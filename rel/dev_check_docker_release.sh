@@ -10,6 +10,7 @@ IMAGE_TAG="captain-fact-frontend:dev-test-build"
 docker build -t "$IMAGE_TAG" --build-arg BUILD_ENV=dev . && \
   docker run --rm -it \
   -v $(pwd)/rel/dev_localhost_keys:/run/secrets \
+  -p 80:80 \
   -p 443:443 \
   "$IMAGE_TAG" serve
 
