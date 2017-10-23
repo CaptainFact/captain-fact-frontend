@@ -57,8 +57,8 @@ promise, ideally without the need for .catch(...) - errors should be converted t
 
 ### Wikidata
 
-Speakers are extracted using wikidata with corresponding item id stored in database. To get the
-Wikipedia page associated use this query:
+[Speakers](https://github.com/CaptainFact/captain-fact-data) are extracted using Wikidata with corresponding
+item id stored in database. To get the Wikipedia page associated use this query:
 
 ```
 const wikidata_item_id = 101410
