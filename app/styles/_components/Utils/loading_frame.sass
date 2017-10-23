@@ -1,0 +1,40 @@
+$loading-frame-fadeout-duration: 0.3s
+
+.loading-frame
+  width: 100%
+  text-align: center
+  opacity: 0
+  visibility: hidden
+  transition: opacity $loading-frame-fadeout-duration, visibility $loading-frame-fadeout-duration
+  margin: 50px auto
+
+  &.is-loading
+    opacity: 1
+    visibility: visible
+    @include animate(fadeIn, 0.3s)
+
+  &.not-displayed
+    display: none
+
+  .spinner
+    width: 100px
+    height: 100px
+
+  .title
+    @extend .is-2
+
+  &.is-small
+    .spinner
+      width: 60px
+      height: 60px
+      margin: 20px auto
+    .title
+      @extend .is-4
+
+  &.is-mini
+    .spinner
+      width: 40px
+      height: 40px
+      margin: 10px auto
+    .title
+      @extend .is-5

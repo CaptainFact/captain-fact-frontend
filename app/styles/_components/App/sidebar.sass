@@ -1,0 +1,144 @@
+$border-color: lightgrey
+
+#sidebar
+  @include animate(fadeIn, 0.5s)
+  background: $white
+  overflow-y: auto
+  overflow-x: hidden
+  z-index: 999
+  box-shadow: -15px 0px 40px -14px rgba(173, 173, 173, .3) inset
+  height: 100vh
+  top: 0
+  width: $sidebar_width
+  border-right: 1px solid #e8e8e8
+  +tablet
+    transition: width 0.15s
+  +mobile
+    width: 100vw
+  @media screen and (max-height: 500px)
+    .user-links
+      display: none
+
+  .logo-banner
+    line-height: 0
+    padding: 1rem
+    width: $sidebar_width
+    text-align: left
+
+    &> *
+      display: inline-block
+      vertical-align: middle
+
+    .menu-collapse-button
+      cursor: pointer
+      height: 40px
+      width: 1em
+      margin-right: 6px
+      font-size: 38px
+      user-select: none
+      &:not(:hover)
+        color: grey
+
+    @media screen and (max-width: 400px)
+      width: 100%
+      .menu-collapse-button
+        float: right
+        margin-right: 0
+        text-align: right
+
+
+  .connect-register-buttons .button
+    @extend .is-fullwidth
+
+  .user-quicklinks
+    figure.image, .title
+      display: inline-block
+      vertical-align: middle
+      margin-right: 7px
+    .current-user-link
+      .title
+        margin: 0 5px 1px 0
+      .tag
+        vertical-align: middle
+    a.is-active .current-user-link .title
+      color: $link-invert
+
+  .menu-content
+    padding: 9px
+    border-top: 1px solid $border-color
+
+  .language-selector
+    padding-left: 10px
+    .icon
+      margin-right: 5px
+
+  .link-with-icon > i
+    transition: font-size 0.2s
+    width: 20px
+
+#sidebar:not(.expended)
+  width: 60px
+  text-align: center
+
+  @media screen and (max-width: 400px)
+    position: fixed
+    right: 0
+    z-index: 9
+    height: inherit
+    background: transparentize($white, 0.1)
+    border-bottom: 1px solid $border-color
+    border-left: 1px solid $border-color
+    .logo-banner
+      height: 65px
+    .menu-content
+      display: none
+
+  .link-with-icon i
+    font-size: 30px
+    margin: 0
+
+  .user-quicklinks
+    a
+      padding: 4px
+    figure.image
+      height: 32px
+      width: 32px
+      margin: 0 auto
+    .button
+      display: none
+    .link-with-icon
+      padding: 5px
+    .tag
+      display: none
+
+
+  .logo-banner
+    .title, .logo
+      display: none
+
+  .menu-content
+    .user-quicklinks
+      margin-bottom: 5px
+
+    .menu-label, .title
+      display: none
+
+    .menu-list
+      border-bottom: 1px solid lightgrey
+      padding-bottom: 5px
+      margin-bottom: 5px
+      &> li > a.link-with-icon
+        padding: 7px 0
+        &> i
+          width: 30px
+        &> span
+          display: none
+
+  .connect-register-buttons
+    span:not(.icon)
+      display: none
+    .icon > i
+      font-size: 24px
+
+  .hide-when-collapsed
+    display: none

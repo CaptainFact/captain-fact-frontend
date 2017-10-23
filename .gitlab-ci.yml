@@ -1,0 +1,30 @@
+# ---- Config ----
+stages:
+  - build
+  - test
+  - release
+
+variables:
+  CF_FRONTEND_IMAGE: registry.gitlab.com/captainfact/captain-fact-frontend:$CI_COMMIT_REF_SLUG
+
+
+# ---- Jobs ----
+build:
+  stage: build
+  only: [tags, triggers, schedules, /^(master|staging|maintenance)$/]
+  tags: [docker, captainfact, frontend]
+  script: docker build --build-arg BUILD_ENV=$CI_COMMIT_REF_SLUG -t $CF_FRONTEND_IMAGE .
+
+test:
+  stage: test
+  only: [tags, triggers, schedules, /^(master|staging|maintenance)$/]
+  tags: [docker, captainfact, frontend]
+  script: docker run --rm $CF_FRONTEND_IMAGE test
+
+release:
+  stage: release
+  only: [tags, triggers, schedules, /^(master|staging|maintenance)$/]
+  tags: [docker, captainfact, frontend]
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+    - echo "Pushing $CF_FRONTEND_IMAGE" && docker push $CF_FRONTEND_IMAGE

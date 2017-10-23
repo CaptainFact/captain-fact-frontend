@@ -1,0 +1,23 @@
+{
+  "title": "Achievements",
+  "1": {
+    "title": "Welcome",
+    "description": "You've successfully created an account on CaptainFact"
+  },
+  "2": {
+    "title": "Not a robot",
+    "description": "With such a pretty email address, there's no doubt you're a human"
+  },
+  "3": {
+    "title": "Everybody hurts",
+    "description": "It's ok, everybody needs an helping hand sometimes"
+  },
+  "4": {
+    "title": "Bulletproof",
+    "description": "With the browser extension activated, no one will fool you anymore"
+  },
+  "5": {
+    "title": "You're fake news!",
+    "description": "Well, seems you've destroyed this source"
+  }
+}

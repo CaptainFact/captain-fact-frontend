@@ -1,0 +1,57 @@
+import { SocketApi } from "../../../API"
+import { COMMENTS_CHANNEL } from "../../../constants"
+import {
+  add, remove, fetchAll, update, setLoading, setVoting, addMyVote, endVoting,
+  addFlag, updateScores
+} from './reducer'
+import { createEffect, generateFSAError } from '../../utils'
+import { errorMsgToFlash, errorToFlash } from '../../flashes/reducer'
+
+
+export const joinCommentsChannel = videoId => (dispatch, getState) => {
+  // Connect to channel
+  dispatch(setLoading(true))
+  dispatch(fetchAll(
+    SocketApi.joinChannel(COMMENTS_CHANNEL, `comments:video:${videoId}`, {
+      'comment_removed': c => dispatch(remove(c)),
+      'comment_added': c => dispatch(add({
+        comment: c,
+        currentUserId: getState().CurrentUser.data.id,
+      })),
+      'comment_updated': c => dispatch(update(c)),
+      'comments_scores_updated': ({comments}) => dispatch(updateScores(comments)),
+    })
+  ))
+}
+
+export const leaveCommentsChannel = () => () => SocketApi.leaveChannel(COMMENTS_CHANNEL)
+
+export const postComment = comment => createEffect(
+  SocketApi.push(COMMENTS_CHANNEL, "new_comment", comment),
+  {catch: [errorMsgToFlash, generateFSAError]}
+)
+
+export const deleteComment = ({id}) => createEffect(
+  SocketApi.push(COMMENTS_CHANNEL, "delete_comment", {id}),
+  {catch: errorToFlash}
+)
+
+export const commentVote = params => createEffect(
+  SocketApi.push(COMMENTS_CHANNEL, "vote", {
+    comment_id: params.comment.id,
+    value: params.value
+  }), {
+    before: setVoting(params.comment.id),
+    then: addMyVote(params),
+    catch: [endVoting(params.comment.id), errorToFlash]
+  }
+)
+
+export const flagComment = ({id, reason}) => createEffect(
+  SocketApi.push(COMMENTS_CHANNEL, "flag_comment", {id, reason}), {
+    then: addFlag(id),
+    catch: errorToFlash
+  }
+)
+
+

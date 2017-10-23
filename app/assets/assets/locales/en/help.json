@@ -1,0 +1,21 @@
+{
+  "categories": {
+    "siteUsage": "Site usage",
+    "contribute": "Contribute",
+    "others": "Others"
+  },
+  "pages": {
+    "achievements": "Achievements",
+    "credits": "Credits",
+    "moderation": "Moderation",
+    "privileges": "Privileges",
+    "reputation": "Reputation",
+    "bug_report": "Bug Report",
+    "code_of_conduct": "Code of Conduct",
+    "extension": "Extension",
+    "privacy": "Privacy",
+    "contact": "Contact",
+    "censorship_requests": "Censorship Requests",
+    "contribute": "Take part in the project"
+  }
+}

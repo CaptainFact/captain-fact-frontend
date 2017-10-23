@@ -1,0 +1,1 @@
+Vous pouvez nous contacter sur [contact@captainfact.io](mailto:contact@captainfact.io) en Anglais ou en Français.

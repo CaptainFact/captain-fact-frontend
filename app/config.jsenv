@@ -1,0 +1,7 @@
+{
+  JS_ENV:               'dev',
+  HTTP_API_URL:         'https://localhost:4001',
+  WS_API_URL:           'wss://localhost:4001/socket',
+  FRONTEND_URL:         'http://localhost:3333',
+  FB_APP_ID:            '506726596325615'
+}

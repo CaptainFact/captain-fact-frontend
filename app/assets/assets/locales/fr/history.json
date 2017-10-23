@@ -1,0 +1,16 @@
+{
+  "compare_show": "Comparer",
+  "compare_hide": "Masquer la comparaison",
+  "action": {
+    "1": "a créé",
+    "2": "a retiré",
+    "3": "a mis à jour",
+    "4": "a supprimé",
+    "5": "a ajouté",
+    "6": "a restauré"
+  },
+  "this": {
+    "2": "cet intervenant",
+    "3": "cette affirmation"
+  }
+}

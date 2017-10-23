@@ -1,0 +1,73 @@
+// ---- Bulma overrides ----
+// Primary colors
+
+$green: #2EBE00
+$red: #F73D57
+
+$primary: #3b84c4
+$primary-dark: #1B6DB6
+$primary-darker: #095191
+$primary-light: #5D9BD4
+$primary-lighter: #8ABAE5
+$primary-neutral: #5f82a0
+$primary-desaturated: #5c82a3
+
+$secondary: #ffb03f
+$secondary-dark: #FF9E16
+$secondary-darker: #E08300
+$secondary-light: #FFBF65
+$secondary-lighter: #FFD292
+//$secondary-neutral: #b57c4a
+//$secondary-desaturated: #c67b39
+
+$info: $blue !default
+$success: $green
+$warning: $yellow !default
+$danger: $red
+
+$light: $white-ter !default
+$dark: $grey-darker !default
+
+// Invert colors
+$primary-invert: $turquoise-invert !default
+$info-invert: $blue-invert !default
+$success-invert: $green-invert !default
+$warning-invert: $yellow-invert !default
+$danger-invert: $red-invert !default
+$light-invert: $dark !default
+$dark-invert: $light !default
+
+// General colors
+$background: $white-ter !default
+
+$border: $grey-lighter !default
+$border-hover: $grey-light !default
+
+// Text colors
+$text: $grey-dark !default
+$text-invert: findColorInvert($text) !default
+$text-light: $grey !default
+$text-strong: $grey-darker !default
+
+// Link colors
+$link: $primary
+$link-invert: $primary-invert
+$link-visited: $purple
+
+$link-hover: lighten($primary, 25)
+$link-hover-border: $grey-light !default
+
+$link-focus: $grey-darker
+$link-focus-border: $primary
+
+$link-active: $grey-darker !default
+$link-active-border: $grey-dark !default
+
+$colors: (white: ($white, $black), black: ($black, $white), light: ($light, $light-invert), dark: ($dark, $dark-invert), primary: ($primary, $primary-invert), info: ($info, $info-invert), success: ($success, $success-invert), warning: ($warning, $warning-invert), danger: ($danger, $danger-invert))
+
+// Inputs
+$input-focus-border: lighten($primary-desaturated, 20)
+$button-hover: lighten($primary, 5)
+
+// ----Custom----
+$sidebar_width: 300px

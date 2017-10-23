@@ -1,0 +1,33 @@
+.user-page
+  .user-header
+    padding-left: 15px
+    padding-right: 15px
+    .main-appelation
+      font-size: 2rem
+      font-weight: 300
+      display: block
+      line-height: 1em
+      margin-bottom: 0.2em
+    .secondary-appelation
+      @extend .title
+      @extend .is-5
+      display: inline-block
+      color: $grey-dark
+      margin-bottom: 0.7rem
+    .registered-since
+      color: $grey
+    .tag
+      box-shadow: 3px 3px 5px 0 rgba(212, 212, 212, 0.35)
+  .tabs
+    margin-bottom: 0
+    +mobile
+      li > a
+        padding-right: 2vw
+        padding-left: 2vw
+
+.edit-user-form
+  max-width: 500px
+  padding-top: 30px
+  margin: 0 auto
+  button[type=submit]
+    width: 100%

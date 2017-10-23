@@ -1,0 +1,21 @@
+{
+  "categories": {
+    "siteUsage": "Utilisation du site",
+    "contribute": "Contribuer",
+    "others": "Autres"
+  },
+  "pages": {
+    "achievements": "Médailles",
+    "credits": "Remerciements",
+    "moderation": "Moderation",
+    "privileges": "Privilèges",
+    "reputation": "Réputation",
+    "bug_report": "Signaler un bug",
+    "code_of_conduct": "Code de Conduite",
+    "extension": "Extension",
+    "privacy": "Vie Privée",
+    "contact": "Contact",
+    "censorship_requests": "Demandes de censure",
+    "contribute": "Aider à la réalisation du projet"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "debate": "Debate",
+  "history": "History",
+  "approve": "Approve",
+  "refute": "Refute",
+  "flagForm": {
+    "title": "Why do you want to flag this comment ?",
+    "bad_language": "Rude language",
+    "spam": "Spam or commercial content",
+    "harassment": "Personal attack or harassment",
+    "xAvailable": "{{count}} available",
+    "xAvailable_plural": "{{count}} available"
+  },
+  "comment": {
+    "writeComment": "Write a comment...",
+    "addSource": "Add a source to turn this comment into a fact",
+    "postComment": "Post Comment",
+    "deleteThread": "Delete comment",
+    "deleteThread_plural": "Delete thread",
+    "replies_hide": "Hide replies",
+    "replies_show": "Show replies ({{count}})",
+    "loadMore_replies": "Load more replies ({{count}})",
+    "loadMore_comments": "Load more comments ({{count}})",
+    "replyingTo": "Replying to"
+  },
+  "video": {
+    "added": "Added"
+  },
+  "speaker": {
+    "remove": "Remove speaker",
+    "confirmRemove": "All statements made by {{speaker.full_name}} on this video will become orphans",
+    "add": "Add Speaker",
+    "create": "Create speaker \"{{name}}\"",
+    "search": "Type a name to search",
+    "fullName": "Full name",
+    "title": "Title",
+    "titlePlaceholder": "Politician, doctor, journalist...",
+    "titleFormat": "{{title}}",
+    "titleFormat_FR": "French {{title}}"
+  },
+  "statement": {
+    "textPlaceholder": "Type a raw transcript of what the speaker says",
+    "noSpeakerTextPlaceholder": "Describe what you see",
+    "text": "Text",
+    "add": "Add a statement",
+    "autoscroll_enable": "Enable autoscroll",
+    "autoscroll_disable": "Disable autoscroll"
+  },
+  "loading": {
+    "statements": "Loading Statements",
+    "video": "Loading Video"
+  }
+}

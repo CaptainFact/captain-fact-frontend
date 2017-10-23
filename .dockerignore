@@ -1,0 +1,10 @@
+.git
+.gitignore
+.gitlab-ci.yml
+.idea
+node_modules
+public
+
+rel/dev*
+Dockerfile
+README.md

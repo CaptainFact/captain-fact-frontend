@@ -1,0 +1,94 @@
+$statement-max-width: 1000px
+$statement-focus-size: 20px
+$statement-focus-size-mobile: 5px
+
+$statement-text-background: #31455d
+$statement-text-color: #e0e7f1
+
+.statements-list-container
+  height: 100vh
+
+  .statements-list
+    overflow-y: auto
+    height: 100%
+    padding: 20px
+    +mobile
+      padding: 5px
+
+    .statement-container
+      padding: 15px 0
+      &.is-focused .statement
+        box-shadow: 0px 0px 10px 5px rgba(197, 197, 197, 0.32)
+        max-width: $statement-max-width
+    .statement
+      @include animate(fadeIn, 0.2s)
+      margin: 0 auto
+      max-width: $statement-max-width - $statement-focus-size
+      transition: box-shadow 0.5s, max-width 0.5s
+      box-shadow: rgba(10, 10, 10, 0.15) 0px 6px 14px -5px
+      border: 1px solid lightgrey
+      .card-header img.speaker-mini
+        height: 25px
+        margin-right: 5px
+        border-radius: 15px
+      .time-display
+        min-width: 60px
+        color: grey
+        border-right: 1px solid #e8e8e8
+        margin-right: 15px
+      &> *:not(:last-child)
+        border-bottom: 1px solid #dbdbdb
+        border-top: none
+      .card-footer
+        border-top: none
+        border-bottom: 1px solid #dbdbdb
+        &.comments
+          display: block
+          padding-bottom: 5px
+          padding-top: 5px
+          .expend-comment-form
+            margin-left: 42px
+
+    .statement-form
+      box-shadow: 0px 3px 15px -3px #b3b3b3
+      @include animate(fadeInDown, 0.3s)
+      .card-header-title
+        .button
+          margin-right: 10px
+        .speaker-select
+          min-width: 200px
+      .textarea
+        min-height: 50px
+        font-style: italic
+        font-size: 20px
+        color: $statement-text-color
+        font-weight: bold
+        background: none
+      .card-content
+        @extend .statement-text-container
+        border-bottom: 1px solid #dbdbdb
+      .submit-button.is-disabled
+        color: #cacaca
+
+.statement-text-container
+  background: $statement-text-background
+  color: $statement-text-color
+  box-shadow: 0px 0px 10px 0px rgb(50, 50, 50) inset
+  padding: 1.5rem
+  &:before
+    content: "“"
+    font-family: serif
+    font-style: normal
+    font-weight: 700
+    font-size: 45px
+    color: $grey-light
+    position: absolute
+  .statement-text
+    padding: 20px 0 20px 40px
+
+.statement-text
+  font-style: italic
+  font-size: 20px
+  font-weight: bold
+  white-space: pre-line
+

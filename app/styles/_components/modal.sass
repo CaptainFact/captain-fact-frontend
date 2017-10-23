@@ -1,0 +1,51 @@
+$modal-background: rgba(10, 10, 10, 0.50)
+
+#main-modal-container
+  height: 0
+  width: 0
+
+.modal
+  .modal-background
+    background-color: $modal-background
+  .modal-card-title
+    +mobile
+      font-size: 1.2em
+  .help-link
+    margin-right: 5px
+    color: #c6c6c6
+    &:hover
+      color: #aeaeae
+
+.modal-confirm, .modal-form
+  @extend .modal
+  @include animate(fadeIn, 0.2s)
+
+.modal-confirm
+  &.is-absolute
+    position: absolute
+  .modal-card
+    border-radius: 5px
+    max-width: 98%
+    .modal-card-body
+      padding: 35px 20px
+
+.modal-history
+  .modal-card
+    width: 800px
+    .modal-card-body
+      text-align: center
+      padding: 0
+
+.form-buttons
+  text-align: center
+  width: 100%
+  .button
+    @extend .is-large
+    width: 49%
+    &:first-child
+      margin-right: 1%
+    .icon
+      vertical-align: baseline
+      font-size: 1.2em
+
+

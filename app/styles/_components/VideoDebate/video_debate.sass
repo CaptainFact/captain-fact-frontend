@@ -1,0 +1,50 @@
+#col-video
+  border-right: 1px solid lightgrey
+  box-shadow: 0px 4px 10px -5px #8e8e8e
+  max-width: 100%
+  min-width: 370px
+
+  &.form .control
+    padding: 5px
+
+  &> .title
+    padding: 18px 7px
+    border-bottom: 1px solid #f1f1f1
+    margin-bottom: 0
+
+  &> .tabs
+    margin-bottom: 0
+    &> ul > li > a
+      border-radius: 0
+      &:first-child
+        border-left: none
+      &:last-child
+        border-right: none
+
+  .actions
+    padding: 15px 10px
+    background: rgb(252, 252, 252)
+
+#video-show
+  @media screen and (max-width: $widescreen)
+    display: block
+    &> .column
+      width: 100%
+      height: auto
+      max-height: none
+      border-bottom: 1px solid $grey-lighter
+    #col-debate.column > .statements-list-container
+      height: auto
+  +widescreen
+    &> .column
+      max-height: 100vh
+      height: 100vh
+      overflow-y: auto
+    #col-video
+      padding-bottom: 25px
+      max-width: 600px
+
+  #col-debate
+    background: rgb(246, 247, 250)
+    .video-debate-help
+      padding: 3rem

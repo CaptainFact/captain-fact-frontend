@@ -1,0 +1,79 @@
+$main-bubble-height: 62px
+$sub-bubble-height: 45px
+$bubble-margin: 25px
+$bubble-font-size: 15px
+$default-bubble-icon-size: 32px
+$sub-bubble-icon-size: 24px
+
+.action-bubble-container
+  display: flex
+  flex-direction: column-reverse
+  right: $bubble-margin
+  bottom: $bubble-margin
+  position: absolute
+  z-index: 99
+  &:not(.active) .action-bubble:not(:first-child)
+    display: none
+
+.action-bubble
+  height: $main-bubble-height
+  width: $main-bubble-height
+  background: $secondary
+  border-radius: 3em
+  box-shadow: 0px 3px 6px 0px transparentize($grey, 0.4)
+  transition: box-shadow 0.3s, background 0.3s
+  &:hover
+    cursor: pointer
+    box-shadow: 0px 3px 6px 0px transparentize($grey, 0.2)
+    .label
+      @include animate(fadeIn, 0.2s)
+      display: block
+
+  .label
+    display: none
+    position: fixed
+    white-space: nowrap
+    font-size: $bubble-font-size
+    margin-top: $main-bubble-height / 2 - $bubble-font-size + 1px
+    right: $main-bubble-height + $bubble-margin + 7px
+    background: transparentize($grey-darker, 0.2)
+    color: $white
+    padding: 0.2em 0.5em
+
+  .icon
+    color: white
+    font-size: $default-bubble-icon-size
+    width: $main-bubble-height
+    text-align: center
+    padding-top: $main-bubble-height / 2 - $default-bubble-icon-size / 3
+    i
+      transition: transform 0.3s
+
+.action-bubble:not(.activated)
+  background: $grey-light
+
+.action-bubble-container:not(:hover):not(.active) .action-bubble:first-child
+  i
+    transform: rotate(-360deg)
+    &:before
+      content: '+'
+      font-size: 50px
+
+.action-bubble:not(:first-child)
+  @include animate(fadeInUp, 0.2s)
+  margin-bottom: 0.5em
+  height: $sub-bubble-height
+  width: $sub-bubble-height
+  margin-left: ($main-bubble-height - $sub-bubble-height) / 2
+  .icon
+    width: $sub-bubble-height
+    font-size: $sub-bubble-icon-size
+    padding-top: $sub-bubble-height / 2 - $sub-bubble-icon-size / 2.5
+  .label
+    margin-top: $sub-bubble-height / 2 - $bubble-font-size + 1px
+    right: $main-bubble-height
+
+
+// Progressive animation delay. Add lines to animate more bubbles
+.action-bubble:nth-child(3)
+  animation-delay: 0.05s

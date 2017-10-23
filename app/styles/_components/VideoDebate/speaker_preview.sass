@@ -1,0 +1,26 @@
+$speakingBoxShadowColor: transparentize($primary-darker, 0.4)
+
+@keyframes speakingPulse
+  0%
+    box-shadow: 0 0 0 2px $speakingBoxShadowColor
+  50%
+    box-shadow: 0 0 0 4px $speakingBoxShadowColor
+  100%
+    box-shadow: 0 0 0 2px $speakingBoxShadowColor
+
+
+.speakers-list
+  .speaker-preview
+    @include animate(fadeInUp, 0.3s)
+    @include ProgressiveAnimationDelay(0.0s, 0.2s, 8)
+    padding: 10px 15px
+    margin: 0
+    border-top: 1px solid rgba(219, 219, 219, 0.5)
+    &.isActive img
+      animation: speakingPulse 2s infinite
+    .media-left > img
+      border-radius: 25px
+      width: 50px
+      height: 50px
+    .link-with-icon > i
+      font-size: 25px

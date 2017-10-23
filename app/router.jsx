@@ -1,0 +1,62 @@
+import React from "react"
+import ReactDOM from "react-dom"
+import { Router, Route, IndexRoute, browserHistory } from "react-router"
+import { Provider } from "react-redux"
+
+// Import polyfills
+import { polyfill as smoothSrollPolyfill } from 'smoothscroll-polyfill'
+smoothSrollPolyfill()
+
+// Load store
+import store from "./state"
+
+// Import Views
+import { default as App } from "./components/App"
+import { Home, NotFound } from "./components/Pages"
+import { PublicVideos, AddVideoForm } from "./components/Videos"
+import { VideoDebate } from "./components/VideoDebate"
+import { Help } from './components/Pages/Help'
+import BrowserExtensionsPage from './components/Pages/BrowserExtensionsPage'
+import UserProfile from './components/Users/UserProfile'
+import ThirdPartyCallback from './components/Users/ThirdPartyCallback'
+import UserSettings from './components/Users/UserSettings'
+import LoginForm from './components/Users/LoginForm'
+import SignupForm from './components/Users/SignupForm'
+import User from './components/Users/User'
+import ResetPasswordRequestForm from './components/Users/ResetPasswordRequestForm'
+import ResetPasswordConfirmForm from './components/Users/ResetPasswordConfirmForm'
+import ConfirmEmail from './components/Users/ConfirmEmail'
+
+
+ReactDOM.render(
+  <Provider store={store}>
+    <Router history={browserHistory}>
+      <Route path="/" component={App}>
+        <IndexRoute component={Home} />
+        <Route path="/signup" component={SignupForm}/>
+        <Route path="/signup/callback/:provider" component={ThirdPartyCallback}/>
+        <Route path="/login" component={LoginForm}/>
+        <Route path="/login/callback/:provider" component={ThirdPartyCallback}/>
+        <Route path="/confirm_email/:token" component={ConfirmEmail}/>
+        <Route path="/reset_password" component={ResetPasswordRequestForm}/>
+        <Route path="/reset_password/confirm/:token" component={ResetPasswordConfirmForm}/>
+        <Route path="/u/:username" component={User}>
+          <IndexRoute component={UserProfile}/>
+          <Route path="/u/:username/activity" component={NotFound}/>
+          <Route path="/u/:username/settings" component={UserSettings}/>
+          <Route path="/u/:username/bookmarks" component={NotFound}/>
+        </Route>
+        <Route path="/videos" component={PublicVideos}/>
+        <Route path="/videos/add" component={AddVideoForm}/>
+        <Route path="/videos/add/:videoUrl" component={AddVideoForm}/>
+        <Route path="/videos/:videoId" component={VideoDebate} view="debate"/>
+        <Route path="/videos/:videoId/history" component={VideoDebate} view="history"/>
+        <Route path="/help" component={Help}/>
+        <Route path="/help/:pageName" component={Help}/>
+        <Route path="/extension" component={BrowserExtensionsPage}/>
+        <Route path="*" component={NotFound}/>
+      </Route>
+    </Router>
+  </Provider>,
+  document.getElementById("app")
+)

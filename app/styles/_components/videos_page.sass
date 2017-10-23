@@ -1,0 +1,76 @@
+.videos-page, .videos-section
+  text-align: center
+  margin: 0 auto
+  padding-top: 25px
+
+  .header
+    margin-bottom: 20px
+
+.videos-page
+  padding-top: 5vh
+  &> .content
+    padding: 15px 3vw
+    .level
+      max-width: 1500px
+      margin: 0 auto 30px
+      border: 1px solid $grey-lighter
+      padding: 0.5em 1em
+  .header
+    min-height: 100px
+
+.videos-list
+  margin: 0
+  justify-content: center
+
+  .column
+    @include animate(fadeIn, 0.1s)
+    min-width: 300px
+    max-width: 654px
+
+.video-card
+  .card-image
+    img
+      border-radius: 0 0 5px 5px
+    .play-overlay
+      display: none
+    &:hover
+      .image
+        opacity: 0.9
+      .play-overlay
+        display: block
+        position: absolute
+        z-index: 9
+        color: rgba(255, 255, 255, 0.52)
+        font-size: 130px
+        height: 130px
+        width: 100%
+        top: 40%
+
+  .card-content
+    padding: 0
+    .title
+      padding: 0.75rem
+      color: darken($primary-neutral, 45)
+      margin: 0
+      &:hover
+        text-decoration: underline
+        color: transparentize(darken($primary-neutral, 45), 0.3)
+
+  .video-metadata
+    color: #bdbdbd
+    width: 100%
+    &>div:first-child
+      padding: 5px 0
+    .icon
+      font-size: 17px
+      vertical-align: baseline
+      margin-right: 5px
+  .speakers-list
+    text-align: left
+    padding: 0.75rem 1rem
+    color: $grey
+    border-top: 1px solid $border-color
+    strong
+      color: $grey-dark
+    .icon
+      color: $grey-light

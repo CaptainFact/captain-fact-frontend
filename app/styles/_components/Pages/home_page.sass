@@ -1,0 +1,59 @@
+.home-page
+  min-height: 100vh
+  display: flex
+  flex-direction: column
+  .hero
+    min-height: 25vh
+    +mobile
+      min-height: 20vh
+    .hero-body
+      padding: 5rem
+      +mobile
+        padding: 3rem 1rem
+        font-size: 12px
+      h1
+        @include animate(bounceInDown, 0.7s)
+      h2
+        @include animate(fadeIn, 1s)
+        animation-delay: 0.7s
+      .title
+        text-shadow: 1px 1px 1px rgba(74, 74, 74, 0.34)
+        color: #3c4852
+        font-size: 3em
+        margin: 0
+        img
+          width: 80px
+      .subtitle
+        font-style: italic
+        color: #3c3c3c
+        font-size: 1.8em
+        margin-top: 10px
+  section.presentation
+    @include animate(fadeIn, 1s)
+    padding: 4rem 4rem 2rem
+    min-height: 45vh
+    flex-grow: 1
+    display: flex
+    flex-direction: column
+    justify-content: center
+    +mobile
+      padding: 3rem
+      min-height: 65vh
+  .footer
+    word-spacing: 2px
+    min-height: 1vh
+    padding: 1.5rem 1.5rem
+    justify-content: flex-end
+    .container
+      @include animate(fadeIn, 2s)
+      // animation-delay: 0.5s
+    .fa.fa-heart
+      color: $red
+
+  .request-invitation
+    @include animate(fadeInUp, 1s)
+    padding: 2rem
+    background: $primary
+    text-align: center
+    .title
+      color: white

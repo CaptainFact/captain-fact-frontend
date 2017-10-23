@@ -1,0 +1,16 @@
+{
+  "compare_show": "Compare",
+  "compare_hide": "Hide comparison",
+  "action": {
+    "1": "created",
+    "2": "removed",
+    "3": "updated",
+    "4": "deleted",
+    "5": "added",
+    "6": "restored"
+  },
+  "this": {
+    "2": "this speaker",
+    "3": "this statement"
+  }
+}
