@@ -2,6 +2,9 @@
 <h1 align="center"><a href="https://captainfact.io">CaptainFact.io</a></h1>
 <br/>
 
+Master: [![Build Status](https://travis-ci.org/CaptainFact/captain-fact-frontend.svg?branch=travis-configuration)](https://travis-ci.org/CaptainFact/captain-fact-frontend) &nbsp;&nbsp;
+Staging: [![Build Status](https://travis-ci.org/CaptainFact/captain-fact-frontend.svg?branch=staging)](https://travis-ci.org/CaptainFact/captain-fact-frontend)
+
 [CaptainFact](https://captainfact.io) frontend source code.
 
 ## Getting started
