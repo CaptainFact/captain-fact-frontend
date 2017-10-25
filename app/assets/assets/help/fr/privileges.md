@@ -17,7 +17,8 @@ renforcer leur signification.
 | 0          | Voter positivement
 | 0          | Signaler du contenu inaproprié                 
 | 50         | Plus de restrictions spécifiques aux nouveaux utilisateurs             
-| 80         | Voter négativement                                    
+| 80         | Voter négativement
+| 100        | Déplacer toutes les citations d'une vidéo (time shift)                        
 | 150        | Supprimer et restaurer des citations                           
 | 200        | Supprimer et restaurer des intervenants
 | 1000       | Accès aux outils de modération

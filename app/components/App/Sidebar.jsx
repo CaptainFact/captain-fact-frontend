@@ -129,10 +129,13 @@ export default class Sidebar extends React.PureComponent {
 
           <p className="menu-label">{ t('menu.other') }</p>
           <ul className="menu-list">
+            <this.MenuListLink to="/help/contact" iconName="envelope" className="hide-when-collapsed">
+              { t('menu.contact') }
+            </this.MenuListLink>
             <this.MenuListLink to="/extension" iconName="puzzle-piece" className="hide-when-collapsed">
               { t('menu.extension') }
             </this.MenuListLink>
-            <this.MenuListLink to="/help" iconName="question-circle">
+            <this.MenuListLink to="/help" iconName="question-circle" ignoreRoutes={['/help/contact']}>
               { t('menu.help') }
             </this.MenuListLink>
           </ul>
