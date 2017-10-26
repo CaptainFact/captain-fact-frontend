@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { translate } from 'react-i18next'
+import debounce from 'debounce'
 
 import { changeStatementFormSpeaker } from '../../state/video_debate/statements/reducer'
 import { toggleAutoscroll } from '../../state/user_preferences/reducer'
@@ -10,6 +11,7 @@ import { addModal } from '../../state/modals/reducer'
 import {isAuthenticated} from '../../state/users/current_user/selectors'
 import { Icon } from '../Utils/Icon'
 import ShareModal from '../Utils/ShareModal'
+import EditVideoModal from '../Videos/EditVideoModal'
 
 
 @connect(
@@ -22,7 +24,7 @@ export default class ActionBubbleMenu extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {active: false}
-    this.activate = this.activate.bind(this)
+    this.activate = debounce(this.activate.bind(this), 10)
   }
 
   addStatement() {
@@ -31,9 +33,9 @@ export default class ActionBubbleMenu extends React.PureComponent {
   }
 
   activate() {
-    // Delay on mouseEnter is meant to avoid the fact that touch devices trigger mouseEnter then
+    // Debounce on mouseEnter is meant to avoid the fact that touch devices trigger mouseEnter then
     // onClick at the same time when touching
-    setTimeout(() => this.setState({active: true}), 100)
+    this.setState({active: true})
   }
 
   render() {
@@ -63,6 +65,12 @@ export default class ActionBubbleMenu extends React.PureComponent {
                         props: {path: location.pathname}
                       })}
         />
+        {this.props.isAuthenticated &&
+        <ActionBubble iconName="pencil"
+                      label={this.props.t('video.edit')}
+                      onClick={() => this.props.addModal({Modal: EditVideoModal})}
+        />
+        }
         <ActionBubble iconName="question"
                       label={this.props.t('main:menu.help')}
                       onClick={() => this.props.router.push('/help')}
