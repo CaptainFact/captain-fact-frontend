@@ -42,7 +42,7 @@ contact us if you want to start working on this today.
 Let's download and install the stuff (you must have docker installed):
 ```bash
 # Create database container
-docker create --name postgres_dev -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=captain_fact_dev -d postgres:9.6
+docker create --name postgres_dev -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=captain_fact_dev postgres:9.6
 # Login to Gitlab registry (if not already done) and pull image
 docker login registry.gitlab.com
 docker pull registry.gitlab.com/captainfact/captain-fact-api:staging
@@ -68,14 +68,16 @@ docker run -it \
   -e "CF_FRONTEND_URL=http://localhost:3333" \
   -e "CF_CHROME_EXTENSION_ID=chrome-extension://lpdmcoikcclagelhlmibniibjilfifac" \
   -v "$(pwd)/rel/dev_localhost_keys:/run/secrets:ro" \
-  --rm registry.gitlab.com/captainfact/captain-fact-api:staging console
+  --rm registry.gitlab.com/captainfact/captain-fact-api:staging foreground
 ```
 
 If you want to update the API on the future, just run `docker pull registry.gitlab.com/captainfact/captain-fact-api:staging`
 
-The process running the API is an interactive Elixir console. Here are some useful commands you may type in:
+You can attach an Elixir Console to the running container with:
+`docker exec -it $(docker ps | grep captain-fact-api | awk '{print $1}') /opt/app/bin/captain_fact remote_console`
+Here are some useful commands you may type in:
 ```elixir
-# Get current API version
+# Get current API version (also available in browser at localhost:4000)
 iex> :application.get_key :captain_fact, :vsn
 # {:ok, '0.6.1'}
 
