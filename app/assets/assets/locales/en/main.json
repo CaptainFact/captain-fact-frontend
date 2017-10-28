@@ -18,6 +18,7 @@
     "content": "Content",
     "language": "Language",
     "other": "Other",
+    "contact": "Contact",
     "extension": "Browser Extension",
     "help": "Help",
     "edit": "Edit"
@@ -38,7 +39,8 @@
     "refute": "Refute",
     "edit": "Edit",
     "loading": "Loading",
-    "share": "Share"
+    "share": "Share",
+    "apply": "Apply"
   },
   "misc": {
     "timeAt": "at",

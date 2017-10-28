@@ -18,6 +18,7 @@
     "content": "Contenu",
     "language": "Langue",
     "other": "Autre",
+    "contact": "Contact",
     "extension": "Extension pour navigateur",
     "help": "Aide"
   },
@@ -37,7 +38,8 @@
     "refute": "Réfuter",
     "edit": "Éditer",
     "loading": "Chargement",
-    "share": "Partager"
+    "share": "Partager",
+    "apply": "Appliquer"
   },
   "misc": {
     "timeAt": "à",

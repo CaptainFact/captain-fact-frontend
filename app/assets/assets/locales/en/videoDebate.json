@@ -24,7 +24,9 @@
     "replyingTo": "Replying to"
   },
   "video": {
-    "added": "Added"
+    "added": "Added",
+    "edit": "Edit Video",
+    "shiftStatements": "Shift all statements (in seconds)"
   },
   "speaker": {
     "remove": "Remove speaker",

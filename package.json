@@ -1,6 +1,6 @@
 {
   "name": "captain-fact-frontend",
-  "version": "0.6.0",
+  "version": "0.6.2",
   "private": true,
   "scripts": {
     "start": "brunch watch --server",
@@ -12,6 +12,7 @@
     "bulma": "^0.3.2",
     "classnames": "^2.2.5",
     "date-fns": "^1.28.5",
+    "debounce": "^1.0.2",
     "debounce-promise": "^3.0.1",
     "diff": "^3.3.1",
     "font-awesome": "^4.7.0",

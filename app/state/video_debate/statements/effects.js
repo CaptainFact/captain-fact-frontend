@@ -1,6 +1,6 @@
 import { SocketApi } from "../../../API"
 import { STATEMENTS_CHANNEL } from "../../../constants"
-import { add, fetchStatements, remove, setLoading, setSubmitting, update } from './reducer'
+import { add, fetchStatements, remove, setLoading, setSubmitting, update, updateAll } from './reducer'
 import { createEffect, returnSuccess } from '../../utils'
 import { errorToFlash } from '../../flashes/reducer'
 
@@ -12,7 +12,8 @@ export const joinStatementsChannel = videoId => dispatch => {
     STATEMENTS_CHANNEL, `${STATEMENTS_CHANNEL}:video:${videoId}`, {
       "statement_removed": s => dispatch(remove(s)),
       "statement_added": s => dispatch(add(s)),
-      "statement_updated": s => dispatch(update(s))
+      "statement_updated": s => dispatch(update(s)),
+      "statements_updated": ({statements}) => dispatch(updateAll(statements))
     }
   )))
 }
@@ -39,4 +40,8 @@ export const deleteStatement = statement => createEffect(
   {catch: errorToFlash}
 )
 
+export const shiftStatements = offset => createEffect(
+  SocketApi.push(STATEMENTS_CHANNEL, "shift_all", offset),
+  {catch: errorToFlash}
+)
 

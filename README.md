@@ -2,14 +2,15 @@
 <h1 align="center"><a href="https://captainfact.io">CaptainFact.io</a></h1>
 <br/>
 
-[CaptainFact](https://captainfact.io) frontend source code.
+Master: [![Build Status](https://travis-ci.org/CaptainFact/captain-fact-frontend.svg?branch=travis-configuration)](https://travis-ci.org/CaptainFact/captain-fact-frontend) &nbsp;&nbsp;
+Staging: [![Build Status](https://travis-ci.org/CaptainFact/captain-fact-frontend.svg?branch=staging)](https://travis-ci.org/CaptainFact/captain-fact-frontend)
 
 ## Getting started
 
 This is a HTML5 application, built with [Brunch](http://brunch.io).
 
 * Install (if you don't have them):
-    * [Node.js](http://nodejs.org): `brew install node` on OS X
+    * [Node.js](http://nodejs.org)
     * [Brunch](http://brunch.io): `npm install -g brunch`
     * Brunch plugins and app dependencies: `npm install`
 * Run:
@@ -53,22 +54,11 @@ app
 An effect is an async action that may dispatch one or more actions when called. It always returns a
 promise, ideally without the need for .catch(...) - errors should be converted to FSA errors objects.
 
-## Misc
 
-### Wikidata
+## License
 
-[Speakers](https://github.com/CaptainFact/captain-fact-data) are extracted using Wikidata with corresponding
-item id stored in database. To get the Wikipedia page associated use this query:
+GNU General Public License v3.0
 
-```
-const wikidata_item_id = 101410
-const locale = 'fr'
-const r = `https://query.wikidata.org/bigdata/namespace/wdq/sparql?query=SELECT%20%3Fsitelink%20WHERE%20%7B%0A%20%20BIND(wd%3AQ${wikidata_item_id}%20AS%20%3Fperson)%0A%20%20%3Fsitelink%20schema%3Aabout%20%3Fperson%20.%20%3Fsitelink%20schema%3AinLanguage%20%22${locale}%22%0A%7D`
-fetch(r).then(r => r.text().then(xml => {
-  const parser = new DOMParser()
-  const res = parser.parseFromString(xml, "text/xml")
-  console.log(Array.from(res.getElementsByTagName('uri')).map(e => e.textContent))
-}))
-```
+Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.
 
-This returns a list of pages about this speaker (wikipedia, wikinews, wikiquotes...etc)
+See [LICENSE](LICENSE) for more info.

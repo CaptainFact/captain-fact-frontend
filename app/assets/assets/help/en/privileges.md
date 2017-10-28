@@ -18,6 +18,7 @@ Judgement actions such as voting and flagging are limited to avoid abusing them 
 | 0          | Flag innapropriate content          
 | 50         | No more new user restrictions               
 | 80         | Vote Down                                    
+| 100        | Shift all video's statements                                 
 | 150        | Delete and restore statements                           
 | 200        | Delete and restore speakers
 | 1000       | Access to moderator tools                                  

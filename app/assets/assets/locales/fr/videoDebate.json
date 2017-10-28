@@ -24,7 +24,9 @@
     "replyingTo": "En réponse à"
   },
   "video": {
-    "added": "Ajoutée"
+    "added": "Ajoutée",
+    "edit": "Editer la vidéo",
+    "shiftStatements": "Décaler toutes les affirmations (en secondes)"
   },
   "speaker": {
     "remove": "Retirer l'intervenant·e",
