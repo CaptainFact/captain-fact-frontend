@@ -96,9 +96,9 @@ iex> CaptainFact.Repo.delete_all CaptainFact.Videos.Video
 
 #### Starting the frontend
 
-Starting the frontend is much easier, just run `npm start` and you'll be able to access the site at
-[localhost:3333](http://localhost:3333). A default account should have been created for you with
-email=`admin@captainfact.io` and password=`password`.
+Starting the frontend is much easier, just run `npm install` to install dependencies then `npm start` and you'll
+be able to access the site at [localhost:3333](http://localhost:3333). A default account should have been created
+for you with email=`admin@captainfact.io` and password=`password`.
 
 ### Code style
 
