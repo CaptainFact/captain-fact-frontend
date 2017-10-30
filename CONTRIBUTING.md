@@ -16,6 +16,16 @@ Familiarity with [forks](https://help.github.com/articles/fork-a-repo/),
 - **Documentation**: Fix typos, clarify language, and add explanations about how things work
 - **Code**: Submit new features or bug fixes, see "Code contributions" below
 
+## Communication
+
+GitHub issues are the primary way for communicating about specific proposed changes to this project.
+
+We also use [Trello](https://trello.com/b/5s6F5iTv/captainfact) to keep track of the tasks we're working on. Feel free to
+comment on these tasks directly.
+
+[TODO] We'll soon create a place for the community to chat, maybe on Slack or on Keybase.io's
+[encrypted slack alternative](https://techcrunch.com/2017/09/18/keybase-launches-fully-encrypted-slack-like-communications-tool-and-its-free/).
+
 ## Contributions: General workflow
 
 1. [Pick or create an issue](https://github.com/CaptainFact/captain-fact-frontend/issues) and tell us you're working on it
@@ -104,18 +114,6 @@ for you with email=`admin@captainfact.io` and password=`password`.
 ### Code style
 
 *TODO: code style and conventions*
-
-# Communication
-
-GitHub issues are the primary way for communicating about specific proposed
-changes to this project.
-
-[TODO] We'll soon create a place for the community to chat, maybe on Slack or on Keybase.io's
-[encrypted slack alternative](https://techcrunch.com/2017/09/18/keybase-launches-fully-encrypted-slack-like-communications-tool-and-its-free/).
-
-In both contexts, please follow the conduct guidelines below. Language issues
-are often contentious and we'd like to keep discussion brief, civil and focused
-on what we're actually doing, not wandering off into too much imaginary stuff.
 
 # Conduct
 
