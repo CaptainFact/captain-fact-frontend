@@ -15,7 +15,6 @@ const UserProfile = ({user: {achievements}, t}) => (
       {/*<p>Posted x comments</p>*/}
       {/*<p>Posted x sourced comments</p>*/}
       {/*TODO: Top comments*/}
-      {/*TODO: Badges*/}
     {/*</div>*/}
     <div className="column">
       <h2 className="title is-2 is-centered has-text-centered">

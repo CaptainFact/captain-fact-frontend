@@ -21,7 +21,8 @@ Familiarity with [forks](https://help.github.com/articles/fork-a-repo/),
 1. [Pick or create an issue](https://github.com/CaptainFact/captain-fact-frontend/issues) and tell us you're working on it
 2. Fork the repo
 3. Checkout `staging` branch (pull requests against `master` will not be accepted)
-4. Create a new branch describing what you'll do. We encourage using `feature/your-awesome-feature` or `fix/your-fix-name` naming
+4. Create a new branch describing what you'll do. We encourage using `feature/your-awesome-feature`, `fix/your-fix-name`
+   or `improvement/your-improvement` naming
 5. Do your stuff and commit your changes
 6. (Optional but nice) [squash your commits](https://forum.freecodecamp.org/t/how-to-squash-multiple-commits-into-one-with-git/13231)
 7. Make a pull request of your branch against `staging` and mention the issue you're dealing with
