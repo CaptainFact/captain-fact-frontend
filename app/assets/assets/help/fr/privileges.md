@@ -13,14 +13,18 @@ renforcer leur signification.
 |:-----------|:-----------------------------------------------------------|
 | Tous       | Poster des commentaires et des sources             
 | Tous       | Editer et supprimer vos commentaires         
-| 0          | Ajouter des vidéos, des intervenants et des citations  
+| 0          | Ajouter des intervenants
+| 0          | Ajouter des transcriptions
 | 0          | Voter positivement
-| 0          | Signaler du contenu inaproprié                 
-| 50         | Plus de restrictions spécifiques aux nouveaux utilisateurs             
-| 80         | Voter négativement
-| 100        | Déplacer toutes les citations d'une vidéo (time shift)                        
-| 150        | Supprimer et restaurer des citations                           
-| 200        | Supprimer et restaurer des intervenants
+| 15         | Signaler du contenu inaproprié                 
+| 15         | Voter négativement
+| 30         | Mettre à jour une transcription                 
+| 30         | Mettre à jour un intervenant                 
+| 75         | Supprimer / restaurer une transcription
+| 75         | Supprimer / restaurer un intervenant
+| 125        | Plus de restrictions spécifiques aux nouveaux utilisateurs             
+| 125        | Déplacer toutes les citations d'une vidéo (time shift)                        
+| 200        | Ajouter une vidéo
 | 1000       | Accès aux outils de modération
 
 

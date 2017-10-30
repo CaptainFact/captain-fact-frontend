@@ -13,20 +13,24 @@ Judgement actions such as voting and flagging are limited to avoid abusing them 
 |:-----------|:-----------------------------------------------------------|
 | Any        | Post comments and facts            
 | Any        | Edit and delete your comments                 
-| 0          | Add videos, speakers and statements                              
+| 0          | Add speakers
+| 0          | Add statements
 | 0          | Vote Up                                 
-| 0          | Flag innapropriate content          
-| 50         | No more new user restrictions               
-| 80         | Vote Down                                    
-| 100        | Shift all video's statements                                 
-| 150        | Delete and restore statements                           
-| 200        | Delete and restore speakers
+| 15         | Flag inappropriate content  
+| 15         | Vote Down                                    
+| 30         | Update statement  
+| 30         | Update speaker
+| 75         | Remove / restore statement
+| 75         | Remove / restore speaker            
+| 125        | No more new user restrictions               
+| 125        | Shift all video's statements                                 
+| 200        | Add videos                            
 | 1000       | Access to moderator tools                                  
 
 
 # New user restrictions
 
-Until you reach a [reputation](/help/reputation) of `50`, you will be considered as a new user.
+Until you reach a [reputation](/help/reputation) of `125`, you will be considered as a new user.
 Your limitations for all actions will be way below the normal.
 
 
