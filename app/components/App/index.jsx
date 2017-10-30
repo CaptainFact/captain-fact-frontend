@@ -9,7 +9,7 @@ import i18n from '../../i18n'
 import { authenticate } from '../../state/users/current_user/effects'
 
 
-@connect(null, {authenticate})
+@connect(state => ({locale: state.UserPreferences.locale}), {authenticate})
 export default class App extends React.PureComponent {
   componentDidMount() {
     this.props.authenticate()
@@ -18,7 +18,7 @@ export default class App extends React.PureComponent {
   render() {
     return (
       <I18nextProvider i18n={i18n}>
-        <div>
+        <div lang={this.props.locale}>
           <MainModalContainer />
           <div className="columns is-mobile is-gapless">
             <Sidebar className="column is-narrow"/>
