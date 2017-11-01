@@ -10,11 +10,9 @@ import { renderTextareaField, validateLengthI18n, cleanStrMultiline } from "../F
 import { STATEMENT_LENGTH } from "../../constants"
 import { translate } from 'react-i18next'
 import { forcePosition } from '../../state/video_debate/video/reducer'
-import {
-  decrementFormCount, incrementFormCount,
-  setScrollTo
-} from '../../state/video_debate/statements/reducer'
+import { decrementFormCount, incrementFormCount, setScrollTo } from '../../state/video_debate/statements/reducer'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
+import {staticResource} from '../../API/resources'
 
 
 const validate = ({text, time}, {t}) => {
@@ -29,7 +27,7 @@ const validate = ({text, time}, {t}) => {
 const SpeakersSelect = ({input, speakers}) => {
   return (
     <Select className="speaker-select"
-            onChange={s => input.onChange(s.id)}
+            onChange={s => s && s.id ? input.onChange(s.id) : input.onChange(null)}
             onBlur={() => input.onBlur(input.value.id)}
             value={input.value}
             name={input.name}
@@ -52,7 +50,7 @@ const SpeakersSelect = ({input, speakers}) => {
 export class StatementForm extends React.PureComponent {
   constructor(props) {
     super(props)
-    this.state = {lockedTime: props.initialValues.time === undefined ? false : props.initialValues.time}
+    this.state = {lockedTime: props.initialValues.time === undefined ? true : props.initialValues.time}
   }
 
   componentDidMount() {
@@ -92,7 +90,7 @@ export class StatementForm extends React.PureComponent {
   render() {
     const { position, handleSubmit, valid, speakers, initialValues, handleAbort, t } = this.props
     const currentTime = this.state.lockedTime === false ? position : this.state.lockedTime
-    const speaker = speakers.find(s => s.id === initialValues.speaker_id)
+    const speaker = initialValues.speaker_id ? speakers.find(s => s.id === initialValues.speaker_id) : null
 
     return (
       <form className={`statement-form${this.props.isBundled ? '' : ' card statement'}`}>
@@ -111,9 +109,9 @@ export class StatementForm extends React.PureComponent {
             <a className="button" title="Lock time marker" onClick={this.toggleLock.bind(this)}>
               <Icon size="small" name={this.state.lockedTime === false ? 'unlock' : 'lock'}/>
             </a>
-              {/*TODO {speaker && speaker.picture &&*/}
-              {/*<img className="speaker-mini" src={staticResource(speaker.picture)}/>*/}
-              {/*}*/}
+              {speaker && speaker.picture &&
+                <img className="speaker-mini" src={staticResource(speaker.picture)}/>
+              }
               <Field name="speaker_id" component={SpeakersSelect} speakers={speakers}/>
           </div>
         </header>
@@ -121,8 +119,7 @@ export class StatementForm extends React.PureComponent {
           <div className="statement-text">
             <Field autoFocus component={renderTextareaField} name="text" autosize={true}
               normalize={cleanStrMultiline}
-              placeholder={speaker ? t('statement.textPlaceholder') :
-                t('statement.noSpeakerTextPlaceholder')}/>
+              placeholder={speaker ? t('statement.textPlaceholder') : t('statement.noSpeakerTextPlaceholder')}/>
           </div>
         </div>
         <footer className="card-footer">

@@ -41,6 +41,8 @@ class SpeakerField extends React.PureComponent {
         value={input.value}
         placeholder={`${t('speaker.add')}...`}
         onChange={e => {
+          if (!e)
+            return
           const speaker = {full_name: capitalizeName(cleanStr(e.full_name))}
           if (e.id !== e.full_name)
             speaker.id = e.id

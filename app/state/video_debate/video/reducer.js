@@ -2,7 +2,7 @@ import { handleActions, createAction } from 'redux-actions'
 import { Record, List } from 'immutable'
 
 import Video from '../../videos/record'
-import Speaker from './speaker_record'
+import Speaker from '../speakers/record'
 
 
 export const fetchAll = createAction('VIDEO/FETCH_ALL')
@@ -60,7 +60,7 @@ const VideoReducer = handleActions({
   [setPosition]: (state, {payload}) =>
     state.setIn(['playback', 'position'], Math.trunc(payload)),
   [forcePosition]: (state, {payload}) =>
-    state.update('playback', p => p.merge({position: payload, forcedPosition: payload + 1})),
+    state.update('playback', p => p.merge({position: payload, forcedPosition: payload})),
   [resetForcedPosition]: (state, {payload}) =>
     state.setIn(['playback', 'forcedPosition'], null),
   [resetPosition]: state => state.update('playback', p => p.merge({position: null, forcedPosition: null}))
