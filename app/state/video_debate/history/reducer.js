@@ -6,7 +6,7 @@ import parseDateTime from '../../../lib/parseDateTime'
 import formatSeconds from "../../../lib/seconds_formatter"
 import UserAction from "../../user_actions/record"
 import Statement from '../statements/record'
-import Speaker from '../video/speaker_record'
+import Speaker from '../speakers/record'
 import {ENTITY_SPEAKER, ENTITY_STATEMENT} from '../../../constants'
 
 export const setLoading = createAction('VIDEO_DEBATE_HISTORY/SET_LOADING')
