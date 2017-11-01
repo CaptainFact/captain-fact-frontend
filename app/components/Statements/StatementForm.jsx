@@ -50,7 +50,7 @@ const SpeakersSelect = ({input, speakers}) => {
 export class StatementForm extends React.PureComponent {
   constructor(props) {
     super(props)
-    this.state = {lockedTime: props.initialValues.time === undefined ? true : props.initialValues.time}
+    this.state = {lockedTime: props.initialValues.time === undefined ? props.position : props.initialValues.time}
   }
 
   componentDidMount() {
