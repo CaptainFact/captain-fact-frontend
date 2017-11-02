@@ -54,6 +54,9 @@ app
 An effect is an async action that may dispatch one or more actions when called. It always returns a
 promise, ideally without the need for .catch(...) - errors should be converted to FSA errors objects.
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) to see how you can contribute.
 
 ## License
 

@@ -46,7 +46,9 @@
     "text": "Text",
     "add": "Add a statement",
     "autoscroll_enable": "Enable autoscroll",
-    "autoscroll_disable": "Disable autoscroll"
+    "autoscroll_disable": "Disable autoscroll",
+    "reverseTimeLock_lock": "Unlock time marker",
+    "reverseTimeLock_unlock": "Lock time marker"
   },
   "loading": {
     "statements": "Loading Statements",
