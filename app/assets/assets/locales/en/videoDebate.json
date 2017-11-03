@@ -42,7 +42,7 @@
   },
   "statement": {
     "textPlaceholder": "Type a raw transcript of what the speaker says",
-    "noSpeakerTextPlaceholder": "Describe what you see",
+    "noSpeakerTextPlaceholder": "Describe what you see or select a speaker",
     "text": "Text",
     "add": "Add a statement",
     "autoscroll_enable": "Enable autoscroll",
