@@ -5,12 +5,14 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
 import { ErrorView } from '../Utils/ErrorView'
 import { login } from '../../state/users/current_user/effects'
 import { translate } from 'react-i18next'
+import { isAuthenticated } from '../../state/users/current_user/selectors'
 
 
 @connect(state => ({
   user: state.CurrentUser.data,
-  isLoading: state.CurrentUser.isLoading,
-  error: state.CurrentUser.error
+  isLoading: state.CurrentUser.isLoading || state.CurrentUser.isPosting,
+  error: state.CurrentUser.error,
+  isAuthenticated: isAuthenticated(state)
 }), {login})
 @translate('user')
 export default class ThirdPartyCallback extends React.PureComponent {
@@ -23,10 +25,9 @@ export default class ThirdPartyCallback extends React.PureComponent {
     }
   }
 
-  componentWillReceiveProps(props) {
-    // TODO If user is authenticated, redirect somewhere else
-    if (props.user.id)
-      this.props.router.push(`/u/${props.user.username}/settings`)
+  componentDidUpdate() {
+    if (this.props.isAuthenticated && this.props.user.username)
+      this.props.router.push(`/u/${this.props.user.username}/settings`)
   }
 
   render() {
@@ -36,6 +37,6 @@ export default class ThirdPartyCallback extends React.PureComponent {
       return <ErrorView error={this.props.error} i18nNS="user:errors.error"/>
     if (this.props.location.query.error)
       return <ErrorView error={this.props.location.query.error} i18nNS="user:errors.thirdParty"/>
-    return null
+    return <LoadingFrame title="Authenticating"/>
   }
 }

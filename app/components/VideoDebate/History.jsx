@@ -6,18 +6,16 @@ import capitalize from 'voca/capitalize'
 
 import { Icon, LoadingFrame } from "../Utils"
 import { EntityHistory } from './EntityHistory'
-import {
-  joinVideoDebateHistoryChannel,
-  leaveVideoDebateHistoryChannel
-} from '../../state/video_debate/history/effects'
-import {ENTITY_SPEAKER, ENTITY_STATEMENT} from '../../constants'
+import { ENTITY_SPEAKER, ENTITY_STATEMENT } from '../../constants'
+import { joinVideoDebateHistoryChannel, leaveVideoDebateHistoryChannel } from '../../state/video_debate/history/effects'
+import { reset } from '../../state/video_debate/history/reducer'
 
 
 @connect(state => ({
   isLoading: state.VideoDebate.history.isLoading,
   error: state.VideoDebate.history.error,
   allActions: state.VideoDebate.history.entitiesActions
-}), {joinVideoDebateHistoryChannel, leaveVideoDebateHistoryChannel})
+}), {joinVideoDebateHistoryChannel, leaveVideoDebateHistoryChannel, reset})
 @translate(['main', 'videoDebate'])
 export default class VideoDebateHistory extends React.PureComponent {
   constructor(props) {
@@ -31,6 +29,7 @@ export default class VideoDebateHistory extends React.PureComponent {
 
   componentWillUnmount() {
     this.props.leaveVideoDebateHistoryChannel()
+    this.props.reset()
   }
 
   render() {

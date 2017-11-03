@@ -5,7 +5,9 @@ import User from "../record"
 
 // Actions
 export const set = createAction('CURRENT_USER/SET')
+export const userLogin = createAction('CURRENT_USER/LOGIN')
 export const setLoading = createAction('CURRENT_USER/SET_LOADING')
+export const setPosting = createAction('CURRENT_USER/SET_POSTING')
 export const reset = createAction('CURRENT_USER/RESET')
 
 // Reducer
@@ -13,6 +15,7 @@ export const reset = createAction('CURRENT_USER/RESET')
 const INITIAL_STATE = new Record({
   error: null,
   isLoading: false,
+  isPosting: false,
   data: new User()
 })
 
@@ -25,7 +28,16 @@ const CurrentUserReducer = handleActions({
       return state.merge({error: payload, isLoading: false})
     }
   },
+  [userLogin]: {
+    next: (state, {payload}) => {
+      return state.mergeDeep({data: payload || {}, error: null, isPosting: false})
+    },
+    throw: (state, {payload}) => {
+      return state.merge({error: payload, isPosting: false})
+    }
+  },
   [setLoading]: (state, {payload}) => state.set('isLoading', payload),
+  [setPosting]: (state, {payload}) => state.set('isPosting', payload),
   [reset]: () => INITIAL_STATE()
 }, INITIAL_STATE())
 

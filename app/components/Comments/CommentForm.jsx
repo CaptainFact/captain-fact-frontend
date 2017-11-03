@@ -15,6 +15,7 @@ import { postComment } from '../../state/video_debate/comments/effects'
 import UserPicture from '../Users/UserPicture'
 import MediaLayout from '../Utils/MediaLayout'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
+import { CommentDisplay } from './CommentDisplay'
 
 
 const validate = ({ source, text }) => {
@@ -105,7 +106,8 @@ export class CommentForm extends React.PureComponent {
         left={<UserPicture user={currentUser} size={USER_PICTURE_MEDIUM}/>}
         content={
           <div>
-            {formValues.reply_to &&
+            {formValues && formValues.reply_to &&
+            <div>
               <Tag size="medium" className="reply_to"
                    onClick={() => this.props.change('reply_to', null)}>
                 <Icon name="times" isClickable={true}/>
@@ -114,8 +116,13 @@ export class CommentForm extends React.PureComponent {
                   <UserAppellation user={formValues.reply_to.user}/>
                 </span>
               </Tag>
+              <CommentDisplay withoutActions={true} withoutHeader={true} hideThread={true} className="quoted"
+                              comment={formValues.reply_to}/>
+              <br/>
+            </div>
             }
-            <Field component={ CommentField } className="textarea" name="text" isReply={!!formValues.reply_to}
+            <Field component={ CommentField } className="textarea" name="text"
+                   isReply={formValues && !!formValues.reply_to}
                    normalize={ cleanStrMultiline }
                    placeholder={t('comment.writeComment')}/>
             <Field component={ renderField } name="source.url"

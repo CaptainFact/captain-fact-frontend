@@ -2,17 +2,17 @@ import React from "react"
 import { connect } from "react-redux"
 import { I18nextProvider } from 'react-i18next'
 
-import { default as Sidebar } from "./Sidebar"
 import { FlashMessages } from "../Utils"
-import { MainModalContainer } from "../Modal/MainModalContainer"
 import i18n from '../../i18n'
-import { authenticate } from '../../state/users/current_user/effects'
+import { getCurrentUser } from '../../state/users/current_user/effects'
+import { default as Sidebar } from "./Sidebar"
+import { MainModalContainer } from "../Modal/MainModalContainer"
 
 
-@connect(state => ({locale: state.UserPreferences.locale}), {authenticate})
+@connect(state => ({locale: state.UserPreferences.locale}), {getCurrentUser: getCurrentUser})
 export default class App extends React.PureComponent {
   componentDidMount() {
-    this.props.authenticate()
+    this.props.getCurrentUser()
   }
 
   render() {

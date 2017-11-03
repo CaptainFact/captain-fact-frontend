@@ -20,7 +20,7 @@ const UserProfile = ({user: {achievements}, t}) => (
       <h2 className="title is-2 is-centered has-text-centered">
         <Icon size="large" name="trophy"/> {t('title')}
       </h2>
-      <div className="columns is-marginless is-multiline is-centered" style={{padding: 20}}>
+      <div className="columns is-marginless is-multiline is-centered achievements">
         {achievements.map(id => (
           <div key={id} className="column is-3" style={{flexBasis: 300}}>
             <Achievement id={id}/>
