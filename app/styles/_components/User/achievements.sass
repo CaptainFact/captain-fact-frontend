@@ -1,0 +1,38 @@
+.achievements
+  .achievement
+    border: 1px solid $grey-light
+    padding: 10px
+    border-radius: 20px
+    background: $grey-lighter
+    max-width: 350px
+    margin: 0 auto
+    cursor: default
+    +tablet
+      transition: transform 0.3s, box-shadow 0.2s
+      transform: scale(0.9)
+      &:hover
+        transform: scale(1.10)
+        box-shadow: 0px 3px 15px $grey-light
+        .card .content .title
+          text-shadow: 0px 0px 20px $logo-main
+    .card
+      border: 1px solid $grey-light
+      border-radius: 25px
+      background: $grey-dark
+      .card-image
+        padding: 20px 10px
+        border-bottom: 1px solid $grey
+        img
+          max-height: 125px
+
+      .content
+        .title
+          font-weight: bold
+          font-size: 2em
+          text-shadow: 0px 0px 5px $logo-main
+          transition: text-shadow 0.3s
+          color: white
+          border-bottom: 1px solid $grey
+          padding-bottom: 20px
+        p
+          color: whitesmoke

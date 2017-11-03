@@ -42,11 +42,13 @@
   },
   "statement": {
     "textPlaceholder": "Type a raw transcript of what the speaker says",
-    "noSpeakerTextPlaceholder": "Describe what you see",
+    "noSpeakerTextPlaceholder": "Describe what you see or select a speaker",
     "text": "Text",
     "add": "Add a statement",
     "autoscroll_enable": "Enable autoscroll",
-    "autoscroll_disable": "Disable autoscroll"
+    "autoscroll_disable": "Disable autoscroll",
+    "reverseTimeLock_lock": "Unlock time marker",
+    "reverseTimeLock_unlock": "Lock time marker"
   },
   "loading": {
     "statements": "Loading Statements",

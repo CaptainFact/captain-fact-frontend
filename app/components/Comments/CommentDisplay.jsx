@@ -110,11 +110,11 @@ export class CommentDisplay extends React.PureComponent {
 
   render() {
     const { user, text, source, score, inserted_at } = this.props.comment
-    const { t, withoutActions, replyingTo, nesting, replies, myVote, isVoting, hideThread } = this.props
+    const { t, withoutActions, withoutHeader, replyingTo, nesting, replies, myVote, isVoting, hideThread, className } = this.props
     return (
       <div>
         <MediaLayout
-          className={classNames('comment', {isBlurred: this.state.isBlurred, hasSource: !!source})}
+          className={classNames('comment', className, {isBlurred: this.state.isBlurred, hasSource: !!source})}
           ContainerType="article"
           left={
            <figure>
@@ -137,11 +137,11 @@ export class CommentDisplay extends React.PureComponent {
           content={
             <div className="content">
               <div>
-                <div className="comment-header">
+                {!withoutHeader && <div className="comment-header">
                   <UserAppellation user={user} withoutActions={withoutActions}/>
                   <span> - </span>
                   <TimeSince className="comment-time" time={inserted_at}/>
-                </div>
+                </div>}
                 {source && <Source source={source}/>}
                 <div className="comment-text">
                   {nesting > 4 && replyingTo &&

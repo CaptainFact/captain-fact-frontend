@@ -20,5 +20,8 @@
   "resetPasswordSuccess": "Password successfully changed",
   "invitationOnlyTitle": "Ask for an invitation",
   "invitationOnlyBody": "You must have an invitation to create an account. To request one, please enter you email below.",
-  "emailConfirmed": "Email confirmed"
+  "emailConfirmed": "Email confirmed",
+  "linkedAccounts": "Linked accounts",
+  "linkAccount": "Link account",
+  "unlinkAccount": "Unlink account"
 }
