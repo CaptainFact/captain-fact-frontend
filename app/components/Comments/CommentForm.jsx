@@ -106,7 +106,7 @@ export class CommentForm extends React.PureComponent {
         left={<UserPicture user={currentUser} size={USER_PICTURE_MEDIUM}/>}
         content={
           <div>
-            {formValues.reply_to &&
+            {formValues && formValues.reply_to &&
             <div>
               <Tag size="medium" className="reply_to"
                    onClick={() => this.props.change('reply_to', null)}>
@@ -121,7 +121,8 @@ export class CommentForm extends React.PureComponent {
               <br/>
             </div>
             }
-            <Field component={ CommentField } className="textarea" name="text" isReply={!!formValues.reply_to}
+            <Field component={ CommentField } className="textarea" name="text"
+                   isReply={formValues && !!formValues.reply_to}
                    normalize={ cleanStrMultiline }
                    placeholder={t('comment.writeComment')}/>
             <Field component={ renderField } name="source.url"
