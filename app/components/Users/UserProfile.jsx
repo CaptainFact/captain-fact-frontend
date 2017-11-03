@@ -21,7 +21,7 @@ const UserProfile = ({user: {achievements}, t}) => (
         <Icon size="large" name="trophy"/> {t('title')}
       </h2>
       <div className="columns is-marginless is-multiline is-centered achievements">
-        {[1,2,6,5].map(id => (
+        {achievements.map(id => (
           <div key={id} className="column is-3" style={{flexBasis: 300}}>
             <Achievement id={id}/>
           </div>
