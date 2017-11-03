@@ -1,5 +1,5 @@
 import HttpApi from '../../../API/http_api'
-import { set as setCurrentUser, setLoading, reset } from './reducer'
+import {set as setCurrentUser, setLoading, reset, setPosting, userLogin} from './reducer'
 import { setUser as setDisplayedUser } from '../displayed_user/reducer'
 import { createEffect } from '../../utils'
 
@@ -8,11 +8,11 @@ import { createEffect } from '../../utils'
 
 // Auth / register / login functions
 
-export const authenticate = () => dispatch => {
+export const getCurrentUser = () => dispatch => {
   if (!HttpApi.hasToken)
     return null
   dispatch(setLoading(true))
-  dispatch(setCurrentUser(HttpApi.get('auth').catch(error => {
+  dispatch(setCurrentUser(HttpApi.get('users/me').catch(error => {
       if (error === 'unauthorized') // Token expired
         HttpApi.resetToken()
       throw error
@@ -29,20 +29,32 @@ export const login = ({provider, params}) =>
 // Ask for an invitation
 
 export const requestInvitation = user => createEffect(
-  HttpApi.post('auth/request_invitation', user)
+  HttpApi.post('users/request_invitation', user)
 )
 
 // Update user
 
 export const updateInfo = user => createEffect(
   HttpApi.put("users/me", user), {
-    before: setLoading(true),
+    before: setPosting(true),
     then: user => (dispatch, getState) => {
       if (getState().DisplayedUser.data.id === user.id)
         dispatch(setDisplayedUser(user))
       return user
     },
-    after: setCurrentUser
+    after: [setPosting(false), setCurrentUser]
+  }
+)
+
+export const unlinkProvider = provider => createEffect(
+  HttpApi.delete(`auth/${provider}/link`), {
+    before: setPosting(true),
+    then: user => (dispatch, getState) => {
+      if (getState().DisplayedUser.data.id === user.id)
+        dispatch(setDisplayedUser(user))
+      return user
+    },
+    after: userLogin
   }
 )
 
@@ -54,13 +66,13 @@ export const confirmEmail = token =>
 // Reset password
 
 export const resetPasswordRequest = ({email}) =>
-  createEffect(HttpApi.post('auth/reset_password/request', {email}))
+  createEffect(HttpApi.post('users/reset_password/request', {email}))
 
 export const resetPasswordVerify = token =>
-  createEffect(HttpApi.get(`auth/reset_password/verify/${token}`))
+  createEffect(HttpApi.get(`users/reset_password/verify/${token}`))
 
 export const resetPasswordConfirm = ({password, token}) =>
-  createEffect(HttpApi.post('auth/reset_password/confirm', {password, token}))
+  createEffect(HttpApi.post('users/reset_password/confirm', {password, token}))
 
 // Logout / delete
 
@@ -75,12 +87,12 @@ export const deleteAccount = () =>
 
 const userConnect = promise => createEffect(
   promise, {
-    before: setLoading(true),
+    before: setPosting(true),
     then: ({token, user}) => () => {
       HttpApi.setAuthorizationToken(token)
       return user
     },
-    after: setCurrentUser
+    after: userLogin
   }
 )
 

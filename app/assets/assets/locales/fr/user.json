@@ -20,5 +20,8 @@
   "resetPasswordSuccess": "Le mot de passe a bien été changé",
   "invitationOnlyTitle": "Demander une invitation",
   "invitationOnlyBody": "Vous devez avoir été invité pour créer un compte. Pour demander une invitation, entrez votre email ci-dessous.",
-  "emailConfirmed": "Email confirmé"
+  "emailConfirmed": "Email confirmé",
+  "linkedAccounts": "Comptes liés",
+  "linkAccount": "Lier le compte",
+  "unlinkAccount": "Délier le compte"
 }

@@ -27,7 +27,9 @@ This is a HTML5 application, built with [Brunch](http://brunch.io).
 - Redux: state management
 - ReactRouter: routing
 - phoenix: interaction with phoenix socket
-- Bulma: base styles
+- Bulma: base styles (we're still using an old 0.3.2 version, documentation
+[here (Github)](https://github.com/jgthms/bulma/tree/0395dc59d8b147f2f47d057a6ffde2eb2966db49/docs/documentation))
+or [here (archive.org)](https://web.archive.org/web/20170518075321/http://bulma.io/documentation/overview/start/)
 
 ## Conventions
 
@@ -54,6 +56,9 @@ app
 An effect is an async action that may dispatch one or more actions when called. It always returns a
 promise, ideally without the need for .catch(...) - errors should be converted to FSA errors objects.
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) to see how you can contribute.
 
 ## License
 

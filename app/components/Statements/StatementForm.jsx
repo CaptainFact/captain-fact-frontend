@@ -91,6 +91,7 @@ export class StatementForm extends React.PureComponent {
     const { position, handleSubmit, valid, speakers, initialValues, handleAbort, t } = this.props
     const currentTime = this.state.lockedTime === false ? position : this.state.lockedTime
     const speaker = initialValues.speaker_id ? speakers.find(s => s.id === initialValues.speaker_id) : null
+    const toggleTimeLockAction = this.state.lockedTime === false ? 'unlock' : 'lock'
 
     return (
       <form className={`statement-form${this.props.isBundled ? '' : ' card statement'}`}>
@@ -106,13 +107,12 @@ export class StatementForm extends React.PureComponent {
                onClick={() => this.moveTimeMarker(currentTime + 1)}>
               <Icon name="caret-right"/>
             </a>
-            <a className="button" title="Lock time marker" onClick={this.toggleLock.bind(this)}>
-              <Icon size="small" name={this.state.lockedTime === false ? 'unlock' : 'lock'}/>
+            <a className="button" title={t("statement.reverseTimeLock", {context: toggleTimeLockAction})}
+               onClick={this.toggleLock.bind(this)}>
+              <Icon size="small" name={toggleTimeLockAction}/>
             </a>
-              {speaker && speaker.picture &&
-                <img className="speaker-mini" src={staticResource(speaker.picture)}/>
-              }
-              <Field name="speaker_id" component={SpeakersSelect} speakers={speakers}/>
+            {speaker && speaker.picture && <img className="speaker-mini" src={staticResource(speaker.picture)}/>}
+            <Field name="speaker_id" component={SpeakersSelect} speakers={speakers}/>
           </div>
         </header>
         <div className="card-content">
