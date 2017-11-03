@@ -1,19 +1,19 @@
 import React from 'react'
+import {staticResource} from '../../API/resources'
 
 
-const getImageUrl = (userId, url, size) => {
-  if (!url)
+const getImageUrl = (userId, url, url_mini, size) => {
+  if (!url || !url_mini)
     return `https://api.adorable.io/avatars/${size}/${userId}.png`
-  if (url.includes('facebook.com'))
-    return url.split('?')[0] + `?width=${size}&height=${size}`
-  return url
+
+  if (size <= 48)
+    return staticResource(url_mini)
+  return staticResource(url)
 }
 
-const UserPicture = ({user: {id, picture_url}, size}) =>
+const UserPicture = ({user: {id, picture_url, mini_picture_url}, size}) =>
   <figure className={`image user-picture is-${size}x${size}`}>
-    {id &&
-      <img src={getImageUrl(id, picture_url, size)}/>
-    }
+    {id && <img src={getImageUrl(id, picture_url, mini_picture_url, size)}/>}
   </figure>
 
 export default UserPicture
