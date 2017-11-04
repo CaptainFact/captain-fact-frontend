@@ -31,7 +31,7 @@ const BrowserExtensionsPage = ({t}) => (
 
 const BrowserExtension = ({browser, image, buttonLabel, url, disabled=false}) => (
   <div className="column has-text-centered">
-    <a href={url} target="_BLANK" className={disabled && "is-disabled"}>
+    <a href={url} target="_BLANK" className={disabled ? "is-disabled" : ""}>
       <img src={image} alt={browser}/>
       <span className={"button is-large" + (disabled ? " is-disabled" : "")} style={{display: "flex"}}>
         {buttonLabel}

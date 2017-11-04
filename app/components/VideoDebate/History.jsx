@@ -16,7 +16,7 @@ import { reset } from '../../state/video_debate/history/reducer'
   error: state.VideoDebate.history.error,
   allActions: state.VideoDebate.history.entitiesActions
 }), {joinVideoDebateHistoryChannel, leaveVideoDebateHistoryChannel, reset})
-@translate(['main', 'videoDebate'])
+@translate(['main', 'videoDebate', 'history'])
 export default class VideoDebateHistory extends React.PureComponent {
   constructor(props) {
     super(props)
