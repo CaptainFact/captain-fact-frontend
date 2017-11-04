@@ -5,7 +5,6 @@ import titleCase from '../../lib/title_case'
 import UserAppellation from "../Users/UserAppellation"
 import { TimeSince, Icon } from '../Utils'
 import classNames from 'classnames'
-import iterateWithSeparators from '../../lib/iterate_with_separators'
 import Tag from '../Utils/Tag'
 import { generateDiff } from '../../state/video_debate/history/reducer'
 import { revertVideoDebateHistoryEntry } from '../../state/video_debate/history/effects'
@@ -25,7 +24,6 @@ export class HistoryEntry extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {isDiffing: false}
-
     this.revertAction = this.authenticatedAction(this.revertAction.bind(this))
   }
 
