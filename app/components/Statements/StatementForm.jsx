@@ -83,7 +83,7 @@ export class StatementForm extends React.PureComponent {
     if (!statement.speaker_id)
       statement.speaker_id = null
     this.props.handleConfirm(statement).then(handleFormEffectResponse({
-      onSuccess: (st) => this.props.setScrollTo(st)
+      onSuccess: ({id}) => this.props.setScrollTo({id, __forceAutoScroll: true})
     }))
   }
 

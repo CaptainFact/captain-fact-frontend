@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
+import { formValueSelector } from 'redux-form'
 
 import { getVideoDebateSpeakers } from '../../video_debate/selectors'
 import { getStatementApprovingFacts, getStatementRefutingFacts } from "../comments/selectors"
@@ -55,3 +56,6 @@ export const isStatementFocused = createSelector(
   (focusedStatementId, statementId) => focusedStatementId === statementId
 )
 
+export const statementFormValueSelector = formValueSelector('StatementForm')
+
+export const hasStatementForm = state => statementFormValueSelector(state, 'speaker_id') !== undefined

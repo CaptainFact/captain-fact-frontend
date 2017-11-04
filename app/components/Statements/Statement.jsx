@@ -20,6 +20,7 @@ import { forcePosition } from '../../state/video_debate/video/reducer'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 import ShareModal from '../Utils/ShareModal'
 import {ENTITY_STATEMENT} from '../../constants'
+import { setScrollTo } from '../../state/video_debate/statements/reducer'
 
 
 @connect((state, props) => ({
@@ -29,14 +30,14 @@ import {ENTITY_STATEMENT} from '../../constants'
   refutingFacts : commentsSelectors.getStatementRefutingFacts(state, props),
   approveScore: statementSelectors.getStatementApproveScore(state, props),
   refuteScore: statementSelectors.getStatementRefuteScore(state, props),
-  isLoading: commentsSelectors.areCommentsLoading(state),
+  commentsLoading: commentsSelectors.areCommentsLoading(state),
   isAuthenticated: isAuthenticated(state),
   isFocused: statementSelectors.isStatementFocused(state, props),
   currentUser: state.CurrentUser.data,
   scrollTo: state.VideoDebate.statements.scrollTo,
-  enableAutoscroll: state.UserPreferences.enableAutoscroll,
+  autoscrollEnabled: state.UserPreferences.enableAutoscroll,
   formEnabled: state.VideoDebate.statements.formsCount > 0
-}), {addModal, updateStatement, deleteStatement, forcePosition})
+}), {addModal, updateStatement, deleteStatement, forcePosition, setScrollTo})
 @translate('videoDebate')
 export class Statement extends React.PureComponent {
   constructor(props) {
@@ -44,24 +45,33 @@ export class Statement extends React.PureComponent {
     this.state = { isDeleting: false, isEditing: false }
   }
 
-  componentDidMount() {
-    if (this.props.scrollTo && this.props.scrollTo.id === this.props.statement.id)
-      this.smoothScrollTo()
-  }
-
   componentDidUpdate(prevProps) {
-    if (!this.props.enableAutoscroll || this.props.formEnabled)
-      return
-    if (this.props.scrollTo &&
-        (this.props.scrollTo !== prevProps.scrollTo || !prevProps.enableAutoscroll) &&
-        this.props.scrollTo.id === this.props.statement.id)
-      this.smoothScrollTo()
-    else if (this.props.isFocused && !prevProps.isFocused)
+    if (this.shouldScroll(this.props, prevProps))
       this.smoothScrollTo()
   }
 
-  smoothScrollTo() {
-    this.refs.container.scrollIntoView({behavior: 'smooth'})
+  render() {
+    const { isDeleting } = this.state
+    const { statement, isFocused, isAuthenticated, speaker } = this.props
+
+    return (
+      <div className={`statement-container${isFocused ? ' is-focused' : ''}`} ref="container">
+        <div className="card statement">
+          {this.renderCardHeaderAndContent(isAuthenticated, speaker, statement)}
+          {this.renderFactsAndComments()}
+          {isDeleting &&
+          <ModalConfirmDelete
+            title="Remove Statement"
+            isAbsolute={true}
+            isRemove={true}
+            message="Do you really want to remove this statement ?"
+            handleAbort={() => this.setState({isDeleting: false})}
+            handleConfirm={() => this.props.deleteStatement({id: statement.id})}
+          />
+          }
+        </div>
+      </div>
+    )
   }
 
   showHistory() {
@@ -95,23 +105,25 @@ export class Statement extends React.PureComponent {
       <div>
         <header className="card-header">
           <p className="card-header-title">
-            <TimeDisplay time={statement.time} handleClick={t => this.props.forcePosition(t)}/>
+            <TimeDisplay time={statement.time} handleClick={t => {
+              this.props.forcePosition(t)
+              this.props.setScrollTo({id: statement.id, __forceAutoScroll: true})
+            }}/>
             {speaker && speaker.picture &&
-              <img className="speaker-mini" src={staticResource(speaker.picture)}/>
+            <img className="speaker-mini" src={staticResource(speaker.picture)}/>
             }
             <strong>{speaker ? speaker.full_name : ""}</strong>
           </p>
-          {isAuthenticated &&
-            <div className="card-header-icon">
-              <LinkWithIcon iconName="history" onClick={ this.showHistory.bind(this) }/>
-              <LinkWithIcon iconName="pencil" onClick={() => this.setState({isEditing: true})}/>
-              <LinkWithIcon iconName="share-alt" onClick={() => this.props.addModal({
-                Modal: ShareModal,
-                props: {path: `${location.pathname}?statement=${statement.id}`}
-              })}/>
-              <LinkWithIcon iconName="times" onClick={() => this.setState({isDeleting: true})}/>
-            </div>
-          }
+
+          <div className="card-header-icon">
+            <LinkWithIcon iconName="history" onClick={ this.showHistory.bind(this) }/>
+            {isAuthenticated && <LinkWithIcon iconName="pencil" onClick={() => this.setState({isEditing: true})}/>}
+            <LinkWithIcon iconName="share-alt" onClick={() => this.props.addModal({
+              Modal: ShareModal,
+              props: {path: `${location.pathname}?statement=${statement.id}`}
+            })}/>
+            {isAuthenticated && <LinkWithIcon iconName="times" onClick={() => this.setState({isDeleting: true})}/>}
+          </div>
         </header>
         <div className="card-content statement-text-container">
           <div className="statement-text">
@@ -127,65 +139,72 @@ export class Statement extends React.PureComponent {
   }
 
   renderFactsAndComments() {
-    if (this.props.isLoading)
+    if (this.props.commentsLoading)
       return (<LoadingFrame size="small" title="Loading comments"/>)
     const { statement, comments, approvingFacts, refutingFacts, currentUser } = this.props
 
     return (
       <div>
         {(approvingFacts.size > 0 || refutingFacts.size > 0) &&
-          <div className="card-footer facts">
-            {approvingFacts.size > 0 &&
-              <CommentsContainer className="card-footer-item approve"
-                comments={approvingFacts}
-                header={this.renderCommentsContainerHeader('approve', 'success', this.props.approveScore)}/>
-            }
-            {refutingFacts.size > 0 &&
-              <CommentsContainer className="card-footer-item refute"
-                comments={refutingFacts}
-                header={this.renderCommentsContainerHeader('refute', 'danger', this.props.refuteScore)}/>
-            }
-          </div>
-        }
-        {(comments.size > 0 || currentUser.id !== 0) &&
-          <div>
-              <div className="card-footer comments">
-                {comments.size > 0 &&
-                  <CommentsContainer comments={comments}/>
-                }
-                {currentUser.id !== 0 &&
-                  <CommentForm  form={`formAddComment-${statement.id}`}
-                                initialValues={{ statement_id: statement.id }}/>
-                  // TODO This can be optimized as initialValues will always change upon rendering
-                }
-              </div>
-          </div>
-        }
-      </div>
-    )
-  }
-
-  render() {
-    const { isDeleting } = this.state
-    const { statement, isFocused, isAuthenticated, speaker } = this.props
-
-    return (
-      <div className={`statement-container${isFocused ? ' is-focused' : ''}`} ref="container">
-        <div className="card statement">
-          {this.renderCardHeaderAndContent(isAuthenticated, speaker, statement)}
-          {this.renderFactsAndComments()}
-          {isDeleting &&
-            <ModalConfirmDelete
-              title="Remove Statement"
-              isAbsolute={true}
-              isRemove={true}
-              message="Do you really want to remove this statement ?"
-              handleAbort={() => this.setState({isDeleting: false})}
-              handleConfirm={() => this.props.deleteStatement({id: statement.id})}
-              />
+        <div className="card-footer facts">
+          {approvingFacts.size > 0 &&
+          <CommentsContainer className="card-footer-item approve"
+                             comments={approvingFacts}
+                             header={this.renderCommentsContainerHeader('approve', 'success', this.props.approveScore)}/>
+          }
+          {refutingFacts.size > 0 &&
+          <CommentsContainer className="card-footer-item refute"
+                             comments={refutingFacts}
+                             header={this.renderCommentsContainerHeader('refute', 'danger', this.props.refuteScore)}/>
           }
         </div>
+        }
+        {(comments.size > 0 || currentUser.id !== 0) &&
+        <div>
+          <div className="card-footer comments">
+            {comments.size > 0 &&
+            <CommentsContainer comments={comments}/>
+            }
+            {currentUser.id !== 0 &&
+            <CommentForm  form={`formAddComment-${statement.id}`}
+                          initialValues={{ statement_id: statement.id }}/>
+              // TODO This can be optimized as initialValues will always change upon rendering
+            }
+          </div>
+        </div>
+        }
       </div>
     )
   }
+
+  // ---- Autoscroll ----
+
+  shouldScroll = (props, prevProps) => {
+    // Return if not ready or if this is not the scroll target and not focused
+    if (!this.isAutoScrollReady(props) || !this.isTarget(props))
+      return false
+
+    // Get previous state
+    const wasEnabled = prevProps.autoscrollEnabled
+    const wasTarget = this.isTarget(prevProps)
+    const wasReady = this.isAutoScrollReady(prevProps)
+    const wasActive = wasTarget && wasReady && wasEnabled
+    const wasForced = this.isAutoScrollForced(props)
+
+    // Scroll if enabled and wasn't target, wasn't enabled or wasn't ready
+    if (props.autoscrollEnabled && !wasActive)
+      return true
+
+    // Only override autoscrollEnabled when we're forced by a scrollTo
+    else if (!props.autoscrollEnabled && (!wasActive || !wasForced) && this.isAutoScrollForced(props))
+      return true
+
+    return false
+  }
+
+  isAutoScrollReady = props => !props.commentsLoading && !props.formEnabled
+  isScrollToTarget = props => props.scrollTo && props.scrollTo.id === props.statement.id
+  isAutoScrollForced = props => this.isScrollToTarget(props) && props.scrollTo.__forceAutoScroll
+  isTarget = props => this.isScrollToTarget(props) || props.isFocused
+  smoothScrollTo = () => this.refs.container.scrollIntoView({behavior: 'smooth'})
 }
