@@ -3,6 +3,7 @@ import { Record, List } from 'immutable'
 
 import Video from '../../videos/record'
 import Speaker from '../speakers/record'
+import { resetVideoDebate } from '../actions'
 
 
 export const fetchAll = createAction('VIDEO/FETCH_ALL')
@@ -10,7 +11,6 @@ export const setLoading = createAction('VIDEO/SET_LOADING')
 export const addSpeaker = createAction('VIDEO/ADD_SPEAKER')
 export const removeSpeaker = createAction('VIDEO/REMOVE_SPEAKER')
 export const updateSpeaker = createAction('VIDEO/UPDATE_SPEAKER')
-export const reset = createAction('VIDEO/RESET')
 
 export const setPosition = createAction('PLAYBACK/SET_POSITION')
 export const forcePosition = createAction('PLAYBACK/FORCE_POSITION')
@@ -56,7 +56,7 @@ const VideoReducer = handleActions({
         .updateIn(['data', 'speakers'], speakers => sortSpeakers(speakers))
     return state
   },
-  [reset]: state => INITIAL_STATE(),
+  [resetVideoDebate]: state => INITIAL_STATE(),
   [setPosition]: (state, {payload}) =>
     state.setIn(['playback', 'position'], Math.trunc(payload)),
   [forcePosition]: (state, {payload}) =>

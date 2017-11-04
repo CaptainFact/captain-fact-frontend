@@ -1,5 +1,5 @@
 import { Record, List, Map } from 'immutable'
-import { createAction, handleActions } from 'redux-actions'
+import { createAction, handleActions, combineActions } from 'redux-actions'
 import { diffWordsWithSpace } from 'diff'
 
 import parseDateTime from '../../../lib/parseDateTime'
@@ -8,6 +8,7 @@ import UserAction from "../../user_actions/record"
 import Statement from '../statements/record'
 import Speaker from '../speakers/record'
 import {ENTITY_SPEAKER, ENTITY_STATEMENT} from '../../../constants'
+import { resetVideoDebate } from '../actions'
 
 export const setLoading = createAction('VIDEO_DEBATE_HISTORY/SET_LOADING')
 export const reset = createAction('VIDEO_DEBATE_HISTORY/RESET')
@@ -79,7 +80,7 @@ const VideoDebateHistoryReducer = handleActions({
     })
     return state.setIn(['diffs', payload.id], diff)
   },
-  [reset]: () => INITIAL_STATE()
+  [combineActions(reset, resetVideoDebate)]: () => INITIAL_STATE()
 }, INITIAL_STATE())
 export default VideoDebateHistoryReducer
 

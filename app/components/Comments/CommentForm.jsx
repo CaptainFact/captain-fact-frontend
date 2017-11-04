@@ -25,7 +25,7 @@ const validate = ({ source, text }) => {
   if (url && !hasValidUrl)
     errors['source'] = {url: 'Invalid URL'}
   if (!hasValidUrl && !text)
-    errors['text'] = 'You must either set a comment or a source'
+    errors['text'] = true
   else if (text)
     validateLength(errors, 'text', text, COMMENT_LENGTH, "Comment")
   return errors
