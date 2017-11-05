@@ -1,7 +1,7 @@
 import React from "react"
+import ReactPlayer from "react-player"
 import upperCase from "voca/upper_case"
-// import trimRight from "voca/trim_right"
-
+import lowerCase from "voca/lower_case"
 
 // const truncateUrl = (url, maxLength) => {
 //   if (url.length >= maxLength) {
@@ -16,14 +16,27 @@ import upperCase from "voca/upper_case"
 //   return url.replace(/https?:\/\//, "")
 // }
 
+const supportedPlayers = ['youtube', 'dailymotion', 'twitch', 'soundcloud', 'streamable', 'vidme', 'vimeo', 'wistia']
+
 const getHostName = url =>
   upperCase(url.replace(/https?:\/\//, "").replace(/\/.*/g, ""))
 
-export const Source = ({source: {url, title, site_name}}) => (
-  <a href={url} target="_BLANK" className="fact-source">
-    <span className="site-name">
-      { upperCase(site_name) || getHostName(url) }
-    </span>
-    <span className="article-title">{title}</span>
-  </a>
-)
+const isPlayer = site_name => supportedPlayers.includes(lowerCase(site_name))
+
+export const Source = ({ source: { url, title, site_name } }) => {
+  if (isPlayer(site_name)) {
+    return <ReactPlayer width='100%' url={url} config={{
+      youtube: { preload: false },
+      facebook: { preload: false },
+      dailymotion: { preload: false },
+      soundcloud: { preload: false }
+    }} />
+  } else {
+    return <a href={url} target="_BLANK" className="fact-source">
+      <span className="site-name">
+        {upperCase(site_name) || getHostName(url)}
+      </span>
+      <span className="article-title">{title}</span>
+    </a>
+  }
+}
