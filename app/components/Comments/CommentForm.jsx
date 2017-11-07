@@ -116,7 +116,7 @@ export class CommentForm extends React.PureComponent {
                   <UserAppellation user={formValues.reply_to.user}/>
                 </span>
               </Tag>
-              <CommentDisplay withoutActions={true} withoutHeader={true} hideThread={true} className="quoted"
+              <CommentDisplay richMedias={false} withoutActions={true} withoutHeader={true} hideThread={true} className="quoted"
                               comment={formValues.reply_to}/>
               <br/>
             </div>

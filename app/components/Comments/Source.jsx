@@ -23,14 +23,14 @@ const getHostName = url =>
 
 const isPlayer = site_name => supportedPlayers.includes(lowerCase(site_name))
 
-export const Source = ({ source: { url, title, site_name } }) => {
-  if (isPlayer(site_name)) {
-    return <ReactPlayer width='100%' url={url} config={{
+export const Source = ({ source: { url, title, site_name }, withoutPlayer }) => {
+  if (isPlayer(site_name) && !withoutPlayer) {
+    return (<ReactPlayer width='100%' url={url} config={{
       youtube: { preload: false },
       facebook: { preload: false },
       dailymotion: { preload: false },
       soundcloud: { preload: false }
-    }} />
+    }} />)
   } else {
     return <a href={url} target="_BLANK" className="fact-source">
       <span className="site-name">
