@@ -1,10 +1,10 @@
 import React from "react"
 import { withRouter } from "react-router"
 import { Field, reduxForm } from 'redux-form'
-import youtubeRegex from "youtube-regex"
 import { connect } from 'react-redux'
 import trim from 'voca/trim'
 
+import { youtubeRegex } from '../../lib/url_utils'
 import { DummyVideoPlayer } from "../Videos"
 import { FieldWithButton } from "../FormUtils"
 import { LoadingFrame } from '../Utils/LoadingFrame'
@@ -13,7 +13,7 @@ import { isAuthenticated } from '../../state/users/current_user/selectors'
 
 
 const validate = ({ url }) => {
-  if (!youtubeRegex().test(url))
+  if (!youtubeRegex.test(url))
     return {url: "Invalid URL. Only youtube videos are currently supported"}
   return {}
 }

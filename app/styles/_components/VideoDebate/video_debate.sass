@@ -4,7 +4,7 @@
   max-width: 100%
   min-width: 370px
 
-  &.form .control
+  &.form .control /* TODO Is this used ? */
     padding: 5px
 
   &> .title
@@ -20,6 +20,20 @@
         border-left: none
       &:last-child
         border-right: none
+
+  .video > div
+    @include animate(fadeIn, 1s)
+    position: relative
+    padding-bottom: 52.1%
+    padding-top: 25px
+    height: 0
+
+    &> iframe
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
 
   .actions
     padding: 15px 10px

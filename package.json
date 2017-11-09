@@ -42,8 +42,7 @@
     "smoothscroll-polyfill": "^0.3.6",
     "uuid": "^3.0.1",
     "validator": "^7.0.0",
-    "voca": "^1.3.0",
-    "youtube-regex": "^1.0.5"
+    "voca": "^1.3.0"
   },
   "devDependencies": {
     "auto-reload-brunch": "^2.0.0",
