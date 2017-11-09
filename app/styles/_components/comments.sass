@@ -107,11 +107,14 @@ $max-comment-width: 600px
   .media-content
     overflow: hidden
     max-width: $max-comment-width
+
+  $source-margin: 2px 0 5px
+
   .fact-source
     display: inline-block
     background: $primary-desaturated
     padding: 7px 10px
-    margin: 2px 0 10px
+    margin: $source-margin
     border-radius: 3px
     &:hover
       background: transparentize($primary-desaturated, 0.15)
@@ -126,6 +129,9 @@ $max-comment-width: 600px
     &> .article-title
       font-style: italic
       color: lightgrey
+
+  .video
+    margin: $source-margin
 
   .user-appellation
     display: inline-block
