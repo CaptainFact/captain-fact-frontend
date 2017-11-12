@@ -67,7 +67,7 @@ export class FlashMessages extends React.PureComponent {
 
 @translate(['main', 'errors'])
 @connect(null, {popModal, removeFlash})
-class FlashContent extends React.PureComponent {
+class FlashContent extends React.Component {
   shouldComponentUpdate(nextProps) {
     // To avoid re-rendering every second, we only compare flash id
     return this.props.flash.id !== nextProps.flash.id ||

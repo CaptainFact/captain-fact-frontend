@@ -12,80 +12,8 @@
   .actions-list
     margin-bottom: 30px
 
-    .user-appellation
-      display: inline-block
-
-.entity-actions
-  @extend .box
-  background: none
-  box-shadow: none
-  border-radius: 0
-  margin: 0 auto
-  width: 90%
-  max-width: 900px
-  padding-bottom: 3rem
-  &:not(:last-child)
-    border-bottom: 1px solid lightgrey
-    margin-bottom: 2rem
-  .entity-title
-    text-align: left
-    .statement-text
-      display: inline-block
-  .expend-old-actions
-    display: block
-    width: 100%
-    padding-top: 10px
-  .old-actions
-    padding: 0 25px
-    .separator
-      width: 50%
-      height: 25px
-      border-right: 1px solid #eaeaea
-  .action
-    @extend .card
-    .action-description
-      @extend .card-content
-      text-align: left
-      padding: 15px
-      &> *
-        margin-right: 3px
-      .action-type
-        margin-right: 7px
-    .action-buttons
-      @extend .card-footer
-      &> a
-        @extend .card-footer-item
-        padding: 5px
-        background-color: whitesmoke
-    .action-diff
-      padding: 15px
-      text-align: left
-      box-shadow: 0px 2px 7px 0px #212121 inset
-      background-color: $dark
-      transition: height 0.4s
-      .diff-entry
-        &:not(:last-child)
-          margin-bottom: 5px
-        .diff-key
-          display: inline-block
-          margin-right: 5px
-          font-weight: bold
-          min-width: 80px
-          color: orange
-          vertical-align: top
-        .diff-view
-          display: inline-block
-          background: none
-          font-size: 1em
-          white-space: pre-wrap
-          span
-            color: $dark-invert
-            &.added, &.removed
-              padding: 2px
-            &.added
-              background-color: #006330
-            &.removed
-              white-space: normal
-              background-color: darkred
-              text-decoration: line-through
-              opacity: 0.45
+.modal-history .modal-card
+  width: 800px
+  .modal-card-body
+    text-align: center
+    padding: 2em 0
