@@ -16,21 +16,27 @@ These rules are subject to change, especially as the number of users grows.
  
 # To gain reputation
 
-| Action                                                         | Reputation gain  |
-|:---------------------------------------------------------------|:-----------------|
-| Your email is verified                                         | +10pts
-| You link your account to one of your social network's profile  | +10pts
+| Action                                                         | Reputation gain          |
+|:---------------------------------------------------------------|:-------------------------|
+| Your email is verified                                         | +15pts
+| You link your account to one of your social network's profile  | +15pts
 | One of your comments is voted up                               | +2pts
 | One of your sourced comment is voted up                        | +3pts
 | Someone approves one of your modifications in history          | +5pts
-| One of your flags get confirmed                                | +5pts
+| One of your flags get confirmed                                | From +3 to +10pts (*)
 
 # You loose reputation when...
 
-| Action                                                        | Reputation loss  |
-|:--------------------------------------------------------------|:-----------------|
+| Action                                                        | Reputation loss          |
+|:--------------------------------------------------------------|:-------------------------|
 | You vote down a fact or comment                               | -1pts
+| You delete one of your comments                               | -1pts
 | One of your comments is voted down                            | -2pts
 | One of your facts is voted down                               | -3pts
-| One of your comment / source is banned after multiple flags   | -30pts
-| One of your modifications is reverted after multiple flags    | -30pts
+| One of your flags is considered as abusive                    | From -3 to -10 pts (*)
+| One of your comment / source is banned after multiple flags   | From -15 to -25 pts (*)
+| One of your modifications is reverted after multiple flags    | From -15 to -25 pts (*)
+
+
+(*) Depends on collective moderation; If there's a full consensus, the maximum value will be 
+    applied.

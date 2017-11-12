@@ -6,6 +6,14 @@ Familiarity with [forks](https://help.github.com/articles/fork-a-repo/),
 [pull requests](https://help.github.com/articles/using-pull-requests) and
 [issues](https://guides.github.com/features/issues/).
 
+## Communication
+
+[![Join the chat at https://gitter.im/CaptainFact](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/CaptainFact)
+
+GitHub issues are the primary way for communicating about specific proposed changes to this project.
+
+We also use [Trello](https://trello.com/b/5s6F5iTv/captainfact) to keep track of the tasks we're working on. Feel free to
+comment on these tasks directly.
 
 ## Contributions types
 
@@ -15,16 +23,6 @@ Familiarity with [forks](https://help.github.com/articles/fork-a-repo/),
                     To translate help pages, get a look at `app/assets/assets/help/[locale]/[page].md`
 - **Documentation**: Fix typos, clarify language, and add explanations about how things work
 - **Code**: Submit new features or bug fixes, see "Code contributions" below
-
-## Communication
-
-GitHub issues are the primary way for communicating about specific proposed changes to this project.
-
-We also use [Trello](https://trello.com/b/5s6F5iTv/captainfact) to keep track of the tasks we're working on. Feel free to
-comment on these tasks directly.
-
-[TODO] We'll soon create a place for the community to chat, maybe on Slack or on Keybase.io's
-[encrypted slack alternative](https://techcrunch.com/2017/09/18/keybase-launches-fully-encrypted-slack-like-communications-tool-and-its-free/).
 
 ## Contributions: General workflow
 
@@ -66,7 +64,7 @@ iex> CaptainFact.Factory.insert :user
 #  ...
 #  email: "tamara1970@gutmann.biz", <- Use this email to connect. Password is "password"
 #  ....}
-# You can also set some property directly, like:
+# You can also set some properties directly, like:
 iex> CaptainFact.Factory.insert :user, %{reputation: 5000, email: "jougier@captainfact.io"}
 
 # Remove all videos
@@ -75,9 +73,9 @@ iex> CaptainFact.Repo.delete_all CaptainFact.Videos.Video
 
 #### Starting the frontend
 
-Starting the frontend is much easier, just run `npm install` to install dependencies then `npm start` and you'll
-be able to access the site at [localhost:3333](http://localhost:3333). A default account should have been created
-for you with email=`admin@captainfact.io` and password=`password`.
+To start the frontend just run `npm install` to install dependencies then `npm start` and you'll
+be able to access the site at [localhost:3333](http://localhost:3333).
+A default account should have been created for you with email=`admin@captainfact.io` and password=`password`.
 
 ### Code style
 

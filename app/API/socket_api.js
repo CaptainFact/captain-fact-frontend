@@ -55,12 +55,12 @@ class CaptainFactSocketApi {
   * @return {Phoenix.Channel} channel
   */
   leaveChannel(identifier) {
-    const channel = this.channels[identifier]
-    delete(this.channels[identifier])
     const socketState = this.socket.connectionState()
     // Leave channel gracefully
-    if (socketState  === "open" && channel)
-      channel.leave()
+    if (this.channels[identifier]) {
+      this.channels[identifier].leave()
+      delete(this.channels[identifier])
+    }
     // If no more channels, close the socket
     if (!Object.keys(this.channels).length && ["connecting", "open"].includes(socketState))
       this.socket.disconnect()
