@@ -1,40 +1,37 @@
 import React from "react"
 import ReactPlayer from "react-player"
 import upperCase from "voca/upper_case"
-import lowerCase from "voca/lower_case"
+import { dailymotionRegex, soundcloudRegex, youtubeRegex } from '../../lib/url_utils'
 
-// const truncateUrl = (url, maxLength) => {
-//   if (url.length >= maxLength) {
-//     url = trimRight(url, '/')
-//     const regex = /(http:\/\/|https:\/\/)?([-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6})\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/ig
-//     const urlParts = regex.exec(url)
-//     if (urlParts) {
-//       const afterSlash = urlParts[3].split('/')
-//       url = `${urlParts[2]}/.../${afterSlash[afterSlash.length - 1]}`
-//     }
-//   }
-//   return url.replace(/https?:\/\//, "")
-// }
 
-const supportedPlayers = ['youtube', 'dailymotion', 'twitch', 'soundcloud', 'streamable', 'vidme', 'vimeo', 'wistia']
+const supportedPlayerUrls = [youtubeRegex, dailymotionRegex, soundcloudRegex]
 
-const getHostName = url =>
-  upperCase(url.replace(/https?:\/\//, "").replace(/\/.*/g, ""))
 
-const isPlayer = site_name => supportedPlayers.includes(lowerCase(site_name))
+/**
+ * Returns displayable, uppercase host name
+ * ex: https://www.toto.fr/titi/page.lol => TOTO.FR
+ */
+const getDisplayableHostname = url =>
+  upperCase(url.replace(/^https?:\/\//i, "").replace(/^www\./i, "").replace(/\/.*/g, ""))
+
+/**
+ * Check if we want to render medias from that website into players using `supportedPlayerUrls`
+ */
+const isPlayer = url => {
+  for (let playerRegex of supportedPlayerUrls) {
+    if (playerRegex.test(url))
+      return true
+  }
+  return false
+}
 
 export const Source = ({ source: { url, title, site_name }, withoutPlayer }) => {
-  if (isPlayer(site_name) && !withoutPlayer) {
-    return (<ReactPlayer width='100%' url={url} config={{
-      youtube: { preload: false },
-      facebook: { preload: false },
-      dailymotion: { preload: false },
-      soundcloud: { preload: false }
-    }} />)
+  if (!withoutPlayer && isPlayer(url)) {
+    return <ReactPlayer className="video" controls={true} height={180} width={320} url={url}/>
   } else {
     return <a href={url} target="_BLANK" className="fact-source">
       <span className="site-name">
-        {upperCase(site_name) || getHostName(url)}
+        {upperCase(site_name) || getDisplayableHostname(url)}
       </span>
       <span className="article-title">{title}</span>
     </a>

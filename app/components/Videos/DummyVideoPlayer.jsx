@@ -26,12 +26,8 @@ export class DummyVideoPlayer extends React.PureComponent {
 
   render() {
     const { url } = this.props
-    const embedUrl = url.replace("http://", "https://")
-                        .replace("youtube.com", "youtube-nocookie.com") // Use Youtube privacy enhancer
-                        .replace("/watch?v=", "/embed/")
-                        .replace(/&.*/, "") // Remove useless get params
     const {playback, dispatch, onProgress, position, forcedPosition, ...iframeProps} = this.props
-    if (!embedUrl)
+    if (!url)
       return (<div className="video"><div/></div>)
     return (
       <ReactPlayer className="video"
