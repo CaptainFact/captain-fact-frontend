@@ -1,4 +1,5 @@
 Vous pouvez nous contacter via:
+  * [Gitter (chat)](https://gitter.im/CaptainFact)
   * [Facebook](https://www.facebook.com/CaptainFact.io)
   * [Twitter](https://twitter.com/CaptainFact_io)
   * [Github](https://github.com/CaptainFact)
