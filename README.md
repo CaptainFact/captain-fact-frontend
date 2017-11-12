@@ -1,9 +1,10 @@
 <p align="center"><img src="app/assets/assets/img/logo.png" height="100"/></p>
 <h1 align="center"><a href="https://captainfact.io">CaptainFact.io</a></h1>
 <p align="center"><a href="https://gitter.im/CaptainFact"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/CaptainFact"/></a></p>
+<hr/>
 <p align="center">Master: <a href="https://travis-ci.org/CaptainFact/captain-fact-frontend"><img src="https://travis-ci.org/CaptainFact/captain-fact-frontend.svg?branch=travis-configuration" alt="Build Status" /></a> &nbsp;&nbsp;
 Staging: <a href="https://travis-ci.org/CaptainFact/captain-fact-frontend"><img src="https://travis-ci.org/CaptainFact/captain-fact-frontend.svg?branch=staging" alt="Build Status" /></a></p>
-<br/>
+<hr/><br/>
 
 ## Getting started
 
