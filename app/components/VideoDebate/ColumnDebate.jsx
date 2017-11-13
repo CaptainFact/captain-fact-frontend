@@ -2,7 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 import { Trans, translate } from 'react-i18next'
 
-import History from "./History"
+import History from "./VideoDebateHistory"
 import ActionBubbleMenu from './ActionBubbleMenu'
 import StatementsList from '../Statements/StatementsList'
 import { LoadingFrame } from '../Utils/LoadingFrame'

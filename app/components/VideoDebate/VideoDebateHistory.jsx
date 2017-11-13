@@ -5,16 +5,17 @@ import classNames from "classnames"
 import capitalize from 'voca/capitalize'
 
 import { Icon, LoadingFrame } from "../Utils"
-import { EntityHistory } from './EntityHistory'
+import { History } from '../UsersActions/History'
 import { ENTITY_SPEAKER, ENTITY_STATEMENT } from '../../constants'
 import { joinVideoDebateHistoryChannel, leaveVideoDebateHistoryChannel } from '../../state/video_debate/history/effects'
-import { reset } from '../../state/video_debate/history/reducer'
+import { reset } from '../../state/user_actions/reducer'
+import Entity from '../UsersActions/Entity'
 
 
 @connect(state => ({
-  isLoading: state.VideoDebate.history.isLoading,
-  error: state.VideoDebate.history.error,
-  allActions: state.VideoDebate.history.entitiesActions
+  isLoading: state.UsersActions.isLoading,
+  error: state.UsersActions.error,
+  allActions: state.UsersActions.entitiesActions
 }), {joinVideoDebateHistoryChannel, leaveVideoDebateHistoryChannel, reset})
 @translate(['main', 'videoDebate', 'history'])
 export default class VideoDebateHistory extends React.PureComponent {
@@ -62,11 +63,11 @@ export default class VideoDebateHistory extends React.PureComponent {
           { error && error }
           <div className="actions-list">
             { actions.entrySeq().map(([entityKey, actions]) =>
-              <EntityHistory key={ entityKey }
-                             entityKey={ entityKey }
-                             entity={ selectedEntity }
-                             actions={ actions }
-              />
+              <div key={ entityKey }>
+                <Entity entityKey={ entityKey } entity={ selectedEntity }/>
+                <History actions={ actions }/>
+                <hr/>
+              </div>
             )}
           </div>
         </section>
