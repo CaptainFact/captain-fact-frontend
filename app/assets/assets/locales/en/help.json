@@ -16,6 +16,9 @@
     "privacy": "Privacy",
     "contact": "Contact",
     "censorship_requests": "Censorship Requests",
-    "contribute": "Take part in the project"
+    "contribute/code": "Programmers",
+    "contribute/graphic": "Graphic Designers",
+    "contribute/law": "Lawyers",
+    "contribute/translate": "Translators"
   }
 }

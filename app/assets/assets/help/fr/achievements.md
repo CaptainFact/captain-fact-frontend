@@ -1,6 +1,8 @@
 Vous souhaitez apporter des ressources graphiques pour cette partie ?
 C'est par [ici](https://github.com/CaptainFact/captain-fact-frontend/issues/6)!
 
+Il s'agît d'un travail en cours et tous les accomplissements n'ont pas encore été ajoutés.
+
 ## Accomplissements ordinaires
 
 Ces médailles sont là pour vous aider à découvrir les diifférentes parties du site.

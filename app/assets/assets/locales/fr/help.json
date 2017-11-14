@@ -16,6 +16,10 @@
     "privacy": "Vie Privée",
     "contact": "Contact",
     "censorship_requests": "Demandes de censure",
-    "contribute": "Aider à la réalisation du projet"
+    "contribute": "Aider à la réalisation du projet",
+    "contribute/code": "Programmation",
+    "contribute/graphic": "Graphistes",
+    "contribute/law": "Juristes",
+    "contribute/translate": "Traducteurs"
   }
 }
