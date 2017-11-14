@@ -13,10 +13,8 @@
  Vous pouvez choisir si vous souhaitez activer la reconnaissance des vidéos en un clic à partir de la
  popup de l'extension.
  
- Si vous choisissez de le faire, une requête sera envoyée pour chaque vidéo que vous regardez sur Youtube
- afin de vérifier si celle-ci a été vérifiée par la communauté.
- **Ces requêtes sont anonymes**. La vie privée est une question serieuse et cette information n'est pas
- pertinante pour le service que nous voulons proposer.
+ Si vous choisissez de le faire, une requête sera envoyée régulièrement au serveur lorsque vous visitez Youtube
+ pour obtenir la liste des vidéos disponnibles.
  
- Vous n'êtes pas obligés de nous faire confiance: activez l'extension uniquement quand celà est nécessaire
- si vous ne souhaitez pas utiliser cette fonctionalité.
+ **Nous n'enregistrons pas les vidéos vous regardez.**
+ 

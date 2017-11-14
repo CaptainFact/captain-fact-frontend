@@ -52,7 +52,7 @@ ReactDOM.render(
         <Route path="/videos/:videoId" component={VideoDebate} view="debate"/>
         <Route path="/videos/:videoId/history" component={VideoDebate} view="history"/>
         <Route path="/help" component={Help}/>
-        <Route path="/help/:pageName" component={Help}/>
+        <Route path="/help/*" component={Help}/>
         <Route path="/extension" component={BrowserExtensionsPage}/>
         <Route path="*" component={NotFound}/>
       </Route>
