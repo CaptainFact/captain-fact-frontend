@@ -26,6 +26,7 @@ import User from './components/Users/User'
 import ResetPasswordRequestForm from './components/Users/ResetPasswordRequestForm'
 import ResetPasswordConfirmForm from './components/Users/ResetPasswordConfirmForm'
 import ConfirmEmail from './components/Users/ConfirmEmail'
+import Moderation from './components/Moderation'
 
 
 ReactDOM.render(
@@ -54,6 +55,7 @@ ReactDOM.render(
         <Route path="/help" component={Help}/>
         <Route path="/help/:pageName" component={Help}/>
         <Route path="/extension" component={BrowserExtensionsPage}/>
+        <Route path="/moderation" component={Moderation}/>
         <Route path="*" component={NotFound}/>
       </Route>
     </Router>
