@@ -6,15 +6,15 @@ import titleCase from '../../lib/title_case'
 import Modal from "../Modal/Modal"
 import { Icon } from '../Utils/Icon'
 import { joinStatementHistoryChannel, leaveStatementHistoryChannel } from '../../state/video_debate/history/effects'
-import { EntityHistory } from '../VideoDebate/EntityHistory'
+import { History } from '../UsersActions/History'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { popModal } from '../../state/modals/reducer'
 import { ENTITY_STATEMENT } from '../../constants'
 
 
 @connect((state, props) => ({
-  actions: state.VideoDebate.history.entitiesActions,
-  isLoading: state.VideoDebate.history.isLoading
+  actions: state.UsersActions.entitiesActions,
+  isLoading: state.UsersActions.isLoading
 }), {joinStatementHistoryChannel, leaveStatementHistoryChannel, popModal})
 export class ModalHistory extends React.PureComponent {
   componentDidMount() {
@@ -44,10 +44,9 @@ export class ModalHistory extends React.PureComponent {
           <LoadingFrame size="mini"/>
         }
         {!isLoading &&
-          <EntityHistory key={ `${props.entity}:${props.entityId}` }
-                         entityKey={ entityKey }
-                         actions={ actions.get(entityKey, new List()) }
-                         defaultExpended={ true }/>
+          <History key={ `${props.entity}:${props.entityId}` }
+                   actions={ actions.get(entityKey, new List()) }
+                   defaultExpended={ true }/>
         }
       </Modal>
     )

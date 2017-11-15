@@ -15,10 +15,6 @@
  
  <!-- TODO: Add screenshot -->
  
- If you do activate it, the extension will send a request to CaptainFact for every video you play
- to ask if the video has been fact checked by the community.
- **We do not log these requests**. Privacy is an important matter and this information is not
- pertinent for what we want to offer you.
+ If you do activate it, the extension will send a request to CaptainFact from time to time to sync available videos.
  
- However, you don't have to trust us : activate CaptainFact only when needed if you don't want to
- use this feature.
+ **We do not log nor record the videos you're watching.**

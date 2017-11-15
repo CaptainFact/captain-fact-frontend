@@ -1,5 +1,7 @@
 Want to contribute on achievements graphics ? Check [this](https://github.com/CaptainFact/captain-fact-frontend/issues/6)!
 
+Achievements are still a work-in-progress and not all of them are implemented yet.
+
 ## Common achievements
 
 Common achievements are meant to help you discover the different parts of the site.

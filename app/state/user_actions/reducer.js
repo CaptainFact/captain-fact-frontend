@@ -2,13 +2,13 @@ import { Record, List, Map } from 'immutable'
 import { createAction, handleActions, combineActions } from 'redux-actions'
 import { diffWordsWithSpace } from 'diff'
 
-import parseDateTime from '../../../lib/parseDateTime'
-import formatSeconds from "../../../lib/seconds_formatter"
-import UserAction from "../../user_actions/record"
-import Statement from '../statements/record'
-import Speaker from '../speakers/record'
-import {ENTITY_SPEAKER, ENTITY_STATEMENT} from '../../../constants'
-import { resetVideoDebate } from '../actions'
+import parseDateTime from '../../lib/parseDateTime'
+import formatSeconds from "../../lib/seconds_formatter"
+import UserAction from "./record"
+import Statement from '../video_debate/statements/record'
+import Speaker from '../video_debate/speakers/record'
+import {ENTITY_SPEAKER, ENTITY_STATEMENT} from '../../constants'
+import { resetVideoDebate } from '../video_debate/actions'
 
 export const setLoading = createAction('VIDEO_DEBATE_HISTORY/SET_LOADING')
 export const reset = createAction('VIDEO_DEBATE_HISTORY/RESET')
@@ -24,14 +24,14 @@ const INITIAL_STATE = new Record({
   errors: null
 })
 
-const VideoDebateHistoryReducer = handleActions({
+const UsersActionsReducer = handleActions({
   [setLoading]: (state, {payload}) => state.set('isLoading', payload),
   [fetchAll]: {
     next: (state, {payload: {actions}}) => {
       const preparedActions = new List(actions.map(a => prepareAction(a)))
       const entitiesActions = preparedActions
         .sortBy(a => -a.time)
-        .groupBy(a => actionEntityKey(a))
+        .groupBy(a => entityKeyFromAction(a))
         .sortBy(actions => -actions.first().time)
 
       return state.merge({
@@ -46,7 +46,7 @@ const VideoDebateHistoryReducer = handleActions({
   [addAction]: (state, {payload}) => {
     // /!\ Assumes that action is more recent than any other action previously stored
     const action = prepareAction(payload)
-    const entityKey = actionEntityKey(action)
+    const entityKey = entityKeyFromAction(action)
     return state.withMutations(state =>
       state
         .update('entitiesActions', e => e.withMutations(entitiesActions =>
@@ -82,7 +82,7 @@ const VideoDebateHistoryReducer = handleActions({
   },
   [combineActions(reset, resetVideoDebate)]: () => INITIAL_STATE()
 }, INITIAL_STATE())
-export default VideoDebateHistoryReducer
+export default UsersActionsReducer
 
 
 function completeReference(reference, actions, keysToStore) {
@@ -161,7 +161,7 @@ function diffEntry(key, prevValue, newValue) {
   return diffWordsWithSpace((prevValue || "").toString(), newValue ? newValue.toString() : "")
 }
 
-function actionEntityKey(action) {
+export function entityKeyFromAction(action) {
   return `${action.entity}:${action.entity_id}`
 }
 

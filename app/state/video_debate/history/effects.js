@@ -3,7 +3,7 @@ import {
   VIDEO_DEBATE_HISTORY_CHANNEL, STATEMENTS_HISTORY_CHANNEL, ACTION_DELETE,
   ACTION_REMOVE, ENTITY_SPEAKER
 } from "../../../constants"
-import { addAction, fetchAll, setLoading } from './reducer'
+import { addAction, fetchAll, setLoading } from '../../user_actions/reducer'
 import { errorToFlash } from '../../flashes/reducer'
 
 
@@ -23,7 +23,7 @@ export const joinStatementHistoryChannel = statementId => dispatch =>
 export const leaveStatementHistoryChannel = () => () =>
   SocketApi.leaveChannel(STATEMENTS_HISTORY_CHANNEL)
 
-export const revertVideoDebateHistoryEntry = action => dispatch => {
+export const revertVideoDebateUserAction = action => dispatch => {
   if (action.type !== ACTION_DELETE && action.type !== ACTION_REMOVE)
     return
   const msg = action.entity === ENTITY_SPEAKER ? "restore_speaker" : "restore_statement"
