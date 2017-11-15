@@ -47,5 +47,5 @@ However if your reputation goes below `-30` you won't be able to do any action a
 
 ## I've been given a negative reputation unfairly !
 
-If you think your situation is not fair, please [contact us](mailto:support@captainfact.io)
+If you think your situation is not fair, please [contact us](/help/contact)
 and we'll investigate.

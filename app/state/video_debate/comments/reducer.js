@@ -4,6 +4,7 @@ import isAfter from 'date-fns/is_after'
 
 import Comment from "./record"
 import parseDateTime from '../../../lib/parseDateTime'
+import { resetVideoDebate } from '../actions'
 
 
 export const addFlag = createAction('COMMENTS/ADD_FLAG')
@@ -108,7 +109,8 @@ const CommentsReducer = handleActions({
         state = state.updateIn(['replies', commentId], oldList => mergeCommentsList(oldList, newComments))
     }
     return state
-  }
+  },
+  [resetVideoDebate]: () => INITIAL_STATE()
 }, INITIAL_STATE())
 
 // Sort comments by score. More recents come firsts if same score

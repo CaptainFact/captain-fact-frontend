@@ -3,6 +3,7 @@ import { combineActions, createAction, handleActions } from 'redux-actions'
 import { change, destroy } from 'redux-form'
 
 import Statement from './record'
+import { resetVideoDebate } from '../actions'
 
 
 export const fetchStatements = createAction('STATEMENTS/FETCH')
@@ -77,7 +78,8 @@ const StatementsReducer = handleActions({
   },
   [setScrollTo]: (state, {payload}) => state.set('scrollTo', payload),
   [combineActions(incrementFormCount, decrementFormCount)]: (state, {payload}) =>
-    state.set('formsCount', state.formsCount + payload)
+    state.set('formsCount', state.formsCount + payload),
+  [resetVideoDebate]: () => INITIAL_STATE()
 }, INITIAL_STATE())
 
 function getInsertPosition(data, newStatement) {

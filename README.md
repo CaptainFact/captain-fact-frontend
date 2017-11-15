@@ -1,9 +1,10 @@
 <p align="center"><img src="app/assets/assets/img/logo.png" height="100"/></p>
 <h1 align="center"><a href="https://captainfact.io">CaptainFact.io</a></h1>
-<br/>
-
-Master: [![Build Status](https://travis-ci.org/CaptainFact/captain-fact-frontend.svg?branch=travis-configuration)](https://travis-ci.org/CaptainFact/captain-fact-frontend) &nbsp;&nbsp;
-Staging: [![Build Status](https://travis-ci.org/CaptainFact/captain-fact-frontend.svg?branch=staging)](https://travis-ci.org/CaptainFact/captain-fact-frontend)
+<p align="center"><a href="https://gitter.im/CaptainFact"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/CaptainFact"/></a></p>
+<hr/>
+<p align="center">Master: <a href="https://travis-ci.org/CaptainFact/captain-fact-frontend"><img src="https://travis-ci.org/CaptainFact/captain-fact-frontend.svg?branch=travis-configuration" alt="Build Status" /></a> &nbsp;&nbsp;
+Staging: <a href="https://travis-ci.org/CaptainFact/captain-fact-frontend"><img src="https://travis-ci.org/CaptainFact/captain-fact-frontend.svg?branch=staging" alt="Build Status" /></a></p>
+<hr/><br/>
 
 ## Getting started
 
@@ -58,7 +59,11 @@ promise, ideally without the need for .catch(...) - errors should be converted t
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) to see how you can contribute.
+See [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## Linked projects
+
+* [Extension](https://github.com/CaptainFact/captain-fact-extension)
 
 ## License
 

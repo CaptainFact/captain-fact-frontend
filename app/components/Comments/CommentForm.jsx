@@ -25,7 +25,7 @@ const validate = ({ source, text }) => {
   if (url && !hasValidUrl)
     errors['source'] = {url: 'Invalid URL'}
   if (!hasValidUrl && !text)
-    errors['text'] = 'You must either set a comment or a source'
+    errors['text'] = true
   else if (text)
     validateLength(errors, 'text', text, COMMENT_LENGTH, "Comment")
   return errors
@@ -116,7 +116,7 @@ export class CommentForm extends React.PureComponent {
                   <UserAppellation user={formValues.reply_to.user}/>
                 </span>
               </Tag>
-              <CommentDisplay withoutActions={true} withoutHeader={true} hideThread={true} className="quoted"
+              <CommentDisplay richMedias={false} withoutActions={true} withoutHeader={true} hideThread={true} className="quoted"
                               comment={formValues.reply_to}/>
               <br/>
             </div>

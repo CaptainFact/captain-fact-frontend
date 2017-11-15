@@ -1,6 +1,6 @@
 {
   "name": "captain-fact-frontend",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "private": true,
   "scripts": {
     "start": "brunch watch --server",
@@ -24,9 +24,10 @@
     "isomorphic-fetch": "^2.2.1",
     "marked": "^0.3.6",
     "phoenix": "^1.3.0",
+    "prop-types": "^15.6.0",
     "re-reselect": "^1.0.1",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "react-flip-move": "^2.9.15",
     "react-i18next": "^6.0.4",
     "react-player": "^0.24.6",
@@ -42,8 +43,7 @@
     "smoothscroll-polyfill": "^0.3.6",
     "uuid": "^3.0.1",
     "validator": "^7.0.0",
-    "voca": "^1.3.0",
-    "youtube-regex": "^1.0.5"
+    "voca": "^1.3.0"
   },
   "devDependencies": {
     "auto-reload-brunch": "^2.0.0",
@@ -64,7 +64,6 @@
     "jsdom": "^11.0.0",
     "jsenv-brunch": "^2.0.0",
     "mocha": "^3.4.1",
-    "react-addons-test-utils": "^15.4.2",
     "sass-brunch": "https://github.com/brunch/sass-brunch",
     "uglify-js-brunch": "^2.10.0"
   }

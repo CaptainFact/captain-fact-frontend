@@ -20,15 +20,15 @@ import { reset } from '../../state/help/reducer'
 @withRouter
 export class Help extends React.PureComponent {
   componentDidMount() {
-    if (this.props.routeParams.pageName)
-      this.props.fetchHelpPage(this.props.routeParams.pageName)
+    if (this.props.routeParams.splat)
+      this.props.fetchHelpPage(this.props.routeParams.splat)
   }
 
   componentDidUpdate(oldProps) {
-    const requestedPageName = this.props.routeParams.pageName
+    const requestedPageName = this.props.routeParams.splat
     if (!requestedPageName)
       this.props.reset()
-    else if (oldProps.routeParams.pageName !== requestedPageName || oldProps.locale !== this.props.locale)
+    else if (oldProps.routeParams.splat !== requestedPageName || oldProps.locale !== this.props.locale)
       this.props.fetchHelpPage(requestedPageName)
     if (this.refs.domContent)
       this.convertLinks(this.refs.domContent)
@@ -39,10 +39,10 @@ export class Help extends React.PureComponent {
   }
 
   render() {
-    const { t, routeParams: {pageName} } = this.props
+    const { t, routeParams: {splat} } = this.props
 
     let header, content
-    if (!pageName) {
+    if (!splat) {
       header = <h1 className="title is-1">{t('main:menu.help')}</h1>
       content = this.renderIndexContent()
     } else {
@@ -94,7 +94,10 @@ export class Help extends React.PureComponent {
           </div>
           <div className="column panel">
             <p className="panel-heading">{this.props.t('categories.contribute')}</p>
-            {this.renderPageLink('contribute')}
+            {this.renderPageLink('contribute/code')}
+            {this.renderPageLink('contribute/graphic')}
+            {this.renderPageLink('contribute/law')}
+            {this.renderPageLink('contribute/translate')}
             {this.renderPageLink('bug_report')}
             {/*TODO Open source*/}
           </div>
@@ -111,22 +114,22 @@ export class Help extends React.PureComponent {
     )
   }
 
-  renderPageLink(pageName) {
+  renderPageLink(splat) {
     return (
       <div className="panel-block">
-        <Link to={`/help/${pageName}`} style={{width: '100%', height: '100%'}}>
-          {this.props.t(`pages.${pageName}`, {defaultValue: pageName})}
+        <Link to={`/help/${splat}`} style={{width: '100%', height: '100%'}}>
+          {this.props.t(`pages.${splat}`, {defaultValue: splat})}
         </Link>
       </div>
     )
   }
 
   renderPageHeader() {
-    const { t, routeParams: { pageName } } = this.props
+    const { t, routeParams: { splat } } = this.props
     return (
       <div>
         <h1 className="title is-1">
-          {t('main:menu.help')}: {t(`help:pages.${pageName}`, {defaultValue: "I am lost 😟"})}
+          {t('main:menu.help')}: {t(`help:pages.${splat}`, {defaultValue: "I am lost 😟"})}
         </h1>
         <a className="subtitle" onClick={this.props.router.goBack}>
           <Icon name="arrow-left"/>

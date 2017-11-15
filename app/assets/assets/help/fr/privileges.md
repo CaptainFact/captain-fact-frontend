@@ -30,7 +30,7 @@ renforcer leur signification.
 
 # Restrictions spécifiques aux nouveaux utilisateurs
 
-Avant d'atteindre une [réputation](/help/reputation) de `50`, vous serez considéré comme un nouvel
+Avant d'atteindre une [réputation](/help/reputation) de `125`, vous serez considéré comme un nouvel
 utilisateur. Les limitations sur toutes vos actions seront bien en dessous de la normale.
 
 
@@ -48,4 +48,4 @@ Si votre réputation passe en dessous de `-30` vous ne pourrez plus effectuer au
 ## "Ma réputation est passée en négatif de manière injuste !"
 
 CaptainFact est toujours en phase d'experimentation. Si vous pensez que votre situation
-n'est pas juste, [contactez nous](mailto:support@captainfact.io).
+n'est pas juste, [contactez nous](/help/contact).

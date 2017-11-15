@@ -110,7 +110,7 @@ export class CommentDisplay extends React.PureComponent {
 
   render() {
     const { user, text, source, score, inserted_at } = this.props.comment
-    const { t, withoutActions, withoutHeader, replyingTo, nesting, replies, myVote, isVoting, hideThread, className } = this.props
+    const { t, withoutActions, withoutHeader, replyingTo, nesting, replies, myVote, isVoting, hideThread, className, richMedias=true } = this.props
     return (
       <div>
         <MediaLayout
@@ -142,7 +142,7 @@ export class CommentDisplay extends React.PureComponent {
                   <span> - </span>
                   <TimeSince className="comment-time" time={inserted_at}/>
                 </div>}
-                {source && <Source source={source}/>}
+                {source && <Source withoutPlayer={!richMedias} source={source}/>}
                 <div className="comment-text">
                   {nesting > 4 && replyingTo &&
                   <Tag style={{marginRight: 5}}>@{replyingTo.username}</Tag>
