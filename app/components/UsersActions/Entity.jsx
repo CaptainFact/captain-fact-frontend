@@ -37,8 +37,8 @@ export default class Entity extends React.PureComponent {
           { speaker && <strong>{speaker.full_name} </strong> }
           <TimeDisplay time={ reference.time } capitalize={!speaker}
                        handleClick={p => this.props.forcePosition(p)}/>
-          <span> - </span>
-          <div className="statement-text">{ text }</div>
+          <hr/>
+          <div className="statement-text">{text}</div>
         </h4>
       )
     }
