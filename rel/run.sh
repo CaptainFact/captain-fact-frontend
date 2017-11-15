@@ -57,27 +57,38 @@ elif [ "$1" = "build" ]; then
   echo "  - Frontend URL: $FRONTEND_URL"
   echo "  - FB APP ID:    $FB_APP_ID"
 
-  # Build and copy actual site
+  # Build and copy actual site and maintenance site
   HTTP_API_URL=${HTTP_API_URL} WS_API_URL=${WS_API_URL} FRONTEND_URL=${FRONTEND_URL} FB_APP_ID=${FB_APP_ID} JS_ENV=${JS_ENV} \
     npm run build || exit 1
   mkdir -p /var/www && rm -rf /var/www/*
-  cp -R ./public/* /var/www
+  mkdir /var/www/captain_fact /var/www/maintenance
+  cp -R ./public/* /var/www/captain_fact
+  cp ./rel/maintenance.html /var/www/maintenance/index.html
+  cp ./app/assets/assets/img/logo.png ./app/assets/favicon.ico /var/www/maintenance
 
   # Copy robots.txt
   if [ "$BUILD_ENV" = "prod" ]; then
-    cp "./rel/robots_public.txt" /var/www/robots.txt
+    cp "./rel/robots_public.txt" /var/www/captain_fact/robots.txt
   else
-    cp "./rel/robots_private.txt" /var/www/robots.txt
+    cp "./rel/robots_private.txt" /var/www/captain_fact/robots.txt
   fi
+  cp /var/www/captain_fact/robots.txt /var/www/maintenance/robots.txt
 
   # Copy NGinx config
   FRONTEND_HOST=$(echo $FRONTEND_URL | sed -r "s/^https?:\/\///")
-  cat ./config/nginx.conf | sed "s/SERVER_HOST/$FRONTEND_HOST/" > /etc/nginx/nginx.conf
+  cat ./config/nginx.conf | sed "s/SERVER_HOST/$FRONTEND_HOST/" | tee /etc/nginx/captain_fact.conf /etc/nginx/nginx.conf
+  cat /etc/nginx/captain_fact.conf | sed "s/captain_fact/maintenance/" > /etc/nginx/maintenance.conf
   cp ./config/mime.types /etc/nginx/mime.types
-
 
 # Serve
 elif [ "$1" = "serve" ]; then
+  # Set appropriate configuration
+  if [ "$MAINTENANCE_MODE" = "on" ] || [ "$MAINTENANCE_MODE" = "ON" ]; then
+    cp /etc/nginx/maintenance.conf /etc/nginx/nginx.conf
+  else
+    cp /etc/nginx/captain_fact.conf /etc/nginx/nginx.conf
+  fi
+
   # Start NGinx front
   nginx -g "daemon off;"
 
