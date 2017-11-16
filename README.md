@@ -65,6 +65,11 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 * [Extension](https://github.com/CaptainFact/captain-fact-extension)
 
+## Dependencies 
+
+Many thanks to [adorable.io](http://avatars.adorable.io/) for their great consistent avatar service (the funny faces
+you see if you don't set your own profile picture).
+
 ## License
 
 GNU AFFERO GENERAL PUBLIC LICENSE Version 3

@@ -14,14 +14,19 @@
   "comment": {
     "writeComment": "Write a comment...",
     "addSource": "Add a source to turn this comment into a fact",
-    "postComment": "Post Comment",
+    "post": "Post Comment",
+    "post_reply": "Post reply",
     "deleteThread": "Delete comment",
     "deleteThread_plural": "Delete thread",
     "replies_hide": "Hide replies",
     "replies_show": "Show replies ({{count}})",
     "loadMore_replies": "Load more replies ({{count}})",
     "loadMore_comments": "Load more comments ({{count}})",
-    "replyingTo": "Replying to"
+    "replyingTo": "Replying to",
+    "approve": "Approve",
+    "approve_reply": "Approve this comment",
+    "refute": "Refute",
+    "refute_reply": "Refute this comment"
   },
   "video": {
     "added": "Added",

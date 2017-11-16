@@ -12,13 +12,12 @@ $max-comment-width: 600px
   .reply_to
     margin-bottom: 5px
 
-  .control
-    .textarea
-      $commentboxSize: 60px
-      min-height: $commentboxSize
-      max-height: $commentboxSize * 3
-      height: $commentboxSize
-      resize: none
+  .control .textarea
+    $commentboxSize: 60px
+    min-height: $commentboxSize
+    max-height: $commentboxSize * 3
+    height: $commentboxSize
+    resize: none
 
   .comment-length
     position: absolute
@@ -29,6 +28,22 @@ $max-comment-width: 600px
     margin-left: 3px
     .value.invalid
       color: #ff3d3d
+
+  .level
+    align-items: start
+    margin-bottom: 0.5em
+    .control
+      flex-grow: 0.99
+      flex-direction: column
+    .submit-btns
+      padding-left: 5px
+      .button:not(:first-child):not(.is-disabled)
+        @extend .animated
+        @extend .flipInX
+        border: none
+        animation-duration: 0.3s
+        &:nth-child(3)
+          animation-delay: 0.1s
 
 .facts
   flex-wrap: wrap
@@ -69,6 +84,8 @@ $max-comment-width: 600px
     font-style: italic
     color: grey
 
+  .media-left
+    margin-right: 0.5rem
   .vote, .image
     display: inline-block
     vertical-align: middle
@@ -116,6 +133,7 @@ $max-comment-width: 600px
     padding: 7px 10px
     margin: $source-margin
     border-radius: 3px
+    font-size: 0.9em
     &:hover
       background: transparentize($primary-desaturated, 0.15)
       &> .site-name
@@ -126,6 +144,7 @@ $max-comment-width: 600px
       text-overflow: ellipsis
       display: block
       color: white
+      font-size: 13px
     &> .article-title
       font-style: italic
       color: lightgrey
@@ -139,12 +158,12 @@ $max-comment-width: 600px
       text-decoration: underline
       text-decoration-color: $grey-light
   .comment-actions > a
-    font-size: 12px
-    color: #c7c7c7
+    font-size: 11px
+    color: $grey-light
     margin-right: 15px
     &:hover
       color: darken(#c7c7c7, 25)
-      // font-weight: bold
+      text-decoration: underline
     &> .icon
       font-size: 10px
       vertical-align: middle
@@ -157,17 +176,24 @@ $max-comment-width: 600px
   width: 100%
   padding: 10px
 
+$thread_border_style: 1px solid
+$thread_border_base_color: darken($light, 2)
+
 .comments-list .comments-list
-  padding: 0 0 0 28px
-  &> div:first-child
-    border-left: 1px dotted $grey-lighter
+  padding: 0 0 0 10px
   .comment
     border-top: none
     margin: 0
     padding: 0 0 0 10px
+    border-left: $thread_border_style $thread_border_base_color
+    &.approve
+      border-color: mix($thread_border_base_color, $green, 70%)
+    &.refute
+      border-color: mix($thread_border_base_color, $red, 70%)
 
 .comments-list .comments-list .comments-list
-  padding: 0 0 0 38px
+  padding: 0 0 0 20px
+  border-left: $thread_border_style $thread_border_base_color
   .comment
     padding: 0 0 0 5px
     font-size: 0.9em
@@ -189,10 +215,11 @@ $max-comment-width: 600px
         margin-right: 5px
 
 .comments-list .comments-list .comments-list .comments-list
-  padding: 0 0 0 30px
+  padding: 0 0 0 20px
 
 .comments-list .comments-list .comments-list .comments-list .comments-list
   padding: 0
+  border-left: none
   &> div
     border: none
 

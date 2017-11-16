@@ -14,14 +14,19 @@
   "comment": {
     "writeComment": "Écrire un commentaire...",
     "addSource": "Ajouter une source",
-    "postComment": "Poster ce commentaire",
+    "post": "Ajouter en commentaire",
+    "post_reply": "Ajouter en réponse",
     "deleteThread": "Supprimer le commentaire",
     "deleteThread_plural": "Supprimer le fil de discussion",
     "replies_hide": "Cacher les réponses",
     "replies_show": "Montrer les réponses ({{count}})",
     "loadMore_replies": "Charger plus de réponses ({{count}})",
     "loadMore_comments": "Charger plus de commentaires ({{count}})",
-    "replyingTo": "En réponse à"
+    "replyingTo": "En réponse à",
+    "approve": "Approuver",
+    "approve_reply": "Approuver ce commentaire",
+    "refute": "Réfuter",
+    "refute_reply": "Réfuter ce commentaire"
   },
   "video": {
     "added": "Ajoutée",
