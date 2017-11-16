@@ -23,8 +23,9 @@ export const ENTITY_STATEMENT = 3
 
 /* ------ UI, animations ------ */
 export const USER_PICTURE_SMALL = 24
-export const USER_PICTURE_MEDIUM = 48
-export const USER_PICTURE_LARGE = 96
+export const USER_PICTURE_MEDIUM = 40
+export const USER_PICTURE_LARGE = 48
+export const USER_PICTURE_XLARGE = 96
 
 // Duration during which statement should stay focused
 export const STATEMENT_FOCUS_TIME = 30 // seconds

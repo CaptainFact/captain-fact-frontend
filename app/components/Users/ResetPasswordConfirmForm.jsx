@@ -10,7 +10,7 @@ import { connect } from 'react-redux'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { ErrorView } from '../Utils/ErrorView'
 import UserPicture from './UserPicture'
-import { USER_PICTURE_LARGE } from '../../constants'
+import { USER_PICTURE_XLARGE } from '../../constants'
 import UserAppellation from './UserAppellation'
 import Notification from '../Utils/Notification'
 import {handleEffectResponse} from '../../lib/handle_effect_response'
@@ -64,7 +64,7 @@ export default class ResetPasswordConfirmForm extends React.PureComponent {
       return (
         <div>
           <div className="user-box">
-            <UserPicture user={user} size={USER_PICTURE_LARGE}/>
+            <UserPicture user={user} size={USER_PICTURE_XLARGE}/>
             <UserAppellation user={user} withoutActions={true}/>
           </div>
           {passwordField(this.props.t)}

@@ -10,7 +10,7 @@ import ScoreTag from './ScoreTag'
 import MediaLayout from '../Utils/MediaLayout'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { TimeSince } from '../Utils/TimeSince'
-import { USER_PICTURE_LARGE } from '../../constants'
+import { USER_PICTURE_XLARGE } from '../../constants'
 import { fetchUser } from '../../state/users/displayed_user/effects'
 import { resetUser } from '../../state/users/displayed_user/reducer'
 
@@ -77,7 +77,7 @@ export default class User extends React.PureComponent {
               {user.id !== 0 &&
                 <MediaLayout
                 left={
-                  <UserPicture user={user} size={USER_PICTURE_LARGE}/>
+                  <UserPicture user={user} size={USER_PICTURE_XLARGE}/>
                 }
                 content={
                   <div>

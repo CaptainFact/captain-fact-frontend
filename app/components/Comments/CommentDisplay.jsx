@@ -109,12 +109,13 @@ export class CommentDisplay extends React.PureComponent {
   }
 
   render() {
-    const { user, text, source, score, inserted_at } = this.props.comment
+    const { user, text, source, score, inserted_at, approve } = this.props.comment
     const { t, withoutActions, withoutHeader, replyingTo, nesting, replies, myVote, isVoting, hideThread, className, richMedias=true } = this.props
+    const approveClass = approve !== null && (approve ? 'approve' : 'refute')
     return (
       <div>
         <MediaLayout
-          className={classNames('comment', className, {isBlurred: this.state.isBlurred, hasSource: !!source})}
+          className={classNames('comment', className, approveClass, {isBlurred: this.state.isBlurred, hasSource: !!source})}
           ContainerType="article"
           left={
            <figure>
