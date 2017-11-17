@@ -1,7 +1,7 @@
 {
   "debate": "Débat",
   "history": "Historique",
-  "approve": "Approuve",
+  "approve": "Confirme",
   "refute": "Réfute",
   "flagForm": {
     "title": "Pourquoi signaler ce commentaire ?",
@@ -23,8 +23,8 @@
     "loadMore_replies": "Charger plus de réponses ({{count}})",
     "loadMore_comments": "Charger plus de commentaires ({{count}})",
     "replyingTo": "En réponse à",
-    "approve": "Approuver",
-    "approve_reply": "Approuver ce commentaire",
+    "approve": "Confirmer",
+    "approve_reply": "Confirmer ce commentaire",
     "refute": "Réfuter",
     "refute_reply": "Réfuter ce commentaire"
   },

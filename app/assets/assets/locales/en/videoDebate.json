@@ -1,7 +1,7 @@
 {
   "debate": "Debate",
   "history": "History",
-  "approve": "Approve",
+  "approve": "Confirm",
   "refute": "Refute",
   "flagForm": {
     "title": "Why do you want to flag this comment ?",
@@ -23,8 +23,8 @@
     "loadMore_replies": "Load more replies ({{count}})",
     "loadMore_comments": "Load more comments ({{count}})",
     "replyingTo": "Replying to",
-    "approve": "Approve",
-    "approve_reply": "Approve this comment",
+    "approve": "Confirm",
+    "approve_reply": "Confirm this comment",
     "refute": "Refute",
     "refute_reply": "Refute this comment"
   },
