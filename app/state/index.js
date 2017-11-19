@@ -16,6 +16,7 @@ import VideosReducer  from './videos/reducer'
 import ModalsReducer from './modals/reducer'
 import HelpReducer from './help/reducer'
 import UsersActionsReducer from './user_actions/reducer'
+import SpeakersReducer from './speakers/reducer'
 
 
 // Declare reducers
@@ -25,6 +26,7 @@ const reducers = combineReducers({
   UserPreferences: UserPreferencesReducer,
   Flashes: FlashesReducer,
   Videos: VideosReducer,
+  Speakers: SpeakersReducer,
   VideoDebate: VideoDebateReducer,
   Modals: ModalsReducer,
   Help: HelpReducer,

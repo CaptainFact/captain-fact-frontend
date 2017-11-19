@@ -43,9 +43,8 @@
     "title": "Titre",
     "titlePlaceholder": "Politicien, docteur, journaliste...",
     "titleFormat": "{{title}}",
-    "titleFormat_FR": "{{title}} français",
     "titles": {
-      "Politician": "Politicien",
+      "Politician": "Personnalité politique",
       "Journalist": "Journaliste"
     }
   },

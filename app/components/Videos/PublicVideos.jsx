@@ -12,6 +12,7 @@ import { ErrorView } from '../Utils/ErrorView'
 import { reset } from '../../state/videos/reducer'
 import { changeVideosLanguageFilter } from '../../state/user_preferences/reducer'
 import LanguageSelector from '../App/LanguageSelector'
+import titleCase from '../../lib/title_case'
 
 
 @connect(state => ({
@@ -20,11 +21,11 @@ import LanguageSelector from '../App/LanguageSelector'
   isLoading: state.Videos.isLoading,
   error: state.Videos.error,
   languageFilter: state.UserPreferences.videosLanguageFilter
-}), {fetchPublicVideos, reset, changeVideosLanguageFilter })
+}), {fetchPublicVideos, reset, changeVideosLanguageFilter})
 @translate(['main', 'errors'])
 export class PublicVideos extends React.PureComponent {
   componentDidMount() {
-    this.props.fetchPublicVideos(this.props.languageFilter)
+    this.props.fetchPublicVideos(this.props.languageFilter && {language: this.props.languageFilter})
   }
 
   componentWillUnmount() {
@@ -37,12 +38,12 @@ export class PublicVideos extends React.PureComponent {
         <section className="header">
           <h2 className="title is-2">
             <Icon size="large" name="television"/>
-            <span> Videos </span>
+            <span> {titleCase(this.props.t('entities.video_plural'))} </span>
           </h2>
           {this.props.isAuthenticated &&
             <Link to="/videos/add" className="button is-primary">
               <Icon name="plus-circle"/>
-              <span>Add video</span>
+              <span>{this.props.t('videos.add')}</span>
             </Link>
           }
         </section>
@@ -85,8 +86,8 @@ export class PublicVideos extends React.PureComponent {
   }
 
   onVideosFilterChange(value) {
-    const newFilter = value === 'all' ? null : value
-    this.props.changeVideosLanguageFilter(newFilter)
-    this.props.fetchPublicVideos(newFilter)
+    const language = value === 'all' ? null : value
+    this.props.changeVideosLanguageFilter(language)
+    this.props.fetchPublicVideos(language && {language})
   }
 }

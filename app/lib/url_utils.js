@@ -1,3 +1,8 @@
+export const optionsToQueryString = (options) => (
+  options && Object.keys(options).length > 0 ?
+    `?${Object.entries(options).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&')}` : ''
+)
+
 export const youtubeRegex =
   /(?:youtube\.com\/\S*(?:(?:\/e(?:mbed))?\/|watch\/?\?(?:\S*?&?v\=))|youtu\.be\/)([a-zA-Z0-9_-]{6,11})/
 

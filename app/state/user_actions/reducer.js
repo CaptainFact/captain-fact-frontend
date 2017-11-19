@@ -6,7 +6,7 @@ import parseDateTime from '../../lib/parseDateTime'
 import formatSeconds from "../../lib/seconds_formatter"
 import UserAction from "./record"
 import Statement from '../video_debate/statements/record'
-import Speaker from '../video_debate/speakers/record'
+import Speaker from '../speakers/record'
 import {ENTITY_SPEAKER, ENTITY_STATEMENT} from '../../constants'
 import { resetVideoDebate } from '../video_debate/actions'
 

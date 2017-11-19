@@ -10,6 +10,7 @@ export const setSubmitting = createAction('VIDEOS/SET_SUBMITTING')
 export const reset = createAction('VIDEOS/RESET')
 export const setVideos = createAction('VIDEOS/SET')
 
+
 const INITIAL_STATE = new Record({
   isLoading: false,
   isSubmitting: false,

@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
-import { withRouter } from 'react-router'
+import { Link, withRouter } from 'react-router'
 import { translate } from 'react-i18next'
 import classNames from 'classnames'
 
@@ -86,22 +86,21 @@ export class SpeakerPreview extends React.PureComponent {
   }
 
   render() {
-    const { speaker, isAuthenticated, withoutActions, t } = this.props
-    const { full_name, is_user_defined } = speaker
+    const { speaker, isAuthenticated, withoutActions, t , className} = this.props
 
     return (
       <MediaLayout
-        className={classNames("speaker-preview", {isActive: this.props.isFocused})}
+        className={classNames("speaker-preview", className, {isActive: this.props.isFocused})}
         left={this.renderSpeakerThumb(speaker)}
         content={
           <div>
-            <p className="title is-4 speaker-name">{full_name}</p>
+            {this.renderName(speaker)}
             <p className="subtitle is-6">{this.getTitle()}</p>
           </div>
         }
         right={!isAuthenticated || withoutActions ? null :
           <div className="quick-actions">
-            {is_user_defined &&
+            {this.props.speaker.is_user_defined &&
             <LinkWithIcon iconName="pencil"
                           title={t('main:actions.edit')}
                           onClick={() => this.handleEdit()}/>
@@ -115,6 +114,16 @@ export class SpeakerPreview extends React.PureComponent {
           </div>
         }
       />
+    )
+  }
+
+  renderName(speaker) {
+    if (speaker.is_user_defined)
+      return <div className="title is-4 speaker-name">{speaker.full_name}</div>
+    return (
+      <Link to={`/s/${speaker.slug || speaker.id}`} className="title is-4 speaker-name">
+        {speaker.full_name}
+      </Link>
     )
   }
 }

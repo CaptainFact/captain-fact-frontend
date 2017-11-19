@@ -26,6 +26,7 @@ import User from './components/Users/User'
 import ResetPasswordRequestForm from './components/Users/ResetPasswordRequestForm'
 import ResetPasswordConfirmForm from './components/Users/ResetPasswordConfirmForm'
 import ConfirmEmail from './components/Users/ConfirmEmail'
+import { SpeakerPage } from './components/Speakers/SpeakerPage'
 
 
 ReactDOM.render(
@@ -51,6 +52,7 @@ ReactDOM.render(
         <Route path="/videos/add/:videoUrl" component={AddVideoForm}/>
         <Route path="/videos/:videoId" component={VideoDebate} view="debate"/>
         <Route path="/videos/:videoId/history" component={VideoDebate} view="history"/>
+        <Route path="/s/:slug_or_id" component={SpeakerPage}/>
         <Route path="/help" component={Help}/>
         <Route path="/help/*" component={Help}/>
         <Route path="/extension" component={BrowserExtensionsPage}/>

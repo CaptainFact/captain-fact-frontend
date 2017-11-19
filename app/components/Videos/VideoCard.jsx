@@ -19,7 +19,7 @@ export class VideoCard extends React.PureComponent {
     for (let [speaker, separator] of iterateWithSeparators(speakers, speakers.size, this.props.t))
       speakerComponentsList.push(
         <span key={ speaker.id }>
-            <strong>{ speaker.full_name }</strong>
+          <strong><Link to={`/s/${speaker.slug || speaker.id}`}> { speaker.full_name }</Link></strong>
           { separator }
         </span>
       )

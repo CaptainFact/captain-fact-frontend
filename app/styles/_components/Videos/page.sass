@@ -1,13 +1,10 @@
-.videos-page, .videos-section
+.videos-page
   text-align: center
   margin: 0 auto
-  padding-top: 25px
+  padding-top: 5vh
 
   .header
     margin-bottom: 20px
-
-.videos-page
-  padding-top: 5vh
   &> .content
     padding: 15px 3vw
     .level
@@ -28,6 +25,7 @@
     max-width: 654px
 
 .video-card
+  text-align: center
   .card-image
     img
       border-radius: 0 0 5px 5px
@@ -74,3 +72,7 @@
       color: $grey-dark
     .icon
       color: $grey-light
+    a
+      color: $text-light
+      &:hover
+        text-decoration: underline

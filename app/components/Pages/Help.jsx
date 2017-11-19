@@ -51,7 +51,7 @@ export class Help extends React.PureComponent {
     }
     return (
       <div className="help-page">
-        <section className="hero is-info">
+        <section className="hero is-info is-bold">
           <div className="hero-body">
             <div className="container">
               { header }
