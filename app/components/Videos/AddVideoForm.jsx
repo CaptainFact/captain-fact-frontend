@@ -58,6 +58,7 @@ export class AddVideoForm extends React.PureComponent {
         <form id="col-video" className="column is-4 form"
           onSubmit={ this.props.handleSubmit(this.handleSubmit.bind(this)) }>
             <Field component={renderVideoField} name="url" buttonLabel="Add Video" placeholder="Video URL"
+                   buttonClassName="is-primary"
                    normalize={s => trim(s)}
             />
         </form>

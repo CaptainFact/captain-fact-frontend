@@ -52,5 +52,8 @@
     "clipboardFail": "Impossible d'enregistrer l'adresse dans le presse papier",
     "all": "Tous",
     "unknown": "Inconnu"
+  },
+  "videos": {
+    "add": "Ajouter une vidéo"
   }
 }

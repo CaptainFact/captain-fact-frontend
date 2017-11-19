@@ -33,8 +33,8 @@ i18n
       prefix: '_translations',
       expirationTime: 48*60*60*1000, // 48h
       versions: {
-        en: "0.7.2",
-        fr: "0.7.2"
+        en: "0.7.2a",
+        fr: "0.7.2a"
       }
     },
     detection: {

@@ -9,6 +9,6 @@ import capitalize from 'voca/capitalize'
 
 const WORD_REGEX = /[^\s\-]+/g
 
-export default function titleCase(str) {
-  return String(str).replace(WORD_REGEX, capitalize)
-}
+const titleCase = str => String(str).replace(WORD_REGEX, capitalize)
+
+export default titleCase

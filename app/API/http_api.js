@@ -5,6 +5,7 @@ import { SocketApi } from "./socket_api"
 import { HTTP_API_URL } from "../config.jsenv"
 import { parseServerError } from './server_error'
 import flashNoInternetError from './no_internet_error'
+import { optionsToQueryString } from '../lib/url_utils'
 
 
 class CaptainFactHttpApi {
@@ -58,8 +59,15 @@ class CaptainFactHttpApi {
     return this.prepareResponse(response)
   }
 
-  get(resourceUrl) {
-    const response = fetch(this.baseUrl + resourceUrl, {headers: this.headers})
+  /**
+   * Send a get request against the given `resourceUrl`.
+   * @param {string} resourceUrl
+   * @param {object} [options] - A map of options to convert to query string http://url?option1=xxx&option2=yyy
+   * @returns {Promise}
+   */
+  get(resourceUrl, options) {
+    const queryString = optionsToQueryString(options)
+    const response = fetch(this.baseUrl + resourceUrl + queryString, {headers: this.headers})
     return this.prepareResponse(response)
   }
 
