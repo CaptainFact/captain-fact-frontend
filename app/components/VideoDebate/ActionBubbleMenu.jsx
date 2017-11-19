@@ -29,9 +29,6 @@ export default class ActionBubbleMenu extends React.PureComponent {
 
   addStatement() {
     this.props.changeStatementFormSpeaker({id: 0})
-    const domElement = document.querySelector('.statements-list')
-    if (domElement)
-      domElement.scrollIntoView()
   }
 
   activate() {
