@@ -1,11 +1,13 @@
+// Import polyfills
+import { polyfill as smoothSrollPolyfill } from 'smoothscroll-polyfill'
+import "babel-polyfill"
+smoothSrollPolyfill()
+
+// Import libs
 import React from "react"
 import ReactDOM from "react-dom"
 import { Router, Route, IndexRoute, browserHistory } from "react-router"
 import { Provider } from "react-redux"
-
-// Import polyfills
-import { polyfill as smoothSrollPolyfill } from 'smoothscroll-polyfill'
-smoothSrollPolyfill()
 
 // Load store
 import store from "./state"

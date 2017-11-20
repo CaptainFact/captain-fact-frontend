@@ -1,5 +1,6 @@
 import "isomorphic-fetch"
 import trimRight from 'voca/trim_right'
+import fetch from 'isomorphic-fetch'
 
 import { SocketApi } from "./socket_api"
 import { HTTP_API_URL } from "../config.jsenv"
@@ -12,16 +13,16 @@ class CaptainFactHttpApi {
   constructor(baseUrl, token) {
     this.baseUrl = trimRight(baseUrl, '/') + '/'
     this.hasToken = !!token
-    this.headers = {
-      'authorization': token ? `Bearer ${token}` : "",
-      'Content-Type': "application/json"
-    }
+    this.headers = {'Content-Type': 'application/json'}
+    if (token)
+      this.headers['authorization'] = `Bearer ${token}`
   }
 
   setAuthorizationToken(token) {
     this.hasToken = true
     localStorage.token = token
-    this.headers['authorization'] = token ? `Bearer ${token}` : ""
+    if (token)
+      this.headers['authorization'] = `Bearer ${token}`
     SocketApi.setAuthorizationToken(token)
   }
 
@@ -42,7 +43,8 @@ class CaptainFactHttpApi {
           else
             fulfill(body)
         })
-      }).catch(() => {
+      }).catch(e => {
+        console.error(e)
         // Special case when no internet connection
         reject('noInternet')
         flashNoInternetError()
