@@ -6,7 +6,7 @@ import isURL from 'validator/lib/isURL'
 import classNames from 'classnames'
 
 import { renderField, validateLength, cleanStrMultiline } from "../FormUtils"
-import { COMMENT_LENGTH, USER_PICTURE_MEDIUM } from "../../constants"
+import { COMMENT_LENGTH, USER_PICTURE_LARGE } from "../../constants"
 import TextareaAutosize from "../FormUtils/TextareaAutosize"
 import { Icon } from '../Utils/Icon'
 import Tag from '../Utils/Tag'
@@ -33,7 +33,7 @@ const validate = ({ source, text }) => {
 
 class CommentField extends React.PureComponent {
   render() {
-    const { input, label, placeholder, isReply, meta: { submitting } } = this.props
+    const { input, label, placeholder, isReply, meta: { submitting, error } } = this.props
     return (
       <p className="control">
         <TextareaAutosize {...input}
@@ -46,6 +46,7 @@ class CommentField extends React.PureComponent {
           </span>
             &nbsp;/ {COMMENT_LENGTH[1]}
         </span>
+        {error && <span className="help is-danger">{typeof(error) === 'string' ? error : error[0]}</span>}
       </p>
     )
   }
@@ -70,28 +71,27 @@ export class CommentForm extends React.PureComponent {
     })
   }
 
-  getSubmit(valid, sourceUrl) {
+  getSubmit(valid, sourceUrl, isReply) {
     const commonClasses = ['button', {'is-disabled': !valid}]
-    if (!sourceUrl) return (
-      <button type="submit" className={classNames(commonClasses, 'is-info')}>
-        {this.props.t('comment.postComment')}
+    const i18nParams = isReply ? {context: 'reply'} : null
+    if (!sourceUrl) return ([
+      <button key="comment" type="submit" className={classNames(commonClasses)}>
+        {this.props.t('comment.post', i18nParams)}
       </button>
-    )
-    else return (
-      <div>
-        <button type="submit" className={classNames(commonClasses, 'is-success')}
-          onClick={this.postAndReset(values => this.props.postComment({...values, approve: true}))}>
-          {this.props.t('main:actions.approve')}
-        </button>
-        <button type="submit" className={classNames(commonClasses, 'is-danger')}
-          onClick={this.postAndReset(values => this.props.postComment({...values, approve: false}))}>
-          {this.props.t('main:actions.refute')}
-        </button>
-        <button type="submit" className={classNames(commonClasses)}>
-          {this.props.t('comment.postComment')}
-        </button>
-      </div>
-    )
+    ])
+    else return ([
+      <button key="comment" type="submit" className={classNames(commonClasses)}>
+        {this.props.t('comment.post', i18nParams)}
+      </button>,
+      <button key="approve" type="submit" className={classNames(commonClasses, 'is-success')}
+              onClick={this.postAndReset(values => this.props.postComment({...values, approve: true}))}>
+        {this.props.t('comment.approve', i18nParams)}
+      </button>,
+      <button key="refute" type="submit" className={classNames(commonClasses, 'is-danger')}
+              onClick={this.postAndReset(values => this.props.postComment({...values, approve: false}))}>
+        {this.props.t('comment.refute', i18nParams)}
+      </button>
+    ])
   }
 
   render() {
@@ -103,7 +103,7 @@ export class CommentForm extends React.PureComponent {
         ContainerType="form"
         containerProps={{onSubmit: this.postAndReset(c => this.props.postComment(c))}}
         className="comment-form"
-        left={<UserPicture user={currentUser} size={USER_PICTURE_MEDIUM}/>}
+        left={<UserPicture user={currentUser} size={USER_PICTURE_LARGE}/>}
         content={
           <div>
             {formValues && formValues.reply_to &&
@@ -125,10 +125,14 @@ export class CommentForm extends React.PureComponent {
                    isReply={formValues && !!formValues.reply_to}
                    normalize={ cleanStrMultiline }
                    placeholder={t('comment.writeComment')}/>
-            <Field component={ renderField } name="source.url"
-                   label={t('comment.addSource')}
-                   normalize={s => s.trim()}/>
-            { this.getSubmit(valid, sourceUrl) }
+            <div className="level">
+              <Field component={ renderField } name="source.url"
+                     label={t('comment.addSource')}
+                     normalize={s => s.trim()}/>
+              <div className="submit-btns">
+                { this.getSubmit(valid, sourceUrl, formValues && formValues.reply_to) }
+              </div>
+            </div>
           </div>
         }
       />

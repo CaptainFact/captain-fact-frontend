@@ -1,26 +1,28 @@
 import "isomorphic-fetch"
 import trimRight from 'voca/trim_right'
+import fetch from 'isomorphic-fetch'
 
 import { SocketApi } from "./socket_api"
 import { HTTP_API_URL } from "../config.jsenv"
 import { parseServerError } from './server_error'
 import flashNoInternetError from './no_internet_error'
+import { optionsToQueryString } from '../lib/url_utils'
 
 
 class CaptainFactHttpApi {
   constructor(baseUrl, token) {
     this.baseUrl = trimRight(baseUrl, '/') + '/'
     this.hasToken = !!token
-    this.headers = {
-      'authorization': token ? `Bearer ${token}` : "",
-      'Content-Type': "application/json"
-    }
+    this.headers = {'Content-Type': 'application/json'}
+    if (token)
+      this.headers['authorization'] = `Bearer ${token}`
   }
 
   setAuthorizationToken(token) {
     this.hasToken = true
     localStorage.token = token
-    this.headers['authorization'] = token ? `Bearer ${token}` : ""
+    if (token)
+      this.headers['authorization'] = `Bearer ${token}`
     SocketApi.setAuthorizationToken(token)
   }
 
@@ -41,7 +43,8 @@ class CaptainFactHttpApi {
           else
             fulfill(body)
         })
-      }).catch(() => {
+      }).catch(e => {
+        console.error(e)
         // Special case when no internet connection
         reject('noInternet')
         flashNoInternetError()
@@ -58,8 +61,15 @@ class CaptainFactHttpApi {
     return this.prepareResponse(response)
   }
 
-  get(resourceUrl) {
-    const response = fetch(this.baseUrl + resourceUrl, {headers: this.headers})
+  /**
+   * Send a get request against the given `resourceUrl`.
+   * @param {string} resourceUrl
+   * @param {object} [options] - A map of options to convert to query string http://url?option1=xxx&option2=yyy
+   * @returns {Promise}
+   */
+  get(resourceUrl, options) {
+    const queryString = optionsToQueryString(options)
+    const response = fetch(this.baseUrl + resourceUrl + queryString, {headers: this.headers})
     return this.prepareResponse(response)
   }
 

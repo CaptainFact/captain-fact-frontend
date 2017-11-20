@@ -1,33 +1,5 @@
-.videos-page, .videos-section
-  text-align: center
-  margin: 0 auto
-  padding-top: 25px
-
-  .header
-    margin-bottom: 20px
-
-.videos-page
-  padding-top: 5vh
-  &> .content
-    padding: 15px 3vw
-    .level
-      max-width: 1500px
-      margin: 0 auto 30px
-      border: 1px solid $grey-lighter
-      padding: 0.5em 1em
-  .header
-    min-height: 100px
-
-.videos-list
-  margin: 0
-  justify-content: center
-
-  .column
-    @include animate(fadeIn, 0.1s)
-    min-width: 300px
-    max-width: 654px
-
 .video-card
+  text-align: center
   .card-image
     img
       border-radius: 0 0 5px 5px
@@ -74,3 +46,7 @@
       color: $grey-dark
     .icon
       color: $grey-light
+    a
+      //color: $text-light
+      &:hover
+        text-decoration: underline

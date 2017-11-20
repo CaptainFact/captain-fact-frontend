@@ -12,7 +12,7 @@ import { translate } from 'react-i18next'
 import { forcePosition } from '../../state/video_debate/video/reducer'
 import { decrementFormCount, incrementFormCount, setScrollTo } from '../../state/video_debate/statements/reducer'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
-import {staticResource} from '../../API/resources'
+import { staticResource } from '../../API/resources'
 
 
 const validate = ({text, time}, {t}) => {
@@ -55,6 +55,7 @@ export class StatementForm extends React.PureComponent {
 
   componentDidMount() {
     this.props.incrementFormCount()
+    this.refs.container.scrollIntoView({behavior: 'smooth'})
   }
 
   componentWillUnmount() {
@@ -94,7 +95,7 @@ export class StatementForm extends React.PureComponent {
     const toggleTimeLockAction = this.state.lockedTime === false ? 'unlock' : 'lock'
 
     return (
-      <form className={`statement-form${this.props.isBundled ? '' : ' card statement'}`}>
+      <form className={`statement-form${this.props.isBundled ? '' : ' card statement'}`} ref="container">
         <header className="card-header">
           <div className="card-header-title">
             <a className="button"

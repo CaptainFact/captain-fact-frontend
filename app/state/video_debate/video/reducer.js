@@ -2,7 +2,7 @@ import { handleActions, createAction } from 'redux-actions'
 import { Record, List } from 'immutable'
 
 import Video from '../../videos/record'
-import Speaker from '../speakers/record'
+import Speaker from '../../speakers/record'
 import { resetVideoDebate } from '../actions'
 
 

@@ -5,6 +5,8 @@ CaptainFact a grandit sur le sol fertile de nombreux projets open source tels qu
 * [React](https://facebook.github.io/react/)
 * [Bulma](http://bulma.io/)
 * [Redux](http://redux.js.org/)
+* [adorable.io](http://avatars.adorable.io/) for their great consistent avatar service (the funny faces 
+  you see if you don't set your own profile picture)
 
 
 Ainsi qu'à la fondation Wikimedia pour les images d'intervenants et d'autres métadonées associées. Vous
