@@ -13,13 +13,13 @@ const INITIAL_STATE = new Record({
   isLoading: false,
   isSubmitting: false,
   error: null,
-  data: new List()
+  entries: new List()
 })
 
 const ModerationReducer = handleActions({
   [setEntries]: {
     next: (state, {payload}) => state.merge({
-      data: new List(payload).map(prepareAction),
+      entries: new List(payload).map(prepareAction),
       isLoading: false
     }),
     throw: (state, action) => state.merge({
