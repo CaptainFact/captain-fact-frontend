@@ -19,7 +19,7 @@ const INITIAL_STATE = new Record({
 const ModerationReducer = handleActions({
   [setEntries]: {
     next: (state, {payload}) => state.merge({
-      data: new List(payload).map(prepareModerationEntry),
+      data: new List(payload).map(prepareAction),
       isLoading: false
     }),
     throw: (state, action) => state.merge({
@@ -27,14 +27,12 @@ const ModerationReducer = handleActions({
       error: action.payload
     })
   },
-  [setSubmitting]: (state, {payload}) => state.set('isSubmitting', payload),
-  [setLoading]: (state, {payload}) => state.set('isLoading', payload),
-  [reset]: () => INITIAL_STATE()
+  [setLoading]: (state, {payload}) => state.set('isLoading', payload)
 }, INITIAL_STATE())
 
 const prepareAction = (action) => {
   action.time = parseDateTime(action.time)
-  action.changes = new Map(action.changes)
+  action.changes = new Map([action.changes])
   return UserAction(action)
 }
 

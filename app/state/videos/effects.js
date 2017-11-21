@@ -1,5 +1,5 @@
 import HttpApi from '../../API/http_api'
-import { setLoading, setEntries } from './reducer'
+import { setLoading, setVideos } from './reducer'
 import { createEffect, returnSuccess, returnError, generateFSAError } from '../utils'
 import { errorToFlash } from '../flashes/reducer'
 
@@ -12,6 +12,6 @@ import { errorToFlash } from '../flashes/reducer'
 export const fetchPublicVideos = (filters=null) => createEffect(
   HttpApi.get("videos", filters), {
     before: setLoading(true),
-    after: setEntries
+    after: setVideos
   }
 )

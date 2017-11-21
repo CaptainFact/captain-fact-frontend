@@ -17,7 +17,7 @@ import ModalsReducer from './modals/reducer'
 import HelpReducer from './help/reducer'
 import UsersActionsReducer from './user_actions/reducer'
 import SpeakersReducer from './speakers/reducer'
-
+import ModerationReducer from './moderation/reducer'
 
 // Declare reducers
 const reducers = combineReducers({
@@ -31,6 +31,7 @@ const reducers = combineReducers({
   Modals: ModalsReducer,
   Help: HelpReducer,
   UsersActions: UsersActionsReducer,
+  Moderation: ModerationReducer,
   form: formReducer
 })
 
