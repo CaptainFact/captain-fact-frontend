@@ -11,7 +11,7 @@ const defaultLocales = new Map({
   fr: 'Français'
 })
 
-@translate([]) // Force waiting for translations to be loaded
+@translate() // Force waiting for translations to be loaded
 export default class LanguageSelector extends React.PureComponent {
   render() {
     return (

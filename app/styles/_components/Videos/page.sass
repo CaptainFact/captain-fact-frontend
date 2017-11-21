@@ -1,0 +1,25 @@
+.videos-page
+  text-align: center
+  margin: 0 auto
+  padding-top: 5vh
+
+  .header
+    margin-bottom: 20px
+  &> .content
+    padding: 15px 3vw
+    .level
+      max-width: 1500px
+      margin: 0 auto 30px
+      border: 1px solid $grey-lighter
+      padding: 0.5em 1em
+  .header
+    min-height: 100px
+
+.videos-list
+  margin: 0
+  justify-content: center
+
+  .column
+    @include animate(fadeIn, 0.1s)
+    min-width: 300px
+    max-width: 654px

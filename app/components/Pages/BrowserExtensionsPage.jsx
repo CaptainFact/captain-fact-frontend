@@ -18,11 +18,11 @@ const BrowserExtensionsPage = ({t}) => (
                             buttonLabel="Get on Chrome Web Store"
                             url="https://chrome.google.com/webstore/detail/captainfact-beta/fnnhlmbnlbgomamcolcpgncflofhjckm"/>
           <BrowserExtension browser="Mozilla Firefox" image="/assets/img/firefox.png"
-                            buttonLabel="Download for Firefox (Coming soon)" disabled={true}
-                            url="https://addons.mozilla.org/en-US/firefox/"/>
+                            buttonLabel="Download for Firefox"
+                            url="https://addons.mozilla.org/addon/captainfact/"/>
           <BrowserExtension browser="Internet Explorer" image="/assets/img/internet_explorer.png"
                             buttonLabel="Just kidding" disabled={true}
-                            url="https://www.mozilla.org/fr/firefox/new/"/>
+                            url="https://www.mozilla.org/fr/firefox/"/>
         </div>
       </div>
     </section>

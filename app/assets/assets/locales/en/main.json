@@ -53,5 +53,8 @@
     "clipboardFail": "Cannot copy to clipboard",
     "all": "All",
     "unknown": "Unknown"
+  },
+  "videos": {
+    "add": "Add Video"
   }
 }
