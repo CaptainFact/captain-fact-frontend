@@ -17,6 +17,14 @@ export const fetchPublicVideos = (filters=null) => createEffect(
   }
 )
 
+export const searchVideo = videoUrl => createEffect(
+  HttpApi.post('search/video', {url: videoUrl}), {
+    before: setSubmitting(true),
+    then: [setSubmitting(false), returnSuccess],
+    catch: [setSubmitting(false), generateFSAError]
+  }
+)
+
 export const postVideo = video => createEffect(
   HttpApi.post('videos', video), {
     before: setSubmitting(true),
