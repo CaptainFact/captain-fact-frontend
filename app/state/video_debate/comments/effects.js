@@ -14,10 +14,7 @@ export const joinCommentsChannel = videoId => (dispatch, getState) => {
   dispatch(fetchAll(
     SocketApi.joinChannel(COMMENTS_CHANNEL, `comments:video:${videoId}`, {
       'comment_removed': c => dispatch(remove(c)),
-      'comment_added': c => dispatch(add({
-        comment: c,
-        currentUserId: getState().CurrentUser.data.id,
-      })),
+      'comment_added': c => dispatch(add(c)),
       'comment_updated': c => dispatch(update(c)),
       'comments_scores_updated': ({comments}) => dispatch(updateScores(comments)),
     })
