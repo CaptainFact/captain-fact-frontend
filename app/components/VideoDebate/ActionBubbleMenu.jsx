@@ -12,11 +12,17 @@ import {isAuthenticated} from '../../state/users/current_user/selectors'
 import { Icon } from '../Utils/Icon'
 import ShareModal from '../Utils/ShareModal'
 import EditVideoModal from '../Videos/EditVideoModal'
+import { hasStatementForm } from '../../state/video_debate/statements/selectors'
+import { destroyStatementForm } from '../../state/video_debate/statements/effects'
 
 
 @connect(
-  state => ({hasAutoscroll: state.UserPreferences.enableAutoscroll, isAuthenticated: isAuthenticated(state)}),
-  {changeStatementFormSpeaker, toggleAutoscroll, addModal}
+  state => ({
+    hasAutoscroll: state.UserPreferences.enableAutoscroll,
+    isAuthenticated: isAuthenticated(state),
+    hasStatementForm: hasStatementForm(state)
+  }),
+  {changeStatementFormSpeaker, toggleAutoscroll, addModal, destroyStatementForm}
 )
 @translate(['videoDebate', 'main'])
 @withRouter
@@ -39,15 +45,16 @@ export default class ActionBubbleMenu extends React.PureComponent {
 
   render() {
     return (
-      <div className={classNames("action-bubble-container", {active: this.state.active})}
+      <div className={classNames("action-bubble-container", {active: this.state.active, hasForm: this.props.hasStatementForm})}
            onMouseEnter={this.activate}
            onMouseLeave={() => this.setState({active: false})}
            onTouchStart={this.activate}
       >
         {this.props.isAuthenticated &&
-          <ActionBubble iconName="commenting-o"
-                        label={this.props.t('statement.add')}
-                        onClick={() => this.state.active ? this.addStatement() : null}
+          <ActionBubble iconName={this.props.hasStatementForm ? 'times' : "commenting-o"}
+                        label={this.props.t(this.props.hasStatementForm ? 'statement.abortAdd' : 'statement.add')}
+                        activated={!this.props.hasStatementForm}
+                        onClick={() => this.onStatementBubbleClick()}
           />
         }
         <ActionBubble iconName="arrows-v"
@@ -76,6 +83,13 @@ export default class ActionBubbleMenu extends React.PureComponent {
         />
       </div>
     )
+  }
+
+  onStatementBubbleClick() {
+    if (this.props.hasStatementForm)
+      this.props.destroyStatementForm()
+    else if (this.state.active)
+      this.addStatement()
   }
 }
 
