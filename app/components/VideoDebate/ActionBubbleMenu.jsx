@@ -50,6 +50,11 @@ export default class ActionBubbleMenu extends React.PureComponent {
            onMouseLeave={() => this.setState({active: false})}
            onTouchStart={this.activate}
       >
+        {!this.props.isAuthenticated &&
+          <ActionBubble iconName="sign-in" label={this.props.t('main:menu.loginSignup')}
+                        onClick={() => this.props.router.push('/login')}
+          />
+        }
         {this.props.isAuthenticated &&
           <ActionBubble iconName={this.props.hasStatementForm ? 'times' : "commenting-o"}
                         label={this.props.t(this.props.hasStatementForm ? 'statement.abortAdd' : 'statement.add')}
