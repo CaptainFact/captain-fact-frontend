@@ -29,6 +29,7 @@ import ResetPasswordRequestForm from './components/Users/ResetPasswordRequestFor
 import ResetPasswordConfirmForm from './components/Users/ResetPasswordConfirmForm'
 import ConfirmEmail from './components/Users/ConfirmEmail'
 import { SpeakerPage } from './components/Speakers/SpeakerPage'
+import NewsletterSubscription from './components/Users/NewsletterSubscription'
 
 
 ReactDOM.render(
@@ -43,6 +44,7 @@ ReactDOM.render(
         <Route path="/confirm_email/:token" component={ConfirmEmail}/>
         <Route path="/reset_password" component={ResetPasswordRequestForm}/>
         <Route path="/reset_password/confirm/:token" component={ResetPasswordConfirmForm}/>
+        <Route path="/newsletter/unsubscribe/:token" component={NewsletterSubscription}/>
         <Route path="/u/:username" component={User}>
           <IndexRoute component={UserProfile}/>
           <Route path="/u/:username/activity" component={NotFound}/>
