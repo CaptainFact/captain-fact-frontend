@@ -20,11 +20,11 @@ $sub-bubble-icon-size: 24px
   width: $main-bubble-height
   background: $secondary
   border-radius: 3em
-  box-shadow: 0px 3px 6px 0px transparentize($grey, 0.4)
+  box-shadow: 0 3px 6px 0 transparentize($grey, 0.4)
   transition: box-shadow 0.3s, background 0.3s
   &:hover
     cursor: pointer
-    box-shadow: 0px 3px 6px 0px transparentize($grey, 0.2)
+    box-shadow: 0 3px 6px 0 transparentize($grey, 0.2)
     .label
       @include animate(fadeIn, 0.2s)
       display: block
@@ -52,7 +52,7 @@ $sub-bubble-icon-size: 24px
 .action-bubble:not(.activated)
   background: $grey-light
 
-.action-bubble-container:not(:hover):not(.active) .action-bubble:first-child
+.action-bubble-container:not(:hover):not(.active):not(.hasForm) .action-bubble:first-child
   i
     transform: rotate(-360deg)
     &:before

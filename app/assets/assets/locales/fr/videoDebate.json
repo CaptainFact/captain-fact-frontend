@@ -53,6 +53,7 @@
     "noSpeakerTextPlaceholder": "Décrivez ce qui apparait à l'image ou ajoutez un intervenant",
     "text": "Le texte",
     "add": "Ajouter une citation",
+    "abortAdd": "Annuler l'ajout de citation",
     "autoscroll_enable": "Activer le scroll automatique",
     "autoscroll_disable": "Désactiver le scroll automatique",
     "reverseTimeLock_lock": "Déverrouiller la position",

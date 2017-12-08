@@ -46,7 +46,7 @@ export default withRouter(translate('user')(SignupForm))
 @translate('user')
 @reduxForm({form: 'signupForm', validate: validatePasswordRepeat})
 @connect(
-  ({CurrentUser: {data}}) => ({CurrentUser: data}),
+  ({CurrentUser: {data}, UserPreferences: {locale}}) => ({CurrentUser: data, locale}),
   {register, requestInvitation, errorToFlash}
 )
 class RealSignupForm extends React.PureComponent {
@@ -57,7 +57,7 @@ class RealSignupForm extends React.PureComponent {
   }
 
   submit({invitation_token, ...user}) {
-    return this.props.register({invitation_token, user})
+    return this.props.register({invitation_token, user: {...user, locale: this.props.locale}})
       .then(handleFormEffectResponse({
         onError: msg => typeof(msg) === 'string' ? this.props.errorToFlash(msg) : null
       }))

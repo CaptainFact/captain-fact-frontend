@@ -24,14 +24,14 @@ const validate = ({text, time}, {t}) => {
   return errors
 }
 
-const SpeakersSelect = ({input, speakers}) => {
+const SpeakersSelect = ({input, speakers, label}) => {
   return (
     <Select className="speaker-select"
             onChange={s => s && s.id ? input.onChange(s.id) : input.onChange(null)}
             onBlur={() => input.onBlur(input.value.id)}
             value={input.value}
             name={input.name}
-            placeholder="Select Speaker..."
+            placeholder={label}
             labelKey="full_name"
             valueKey="id"
             ignoreAccents={true}
@@ -113,7 +113,7 @@ export class StatementForm extends React.PureComponent {
               <Icon size="small" name={toggleTimeLockAction}/>
             </a>
             {speaker && speaker.picture && <img className="speaker-mini" src={staticResource(speaker.picture)}/>}
-            <Field name="speaker_id" component={SpeakersSelect} speakers={speakers}/>
+            <Field name="speaker_id" component={SpeakersSelect} speakers={speakers} label={t('speaker.add')}/>
           </div>
         </header>
         <div className="card-content">

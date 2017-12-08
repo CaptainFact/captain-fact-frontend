@@ -1,3 +1,5 @@
+import { destroy } from 'redux-form'
+
 import { SocketApi } from "../../../API"
 import { STATEMENTS_CHANNEL } from "../../../constants"
 import { add, fetchStatements, remove, setLoading, setSubmitting, update, updateAll } from './reducer'
@@ -45,3 +47,4 @@ export const shiftStatements = offset => createEffect(
   {catch: errorToFlash}
 )
 
+export const destroyStatementForm = () => destroy('StatementForm')

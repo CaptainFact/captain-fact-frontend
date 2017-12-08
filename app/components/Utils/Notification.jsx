@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Notification = ({children, type='info'}) =>
-  <div className={`notification is-${type}`}>
+const Notification = ({children, type='info', ...otherProps}) =>
+  <div className={`notification is-${type}`} {...otherProps}>
     {children}
   </div>
 
