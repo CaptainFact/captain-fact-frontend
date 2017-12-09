@@ -65,6 +65,7 @@
     "jsenv-brunch": "^2.0.0",
     "mocha": "^3.4.1",
     "sass-brunch": "https://github.com/brunch/sass-brunch",
-    "uglify-js-brunch": "^2.10.0"
+    "uglify-js-brunch": "^2.10.0",
+    "version-brunch": "^1.0.1"
   }
 }

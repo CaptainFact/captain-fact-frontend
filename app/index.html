@@ -31,11 +31,11 @@
     <meta name="msapplication-config" content="/favicons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
     <!-- Resources -->
-    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" href="/assets/css/app.css?version={!major!}.{!minor!}.{!maintenance!}">
   </head>
   <body>
-    <div id='app'></div>
-    <script src="/assets/js/vendor.js"></script>
-    <script src="/assets/js/app.js"></script>
+    <div id='app' data-version="{!major!}.{!minor!}.{!maintenance!}"></div>
+    <script src="/assets/js/vendor.js?version={!major!}.{!minor!}.{!maintenance!}"></script>
+    <script src="/assets/js/app.js?version={!major!}.{!minor!}.{!maintenance!}"></script>
   </body>
 </html>
