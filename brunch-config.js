@@ -37,6 +37,10 @@ module.exports = {
         javascript: 'assets/js',
         stylesheet: 'assets/css'
       }
+    },
+    version: {
+      versionFile: "version.json",
+      fileRegExp: /index\.html$/
     }
   }
 }
