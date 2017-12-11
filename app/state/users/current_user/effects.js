@@ -8,11 +8,16 @@ import { createEffect } from '../../utils'
 
 // Auth / register / login functions
 
-export const getCurrentUser = () => dispatch => {
+export const getCurrentUser = () => (dispatch, getState) => {
   if (!HttpApi.hasToken)
     return null
   dispatch(setLoading(true))
-  dispatch(setCurrentUser(HttpApi.get('users/me').catch(error => {
+  dispatch(setCurrentUser(HttpApi.get('users/me').then(r => {
+    // Save user locale on server when authenticating if not already set
+    if (r.locale === null)
+      dispatch(updateInfo({locale: getState().UserPreferences.locale}))
+    return r
+  }).catch(error => {
       if (error === 'unauthorized') // Token expired
         HttpApi.resetToken()
       throw error
