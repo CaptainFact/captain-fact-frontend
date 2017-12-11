@@ -6,23 +6,22 @@ html
   overflow-y: auto
 
 .link-with-icon
+  color: #4a4a4a
+  &.is-disabled
+    color: gainsboro
   &> *
     display: inline-block
     vertical-align: middle
-  &> i
-    font-size: 18px
+  &> .fa
+    font-size: 17px
     margin-right: 5px
+    vertical-align: middle
 
 .not-displayed
   display: none
 
 .icon.is-mini
   font-size: 12px
-
-.link-with-icon
-  color: #4a4a4a
-  &.is-disabled
-    color: gainsboro
 
 a.is-disabled
   color: lightgrey

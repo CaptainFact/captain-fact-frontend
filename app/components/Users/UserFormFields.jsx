@@ -58,7 +58,7 @@ export const renderAllUserFields = (valid, t, isPasswdOptional=false) => (
            placeholder={`${t('realName')} (${t('optional')})`}
            component={renderField}
            normalize={cleanStr}
-           icon="address-card"
+           icon="identity"
           validate={v => v && validateFieldLength(t, v, NAME_LENGTH)}/>
     {emailField(t)}
     {passwordField(t, isPasswdOptional)}

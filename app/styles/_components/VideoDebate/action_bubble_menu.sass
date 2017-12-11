@@ -43,21 +43,23 @@ $sub-bubble-icon-size: 24px
   .icon
     color: white
     font-size: $default-bubble-icon-size
+    height: $default-bubble-icon-size
     width: $main-bubble-height
     text-align: center
-    padding-top: $main-bubble-height / 2 - $default-bubble-icon-size / 3
+    padding-top: ($main-bubble-height / 2) - ($default-bubble-icon-size / 2.5)
     i
       transition: transform 0.3s
 
 .action-bubble:not(.activated)
   background: $grey-light
 
-.action-bubble-container:not(:hover):not(.active):not(.hasForm) .action-bubble:first-child
-  i
-    transform: rotate(-360deg)
-    &:before
-      content: '+'
-      font-size: 50px
+.action-bubble-container:not(.active):not(.hasForm) .action-bubble:first-child i
+  transform: rotate(-360deg)
+  @extend .icon-plus
+  $plus-sign-size: $default-bubble-icon-size + 12
+  padding-top: ($main-bubble-height / 2) - ($plus-sign-size / 1.6)
+  &:before
+    font-size: $plus-sign-size
 
 .action-bubble:not(:first-child)
   @include animate(fadeInUp, 0.2s)
