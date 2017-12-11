@@ -27,29 +27,9 @@ import { destroyStatementForm } from '../../state/video_debate/statements/effect
 @translate(['videoDebate', 'main'])
 @withRouter
 export default class ActionBubbleMenu extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = {active: false}
-    this.activate = debounce(this.activate.bind(this), 10)
-  }
-
-  addStatement() {
-    this.props.changeStatementFormSpeaker({id: 0})
-  }
-
-  activate() {
-    // Debounce on mouseEnter is meant to avoid the fact that touch devices trigger mouseEnter then
-    // onClick at the same time when touching
-    this.setState({active: true})
-  }
-
   render() {
     return (
-      <div className={classNames("action-bubble-container", {active: this.state.active, hasForm: this.props.hasStatementForm})}
-           onMouseEnter={this.activate}
-           onMouseLeave={() => this.setState({active: false})}
-           onTouchStart={this.activate}
-      >
+      <div className={classNames("action-bubble-container", {hasForm: this.props.hasStatementForm})}>
         {!this.props.isAuthenticated &&
           <ActionBubble iconName="sign-in" label={this.props.t('main:menu.loginSignup')}
                         onClick={() => this.props.router.push('/login')}
@@ -93,8 +73,8 @@ export default class ActionBubbleMenu extends React.PureComponent {
   onStatementBubbleClick() {
     if (this.props.hasStatementForm)
       this.props.destroyStatementForm()
-    else if (this.state.active)
-      this.addStatement()
+    else
+      this.props.changeStatementFormSpeaker({id: 0})
   }
 }
 
