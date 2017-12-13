@@ -1,5 +1,6 @@
 import { handleActions, createAction } from 'redux-actions'
 import { Record, List } from 'immutable'
+import uuidv1 from "uuid/v1"
 
 import Video from '../../videos/record'
 import Speaker from '../../speakers/record'
@@ -14,8 +15,9 @@ export const updateSpeaker = createAction('VIDEO/UPDATE_SPEAKER')
 
 export const setPosition = createAction('PLAYBACK/SET_POSITION')
 export const forcePosition = createAction('PLAYBACK/FORCE_POSITION')
-export const resetPosition = createAction('PLAYBACK/RESET_POSITION')
-export const resetForcedPosition = createAction('PLAYBACK/RESET_FORCED_POSITION')
+
+
+const FORCED_POSITION_RECORD = new Record({requestId: null, time: 0})
 
 const INITIAL_STATE = new Record({
   data: new Video(),
@@ -23,7 +25,7 @@ const INITIAL_STATE = new Record({
   isLoading: false,
   playback: new Record({
     position: null,
-    forcedPosition: null
+    forcedPosition: FORCED_POSITION_RECORD()
   })()
 })
 const VideoReducer = handleActions({
@@ -60,10 +62,7 @@ const VideoReducer = handleActions({
   [setPosition]: (state, {payload}) =>
     state.setIn(['playback', 'position'], Math.trunc(payload)),
   [forcePosition]: (state, {payload}) =>
-    state.update('playback', p => p.merge({position: payload, forcedPosition: payload})),
-  [resetForcedPosition]: (state, {payload}) =>
-    state.setIn(['playback', 'forcedPosition'], null),
-  [resetPosition]: state => state.update('playback', p => p.merge({position: null, forcedPosition: null}))
+    state.update('playback', p => p.mergeDeep({position: payload, forcedPosition: {time: payload, requestId: uuidv1()}}))
 }, INITIAL_STATE())
 export default VideoReducer
 

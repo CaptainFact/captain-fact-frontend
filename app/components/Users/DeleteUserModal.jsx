@@ -40,7 +40,7 @@ export default class DeleteUserModal extends React.PureComponent {
       <ModalFormContainer
         message="This action is irreversible. All your data (comments, votes...etc) will be deleted."
         FormComponent={DeleteForm}
-        confirmIcon="trash"
+        confirmIcon="trash-o"
         confirmType="danger"
         confirmDisabled={!isValid}
         confirmText={t('actions.delete')}
