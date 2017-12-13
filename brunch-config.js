@@ -27,11 +27,6 @@ module.exports = {
         ]
       }
     },
-    copycat: {
-      "assets/fonts": [
-        "node_modules/font-awesome/fonts"
-      ]
-    },
     gzip: {
       paths: {
         javascript: 'assets/js',

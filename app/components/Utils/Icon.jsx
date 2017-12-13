@@ -6,7 +6,7 @@ export class Icon extends React.PureComponent {
   }
 
   renderIcon(name) {
-    return (<i className={`fa fa-${name}`}/>)
+    return (<i className={`fa icon-${name}`}/>)
   }
 
   render() {
