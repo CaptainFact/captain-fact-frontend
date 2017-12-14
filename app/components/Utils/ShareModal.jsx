@@ -20,6 +20,7 @@ export default class ShareModal extends React.PureComponent {
     const encodedUrl = encodeURIComponent(url)
     return (
       <Modal handleCloseClick={this.props.popModal}
+             className="modal-share"
              title={<span><Icon name="share-alt"/> {this.props.t('actions.share')}</span>}>
         <FieldWithButton className="is-medium share-link-field"
                          input={{value: url, readOnly: true}}
@@ -31,7 +32,7 @@ export default class ShareModal extends React.PureComponent {
         <div style={{textAlign: 'center'}}>
           <ThirdPartyServiceButton icon="twitter" name="Twitter" url={this.twitterLink(encodedUrl)} newTab={true}/>
           <ThirdPartyServiceButton icon="facebook" name="Facebook" url={this.facebookLink(encodedUrl)} newTab={true}/>
-          <ThirdPartyServiceButton icon="google-plus-official" name="Google+" url={this.googlePlusLink(encodedUrl)} newTab={true}/>
+          <ThirdPartyServiceButton icon="google-plus" name="Google+" url={this.googlePlusLink(encodedUrl)} newTab={true}/>
           <span style={{marginLeft: 5}}>
             <ThirdPartyServiceButton icon="envelope" name="Mail" url={this.mailLink(encodedUrl)} newTab={true}/>
           </span>
