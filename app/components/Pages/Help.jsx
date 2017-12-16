@@ -131,10 +131,10 @@ export class Help extends React.PureComponent {
         <h1 className="title is-1">
           {t('main:menu.help')}: {t(`help:pages.${splat}`, {defaultValue: "I am lost 😟"})}
         </h1>
-        <a className="subtitle" onClick={this.props.router.goBack}>
+        <Link className="subtitle" to="/help">
           <Icon name="arrow-left"/>
           <span> {t('main:actions.goBack')}</span>
-        </a>
+        </Link>
       </div>
     )
   }

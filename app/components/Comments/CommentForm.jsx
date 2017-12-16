@@ -16,6 +16,7 @@ import UserPicture from '../Users/UserPicture'
 import MediaLayout from '../Utils/MediaLayout'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 import { CommentDisplay } from './CommentDisplay'
+import TextareaLengthCounter from '../FormUtils/TextareaLengthCounter'
 
 
 const validate = ({ source, text }) => {
@@ -40,12 +41,7 @@ class CommentField extends React.PureComponent {
                           placeholder={placeholder ? placeholder : label}
                           disabled={submitting}
                           focus={isReply}/>
-        <span className="comment-length">
-          <span className={`value ${input.value.length > COMMENT_LENGTH[1] ? 'invalid' : ''}`}>
-            {input.value.length}
-          </span>
-            &nbsp;/ {COMMENT_LENGTH[1]}
-        </span>
+        <TextareaLengthCounter length={input.value.length} maxLength={COMMENT_LENGTH[1]}/>
         {error && <span className="help is-danger">{typeof(error) === 'string' ? error : error[0]}</span>}
       </p>
     )
