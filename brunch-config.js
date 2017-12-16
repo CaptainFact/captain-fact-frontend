@@ -35,7 +35,7 @@ module.exports = {
     },
     version: {
       versionFile: "version.json",
-      fileRegExp: /index\.html$/
+      fileRegExp: /(index\.html|app\.css)$/
     }
   }
 }
