@@ -98,14 +98,11 @@ export class StatementForm extends React.PureComponent {
       <form className={`statement-form${this.props.isBundled ? '' : ' card statement'}`} ref="container">
         <header className="card-header">
           <div className="card-header-title">
-            <a className="button"
-              onClick={() => this.moveTimeMarker(currentTime - 1)}>
+            <a className="button" onClick={() => this.moveTimeMarker(currentTime - 1)}>
               <Icon name="caret-left"/>
             </a>
-            <TimeDisplay time={currentTime}
-                         handleClick={() => this.props.forcePosition(currentTime)}/>
-            <a className="button"
-               onClick={() => this.moveTimeMarker(currentTime + 1)}>
+            <TimeDisplay time={currentTime} handleClick={() => this.props.forcePosition(currentTime)}/>
+            <a className="button" onClick={() => this.moveTimeMarker(currentTime + 1)}>
               <Icon name="caret-right"/>
             </a>
             <a className="button" title={t("statement.reverseTimeLock", {context: toggleTimeLockAction})}
@@ -119,7 +116,7 @@ export class StatementForm extends React.PureComponent {
         <div className="card-content">
           <div className="statement-text">
             <Field autoFocus component={renderTextareaField} name="text" autosize={true}
-              normalize={cleanStrMultiline}
+              normalize={cleanStrMultiline} maxLength={STATEMENT_LENGTH[1]}
               placeholder={speaker ? t('statement.textPlaceholder') : t('statement.noSpeakerTextPlaceholder')}/>
           </div>
         </div>
