@@ -9,6 +9,7 @@ import trimLeft from "voca/trim_left"
 import classNames from "classnames"
 import TextareaAutosize from './TextareaAutosize'
 import { Icon } from '../Utils/Icon'
+import TextareaLengthCounter from './TextareaLengthCounter'
 
 
 export const renderInput = ({ input, label, placeholder, type, className, meta }) => {
@@ -38,7 +39,7 @@ export const renderField = (params) => {
 
 export const renderTextareaField = (params) => {
   const {
-    input, label, icon, type, placeholder, autosize,
+    input, label, icon, type, placeholder, autosize, maxLength,
     meta: { touched, error, submitting },
     ...props
   } = params
@@ -54,9 +55,8 @@ export const renderTextareaField = (params) => {
   return (
     <p className={`control ${icon ? 'has-icon' : ''}`}>
       { textarea }
-      {touched && error &&
-      <span className='help is-danger'>{ error }</span>
-      }
+      <TextareaLengthCounter length={input.value.length} maxLength={maxLength}/>
+      { touched && error && <span className='help is-danger'>{ error }</span> }
     </p>
   )
 }

@@ -81,7 +81,5 @@ $sub-bubble-icon-size: 24px
     margin-top: $sub-bubble-height / 2 - $bubble-font-size + 1px
     right: $main-bubble-height
 
-
-// Progressive animation delay. Add lines to animate more bubbles
-.action-bubble:nth-child(3)
-  animation-delay: 0.05s
+.action-bubble
+  @include ProgressiveAnimationDelay(0s, 0.08s, 4)
