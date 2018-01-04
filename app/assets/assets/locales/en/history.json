@@ -1,16 +1,24 @@
 {
   "compare_show": "Compare",
-  "compare_hide": "Hide comparison",
+  "compare_hide": "Hide",
+  "compareAll": "Compare all",
+  "hideAll": "Hide all",
+  "when": "When",
+  "who": "Who",
+  "changes": "Changes",
+  "revert": "Revert",
+  "entity": "Entity",
+  "moderation": "Moderation",
   "action": {
-    "1": "created",
-    "2": "removed",
-    "3": "updated",
-    "4": "deleted",
-    "5": "added",
-    "6": "restored"
+    "1": "Created",
+    "2": "Removed",
+    "3": "Updated",
+    "4": "Deleted",
+    "5": "Added",
+    "6": "Reverted"
   },
   "this": {
-    "2": "this speaker",
-    "3": "this statement"
+    "2": "Speaker",
+    "3": "Statement"
   }
 }
