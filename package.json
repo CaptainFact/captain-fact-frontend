@@ -20,7 +20,7 @@
     "i18next": "^9.0.1",
     "i18next-localstorage-cache": "^1.1.1",
     "i18next-xhr-backend": "^1.4.3",
-    "immutable": "^3.8.1",
+    "immutable": "^4.0.0-rc.9",
     "is-promise": "^2.1.0",
     "isomorphic-fetch": "^2.2.1",
     "marked": "^0.3.6",

@@ -1,16 +1,25 @@
 {
   "compare_show": "Comparer",
-  "compare_hide": "Masquer la comparaison",
+  "compare_hide": "Masquer",
+  "compareAll": "Tout comparer",
+  "hideAll": "Tout masquer",
+  "when": "Quand",
+  "who": "Qui",
+  "changes": "Changements",
+  "revert": "Restaurer",
+  "entity": "Entité",
+  "moderation": "Modération",
   "action": {
-    "1": "a créé",
-    "2": "a retiré",
-    "3": "a mis à jour",
-    "4": "a supprimé",
-    "5": "a ajouté",
-    "6": "a restauré"
+    "1": "Créé",
+    "2": "Retiré",
+    "3": "Mis à jour",
+    "4": "Supprimé",
+    "5": "Ajouté",
+    "6": "Restauré"
   },
   "this": {
-    "2": "cet intervenant",
-    "3": "cette affirmation"
+    "1": "Vidéo",
+    "2": "Intervenant",
+    "3": "Affirmation"
   }
 }

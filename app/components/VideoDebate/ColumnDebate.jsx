@@ -2,7 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 import { Trans, translate } from 'react-i18next'
 
-import History from "./VideoDebateHistory"
+import VideoDebateHistory from "./VideoDebateHistory"
 import ActionBubbleMenu from './ActionBubbleMenu'
 import StatementsList from '../Statements/StatementsList'
 import { LoadingFrame } from '../Utils/LoadingFrame'
@@ -28,7 +28,7 @@ export class ColumnDebate extends React.PureComponent {
     const { isLoading, view, videoId, hasStatements } = this.props
 
     if (view === 'history')
-      return <History videoId={ videoId }/>
+      return <VideoDebateHistory videoId={ videoId }/>
     else if (view === 'debate') {
       if (isLoading)
         return <LoadingFrame title={this.props.t('loading.statements')}/>
