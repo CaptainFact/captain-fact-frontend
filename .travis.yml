@@ -1,7 +1,7 @@
 # ---- Config ----
 
 branches:
-  only: [master, staging, maintenance]
+  only: [master, staging]
 language: generic
 sudo: required
 services:
