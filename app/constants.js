@@ -18,6 +18,7 @@ export const ACTION_ADD = 5
 export const ACTION_RESTORE = 6
 
 // Entities
+export const ENTITY_VIDEO = 1
 export const ENTITY_SPEAKER = 2
 export const ENTITY_STATEMENT = 3
 
