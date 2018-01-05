@@ -10,7 +10,7 @@ Judgement actions such as voting and flagging are limited to avoid abusing them 
 ## List of privileges
 
 | Reputation | Privilege                                                  |
-|:-----------|:-----------------------------------------------------------|
+|------------|------------------------------------------------------------|
 | Any        | Post comments and facts            
 | Any        | Edit and delete your comments                 
 | 0          | Add speakers
