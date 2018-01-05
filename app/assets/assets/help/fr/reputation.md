@@ -18,7 +18,7 @@ Ces règles sont sujettes à évolution dans le temps.
 # Pour gagner de la réputation
 
 | Action                                                         | Gain             |
-|:---------------------------------------------------------------|:-----------------|
+|----------------------------------------------------------------|------------------|
 | Faire vérifier son email                                       | +15pts
 | Relier au moins un compte Facebook / Google / Github           | +15pts
 | Un de vos commentaires recoit un vote positif                  | +2pts
@@ -29,7 +29,7 @@ Ces règles sont sujettes à évolution dans le temps.
 # Vous perdez de la réputation quand...
 
 | Action                                                                     | Perte            |
-|:---------------------------------------------------------------------------|:-----------------|
+|----------------------------------------------------------------------------|------------------|
 | Vous effectuez un vote négatif                                             | -1pts
 | Vous supprimez l'un de vos commentaires                                    | -1pts
 | Un de vos commentaires recoit un vote négatif                              | -2pts
