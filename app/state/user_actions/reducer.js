@@ -5,9 +5,7 @@ import { diffWordsWithSpace } from 'diff'
 import parseDateTime from '../../lib/parseDateTime'
 import formatSeconds from "../../lib/seconds_formatter"
 import UserAction from "./record"
-import Statement from '../video_debate/statements/record'
-import Speaker from '../speakers/record'
-import {ENTITY_SPEAKER, ENTITY_STATEMENT} from '../../constants'
+import { ACTION_DELETE, ACTION_REMOVE, ACTION_RESTORE, ENTITY_SPEAKER, ENTITY_STATEMENT } from '../../constants'
 import { resetVideoDebate } from '../video_debate/actions'
 
 export const setLoading = createAction('VIDEO_DEBATE_HISTORY/SET_LOADING')
@@ -15,12 +13,15 @@ export const reset = createAction('VIDEO_DEBATE_HISTORY/RESET')
 export const fetchAll = createAction('VIDEO_DEBATE_HISTORY/FETCH')
 export const addAction = createAction('VIDEO_DEBATE_HISTORY/ADD_ACTION')
 export const generateDiff = createAction('VIDEO_DEBATE_HISTORY/GENERATE_DIFF')
+export const hideDiff = createAction('VIDEO_DEBATE_HISTORY/HIDE_DIFF')
+export const generateAllDiffs = createAction('VIDEO_DEBATE_HISTORY/GENERATE_ALL_DIFF')
+export const hideAllDiffs = createAction('VIDEO_DEBATE_HISTORY/HIDE_ALL_DIFF')
 
 const INITIAL_STATE = new Record({
-  entitiesActions: new Map(),
-  referenceEntities: new Map(),
+  actions: new List(),
+  lastActionsIds: new List(),
   diffs: new Map(),
-  isLoading: false,
+  isLoading: true,
   errors: null
 })
 
@@ -28,15 +29,11 @@ const UsersActionsReducer = handleActions({
   [setLoading]: (state, {payload}) => state.set('isLoading', payload),
   [fetchAll]: {
     next: (state, {payload: {actions}}) => {
-      const preparedActions = new List(actions.map(a => prepareAction(a)))
-      const entitiesActions = preparedActions
-        .sortBy(a => -a.time)
-        .groupBy(a => entityKeyFromAction(a))
-        .sortBy(actions => -actions.first().time)
+      const preparedActions = new List(actions.map(a => prepareAction(a))).sortBy(a => -a.time)
 
       return state.merge({
-        entitiesActions: entitiesActions,
-        referenceEntities: buildReferenceEntities(entitiesActions),
+        actions: preparedActions,
+        lastActionsIds: getLastActions(preparedActions),
         isLoading: false,
         errors: null
       })
@@ -44,46 +41,75 @@ const UsersActionsReducer = handleActions({
     throw: (state, {payload}) => state.merge({isLoading: false, errors: payload})
   },
   [addAction]: (state, {payload}) => {
-    // /!\ Assumes that action is more recent than any other action previously stored
     const action = prepareAction(payload)
-    const entityKey = entityKeyFromAction(action)
-    return state.withMutations(state =>
-      state
-        .update('entitiesActions', e => e.withMutations(entitiesActions =>
-          entitiesActions
-            .update(entityKey, actions => actions.insert(0, action))
-            .sortBy(actions => -actions.first().time)
-        ))
-        .updateIn(['referenceEntities', entityKey], reference =>
-          buildReferenceEntity(new List([action]), reference)
-        )
-    )
+    const actions = state.actions.insert(0, action).sortBy(a => -a.time)
+    return state.set('actions', actions).set('lastActionsIds', getLastActions(actions))
   },
   [generateDiff]: (state, {payload}) => {
-    // If diff already exists, do nothing
-    if (state.diffs.has(payload.id))
-      return state
-
-    const entityActions = state.entitiesActions.get(`${payload.entity}:${payload.entity_id}`)
-    const actionIdx = entityActions.findIndex(a => a.id === payload.id)
-    // Get previous state
-    let prevState = new Map()
-    if (actionIdx + 1 < entityActions.size) {
-      prevState = buildReferenceEntity(entityActions.slice(actionIdx + 1))
-    }
-    // Build changes object like key: [diffs]
-    const diff = new Map().withMutations(diff => {
-      for (let [key, newValue] of payload.changes.entrySeq()) {
-        const valueDiff = diffEntry(key, prevState.get(key), newValue)
-        diff.set(key, new List(valueDiff))
-      }
-    })
-    return state.setIn(['diffs', payload.id], diff)
+    const diff = generateDiffForAction(state, payload)
+    return diff ? state.setIn(['diffs', payload.id], diff) : state
   },
+  [hideDiff]: (state, {payload}) => {
+    if (state.diffs.has(payload.id))
+      return state.update('diffs', diffs => diffs.remove(payload.id))
+    return state
+  },
+  [generateAllDiffs]: state => {
+    const diffs = state.diffs.withMutations(allDiffs => {
+      state.actions.forEach(action => {
+        const diff = generateDiffForAction(state, action)
+        if (diff)
+          allDiffs.set(action.id, diff)
+      })
+      return allDiffs
+    })
+    return state.set('diffs', diffs)
+  },
+  [hideAllDiffs]: state => state.set('diffs', new Map()),
   [combineActions(reset, resetVideoDebate)]: () => INITIAL_STATE()
 }, INITIAL_STATE())
 export default UsersActionsReducer
 
+function getLastActions(actions) {
+  const lastActionsMap = {}
+  actions.forEach(action => {
+    const entityKey = `${action.entity}:${action.entity_id}`
+    if (!lastActionsMap[entityKey])
+      lastActionsMap[entityKey] = action.id
+  })
+  return List(Object.values(lastActionsMap))
+}
+
+function generateDiffForAction(state, action) {
+  // If diff already exists, do nothing
+  if (state.diffs.has(action.id))
+    return null
+
+  const entityActions = state.actions.filter(a =>
+    a.entity_id === action.entity_id && a.entity === action.entity
+  )
+  const actionIdx = entityActions.findIndex(a => a.id === action.id)
+  // Get previous state
+  let prevState = new Map()
+  if (actionIdx + 1 < entityActions.size)
+    prevState = buildReferenceEntity(entityActions.slice(actionIdx + 1))
+
+  // Build changes object like key: [diffs]
+  return new Map().withMutations(diff => {
+    for (let [key, newValue] of getActionChanges(action, prevState).entrySeq()) {
+      const valueDiff = diffEntry(key, prevState.get(key), newValue)
+      diff.set(key, new List(valueDiff))
+    }
+  })
+}
+
+function getActionChanges(action, prevState) {
+  if ([ACTION_DELETE, ACTION_REMOVE].includes(action.type))
+    return prevState.map(() => null)
+  else if (action.type === ACTION_RESTORE)
+    return prevState
+  return action.changes
+}
 
 function completeReference(reference, actions, keysToStore) {
   return reference.withMutations(reference => {
@@ -105,18 +131,6 @@ function completeReference(reference, actions, keysToStore) {
   })
 }
 
-function buildReferenceStatement(actions, base=null) {
-  if (!base)
-    base = new Statement({ id: actions.last().entity_id, })
-  return completeReference(base, actions, ['text', 'time', 'speaker_id'])
-}
-
-function buildReferenceSpeaker(actions, base=null) {
-  if (!base)
-    base = new Speaker({ id: actions.first().entity_id })
-  return completeReference(base, actions, ['full_name', 'title'])
-}
-
 function buildReferenceEntity(actions, base=null) {
   const entity = actions.first().entity
   if (entity === ENTITY_STATEMENT)
@@ -125,13 +139,16 @@ function buildReferenceEntity(actions, base=null) {
     return buildReferenceSpeaker(actions, base)
 }
 
-function buildReferenceEntities(entitiesActions) {
-  return new Map().withMutations(references => {
-    for (let [entity_key, actions] of entitiesActions.entrySeq()) {
-      references.set(entity_key, buildReferenceEntity(actions))
-    }
-    return references
-  })
+function buildReferenceStatement(actions, base=null) {
+  if (!base)
+    base = new Map({ id: actions.last().entity_id })
+  return completeReference(base, actions, ['text', 'time', 'speaker_id'])
+}
+
+function buildReferenceSpeaker(actions, base=null) {
+  if (!base)
+    base = new Map({ id: actions.first().entity_id })
+  return completeReference(base, actions, ['full_name', 'title'])
 }
 
 function prepareAction(action) {
@@ -141,19 +158,18 @@ function prepareAction(action) {
 }
 
 function diffEntry(key, prevValue, newValue) {
+  if (prevValue === newValue)
+    return [{added: true, value: formatValue(key, newValue)}]
+
   // Format numbers like prevNumber -> newNumber
   if (typeof(newValue) === "number") {
     // Format time like 0:42 -> 1:35
-    if (key === "time") {
-      prevValue = prevValue ? formatSeconds(prevValue) : ""
-      newValue = formatSeconds(newValue)
-    }
+    prevValue = formatValue(key, prevValue)
+    newValue = formatValue(key, newValue)
+
     // Generate diff
     if (prevValue)
-      return [
-        {removed: true, value: prevValue},
-        {added: true, value: newValue}
-      ]
+      return [{removed: true, value: prevValue}, {added: true, value: newValue}]
     else
       return [{added: true, value: newValue}]
   }
@@ -161,8 +177,9 @@ function diffEntry(key, prevValue, newValue) {
   return diffWordsWithSpace((prevValue || "").toString(), newValue ? newValue.toString() : "")
 }
 
-export function entityKeyFromAction(action) {
-  return `${action.entity}:${action.entity_id}`
+function formatValue(key, value) {
+  if (key === "time")
+    return value ? formatSeconds(value) : ""
+  return value
 }
-
 

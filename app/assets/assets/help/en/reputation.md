@@ -17,7 +17,7 @@ These rules are subject to change, especially as the number of users grows.
 # To gain reputation
 
 | Action                                                         | Reputation gain          |
-|:---------------------------------------------------------------|:-------------------------|
+|----------------------------------------------------------------|--------------------------|
 | Your email is verified                                         | +15pts
 | You link your account to one of your social network's profile  | +15pts
 | One of your comments is voted up                               | +2pts
@@ -28,7 +28,7 @@ These rules are subject to change, especially as the number of users grows.
 # You loose reputation when...
 
 | Action                                                        | Reputation loss          |
-|:--------------------------------------------------------------|:-------------------------|
+|---------------------------------------------------------------|--------------------------|
 | You vote down a fact or comment                               | -1pts
 | You delete one of your comments                               | -1pts
 | One of your comments is voted down                            | -2pts

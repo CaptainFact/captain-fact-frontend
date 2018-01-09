@@ -15,5 +15,4 @@ ARG BUILD_ENV
 RUN /opt/app/rel/run.sh build $BUILD_ENV
 
 EXPOSE 80
-HEALTHCHECK --start-period=20s --interval=1m CMD curl --fail http://localhost || exit 1
 ENTRYPOINT ["/opt/app/rel/run.sh"]
