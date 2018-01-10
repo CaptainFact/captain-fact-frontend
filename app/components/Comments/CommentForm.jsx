@@ -4,6 +4,7 @@ import { Field, reduxForm, getFormValues } from 'redux-form'
 import { translate } from 'react-i18next'
 import isURL from 'validator/lib/isURL'
 import classNames from 'classnames'
+import { withRouter } from 'react-router'
 
 import { renderField, validateLength, cleanStrMultiline } from "../FormUtils"
 import { COMMENT_LENGTH, USER_PICTURE_LARGE } from "../../constants"
@@ -17,6 +18,8 @@ import MediaLayout from '../Utils/MediaLayout'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 import { CommentDisplay } from './CommentDisplay'
 import TextareaLengthCounter from '../FormUtils/TextareaLengthCounter'
+import { isAuthenticated } from '../../state/users/current_user/selectors'
+import { flashErrorUnauthenticated } from '../../state/flashes/reducer'
 
 
 const validate = ({ source, text }) => {
@@ -34,13 +37,16 @@ const validate = ({ source, text }) => {
 
 class CommentField extends React.PureComponent {
   render() {
-    const { input, label, placeholder, isReply, meta: { submitting, error } } = this.props
+    const { input, label, placeholder, isReply, meta: { submitting, error }, autoFocus=false } = this.props
+
     return (
       <p className="control">
         <TextareaAutosize {...input}
                           placeholder={placeholder ? placeholder : label}
                           disabled={submitting}
-                          focus={isReply}/>
+                          focus={isReply}
+                          autoFocus={autoFocus}
+        />
         <TextareaLengthCounter length={input.value.length} maxLength={COMMENT_LENGTH[1]}/>
         {error && <span className="help is-danger">{typeof(error) === 'string' ? error : error[0]}</span>}
       </p>
@@ -50,24 +56,76 @@ class CommentField extends React.PureComponent {
 
 @connect((state, props) => ({
   formValues: getFormValues(props.form)(state),
-  currentUser: state.CurrentUser.data
-}), {postComment})
+  currentUser: state.CurrentUser.data,
+  isAuthenticated: isAuthenticated(state)
+}), {postComment, flashErrorUnauthenticated})
 @reduxForm({form:'commentForm', validate})
 @translate(['videoDebate', 'main'])
+@withRouter
 export class CommentForm extends React.PureComponent {
-  postAndReset(postFunc) {
-    return this.props.handleSubmit(comment => {
-      if (comment.reply_to) {
-        comment.reply_to_id = comment.reply_to.id
-        delete(comment.reply_to)
-      }
-      return postFunc(comment).then(handleFormEffectResponse({
-        onSuccess: () => this.props.reset()
-      }))
-    })
+  constructor(props) {
+    super(props)
+    this.state = {isCollapsed: true}
   }
 
-  getSubmit(valid, sourceUrl, isReply) {
+  render() {
+    const { valid, formValues, currentUser, t } = this.props
+    const sourceUrl = formValues && formValues.source ? formValues.source.url : null
+
+    if (this.state.isCollapsed && !(formValues && formValues.reply_to))
+      return (
+        <div className="comment-form collapsed">
+          <a onClick={() => this.expandForm()}>
+            <Icon name="plus"/>
+            <span>{t('comment.revealForm')}</span>
+          </a>
+        </div>
+      )
+
+    return (
+      <MediaLayout
+        ContainerType="form"
+        containerProps={{onSubmit: this.postAndReset(c => this.props.postComment(c))}}
+        className="comment-form"
+        left={<UserPicture user={currentUser} size={USER_PICTURE_LARGE}/>}
+        content={
+          <div>
+            {formValues && formValues.reply_to &&
+            <div>
+              <Tag size="medium" className="reply_to"
+                   onClick={() => this.props.change('reply_to', null)}>
+                <Icon name="times" isClickable={true}/>
+                <span>
+                  {t('comment.replyingTo')}&nbsp;
+                  <UserAppellation user={formValues.reply_to.user}/>
+                </span>
+              </Tag>
+              <CommentDisplay className="quoted" richMedias={false} withoutActions withoutHeader hideThread
+                              comment={formValues.reply_to}/>
+              <br/>
+            </div>
+            }
+            <Field component={ CommentField } className="textarea" name="text"
+                   isReply={formValues && !!formValues.reply_to}
+                   normalize={ cleanStrMultiline }
+                   placeholder={t('comment.writeComment')}
+                   autoFocus
+            />
+            <div className="level">
+              <Field component={ renderField } name="source.url"
+                     label={t('comment.addSource')}
+                     normalize={s => s.trim()}/>
+              <div className="submit-btns">
+                { this.renderSubmit(valid, sourceUrl, formValues && formValues.reply_to) }
+              </div>
+            </div>
+          </div>
+        }
+      />
+    )
+  }
+
+  renderSubmit(valid, sourceUrl, isReply) {
     const commonClasses = ['button', {'is-disabled': !valid}]
     const i18nParams = isReply ? {context: 'reply'} : null
     if (!sourceUrl) return ([
@@ -90,48 +148,22 @@ export class CommentForm extends React.PureComponent {
     ])
   }
 
-  render() {
-    const { valid, formValues, currentUser, t } = this.props
-    const sourceUrl = formValues && formValues.source ? formValues.source.url : null
+  expandForm() {
+    if (this.props.isAuthenticated)
+      this.setState({isCollapsed: false})
+    else
+      this.props.flashErrorUnauthenticated()
+  }
 
-    return (
-      <MediaLayout
-        ContainerType="form"
-        containerProps={{onSubmit: this.postAndReset(c => this.props.postComment(c))}}
-        className="comment-form"
-        left={<UserPicture user={currentUser} size={USER_PICTURE_LARGE}/>}
-        content={
-          <div>
-            {formValues && formValues.reply_to &&
-            <div>
-              <Tag size="medium" className="reply_to"
-                   onClick={() => this.props.change('reply_to', null)}>
-                <Icon name="times" isClickable={true}/>
-                <span>
-                  {t('comment.replyingTo')}&nbsp;
-                  <UserAppellation user={formValues.reply_to.user}/>
-                </span>
-              </Tag>
-              <CommentDisplay richMedias={false} withoutActions={true} withoutHeader={true} hideThread={true} className="quoted"
-                              comment={formValues.reply_to}/>
-              <br/>
-            </div>
-            }
-            <Field component={ CommentField } className="textarea" name="text"
-                   isReply={formValues && !!formValues.reply_to}
-                   normalize={ cleanStrMultiline }
-                   placeholder={t('comment.writeComment')}/>
-            <div className="level">
-              <Field component={ renderField } name="source.url"
-                     label={t('comment.addSource')}
-                     normalize={s => s.trim()}/>
-              <div className="submit-btns">
-                { this.getSubmit(valid, sourceUrl, formValues && formValues.reply_to) }
-              </div>
-            </div>
-          </div>
-        }
-      />
-    )
+  postAndReset(postFunc) {
+    return this.props.handleSubmit(comment => {
+      if (comment.reply_to) {
+        comment.reply_to_id = comment.reply_to.id
+        delete(comment.reply_to)
+      }
+      return postFunc(comment).then(handleFormEffectResponse({
+        onSuccess: () => this.props.reset()
+      }))
+    })
   }
 }

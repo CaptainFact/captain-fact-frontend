@@ -26,7 +26,8 @@
     "approve": "Confirmer",
     "approve_reply": "Confirmer ce commentaire",
     "refute": "Réfuter",
-    "refute_reply": "Réfuter ce commentaire"
+    "refute_reply": "Réfuter ce commentaire",
+    "revealForm": "Ajouter une source ou un commentaire"
   },
   "video": {
     "added": "Ajoutée",
