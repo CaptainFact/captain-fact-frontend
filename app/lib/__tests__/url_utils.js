@@ -1,4 +1,4 @@
-import { youtubeRegex, optionsToQueryString } from '../url_utils'
+import { youtubeRegex, optionsToQueryString, isExternal, checkDomain } from '../url_utils'
 
 
 describe('Youtube regex', () => {
@@ -28,5 +28,25 @@ describe('optionsToQueryString', () => {
 
   it('should map values', () => {
     expect(optionsToQueryString({hello: "world", value: 42})).toBe("?hello=world&value=42")
+  })
+})
+
+const MOCK_URL = 'https://captainfact.io/help/gandhi'
+
+describe('is external', () => {
+  it('should detect external links', () => {
+    expect(isExternal(MOCK_URL, 'http://google.com')).toBe(true)
+    expect(isExternal(MOCK_URL, 'https://google.com')).toBe(true)
+    expect(isExternal(MOCK_URL, '//google.com')).toBe(true)
+    expect(isExternal(MOCK_URL, 'mailto:mail@example.com')).toBe(true)
+    expect(isExternal(MOCK_URL, 'http://samedomain.com:8080/port')).toBe(true)
+    expect(isExternal(MOCK_URL, 'https://samedomain.com/secure')).toBe(true)
+  })
+  it('should detect internal links', () => {
+    expect(isExternal(MOCK_URL, MOCK_URL)).toBe(false)
+    expect(isExternal(MOCK_URL, MOCK_URL.replace('https://', 'HTTPS://'))).toBe(false)
+    expect(isExternal(MOCK_URL, '/about')).toBe(false)
+    expect(isExternal(MOCK_URL, 'image.jpg')).toBe(false)
+    expect(isExternal(MOCK_URL, '#anchor')).toBe(false)
   })
 })
