@@ -30,10 +30,10 @@
     "re-reselect": "^1.0.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-player": "^0.24.6",
     "react-flip-move": "^2.10.2",
     "react-i18next": "^7.3.1",
     "react-markdown": "^3.1.4",
+    "react-player": "^0.25.3",
     "react-redux": "^5.0.6",
     "react-router": "^3.0.1",
     "react-select": "^1.2.0",
@@ -43,9 +43,9 @@
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
-    "smoothscroll-polyfill": "^0.3.6",
+    "smoothscroll-polyfill": "^0.4.0",
     "uuid": "^3.0.1",
-    "validator": "^7.0.0",
+    "validator": "^9.2.0",
     "voca": "^1.4.0"
   },
   "devDependencies": {
