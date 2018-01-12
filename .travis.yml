@@ -10,7 +10,6 @@ jobs:
       node_js: [node]
       cache: {directories: [node_modules]}
       script:
-        - npm install
         - npm test
     - stage: deploy
       language: generic
