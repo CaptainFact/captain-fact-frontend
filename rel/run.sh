@@ -11,12 +11,14 @@
 print_error() {
   >&2 echo "Error: $1"
 }
+
 check_dependency () {
   command -v $1 >/dev/null 2>&1 || {
     print_error "Missing dependency: $1. Run npm install -g $1";
     exit 1;
   }
 }
+
 check_dependency "brunch"
 
 # Check args
@@ -36,7 +38,7 @@ fi
 
 # Test - only compile for now
 if [ "$1" = "test" ]; then
-  echo "[TODO] Running tests"
+  npm test
 
 # Build
 elif [ "$1" = "build" ]; then

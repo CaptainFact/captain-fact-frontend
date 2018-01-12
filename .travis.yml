@@ -1,19 +1,25 @@
-# ---- Config ----
+stages:
+  - test
+  - name: deploy
+    if: branch in (master, staging) AND type = push
 
-branches:
-  only: [master, staging]
-language: generic
-sudo: required
-services:
-  - docker
-env:
-  - CF_FRONTEND_IMAGE=registry.gitlab.com/captainfact/captain-fact-frontend:$TRAVIS_BRANCH
-
-# ---- Jobs ----
-script: docker build --build-arg BUILD_ENV=$TRAVIS_BRANCH -t $CF_FRONTEND_IMAGE .
-
-after_success:
-  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
-    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" registry.gitlab.com;
-    echo "Pushing $CF_FRONTEND_IMAGE" && docker push $CF_FRONTEND_IMAGE;
-    fi
+jobs:
+  include:
+    - stage: test
+      language: node_js
+      node_js: [node]
+      cache: {directories: [node_modules]}
+      script:
+        - npm install
+        - npm test
+    - stage: deploy
+      language: generic
+      sudo: required
+      services: [docker]
+      env:
+        - CF_FRONTEND_IMAGE=registry.gitlab.com/captainfact/captain-fact-frontend:$TRAVIS_BRANCH
+      script:
+        - docker build --build-arg BUILD_ENV=$TRAVIS_BRANCH -t $CF_FRONTEND_IMAGE .
+        - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" registry.gitlab.com
+        - echo "Pushing $CF_FRONTEND_IMAGE"
+        - docker push $CF_FRONTEND_IMAGE

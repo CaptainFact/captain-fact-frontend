@@ -3,7 +3,7 @@ import { createAction, handleActions } from 'redux-actions'
 import isAfter from 'date-fns/is_after'
 
 import Comment from "./record"
-import parseDateTime from '../../../lib/parseDateTime'
+import parseDateTime from '../../../lib/parse_datetime'
 import { resetVideoDebate } from '../actions'
 
 
