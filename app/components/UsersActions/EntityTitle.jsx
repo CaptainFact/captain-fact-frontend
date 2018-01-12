@@ -12,6 +12,8 @@ class EntityTitle extends PureComponent {
     const {t, entity, entityId, withPrefix} = this.props
     let label = null
 
+    if (!entityId)
+      return null
     if (entity === ENTITY_VIDEO)
       return t(`this.${entity}`)
     if (withPrefix)
