@@ -2,7 +2,7 @@ import React from "react"
 import { translate } from 'react-i18next'
 
 
-const BrowserExtensionsPage = ({t}) => (
+export const BrowserExtensionsPage = translate('main')(({t}) => (
   <div className="browser-extension-page">
     <section className="hero is-info">
       <div className="hero-body">
@@ -27,7 +27,7 @@ const BrowserExtensionsPage = ({t}) => (
       </div>
     </section>
   </div>
-)
+))
 
 const BrowserExtension = ({browser, image, buttonLabel, url, disabled=false}) => (
   <div className="column has-text-centered">
@@ -39,5 +39,3 @@ const BrowserExtension = ({browser, image, buttonLabel, url, disabled=false}) =>
     </a>
   </div>
 )
-
-export default translate('main')(BrowserExtensionsPage)
