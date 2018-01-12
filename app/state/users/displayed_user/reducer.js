@@ -1,7 +1,7 @@
 import { Record } from "immutable"
 import { createAction, handleActions } from 'redux-actions'
 
-import parseDateTime from '../../../lib/parseDateTime'
+import parseDateTime from '../../../lib/parse_datetime'
 import User from '../record'
 
 

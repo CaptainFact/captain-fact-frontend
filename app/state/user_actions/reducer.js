@@ -2,7 +2,7 @@ import { Record, List, Map } from 'immutable'
 import { createAction, handleActions, combineActions } from 'redux-actions'
 import { diffWordsWithSpace } from 'diff'
 
-import parseDateTime from '../../lib/parseDateTime'
+import parseDateTime from '../../lib/parse_datetime'
 import formatSeconds from "../../lib/seconds_formatter"
 import UserAction from "./record"
 import { ACTION_DELETE, ACTION_REMOVE, ACTION_RESTORE, ENTITY_SPEAKER, ENTITY_STATEMENT } from '../../constants'

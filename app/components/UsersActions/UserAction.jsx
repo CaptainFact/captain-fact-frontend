@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import classNames from 'classnames'
 
-import titleCase from '../../lib/title_case'
+import titleCase from 'voca/title_case'
 import UserAppellation from "../Users/UserAppellation"
 import { TimeSince, Icon } from '../Utils/index'
 import Tag from '../Utils/Tag'

@@ -7,7 +7,7 @@ import { Icon, ActiveLink } from "../Utils"
 import { MOBILE_WIDTH_THRESHOLD, USER_PICTURE_SMALL } from "../../constants"
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import LanguageSelector from './LanguageSelector'
-import titleCase from '../../lib/title_case'
+import capitalize from 'voca/capitalize'
 import ScoreTag from '../Users/ScoreTag'
 import { logout } from '../../state/users/current_user/effects'
 import { closeSidebar, toggleSidebar } from '../../state/user_preferences/reducer'
@@ -114,10 +114,10 @@ export default class Sidebar extends React.PureComponent {
           <p className="menu-label">{ t('menu.content') }</p>
           <ul className="menu-list">
             <this.MenuListLink to="/videos" iconName="television" exact={true}>
-              { titleCase(t('entities.video_plural')) }
+              { capitalize(t('entities.video_plural')) }
             </this.MenuListLink>
             <this.MenuListLink to="/speakers" iconName="users" className="is-disabled">
-              { titleCase(t('entities.speaker_plural')) }
+              { capitalize(t('entities.speaker_plural')) }
             </this.MenuListLink>
           </ul>
 

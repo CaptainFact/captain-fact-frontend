@@ -24,3 +24,6 @@ node_modules/
 
 # Brunch output folder.
 public/
+
+# Ignore tests coverage
+coverage
