@@ -15,8 +15,6 @@ export const fetchPublicVideos = (filters=null) => createEffect(
     after: setVideos
   }
 )
-<<<<<<< HEAD
-=======
 
 export const searchVideo = videoUrl => createEffect(
   HttpApi.post('search/video', {url: videoUrl}), {
@@ -33,4 +31,4 @@ export const postVideo = video => createEffect(
     catch: [setSubmitting(false), errorToFlash, generateFSAError]
   }
 )
->>>>>>> staging
+
