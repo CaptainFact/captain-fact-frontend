@@ -14,11 +14,10 @@ import store from "./state"
 
 // Import Views
 import { default as App } from "./components/App"
-import { Home, NotFound } from "./components/Pages"
+import { Home, NotFound, BrowserExtensionsPage } from "./components/Pages"
 import { PublicVideos, AddVideoForm } from "./components/Videos"
 import { VideoDebate } from "./components/VideoDebate"
-import { Help } from './components/Pages/Help'
-import BrowserExtensionsPage from './components/Pages/BrowserExtensionsPage'
+import Help from './components/Help'
 import UserProfile from './components/Users/UserProfile'
 import ThirdPartyCallback from './components/Users/ThirdPartyCallback'
 import UserSettings from './components/Users/UserSettings'
@@ -30,6 +29,7 @@ import ResetPasswordConfirmForm from './components/Users/ResetPasswordConfirmFor
 import ConfirmEmail from './components/Users/ConfirmEmail'
 import Moderation from './components/Moderation'
 import { SpeakerPage } from './components/Speakers/SpeakerPage'
+import NewsletterSubscription from './components/Users/NewsletterSubscription'
 
 
 ReactDOM.render(
@@ -44,6 +44,7 @@ ReactDOM.render(
         <Route path="/confirm_email/:token" component={ConfirmEmail}/>
         <Route path="/reset_password" component={ResetPasswordRequestForm}/>
         <Route path="/reset_password/confirm/:token" component={ResetPasswordConfirmForm}/>
+        <Route path="/newsletter/unsubscribe/:token" component={NewsletterSubscription}/>
         <Route path="/u/:username" component={User}>
           <IndexRoute component={UserProfile}/>
           <Route path="/u/:username/activity" component={NotFound}/>

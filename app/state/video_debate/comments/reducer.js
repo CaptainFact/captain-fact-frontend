@@ -3,7 +3,7 @@ import { createAction, handleActions } from 'redux-actions'
 import isAfter from 'date-fns/is_after'
 
 import Comment from "./record"
-import parseDateTime from '../../../lib/parseDateTime'
+import parseDateTime from '../../../lib/parse_datetime'
 import { resetVideoDebate } from '../actions'
 
 
@@ -18,10 +18,7 @@ export const update = createAction('COMMENTS/UPDATE')
 export const updateScores = createAction('COMMENTS/UPDATE_SCORES')
 export const setLoading = createAction('COMMENTS/SET_LOADING')
 export const remove = createAction('COMMENTS/DELETE')
-export const add = createAction('COMMENTS/ADD',
-  ({comment}) => comment,
-  ({currentUserId}) => currentUserId
-)
+export const add = createAction('COMMENTS/ADD')
 
 const INITIAL_STATE = new Record({
   isLoading: false,
@@ -71,15 +68,13 @@ const CommentsReducer = handleActions({
     },
     throw: (state, {payload}) => state.merge({errors: payload, isLoading: false})
   },
-  [add]: (state, {payload, meta}) => {
+  [add]: (state, {payload}) => {
     const comment = prepareComment(payload)
     const commentPath = getCommentPath(comment)
     const commentsList = state.getIn(commentPath, new List())
     const insertIdx = commentsList.findIndex(c => commentsComparator(comment, c) < 0)
     const newCommentsList = commentsList.insert(insertIdx !== -1 ? insertIdx : commentsList.size, comment)
     state = state.setIn(commentPath, newCommentsList)
-    if (comment.user.id === meta) // Own comments are up-voted by default
-      return state.setIn(['voted', comment.id], 1)
     return state
   },
   [update]: (state, {payload}) => {

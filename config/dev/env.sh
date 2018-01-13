@@ -3,7 +3,8 @@
 # edit `app/config.jsenv` (please avoid commit your modifications to this file)
 
 JS_ENV="dev"
-HTTP_API_URL="https://localhost:4001"
-WS_API_URL="wss://localhost:4001/socket"
-FRONTEND_URL="https://localhost"
+HTTP_API_URL="http://localhost:4000"
+WS_API_URL="ws://localhost:4000/socket"
+FRONTEND_URL="http://localhost"
+STATIC_RESOURCES_URL="http://localhost:4000/resources/" # Keep trailing /
 FB_APP_ID="506726596325615"

@@ -10,6 +10,7 @@
 @import "bulma/sass/elements/icon"
 @import "bulma/sass/elements/image"
 @import "bulma/sass/elements/notification"
+@import "bulma/sass/elements/table"
 @import "bulma/sass/elements/title"
 @import "bulma/sass/elements/tag"
 @import "bulma/sass/components/level"
@@ -25,8 +26,7 @@
 @import "bulma/sass/layout/section"
 @import "bulma/sass/layout/footer"
 
-@import "font-awesome/scss/font-awesome"
-
+// Animate.css
 @import "animate.scss/vendor/assets/stylesheets/animate"
 @import "animate/fadeInUp"
 @import "animate/fadeInDown"
@@ -37,9 +37,14 @@
 
 @import "react-select/scss/default"
 
+// Mixins
+@import "_mixins/font_face"
+@import "_mixins/progressive_animation_delay"
+
 // Custom styles
-@import "_global/mixins"
 @import "_global/global"
+@import "_global/icons"
+@import "_global/icons_list"
 @import "_global/card"
 @import "_global/scrollbars"
 @import "_global/spinner"
@@ -56,16 +61,19 @@
 @import "_components/Utils/error_page"
 @import "_components/Utils/loading_frame"
 @import "_components/Utils/popover"
+@import "_components/Utils/flash_messages"
+@import "_components/Utils/modal_share"
+@import "_components/Utils/textarea_length_counter"
+@import "_components/Utils/third_party_service_button"
 @import "_components/Pages/home_page"
 @import "_components/Pages/help"
 @import "_components/form"
 @import "_components/invitation_request_form"
-@import "_components/Utils/flash_messages"
-@import "_components/action_bubble_menu"
 @import "_components/Videos/card"
 @import "_components/Videos/page"
 @import "_components/Videos/player"
 @import "_components/modal"
+@import "_components/VideoDebate/action_bubble_menu"
 @import "_components/VideoDebate/video_debate"
 @import "_components/VideoDebate/history"
 @import "_components/VideoDebate/speaker_preview"

@@ -24,7 +24,7 @@ export class ColumnVideo extends React.PureComponent {
     const { video, authenticated, view, t } = this.props
     const { url, title, speakers } = video
     return (
-      <div id="col-video" className="column is-4">
+      <div id="col-video" className="column is-5">
         <VideoPlayer url={url}/>
         <h3 className="title is-4">{title}</h3>
         <div className="tabs is-toggle is-fullwidth">

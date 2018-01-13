@@ -6,4 +6,4 @@
 
 # Soyez scéptique
 
-# Gardez votre esprit ouvert, mais pas au point de laisse s'échaper votre cerveau
+# Gardez votre esprit ouvert, mais pas au point de laisser s'échaper votre cerveau

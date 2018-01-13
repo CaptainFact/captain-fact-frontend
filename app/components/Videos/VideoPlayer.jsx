@@ -2,24 +2,22 @@ import React from "react"
 import { connect } from "react-redux"
 
 import { DummyVideoPlayer } from "./DummyVideoPlayer"
-import { resetForcedPosition, setPosition } from '../../state/video_debate/video/reducer'
+import { setPosition } from '../../state/video_debate/video/reducer'
 
 
 @connect(state => ({
   position: state.VideoDebate.video.playback.position,
   forcedPosition: state.VideoDebate.video.playback.forcedPosition
-}), {setPosition, resetForcedPosition})
+}), {setPosition})
 export class VideoPlayer extends React.PureComponent {
   componentDidUpdate(oldProps) {
-    const {forcedPosition} = this.props
-    if (forcedPosition !== null && forcedPosition !== oldProps.forcedPosition) {
-      this.refs.player.seekTo(forcedPosition)
-      this.props.resetForcedPosition()
-    }
+    const { forcedPosition } = this.props
+    if (forcedPosition.requestId !== null && forcedPosition.requestId !== oldProps.forcedPosition.requestId)
+      this.refs.player.seekTo(forcedPosition.time)
   }
 
   render() {
-    const {setPosition, resetForcedPosition, ...playerProps} = this.props
+    const {setPosition, ...playerProps} = this.props
     return (
       <DummyVideoPlayer ref="player"
         onProgress={({played}) => setPosition(played)}

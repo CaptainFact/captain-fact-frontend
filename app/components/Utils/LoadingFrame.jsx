@@ -1,6 +1,6 @@
 import React from "react"
 import { translate } from 'react-i18next'
-import titleCase from '../../lib/title_case'
+import capitalize from 'voca/capitalize'
 
 
 const LOADING_FADEOUT_TIME = 300 // 0.5s
@@ -20,7 +20,7 @@ export class LoadingFrame extends React.PureComponent {
 
   defaultTitle() {
     // If translation is not available, we'll show "Loading..."
-    return titleCase(this.props.t('actions.loading').replace('actions.', ''))
+    return capitalize(this.props.t('actions.loading').replace('actions.', ''))
   }
 
   render() {

@@ -24,14 +24,14 @@ const validate = ({text, time}, {t}) => {
   return errors
 }
 
-const SpeakersSelect = ({input, speakers}) => {
+const SpeakersSelect = ({input, speakers, label}) => {
   return (
     <Select className="speaker-select"
             onChange={s => s && s.id ? input.onChange(s.id) : input.onChange(null)}
             onBlur={() => input.onBlur(input.value.id)}
             value={input.value}
             name={input.name}
-            placeholder="Select Speaker..."
+            placeholder={label}
             labelKey="full_name"
             valueKey="id"
             ignoreAccents={true}
@@ -98,14 +98,11 @@ export class StatementForm extends React.PureComponent {
       <form className={`statement-form${this.props.isBundled ? '' : ' card statement'}`} ref="container">
         <header className="card-header">
           <div className="card-header-title">
-            <a className="button"
-              onClick={() => this.moveTimeMarker(currentTime - 1)}>
+            <a className="button" onClick={() => this.moveTimeMarker(currentTime - 1)}>
               <Icon name="caret-left"/>
             </a>
-            <TimeDisplay time={currentTime}
-                         handleClick={() => this.props.forcePosition(currentTime)}/>
-            <a className="button"
-               onClick={() => this.moveTimeMarker(currentTime + 1)}>
+            <TimeDisplay time={currentTime} handleClick={() => this.props.forcePosition(currentTime)}/>
+            <a className="button" onClick={() => this.moveTimeMarker(currentTime + 1)}>
               <Icon name="caret-right"/>
             </a>
             <a className="button" title={t("statement.reverseTimeLock", {context: toggleTimeLockAction})}
@@ -113,13 +110,13 @@ export class StatementForm extends React.PureComponent {
               <Icon size="small" name={toggleTimeLockAction}/>
             </a>
             {speaker && speaker.picture && <img className="speaker-mini" src={staticResource(speaker.picture)}/>}
-            <Field name="speaker_id" component={SpeakersSelect} speakers={speakers}/>
+            <Field name="speaker_id" component={SpeakersSelect} speakers={speakers} label={t('speaker.add')}/>
           </div>
         </header>
         <div className="card-content">
           <div className="statement-text">
             <Field autoFocus component={renderTextareaField} name="text" autosize={true}
-              normalize={cleanStrMultiline}
+              normalize={cleanStrMultiline} maxLength={STATEMENT_LENGTH[1]}
               placeholder={speaker ? t('statement.textPlaceholder') : t('statement.noSpeakerTextPlaceholder')}/>
           </div>
         </div>

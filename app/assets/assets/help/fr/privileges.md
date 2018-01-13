@@ -10,7 +10,7 @@ renforcer leur signification.
 ## Liste des privilèges
 
 | Reputation | Privilege                                                  |
-|:-----------|:-----------------------------------------------------------|
+|------------|------------------------------------------------------------|
 | Tous       | Poster des commentaires et des sources             
 | Tous       | Editer et supprimer vos commentaires         
 | 0          | Ajouter des intervenants

@@ -7,7 +7,7 @@ const currentUserLocale = state => state.CurrentUser.data.locale
 
 export const fetchLocale = locale => (dispatch, getState) => {
   const state = getState()
-  if (isAuthenticated(state) && currentUserLocale(state) && currentUserLocale(state) !== locale)
+  if (isAuthenticated(state) && locale && currentUserLocale(state) !== locale)
     dispatch(updateInfo({locale}))
   dispatch(changeLocale(locale))
 }

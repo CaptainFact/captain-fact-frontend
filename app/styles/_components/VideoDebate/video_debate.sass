@@ -1,11 +1,8 @@
 #col-video
   border-right: 1px solid lightgrey
-  box-shadow: 0px 4px 10px -5px #8e8e8e
+  box-shadow: 0 4px 10px -5px #8e8e8e
   max-width: 100%
   min-width: 370px
-
-  &.form .control /* TODO Is this used ? */
-    padding: 5px
 
   &> .title
     padding: 18px 7px
@@ -23,8 +20,8 @@
 
   .video > div
     position: relative
-    padding-bottom: 52.1%
-    padding-top: 25px
+    padding-bottom: 56.2%
+    padding-top: 0
     height: 0
 
     &> iframe
@@ -54,8 +51,12 @@
       height: 100vh
       overflow-y: auto
     #col-video
+      resize: horizontal
       padding-bottom: 25px
-      max-width: 600px
+      max-width: 60%
+      width: 40%
+      @media (max-width: 1400px)
+        max-width: 50%
 
   #col-debate
     background: rgb(246, 247, 250)

@@ -14,6 +14,5 @@ COPY . .
 ARG BUILD_ENV
 RUN /opt/app/rel/run.sh build $BUILD_ENV
 
-EXPOSE 80 443
-HEALTHCHECK CMD curl --fail http://localhost || exit 1
+EXPOSE 80
 ENTRYPOINT ["/opt/app/rel/run.sh"]

@@ -27,16 +27,15 @@ module.exports = {
         ]
       }
     },
-    copycat: {
-      "assets/fonts": [
-        "node_modules/font-awesome/fonts"
-      ]
-    },
     gzip: {
       paths: {
         javascript: 'assets/js',
         stylesheet: 'assets/css'
       }
+    },
+    version: {
+      versionFile: "version.json",
+      fileRegExp: /(index\.html|app\.css)$/
     }
   }
 }

@@ -141,7 +141,7 @@ export class Statement extends React.PureComponent {
   renderFactsAndComments() {
     if (this.props.commentsLoading)
       return (<LoadingFrame size="small" title="Loading comments"/>)
-    const { statement, comments, approvingFacts, refutingFacts, currentUser } = this.props
+    const { statement, comments, approvingFacts, refutingFacts, currentUser, isAuthenticated } = this.props
 
     return (
       <div>
@@ -159,20 +159,11 @@ export class Statement extends React.PureComponent {
           }
         </div>
         }
-        {(comments.size > 0 || currentUser.id !== 0) &&
-        <div>
-          <div className="card-footer comments">
-            {comments.size > 0 &&
-            <CommentsContainer comments={comments}/>
-            }
-            {currentUser.id !== 0 &&
-            <CommentForm  form={`formAddComment-${statement.id}`}
-                          initialValues={{ statement_id: statement.id }}/>
-              // TODO This can be optimized as initialValues will always change upon rendering
-            }
-          </div>
+        <div className="card-footer comments">
+          {comments.size > 0 && <CommentsContainer comments={comments}/>}
+          {/* TODO This can be optimized as initialValues will always change upon rendering */}
+          <CommentForm form={`formAddComment-${statement.id}`} initialValues={{ statement_id: statement.id }}/>
         </div>
-        }
       </div>
     )
   }

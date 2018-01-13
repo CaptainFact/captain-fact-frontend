@@ -26,7 +26,8 @@
     "approve": "Confirm",
     "approve_reply": "Confirm this comment",
     "refute": "Refute",
-    "refute_reply": "Refute this comment"
+    "refute_reply": "Refute this comment",
+    "revealForm": "Add a source or comment"
   },
   "video": {
     "added": "Added",
@@ -49,9 +50,10 @@
     "textPlaceholder": "Type a raw transcript of what the speaker says",
     "noSpeakerTextPlaceholder": "Describe what you see or select a speaker",
     "text": "Text",
-    "add": "Add a statement",
-    "autoscroll_enable": "Enable autoscroll",
-    "autoscroll_disable": "Disable autoscroll",
+    "add": "Add a Statement",
+    "abortAdd": "Close Statement Form",
+    "autoscroll_enable": "Enable Autoscroll",
+    "autoscroll_disable": "Disable Autoscroll",
     "reverseTimeLock_lock": "Unlock time marker",
     "reverseTimeLock_unlock": "Lock time marker"
   },

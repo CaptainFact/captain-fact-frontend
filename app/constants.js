@@ -15,9 +15,10 @@ export const ACTION_REMOVE = 2
 export const ACTION_UPDATE = 3
 export const ACTION_DELETE = 4
 export const ACTION_ADD = 5
-
+export const ACTION_RESTORE = 6
 
 // Entities
+export const ENTITY_VIDEO = 1
 export const ENTITY_SPEAKER = 2
 export const ENTITY_STATEMENT = 3
 

@@ -1,10 +1,10 @@
 import React from "react"
 import ReactPlayer from "react-player"
 import upperCase from "voca/upper_case"
-import { dailymotionRegex, soundcloudRegex, youtubeRegex } from '../../lib/url_utils'
+import { youtubeRegex } from '../../lib/url_utils'
 
 
-const supportedPlayerUrls = [youtubeRegex, dailymotionRegex, soundcloudRegex]
+const supportedPlayerUrls = [youtubeRegex]
 
 
 /**

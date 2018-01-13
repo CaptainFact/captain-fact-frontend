@@ -4,7 +4,11 @@ $max-comment-width: 600px
 
 .comment-form
   width: 100%
-  padding: 5px 20px
+  padding: 15px 20px 0
+
+  &.collapsed
+    padding: 0.75em
+    text-align: center
 
   button
     margin-right: 5px
@@ -18,16 +22,6 @@ $max-comment-width: 600px
     max-height: $commentboxSize * 3
     height: $commentboxSize
     resize: none
-
-  .comment-length
-    position: absolute
-    bottom: 2px
-    right: 8px
-    font-size: 13px
-    color: darkgrey
-    margin-left: 3px
-    .value.invalid
-      color: #ff3d3d
 
   .level
     align-items: flex-start
@@ -176,8 +170,9 @@ $max-comment-width: 600px
 .comments-list
   width: 100%
   padding: 10px
+  position: relative
 
-$thread_border_style: 1px solid
+$thread_border_style: 2px solid
 $thread_border_base_color: darken($light, 2)
 
 .comments-list .comments-list

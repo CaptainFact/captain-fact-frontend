@@ -27,15 +27,15 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
     <link rel="manifest" href="/favicons/manifest.json">
     <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="/favicons/favicon.ico">
+    <link rel="shortcut icon" href="/favicon.ico">
     <meta name="msapplication-config" content="/favicons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
     <!-- Resources -->
-    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" href="/assets/css/app.css?version={!major!}.{!minor!}.{!maintenance!}">
   </head>
   <body>
-    <div id='app'></div>
-    <script src="/assets/js/vendor.js"></script>
-    <script src="/assets/js/app.js"></script>
+    <div id='app' data-version="{!major!}.{!minor!}.{!maintenance!}"></div>
+    <script src="/assets/js/vendor.js?v={!major!}.{!minor!}.{!maintenance!}"></script>
+    <script src="/assets/js/app.js?v={!major!}.{!minor!}.{!maintenance!}"></script>
   </body>
 </html>

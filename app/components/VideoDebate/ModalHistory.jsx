@@ -1,21 +1,21 @@
 import React from "react"
 import { connect } from 'react-redux'
-import { List } from 'immutable'
-import titleCase from '../../lib/title_case'
+import { translate } from 'react-i18next'
 
 import Modal from "../Modal/Modal"
 import { Icon } from '../Utils/Icon'
 import { joinStatementHistoryChannel, leaveStatementHistoryChannel } from '../../state/video_debate/history/effects'
-import { History } from '../UsersActions/History'
-import { LoadingFrame } from '../Utils/LoadingFrame'
 import { popModal } from '../../state/modals/reducer'
 import { ENTITY_STATEMENT } from '../../constants'
+import ActionsTable from '../UsersActions/ActionsTable'
+import { reset } from '../../state/user_actions/reducer'
 
 
 @connect((state, props) => ({
-  actions: state.UsersActions.entitiesActions,
+  actions: state.UsersActions.actions,
   isLoading: state.UsersActions.isLoading
-}), {joinStatementHistoryChannel, leaveStatementHistoryChannel, popModal})
+}), {joinStatementHistoryChannel, leaveStatementHistoryChannel, popModal, reset})
+@translate(['history'])
 export class ModalHistory extends React.PureComponent {
   componentDidMount() {
     if (this.props.entity === ENTITY_STATEMENT)
@@ -25,30 +25,24 @@ export class ModalHistory extends React.PureComponent {
   componentWillUnmount() {
     if (this.props.entity === ENTITY_STATEMENT)
       this.props.leaveStatementHistoryChannel()
+    this.props.reset()
   }
 
   render() {
-    const { entity, entityId, actions, isLoading, ...props } = this.props
-    const entityKey = `${entity}:${entityId}`
+    const { entity, entityId, actions, isLoading, t, ...props } = this.props
     return (
       <Modal className="modal modal-history"
-             title={(
-               <div>
-                 <Icon name="history"/>
-                 <span> {titleCase(entity)} #{entityId} history</span>
-               </div>
-             )}
+             title={this.renderTitle(t, entity, entityId)}
              handleCloseClick={ this.props.popModal }
              {...props}>
-        {isLoading &&
-          <LoadingFrame size="mini"/>
-        }
-        {!isLoading &&
-          <History key={ `${props.entity}:${props.entityId}` }
-                   actions={ actions.get(entityKey, new List()) }
-                   defaultExpended={ true }/>
-        }
+        <ActionsTable actions={actions} isLoading={isLoading} showRestore={false} showEntity={false}/>
       </Modal>
     )
   }
+
+  renderTitle = (t, entity, entityId) =>
+    <div>
+      <Icon name="history"/>
+      <span> {t(`this.${entity}`)} #{entityId}</span>
+    </div>
 }

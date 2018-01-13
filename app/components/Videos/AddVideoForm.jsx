@@ -8,7 +8,7 @@ import { youtubeRegex } from '../../lib/url_utils'
 import { DummyVideoPlayer } from "../Videos"
 import { FieldWithButton } from "../FormUtils"
 import { LoadingFrame } from '../Utils/LoadingFrame'
-import { postVideo } from '../../state/videos/effects'
+import { postVideo, searchVideo } from '../../state/videos/effects'
 import { isAuthenticated } from '../../state/users/current_user/selectors'
 
 
@@ -34,12 +34,16 @@ const renderVideoField = (field) => {
   initialValues: {url: props.params.videoUrl},
   isSubmitting: state.Videos.isSubmitting,
   isAuthenticated: isAuthenticated(state)
-}), {postVideo})
+}), {postVideo, searchVideo})
 @reduxForm({form: 'AddVideo', validate})
 export class AddVideoForm extends React.PureComponent {
   componentDidMount() {
-    if (this.props.params.videoUrl)
-      this.handleSubmit({url: this.props.params.videoUrl})
+    if (this.props.params.videoUrl) {
+      this.props.searchVideo(decodeURI(this.props.params.videoUrl)).then(action => {
+        if (!action.error && action.payload !== null)
+          this.props.router.push(`/videos/${action.payload.id}`)
+      })
+    }
   }
 
   handleSubmit(video) {
@@ -60,6 +64,7 @@ export class AddVideoForm extends React.PureComponent {
             <Field component={renderVideoField} name="url" buttonLabel="Add Video" placeholder="Video URL"
                    buttonClassName="is-primary"
                    normalize={s => trim(s)}
+                   meta={{submitting: this.props.isSubmitting}}
             />
         </form>
         <div id="col-debate" className="column">

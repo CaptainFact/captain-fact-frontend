@@ -11,12 +11,14 @@
 print_error() {
   >&2 echo "Error: $1"
 }
+
 check_dependency () {
   command -v $1 >/dev/null 2>&1 || {
     print_error "Missing dependency: $1. Run npm install -g $1";
     exit 1;
   }
 }
+
 check_dependency "brunch"
 
 # Check args
@@ -36,7 +38,7 @@ fi
 
 # Test - only compile for now
 if [ "$1" = "test" ]; then
-  echo "[TODO] Running tests"
+  npm test
 
 # Build
 elif [ "$1" = "build" ]; then
@@ -57,14 +59,9 @@ elif [ "$1" = "build" ]; then
   echo "  - Frontend URL: $FRONTEND_URL"
   echo "  - FB APP ID:    $FB_APP_ID"
 
-  # Build and copy actual site and maintenance site
-  HTTP_API_URL=${HTTP_API_URL} WS_API_URL=${WS_API_URL} FRONTEND_URL=${FRONTEND_URL} FB_APP_ID=${FB_APP_ID} JS_ENV=${JS_ENV} \
-    npm run build || exit 1
+  # Create initial structure
   mkdir -p /var/www && rm -rf /var/www/*
   mkdir /var/www/captain_fact /var/www/maintenance
-  cp -R ./public/* /var/www/captain_fact
-  cp ./rel/maintenance.html /var/www/maintenance/index.html
-  cp ./app/assets/assets/img/logo.png ./app/assets/favicon.ico /var/www/maintenance
 
   # Copy robots.txt
   if [ "$BUILD_ENV" = "prod" ]; then
@@ -75,10 +72,24 @@ elif [ "$1" = "build" ]; then
   cp /var/www/captain_fact/robots.txt /var/www/maintenance/robots.txt
 
   # Copy NGinx config
-  FRONTEND_HOST=$(echo $FRONTEND_URL | sed -r "s/^https?:\/\///")
-  cat ./config/nginx.conf | sed "s/SERVER_HOST/$FRONTEND_HOST/" | tee /etc/nginx/captain_fact.conf /etc/nginx/nginx.conf
+  FRONTEND_HOST=$(echo ${FRONTEND_URL} | sed -r "s/^https?:\/\///")
+  HTTP_API_BASE_URL=$(echo ${HTTP_API_URL} | sed -E 's,(https?://)([^/]+).*,\1\2,')
+  WS_API_BASE_URL=$(echo ${WS_API_URL} | sed -E 's,(wss?://)([^/]+).*,\1\2,')
+  cat ./config/nginx.conf \
+    | sed "s/FRONTEND_HOST/$FRONTEND_HOST/" \
+    | sed "s,HTTP_API_BASE_URL,$HTTP_API_BASE_URL,g" \
+    | sed "s,WS_API_BASE_URL,$WS_API_BASE_URL,g" \
+    | sed "s,STATIC_RESOURCES_URL,$STATIC_RESOURCES_URL,g" \
+    | tee /etc/nginx/captain_fact.conf /etc/nginx/nginx.conf
   cat /etc/nginx/captain_fact.conf | sed "s/captain_fact/maintenance/" > /etc/nginx/maintenance.conf
   cp ./config/mime.types /etc/nginx/mime.types
+
+  # Build and copy actual site and maintenance site
+  HTTP_API_URL=${HTTP_API_URL} WS_API_URL=${WS_API_URL} FRONTEND_URL=${FRONTEND_URL} FB_APP_ID=${FB_APP_ID} JS_ENV=${JS_ENV} \
+    npm run build || exit 1
+  mv ./public/* /var/www/captain_fact
+  cp ./rel/maintenance.html /var/www/maintenance/index.html
+  cp ./app/assets/assets/img/logo.png ./app/assets/favicon.ico /var/www/maintenance
 
 # Serve
 elif [ "$1" = "serve" ]; then
