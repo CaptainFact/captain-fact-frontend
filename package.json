@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "animate.scss": "0.0.6",
-    "babel-polyfill": "^6.26.0",
     "bulma": "^0.3.2",
     "classnames": "^2.2.5",
+    "core-js": "^2.5.3",
     "date-fns": "^1.28.5",
     "debounce": "^1.0.2",
     "debounce-promise": "^3.0.2",
