@@ -1,6 +1,3 @@
-import 'babel-polyfill'
-
-
 export const optionsToQueryString = (options) => (
   options && Object.keys(options).length > 0 ?
     `?${Object.entries(options).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&')}` : ''
