@@ -1,6 +1,13 @@
 // Import polyfills
+import "core-js/es6/promise.js"
+import "core-js/es6/symbol.js"
+import "core-js/es6/array.js"
+import "core-js/es6/string.js"
+import "core-js/es7/array.js"
+import "core-js/es7/object.js"
+import "core-js/modules/es6.math.trunc.js"
+
 import { polyfill as smoothSrollPolyfill } from 'smoothscroll-polyfill'
-import "babel-polyfill"
 smoothSrollPolyfill()
 
 // Import libs

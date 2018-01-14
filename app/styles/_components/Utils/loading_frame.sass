@@ -1,20 +1,11 @@
 $loading-frame-fadeout-duration: 0.3s
 
 .loading-frame
+  @include animate(fadeIn, 0.3s)
   width: 100%
   text-align: center
-  opacity: 0
-  visibility: hidden
   transition: opacity $loading-frame-fadeout-duration, visibility $loading-frame-fadeout-duration
   margin: 50px auto
-
-  &.is-loading
-    opacity: 1
-    visibility: visible
-    @include animate(fadeIn, 0.3s)
-
-  &.not-displayed
-    display: none
 
   .spinner
     width: 100px
@@ -22,6 +13,14 @@ $loading-frame-fadeout-duration: 0.3s
 
   .title
     @extend .is-2
+
+  &.is-medium
+    .spinner
+      width: 80px
+      height: 80px
+      margin: 20px auto
+    .title
+      @extend .is-3
 
   &.is-small
     .spinner

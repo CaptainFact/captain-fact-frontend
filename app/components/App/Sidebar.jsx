@@ -2,8 +2,9 @@ import React from "react"
 import { connect } from "react-redux"
 import { Link } from 'react-router'
 import { translate } from 'react-i18next'
+import classNames from 'classnames'
 
-import { Icon, ActiveLink } from "../Utils"
+import { Icon } from "../Utils"
 import { MOBILE_WIDTH_THRESHOLD, USER_PICTURE_SMALL } from "../../constants"
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import LanguageSelector from './LanguageSelector'
@@ -35,8 +36,14 @@ export default class Sidebar extends React.PureComponent {
       this.props.closeSidebar()
   }
 
-  MenuLink(props) {
-    return <ActiveLink {...props} onClick={this.closeSideBarIfMobile}/>
+  MenuLink({iconName, className, children, ...props}) {
+    const classes = classNames(className, {'link-with-icon': !!iconName})
+    return (
+      <Link className={classes} activeClassName='is-active' {...props}>
+        {iconName && <Icon name={iconName} withContainer={false}/>}
+        <span>{children}</span>
+      </Link>
+    )
   }
 
   MenuListLink(props) {
@@ -50,7 +57,7 @@ export default class Sidebar extends React.PureComponent {
       <div className="user-section">
         <nav className="level user-quicklinks">
           <div className="level-left menu-list">
-            <this.MenuLink to={baseLink} title="My Profile" className="my-profile-link" exact={true}>
+            <this.MenuLink to={baseLink} className="my-profile-link" onlyActiveOnIndex={true}>
               <div className="current-user-link">
                 <UserPicture size={USER_PICTURE_SMALL} user={this.props.CurrentUser}/>
                 <h4 className="title is-4" style={{fontSize: this.usernameFontSize()}}>
@@ -113,7 +120,7 @@ export default class Sidebar extends React.PureComponent {
           { this.renderUserSection() }
           <p className="menu-label">{ t('menu.content') }</p>
           <ul className="menu-list">
-            <this.MenuListLink to="/videos" iconName="television" exact={true}>
+            <this.MenuListLink to="/videos" iconName="television" onlyActiveOnIndex={true}>
               { capitalize(t('entities.video_plural')) }
             </this.MenuListLink>
             <this.MenuListLink to="/speakers" iconName="users" className="is-disabled">
@@ -135,7 +142,7 @@ export default class Sidebar extends React.PureComponent {
             <this.MenuListLink to="/extension" iconName="puzzle-piece" className="hide-when-collapsed">
               { t('menu.extension') }
             </this.MenuListLink>
-            <this.MenuListLink to="/help" iconName="question-circle" ignoreRoutes={['/help/contact']}>
+            <this.MenuListLink to="/help" iconName="question-circle">
               { t('menu.help') }
             </this.MenuListLink>
           </ul>
