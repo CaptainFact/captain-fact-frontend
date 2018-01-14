@@ -1,6 +1,6 @@
 {
   "name": "captain-fact-frontend",
-  "version": "0.7.7",
+  "version": "0.7.8",
   "private": true,
   "scripts": {
     "start": "brunch watch --server",
