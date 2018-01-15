@@ -72,7 +72,7 @@ export class CommentForm extends React.PureComponent {
     const { valid, formValues, currentUser, t } = this.props
     const sourceUrl = formValues && formValues.source ? formValues.source.url : null
 
-    if (this.state.isCollapsed && !(formValues && formValues.reply_to))
+    if (!this.props.currentUser.id || this.state.isCollapsed && !(formValues && formValues.reply_to))
       return (
         <div className="comment-form collapsed">
           <a onClick={() => this.expandForm()}>
