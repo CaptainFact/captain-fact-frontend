@@ -30,9 +30,11 @@ export const BrowserExtensionsPage = translate('main')(({t}) => (
 ))
 
 const BrowserExtension = ({browser, image, buttonLabel, url, disabled=false}) => (
-  <div className="column has-text-centered">
+  <div className="column">
     <a href={url} target="_BLANK" className={disabled ? "is-disabled" : ""}>
-      <img src={image} alt={browser}/>
+      <figure className="image is-128x128" style={{margin: '0 auto'}}>
+        <img src={image} alt={browser}/>
+      </figure>
       <span className={"button is-large" + (disabled ? " is-disabled" : "")} style={{display: "flex"}}>
         {buttonLabel}
       </span>
