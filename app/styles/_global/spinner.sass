@@ -37,3 +37,47 @@
   100%
     transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg)
     -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg)
+
+@keyframes animated-logo
+  0%
+    transform: perspective(120px) rotateX(0deg) rotateZ(0deg)
+    filter: drop-shadow(0 0px 0px #888)
+  20%
+    transform: perspective(120px) rotateX(40deg)  rotateZ(1440deg)
+    filter: drop-shadow(0 0px 3px #888)
+  40%
+    transform: perspective(120px) rotateX(40deg)  rotateZ(2880deg)
+    filter: drop-shadow(0 0px 3px #888)
+  60%
+    transform: perspective(120px) rotateX(40deg)  rotateZ(3600deg)
+    filter: drop-shadow(0 0px 3px #888)
+  70%
+    transform: perspective(120px) rotateX(40deg)  rotateZ(3600deg) translateZ(10px)
+    filter: drop-shadow(0 0px 8px #BBB)
+  80%
+    transform: perspective(120px) rotateX(40deg)  rotateZ(3600deg)
+    filter: drop-shadow(0 0px 3px #888)
+  100%
+    transform: perspective(120px) rotateX(0deg) rotateZ(0deg)
+    filter: drop-shadow(0 0px 0px #888)
+
+@keyframes animated-logo-mobile
+  0%
+    transform: perspective(120px) rotateY(0deg)
+  50%
+    transform: perspective(120px) rotateY(-180deg)
+  100%
+    transform: perspective(120px) rotateY(-360deg)
+
+.animated-logo
+  animation: animated-logo-mobile 3s ease infinite
+  +widescreen
+    animation: animated-logo 10s ease infinite
+
+#preloading-frame
+  position: relative
+  padding-top: 20vh
+  text-align: center
+  font-size: 40px
+  .animated-logo
+    margin-bottom: 35px

@@ -12,7 +12,7 @@ import { ErrorView } from '../Utils/ErrorView'
 import { reset } from '../../state/videos/reducer'
 import { changeVideosLanguageFilter } from '../../state/user_preferences/reducer'
 import LanguageSelector from '../App/LanguageSelector'
-import titleCase from '../../lib/title_case'
+import capitalize from 'voca/capitalize'
 
 
 @connect(state => ({
@@ -38,7 +38,7 @@ export class PublicVideos extends React.PureComponent {
         <section className="header">
           <h2 className="title is-2">
             <Icon size="large" name="television"/>
-            <span> {titleCase(this.props.t('entities.video_plural'))} </span>
+            <span> {capitalize(this.props.t('entities.video_plural'))} </span>
           </h2>
           {this.props.isAuthenticated &&
             <Link to="/videos/add" className="button is-primary">

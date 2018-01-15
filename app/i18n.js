@@ -10,17 +10,15 @@ import { fetchLocale } from './state/user_preferences/effects'
 import { JS_ENV } from './config.jsenv'
 
 
-export const locales = {
-  fr: Object.assign(localeFr, {
-    defaultDateTimeFormat: "[Le] D MMM YYYY [à] H:mm",
-    defaultDateFormat: "[Le] D MMM YYYY"
-  }),
-  en: Object.assign(localeEn, {
-    defaultDateTimeFormat: "D MMM YYYY [at] H:mm",
-    defaultDateFormat: "D MMM YYYY"
-  }),
-}
+// Add default formats for dates
+localeFr.defaultDateTimeFormat = "[Le] D MMM YYYY [à] H:mm"
+localeFr.defaultDateFormat = "[Le] D MMM YYYY"
+localeEn.defaultDateTimeFormat = "D MMM YYYY [at] H:mm"
+localeEn.defaultDateFormat = "D MMM YYYY"
 
+export const locales = {fr: localeFr, en: localeEn,}
+
+// Configure I18N
 i18n
   .use(XHR)
   .use(Cache)
@@ -33,8 +31,8 @@ i18n
       prefix: '_translations',
       expirationTime: 48*60*60*1000, // 48h
       versions: {
-        en: "0.7.6",
-        fr: "0.7.6"
+        en: "0.7.8",
+        fr: "0.7.8"
       }
     },
     detection: {

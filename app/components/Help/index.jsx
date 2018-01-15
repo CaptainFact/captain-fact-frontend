@@ -1,5 +1,6 @@
 import React from "react"
 import { connect } from 'react-redux'
+import Markdown from 'react-markdown'
 
 import { LoadingFrame } from '../Utils'
 import { Link, withRouter } from 'react-router'
@@ -8,30 +9,38 @@ import { ErrorView } from '../Utils/ErrorView'
 import { translate } from 'react-i18next'
 import { fetchHelpPage } from '../../state/help/effects'
 import { reset } from '../../state/help/reducer'
+import { isExternal } from '../../lib/url_utils'
 
+
+const MARKDOWN_RENDERERS = {
+  link: ({href, children}) => {
+    if (isExternal(window.location.href, href))
+      return <a href={href}>{children}</a>
+    else
+      return <Link to={href}>{children}</Link>
+  }
+}
 
 @connect(state => ({
-  htmlContent: state.Help.htmlContent,
+  markdownContent: state.Help.markdownContent,
   isLoading: state.Help.isLoading,
   error: state.Help.error,
   locale: state.UserPreferences.locale
 }), {fetchHelpPage, reset})
 @translate(['help', 'main'])
 @withRouter
-export class Help extends React.PureComponent {
+export default class Help extends React.PureComponent {
   componentDidMount() {
     if (this.props.routeParams.splat)
       this.props.fetchHelpPage(this.props.routeParams.splat)
   }
 
-  componentDidUpdate(oldProps) {
+  componentDidUpdate(prevProps) {
     const requestedPageName = this.props.routeParams.splat
     if (!requestedPageName)
       this.props.reset()
-    else if (oldProps.routeParams.splat !== requestedPageName || oldProps.locale !== this.props.locale)
+    else if (prevProps.routeParams.splat !== requestedPageName || prevProps.locale !== this.props.locale)
       this.props.fetchHelpPage(requestedPageName)
-    if (this.refs.domContent)
-      this.convertLinks(this.refs.domContent)
   }
 
   componentWillUnmount() {
@@ -67,19 +76,6 @@ export class Help extends React.PureComponent {
     )
   }
 
-  convertLinks(domContent) {
-    // Bind internal links to react-router
-    const links = Array.from(domContent.getElementsByTagName('a'))
-    links.forEach(link => {
-      const href = link.getAttribute('href')
-      if (!href.match(/^http(s?):\/\//))
-        link.onclick = () => {
-          this.props.router.push(href)
-          return false
-        }
-    })
-  }
-
   renderIndexContent() {
     return (
       <div className="">
@@ -99,7 +95,6 @@ export class Help extends React.PureComponent {
             {this.renderPageLink('contribute/law')}
             {this.renderPageLink('contribute/translate')}
             {this.renderPageLink('bug_report')}
-            {/*TODO Open source*/}
           </div>
           <div className="column panel">
             <p className="panel-heading">{this.props.t('categories.others')}</p>
@@ -144,7 +139,6 @@ export class Help extends React.PureComponent {
       return <LoadingFrame/>
     if (this.props.error)
       return <ErrorView canGoBack={false} error={this.props.error}/>
-    return <div className="content" ref="domContent"
-                dangerouslySetInnerHTML={{__html: this.props.htmlContent}}/>
+    return <Markdown className="content" source={this.props.markdownContent} renderers={MARKDOWN_RENDERERS}/>
   }
 }

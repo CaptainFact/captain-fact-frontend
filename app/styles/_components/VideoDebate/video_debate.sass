@@ -1,11 +1,9 @@
 #col-video
   border-right: 1px solid lightgrey
-  box-shadow: 0px 4px 10px -5px #8e8e8e
+  box-shadow: 0 4px 10px -5px #8e8e8e
   max-width: 100%
-  min-width: 370px
-
-  &.form .control /* TODO Is this used ? */
-    padding: 5px
+  +tablet
+    min-width: 370px
 
   &> .title
     padding: 18px 7px
@@ -57,9 +55,13 @@
       resize: horizontal
       padding-bottom: 25px
       max-width: 60%
-      width: 36%
+      width: 40%
+      @media (max-width: 1400px)
+        max-width: 50%
 
   #col-debate
     background: rgb(246, 247, 250)
+    &> .loading-frame
+      padding-top: 1px
     .video-debate-help
       padding: 3rem

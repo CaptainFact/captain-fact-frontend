@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Immutable from 'immutable'
 
-import titleCase from '../../lib/title_case'
+import titleCase from 'voca/title_case'
 import { ENTITY_SPEAKER } from '../../constants'
 import EntityTitle from './EntityTitle'
 

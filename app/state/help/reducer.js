@@ -1,5 +1,4 @@
 import { Record } from "immutable"
-import marked from 'marked'
 import { createAction, handleActions } from 'redux-actions'
 
 
@@ -8,7 +7,7 @@ export const reset = createAction('HELP/RESET')
 export const setContent = createAction('HELP/SET_HELP_PAGE')
 
 const INITIAL_STATE = new Record({
-  htmlContent: "",
+  markdownContent: "",
   isLoading: false,
   error: null
 })
@@ -16,7 +15,7 @@ const INITIAL_STATE = new Record({
 const HelpReducer = handleActions({
   [setContent]: {
     next: (state, {payload}) => state.merge({
-      htmlContent: marked(payload),
+      markdownContent: payload,
       isLoading: false
     }),
     throw: (state, {payload}) => state.merge({error: payload, isLoading: false})
