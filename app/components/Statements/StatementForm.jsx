@@ -114,11 +114,11 @@ export class StatementForm extends React.PureComponent {
           </div>
         </header>
         <div className="card-content">
-          <div className="statement-text">
+          <h3 className="statement-text">
             <Field autoFocus component={renderTextareaField} name="text" autosize={true}
               normalize={cleanStrMultiline} maxLength={STATEMENT_LENGTH[1]}
               placeholder={speaker ? t('statement.textPlaceholder') : t('statement.noSpeakerTextPlaceholder')}/>
-          </div>
+          </h3>
         </div>
         <footer className="card-footer">
           <LinkWithIcon iconName="floppy-o"

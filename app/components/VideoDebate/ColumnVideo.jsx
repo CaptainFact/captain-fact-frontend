@@ -26,7 +26,7 @@ export class ColumnVideo extends React.PureComponent {
     return (
       <div id="col-video" className="column is-5">
         <VideoPlayer url={url}/>
-        <h3 className="title is-4">{title}</h3>
+        <h2 className="title is-4">{title}</h2>
         <div className="tabs is-toggle is-fullwidth">
           <ul>
             <li className={classNames({'is-active': view === "debate"})}>

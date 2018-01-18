@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import differenceInSeconds from 'date-fns/difference_in_seconds'
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 import format from 'date-fns/format'
-import { locales } from '../../i18n'
+import { locales } from '../../i18n/i18n'
 
 
 @connect(state => ({locale: state.UserPreferences.locale}))

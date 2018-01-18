@@ -1,6 +1,6 @@
 {
   "name": "captain-fact-frontend",
-  "version": "0.7.8",
+  "version": "0.7.9",
   "private": true,
   "scripts": {
     "start": "brunch watch --server",
@@ -20,8 +20,6 @@
     "debounce-promise": "^3.0.2",
     "diff": "^3.3.1",
     "i18next": "^10.2.2",
-    "i18next-localstorage-cache": "^1.1.1",
-    "i18next-xhr-backend": "^1.5.1",
     "immutable": "^4.0.0-rc.9",
     "is-promise": "^2.1.0",
     "isomorphic-fetch": "^2.2.1",
@@ -66,6 +64,7 @@
     "html-pages-brunch": "^2.6.0",
     "jest": "^22.0.6",
     "jsenv-brunch": "^2.0.0",
+    "json-brunch": "^1.5.4",
     "regenerator-runtime": "^0.11.1",
     "sass-brunch": "https://github.com/brunch/sass-brunch",
     "uglify-js-brunch": "^2.10.0",

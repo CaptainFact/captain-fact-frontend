@@ -43,6 +43,7 @@ export class Statement extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = { isDeleting: false, isEditing: false }
+    this.showHistory = this.showHistory.bind(this)
   }
 
   componentDidUpdate(prevProps) {
@@ -85,6 +86,8 @@ export class Statement extends React.PureComponent {
   }
 
   renderCardHeaderAndContent(isAuthenticated, speaker, statement) {
+    const {t, forcePosition, setScrollTo, addModal} = this.props
+
     if (this.state.isEditing) return (
       <StatementForm
         form={`StatementForm-${statement.id}`}
@@ -106,8 +109,8 @@ export class Statement extends React.PureComponent {
         <header className="card-header">
           <p className="card-header-title">
             <TimeDisplay time={statement.time} handleClick={t => {
-              this.props.forcePosition(t)
-              this.props.setScrollTo({id: statement.id, __forceAutoScroll: true})
+              forcePosition(t)
+              setScrollTo({id: statement.id, __forceAutoScroll: true})
             }}/>
             {speaker && speaker.picture &&
             <img className="speaker-mini" src={staticResource(speaker.picture)}/>
@@ -116,19 +119,25 @@ export class Statement extends React.PureComponent {
           </p>
 
           <div className="card-header-icon">
-            <LinkWithIcon iconName="history" onClick={ this.showHistory.bind(this) }/>
-            {isAuthenticated && <LinkWithIcon iconName="pencil" onClick={() => this.setState({isEditing: true})}/>}
-            <LinkWithIcon iconName="share-alt" onClick={() => this.props.addModal({
+            <LinkWithIcon iconName="history" title={t('history')} onClick={ this.showHistory }/>
+            {isAuthenticated &&
+              <LinkWithIcon iconName="pencil"
+                            title={t('main:actions.edit')}
+                            onClick={() => this.setState({isEditing: true})}/>
+            }
+            <LinkWithIcon iconName="share-alt" title={t('main:actions.share')} onClick={() => addModal({
               Modal: ShareModal,
               props: {path: `${location.pathname}?statement=${statement.id}`}
             })}/>
-            {isAuthenticated && <LinkWithIcon iconName="times" onClick={() => this.setState({isDeleting: true})}/>}
+            {isAuthenticated &&
+              <LinkWithIcon iconName="times"
+                            title={t('main:actions.remove')}
+                            onClick={() => this.setState({isDeleting: true})}/>
+            }
           </div>
         </header>
         <div className="card-content statement-text-container">
-          <div className="statement-text">
-            {statement.text}
-          </div>
+          <h3 className="statement-text">{statement.text}</h3>
         </div>
       </div>
     )
