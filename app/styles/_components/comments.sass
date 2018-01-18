@@ -68,7 +68,7 @@ $max-comment-width: 600px
       color: grey
 
 .media.comment
-  padding: 0
+  padding: 0.1em 0
   border-top: none
   width: 100%
   &:not(:last-child)
@@ -78,14 +78,15 @@ $max-comment-width: 600px
   &.quoted .comment-text
     font-style: italic
     color: grey
-
+  .user-picture
+    margin-right: 0.25em
   .media-left
     margin-right: 0.5rem
   .vote, .image
     display: inline-block
     vertical-align: middle
   .vote
-    margin-right: 7px
+    margin-top: -5px
     .icon
       display: block
       color: lightgrey
@@ -146,9 +147,11 @@ $max-comment-width: 600px
 
   .video
     margin: $source-margin
+    max-width: 100%
 
   .user-appellation
     display: inline-block
+    font-size: 14px
     &:hover
       text-decoration: underline
       text-decoration-color: $grey-light
@@ -178,9 +181,9 @@ $thread_border_base_color: darken($light, 2)
 .comments-list .comments-list
   padding: 0 0 0 10px
   .comment
-    border-top: none
     margin: 0
-    padding: 0 0 0 10px
+    padding: 0.1em 0 0.1em 10px
+    border-top: none
     border-left: $thread_border_style $thread_border_base_color
     &.approve
       border-color: mix($thread_border_base_color, $green, 70%)
@@ -188,14 +191,15 @@ $thread_border_base_color: darken($light, 2)
       border-color: mix($thread_border_base_color, $red, 70%)
 
 .comments-list .comments-list .comments-list
-  padding: 0 0 0 20px
+  padding: 0.2em 0 0.2em 20px
   border-left: $thread_border_style $thread_border_base_color
   .comment
-    padding: 0 0 0 5px
+    padding: 0 0 0 1em
     font-size: 0.9em
     .media-left
       .vote
         margin-right: 5px
+        margin-top: 0
         .icon
           font-size: 14px
           height: 10px
@@ -211,13 +215,14 @@ $thread_border_base_color: darken($light, 2)
         margin-right: 5px
 
 .comments-list .comments-list .comments-list .comments-list
-  padding: 0 0 0 20px
+  padding: 0.2em 0 0.2em 1.3em
 
 .comments-list .comments-list .comments-list .comments-list .comments-list
-  padding: 0
-  border-left: none
-  &> div
-    border: none
+  padding: 0.1em 1.3em
+  //border-left: none
+
+.comments-list .comments-list .comments-list .comments-list .comments-list .comments-list .comments-list
+  padding: 0.1em 0
 
 .comments-expender
   margin: 5px

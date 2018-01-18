@@ -17,7 +17,7 @@ import { addModal } from '../../state/modals/reducer'
 import { commentVote, deleteComment, flagComment } from '../../state/video_debate/comments/effects'
 import {flashErrorUnauthenticated} from '../../state/flashes/reducer'
 import UserPicture from '../Users/UserPicture'
-import { USER_PICTURE_MEDIUM } from '../../constants'
+import { USER_PICTURE_SMALL } from '../../constants'
 import MediaLayout from '../Utils/MediaLayout'
 
 
@@ -132,20 +132,20 @@ export class CommentDisplay extends React.PureComponent {
                      onClick={() => myVote >= 0 ? this.vote(-1) : this.vote(0)}/>
              </div>
              }
-             <UserPicture user={user} size={USER_PICTURE_MEDIUM}/>
            </figure>
           }
           content={
             <div className="content">
               <div>
                 {!withoutHeader && <div className="comment-header">
+                  <UserPicture user={user} size={USER_PICTURE_SMALL}/>
                   <UserAppellation user={user} withoutActions={withoutActions}/>
                   <span> - </span>
                   <TimeSince className="comment-time" time={inserted_at}/>
                 </div>}
                 {source && <Source withoutPlayer={!richMedias} source={source}/>}
                 <div className="comment-text">
-                  {nesting > 4 && replyingTo &&
+                  {nesting > 6 && replyingTo &&
                   <Tag style={{marginRight: 5}}>@{replyingTo.username}</Tag>
                   }
                   { text }
