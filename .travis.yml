@@ -1,8 +1,8 @@
 stages:
   - name: test
-    if: NOT branch IN (master, staging)
+    if: NOT (branch IN (master, staging) OR tag =~ ^v\d+)
   - name: deploy
-    if: branch IN (master, staging)
+    if: branch IN (master, staging) OR tag =~ ^v\d+
 
 jobs:
   include:
