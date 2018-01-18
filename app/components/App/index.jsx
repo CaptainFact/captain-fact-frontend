@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { I18nextProvider } from 'react-i18next'
 
 import { FlashMessages } from "../Utils"
-import i18n from '../../i18n'
+import i18n from '../../i18n/i18n'
 import { getCurrentUser } from '../../state/users/current_user/effects'
 import { default as Sidebar } from "./Sidebar"
 import { MainModalContainer } from "../Modal/MainModalContainer"
