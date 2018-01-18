@@ -27,10 +27,15 @@ $statement-text-color: #e0e7f1
       transition: box-shadow 0.5s, max-width 0.5s
       box-shadow: rgba(10, 10, 10, 0.15) 0px 6px 14px -5px
       border: 1px solid lightgrey
-      .card-header img.speaker-mini
-        height: 25px
-        margin-right: 5px
-        border-radius: 15px
+      .card-header
+        .speaker-mini
+          height: 25px
+          margin-right: 5px
+          border-radius: 15px
+        .link-with-icon
+          font-size: 15px
+          &:not(:last-child)
+            margin-right: 0.3em
       .time-display
         min-width: 60px
         color: grey

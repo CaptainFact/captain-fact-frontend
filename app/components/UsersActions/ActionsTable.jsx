@@ -87,7 +87,7 @@ class ActionsTable extends PureComponent {
       <tr key={action.id}>
         <td><TimeSince time={ action.time }/></td>
         <td><UserAppellation user={action.user} compact/></td>
-        <td>{this.renderActionIcon(action.type)}<strong>{ t(`action.${action.type}`) }</strong></td>
+        <td>{this.renderActionIcon(action.type)}<strong> { t(`action.${action.type}`) }</strong></td>
         {showEntity && <td><EntityTitle entity={action.entity} entityId={action.entity_id}/></td>}
         <td>
           <a className='button' onClick={() => this.toggleDiff(action, isDiffing)}>

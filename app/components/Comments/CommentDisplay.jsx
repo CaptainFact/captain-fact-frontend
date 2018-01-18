@@ -135,7 +135,7 @@ export class CommentDisplay extends React.PureComponent {
            </figure>
           }
           content={
-            <div className="content">
+            <div>
               <div>
                 {!withoutHeader && <div className="comment-header">
                   <UserPicture user={user} size={USER_PICTURE_SMALL}/>
@@ -143,13 +143,15 @@ export class CommentDisplay extends React.PureComponent {
                   <span> - </span>
                   <TimeSince className="comment-time" time={inserted_at}/>
                 </div>}
+                {(text || replyingTo) &&
+                  <div className="comment-text">
+                    {nesting > 6 && replyingTo &&
+                      <Tag style={{marginRight: 5}}>@{replyingTo.username}</Tag>
+                    }
+                    { text }
+                  </div>
+                }
                 {source && <Source withoutPlayer={!richMedias} source={source}/>}
-                <div className="comment-text">
-                  {nesting > 6 && replyingTo &&
-                  <Tag style={{marginRight: 5}}>@{replyingTo.username}</Tag>
-                  }
-                  { text }
-                </div>
               </div>
               {!withoutActions &&
               <nav className="comment-actions">
