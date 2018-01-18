@@ -117,9 +117,26 @@ $max-comment-width: 600px
   .comment-text
     white-space: pre-wrap
     word-wrap: break-word
+    background-color: $white
+    padding: 0.5em 1em
+    border: 1px solid $grey-lighter
+    border-radius: 0 0.5em 0.5em 0.5em
+    display: inline-block
+    +tablet
+      &:before
+        width: 0
+        height: 0
+        border-left: 8px solid transparent
+        border-right: 8px solid transparent
+        border-bottom: 8px solid white
+        position: absolute
+        left: 0.35em
+        margin-top: -1em
+        content: ''
   .media-content
     overflow: hidden
     max-width: $max-comment-width
+    position: relative
 
   $source-margin: 2px 0 5px
 
@@ -128,8 +145,9 @@ $max-comment-width: 600px
     background: $primary-desaturated
     padding: 7px 10px
     margin: $source-margin
-    border-radius: 3px
     font-size: 0.9em
+    border: 1px solid $grey
+    border-left: 5px solid $grey-dark
     &:hover
       background: transparentize($primary-desaturated, 0.15)
       &> .site-name
@@ -209,10 +227,8 @@ $thread_border_base_color: darken($light, 2)
       .image
         height: 30px
         width: 30px
-    &:not(.hasSource)
-      .comment-header, .comment-text
-        display: inline-block
-        margin-right: 5px
+    .comment-text
+      padding: 0.4em 0.75em
 
 .comments-list .comments-list .comments-list .comments-list
   padding: 0.2em 0 0.2em 1.3em

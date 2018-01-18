@@ -31,12 +31,14 @@ export const Source = ({ source: { url, title, site_name }, withoutPlayer }) => 
                          config={{youtube: {playerVars: { showinfo: 1 }}}}/>
   } else {
     return (
-      <a href={url} target="_BLANK" className="fact-source">
-        <span className="site-name">
-          {upperCase(site_name) || getDisplayableHostname(url)}
-        </span>
-        <span className="article-title">{title}</span>
-      </a>
+      <div>
+        <a href={url} target="_BLANK" className="fact-source">
+          <span className="site-name">
+            {upperCase(site_name) || getDisplayableHostname(url)}
+          </span>
+          <span className="article-title">{title}</span>
+        </a>
+      </div>
     )
   }
 }
