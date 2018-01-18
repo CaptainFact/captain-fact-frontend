@@ -1,6 +1,6 @@
 stages:
   - name: test
-    if: (NOT branch IN (master, staging)) AND (NOT tag =~ ^v\d+)
+    if: NOT branch IN (master, staging)
   - name: deploy
     if: branch IN (master, staging) OR tag =~ ^v\d+
 
