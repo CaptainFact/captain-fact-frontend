@@ -16,23 +16,16 @@ import { ACTION_ADD, ACTION_CREATE, ACTION_DELETE, ACTION_REMOVE, ACTION_UPDATE 
 import { default as UserActionRecord } from '../../state/user_actions/record'
 
 
-@connect((state, props) => ({
-  diff: state.UsersActions.diffs.get(props.action.id),
-  speakers: state.VideoDebate.video.data.speakers,
-  isAuthenticated: isAuthenticated(state)
-}), {generateDiff, revertVideoDebateUserAction, flashErrorUnauthenticated})
+// @connect((state, props) => ({
+//   diff: state.UsersActions.diffs.get(props.action.id),
+//   speakers: state.VideoDebate.video.data.speakers,
+//   isAuthenticated: isAuthenticated(state)
+// }), {generateDiff, revertVideoDebateUserAction, flashErrorUnauthenticated})
 @translate(['history', 'main'])
 export class UserAction extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = {isDiffing: false}
-    this.revertAction = this.authenticatedAction(this.revertAction.bind(this))
-  }
-
   render() {
-    const { action, diff, className, t } = this.props
+    const { action, className, t } = this.props
     const { user, type, entity, time } = action
-    const actionButtons = this.renderActionsButtons()
 
     return (
       <div className={ classNames(className, 'user-action', 'card') }>
@@ -47,117 +40,8 @@ export class UserAction extends React.PureComponent {
             { t(`this.${entity}`) }
           </span>
         </div>
-        {actionButtons.length > 0 && <div className="action-buttons card-footer">{actionButtons}</div>}
-        {this.state.isDiffing &&
-        <div className="action-diff">
-          { this.renderDiff(diff) }
-        </div>
-        }
       </div>
     )
-  }
-
-  renderActionsButtons() {
-    const t = this.props.t
-    let buttons = []
-    if (this.canBeDiffed())
-      buttons.push(
-        <a key="diff" onClick={this.toggleDiff.bind(this)}>
-          <Icon size="small" name="indent"/>
-          <span>{ t(this.state.isDiffing ? 'compare_hide' : 'compare_show') } </span>
-        </a>
-      )
-    if (!this.props.withoutActions) {
-      const { isLatest, type } = this.props.action
-      const reversible = isLatest && (type === ACTION_DELETE || type === ACTION_REMOVE)
-      if (reversible)
-        buttons.push(
-          <a key="revert" onClick={this.revertAction}>
-            <Icon size="small" name="undo"/>
-            <span>Restore</span>
-          </a>
-        )
-      buttons = buttons.concat([
-        (
-          <a key="approve" className="is-disabled">
-            <Icon size="small" name="check"/><span>{t('main:actions.approve')}</span>
-          </a>
-        ),
-        (
-          <a key="flag" className="is-disabled">
-            <Icon size="small" name="flag"/><span>{t('main:actions.flag')}</span>
-          </a>
-        )
-      ])
-    }
-    return buttons
-  }
-
-  renderDiff(diff) {
-    return (
-      <div>
-        {diff.entrySeq().map(([key, changes]) => (
-          <div key={ key } className="diff-entry">
-            <span className="diff-key">{ titleCase(UserAction.formatChangeKey(key)) }</span>
-            <pre className="diff-view">
-              { this.renderKeyDiff(key, changes) }
-            </pre>
-          </div>
-        ))}
-      </div>
-    )
-  }
-
-  renderKeyDiff(key, changes) {
-    // Value completely changed, show it like prev -> new
-    if (changes.size === 2 && changes.first().removed && changes.last().added)
-      return <div>
-        <span className="removed">{ this.formatChangeValue(changes.first().value, key) }</span>,
-        <span> -> </span>,
-        <span className="added">{ this.formatChangeValue(changes.last().value, key) }</span>
-      </div>
-    // Generate a real diff
-    return changes.map((change, idx) => (
-      <span key={idx}
-            className={ change.added ? 'added' : change.removed ? 'removed' : '' }>
-        { this.formatChangeValue(change.value, key) }
-      </span>
-    ))
-  }
-
-  toggleDiff() {
-    if (!this.state.isDiffing)
-      this.props.generateDiff(this.props.action)
-    this.setState({isDiffing: !this.state.isDiffing})
-  }
-
-  canBeDiffed() {
-    return [ACTION_CREATE, ACTION_ADD, ACTION_UPDATE].includes(this.props.action.type)
-  }
-
-  authenticatedAction(func) {
-    return () => {
-      if (!this.props.isAuthenticated)
-        this.props.flashErrorUnauthenticated()
-      else
-        return func()
-    }
-  }
-
-  revertAction() {
-    return this.props.revertVideoDebateUserAction(this.props.action)
-  }
-
-  formatChangeValue(value, key) {
-    if (key === "speaker_id") {
-      const speaker = this.props.speakers.find(s => s.id === value)
-      return speaker ? `${speaker.full_name} (#${speaker.id})` : ""
-    }
-    return value
-  }
-
-  static formatChangeKey(key) {
-    return key.replace('_id', '').replace('_', ' ')
   }
 
   static getActionTag(type) {
@@ -179,6 +63,7 @@ export class UserAction extends React.PureComponent {
   }
 }
 
+// try to remove later
 UserAction.propTypes = {
   action: PropTypes.instanceOf(UserActionRecord).isRequired,
   isLatest: PropTypes.bool,

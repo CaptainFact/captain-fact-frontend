@@ -10,7 +10,7 @@ import { LoadingFrame, LinkWithIcon } from "./Utils"
   isLoading: state.CurrentUser.isLoading
 }))
 @translate('errors')
-export class ReputationGuard extends React.PureComponent {
+export default class ReputationGuard extends React.PureComponent {
   render() {
     const { isLoading, hasReputation, t } = this.props
 

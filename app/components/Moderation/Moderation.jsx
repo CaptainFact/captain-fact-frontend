@@ -6,13 +6,13 @@ import { History } from '../UsersActions/History'
 import { fetchRandomModeration } from '../../state/moderation/effects'
 
 import Entity from '../UsersActions/Entity'
-
-import { ReputationGuard } from '../ReputationGuard'
+import ModerationEntry from './ModerationEntry'
+import ReputationGuard from '../ReputationGuard'
 
 @connect(state => ({
   isLoading: state.Moderation.isLoading,
   error: state.Moderation.error,
-  entries: state.Moderation.entries
+  items: state.Moderation.items
 }), { fetchRandomModeration })
 export default class Moderation extends React.PureComponent {
   requiredReputation = 500;
@@ -22,11 +22,13 @@ export default class Moderation extends React.PureComponent {
   }
 
   render() {
-    const { isLoading, error, entries, t } = this.props
+    const { isLoading, error, items, t } = this.props
 
     return (
       <ReputationGuard requiredRep={this.requiredReputation}>
-        <div>moderation component</div>
+        <div>
+          { items && items.map(el => <ModerationEntry key={el.id} entry={el}></ModerationEntry>) }
+        </div>
       </ReputationGuard>)
   }
 

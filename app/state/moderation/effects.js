@@ -1,5 +1,5 @@
 import HttpApi from '../../API/http_api'
-import { setLoading, setSubmitting, setEntries } from './reducer'
+import { setLoading, setSubmitting, setItems } from './reducer'
 import {createEffect, returnSuccess, returnError, generateFSAError} from '../utils'
 import { errorToFlash } from '../flashes/reducer'
 
@@ -7,6 +7,6 @@ import { errorToFlash } from '../flashes/reducer'
 export const fetchRandomModeration = () => createEffect(
   HttpApi.get("moderation/random"), {
     before: setLoading(true),
-    after: setEntries
+    after: setItems
   }
 )

@@ -7,19 +7,19 @@ import UserAction from '../user_actions/record'
 
 export const setLoading = createAction('MODERATION/SET_LOADING')
 export const setSubmitting = createAction('MODERATION/SET_SUBMITTING')
-export const setEntries = createAction('MODERATION/SET_ENTRIES')
+export const setItems = createAction('MODERATION/SET_ITEMS')
 
 const INITIAL_STATE = new Record({
   isLoading: false,
   isSubmitting: false,
   error: null,
-  entries: new List()
+  items: new List()
 })
 
 const ModerationReducer = handleActions({
-  [setEntries]: {
+  [setItems]: {
     next: (state, {payload}) => state.merge({
-      entries: new List(payload).map(prepareAction),
+      items: new List(payload).map(prepareAction),
       isLoading: false
     }),
     throw: (state, action) => state.merge({
