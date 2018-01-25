@@ -5,7 +5,9 @@ import { diffWordsWithSpace } from 'diff'
 import parseDateTime from '../../lib/parse_datetime'
 import formatSeconds from "../../lib/seconds_formatter"
 import UserAction from "./record"
-import { ACTION_DELETE, ACTION_REMOVE, ACTION_RESTORE, ENTITY_SPEAKER, ENTITY_STATEMENT } from '../../constants'
+import {
+  ACTION_DELETE, ACTION_REMOVE, ACTION_RESTORE, ENTITY_SPEAKER, ENTITY_STATEMENT, ENTITY_VIDEO
+} from '../../constants'
 import { resetVideoDebate } from '../video_debate/actions'
 
 export const setLoading = createAction('VIDEO_DEBATE_HISTORY/SET_LOADING')
@@ -137,6 +139,12 @@ function buildReferenceEntity(actions, base=null) {
     return buildReferenceStatement(actions, base)
   else if (entity === ENTITY_SPEAKER)
     return buildReferenceSpeaker(actions, base)
+  else if (entity === ENTITY_VIDEO)
+    return buildReferenceVideo(actions, base)
+}
+
+function buildReferenceVideo(actions, base=null) {
+  return new Map()
 }
 
 function buildReferenceStatement(actions, base=null) {

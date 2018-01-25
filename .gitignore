@@ -27,3 +27,7 @@ public/
 
 # Ignore tests coverage
 coverage
+
+# API dev image resources
+rel/dev_docker_api_resources/*
+!rel/dev_docker_api_resources/.keep
