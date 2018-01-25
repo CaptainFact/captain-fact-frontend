@@ -53,7 +53,7 @@ export class Statement extends React.PureComponent {
 
   render() {
     const { isDeleting } = this.state
-    const { statement, isFocused, isAuthenticated, speaker } = this.props
+    const { statement, isFocused, isAuthenticated, speaker, t } = this.props
 
     return (
       <div className={`statement-container${isFocused ? ' is-focused' : ''}`} ref="container">
@@ -62,10 +62,11 @@ export class Statement extends React.PureComponent {
           {this.renderFactsAndComments()}
           {isDeleting &&
           <ModalConfirmDelete
-            title="Remove Statement"
+            title={t('statement.remove')}
+            className="is-small"
             isAbsolute={true}
             isRemove={true}
-            message="Do you really want to remove this statement ?"
+            message={t('statement.confirmRemove')}
             handleAbort={() => this.setState({isDeleting: false})}
             handleConfirm={() => this.props.deleteStatement({id: statement.id})}
           />

@@ -50,6 +50,8 @@
     }
   },
   "statement": {
+    "remove": "Retirer la citation",
+    "confirmRemove": "Êtes-vous sûr·e ?",
     "textPlaceholder": "Retranscrivez ici les propos de l'intervenant·e",
     "noSpeakerTextPlaceholder": "Décrivez ce qui apparait à l'image ou ajoutez un intervenant",
     "text": "Le texte",

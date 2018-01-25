@@ -22,11 +22,13 @@ const renderVideoField = (field) => {
   const { meta: {error}, input: {value} } = field
   const urlInput = FieldWithButton(field)
 
-  return (<div>
-    {!error && <DummyVideoPlayer url={value}/>}
-    {error && <div className="video"><div></div></div>}
-    {urlInput}
-  </div>)
+  return (
+    <div>
+      {!error && <DummyVideoPlayer url={value}/>}
+      {error && <div className="video"><div></div></div>}
+      {urlInput}
+    </div>
+  )
 }
 
 @withRouter
@@ -64,7 +66,6 @@ export class AddVideoForm extends React.PureComponent {
             <Field component={renderVideoField} name="url" buttonLabel="Add Video" placeholder="Video URL"
                    buttonClassName="is-primary"
                    normalize={s => trim(s)}
-                   meta={{submitting: this.props.isSubmitting}}
             />
         </form>
         <div id="col-debate" className="column">
