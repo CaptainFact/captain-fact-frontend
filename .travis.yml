@@ -19,11 +19,10 @@ jobs:
       env:
         - CF_FRONTEND_IMAGE=captainfact/frontend:$TRAVIS_BRANCH
       script:
-        - docker --version
         - docker build --build-arg BUILD_ENV=$TRAVIS_BRANCH -t $CF_FRONTEND_IMAGE . &&
           docker run --rm -it $CF_FRONTEND_IMAGE test &&
           if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
-              docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+              docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
               echo "Pushing $CF_FRONTEND_IMAGE";
               docker push $CF_FRONTEND_IMAGE;
           fi
