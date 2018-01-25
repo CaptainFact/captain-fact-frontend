@@ -5,29 +5,38 @@ $modal-background: rgba(10, 10, 10, 0.50)
   width: 0
 
 .modal
+  &.is-absolute
+    position: absolute
   .modal-background
     background-color: $modal-background
   .modal-card-title
+    font-size: 1.5em
     +mobile
       font-size: 1.2em
+  .modal-card-body
+    font-size: 1em
   .help-link
     margin-right: 5px
     color: #c6c6c6
     &:hover
       color: #aeaeae
 
+.modal.is-small
+  font-size: 0.8em
+  .modal-card-head
+    padding: 1.2em
+  .modal-card-foot, .modal-card-body
+    padding: 1em
+
 .modal-confirm, .modal-form
   @extend .modal
   @include animate(fadeIn, 0.2s)
 
-.modal-confirm
-  &.is-absolute
-    position: absolute
-  .modal-card
-    border-radius: 5px
-    max-width: 98%
-    .modal-card-body
-      padding: 35px 20px
+.modal-confirm .modal-card
+  border-radius: 5px
+  max-width: 98%
+  .modal-card-body
+    padding: 2em
 
 .form-buttons
   text-align: center

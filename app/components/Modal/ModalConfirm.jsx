@@ -55,17 +55,19 @@ export class ModalConfirm extends React.PureComponent {
   }
 
   render() {
-    const { handleConfirm, content, message, ...props } = this.props
+    const { handleConfirm, className, content, message, ...props } = this.props
     return (
-      <Modal className="modal-confirm" handleCloseClick={this.close} {...props}
-             footer={this.renderFormButtons()}>
+      <Modal className={classNames("modal-confirm", className)}
+             handleCloseClick={this.close}
+             footer={this.renderFormButtons()}
+             {...props}>
         {content &&
         <div>
           {content}
           {message && <hr/>}
         </div>
         }
-        <h3 className="title is-3">{message}</h3>
+        <h3 className="title is-4">{message}</h3>
       </Modal>
     )
   }

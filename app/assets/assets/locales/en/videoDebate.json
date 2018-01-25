@@ -47,6 +47,8 @@
     "titleFormat_FR": "French {{title}}"
   },
   "statement": {
+    "remove": "Remove statement",
+    "confirmRemove": "Do you really want to remove this statement ?",
     "textPlaceholder": "Type a raw transcript of what the speaker says",
     "noSpeakerTextPlaceholder": "Describe what you see or select a speaker",
     "text": "Text",
