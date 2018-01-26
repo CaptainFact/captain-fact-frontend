@@ -7,7 +7,7 @@ import {Icon} from '../Utils/Icon'
 
 
 const UserProfile = ({user: {achievements}, t}) => (
-  <div className="columns" style={{paddingTop: 40}}>
+  <div className="columns is-marginless" style={{paddingTop: 40}}>
     {/*<div className="column is-7">*/}
       {/*<h2 className="title is-2 is-centered has-text-centered" >*/}
         {/*<Icon size="large" name="bar-chart"/> Statistics*/}
@@ -22,7 +22,7 @@ const UserProfile = ({user: {achievements}, t}) => (
       </h2>
       <div className="columns is-marginless is-multiline is-centered achievements">
         {achievements.map(id => (
-          <div key={id} className="column is-3" style={{flexBasis: 300}}>
+          <div key={id} className="column is-4" style={{flexBasis: 325}}>
             <Achievement id={id}/>
           </div>
         ))}

@@ -23,5 +23,17 @@
   "6": {
     "title": "Social Addict",
     "description": "Vous aimez vous faire espionner par ces entreprises Américaines, n'est-ce pas ?"
+  },
+  "7": {
+    "title": "Ambassador",
+    "description": "Vous étiez là avant que ça soit cool et avez aidé d'une façon unique le projet"
+  },
+  "8": {
+    "title": "Ghostbuster",
+    "description": "Merci de nous avoir signalé ce bug !"
+  },
+  "9": {
+    "title": "Fact Check Me, I'm Famous",
+    "description": "Vous êtes arrivé en haut du classement ce mois-ci, bravo Capitaine !"
   }
 }
