@@ -1,38 +1,26 @@
-Want to contribute on achievements graphics ? Check [this](https://github.com/CaptainFact/captain-fact-frontend/issues/6)!
+> CaptainFact achievements bring you health, joy and love.
 
-Achievements are still a work-in-progress and not all of them are implemented yet.
-
-## Common achievements
-
-Common achievements are meant to help you discover the different parts of the site.
+# Common
 
 * `🎉 Welcome` You successfully joined the community, welcome !
 * `🤖 Not a Robot` Confirm your email
 * `🎸 Help !` You read a help page for the first time
 * `🛡️ Bulletproof` Install the browser extension
+* `💉 Social Addict` Connect or link your account with third party (Facebook)
 
+# Rare
 
-## Special achievements
-
-* `🐅 Fact's tamer` First fact with +5 votes
-* `👍 You made a point` First comment with +5 votes
-
-
-## Rare achievements
-
-* `🔝 Hit Machine` One of your facts or comments get +30 upvotes
-* `✍️ Scribe Master` Transcribed more thant 30 statements
-* `🚿 The cleaner` 10 of your flags have been confirmed
 * `👻 Ghostbuster` you [report a bug](/help/bug_report) that gets confirmed
+* `🌟 Fact check me, I'm famous` You made your way up to the monthly leaderboard
 
+# Legendary
 
-## Legendary achievements
+* `🏴‍☠️ Born to hack` You responsibly report us a security breach that gets confirmed
+* `📁 Ambassador` You helped the project in a unique way
 
-* `👴 Old and Wise` 5 facts with over +50 upvotes
-* `🌟 Fact check me, I'm famous`
-* `You're fake news!`
+----------------------
 
+# Credits
 
-## Secret achievements
-
-Some achievements are not listed here.
+* [U Maja](https://society6.com/rabbitball) for the Bulletproof achievement
+* Want to contribute ? Checkout [this link](https://github.com/CaptainFact/captain-fact-frontend/issues/6)!

@@ -1,9 +1,7 @@
-You can check [our Github](https://github.com/CaptainFact) to see where you can contributes.
-
 # API
 
-* Stack: Elixir + Phoenix
-* Status: Not open sourced yet (very soon, we're just waiting for the code reviews on it to be over)
+* Stack: Elixir, Phoenix, GraphQL
+* Status: Not open sourced yet (waiting for code reviews & documentation)
 * Repository: *TODO*
 * Issues: *TODO*
 
@@ -16,7 +14,14 @@ You can check [our Github](https://github.com/CaptainFact) to see where you can 
 
 # Browser Extension
 
-* Stack: React, Redux
+* Stack: React
 * Status: Open source (AGPL3)
 * Repository: https://github.com/CaptainFact/captain-fact-extension
 * Issues: https://github.com/CaptainFact/captain-fact-extension/issues
+
+# Video overlay injector
+
+* Stack: React, Redux
+* Status: Open Source (AGPL3)
+* Repository: https://github.com/CaptainFact/captain-fact-overlay-injector
+* Issues: https://github.com/CaptainFact/captain-fact-overlay-injector/issues
