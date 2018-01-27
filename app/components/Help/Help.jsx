@@ -91,7 +91,7 @@ export default class Help extends React.PureComponent {
         </h1>
         <Link className="subtitle" to="/help">
           <Icon name="arrow-left"/>
-          <span> {t('main:actions.goBack')}</span>
+          <span> {t('goBack')}</span>
         </Link>
       </div>
     )

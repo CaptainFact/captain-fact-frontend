@@ -11,15 +11,6 @@ import { fetchHelpPage } from '../../state/help/effects'
 import { reset } from '../../state/help/reducer'
 
 
-const MARKDOWN_RENDERERS = {
-  link: ({href, children}) => {
-    if (isExternal(window.location.href, href))
-      return <a href={href}>{children}</a>
-    else
-      return <Link to={href}>{children}</Link>
-  }
-}
-
 @connect(state => ({
   markdownContent: state.Help.markdownContent,
   isLoading: state.Help.isLoading,
@@ -27,12 +18,17 @@ const MARKDOWN_RENDERERS = {
   locale: state.UserPreferences.locale
 }), {fetchHelpPage, reset})
 class HelpPageContent extends PureComponent {
+  constructor(props) {
+    super(props)
+    this.renderers = {link: this.renderLink.bind(this)}
+  }
+
   componentDidMount() {
     this.props.fetchHelpPage(this.props.page)
   }
 
   componentDidUpdate(oldProps) {
-    if (this.props.locale !== oldProps.locale)
+    if (this.props.locale !== oldProps.locale || this.props.page !== oldProps.page)
       this.props.fetchHelpPage(this.props.page)
   }
 
@@ -45,12 +41,20 @@ class HelpPageContent extends PureComponent {
       return <LoadingFrame/>
     if (this.props.error)
       return <ErrorView canGoBack={false} error={this.props.error}/>
-    return <Markdown className="content" source={this.props.markdownContent} renderers={MARKDOWN_RENDERERS}/>
+    return <Markdown className="content" source={this.props.markdownContent} renderers={this.renderers}/>
+  }
+
+  renderLink({href, children}) {
+    if (isExternal(window.location.href, href))
+      return <a href={href}>{children}</a>
+    else
+      return <Link to={href} onClick={this.props.onLinkClick}>{children}</Link>
   }
 }
 
 HelpPageContent.propTypes = {
-  page: PropTypes.string.isRequired
+  page: PropTypes.string.isRequired,
+  onLinkClick: PropTypes.func
 }
 
 export default HelpPageContent

@@ -11,7 +11,7 @@
 # Rare
 
 * `👻 Ghostbuster` you [report a bug](/help/bug_report) that gets confirmed
-* `🌟 Fact check me, I'm famous` You made your way up to the monthly leaderboard
+* `🌟 Fact Check Me, I'm Famous` You made your way up to the monthly leaderboard
 
 # Legendary
 

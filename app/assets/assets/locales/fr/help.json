@@ -19,6 +19,7 @@
     "contribute/code": "Programmation",
     "contribute/graphic": "Graphistes",
     "contribute/law": "Juristes",
-    "contribute/translate": "Traducteurs"
-  }
+    "contribute/translate": "Traduire"
+  },
+  "goBack": "Retourner au menu d'aide principal"
 }

@@ -18,6 +18,7 @@
     "contribute/code": "Programmers",
     "contribute/graphic": "Graphic Designers",
     "contribute/law": "Lawyers",
-    "contribute/translate": "Translators"
-  }
+    "contribute/translate": "Translate"
+  },
+  "goBack": "Go back to help index"
 }

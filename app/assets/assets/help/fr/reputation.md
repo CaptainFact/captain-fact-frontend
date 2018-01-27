@@ -20,19 +20,23 @@ Ces règles sont sujettes à évolution dans le temps.
 | Action                                                         | Gain             |
 |----------------------------------------------------------------|------------------|
 | Faire vérifier son email                                       | +15pts
-| Relier au moins un compte Facebook / Google / Github           | +15pts
+| Relier au moins un compte tierce (Facebook)                    | +15pts
 | Un de vos commentaires recoit un vote positif                  | +2pts
 | Un de vos commentaires **sourcé** recoit un vote positif       | +3pts
 | Quelqu'un approuve une de vos modifications dans l'historique  | +5pts
-| Un de vos signalements est comfirmé                            | +5pts
+| Un de vos signalements est comfirmé                            | From +3 to +10pts (*)
 
 # Vous perdez de la réputation quand...
 
-| Action                                                                     | Perte            |
-|----------------------------------------------------------------------------|------------------|
+| Action                                                                     | Perte               |
+|----------------------------------------------------------------------------|---------------------|
 | Vous effectuez un vote négatif                                             | -1pts
 | Vous supprimez l'un de vos commentaires                                    | -1pts
 | Un de vos commentaires recoit un vote négatif                              | -2pts
 | Une de vos sources recoit un vote négatif                                  | -3pts
-| Un·e de vos commentaires / sources est bannie après plusieurs signalements | -30pts
-| Une de vos modifications est annulée après plusieurs signalements          | -30pts
+| Un de vos signalements est jugé abusif                                     | De -3 à -10 pts (*)
+| Un·e de vos commentaires / sources est bannie après plusieurs signalements | De -15 à -25 pts (*)
+| Une de vos modifications est annulée après plusieurs signalements          | De -15 à -25 pts (*)
+
+(*) Dépend du résultat de la modération collective. Si le consensus est complet, la valeur maximum
+    sera appliquée.
