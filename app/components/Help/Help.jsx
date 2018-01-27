@@ -4,7 +4,7 @@ import { Link, withRouter } from 'react-router'
 import { Icon } from '../Utils/Icon'
 import { translate } from 'react-i18next'
 import HelpPageContent from './HelpPageContent'
-
+import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
 
 
 @translate(['help', 'main'])
@@ -36,6 +36,7 @@ export default class Help extends React.PureComponent {
             { content }
           </div>
         </section>
+        <PublicAchievementUnlocker achievementId={3}/>
       </div>
     )
   }

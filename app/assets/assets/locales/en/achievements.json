@@ -1,6 +1,7 @@
 {
   "title": "Achievements",
   "about": "About",
+  "unlocked": "You just unlocked the \"{{achievement}}\" achievement",
   "1": {
     "title": "Welcome",
     "description": "You've successfully created an account on CaptainFact"

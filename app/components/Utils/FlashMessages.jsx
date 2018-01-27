@@ -65,17 +65,16 @@ export class FlashMessages extends React.PureComponent {
 }
 
 
-@translate(['main', 'errors'])
+@translate(['main', 'errors', 'achievements'])
 @connect(null, {popModal, removeFlash})
 class FlashContent extends React.Component {
   shouldComponentUpdate(nextProps) {
     // To avoid re-rendering every second, we only compare flash id
-    return this.props.flash.id !== nextProps.flash.id ||
-           this.props.i18nLoadedAt !== nextProps.i18nLoadedAt
+    return this.props.flash.id !== nextProps.flash.id || this.props.i18nLoadedAt !== nextProps.i18nLoadedAt
   }
 
   render() {
-    const {iconName, message, isError} = this.props.flash
+    const {iconName, message, isError, i18nParams={}} = this.props.flash
     return (
       <div className="columns">
         { iconName &&
@@ -85,7 +84,7 @@ class FlashContent extends React.Component {
         }
         <div className="column">
           <div>
-            { isError ? tError(this.props.t, message) : this.props.t(message) }
+            { isError ? tError(this.props.t, message) : this.props.t(message, i18nParams) }
           </div>
           {this.renderInfoLink()}
         </div>

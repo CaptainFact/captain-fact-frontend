@@ -1,6 +1,7 @@
 {
   "title": "Médailles",
   "about": "A propos",
+  "unlocked": "Vous venez de déverouiller le succès \"{{achievement}}\"",
   "1": {
     "title": "Welcome",
     "description": "Bienvenue dans l'aventure!"
@@ -11,7 +12,7 @@
   },
   "3": {
     "title": "Everybody hurts",
-    "description": "On a tous parfois besoin d'un peu d'aide"
+    "description": "Chercher de l'aide dans la section \"Aide\" était la bonne chose à faire"
   },
   "4": {
     "title": "Bulletproof",
