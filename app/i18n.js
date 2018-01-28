@@ -9,6 +9,9 @@ import localeEn from 'date-fns/locale/en'
 import { fetchLocale } from './state/user_preferences/effects'
 import { JS_ENV } from './config.jsenv'
 
+// The moment locales must be imported once to be loaded
+import moment from 'moment'
+import 'moment/locale/fr';
 
 // Add default formats for dates
 localeFr.defaultDateTimeFormat = "[Le] D MMM YYYY [à] H:mm"
@@ -64,5 +67,7 @@ i18n
   });
 
 i18n.on('languageChanged', language => store.dispatch(fetchLocale(language)))
+i18n.on('languageChanged', language => moment.locale(language))
+
 
 export default i18n;
