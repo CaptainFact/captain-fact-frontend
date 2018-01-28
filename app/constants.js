@@ -26,6 +26,7 @@ export const MODERATION_ACTION_ABUSIVE = 3
 export const ENTITY_VIDEO = 1
 export const ENTITY_SPEAKER = 2
 export const ENTITY_STATEMENT = 3
+export const ENTITY_COMMENT = 4
 
 /* ------ UI, animations ------ */
 export const USER_PICTURE_SMALL = 24
