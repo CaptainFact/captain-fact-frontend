@@ -17,6 +17,11 @@ export const ACTION_DELETE = 4
 export const ACTION_ADD = 5
 export const ACTION_RESTORE = 6
 
+// Moderation actions
+export const MODERATION_ACTION_CONFIRM = 1
+export const MODERATION_ACTION_NOTSURE = 2
+export const MODERATION_ACTION_ABUSIVE = 3
+
 // Entities
 export const ENTITY_VIDEO = 1
 export const ENTITY_SPEAKER = 2
