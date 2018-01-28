@@ -11,6 +11,8 @@ describe('Youtube regex', () => {
     expect(youtubeRegex.test("https://youtu.be/dQw4w9WgXcQ")).toBe(true)
     // Short form with get params
     expect(youtubeRegex.test("https://youtu.be/dQw4w9WgXcQ?t=42s")).toBe(true)
+    // Embedded form
+    expect(youtubeRegex.test("https://www.youtube.com/embed/LMRdn_MQWXM")).toBe(true)
   })
 
   it('should reject invalid urls', () => {
@@ -18,6 +20,10 @@ describe('Youtube regex', () => {
     expect(youtubeRegex.test("https://youtu.be")).toBe(false)
     // Channel
     expect(youtubeRegex.test("https://www.youtube.com/channel/UCQgWpmt02UtJkyO32HGUASQ")).toBe(false)
+    // Empty string
+    expect(youtubeRegex.test("")).toBe(false)
+    // Random string
+    expect(youtubeRegex.test(Math.random().toString(36).substring(7))).toBe(false)
   })
 })
 

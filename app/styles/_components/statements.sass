@@ -27,10 +27,15 @@ $statement-text-color: #e0e7f1
       transition: box-shadow 0.5s, max-width 0.5s
       box-shadow: rgba(10, 10, 10, 0.15) 0px 6px 14px -5px
       border: 1px solid lightgrey
-      .card-header img.speaker-mini
-        height: 25px
-        margin-right: 5px
-        border-radius: 15px
+      .card-header
+        .speaker-mini
+          height: 25px
+          margin-right: 5px
+          border-radius: 15px
+        .link-with-icon
+          font-size: 15px
+          &:not(:last-child)
+            margin-right: 0.3em
       .time-display
         min-width: 60px
         color: grey
@@ -78,10 +83,10 @@ $statement-text-color: #e0e7f1
 .statement-text-container
   background: $statement-text-background
   color: $statement-text-color
-  box-shadow: 0px 0px 10px 0px rgb(50, 50, 50) inset
-  padding: 1.5rem
+  box-shadow: 0 0 10px 0 rgb(50, 50, 50) inset
+  padding: 1.5em
   &:before
-    content: "“"
+    content: "\201C"
     font-family: serif
     font-style: normal
     font-weight: 700
@@ -89,11 +94,19 @@ $statement-text-color: #e0e7f1
     color: $grey-light
     position: absolute
   .statement-text
-    padding: 20px 0 20px 40px
+    padding: 1em 1em 1em 2em
+  +mobile
+    padding: 0em 0.75em
+    &:before
+      font-size: 3em
+    .statement-text
+      padding: 1em 1em 1em 1.5em
+      font-size: 1.25em
 
 .statement-text
   font-style: italic
-  font-size: 20px
+  font-size: 1.45em
   font-weight: bold
   white-space: pre-line
+  text-shadow: 0 0 1px black
 

@@ -13,7 +13,7 @@ import ScoreTag from '../Users/ScoreTag'
 import { logout } from '../../state/users/current_user/effects'
 import { closeSidebar, toggleSidebar } from '../../state/user_preferences/reducer'
 import UserPicture from '../Users/UserPicture'
-import i18n from '../../i18n'
+import i18n from '../../i18n/i18n'
 import Logo from './Logo'
 
 
@@ -39,7 +39,7 @@ export default class Sidebar extends React.PureComponent {
   MenuLink({iconName, className, children, ...props}) {
     const classes = classNames(className, {'link-with-icon': !!iconName})
     return (
-      <Link className={classes} activeClassName='is-active' {...props}>
+      <Link className={classes} activeClassName='is-active' onClick={this.closeSideBarIfMobile} {...props}>
         {iconName && <Icon name={iconName} withContainer={false}/>}
         <span>{children}</span>
       </Link>
@@ -86,8 +86,7 @@ export default class Sidebar extends React.PureComponent {
   renderConnectLinks() {
     return (
       <div className="connect-register-buttons">
-        <Link to="/login" className="button" title="Login / Singup"
-              onClick={this.closeSideBarIfMobile}>
+        <Link to="/login" className="button" title="Login / Singup" onClick={this.closeSideBarIfMobile}>
           <Icon size="small" name="sign-in"/>
           <span>{ this.props.t('menu.loginSignup') }</span>
         </Link>

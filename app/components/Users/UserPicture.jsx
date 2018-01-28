@@ -2,6 +2,7 @@ import React from 'react'
 import {staticResource} from '../../API/resources'
 
 
+// TODO In 0.7.8 user picture URL will never be null
 const getImageUrl = (userId, url, url_mini, size) => {
   if (!url || !url_mini)
     return `https://api.adorable.io/avatars/${size}/${userId}.png`
