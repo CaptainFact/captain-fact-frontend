@@ -19,8 +19,8 @@ export const ACTION_RESTORE = 6
 
 // Moderation actions
 export const MODERATION_ACTION_CONFIRM = 1
-export const MODERATION_ACTION_NOTSURE = 2
-export const MODERATION_ACTION_ABUSIVE = 3
+export const MODERATION_ACTION_NOTSURE = 0
+export const MODERATION_ACTION_ABUSIVE = -1
 
 // Entities
 export const ENTITY_VIDEO = 1

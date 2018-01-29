@@ -29,7 +29,10 @@ export default class ModerationEntry extends React.PureComponent {
         <br />
         <div className="moderation-entry-header">
           <span>{t('header.date')}
-            <span>{moment(entry.time).format('MMMM Do YYYY, h:mm:ss a')}</span>
+            <span>{
+              // exemple dans timesince
+              //moment(entry.time).format('MMMM Do YYYY, h:mm:ss a')
+            }</span>
           </span>
           <br />
           <span>
@@ -37,7 +40,6 @@ export default class ModerationEntry extends React.PureComponent {
             <span> {"missing data"} </span>
           </span>
           <UserAction action={entry}></UserAction>
-          { entry.type === ACTION_UPDATE ? <ActionDiff action={entry}></ActionDiff> : '' }
           <div className="moderation-entry-buttons">
             <button onClick={(e) => onAction(entry.id, MODERATION_ACTION_ABUSIVE)}>{t('actions.flag_abusive')}</button>
             <button onClick={(e) => onAction(entry.id, MODERATION_ACTION_NOTSURE)}>{t('actions.unsure')}</button>
