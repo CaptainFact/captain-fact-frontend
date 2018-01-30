@@ -1,16 +1,18 @@
 import React from "react"
+import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import classNames from 'classnames'
 
+import { popModal } from '../../state/modals/reducer'
 import { Icon } from '../Utils/Icon'
 
 
 const Modal = ({
   isActive=true, helpLink, title=null, children=null, footer=null, className=null,
-  isAbsolute=false, overrideContentStructure=false, handleCloseClick=null
+  isAbsolute=false, overrideContentStructure=false, handleCloseClick=null, popModal
 }) => (
   <div className={classNames('modal', className, {'is-active': isActive, 'is-absolute': isAbsolute})}>
-    <div className="modal-background" onClick={handleCloseClick}/>
+    <div className="modal-background" onClick={handleCloseClick || popModal}/>
     <div className="modal-card">
       {title &&
         <header className="modal-card-head">
@@ -22,7 +24,7 @@ const Modal = ({
             <Icon name="question-circle"/>
           </Link>
           }
-          {handleCloseClick && <button className="delete" onClick={() => handleCloseClick()}/>}
+          <button className="delete" onClick={handleCloseClick || popModal}/>
         </header>
       }
       { overrideContentStructure ? children : (
@@ -39,5 +41,5 @@ const Modal = ({
   </div>
 )
 
-export default Modal
+export default connect(null, {popModal})(Modal)
 

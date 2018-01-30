@@ -1,8 +1,6 @@
 > _The nicest feeling in the world is to do a good deed anonymously, and have somebody find out._
 > (Oscar Wilde)
 
-# What is it for ?
-
 Reputation is a way of measuring how much the community trusts you.
 Good contributions (commenting, posting facts, adding statements...etc) are rewarded
 while negative contributions (bad language, questionable sources...etc) can make

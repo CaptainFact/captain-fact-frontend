@@ -7,8 +7,6 @@ CaptainFact a grandit sur le sol fertile de nombreux projets open source tels qu
 * [Redux](http://redux.js.org/)
 * [adorable.io](http://avatars.adorable.io/) for their great consistent avatar service (the funny faces 
   you see if you don't set your own profile picture)
-
-
-Ainsi qu'à la fondation Wikimedia pour les images d'intervenants et d'autres métadonées associées. Vous
-pouvez trouvez plus d'informations sur cette partie sur
-[notre dépôt de données](https://github.com/CaptainFact/captain-fact-data)
+* La fondation Wikimedia pour les images d'intervenants et d'autres métadonées associées. Vous
+  pouvez trouvez plus d'informations sur cette partie sur
+  [notre dépôt de données](https://github.com/CaptainFact/captain-fact-data)

@@ -1,36 +1,57 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 
 import Achievement from './Achievement'
-import {Icon} from '../Utils/Icon'
+import { Icon } from '../Utils/Icon'
+import { addModal } from '../../state/modals/reducer'
+import HelpModal from '../Help/HelpModal'
 
 
-const UserProfile = ({user: {achievements}, t}) => (
-  <div className="columns" style={{paddingTop: 40}}>
-    {/*<div className="column is-7">*/}
-      {/*<h2 className="title is-2 is-centered has-text-centered" >*/}
+@connect(state => ({user: state.DisplayedUser.data}), {addModal})
+@translate('achievements')
+class UserProfile extends PureComponent {
+  render() {
+    const {user: {achievements}, t} = this.props
+    return (
+      <div className="columns is-marginless" style={{paddingTop: 40}}>
+        {/*<div className="column is-7">*/}
+        {/*<h2 className="title is-2 is-centered has-text-centered" >*/}
         {/*<Icon size="large" name="bar-chart"/> Statistics*/}
-      {/*</h2>*/}
-      {/*<p>Posted x comments</p>*/}
-      {/*<p>Posted x sourced comments</p>*/}
-      {/*TODO: Top comments*/}
-    {/*</div>*/}
-    <div className="column">
-      <h2 className="title is-2 is-centered has-text-centered">
-        <Icon size="large" name="trophy"/> {t('title')}
-      </h2>
-      <div className="columns is-marginless is-multiline is-centered achievements">
-        {achievements.map(id => (
-          <div key={id} className="column is-3" style={{flexBasis: 300}}>
-            <Achievement id={id}/>
+        {/*</h2>*/}
+        {/*<p>Posted x comments</p>*/}
+        {/*<p>Posted x sourced comments</p>*/}
+        {/*TODO: Top comments*/}
+        {/*</div>*/}
+        <div className="column has-text-centered">
+          <h2 className="title is-2 is-centered">
+            <Icon size="large" name="trophy"/> {t('title')}
+          </h2>
+          <a className="subtitle link-with-icon" onClick={this.achievementsHelpModal.bind(this)}>
+            <Icon name="question-circle"/>
+            <span> {t('about')}</span>
+          </a>
+          <br/><br/>
+          <div className="columns is-marginless is-multiline is-centered achievements">
+            {achievements.map(id => (
+              <div key={id} className="column is-4" style={{flexBasis: 325}}>
+                <Achievement id={id}/>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
-    </div>
-  </div>
-)
+    )
+  }
 
-export default connect(state => ({user: state.DisplayedUser.data}))(
-  translate('achievements')(UserProfile)
-)
+  achievementsHelpModal() {
+    this.props.addModal({
+      Modal: HelpModal,
+      props: {
+        page: 'achievements'
+      }
+    })
+  }
+}
+
+export default UserProfile

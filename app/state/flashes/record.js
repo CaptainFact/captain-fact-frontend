@@ -10,6 +10,7 @@ const Flash = Record({
   flashType: "info",
   iconName: null,
   message: "",
+  i18nParams: null,
   isError: false,
   infoUrl: null,
   infoText: null

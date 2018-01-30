@@ -11,7 +11,6 @@
     "privileges": "Privilèges",
     "reputation": "Réputation",
     "bug_report": "Signaler un bug",
-    "code_of_conduct": "Code de Conduite",
     "extension": "Extension",
     "privacy": "Vie Privée",
     "contact": "Contact",
@@ -20,6 +19,7 @@
     "contribute/code": "Programmation",
     "contribute/graphic": "Graphistes",
     "contribute/law": "Juristes",
-    "contribute/translate": "Traducteurs"
-  }
+    "contribute/translate": "Traduire"
+  },
+  "goBack": "Retourner au menu d'aide principal"
 }

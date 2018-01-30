@@ -2,7 +2,7 @@ import { List, Record } from "immutable"
 import { handleActions, createAction, combineActions } from 'redux-actions'
 import { buildFlash } from './record'
 import { getErrorInfo } from '../../lib/errors'
-import {NO_INTERNET_ERROR} from '../../constants'
+import { NO_INTERNET_ERROR } from '../../constants'
 
 
 // Actions
@@ -25,10 +25,11 @@ export const flashErrorUnauthenticated = () => flashError({
   infoUrl: "/login"
 })
 
-export const flashSuccessMsg = message => addFlash({
+export const flashSuccessMsg = (message, params={}) => addFlash({
   flashType: 'success',
   iconName: 'check-circle',
-  message: message
+  message: message,
+  ...params
 })
 export function errorToFlash(msg) {
   const errorInfo = getErrorInfo(msg)
