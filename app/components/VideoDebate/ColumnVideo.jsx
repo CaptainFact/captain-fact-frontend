@@ -2,18 +2,23 @@ import React from "react"
 import { connect } from "react-redux"
 import classNames from "classnames"
 import { translate } from 'react-i18next'
+import { videoDebateOnlineUsersCount, videoDebateOnlineViewersCount } from '../../state/video_debate/presence/selectors'
 
 import { AddSpeakerForm, SpeakerPreview } from "../Speakers"
+import Tag from '../Utils/Tag'
 import { VideoPlayer } from "../Videos"
 import { LoadingFrame, Icon } from "../Utils"
 import { Link } from 'react-router'
 import { isAuthenticated } from "../../state/users/current_user/selectors"
+import Presence from './Presence'
 
 
 @connect(state => ({
   video: state.VideoDebate.video.data,
   isLoading: state.VideoDebate.video.isLoading,
   authenticated: isAuthenticated(state),
+  nbUsers: videoDebateOnlineUsersCount(state),
+  nbViewers: videoDebateOnlineViewersCount(state),
 }))
 @translate('videoDebate')
 export class ColumnVideo extends React.PureComponent {
@@ -26,7 +31,10 @@ export class ColumnVideo extends React.PureComponent {
     return (
       <div id="col-video" className="column is-5">
         <VideoPlayer url={url}/>
-        <h2 className="title is-4">{title}</h2>
+        <div className="videoInfo">
+          <h2 className="title is-4">{title}</h2>
+          <Presence nbUsers={this.props.nbUsers} nbViewers={this.props.nbViewers}/>
+        </div>
         <div className="tabs is-toggle is-fullwidth">
           <ul>
             <li className={classNames({'is-active': view === "debate"})}>

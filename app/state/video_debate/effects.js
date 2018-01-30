@@ -1,5 +1,6 @@
 import { SocketApi } from '../../API'
 import { VIDEO_DEBATE_CHANNEL } from "../../constants"
+import { presenceDiff, setPresence } from './presence/reducer'
 import * as videoReducer from './video/reducer'
 import { errorToFlash, errorMsgToFlash } from '../flashes/reducer'
 import { createEffect, generateFSAError } from '../utils'
@@ -13,6 +14,8 @@ export const joinVideoDebateChannel = videoId => dispatch => {
       "speaker_added": s => dispatch(videoReducer.addSpeaker(s)),
       "speaker_removed": s => dispatch(videoReducer.removeSpeaker(s)),
       "speaker_updated": s => dispatch(videoReducer.updateSpeaker(s)),
+      "presence_state": s => dispatch(setPresence(s)),
+      "presence_diff": s => dispatch(presenceDiff(s)),
     }
   )))
 }
