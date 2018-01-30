@@ -5,10 +5,17 @@
   +tablet
     min-width: 370px
 
-  &> .title
-    padding: 18px 7px
-    border-bottom: 1px solid #f1f1f1
-    margin-bottom: 0
+  .videoInfo
+    display: flex
+    padding: 1em
+    align-items: center
+    .title
+      flex-grow: 10
+      flex-shrink: 1
+      margin: 0 0.5em 0 0
+    .presence
+      display: inline-block
+      flex-shrink: 10000
 
   &> .tabs
     margin-bottom: 0
