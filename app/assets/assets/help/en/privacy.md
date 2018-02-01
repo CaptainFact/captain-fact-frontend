@@ -6,3 +6,6 @@ You're free to use your real name or just a simple good'old username.
 
 Though nothing is infallible, we care about security and we try to follow the best practices to
 ensure your data stay as safe as possible.  
+
+To learn more aboute the browser extension privacy policy, follow
+[this link](/help/extension).

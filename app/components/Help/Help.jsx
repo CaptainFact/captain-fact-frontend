@@ -51,6 +51,7 @@ export default class Help extends React.PureComponent {
             {this.renderPageLink('moderation')}
             {this.renderPageLink('privileges')}
             {this.renderPageLink('reputation')}
+            {this.renderPageLink('extension')}
           </div>
           <div className="column panel">
             <p className="panel-heading">{this.props.t('categories.contribute')}</p>
@@ -62,10 +63,10 @@ export default class Help extends React.PureComponent {
           </div>
           <div className="column panel">
             <p className="panel-heading">{this.props.t('categories.others')}</p>
+            {this.renderPageLink('about')}
             {this.renderPageLink('contact')}
             {this.renderPageLink('censorship_requests')}
             {this.renderPageLink('credits')}
-            {this.renderPageLink('extension')}
             {this.renderPageLink('privacy')}
           </div>
         </div>

@@ -6,7 +6,7 @@ et pour [Firefox](https://addons.mozilla.org/en-US/firefox/addon/captainfact/)
 
 # Code source
 
-Le code source de l'extension est 100% open-source, vous pouvez le retrouver ici:
+Le code source de l'extension est 100% open-source (GPL3/AGPL3), vous pouvez le retrouver ici:
 * https://github.com/CaptainFact/captain-fact-extension
 
 Elle utilise aussi un autre projet interne qui inject des informations sur des videos HTML en utilisant Javascript:

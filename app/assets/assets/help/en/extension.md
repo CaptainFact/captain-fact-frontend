@@ -6,7 +6,7 @@ and for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/captainfact/)
 
 # Source code
 
-CaptainFact's extension is fully open sourced. The main repository is available here:
+CaptainFact's extension is fully open sourced (GPL3/AGPL3). The main repository is available here:
 * https://github.com/CaptainFact/captain-fact-extension
 
 The extension also make use of another internal project which injects facts into HTML videos in javascript:
