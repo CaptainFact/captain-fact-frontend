@@ -1,8 +1,8 @@
 import React from "react"
 import PropTypes from 'prop-types'
+
 import { connect } from "react-redux"
 import { translate } from 'react-i18next'
-import moment from 'moment'
 
 import Entity from '../UsersActions/Entity'
 import { UserAction } from "../UsersActions/UserAction"
@@ -15,11 +15,17 @@ import {
   MODERATION_ACTION_NOTSURE
 } from '../../constants'
 
+import format from 'date-fns/format'
+import { locales } from '../../i18n/i18n'
+
+@connect(state => ({locale: state.UserPreferences.locale}))
 @translate('moderation')
 export default class ModerationEntry extends React.PureComponent {
 
   render() {
-    const { entry, t, onAction } = this.props
+    const { entry, t, onAction, time, locale } = this.props
+    const localeObj = locales[locale]
+    const dateFormat = localeObj.defaultDateTimeFormat
 
     return (
 
@@ -29,16 +35,9 @@ export default class ModerationEntry extends React.PureComponent {
         <br />
         <div className="moderation-entry-header">
           <span>{t('header.date')}
-            <span>{
-              // exemple dans timesince
-              //moment(entry.time).format('MMMM Do YYYY, h:mm:ss a')
-            }</span>
+            <span> { format(entry.time, dateFormat, {locale: localeObj}) }</span>
           </span>
           <br />
-          <span>
-            {t('header.reported_for')}
-            <span> {"missing data"} </span>
-          </span>
           <UserAction action={entry}></UserAction>
           <div className="moderation-entry-buttons">
             <button onClick={(e) => onAction(entry.id, MODERATION_ACTION_ABUSIVE)}>{t('actions.flag_abusive')}</button>
