@@ -7,7 +7,7 @@ import ReputationGuard from '../ReputationGuard'
 import { fetchRandomModeration } from '../../state/moderation/effects'
 import Entity from '../UsersActions/Entity'
 import ModerationEntry from './ModerationEntry'
- 
+
 @connect(state => ({
   isLoading: state.Moderation.isLoading,
   error: state.Moderation.error,
@@ -26,7 +26,9 @@ export default class Moderation extends React.PureComponent {
 
     return (
       <ReputationGuard requiredRep={this.requiredReputation}>
-        <div>
+        <div className="container">
+          <h1 className="title is-1 has-text-centered">{t('title')}</h1>
+
           {items && items.map(el =>
             <ModerationEntry key={el.id} entry={el} onAction={this.onEntryAction}></ModerationEntry>)
           }

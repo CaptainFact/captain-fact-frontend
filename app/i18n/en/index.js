@@ -8,6 +8,7 @@ import home from '../../assets/assets/locales/en/home.json'
 import main from '../../assets/assets/locales/en/main.json'
 import user from '../../assets/assets/locales/en/user.json'
 import videoDebate from '../../assets/assets/locales/en/videoDebate.json'
+import moderation from '../../assets/assets/locales/en/moderation.json'
 
 export default {
   achievements,
@@ -17,5 +18,6 @@ export default {
   home,
   main,
   user,
-  videoDebate
+  videoDebate,
+  moderation
 }

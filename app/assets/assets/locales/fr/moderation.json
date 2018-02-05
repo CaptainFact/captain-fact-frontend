@@ -1,0 +1,11 @@
+{
+  "header": {
+    "date": "Date"
+  },
+  "actions": {
+    "flag_abusive": "Marquer comme abusif",
+    "unsure": "Pas sur",
+    "confirm": "Confirmer"
+  },
+  "title": "Modération"
+}

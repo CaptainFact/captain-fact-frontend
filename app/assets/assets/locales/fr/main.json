@@ -5,7 +5,8 @@
     "speaker": "intervenant·e",
     "speaker_plural": "intervenant·e·s",
     "statement": "déclaration",
-    "statement_plural": "déclarations"
+    "statement_plural": "déclarations",
+    "comment": "commentaire"
   },
   "menu": {
     "loginSignup": "Connexion",
