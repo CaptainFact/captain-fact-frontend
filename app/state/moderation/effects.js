@@ -10,3 +10,7 @@ export const fetchRandomModeration = () => createEffect(
     after: setItems
   }
 )
+
+export const postModerationFeedback = () => createEffect(
+  HttpApi.post("moderation/feedback")
+)

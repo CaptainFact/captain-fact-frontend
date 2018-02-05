@@ -12,7 +12,7 @@ import ModerationEntry from './ModerationEntry'
   isLoading: state.Moderation.isLoading,
   error: state.Moderation.error,
   items: state.Moderation.items
-}), { fetchRandomModeration })
+}), { fetchRandomModeration, postModerationFeedback })
 @translate('moderation')
 export default class Moderation extends React.PureComponent {
   requiredReputation = 500;
