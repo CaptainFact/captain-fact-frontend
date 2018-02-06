@@ -11,6 +11,9 @@ export const fetchRandomModeration = () => createEffect(
   }
 )
 
-export const postModerationFeedback = () => createEffect(
-  HttpApi.post("moderation/feedback")
+export const postModerationFeedback = (entryId, action) => createEffect(
+  HttpApi.post("moderation/feedback", {
+    "value": action,
+    "action_id": entryId
+  })
 )

@@ -4,7 +4,7 @@ import { translate } from 'react-i18next'
 
 import ReputationGuard from '../ReputationGuard'
 
-import { fetchRandomModeration } from '../../state/moderation/effects'
+import { fetchRandomModeration, postModerationFeedback } from '../../state/moderation/effects'
 import Entity from '../UsersActions/Entity'
 import ModerationEntry from './ModerationEntry'
 
@@ -42,5 +42,6 @@ export default class Moderation extends React.PureComponent {
 
   onEntryAction(entryId, action) {
     console.log("on entry action", entryId, action)
+    this.props.fetchRandomModeration(entryId, action)
   }
 }
