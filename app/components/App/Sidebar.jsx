@@ -5,7 +5,7 @@ import { translate } from 'react-i18next'
 import classNames from 'classnames'
 
 import { Icon } from "../Utils"
-import { MOBILE_WIDTH_THRESHOLD, USER_PICTURE_SMALL } from "../../constants"
+import { MOBILE_WIDTH_THRESHOLD, USER_PICTURE_SMALL, MODERATION_REPUTATION_REQUIRED } from "../../constants"
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import LanguageSelector from './LanguageSelector'
 import capitalize from 'voca/capitalize'
@@ -15,7 +15,7 @@ import { closeSidebar, toggleSidebar } from '../../state/user_preferences/reduce
 import UserPicture from '../Users/UserPicture'
 import i18n from '../../i18n/i18n'
 import Logo from './Logo'
-
+import ReputationGuard from '../ReputationGuard'
 
 @connect(state => ({
   CurrentUser: state.CurrentUser.data,
@@ -135,6 +135,11 @@ export default class Sidebar extends React.PureComponent {
 
           <p className="menu-label">{ t('menu.other') }</p>
           <ul className="menu-list">
+            <ReputationGuard requiredRep={MODERATION_REPUTATION_REQUIRED}>
+              <this.MenuListLink to="/moderation" iconName="envelope" className="hide-when-collapsed">
+                { t('menu.moderation') }
+              </this.MenuListLink>
+            </ReputationGuard>
             <this.MenuListLink to="/help/contact" iconName="envelope" className="hide-when-collapsed">
               { t('menu.contact') }
             </this.MenuListLink>
