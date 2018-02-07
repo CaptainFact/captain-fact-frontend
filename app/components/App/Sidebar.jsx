@@ -136,7 +136,7 @@ export default class Sidebar extends React.PureComponent {
           <p className="menu-label">{ t('menu.other') }</p>
           <ul className="menu-list">
             <ReputationGuard requiredRep={MODERATION_REPUTATION_REQUIRED}>
-              <this.MenuListLink to="/moderation" iconName="envelope" className="hide-when-collapsed">
+              <this.MenuListLink to="/moderation" iconName="flag" className="hide-when-collapsed">
                 { t('menu.moderation') }
               </this.MenuListLink>
             </ReputationGuard>

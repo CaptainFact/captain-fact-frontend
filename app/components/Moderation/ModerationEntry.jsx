@@ -40,15 +40,15 @@ export default class ModerationEntry extends React.PureComponent {
           <UserAction action={entry}></UserAction>
           <div className="buttons field is-grouped">
             <button className="button is-danger" onClick={(e) => onAction(entry.id, MODERATION_ACTION_ABUSIVE)}>
-              {/* <Icon name="cross" /> */}
+              <Icon name="close" />
               {t('actions.flag_abusive')}
             </button>
             <button className="button" onClick={(e) => onAction(entry.id, MODERATION_ACTION_NOTSURE)}>
-              {/* <Icon name="blocked" /> */}
+              <Icon name="ban" />
               {t('actions.unsure')}
             </button>
             <button className="button is-success" onClick={(e) => onAction(entry.id, MODERATION_ACTION_CONFIRM)}>
-              {/* <Icon name="flag" /> */}
+              <Icon name="check" />
               {t('actions.confirm')}
             </button>
           </div>
