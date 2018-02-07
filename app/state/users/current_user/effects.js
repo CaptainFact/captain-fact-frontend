@@ -8,7 +8,7 @@ import { createEffect } from '../../utils'
 
 // Auth / register / login functions
 
-export const getCurrentUser = () => (dispatch, getState) => {
+export const fetchCurrentUser = () => (dispatch, getState) => {
   if (!HttpApi.hasToken)
     return null
   dispatch(setLoading(true))
@@ -87,6 +87,17 @@ export const logout = () =>
 export const deleteAccount = () =>
   resetUser(HttpApi.delete("users/me"))
 
+// Achievements
+export const unlockPublicAchievement = achievementId => createEffect(
+  HttpApi.put(`users/me/achievements/${achievementId}`, achievementId), {
+    then: user => (dispatch, getState) => {
+      if (getState().DisplayedUser.data.id === user.id)
+        dispatch(setDisplayedUser(user))
+      dispatch(setCurrentUser(user))
+      return user
+    },
+  }
+)
 
 // ---- Private functions ----
 
