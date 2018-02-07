@@ -8,6 +8,8 @@ import { fetchRandomModeration, postModerationFeedback } from '../../state/moder
 import Entity from '../UsersActions/Entity'
 import ModerationEntry from './ModerationEntry'
 
+import { MODERATION_REPUTATION_REQUIRED } from '../../constants'
+
 @connect(state => ({
   isLoading: state.Moderation.isLoading,
   error: state.Moderation.error,
@@ -15,8 +17,6 @@ import ModerationEntry from './ModerationEntry'
 }), { fetchRandomModeration, postModerationFeedback })
 @translate('moderation')
 export default class Moderation extends React.PureComponent {
-  requiredReputation = 500;
-
   constructor(props) {
     super(props)
   }
@@ -25,7 +25,7 @@ export default class Moderation extends React.PureComponent {
     const { isLoading, error, items, t } = this.props
 
     return (
-      <ReputationGuard requiredRep={this.requiredReputation}>
+      <ReputationGuard requiredRep={MODERATION_REPUTATION_REQUIRED}>
         <div className="container">
           <h1 className="title is-1 has-text-centered">{t('title')}</h1>
 

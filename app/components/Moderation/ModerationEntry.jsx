@@ -31,9 +31,6 @@ export default class ModerationEntry extends React.PureComponent {
     return (
 
       <div className="box">
-        {JSON.stringify(entry.toJSON())}
-        <br />
-        <br />
         <div>
           <span>{format(entry.time, dateFormat, { locale: localeObj })}</span>
           <br />
