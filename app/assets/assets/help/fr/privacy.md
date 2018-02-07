@@ -2,7 +2,7 @@ Nous ne vendrons **jamais** vos données personelles et il n'y a pas grand chose
 toutes les façons : on ne collecte que ce dont on a besoin pour faire fonctionner le site.
 
 Vous devez par contre considérer toutes vos intéractions (votes, commentaires...)
-comme **publiques**. Vous êtes libre d'utiliser votre vrai non ou juste un bon view
+comme **publiques**. Vous êtes libre d'utiliser votre vrai nom ou juste un bon vieux
 pseudonyme si c'est ce que vous préférez.
 
 Bien que rien ne soit infaible, nous faisons attention à la sécurité et essayons de suivre les
