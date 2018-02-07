@@ -1,4 +1,15 @@
-Helping to translate CaptainFact doesn't require any technical skills. We would love having Spanish, German or Chinese
-integrated.
+Traduire le site ne requiert aucune compétence technique, il s'agît simplement de remplacer
+des chaînes de caractères dans des fichiers.
 
-If you're interested in translating the project in your own language, be sure that all contributions will be welcomed! 
+#### Si vous êtes à l'aise avec git
+
+1. Forker le [dépôt](https://github.com/CaptainFact/captain-fact-frontend)
+2. Editer ou créer les fichiers dans `app/assets/assets/locales/${YOUR_LOCALE}/${namespace}.json`
+   pour traduire l'interface utilisateur
+3. Editer ou créer les fichiers dans `app/assets/assets/help/${YOUR_LOCALE}/${page}.md`
+   pour traduire les pages d'aide (comme celle-ci).
+4. Faites une pull request sur la branche `staging`
+
+#### Si vous ne souhaitez pas passer par git
+
+[Contactez nous](/help/contact) et nous vous enverrons les fichiers.

@@ -1,5 +1,7 @@
 {
   "title": "Médailles",
+  "about": "A propos",
+  "unlocked": "Vous venez de déverouiller le succès \"{{achievement}}\"",
   "1": {
     "title": "Welcome",
     "description": "Bienvenue dans l'aventure!"
@@ -10,7 +12,7 @@
   },
   "3": {
     "title": "Everybody hurts",
-    "description": "On a tous parfois besoin d'un peu d'aide"
+    "description": "Chercher de l'aide dans la section \"Aide\" était la bonne chose à faire"
   },
   "4": {
     "title": "Bulletproof",
@@ -23,5 +25,17 @@
   "6": {
     "title": "Social Addict",
     "description": "Vous aimez vous faire espionner par ces entreprises Américaines, n'est-ce pas ?"
+  },
+  "7": {
+    "title": "Ambassador",
+    "description": "Vous étiez là avant que ça soit cool et avez aidé d'une façon unique le projet"
+  },
+  "8": {
+    "title": "Ghostbuster",
+    "description": "Merci de nous avoir signalé ce bug !"
+  },
+  "9": {
+    "title": "Fact Check Me, I'm Famous",
+    "description": "Vous êtes arrivé en haut du classement ce mois-ci, bravo Capitaine !"
   }
 }

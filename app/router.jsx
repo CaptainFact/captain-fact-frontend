@@ -24,7 +24,7 @@ import { default as App } from "./components/App"
 import { Home, NotFound, BrowserExtensionsPage } from "./components/Pages"
 import { PublicVideos, AddVideoForm } from "./components/Videos"
 import { VideoDebate } from "./components/VideoDebate"
-import Help from './components/Help'
+import Help from './components/Help/Help'
 import UserProfile from './components/Users/UserProfile'
 import ThirdPartyCallback from './components/Users/ThirdPartyCallback'
 import UserSettings from './components/Users/UserSettings'

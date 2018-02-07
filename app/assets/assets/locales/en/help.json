@@ -5,13 +5,13 @@
     "others": "Others"
   },
   "pages": {
+    "about": "About",
     "achievements": "Achievements",
     "credits": "Credits",
     "moderation": "Moderation",
     "privileges": "Privileges",
     "reputation": "Reputation",
     "bug_report": "Bug Report",
-    "code_of_conduct": "Code of Conduct",
     "extension": "Extension",
     "privacy": "Privacy",
     "contact": "Contact",
@@ -19,6 +19,7 @@
     "contribute/code": "Programmers",
     "contribute/graphic": "Graphic Designers",
     "contribute/law": "Lawyers",
-    "contribute/translate": "Translators"
-  }
+    "contribute/translate": "Translate"
+  },
+  "goBack": "Go back to help index"
 }

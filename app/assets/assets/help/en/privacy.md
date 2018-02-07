@@ -1,20 +1,11 @@
-# About my privacy
+We will **never** sell your personal data and we don't have much to sell anyways: we don't
+collect stuff that we don't need to run the site.
 
-## Website
+However, you should consider all your interactions (voting, commenting, flagging...) as **public**.
+You're free to use your real name or just a simple good'old username.
 
- We will **never** sell your personal data (email, name...etc).
- However, you should consider all your interactions (voting, commenting, flagging...) as public.
- 
- Also, we don't use any external tracker nor do we implement any social network buttons.
- The only external code we run here is the one for the video player.
+Though nothing is infallible, we care about security and we try to follow the best practices to
+ensure your data stay as safe as possible.  
 
-## Extension
-
- You can select whether or not you want to activate videos overlay in one click, using the extension
- popup.
- 
- <!-- TODO: Add screenshot -->
- 
- If you do activate it, the extension will send a request to CaptainFact from time to time to sync available videos.
- 
- **We do not log nor record the videos you're watching.**
+To learn more aboute the browser extension privacy policy, follow
+[this link](/help/extension).

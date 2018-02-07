@@ -1,38 +1,26 @@
-Vous souhaitez apporter des ressources graphiques pour cette partie ?
-C'est par [ici](https://github.com/CaptainFact/captain-fact-frontend/issues/6)!
+> Les médailles CaptainFact vous apportent la bonne santé, de la joie et de l'amour.
 
-Il s'agît d'un travail en cours et tous les accomplissements n'ont pas encore été ajoutés.
-
-## Accomplissements ordinaires
-
-Ces médailles sont là pour vous aider à découvrir les diifférentes parties du site.
+## Médailles ordinaires
 
 * `🎉 Welcome` Bienvenue dans la communauté !
 * `🤖 Not a Robot` Email vérifié
 * `🎸 Help !` Vous avez lu au moins une page de l'aide
 * `🛡️ Bulletproof` Vous installez l'extension Chrome ou Firefox
+* `💉 Social Addict` Connectez-vous avec ou liez un compte tierce (Facebook)
 
+## Médailles rares
 
-## Accomplissements spéciaux
-
-* `🐅 Fact's tamer` Première source avec 5 votes positifs
-* `👍 You made a point` Premier commentaire avec 5 votes positifs
-
-
-## Accomplissements rares
-
-* `🔝 Hit Machine` Premier commentaire avec 30 votes positifs
-* `✍️ Scribe Master` Vous avez recopié plus de 30 affirmations
-* `🚿 The cleaner` 10 de vos signalements sont confirmés
 * `👻 Ghostbuster` vous [signalez un bug](/help/bug_report)
+* `🌟 Fact Check Me, I'm Famous` Vous êtes arrivé dans le top contributeurs mensuel
 
+## Médailles légendaires
 
-## Accomplissements légendaires
+* `🏴‍☠️ Born to hack` Vous nous rapportez une faille de sécurité qui est confirmée
+* `📁 Ambassador` Vous avez aidé le projet d'une façon unique
 
-* `👴 Old and Wise` 5 sources avec un score superieur à 50
-* `🌟 Fact check me, I'm famous`
+----------------------
 
+# Credits
 
-## Accomplissements secrets
-
-Certains accomplissements ne sont pas listés ici
+* [U Maja](https://society6.com/rabbitball) pour la médaille "Bulletproof"
+* Vous souhaitez contribuer ? Jetez un coup d'oeuil [par ici](https://github.com/CaptainFact/captain-fact-frontend/issues/6)!

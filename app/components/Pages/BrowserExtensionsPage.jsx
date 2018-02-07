@@ -1,5 +1,6 @@
 import React from "react"
 import { translate } from 'react-i18next'
+import classNames from 'classnames'
 
 
 export const BrowserExtensionsPage = translate('main')(({t}) => (
@@ -15,10 +16,11 @@ export const BrowserExtensionsPage = translate('main')(({t}) => (
       <div className="container">
         <div className="columns">
           <BrowserExtension browser="Google Chrome" image="/assets/img/chrome.png"
-                            buttonLabel="Get on Chrome Web Store"
-                            url="https://chrome.google.com/webstore/detail/captainfact-beta/fnnhlmbnlbgomamcolcpgncflofhjckm"/>
+                            buttonLabel="Add to Chrome"
+                            onClick={chromeInstall}
+                            url="https://chrome.google.com/webstore/detail/fnnhlmbnlbgomamcolcpgncflofhjckm"/>
           <BrowserExtension browser="Mozilla Firefox" image="/assets/img/firefox.png"
-                            buttonLabel="Download for Firefox"
+                            buttonLabel="Add to Firefox"
                             url="https://addons.mozilla.org/addon/captainfact/"/>
           <BrowserExtension browser="Internet Explorer" image="/assets/img/internet_explorer.png"
                             buttonLabel="Just kidding" disabled={true}
@@ -29,9 +31,9 @@ export const BrowserExtensionsPage = translate('main')(({t}) => (
   </div>
 ))
 
-const BrowserExtension = ({browser, image, buttonLabel, url, disabled=false}) => (
+const BrowserExtension = ({browser, image, buttonLabel, url, onClick, disabled=false}) => (
   <div className="column">
-    <a href={url} target="_BLANK" className={disabled ? "is-disabled" : ""}>
+    <a href={url} onClick={onClick} target="_BLANK" className={classNames({'is-disabled': disabled})}>
       <figure className="image is-128x128" style={{margin: '0 auto'}}>
         <img src={image} alt={browser}/>
       </figure>
@@ -41,3 +43,11 @@ const BrowserExtension = ({browser, image, buttonLabel, url, disabled=false}) =>
     </a>
   </div>
 )
+
+function chromeInstall(e) {
+  if (typeof chrome !== 'undefined') {
+    chrome.webstore.install(null)
+    e.preventDefault()
+    return false
+  }
+}

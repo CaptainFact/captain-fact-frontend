@@ -1,9 +1,6 @@
-Vous pouvez nous contacter via:
+Vous pouvez nous contacter en Anglais ou en Français via:
   * [Gitter (chat)](https://gitter.im/CaptainFact)
+  * [Mail](mailto:contact@captainfact.io)
   * [Facebook](https://www.facebook.com/CaptainFact.io)
   * [Twitter](https://twitter.com/CaptainFact_io)
   * [Github](https://github.com/CaptainFact)
-  * [Mail](mailto:contact@captainfact.io)
-
-Merci de formuler votre demande en Français ou en Anglais
-et de donner un maximum d'informations si vous remontez un bug.
