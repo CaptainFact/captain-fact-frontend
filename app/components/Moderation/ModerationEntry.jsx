@@ -30,21 +30,21 @@ export default class ModerationEntry extends React.PureComponent {
 
     return (
 
-      <div className="box">
+      <div className="box moderation-entry">
         <div>
-          <span>{format(entry.time, dateFormat, { locale: localeObj })}</span>
+          <span className="moderation-entry-date">{format(entry.time, dateFormat, { locale: localeObj })}</span>
           <br />
           <UserAction action={entry}></UserAction>
-          <div className="buttons field is-grouped">
-            <button className="button is-danger" onClick={(e) => onAction(entry.id, MODERATION_ACTION_ABUSIVE)}>
+          <div className="moderation-entry-buttons buttons field is-grouped">
+            <button className="moderation-entry-button button is-danger" onClick={(e) => onAction(entry.id, MODERATION_ACTION_ABUSIVE)}>
               <Icon name="close" />
               {t('actions.flag_abusive')}
             </button>
-            <button className="button" onClick={(e) => onAction(entry.id, MODERATION_ACTION_NOTSURE)}>
+            <button className="moderation-entry-button button" onClick={(e) => onAction(entry.id, MODERATION_ACTION_NOTSURE)}>
               <Icon name="ban" />
               {t('actions.unsure')}
             </button>
-            <button className="button is-success" onClick={(e) => onAction(entry.id, MODERATION_ACTION_CONFIRM)}>
+            <button className="moderation-entry-button button is-success" onClick={(e) => onAction(entry.id, MODERATION_ACTION_CONFIRM)}>
               <Icon name="check" />
               {t('actions.confirm')}
             </button>
