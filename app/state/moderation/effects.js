@@ -1,5 +1,5 @@
 import HttpApi from '../../API/http_api'
-import { setLoading, setSubmitting, setItems } from './reducer'
+import { setLoading, setSubmitting, setItems, removeItem } from './reducer'
 import {createEffect, returnSuccess, returnError, generateFSAError} from '../utils'
 import { errorToFlash } from '../flashes/reducer'
 
@@ -15,5 +15,7 @@ export const postModerationFeedback = (entryId, action) => createEffect(
   HttpApi.post("moderation/feedback", {
     "value": action,
     "action_id": entryId
-  })
+  }), {
+    after: removeItem(entryId)
+  }
 )

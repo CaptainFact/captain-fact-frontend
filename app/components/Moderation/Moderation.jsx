@@ -5,6 +5,7 @@ import { translate } from 'react-i18next'
 import ReputationGuard from '../ReputationGuard'
 
 import { fetchRandomModeration, postModerationFeedback } from '../../state/moderation/effects'
+import { removeItem } from '../../state/moderation/reducer'
 import Entity from '../UsersActions/Entity'
 import ModerationEntry from './ModerationEntry'
 
@@ -28,9 +29,8 @@ export default class Moderation extends React.PureComponent {
       <ReputationGuard requiredRep={MODERATION_REPUTATION_REQUIRED}>
         <div className="container">
           <h1 className="title is-1 has-text-centered">{t('title')}</h1>
-
           {items && items.map(el =>
-            <ModerationEntry key={el.id} entry={el} onAction={this.onEntryAction}></ModerationEntry>)
+            <ModerationEntry key={el.id} entry={el} onAction={this.onEntryAction.bind(this)}></ModerationEntry>)
           }
         </div>
       </ReputationGuard>)
@@ -41,7 +41,7 @@ export default class Moderation extends React.PureComponent {
   }
 
   onEntryAction(entryId, action) {
-    console.log("on entry action", entryId, action)
-    this.props.fetchRandomModeration(entryId, action)
+    this.props.postModerationFeedback(entryId, action)
+
   }
 }
