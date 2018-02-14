@@ -4,7 +4,7 @@
   },
   "actions": {
     "flag_abusive": "Marquer comme abusif",
-    "unsure": "Pas sur",
+    "unsure": "Pas sûr",
     "confirm": "Confirmer"
   },
   "title": "Modération"

@@ -19,7 +19,7 @@ module.exports = {
       plugins: ["transform-decorators-legacy", "transform-class-properties"]
     },
     sass: {
-      mode: 'ruby',
+      mode: 'native',
       options: {
         includePaths: [
           "node_modules",
