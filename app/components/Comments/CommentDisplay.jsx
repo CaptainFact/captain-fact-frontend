@@ -143,10 +143,10 @@ export class CommentDisplay extends React.PureComponent {
                   <span> - </span>
                   <TimeSince className="comment-time" time={inserted_at}/>
                 </div>}
-                {(text || replyingTo) &&
+                {text || (replyingTo && nesting > 6) &&
                   <div className="comment-text">
-                    {nesting > 6 && replyingTo &&
-                      <Tag style={{marginRight: 5}}>@{replyingTo.username}</Tag>
+                    {(replyingTo && nesting > 6) &&
+                    <Tag style={{marginRight: 5}}>@{replyingTo.username}</Tag>
                     }
                     { text }
                   </div>
