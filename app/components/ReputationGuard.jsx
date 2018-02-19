@@ -12,12 +12,12 @@ import { LoadingFrame, LinkWithIcon } from "./Utils"
 @translate('errors')
 export default class ReputationGuard extends React.PureComponent {
   render() {
-    const { isLoading, hasReputation, t } = this.props
+    const { isLoading, hasReputation, showLoading, showNotEnough, t } = this.props
 
-    if (isLoading)
+    if (showLoading && isLoading)
       return <LoadingFrame/>
     if (hasReputation)
       return this.props.children
-    return <div>{ t('client.notEnoughReputation') }</div>
+    return showNotEnough ? <div>{ t('client.notEnoughReputation') }</div> : ''
     }
 }

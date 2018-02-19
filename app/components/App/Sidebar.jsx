@@ -11,11 +11,11 @@ import {
   MODERATION_REPUTATION_REQUIRED
 } from "../../constants"
 import { LoadingFrame } from '../Utils/LoadingFrame'
+import ReputationGuard from '../ReputationGuard'
 import LanguageSelector from './LanguageSelector'
 import capitalize from 'voca/capitalize'
 import ScoreTag from '../Users/ScoreTag'
 import { logout } from '../../state/users/current_user/effects'
-import { hasReputation } from '../../state/users/current_user/selectors'
 import { closeSidebar, toggleSidebar } from '../../state/user_preferences/reducer'
 import UserPicture from '../Users/UserPicture'
 import i18n from '../../i18n/i18n'
@@ -24,7 +24,6 @@ import Logo from './Logo'
 @connect(state => ({
   CurrentUser: state.CurrentUser.data,
   isLoadingUser: state.CurrentUser.isLoading,
-  canAccessModeration: hasReputation(state, MODERATION_REPUTATION_REQUIRED),
   sidebarExpended: state.UserPreferences.sidebarExpended
 }), {logout, toggleSidebar, closeSidebar})
 @translate('main')
@@ -140,9 +139,12 @@ export default class Sidebar extends React.PureComponent {
 
           <p className="menu-label">{ t('menu.other') }</p>
           <ul className="menu-list">
-            {this.props.canAccessModeration ? <this.MenuListLink to="/moderation" iconName="flag" className="hide-when-collapsed">
-              { t('menu.moderation') }
-            </this.MenuListLink> : ''}
+            <ReputationGuard requiredRep={MODERATION_REPUTATION_REQUIRED}
+              showNotEnough={false} showLoading={false}>
+              <this.MenuListLink to="/moderation" iconName="flag" className="hide-when-collapsed">
+                { t('menu.moderation') }
+              </this.MenuListLink>
+            </ReputationGuard>
             <this.MenuListLink to="/help/contact" iconName="envelope" className="hide-when-collapsed">
               { t('menu.contact') }
             </this.MenuListLink>
