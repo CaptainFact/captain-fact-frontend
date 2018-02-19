@@ -151,21 +151,21 @@ export class Statement extends React.PureComponent {
   renderFactsAndComments() {
     if (this.props.commentsLoading)
       return (<LoadingFrame size="small" title="Loading comments"/>)
-    const { statement, comments, approvingFacts, refutingFacts, currentUser, isAuthenticated } = this.props
+    const { statement, comments, approvingFacts, refutingFacts } = this.props
 
     return (
       <div>
         {(approvingFacts.size > 0 || refutingFacts.size > 0) &&
         <div className="card-footer facts">
-          {approvingFacts.size > 0 &&
-          <CommentsContainer className="card-footer-item approve"
-                             comments={approvingFacts}
-                             header={this.renderCommentsContainerHeader('approve', 'success', this.props.approveScore)}/>
-          }
           {refutingFacts.size > 0 &&
           <CommentsContainer className="card-footer-item refute"
                              comments={refutingFacts}
                              header={this.renderCommentsContainerHeader('refute', 'danger', this.props.refuteScore)}/>
+          }
+          {approvingFacts.size > 0 &&
+          <CommentsContainer className="card-footer-item approve"
+                             comments={approvingFacts}
+                             header={this.renderCommentsContainerHeader('approve', 'success', this.props.approveScore)}/>
           }
         </div>
         }

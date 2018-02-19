@@ -19,7 +19,12 @@ import {flashErrorUnauthenticated} from '../../state/flashes/reducer'
 import UserPicture from '../Users/UserPicture'
 import { USER_PICTURE_SMALL } from '../../constants'
 import MediaLayout from '../Utils/MediaLayout'
+import Vote from './Vote'
 
+
+// TODO Use ReputationGuard to protect actions
+// Add the following possibilities to reputationGuard :
+// onUnauthorized = "hide" | "showMessage" | "flash"
 
 @connect(({CurrentUser, VideoDebate}, props) => ({
   currentUser: CurrentUser.data,
@@ -36,27 +41,97 @@ export class CommentDisplay extends React.PureComponent {
     this.showRepliesToggle = this.showRepliesToggle.bind(this)
 
     // Authenticated actions
-    this.vote = this.actionAuthenticated(this.vote.bind(this))
     this.actionReply = this.actionAuthenticated(this.actionReply.bind(this))
     this.handleFlag = this.actionAuthenticated(this.handleFlag.bind(this))
   }
 
-  getRemoveOrFlag() {
-    const { currentUser, comment, isFlagged, t } = this.props
-    if (currentUser.id === comment.user.id)
-      return (
-        <a onClick={this.handleDelete.bind(this)}>
-          <Icon name="times"/>
-          <span> {t('actions.delete')}</span>
-        </a>
-      )
-    else return (
-      <a onClick={this.handleFlag}
-         className={classNames('action-report', {selected: isFlagged})}>
-        <Icon name="flag"/>
-        <span> {t(isFlagged ? 'actions.flagged' : 'actions.flag')}</span>
-      </a>
+  render() {
+    const { user, text, source, score, inserted_at, approve } = this.props.comment
+    const { t, withoutActions, withoutHeader, replyingTo, nesting, replies, myVote, isVoting, hideThread, className, richMedias=true } = this.props
+    const approveClass = approve !== null && (approve ? 'approve' : 'refute')
+    const isOwnComment = this.props.comment.user.id === this.props.currentUser.id
+
+    return (
+      <div>
+        <MediaLayout
+          className={classNames('comment', className, approveClass, {isBlurred: this.state.isBlurred, hasSource: !!source})}
+          ContainerType="article"
+          left={!withoutActions &&
+            <Vote isVoting={isVoting} score={score} myVote={myVote}
+                  onVote={value => this.props.commentVote({comment: this.props.comment, value})}/>
+          }
+          content={
+            <div>
+              <div>
+                {!withoutHeader && <div className="comment-header">
+                  <UserPicture user={user} size={USER_PICTURE_SMALL}/>
+                  <UserAppellation user={user} withoutActions={withoutActions}/>
+                  <span> - </span>
+                  <TimeSince className="comment-time" time={inserted_at}/>
+                </div>}
+                {(text || (replyingTo && nesting > 6)) &&
+                <div className="comment-text">
+                  {(replyingTo && nesting > 6) &&
+                  <Tag style={{marginRight: 5}}>@{replyingTo.username}</Tag>
+                  }
+                  { text }
+                </div>
+                }
+                {source && <Source withoutPlayer={!richMedias} source={source}/>}
+              </div>
+              {!withoutActions &&
+                <nav className="comment-actions">
+                  { isOwnComment ? this.renderOwnCommentActions() : this.renderOtherCommentActions()}
+                  { replies &&
+                    <a onClick={this.showRepliesToggle}>
+                      <Icon size="small" name={this.state.showReplies ? "eye-slash" : "eye"}/>
+                      <span>
+                        {t('videoDebate:comment.replies', {
+                          context: this.state.showReplies ? 'hide' : 'show',
+                          count: replies.size
+                        })}
+                      </span>
+                    </a>
+                  }
+                </nav>
+              }
+            </div>
+          }
+        />
+        {!hideThread && replies &&
+        <CommentsContainer comments={this.state.showReplies ? replies : new List()}
+                           nesting={nesting + 1}
+                           replyingTo={user}/>
+        }
+      </div>
     )
+  }
+
+  renderOwnCommentActions() {
+    return [
+      <a key="r" onClick={this.actionReply}>
+        <Icon name="plus"/>
+        <span> {this.props.t('actions.addToThread')}</span>
+      </a>,
+      <a key="d" onClick={this.handleDelete.bind(this)}>
+        <Icon name="times"/>
+        <span> {this.props.t('actions.delete')}</span>
+      </a>
+    ]
+  }
+
+  renderOtherCommentActions() {
+    return [
+      <a key="r" onClick={this.actionReply}>
+        <Icon name="reply"/>
+        <span> {this.props.t('actions.reply')}</span>
+      </a>,
+      <a key="f" onClick={this.handleFlag}
+         className={classNames('action-report', {selected: this.props.isFlagged})}>
+        <Icon name="flag"/>
+        <span> {this.props.t(this.props.isFlagged ? 'actions.flagged' : 'actions.flag')}</span>
+      </a>
+    ]
   }
 
   handleDelete() {
@@ -95,10 +170,6 @@ export class CommentDisplay extends React.PureComponent {
     }
   }
 
-  vote(value) {
-    this.props.commentVote({comment: this.props.comment, value})
-  }
-
   showRepliesToggle() {
     this.setState({showReplies: !this.state.showReplies})
   }
@@ -106,81 +177,5 @@ export class CommentDisplay extends React.PureComponent {
   actionReply() {
     const formName = `formAddComment-${this.props.comment.statement_id}`
     this.props.change(formName, 'reply_to', this.props.comment)
-  }
-
-  render() {
-    const { user, text, source, score, inserted_at, approve } = this.props.comment
-    const { t, withoutActions, withoutHeader, replyingTo, nesting, replies, myVote, isVoting, hideThread, className, richMedias=true } = this.props
-    const approveClass = approve !== null && (approve ? 'approve' : 'refute')
-    return (
-      <div>
-        <MediaLayout
-          className={classNames('comment', className, approveClass, {isBlurred: this.state.isBlurred, hasSource: !!source})}
-          ContainerType="article"
-          left={
-           <figure>
-             {!withoutActions &&
-             <div className="vote">
-               <Icon name="chevron-up" isClickable={true}
-                     className={classNames({ selected: myVote > 0 })}
-                     onClick={() => myVote <= 0 ? this.vote(1) : this.vote(0)}/>
-               <div className="score">
-                 {isVoting ? <span className="round-spinner"/> : score}
-               </div>
-               <Icon name="chevron-down" isClickable={true}
-                     className={classNames({ selected: myVote < 0 })}
-                     onClick={() => myVote >= 0 ? this.vote(-1) : this.vote(0)}/>
-             </div>
-             }
-           </figure>
-          }
-          content={
-            <div>
-              <div>
-                {!withoutHeader && <div className="comment-header">
-                  <UserPicture user={user} size={USER_PICTURE_SMALL}/>
-                  <UserAppellation user={user} withoutActions={withoutActions}/>
-                  <span> - </span>
-                  <TimeSince className="comment-time" time={inserted_at}/>
-                </div>}
-                {text || (replyingTo && nesting > 6) &&
-                  <div className="comment-text">
-                    {(replyingTo && nesting > 6) &&
-                    <Tag style={{marginRight: 5}}>@{replyingTo.username}</Tag>
-                    }
-                    { text }
-                  </div>
-                }
-                {source && <Source withoutPlayer={!richMedias} source={source}/>}
-              </div>
-              {!withoutActions &&
-              <nav className="comment-actions">
-                <a onClick={this.actionReply}>
-                  <Icon size="small" name="reply"/>
-                  <span> {t('actions.reply')}</span>
-                </a>
-                { this.getRemoveOrFlag() }
-                { replies &&
-                <a onClick={this.showRepliesToggle}>
-                  <Icon size="small" name={this.state.showReplies ? "eye-slash" : "eye"}/>
-                  <span> {t('videoDebate:comment.replies', {
-                    context: this.state.showReplies ? 'hide' : 'show',
-                    count: replies.size
-                  })}
-                    </span>
-                </a>
-                }
-              </nav>
-              }
-            </div>
-          }
-        />
-        {!hideThread && replies &&
-          <CommentsContainer comments={this.state.showReplies ? replies : new List()}
-                             nesting={nesting + 1}
-                             replyingTo={user}/>
-        }
-      </div>
-    )
   }
 }
