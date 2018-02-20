@@ -33,8 +33,7 @@ export class ErrorView extends React.PureComponent {
       <div className="message-view">
         <Message
           type="danger"
-          header={<p><strong>{t('title')}</strong></p>}
-          body={
+          header={<p><strong>{t('title')}</strong></p>}>
             <div>
               <p>{tError(t, error)}{this.getMoreInfo()}</p>
               {(canGoBack || canReload) && <br/>}
@@ -48,7 +47,7 @@ export class ErrorView extends React.PureComponent {
                 {t('main:actions.reload')}
               </LinkWithIcon>}
             </div>
-          }
+        </Message>
         />
       </div>
     )
