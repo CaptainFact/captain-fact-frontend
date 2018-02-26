@@ -20,7 +20,10 @@ export default class ThirdPartyCallback extends React.PureComponent {
     if (!this.props.location.query.error) {
       this.props.login({
         provider: this.props.params.provider,
-        params: this.props.location.query
+        params: {
+          code: this.props.location.query.code,
+          invitation_token: this.props.location.query.state
+        }
       })
     }
   }

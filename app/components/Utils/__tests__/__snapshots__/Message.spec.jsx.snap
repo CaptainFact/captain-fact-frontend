@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`can set header 1`] = `
+<article
+  className="message is-info"
+>
+  <div
+    className="message-header"
+  >
+    Awesome title
+  </div>
+  <div
+    className="message-body"
+  >
+    Hellooow
+  </div>
+</article>
+`;
+
+exports[`can set type 1`] = `
+<article
+  className="message is-warning"
+>
+  <div
+    className="message-body"
+  >
+    Alert !
+  </div>
+</article>
+`;
+
+exports[`render message 1`] = `
+<article
+  className="message is-info"
+>
+  <div
+    className="message-body"
+  >
+    Hello
+  </div>
+</article>
+`;
+
+exports[`without body 1`] = `
+<article
+  className="message is-info"
+>
+  <div
+    className="message-body"
+  />
+</article>
+`;

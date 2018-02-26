@@ -16,8 +16,7 @@ These rules are subject to change, especially as the number of users grows.
 
 | Action                                                         | Reputation gain          |
 |----------------------------------------------------------------|--------------------------|
-| Your email is verified                                         | +15pts
-| You link your account to one of your social network's profile  | +15pts
+| Verify you email or link a third-party account                 | +15pts
 | One of your comments is voted up                               | +2pts
 | One of your sourced comment is voted up                        | +3pts
 | Someone approves one of your modifications in history          | +5pts

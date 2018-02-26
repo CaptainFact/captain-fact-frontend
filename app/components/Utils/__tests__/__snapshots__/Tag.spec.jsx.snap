@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render tag 1`] = `
+<div
+  className="tag is-small"
+>
+  Test
+</div>
+`;
+
+exports[`set size 1`] = `
+<div
+  className="tag is-small is-info"
+>
+  Test
+</div>
+`;

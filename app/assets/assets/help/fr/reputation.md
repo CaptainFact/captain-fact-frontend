@@ -12,15 +12,15 @@ Gagner en réputation vous permet de débloquer des nouveaux
 [privilèges](/help/privileges). Vous pouvez gagner jusqu'à 25 points de réputation par
 jour (les compteurs sont réinitialisés à minuit).
 
-Ces règles sont sujettes à évolution dans le temps.
+Ces règles sont sujettes à évolution dans le temps, en particulier avec la
+montée du nombre d'utilisateurs.
 
  
 # Pour gagner de la réputation
 
 | Action                                                         | Gain             |
 |----------------------------------------------------------------|------------------|
-| Faire vérifier son email                                       | +15pts
-| Relier au moins un compte tierce (Facebook)                    | +15pts
+| Vérifier son email ou relier un compte tierce (Facebook)       | +15pts
 | Un de vos commentaires recoit un vote positif                  | +2pts
 | Un de vos commentaires **sourcé** recoit un vote positif       | +3pts
 | Quelqu'un approuve une de vos modifications dans l'historique  | +5pts

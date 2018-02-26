@@ -23,8 +23,8 @@
     "loadMore_replies": "Load more replies ({{count}})",
     "loadMore_comments": "Load more comments ({{count}})",
     "replyingTo": "Replying to",
-    "approve": "Confirm",
-    "approve_reply": "Confirm this comment",
+    "approve": "Approve",
+    "approve_reply": "Approve this comment",
     "refute": "Refute",
     "refute_reply": "Refute this comment",
     "revealForm": "Add a source or comment"

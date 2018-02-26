@@ -15,6 +15,8 @@ $max-comment-width: 600px
 
   .reply_to
     margin-bottom: 5px
+    .delete
+      margin-right: 0.5em
 
   .control .textarea
     $commentboxSize: 60px
@@ -68,16 +70,18 @@ $max-comment-width: 600px
       color: grey
 
 .media.comment
-  padding: 0.1em 0
   border-top: none
   width: 100%
   &:not(:last-child)
     margin: 0
   &.isBlurred
     filter: blur(2px)
-  &.quoted .comment-text
+  &.quoted
     font-style: italic
-    color: grey
+    color: $grey
+    border-left: 0.25em solid $grey-lighter
+    padding-left: 0.5em
+    margin-left: 0.5em
   .user-picture
     margin-right: 0.25em
   .media-left
@@ -114,25 +118,6 @@ $max-comment-width: 600px
   .comment-time
     font-size: 11px
     color: #949494
-  .comment-text
-    white-space: pre-wrap
-    word-wrap: break-word
-    background-color: $white
-    padding: 0.5em 1em
-    border: 1px solid $grey-lighter
-    border-radius: 0 0.5em 0.5em 0.5em
-    display: inline-block
-    +tablet
-      &:before
-        width: 0
-        height: 0
-        border-left: 8px solid transparent
-        border-right: 8px solid transparent
-        border-bottom: 8px solid white
-        position: absolute
-        left: 0.35em
-        margin-top: -1em
-        content: ''
   .media-content
     overflow: hidden
     max-width: $max-comment-width
@@ -173,20 +158,40 @@ $max-comment-width: 600px
     &:hover
       text-decoration: underline
       text-decoration-color: $grey-light
-  .comment-actions > a
-    font-size: 11px
-    color: $grey-light
-    margin-right: 15px
-    &:hover
-      color: darken(#c7c7c7, 25)
-      text-decoration: underline
-    &> .icon
-      font-size: 10px
-      vertical-align: middle
-      width: 10px
   .action-report.selected
     color: $red
     pointer-events: none
+
+.media.comment:not(.quoted) .comment-text
+  white-space: pre-wrap
+  word-wrap: break-word
+  background-color: $white
+  padding: 0.4em 0.7em
+  border: 1px solid $grey-lighter
+  border-radius: 0 0.5em 0.5em 0.5em
+  display: inline-block
+  +tablet
+    &:before
+      width: 0
+      height: 0
+      border-left: 8px solid transparent
+      border-right: 8px solid transparent
+      border-bottom: 8px solid white
+      position: absolute
+      left: 0.35em
+      margin-top: -0.9em
+      content: ''
+
+.comment-actions a
+  font-size: 0.8em
+  color: $grey-light
+  margin-right: 1em
+  &:hover
+    color: darken(#c7c7c7, 25)
+    text-decoration: underline
+  &> .icon
+    font-size: 0.8em
+    vertical-align: middle
 
 .comments-list
   width: 100%

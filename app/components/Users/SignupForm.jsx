@@ -27,15 +27,13 @@ const SignupForm = ({location, t}) => {
       <div className="user-form">
         <Message
           type="warning"
-          header={t('invitationOnlyTitle')}
-          body={
+          header={t('invitationOnlyTitle')}>
             <div>
               {t('invitationOnlyBody')}
               <hr/>
               <InvitationRequestForm/>
             </div>
-          }
-        />
+        </Message>
       </div>
     )
 }

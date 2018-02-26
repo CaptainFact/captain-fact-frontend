@@ -23,10 +23,10 @@
     "loadMore_replies": "Charger plus de réponses ({{count}})",
     "loadMore_comments": "Charger plus de commentaires ({{count}})",
     "replyingTo": "En réponse à",
-    "approve": "Confirmer",
-    "approve_reply": "Confirmer ce commentaire",
-    "refute": "Réfuter",
-    "refute_reply": "Réfuter ce commentaire",
+    "approve": "J'approuve",
+    "approve_reply": "J'approuve ce commentaire",
+    "refute": "Je réfute",
+    "refute_reply": "Je réfute ce commentaire",
     "revealForm": "Ajouter une source ou un commentaire"
   },
   "video": {

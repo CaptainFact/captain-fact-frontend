@@ -31,7 +31,7 @@ export class CommentsContainer extends React.PureComponent {
     return (
       <div className={`comments-list ${className ? className : ''}`}>
         {header && <div className="comments-list-header">{header}</div>}
-        <FlipMove enterAnimation="fade" leaveAnimation={false} typeName={null}>
+        <FlipMove enterAnimation="fade" leaveAnimation={false}>
           {displayedComments.map(comment =>
             <div key={comment.id}>
               <CommentDisplay comment={comment} nesting={nesting} replyingTo={replyingTo}/>

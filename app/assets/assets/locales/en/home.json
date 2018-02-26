@@ -9,7 +9,7 @@
   "creatingAnAccount": "creating an account",
   "invitation": "Ask for an invitation",
   "inviteFriend": "Invite a friend",
-  "footer": "Created with {{iconLove}} in New Caledonia using ",
+  "footer": "Created with {{iconLove}} using ",
   "emailPlaceholder": "Email address",
   "inviteSuccess": "Invitation request confirmed !",
   "error_invalid_email": "Invalid email address"

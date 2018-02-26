@@ -9,7 +9,8 @@ import { withRouter } from 'react-router'
 import { renderField, validateLength, cleanStrMultiline } from "../FormUtils"
 import { COMMENT_LENGTH, USER_PICTURE_LARGE } from "../../constants"
 import TextareaAutosize from "../FormUtils/TextareaAutosize"
-import { Icon } from '../Utils/Icon'
+import CloseButton from '../Utils/CloseButton'
+import Icon from '../Utils/Icon'
 import Tag from '../Utils/Tag'
 import UserAppellation from '../Users/UserAppellation'
 import { postComment } from '../../state/video_debate/comments/effects'
@@ -92,16 +93,16 @@ export class CommentForm extends React.PureComponent {
           <div>
             {formValues && formValues.reply_to &&
             <div>
-              <Tag size="medium" className="reply_to"
-                   onClick={() => this.props.change('reply_to', null)}>
-                <Icon name="times" isClickable={true}/>
+              <Tag size="medium" className="reply_to">
+                <CloseButton onClick={() => this.props.change('reply_to', null)}/>
                 <span>
                   {t('comment.replyingTo')}&nbsp;
                   <UserAppellation user={formValues.reply_to.user}/>
                 </span>
               </Tag>
-              <CommentDisplay className="quoted" richMedias={false} withoutActions withoutHeader hideThread
-                              comment={formValues.reply_to}/>
+              <CommentDisplay className="quoted" richMedias={false}
+                              comment={formValues.reply_to}
+                              withoutActions withoutHeader hideThread/>
               <br/>
             </div>
             }
@@ -137,13 +138,13 @@ export class CommentForm extends React.PureComponent {
       <button key="comment" type="submit" className={classNames(commonClasses)}>
         {this.props.t('comment.post', i18nParams)}
       </button>,
-      <button key="approve" type="submit" className={classNames(commonClasses, 'is-success')}
-              onClick={this.postAndReset(values => this.props.postComment({...values, approve: true}))}>
-        {this.props.t('comment.approve', i18nParams)}
-      </button>,
       <button key="refute" type="submit" className={classNames(commonClasses, 'is-danger')}
               onClick={this.postAndReset(values => this.props.postComment({...values, approve: false}))}>
         {this.props.t('comment.refute', i18nParams)}
+      </button>,
+      <button key="approve" type="submit" className={classNames(commonClasses, 'is-success')}
+              onClick={this.postAndReset(values => this.props.postComment({...values, approve: true}))}>
+        {this.props.t('comment.approve', i18nParams)}
       </button>
     ])
   }

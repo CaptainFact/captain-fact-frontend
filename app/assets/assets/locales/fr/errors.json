@@ -14,7 +14,7 @@
     "action_already_done": "Cette action a déjà été effectuée",
     "unauthenticated": "Vous devez vous connecter pour effectuer cette action",
     "unauthorized": "Merci de vous (re)connecter pour continuer",
-    "noInternet": "La connection au serveur a échoué, éssayez de rafraichir la page"
+    "noInternet": "La connection au serveur a échoué, essayez de rafraichir la page"
   },
   "client": {
     "joinCrashed": "La connection au serveur a échouée",
