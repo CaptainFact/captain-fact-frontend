@@ -3,12 +3,9 @@ import PropTypes from 'prop-types'
 import { connect } from "react-redux"
 import { translate } from 'react-i18next'
 
-import Entity from '../UsersActions/Entity'
 import { UserAction } from "../UsersActions/UserAction"
-import ActionDiff from '../UsersActions/ActionDiff'
 
 import {
-  ACTION_UPDATE,
   MODERATION_ACTION_ABUSIVE,
   MODERATION_ACTION_CONFIRM,
   MODERATION_ACTION_NOTSURE
@@ -34,7 +31,7 @@ export default class ModerationEntry extends React.PureComponent {
         <div>
           <span className="moderation-entry-date">{format(entry.time, dateFormat, { locale: localeObj })}</span>
           <br />
-          <UserAction action={entry}></UserAction>
+          <UserAction action={entry}/>
           <div className="moderation-entry-buttons buttons field is-grouped">
             <button className="moderation-entry-button button is-danger" onClick={(e) => onAction(entry.id, MODERATION_ACTION_ABUSIVE)}>
               <Icon name="close" />

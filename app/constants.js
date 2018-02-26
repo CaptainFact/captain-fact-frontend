@@ -41,7 +41,7 @@ export const MOBILE_WIDTH_THRESHOLD = 768 // pixels
 export const DEFAULT_FLASH_DURATION = 6000 // milliseconds
 
 // Required reputations
-export const MODERATION_REPUTATION_REQUIRED = 5000
+export const MODERATION_REPUTATION_REQUIRED = 500
 
 /* ------ Forms ------ */
 // User

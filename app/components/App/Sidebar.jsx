@@ -11,7 +11,7 @@ import {
   MODERATION_REPUTATION_REQUIRED
 } from "../../constants"
 import { LoadingFrame } from '../Utils/LoadingFrame'
-import ReputationGuard from '../ReputationGuard'
+import ReputationGuard from '../Utils/ReputationGuard'
 import LanguageSelector from './LanguageSelector'
 import capitalize from 'voca/capitalize'
 import ScoreTag from '../Users/ScoreTag'
@@ -122,15 +122,7 @@ export default class Sidebar extends React.PureComponent {
         <div className="menu-content">
           { this.renderUserSection() }
           <p className="menu-label">{ t('menu.content') }</p>
-          <ul className="menu-list">
-            <this.MenuListLink to="/videos" iconName="television" onlyActiveOnIndex={true}>
-              { capitalize(t('entities.video_plural')) }
-            </this.MenuListLink>
-            <this.MenuListLink to="/speakers" iconName="users" className="is-disabled">
-              { capitalize(t('entities.speaker_plural')) }
-            </this.MenuListLink>
-          </ul>
-
+          {this.renderMenuContent()}
           <p className="menu-label hide-when-collapsed">{ t('menu.language') }</p>
           <LanguageSelector className="hide-when-collapsed"
                             handleChange={v => i18n.changeLanguage(v)}
@@ -139,12 +131,6 @@ export default class Sidebar extends React.PureComponent {
 
           <p className="menu-label">{ t('menu.other') }</p>
           <ul className="menu-list">
-            <ReputationGuard requiredRep={MODERATION_REPUTATION_REQUIRED}
-              showNotEnough={false} showLoading={false}>
-              <this.MenuListLink to="/moderation" iconName="flag" className="hide-when-collapsed">
-                { t('menu.moderation') }
-              </this.MenuListLink>
-            </ReputationGuard>
             <this.MenuListLink to="/help/contact" iconName="envelope" className="hide-when-collapsed">
               { t('menu.contact') }
             </this.MenuListLink>
@@ -157,6 +143,26 @@ export default class Sidebar extends React.PureComponent {
           </ul>
         </div>
       </aside>
+    )
+  }
+
+  renderMenuContent() {
+    const t = this.props.t
+    return (
+      <ul className="menu-list">
+        <this.MenuListLink to="/videos" iconName="television" onlyActiveOnIndex={true}>
+          { capitalize(t('entities.video_plural')) }
+        </this.MenuListLink>
+        <this.MenuListLink to="/speakers" iconName="users" className="is-disabled">
+          { capitalize(t('entities.speaker_plural')) }
+        </this.MenuListLink>
+        <ReputationGuard requiredRep={MODERATION_REPUTATION_REQUIRED}
+                         showNotEnough={false} showLoading={false}>
+          <this.MenuListLink to="/moderation" iconName="flag" className="hide-when-collapsed">
+            { t('menu.moderation') }
+          </this.MenuListLink>
+        </ReputationGuard>
+      </ul>
     )
   }
 

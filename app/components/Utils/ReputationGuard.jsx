@@ -1,8 +1,8 @@
 import React from "react"
 import { connect } from "react-redux"
 import { translate } from 'react-i18next'
-import { isAuthenticated, hasReputation } from '../state/users/current_user/selectors'
-import { LoadingFrame, LinkWithIcon } from "./Utils"
+import { isAuthenticated, hasReputation } from '../../state/users/current_user/selectors'
+import { LoadingFrame } from "."
 
 @connect((state, props) => ({
   isAuthenticated: isAuthenticated(state),
@@ -19,5 +19,5 @@ export default class ReputationGuard extends React.PureComponent {
     if (hasReputation)
       return this.props.children
     return showNotEnough ? <div>{ t('client.notEnoughReputation') }</div> : ''
-    }
+  }
 }
