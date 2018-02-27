@@ -12,8 +12,8 @@ export const fetchRandomModeration = () => createEffect(
 
 export const postModerationFeedback = (entryId, action) => createEffect(
   HttpApi.post("moderation/feedback", {
-    "value": action,
-    "action_id": entryId
+    value: action,
+    action_id: entryId
   }), {
     after: removeItem(entryId)
   }

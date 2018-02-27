@@ -5,8 +5,7 @@
     "speaker": "speaker",
     "speaker_plural": "speakers",
     "statement": "statement",
-    "statement_plural": "statements",
-    "comment": "comment"
+    "statement_plural": "statements"
   },
   "menu": {
     "loginSignup": "Login / Signup",
