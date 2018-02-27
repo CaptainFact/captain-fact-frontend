@@ -48,7 +48,7 @@ app
 │   │   └── selectors.js => re-select selectors to select data in state
 │   └── ...
 ├── styles => stylesheet in .sass format, all included from application.sass
-├── i18n.js => I18n initialization
+├── i18n => I18n initialization + translation files
 └── router.jsx => Application router and main entry point
 ```
 

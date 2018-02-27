@@ -19,7 +19,7 @@ comment on these tasks directly.
 
 - **Ideas**: Participate in an issue thread or start your own to have your voice heard
 - **Resources**: Submit a pull request to add to RESOURCES.md with links to related content
-- **Translations**: You can create and edit translations for the interface in `app/assets/assets/[locale]/[file].json`.
+- **Translations**: You can create and edit translations for the interface in `app/i18n/[locale]/[file].js`.
                     To translate help pages, get a look at `app/assets/assets/help/[locale]/[page].md`
 - **Documentation**: Fix typos, clarify language, and add explanations about how things work
 - **Code**: Submit new features or bug fixes, see "Code contributions" below

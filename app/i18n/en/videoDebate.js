@@ -1,4 +1,4 @@
-{
+export default {
   "debate": "Debate",
   "history": "History",
   "approve": "Confirm",

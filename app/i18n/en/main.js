@@ -1,4 +1,4 @@
-{
+export default {
   "entities": {
     "video": "video",
     "video_plural": "videos",

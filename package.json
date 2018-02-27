@@ -83,7 +83,6 @@
     "jest": "^22.0.6",
     "jest-localstorage-mock": "^2.2.0",
     "jsenv-brunch": "^2.0.0",
-    "json-brunch": "^1.5.4",
     "regenerator-runtime": "^0.11.1",
     "sass-brunch": "https://github.com/brunch/sass-brunch",
     "uglify-js-brunch": "^2.10.0",

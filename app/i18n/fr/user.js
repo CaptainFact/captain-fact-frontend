@@ -1,4 +1,4 @@
-{
+export default {
   "username": "Nom d'utilisateur·rice",
   "realName": "Votre vrai nom",
   "password": "Mot de passe",

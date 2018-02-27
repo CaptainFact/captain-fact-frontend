@@ -1,4 +1,4 @@
-{
+export default {
   "categories": {
     "siteUsage": "Site usage",
     "contribute": "Contribute",

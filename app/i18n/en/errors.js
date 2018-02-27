@@ -1,4 +1,4 @@
-{
+export default {
   "title": "Error",
   "server": {
     "unknown": "Something didn't work on our side, we'll check it out !",

@@ -1,4 +1,4 @@
-{
+export default {
   "header": {
     "date": "Date"
   },

@@ -1,4 +1,4 @@
-{
+export default {
   "compare_show": "Comparer",
   "compare_hide": "Masquer",
   "compareAll": "Tout comparer",
