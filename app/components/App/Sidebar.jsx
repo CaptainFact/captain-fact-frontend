@@ -156,8 +156,7 @@ export default class Sidebar extends React.PureComponent {
         <this.MenuListLink to="/speakers" iconName="users" className="is-disabled">
           { capitalize(t('entities.speaker_plural')) }
         </this.MenuListLink>
-        <ReputationGuard requiredRep={MODERATION_REPUTATION_REQUIRED}
-                         showNotEnough={false} showLoading={false}>
+        <ReputationGuard requiredRep={MODERATION_REPUTATION_REQUIRED}>
           <this.MenuListLink to="/moderation" iconName="flag" className="hide-when-collapsed">
             { t('menu.moderation') }
           </this.MenuListLink>

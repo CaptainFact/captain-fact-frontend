@@ -13,7 +13,8 @@
   },
   "jest": {
     "setupFiles": [
-      "./tests_setup.js"
+      "./tests_setup.js",
+      "jest-localstorage-mock"
     ],
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
@@ -80,6 +81,7 @@
     "gzip-brunch": "^1.3.0",
     "html-pages-brunch": "^2.6.0",
     "jest": "^22.0.6",
+    "jest-localstorage-mock": "^2.2.0",
     "jsenv-brunch": "^2.0.0",
     "json-brunch": "^1.5.4",
     "regenerator-runtime": "^0.11.1",

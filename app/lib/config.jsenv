@@ -1,0 +1,9 @@
+function getConfig(env) {
+  return {
+      JS_ENV:       env.JS_ENV || 'dev',
+      HTTP_API_URL: env.HTTP_API_URL || 'http://localhost:4000',
+      WS_API_URL:   env.WS_API_URL || 'ws://localhost:4000/socket',
+      FRONTEND_URL: env.FRONTEND_URL || 'http://localhost:3333',
+      FB_APP_ID:    env.FB_APP_ID || '506726596325615'
+  }
+}

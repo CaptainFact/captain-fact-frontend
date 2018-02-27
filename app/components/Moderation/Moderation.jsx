@@ -20,7 +20,7 @@ export default class Moderation extends React.PureComponent {
     const { items, t } = this.props
 
     return (
-      <ReputationGuard requiredRep={MODERATION_REPUTATION_REQUIRED}>
+      <ReputationGuard requiredRep={MODERATION_REPUTATION_REQUIRED} showLoading showNotEnough>
         <div className="container">
           <h1 className="title is-1 has-text-centered">{t('title')}</h1>
           {items && items.map(el =>

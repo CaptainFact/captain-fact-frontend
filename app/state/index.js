@@ -4,7 +4,7 @@ import Immutable from 'immutable'
 import promiseMiddleware from 'redux-promise'
 import thunk from 'redux-thunk'
 
-import { JS_ENV } from '../config.jsenv'
+import { JS_ENV } from '../config'
 
 // Reducers
 import FlashesReducer from './flashes/reducer'
