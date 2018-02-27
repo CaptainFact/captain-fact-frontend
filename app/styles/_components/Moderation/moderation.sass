@@ -2,10 +2,20 @@
   &-date
     font-weight: bold
     display: block
-  &-buttons
+  .buttons
     padding-top: 2em
-    display: flex 
+    display: flex
     justify-content: space-between
-    margin: 0 10%
-  &-button
-    width: 25%
+    flex-wrap: wrap
+    .button
+      flex-basis: 100%
+      margin-bottom: 0.5em
+      font-size: 1.2em
+    +desktop
+      flex-wrap: nowrap
+      flex-shrink: 1
+      .button
+        flex-basis: 33%
+    +mobile
+      .button
+        font-size: 1em

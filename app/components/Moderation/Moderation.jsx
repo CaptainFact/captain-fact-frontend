@@ -1,6 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import { translate } from 'react-i18next'
+import Message from '../Utils/Message'
 
 import ReputationGuard from '../Utils/ReputationGuard'
 
@@ -16,23 +17,29 @@ import { MODERATION_REPUTATION_REQUIRED } from '../../constants'
 }), { fetchRandomModeration, postModerationFeedback })
 @translate('moderation')
 export default class Moderation extends React.PureComponent {
-  render() {
-    const { items, t } = this.props
-
-    return (
-      <ReputationGuard requiredRep={MODERATION_REPUTATION_REQUIRED} showLoading showNotEnough>
-        <div className="container">
-          <h1 className="title is-1 has-text-centered">{t('title')}</h1>
-          {items && items.map(el =>
-            <ModerationEntry key={el.id} entry={el}
-                             onAction={this.onEntryAction.bind(this)}/>)
-          }
-        </div>
-      </ReputationGuard>)
-  }
-
   componentDidMount() {
     this.props.fetchRandomModeration()
+  }
+
+  render() {
+    return (
+      <ReputationGuard requiredRep={MODERATION_REPUTATION_REQUIRED} showLoading showNotEnough>
+        <div className="section container">
+          <h1 className="title is-1 has-text-centered">{this.props.t('title')}</h1>
+          {this.getItems()}
+        </div>
+      </ReputationGuard>
+    )
+  }
+
+  getItems() {
+    const items = this.props.items
+
+    if (!items || items.size === 0)
+      return <Message className="has-text-centered">{this.props.t('emptyModeration')}</Message>
+    return items.map(el =>
+      <ModerationEntry key={el.id} entry={el} onAction={this.onEntryAction.bind(this)}/>
+    )
   }
 
   onEntryAction(entryId, action) {

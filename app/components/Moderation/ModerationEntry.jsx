@@ -19,9 +19,8 @@ import { locales } from '../../i18n/i18n'
 @connect(state => ({ locale: state.UserPreferences.locale }))
 @translate('moderation', 'main')
 export default class ModerationEntry extends React.PureComponent {
-
   render() {
-    const { entry, t, onAction, time, locale } = this.props
+    const { entry, locale, t, onAction } = this.props
     const localeObj = locales[locale]
     const dateFormat = localeObj.defaultDateTimeFormat
 
@@ -30,18 +29,21 @@ export default class ModerationEntry extends React.PureComponent {
       <div className="box moderation-entry">
         <div>
           <span className="moderation-entry-date">{format(entry.time, dateFormat, { locale: localeObj })}</span>
-          <br />
+          <br/>
           <UserAction action={entry}/>
-          <div className="moderation-entry-buttons buttons field is-grouped">
-            <button className="moderation-entry-button button is-danger" onClick={(e) => onAction(entry.id, MODERATION_ACTION_ABUSIVE)}>
+          <div className="buttons field is-grouped">
+            <button className="button is-danger"
+                    onClick={() => onAction(entry.id, MODERATION_ACTION_ABUSIVE)}>
               <Icon name="close" />
               <span>{t('actions.flag_abusive')}</span>
             </button>
-            <button className="moderation-entry-button button" onClick={(e) => onAction(entry.id, MODERATION_ACTION_NOTSURE)}>
+            <button className="button"
+                    onClick={() => onAction(entry.id, MODERATION_ACTION_NOTSURE)}>
               <Icon name="ban" />
               <span>{t('actions.unsure')}</span>
             </button>
-            <button className="moderation-entry-button button is-success" onClick={(e) => onAction(entry.id, MODERATION_ACTION_CONFIRM)}>
+            <button className="button is-success"
+                    onClick={() => onAction(entry.id, MODERATION_ACTION_CONFIRM)}>
               <Icon name="check" />
               <span>{t('actions.confirm')}</span>
             </button>

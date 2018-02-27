@@ -4,7 +4,7 @@ import { diffWordsWithSpace } from 'diff'
 import titleCase from 'voca/title_case'
 
 import {
-  ACTION_DELETE, ACTION_REMOVE, ACTION_RESTORE, ENTITY_SPEAKER,
+  ACTION_DELETE, ACTION_REMOVE, ACTION_RESTORE, ENTITY_COMMENT, ENTITY_SPEAKER,
   ENTITY_STATEMENT, ENTITY_VIDEO
 } from '../../constants'
 import parseDateTime from '../../lib/parse_datetime'
@@ -71,7 +71,6 @@ class ActionDiff extends PureComponent {
       prevState = this.buildReferenceEntity(entityActions.slice(actionIdx + 1))
 
     // Build changes object like key: [diffs]
-    console.log(this.getActionChanges(action, prevState))
     return new Map().withMutations(diff => {
       for (let [key, newValue] of this.getActionChanges(action, prevState).entrySeq()) {
         const valueDiff = this.diffEntry(key, prevState.get(key), newValue)
@@ -81,7 +80,6 @@ class ActionDiff extends PureComponent {
   }
 
   getActionChanges(action, prevState) {
-    console.log(action)
     if ([ACTION_DELETE, ACTION_REMOVE].includes(action.type))
       return prevState.map(() => null)
     else if (action.type === ACTION_RESTORE)
@@ -115,12 +113,8 @@ class ActionDiff extends PureComponent {
       return this.buildReferenceStatement(actions, base)
     else if (entity === ENTITY_SPEAKER)
       return this.buildReferenceSpeaker(actions, base)
-    else if (entity === ENTITY_VIDEO)
-      return this.buildReferenceVideo(actions, base)
-  }
-
-  buildReferenceVideo(actions, base=null) {
-    return new Map()
+    else if (entity === ENTITY_VIDEO || entity === ENTITY_COMMENT)
+      return new Map()
   }
 
   buildReferenceStatement(actions, base=null) {
@@ -135,19 +129,12 @@ class ActionDiff extends PureComponent {
     return this.completeReference(base, actions, ['full_name', 'title'])
   }
 
-  prepareAction(action) {
-    action.time = parseDateTime(action.time)
-    action.changes = new Map(action.changes)
-    return UserAction(action)
-  }
-
   diffEntry(key, prevValue, newValue) {
-    if (prevValue === newValue)
+    if (!prevValue && newValue)
       return [{added: true, value: this.formatValue(key, newValue)}]
 
     // Format numbers like prevNumber -> newNumber
     if (typeof(newValue) === "number") {
-      // Format time like 0:42 -> 1:35
       prevValue = this.formatValue(key, prevValue)
       newValue = this.formatValue(key, newValue)
 
@@ -162,11 +149,15 @@ class ActionDiff extends PureComponent {
   }
 
   formatValue(key, value) {
-    if (key === "time")
+    if (!value)
+      return value
+    // Format time like 0:42 -> 1:35
+    else if (key === "time")
       return value ? formatSeconds(value) : ""
+    else if (key === "source" || key === "url")
+      return <a href={value} target="_blank">{value}</a>
     return value
   }
-
 }
 
 export default ActionDiff

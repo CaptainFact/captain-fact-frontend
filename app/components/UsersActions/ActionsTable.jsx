@@ -61,7 +61,6 @@ class ActionsTable extends PureComponent {
       onClick = () => this.setState({expendedDiffs: this.props.actions.map(a => a.id)})
     else
       onClick = () => this.setState({expendedDiffs: this.state.expendedDiffs.clear()})
-    console.log(isMostlyComparing)
     return (
       <a className="button"
          title={this.props.t(isMostlyComparing ? 'hideAll' : 'compareAll')}

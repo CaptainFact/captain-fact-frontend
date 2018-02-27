@@ -1,5 +1,5 @@
 import HttpApi from '../../API/http_api'
-import { setLoading, setVideos } from './reducer'
+import { setLoading, setVideos, setSubmitting } from './reducer'
 import { createEffect, returnSuccess, returnError, generateFSAError } from '../utils'
 import { errorToFlash } from '../flashes/reducer'
 

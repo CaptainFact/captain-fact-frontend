@@ -3,9 +3,10 @@
     "date": "Date"
   },
   "actions": {
-    "flag_abusive": "Marquer comme abusif",
+    "flag_abusive": "Signalement abusif",
     "unsure": "Pas sûr",
-    "confirm": "Confirmer"
+    "confirm": "Confirmer le signalement"
   },
-  "title": "Modération"
+  "title": "Modération",
+  "emptyModeration": "Il n'y a rien à modérer ici. Allez nourrir quelques trolls et revenez plus tard."
 }
