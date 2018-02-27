@@ -1,5 +1,5 @@
 import trimRight from 'voca/trim_right'
-import { HTTP_API_URL } from "../config.jsenv"
+import { HTTP_API_URL } from "../config"
 
 const cleanUrl = trimRight(HTTP_API_URL, '/api')
 const isAsoluteRegex = /^https?:\/\/(.*)/

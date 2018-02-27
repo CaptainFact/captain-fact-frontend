@@ -1,4 +1,4 @@
-import { FRONTEND_URL, FB_APP_ID } from '../config.jsenv'
+import { FRONTEND_URL, FB_APP_ID } from '../config'
 import { optionsToQueryString } from './url_utils'
 
 

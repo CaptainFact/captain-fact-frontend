@@ -5,8 +5,13 @@ import { translate } from 'react-i18next'
 import classNames from 'classnames'
 
 import { Icon } from "../Utils"
-import { MOBILE_WIDTH_THRESHOLD, USER_PICTURE_SMALL } from "../../constants"
+import {
+  MOBILE_WIDTH_THRESHOLD,
+  USER_PICTURE_SMALL,
+  MODERATION_REPUTATION_REQUIRED
+} from "../../constants"
 import { LoadingFrame } from '../Utils/LoadingFrame'
+import ReputationGuard from '../Utils/ReputationGuard'
 import LanguageSelector from './LanguageSelector'
 import capitalize from 'voca/capitalize'
 import ScoreTag from '../Users/ScoreTag'
@@ -15,7 +20,6 @@ import { closeSidebar, toggleSidebar } from '../../state/user_preferences/reduce
 import UserPicture from '../Users/UserPicture'
 import i18n from '../../i18n/i18n'
 import Logo from './Logo'
-
 
 @connect(state => ({
   CurrentUser: state.CurrentUser.data,
@@ -118,15 +122,7 @@ export default class Sidebar extends React.PureComponent {
         <div className="menu-content">
           { this.renderUserSection() }
           <p className="menu-label">{ t('menu.content') }</p>
-          <ul className="menu-list">
-            <this.MenuListLink to="/videos" iconName="television" onlyActiveOnIndex={true}>
-              { capitalize(t('entities.video_plural')) }
-            </this.MenuListLink>
-            <this.MenuListLink to="/speakers" iconName="users" className="is-disabled">
-              { capitalize(t('entities.speaker_plural')) }
-            </this.MenuListLink>
-          </ul>
-
+          {this.renderMenuContent()}
           <p className="menu-label hide-when-collapsed">{ t('menu.language') }</p>
           <LanguageSelector className="hide-when-collapsed"
                             handleChange={v => i18n.changeLanguage(v)}
@@ -147,6 +143,25 @@ export default class Sidebar extends React.PureComponent {
           </ul>
         </div>
       </aside>
+    )
+  }
+
+  renderMenuContent() {
+    const t = this.props.t
+    return (
+      <ul className="menu-list">
+        <this.MenuListLink to="/videos" iconName="television" onlyActiveOnIndex={true}>
+          { capitalize(t('entities.video_plural')) }
+        </this.MenuListLink>
+        <this.MenuListLink to="/speakers" iconName="users" className="is-disabled">
+          { capitalize(t('entities.speaker_plural')) }
+        </this.MenuListLink>
+        <ReputationGuard requiredRep={MODERATION_REPUTATION_REQUIRED}>
+          <this.MenuListLink to="/moderation" iconName="flag" className="hide-when-collapsed">
+            { t('menu.moderation') }
+          </this.MenuListLink>
+        </ReputationGuard>
+      </ul>
     )
   }
 

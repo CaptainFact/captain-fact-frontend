@@ -1,5 +1,5 @@
 import { Socket } from "phoenix"
-import { WS_API_URL } from "../config.jsenv"
+import { WS_API_URL } from "../config"
 import { parseServerError } from './server_error'
 import noInternetError from './no_internet_error'
 

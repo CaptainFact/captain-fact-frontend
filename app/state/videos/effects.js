@@ -1,8 +1,7 @@
 import HttpApi from '../../API/http_api'
-import { setLoading, setSubmitting, setVideos } from './reducer'
-import {createEffect, returnSuccess, returnError, generateFSAError} from '../utils'
+import { setLoading, setVideos, setSubmitting } from './reducer'
+import { createEffect, returnSuccess, returnError, generateFSAError } from '../utils'
 import { errorToFlash } from '../flashes/reducer'
-
 
 /**
  * Fetch videos list
@@ -32,3 +31,4 @@ export const postVideo = video => createEffect(
     catch: [setSubmitting(false), errorToFlash, generateFSAError]
   }
 )
+

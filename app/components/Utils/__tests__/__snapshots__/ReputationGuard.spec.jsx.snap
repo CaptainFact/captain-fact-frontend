@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`display loading 1`] = `<Translate(LoadingFrame) />`;
+
+exports[`should render children if allowed to 1`] = `"HelloWorld"`;
+
+exports[`show error 1`] = `
+<withRouter(Translate(ErrorView))
+  error="notEnoughReputation"
+/>
+`;
