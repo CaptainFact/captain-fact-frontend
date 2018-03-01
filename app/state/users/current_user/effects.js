@@ -1,5 +1,5 @@
 import HttpApi from '../../../API/http_api'
-import {set as setCurrentUser, setLoading, reset, setPosting, userLogin} from './reducer'
+import { set as setCurrentUser, setLoading, reset, setPosting, userLogin } from './reducer'
 import { setUser as setDisplayedUser } from '../displayed_user/reducer'
 import { createEffect } from '../../utils'
 

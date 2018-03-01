@@ -25,7 +25,7 @@ i18n
     lng: store.getState().UserPreferences.locale,
     defaultNS: 'main',
     joinArrays: '\n',
-    debug: JS_ENV !== 'prod',
+    debug: JS_ENV === 'dev',
     react: {
       wait: true
     },

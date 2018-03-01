@@ -1,6 +1,8 @@
 import Enzyme, { shallow, render, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import React from 'react'
+import 'isomorphic-fetch'
+import 'fetch-mock'
 
 
 global.React = React
