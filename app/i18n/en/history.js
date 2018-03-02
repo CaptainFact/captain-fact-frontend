@@ -9,6 +9,7 @@ export default {
   "revert": "Revert",
   "entity": "Entity",
   "moderation": "Moderation",
+  "deletedUser": "Deleted user",
   "action": {
     "1": "Created",
     "2": "Removed",
