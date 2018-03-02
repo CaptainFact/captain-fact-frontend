@@ -9,6 +9,7 @@ export default {
   "revert": "Restaurer",
   "entity": "Entité",
   "moderation": "Modération",
+  "deletedUser": "Compte supprimé",
   "action": {
     "1": "Créé",
     "2": "Retiré",

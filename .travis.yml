@@ -1,6 +1,5 @@
 stages:
   - name: test
-    if: NOT branch IN (master, staging)
   - name: deploy
     if: branch IN (master, staging) OR tag =~ ^v\d+
 
@@ -11,7 +10,7 @@ jobs:
       node_js: [node]
       cache: {directories: [node_modules]}
       script:
-        - npm test
+        - npm run coverage && cat ./coverage/lcov.info | coveralls
     - stage: deploy
       language: generic
       sudo: required
@@ -20,7 +19,6 @@ jobs:
         - CF_FRONTEND_IMAGE=captainfact/frontend:$TRAVIS_BRANCH
       script:
         - docker build --build-arg BUILD_ENV=$TRAVIS_BRANCH -t $CF_FRONTEND_IMAGE . &&
-          docker run --rm -it $CF_FRONTEND_IMAGE test &&
           if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
               docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
               echo "Pushing $CF_FRONTEND_IMAGE";

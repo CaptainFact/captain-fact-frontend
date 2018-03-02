@@ -1,6 +1,6 @@
 import "isomorphic-fetch"
 import trimRight from 'voca/trim_right'
-import fetch from 'isomorphic-fetch'
+import 'isomorphic-fetch'
 
 import { SocketApi } from "./socket_api"
 import { HTTP_API_URL } from "../config"

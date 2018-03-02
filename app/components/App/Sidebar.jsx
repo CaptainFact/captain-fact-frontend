@@ -5,11 +5,8 @@ import { translate } from 'react-i18next'
 import classNames from 'classnames'
 
 import { Icon } from "../Utils"
-import {
-  MOBILE_WIDTH_THRESHOLD,
-  USER_PICTURE_SMALL,
-  MODERATION_REPUTATION_REQUIRED
-} from "../../constants"
+import { MOBILE_WIDTH_THRESHOLD, USER_PICTURE_SMALL } from '../../constants'
+import { MODERATION_REPUTATION_REQUIRED } from "../../constants"
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import ReputationGuard from '../Utils/ReputationGuard'
 import LanguageSelector from './LanguageSelector'
@@ -59,7 +56,7 @@ export default class Sidebar extends React.PureComponent {
     const baseLink = `/u/${username}`
     return (
       <div className="user-section">
-        <nav className="level user-quicklinks">
+        <nav className="level user-quicklinks is-mobile">
           <div className="level-left menu-list">
             <this.MenuLink to={baseLink} className="my-profile-link" onlyActiveOnIndex={true}>
               <div className="current-user-link">
@@ -72,7 +69,10 @@ export default class Sidebar extends React.PureComponent {
             </this.MenuLink>
           </div>
           <div className="level-right">
-            <a className="button" onClick={() => this.props.logout()}>Logout</a>
+            <a className="button" title={this.props.t('menu.logout')}
+               onClick={() => this.props.logout()}>
+              <Icon name="sign-out"/>
+            </a>
           </div>
         </nav>
         <ul className="menu-list user-links">
@@ -166,6 +166,6 @@ export default class Sidebar extends React.PureComponent {
   }
 
   usernameFontSize() {
-    return `${1.5 - this.props.CurrentUser.username.length / 20}em`
+    return `${1.5 - this.props.CurrentUser.username.length / 38}em`
   }
 }

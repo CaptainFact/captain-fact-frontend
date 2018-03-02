@@ -1,27 +1,31 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import Immutable from 'immutable'
 import PropTypes from 'prop-types'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 
+import { flashErrorUnauthenticated } from '../../state/flashes/reducer'
+import { isAuthenticated } from '../../state/users/current_user/selectors'
+import { revertVideoDebateUserAction } from '../../state/video_debate/history/effects'
 import { TimeSince } from '../Utils/TimeSince'
 import UserAppellation from '../Users/UserAppellation'
 import { Icon } from '../Utils/Icon'
 import ActionDiff from './ActionDiff'
-import { generateAllDiffs, generateDiff, hideAllDiffs, hideDiff } from '../../state/user_actions/reducer'
 import ActionIcon from './ActionIcon'
 import EntityTitle from './EntityTitle'
 import { ACTION_DELETE, ACTION_REMOVE } from '../../constants'
-import { revertVideoDebateUserAction } from '../../state/video_debate/history/effects'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 
 
 @translate(['history', 'main'])
 @connect(
-  state => ({lastActionsIds: state.UsersActions.lastActionsIds}),
-  {revertVideoDebateUserAction}
+  state => ({
+    lastActionsIds: state.UsersActions.lastActionsIds,
+    isAuthenticated: isAuthenticated(state)
+  }),
+  {revertVideoDebateUserAction, flashErrorUnauthenticated}
 )
-class ActionsTable extends PureComponent {
+class ActionsTable extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {expendedDiffs: new Immutable.List()}
@@ -85,14 +89,14 @@ class ActionsTable extends PureComponent {
   }
 
   renderActionLine(action, isDiffing=false) {
-    const {showRestore, showEntity, t, revertVideoDebateUserAction} = this.props
+    const { showRestore, showEntity, t } = this.props
     const reversible = showRestore && this.props.lastActionsIds.includes(action.id) &&
       ([ACTION_DELETE, ACTION_REMOVE].includes(action.type))
 
     return (
       <tr key={action.id}>
         <td><TimeSince time={ action.time }/></td>
-        <td><UserAppellation user={action.user} compact/></td>
+        <td>{this.renderUser(action.user)}</td>
         <td><ActionIcon type={action.type}/><strong> { t(`action.${action.type}`) }</strong></td>
         {showEntity && <td><EntityTitle entity={action.entity} entityId={action.entity_id}/></td>}
         <td>
@@ -104,7 +108,7 @@ class ActionsTable extends PureComponent {
         {showRestore &&
           <td>
             {reversible &&
-              <a className="button" onClick={() => revertVideoDebateUserAction(action)}>
+              <a className="button" onClick={() => this.revertAction(action)}>
                 <Icon size="small" name="undo"/>
                 <span>{t('revert')}</span>
               </a>
@@ -125,6 +129,11 @@ class ActionsTable extends PureComponent {
     )
   }
 
+  renderUser = user =>
+    user ?
+      <UserAppellation user={user} compact/> :
+      <span className="has-text-grey-lighter is-italic">{this.props.t('deletedUser')}</span>
+
   renderDiffLine = action =>
     <tr key={`${action.id}-diff`}>
       <td colSpan={this.getNbCols()} style={{padding: 0}}>
@@ -143,6 +152,13 @@ class ActionsTable extends PureComponent {
 
   getNbCols = () =>
     7 - !this.props.showRestore - !this.props.showEntity
+
+  revertAction = action => {
+    if (!this.props.isAuthenticated)
+      this.props.flashErrorUnauthenticated()
+    else
+      this.props.revertVideoDebateUserAction(action)
+  }
 }
 
 ActionsTable.defaultProps = {
