@@ -9,6 +9,7 @@ export default {
   },
   "menu": {
     "loginSignup": "Connexion",
+    "logout": "Se déconnecter",
     "settings": "Paramètres",
     "profile": "Profil",
     "activity": "Activité",

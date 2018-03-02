@@ -9,6 +9,7 @@ export default {
   },
   "menu": {
     "loginSignup": "Login / Signup",
+    "logout": "Logout",
     "settings": "Settings",
     "profile": "Profile",
     "activity": "Activity",
