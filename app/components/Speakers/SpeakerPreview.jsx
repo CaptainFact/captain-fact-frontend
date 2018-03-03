@@ -56,7 +56,7 @@ export class SpeakerPreview extends React.PureComponent {
 
   renderSpeakerThumb(speaker) {
     if (speaker.picture)
-      return (<img className="speaker-picture" src={staticResource(speaker.picture)}/>)
+      return (<img className="speaker-picture" src={speaker.picture}/>)
     return (<Icon className="speaker-picture" name="user" size="large" style={{color: "grey"}}/>)
   }
 

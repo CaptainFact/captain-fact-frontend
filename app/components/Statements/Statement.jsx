@@ -114,7 +114,7 @@ export class Statement extends React.PureComponent {
               setScrollTo({id: statement.id, __forceAutoScroll: true})
             }}/>
             {speaker && speaker.picture &&
-            <img className="speaker-mini" src={staticResource(speaker.picture)}/>
+            <img className="speaker-mini" src={speaker.picture}/>
             }
             <strong>{speaker ? speaker.full_name : ""}</strong>
           </p>
