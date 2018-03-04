@@ -9,7 +9,7 @@ import ReputationGuard from '../Utils/ReputationGuard'
 import { fetchRandomModeration, postModerationFeedback } from '../../state/moderation/effects'
 import ModerationEntry from './ModerationEntry'
 
-import { MODERATION_REPUTATION_REQUIRED } from '../../constants'
+import { MIN_REPUTATION_MODERATION } from '../../constants'
 
 @connect(state => ({
   isLoading: state.Moderation.isLoading,
@@ -29,7 +29,7 @@ export default class Moderation extends React.PureComponent {
 
   render() {
     return (
-      <ReputationGuard requiredRep={MODERATION_REPUTATION_REQUIRED} showLoading showNotEnough>
+      <ReputationGuard requiredRep={MIN_REPUTATION_MODERATION} showLoading showNotEnough>
         <div className="section container">
           <h1 className="title is-1 has-text-centered">{this.props.t('title')}</h1>
 

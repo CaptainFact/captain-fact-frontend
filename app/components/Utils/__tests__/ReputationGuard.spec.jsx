@@ -1,3 +1,4 @@
+import User from '../../../state/users/record'
 import { ReputationGuard } from '../ReputationGuard'
 
 test("should not render anything if no permissions until specified otherwise", () => {
@@ -25,4 +26,29 @@ test("display loading", () => {
 
 test("show error", () => {
   snapshot(<ReputationGuard hasReputation={false} showNotEnough>HelloWorld</ReputationGuard>)
+})
+
+test("can specify a custom verifyFunc", () => {
+  const templateUser = new User({id: 420056})
+  const truthyVerify = shallow(
+    <ReputationGuard hasReputation={false} user={templateUser} verifyFunc={(user, hasReputation) => {
+        expect(user.id).toBe(templateUser.id)
+        expect(hasReputation).toBeFalsy()
+        return true
+      }}>
+        AwesomeValue
+    </ReputationGuard>
+  )
+  expect(truthyVerify.text()).toBe("AwesomeValue")
+
+  const falsyVerify = shallow(
+    <ReputationGuard hasReputation={true} user={templateUser} verifyFunc={(user, hasReputation) => {
+      expect(user.id).toBe(templateUser.id)
+      expect(hasReputation).toBeTruthy()
+      return false
+    }}>
+      AwesomeValue
+    </ReputationGuard>
+  )
+  expect(falsyVerify.isEmptyRender()).toBeTruthy()
 })
