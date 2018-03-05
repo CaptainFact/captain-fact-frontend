@@ -4,6 +4,7 @@ import { translate } from 'react-i18next'
 
 import { staticResource } from "../../API"
 import { LoadingFrame, LinkWithIcon } from "../Utils"
+import ReputationGuard from '../Utils/ReputationGuard'
 import TimeDisplay from '../Utils/TimeDisplay'
 import { StatementForm } from "./StatementForm"
 import { CommentForm, CommentsContainer } from "../Comments"
@@ -11,7 +12,6 @@ import ModalConfirmDelete from "../Modal/ModalConfirmDelete"
 
 import * as statementSelectors from "../../state/video_debate/statements/selectors"
 import * as commentsSelectors from "../../state/video_debate/comments/selectors"
-import { isAuthenticated } from '../../state/users/current_user/selectors'
 import { ModalHistory } from '../VideoDebate/ModalHistory'
 import Tag from '../Utils/Tag'
 import { addModal } from '../../state/modals/reducer'
@@ -19,7 +19,10 @@ import { deleteStatement, updateStatement } from '../../state/video_debate/state
 import { forcePosition } from '../../state/video_debate/video/reducer'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 import ShareModal from '../Utils/ShareModal'
-import {ENTITY_STATEMENT} from '../../constants'
+import {
+  ENTITY_STATEMENT, MIN_REPUTATION_REMOVE_STATEMENT,
+  MIN_REPUTATION_UPDATE_STATEMENT
+} from '../../constants'
 import { setScrollTo } from '../../state/video_debate/statements/reducer'
 
 
@@ -31,7 +34,6 @@ import { setScrollTo } from '../../state/video_debate/statements/reducer'
   approveScore: statementSelectors.getStatementApproveScore(state, props),
   refuteScore: statementSelectors.getStatementRefuteScore(state, props),
   commentsLoading: commentsSelectors.areCommentsLoading(state),
-  isAuthenticated: isAuthenticated(state),
   isFocused: statementSelectors.isStatementFocused(state, props),
   currentUser: state.CurrentUser.data,
   scrollTo: state.VideoDebate.statements.scrollTo,
@@ -53,12 +55,12 @@ export class Statement extends React.PureComponent {
 
   render() {
     const { isDeleting } = this.state
-    const { statement, isFocused, isAuthenticated, speaker, t } = this.props
+    const { statement, isFocused, speaker, t } = this.props
 
     return (
       <div className={`statement-container${isFocused ? ' is-focused' : ''}`} ref="container">
         <div className="card statement">
-          {this.renderCardHeaderAndContent(isAuthenticated, speaker, statement)}
+          {this.renderCardHeaderAndContent(speaker, statement)}
           {this.renderFactsAndComments()}
           {isDeleting &&
           <ModalConfirmDelete
@@ -86,7 +88,7 @@ export class Statement extends React.PureComponent {
     })
   }
 
-  renderCardHeaderAndContent(isAuthenticated, speaker, statement) {
+  renderCardHeaderAndContent(speaker, statement) {
     const {t, forcePosition, setScrollTo, addModal} = this.props
 
     if (this.state.isEditing) return (
@@ -121,20 +123,20 @@ export class Statement extends React.PureComponent {
 
           <div className="card-header-icon">
             <LinkWithIcon iconName="history" title={t('history')} onClick={ this.showHistory }/>
-            {isAuthenticated &&
+            <ReputationGuard requiredRep={MIN_REPUTATION_UPDATE_STATEMENT}>
               <LinkWithIcon iconName="pencil"
                             title={t('main:actions.edit')}
                             onClick={() => this.setState({isEditing: true})}/>
-            }
+            </ReputationGuard>
             <LinkWithIcon iconName="share-alt" title={t('main:actions.share')} onClick={() => addModal({
               Modal: ShareModal,
               props: {path: `${location.pathname}?statement=${statement.id}`}
             })}/>
-            {isAuthenticated &&
+            <ReputationGuard requiredRep={MIN_REPUTATION_REMOVE_STATEMENT}>
               <LinkWithIcon iconName="times"
                             title={t('main:actions.remove')}
                             onClick={() => this.setState({isDeleting: true})}/>
-            }
+            </ReputationGuard>
           </div>
         </header>
         <div className="card-content statement-text-container">

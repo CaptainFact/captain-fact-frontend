@@ -43,6 +43,13 @@ export const DEFAULT_FLASH_DURATION = 6000 // milliseconds
 // Required reputations
 export const MIN_REPUTATION_MODERATION = 500
 export const MIN_REPUTATION_ADD_VIDEO = 200
+export const MIN_REPUTATION_ADD_SPEAKER = 30
+export const MIN_REPUTATION_UPDATE_SPEAKER = 75
+export const MIN_REPUTATION_REMOVE_SPEAKER = 125
+export const MIN_REPUTATION_ADD_STATEMENT = -5
+export const MIN_REPUTATION_UPDATE_STATEMENT = 15
+export const MIN_REPUTATION_REMOVE_STATEMENT = 75
+export const MIN_REPUTATION_RESTORE_ENTITY = 75
 
 /* ------ Forms ------ */
 // User

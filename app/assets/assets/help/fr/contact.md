@@ -1,4 +1,4 @@
-Vous pouvez nous contacter en Anglais ou en Français via:
+Vous pouvez nous contacter en Anglais ou en Français via :
   * [Discord](https://discord.gg/2Qd7hMz)
   * [Mail](mailto:contact@captainfact.io)
   * [Facebook](https://www.facebook.com/CaptainFact.io)

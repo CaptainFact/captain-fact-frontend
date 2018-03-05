@@ -1,5 +1,5 @@
 import User from '../../../state/users/record'
-import { ReputationGuard } from '../ReputationGuard'
+import { DumbReputationGuard as ReputationGuard } from '../ReputationGuard'
 
 test("should not render anything if no permissions until specified otherwise", () => {
   const noReputation = shallow(
