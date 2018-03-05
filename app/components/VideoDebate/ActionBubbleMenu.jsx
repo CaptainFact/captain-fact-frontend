@@ -4,12 +4,14 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { translate } from 'react-i18next'
 import debounce from 'debounce'
+import { MIN_REPUTATION_UPDATE_VIDEO } from '../../constants'
 
 import { changeStatementFormSpeaker } from '../../state/video_debate/statements/reducer'
 import { toggleAutoscroll } from '../../state/user_preferences/reducer'
 import { addModal } from '../../state/modals/reducer'
 import {isAuthenticated} from '../../state/users/current_user/selectors'
 import { Icon } from '../Utils/Icon'
+import ReputationGuard from '../Utils/ReputationGuard'
 import ShareModal from '../Utils/ShareModal'
 import EditVideoModal from '../Videos/EditVideoModal'
 import { hasStatementForm } from '../../state/video_debate/statements/selectors'
@@ -56,12 +58,12 @@ export default class ActionBubbleMenu extends React.PureComponent {
                         props: {path: location.pathname}
                       })}
         />
-        {this.props.isAuthenticated &&
-        <ActionBubble iconName="pencil"
-                      label={this.props.t('video.edit')}
-                      onClick={() => this.props.addModal({Modal: EditVideoModal})}
-        />
-        }
+        <ReputationGuard requiredRep={MIN_REPUTATION_UPDATE_VIDEO}>
+          <ActionBubble iconName="pencil"
+                        label={this.props.t('video.edit')}
+                        onClick={() => this.props.addModal({Modal: EditVideoModal})}
+          />
+        </ReputationGuard>
         <ActionBubble iconName="question"
                       label={this.props.t('main:menu.help')}
                       onClick={() => this.props.router.push('/help')}

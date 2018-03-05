@@ -50,6 +50,7 @@ export const MIN_REPUTATION_ADD_STATEMENT = -5
 export const MIN_REPUTATION_UPDATE_STATEMENT = 15
 export const MIN_REPUTATION_REMOVE_STATEMENT = 75
 export const MIN_REPUTATION_RESTORE_ENTITY = 75
+export const MIN_REPUTATION_UPDATE_VIDEO = 200
 
 /* ------ Forms ------ */
 // User
