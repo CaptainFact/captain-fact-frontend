@@ -90,12 +90,12 @@ export class StatementForm extends React.PureComponent {
         </header>
         <div className="card-content">
           <h3 className="statement-text">
-            <Field autoFocus component={renderTextareaField} name="text"
-                   autosize={true} normalize={cleanStrMultiline}
+            <Field name="text" component={renderTextareaField}
+                   normalize={cleanStrMultiline}
                    maxLength={STATEMENT_LENGTH[1]}
                    validate={value => validateFieldLength(t, value, STATEMENT_LENGTH)}
                    placeholder={speaker ? t('statement.textPlaceholder') : t('statement.noSpeakerTextPlaceholder')}
-                   hideErrorIfEmpty
+                   hideErrorIfEmpty autoFocus autosize
             />
           </h3>
         </div>

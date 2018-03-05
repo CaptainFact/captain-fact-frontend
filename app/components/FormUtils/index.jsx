@@ -22,6 +22,7 @@ export const renderInput = ({ input, label, placeholder, type, className, meta }
 
 export const renderField = (params) => {
   const { icon, meta: { touched, error } } = params
+
   return (
     <p className={`control ${icon ? 'has-icon' : ''}`}>
       {renderInput(params)}
@@ -113,12 +114,12 @@ export const validateLengthI18n = (t, errors, fieldName, value, range) => {
 
 export const validateFieldLength = (t, value, range) => {
   if (checkLength(value, range))
-    return false
+    return undefined
   if (!value || value.length < range[0])
     return t('main:misc.fieldMinLength', {min: range[0]})
   else if (range[1] !== -1 && value.length > range[1])
     return t('main:misc.fieldMaxLength', {max: range[1]})
-  return false
+  return undefined
 }
 
 export const cleanStr = (str) =>
