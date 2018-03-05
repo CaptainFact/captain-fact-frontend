@@ -3,10 +3,12 @@ import { Map } from 'immutable'
 import { connect } from "react-redux"
 import { Link } from "react-router"
 import { translate } from 'react-i18next'
+import { MIN_REPUTATION_ADD_VIDEO } from '../../constants'
+import { hasReputation } from '../../state/users/current_user/selectors'
+import ReputationGuard from '../Utils/ReputationGuard'
 
 import { VideosGrid } from "../Videos"
 import { LoadingFrame, Icon } from "../Utils"
-import { isAuthenticated } from "../../state/users/current_user/selectors"
 import { fetchPublicVideos } from '../../state/videos/effects'
 import { ErrorView } from '../Utils/ErrorView'
 import { reset } from '../../state/videos/reducer'
@@ -17,7 +19,6 @@ import capitalize from 'voca/capitalize'
 
 @connect(state => ({
   videos: state.Videos.data,
-  isAuthenticated: isAuthenticated(state),
   isLoading: state.Videos.isLoading,
   error: state.Videos.error,
   languageFilter: state.UserPreferences.videosLanguageFilter
@@ -40,12 +41,13 @@ export class PublicVideos extends React.PureComponent {
             <Icon size="large" name="television"/>
             <span> {capitalize(this.props.t('entities.video_plural'))} </span>
           </h2>
-          {this.props.isAuthenticated &&
+          <ReputationGuard requiredRep={MIN_REPUTATION_ADD_VIDEO}
+                           verifyFunc={(user, hasReputation) => hasReputation || user.is_publisher}>
             <Link to="/videos/add" className="button is-primary">
               <Icon name="plus-circle"/>
               <span>{this.props.t('videos.add')}</span>
             </Link>
-          }
+          </ReputationGuard>
         </section>
         <section className="content">
           {this.renderFilterBar()}

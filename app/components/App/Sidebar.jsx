@@ -6,7 +6,7 @@ import classNames from 'classnames'
 
 import { Icon } from "../Utils"
 import { MOBILE_WIDTH_THRESHOLD, USER_PICTURE_SMALL } from '../../constants'
-import { MODERATION_REPUTATION_REQUIRED } from "../../constants"
+import { MIN_REPUTATION_MODERATION } from "../../constants"
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import ReputationGuard from '../Utils/ReputationGuard'
 import LanguageSelector from './LanguageSelector'
@@ -156,7 +156,7 @@ export default class Sidebar extends React.PureComponent {
         <this.MenuListLink to="/speakers" iconName="users" className="is-disabled">
           { capitalize(t('entities.speaker_plural')) }
         </this.MenuListLink>
-        <ReputationGuard requiredRep={MODERATION_REPUTATION_REQUIRED}>
+        <ReputationGuard requiredRep={MIN_REPUTATION_MODERATION}>
           <this.MenuListLink to="/moderation" iconName="flag" className="hide-when-collapsed">
             { t('menu.moderation') }
           </this.MenuListLink>

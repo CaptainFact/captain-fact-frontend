@@ -5,7 +5,7 @@ import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 
 import { flashErrorUnauthenticated } from '../../state/flashes/reducer'
-import { isAuthenticated } from '../../state/users/current_user/selectors'
+import { hasReputation } from '../../state/users/current_user/selectors'
 import { revertVideoDebateUserAction } from '../../state/video_debate/history/effects'
 import { TimeSince } from '../Utils/TimeSince'
 import UserAppellation from '../Users/UserAppellation'
@@ -13,15 +13,15 @@ import { Icon } from '../Utils/Icon'
 import ActionDiff from './ActionDiff'
 import ActionIcon from './ActionIcon'
 import EntityTitle from './EntityTitle'
-import { ACTION_DELETE, ACTION_REMOVE } from '../../constants'
+import { ACTION_DELETE, ACTION_REMOVE, MIN_REPUTATION_RESTORE_ENTITY } from '../../constants'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 
 
 @translate(['history', 'main'])
 @connect(
-  state => ({
+  (state, props) => ({
     lastActionsIds: state.UsersActions.lastActionsIds,
-    isAuthenticated: isAuthenticated(state)
+    canRestore: props.showRestore && hasReputation(state, MIN_REPUTATION_RESTORE_ENTITY)
   }),
   {revertVideoDebateUserAction, flashErrorUnauthenticated}
 )
@@ -43,7 +43,7 @@ class ActionsTable extends React.PureComponent {
   // ---- Table header ----
 
   renderHeader = () => {
-    const { t, actions, showRestore, showEntity } = this.props
+    const { t, actions, canRestore, showEntity } = this.props
     const isMostlyComparing = this.state.expendedDiffs.count() / actions.count() > 0.5
 
     return (
@@ -53,7 +53,7 @@ class ActionsTable extends React.PureComponent {
         <th>Action</th>
         {showEntity && <th>{t('entity')}</th>}
         <th>{this.renderCompareAllButton(isMostlyComparing)}</th>
-        {showRestore && <th>{t('revert')}</th>}
+        {canRestore && <th>{t('revert')}</th>}
         <th>{t('moderation')}</th>
       </tr>
     )
@@ -89,8 +89,8 @@ class ActionsTable extends React.PureComponent {
   }
 
   renderActionLine(action, isDiffing=false) {
-    const { showRestore, showEntity, t } = this.props
-    const reversible = showRestore && this.props.lastActionsIds.includes(action.id) &&
+    const { canRestore, showEntity, t } = this.props
+    const reversible = canRestore && this.props.lastActionsIds.includes(action.id) &&
       ([ACTION_DELETE, ACTION_REMOVE].includes(action.type))
 
     return (
@@ -105,10 +105,10 @@ class ActionsTable extends React.PureComponent {
             <span>{ t(isDiffing ? 'compare_hide' : 'compare_show') } </span>
           </a>
         </td>
-        {showRestore &&
+        {canRestore &&
           <td>
             {reversible &&
-              <a className="button" onClick={() => this.revertAction(action)}>
+              <a className="button" onClick={() => this.props.revertVideoDebateUserAction(action)}>
                 <Icon size="small" name="undo"/>
                 <span>{t('revert')}</span>
               </a>
@@ -151,14 +151,7 @@ class ActionsTable extends React.PureComponent {
   }
 
   getNbCols = () =>
-    7 - !this.props.showRestore - !this.props.showEntity
-
-  revertAction = action => {
-    if (!this.props.isAuthenticated)
-      this.props.flashErrorUnauthenticated()
-    else
-      this.props.revertVideoDebateUserAction(action)
-  }
+    7 - !this.props.canRestore - !this.props.showEntity
 }
 
 ActionsTable.defaultProps = {

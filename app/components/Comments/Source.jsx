@@ -27,8 +27,8 @@ const isPlayer = url => {
 
 export const Source = ({ source: { url, title, site_name }, withoutPlayer }) => {
   if (!withoutPlayer && isPlayer(url)) {
-    return <ReactPlayer  className="video" controls={true} height={180} width={320} url={url}
-                         config={{youtube: {playerVars: { showinfo: 1 }}}}/>
+    return <ReactPlayer  className="video" controls={true} height={198} width={352} url={url}
+                         config={{youtube: {playerVars: { showinfo: 1, fs: 0 }}}}/>
   } else {
     return (
       <div>

@@ -25,6 +25,7 @@ const capitalizeName = (str) => (
 )
 
 const searchSpeakerRequest = debounce((query) => (
+  // TODO This request has nothing to do here !
   SocketApi.push("video_debate", "search_speaker", {query})
     .then(({speakers}) => ({options: speakers}))
 ), 250)

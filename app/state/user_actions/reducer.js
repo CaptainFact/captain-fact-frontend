@@ -10,8 +10,6 @@ export const setLoading = createAction('VIDEO_DEBATE_HISTORY/SET_LOADING')
 export const reset = createAction('VIDEO_DEBATE_HISTORY/RESET')
 export const fetchAll = createAction('VIDEO_DEBATE_HISTORY/FETCH')
 export const addAction = createAction('VIDEO_DEBATE_HISTORY/ADD_ACTION')
-export const generateDiff = createAction('VIDEO_DEBATE_HISTORY/GENERATE_DIFF')
-export const hideDiff = createAction('VIDEO_DEBATE_HISTORY/HIDE_DIFF')
 
 const INITIAL_STATE = new Record({
   actions: new List(),

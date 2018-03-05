@@ -3,11 +3,16 @@ import { connect } from "react-redux"
 import { Link, withRouter } from 'react-router'
 import { translate } from 'react-i18next'
 import classNames from 'classnames'
+import {
+  MIN_REPUTATION_ADD_STATEMENT,
+  MIN_REPUTATION_REMOVE_SPEAKER, MIN_REPUTATION_UPDATE_SPEAKER
+} from '../../constants'
 
 import { isAuthenticated } from "../../state/users/current_user/selectors"
 import { staticResource } from "../../API"
 import { ModalFormContainer } from "../Modal"
 import { Icon, LinkWithIcon } from "../Utils"
+import ReputationGuard from '../Utils/ReputationGuard'
 import { EditSpeakerForm } from "./SpeakerForm"
 import ModalRemoveSpeaker from './ModalRemoveSpeaker'
 import { addModal } from '../../state/modals/reducer'
@@ -56,7 +61,7 @@ export class SpeakerPreview extends React.PureComponent {
 
   renderSpeakerThumb(speaker) {
     if (speaker.picture)
-      return (<img className="speaker-picture" src={staticResource(speaker.picture)}/>)
+      return (<img className="speaker-picture" src={speaker.picture}/>)
     return (<Icon className="speaker-picture" name="user" size="large" style={{color: "grey"}}/>)
   }
 
@@ -86,7 +91,7 @@ export class SpeakerPreview extends React.PureComponent {
   }
 
   render() {
-    const { speaker, isAuthenticated, withoutActions, t , className} = this.props
+    const { speaker, isAuthenticated, withoutActions , className} = this.props
 
     return (
       <MediaLayout
@@ -98,22 +103,32 @@ export class SpeakerPreview extends React.PureComponent {
             <p className="subtitle is-6">{this.getTitle()}</p>
           </div>
         }
-        right={!isAuthenticated || withoutActions ? null :
-          <div className="quick-actions">
-            {this.props.speaker.is_user_defined &&
-            <LinkWithIcon iconName="pencil"
-                          title={t('main:actions.edit')}
-                          onClick={() => this.handleEdit()}/>
-            }
-            <LinkWithIcon iconName="times"
-                          title={t('main:actions.remove')}
-                          onClick={() => this.handleRemove()}/>
-            <LinkWithIcon iconName="commenting-o"
-                          title={t('statement.add')}
-                          onClick={() => this.handleAddStatement()}/>
-          </div>
-        }
+        right={isAuthenticated && !withoutActions && this.renderActions()}
       />
+    )
+  }
+
+  renderActions() {
+    return (
+      <div className="quick-actions">
+        {this.props.speaker.is_user_defined &&
+          <ReputationGuard requiredRep={MIN_REPUTATION_UPDATE_SPEAKER}>
+            <LinkWithIcon iconName="pencil"
+                          title={this.props.t('main:actions.edit')}
+                          onClick={() => this.handleEdit()}/>
+          </ReputationGuard>
+        }
+        <ReputationGuard requiredRep={MIN_REPUTATION_REMOVE_SPEAKER}>
+          <LinkWithIcon iconName="times"
+                        title={this.props.t('main:actions.remove')}
+                        onClick={() => this.handleRemove()}/>
+        </ReputationGuard>
+        <ReputationGuard requiredRep={MIN_REPUTATION_ADD_STATEMENT}>
+          <LinkWithIcon iconName="commenting-o"
+                        title={this.props.t('statement.add')}
+                        onClick={() => this.handleAddStatement()}/>
+        </ReputationGuard>
+      </div>
     )
   }
 

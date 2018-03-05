@@ -12,7 +12,8 @@ const User = new Record({
   picture_url: null,
   mini_picture_url: null,
   registered_at: null,
-  achievements: []
+  achievements: [],
+  is_publisher: false
 })
 
 export default User

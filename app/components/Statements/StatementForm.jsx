@@ -1,47 +1,21 @@
 import React from "react"
 import { Field, reduxForm } from 'redux-form'
 import { connect } from "react-redux"
-import Select from 'react-select'
 import classNames from 'classnames'
+import SpeakersSelect from '../Speakers/SpeakersSelect'
 
 import { Icon, LinkWithIcon } from "../Utils"
 import TimeDisplay from '../Utils/TimeDisplay'
-import { renderTextareaField, validateLengthI18n, cleanStrMultiline } from "../FormUtils"
+import { renderTextareaField, validateFieldLength, cleanStrMultiline } from "../FormUtils"
 import { STATEMENT_LENGTH } from "../../constants"
 import { translate } from 'react-i18next'
 import { forcePosition } from '../../state/video_debate/video/reducer'
-import { decrementFormCount, incrementFormCount, setScrollTo } from '../../state/video_debate/statements/reducer'
+import { decrementFormCount, incrementFormCount, setScrollTo, STATEMENT_FORM_NAME } from '../../state/video_debate/statements/reducer'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
-import { staticResource } from '../../API/resources'
 
-
-const validate = ({text, time}, {t}) => {
-  const errors = {}
-
-  validateLengthI18n(t, errors, 'text', text, STATEMENT_LENGTH, "videoDebate:statement:text")
-  if (time < 0)
-    errors.time = "Invalid time"
-  return errors
-}
-
-const SpeakersSelect = ({input, speakers, label}) => {
-  return (
-    <Select className="speaker-select"
-            onChange={s => s && s.id ? input.onChange(s.id) : input.onChange(null)}
-            onBlur={() => input.onBlur(input.value.id)}
-            value={input.value}
-            name={input.name}
-            placeholder={label}
-            labelKey="full_name"
-            valueKey="id"
-            ignoreAccents={true}
-            options={speakers.toJS()}
-    />
-  )
-}
 
 @translate(['videoDebate', 'main'])
-@reduxForm({form: 'StatementForm', validate})
+@reduxForm({form: STATEMENT_FORM_NAME})
 @connect(({VideoDebate: {video, statements}}) => ({
   position: video.playback.position,
   speakers: video.data.speakers,
@@ -50,7 +24,8 @@ const SpeakersSelect = ({input, speakers, label}) => {
 export class StatementForm extends React.PureComponent {
   constructor(props) {
     super(props)
-    this.state = {lockedTime: props.initialValues.time === undefined ? props.position : props.initialValues.time}
+    const lockedTime = props.initialValues.time === undefined ? props.position : props.initialValues.time
+    this.state = {lockedTime}
   }
 
   componentDidMount() {
@@ -95,7 +70,7 @@ export class StatementForm extends React.PureComponent {
     const toggleTimeLockAction = this.state.lockedTime === false ? 'unlock' : 'lock'
 
     return (
-      <form className={`statement-form${this.props.isBundled ? '' : ' card statement'}`} ref="container">
+      <form className={classNames('statement-form', {'card statement': !this.props.isBundled})} ref="container">
         <header className="card-header">
           <div className="card-header-title">
             <a className="button" onClick={() => this.moveTimeMarker(currentTime - 1)}>
@@ -109,15 +84,19 @@ export class StatementForm extends React.PureComponent {
                onClick={this.toggleLock.bind(this)}>
               <Icon size="small" name={toggleTimeLockAction}/>
             </a>
-            {speaker && speaker.picture && <img className="speaker-mini" src={staticResource(speaker.picture)}/>}
-            <Field name="speaker_id" component={SpeakersSelect} speakers={speakers} label={t('speaker.add')}/>
+            {speaker && speaker.picture && <img className="speaker-mini" src={speaker.picture}/>}
+            <Field name="speaker_id" component={SpeakersSelect} speakers={speakers} placeholder={t('speaker.add')}/>
           </div>
         </header>
         <div className="card-content">
           <h3 className="statement-text">
-            <Field autoFocus component={renderTextareaField} name="text" autosize={true}
-              normalize={cleanStrMultiline} maxLength={STATEMENT_LENGTH[1]}
-              placeholder={speaker ? t('statement.textPlaceholder') : t('statement.noSpeakerTextPlaceholder')}/>
+            <Field name="text" component={renderTextareaField}
+                   normalize={cleanStrMultiline}
+                   maxLength={STATEMENT_LENGTH[1]}
+                   validate={value => validateFieldLength(t, value, STATEMENT_LENGTH)}
+                   placeholder={speaker ? t('statement.textPlaceholder') : t('statement.noSpeakerTextPlaceholder')}
+                   hideErrorIfEmpty autoFocus autosize
+            />
           </h3>
         </div>
         <footer className="card-footer">
@@ -126,10 +105,11 @@ export class StatementForm extends React.PureComponent {
                           'is-disabled': !valid || this.props.submitting,
                           'is-loading': this.props.submitting
                         })}
-            onClick={handleSubmit(this.handleSubmit.bind(this))}>
+                        onClick={handleSubmit(this.handleSubmit.bind(this))}>
             {t('main:actions.save')}
           </LinkWithIcon>
-          <LinkWithIcon iconName="ban" className={classNames('card-footer-item', {
+          <LinkWithIcon iconName="ban"
+                        className={classNames('card-footer-item', {
                           'is-disabled': this.props.submitting
                         })}
                         onClick={handleAbort}>
