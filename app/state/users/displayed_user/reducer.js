@@ -18,8 +18,14 @@ const INITIAL_STATE = new Record({
 const DisplayedUserReducer = handleActions({
   [setUser]: {
     next: (state, {payload}) => {
-      payload.registered_at = parseDateTime(payload.registered_at)
-      return state.merge({data: new User(payload), isLoading: false, errors: null})
+      return state.merge({
+        data: new User({
+          ...payload,
+          registered_at: parseDateTime(payload.registered_at)
+        }),
+        isLoading: false,
+        errors: null
+      })
     },
     throw: (state, {payload}) => state.merge({errors: payload, isLoading: false}),
   },

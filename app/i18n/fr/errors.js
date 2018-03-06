@@ -1,4 +1,4 @@
-{
+export default {
   "title": "Erreur",
   "server": {
     "unknown": "Quelque chose a mal fonctionné de notre côté, on regarde ça !",
@@ -20,6 +20,7 @@
     "joinCrashed": "La connection au serveur a échouée",
     "thirdParty": "L'authentification a échouée",
     "submissionError": "Un problème est apparu lors de l'envoi des données",
-    "noVideoAvailable": "Aucune vidéo n'est disponnible"
+    "noVideoAvailable": "Aucune vidéo n'est disponible",
+    "notEnoughReputation": "Pas assez de réputation pour accéder à cette fonctionnalité"
   }
 }

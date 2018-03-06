@@ -1,4 +1,4 @@
-{
+export default {
   "title": "Médailles",
   "about": "A propos",
   "unlocked": "Vous venez de déverouiller le succès \"{{achievement}}\"",

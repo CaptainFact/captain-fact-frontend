@@ -1,6 +1,8 @@
 <p align="center"><img src="app/assets/assets/img/logo.png" height="100"/></p>
 <h1 align="center"><a href="https://captainfact.io">CaptainFact.io</a></h1>
-<p align="center"><a href="https://gitter.im/CaptainFact"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/CaptainFact"/></a></p>
+<p align="center"><a href="https://discord.gg/2Qd7hMz" title="Discord"><img src="https://discordapp.com/api/guilds/416782744748687361/widget.png" alt="Discord"></a>
+<a href="https://twitter.com/CaptainFact_io" title="Twitter"><img src="https://img.shields.io/twitter/follow/CaptainFact_io.svg?style=social&label=Follow"></a>
+<a href="./LICENSE"><img src="https://img.shields.io/github/license/CaptainFact/captain-fact-frontend.svg" alt="AGPL3"></a></p>
 <hr/>
 <p align="center">Master: <a href="https://travis-ci.org/CaptainFact/captain-fact-frontend"><img src="https://travis-ci.org/CaptainFact/captain-fact-frontend.svg?branch=travis-configuration" alt="Build Status" /></a> &nbsp;&nbsp;
 Staging: <a href="https://travis-ci.org/CaptainFact/captain-fact-frontend"><img src="https://travis-ci.org/CaptainFact/captain-fact-frontend.svg?branch=staging" alt="Build Status" /></a></p>
@@ -34,6 +36,8 @@ or [here (archive.org)](https://web.archive.org/web/20170518075321/http://bulma.
 
 ## Conventions
 
+#### File structure
+
 ```
 app
 ├── API => Api libraries for both REST API and websockets
@@ -48,9 +52,23 @@ app
 │   │   └── selectors.js => re-select selectors to select data in state
 │   └── ...
 ├── styles => stylesheet in .sass format, all included from application.sass
-├── i18n.js => I18n initialization
+├── i18n => I18n initialization + translation files
 └── router.jsx => Application router and main entry point
 ```
+
+#### Exporting components
+
+Components files should export two versions :
+
+1. `export DumbMyComponent` : non-connected component (for testing)
+2. `export default MyComponent` : connected component
+
+Non-connected components exports are there for testing them without the need
+to be connected to a store. If component is always dump, you can export
+`default` only.
+
+You might find some exceptions in old components but all new
+ones must follow this rule. 
 
 ### Effects
 

@@ -1,16 +1,11 @@
 .user-action
-  .action-description
+  .card-content
     text-align: left
     padding: 15px
     &> *
       margin-right: 3px
     .action-type
       margin-right: 7px
-  .action-buttons
-    &> a
-      @extend .card-footer-item
-      padding: 5px
-      background-color: whitesmoke
 
 .action-diff
   padding: 15px
@@ -32,7 +27,9 @@
       display: inline-block
       background: none
       font-size: 1em
+      max-width: 100%
       white-space: pre-wrap
+      word-wrap: break-word
       span
         color: $dark-invert
         &.added, &.removed
@@ -44,3 +41,7 @@
           background-color: darkred
           text-decoration: line-through
           opacity: 0.45
+      a
+        color: $white
+        &:hover
+          text-decoration: underline

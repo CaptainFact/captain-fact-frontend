@@ -1,9 +1,9 @@
 import "isomorphic-fetch"
 import trimRight from 'voca/trim_right'
-import fetch from 'isomorphic-fetch'
+import 'isomorphic-fetch'
 
 import { SocketApi } from "./socket_api"
-import { HTTP_API_URL } from "../config.jsenv"
+import { HTTP_API_URL } from "../config"
 import { parseServerError } from './server_error'
 import flashNoInternetError from './no_internet_error'
 import { optionsToQueryString } from '../lib/url_utils'

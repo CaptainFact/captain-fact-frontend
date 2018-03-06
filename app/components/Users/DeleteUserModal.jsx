@@ -13,13 +13,22 @@ const DELETE_FORM = 'deleteAccount'
 class DeleteForm extends React.PureComponent {
   render() {
     return (
-      <div>
+      <div className="delete-account-form">
         <h2 className="title is-2 has-text-centered">
           <Icon size="large" name="exclamation-triangle"/>
           This action is irreversible.
         </h2>
-        <br/>
-        Type your username below to confirm the deletion :
+        <hr/>
+        <h4 className="title is-4">Deleting your account will...</h4>
+        <ul>
+          <li>Delete all your votes</li>
+          <li>Delete all your comments</li>
+          <li>Delete all your flags</li>
+          <li>Delete all your personal data (email, username...etc)</li>
+          <li>Anonymize your actions history</li>
+        </ul>
+        <hr/>
+        <h5 className="title is-5">Type your username below to confirm the deletion :</h5>
         <Field component="input" className="input" name="usernameConfirm"/>
       </div>
     )
@@ -32,13 +41,13 @@ const valueSelector = formValueSelector(DELETE_FORM)
 @connect(state => ({
   isValid: valueSelector(state, 'usernameConfirm') === state.CurrentUser.data.username
 }))
-@translate('main')
+@translate(['main', 'user'])
 export default class DeleteUserModal extends React.PureComponent {
   render() {
     const { t, isValid, ...otherProps } = this.props
     return (
       <ModalFormContainer
-        message="This action is irreversible. All your data (comments, votes...etc) will be deleted."
+        title={t('user:deleteAccount')}
         FormComponent={DeleteForm}
         confirmIcon="trash-o"
         confirmType="danger"

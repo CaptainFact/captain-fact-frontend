@@ -48,7 +48,6 @@ export class ErrorView extends React.PureComponent {
               </LinkWithIcon>}
             </div>
         </Message>
-        />
       </div>
     )
   }

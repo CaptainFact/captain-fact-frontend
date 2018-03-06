@@ -1,4 +1,4 @@
-{
+export default {
   "title": "Error",
   "server": {
     "unknown": "Something didn't work on our side, we'll check it out !",
@@ -20,6 +20,7 @@
     "joinCrashed": "Server connection failed",
     "thirdParty": "Third party authentication failed",
     "submissionError": "An error occured while sending the data",
-    "noVideoAvailable": "No video available"
+    "noVideoAvailable": "No video available",
+    "notEnoughReputation": "Not enough reputation to access this feature"
   }
 }

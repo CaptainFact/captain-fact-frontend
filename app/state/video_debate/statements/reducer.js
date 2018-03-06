@@ -18,7 +18,7 @@ export const incrementFormCount = createAction('STATEMENTS/INCREMENT_FORM_COUNT'
 export const decrementFormCount = createAction('STATEMENTS/DECREMENT_FORM_COUNT', () => -1)
 
 // Statement form actions
-const STATEMENT_FORM_NAME = 'StatementForm'
+export const STATEMENT_FORM_NAME = 'StatementForm'
 export const changeStatementFormSpeaker = ({id}) => change(STATEMENT_FORM_NAME, 'speaker_id', id)
 export const closeStatementForm = () => destroy(STATEMENT_FORM_NAME)
 

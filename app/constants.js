@@ -17,10 +17,16 @@ export const ACTION_DELETE = 4
 export const ACTION_ADD = 5
 export const ACTION_RESTORE = 6
 
+// Moderation actions
+export const MODERATION_ACTION_CONFIRM = 1
+export const MODERATION_ACTION_NOTSURE = 0
+export const MODERATION_ACTION_ABUSIVE = -1
+
 // Entities
 export const ENTITY_VIDEO = 1
 export const ENTITY_SPEAKER = 2
 export const ENTITY_STATEMENT = 3
+export const ENTITY_COMMENT = 4
 
 /* ------ UI, animations ------ */
 export const USER_PICTURE_SMALL = 24
@@ -34,6 +40,17 @@ export const MOBILE_WIDTH_THRESHOLD = 768 // pixels
 
 export const DEFAULT_FLASH_DURATION = 6000 // milliseconds
 
+// Required reputations
+export const MIN_REPUTATION_MODERATION = 500
+export const MIN_REPUTATION_ADD_VIDEO = 200
+export const MIN_REPUTATION_ADD_SPEAKER = 30
+export const MIN_REPUTATION_UPDATE_SPEAKER = 75
+export const MIN_REPUTATION_REMOVE_SPEAKER = 125
+export const MIN_REPUTATION_ADD_STATEMENT = -5
+export const MIN_REPUTATION_UPDATE_STATEMENT = 15
+export const MIN_REPUTATION_REMOVE_STATEMENT = 75
+export const MIN_REPUTATION_RESTORE_ENTITY = 75
+export const MIN_REPUTATION_UPDATE_VIDEO = 200
 
 /* ------ Forms ------ */
 // User

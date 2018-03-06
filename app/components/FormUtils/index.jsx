@@ -1,12 +1,8 @@
-/**
-* Removes multiple spaces, tabs and trim on left
-* @param {String} str
-* @return {String} clean string
-*/
 import React from "react"
 import capitalize from "voca/capitalize"
 import trimLeft from "voca/trim_left"
 import classNames from "classnames"
+
 import TextareaAutosize from './TextareaAutosize'
 import { Icon } from '../Utils/Icon'
 import TextareaLengthCounter from './TextareaLengthCounter'
@@ -26,6 +22,7 @@ export const renderInput = ({ input, label, placeholder, type, className, meta }
 
 export const renderField = (params) => {
   const { icon, meta: { touched, error } } = params
+
   return (
     <p className={`control ${icon ? 'has-icon' : ''}`}>
       {renderInput(params)}
@@ -39,24 +36,28 @@ export const renderField = (params) => {
 
 export const renderTextareaField = (params) => {
   const {
-    input, label, icon, type, placeholder, autosize, maxLength,
+    input, label, icon, type, placeholder, autosize, maxLength, hideErrorIfEmpty,
     meta: { touched, error, submitting },
     ...props
   } = params
+  const hasError = (!hideErrorIfEmpty || input.value.length > 0) && touched && error
   const inputProps = {
     ...input,
     ...props,
-    className: classNames('textarea', {'is-danger': touched && error}),
+    className: classNames('textarea', {'is-danger': hasError}),
     placeholder: placeholder ? placeholder : label,
     disabled: submitting,
     type
   }
-  const textarea = autosize ? (<TextareaAutosize {...inputProps}/>) : (<textarea {...inputProps}/>)
+  const textarea = autosize ?
+    (<TextareaAutosize {...inputProps}/>) :
+    (<textarea {...inputProps}/>)
+
   return (
-    <p className={`control ${icon ? 'has-icon' : ''}`}>
+    <p className={classNames('control', {'has-icon': !!icon})}>
       { textarea }
       <TextareaLengthCounter length={input.value.length} maxLength={maxLength}/>
-      { touched && error && <span className='help is-danger'>{ error }</span> }
+      { hasError && <span className='help is-danger'>{ error }</span> }
     </p>
   )
 }
@@ -113,12 +114,12 @@ export const validateLengthI18n = (t, errors, fieldName, value, range) => {
 
 export const validateFieldLength = (t, value, range) => {
   if (checkLength(value, range))
-    return false
+    return undefined
   if (!value || value.length < range[0])
     return t('main:misc.fieldMinLength', {min: range[0]})
   else if (range[1] !== -1 && value.length > range[1])
     return t('main:misc.fieldMaxLength', {max: range[1]})
-  return false
+  return undefined
 }
 
 export const cleanStr = (str) =>

@@ -1,4 +1,4 @@
-{
+export default {
   "compare_show": "Compare",
   "compare_hide": "Hide",
   "compareAll": "Compare all",
@@ -9,6 +9,7 @@
   "revert": "Revert",
   "entity": "Entity",
   "moderation": "Moderation",
+  "deletedUser": "Deleted user",
   "action": {
     "1": "Created",
     "2": "Removed",
@@ -20,6 +21,7 @@
   "this": {
     "1": "Video",
     "2": "Speaker",
-    "3": "Statement"
+    "3": "Statement",
+    "4": "Comment"
   }
 }

@@ -24,7 +24,7 @@ Judgement actions such as voting and flagging are limited to avoid abusing them 
 | 75         | Remove / restore speaker            
 | 125        | No more new user restrictions               
 | 125        | Shift all video's statements                                 
-| 200        | Add videos                            
+| 200        | Add videos (weekly limitation)                           
 | 1000       | Access to moderator tools                                  
 
 

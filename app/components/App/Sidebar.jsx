@@ -5,8 +5,10 @@ import { translate } from 'react-i18next'
 import classNames from 'classnames'
 
 import { Icon } from "../Utils"
-import { MOBILE_WIDTH_THRESHOLD, USER_PICTURE_SMALL } from "../../constants"
+import { MOBILE_WIDTH_THRESHOLD, USER_PICTURE_SMALL } from '../../constants'
+import { MIN_REPUTATION_MODERATION } from "../../constants"
 import { LoadingFrame } from '../Utils/LoadingFrame'
+import ReputationGuard from '../Utils/ReputationGuard'
 import LanguageSelector from './LanguageSelector'
 import capitalize from 'voca/capitalize'
 import ScoreTag from '../Users/ScoreTag'
@@ -15,7 +17,6 @@ import { closeSidebar, toggleSidebar } from '../../state/user_preferences/reduce
 import UserPicture from '../Users/UserPicture'
 import i18n from '../../i18n/i18n'
 import Logo from './Logo'
-
 
 @connect(state => ({
   CurrentUser: state.CurrentUser.data,
@@ -55,7 +56,7 @@ export default class Sidebar extends React.PureComponent {
     const baseLink = `/u/${username}`
     return (
       <div className="user-section">
-        <nav className="level user-quicklinks">
+        <nav className="level user-quicklinks is-mobile">
           <div className="level-left menu-list">
             <this.MenuLink to={baseLink} className="my-profile-link" onlyActiveOnIndex={true}>
               <div className="current-user-link">
@@ -68,7 +69,10 @@ export default class Sidebar extends React.PureComponent {
             </this.MenuLink>
           </div>
           <div className="level-right">
-            <a className="button" onClick={() => this.props.logout()}>Logout</a>
+            <a className="button" title={this.props.t('menu.logout')}
+               onClick={() => this.props.logout()}>
+              <Icon name="sign-out"/>
+            </a>
           </div>
         </nav>
         <ul className="menu-list user-links">
@@ -118,15 +122,7 @@ export default class Sidebar extends React.PureComponent {
         <div className="menu-content">
           { this.renderUserSection() }
           <p className="menu-label">{ t('menu.content') }</p>
-          <ul className="menu-list">
-            <this.MenuListLink to="/videos" iconName="television" onlyActiveOnIndex={true}>
-              { capitalize(t('entities.video_plural')) }
-            </this.MenuListLink>
-            <this.MenuListLink to="/speakers" iconName="users" className="is-disabled">
-              { capitalize(t('entities.speaker_plural')) }
-            </this.MenuListLink>
-          </ul>
-
+          {this.renderMenuContent()}
           <p className="menu-label hide-when-collapsed">{ t('menu.language') }</p>
           <LanguageSelector className="hide-when-collapsed"
                             handleChange={v => i18n.changeLanguage(v)}
@@ -150,7 +146,26 @@ export default class Sidebar extends React.PureComponent {
     )
   }
 
+  renderMenuContent() {
+    const t = this.props.t
+    return (
+      <ul className="menu-list">
+        <this.MenuListLink to="/videos" iconName="television" onlyActiveOnIndex={true}>
+          { capitalize(t('entities.video_plural')) }
+        </this.MenuListLink>
+        <this.MenuListLink to="/speakers" iconName="users" className="is-disabled">
+          { capitalize(t('entities.speaker_plural')) }
+        </this.MenuListLink>
+        <ReputationGuard requiredRep={MIN_REPUTATION_MODERATION}>
+          <this.MenuListLink to="/moderation" iconName="flag" className="hide-when-collapsed">
+            { t('menu.moderation') }
+          </this.MenuListLink>
+        </ReputationGuard>
+      </ul>
+    )
+  }
+
   usernameFontSize() {
-    return `${1.5 - this.props.CurrentUser.username.length / 20}em`
+    return `${1.5 - this.props.CurrentUser.username.length / 38}em`
   }
 }

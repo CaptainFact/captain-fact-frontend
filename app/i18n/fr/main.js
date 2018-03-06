@@ -1,4 +1,4 @@
-{
+export default {
   "entities": {
     "video": "vidéo",
     "video_plural": "vidéos",
@@ -9,6 +9,7 @@
   },
   "menu": {
     "loginSignup": "Connexion",
+    "logout": "Se déconnecter",
     "settings": "Paramètres",
     "profile": "Profil",
     "activity": "Activité",
@@ -20,6 +21,7 @@
     "other": "Autre",
     "contact": "Contact",
     "extension": "Extension pour navigateur",
+    "moderation": "Modération",
     "help": "Aide"
   },
   "actions": {
