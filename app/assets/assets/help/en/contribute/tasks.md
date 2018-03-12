@@ -1,3 +1,22 @@
+# Development
+
+For all development tasks, [check this out](/help/contribute/code).
+
+# Design
+
+For all gamification aspects you can check
+[this link](https://github.com/CaptainFact/captain-fact-frontend/issues/6)
+
+For everything else (or if you're uncomfortable with using Github) you
+can [contact us](/help/contact) directly. 
+
+# Law
+
+If you have experience with legal structures issues and particularly with
+non-profit / common good companies your help could be extremely valuable. 
+
+# Traductions
+
 Helping to translate CaptainFact doesn't require any technical skills, it's just a matter
 of replacing strings in files.
 

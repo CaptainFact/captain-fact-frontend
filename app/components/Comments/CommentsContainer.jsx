@@ -23,6 +23,7 @@ export class CommentsContainer extends React.PureComponent {
     const {t, comments, className, header, replyingTo, nesting=1} = this.props
 
     // TODO Optimize: This re-update the list each time!
+    // TODO Optimize: Use a selector !
     let numComment = 0
     const displayedComments = comments.takeWhile(c =>
       ++numComment <= this.state.nbComments[0] ||
