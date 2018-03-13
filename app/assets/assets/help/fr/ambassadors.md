@@ -15,34 +15,34 @@ par leur appartenance au groupe éponyme. Les deux premiers ambassadeurs,
 contributions importantes sur la plateforme en termes de qualité et
 d'implication.
 
-C'est eux qui ont la résponsabilité de nommer les futurs ambassadeurs.
+C'est eux qui ont la responsabilité de nommer les futurs ambassadeurs.
 
 # Charte des ambassadeurs
 
 
 ### 🖐‍ Vous êtes des **barreurs** !
 
-En discutant avec l'équipe, en influencant certaines 
-actions de la communauté, vous nous aider à garantir une cohérence et une 
+En discutant avec l'équipe, en influençant certaines 
+actions de la communauté, vous nous aidez à garantir une cohérence et une 
 certaine vision à long terme du projet ! Vous êtes notre **gage d'indépendance**.
 
 
 ### 😠‍ Vous êtes notre **contre-prouvoir** !
 Si nous ne sommes pas en adéquation avec nos valeurs ou si nous
 appliquons des actions incohérentes,
-vous êtes là pour nous rappeller à l'ordre.
+vous êtes là pour nous rappeler à l'ordre.
 
 
 ### 📝‍  Vous êtes **membres de la communauté** ! 
-Que ca soit sur la plateforme ou 
+Que ça soit sur la plateforme ou 
 le [Discord](https://discord.gg/2Qd7hMz), vous pouvez prendre la
 température des utilisateurs, modérer les échanges et garantir 
 une utilisation seine de la plateforme.
 
 
 ### 👁‍ Vous êtes en **auto-gestion** ! 
-Que ca soit dans le recrutement d'ambassadeurs
-ou l'organisation, nous ne serons pas interventionistes, 
+Que ça soit dans le recrutement d'ambassadeurs
+ou l'organisation, nous ne serons pas interventionnistes, 
 nous souhaitons construire une relation de confiance avec vous.
 
 ### ⏲‍ Vous êtes **mandatés** ! 
@@ -66,7 +66,7 @@ promotion ou l'organisation d'événements nous serons là pour vous soutenir.
 Tous les points mentionnés dans 
 cette charte sont sujets à discussion et nous comptons sur vous pour nous faire 
 des retours pour préciser / modifier / supprimer / ajouter
-des règles qui vous parraitraient importantes.
+des règles qui vous sembleraient importantes.
 
 ### 🆓‍ Vous êtes **libres** !
 De quitter vos fonctions d'ambassadeur à tout moment.
