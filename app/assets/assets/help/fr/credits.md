@@ -1,12 +1,32 @@
-CaptainFact a grandit sur le sol fertile de nombreux projets open source tels que :
+Pour leur soutient crucial, un **énorme** merci à...
+
+
+#### L'équipe de [TEDxNouméa](http://tedxnoumea.com)
+
+Qui a cru en notre démarche
+dès le début et a su accompagner les réflexions
+dans la bonne direction.
+  
+  
+#### La chaîne Internet [ThinkerView](https://thinkerview.com)
+
+Qui par leur adoption précoce de l'outil
+ont permis de transformer les quelques lignes de code de ce projet
+en une expérience sociale positive sur laquelle nous pouvons désormais
+nous appuyer pour construire le futur de la plateforme.
+Leur volonté de mettre à disposition de leur communauté un outil qui permette
+de sourcer et de vérifier leurs propres contenus est à nos yeux
+une preuve d'honnêteté et de rigueur intellectuelle exemplaire. 
+
+
+#### La communauté open-source
 
 * [Elixir](https://elixir-lang.org)
 * [Phoenix Framework](https://github.com/phoenixframework/phoenix)
 * [React](https://facebook.github.io/react/)
 * [Bulma](http://bulma.io/)
 * [Redux](http://redux.js.org/)
-* [adorable.io](http://avatars.adorable.io/) for their great consistent avatar service (the funny faces 
-  you see if you don't set your own profile picture)
+* [adorable.io](http://avatars.adorable.io/) pour leur super service de géneration d'avatars à la volée
 * La fondation Wikimedia pour les images d'intervenants et d'autres métadonées associées. Vous
   pouvez trouvez plus d'informations sur cette partie sur
   [notre dépôt de données](https://github.com/CaptainFact/captain-fact-data)

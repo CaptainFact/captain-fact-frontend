@@ -7,7 +7,9 @@ export default {
   "pages": {
     "about": "About",
     "achievements": "Achievements",
+    "ambassadors": "Ambassadors",
     "credits": "Credits",
+    "jobs": "Join us !",
     "moderation": "Moderation",
     "privileges": "Privileges",
     "reputation": "Reputation",
@@ -17,9 +19,7 @@ export default {
     "contact": "Contact",
     "censorship_requests": "Censorship Requests",
     "contribute/code": "Programmers",
-    "contribute/graphic": "Graphic Designers",
-    "contribute/law": "Lawyers",
-    "contribute/translate": "Translate"
+    "contribute/tasks": "Independent tasks"
   },
   "goBack": "Go back to help index"
 }

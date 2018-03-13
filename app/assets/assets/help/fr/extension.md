@@ -27,7 +27,8 @@ Le script s'injecte manuellement **uniquement** si la vidéo est référencée d
 besoin de cette permission pour désactiver CaptainFact dans tous vos onglets lorsque vous le désactivez dans la popup
 d'extension.
 
-Vous pouvez vérifiez par vous-même dans le code source, dans `chrome/extension/background.js` (look for `chrome.tabs.`)
+Vous pouvez vérifier par vous-même dans le code source,
+dans`chrome/extension/background.js` (cherchez les `chrome.tabs.`)
 
 ## Pourquoi demander la permission d'accès à Youtube ?
 

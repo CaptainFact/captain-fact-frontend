@@ -7,7 +7,9 @@ export default {
   "pages": {
     "about": "A propos",
     "achievements": "Médailles",
+    "ambassadors": "Ambassadeurs",
     "credits": "Remerciements",
+    "jobs": "On recrute !",
     "moderation": "Moderation",
     "privileges": "Privilèges",
     "reputation": "Réputation",
@@ -16,11 +18,8 @@ export default {
     "privacy": "Vie Privée",
     "contact": "Contact",
     "censorship_requests": "Demandes de censure",
-    "contribute": "Aider à la réalisation du projet",
-    "contribute/code": "Programmation",
-    "contribute/graphic": "Graphistes",
-    "contribute/law": "Juristes",
-    "contribute/translate": "Traduire"
+    "contribute/code": "Développeurs",
+    "contribute/tasks": "Tâches indépendantes",
   },
   "goBack": "Retourner au menu d'aide principal"
 }
