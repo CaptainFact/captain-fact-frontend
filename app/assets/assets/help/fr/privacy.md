@@ -1,7 +1,20 @@
-Nous ne vendrons **jamais** vos données personelles et il n'y a pas grand chose à vendre de
-toutes les façons : on ne collecte que ce dont on a besoin pour faire fonctionner le site.
+## Données personelles
 
-Vous devez par contre considérer toutes vos intéractions (votes, commentaires...)
+Nous ne vendrons **jamais** vos données personelles et il n'y a pas grand chose
+à vendre de toutes les façons, on ne collecte que ce dont on a besoin pour
+faire fonctionner le site :
+
+##### Si vous créez un compte
+  * Email
+  * Mot de passe (chiffré avec [bcrypt](https://fr.wikipedia.org/wiki/Bcrypt) + salé)
+  
+  
+##### Si vous n'avez pas de compte
+  * Votre adresse IP **uniquement** lors d'une demande de réinitialisation de mot de passe
+
+## Données publiques : intéractions sociales
+
+Vous devez par contre considérer toutes vos intéractions (ajout d'un commentaire, d'une source...)
 comme **publiques**. Vous êtes libre d'utiliser votre vrai nom ou juste un bon vieux
 pseudonyme si c'est ce que vous préférez.
 

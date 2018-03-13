@@ -3,8 +3,8 @@ de faire remonter les attentes des utilisateurs, de donner leur avis sur les
 futures évolutions et d'être un contre-pouvoir si l'équipe venait à prendre
 des décisions allant a l'encontre de l'intérêt général.
 
-La plateforme étant toujours en Beta, l'équipe se réserve la possibilité
-de modifier les différents aspects présentés jusqu'à ce qu'un équilibre
+La plateforme étant toujours en Beta, nous nous reservons la possibilité
+de modifier les différents aspects présentés ici jusqu'à ce qu'un équilibre
 soit trouvé.
 
 ### Nomination des ambassadeurs

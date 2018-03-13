@@ -58,13 +58,12 @@ export default class Help extends React.PureComponent {
             {this.renderPageLink('jobs')}
             {this.renderPageLink('contribute/tasks')}
             {this.renderPageLink('bug_report')}
-            {this.renderPageLink('ambassadors')}
           </div>
           <div className="column panel">
             <p className="panel-heading">{this.props.t('categories.others')}</p>
             {this.renderPageLink('about')}
+            {this.renderPageLink('ambassadors')}
             {this.renderPageLink('contact')}
-            {this.renderPageLink('censorship_requests')}
             {this.renderPageLink('credits')}
             {this.renderPageLink('privacy')}
           </div>

@@ -11,8 +11,8 @@ Ce processus d'une durée de 4 mois doit nous permettre :
   4. De créer de nouveaux partenariats et d'intégrer de nouveaux contenus
   5. De développer et d'animer une communauté soudée autour du projet
 
-**Maia Mater** fournît le gîte, le couvert et un accompagnement pour mener
-à bien ces missions.
+**Maia Mater** fournît le gîte, le couvert et un accompagnement à toute
+l'équipe pour mener à bien ces missions.
 
 ### Notre fonctionnement
 
