@@ -44,7 +44,7 @@ sur Internet.
 
 Soyons clairs dès le début : nous n'avons pas pour ambition de lever des
 milliards chez des business angels Américains pour pouvoir se la couler douce
-dans un Jacuzzi à San Francisco. Nous souhaitons apporter des solutions 
+dans un jacuzzi à San Francisco. Nous souhaitons apporter des solutions 
 simples et d'utilité publique sur des problématiques qui sont à nos yeux cruciales.
 La recherche d'un modèle soutenable reste toutefois une étape obligatoire :
 même avec toute la passion du monde, une équipe efficace doit avoir les
@@ -62,7 +62,7 @@ collective.
 
 ## Candidater
 
-Si vous vous sentez l'âme **d'un·e hacker** prêt à vous mettre à l'abordage 
+Si vous vous sentez l'âme **d'un·e hacker** prêt·te à vous mettre à l'abordage 
 des problématiques liées à l'information sur Internet, envoyez-nous un mail sur 
 [jobs@captainfact.io](mailto:jobs@captainfact.io) ou contactez @Team
 sur [Discord](https://discord.gg/2Qd7hMz).
