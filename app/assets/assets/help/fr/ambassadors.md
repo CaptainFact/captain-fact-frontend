@@ -3,6 +3,10 @@ de faire remonter les attentes des utilisateurs, de donner leur avis sur les
 futures évolutions et d'être un contre-pouvoir si l'équipe venait à prendre
 des décisions allant a l'encontre de l'intérêt général.
 
+La plateforme étant toujours en Beta, l'équipe se réserve la possibilité
+de modifier les différents aspects présentés jusqu'à ce qu'un équilibre
+soit trouvé.
+
 ### Nomination des ambassadeurs
 
 Les ambassadeurs sont reconnaissables sur [Discord](https://discord.gg/2Qd7hMz)
@@ -43,7 +47,7 @@ nous souhaitons construire une relation de confiance avec vous.
 
 ### ⏲‍ Vous êtes **mandatés** ! 
 Afin de garantir un minimum d'investissement et 
-un renouvellement régulier, votre mandat sera limité dans le temps 
+un renouvellement régulier, votre mandat sera limité à une durée de 6 mois
 et renouvelable.
 
 
@@ -59,11 +63,13 @@ promotion ou l'organisation d'événements nous serons là pour vous soutenir.
 
 
 ### 👷‍  Vous êtes **des conseillés** ! 
-Tout les points que mentionnés dans 
+Tous les points mentionnés dans 
 cette charte sont sujets à discussion et nous comptons sur vous pour nous faire 
 des retours pour préciser / modifier / supprimer / ajouter
 des règles qui vous parraitraient importantes.
 
+### 🆓‍ Vous êtes **libres** !
+De quitter vos fonctions d'ambassadeur à tout moment.
 
 ### 😃‍ Vous êtes **géniaux** ! 
 Merci pour votre implication et votre travail.

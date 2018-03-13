@@ -64,4 +64,5 @@ collective.
 
 Si vous vous sentez l'âme **d'un·e hacker** prêt à vous mettre à l'abordage 
 des problématiques liées à l'information sur Internet, envoyez-nous un mail sur 
-[jobs@captainfact.io](mailto:jobs@captainfact.io).
+[jobs@captainfact.io](mailto:jobs@captainfact.io) ou contactez @Team
+sur [Discord](https://discord.gg/2Qd7hMz).
