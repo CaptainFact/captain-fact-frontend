@@ -1,6 +1,6 @@
 {
   "name": "captain-fact-frontend",
-  "version": "0.8.4",
+  "version": "0.8.4-rc.2",
   "private": true,
   "scripts": {
     "start": "brunch watch --server",
@@ -45,7 +45,7 @@
     "react-flip-move": "^3.0.1",
     "react-i18next": "^7.4.0",
     "react-markdown": "^3.2.2",
-    "react-player": "^1.2.1",
+    "react-player": "0.25.3",
     "react-redux": "^5.0.7",
     "react-router": "^3.0.1",
     "react-select": "^1.2.1",
