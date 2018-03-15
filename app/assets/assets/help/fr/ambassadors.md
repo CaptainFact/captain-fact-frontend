@@ -37,7 +37,7 @@ vous êtes là pour nous rappeler à l'ordre.
 Que ça soit sur la plateforme ou 
 le [Discord](https://discord.gg/2Qd7hMz), vous pouvez prendre la
 température des utilisateurs, modérer les échanges et garantir 
-une utilisation seine de la plateforme.
+une utilisation saine de la plateforme.
 
 
 ### 👁‍ Vous êtes en **auto-gestion** ! 
@@ -47,17 +47,16 @@ nous souhaitons construire une relation de confiance avec vous.
 
 ### ⏲‍ Vous êtes **mandatés** ! 
 Afin de garantir un minimum d'investissement et 
-un renouvellement régulier, votre mandat sera limité à une durée de 6 mois
-et renouvelable.
-
+un renouvellement régulier des ambassadeurs, votre mandat est de 6 mois 
+et il est renouvelable.
 
 ### 😃‍ Vous êtes **réels** ! 
 Nous allons travailler avec vous pour définir votre 
-statut juridique au sein de notre structure pour garantir
+statut juridique au sein de notre structure pour garantir votre indépendance.
 
 
 ### 🔗‍ Vous êtes **un lien** ! 
-Nous souhaitons casser cette dimension virtuelle de 
+Nous souhaitons casser la dimension virtuelle de 
 notre communauté et vous avez un rôle à jouer, que ca soit à travers la 
 promotion ou l'organisation d'événements nous serons là pour vous soutenir.
 
