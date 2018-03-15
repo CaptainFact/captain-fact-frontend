@@ -14,7 +14,7 @@ pour l'extension.
 
 # Pire ! Une faille de sécurité ?
 
-Nous croyons en la divulation responsable et l'encourageons.
+Nous croyons en la divulgation responsable et l'encourageons.
 
 Si votre signalement est relatif à une faille de sécurité critique, vous pouvez
 chiffrer votre message avec la clef PGP ci-dessous :

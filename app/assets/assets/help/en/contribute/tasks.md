@@ -15,7 +15,7 @@ can [contact us](/help/contact) directly.
 If you have experience with legal structures issues and particularly with
 non-profit / common good companies your help could be extremely valuable. 
 
-# Traductions
+# Translation
 
 Helping to translate CaptainFact doesn't require any technical skills, it's just a matter
 of replacing strings in files.
