@@ -37,7 +37,7 @@ vous êtes là pour nous rappeler à l'ordre.
 Que ça soit sur la plateforme ou 
 le [Discord](https://discord.gg/2Qd7hMz), vous pouvez prendre la
 température des utilisateurs, modérer les échanges et garantir 
-une utilisation seine de la plateforme.
+une utilisation saine de la plateforme.
 
 
 ### 👁‍ Vous êtes en **auto-gestion** ! 
