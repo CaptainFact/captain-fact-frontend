@@ -26,7 +26,7 @@ import { destroyStatementForm } from '../../state/video_debate/statements/effect
   }),
   {changeStatementFormSpeaker, toggleAutoscroll, addModal, destroyStatementForm}
 )
-@translate(['videoDebate', 'main'])
+@translate('videoDebate')
 @withRouter
 export default class ActionBubbleMenu extends React.PureComponent {
   render() {

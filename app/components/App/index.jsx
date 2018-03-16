@@ -1,6 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import { I18nextProvider } from 'react-i18next'
+import { Helmet } from 'react-helmet'
 
 import i18n from '../../i18n/i18n'
 import { FlashMessages } from "../Utils"
@@ -20,6 +21,9 @@ export default class App extends React.PureComponent {
     return (
       <I18nextProvider i18n={i18n}>
         <div lang={this.props.locale}>
+          <Helmet>
+            <title>CaptainFact</title>
+          </Helmet>
           <MainModalContainer/>
           <div className="columns is-mobile is-gapless">
             <Sidebar className="column is-narrow"/>

@@ -6,7 +6,7 @@ Pour toutes les tâches liées au développement,
 # Design
 
 Pour les tâches liées à la ludification (gamification) vous pouvez jeter un
-coup d'oeuil [par ici](https://github.com/CaptainFact/captain-fact-frontend/issues/6)
+coup d'œuil [par ici](https://github.com/CaptainFact/captain-fact-frontend/issues/6)
 
 Pour tout le reste ou si vous n'êtes pas à l'aise avec Github vous pouvez 
 [nous contacter](/help/contact) directement.

@@ -10,7 +10,7 @@ import Logo from '../App/Logo'
 
 
 @connect(state => ({authenticated: isAuthenticated(state)}))
-@translate(['home', 'main'])
+@translate('home')
 export class Home extends React.PureComponent {
   render() {
     return (

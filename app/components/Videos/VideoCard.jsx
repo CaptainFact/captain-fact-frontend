@@ -7,7 +7,7 @@ import { translate } from 'react-i18next'
 import CardLayout from '../Utils/CardLayout'
 
 
-@translate(['main', 'videoDebate'])
+@translate('main')
 export class VideoCard extends React.PureComponent {
   static videoThumb(provider, provider_id) {
     if (provider === "youtube")

@@ -11,7 +11,7 @@ import HttpApi from '../../API/http_api'
 const flagFormValueSelector = formValueSelector('flagForm')
 
 @connect(state => ({selectedReason: flagFormValueSelector(state, 'reason')}))
-@translate(['videoDebate', 'main'])
+@translate('videoDebate')
 export default class ModalFlag extends React.PureComponent {
   constructor(props) {
     super(props)
