@@ -10,7 +10,8 @@ import { STATEMENT_FOCUS_TIME } from "../../../constants"
 export const getStatementSpeakerId = (state, props) => props.statement.speaker_id
 
 export const getStatementSpeaker = createCachedSelector(
-  [getStatementSpeakerId, getVideoDebateSpeakers],
+  getStatementSpeakerId,
+  getVideoDebateSpeakers,
   (speakerId, speakers) => speakers.find(s => s.id === speakerId)
 )((state, props) => props.statement.id)
 
@@ -26,10 +27,8 @@ export const getStatementRefuteScore = createCachedSelector(
 
 
 export const getFocusedStatementId = createSelector(
-  [
-    state => state.VideoDebate.statements.data,
-    state => state.VideoDebate.video.playback.position
-  ],
+  state => state.VideoDebate.statements.data,
+  state => state.VideoDebate.video.playback.position,
   (statements, position) => {
     if (!position)
       return -1
@@ -39,10 +38,8 @@ export const getFocusedStatementId = createSelector(
 )
 
 export const getFocusedStatementSpeakerId = createSelector(
-  [
-    state => state.VideoDebate.statements.data,
-    getFocusedStatementId
-  ],
+  state => state.VideoDebate.statements.data,
+  getFocusedStatementId,
   (statements, focusId) => {
     if (focusId === -1)
       return null
@@ -52,7 +49,8 @@ export const getFocusedStatementSpeakerId = createSelector(
 )
 
 export const isStatementFocused = createSelector(
-  [getFocusedStatementId, (state, props) => props.statement.id],
+  getFocusedStatementId,
+  (state, props) => props.statement.id,
   (focusedStatementId, statementId) => focusedStatementId === statementId
 )
 

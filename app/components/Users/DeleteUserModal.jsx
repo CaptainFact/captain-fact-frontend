@@ -41,7 +41,7 @@ const valueSelector = formValueSelector(DELETE_FORM)
 @connect(state => ({
   isValid: valueSelector(state, 'usernameConfirm') === state.CurrentUser.data.username
 }))
-@translate(['main', 'user'])
+@translate('main')
 export default class DeleteUserModal extends React.PureComponent {
   render() {
     const { t, isValid, ...otherProps } = this.props

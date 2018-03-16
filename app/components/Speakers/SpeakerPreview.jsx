@@ -23,7 +23,7 @@ import {getFocusedStatementSpeakerId} from '../../state/video_debate/statements/
 
 
 @withRouter
-@translate(['videoDebate', 'main'])
+@translate('videoDebate')
 @connect((state, props) => (
   {isAuthenticated: isAuthenticated(state), isFocused: getFocusedStatementSpeakerId(state) === props.speaker.id}),
   {addModal, changeStatementFormSpeaker, removeSpeaker, updateSpeaker}
