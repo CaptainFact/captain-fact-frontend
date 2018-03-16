@@ -156,8 +156,8 @@ export class Statement extends React.PureComponent {
         }
         <div className="card-footer comments">
           {comments.size > 0 && <CommentsContainer comments={comments}/>}
-          {/* TODO This can be optimized as initialValues will always change upon rendering */}
-          <CommentForm form={`formAddComment-${statement.id}`} initialValues={{ statement_id: statement.id }}/>
+          <CommentForm form={`formAddComment-${statement.id}`}
+                       initialValues={{ statement_id: statement.id }}/>
         </div>
       </div>
     )

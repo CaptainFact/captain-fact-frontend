@@ -30,8 +30,7 @@ export default class User extends React.PureComponent {
     // If user's username was updated
     if (this.props.user.id === oldProps.user.id &&
         this.props.user.username !== oldProps.user.username)
-          // Remove old user profile from history
-          // TODO
+          // TODO Remove old user profile from history
           // Redirect
           this.props.router.replace(`/u/${this.props.user.username}`)
 

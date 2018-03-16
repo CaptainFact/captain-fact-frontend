@@ -15,14 +15,6 @@ class UserProfile extends PureComponent {
     const {user: {achievements}, t} = this.props
     return (
       <div className="columns is-marginless" style={{paddingTop: 40}}>
-        {/*<div className="column is-7">*/}
-        {/*<h2 className="title is-2 is-centered has-text-centered" >*/}
-        {/*<Icon size="large" name="bar-chart"/> Statistics*/}
-        {/*</h2>*/}
-        {/*<p>Posted x comments</p>*/}
-        {/*<p>Posted x sourced comments</p>*/}
-        {/*TODO: Top comments*/}
-        {/*</div>*/}
         <div className="column has-text-centered">
           <h2 className="title is-2 is-centered">
             <Icon size="large" name="trophy"/> {t('title')}
