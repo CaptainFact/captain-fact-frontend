@@ -23,7 +23,7 @@ import capitalize from 'voca/capitalize'
   error: state.Videos.error,
   languageFilter: state.UserPreferences.videosLanguageFilter
 }), {fetchPublicVideos, reset, changeVideosLanguageFilter})
-@translate(['main', 'errors'])
+@translate('main')
 export class PublicVideos extends React.PureComponent {
   componentDidMount() {
     this.props.fetchPublicVideos(this.props.languageFilter && {language: this.props.languageFilter})

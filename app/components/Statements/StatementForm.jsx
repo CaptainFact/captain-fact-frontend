@@ -14,13 +14,13 @@ import { decrementFormCount, incrementFormCount, setScrollTo, STATEMENT_FORM_NAM
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 
 
-@translate(['videoDebate', 'main'])
-@reduxForm({form: STATEMENT_FORM_NAME})
 @connect(({VideoDebate: {video, statements}}) => ({
   position: video.playback.position,
   speakers: video.data.speakers,
   submitting: statements.isSubmitting
 }), {forcePosition, setScrollTo, incrementFormCount, decrementFormCount})
+@reduxForm({form: STATEMENT_FORM_NAME})
+@translate('videoDebate')
 export class StatementForm extends React.PureComponent {
   constructor(props) {
     super(props)

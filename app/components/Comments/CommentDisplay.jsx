@@ -33,7 +33,7 @@ import Vote from './Vote'
   replies: VideoDebate.comments.replies.get(props.comment.id),
   isFlagged: VideoDebate.comments.myFlags.has(props.comment.id) // TODO Selector
 }), {addModal, deleteComment, flagComment, commentVote, change, flashErrorUnauthenticated})
-@translate(['main', 'videoDebate'])
+@translate('main')
 export class CommentDisplay extends React.PureComponent {
   constructor(props) {
     super(props)

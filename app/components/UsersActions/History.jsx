@@ -10,7 +10,7 @@ import { UserAction } from './UserAction'
 /**
  * Display a list of `UserAction` record as an history
  */
-@translate(['main', 'videoDebate'])
+@translate('main')
 export class History extends React.PureComponent {
   constructor(props) {
     super(props)

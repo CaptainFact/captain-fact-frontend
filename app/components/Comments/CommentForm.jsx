@@ -55,25 +55,25 @@ class CommentField extends React.PureComponent {
   }
 }
 
-@connect((state, props) => ({
-  formValues: getFormValues(props.form)(state),
-  currentUser: state.CurrentUser.data,
-  isAuthenticated: isAuthenticated(state)
-}), {postComment, flashErrorUnauthenticated})
-@reduxForm({form:'commentForm', validate})
-@translate(['videoDebate', 'main'])
-@withRouter
-export class CommentForm extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = {isCollapsed: true}
+@connect((state, props) => {
+  const formValues = getFormValues(props.form)(state)
+  return {
+    sourceUrl: formValues && formValues.source ? formValues.source.url : null,
+    replyTo: formValues && formValues.reply_to,
+    currentUser: state.CurrentUser.data,
+    isAuthenticated: isAuthenticated(state)
   }
+}, {postComment, flashErrorUnauthenticated})
+@reduxForm({form:'commentForm', validate})
+@translate('videoDebate')
+@withRouter
+export class CommentForm extends React.Component {
+  state = { isCollapsed: true }
 
   render() {
-    const { valid, formValues, currentUser, t } = this.props
-    const sourceUrl = formValues && formValues.source ? formValues.source.url : null
+    const { valid, currentUser, sourceUrl, replyTo, t } = this.props
 
-    if (!this.props.currentUser.id || this.state.isCollapsed && !(formValues && formValues.reply_to))
+    if (!this.props.currentUser.id || this.state.isCollapsed && !replyTo)
       return (
         <div className="comment-form collapsed">
           <a onClick={() => this.expandForm()}>
@@ -91,23 +91,23 @@ export class CommentForm extends React.PureComponent {
         left={<UserPicture user={currentUser} size={USER_PICTURE_LARGE}/>}
         content={
           <div>
-            {formValues && formValues.reply_to &&
+            {replyTo &&
             <div>
               <Tag size="medium" className="reply_to">
                 <CloseButton onClick={() => this.props.change('reply_to', null)}/>
                 <span>
                   {t('comment.replyingTo')}&nbsp;
-                  <UserAppellation user={formValues.reply_to.user}/>
+                  <UserAppellation user={replyTo.user}/>
                 </span>
               </Tag>
               <CommentDisplay className="quoted" richMedias={false}
-                              comment={formValues.reply_to}
+                              comment={replyTo}
                               withoutActions withoutHeader hideThread/>
               <br/>
             </div>
             }
             <Field component={ CommentField } className="textarea" name="text"
-                   isReply={formValues && !!formValues.reply_to}
+                   isReply={!!replyTo}
                    normalize={ cleanStrMultiline }
                    placeholder={t('comment.writeComment')}
                    autoFocus
@@ -117,7 +117,7 @@ export class CommentForm extends React.PureComponent {
                      label={t('comment.addSource')}
                      normalize={s => s.trim()}/>
               <div className="submit-btns">
-                { this.renderSubmit(valid, sourceUrl, formValues && formValues.reply_to) }
+                { this.renderSubmit(valid, sourceUrl, replyTo) }
               </div>
             </div>
           </div>

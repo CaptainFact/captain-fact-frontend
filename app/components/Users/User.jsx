@@ -20,7 +20,7 @@ import { resetUser } from '../../state/users/displayed_user/reducer'
   isLoading, errors,
   user: data
 }), {fetchUser, resetUser})
-@translate(['main', 'user'])
+@translate('main')
 export default class User extends React.PureComponent {
   componentDidMount() {
     this.props.fetchUser(this.props.params.username)

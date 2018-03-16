@@ -33,7 +33,6 @@ import { setScrollTo } from '../../state/video_debate/statements/reducer'
   refutingFacts : commentsSelectors.getStatementRefutingFacts(state, props),
   approveScore: statementSelectors.getStatementApproveScore(state, props),
   refuteScore: statementSelectors.getStatementRefuteScore(state, props),
-  commentsLoading: commentsSelectors.areCommentsLoading(state),
   isFocused: statementSelectors.isStatementFocused(state, props),
   currentUser: state.CurrentUser.data,
   scrollTo: state.VideoDebate.statements.scrollTo,
@@ -42,11 +41,7 @@ import { setScrollTo } from '../../state/video_debate/statements/reducer'
 }), {addModal, updateStatement, deleteStatement, forcePosition, setScrollTo})
 @translate('videoDebate')
 export class Statement extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = { isDeleting: false, isEditing: false }
-    this.showHistory = this.showHistory.bind(this)
-  }
+  state = { isDeleting: false, isEditing: false }
 
   componentDidUpdate(prevProps) {
     if (this.shouldScroll(this.props, prevProps))
@@ -76,16 +71,6 @@ export class Statement extends React.PureComponent {
         </div>
       </div>
     )
-  }
-
-  showHistory() {
-    this.props.addModal({
-      Modal: ModalHistory,
-      props: {
-        entity: ENTITY_STATEMENT,
-        entityId: this.props.statement.id
-      }
-    })
   }
 
   renderCardHeaderAndContent(speaker, statement) {
@@ -122,7 +107,7 @@ export class Statement extends React.PureComponent {
           </p>
 
           <div className="card-header-icon">
-            <LinkWithIcon iconName="history" title={t('history')} onClick={ this.showHistory }/>
+            <LinkWithIcon iconName="history" title={t('history')} onClick={ () => this.showHistory() }/>
             <ReputationGuard requiredRep={MIN_REPUTATION_UPDATE_STATEMENT}>
               <LinkWithIcon iconName="pencil"
                             title={t('main:actions.edit')}
@@ -151,8 +136,6 @@ export class Statement extends React.PureComponent {
   }
 
   renderFactsAndComments() {
-    if (this.props.commentsLoading)
-      return (<LoadingFrame size="small" title="Loading comments"/>)
     const { statement, comments, approvingFacts, refutingFacts } = this.props
 
     return (
@@ -178,6 +161,16 @@ export class Statement extends React.PureComponent {
         </div>
       </div>
     )
+  }
+
+  showHistory() {
+    this.props.addModal({
+      Modal: ModalHistory,
+      props: {
+        entity: ENTITY_STATEMENT,
+        entityId: this.props.statement.id
+      }
+    })
   }
 
   // ---- Autoscroll ----

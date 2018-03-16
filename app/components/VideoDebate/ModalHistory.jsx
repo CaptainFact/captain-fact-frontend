@@ -11,11 +11,11 @@ import ActionsTable from '../UsersActions/ActionsTable'
 import { reset } from '../../state/user_actions/reducer'
 
 
-@connect((state, props) => ({
+@connect(state => ({
   actions: state.UsersActions.actions,
   isLoading: state.UsersActions.isLoading
 }), {joinStatementHistoryChannel, leaveStatementHistoryChannel, popModal, reset})
-@translate(['history'])
+@translate('history')
 export class ModalHistory extends React.PureComponent {
   componentDidMount() {
     if (this.props.entity === ENTITY_STATEMENT)

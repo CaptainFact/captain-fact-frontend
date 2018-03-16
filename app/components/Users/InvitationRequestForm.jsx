@@ -20,7 +20,7 @@ const validate = ({email}) => {
 }
 
 @reduxForm({form: 'newsletterSubscribeForm', validate})
-@translate(['home', 'user'])
+@translate('home')
 @connect(null, {addFlash, errorToFlash, requestInvitation})
 export default class InvitationRequestForm extends React.PureComponent {
   constructor(props) {

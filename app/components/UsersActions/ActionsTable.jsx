@@ -17,7 +17,7 @@ import { ACTION_DELETE, ACTION_REMOVE, MIN_REPUTATION_RESTORE_ENTITY } from '../
 import { LoadingFrame } from '../Utils/LoadingFrame'
 
 
-@translate(['history', 'main'])
+@translate('history')
 @connect(
   (state, props) => ({
     lastActionsIds: state.UsersActions.lastActionsIds,

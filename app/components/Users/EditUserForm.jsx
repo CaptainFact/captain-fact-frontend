@@ -18,7 +18,7 @@ import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 }), {updateInfo})
 @reduxForm({ form: 'editUserForm', validate: validatePasswordRepeat })
 @withRouter
-@translate(['user', 'main'])
+@translate('user')
 export default class EditUserForm extends React.PureComponent {
   componentDidUpdate() {
     // Redirect to user profile when logged in
