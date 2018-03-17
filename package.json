@@ -44,6 +44,7 @@
     "react-dom": "^16.2.0",
     "react-flip-move": "^3.0.1",
     "react-i18next": "^7.4.0",
+    "react-joyride": "^1.11.4",
     "react-markdown": "^3.2.2",
     "react-player": "0.25.3",
     "react-redux": "^5.0.7",
