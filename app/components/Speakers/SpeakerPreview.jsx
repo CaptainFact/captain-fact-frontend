@@ -36,7 +36,7 @@ export class SpeakerPreview extends React.PureComponent {
     store.dispatch(addStep({
       title: "test",
       text: "hello",
-      selector: ".add-statement-button:nth-child(1)"
+      selector: ".add-statement-button"
     }))
   }
 

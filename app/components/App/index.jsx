@@ -11,7 +11,10 @@ import { MainModalContainer } from "../Modal/MainModalContainer"
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
 
 
-@connect(state => ({locale: state.UserPreferences.locale}), {fetchCurrentUser: fetchCurrentUser})
+@connect(state => ({
+  locale: state.UserPreferences.locale,
+  onboardingSteps: state.OnboardingSteps.steps
+}),{fetchCurrentUser: fetchCurrentUser})
 export default class App extends React.PureComponent {
   componentDidMount() {
     this.props.fetchCurrentUser()
@@ -20,15 +23,14 @@ export default class App extends React.PureComponent {
   render() {
     return (
       <I18nextProvider i18n={i18n}>   
-        {/* <Joyride
-          ref="joyride"
-          steps={[arrayOfSteps]}
-          run={true}
-          debug={true}
-          callback={this.callback}
-        /> */}
         <div lang={this.props.locale}>
           <MainModalContainer/>
+          <Joyride
+            ref="joyride"
+            steps={this.props.onboardingSteps.toArray().map(step => step.toJS())}
+            run={true}
+            debug={true}
+          />
           <div className="columns is-mobile is-gapless">
             <Sidebar className="column is-narrow"/>
             <div id="main-container" className="column">
