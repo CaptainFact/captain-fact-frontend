@@ -39,7 +39,7 @@ export default class StatementsList extends React.PureComponent {
             e => {if (!e.error) this.props.closeStatementForm(); return e;}
           )}/>
         }
-        <FlipMove>
+        <FlipMove enterAnimation='fade'>
           {statements.map(statement =>
             <Statement key={statement.id} statement={statement}/>
           )}
