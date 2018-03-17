@@ -7,9 +7,9 @@ import { Link } from 'react-router'
 import { MIN_REPUTATION_ADD_SPEAKER } from '../../constants'
 import { videoDebateOnlineUsersCount, videoDebateOnlineViewersCount } from '../../state/video_debate/presence/selectors'
 import { AddSpeakerForm, SpeakerPreview } from "../Speakers"
-import { VideoPlayer } from "../Videos"
 import { LoadingFrame, Icon } from "../Utils"
 import ReputationGuard from '../Utils/ReputationGuard'
+import VideoDebatePlayer from './VideoDebatePlayer'
 import Presence from './Presence'
 
 
@@ -29,7 +29,7 @@ export class ColumnVideo extends React.PureComponent {
     const { url, title, speakers } = video
     return (
       <div id="col-video" className="column is-5">
-        <VideoPlayer url={url}/>
+        <VideoDebatePlayer url={url}/>
         <div className="videoInfo">
           <h2 className="title is-4">{title}</h2>
           <Presence nbUsers={this.props.nbUsers} nbViewers={this.props.nbViewers}/>
