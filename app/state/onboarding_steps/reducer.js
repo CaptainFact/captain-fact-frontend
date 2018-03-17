@@ -1,4 +1,5 @@
 import { Record, List, Map } from 'immutable'
+import { createAction, handleActions } from 'redux-actions'
 
 import OnboardingStep from './record'
 
@@ -21,4 +22,6 @@ const OnboardingStepsReducer = handleActions({
     return state.set('steps', steps)
   },
   [removeStep]: (state, {payload}) => state.set('showOnboarding', true)
-})
+}, INITIAL_STATE())
+
+export default OnboardingStepsReducer

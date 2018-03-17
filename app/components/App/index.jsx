@@ -1,6 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import { I18nextProvider } from 'react-i18next'
+import Joyride from 'react-joyride'
 
 import i18n from '../../i18n/i18n'
 import { FlashMessages } from "../Utils"
@@ -18,7 +19,14 @@ export default class App extends React.PureComponent {
 
   render() {
     return (
-      <I18nextProvider i18n={i18n}>
+      <I18nextProvider i18n={i18n}>   
+        {/* <Joyride
+          ref="joyride"
+          steps={[arrayOfSteps]}
+          run={true}
+          debug={true}
+          callback={this.callback}
+        /> */}
         <div lang={this.props.locale}>
           <MainModalContainer/>
           <div className="columns is-mobile is-gapless">

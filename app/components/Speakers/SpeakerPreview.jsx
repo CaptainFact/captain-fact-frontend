@@ -8,6 +8,7 @@ import {
   MIN_REPUTATION_REMOVE_SPEAKER, MIN_REPUTATION_UPDATE_SPEAKER
 } from '../../constants'
 
+import store from '../../state/index'
 import { isAuthenticated } from "../../state/users/current_user/selectors"
 import { staticResource } from "../../API"
 import { ModalFormContainer } from "../Modal"
@@ -16,6 +17,7 @@ import ReputationGuard from '../Utils/ReputationGuard'
 import { EditSpeakerForm } from "./SpeakerForm"
 import ModalRemoveSpeaker from './ModalRemoveSpeaker'
 import { addModal } from '../../state/modals/reducer'
+import { addStep } from '../../state/onboarding_steps/reducer'
 import { removeSpeaker, updateSpeaker } from '../../state/video_debate/effects'
 import { changeStatementFormSpeaker } from '../../state/video_debate/statements/reducer'
 import MediaLayout from '../Utils/MediaLayout'
@@ -29,6 +31,15 @@ import {getFocusedStatementSpeakerId} from '../../state/video_debate/statements/
   {addModal, changeStatementFormSpeaker, removeSpeaker, updateSpeaker}
 )
 export class SpeakerPreview extends React.PureComponent {
+  componentDidMount() {
+    // TODO ensure only happens once
+    store.dispatch(addStep({
+      title: "test",
+      text: "hello",
+      selector: ".add-statement-button:nth-child(1)"
+    }))
+  }
+
   handleRemove() {
     this.props.addModal({
       Modal: ModalRemoveSpeaker,
@@ -125,6 +136,7 @@ export class SpeakerPreview extends React.PureComponent {
         </ReputationGuard>
         <ReputationGuard requiredRep={MIN_REPUTATION_ADD_STATEMENT}>
           <LinkWithIcon iconName="commenting-o"
+                        className="add-statement-button"
                         title={this.props.t('statement.add')}
                         onClick={() => this.handleAddStatement()}/>
         </ReputationGuard>
