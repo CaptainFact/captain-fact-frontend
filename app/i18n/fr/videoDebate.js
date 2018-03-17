@@ -67,7 +67,7 @@ export default {
     "video": "Chargement de la video"
   },
   "tips": {
-    "firstStatement": "Maintenant <1>ajoutez votre première citation</1> en cliquant sur l'icone <3></3> à côté du nom de l'intervenant",
+    "firstStatement": "Vous pouvez <1>ajouter une citation</1> en cliquant sur l'icone <3></3> à côté du nom de l'intervenant",
     "firstSpeaker": "Commencez par ajouter un intervenant en utilisant la colonne de gauche",
     "noContentUnauthenticated": "Cette vidéo n'a pas encore été vérifiée. Connectez-vous pour contribuer!"
   },

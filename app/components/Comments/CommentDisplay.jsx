@@ -77,7 +77,8 @@ export class CommentDisplay extends React.PureComponent {
                 <nav className="comment-actions">
                   { isOwnComment ? this.renderOwnCommentActions() : this.renderOtherCommentActions()}
                   { replies &&
-                    <a onClick={() => this.setState({showReplies: !showReplies})}>
+                    <a className={!showReplies ? "reply-collapsed" : null}
+                       onClick={() => this.setState({showReplies: !showReplies})}>
                       <Icon size="small" name={showReplies ? "eye-slash" : "eye"}/>
                       <span>
                         {t('videoDebate:comment.replies', {

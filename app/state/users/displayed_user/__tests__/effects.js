@@ -24,11 +24,8 @@ test('fetch other user', () => {
     // Set displayed user
     expect(dispatchMock.mock.calls[1][0]).toEqual(setDisplayedUser(other.toJS()))
 
-    // Reset isLoading
-    expect(dispatchMock.mock.calls[2][0]).toEqual(setLoading(false))
-
     // There are no other dispatch
-    expect(dispatchMock.mock.calls.length).toEqual(3)
+    expect(dispatchMock.mock.calls.length).toEqual(2)
   })
 })
 
@@ -44,13 +41,10 @@ test('fetch self', () => {
     // Set displayed user
     expect(dispatchMock.mock.calls[1][0]).toEqual(setDisplayedUser(self.toJS()))
 
-    // Reset isLoading
-    expect(dispatchMock.mock.calls[2][0]).toEqual(setLoading(false))
-
     // Update self
-    expect(dispatchMock.mock.calls[3][0]).toEqual(setCurrentUser(self.toJS()))
+    expect(dispatchMock.mock.calls[2][0]).toEqual(setCurrentUser(self.toJS()))
 
     // There are no other dispatch
-    expect(dispatchMock.mock.calls.length).toEqual(4)
-  })
+    expect(dispatchMock.mock.calls.length).toEqual(3)
+  }).catch(error => console.log(error))
 })
