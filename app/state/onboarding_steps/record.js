@@ -1,6 +1,7 @@
 import { Record, Map } from "immutable"
 
 const OnboardingStep = new Record({
+  uniqueId: 0,
   title: "",
   text: "",
   selector: "",

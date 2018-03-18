@@ -18,7 +18,8 @@ const OnboardingStepsReducer = handleActions({
   [enable]: (state, {payload}) => state.set('showOnboarding', true),
   [addStep]: (state, {payload}) => {
     const step = OnboardingStep(payload)
-    const steps = state.steps.insert(state.steps.length, step)
+    const steps = (state.steps.findIndex(s => s.uniqueId === step.uniqueId) === -1) ? state.steps.insert(state.steps.length, step) : state.steps
+    // 
     return state.set('steps', steps)
   },
   [removeStep]: (state, {payload}) => state.set('showOnboarding', true)

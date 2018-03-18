@@ -28,6 +28,9 @@ export const ENTITY_SPEAKER = 2
 export const ENTITY_STATEMENT = 3
 export const ENTITY_COMMENT = 4
 
+// Onboarding steps
+export const ONBOARDING_ADD_STATEMENT = 1
+
 /* ------ UI, animations ------ */
 export const USER_PICTURE_SMALL = 24
 export const USER_PICTURE_MEDIUM = 40

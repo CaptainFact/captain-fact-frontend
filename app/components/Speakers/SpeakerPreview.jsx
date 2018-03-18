@@ -5,7 +5,9 @@ import { translate } from 'react-i18next'
 import classNames from 'classnames'
 import {
   MIN_REPUTATION_ADD_STATEMENT,
-  MIN_REPUTATION_REMOVE_SPEAKER, MIN_REPUTATION_UPDATE_SPEAKER
+  MIN_REPUTATION_REMOVE_SPEAKER,
+  MIN_REPUTATION_UPDATE_SPEAKER,
+  ONBOARDING_ADD_STATEMENT
 } from '../../constants'
 
 import store from '../../state/index'
@@ -32,8 +34,8 @@ import {getFocusedStatementSpeakerId} from '../../state/video_debate/statements/
 )
 export class SpeakerPreview extends React.PureComponent {
   componentDidMount() {
-    // TODO ensure only happens once
     store.dispatch(addStep({
+      uniqueId: ONBOARDING_ADD_STATEMENT,
       title: "test",
       text: "hello",
       selector: ".add-statement-button"
