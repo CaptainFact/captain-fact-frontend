@@ -1,4 +1,4 @@
-import { Record } from "immutable"
+import { Record, List } from "immutable"
 
 
 const User = new Record({
@@ -13,7 +13,8 @@ const User = new Record({
   mini_picture_url: null,
   registered_at: null,
   achievements: [],
-  is_publisher: false
+  is_publisher: false,
+  onboarding_completed: new List()
 })
 
 export default User

@@ -6,6 +6,7 @@ import Joyride from 'react-joyride'
 import i18n from '../../i18n/i18n'
 import { FlashMessages } from "../Utils"
 import { fetchCurrentUser } from '../../state/users/current_user/effects'
+import { stepSeen } from '../../state/onboarding_steps/effects'
 import { default as Sidebar } from "./Sidebar"
 import { MainModalContainer } from "../Modal/MainModalContainer"
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
@@ -14,8 +15,16 @@ import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
 @connect(state => ({
   locale: state.UserPreferences.locale,
   onboardingSteps: state.OnboardingSteps.steps
-}),{fetchCurrentUser: fetchCurrentUser})
+}), {
+  fetchCurrentUser: fetchCurrentUser,
+  stepSeen: stepSeen
+})
 export default class App extends React.PureComponent {
+  constructor(props) {
+    super(props)
+    this.joyrideCallback = this.joyrideCallback.bind(this)
+  }
+
   componentDidMount() {
     this.props.fetchCurrentUser()
   }
@@ -30,6 +39,7 @@ export default class App extends React.PureComponent {
             steps={this.props.onboardingSteps.toArray().map(step => step.toJS())}
             run={true}
             debug={true}
+            callback={this.joyrideCallback}
           />
           <div className="columns is-mobile is-gapless">
             <Sidebar className="column is-narrow"/>
@@ -42,6 +52,14 @@ export default class App extends React.PureComponent {
         </div>
       </I18nextProvider>
     )
+  }
+
+  joyrideCallback(data) {
+    // step:after = after each step
+    if (data.action === 'close' && data.type === 'step:after') {
+      this.props.stepSeen(data.step.uniqueId)
+    }
+    // finished = all steps complete
   }
 
   /**
