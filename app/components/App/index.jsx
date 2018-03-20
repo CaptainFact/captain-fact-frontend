@@ -7,6 +7,7 @@ import i18n from '../../i18n/i18n'
 import { FlashMessages } from "../Utils"
 import { fetchCurrentUser } from '../../state/users/current_user/effects'
 import { stepSeen } from '../../state/onboarding_steps/effects'
+import { uncompletedOnboardingSteps } from '../../state/onboarding_steps/selectors'
 import { default as Sidebar } from "./Sidebar"
 import { MainModalContainer } from "../Modal/MainModalContainer"
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
@@ -14,7 +15,7 @@ import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
 
 @connect(state => ({
   locale: state.UserPreferences.locale,
-  onboardingSteps: state.OnboardingSteps.steps
+  onboardingSteps: uncompletedOnboardingSteps(state)
 }), {
   fetchCurrentUser: fetchCurrentUser,
   stepSeen: stepSeen
