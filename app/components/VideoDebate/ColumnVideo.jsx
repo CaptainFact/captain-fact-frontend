@@ -27,6 +27,8 @@ export class ColumnVideo extends React.PureComponent {
 
     const { video, view, t } = this.props
     const { url, title, speakers } = video
+    const isDebate = view === "debate"
+
     return (
       <div id="col-video" className="column is-5">
         <VideoDebatePlayer url={url}/>
@@ -36,13 +38,13 @@ export class ColumnVideo extends React.PureComponent {
         </div>
         <div className="tabs is-toggle is-fullwidth">
           <ul>
-            <li className={classNames({'is-active': view === "debate"})}>
+            <li className={classNames({'is-active': isDebate})}>
               <Link to={`/videos/${video.id}`}>
                 <Icon size="small" name="comments-o"/>
                 <span>{ t('debate') }</span>
               </Link>
             </li>
-            <li className={classNames({'is-active': view === "history"})}>
+            <li className={classNames({'is-active': !isDebate})}>
               <Link to={`/videos/${video.id}/history`}>
                 <Icon size="small" name="history"/>
                 <span>{ t('history') }</span>
@@ -50,16 +52,20 @@ export class ColumnVideo extends React.PureComponent {
             </li>
           </ul>
         </div>
-        <ReputationGuard requiredRep={MIN_REPUTATION_ADD_SPEAKER}>
-          <div className="actions">
-            <AddSpeakerForm/>
+        {isDebate &&
+          <div>
+            <ReputationGuard requiredRep={MIN_REPUTATION_ADD_SPEAKER}>
+              <div className="actions">
+                <AddSpeakerForm/>
+              </div>
+            </ReputationGuard>
+            <div className="speakers-list">
+              {speakers.map(speaker =>
+                <SpeakerPreview key={speaker.id} speaker={speaker}/>
+              )}
+            </div>
           </div>
-        </ReputationGuard>
-        <div className="speakers-list">
-          {speakers.map(speaker =>
-            <SpeakerPreview key={speaker.id} speaker={speaker}/>
-          )}
-        </div>
+        }
       </div>
     )
   }

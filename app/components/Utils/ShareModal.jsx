@@ -27,12 +27,11 @@ export default class ShareModal extends React.PureComponent {
                          buttonClassName="is-medium"
                          buttonLabel={<Icon name="clipboard"/>}
                          buttonClickHandler={this.copyUrlToClipboard.bind(this)}
-        />
+                         expandInput/>
         <hr/>
         <div style={{textAlign: 'center'}}>
           <ThirdPartyServiceButton icon="twitter" name="Twitter" url={this.twitterLink(encodedUrl)} newTab={true}/>
           <ThirdPartyServiceButton icon="facebook" name="Facebook" url={this.facebookLink(encodedUrl)} newTab={true}/>
-          <ThirdPartyServiceButton icon="google-plus" name="Google+" url={this.googlePlusLink(encodedUrl)} newTab={true}/>
           <span style={{marginLeft: 5}}>
             <ThirdPartyServiceButton icon="envelope" name="Mail" url={this.mailLink(encodedUrl)} newTab={true}/>
           </span>

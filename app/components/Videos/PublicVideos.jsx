@@ -49,17 +49,15 @@ export class PublicVideos extends React.PureComponent {
             </Link>
           </ReputationGuard>
         </section>
-        <section className="container">
-          {this.renderFilterBar()}
-          {this.renderContent()}
-        </section>
+        {this.renderFilterBar()}
+        {this.renderContent()}
       </div>
     )
   }
 
   renderFilterBar() {
     return (
-      <nav className="level">
+      <nav className="level videos-filter">
         <div className="level-left">
         </div>
         <div className="level-right">

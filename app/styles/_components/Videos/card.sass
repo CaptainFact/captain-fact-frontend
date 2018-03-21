@@ -5,18 +5,21 @@
       border-radius: 0 0 5px 5px
     .play-overlay
       display: none
+      position: absolute
+      z-index: 9
+      color: white
+      text-shadow: 3px 7px 10px transparentize($grey-dark, 0.5)
+      font-size: 130px
+      height: 100%
+      width: 100%
+      opacity: 0.7
+      background: transparentize($white, .9)
+      i
+        align-self: center
+        margin: 0 auto
     &:hover
-      .image
-        opacity: 0.9
       .play-overlay
-        display: block
-        position: absolute
-        z-index: 9
-        color: rgba(255, 255, 255, 0.52)
-        font-size: 130px
-        height: 130px
-        width: 100%
-        top: 10%
+        display: flex
 
   .card-content
     padding: 0.75rem
@@ -45,7 +48,5 @@
       color: $grey-dark
     .icon
       color: $grey-light
-    a
-      //color: $text-light
-      &:hover
-        text-decoration: underline
+    a:hover
+      text-decoration: underline

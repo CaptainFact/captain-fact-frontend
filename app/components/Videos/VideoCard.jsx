@@ -46,7 +46,9 @@ export class VideoCard extends React.PureComponent {
           className="video-card"
           image={
             <Link to={`/videos/${id}`}>
-              <Icon className="play-overlay" name="play-circle"/>
+              <div className="play-overlay">
+                <Icon name="play-circle" withContainer={false}/>
+              </div>
               <figure className="image is-16by9">
                 <img src={VideoCard.videoThumb(provider, provider_id)}/>
               </figure>

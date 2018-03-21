@@ -93,17 +93,16 @@ export class CommentForm extends React.Component {
           <div>
             {replyTo &&
             <div>
-              <Tag size="medium" className="reply_to">
+              <Tag size="medium" className="replyTo">
                 <CloseButton onClick={() => this.props.change('reply_to', null)}/>
                 <span>
-                  {t('comment.replyingTo')}&nbsp;
-                  <UserAppellation user={replyTo.user}/>
+                  {t('comment.replyingTo')} <UserAppellation user={replyTo.user}/>
                 </span>
               </Tag>
-              <CommentDisplay className="quoted" richMedias={false}
+              <CommentDisplay className="quoted"
+                              richMedias={false}
                               comment={replyTo}
                               withoutActions withoutHeader hideThread/>
-              <br/>
             </div>
             }
             <Field component={ CommentField } className="textarea" name="text"
