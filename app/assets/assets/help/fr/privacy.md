@@ -18,7 +18,7 @@ Vous devez par contre considérer toutes vos intéractions (ajout d'un commentai
 comme **publiques**. Vous êtes libre d'utiliser votre vrai nom ou juste un bon vieux
 pseudonyme si c'est ce que vous préférez.
 
-Bien que rien ne soit infaible, nous faisons attention à la sécurité et essayons de suivre les
+Bien que rien ne soit infaillible, nous faisons attention à la sécurité et essayons de suivre les
 meilleurs pratiques pour garder vos données aussi protégées que possible.
 
 Pour en savoir plus sur la politique de vie privée de l'extension pour navigateur,
