@@ -31,7 +31,7 @@ export class ColumnVideo extends React.PureComponent {
       <div id="col-video" className="column is-5">
         <VideoDebatePlayer url={url}/>
         <div className="videoInfo">
-          <h2 className="title is-4">{title}</h2>
+          <h2 className="title is-4 has-text-weight-light">{title}</h2>
           <Presence nbUsers={this.props.nbUsers} nbViewers={this.props.nbViewers}/>
         </div>
         <div className="tabs is-toggle is-fullwidth">

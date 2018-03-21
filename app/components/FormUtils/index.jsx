@@ -71,10 +71,10 @@ export const renderFieldWithLabel = (params) => (
 
 export const FieldWithButton = (params) => {
   const { submitting, invalid } = params.meta || {}
-  const { buttonClassName, buttonLabel, buttonClickHandler, ...inputProps } = params
+  const { buttonClassName, buttonLabel, buttonClickHandler, expandInput, ...inputProps } = params
   return (
     <div className="field has-addons">
-      <div className="control">
+      <div className={classNames('control', {'is-expanded': expandInput})}>
         { renderInput(inputProps) }
       </div>
       <div className="control">

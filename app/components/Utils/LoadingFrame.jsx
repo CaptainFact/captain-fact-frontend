@@ -11,7 +11,9 @@ export class LoadingFrame extends React.PureComponent {
     return (
       <div className={classNames('loading-frame', `is-${size}`)}>
         <div className="spinner"/>
-        <h2 className="title">{title || this.props.t('actions.loading')}...</h2>
+        <div className="title">
+          {title || this.props.t('actions.loading')}...
+        </div>
       </div>
     )
   }

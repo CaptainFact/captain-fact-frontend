@@ -44,6 +44,7 @@ export class AddVideoForm extends React.PureComponent {
                    buttonLabel="Add Video" placeholder="Video URL"
                    buttonClassName="is-primary"
                    normalize={s => trim(s)}
+                   expandInput
             />
         </form>
         <div id="col-debate" className="column">

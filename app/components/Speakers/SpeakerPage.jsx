@@ -1,5 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
+import Helmet from 'react-helmet'
 
 import { SpeakerPreview } from './SpeakerPreview'
 import { fetchSpeaker, fetchWikiDataInfo } from '../../state/speakers/effects'
@@ -54,6 +55,9 @@ export class SpeakerPage extends React.PureComponent {
       return <ErrorView error={this.props.error}/>
     return (
       <div className="speaker-page">
+        <Helmet>
+          <title>{this.props.speaker.full_name}</title>
+        </Helmet>
         <div className="hero is-small is-light is-bold is-primary">
           <div className="hero-body">
             <div className="container">

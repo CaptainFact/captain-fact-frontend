@@ -132,7 +132,12 @@ export class Statement extends React.PureComponent {
   }
 
   renderCommentsContainerHeader(label, tagType, score) {
-    return <span>{this.props.t(label)} <Tag type={tagType}>{ score }</Tag></span>
+    return (
+      <div>
+        <span>{this.props.t(label)} </span>
+        <Tag type={tagType}>{ score }</Tag>
+      </div>
+      )
   }
 
   renderFactsAndComments() {
