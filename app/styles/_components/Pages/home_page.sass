@@ -11,9 +11,9 @@
       +mobile
         padding: 3rem 1rem
         font-size: 12px
-      h1
+      .site-logo
         @include animate(bounceInDown, 0.7s)
-      h2
+      .subtitle
         @include animate(fadeIn, 1s)
         animation-delay: 0.7s
       .title
@@ -26,9 +26,10 @@
       .subtitle
         font-style: italic
         color: #3c3c3c
-        font-size: 1.8em
         margin-top: 10px
-  section.presentation
+  .container
+    max-width: 1000px
+  .presentation
     @include animate(fadeIn, 1s)
     padding: 4rem 4rem 2rem
     min-height: 45vh

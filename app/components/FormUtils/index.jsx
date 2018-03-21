@@ -73,16 +73,18 @@ export const FieldWithButton = (params) => {
   const { submitting, invalid } = params.meta || {}
   const { buttonClassName, buttonLabel, buttonClickHandler, ...inputProps } = params
   return (
-    <div>
-      <p className="control has-addons">
+    <div className="field has-addons">
+      <div className="control">
         { renderInput(inputProps) }
+      </div>
+      <div className="control">
         <button type="submit"
-          className={classNames('button', buttonClassName, {'is-loading': submitting})}
-          disabled={ submitting || invalid }
-          onClick={buttonClickHandler}>
-            { buttonLabel }
+                className={classNames('button', buttonClassName, {'is-loading': submitting})}
+                disabled={ submitting || invalid }
+                onClick={buttonClickHandler}>
+          { buttonLabel }
         </button>
-      </p>
+      </div>
     </div>
   )
 }

@@ -3,10 +3,11 @@
   height: 4rem
   line-height: 4rem
   width: 6rem
-  color: #3b84c4
   &:hover
     color: #3b84c4
-  &.is-disabled .fa:before
-    color: $grey-lighter
+  &[disabled]
+    color: #3b84c4
+    .fa:before
+      color: $grey-lighter
   &:not(.is-disabled):hover .fa:before
     opacity: 0.8

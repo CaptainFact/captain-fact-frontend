@@ -15,9 +15,15 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
 class ThirdPartyAccountLinker extends React.PureComponent {
   render() {
     return (
-      <p className="control has-addons" style={{width: 200, margin: 'auto'}}>
-        <button type="submit" className="button is-info is-disabled">{this.props.title}</button>
-        {this.props.isLinked ? this.renderUnlinkAccount() : this.renderLinkAccount()}
+      <p className="field has-addons" style={{width: 200, margin: 'auto'}}>
+        <div className="control">
+          <div className="linked-account-title">
+            {this.props.title}
+          </div>
+        </div>
+        <div className="control">
+          {this.props.isLinked ? this.renderUnlinkAccount() : this.renderLinkAccount()}
+        </div>
       </p>
     )
   }
