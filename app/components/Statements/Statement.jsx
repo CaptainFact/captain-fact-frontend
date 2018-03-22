@@ -132,7 +132,12 @@ export class Statement extends React.PureComponent {
   }
 
   renderCommentsContainerHeader(label, tagType, score) {
-    return <span>{this.props.t(label)} <Tag type={tagType}>{ score }</Tag></span>
+    return (
+      <div>
+        <span>{this.props.t(label)} </span>
+        <Tag type={tagType}>{ score }</Tag>
+      </div>
+      )
   }
 
   renderFactsAndComments() {
@@ -141,7 +146,7 @@ export class Statement extends React.PureComponent {
     return (
       <div>
         {(approvingFacts.size > 0 || refutingFacts.size > 0) &&
-        <div className="card-footer facts">
+        <div className="card-footer sourced-comments">
           {refutingFacts.size > 0 &&
           <CommentsContainer className="card-footer-item refute"
                              comments={refutingFacts}

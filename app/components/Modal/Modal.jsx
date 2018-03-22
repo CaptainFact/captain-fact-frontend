@@ -21,7 +21,7 @@ const Modal = ({
           </div>
           {helpLink &&
           <Link to={helpLink} className="help-link" target="_BLANK">
-            <Icon name="question-circle"/>
+            <Icon name="question-circle" size="medium"/>
           </Link>
           }
           <button className="delete" onClick={handleCloseClick || popModal}/>

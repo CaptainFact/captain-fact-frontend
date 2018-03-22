@@ -1,0 +1,96 @@
+@import "./variables"
+
+
+/* Approve / refute columns */
+
+.sourced-comments
+  flex-wrap: wrap
+  .comments-list
+    &.approve .comments-list-header
+      color: darken($green, 5)
+      border-bottom: 1px solid $green
+    &.refute .comments-list-header
+      color: darken($red, 5)
+      border-bottom: 1px solid $red
+    &.approve, &.refute
+      width: 50%
+      flex-direction: column
+      justify-content: flex-start
+      background: $white-bis
+      flex-basis: 400px
+      +mobile
+        flex-basis: 300px
+      &> div
+        width: 100%
+    .comments-list-header
+      font-weight: bold
+      text-align: center
+      padding-bottom: 0.4em
+      margin-bottom: 1em
+      .tag
+        border-radius: 1em
+        padding: 0 1em
+
+/* Button to load more comments */
+
+.comments-expender
+  margin: 0.5em
+
+/* Regular comments list */
+
+.comments-list
+  width: 100%
+  max-width: 100%
+  padding: 0.75em
+  position: relative
+
+/* Nested comments lists (from depth 1)  */
+/* => show thread wire on the left */
+
+.comments-list .comments-list
+  padding: 0 0 0 0.75em
+  .comment
+    margin: 0
+    padding: 0.1em 0 0.1em 0.75em
+    border-left: $thread_border_style $thread_border_base_color
+    &.approve
+      border-color: mix($thread_border_base_color, $green, 70%)
+    &.refute
+      border-color: mix($thread_border_base_color, $red, 70%)
+
+/* Nested comments list (from depth 2)  */
+/* => Make everything smaller */
+
+.comments-list .comments-list .comments-list
+  padding: 0.2em 0 0.2em 1.5em
+  border-left: $thread_border_style $thread_border_base_color
+  .comment
+    font-size: 0.9em
+  .vote
+    margin-top: 0
+    .icon
+      height: 0.9em
+      .fa
+        font-size: 1.1em
+        line-height: 0.9em
+    .score
+      font-size: 0.9em
+    .round-spinner
+      font-size: 13px
+      margin-left: 0
+
+/* Nested comments list (from depth 3)  */
+
+.comments-list .comments-list .comments-list .comments-list
+  padding: 0.2em 0 0.2em 1.3em
+
+/* Nested comments list (from depth 4)  */
+
+.comments-list .comments-list .comments-list .comments-list .comments-list
+  padding: 0.1em 1.3em
+
+/* Nested comments list (from depth 5)  */
+
+.comments-list .comments-list .comments-list .comments-list .comments-list .comments-list .comments-list
+  padding: 0.1em 0.5em
+

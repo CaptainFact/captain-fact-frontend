@@ -26,10 +26,8 @@ export default class VideoDebateHistory extends React.PureComponent {
 
     return (
       <div className="videodebate-actions-history">
-        <section className="content">
-          { error && error }
-          <ActionsTable actions={actions} isLoading={isLoading}/>
-        </section>
+        { error && error }
+        <ActionsTable actions={actions} isLoading={isLoading}/>
       </div>
     )
   }

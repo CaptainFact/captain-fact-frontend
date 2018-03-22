@@ -51,7 +51,7 @@ export default class User extends React.PureComponent {
 
     return (
       <li className={isActive ? 'is-active' : ""}>
-        <Link to={linkTo} className={isDisabled ? "is-disabled" : ""}>
+        <Link to={linkTo} disabled={isDisabled}>
           <Icon name={iconName}/>
           <span>{this.props.t(menuTKey)}</span>
         </Link>

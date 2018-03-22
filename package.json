@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "animate.scss": "0.0.6",
-    "bulma": "^0.3.2",
+    "bulma": "^0.6.2",
     "classnames": "^2.2.5",
     "core-js": "^2.5.3",
     "date-fns": "^1.28.5",

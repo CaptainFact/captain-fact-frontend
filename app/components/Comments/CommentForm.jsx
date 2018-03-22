@@ -76,8 +76,8 @@ export class CommentForm extends React.Component {
     if (!this.props.currentUser.id || this.state.isCollapsed && !replyTo)
       return (
         <div className="comment-form collapsed">
-          <a onClick={() => this.expandForm()}>
-            <Icon name="plus"/>
+          <a className="button is-inverted is-primary" onClick={() => this.expandForm()}>
+            <Icon name="plus" size="medium"/>
             <span>{t('comment.revealForm')}</span>
           </a>
         </div>
@@ -93,17 +93,16 @@ export class CommentForm extends React.Component {
           <div>
             {replyTo &&
             <div>
-              <Tag size="medium" className="reply_to">
+              <Tag size="medium" className="replyTo">
                 <CloseButton onClick={() => this.props.change('reply_to', null)}/>
                 <span>
-                  {t('comment.replyingTo')}&nbsp;
-                  <UserAppellation user={replyTo.user}/>
+                  {t('comment.replyingTo')} <UserAppellation user={replyTo.user}/>
                 </span>
               </Tag>
-              <CommentDisplay className="quoted" richMedias={false}
+              <CommentDisplay className="quoted"
+                              richMedias={false}
                               comment={replyTo}
                               withoutActions withoutHeader hideThread/>
-              <br/>
             </div>
             }
             <Field component={ CommentField } className="textarea" name="text"
@@ -127,22 +126,26 @@ export class CommentForm extends React.Component {
   }
 
   renderSubmit(valid, sourceUrl, isReply) {
-    const commonClasses = ['button', {'is-disabled': !valid}]
+    const disabled = !valid
     const i18nParams = isReply ? {context: 'reply'} : null
-    if (!sourceUrl) return ([
-      <button key="comment" type="submit" className={classNames(commonClasses)}>
+    if (!sourceUrl) return (
+      <button type="submit" className="button" disabled={disabled}>
         {this.props.t('comment.post', i18nParams)}
       </button>
-    ])
+    )
     else return ([
-      <button key="comment" type="submit" className={classNames(commonClasses)}>
+      <button key="comment" type="submit" className="button" disabled={disabled}>
         {this.props.t('comment.post', i18nParams)}
       </button>,
-      <button key="refute" type="submit" className={classNames(commonClasses, 'is-danger')}
+      <button key="refute" type="submit"
+              className="button is-danger"
+              disabled={disabled}
               onClick={this.postAndReset(values => this.props.postComment({...values, approve: false}))}>
         {this.props.t('comment.refute', i18nParams)}
       </button>,
-      <button key="approve" type="submit" className={classNames(commonClasses, 'is-success')}
+      <button key="approve" type="submit"
+              className="button is-success"
+              disabled={disabled}
               onClick={this.postAndReset(values => this.props.postComment({...values, approve: true}))}>
         {this.props.t('comment.approve', i18nParams)}
       </button>

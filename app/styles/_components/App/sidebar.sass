@@ -55,9 +55,9 @@ $border-color: lightgrey
       vertical-align: middle
       margin-right: 7px
     .current-user-link
-      .title
+      span
         margin: 0 5px 1px 0
-      .tag
+      &> *
         vertical-align: middle
     a.is-active .current-user-link .title
       color: $link-invert
@@ -116,6 +116,9 @@ $border-color: lightgrey
   .logo-banner
     .title, .logo
       display: none
+
+  .username
+    display: none
 
   .menu-content
     .user-quicklinks

@@ -31,19 +31,16 @@ export class ModalConfirm extends React.PureComponent {
   renderFormButtons() {
     return (
       <div className="form-buttons">
-        <button className={classNames('button', 'is-danger', {
-                  'is-disabled': (this.state.isSubmitting || this.props.confirmDisabled),
-                  'is-loading': (this.state.isSubmitting)
-                })}
-                onClick={this.handleSubmit.bind(this)}>
+        <a className={classNames('button', 'is-danger', {'is-loading': (this.state.isSubmitting)})}
+           disabled={this.state.isSubmitting || this.props.confirmDisabled}
+           onClick={this.handleSubmit.bind(this)}>
           {this.props.confirmIcon && <Icon name={this.props.confirmIcon}/>}
           <span>{ this.props.confirmText }</span>
-        </button>
-        <button className={classNames('button', {'is-disabled': this.state.isSubmitting})}
-                onClick={this.close}>
+        </a>
+        <a className='button' disabled={this.state.isSubmitting} onClick={this.close}>
           {this.props.abortIcon && <Icon name={this.props.abortIcon}/>}
           <span>{ this.props.abortText }</span>
-        </button>
+        </a>
       </div>
     )
   }

@@ -38,8 +38,8 @@ export class PublicVideos extends React.PureComponent {
       <div className="videos-page">
         <section className="header">
           <h2 className="title is-2">
-            <Icon size="large" name="television"/>
-            <span> {capitalize(this.props.t('entities.video_plural'))} </span>
+            <Icon name="television"/>
+            <span> {capitalize(this.props.t('entities.video_plural'))}</span>
           </h2>
           <ReputationGuard requiredRep={MIN_REPUTATION_ADD_VIDEO}
                            verifyFunc={(user, hasReputation) => hasReputation || user.is_publisher}>
@@ -49,17 +49,15 @@ export class PublicVideos extends React.PureComponent {
             </Link>
           </ReputationGuard>
         </section>
-        <section className="content">
-          {this.renderFilterBar()}
-          {this.renderContent()}
-        </section>
+        {this.renderFilterBar()}
+        {this.renderContent()}
       </div>
     )
   }
 
   renderFilterBar() {
     return (
-      <nav className="level">
+      <nav className="level videos-filter">
         <div className="level-left">
         </div>
         <div className="level-right">

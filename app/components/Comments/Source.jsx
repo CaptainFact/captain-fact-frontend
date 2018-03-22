@@ -25,14 +25,20 @@ const isPlayer = url => {
   return false
 }
 
+const PLAYER_CONFIG = {youtube: {playerVars: { showinfo: 1 }}}
+
 export const Source = ({ source: { url, title, site_name }, withoutPlayer }) => {
   if (!withoutPlayer && isPlayer(url)) {
-    return <ReactPlayer  className="video" controls={true} height={198} width={352} url={url}
-                         config={{youtube: {playerVars: { showinfo: 1, fs: 0 }}}}/>
+    return <ReactPlayer  className="video"
+                         controls={true}
+                         height={198}
+                         width={352}
+                         url={url}
+                         config={PLAYER_CONFIG}/>
   } else {
     return (
       <div>
-        <a href={url} target="_BLANK" className="fact-source">
+        <a href={url} target="_BLANK" className="source">
           <span className="site-name">
             {upperCase(site_name) || getDisplayableHostname(url)}
           </span>

@@ -3,7 +3,6 @@ import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { translate } from 'react-i18next'
-import debounce from 'debounce'
 import { MIN_REPUTATION_UPDATE_VIDEO } from '../../constants'
 
 import { changeStatementFormSpeaker } from '../../state/video_debate/statements/reducer'
