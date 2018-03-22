@@ -9,7 +9,7 @@ import ActionDiff from './ActionDiff'
 import ActionIcon from './ActionIcon'
 
 
-@translate(['history', 'main'])
+@translate('history')
 export class UserAction extends React.PureComponent {
   render() {
     const { action, className, t } = this.props

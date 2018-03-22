@@ -40,9 +40,8 @@ export const passwordRepeatField = (t) =>
 
 export const submitButton = (text, valid) =>
   <p className="control">
-    <button type="submit"
-      className={`button is-success is-medium ${valid ? '' : 'is-disabled'}`}>
-        {text}
+    <button type="submit" className="button is-success is-medium" disabled={!valid}>
+      {text}
     </button>
   </p>
 

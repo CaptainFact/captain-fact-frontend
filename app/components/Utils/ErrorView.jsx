@@ -11,7 +11,7 @@ const refreshableErrors = ['join_crashed']
 
 
 @withRouter
-@translate(['errors', 'main'])
+@translate('errors')
 export class ErrorView extends React.PureComponent {
   getMoreInfo() {
     const errorInfo = getErrorInfo(this.props.error)

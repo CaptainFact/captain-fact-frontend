@@ -21,7 +21,6 @@ $statement-text-color: #e0e7f1
         box-shadow: 0px 0px 20px 0px rgb(148, 148, 148)
         max-width: $statement-max-width
     .statement
-      @include animate(fadeIn, 0.2s)
       margin: 0 auto
       max-width: $statement-max-width - $statement-focus-size
       transition: box-shadow 0.5s, max-width 0.5s
@@ -55,30 +54,31 @@ $statement-text-color: #e0e7f1
           &> .comments-list
             border-bottom: 1px solid #dbdbdb
 
-    .statement-form
-      box-shadow: 0px 3px 15px -3px #b3b3b3
+  .statement-form
+    box-shadow: 0px 3px 15px -3px #b3b3b3
+    &.card
       @include animate(fadeInDown, 0.3s)
-      .card-header-title
-        .button
-          margin-right: 10px
-        .speaker-select
-          min-width: 235px
-        .time-display
-          border: none
-          padding-right: 0
-          margin-right: 10px
-      .textarea
-        min-height: 50px
-        font-style: italic
-        font-size: 20px
-        color: $statement-text-color
-        font-weight: bold
-        background: none
-      .card-content
-        @extend .statement-text-container
-        border-bottom: 1px solid #dbdbdb
-      .submit-button.is-disabled
-        color: #cacaca
+    .card-header-title
+      .button
+        margin-right: 10px
+      .speaker-select
+        min-width: 235px
+      .time-display
+        border: none
+        padding-right: 0
+        margin-right: 10px
+    .textarea
+      min-height: 50px
+      font-style: italic
+      font-size: 20px
+      font-weight: bold
+      background: none
+      color: $statement-text-color
+      &::placeholder
+        color: $grey
+    .card-content
+      @extend .statement-text-container
+      border-bottom: 1px solid #dbdbdb
 
 .statement-text-container
   background: $statement-text-background

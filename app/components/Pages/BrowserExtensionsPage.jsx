@@ -44,11 +44,11 @@ export const BrowserExtensionsPage = translate('extension')(({t}) => (
 
 const BrowserExtension = ({browser, image, buttonLabel, url, onClick, disabled=false}) => (
   <div className="column">
-    <a href={url} onClick={onClick} target="_BLANK" className={classNames({'is-disabled': disabled})}>
+    <a href={url} onClick={onClick} target="_BLANK" disabled={disabled}>
       <figure className="image is-128x128">
         <img src={image} alt={browser}/>
       </figure>
-      <span className={classNames('button is-large is-info is-inverted', {"is-disabled": disabled})}>
+      <span className='button is-large is-info is-inverted' disabled={disabled}>
         <Icon name="plus"/>
         <span>{buttonLabel}</span>
       </span>

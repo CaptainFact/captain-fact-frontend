@@ -26,7 +26,7 @@ export default class FlagForm extends React.PureComponent {
 
   render() {
     const { handleSubmit } = this.props
-    // TODO see https://stackoverflow.com/help/privileges/flag-posts
+
     return (
       <form className="form flag-form" onSubmit={handleSubmit}>
         <CommentDisplay comment={this.props.comment} withoutActions={true} hideThread={true}/>

@@ -19,6 +19,21 @@ export class TimeSince extends React.PureComponent {
     this.timeoutUpdate()
   }
 
+  componentWillUnmount() {
+    this.clearTimeout()
+  }
+
+  render() {
+    const { time, locale, dispatch, addSuffix=true, isDateTime=true, ...props } = this.props
+    const localeObj = locales[locale]
+    const dateFormat = isDateTime ? localeObj.defaultDateTimeFormat : localeObj.defaultDateFormat
+    return (
+      <span title={format(time, dateFormat, {locale: localeObj})} {...props}>
+        { distanceInWordsToNow(time, {addSuffix: addSuffix, locale: localeObj}) }
+      </span>
+    )
+  }
+
   timeoutUpdate() {
     const secondsSince = !this.props.time ? 0 : differenceInSeconds(Date.now(), this.props.time)
     const minutesSince = Math.trunc(secondsSince / 60)
@@ -35,10 +50,6 @@ export class TimeSince extends React.PureComponent {
       this.timeout = setTimeout(this.timeoutUpdate, (60 - (minutesSince % 60)) * 60 * 1000)
   }
 
-  componentWillUnmount() {
-    this.clearTimeout()
-  }
-
   clearTimeout() {
     if (this.timeout)
       clearTimeout(this.timeout)
@@ -47,16 +58,5 @@ export class TimeSince extends React.PureComponent {
 
   static getMinutesSince(time) {
     return !time ? 0 : Math.trunc(differenceInSeconds(Date.now(), time)  / 60)
-  }
-
-  render() {
-    const { time, locale, dispatch, addSuffix=true, isDateTime=true, ...props } = this.props
-    const localeObj = locales[locale]
-    const dateFormat = isDateTime ? localeObj.defaultDateTimeFormat : localeObj.defaultDateFormat
-    return (
-      <span title={format(time, dateFormat, {locale: localeObj})} {...props}>
-        { distanceInWordsToNow(time, {addSuffix: addSuffix, locale: localeObj}) }
-      </span>
-    )
   }
 }

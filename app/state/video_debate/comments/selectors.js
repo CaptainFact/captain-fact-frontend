@@ -2,12 +2,12 @@ import { List } from "immutable"
 import createCachedSelector from 're-reselect'
 
 
+const EMPTY_COMMENTS_LIST = new List()
+
 export const getAllComments = (state) => state.VideoDebate.comments.comments
 
-export const areCommentsLoading = (state) => state.VideoDebate.comments.isLoading
-
 export const getStatementAllComments = (state, props) =>
-  getAllComments(state).get(props.statement.id, new List())
+  getAllComments(state).get(props.statement.id, EMPTY_COMMENTS_LIST)
 
 export const getStatementComments = createCachedSelector(
   getStatementAllComments,

@@ -1,6 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import { Trans, translate } from 'react-i18next'
+import { isLoadingVideoDebate } from '../../state/video_debate/selectors'
 
 import VideoDebateHistory from "./VideoDebateHistory"
 import ActionBubbleMenu from './ActionBubbleMenu'
@@ -12,7 +13,7 @@ import { isAuthenticated } from '../../state/users/current_user/selectors'
 
 
 @connect(state => ({
-  isLoading: state.VideoDebate.video.isLoading || state.VideoDebate.statements.isLoading,
+  isLoading: isLoadingVideoDebate(state),
   hasStatements: state.VideoDebate.statements.data.size !== 0,
   hasSpeakers: state.VideoDebate.video.data.speakers.size !== 0,
   hasStatementForm: hasStatementForm(state),

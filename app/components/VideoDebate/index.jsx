@@ -1,6 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import { translate } from 'react-i18next'
+import { Helmet } from 'react-helmet'
 
 import { ErrorView } from "../Utils"
 import { isAuthenticated } from "../../state/users/current_user/selectors"
@@ -14,6 +15,8 @@ import { ColumnDebate } from './ColumnDebate'
 
 @connect(state => ({
   videoErrors: state.VideoDebate.video.errors,
+  isLoading: state.VideoDebate.video.isLoading,
+  videoTitle: state.VideoDebate.video.data.title,
   authenticated: isAuthenticated(state),
 }), {
   joinVideoDebateChannel, joinCommentsChannel, joinStatementsChannel,
@@ -44,6 +47,9 @@ export class VideoDebate extends React.PureComponent {
       return <ErrorView error={this.props.videoErrors}/>
     return (
       <div id="video-show" className="columns is-gapless">
+        <Helmet>
+          {!this.props.isLoading && <title>{this.props.videoTitle}</title>}
+        </Helmet>
         <ColumnVideo view={this.props.route.view}/>
         <ColumnDebate view={this.props.route.view} videoId={this.props.params.videoId}/>
       </div>

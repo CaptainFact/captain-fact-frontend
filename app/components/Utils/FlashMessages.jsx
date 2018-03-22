@@ -65,7 +65,7 @@ export class FlashMessages extends React.PureComponent {
 }
 
 
-@translate(['main', 'errors', 'achievements'])
+@translate('main')
 @connect(null, {popModal, removeFlash})
 class FlashContent extends React.Component {
   shouldComponentUpdate(nextProps) {

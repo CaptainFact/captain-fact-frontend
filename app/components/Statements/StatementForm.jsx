@@ -14,13 +14,13 @@ import { decrementFormCount, incrementFormCount, setScrollTo, STATEMENT_FORM_NAM
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 
 
-@translate(['videoDebate', 'main'])
-@reduxForm({form: STATEMENT_FORM_NAME})
 @connect(({VideoDebate: {video, statements}}) => ({
   position: video.playback.position,
   speakers: video.data.speakers,
   submitting: statements.isSubmitting
 }), {forcePosition, setScrollTo, incrementFormCount, decrementFormCount})
+@reduxForm({form: STATEMENT_FORM_NAME})
+@translate('videoDebate')
 export class StatementForm extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -102,16 +102,15 @@ export class StatementForm extends React.PureComponent {
         <footer className="card-footer">
           <LinkWithIcon iconName="floppy-o"
                         className={classNames('card-footer-item', 'submit-button', {
-                          'is-disabled': !valid || this.props.submitting,
                           'is-loading': this.props.submitting
                         })}
+                        disabled={!valid || this.props.submitting}
                         onClick={handleSubmit(this.handleSubmit.bind(this))}>
             {t('main:actions.save')}
           </LinkWithIcon>
           <LinkWithIcon iconName="ban"
-                        className={classNames('card-footer-item', {
-                          'is-disabled': this.props.submitting
-                        })}
+                        className='card-footer-item'
+                        disabled={this.props.submitting}
                         onClick={handleAbort}>
             {t('main:actions.cancel')}
           </LinkWithIcon>

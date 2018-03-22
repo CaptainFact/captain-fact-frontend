@@ -17,7 +17,7 @@ import { ACTION_DELETE, ACTION_REMOVE, MIN_REPUTATION_RESTORE_ENTITY } from '../
 import { LoadingFrame } from '../Utils/LoadingFrame'
 
 
-@translate(['history', 'main'])
+@translate('history')
 @connect(
   (state, props) => ({
     lastActionsIds: state.UsersActions.lastActionsIds,
@@ -54,7 +54,7 @@ class ActionsTable extends React.PureComponent {
         {showEntity && <th>{t('entity')}</th>}
         <th>{this.renderCompareAllButton(isMostlyComparing)}</th>
         {canRestore && <th>{t('revert')}</th>}
-        <th>{t('moderation')}</th>
+        {/*<th>{t('moderation')}</th>*/}
       </tr>
     )
   }
@@ -115,16 +115,16 @@ class ActionsTable extends React.PureComponent {
             }
           </td>
         }
-        <td>
-          <a className="is-disabled button">
-            <Icon size="small" name="check"/>
-            <span>{t('main:actions.approve')}</span>
-          </a>&nbsp;&nbsp;
-          <a key="flag" className="is-disabled button">
-            <Icon size="small" name="flag"/>
-            <span>{t('main:actions.flag')}</span>
-          </a>
-        </td>
+        {/*<td>*/}
+          {/*<a className="button" disabled>*/}
+            {/*<Icon size="small" name="check"/>*/}
+            {/*<span>{t('main:actions.approve')}</span>*/}
+          {/*</a>&nbsp;&nbsp;*/}
+          {/*<a className="button" disabled>*/}
+            {/*<Icon size="small" name="flag"/>*/}
+            {/*<span>{t('main:actions.flag')}</span>*/}
+          {/*</a>*/}
+        {/*</td>*/}
       </tr>
     )
   }

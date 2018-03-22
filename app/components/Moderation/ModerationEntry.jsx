@@ -17,7 +17,7 @@ import format from 'date-fns/format'
 import { locales } from '../../i18n/i18n'
 
 @connect(state => ({ locale: state.UserPreferences.locale }))
-@translate('moderation', 'main')
+@translate('moderation')
 export default class ModerationEntry extends React.PureComponent {
   render() {
     const { entry, locale, t, onAction } = this.props

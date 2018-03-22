@@ -8,11 +8,11 @@ import Tag from '../Utils/Tag'
 
 const Presence = ({t, nbUsers, nbViewers}) =>
   <div className="presence">
-    <Tag size="medium" type="primary">
+    <Tag type="primary">
       <Icon size="small" name="group"/>
       <span>{t('presence.user', {count: nbUsers})}</span>
     </Tag>
-    <Tag size="medium" className="viewers">
+    <Tag className="viewers">
       <Icon size="small" name="eye"/>
       <span>{t('presence.viewer', {count: nbViewers})}</span>
     </Tag>

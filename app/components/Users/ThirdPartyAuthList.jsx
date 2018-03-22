@@ -11,9 +11,9 @@ const ThirdPartyAuthList = ({t, location: {query: {invitation_token}}}) => (
     <h4 className="title is-4">{t('actionWithThirdParty')}</h4>
     <div className="services-list">
       <ThirdPartyServiceButton url={facebookAuthUrl(invitation_token || "")} icon="facebook"/>
-      <ThirdPartyServiceButton url="facebook.com" icon="google" className="is-disabled"/>
-      <ThirdPartyServiceButton url="facebook.com" icon="github" className="is-disabled"/>
-      <ThirdPartyServiceButton url="facebook.com" icon="twitter" className="is-disabled"/>
+      <ThirdPartyServiceButton url="facebook.com" icon="google" disabled/>
+      <ThirdPartyServiceButton url="facebook.com" icon="github" disabled/>
+      <ThirdPartyServiceButton url="facebook.com" icon="twitter" disabled/>
     </div>
   </div>
 )

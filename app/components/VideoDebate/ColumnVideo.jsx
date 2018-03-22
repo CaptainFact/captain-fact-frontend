@@ -7,9 +7,9 @@ import { Link } from 'react-router'
 import { MIN_REPUTATION_ADD_SPEAKER } from '../../constants'
 import { videoDebateOnlineUsersCount, videoDebateOnlineViewersCount } from '../../state/video_debate/presence/selectors'
 import { AddSpeakerForm, SpeakerPreview } from "../Speakers"
-import { VideoPlayer } from "../Videos"
 import { LoadingFrame, Icon } from "../Utils"
 import ReputationGuard from '../Utils/ReputationGuard'
+import VideoDebatePlayer from './VideoDebatePlayer'
 import Presence from './Presence'
 
 
@@ -27,22 +27,24 @@ export class ColumnVideo extends React.PureComponent {
 
     const { video, view, t } = this.props
     const { url, title, speakers } = video
+    const isDebate = view === "debate"
+
     return (
       <div id="col-video" className="column is-5">
-        <VideoPlayer url={url}/>
+        <VideoDebatePlayer url={url}/>
         <div className="videoInfo">
-          <h2 className="title is-4">{title}</h2>
+          <h2 className="title is-4 has-text-weight-light">{title}</h2>
           <Presence nbUsers={this.props.nbUsers} nbViewers={this.props.nbViewers}/>
         </div>
         <div className="tabs is-toggle is-fullwidth">
           <ul>
-            <li className={classNames({'is-active': view === "debate"})}>
+            <li className={classNames({'is-active': isDebate})}>
               <Link to={`/videos/${video.id}`}>
                 <Icon size="small" name="comments-o"/>
                 <span>{ t('debate') }</span>
               </Link>
             </li>
-            <li className={classNames({'is-active': view === "history"})}>
+            <li className={classNames({'is-active': !isDebate})}>
               <Link to={`/videos/${video.id}/history`}>
                 <Icon size="small" name="history"/>
                 <span>{ t('history') }</span>
@@ -50,16 +52,20 @@ export class ColumnVideo extends React.PureComponent {
             </li>
           </ul>
         </div>
-        <ReputationGuard requiredRep={MIN_REPUTATION_ADD_SPEAKER}>
-          <div className="actions">
-            <AddSpeakerForm/>
+        {isDebate &&
+          <div>
+            <ReputationGuard requiredRep={MIN_REPUTATION_ADD_SPEAKER}>
+              <div className="actions">
+                <AddSpeakerForm/>
+              </div>
+            </ReputationGuard>
+            <div className="speakers-list">
+              {speakers.map(speaker =>
+                <SpeakerPreview key={speaker.id} speaker={speaker}/>
+              )}
+            </div>
           </div>
-        </ReputationGuard>
-        <div className="speakers-list">
-          {speakers.map(speaker =>
-            <SpeakerPreview key={speaker.id} speaker={speaker}/>
-          )}
-        </div>
+        }
       </div>
     )
   }
