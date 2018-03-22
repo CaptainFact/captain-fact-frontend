@@ -82,7 +82,7 @@ export class SpeakerPreview extends React.PureComponent {
     if (speaker.is_user_defined)
       return <div className="speaker-name">{speaker.full_name}</div>
     return (
-      <Link to={`/s/${speaker.slug || speaker.id}`} className="speaker-name">
+      <Link to={`/s/${speaker.slug || speaker.id}`} className="speaker-name" target="_blank">
         {speaker.full_name}
       </Link>
     )

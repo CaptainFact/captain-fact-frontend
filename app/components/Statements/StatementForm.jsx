@@ -102,16 +102,15 @@ export class StatementForm extends React.PureComponent {
         <footer className="card-footer">
           <LinkWithIcon iconName="floppy-o"
                         className={classNames('card-footer-item', 'submit-button', {
-                          'is-disabled': !valid || this.props.submitting,
                           'is-loading': this.props.submitting
                         })}
+                        disabled={!valid || this.props.submitting}
                         onClick={handleSubmit(this.handleSubmit.bind(this))}>
             {t('main:actions.save')}
           </LinkWithIcon>
           <LinkWithIcon iconName="ban"
-                        className={classNames('card-footer-item', {
-                          'is-disabled': this.props.submitting
-                        })}
+                        className='card-footer-item'
+                        disabled={this.props.submitting}
                         onClick={handleAbort}>
             {t('main:actions.cancel')}
           </LinkWithIcon>

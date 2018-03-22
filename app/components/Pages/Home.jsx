@@ -37,11 +37,6 @@ export class Home extends React.PureComponent {
               <Interpolate i18nKey="journeyStart" videoLink={
                 <Link to="/videos">{this.props.t('main:entities.video_plural')}</Link>
               }/>
-              {this.props.authenticated ? '.' :
-                <Interpolate i18nKey="journeyStartOr" createAccountLink={
-                  <Link to="/signup">{this.props.t('creatingAnAccount')}</Link>
-                }/>
-              }
               <br/>
               <br/>
             </p>

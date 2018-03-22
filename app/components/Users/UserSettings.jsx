@@ -61,7 +61,9 @@ export default class UserSettings extends React.PureComponent {
         <div className="has-text-centered">
           <h3 className="title is-3">{this.props.t('linkedAccounts')}</h3>
           <div className="container">
-            <ThirdPartyAccountLinker provider="facebook" title="Facebook" isLinked={!!this.props.user.fb_user_id}
+            <ThirdPartyAccountLinker provider="facebook"
+                                     title="Facebook"
+                                     isLinked={!!this.props.user.fb_user_id}
                                      authUrl={facebookAuthUrl()}/>
           </div>
         </div>

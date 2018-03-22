@@ -13,10 +13,7 @@ const flagFormValueSelector = formValueSelector('flagForm')
 @connect(state => ({selectedReason: flagFormValueSelector(state, 'reason')}))
 @translate('videoDebate')
 export default class ModalFlag extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = {isLoading: true, flagsAvailable: 0, error: null}
-  }
+  state = {isLoading: true, flagsAvailable: 0, error: null}
 
   componentDidMount() {
     HttpApi.get('users/me/available_flags')
@@ -29,7 +26,6 @@ export default class ModalFlag extends React.PureComponent {
   render() {
     const { isLoading, flagsAvailable } = this.state
     const { t, handleAbort, selectedReason, comment, ...otherProps } = this.props
-    const availableStr = t('flagForm.xAvailable', {count: flagsAvailable})
     return (
       <ModalFormContainer handleAbort={handleAbort}
                           handleCloseClick={handleAbort}
@@ -37,13 +33,21 @@ export default class ModalFlag extends React.PureComponent {
                           confirmType="danger"
                           confirmLoading={isLoading}
                           confirmDisabled={!flagsAvailable || !selectedReason}
-                          confirmText={`${t('main:actions.flag')} (${availableStr})`}
+                          confirmText={this.renderConfirmText(t, flagsAvailable)}
                           confirmIcon="flag"
                           FormComponent={FlagForm}
                           formProps={{comment: comment}}
                           helpLink="/help/moderation"
                           {...otherProps}
       />
+    )
+  }
+
+  renderConfirmText(t, flagsAvailable) {
+    return (
+      <span>
+        {t('main:actions.flag')} <small>({t('flagForm.xAvailable', {count: flagsAvailable})})</small>
+      </span>
     )
   }
 }

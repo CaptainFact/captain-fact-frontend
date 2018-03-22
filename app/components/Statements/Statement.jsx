@@ -146,7 +146,7 @@ export class Statement extends React.PureComponent {
     return (
       <div>
         {(approvingFacts.size > 0 || refutingFacts.size > 0) &&
-        <div className="card-footer facts">
+        <div className="card-footer sourced-comments">
           {refutingFacts.size > 0 &&
           <CommentsContainer className="card-footer-item refute"
                              comments={refutingFacts}

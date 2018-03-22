@@ -126,22 +126,26 @@ export class CommentForm extends React.Component {
   }
 
   renderSubmit(valid, sourceUrl, isReply) {
-    const commonClasses = ['button', {'is-disabled': !valid}]
+    const disabled = !valid
     const i18nParams = isReply ? {context: 'reply'} : null
-    if (!sourceUrl) return ([
-      <button key="comment" type="submit" className={classNames(commonClasses)}>
+    if (!sourceUrl) return (
+      <button type="submit" className="button" disabled={disabled}>
         {this.props.t('comment.post', i18nParams)}
       </button>
-    ])
+    )
     else return ([
-      <button key="comment" type="submit" className={classNames(commonClasses)}>
+      <button key="comment" type="submit" className="button" disabled={disabled}>
         {this.props.t('comment.post', i18nParams)}
       </button>,
-      <button key="refute" type="submit" className={classNames(commonClasses, 'is-danger')}
+      <button key="refute" type="submit"
+              className="button is-danger"
+              disabled={disabled}
               onClick={this.postAndReset(values => this.props.postComment({...values, approve: false}))}>
         {this.props.t('comment.refute', i18nParams)}
       </button>,
-      <button key="approve" type="submit" className={classNames(commonClasses, 'is-success')}
+      <button key="approve" type="submit"
+              className="button is-success"
+              disabled={disabled}
               onClick={this.postAndReset(values => this.props.postComment({...values, approve: true}))}>
         {this.props.t('comment.approve', i18nParams)}
       </button>
