@@ -99,19 +99,21 @@ $max-comment-width: 600px
       transition: color 0.3s
       margin: 0
       user-select: none
-      &:first-child
-        &.selected
-          color: $vote-up-color
-        &:hover
-          color: transparentize($vote-up-color, 0.35)
-      &:last-child
-        &.selected
-          color: $vote-down-color
-        &:hover
-          color: darken(transparentize($vote-down-color, 0.45), 20)
+      .fa
+        font-size: 21px
+    .icon-chevron-up
+      &.selected
+        color: $vote-up-color
+      &:hover
+        color: transparentize($vote-up-color, 0.35)
+    .icon-chevron-down
+      &.selected
+        color: $vote-down-color
+      &:hover
+        color: darken(transparentize($vote-down-color, 0.45), 20)
     .score
       text-align: center
-      font-size: 12px
+      font-size: 13px
       height: 14px
       .round-spinner
         animation: spinAround 400ms infinite linear, fadeIn 500ms
@@ -229,9 +231,10 @@ $thread_border_base_color: darken($light, 2)
         margin-right: 5px
         margin-top: 0
         .icon
-          font-size: 14px
           height: 10px
-          line-height: 10px
+          .fa
+            font-size: 14px
+            line-height: 10px
         .score
           font-size: 10px
           padding-top: 1px
@@ -249,7 +252,6 @@ $thread_border_base_color: darken($light, 2)
 
 .comments-list .comments-list .comments-list .comments-list .comments-list
   padding: 0.1em 1.3em
-  //border-left: none
 
 .comments-list .comments-list .comments-list .comments-list .comments-list .comments-list .comments-list
   padding: 0.1em 0

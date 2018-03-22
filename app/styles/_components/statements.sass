@@ -71,9 +71,11 @@ $statement-text-color: #e0e7f1
       min-height: 50px
       font-style: italic
       font-size: 20px
-      color: $statement-text-color
       font-weight: bold
       background: none
+      color: $statement-text-color
+      &::placeholder
+        color: $grey
     .card-content
       @extend .statement-text-container
       border-bottom: 1px solid #dbdbdb
