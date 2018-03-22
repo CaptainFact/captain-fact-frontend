@@ -76,8 +76,8 @@ export class CommentForm extends React.Component {
     if (!this.props.currentUser.id || this.state.isCollapsed && !replyTo)
       return (
         <div className="comment-form collapsed">
-          <a onClick={() => this.expandForm()}>
-            <Icon name="plus"/>
+          <a className="button is-inverted is-primary" onClick={() => this.expandForm()}>
+            <Icon name="plus" size="medium"/>
             <span>{t('comment.revealForm')}</span>
           </a>
         </div>
