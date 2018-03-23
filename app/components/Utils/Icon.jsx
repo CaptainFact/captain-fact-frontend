@@ -1,19 +1,15 @@
 import React from "react"
 import classNames from 'classnames'
+import RawIcon from './RawIcon'
 
 
-export const Icon = ({name, size, withContainer=true, className, isClickable, ...otherProps}) => {
+export const Icon = ({name, size, className, ...otherProps}) => {
   const sizeClass = size && `is-${size}`
-  const icon = <i className={`fa icon-${name}`}/>
 
-  if (!withContainer)
-    return icon
-
-  const Container = isClickable ? 'a' : 'span'
   return (
-    <Container className={classNames('icon', className, sizeClass)} {...otherProps}>
-      {icon}
-    </Container>
+    <span className={classNames('icon', className, sizeClass)} {...otherProps}>
+      <RawIcon name={name}/>
+    </span>
   )
 }
 
