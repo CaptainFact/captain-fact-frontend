@@ -11,7 +11,7 @@ import {
 import { isAuthenticated } from "../../state/users/current_user/selectors"
 import { staticResource } from "../../API"
 import { ModalFormContainer } from "../Modal"
-import { Icon, LinkWithIcon } from "../Utils"
+import Icon from "../Utils/Icon"
 import ClickableIcon from '../Utils/ClickableIcon'
 import ReputationGuard from '../Utils/ReputationGuard'
 import { EditSpeakerForm } from "./SpeakerForm"
@@ -60,19 +60,22 @@ export class SpeakerPreview extends React.PureComponent {
         {this.props.speaker.is_user_defined &&
           <ReputationGuard requiredRep={MIN_REPUTATION_UPDATE_SPEAKER}>
             <ClickableIcon name="pencil"
-                  title={this.props.t('main:actions.edit')}
-                  onClick={() => this.handleEdit()}/>
+                           size="action-size"
+                           title={this.props.t('main:actions.edit')}
+                           onClick={() => this.handleEdit()}/>
           </ReputationGuard>
         }
         <ReputationGuard requiredRep={MIN_REPUTATION_REMOVE_SPEAKER}>
           <ClickableIcon name="times"
-                title={this.props.t('main:actions.remove')}
-                onClick={() => this.handleRemove()}/>
+                         size="action-size"
+                         title={this.props.t('main:actions.remove')}
+                         onClick={() => this.handleRemove()}/>
         </ReputationGuard>
         <ReputationGuard requiredRep={MIN_REPUTATION_ADD_STATEMENT}>
           <ClickableIcon name="commenting-o"
-                title={this.props.t('statement.add')}
-                onClick={() => this.handleAddStatement()}/>
+                         size="action-size"
+                         title={this.props.t('statement.add')}
+                         onClick={() => this.handleAddStatement()}/>
         </ReputationGuard>
       </div>
     )

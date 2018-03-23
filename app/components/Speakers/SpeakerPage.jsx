@@ -94,7 +94,7 @@ export class SpeakerPage extends React.PureComponent {
       return null
     return (
       <a href={url} key={url} target="_BLANK" className='link-with-icon'>
-        <Icon name="link" size="small" withContainer={false}/> <span>{siteName}</span>
+        <Icon name="link"/> <span>{siteName}</span>
       </a>
     )
   }

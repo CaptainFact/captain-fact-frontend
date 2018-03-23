@@ -62,7 +62,7 @@ Components files should export two versions :
 2. `export default MyComponent` : connected component
 
 Non-connected components exports are there for testing them without the need
-to be connected to a store. If component is always dump, you can export
+to be connected to a store. If component is always dumb, you can export
 `default` only.
 
 You might find some exceptions in old components but all new
@@ -80,6 +80,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 ## Linked projects
 
 * [Extension](https://github.com/CaptainFact/captain-fact-extension)
+* [Overlay injector](https://github.com/CaptainFact/captain-fact-overlay-injector)
 
 ## Dependencies 
 

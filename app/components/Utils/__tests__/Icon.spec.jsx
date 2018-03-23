@@ -8,14 +8,6 @@ test("set size", () => {
   snapshot(<Icon name="plus" size="large"/>)
 })
 
-test("render without container", () => {
-  snapshot(<Icon name="plus" withContainer={false}/>)
-})
-
-test("use 'a' if is link", () => {
-  snapshot(<Icon name="plus" isClickable={true}/>)
-})
-
 test("other props get passed to container", () => {
   snapshot(<Icon name="plus" title="Add some stuff"/>)
 })
