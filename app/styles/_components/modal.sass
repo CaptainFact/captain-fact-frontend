@@ -5,6 +5,7 @@ $modal-background: rgba(10, 10, 10, 0.50)
   width: 0
 
 .modal
+  z-index: 10000
   &.is-absolute
     position: absolute
   .modal-background
@@ -20,6 +21,9 @@ $modal-background: rgba(10, 10, 10, 0.50)
     color: #c6c6c6
     &:hover
       color: #aeaeae
+
+.modal-card
+  @include animate(fadeInDown, 0.4s)
 
 .modal.is-small
   font-size: 0.8em

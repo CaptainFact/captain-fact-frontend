@@ -1,4 +1,8 @@
 // ---- Bulma overrides ----
+
+@import "bulma/sass/utilities/initial-variables"
+@import "bulma/sass/utilities/functions"
+
 // Primary colors
 
 $green: #2EBE00
@@ -27,18 +31,6 @@ $success: $green
 $warning: $yellow !default
 $danger: $red
 
-$light: $white-ter !default
-$dark: $grey-darker !default
-
-// Invert colors
-$primary-invert: $turquoise-invert !default
-$info-invert: $blue-invert !default
-$success-invert: $green-invert !default
-$warning-invert: $yellow-invert !default
-$danger-invert: $red-invert !default
-$light-invert: $dark !default
-$dark-invert: $light !default
-
 // General colors
 $background: $white-ter !default
 
@@ -50,6 +42,27 @@ $text: $grey-dark !default
 $text-invert: findColorInvert($text) !default
 $text-light: $grey !default
 $text-strong: $grey-darker !default
+
+// Typography
+
+$family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif
+
+$body-size: 14px
+
+$size-1: 3rem
+$size-2: 2.5rem
+$size-3: 1.8rem
+$size-4: 1.5rem
+$size-5: 1.25rem
+$size-6: 1rem
+$size-7: 0.75rem
+
+$sizes: $size-1 $size-2 $size-3 $size-4 $size-5 $size-6 $size-7
+
+// ----Custom----
+$sidebar_width: 300px
+
+@import "bulma/sass/utilities/derived-variables"
 
 // Link colors
 $link: $primary
@@ -71,5 +84,14 @@ $colors: (white: ($white, $black), black: ($black, $white), light: ($light, $lig
 $input-focus-border: lighten($primary-desaturated, 20)
 $button-hover: lighten($primary, 5)
 
-// ----Custom----
-$sidebar_width: 300px
+$light: $white-ter !default
+$dark: $grey-darker !default
+
+// Invert colors
+$primary-invert: $turquoise-invert !default
+$info-invert: $blue-invert !default
+$success-invert: $green-invert !default
+$warning-invert: $yellow-invert !default
+$danger-invert: $red-invert !default
+$light-invert: $dark !default
+$dark-invert: $light !default

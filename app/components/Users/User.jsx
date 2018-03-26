@@ -20,7 +20,7 @@ import { resetUser } from '../../state/users/displayed_user/reducer'
   isLoading, errors,
   user: data
 }), {fetchUser, resetUser})
-@translate(['main', 'user'])
+@translate('main')
 export default class User extends React.PureComponent {
   componentDidMount() {
     this.props.fetchUser(this.props.params.username)
@@ -30,8 +30,7 @@ export default class User extends React.PureComponent {
     // If user's username was updated
     if (this.props.user.id === oldProps.user.id &&
         this.props.user.username !== oldProps.user.username)
-          // Remove old user profile from history
-          // TODO
+          // TODO Remove old user profile from history
           // Redirect
           this.props.router.replace(`/u/${this.props.user.username}`)
 
@@ -52,7 +51,7 @@ export default class User extends React.PureComponent {
 
     return (
       <li className={isActive ? 'is-active' : ""}>
-        <Link to={linkTo} className={isDisabled ? "is-disabled" : ""}>
+        <Link to={linkTo} disabled={isDisabled}>
           <Icon name={iconName}/>
           <span>{this.props.t(menuTKey)}</span>
         </Link>

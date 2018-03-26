@@ -7,6 +7,7 @@ import User from '../record'
 
 export const setLoading = createAction('DISPLAYED_USER/SET_LOADING')
 export const setUser = createAction('DISPLAYED_USER/SET')
+export const setError = createAction('DISPLAYED_USER/SET_ERROR')
 export const resetUser = createAction('DISPLAYED_USER/RESET')
 
 const INITIAL_STATE = new Record({
@@ -29,6 +30,7 @@ const DisplayedUserReducer = handleActions({
     },
     throw: (state, {payload}) => state.merge({errors: payload, isLoading: false}),
   },
+  [setError]: (state, {payload}) => state.merge({errors: payload, isLoading: false}),
   [setLoading]: (state, {payload}) => state.set('isLoading', payload),
   [resetUser]: () => INITIAL_STATE()
 }, INITIAL_STATE())

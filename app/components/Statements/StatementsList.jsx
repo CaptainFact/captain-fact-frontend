@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from "react-redux"
 import { translate } from 'react-i18next'
 import { withRouter } from 'react-router'
+import FlipMove from 'react-flip-move'
 
 import { StatementForm } from './StatementForm'
 import { Statement } from './Statement'
@@ -38,7 +39,11 @@ export default class StatementsList extends React.PureComponent {
             e => {if (!e.error) this.props.closeStatementForm(); return e;}
           )}/>
         }
-        {statements.map(statement => <Statement key={statement.id} statement={statement}/>)}
+        <FlipMove enterAnimation='fade'>
+          {statements.map(statement =>
+            <Statement key={statement.id} statement={statement}/>
+          )}
+        </FlipMove>
       </div>
     )
   }

@@ -1,0 +1,131 @@
+@import "./variables"
+
+.media.comment
+  border-top: none
+  width: 100%
+  &:not(:last-child)
+    margin: 0
+
+  /* Voting bloc */
+
+  .media-left
+    margin-right: 0.5rem
+
+  .vote
+    margin-top: -5px
+    display: flex
+    flex-direction: column
+    .icon
+      display: block
+      color: lightgrey
+      transition: color 0.3s
+      margin: 0
+      user-select: none
+      .fa
+        font-size: 21px
+    .selected .icon-chevron-up
+      color: $vote-up-color
+    .icon-chevron-up:hover
+      color: transparentize($vote-up-color, 0.35)
+    .selected .icon-chevron-down
+      color: $vote-down-color
+    .icon-chevron-down:hover
+      color: darken(transparentize($vote-down-color, 0.45), 20)
+    .score
+      text-align: center
+      font-size: 0.9em
+      height: 1.1em
+      .round-spinner
+        animation: spinAround 400ms infinite linear, fadeIn 500ms
+        margin-left: 3px
+        font-size: 15px
+
+  /* Comment metadata */
+
+  .user-picture
+    margin-right: 0.25em
+    display: inline-block
+    vertical-align: middle
+  .user-appellation
+    display: inline-block
+    &:hover
+      text-decoration: underline
+      text-decoration-color: $grey-light
+  .comment-time
+    font-size: 0.75em
+    color: #949494
+
+  /* ---- Content ---- */
+
+  .media-content
+    overflow: hidden
+    max-width: $max-comment-width
+    position: relative
+
+  /* Source */
+
+  .source
+    display: inline-block
+    background: $primary-desaturated
+    padding: 0.5em 1em
+    margin: $source-margin
+    font-size: 0.9em
+    border: 1px solid $grey
+    border-left: 5px solid $grey-dark
+    &:hover
+      background: transparentize($primary-desaturated, 0.15)
+      .site-name
+        text-decoration: underline
+    .site-name
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+      display: block
+      color: white
+      font-size: 1.05em
+    .article-title
+      font-style: italic
+      color: lightgrey
+
+  .video
+    margin: $source-margin
+    max-width: 100%
+
+  /* Text */
+  &:not(.quoted) .comment-text
+    white-space: pre-wrap
+    word-wrap: break-word
+    background-color: $white
+    padding: 0.4em 0.7em
+    border: 1px solid $grey-lighter
+    border-radius: 0 0.5em 0.5em 0.5em
+    display: inline-block
+    +tablet
+      &:before
+        width: 0
+        height: 0
+        border-left: 8px solid transparent
+        border-right: 8px solid transparent
+        border-bottom: 8px solid white
+        position: absolute
+        left: 0.35em
+        margin-top: -0.9em
+        content: ''
+
+  /* ---- Actions ---- */
+
+  .comment-actions a
+    font-size: 0.8em
+    color: $grey-light
+    margin-right: 1em
+    &:hover
+      color: darken(#c7c7c7, 25)
+      text-decoration: underline
+    &.action-report.selected
+      color: $red
+      pointer-events: none
+    &.reply-collapsed
+      color: $grey
+    .icon
+      font-size: 0.8em
+      vertical-align: middle

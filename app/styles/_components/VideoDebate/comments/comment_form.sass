@@ -1,0 +1,41 @@
+@import "./variables"
+
+.comment-form
+  width: 100%
+  padding: 1em 1em 0.5em
+
+  .replyTo
+    border: 1px solid $grey-lighter
+    span
+      padding-left: 0.5em
+
+  .control
+    margin-bottom: 0.5em
+
+  /* Main comment textarea */
+
+  .textarea
+    $commentboxSize: 60px
+    min-height: $commentboxSize
+    max-height: $commentboxSize * 3
+    height: $commentboxSize
+    resize: none
+
+  /* Source input */
+
+  .level
+    align-items: flex-start
+    margin-bottom: 0.5em
+    .control
+      flex-grow: 0.99
+      flex-direction: column
+      padding-right: 5px
+    .submit-btns .button
+      margin-bottom: 5px
+      margin-right: 5px
+      &:not(:first-child):not([disabled])
+        @include animate(flipInX, 0.3s)
+
+.comment-form.collapsed
+  padding: 0.4em
+  text-align: center

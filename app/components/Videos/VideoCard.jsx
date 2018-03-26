@@ -5,9 +5,10 @@ import { Icon, TimeSince } from "../Utils"
 import iterateWithSeparators from '../../lib/iterate_with_separators'
 import { translate } from 'react-i18next'
 import CardLayout from '../Utils/CardLayout'
+import RawIcon from '../Utils/RawIcon'
 
 
-@translate(['main', 'videoDebate'])
+@translate('main')
 export class VideoCard extends React.PureComponent {
   static videoThumb(provider, provider_id) {
     if (provider === "youtube")
@@ -46,7 +47,9 @@ export class VideoCard extends React.PureComponent {
           className="video-card"
           image={
             <Link to={`/videos/${id}`}>
-              <Icon className="play-overlay" name="play-circle" size="large"/>
+              <div className="play-overlay">
+                <RawIcon name="play-circle"/>
+              </div>
               <figure className="image is-16by9">
                 <img src={VideoCard.videoThumb(provider, provider_id)}/>
               </figure>
@@ -54,7 +57,7 @@ export class VideoCard extends React.PureComponent {
           }
           content={
             <Link to={`/videos/${id}`}>
-              <h4 className="title is-4">
+              <h4 className="title is-5">
                 { title }
               </h4>
             </Link>

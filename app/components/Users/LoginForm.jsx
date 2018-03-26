@@ -13,7 +13,7 @@ import { tError } from '../../lib/errors'
 @reduxForm({form: 'loginForm'})
 @connect(({CurrentUser: {data, error}}) => ({CurrentUser: data, error}), {login})
 @withRouter
-@translate(['user', 'main', 'errors'])
+@translate('user')
 export default class LoginForm extends React.PureComponent {
   componentWillReceiveProps(props) {
     // Redirect when logged in

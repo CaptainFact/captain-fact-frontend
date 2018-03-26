@@ -8,6 +8,7 @@ import { Icon } from "../Utils"
 import { MOBILE_WIDTH_THRESHOLD, USER_PICTURE_SMALL } from '../../constants'
 import { MIN_REPUTATION_MODERATION } from "../../constants"
 import { LoadingFrame } from '../Utils/LoadingFrame'
+import RawIcon from '../Utils/RawIcon'
 import ReputationGuard from '../Utils/ReputationGuard'
 import LanguageSelector from './LanguageSelector'
 import capitalize from 'voca/capitalize'
@@ -41,7 +42,7 @@ export default class Sidebar extends React.PureComponent {
     const classes = classNames(className, {'link-with-icon': !!iconName})
     return (
       <Link className={classes} activeClassName='is-active' onClick={this.closeSideBarIfMobile} {...props}>
-        {iconName && <Icon name={iconName} withContainer={false}/>}
+        {iconName && <RawIcon name={iconName}/>}
         <span>{children}</span>
       </Link>
     )
@@ -61,9 +62,9 @@ export default class Sidebar extends React.PureComponent {
             <this.MenuLink to={baseLink} className="my-profile-link" onlyActiveOnIndex={true}>
               <div className="current-user-link">
                 <UserPicture size={USER_PICTURE_SMALL} user={this.props.CurrentUser}/>
-                <h4 className="title is-4" style={{fontSize: this.usernameFontSize()}}>
+                <span className="username" style={{fontSize: this.usernameFontSize()}}>
                   { username }
-                </h4>
+                </span>
                 <ScoreTag reputation={reputation}/>
               </div>
             </this.MenuLink>
@@ -77,10 +78,10 @@ export default class Sidebar extends React.PureComponent {
         </nav>
         <ul className="menu-list user-links">
           <this.MenuListLink to={`${baseLink}/settings`} iconName="cog" children={t('menu.settings')}/>
-          <this.MenuListLink to={`${username}/bookmarks`} iconName="bookmark" className="is-disabled">
+          <this.MenuListLink to={`${username}/bookmarks`} iconName="bookmark" disabled>
             { t('menu.myBookmarks') }
           </this.MenuListLink>
-          <this.MenuListLink to={`${baseLink}/activity`} iconName="tasks" className="is-disabled">
+          <this.MenuListLink to={`${baseLink}/activity`} iconName="tasks" disabled>
             { t('menu.myActivity') }
           </this.MenuListLink>
         </ul>
@@ -114,7 +115,7 @@ export default class Sidebar extends React.PureComponent {
         className={`menu ${className} ${sidebarExpended ? 'expended' : ''}`}>
         <div className="logo-banner">
           <div className="menu-collapse-button" onClick={() => this.props.toggleSidebar()}>
-            <Icon name="bars" withContainer={false}/>
+            <RawIcon name="bars"/>
           </div>
           <Link to="/"><Logo/></Link>
         </div>
@@ -153,7 +154,7 @@ export default class Sidebar extends React.PureComponent {
         <this.MenuListLink to="/videos" iconName="television" onlyActiveOnIndex={true}>
           { capitalize(t('entities.video_plural')) }
         </this.MenuListLink>
-        <this.MenuListLink to="/speakers" iconName="users" className="is-disabled">
+        <this.MenuListLink to="/speakers" iconName="users" disabled>
           { capitalize(t('entities.speaker_plural')) }
         </this.MenuListLink>
         <ReputationGuard requiredRep={MIN_REPUTATION_MODERATION}>
@@ -166,6 +167,6 @@ export default class Sidebar extends React.PureComponent {
   }
 
   usernameFontSize() {
-    return `${1.5 - this.props.CurrentUser.username.length / 38}em`
+    return `${1.4 - this.props.CurrentUser.username.length / 40}em`
   }
 }

@@ -1,6 +1,6 @@
 > Si vous croisez un troll, mettez lui un vote négatif et ne le nourissez pas.
 
-Le système de signalement vous permet de signaler du contenu inaproprié. Vous êtes autorisé à effectuer
+Le système de signalement vous permet de signaler du contenu inapproprié. Vous êtes autorisé à effectuer
 un petit nombre de signalements chaque jour et devez les utiliser judicieusement: en abuser peut vous faire
 perdre beaucoup de réputation.
 
@@ -31,7 +31,7 @@ Pour chaque action signalée, les modérateurs ont 3 choix :
 
 ## Règles
 
-Il faut le vote d'au mois 3 modérateurs avant de pouvoir prendre une décision.
+Il faut le vote d'au moins 3 modérateurs avant de pouvoir prendre une décision.
 Un score est ensuite généré entre -1.0 et +1.0: 
 
 ```

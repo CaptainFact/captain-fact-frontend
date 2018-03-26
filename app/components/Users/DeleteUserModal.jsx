@@ -16,7 +16,7 @@ class DeleteForm extends React.PureComponent {
       <div className="delete-account-form">
         <h2 className="title is-2 has-text-centered">
           <Icon size="large" name="exclamation-triangle"/>
-          This action is irreversible.
+          This action is irreversible
         </h2>
         <hr/>
         <h4 className="title is-4">Deleting your account will...</h4>
@@ -28,7 +28,7 @@ class DeleteForm extends React.PureComponent {
           <li>Anonymize your actions history</li>
         </ul>
         <hr/>
-        <h5 className="title is-5">Type your username below to confirm the deletion :</h5>
+        <p className="is-size-5">Type your username below to confirm the deletion :</p>
         <Field component="input" className="input" name="usernameConfirm"/>
       </div>
     )
@@ -41,7 +41,7 @@ const valueSelector = formValueSelector(DELETE_FORM)
 @connect(state => ({
   isValid: valueSelector(state, 'usernameConfirm') === state.CurrentUser.data.username
 }))
-@translate(['main', 'user'])
+@translate('main')
 export default class DeleteUserModal extends React.PureComponent {
   render() {
     const { t, isValid, ...otherProps } = this.props

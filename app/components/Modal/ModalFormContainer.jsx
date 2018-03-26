@@ -43,21 +43,22 @@ export class ModalFormContainer extends React.PureComponent {
     const isSubmitting = this.props.isSubmitting || this.state.isSubmitting
     return (
       <div className="form-buttons">
-        <button type="submit"
-                className={classNames('button', confirmType, {
-                  'is-disabled': (isSubmitting || this.props.confirmLoading || this.props.confirmDisabled),
-                  'is-loading': (isSubmitting || this.props.confirmLoading)
-                })}
-                onClick={() => this.refs.form.submit()}>
+        <a type="submit"
+           disabled={isSubmitting || this.props.confirmLoading || this.props.confirmDisabled}
+           className={classNames('button', confirmType, {
+             'is-loading': (isSubmitting || this.props.confirmLoading)
+           })}
+           onClick={() => this.refs.form.submit()}>
             <Icon name={this.props.confirmIcon || "floppy-o"}/>
             <div>{this.props.confirmText || this.props.t('actions.save')}</div>
-        </button>
-        <button type="reset"
-          className={classNames('button', {'is-disabled': isSubmitting})}
-          onClick={this.close}>
+        </a>
+        <a type="reset"
+           className={classNames('button')}
+           disabled={isSubmitting}
+           onClick={this.close}>
             <Icon name="ban"/>
             <div>{this.props.t('actions.cancel')}</div>
-        </button>
+        </a>
       </div>
   )}
 

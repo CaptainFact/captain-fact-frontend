@@ -7,7 +7,7 @@ import HelpPageContent from './HelpPageContent'
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
 
 
-@translate(['help', 'main'])
+@translate('help')
 @withRouter
 export default class Help extends React.PureComponent {
   render() {

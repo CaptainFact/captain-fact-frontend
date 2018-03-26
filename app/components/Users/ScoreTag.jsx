@@ -13,7 +13,7 @@ function getTagType(reputation) {
 }
 
 const ScoreTag = ({reputation, size="small", withIcon=false}) =>
-  <Tag type={getTagType(reputation)} size={size} title="Reputation">
+  <Tag type={getTagType(reputation)} size={size}>
     { withIcon && <Icon name="star" style={{marginRight: 5, color: 'yellow'}}/> }
     { reputation }
   </Tag>

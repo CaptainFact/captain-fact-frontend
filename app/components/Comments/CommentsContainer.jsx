@@ -5,7 +5,6 @@ import FlipMove from 'react-flip-move'
 import { CommentDisplay } from "./CommentDisplay"
 
 
-// TODO optimize this all thing
 @translate('videoDebate')
 export class CommentsContainer extends React.PureComponent {
   constructor(props) {
@@ -13,17 +12,9 @@ export class CommentsContainer extends React.PureComponent {
     this.state = {nbComments: CommentsContainer.getNbDisplayedRange(props.nesting || 1)}
   }
 
-  static getNbDisplayedRange(nesting) {
-    if (nesting > 3)
-      return [3, 5]
-    return [4 - nesting, 6 - nesting]
-  }
-
   render() {
     const {t, comments, className, header, replyingTo, nesting=1} = this.props
 
-    // TODO Optimize: This re-update the list each time!
-    // TODO Optimize: Use a selector !
     let numComment = 0
     const displayedComments = comments.takeWhile(c =>
       ++numComment <= this.state.nbComments[0] ||
@@ -54,6 +45,12 @@ export class CommentsContainer extends React.PureComponent {
         }
       </div>
     )
+  }
+
+  static getNbDisplayedRange(nesting) {
+    if (nesting > 3)
+      return [3, 5]
+    return [4 - nesting, 6 - nesting]
   }
 }
 

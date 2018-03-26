@@ -16,7 +16,7 @@ import { SpeakerPreview } from '../Speakers/SpeakerPreview'
   reference: state.UsersActions.referenceEntities.get(props.entityKey),
   speakers: state.VideoDebate.video.data.speakers
 }), {forcePosition})
-@translate(['main', 'videoDebate'])
+@translate('main')
 export default class Entity extends React.PureComponent {
   render() {
     return (

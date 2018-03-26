@@ -30,9 +30,7 @@ This is a HTML5 application, built with [Brunch](http://brunch.io).
 - Redux: state management
 - ReactRouter: routing
 - phoenix: interaction with phoenix socket
-- Bulma: base styles (we're still using an old 0.3.2 version, documentation
-[here (Github)](https://github.com/jgthms/bulma/tree/0395dc59d8b147f2f47d057a6ffde2eb2966db49/docs/documentation))
-or [here (archive.org)](https://web.archive.org/web/20170518075321/http://bulma.io/documentation/overview/start/)
+- Bulma: base styles
 
 ## Conventions
 
@@ -64,7 +62,7 @@ Components files should export two versions :
 2. `export default MyComponent` : connected component
 
 Non-connected components exports are there for testing them without the need
-to be connected to a store. If component is always dump, you can export
+to be connected to a store. If component is always dumb, you can export
 `default` only.
 
 You might find some exceptions in old components but all new
@@ -82,6 +80,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 ## Linked projects
 
 * [Extension](https://github.com/CaptainFact/captain-fact-extension)
+* [Overlay injector](https://github.com/CaptainFact/captain-fact-overlay-injector)
 
 ## Dependencies 
 

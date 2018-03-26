@@ -64,7 +64,7 @@ export default {
     "video": "Loading Video"
   },
   "tips": {
-    "firstStatement": "Now <1>add your first statement</1> by clicking on the <3></3> icon next to the speaker's name",
+    "firstStatement": "You can <1>add a first statement</1> by clicking on the <3></3> icon next to the speaker's name",
     "firstSpeaker": "Start by adding a speaker using left column",
     "noContentUnauthenticated": "This video hasn't been verified yet. Login / Signup to contribute!"
   },

@@ -20,13 +20,10 @@ const validate = ({email}) => {
 }
 
 @reduxForm({form: 'newsletterSubscribeForm', validate})
-@translate(['home', 'user'])
+@translate('home')
 @connect(null, {addFlash, errorToFlash, requestInvitation})
 export default class InvitationRequestForm extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = {confirmed: false}
-  }
+  state = { confirmed: false }
 
   submit(user) {
     return this.props.requestInvitation(user)
@@ -41,9 +38,12 @@ export default class InvitationRequestForm extends React.PureComponent {
 
   getContent() {
     if (!this.state.confirmed)
-      return <Field component={FieldWithButton} name="email" className="is-medium"
+      return <Field component={FieldWithButton}
+                    name="email"
+                    className="is-medium"
+                    buttonClassName="is-medium"
                     placeholder={this.props.t("emailPlaceholder")}
-                    buttonLabel={this.props.t('main:actions.send')} buttonClassName="is-medium" />
+                    buttonLabel={this.props.t('main:actions.send')}/>
     else
       return (
         <Notification type="success">

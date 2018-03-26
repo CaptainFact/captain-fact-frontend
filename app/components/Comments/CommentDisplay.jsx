@@ -22,33 +22,25 @@ import MediaLayout from '../Utils/MediaLayout'
 import Vote from './Vote'
 
 
-// TODO Use ReputationGuard to protect actions
-// Add the following possibilities to reputationGuard :
-// onUnauthorized = "hide" | "showMessage" | "flash"
-
 @connect(({CurrentUser, VideoDebate}, props) => ({
   currentUser: CurrentUser.data,
   myVote: VideoDebate.comments.voted.get(props.comment.id, 0),
   isVoting: VideoDebate.comments.voting.has(props.comment.id),
   replies: VideoDebate.comments.replies.get(props.comment.id),
-  isFlagged: VideoDebate.comments.myFlags.has(props.comment.id) // TODO Selector
+  isFlagged: VideoDebate.comments.myFlags.has(props.comment.id)
 }), {addModal, deleteComment, flagComment, commentVote, change, flashErrorUnauthenticated})
-@translate(['main', 'videoDebate'])
+@translate('main')
 export class CommentDisplay extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {isBlurred: false, showReplies: props.nesting !== 4}
-    this.showRepliesToggle = this.showRepliesToggle.bind(this)
-
-    // Authenticated actions
-    this.actionReply = this.actionAuthenticated(this.actionReply.bind(this))
-    this.handleFlag = this.actionAuthenticated(this.handleFlag.bind(this))
   }
 
   render() {
     const { user, text, source, score, inserted_at, approve } = this.props.comment
     const { t, withoutActions, withoutHeader, replyingTo, nesting, replies, myVote, isVoting, hideThread, className, richMedias=true } = this.props
     const approveClass = approve !== null && (approve ? 'approve' : 'refute')
+    const showReplies = this.state.showReplies
     const isOwnComment = this.props.comment.user.id === this.props.currentUser.id
 
     return (
@@ -58,7 +50,9 @@ export class CommentDisplay extends React.PureComponent {
           ContainerType="article"
           left={!withoutActions &&
             <Vote isVoting={isVoting} score={score} myVote={myVote}
-                  onVote={value => this.props.commentVote({comment: this.props.comment, value})}/>
+                  onVote={value => this.ensureAuthenticated() &&
+                    this.props.commentVote({comment: this.props.comment, value})
+                  }/>
           }
           content={
             <div>
@@ -83,11 +77,12 @@ export class CommentDisplay extends React.PureComponent {
                 <nav className="comment-actions">
                   { isOwnComment ? this.renderOwnCommentActions() : this.renderOtherCommentActions()}
                   { replies &&
-                    <a onClick={this.showRepliesToggle}>
-                      <Icon size="small" name={this.state.showReplies ? "eye-slash" : "eye"}/>
+                    <a className={!showReplies ? "reply-collapsed" : null}
+                       onClick={() => this.setState({showReplies: !showReplies})}>
+                      <Icon size="small" name={showReplies ? "eye-slash" : "eye"}/>
                       <span>
                         {t('videoDebate:comment.replies', {
-                          context: this.state.showReplies ? 'hide' : 'show',
+                          context: showReplies ? 'hide' : 'show',
                           count: replies.size
                         })}
                       </span>
@@ -109,7 +104,7 @@ export class CommentDisplay extends React.PureComponent {
 
   renderOwnCommentActions() {
     return [
-      <a key="r" onClick={this.actionReply}>
+      <a key="r" onClick={() => this.actionReply()}>
         <Icon name="plus"/>
         <span> {this.props.t('actions.addToThread')}</span>
       </a>,
@@ -122,11 +117,11 @@ export class CommentDisplay extends React.PureComponent {
 
   renderOtherCommentActions() {
     return [
-      <a key="r" onClick={this.actionReply}>
+      <a key="r" onClick={() => this.actionReply()}>
         <Icon name="reply"/>
         <span> {this.props.t('actions.reply')}</span>
       </a>,
-      <a key="f" onClick={this.handleFlag}
+      <a key="f" onClick={() => this.handleFlag()}
          className={classNames('action-report', {selected: this.props.isFlagged})}>
         <Icon name="flag"/>
         <span> {this.props.t(this.props.isFlagged ? 'actions.flagged' : 'actions.flag')}</span>
@@ -146,7 +141,26 @@ export class CommentDisplay extends React.PureComponent {
     })
   }
 
+  // ---- Authenticated actions ----
+
+  ensureAuthenticated() {
+    if (!this.props.currentUser.id) {
+      this.props.flashErrorUnauthenticated()
+      return false
+    }
+    return true
+  }
+
+  actionReply() {
+    if (!this.ensureAuthenticated())
+      return
+    const formName = `formAddComment-${this.props.comment.statement_id}`
+    this.props.change(formName, 'reply_to', this.props.comment)
+  }
+
   handleFlag() {
+    if (!this.ensureAuthenticated())
+      return
     this.setState({isBlurred: true})
     this.props.addModal({
       Modal: ModalFlag,
@@ -159,23 +173,5 @@ export class CommentDisplay extends React.PureComponent {
         comment: this.props.comment
       }
     })
-  }
-
-  actionAuthenticated(func) {
-    return args => {
-      if (!this.props.currentUser.id)
-        this.props.flashErrorUnauthenticated()
-      else
-        func(args)
-    }
-  }
-
-  showRepliesToggle() {
-    this.setState({showReplies: !this.state.showReplies})
-  }
-
-  actionReply() {
-    const formName = `formAddComment-${this.props.comment.statement_id}`
-    this.props.change(formName, 'reply_to', this.props.comment)
   }
 }
