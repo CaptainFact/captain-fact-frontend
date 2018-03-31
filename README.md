@@ -10,18 +10,45 @@ Staging: <a href="https://travis-ci.org/CaptainFact/captain-fact-frontend"><img 
 
 ## Getting started
 
-This is a HTML5 application, built with [Brunch](http://brunch.io).
+The REST API has not been open-sourced yet so you must have been invited to
+the gitlab registry for `./dev/start_api.sh` to run correctly.
 
 * Install (if you don't have them):
-    * [Node.js](http://nodejs.org)
-    * [Brunch](http://brunch.io): `npm install -g brunch`
-    * Brunch plugins and app dependencies: `npm install`
+  * [Docker](https://docs.docker.com/install/) (to start the API easily)
+  * [Node.js](http://nodejs.org)
+  * [Brunch](http://brunch.io): `npm install -g brunch`
+  * App dependencies: `npm install`
+    
 * Run:
-    * `npm start` — watches the project with continuous rebuild. This will also launch HTTP server with [pushState](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history).
-    * `npm run build` — builds minified project for production
-* Learn:
-    * `public/` dir is fully auto-generated and served by HTTP server.  Write your code in `app/` dir.
-    * Place static files you want to be copied from `app/assets/` to `public/`.
+  * `./dev/start_api.sh` - Start the API (with an Elixir console attached)
+  * `npm start` - Start the frontend
+  * `npm run test` - run all unit tests
+
+A default account should have been created for you with
+email=`admin@captainfact.io` and password=`password`.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
+
+## Conventions
+
+#### File structure
+
+```
+app
+├── API => Api libraries for both REST API and websockets
+├── assets => static assets, directly copied to the public directory
+├── components => All react components
+├── i18n => Translations
+├── lib => Misc utilities
+├── state => All redux related
+│   ├── comments
+│   │   ├── effects.js => Async actions creators, always return a promise
+│   │   ├── record.js => The object representing a single comment
+│   │   ├── reducer.js => Reducer + actions creators, always return an action object
+│   │   └── selectors.js => re-select selectors to select data in state
+│   └── ...
+├── styles => stylesheets in .sass format, all included from application.sass
+└── router.jsx => Application router and main entry point
+```
 
 ## Main Libraries / Frameworks
 
@@ -32,60 +59,10 @@ This is a HTML5 application, built with [Brunch](http://brunch.io).
 - phoenix: interaction with phoenix socket
 - Bulma: base styles
 
-## Conventions
-
-#### File structure
-
-```
-app
-├── API => Api libraries for both REST API and websockets
-├── assets => static assets, directly copied to the public directory
-├── components => React components
-├── lib => Misc utilities
-├── state => All redux related
-│   ├── comments
-│   │   ├── effects.js => Async actions creators, always return a promise
-│   │   ├── record.js => The object representing a single comment
-│   │   ├── reducer.js => Reducer + actions creators, always return an action object
-│   │   └── selectors.js => re-select selectors to select data in state
-│   └── ...
-├── styles => stylesheet in .sass format, all included from application.sass
-├── i18n => I18n initialization + translation files
-└── router.jsx => Application router and main entry point
-```
-
-#### Exporting components
-
-Components files should export two versions :
-
-1. `export DumbMyComponent` : non-connected component (for testing)
-2. `export default MyComponent` : connected component
-
-Non-connected components exports are there for testing them without the need
-to be connected to a store. If component is always dumb, you can export
-`default` only.
-
-You might find some exceptions in old components but all new
-ones must follow this rule. 
-
-### Effects
-
-An effect is an async action that may dispatch one or more actions when called. It always returns a
-promise, ideally without the need for .catch(...) - errors should be converted to FSA errors objects.
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md)
-
 ## Linked projects
 
 * [Extension](https://github.com/CaptainFact/captain-fact-extension)
 * [Overlay injector](https://github.com/CaptainFact/captain-fact-overlay-injector)
-
-## Dependencies 
-
-Many thanks to [adorable.io](http://avatars.adorable.io/) for their great consistent avatar service (the funny faces
-you see if you don't set your own profile picture).
 
 ## License
 

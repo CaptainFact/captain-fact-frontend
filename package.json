@@ -13,7 +13,7 @@
   },
   "jest": {
     "setupFiles": [
-      "./tests_setup.js",
+      "./dev/tests_setup.js",
       "jest-localstorage-mock"
     ],
     "snapshotSerializers": [

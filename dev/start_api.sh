@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
 #
-# Run an API on localhost from API docker dev image. This has been created mainly
-# to simplify the procedure and for compatibility with windows
+# Run a local version of the API by fetching a docker image of the database and
+# of the main REST API. You **must** have been invited to the gitlab registry
+# to use this script.
 #
 # Usage: ./rel/run_dev_docker_api.sh [--update]
 #
 # Options: --update Update API image from registry
 #
-# -------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
 # ---- Configuration ----
 
 DB_HOSTNAME="postgres_dev"
+DOCKER_DB_IMAGE="captainfact/dev-db:latest"
 DOCKER_API_IMAGE="registry.gitlab.com/captainfact/captain-fact-api/rest:dev"
 HTTP_PORT=4000
 HTTPS_PORT=4001
@@ -31,7 +33,7 @@ fi
 COUNT=$(docker ps -a | grep "$DB_HOSTNAME" | wc -l)
 if (($COUNT == 0)); then
   echo "Creating database..."
-  docker run -d --name ${DB_HOSTNAME} -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=captain_fact_dev postgres:9.6 > /dev/null || exit 1
+  docker run -d --name ${DB_HOSTNAME} -p 5432:5432 ${DOCKER_DB_IMAGE} > /dev/null || exit 1
   sleep 2 # Wait for database to be created
 fi
 

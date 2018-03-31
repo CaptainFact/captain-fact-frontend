@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/app" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/coverage" />
+      <excludeFolder url="file://$MODULE_DIR$/dev/dev_docker_api_resources" />
       <excludeFolder url="file://$MODULE_DIR$/node_modules" />
       <excludeFolder url="file://$MODULE_DIR$/public" />
       <excludeFolder url="file://$MODULE_DIR$/temp" />
