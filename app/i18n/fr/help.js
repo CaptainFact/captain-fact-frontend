@@ -9,6 +9,7 @@ export default {
     "achievements": "Médailles",
     "ambassadors": "Ambassadeurs",
     "credits": "Remerciements",
+    "contributionGuidelines": "Guide de contribution",
     "jobs": "On recrute !",
     "moderation": "Moderation",
     "privileges": "Privilèges",

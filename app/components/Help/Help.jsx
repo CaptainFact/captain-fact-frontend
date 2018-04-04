@@ -47,6 +47,7 @@ export default class Help extends React.PureComponent {
         <div className="columns">
           <div className="column panel">
             <p className="panel-heading">{this.props.t('categories.siteUsage')}</p>
+            {this.renderPageLink('contributionGuidelines')}
             {this.renderPageLink('reputation')}
             {this.renderPageLink('privileges')}
             {this.renderPageLink('moderation')}
