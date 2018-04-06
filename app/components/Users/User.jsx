@@ -2,6 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 import { Link } from "react-router"
 import { Interpolate, translate } from 'react-i18next'
+import { Helmet } from 'react-helmet'
 
 import UserAppellation from "./UserAppellation"
 import UserPicture from './UserPicture'
@@ -66,10 +67,13 @@ export default class User extends React.PureComponent {
       return <LoadingFrame/>
 
     const user = this.props.user
+    const prettyUsername = `@${user.username}`
     const isSelf = this.props.isSelf
-
     return (
       <div className="user-page">
+        <Helmet>
+          <title>{user.name || prettyUsername}</title>
+        </Helmet>
         <section className="hero is-light is-bold is-medium user-header">
           <div className="hero-body">
             <div className="container">
