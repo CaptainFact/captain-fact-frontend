@@ -13,17 +13,21 @@ import { default as Sidebar } from "./Sidebar"
 import { MainModalContainer } from "../Modal/MainModalContainer"
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
 
-
 @connect(state => ({
   locale: state.UserPreferences.locale,
-  onboardingSteps: uncompletedOnboardingSteps(state)
+  onboardingSteps: uncompletedOnboardingSteps(state),
+  lastAddedStep: state.OnboardingSteps.lastAddedStep
 }), {
   fetchCurrentUser: fetchCurrentUser,
   stepSeen: stepSeen
 })
-export default class App extends React.PureComponent {
+export default class App extends React.Component {
   constructor(props) {
     super(props)
+    
+    this.state = {
+      joyrideSteps: []
+    }
     this.joyrideCallback = this.joyrideCallback.bind(this)
   }
 
@@ -31,7 +35,20 @@ export default class App extends React.PureComponent {
     this.props.fetchCurrentUser()
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    // if a new step is pushed, notify joyride instance
+    if (prevProps.lastAddedStep != this.props.lastAddedStep) {
+      this.setState(currentState => {
+        currentState.joyrideSteps = currentState.joyrideSteps.concat([this.props.lastAddedStep.toJS()])
+      })
+      this.forceUpdate()
+    }
+  }
+
   render() {
+    const { joyrideSteps } = this.state
+    console.log("in render : joyridesteps", joyrideSteps)
+
     return (
       <I18nextProvider i18n={i18n}>   
         <div lang={this.props.locale}>
@@ -40,10 +57,10 @@ export default class App extends React.PureComponent {
           </Helmet>
           <MainModalContainer/>
           <Joyride
-            ref="joyride"
-            steps={this.props.onboardingSteps.toArray().map(step => step.toJS())}
+            ref={c => (this.joyride = c)}
+            type="single"
+            steps={joyrideSteps}
             run={true}
-            debug={true}
             callback={this.joyrideCallback}
           />
           <div className="columns is-mobile is-gapless">

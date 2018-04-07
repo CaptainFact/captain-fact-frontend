@@ -7,7 +7,7 @@ import classNames from 'classnames'
 import { withRouter } from 'react-router'
 
 import { renderField, validateLength, cleanStrMultiline } from "../FormUtils"
-import { COMMENT_LENGTH, USER_PICTURE_LARGE } from "../../constants"
+import { COMMENT_LENGTH, USER_PICTURE_LARGE, ONBOARDING_ADD_SOURCE_OR_COMMENT } from "../../constants"
 import TextareaAutosize from "../FormUtils/TextareaAutosize"
 import CloseButton from '../Utils/CloseButton'
 import Icon from '../Utils/Icon'
@@ -21,6 +21,8 @@ import { CommentDisplay } from './CommentDisplay'
 import TextareaLengthCounter from '../FormUtils/TextareaLengthCounter'
 import { isAuthenticated } from '../../state/users/current_user/selectors'
 import { flashErrorUnauthenticated } from '../../state/flashes/reducer'
+import store from '../../state/index'
+import { addStep } from '../../state/onboarding_steps/reducer'
 
 
 const validate = ({ source, text }) => {
@@ -70,13 +72,23 @@ class CommentField extends React.PureComponent {
 export class CommentForm extends React.Component {
   state = { isCollapsed: true }
 
+  componentDidMount() {
+    store.dispatch(addStep({
+      uniqueId: ONBOARDING_ADD_SOURCE_OR_COMMENT,
+      title: "add source or comment",
+      text: "salut salut",
+      selector: ".expand-form-button",
+      position: "left"
+    }))
+  }
+
   render() {
     const { valid, currentUser, sourceUrl, replyTo, t } = this.props
 
     if (!this.props.currentUser.id || this.state.isCollapsed && !replyTo)
       return (
         <div className="comment-form collapsed">
-          <a className="button is-inverted is-primary" onClick={() => this.expandForm()}>
+          <a className="button is-inverted is-primary expand-form-button" onClick={() => this.expandForm()}>
             <Icon name="plus" size="medium"/>
             <span>{t('comment.revealForm')}</span>
           </a>
