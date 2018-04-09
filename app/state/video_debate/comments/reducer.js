@@ -81,7 +81,8 @@ const CommentsReducer = handleActions({
     const commentFullPath = getCommentFullPath(state, payload)
     if (!commentFullPath)
       return state
-    return state.updateIn(commentFullPath, c => c.merge(prepareComment(payload)))
+    const comment = payload.__partial ? payload : prepareComment(payload)
+    return state.updateIn(commentFullPath, c => c.merge(comment))
   },
   [remove]: (state, {payload}) => {
     const commentFullPath = getCommentFullPath(state, payload)

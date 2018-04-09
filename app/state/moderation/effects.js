@@ -1,20 +1,22 @@
 import HttpApi from '../../API/http_api'
-import { setLoading, setItems, removeItem } from './reducer'
+import { errorToFlash } from '../flashes/reducer'
+import { setLoading, setModerationEntry, removeModerationEntry } from './reducer'
 import { createEffect } from '../utils'
 
 
 export const fetchRandomModeration = () => createEffect(
   HttpApi.get("moderation/random"), {
     before: setLoading(true),
-    after: setItems
+    after: setModerationEntry
   }
 )
 
-export const postModerationFeedback = (entryId, action) => createEffect(
+export const postModerationUserFeedback = (entryId, action) => createEffect(
   HttpApi.post("moderation/feedback", {
     value: action,
     action_id: entryId
   }), {
-    after: removeItem(entryId)
+    then: removeModerationEntry,
+    catch: errorToFlash
   }
 )

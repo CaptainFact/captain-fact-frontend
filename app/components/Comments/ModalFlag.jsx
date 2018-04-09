@@ -25,7 +25,7 @@ export default class ModalFlag extends React.PureComponent {
 
   render() {
     const { isLoading, flagsAvailable } = this.state
-    const { t, handleAbort, selectedReason, comment, ...otherProps } = this.props
+    const { t, handleAbort, selectedReason, comment, initialReason, ...otherProps } = this.props
     return (
       <ModalFormContainer handleAbort={handleAbort}
                           handleCloseClick={handleAbort}
@@ -36,7 +36,7 @@ export default class ModalFlag extends React.PureComponent {
                           confirmText={this.renderConfirmText(t, flagsAvailable)}
                           confirmIcon="flag"
                           FormComponent={FlagForm}
-                          formProps={{comment: comment}}
+                          formProps={{comment: comment, initialValues: {reason: initialReason}}}
                           helpLink="/help/moderation"
                           {...otherProps}
       />

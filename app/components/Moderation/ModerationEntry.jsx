@@ -1,53 +1,34 @@
 import React from "react"
 import PropTypes from 'prop-types'
+import { Link } from 'react-router'
 import { connect } from "react-redux"
-import { translate } from 'react-i18next'
+import format from 'date-fns/format'
 
 import { UserAction } from "../UsersActions/UserAction"
-
-import {
-  MODERATION_ACTION_ABUSIVE,
-  MODERATION_ACTION_CONFIRM,
-  MODERATION_ACTION_NOTSURE
-} from '../../constants'
-
-import { Icon } from "../Utils"
-
-import format from 'date-fns/format'
 import { locales } from '../../i18n/i18n'
+import { ModerationForm } from './ModerationForm'
 
 @connect(state => ({ locale: state.UserPreferences.locale }))
-@translate('moderation')
 export default class ModerationEntry extends React.PureComponent {
   render() {
-    const { entry, locale, t, onAction } = this.props
+    const { entry: {action}, locale } = this.props
     const localeObj = locales[locale]
     const dateFormat = localeObj.defaultDateTimeFormat
+    const videoId = action.context.hash_id
+    const statementId = action.changes.get('statement_id')
 
     return (
-
       <div className="box moderation-entry">
         <div>
-          <span className="moderation-entry-date">{format(entry.time, dateFormat, { locale: localeObj })}</span>
-          <br/>
-          <UserAction action={entry}/>
-          <div className="buttons field is-grouped">
-            <button className="button is-danger"
-                    onClick={() => onAction(entry.id, MODERATION_ACTION_ABUSIVE)}>
-              <Icon name="close" />
-              <span>{t('actions.flag_abusive')}</span>
-            </button>
-            <button className="button"
-                    onClick={() => onAction(entry.id, MODERATION_ACTION_NOTSURE)}>
-              <Icon name="ban" />
-              <span>{t('actions.unsure')}</span>
-            </button>
-            <button className="button is-success"
-                    onClick={() => onAction(entry.id, MODERATION_ACTION_CONFIRM)}>
-              <Icon name="check" />
-              <span>{t('actions.confirm')}</span>
-            </button>
-          </div>
+          <h4 className="title is-4">
+            {format(action.time, dateFormat, { locale: localeObj })} -&nbsp;
+            <Link target='_blank' to={`/videos/${videoId}?statement=${statementId}`}>
+              Context
+            </Link>
+          </h4>
+          <UserAction action={action}/>
+          <hr/>
+          <ModerationForm action={action} initialValues={{action_id: action.id}}/>
         </div>
       </div>
     )
