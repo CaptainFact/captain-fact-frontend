@@ -28,17 +28,18 @@ import {getFocusedStatementSpeakerId} from '../../state/video_debate/statements/
 
 
 @withRouter
-@translate('videoDebate')
+@translate(['videoDebate', 'onboarding'])
 @connect((state, props) => (
   {isAuthenticated: isAuthenticated(state), isFocused: getFocusedStatementSpeakerId(state) === props.speaker.id}),
   {addModal, changeStatementFormSpeaker, removeSpeaker, updateSpeaker}
 )
 export class SpeakerPreview extends React.PureComponent {
   componentDidMount() {
+    const { t } = this.props
     store.dispatch(addStep({
       uniqueId: ONBOARDING_ADD_STATEMENT,
-      title: "test",
-      text: "hello",
+      title: t('onboarding.add_statement.title'),
+      text: t('onboarding.add_statement.text'),
       selector: ".add-statement-button"
     }))
   }

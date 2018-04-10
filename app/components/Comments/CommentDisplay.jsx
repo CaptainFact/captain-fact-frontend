@@ -17,10 +17,11 @@ import { addModal } from '../../state/modals/reducer'
 import { commentVote, deleteComment, flagComment } from '../../state/video_debate/comments/effects'
 import {flashErrorUnauthenticated} from '../../state/flashes/reducer'
 import UserPicture from '../Users/UserPicture'
-import { USER_PICTURE_SMALL } from '../../constants'
+import { USER_PICTURE_SMALL, ONBOARDING_VOTE_BUTTONS } from '../../constants'
 import MediaLayout from '../Utils/MediaLayout'
 import Vote from './Vote'
-
+import store from '../../state/index'
+import { addStep } from '../../state/onboarding_steps/reducer'
 
 @connect(({CurrentUser, VideoDebate}, props) => ({
   currentUser: CurrentUser.data,
@@ -34,6 +35,16 @@ export class CommentDisplay extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {isBlurred: false, showReplies: props.nesting !== 4}
+  }
+
+  componentDidMount() {
+    store.dispatch(addStep({
+      uniqueId: ONBOARDING_VOTE_BUTTONS,
+      title: "vote ! ",
+      text: "vote !!!!",
+      selector: ".vote",
+      position: "left"
+    }))
   }
 
   render() {

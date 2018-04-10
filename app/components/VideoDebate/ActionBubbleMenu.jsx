@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { translate } from 'react-i18next'
-import { MIN_REPUTATION_UPDATE_VIDEO } from '../../constants'
+import { MIN_REPUTATION_UPDATE_VIDEO, ONBOARDING_PLUS_BUTTON } from '../../constants'
 
 import { changeStatementFormSpeaker } from '../../state/video_debate/statements/reducer'
 import { toggleAutoscroll } from '../../state/user_preferences/reducer'
@@ -15,7 +15,8 @@ import ShareModal from '../Utils/ShareModal'
 import EditVideoModal from '../Videos/EditVideoModal'
 import { hasStatementForm } from '../../state/video_debate/statements/selectors'
 import { destroyStatementForm } from '../../state/video_debate/statements/effects'
-
+import store from '../../state/index'
+import { addStep } from '../../state/onboarding_steps/reducer'
 
 @connect(
   state => ({
@@ -28,6 +29,15 @@ import { destroyStatementForm } from '../../state/video_debate/statements/effect
 @translate('videoDebate')
 @withRouter
 export default class ActionBubbleMenu extends React.PureComponent {
+  componentDidMount() {
+    store.dispatch(addStep({
+      uniqueId: ONBOARDING_PLUS_BUTTON,
+      title: "adz",
+      text: "aazdadz",
+      selector: ".action-bubble-container"
+    }))
+  }
+
   render() {
     return (
       <div className={classNames("action-bubble-container", {hasForm: this.props.hasStatementForm})}>

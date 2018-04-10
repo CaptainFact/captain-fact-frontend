@@ -31,6 +31,8 @@ export const ENTITY_COMMENT = 4
 // Onboarding steps
 export const ONBOARDING_ADD_STATEMENT = 1
 export const ONBOARDING_ADD_SOURCE_OR_COMMENT = 2
+export const ONBOARDING_PLUS_BUTTON = 3
+export const ONBOARDING_VOTE_BUTTONS = 4
 
 // Required reputations
 export const MIN_REPUTATION_MODERATION = 200
