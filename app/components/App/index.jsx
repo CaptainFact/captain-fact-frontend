@@ -25,7 +25,6 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-      // we maintain a local step array as using directly redux data results in incorrect beacon placement
       joyrideSteps: []
     }
     this.joyrideCallback = this.joyrideCallback.bind(this)
