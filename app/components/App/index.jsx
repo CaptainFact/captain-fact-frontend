@@ -67,7 +67,6 @@ export default class App extends React.Component {
             type="single"
             steps={joyrideSteps}
             run={true}
-            debug={true}
             callback={this.joyrideCallback}
           />
           <div className="columns is-mobile is-gapless">
