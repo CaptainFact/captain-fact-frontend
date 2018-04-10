@@ -40,14 +40,10 @@ export default class App extends React.Component {
     if (this.props.onboardingSteps != prevProps.onboardingSteps) {
       this.setState(currentState => {
         const newSteps = this.props.onboardingSteps.toArray().map(step => step.toJS())
-        console.log("newsteps : ", newSteps)
         newSteps.forEach(step => {
-          console.log("index : ", currentState.joyrideSteps.findIndex(s => s.uniqueId === step.uniqueId))
           if (currentState.joyrideSteps.findIndex(s => s.uniqueId === step.uniqueId) === -1) {
-            console.log("pushe")
             currentState.joyrideSteps = currentState.joyrideSteps.concat([step])
           }
-          console.log("current state", currentState)
         })
       })
       this.joyride.reset(true)
