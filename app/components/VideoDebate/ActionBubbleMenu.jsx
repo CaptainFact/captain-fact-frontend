@@ -30,10 +30,12 @@ import { addStep } from '../../state/onboarding_steps/reducer'
 @withRouter
 export default class ActionBubbleMenu extends React.PureComponent {
   componentDidMount() {
+    const { t } = this.props
+
     store.dispatch(addStep({
       uniqueId: ONBOARDING_PLUS_BUTTON,
-      title: "adz",
-      text: "aazdadz",
+      title: t("onboarding:plus_button.title"),
+      text: t("onboarding:plus_button.text"),
       selector: ".action-bubble-container"
     }))
   }

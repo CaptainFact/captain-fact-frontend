@@ -38,10 +38,12 @@ export class CommentDisplay extends React.PureComponent {
   }
 
   componentDidMount() {
+    const { t } = this.props
+
     store.dispatch(addStep({
       uniqueId: ONBOARDING_VOTE_BUTTONS,
-      title: "vote ! ",
-      text: "vote !!!!",
+      title: t("onboarding:vote_buttons.title"),
+      text: t("onboarding:vote_buttons.text"),
       selector: ".vote",
       position: "left"
     }))

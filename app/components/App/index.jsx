@@ -15,8 +15,7 @@ import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
 
 @connect(state => ({
   locale: state.UserPreferences.locale,
-  onboardingSteps: uncompletedOnboardingSteps(state),
-  lastAddedStep: state.OnboardingSteps.lastAddedStep
+  onboardingSteps: uncompletedOnboardingSteps(state)
 }), {
     fetchCurrentUser: fetchCurrentUser,
     stepSeen: stepSeen
@@ -37,6 +36,7 @@ export default class App extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    // it appears we have to maintain a local Array (as seen in joyride demo code). Failure to do so results some steps not registering
     if (this.props.onboardingSteps != prevProps.onboardingSteps) {
       this.setState(currentState => {
         const newSteps = this.props.onboardingSteps.toArray().map(step => step.toJS())
@@ -46,6 +46,7 @@ export default class App extends React.Component {
           }
         })
       })
+      // after a lot of tests, both  of these are needed
       this.joyride.reset(true)
       this.forceUpdate()
     }
