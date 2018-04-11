@@ -8,6 +8,7 @@ import i18n from '../../i18n/i18n'
 import { FlashMessages } from "../Utils"
 import { fetchCurrentUser } from '../../state/users/current_user/effects'
 import { stepSeen } from '../../state/onboarding_steps/effects'
+import { isAuthenticated } from '../../state/users/current_user/selectors'
 import { uncompletedOnboardingSteps } from '../../state/onboarding_steps/selectors'
 import { default as Sidebar } from "./Sidebar"
 import { MainModalContainer } from "../Modal/MainModalContainer"
@@ -15,7 +16,8 @@ import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
 
 @connect(state => ({
   locale: state.UserPreferences.locale,
-  onboardingSteps: uncompletedOnboardingSteps(state)
+  onboardingSteps: uncompletedOnboardingSteps(state),
+  isAuthenticated: isAuthenticated(state)
 }), {
     fetchCurrentUser: fetchCurrentUser,
     stepSeen: stepSeen
@@ -45,14 +47,22 @@ export default class App extends React.Component {
           }
         })
       })
-      // after a lot of tests, both  of these are needed
+      // update and refresh joyride if we are logged in
+      if (this.props.isAuthenticated) {
+        this.joyride.reset(true)
+        this.forceUpdate()
+      }
+    }
+
+    // start joyride if we logged in
+    if (this.props.isAuthenticated && !prevProps.isAuthenticated) {
       this.joyride.reset(true)
-      this.forceUpdate()
     }
   }
 
   render() {
     const { joyrideSteps } = this.state
+    const { isAuthenticated } = this.props
 
     return (
       <I18nextProvider i18n={i18n}>
@@ -65,7 +75,7 @@ export default class App extends React.Component {
             ref={c => (this.joyride = c)}
             type="single"
             steps={joyrideSteps}
-            run={true}
+            run={isAuthenticated}
             callback={this.joyrideCallback}
           />
           <div className="columns is-mobile is-gapless">
