@@ -9,19 +9,15 @@ export const disable = createAction('ONBOARDING/DISABLE')
 export const enable = createAction('ONBOARDING/ENABLE')
 
 const INITIAL_STATE = new Record({
-  steps: new List(),
-  showOnboarding: true
+  steps: new List()
 })
 
 const OnboardingStepsReducer = handleActions({
-  [disable]: (state, {payload}) => state.set('showOnboarding', false),
-  [enable]: (state, {payload}) => state.set('showOnboarding', true),
   [addStep]: (state, {payload}) => {
     const step = OnboardingStep(payload)
     const steps = (state.steps.findIndex(s => s.uniqueId === step.uniqueId) === -1) ? state.steps.insert(state.steps.length, step) : state.steps
     return state.set('steps', steps)
-  },
-  [removeStep]: (state, {payload}) => state.set('showOnboarding', true)
+  }
 }, INITIAL_STATE())
 
 export default OnboardingStepsReducer

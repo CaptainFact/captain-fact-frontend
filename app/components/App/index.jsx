@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet'
 import i18n from '../../i18n/i18n'
 import { FlashMessages } from "../Utils"
 import { fetchCurrentUser } from '../../state/users/current_user/effects'
-import { stepSeen } from '../../state/onboarding_steps/effects'
+import { stepSeen, tourSkipped } from '../../state/onboarding_steps/effects'
 import { isAuthenticated } from '../../state/users/current_user/selectors'
 import { uncompletedOnboardingSteps } from '../../state/onboarding_steps/selectors'
 import { default as Sidebar } from "./Sidebar"
@@ -20,7 +20,8 @@ import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
   isAuthenticated: isAuthenticated(state)
 }), {
     fetchCurrentUser: fetchCurrentUser,
-    stepSeen: stepSeen
+    stepSeen: stepSeen,
+    tourSkipped: tourSkipped
   })
 export default class App extends React.Component {
   constructor(props) {
@@ -38,7 +39,7 @@ export default class App extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     // it appears we have to maintain a local Array (as seen in joyride demo code). Failure to do so results some steps not registering
-    if (this.props.onboardingSteps != prevProps.onboardingSteps) {
+    if (this.props.onboardingSteps != prevProps.onboardingSteps && this.props.onboardingSteps.size > prevProps.onboardingSteps.size) {
       this.setState(currentState => {
         const newSteps = this.props.onboardingSteps.toArray().map(step => step.toJS())
         newSteps.forEach(step => {
@@ -76,6 +77,7 @@ export default class App extends React.Component {
             type="single"
             steps={joyrideSteps}
             run={isAuthenticated}
+            showSkipButton={true}
             callback={this.joyrideCallback}
           />
           <div className="columns is-mobile is-gapless">
@@ -93,8 +95,10 @@ export default class App extends React.Component {
 
   joyrideCallback(data) {
     // after each step, POST completed_steps
-    if (data.action === 'close' && data.type === 'step:after') {
+    if (data.type === 'step:after' && data.action === 'close') {
       this.props.stepSeen(data.step.uniqueId)
+    } else if (data.type === 'finished' && data.isTourSkipped) {
+      this.props.tourSkipped()
     }
   }
 

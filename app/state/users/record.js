@@ -14,7 +14,8 @@ const User = new Record({
   registered_at: null,
   achievements: [],
   is_publisher: false,
-  onboarding_completed: new List()
+  onboarding_completed: new List(),
+  onboarding_skipped: false
 })
 
 export default User
