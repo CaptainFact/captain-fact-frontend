@@ -29,7 +29,7 @@ import { addStep } from '../../state/onboarding_steps/reducer'
   isVoting: VideoDebate.comments.voting.has(props.comment.id),
   replies: VideoDebate.comments.replies.get(props.comment.id),
   isFlagged: VideoDebate.comments.myFlags.has(props.comment.id)
-}), {addModal, deleteComment, flagComment, commentVote, change, flashErrorUnauthenticated})
+}), {addModal, deleteComment, flagComment, commentVote, change, flashErrorUnauthenticated, addStep})
 @translate('main')
 export class CommentDisplay extends React.PureComponent {
   constructor(props) {
@@ -38,15 +38,15 @@ export class CommentDisplay extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { t } = this.props
+    const { t, addStep } = this.props
 
-    store.dispatch(addStep({
+    addStep({
       uniqueId: ONBOARDING_VOTE_BUTTONS,
       title: t("onboarding:vote_buttons.title"),
       text: t("onboarding:vote_buttons.text"),
       selector: ".vote",
       position: "left"
-    }))
+    })
   }
 
   render() {

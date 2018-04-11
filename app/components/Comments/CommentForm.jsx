@@ -65,7 +65,7 @@ class CommentField extends React.PureComponent {
     currentUser: state.CurrentUser.data,
     isAuthenticated: isAuthenticated(state)
   }
-}, {postComment, flashErrorUnauthenticated})
+}, {postComment, flashErrorUnauthenticated, addStep})
 @reduxForm({form:'commentForm', validate})
 @translate('videoDebate')
 @withRouter
@@ -73,15 +73,15 @@ export class CommentForm extends React.Component {
   state = { isCollapsed: true }
 
   componentDidMount() {
-    const { t } = this.props
+    const { t, addStep } = this.props
 
-    store.dispatch(addStep({
+    addStep({
       uniqueId: ONBOARDING_ADD_SOURCE_OR_COMMENT,
       title: t("onboarding:add_source_or_comment.title"),
       text: t("onboarding:add_source_or_comment.text"),
       selector: ".expand-form-button",
       position: "left"
-    }))
+    })
   }
 
   render() {

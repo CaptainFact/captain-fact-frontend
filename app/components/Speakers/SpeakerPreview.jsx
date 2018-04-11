@@ -30,18 +30,28 @@ import {getFocusedStatementSpeakerId} from '../../state/video_debate/statements/
 @withRouter
 @translate('videoDebate')
 @connect((state, props) => (
-  {isAuthenticated: isAuthenticated(state), isFocused: getFocusedStatementSpeakerId(state) === props.speaker.id}),
-  {addModal, changeStatementFormSpeaker, removeSpeaker, updateSpeaker}
+  {
+    isAuthenticated: isAuthenticated(state),
+    isFocused: getFocusedStatementSpeakerId(state) === props.speaker.id
+  }),
+  {
+    addModal,
+    addStep,
+    changeStatementFormSpeaker,
+    removeSpeaker,
+    updateSpeaker
+  }
 )
 export class SpeakerPreview extends React.PureComponent {
   componentDidMount() {
-    const { t } = this.props
-    store.dispatch(addStep({
+    const { t, addStep } = this.props
+  
+    addStep({
       uniqueId: ONBOARDING_ADD_STATEMENT,
       title: t('onboarding:add_statement.title'),
       text: t('onboarding:add_statement.text'),
       selector: ".add-statement-button"
-    }))
+    })
   }
   render() {
     const { speaker, isAuthenticated, withoutActions , className} = this.props

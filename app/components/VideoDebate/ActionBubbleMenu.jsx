@@ -24,20 +24,20 @@ import { addStep } from '../../state/onboarding_steps/reducer'
     isAuthenticated: isAuthenticated(state),
     hasStatementForm: hasStatementForm(state)
   }),
-  {changeStatementFormSpeaker, toggleAutoscroll, addModal, destroyStatementForm}
+  {changeStatementFormSpeaker, toggleAutoscroll, addModal, destroyStatementForm, addStep}
 )
 @translate('videoDebate')
 @withRouter
 export default class ActionBubbleMenu extends React.PureComponent {
   componentDidMount() {
-    const { t } = this.props
+    const { t, addStep } = this.props
 
-    store.dispatch(addStep({
+    addStep({
       uniqueId: ONBOARDING_PLUS_BUTTON,
       title: t("onboarding:plus_button.title"),
       text: t("onboarding:plus_button.text"),
       selector: ".action-bubble-container"
-    }))
+    })
   }
 
   render() {
