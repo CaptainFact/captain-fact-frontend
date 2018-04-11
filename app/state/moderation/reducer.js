@@ -7,7 +7,7 @@ import ModerationEntry from './record'
 
 
 export const setLoading = createAction('MODERATION/SET_LOADING')
-export const setModerationEntry = createAction('MODERATION/SET_ITEMS')
+export const setModerationEntry = createAction('MODERATION/SET_ITEM')
 export const removeModerationEntry = createAction('MODERATION/REMOVE_ITEM')
 
 const INITIAL_STATE = new Record({
@@ -18,10 +18,12 @@ const INITIAL_STATE = new Record({
 
 const ModerationReducer = handleActions({
   [setModerationEntry]: {
-    next: (state, {payload}) => !payload ? state : state.merge({
-      entry: prepareEntry(payload),
-      isLoading: false
-    }),
+    next: (state, {payload}) => !payload ?
+      state.set('isLoading', false) :
+      state.merge({
+        entry: prepareEntry(payload),
+        isLoading: false
+      }),
     throw: (state, action) => state.merge({
       isLoading: false,
       error: action.payload

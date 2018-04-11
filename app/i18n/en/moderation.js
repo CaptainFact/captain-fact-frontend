@@ -3,7 +3,7 @@ export default {
     "date": "Date"
   },
   "actions": {
-    "flag_abusive": "Abusive flag",
+    "flag_abusive": "Refute flag",
     "unsure": "Unsure",
     "confirm": "Confirm flag"
   },
@@ -13,6 +13,9 @@ export default {
     "3": "Irrelevant",
     "4": "Not constructive",
   },
+  "seeContext": "See in context",
+  "whyReport": "Why do you think this comment was reported?",
+  "flaggedFor": "flagged this for \"$t(reason.{{reason}})\"",
   "title": "Moderation",
   "emptyModeration": "There's nothing to moderate here. Go feed some trolls and come back later!",
   "pending": "Pending moderation"

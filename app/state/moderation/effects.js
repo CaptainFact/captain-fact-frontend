@@ -11,11 +11,8 @@ export const fetchRandomModeration = () => createEffect(
   }
 )
 
-export const postModerationUserFeedback = (entryId, action) => createEffect(
-  HttpApi.post("moderation/feedback", {
-    value: action,
-    action_id: entryId
-  }), {
+export const postModerationFeedback = (values) => createEffect(
+  HttpApi.post("moderation/feedback", values), {
     then: removeModerationEntry,
     catch: errorToFlash
   }

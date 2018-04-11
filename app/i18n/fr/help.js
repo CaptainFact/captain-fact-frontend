@@ -11,7 +11,7 @@ export default {
     "credits": "Remerciements",
     "contributionGuidelines": "Guide de contribution",
     "jobs": "On recrute !",
-    "moderation": "Moderation",
+    "moderation": "Modération",
     "privileges": "Privilèges",
     "reputation": "Réputation",
     "bug_report": "Signaler un bug",
