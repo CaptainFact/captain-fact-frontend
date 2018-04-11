@@ -10,6 +10,7 @@ export const setLoading = createAction('CURRENT_USER/SET_LOADING')
 export const setPosting = createAction('CURRENT_USER/SET_POSTING')
 export const reset = createAction('CURRENT_USER/RESET')
 export const completeOnboardingStep = createAction('CURRENT_USER/COMPLETE_ONBOARDING_STEP')
+export const skipTour = createAction('CURRENT_USER/SKIP_TOUR')
 
 // Reducer
 
@@ -40,6 +41,7 @@ const CurrentUserReducer = handleActions({
   [setLoading]: (state, {payload}) => state.set('isLoading', payload),
   [setPosting]: (state, {payload}) => state.set('isPosting', payload),
   [completeOnboardingStep]: (state, {payload}) => state.updateIn(['data', 'onboarding_completed'], completedSteps => completedSteps.push(payload)),
+  [skipTour]: (state, {payload}) => state.updateIn(['data', 'onboarding_skipped'], onboarding_skipped => true),
   [reset]: () => INITIAL_STATE()
 }, INITIAL_STATE())
 
