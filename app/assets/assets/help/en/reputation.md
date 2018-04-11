@@ -31,7 +31,7 @@ These rules are subject to change, especially as the number of users grows.
 | One of your facts is voted down                                            | -3pts
 | One of your flags is considered as abusive                                 | -5pts
 | One of your comment is banned after the collective moderation              | ...
-| ... Pour **Personal attack or inappropriate language**                     | -25pts
-| ... Pour **Unwanted commercial content or spam**                           | -30pts
-| ... Pour **Irrelevant**                                                    | -10pts
-| ... Pour **Not constructive**                                              | -5pts
+| ... For **Personal attack or inappropriate language**                     | -25pts
+| ... For **Unwanted commercial content or spam**                           | -30pts
+| ... For **Irrelevant**                                                    | -10pts
+| ... For **Not constructive**                                              | -5pts
