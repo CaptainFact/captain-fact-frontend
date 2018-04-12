@@ -75,28 +75,24 @@ export default class User extends React.PureComponent {
           <title>{user.name || prettyUsername}</title>
         </Helmet>
         <section className="hero is-light is-bold is-medium user-header">
-          <div className="hero-body">
-            <div className="container">
-              {user.id !== 0 &&
-                <MediaLayout
-                left={
-                  <UserPicture user={user} size={USER_PICTURE_XLARGE}/>
-                }
-                content={
-                  <div>
-                    <UserAppellation user={user} withoutActions={true}/>
-                    <div className="registered-since">
-                      <Icon name="clock-o"/>&nbsp;
-                      <Interpolate i18nKey="user:registeredSince" value={
-                        <TimeSince time={user.registered_at} addSuffix={false} isDateTime={false}/>
-                      }/>
-                    </div>
-                  </div>
-                }
-                right={<ScoreTag reputation={user.reputation} size="large" withIcon={true}/>}/>
-              }
-            </div>
-          </div>
+          {user.id !== 0 &&
+            <MediaLayout
+            left={
+              <UserPicture user={user} size={USER_PICTURE_XLARGE}/>
+            }
+            content={
+              <div>
+                <UserAppellation user={user} withoutActions={true}/>
+                <div className="registered-since">
+                  <Icon name="clock-o"/>&nbsp;
+                  <Interpolate i18nKey="user:registeredSince" value={
+                    <TimeSince time={user.registered_at} addSuffix={false} isDateTime={false}/>
+                  }/>
+                </div>
+              </div>
+            }
+            right={<ScoreTag reputation={user.reputation} size="large" withIcon={true}/>}/>
+          }
         </section>
         <div className="tabs is-centered">
           <ul>

@@ -25,7 +25,7 @@ export default class NewsletterSubscription extends React.PureComponent {
       return <LoadingFrame/>
     const cssType = this.state.status === 'success' ? this.state.status : 'danger'
     return (
-      <div className="container">
+      <div className="section">
         <Notification type={cssType} style={{maxWidth: 400, margin: '3em auto'}}>
           {this.props.t('newsletter.unsubscribe', {context: this.state.status})}
         </Notification>
