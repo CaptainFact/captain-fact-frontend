@@ -21,9 +21,9 @@ class ActionDiff extends PureComponent {
       <div className="action-diff">
         {diff.entrySeq().map(([key, changes]) => (
           <div key={ key } className="diff-entry">
-            <span className="diff-key">
-              { titleCase(this.formatChangeKey(key)) }
-            </span>
+            <div className="diff-key">
+              { titleCase(this.formatChangeKey(key)) }&nbsp;
+            </div>
             <pre className="diff-view">
               { this.renderKeyDiff(key, changes) }
             </pre>

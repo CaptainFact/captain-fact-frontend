@@ -5,9 +5,6 @@ export default {
   "refute": "Refute",
   "flagForm": {
     "title": "Why do you want to flag this comment ?",
-    "bad_language": "Rude language",
-    "spam": "Spam or commercial content",
-    "harassment": "Personal attack or harassment",
     "xAvailable": "{{count}} available",
     "xAvailable_plural": "{{count}} available"
   },

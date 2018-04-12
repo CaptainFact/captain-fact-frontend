@@ -55,7 +55,8 @@ export default {
     "clipboardSuccess": "Url copied to clipboard",
     "clipboardFail": "Cannot copy to clipboard",
     "all": "All",
-    "unknown": "Unknown"
+    "unknown": "Unknown",
+    "otherFlags": "Other flags"
   },
   "videos": {
     "add": "Add Video"

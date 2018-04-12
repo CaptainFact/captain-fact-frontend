@@ -11,21 +11,21 @@ Judgement actions such as voting and flagging are limited to avoid abusing them 
 
 | Reputation | Privilege                                                  |
 |------------|------------------------------------------------------------|
-| Any        | Post comments and facts            
-| Any        | Edit and delete your comments                 
-| 0          | Add speakers
-| 0          | Add statements
+| Any        | Post comments and sources     
+| Any        | Delete your own comments                 
+| 0          | Create statements
 | 0          | Vote Up                                 
-| 15         | Flag inappropriate content  
 | 15         | Vote Down                                    
 | 30         | Update statement  
-| 30         | Update speaker
-| 75         | Remove / restore statement
-| 75         | Remove / restore speaker            
+| 75         | Add / create speakers
+| 75         | Update speaker
+| 75         | Flag inappropriate content  
+| 125        | Remove / restore statement     
 | 125        | No more new user restrictions               
-| 125        | Shift all video's statements                                 
+| 200        | Shift all video's statements                                 
+| 200        | Remove / restore speaker
 | 200        | Add videos (weekly limitation)                           
-| 1000       | Access to moderator tools                                  
+| 200        | Access to the moderation platform                           
 
 
 # New user restrictions

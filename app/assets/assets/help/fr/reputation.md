@@ -10,7 +10,7 @@ Joindre des sources à vos commentaires augmente le nombre de points de réputat
 vous gagnez pour chaque vote positif.
 Gagner en réputation vous permet de débloquer des nouveaux
 [privilèges](/help/privileges). Vous pouvez gagner jusqu'à 25 points de réputation par
-jour (les compteurs sont réinitialisés à minuit).
+jour.
 
 Ces règles sont sujettes à évolution dans le temps, en particulier avec la
 montée du nombre d'utilisateurs.
@@ -24,19 +24,18 @@ montée du nombre d'utilisateurs.
 | Un de vos commentaires recoit un vote positif                  | +2pts
 | Un de vos commentaires **sourcé** recoit un vote positif       | +3pts
 | Quelqu'un approuve une de vos modifications dans l'historique  | +5pts
-| Un de vos signalements est comfirmé                            | From +3 to +10pts (*)
+| Un de vos signalements est comfirmé                            | +3pts
 
 # Vous perdez de la réputation quand...
 
 | Action                                                                     | Perte               |
 |----------------------------------------------------------------------------|---------------------|
 | Vous effectuez un vote négatif                                             | -1pts
-| Vous supprimez l'un de vos commentaires                                    | -1pts
 | Un de vos commentaires recoit un vote négatif                              | -2pts
 | Une de vos sources recoit un vote négatif                                  | -3pts
-| Un de vos signalements est jugé abusif                                     | De -3 à -10 pts (*)
-| Un·e de vos commentaires / sources est bannie après plusieurs signalements | De -15 à -25 pts (*)
-| Une de vos modifications est annulée après plusieurs signalements          | De -15 à -25 pts (*)
-
-(*) Dépend du résultat de la modération collective. Si le consensus est complet, la valeur maximum
-    sera appliquée.
+| Un de vos signalements est jugé abusif                                     | -5pts
+| Un·e de vos commentaires / sources est bannie après plusieurs signalements | ...
+| ... Pour **Attaque personelle ou langage inapproprié**                     | -25pts
+| ... Pour **Spam ou publicité non souhaitée**                               | -30pts
+| ... Pour **Hors-sujet**                                                    | -10pts
+| ... Pour **Commentaire non constructif**                                   | -5pts
