@@ -9,22 +9,20 @@ import Icon from '../Utils/Icon'
 export const BrowserExtensionsPage = translate('extension')(({t}) => (
   <div className="browser-extension-page">
     <section className="section">
-      <div className="container">
-        <div className="columns">
-          <BrowserExtension browser="Google Chrome" image="/assets/img/chrome.png"
-                            buttonLabel={`${t('addTo')} Chrome`}
-                            onClick={chromeInstall}
-                            url="https://chrome.google.com/webstore/detail/fnnhlmbnlbgomamcolcpgncflofhjckm"/>
-          <BrowserExtension browser="Mozilla Firefox" image="/assets/img/firefox.png"
-                            buttonLabel={`${t('addTo')} Firefox`}
-                            url="https://addons.mozilla.org/addon/captainfact/"/>
-          <BrowserExtension browser="Internet Explorer" image="/assets/img/internet_explorer.png"
-                            buttonLabel="Just kidding" disabled={true}
-                            url="https://www.mozilla.org/fr/firefox/"/>
-        </div>
+      <div className="columns">
+        <BrowserExtension browser="Google Chrome" image="/assets/img/chrome.png"
+                          buttonLabel={`${t('addTo')} Chrome`}
+                          onClick={chromeInstall}
+                          url="https://chrome.google.com/webstore/detail/fnnhlmbnlbgomamcolcpgncflofhjckm"/>
+        <BrowserExtension browser="Mozilla Firefox" image="/assets/img/firefox.png"
+                          buttonLabel={`${t('addTo')} Firefox`}
+                          url="https://addons.mozilla.org/addon/captainfact/"/>
+        <BrowserExtension browser="Internet Explorer" image="/assets/img/internet_explorer.png"
+                          buttonLabel="Just kidding" disabled={true}
+                          url="https://www.mozilla.org/fr/firefox/"/>
       </div>
     </section>
-    <section className="container section content has-text-centered box">
+    <section className="section content has-text-centered box">
       <h2>
         {t('description')}
         <br/><br/>
@@ -34,7 +32,7 @@ export const BrowserExtensionsPage = translate('extension')(({t}) => (
         </Trans>
       </h2>
     </section>
-    <section className="has-text-centered container section">
+    <section className="has-text-centered section">
       <ReactPlayer controls={true}
                    className="video"
                    url="https://youtu.be/k4L0fvwsBg0"/>
@@ -58,7 +56,7 @@ const BrowserExtension = ({browser, image, buttonLabel, url, onClick, disabled=f
 
 function chromeInstall(e) {
   if (typeof chrome !== 'undefined') {
-    chrome.webstore.install(null)
+    chrome.webstore.install('https://chrome.google.com/webstore/detail/fnnhlmbnlbgomamcolcpgncflofhjckm')
     e.preventDefault()
     return false
   }

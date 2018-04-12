@@ -15,7 +15,7 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
 class ThirdPartyAccountLinker extends React.PureComponent {
   render() {
     return (
-      <p className="field has-addons" style={{width: 200, margin: 'auto'}}>
+      <div className="field has-addons" style={{width: 200, margin: 'auto'}}>
         <div className="control">
           <div className="linked-account-title">
             {this.props.title}
@@ -24,7 +24,7 @@ class ThirdPartyAccountLinker extends React.PureComponent {
         <div className="control">
           {this.props.isLinked ? this.renderUnlinkAccount() : this.renderLinkAccount()}
         </div>
-      </p>
+      </div>
     )
   }
 
@@ -55,19 +55,24 @@ export default class UserSettings extends React.PureComponent {
     if (this.props.isLoading)
       return <LoadingFrame/>
     return (
-      <div>
+      <div className="section">
+        <div className="has-text-centered">
+          <h3 className="title is-3">{this.props.t('main:menu.settings')}</h3>
+        </div>
         <EditUserForm/>
+        <br/>
         <hr/>
+        <br/>
         <div className="has-text-centered">
           <h3 className="title is-3">{this.props.t('linkedAccounts')}</h3>
-          <div className="container">
-            <ThirdPartyAccountLinker provider="facebook"
-                                     title="Facebook"
-                                     isLinked={!!this.props.user.fb_user_id}
-                                     authUrl={facebookAuthUrl()}/>
-          </div>
+          <ThirdPartyAccountLinker provider="facebook"
+                                   title="Facebook"
+                                   isLinked={!!this.props.user.fb_user_id}
+                                   authUrl={facebookAuthUrl()}/>
         </div>
+        <br/>
         <hr/>
+        <br/>
         <div className="has-text-centered">
           <h3 className="title is-3">{this.props.t('dangerZone')}</h3>
           <button className="button is-danger" onClick={() => this.props.addModal({

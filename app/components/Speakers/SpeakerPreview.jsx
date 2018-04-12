@@ -38,10 +38,10 @@ export class SpeakerPreview extends React.PureComponent {
         className={classNames("speaker-preview", className, {isActive: this.props.isFocused})}
         left={this.renderSpeakerThumb(speaker)}
         content={
-          <div>
+          <React.Fragment>
             {this.renderName(speaker)}
             <p className="subtitle">{this.getTitle()}</p>
-          </div>
+          </React.Fragment>
         }
         right={isAuthenticated && !withoutActions && this.renderActions()}
       />
