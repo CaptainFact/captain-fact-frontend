@@ -54,7 +54,8 @@ export default {
     "clipboardSuccess": "Adresse copiée dans le presse papier",
     "clipboardFail": "Impossible d'enregistrer l'adresse dans le presse papier",
     "all": "Tous",
-    "unknown": "Inconnu"
+    "unknown": "Inconnu",
+    "otherFlags": "Autres signalements"
   },
   "videos": {
     "add": "Ajouter une vidéo"

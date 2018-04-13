@@ -8,8 +8,7 @@ function getTagType(reputation) {
     return "danger"
   else if (reputation < 50)
     return "warning"
-  else
-    return "success"
+  return "success"
 }
 
 const ScoreTag = ({reputation, size="small", withIcon=false}) =>

@@ -20,7 +20,7 @@
 
 ----------------------
 
-# Credits
+### Remerciements
 
-* [U Maja](https://society6.com/rabbitball) pour la médaille "Bulletproof"
+* [U Maja](https://society6.com/rabbitball) pour la médaille `🛡️ Bulletproof`
 * Vous souhaitez contribuer ? Jetez un coup d'oeuil [par ici](https://github.com/CaptainFact/captain-fact-frontend/issues/6)!

@@ -6,6 +6,7 @@ import classNames from 'classnames'
 
 import { TimeSince } from "../Utils"
 import { Icon } from "../Utils"
+import ReputationGuard from '../Utils/ReputationGuard'
 import { Source } from "./Source"
 import UserAppellation from "../Users/UserAppellation"
 import ModalFlag from './ModalFlag'
@@ -17,7 +18,7 @@ import { addModal } from '../../state/modals/reducer'
 import { commentVote, deleteComment, flagComment } from '../../state/video_debate/comments/effects'
 import {flashErrorUnauthenticated} from '../../state/flashes/reducer'
 import UserPicture from '../Users/UserPicture'
-import { USER_PICTURE_SMALL } from '../../constants'
+import { MIN_REPUTATION_FLAG, USER_PICTURE_SMALL } from '../../constants'
 import MediaLayout from '../Utils/MediaLayout'
 import Vote from './Vote'
 
@@ -37,7 +38,7 @@ export class CommentDisplay extends React.PureComponent {
   }
 
   render() {
-    const { user, text, source, score, inserted_at, approve } = this.props.comment
+    const { user, text, source, inserted_at, approve } = this.props.comment
     const { t, withoutActions, withoutHeader, replyingTo, nesting, replies, myVote, isVoting, hideThread, className, richMedias=true } = this.props
     const approveClass = approve !== null && (approve ? 'approve' : 'refute')
     const showReplies = this.state.showReplies
@@ -46,10 +47,13 @@ export class CommentDisplay extends React.PureComponent {
     return (
       <div>
         <MediaLayout
-          className={classNames('comment', className, approveClass, {isBlurred: this.state.isBlurred, hasSource: !!source})}
+          className={classNames('comment', className, approveClass, {
+            isBlurred: this.state.isBlurred,
+            hasSource: !!source,
+          })}
           ContainerType="article"
           left={!withoutActions &&
-            <Vote isVoting={isVoting} score={score} myVote={myVote}
+            <Vote isVoting={isVoting} score={this.getScore()} myVote={myVote}
                   onVote={value => this.ensureAuthenticated() &&
                     this.props.commentVote({comment: this.props.comment, value})
                   }/>
@@ -103,30 +107,43 @@ export class CommentDisplay extends React.PureComponent {
   }
 
   renderOwnCommentActions() {
-    return [
-      <a key="r" onClick={() => this.actionReply()}>
-        <Icon name="plus"/>
-        <span> {this.props.t('actions.addToThread')}</span>
-      </a>,
-      <a key="d" onClick={this.handleDelete.bind(this)}>
+    return <React.Fragment>
+      <a onClick={() => this.actionReply()}>
+        <Icon name="plus"/> <span> {this.props.t('actions.addToThread')}</span>
+      </a>
+      <a onClick={this.handleDelete.bind(this)}>
         <Icon name="times"/>
         <span> {this.props.t('actions.delete')}</span>
       </a>
-    ]
+    </React.Fragment>
   }
 
   renderOtherCommentActions() {
-    return [
-      <a key="r" onClick={() => this.actionReply()}>
-        <Icon name="reply"/>
-        <span> {this.props.t('actions.reply')}</span>
-      </a>,
-      <a key="f" onClick={() => this.handleFlag()}
-         className={classNames('action-report', {selected: this.props.isFlagged})}>
-        <Icon name="flag"/>
-        <span> {this.props.t(this.props.isFlagged ? 'actions.flagged' : 'actions.flag')}</span>
+    const {t, isFlagged} = this.props
+    return <React.Fragment>
+      <a onClick={() => this.actionReply()}>
+        <Icon name="reply"/> <span>{t('actions.reply')}</span>
       </a>
-    ]
+      <ReputationGuard requiredRep={MIN_REPUTATION_FLAG}>
+        {!isFlagged &&
+        <a onClick={() => this.handleFlag('3')}>
+          <Icon name="ban"/>
+          <span> {t('moderation:reason.3')}</span>
+        </a>
+        }
+        <a onClick={() => this.handleFlag()}
+           className={classNames('action-report', {selected: isFlagged})}>
+          <Icon name="flag"/>
+          <span> {t(isFlagged ? 'actions.flagged' : 'misc.otherFlags')}</span>
+        </a>
+      </ReputationGuard>
+    </React.Fragment>
+  }
+
+  getScore() {
+    if (this.props.comment.is_reported)
+      return <Icon className="reported" name="ban" title={this.props.t('moderation:pending')}/>
+    return this.props.comment.score
   }
 
   handleDelete() {
@@ -158,7 +175,7 @@ export class CommentDisplay extends React.PureComponent {
     this.props.change(formName, 'reply_to', this.props.comment)
   }
 
-  handleFlag() {
+  handleFlag(initialReason) {
     if (!this.ensureAuthenticated())
       return
     this.setState({isBlurred: true})
@@ -170,7 +187,8 @@ export class CommentDisplay extends React.PureComponent {
           this.setState({isBlurred: false})
           return this.props.flagComment({id: this.props.comment.id, reason: parseInt(reason)})
         },
-        comment: this.props.comment
+        comment: this.props.comment,
+        initialReason
       }
     })
   }

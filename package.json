@@ -1,6 +1,6 @@
 {
   "name": "captain-fact-frontend",
-  "version": "0.8.6",
+  "version": "0.8.7",
   "private": true,
   "scripts": {
     "start": "brunch watch --server",
@@ -13,7 +13,7 @@
   },
   "jest": {
     "setupFiles": [
-      "./tests_setup.js",
+      "./dev/tests_setup.js",
       "jest-localstorage-mock"
     ],
     "snapshotSerializers": [

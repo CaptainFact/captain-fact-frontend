@@ -8,6 +8,7 @@ export default {
     "about": "About",
     "achievements": "Achievements",
     "ambassadors": "Ambassadors",
+    "contributionGuidelines": "Contribution guidelines",
     "credits": "Credits",
     "jobs": "Join us !",
     "moderation": "Moderation",

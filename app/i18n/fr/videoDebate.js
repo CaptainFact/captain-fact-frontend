@@ -5,9 +5,6 @@ export default {
   "refute": "Réfute",
   "flagForm": {
     "title": "Pourquoi signaler ce commentaire ?",
-    "bad_language": "Malpolis ou offensant",
-    "spam": "Publicité / Spam",
-    "harassment": "Attaque personelle ou harcelement",
     "xAvailable": "{{count}} disponnible",
     "xAvailable_plural": "{{count}} disponnibles"
   },
