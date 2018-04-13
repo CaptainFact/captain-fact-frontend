@@ -1,1 +1,1 @@
-export { default } from './Moderation.jsx';
+export { default } from './Moderation.jsx'

@@ -3,8 +3,8 @@ import createCachedSelector from 're-reselect'
 import { formValueSelector } from 'redux-form'
 
 import { getVideoDebateSpeakers } from '../../video_debate/selectors'
-import { getStatementApprovingFacts, getStatementRefutingFacts } from "../comments/selectors"
-import { STATEMENT_FOCUS_TIME } from "../../../constants"
+import { getStatementApprovingFacts, getStatementRefutingFacts } from '../comments/selectors'
+import { STATEMENT_FOCUS_TIME } from '../../../constants'
 
 
 export const getStatementSpeakerId = (state, props) => props.statement.speaker_id
@@ -33,7 +33,8 @@ export const getFocusedStatementId = createSelector(
     if (!position)
       return -1
     const statement = statements.findLast(st => position >= st.time)
-    return statement && position <= statement.time + STATEMENT_FOCUS_TIME ? statement.id : -1
+    return statement && position <= statement.time + STATEMENT_FOCUS_TIME ?
+      statement.id : -1
   }
 )
 

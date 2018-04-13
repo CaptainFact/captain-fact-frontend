@@ -7,6 +7,6 @@ export const facebookAuthUrl = callbackOptions =>
     client_id: FB_APP_ID,
     redirect_uri: `${FRONTEND_URL}/login/callback/facebook`,
     response_type: 'code',
-    scope: "email,public_profile",
+    scope: 'email,public_profile',
     state: callbackOptions
   })}`

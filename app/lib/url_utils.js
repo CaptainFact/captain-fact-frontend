@@ -1,13 +1,16 @@
-import "core-js/es7/object.js"
+import 'core-js/es7/object.js'
 
 
-export const optionsToQueryString = (options) => (
-  options && Object.keys(options).length > 0 ?
-    `?${Object.entries(options).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&')}` : ''
-)
+export const optionsToQueryString = (options) => {
+  if (!options || Object.keys(options).length === 0)
+    return ''
+  return `?${Object.entries(options).map(([key, value]) => 
+    `${key}=${encodeURIComponent(value)}`
+  ).join('&')}`
+}
 
 export const youtubeRegex =
-  /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i
+  /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/ ]{11})/i
 
 export const isExternal = (currentHref, url) =>
   (url.indexOf(':') > -1 || url.indexOf('//') > -1) && checkDomain(currentHref) !== checkDomain(url)

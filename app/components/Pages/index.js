@@ -1,3 +1,3 @@
-export * from "./Home"
-export * from "./NotFound"
-export * from "./BrowserExtensionsPage"
+export * from './Home'
+export * from './NotFound'
+export * from './BrowserExtensionsPage'

@@ -8,8 +8,8 @@ import isPromise from 'is-promise'
  * Errors will always be caught at the end and an object similar to a
  * flux standard action (FSA) will be generated using `generateFSAError()`
  *
- * All opts values are dispatched using `cleverDispatch` meaning you can give an action, an action
- * creator, or an iterable containing any number of these.
+ * All opts values are dispatched using `cleverDispatch` meaning you can give
+ * an action, an action creator, or an iterable containing any number of these.
  *
  * `after` last action / action creator return will be used as the final return
  *
@@ -30,8 +30,8 @@ export function createEffect(promise, opts=null) {
       if (opts.after)
         promise = cleverDispatch(dispatch, getState, opts.after, promise)
     }
-    // Handle return value : if none of the functions generated FSA actions, we manually generate
-    // SUCCESS / ERROR actions based on then() / catch()
+    // Handle return value : if none of the functions generated FSA actions,
+    // we manually generate SUCCESS / ERROR actions based on then() / catch()
     if (promise && isPromise(promise)) {
       return promise
         .then(value => isAction(value) ? value : generateFSASuccess(value))

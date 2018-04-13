@@ -1,10 +1,10 @@
 /* ------ Server & API ------ */
 // Channels
-export const VIDEO_DEBATE_CHANNEL = "video_debate"
-export const VIDEO_DEBATE_HISTORY_CHANNEL = "video_debate_history"
-export const STATEMENTS_HISTORY_CHANNEL = "statement_history"
-export const STATEMENTS_CHANNEL = "statements"
-export const COMMENTS_CHANNEL = "comments"
+export const VIDEO_DEBATE_CHANNEL = 'video_debate'
+export const VIDEO_DEBATE_HISTORY_CHANNEL = 'video_debate_history'
+export const STATEMENTS_HISTORY_CHANNEL = 'statement_history'
+export const STATEMENTS_CHANNEL = 'statements'
+export const COMMENTS_CHANNEL = 'comments'
 
 // Misc
 export const NO_INTERNET_ERROR = 'errors:server.noInternet'

@@ -10,7 +10,7 @@ export const changeVideosLanguageFilter = createAction('USER_PREFERENCES/CHANGE_
 export const toggleAutoscroll = createAction('STATEMENTS/TOGGLE_AUTOSCROLL')
 
 export const browserLocale = () =>
-  (window.navigator.userLanguage || window.navigator.language || "en").split('-')[0].toLowerCase()
+  (window.navigator.userLanguage || window.navigator.language || 'en').split('-')[0].toLowerCase()
 
 const isMobile = window.innerWidth <= MOBILE_WIDTH_THRESHOLD
 

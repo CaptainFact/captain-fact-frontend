@@ -1,9 +1,8 @@
 import { Record, List, Map } from 'immutable'
 import { createAction, handleActions, combineActions } from 'redux-actions'
-import { diffWordsWithSpace } from 'diff'
 
 import parseDateTime from '../../lib/parse_datetime'
-import UserAction from "./record"
+import UserAction from './record'
 import { resetVideoDebate } from '../video_debate/actions'
 
 export const setLoading = createAction('VIDEO_DEBATE_HISTORY/SET_LOADING')

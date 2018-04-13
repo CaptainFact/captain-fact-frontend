@@ -10,5 +10,5 @@ export function getErrorInfo(message) {
 }
 
 export function tError(t, error) {
-  return t([`errors:server.${error}`, `errors:client.${error}`, `errors:server.unknown`])
+  return t([`errors:server.${error}`, `errors:client.${error}`, 'errors:server.unknown'])
 }

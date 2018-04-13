@@ -2,8 +2,8 @@ import { handleActions, createAction } from 'redux-actions'
 import { Record } from 'immutable'
 
 
-export const setPresence = createAction("PRESENCE/SET")
-export const presenceDiff = createAction("PRESENCE/DIFF")
+export const setPresence = createAction('PRESENCE/SET')
+export const presenceDiff = createAction('PRESENCE/DIFF')
 
 
 const INITIAL_STATE = new Record({

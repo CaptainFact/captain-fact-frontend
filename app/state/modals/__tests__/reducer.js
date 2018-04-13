@@ -7,7 +7,7 @@ const createTestModal = id => ({
   Modal: Modal,
   props: {
     id: id,
-    hello: "world"
+    hello: 'world'
   }
 })
 

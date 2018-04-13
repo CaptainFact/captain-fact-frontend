@@ -1,7 +1,7 @@
-import { Record } from "immutable"
+import { Record } from 'immutable'
 import { createAction, handleActions } from 'redux-actions'
 
-import User from "../record"
+import User from '../record'
 
 // Actions
 export const set = createAction('CURRENT_USER/SET')

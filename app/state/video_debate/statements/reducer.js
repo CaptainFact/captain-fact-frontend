@@ -64,7 +64,9 @@ const StatementsReducer = handleActions({
       for (const newStatement of payload) {
         const statementIdx = statements.findIndex(s => s.id === newStatement.id)
         if (statementIdx !== -1)
-          statements.update(statementIdx, oldStatement => oldStatement.merge(newStatement))
+          statements.update(statementIdx, oldStatement =>
+            oldStatement.merge(newStatement)
+          )
       }
       // Re-sort them
       return statements.sortBy(st => st.time)

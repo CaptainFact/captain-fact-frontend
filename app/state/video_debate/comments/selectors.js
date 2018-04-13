@@ -1,4 +1,4 @@
-import { List } from "immutable"
+import { List } from 'immutable'
 import createCachedSelector from 're-reselect'
 
 

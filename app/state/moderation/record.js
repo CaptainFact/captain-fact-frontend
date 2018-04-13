@@ -1,4 +1,4 @@
-import { Record, List } from "immutable"
+import { Record, List } from 'immutable'
 import UserAction from '../user_actions/record'
 
 const ModerationEntry = new Record({

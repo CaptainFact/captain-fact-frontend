@@ -18,10 +18,10 @@ export const fetchCurrentUser = () => (dispatch, getState) => {
       dispatch(updateInfo({locale: getState().UserPreferences.locale}))
     return r
   }).catch(error => {
-      if (error === 'unauthorized') // Token expired
-        HttpApi.resetToken()
-      throw error
-    })
+    if (error === 'unauthorized') // Token expired
+      HttpApi.resetToken()
+    throw error
+  })
   ))
 }
 
@@ -40,7 +40,7 @@ export const requestInvitation = user => createEffect(
 // Update user
 
 export const updateInfo = user => createEffect(
-  HttpApi.put("users/me", user), {
+  HttpApi.put('users/me', user), {
     before: setPosting(true),
     then: user => (dispatch, getState) => {
       if (getState().DisplayedUser.data.id === user.id)
@@ -82,10 +82,10 @@ export const resetPasswordConfirm = ({password, token}) =>
 // Logout / delete
 
 export const logout = () =>
-  resetUser(HttpApi.delete("auth"))
+  resetUser(HttpApi.delete('auth'))
 
 export const deleteAccount = () =>
-  resetUser(HttpApi.delete("users/me"))
+  resetUser(HttpApi.delete('users/me'))
 
 // Achievements
 export const unlockPublicAchievement = achievementId => createEffect(

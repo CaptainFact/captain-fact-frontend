@@ -1,4 +1,4 @@
-import { combineReducers } from "redux"
+import { combineReducers } from 'redux'
 import PresenceReducer from './presence/reducer'
 
 import VideoReducer from './video/reducer'

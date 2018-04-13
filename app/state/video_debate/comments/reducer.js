@@ -1,8 +1,8 @@
-import { Record, Map, List, Set } from "immutable"
+import { Record, Map, List, Set } from 'immutable'
 import { createAction, handleActions } from 'redux-actions'
 import isAfter from 'date-fns/is_after'
 
-import Comment from "./record"
+import Comment from './record'
 import parseDateTime from '../../../lib/parse_datetime'
 import { resetVideoDebate } from '../actions'
 
@@ -36,12 +36,13 @@ const CommentsReducer = handleActions({
   // Votes
   [addMyVote]: (state, {payload: {comment, value}}) => {
     const prevVote = state.voted.get(comment.id, 0)
-    const voteChange = value === 0 ? -prevVote : Math.abs(prevVote - value) * (value >= 0 ? 1 : -1)
+    const voteChange = value === 0 ?
+      -prevVote : Math.abs(prevVote - value) * (value >= 0 ? 1 : -1)
     const commentPath = getCommentPath(comment)
     const commentIdx = getCommentIdx(state, commentPath, comment.id)
     if (commentIdx !== -1)
       state = state.updateIn([...commentPath, commentIdx, 'score'], s => s + voteChange)
-                   .updateIn(commentPath, comments => comments.sort(commentsComparator))
+        .updateIn(commentPath, comments => comments.sort(commentsComparator))
 
     return state.setIn(['voted', comment.id], value).update('voting', s => s.delete(comment.id))
   },
@@ -73,9 +74,11 @@ const CommentsReducer = handleActions({
     const commentPath = getCommentPath(comment)
     const commentsList = state.getIn(commentPath, new List())
     const insertIdx = commentsList.findIndex(c => commentsComparator(comment, c) < 0)
-    const newCommentsList = commentsList.insert(insertIdx !== -1 ? insertIdx : commentsList.size, comment)
-    state = state.setIn(commentPath, newCommentsList)
-    return state
+    const newCommentsList = commentsList.insert(
+      insertIdx !== -1 ? insertIdx : commentsList.size,
+      comment
+    )
+    return state.setIn(commentPath, newCommentsList)
   },
   [update]: (state, {payload}) => {
     const commentFullPath = getCommentFullPath(state, payload)
@@ -96,13 +99,19 @@ const CommentsReducer = handleActions({
 
     // Update comments
     if (comments) {
-      for (let [statementId, newComments] of comments.groupBy(c => c.statement_id).entries())
-        state = state.updateIn(['comments', statementId], oldList => mergeCommentsList(oldList, newComments))
+      const groupedComments = comments.groupBy(c => c.statement_id).entries()
+      for (let [statementId, newComments] of groupedComments)
+        state = state.updateIn(['comments', statementId], oldList =>
+          mergeCommentsList(oldList, newComments)
+        )
     }
     // Update replies
     if (replies) {
-      for (let [commentId, newComments] of replies.groupBy(r => r.reply_to_id).entries())
-        state = state.updateIn(['replies', commentId], oldList => mergeCommentsList(oldList, newComments))
+      const groupedReplies = replies.groupBy(r => r.reply_to_id).entries()
+      for (let [commentId, newComments] of groupedReplies)
+        state = state.updateIn(['replies', commentId], oldList =>
+          mergeCommentsList(oldList, newComments)
+        )
     }
     return state
   },
@@ -132,7 +141,8 @@ function getCommentFullPath(state, comment) {
 }
 
 function getCommentPath(comment) {
-  return comment.reply_to_id ? ['replies', comment.reply_to_id] : ['comments', comment.statement_id]
+  return comment.reply_to_id ?
+    ['replies', comment.reply_to_id] : ['comments', comment.statement_id]
 }
 
 function getCommentIdx(state, path, id) {

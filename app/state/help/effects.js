@@ -1,6 +1,6 @@
 import { setContent, setLoading } from './reducer'
 
-const ERROR_NOT_FOUND = "not_found"
+const ERROR_NOT_FOUND = 'not_found'
 
 
 export const fetchHelpPage = pageName => (dispatch, getState) => {
