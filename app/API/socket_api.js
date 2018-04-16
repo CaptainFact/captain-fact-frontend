@@ -1,12 +1,12 @@
-import { Socket } from "phoenix"
-import { WS_API_URL } from "../config"
+import { Socket } from 'phoenix'
+import { WS_API_URL } from '../config'
 import { parseServerError } from './server_error'
 import noInternetError from './no_internet_error'
 
 
 class CaptainFactSocketApi {
   constructor(url) {
-    const token = typeof localStorage === "undefined" ? null : localStorage.token
+    const token = typeof localStorage === 'undefined' ? null : localStorage.token
     this.socketUrl = url
     this.channels = {}
     this.createSocket(token)
@@ -35,7 +35,7 @@ class CaptainFactSocketApi {
   */
   joinChannel(identifier, channelAddress, mapEventsToFuncs={}) {
     return new Promise((fulfill, reject) => {
-      if (["closed", "closing"].includes(this.socket.connectionState())) {
+      if (['closed', 'closing'].includes(this.socket.connectionState())) {
         this.socket.connect()
       }
       const channel = this.socket.channel(channelAddress)
@@ -43,9 +43,9 @@ class CaptainFactSocketApi {
       for (let [event, func] of Object.entries(mapEventsToFuncs))
         channel.on(event, func)
       channel.join()
-        .receive("ok", fulfill)
-        .receive("error", () => reject('noInternet'))
-        .receive("timeout", () => reject('noInternet'))
+        .receive('ok', fulfill)
+        .receive('error', () => reject('noInternet'))
+        .receive('timeout', () => reject('noInternet'))
     })
   }
 
@@ -62,7 +62,7 @@ class CaptainFactSocketApi {
       delete(this.channels[identifier])
     }
     // If no more channels, close the socket
-    if (!Object.keys(this.channels).length && ["connecting", "open"].includes(socketState))
+    if (!Object.keys(this.channels).length && ['connecting', 'open'].includes(socketState))
       this.socket.disconnect()
   }
 
@@ -76,8 +76,8 @@ class CaptainFactSocketApi {
   push(channelIdentifier, message, params={}) {
     return new Promise((fulfill, reject) => {
       return this.channels[channelIdentifier].push(message, params)
-        .receive("ok", (data) => fulfill(data))
-        .receive("error", (err) => reject(parseServerError(err)))
+        .receive('ok', (data) => fulfill(data))
+        .receive('error', (err) => reject(parseServerError(err)))
     })
   }
 }

@@ -3,7 +3,7 @@ import { default as reducer, toggleSidebar } from '../reducer'
 test('has correct defaults', () => {
   expect(reducer(undefined, {}).toJS()).toEqual({
     sidebarExpended: true,
-    locale: "en",
+    locale: 'en',
     enableAutoscroll: true,
     videosLanguageFilter: null
   })

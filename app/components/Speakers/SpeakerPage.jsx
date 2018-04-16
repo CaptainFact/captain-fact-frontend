@@ -58,13 +58,11 @@ export class SpeakerPage extends React.PureComponent {
         <Helmet>
           <title>{this.props.speaker.full_name}</title>
         </Helmet>
-        <div className="hero is-small is-light is-bold is-primary">
+        <div className="hero is-light is-bold is-primary">
           <div className="hero-body">
-            <div className="container">
-              <SpeakerPreview withoutActions={true} speaker={this.props.speaker} className="title"/>
-              <hr/>
-              <div className="subtitle">{this.renderWikidata()}</div>
-            </div>
+            <SpeakerPreview withoutActions={true} speaker={this.props.speaker}/>
+            <hr/>
+            <div className="subtitle">{this.renderWikidata()}</div>
           </div>
         </div>
         {this.renderVideos()}
@@ -94,7 +92,7 @@ export class SpeakerPage extends React.PureComponent {
       return null
     return (
       <a href={url} key={url} target="_BLANK" className='link-with-icon'>
-        <Icon name="link" size="small" withContainer={false}/> <span>{siteName}</span>
+        <Icon name="link"/> <span>{siteName}</span>
       </a>
     )
   }

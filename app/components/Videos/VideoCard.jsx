@@ -5,6 +5,7 @@ import { Icon, TimeSince } from "../Utils"
 import iterateWithSeparators from '../../lib/iterate_with_separators'
 import { translate } from 'react-i18next'
 import CardLayout from '../Utils/CardLayout'
+import RawIcon from '../Utils/RawIcon'
 
 
 @translate('main')
@@ -47,7 +48,7 @@ export class VideoCard extends React.PureComponent {
           image={
             <Link to={`/videos/${id}`}>
               <div className="play-overlay">
-                <Icon name="play-circle" withContainer={false}/>
+                <RawIcon name="play-circle"/>
               </div>
               <figure className="image is-16by9">
                 <img src={VideoCard.videoThumb(provider, provider_id)}/>

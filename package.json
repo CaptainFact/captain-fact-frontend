@@ -1,6 +1,6 @@
 {
   "name": "captain-fact-frontend",
-  "version": "0.8.5",
+  "version": "0.8.7",
   "private": true,
   "scripts": {
     "start": "brunch watch --server",
@@ -9,11 +9,12 @@
     "watch": "jest --watch",
     "test": "jest",
     "wtest": "jest --watch",
-    "coverage": "jest --coverage '--collectCoverageFrom=app/+(API|components|lib|state)/**/!(record).{js,jsx}'"
+    "coverage": "jest --coverage '--collectCoverageFrom=app/+(API|components|lib|state)/**/!(record).{js,jsx}'",
+    "lint": "./node_modules/.bin/eslint app"
   },
   "jest": {
     "setupFiles": [
-      "./tests_setup.js",
+      "./dev/tests_setup.js",
       "jest-localstorage-mock"
     ],
     "snapshotSerializers": [
@@ -81,6 +82,8 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.1",
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.7.0",
     "fetch-mock": "^6.0.1",
     "gzip-brunch": "^1.3.0",
     "html-pages-brunch": "^2.7.0",

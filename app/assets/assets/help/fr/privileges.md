@@ -12,20 +12,20 @@ renforcer leur signification.
 | Reputation | Privilege                                                  |
 |------------|------------------------------------------------------------|
 | Tous       | Poster des commentaires et des sources             
-| Tous       | Editer et supprimer vos commentaires         
-| 0          | Ajouter des intervenants
-| 0          | Ajouter des transcriptions
+| Tous       | Supprimer vos commentaires         
+| 0          | Ajouter des citations
 | 0          | Voter positivement
-| 15         | Signaler du contenu inaproprié                 
 | 15         | Voter négativement
-| 30         | Mettre à jour une transcription                 
-| 30         | Mettre à jour un intervenant                 
-| 75         | Supprimer / restaurer une transcription
-| 75         | Supprimer / restaurer un intervenant
+| 30         | Mettre à jour une citation                 
+| 75         | Ajouter ou créer des intervenants
+| 75         | Mettre à jour un intervenant                 
+| 75         | Signaler un contenu inapproprié                 
+| 125        | Supprimer / restaurer une citation
 | 125        | Plus de restrictions spécifiques aux nouveaux utilisateurs             
-| 125        | Déplacer toutes les citations d'une vidéo (time shift)                        
+| 200        | Déplacer toutes les citations d'une vidéo (time shift)                        
+| 200        | Supprimer / restaurer un intervenant
 | 200        | Ajouter une vidéo
-| 1000       | Accès aux outils de modération
+| 200       | Accès aux outils de modération
 
 
 # Restrictions spécifiques aux nouveaux utilisateurs

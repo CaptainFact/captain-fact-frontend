@@ -6,8 +6,8 @@ import User from '../../record'
 
 
 // Prepare test data
-const self = new User({id: 42, username: "IamMe"})
-const other = new User({id: 55, username: "OtherUser"})
+const self = new User({id: 42, username: 'IamMe'})
+const other = new User({id: 55, username: 'OtherUser'})
 fetchMock.get('http://test/users/me', self)
 fetchMock.get(`http://test/users/username/${other.username}`, other.toJS())
 

@@ -1,10 +1,10 @@
 /* ------ Server & API ------ */
 // Channels
-export const VIDEO_DEBATE_CHANNEL = "video_debate"
-export const VIDEO_DEBATE_HISTORY_CHANNEL = "video_debate_history"
-export const STATEMENTS_HISTORY_CHANNEL = "statement_history"
-export const STATEMENTS_CHANNEL = "statements"
-export const COMMENTS_CHANNEL = "comments"
+export const VIDEO_DEBATE_CHANNEL = 'video_debate'
+export const VIDEO_DEBATE_HISTORY_CHANNEL = 'video_debate_history'
+export const STATEMENTS_HISTORY_CHANNEL = 'statement_history'
+export const STATEMENTS_CHANNEL = 'statements'
+export const COMMENTS_CHANNEL = 'comments'
 
 // Misc
 export const NO_INTERNET_ERROR = 'errors:server.noInternet'
@@ -35,16 +35,17 @@ export const ONBOARDING_PLUS_BUTTON = 3
 export const ONBOARDING_VOTE_BUTTONS = 4
 
 // Required reputations
-export const MIN_REPUTATION_MODERATION = 200
-export const MIN_REPUTATION_ADD_VIDEO = 200
-export const MIN_REPUTATION_ADD_SPEAKER = 30
-export const MIN_REPUTATION_UPDATE_SPEAKER = 75
-export const MIN_REPUTATION_REMOVE_SPEAKER = 125
 export const MIN_REPUTATION_ADD_STATEMENT = -5
-export const MIN_REPUTATION_UPDATE_STATEMENT = 15
+export const MIN_REPUTATION_UPDATE_STATEMENT = 30
+export const MIN_REPUTATION_FLAG = 75
+export const MIN_REPUTATION_ADD_SPEAKER = 75
+export const MIN_REPUTATION_UPDATE_SPEAKER = 75
 export const MIN_REPUTATION_REMOVE_STATEMENT = 75
-export const MIN_REPUTATION_RESTORE_ENTITY = 75
+export const MIN_REPUTATION_RESTORE_ENTITY = 125
+export const MIN_REPUTATION_REMOVE_SPEAKER = 200
 export const MIN_REPUTATION_UPDATE_VIDEO = 200
+export const MIN_REPUTATION_ADD_VIDEO = 200
+export const MIN_REPUTATION_MODERATION = 200
 
 /* ------ UI, animations ------ */
 export const MOBILE_WIDTH_THRESHOLD = 768 // pixels

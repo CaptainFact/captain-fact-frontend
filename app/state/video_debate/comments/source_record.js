@@ -1,11 +1,11 @@
-import { Record } from "immutable"
+import { Record } from 'immutable'
 
 
 const Source = new Record({
-  url: "",
-  title: "",
-  language: "",
-  site_name: ""
+  url: '',
+  title: '',
+  language: '',
+  site_name: ''
 })
 
 export default Source

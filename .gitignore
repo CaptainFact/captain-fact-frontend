@@ -29,5 +29,5 @@ public/
 coverage
 
 # API dev image resources
-rel/dev_docker_api_resources/*
-!rel/dev_docker_api_resources/.keep
+dev/dev_docker_api_resources/*
+!dev/dev_docker_api_resources/.keep

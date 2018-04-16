@@ -1,5 +1,6 @@
 import React from "react"
 import classNames from 'classnames'
+import RawIcon from './RawIcon'
 
 
 export const ClickableIcon = ({name, size, className, ...otherProps}) => {
@@ -7,7 +8,7 @@ export const ClickableIcon = ({name, size, className, ...otherProps}) => {
 
   return (
     <a className={classNames('icon', sizeClass, className)} {...otherProps}>
-      <i className={`fa icon-${name}`}/>
+      <RawIcon name={name}/>
     </a>
   )
 }

@@ -1,13 +1,12 @@
 import { Record, List } from "immutable"
 
-
 const User = new Record({
   id: 0,
-  email: "",
+  email: '',
   fb_user_id: null,
-  username: "",
-  name: "",
-  locale: "",
+  username: '',
+  name: '',
+  locale: '',
   reputation: 0,
   picture_url: null,
   mini_picture_url: null,

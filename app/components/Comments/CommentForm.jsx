@@ -3,7 +3,6 @@ import { connect } from "react-redux"
 import { Field, reduxForm, getFormValues } from 'redux-form'
 import { translate } from 'react-i18next'
 import isURL from 'validator/lib/isURL'
-import classNames from 'classnames'
 import { withRouter } from 'react-router'
 
 import { renderField, validateLength, cleanStrMultiline } from "../FormUtils"

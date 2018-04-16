@@ -1,4 +1,4 @@
-import { Record } from "immutable"
+import { Record } from 'immutable'
 import { createAction, handleActions } from 'redux-actions'
 
 
@@ -7,7 +7,7 @@ export const reset = createAction('HELP/RESET')
 export const setContent = createAction('HELP/SET_HELP_PAGE')
 
 const INITIAL_STATE = new Record({
-  markdownContent: "",
+  markdownContent: '',
   isLoading: false,
   error: null
 })

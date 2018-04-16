@@ -1,9 +1,9 @@
-import "isomorphic-fetch"
+import 'isomorphic-fetch'
 import trimRight from 'voca/trim_right'
 import 'isomorphic-fetch'
 
-import { SocketApi } from "./socket_api"
-import { HTTP_API_URL } from "../config"
+import { SocketApi } from './socket_api'
+import { HTTP_API_URL } from '../config'
 import { parseServerError } from './server_error'
 import flashNoInternetError from './no_internet_error'
 import { optionsToQueryString } from '../lib/url_utils'
@@ -29,7 +29,7 @@ class CaptainFactHttpApi {
   resetToken() {
     this.hasToken = false
     delete(this.headers['authorization'])
-    localStorage.removeItem("token")
+    localStorage.removeItem('token')
     SocketApi.resetToken()
   }
 
@@ -64,31 +64,33 @@ class CaptainFactHttpApi {
   /**
    * Send a get request against the given `resourceUrl`.
    * @param {string} resourceUrl
-   * @param {object} [options] - A map of options to convert to query string http://url?option1=xxx&option2=yyy
+   * @param {object} [options] - A map of options to convert to query
+ *                               string http://url?option1=xxx&option2=yyy
    * @returns {Promise}
    */
   get(resourceUrl, options) {
     const queryString = optionsToQueryString(options)
-    const response = fetch(this.baseUrl + resourceUrl + queryString, {headers: this.headers})
+    const url = this.baseUrl + resourceUrl + queryString
+    const response = fetch(url, {headers: this.headers})
     return this.prepareResponse(response)
   }
 
   post(resourceUrl, data) {
-    return this.makeRequest(resourceUrl, "POST", data)
+    return this.makeRequest(resourceUrl, 'POST', data)
   }
 
   put(resourceUrl, data) {
-    return this.makeRequest(resourceUrl, "PUT", data)
+    return this.makeRequest(resourceUrl, 'PUT', data)
   }
 
   delete(resourceUrl, data) {
-    return this.makeRequest(resourceUrl, "DELETE", data)
+    return this.makeRequest(resourceUrl, 'DELETE', data)
   }
 }
 
 
 // Configure HttpApi
-const token = typeof localStorage === "undefined" ? null : localStorage.token
+const token = typeof localStorage === 'undefined' ? null : localStorage.token
 const HttpApi = new CaptainFactHttpApi(HTTP_API_URL, token)
 
 export default HttpApi

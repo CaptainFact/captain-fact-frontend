@@ -13,9 +13,9 @@ it('should return a list of values with separators', () => {
   expect(iteratorTester(['hello']))
     .toEqual([['hello', '']])
 
-  expect(iteratorTester(["bananas", "coconuts"]))
-    .toEqual([["bananas", " and "], ["coconuts", ""]])
+  expect(iteratorTester(['bananas', 'coconuts']))
+    .toEqual([['bananas', ' and '], ['coconuts', '']])
 
-  expect(iteratorTester(["bananas", "coconuts", 'pineapple']))
-    .toEqual([["bananas", ", "], ["coconuts", " and "], ["pineapple", ""]])
+  expect(iteratorTester(['bananas', 'coconuts', 'pineapple']))
+    .toEqual([['bananas', ', '], ['coconuts', ' and '], ['pineapple', '']])
 })

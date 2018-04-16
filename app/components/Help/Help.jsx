@@ -26,15 +26,13 @@ export default class Help extends React.PureComponent {
       <div className="help-page">
         <section className="hero is-info is-bold">
           <div className="hero-body">
-            <div className="container">
+            <div className="section">
               { header }
             </div>
           </div>
         </section>
         <section className="section">
-          <div className="container">
-            { content }
-          </div>
+          { content }
         </section>
         <PublicAchievementUnlocker achievementId={3}/>
       </div>
@@ -47,6 +45,7 @@ export default class Help extends React.PureComponent {
         <div className="columns">
           <div className="column panel">
             <p className="panel-heading">{this.props.t('categories.siteUsage')}</p>
+            {this.renderPageLink('contributionGuidelines')}
             {this.renderPageLink('reputation')}
             {this.renderPageLink('privileges')}
             {this.renderPageLink('moderation')}

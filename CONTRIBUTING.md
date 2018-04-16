@@ -8,7 +8,7 @@ Familiarity with [forks](https://help.github.com/articles/fork-a-repo/),
 
 ## Communication
 
-[![Join the chat at https://gitter.im/CaptainFact](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/CaptainFact)
+Discord: <p align="center"><a href="https://discord.gg/2Qd7hMz" title="Discord"><img src="https://discordapp.com/api/guilds/416782744748687361/widget.png" alt="Discord"></a>
 
 GitHub issues are the primary way for communicating about specific proposed changes to this project.
 
@@ -53,34 +53,23 @@ $ sudo sh get-docker.sh
 ```
 
 A script will then help you getting this API up and running:
-Just execute `./rel/run_dev_docker_api.sh` from project's root, follow the instructions and you'll end up with 
-an Elixir console bind to the API and listening on port 4000(HTTP) + 4001(HTTPS).
+Just execute `./dev/start_api.sh` from project's root, follow the instructions 
+and you'll end up with an Elixir console bind to the API and listening on 
+port 4000(HTTP) + 4001(HTTPS).
 
 Here are some useful commands you may type in:
 ```elixir
 # Get current API version (also available in browser at localhost:4000)
 iex> CaptainFact.Application.version
-"0.7.7"
+"0.8.6"
+
 # This image ships with a factory to quickly create users, without worriying about invitations and emails
 iex> DB.Factory.insert :user
 # %CaptainFact.Accounts.User{
 #  ...
 #  email: "tamara1970@gutmann.biz", <- Use this email to connect. Password is "password"
 #  ....}
+
 # You can also set properties directly, like:
 iex> DB.Factory.insert :user, %{reputation: 5000, email: "jougier@captainfact.io"}
-
-# If you need a full video with sources, speakers comments and all the goods, you can run the
-# following command. It may take some time to run (30s-1min) cause it must fetch the speakers
-# pictures from wikimedia.
-iex> List.first(c(Path.join(:code.priv_dir(:captain_fact), "demos/demo_fr.ex"))).init_and_run
-
-# Remove all videos
-iex> CaptainFact.Repo.delete_all CaptainFact.Videos.Video
 ```
-
-#### Starting the frontend
-
-To start the frontend just run `npm install` to install dependencies then `npm start` and you'll
-be able to access the site at [localhost:3333](http://localhost:3333).
-A default account should have been created for you with email=`admin@captainfact.io` and password=`password`.

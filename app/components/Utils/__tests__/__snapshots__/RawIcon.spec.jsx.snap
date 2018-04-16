@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render icon 1`] = `
+<i
+  className="fa icon-plus"
+/>
+`;

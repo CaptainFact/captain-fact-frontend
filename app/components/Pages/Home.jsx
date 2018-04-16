@@ -17,7 +17,7 @@ export class Home extends React.PureComponent {
       <div className="home-page">
         <section className="hero is-medium is-bold is-warning">
           <div className="hero-body">
-            <div className="container has-text-centered">
+            <div className="has-text-centered">
               <Logo/>
               <h2 className="subtitle is-3 has-text-weight-light">
                 Let's check the Internet
@@ -26,7 +26,7 @@ export class Home extends React.PureComponent {
           </div>
         </section>
         <section className="section presentation">
-          <div className="container has-text-weight-light is-size-3">
+          <div className="has-text-weight-light is-size-3">
             <p>
               {this.props.t('presentation1')}
               <br/><br/>
@@ -53,7 +53,7 @@ export class Home extends React.PureComponent {
           <InvitationRequestForm/>
         </section>
         <footer className="footer">
-          <div className="container has-text-centered">
+          <div className="has-text-centered">
             <Interpolate i18nKey="footer" iconLove={<Icon name="heart"/>}/>
             <a href='http://elixir-lang.org'>Elixir</a>,&nbsp;
             <a href='http://www.phoenixframework.org'>Phoenix</a>
