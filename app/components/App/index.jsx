@@ -37,25 +37,28 @@ export default class App extends React.Component {
     this.props.fetchCurrentUser()
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  static getDerivedStateFromProps(nextProps, prevState) {
     // it appears we have to maintain a local Array (as seen in joyride demo code). Failure to do so results some steps not registering
-    if (this.props.onboardingSteps != prevProps.onboardingSteps && this.props.onboardingSteps.size > prevProps.onboardingSteps.size) {
-      this.setState(currentState => {
-        const newSteps = this.props.onboardingSteps.toArray().map(step => step.toJS())
-        newSteps.forEach(step => {
-          if (currentState.joyrideSteps.findIndex(s => s.uniqueId === step.uniqueId) === -1) {
-            currentState.joyrideSteps = currentState.joyrideSteps.concat([step])
-          }
-        })
-      })
-      // update and refresh joyride if we are logged in
-      if (this.props.isAuthenticated) {
-        this.joyride.reset(true)
-        this.forceUpdate()
+    const newSteps = nextProps.onboardingSteps.toArray().map(step => step.toJS())
+    const newState = prevState
+
+    newSteps.forEach(step => {
+      if (prevState.joyrideSteps.findIndex(s => s.uniqueId === step.uniqueId) === -1) {
+        newState.joyrideSteps = prevState.joyrideSteps.concat([step])
       }
+    })
+
+    return newState
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // if new steps have been pushed in state by above function, update joyride
+    if (prevState.joyrideSteps != this.state.joyrideSteps && this.props.isAuthenticated) {
+      this.joyride.reset(true)
+      this.forceUpdate()
     }
 
-    // start joyride if we logged in
+    // start joyride if we just logged in
     if (this.props.isAuthenticated && !prevProps.isAuthenticated) {
       this.joyride.reset(true)
     }
