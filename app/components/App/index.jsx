@@ -14,6 +14,7 @@ import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
 @connect(state => ({locale: state.UserPreferences.locale}), {fetchCurrentUser: fetchCurrentUser})
 export default class App extends React.PureComponent {
   componentDidMount() {
+    console.log('app index')
     this.props.fetchCurrentUser()
   }
 

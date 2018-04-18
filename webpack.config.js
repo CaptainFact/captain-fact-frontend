@@ -18,8 +18,7 @@ module.exports = {
     'core-js/fn/promise',
     'core-js/es6/object',
     'core-js/es6/array',
-
-    './app/components/App/index.jsx' // your app's entry point
+    './app/router.jsx' // your app's entry point
   ],
   devtool: process.env.WEBPACK_DEVTOOL || 'eval-source-map',
   output: {
@@ -63,7 +62,7 @@ module.exports = {
     }),
     new DashboardPlugin(),
     new HtmlWebpackPlugin({
-      template: './app/index.html',
+      template: 'app/index.html',
       files: {
         css: ['style.css'],
         js: [ "bundle.js"],

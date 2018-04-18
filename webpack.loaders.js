@@ -29,7 +29,16 @@ module.exports = [
       // It enables caching results in ./node_modules/.cache/babel-loader/
       // directory for faster rebuilds.
       cacheDirectory: true,
-      plugins: ['transform-decorators-legacy', 'react-hot-loader/babel'],
+      presets: [
+        ['es2015', { loose: true, modules: "umd" }],
+        'react'
+    ],
+    plugins: [
+        'transform-class-properties',
+        'transform-decorators-legacy',
+        'transform-runtime',
+        'react-hot-loader/babel'
+    ]
     }
   },
   // =========

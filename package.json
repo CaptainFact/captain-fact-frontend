@@ -3,8 +3,8 @@
   "version": "0.8.7",
   "private": true,
   "scripts": {
-    "webpack": "webpack-dev-server --progress --profile --colors",
-    "dev": "webpack-dashboard -- webpack-dev-server",
+    "webpack": "webpack-dev-server --progress --profile --colors --port 3333 --mode development",
+    "dev": "webpack-dashboard -- webpack-dev-server --port 3333 --mode development",
     "start": "brunch watch --server",
     "build": "brunch build --production",
     "serve": "brunch watch --server -n",
