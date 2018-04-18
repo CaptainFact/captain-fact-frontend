@@ -1,5 +1,5 @@
 const path = require('path');
-
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // Options passed to node-sass
 const sassIncludePaths = [
@@ -32,13 +32,13 @@ module.exports = [
       presets: [
         ['es2015', { loose: true, modules: "umd" }],
         'react'
-    ],
-    plugins: [
+      ],
+      plugins: [
         'transform-class-properties',
         'transform-decorators-legacy',
-        'transform-runtime',
-        'react-hot-loader/babel'
-    ]
+        'transform-runtime'
+      ]
+      // plugins: ['transform-decorators-legacy', '],
     }
   },
   // =========
@@ -55,7 +55,7 @@ module.exports = [
     use: [
       {
         loader: "url-loader",
-        options: {prefix: "font", limit: 5000}
+        options: { prefix: "font", limit: 5000 }
       }
     ]
   },
@@ -146,89 +146,26 @@ module.exports = [
       }
     ]
   },
-  // Global SASS (from app)
-  // ===============================
-  // Do not modularize these imports
-  // (leave them as global css styles)
   {
     test: /\.(sass|scss)$/,
-    include: path.resolve(__dirname, 'styles/base'),
-    use: [
+    include: [
+      path.resolve(__dirname, 'node_modules'),
+      path.resolve(__dirname, 'app/styles')
+    ],
+    loader: ExtractTextPlugin.extract([
       {
-        loader: "style-loader",
+        loader: 'css-loader'
       },
       {
-        loader: "css-loader",
+        loader: 'sass-loader',
         options: {
-          sourceMap: true,
-          camelCase: "dashes",
-          importLoaders: 1
-        }
-      },
-      {
-        loader: "postcss-loader",
-        options: {
-          sourceMap: "inline",
-        }
-      },
-      {
-        loader: "sass-loader",
-        options: {
-          sourceMap: true,
-          outputStyle: "expanded",
-          indentedSyntax: "sass",
-          includePaths: sassIncludePaths
-        }
-      },
-      {
-        loader: "sass-resources-loader",
-        options: {
-          resources: sassResourcesPaths
+          includePaths: [
+            path.resolve(__dirname, 'node_modules'),
+            path.resolve(__dirname, 'app/styles'),
+            path.resolve(__dirname, 'node_modules/animate.scss/vendor/assets/stylesheets')
+          ]
         }
       }
-    ]
-  },
-  // Local SASS css-modules
-  // ======================
-  {
-    test: /\.(sass|scss)$/,
-    exclude: path.resolve(__dirname, 'styles/base'),
-    use: [
-      {
-        loader: "style-loader",
-      },
-      {
-        loader: "css-loader",
-        options: {
-          sourceMap: true,
-          camelCase: "dashes",
-          importLoaders: 1,
-          modules: true,
-          localIdentName: "[name]__[local]___[hash:base64:5]"
-        }
-      },
-      {
-        loader: "postcss-loader",
-        options: {
-          sourceMap: "inline",
-        }
-      },
-      {
-        loader: "sass-loader",
-        options: {
-          sourceMap: true,
-          outputStyle: "expanded",
-          indentedSyntax: "sass",
-          includePaths: sassIncludePaths
-        }
-      },
-      {
-        loader: "sass-resources-loader",
-        options: {
-          resources: sassResourcesPaths
-        },
-      }
-    ]
+    ])
   }
-
 ];

@@ -11,15 +11,19 @@ const PORT = process.env.PORT || "8888";
 
 
 module.exports = {
-  entry: [
-    // POLYFILL: Set up an ES6-ish environment
-    // 'babel-polyfill',  // The entire babel-polyfill
-    // Or pick es6 features needed (included into babel-polyfill)
-    'core-js/fn/promise',
-    'core-js/es6/object',
-    'core-js/es6/array',
-    './app/router.jsx' // your app's entry point
-  ],
+  entry: {
+    "main": [
+      // POLYFILL: Set up an ES6-ish environment
+      // 'babel-polyfill',  // The entire babel-polyfill
+      // Or pick es6 features needed (included into babel-polyfill)
+      'core-js/fn/promise',
+      'core-js/es6/object',
+      'core-js/es6/array',
+      // app entry point
+      './app/router.jsx' 
+    ]
+    // "styles": "./app/styles/application.sass"
+  },
   devtool: process.env.WEBPACK_DEVTOOL || 'eval-source-map',
   output: {
     publicPath: '/',
@@ -57,14 +61,14 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin({
-      filename: 'style.css',
+      filename: 'app.css',
       allChunks: true
     }),
     new DashboardPlugin(),
     new HtmlWebpackPlugin({
       template: 'app/index.html',
       files: {
-        css: ['style.css'],
+        css: ['app.css'],
         js: [ "bundle.js"],
       }
     }),
