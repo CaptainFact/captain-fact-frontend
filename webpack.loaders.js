@@ -8,9 +8,10 @@ const sassIncludePaths = [
 
 
 // These files will be imported in every sass file
+// TODO use this feature and refactor existing ? 
 const sassResourcesPaths = [
-  path.resolve(__dirname, 'styles/abstracts/_variables.sass'),
-  path.resolve(__dirname, 'styles/abstracts/_mixins.sass'),
+  // path.resolve(__dirname, 'styles/abstracts/_variables.sass'),
+  // path.resolve(__dirname, 'styles/abstracts/_mixins.sass'),
 ];
 
 // noinspection WebpackConfigHighlighting
@@ -91,10 +92,13 @@ module.exports = [
   },
   {
     test: /\.gif/,
+    include: [
+      path.resolve(__dirname, 'app/assets')
+    ],
     exclude: path.resolve(__dirname, "node_modules"),
     use: [
       {
-        loader: "url-loader",
+        loader: "file-loader",
         options: {
           limit: 10000,
           mimetype: "image/gif"
@@ -104,10 +108,13 @@ module.exports = [
   },
   {
     test: /\.jpg/,
+    include: [
+      path.resolve(__dirname, 'app/assets')
+    ],
     exclude: path.resolve(__dirname, "node_modules"),
     use: [
       {
-        loader: "url-loader",
+        loader: "file-loader",
         options: {
           limit: 10000,
           mimetype: "image/jpg"
@@ -117,10 +124,13 @@ module.exports = [
   },
   {
     test: /\.png/,
+    include: [
+      path.resolve(__dirname, 'app/assets')
+    ],
     exclude: path.resolve(__dirname, "node_modules"),
     use: [
       {
-        loader: "url-loader",
+        loader: "file-loader",
         options: {
           limit: 10000,
           mimetype: "image/png",

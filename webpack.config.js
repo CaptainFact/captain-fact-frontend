@@ -5,6 +5,7 @@ const loadersConf = require('./webpack.loaders');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const HOST = process.env.HOST || "127.0.0.1";
 const PORT = process.env.PORT || "8888";
@@ -65,6 +66,10 @@ module.exports = {
       allChunks: true
     }),
     new DashboardPlugin(),
+    new CopyWebpackPlugin(
+      [{ from: 'app/assets', to: '', toType: 'dir' }], // patterns
+      {} // options
+    ),
     new HtmlWebpackPlugin({
       template: 'app/index.html',
       files: {
