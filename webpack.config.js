@@ -13,7 +13,7 @@ const PORT = process.env.PORT || "8888";
 
 module.exports = {
   entry: {
-    "main": [
+    "app": [
       // POLYFILL: Set up an ES6-ish environment
       // 'babel-polyfill',  // The entire babel-polyfill
       // Or pick es6 features needed (included into babel-polyfill)
@@ -21,15 +21,14 @@ module.exports = {
       'core-js/es6/object',
       'core-js/es6/array',
       // app entry point
-      './app/router.jsx' 
+      './app/router.jsx'
     ]
     // "styles": "./app/styles/application.sass"
   },
   devtool: process.env.WEBPACK_DEVTOOL || 'eval-source-map',
   output: {
     publicPath: '/',
-    path: path.join(__dirname, 'public'),
-    filename: 'bundle.js'
+    path: path.join(__dirname, 'public')
   },
   module: {
     rules: loadersConf
@@ -42,6 +41,13 @@ module.exports = {
     ],
     alias: {
       "styles": path.resolve(__dirname, 'styles/'),
+    }
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: { test: /[\\/]node_modules[\\/]/, name: "vendor", chunks: "all" }
+      }
     }
   },
   devServer: {
@@ -74,7 +80,7 @@ module.exports = {
       template: 'app/index.html',
       files: {
         css: ['app.css'],
-        js: [ "bundle.js"],
+        js: ["bundle.js"],
       }
     }),
   ]
