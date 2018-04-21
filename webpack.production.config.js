@@ -4,16 +4,20 @@ const webpack = require('webpack')
 const path = require('path')
 const loadersConf = require('./webpack.loaders')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const DashboardPlugin = require('webpack-dashboard/plugin')
+const WebpackCleanupPlugin = require('webpack-cleanup-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CompressionPlugin = require("compression-webpack-plugin")
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
-const HOST = process.env.HOST || "127.0.0.1";
-const PORT = process.env.PORT || "3333";
 
+// loadersConf.push({
+//   test: /\.scss$/,
+//   loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: 'css-loader?sourceMap&localIdentName=[local]___[hash:base64:5]!sass-loader?outputStyle=expanded'}),
+//   exclude: ['node_modules']
+// });
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: {
     "app": [
       // POLYFILL: Set up an ES6-ish environment
@@ -25,16 +29,13 @@ module.exports = {
       // app entry point
       './app/router.jsx'
     ]
-    // "styles": "./app/styles/application.sass"
   },
   // sourcemap complexity
-  devtool: process.env.WEBPACK_DEVTOOL || 'eval-source-map',
+
   output: {
-    publicPath: '/',
-    path: path.join(__dirname, 'public')
-  },
-  module: {
-    rules: loadersConf
+    publicPath: './',
+    path: path.join(__dirname, 'public'),
+    filename: '[name].[chunkhash].js'
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -53,40 +54,25 @@ module.exports = {
       }
     }
   },
-  devServer: {
-    contentBase: "./public",
-    // do not print bundle build stats
-    noInfo: true,
-    // enable HMR
-    hot: true,
-    // embed the webpack-dev-server runtime into the bundle
-    inline: true,
-    // serve index.html in place of 404 responses to allow HTML5 history
-    historyApiFallback: true,
-    port: PORT,
-    host: HOST
+  module: {
+    rules: loadersConf
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"development"'
-      }
-    }),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    // provides a nice visualisation on http://localhost:8888 for debugging bundle size (use with --watch)
+    new BundleAnalyzerPlugin(),
+    // cleans output folder
+    new WebpackCleanupPlugin(),
+    // minimizing is done by webpack as we are in prod mode
+    new webpack.optimize.OccurrenceOrderPlugin(),
     // regroup styles in app.css bundle
     new ExtractTextPlugin({
       filename: 'app.css',
       allChunks: true
     }),
-    // beautiful output
-    new DashboardPlugin(),
-    // copy static assets as they are required from external sources
-    new CopyWebpackPlugin(
-      [{ from: 'app/assets', to: '', toType: 'dir' }], // patterns
-      {} // options
-    ),
+    // gzip
+    new CompressionPlugin({
+      test: /\.(js|css)$/
+    }),
     // load the bundles into an html template
     new HtmlWebpackPlugin({
       template: 'app/index.html',
