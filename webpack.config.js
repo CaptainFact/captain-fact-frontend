@@ -1,14 +1,15 @@
 "use strict";
-const webpack = require('webpack');
-const path = require('path');
-const loadersConf = require('./webpack.loaders');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const DashboardPlugin = require('webpack-dashboard/plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack')
+const path = require('path')
+const loadersConf = require('./webpack.loaders')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const DashboardPlugin = require('webpack-dashboard/plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CompressionPlugin = require("compression-webpack-plugin")
 
 const HOST = process.env.HOST || "127.0.0.1";
-const PORT = process.env.PORT || "8888";
+const PORT = process.env.PORT || "3333";
 
 
 module.exports = {
@@ -76,12 +77,15 @@ module.exports = {
       [{ from: 'app/assets', to: '', toType: 'dir' }], // patterns
       {} // options
     ),
+    new CompressionPlugin({
+      test: /\.(js|css)$/
+    }),
     new HtmlWebpackPlugin({
       template: 'app/index.html',
       files: {
         css: ['app.css'],
         js: ["bundle.js"],
       }
-    }),
+    })
   ]
 };
