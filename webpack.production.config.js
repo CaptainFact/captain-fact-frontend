@@ -9,13 +9,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CompressionPlugin = require("compression-webpack-plugin")
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
-
-// loadersConf.push({
-//   test: /\.scss$/,
-//   loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: 'css-loader?sourceMap&localIdentName=[local]___[hash:base64:5]!sass-loader?outputStyle=expanded'}),
-//   exclude: ['node_modules']
-// });
-
 module.exports = {
   mode: 'production',
   entry: {
@@ -30,8 +23,6 @@ module.exports = {
       './app/router.jsx'
     ]
   },
-  // sourcemap complexity
-
   output: {
     publicPath: './',
     path: path.join(__dirname, 'public'),

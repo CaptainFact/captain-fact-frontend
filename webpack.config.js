@@ -25,7 +25,6 @@ module.exports = {
       // app entry point
       './app/router.jsx'
     ]
-    // "styles": "./app/styles/application.sass"
   },
   // sourcemap complexity
   devtool: process.env.WEBPACK_DEVTOOL || 'eval-source-map',
@@ -63,6 +62,7 @@ module.exports = {
     inline: true,
     // serve index.html in place of 404 responses to allow HTML5 history
     historyApiFallback: true,
+    open: true,
     port: PORT,
     host: HOST
   },
