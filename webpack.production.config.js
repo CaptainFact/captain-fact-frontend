@@ -57,7 +57,7 @@ module.exports = {
     new webpack.optimize.OccurrenceOrderPlugin(),
     // regroup styles in app.css bundle
     new ExtractTextPlugin({
-      filename: 'app.css',
+      filename: 'app.[chunkhash].css',
       allChunks: true
     }),
     // gzip

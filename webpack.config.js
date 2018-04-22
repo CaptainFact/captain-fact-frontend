@@ -27,7 +27,7 @@ module.exports = {
     ]
   },
   // sourcemap complexity
-  devtool: process.env.WEBPACK_DEVTOOL || 'eval-source-map',
+  devtool: process.env.WEBPACK_DEVTOOL || 'eval',
   output: {
     publicPath: '/',
     path: path.join(__dirname, 'public')
