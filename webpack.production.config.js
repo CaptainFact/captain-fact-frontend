@@ -8,6 +8,7 @@ const WebpackCleanupPlugin = require('webpack-cleanup-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CompressionPlugin = require("compression-webpack-plugin")
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
   mode: 'production',
@@ -52,7 +53,7 @@ module.exports = {
     // provides a nice visualisation on http://localhost:8888 for debugging bundle size (use with --watch)
     new BundleAnalyzerPlugin(),
     // cleans output folder
-    new WebpackCleanupPlugin(),
+    new CleanWebpackPlugin(['public']),
     // minimizing is done by webpack as we are in prod mode
     new webpack.optimize.OccurrenceOrderPlugin(),
     // regroup styles in app.css bundle
