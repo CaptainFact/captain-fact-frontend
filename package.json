@@ -3,11 +3,10 @@
   "version": "0.8.7",
   "private": true,
   "scripts": {
-    "webpack": "webpack-cli --mode development --watch",
-    "dev": "webpack-dashboard -- webpack-dev-server --port 3333 --mode development",
-    "start": "brunch watch --server",
-    "build": "brunch build --production",
-    "serve": "brunch watch --server -n",
+    "build": "webpack-cli --config webpack.production.config.js",
+    "dev": "webpack-dashboard -- webpack-dev-server",
+    "serve": "webpack-dashboard -- webpack-dev-server",
+    "start": "webpack-dashboard -- webpack-dev-server",
     "watch": "jest --watch",
     "test": "jest",
     "wtest": "jest --watch",
@@ -99,7 +98,7 @@
     "jest-localstorage-mock": "^2.2.0",
     "jsenv-brunch": "^2.0.0",
     "node-sass": "^4.8.3",
-    "react-hot-loader": "^4.0.1",
+    "react-hot-loader": "^4.1.1",
     "regenerator-runtime": "^0.11.1",
     "sass-brunch": "https://github.com/brunch/sass-brunch",
     "sass-loader": "^7.0.1",
@@ -108,7 +107,7 @@
     "webpack": "^4.5.0",
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cleanup-plugin": "^0.5.1",
-    "webpack-cli": "^2.0.14",
+    "webpack-cli": "^2.0.15",
     "webpack-dashboard": "^1.1.1",
     "webpack-dev-server": "^3.1.3"
   }
