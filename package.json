@@ -27,6 +27,9 @@
     }
   },
   "dependencies": {
+    "@types/react": "^16.3.12",
+    "@types/react-dom": "^16.0.5",
+    "@types/react-redux": "^5.0.16",
     "animate.scss": "0.0.6",
     "bulma": "^0.6.2",
     "classnames": "^2.2.5",
@@ -103,6 +106,8 @@
     "regenerator-runtime": "^0.11.1",
     "sass-brunch": "https://github.com/brunch/sass-brunch",
     "sass-loader": "^7.0.1",
+    "ts-loader": "^4.2.0",
+    "typescript": "^2.8.3",
     "uglify-js-brunch": "^2.10.0",
     "version-brunch": "^1.0.1",
     "webpack": "^4.5.0",
