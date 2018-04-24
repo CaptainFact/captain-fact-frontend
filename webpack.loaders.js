@@ -22,26 +22,27 @@ module.exports = [
   // Load jsx extensions with babel so we can use
   // 'import' instead of 'require' and es6 syntax
   {
-    test: /\.jsx?$/,
+    test: /\.(t|j)sx?$/,
     include: path.resolve(__dirname, 'app'),
-    loader: "babel-loader",
+    loader: "awesome-typescript-loader",
     options: {
-      // This is a feature of `babel-loader` for Webpack (not Babel itself).
-      // It enables caching results in ./node_modules/.cache/babel-loader/
-      // directory for faster rebuilds.
-      cacheDirectory: true,
-      presets: [
-        ['es2015', { loose: true, modules: "umd" }],
-        'react'
-      ],
-      plugins: [
-        'transform-class-properties',
-        'transform-decorators-legacy',
-        'transform-runtime'
-      ]
+      // // This is a feature of `babel-loader` for Webpack (not Babel itself).
+      // // It enables caching results in ./node_modules/.cache/babel-loader/
+      // // directory for faster rebuilds.
+      // cacheDirectory: true,
+      // presets: [
+      //   ['es2015', { loose: true, modules: "umd" }],
+      //   'react'
+      // ],
+      // plugins: [
+      //   'transform-class-properties',
+      //   'transform-decorators-legacy',
+      //   'transform-runtime'
+      // ]
       // plugins: ['transform-decorators-legacy', '],
     }
   },
+  { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
   // =========
   // = Fonts =
   // =========

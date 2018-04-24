@@ -68,6 +68,7 @@
   },
   "devDependencies": {
     "auto-reload-brunch": "^2.0.0",
+    "awesome-typescript-loader": "^5.0.0",
     "babel-brunch": "^6.1.1",
     "babel-core": "^6.26.0",
     "babel-jest": "^22.4.1",
@@ -106,6 +107,7 @@
     "regenerator-runtime": "^0.11.1",
     "sass-brunch": "https://github.com/brunch/sass-brunch",
     "sass-loader": "^7.0.1",
+    "source-map-loader": "^0.2.3",
     "ts-loader": "^4.2.0",
     "typescript": "^2.8.3",
     "uglify-js-brunch": "^2.10.0",

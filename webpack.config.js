@@ -36,7 +36,7 @@ module.exports = {
     rules: loadersConf
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
     modules: [
       path.join(__dirname, "src"),
       path.join(__dirname, "node_modules"), // the old 'fallback' option (needed for npm link-ed packages)
