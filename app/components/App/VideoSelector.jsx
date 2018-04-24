@@ -7,16 +7,15 @@ import { translate } from 'react-i18next'
 
 
 const defaultLocales = new Map({
-  en: 'English',
-  fr: 'Français'
+  user: 'User',
+  partner: 'Partner'
 })
 
 @translate() // Force waiting for translations to be loaded
-export default class LanguageSelector extends React.PureComponent {
+export default class PublisherSelector extends React.PureComponent {
   render() {
     return (
       <div className={classNames("selector", this.props.className)}>
-        {this.props.withIcon && <Icon name="language"/>}
         <span className={classNames('select', this.props.size ? `is-${this.props.size}` : null)}>
           { this.renderSelect() }
         </span>

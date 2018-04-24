@@ -9,6 +9,7 @@
 *.vi
 *~
 *.sass-cache
+.vscode/
 
 # OS or Editor folders
 .DS_Store

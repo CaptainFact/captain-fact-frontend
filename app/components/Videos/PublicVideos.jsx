@@ -12,8 +12,10 @@ import { LoadingFrame, Icon } from "../Utils"
 import { fetchPublicVideos } from '../../state/videos/effects'
 import { ErrorView } from '../Utils/ErrorView'
 import { reset } from '../../state/videos/reducer'
-import { changeVideosLanguageFilter } from '../../state/user_preferences/reducer'
+import { changeVideosLanguageFilter, changeVideosPublisherFilter } from '../../state/user_preferences/reducer'
+
 import LanguageSelector from '../App/LanguageSelector'
+import VideoSelector from '../App/VideoSelector'
 import capitalize from 'voca/capitalize'
 
 
@@ -21,12 +23,14 @@ import capitalize from 'voca/capitalize'
   videos: state.Videos.data,
   isLoading: state.Videos.isLoading,
   error: state.Videos.error,
-  languageFilter: state.UserPreferences.videosLanguageFilter
-}), {fetchPublicVideos, reset, changeVideosLanguageFilter})
+  languageFilter: state.UserPreferences.videosLanguageFilter,
+  publisherFilter: state.UserPreferences.videosPublisherFilter
+}), {fetchPublicVideos, reset, changeVideosLanguageFilter, changeVideosPublisherFilter})
 @translate('main')
 export class PublicVideos extends React.PureComponent {
   componentDidMount() {
-    this.props.fetchPublicVideos(this.props.languageFilter && {language: this.props.languageFilter})
+    this.props.fetchPublicVideos(this.props.languageFilter && this.props.publisherFilter && 
+      {language: this.props.languageFilter, publisher: this.props.publisherFilter})
   }
 
   componentWillUnmount() {
@@ -59,6 +63,13 @@ export class PublicVideos extends React.PureComponent {
     return (
       <nav className="level videos-filter">
         <div className="level-left">
+          <span>Publisher:&nbsp;&nbsp;</span>
+          <VideoSelector additionalOptions={new Map({
+                              all: this.props.t('misc.all'),
+                            })}
+                            handleChange={this.onVideosFilterChange.bind(this, 'publisher')}
+                            value={this.props.publisherFilter || "all"}
+          />
         </div>
         <div className="level-right">
           <span>Language:&nbsp;&nbsp;</span>
@@ -66,7 +77,7 @@ export class PublicVideos extends React.PureComponent {
                               all: this.props.t('misc.all'),
                               unknown: this.props.t('misc.unknown')
                             })}
-                            handleChange={this.onVideosFilterChange.bind(this)}
+                            handleChange={this.onVideosFilterChange.bind(this, 'language')}
                             value={this.props.languageFilter || "all"}
           />
         </div>
@@ -85,9 +96,15 @@ export class PublicVideos extends React.PureComponent {
       return <VideosGrid videos={this.props.videos}/>
   }
 
-  onVideosFilterChange(value) {
-    const language = value === 'all' ? null : value
-    this.props.changeVideosLanguageFilter(language)
-    this.props.fetchPublicVideos(language && {language})
+  onVideosFilterChange(filterType, value) {
+    const filter = value === 'all' ? null : value
+    if(filterType === 'language') {
+      this.props.changeVideosLanguageFilter(filter)
+    } else if (filterType === 'publisher') {
+      this.props.changeVideosPublisherFilter(filter)
+    }
+    //this.props.fetchPublicVideos({language: this.props.languageFilter, publisher: this.props.publisherFilter})
+    this.props.fetchPublicVideos(this.props.languageFilter && this.props.publisherFilter && 
+      {language: this.props.languageFilter, publisher: this.props.publisherFilter})
   }
 }

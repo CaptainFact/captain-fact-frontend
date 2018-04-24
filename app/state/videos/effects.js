@@ -32,4 +32,3 @@ export const postVideo = video => createEffect(
     catch: [setSubmitting(false), errorToFlash, generateFSAError]
   }
 )
-
