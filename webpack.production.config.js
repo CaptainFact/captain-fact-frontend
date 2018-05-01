@@ -9,6 +9,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CompressionPlugin = require("compression-webpack-plugin")
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
 
 module.exports = {
   mode: 'production',
@@ -72,6 +73,8 @@ module.exports = {
         css: ['app.css'],
         js: ["bundle.js"],
       }
-    })
+    }),
+    // loads up .env file
+    new Dotenv()
   ]
 };

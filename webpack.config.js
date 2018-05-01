@@ -7,8 +7,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const DashboardPlugin = require('webpack-dashboard/plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
 
-const HOST = process.env.HOST || "127.0.0.1";
+const HOST = process.env.HOST || "localhost";
 const PORT = process.env.PORT || "3333";
 
 
@@ -94,6 +95,8 @@ module.exports = {
         css: ['app.css'],
         js: ["bundle.js"],
       }
-    })
+    }),
+    // loads up .env file
+    new Dotenv()
   ]
 };
