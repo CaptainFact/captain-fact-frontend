@@ -28,7 +28,7 @@ export default {
   },
   '7': {
     'title': 'Ambassador',
-    'description': 'You were there before it was cool, and helped the project in a unique way'
+    'description': 'You are an ambassador of the community'
   },
   '8': {
     'title': 'Ghostbuster',

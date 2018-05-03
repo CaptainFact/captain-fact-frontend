@@ -98,7 +98,7 @@ module.exports = {
     }),
     // loads up .env file
     new Dotenv({
-      path: './config/dev.env'
+      path: './config/env/dev.env'
     })
   ]
 };

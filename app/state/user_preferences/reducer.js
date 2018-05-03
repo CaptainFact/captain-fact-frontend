@@ -1,6 +1,7 @@
 import { Record } from 'immutable'
 import { createAction, handleActions } from 'redux-actions'
 import { MOBILE_WIDTH_THRESHOLD } from '../../constants'
+import browserLocale from '../../i18n/browser_locale'
 
 
 export const toggleSidebar = createAction('USER_PREFERENCES/TOGGLE_SIDEBAR')
@@ -9,8 +10,7 @@ export const changeLocale = createAction('USER_PREFERENCES/CHANGE_LOCALE')
 export const changeVideosLanguageFilter = createAction('USER_PREFERENCES/CHANGE_VIDEOS_LANGUAGE_FILTER')
 export const toggleAutoscroll = createAction('STATEMENTS/TOGGLE_AUTOSCROLL')
 
-export const browserLocale = () =>
-  (window.navigator.userLanguage || window.navigator.language || 'en').split('-')[0].toLowerCase()
+
 
 const isMobile = window.innerWidth <= MOBILE_WIDTH_THRESHOLD
 
