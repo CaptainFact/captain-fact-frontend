@@ -38,6 +38,7 @@ import Moderation from './components/Moderation'
 import { SpeakerPage } from './components/Speakers/SpeakerPage'
 import NewsletterSubscription from './components/Users/NewsletterSubscription'
 
+import "./styles/application.sass"
 
 ReactDOM.render(
   <Provider store={store}>

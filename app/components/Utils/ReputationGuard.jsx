@@ -1,9 +1,8 @@
-import React from "react"
-import { connect } from "react-redux"
+import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { LoadingFrame } from "."
-import { MIN_REPUTATION_MODERATION } from '../../constants'
+import { LoadingFrame } from './LoadingFrame'
 import { hasReputation } from '../../state/users/current_user/selectors'
 import { ErrorView } from './ErrorView'
 
