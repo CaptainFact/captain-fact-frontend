@@ -51,8 +51,8 @@ module.exports = {
     rules: loadersConf
   },
   plugins: [
-    // provides a nice visualisation on http://localhost:8888 for debugging bundle size (use with --watch)
-    new BundleAnalyzerPlugin(),
+    // provides a nice visualisation on http://localhost:8888 for debugging bundle size
+    // new BundleAnalyzerPlugin(),
     // cleans output folder
     new CleanWebpackPlugin(['public']),
     // minimizing is done by webpack as we are in prod mode
@@ -75,6 +75,9 @@ module.exports = {
       }
     }),
     // loads up .env file
-    new Dotenv()
+    new Dotenv({
+      path: 'config/env/prod.env',
+      systemvars: true
+    })
   ]
 };
