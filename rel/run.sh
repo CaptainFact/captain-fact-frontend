@@ -52,7 +52,7 @@ elif [ "$1" = "build" ]; then
   if [ "$BUILD_ENV" != "dev" ] && [ "$BUILD_ENV" != "staging" ] ; then
     BUILD_ENV="prod"
   fi
-  source "./config/$BUILD_ENV/env.sh"
+  source "./config/env/$BUILD_ENV.env"
   echo "Building Frontend for env $BUILD_ENV:"
   echo "  - HTTP API:     $HTTP_API_URL"
   echo "  - WSS API:      $WS_API_URL"
