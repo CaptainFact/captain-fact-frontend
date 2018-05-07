@@ -27,7 +27,7 @@ export class ColumnVideo extends React.PureComponent {
 
     const { video, view, t } = this.props
     const { url, title, speakers } = video
-    const isDebate = view === "debate"
+    const isDebate = view === 'debate'
 
     return (
       <div id="col-video" className="column is-5">
@@ -40,7 +40,7 @@ export class ColumnVideo extends React.PureComponent {
           <ul>
             <li className={classNames({'is-active': isDebate})}>
               <Link to={`/videos/${video.id}`}>
-                <Icon size="small" name="comments-o"/>
+                <Icon size="small" name="check-circle"/>
                 <span>{ t('debate') }</span>
               </Link>
             </li>
@@ -49,6 +49,12 @@ export class ColumnVideo extends React.PureComponent {
                 <Icon size="small" name="history"/>
                 <span>{ t('history') }</span>
               </Link>
+            </li>
+            <li>
+              <a href="https://discord.gg/yqFpjgG" target="_blank">
+                <Icon size="small" name="comments-o"/>
+                <span>Chat</span>
+              </a>
             </li>
           </ul>
         </div>

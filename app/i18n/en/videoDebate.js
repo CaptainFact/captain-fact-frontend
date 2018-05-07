@@ -1,5 +1,5 @@
 export default {
-  'debate': 'Debate',
+  'debate': 'Fact-checking',
   'history': 'History',
   'approve': 'Confirm',
   'refute': 'Refute',
