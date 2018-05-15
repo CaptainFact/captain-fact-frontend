@@ -40,8 +40,8 @@ value (best, worst, stupid...etc) by `[...]`.
 
 For example :
 
-> This social measure was the worst. It disgusts me. It has created a massive increase in unemployment, which is madness.
+> This social measure was the worst. It disgusts me. It has created an increase in unemployment, which is madness.
 
 Can become:
 
-> This social measure \[...] has created a massive increase in unemployment
+> This social measure \[...] has created an increase in unemployment

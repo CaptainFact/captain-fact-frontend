@@ -41,8 +41,8 @@ valeur (le mieux, le pire, stupide...etc) par des `[...]`.
 
 Par exemple :
 
-> Cette mesure sociale a été un désastre le la pensée, ça ne m'évoque que du dégoût. Elle n'a fait que créer une augmentation massive du chômage, c'est pour moi une pure folie
+> Cette mesure sociale a été un désastre le la pensée, ça ne m'évoque que du dégoût. Elle n'a fait que créer une augmentation du chômage, c'est pour moi une pure folie
 
 Peut devenir :
 
-> Cette mesure sociale \[...] n'a fait que créer une augmentation massive du chômage
+> Cette mesure sociale \[...] n'a fait que créer une augmentation du chômage
