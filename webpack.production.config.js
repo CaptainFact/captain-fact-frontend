@@ -9,6 +9,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CompressionPlugin = require("compression-webpack-plugin")
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 
 module.exports = {
@@ -62,6 +63,10 @@ module.exports = {
       filename: 'app.[chunkhash].css',
       allChunks: true
     }),
+    new CopyWebpackPlugin(
+      [{ from: 'app/assets', to: '', toType: 'dir' }], // patterns
+      {} // options
+    ),
     // gzip
     new CompressionPlugin({
       test: /\.(js|css)$/
@@ -80,4 +85,4 @@ module.exports = {
       systemvars: true
     })
   ]
-};
+}
