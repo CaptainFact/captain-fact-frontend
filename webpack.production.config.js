@@ -67,10 +67,6 @@ module.exports = {
       [{ from: 'app/assets', to: '', toType: 'dir' }], // patterns
       {} // options
     ),
-    // gzip
-    new CompressionPlugin({
-      test: /\.(js|css)$/
-    }),
     // load the bundles into an html template
     new HtmlWebpackPlugin({
       template: 'app/index.html',
@@ -78,6 +74,10 @@ module.exports = {
         css: ['app.css'],
         js: ["bundle.js"],
       }
+    }),
+    // gzip
+    new CompressionPlugin({
+      test: /\.(js|css|html)$/
     }),
     // loads up .env file
     new Dotenv({
