@@ -1,21 +1,9 @@
-const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-// Options passed to node-sass
-const sassIncludePaths = [
-  path.resolve(__dirname, 'styles'),
-];
-
-
-// These files will be imported in every sass file
-// TODO use this feature and refactor existing ? 
-const sassResourcesPaths = [
-  // path.resolve(__dirname, 'styles/abstracts/_variables.sass'),
-  // path.resolve(__dirname, 'styles/abstracts/_mixins.sass'),
-];
 
 // noinspection WebpackConfigHighlighting
-module.exports = [
+module.exports = isProd => [
   // =========
   // = Babel =
   // =========
@@ -24,14 +12,14 @@ module.exports = [
   {
     test: /\.jsx?$/,
     include: path.resolve(__dirname, 'app'),
-    loader: "babel-loader",
+    loader: 'babel-loader',
     options: {
       // This is a feature of `babel-loader` for Webpack (not Babel itself).
       // It enables caching results in ./node_modules/.cache/babel-loader/
       // directory for faster rebuilds.
       cacheDirectory: true,
       presets: [
-        ['es2015', { loose: true, modules: "umd" }],
+        ['es2015', { loose: true, modules: 'umd' }],
         'react'
       ],
       plugins: [
@@ -39,7 +27,6 @@ module.exports = [
         'transform-decorators-legacy',
         'transform-runtime'
       ]
-      // plugins: ['transform-decorators-legacy', '],
     }
   },
   // =========
@@ -47,29 +34,29 @@ module.exports = [
   // =========
   {
     test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-    exclude: path.resolve(__dirname, "node_modules"),
-    use: ["file-loader"]
+    exclude: path.resolve(__dirname, 'node_modules'),
+    use: ['file-loader']
   },
   {
     test: /\.(woff|woff2)$/,
-    exclude: path.resolve(__dirname, "node_modules"),
+    exclude: path.resolve(__dirname, 'node_modules'),
     use: [
       {
-        loader: "url-loader",
-        options: { prefix: "font", limit: 5000 }
+        loader: 'url-loader',
+        options: { prefix: 'font', limit: 5000 }
       }
     ]
   },
   {
     test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-    exclude: path.resolve(__dirname, "node_modules"),
+    exclude: path.resolve(__dirname, 'node_modules'),
     use: [
       {
-        loader: "url-loader",
+        loader: 'url-loader',
         options: {
-          prefix: "font",
+          prefix: 'font',
           limit: 10000,
-          mimetype: "application/octet-stream"
+          mimetype: 'application/octet-stream'
         }
       }
     ]
@@ -79,13 +66,13 @@ module.exports = [
   // ==========
   {
     test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-    exclude: path.resolve(__dirname, "node_modules"),
+    exclude: path.resolve(__dirname, 'node_modules'),
     use: [
       {
-        loader: "url-loader",
+        loader: 'url-loader',
         options: {
           limit: 10000,
-          mimetype: "image/svg+xml"
+          mimetype: 'image/svg+xml'
         }
       }
     ]
@@ -95,13 +82,13 @@ module.exports = [
     include: [
       path.resolve(__dirname, 'app/assets')
     ],
-    exclude: path.resolve(__dirname, "node_modules"),
+    exclude: path.resolve(__dirname, 'node_modules'),
     use: [
       {
-        loader: "file-loader",
+        loader: 'file-loader',
         options: {
           limit: 10000,
-          mimetype: "image/gif"
+          mimetype: 'image/gif'
         }
       }
     ]
@@ -111,13 +98,13 @@ module.exports = [
     include: [
       path.resolve(__dirname, 'app/assets')
     ],
-    exclude: path.resolve(__dirname, "node_modules"),
+    exclude: path.resolve(__dirname, 'node_modules'),
     use: [
       {
-        loader: "file-loader",
+        loader: 'file-loader',
         options: {
           limit: 10000,
-          mimetype: "image/jpg"
+          mimetype: 'image/jpg'
         }
       }
     ]
@@ -127,14 +114,14 @@ module.exports = [
     include: [
       path.resolve(__dirname, 'app/assets')
     ],
-    exclude: path.resolve(__dirname, "node_modules"),
+    exclude: path.resolve(__dirname, 'node_modules'),
     use: [
       {
-        loader: "file-loader",
+        loader: 'file-loader',
         options: {
           limit: 10000,
-          mimetype: "image/png",
-          name: "[path][name].[ext]"
+          mimetype: 'image/png',
+          name: '[path][name].[ext]'
         }
       }
     ]
@@ -146,10 +133,10 @@ module.exports = [
   // ==============================
   {
     test: /\.css/,
-    include: path.resolve(__dirname, "node_modules"),
+    include: path.resolve(__dirname, 'node_modules'),
     use: [
       {
-        loader: "style-loader"
+        loader: !isProd ? 'style-loader' : MiniCssExtractPlugin.loader
       },
       {
         loader: 'css-loader'
@@ -162,7 +149,10 @@ module.exports = [
       path.resolve(__dirname, 'node_modules'),
       path.resolve(__dirname, 'app/styles')
     ],
-    loader: ExtractTextPlugin.extract([
+    use: [
+      {
+        loader: !isProd ? 'style-loader' : MiniCssExtractPlugin.loader,
+      },
       {
         loader: 'css-loader'
       },
@@ -176,6 +166,6 @@ module.exports = [
           ]
         }
       }
-    ])
+    ]
   }
-];
+]
