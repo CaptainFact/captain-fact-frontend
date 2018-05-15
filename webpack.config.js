@@ -1,22 +1,24 @@
-"use strict"
+'use strict'
 
 const webpack = require('webpack')
 const path = require('path')
 const loadersConf = require('./webpack.loaders')
+
+// Plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const DashboardPlugin = require('webpack-dashboard/plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 
-const HOST = process.env.HOST || "localhost";
-const PORT = process.env.PORT || "3333";
+const HOST = process.env.HOST || 'localhost'
+const PORT = process.env.PORT || '3333'
 
 
 module.exports = {
   mode: 'development',
   entry: {
-    "app": [
+    'app': [
       // POLYFILL: Set up an ES6-ish environment
       // 'babel-polyfill',  // The entire babel-polyfill
       // Or pick es6 features needed (included into babel-polyfill)
@@ -34,27 +36,27 @@ module.exports = {
     path: path.join(__dirname, 'public')
   },
   module: {
-    rules: loadersConf
+    rules: loadersConf(false)
   },
   resolve: {
     extensions: ['.js', '.jsx'],
     modules: [
-      path.join(__dirname, "src"),
-      path.join(__dirname, "node_modules"), // the old 'fallback' option (needed for npm link-ed packages)
+      path.join(__dirname, 'src'),
+      path.join(__dirname, 'node_modules'), // the old 'fallback' option (needed for npm link-ed packages)
     ],
     alias: {
-      "styles": path.resolve(__dirname, 'styles/'),
+      'styles': path.resolve(__dirname, 'styles/'),
     }
   },
   optimization: {
     splitChunks: {
       cacheGroups: {
-        commons: { test: /[\\/]node_modules[\\/]/, name: "vendor", chunks: "all" }
+        commons: { test: /[\\/]node_modules[\\/]/, name: 'vendor', chunks: 'all' }
       }
     }
   },
   devServer: {
-    contentBase: "./public",
+    contentBase: './public',
     // do not print bundle build stats
     noInfo: true,
     // enable HMR
@@ -68,21 +70,18 @@ module.exports = {
     host: HOST
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"development"'
-      }
-    }),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     // regroup styles in app.css bundle
-    new ExtractTextPlugin({
-      filename: 'app.css',
-      allChunks: true
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
     }),
     // beautiful output
-    new DashboardPlugin(),
+    new DashboardPlugin({
+      minified: false,
+      gzip: false
+    }),
     // copy static assets as they are required from external sources
     new CopyWebpackPlugin(
       [{ from: 'app/assets', to: '', toType: 'dir' }], // patterns
@@ -90,15 +89,11 @@ module.exports = {
     ),
     // load the bundles into an html template
     new HtmlWebpackPlugin({
-      template: 'app/index.html',
-      files: {
-        css: ['app.css'],
-        js: ["bundle.js"],
-      }
+      template: 'app/index.html'
     }),
     // loads up .env file
     new Dotenv({
       path: './config/env/dev.env'
     })
   ]
-};
+}

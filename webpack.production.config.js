@@ -1,21 +1,24 @@
-"use strict"
+'use strict'
 
 const webpack = require('webpack')
 const path = require('path')
 const loadersConf = require('./webpack.loaders')
+
+// Plugins
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const WebpackCleanupPlugin = require('webpack-cleanup-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const CompressionPlugin = require("compression-webpack-plugin")
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 
 module.exports = {
   mode: 'production',
   entry: {
-    "app": [
+    'app': [
       // POLYFILL: Set up an ES6-ish environment
       // 'babel-polyfill',  // The entire babel-polyfill
       // Or pick es6 features needed (included into babel-polyfill)
@@ -34,22 +37,30 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     modules: [
-      path.join(__dirname, "src"),
-      path.join(__dirname, "node_modules"), // the old 'fallback' option (needed for npm link-ed packages)
+      path.join(__dirname, 'src'),
+      path.join(__dirname, 'node_modules'), // the old 'fallback' option (needed for npm link-ed packages)
     ],
     alias: {
-      "styles": path.resolve(__dirname, 'styles/'),
+      'styles': path.resolve(__dirname, 'styles/'),
     }
   },
   optimization: {
     splitChunks: {
       cacheGroups: {
-        commons: { test: /[\\/]node_modules[\\/]/, name: "vendor", chunks: "all" }
+        commons: { test: /[\\/]node_modules[\\/]/, name: 'vendor', chunks: 'all' }
       }
-    }
+    },
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true
+      }),
+      new OptimizeCSSAssetsPlugin({})
+    ]
   },
   module: {
-    rules: loadersConf
+    rules: loadersConf(true)
   },
   plugins: [
     // provides a nice visualisation on http://localhost:8888 for debugging bundle size
@@ -59,7 +70,7 @@ module.exports = {
     // minimizing is done by webpack as we are in prod mode
     new webpack.optimize.OccurrenceOrderPlugin(),
     // regroup styles in app.css bundle
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
       filename: 'app.[chunkhash].css',
       allChunks: true
     }),
@@ -69,11 +80,7 @@ module.exports = {
     ),
     // load the bundles into an html template
     new HtmlWebpackPlugin({
-      template: 'app/index.html',
-      files: {
-        css: ['app.css'],
-        js: ["bundle.js"],
-      }
+      template: 'app/index.html'
     }),
     // gzip
     new CompressionPlugin({
