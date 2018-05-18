@@ -16,7 +16,7 @@ export const fetchHelpPage = pageName => (dispatch, getState) => {
           return response.text()
         else if (response.status === 404)
           return ERROR_NOT_FOUND
-        throw ('error')
+        throw new Error('Cannot fetch help page')
       })
   ))
 }

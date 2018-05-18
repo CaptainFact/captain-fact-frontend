@@ -11,7 +11,8 @@
     "test": "jest",
     "wtest": "jest --watch",
     "coverage": "jest --coverage '--collectCoverageFrom=app/+(API|components|lib|state)/**/!(record).{js,jsx}'",
-    "lint": "./node_modules/.bin/eslint app"
+    "lint": "./node_modules/.bin/eslint app",
+    "lint_fix": "./node_modules/.bin/eslint app --fix"
   },
   "jest": {
     "setupFiles": [

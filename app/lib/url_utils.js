@@ -1,4 +1,4 @@
-import 'core-js/es7/object.js'
+import 'core-js/es7/object'
 
 
 export const optionsToQueryString = (options) => {
@@ -19,7 +19,6 @@ export const isExternal = (currentHref, url) =>
 // ---- Private ----
 
 function checkDomain(url) {
-  if (url.indexOf('//') === 0)
-    url = location.protocol + url
-  return url.toLowerCase().replace(/([a-z])?:\/\//, '$1').split('/')[0]
+  const fullURL = url.indexOf('//') === 0 ? location.protocol + url : url
+  return fullURL.toLowerCase().replace(/([a-z])?:\/\//, '$1').split('/')[0]
 }

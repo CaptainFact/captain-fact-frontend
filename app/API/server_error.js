@@ -1,4 +1,4 @@
-export function parseServerError(responseBody) {
+export default function parseServerError(responseBody) {
   if (responseBody.error)
     return responseBody.error
   if (responseBody.errors)

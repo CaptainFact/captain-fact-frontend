@@ -1,6 +1,6 @@
 import { Socket } from 'phoenix'
 import { WS_API_URL } from '../config'
-import { parseServerError } from './server_error'
+import parseServerError from './server_error'
 import noInternetError from './no_internet_error'
 
 
@@ -33,7 +33,7 @@ class CaptainFactSocketApi {
   * @param {{}} mapEventsToFuncs - functions to call when events are triggered
   * @return {Promise} promise
   */
-  joinChannel(identifier, channelAddress, mapEventsToFuncs={}) {
+  joinChannel(identifier, channelAddress, mapEventsToFuncs = {}) {
     return new Promise((fulfill, reject) => {
       if (['closed', 'closing'].includes(this.socket.connectionState())) {
         this.socket.connect()
@@ -73,7 +73,7 @@ class CaptainFactSocketApi {
   * @param {Object} params
   * @return {Promise} channel
   */
-  push(channelIdentifier, message, params={}) {
+  push(channelIdentifier, message, params = {}) {
     return new Promise((fulfill, reject) => {
       return this.channels[channelIdentifier].push(message, params)
         .receive('ok', (data) => fulfill(data))
@@ -83,4 +83,4 @@ class CaptainFactSocketApi {
 }
 
 
-export const SocketApi = new CaptainFactSocketApi(WS_API_URL)
+export default new CaptainFactSocketApi(WS_API_URL)

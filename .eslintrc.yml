@@ -29,7 +29,7 @@ rules:
     - never
   max-len:
     - error
-    - code: 90
+    - code: 85
       ignoreStrings: true
       ignoreTemplateLiterals: true
       ignoreRegExpLiterals: true
@@ -43,7 +43,6 @@ rules:
   function-paren-newline: off
   arrow-parens: off
   arrow-body-style: off
-  space-infix-ops: off
   curly: off
   no-use-before-define: off
   no-param-reassign: off
@@ -51,13 +50,10 @@ rules:
   no-underscore-dangle: off
   no-restricted-syntax: off
   prefer-destructuring: off
-  no-mixed-operators: off
   consistent-return: off
   class-methods-use-this: off
   prefer-promise-reject-errors: off
   react/jsx-tag-spacing: off
   import/prefer-default-export: off
-  import/extensions: off
   import/export: off
-  no-throw-literal: off
-  no-restricted-globals: off
+  no-restricted-globals: ["error", "event", "fdescribe"]

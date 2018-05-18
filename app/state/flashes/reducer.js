@@ -25,7 +25,7 @@ export const flashErrorUnauthenticated = () => flashError({
   infoUrl: '/login'
 })
 
-export const flashSuccessMsg = (message, params={}) => addFlash({
+export const flashSuccessMsg = (message, params = {}) => addFlash({
   flashType: 'success',
   iconName: 'check-circle',
   message,
@@ -78,7 +78,7 @@ const FlashesReducer = handleActions({
     state.set('isPaused', payload),
   [update]: (state, {payload}) => {
     if (!state.isPaused)
-      state = state.update('flashes', flashes =>
+      return state.update('flashes', flashes =>
         flashes
           .map(f => f.set('timeLeft', f.timeLeft - payload))
           .filter(msg => msg.timeLeft > 0)

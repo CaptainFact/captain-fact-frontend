@@ -41,10 +41,13 @@ const CommentsReducer = handleActions({
     const commentPath = getCommentPath(comment)
     const commentIdx = getCommentIdx(state, commentPath, comment.id)
     if (commentIdx !== -1)
-      state = state.updateIn([...commentPath, commentIdx, 'score'], s => s + voteChange)
+      state = state
+        .updateIn([...commentPath, commentIdx, 'score'], s => s + voteChange)
         .updateIn(commentPath, comments => comments.sort(commentsComparator))
 
-    return state.setIn(['voted', comment.id], value).update('voting', s => s.delete(comment.id))
+    return state
+      .setIn(['voted', comment.id], value)
+      .update('voting', s => s.delete(comment.id))
   },
   [setVoting]: (state, {payload}) => state.update('voting', s => s.add(payload)),
   [endVoting]: (state, {payload}) => state.update('voting', s => s.remove(payload)),
@@ -56,11 +59,15 @@ const CommentsReducer = handleActions({
         new List(comments.map(prepareComment)
           .sort(commentsComparator))
           .groupBy(c => c.reply_to_id)
+
+      const replies = preparedComments.delete(null)
+      const notReplies = preparedComments.get(null) || new List()
+
       return state.merge({
-        comments: (preparedComments.get(null) || new List()).groupBy(c => c.statement_id),
+        comments: notReplies.groupBy(c => c.statement_id),
         errors: null,
         isLoading: false,
-        replies: preparedComments.delete(null),
+        replies,
         voted: !my_votes ? new Map() : new Map().withMutations(map =>
           my_votes.forEach(vote => map.set(vote.comment_id, vote.value))
         ),
@@ -149,7 +156,7 @@ function getCommentIdx(state, path, id) {
   return state.getIn(path, new List()).findIndex(c => c.id === id)
 }
 
-function mergeCommentsList(_oldList, newList, addNewComments=false) {
+function mergeCommentsList(_oldList, newList, addNewComments = false) {
   return _oldList
     .withMutations(oldList => {
       for (const comment of newList) {

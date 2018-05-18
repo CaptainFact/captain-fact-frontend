@@ -1,9 +1,9 @@
 import 'isomorphic-fetch'
 import trimRight from 'voca/trim_right'
 
-import { SocketApi } from './socket_api'
+import SocketApi from './socket_api'
 import { HTTP_API_URL } from '../config'
-import { parseServerError } from './server_error'
+import parseServerError from './server_error'
 import flashNoInternetError from './no_internet_error'
 import { optionsToQueryString } from '../lib/url_utils'
 
@@ -36,11 +36,11 @@ class CaptainFactHttpApi {
     return new Promise((fulfill, reject) => {
       return promise.then(response => {
         return response.text().then((body) => {
-          body = body ? JSON.parse(body) : null
+          const parsedBody = body ? JSON.parse(body) : null
           if (!response.ok)
-            reject(parseServerError(body))
+            reject(parseServerError(parsedBody))
           else
-            fulfill(body)
+            fulfill(parsedBody)
         })
       }).catch(e => {
         console.error(e)

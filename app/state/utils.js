@@ -17,16 +17,20 @@ import isPromise from 'is-promise'
  * @param {{before: *, then: *, catch: *, after: *} || null} opts
  * @return function effect returning the updated promise
  */
-export function createEffect(promise, opts=null) {
+export function createEffect(promise, opts = null) {
   return (dispatch, getState) => {
     // Dispatch a series of actions at different steps of the promise
     if (opts) {
       if (opts.before)
         cleverDispatch(dispatch, getState, opts.before)
       if (promise && opts.then)
-        promise = promise.then(x => cleverDispatch(dispatch, getState, opts.then, x))
+        promise = promise.then(x =>
+          cleverDispatch(dispatch, getState, opts.then, x)
+        )
       if (promise && opts.catch)
-        promise = promise.catch(x => cleverDispatch(dispatch, getState, opts.catch, x))
+        promise = promise.catch(x =>
+          cleverDispatch(dispatch, getState, opts.catch, x)
+        )
       if (opts.after)
         promise = cleverDispatch(dispatch, getState, opts.after, promise)
     }
@@ -62,7 +66,7 @@ export function returnSuccess(returnValue) {
  * @param params params to give to action creators
  * @returns {*}
  */
-export function cleverDispatch(dispatch, getState, toDispatch, params=null) {
+export function cleverDispatch(dispatch, getState, toDispatch, params = null) {
   if (typeof (toDispatch) === 'function')
     return dispatch(toDispatch(params))
   else if (isAction(toDispatch))

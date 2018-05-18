@@ -13,10 +13,12 @@ export const handleEffectResponse = ({onSuccess, onError}) => action => {
 }
 
 /**
- * Same as `handleEffectResponse` but throws a SubmissionError after calling `onError`
+ * Same as `handleEffectResponse` but throws a SubmissionError
+ * after calling `onError`.
+ *
  * @param handlers {{onSuccess, onError}}
  */
-export const handleFormEffectResponse = (handlers={}) => action => {
+export const handleFormEffectResponse = (handlers = {}) => action => {
   const {onSuccess, onError} = handlers
   if (action) {
     if (action.error) {
