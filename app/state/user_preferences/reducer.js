@@ -11,7 +11,6 @@ export const changeVideosLanguageFilter = createAction('USER_PREFERENCES/CHANGE_
 export const toggleAutoscroll = createAction('STATEMENTS/TOGGLE_AUTOSCROLL')
 
 
-
 const isMobile = window.innerWidth <= MOBILE_WIDTH_THRESHOLD
 
 const Preferences = new Record({

@@ -65,20 +65,26 @@ export default class UserSettings extends React.PureComponent {
         <br/>
         <div className="has-text-centered">
           <h3 className="title is-3">{this.props.t('linkedAccounts')}</h3>
-          <ThirdPartyAccountLinker provider="facebook"
-                                   title="Facebook"
-                                   isLinked={!!this.props.user.fb_user_id}
-                                   authUrl={facebookAuthUrl()}/>
+          <ThirdPartyAccountLinker
+            provider="facebook"
+            title="Facebook"
+            isLinked={!!this.props.user.fb_user_id}
+            authUrl={facebookAuthUrl()}
+          />
         </div>
         <br/>
         <hr/>
         <br/>
         <div className="has-text-centered">
           <h3 className="title is-3">{this.props.t('dangerZone')}</h3>
-          <button className="button is-danger" onClick={() => this.props.addModal({
-            Modal: DeleteUserModal,
-            props: { handleConfirm: () => this.props.deleteAccount() }
-          })}>{this.props.t('deleteAccount')}</button>
+          <button
+            className="button is-danger"
+            onClick={() => this.props.addModal({
+              Modal: DeleteUserModal,
+              props: { handleConfirm: () => this.props.deleteAccount() }
+            })}
+          >{this.props.t('deleteAccount')}
+          </button>
         </div>
       </div>
     )

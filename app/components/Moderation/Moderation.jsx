@@ -1,5 +1,5 @@
-import React from "react"
-import { connect } from "react-redux"
+import React from 'react'
+import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import { Link } from 'react-router'
 
@@ -63,17 +63,18 @@ export default class Moderation extends React.PureComponent {
         <UserAction action={action}/>
         <br/>
         <h4 className="box has-text-centered">
-          <Link target='_blank' to={`/videos/${videoId}?statement=${statementId}`}>
-            <strong>{this.props.t("seeContext")}</strong>
+          <Link target="_blank" to={`/videos/${videoId}?statement=${statementId}`}>
+            <strong>{this.props.t('seeContext')}</strong>
           </Link>
         </h4>
         <hr/>
-        <ModerationForm action={action}
-                        initialValues={{action_id: action.id}}
-                        onSubmit={values =>
-                          this.props.postModerationFeedback(values)
-                            .then(() => this.props.fetchRandomModeration())
-                        }
+        <ModerationForm
+          action={action}
+          initialValues={{action_id: action.id}}
+          onSubmit={values =>
+            this.props.postModerationFeedback(values)
+              .then(() => this.props.fetchRandomModeration())
+          }
         />
       </div>
     )

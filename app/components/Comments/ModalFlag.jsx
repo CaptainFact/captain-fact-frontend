@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import { formValueSelector } from 'redux-form'
@@ -27,18 +27,19 @@ export default class ModalFlag extends React.PureComponent {
     const { isLoading, flagsAvailable } = this.state
     const { t, handleAbort, selectedReason, comment, initialReason, ...otherProps } = this.props
     return (
-      <ModalFormContainer handleAbort={handleAbort}
-                          handleCloseClick={handleAbort}
-                          title={t('flagForm.title')}
-                          confirmType="danger"
-                          confirmLoading={isLoading}
-                          confirmDisabled={!flagsAvailable || !selectedReason}
-                          confirmText={this.renderConfirmText(t, flagsAvailable)}
-                          confirmIcon="flag"
-                          FormComponent={FlagForm}
-                          formProps={{comment: comment, initialValues: {reason: initialReason}}}
-                          helpLink="/help/moderation"
-                          {...otherProps}
+      <ModalFormContainer
+        handleAbort={handleAbort}
+        handleCloseClick={handleAbort}
+        title={t('flagForm.title')}
+        confirmType="danger"
+        confirmLoading={isLoading}
+        confirmDisabled={!flagsAvailable || !selectedReason}
+        confirmText={this.renderConfirmText(t, flagsAvailable)}
+        confirmIcon="flag"
+        FormComponent={FlagForm}
+        formProps={{comment, initialValues: {reason: initialReason}}}
+        helpLink="/help/moderation"
+        {...otherProps}
       />
     )
   }

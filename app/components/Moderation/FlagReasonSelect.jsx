@@ -5,10 +5,11 @@ import { Field } from 'redux-form'
 
 const VALID_REASONS = ['1', '2', '3', '4']
 
-const FlagReason = ({value, label}) =>
+const FlagReason = ({value, label}) => (
   <label className="radio">
     <Field name="reason" component="input" type="radio" value={value}/> {label}
   </label>
+)
 
 const FlagReasonSelect = ({t}) => {
   const labels = t("reason", {returnObjects: true})

@@ -17,12 +17,16 @@ export const getStatementSpeaker = createCachedSelector(
 
 export const getStatementApproveScore = createCachedSelector(
   getStatementApprovingFacts,
-  facts => facts.reduce((score, fact) => score + (fact.score > 0 ? fact.score : 0), 0)
+  facts => facts.reduce((score, fact) =>
+    score + (fact.score > 0 ? fact.score : 0), 0
+  )
 )((state, props) => props.statement.id)
 
 export const getStatementRefuteScore = createCachedSelector(
   getStatementRefutingFacts,
-  facts => facts.reduce((score, fact) => score + (fact.score > 0 ? fact.score : 0), 0)
+  facts => facts.reduce((score, fact) =>
+    score + (fact.score > 0 ? fact.score : 0), 0
+  )
 )((state, props) => props.statement.id)
 
 
@@ -57,4 +61,5 @@ export const isStatementFocused = createSelector(
 
 export const statementFormValueSelector = formValueSelector('StatementForm')
 
-export const hasStatementForm = state => statementFormValueSelector(state, 'speaker_id') !== undefined
+export const hasStatementForm = state =>
+  statementFormValueSelector(state, 'speaker_id') !== undefined

@@ -1,12 +1,13 @@
-import { addModal, default as reducer, popModal } from '../reducer'
 import { Stack } from 'immutable'
+
+import reducer, { addModal, popModal } from '../reducer'
 import Modal from '../../../components/Modal/Modal'
 
 
 const createTestModal = id => ({
-  Modal: Modal,
+  Modal,
   props: {
-    id: id,
+    id,
     hello: 'world'
   }
 })

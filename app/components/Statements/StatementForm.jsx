@@ -1,13 +1,13 @@
-import React from "react"
+import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { connect } from "react-redux"
+import { connect } from 'react-redux'
 import classNames from 'classnames'
 import SpeakersSelect from '../Speakers/SpeakersSelect'
 
-import { Icon, LinkWithIcon } from "../Utils"
+import { Icon, LinkWithIcon } from '../Utils'
 import TimeDisplay from '../Utils/TimeDisplay'
-import { renderTextareaField, validateFieldLength, cleanStrMultiline } from "../FormUtils"
-import { STATEMENT_LENGTH } from "../../constants"
+import { renderTextareaField, validateFieldLength, cleanStrMultiline } from '../FormUtils'
+import { STATEMENT_LENGTH } from '../../constants'
 import { translate } from 'react-i18next'
 import { forcePosition } from '../../state/video_debate/video/reducer'
 import { decrementFormCount, incrementFormCount, setScrollTo, STATEMENT_FORM_NAME } from '../../state/video_debate/statements/reducer'
@@ -80,8 +80,11 @@ export class StatementForm extends React.PureComponent {
             <a className="button" onClick={() => this.moveTimeMarker(currentTime + 1)}>
               <Icon name="caret-right"/>
             </a>
-            <a className="button" title={t("statement.reverseTimeLock", {context: toggleTimeLockAction})}
-               onClick={this.toggleLock.bind(this)}>
+            <a
+              className="button"
+              title={t('statement.reverseTimeLock', {context: toggleTimeLockAction})}
+              onClick={this.toggleLock.bind(this)}
+            >
               <Icon size="small" name={toggleTimeLockAction}/>
             </a>
             {speaker && speaker.picture && <img className="speaker-mini" src={speaker.picture}/>}
@@ -90,28 +93,36 @@ export class StatementForm extends React.PureComponent {
         </header>
         <div className="card-content">
           <h3 className="statement-text">
-            <Field name="text" component={renderTextareaField}
-                   normalize={cleanStrMultiline}
-                   maxLength={STATEMENT_LENGTH[1]}
-                   validate={value => validateFieldLength(t, value, STATEMENT_LENGTH)}
-                   placeholder={speaker ? t('statement.textPlaceholder') : t('statement.noSpeakerTextPlaceholder')}
-                   hideErrorIfEmpty autoFocus autosize
+            <Field
+              name="text"
+              component={renderTextareaField}
+              normalize={cleanStrMultiline}
+              maxLength={STATEMENT_LENGTH[1]}
+              validate={value => validateFieldLength(t, value, STATEMENT_LENGTH)}
+              placeholder={speaker ? t('statement.textPlaceholder') : t('statement.noSpeakerTextPlaceholder')}
+              hideErrorIfEmpty
+              autoFocus
+              autosize
             />
           </h3>
         </div>
         <footer className="card-footer">
-          <LinkWithIcon iconName="floppy-o"
-                        className={classNames('card-footer-item', 'submit-button', {
-                          'is-loading': this.props.submitting
-                        })}
-                        disabled={!valid || this.props.submitting}
-                        onClick={handleSubmit(this.handleSubmit.bind(this))}>
+          <LinkWithIcon
+            iconName="floppy-o"
+            className={classNames('card-footer-item', 'submit-button', {
+              'is-loading': this.props.submitting
+            })}
+            disabled={!valid || this.props.submitting}
+            onClick={handleSubmit(this.handleSubmit.bind(this))}
+          >
             {t('main:actions.save')}
           </LinkWithIcon>
-          <LinkWithIcon iconName="ban"
-                        className='card-footer-item'
-                        disabled={this.props.submitting}
-                        onClick={handleAbort}>
+          <LinkWithIcon
+            iconName="ban"
+            className="card-footer-item"
+            disabled={this.props.submitting}
+            onClick={handleAbort}
+          >
             {t('main:actions.cancel')}
           </LinkWithIcon>
         </footer>

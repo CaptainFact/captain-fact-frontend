@@ -1,5 +1,5 @@
-import React from "react"
-import { connect } from "react-redux"
+import React from 'react'
+import { connect } from 'react-redux'
 import ReactPlayer from 'react-player'
 
 import { setPosition } from '../../state/video_debate/video/reducer'
@@ -22,7 +22,7 @@ export default class VideoDebatePlayer extends React.Component {
     const { forcedPosition } = newProps
     if (forcedPosition.requestId !== null &&
       forcedPosition.requestId !== this.props.forcedPosition.requestId) {
-        this.refs.player.seekTo(forcedPosition.time)
+      this.refs.player.seekTo(forcedPosition.time)
     }
   }
 
@@ -30,13 +30,14 @@ export default class VideoDebatePlayer extends React.Component {
     const { setPosition, url } = this.props
 
     return (
-      <ReactPlayer ref="player"
-                   className="video"
-                   url={url}
-                   onProgress={({playedSeconds}) => setPosition(playedSeconds)}
-                   width=""
-                   height=""
-                   controls
+      <ReactPlayer
+        ref="player"
+        className="video"
+        url={url}
+        onProgress={({playedSeconds}) => setPosition(playedSeconds)}
+        width=""
+        height=""
+        controls
       />
     )
   }

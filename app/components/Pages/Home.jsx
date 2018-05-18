@@ -1,10 +1,10 @@
-import React from "react"
-import { connect } from "react-redux"
-import { Link } from "react-router"
+import React from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import { translate, Interpolate } from 'react-i18next'
 
-import { Icon } from "../Utils"
-import InvitationRequestForm from "../Users/InvitationRequestForm"
+import { Icon } from '../Utils'
+import InvitationRequestForm from '../Users/InvitationRequestForm'
 import { isAuthenticated } from '../../state/users/current_user/selectors'
 import Logo from '../App/Logo'
 
@@ -34,9 +34,12 @@ export class Home extends React.PureComponent {
             </p>
             <br/>
             <p>
-              <Interpolate i18nKey="journeyStart" videoLink={
-                <Link to="/videos">{this.props.t('main:entities.video_plural')}</Link>
-              }/>
+              <Interpolate
+                i18nKey="journeyStart"
+                videoLink={
+                  <Link to="/videos">{this.props.t('main:entities.video_plural')}</Link>
+                }
+              />
               <br/>
               <br/>
             </p>
@@ -55,10 +58,10 @@ export class Home extends React.PureComponent {
         <footer className="footer">
           <div className="has-text-centered">
             <Interpolate i18nKey="footer" iconLove={<Icon name="heart"/>}/>
-            <a href='http://elixir-lang.org'>Elixir</a>,&nbsp;
-            <a href='http://www.phoenixframework.org'>Phoenix</a>
+            <a href="http://elixir-lang.org">Elixir</a>,&nbsp;
+            <a href="http://www.phoenixframework.org">Phoenix</a>
             &nbsp;{this.props.t('main:misc.and')}&nbsp;
-            <a href='https://facebook.github.io/react'>React</a>
+            <a href="https://facebook.github.io/react">React</a>
           </div>
         </footer>
       </div>

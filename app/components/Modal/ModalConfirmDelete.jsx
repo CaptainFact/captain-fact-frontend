@@ -1,12 +1,12 @@
-import React from "react"
+import React from 'react'
 
-import { ModalConfirm } from "./ModalConfirm"
+import { ModalConfirm } from './ModalConfirm'
 import { translate } from 'react-i18next'
 
 
-const ModalConfirmDelete = ({t, isRemove=false, ...props}) => (
+const ModalConfirmDelete = ({t, isRemove = false, ...props}) => (
   <ModalConfirm
-    confirmIcon={isRemove ? "trash-o" : "times"}
+    confirmIcon={isRemove ? 'trash-o' : 'times'}
     confirmText={isRemove ? t('actions.remove') : t('actions.delete')}
     abortIcon="ban"
     abortText={t('actions.cancel')}

@@ -1,4 +1,4 @@
-import { default as reducer, toggleSidebar } from '../reducer'
+import reducer, { toggleSidebar } from '../reducer'
 
 test('has correct defaults', () => {
   expect(reducer(undefined, {}).toJS()).toEqual({

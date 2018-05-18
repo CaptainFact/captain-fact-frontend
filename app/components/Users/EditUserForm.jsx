@@ -23,7 +23,7 @@ export default class EditUserForm extends React.PureComponent {
   componentDidUpdate() {
     // Redirect to user profile when logged in
     if (!this.props.isLoading && !this.props.user.id)
-      this.props.router.push("/")
+      this.props.router.push('/')
   }
 
   submit(user) {
@@ -33,8 +33,10 @@ export default class EditUserForm extends React.PureComponent {
   render() {
     const {handleSubmit, valid, t} = this.props
     return (
-      <form className="edit-user-form form"
-            onSubmit={handleSubmit(user => this.submit(user))}>
+      <form
+        className="edit-user-form form"
+        onSubmit={handleSubmit(user => this.submit(user))}
+      >
         {renderAllUserFields(valid, t, true)}
         {submitButton((<div>
           <Icon name="floppy-o"/>

@@ -33,7 +33,7 @@ i18n
     interpolation: {
       escapeValue: false, // Not needed for react
       formatSeparator: ',',
-      format: function(value, format) {
+      format(value, format) {
         if (format === 'lowerCase') return value.toLowerCase()
         if (format === 'upperCase') return value.toUpperCase()
         if (format === 'titleCase') return titleCase(value)

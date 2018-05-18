@@ -4,10 +4,10 @@ import classNames from 'classnames'
 
 const CardLayout =
   ({
-     headerTitle=null, headerIcon=null, image=null, content=null, footer=null, className=null,
-     ContainerType='div', containerProps={}
+    headerTitle = null, headerIcon = null, image = null, content = null, footer = null, className = null,
+    ContainerType = 'div', containerProps = {}
   }) =>
-    <ContainerType className={classNames('card', className)} {...containerProps}>
+    (<ContainerType className={classNames('card', className)} {...containerProps}>
       {(headerTitle || headerIcon) &&
         <header className="card-header">
           {headerTitle && <p className="card-header-title">{headerTitle}</p>}
@@ -27,6 +27,6 @@ const CardLayout =
           {footer}
         </footer>
       }
-    </ContainerType>
+     </ContainerType>)
 
 export default CardLayout

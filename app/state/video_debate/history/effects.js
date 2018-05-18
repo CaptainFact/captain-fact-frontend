@@ -35,6 +35,6 @@ export const revertVideoDebateUserAction = action => dispatch => {
 function joinHistoryChannel(dispatch, channelId, topic) {
   // Connect to channel
   dispatch(fetchAll(SocketApi.joinChannel(channelId, topic, {
-    'action_added': a => dispatch(addAction(a))
+    action_added: a => dispatch(addAction(a))
   })))
 }
