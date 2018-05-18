@@ -59,5 +59,7 @@ export default {
   },
   videos: {
     add: 'Ajouter une vidéo'
-  }
+  },
+  users: 'Utilisateurs',
+  partners: 'Partenaires'
 }

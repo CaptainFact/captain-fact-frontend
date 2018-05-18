@@ -26,6 +26,7 @@ rules:
   quotes: ['warn', 'single', {avoidEscape: true}]
   semi: ['error', 'never']
   import/first: ['warn']
+  no-trailing-spaces: ['warn']
   no-continue: off
   no-plusplus: off
   radix: off
@@ -48,6 +49,7 @@ rules:
   react/jsx-closing-tag-location: ['warn']
   react/no-unescaped-entities: ['warn']
   react/no-unused-prop-types: ['warn']
+  react/self-closing-comp: ['warn']
   react/jsx-indent: ['warn']
   react/no-array-index-key: ['warn']
   jsx-a11y/anchor-is-valid: 

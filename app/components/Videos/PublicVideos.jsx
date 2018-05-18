@@ -12,26 +12,33 @@ import { LoadingFrame, Icon } from '../Utils'
 import { fetchPublicVideos } from '../../state/videos/effects'
 import { ErrorView } from '../Utils/ErrorView'
 import { reset } from '../../state/videos/reducer'
-import { changeVideosLanguageFilter } from '../../state/user_preferences/reducer'
+import { changeVideosLanguageFilter, setVideosOnlyFromPartners } from '../../state/user_preferences/reducer'
 import LanguageSelector from '../App/LanguageSelector'
+import FilterOnlyFromPartners from './FilterOnlyFromPartners'
 
 
 @connect(state => ({
   videos: state.Videos.data,
   isLoading: state.Videos.isLoading,
   error: state.Videos.error,
-  languageFilter: state.UserPreferences.videosLanguageFilter
-}), {fetchPublicVideos, reset, changeVideosLanguageFilter})
+  languageFilter: state.UserPreferences.videosLanguageFilter,
+  onlyFromPartners: state.UserPreferences.videosOnlyFromPartners,
+}), {fetchPublicVideos, reset, changeVideosLanguageFilter, setVideosOnlyFromPartners})
 @translate('main')
 export class PublicVideos extends React.PureComponent {
   componentDidMount() {
-    const {languageFilter} = this.props
-    const filters = languageFilter && {language: languageFilter}
-    this.props.fetchPublicVideos(filters)
+    this.props.fetchPublicVideos(this.buildFilters())
   }
 
   componentWillUnmount() {
     this.props.reset()
+  }
+
+  componentDidUpdate(oldProps) {
+    if (oldProps.languageFilter !== this.props.languageFilter ||
+        oldProps.onlyFromPartners !== this.props.onlyFromPartners) {
+      this.props.fetchPublicVideos(this.buildFilters())
+    }
   }
 
   render() {
@@ -61,17 +68,26 @@ export class PublicVideos extends React.PureComponent {
   renderFilterBar() {
     return (
       <nav className="level videos-filter">
-        <div className="level-left" />
+        <div className="level-left"/>
         <div className="level-right">
-          <span>Language:&nbsp;&nbsp;</span>
-          <LanguageSelector
-            additionalOptions={new Map({
-              all: this.props.t('misc.all'),
-              unknown: this.props.t('misc.unknown')
-            })}
-            handleChange={this.onVideosFilterChange.bind(this)}
-            value={this.props.languageFilter || 'all'}
-          />
+          <div className="filter">
+            <span>Source:</span>
+            <FilterOnlyFromPartners
+              value={this.props.onlyFromPartners}
+              onChange={this.props.setVideosOnlyFromPartners}
+            />
+          </div>
+          <div className="filter">
+            <span>Language:</span>
+            <LanguageSelector
+              additionalOptions={new Map({
+                all: this.props.t('misc.all'),
+                unknown: this.props.t('misc.unknown')
+              })}
+              handleChange={(v) => this.onVideosFilterChange(v)}
+              value={this.props.languageFilter || 'all'}
+            />
+          </div>
         </div>
       </nav>
     )
@@ -91,6 +107,13 @@ export class PublicVideos extends React.PureComponent {
   onVideosFilterChange(value) {
     const language = value === 'all' ? null : value
     this.props.changeVideosLanguageFilter(language)
-    this.props.fetchPublicVideos(language && {language})
+  }
+
+  buildFilters() {
+    const {languageFilter, onlyFromPartners} = this.props
+    const filters = {is_partner: onlyFromPartners}
+    if (languageFilter)
+      filters.language = languageFilter
+    return filters
   }
 }
