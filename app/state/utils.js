@@ -34,8 +34,8 @@ export function createEffect(promise, opts=null) {
     // we manually generate SUCCESS / ERROR actions based on then() / catch()
     if (promise && isPromise(promise)) {
       return promise
-        .then(value => isAction(value) ? value : generateFSASuccess(value))
-        .catch(value => isAction(value) ? value : generateFSAError(value))
+        .then(value => (isAction(value) ? value : generateFSASuccess(value)))
+        .catch(value => (isAction(value) ? value : generateFSAError(value)))
     }
     return promise
   }
@@ -63,7 +63,7 @@ export function returnSuccess(returnValue) {
  * @returns {*}
  */
 export function cleverDispatch(dispatch, getState, toDispatch, params=null) {
-  if (typeof(toDispatch) === 'function')
+  if (typeof (toDispatch) === 'function')
     return dispatch(toDispatch(params))
   else if (isAction(toDispatch))
     return dispatch(toDispatch)
@@ -110,9 +110,9 @@ export function generateFSASuccess(payload) {
  * @returns {boolean}
  */
 export function isAction(obj) {
-  return obj !== null && typeof(obj) === 'object' && typeof(obj.type) === 'string'
+  return obj !== null && typeof (obj) === 'object' && typeof (obj.type) === 'string'
 }
 
 function isIterable(obj) {
-  return obj !== null && typeof(obj[Symbol.iterator]) === 'function'
+  return obj !== null && typeof (obj[Symbol.iterator]) === 'function'
 }

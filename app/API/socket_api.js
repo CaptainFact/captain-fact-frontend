@@ -40,7 +40,7 @@ class CaptainFactSocketApi {
       }
       const channel = this.socket.channel(channelAddress)
       this.channels[identifier] = channel
-      for (let [event, func] of Object.entries(mapEventsToFuncs))
+      for (const [event, func] of Object.entries(mapEventsToFuncs))
         channel.on(event, func)
       channel.join()
         .receive('ok', fulfill)
@@ -59,7 +59,7 @@ class CaptainFactSocketApi {
     // Leave channel gracefully
     if (this.channels[identifier]) {
       this.channels[identifier].leave()
-      delete(this.channels[identifier])
+      delete (this.channels[identifier])
     }
     // If no more channels, close the socket
     if (!Object.keys(this.channels).length && ['connecting', 'open'].includes(socketState))

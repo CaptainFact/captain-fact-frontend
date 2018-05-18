@@ -1,6 +1,5 @@
 import 'isomorphic-fetch'
 import trimRight from 'voca/trim_right'
-import 'isomorphic-fetch'
 
 import { SocketApi } from './socket_api'
 import { HTTP_API_URL } from '../config'
@@ -11,24 +10,24 @@ import { optionsToQueryString } from '../lib/url_utils'
 
 class CaptainFactHttpApi {
   constructor(baseUrl, token) {
-    this.baseUrl = trimRight(baseUrl, '/') + '/'
+    this.baseUrl = `${trimRight(baseUrl, '/')}/`
     this.hasToken = !!token
     this.headers = {'Content-Type': 'application/json'}
     if (token)
-      this.headers['authorization'] = `Bearer ${token}`
+      this.headers.authorization = `Bearer ${token}`
   }
 
   setAuthorizationToken(token) {
     this.hasToken = true
     localStorage.token = token
     if (token)
-      this.headers['authorization'] = `Bearer ${token}`
+      this.headers.authorization = `Bearer ${token}`
     SocketApi.setAuthorizationToken(token)
   }
 
   resetToken() {
     this.hasToken = false
-    delete(this.headers['authorization'])
+    delete (this.headers.authorization)
     localStorage.removeItem('token')
     SocketApi.resetToken()
   }

@@ -11,13 +11,12 @@ export const fetchHelpPage = pageName => (dispatch, getState) => {
       .then(response => {
         const contentType = response.headers.get('Content-Type')
         if (contentType && !contentType.includes('markdown'))
-          throw(ERROR_NOT_FOUND)
+          throw (ERROR_NOT_FOUND)
         if (response.status === 200 || response.status === 304)
           return response.text()
         else if (response.status === 404)
           return ERROR_NOT_FOUND
-        else
-          throw('error')
+        throw ('error')
       })
   ))
 }

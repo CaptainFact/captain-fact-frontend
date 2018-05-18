@@ -28,7 +28,7 @@ export const flashErrorUnauthenticated = () => flashError({
 export const flashSuccessMsg = (message, params={}) => addFlash({
   flashType: 'success',
   iconName: 'check-circle',
-  message: message,
+  message,
   ...params
 })
 export function errorToFlash(msg) {
@@ -49,7 +49,7 @@ export function errorToFlash(msg) {
 // Same as errorToFlash but doesn't show anything if payload is
 // not a string (useful for forms)
 export function errorMsgToFlash(msg) {
-  if (typeof(msg) === 'string')
+  if (typeof (msg) === 'string')
     return errorToFlash(msg)
   return () => () => null
 }

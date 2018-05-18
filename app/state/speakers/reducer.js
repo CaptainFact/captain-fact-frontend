@@ -36,7 +36,7 @@ const SpeakersReducer = handleActions({
   [actionFetchSpeakerWikiLinks]: {
     next: (state, {payload}) => {
       const allLinks = {}
-      for (let link of payload) {
+      for (const link of payload) {
         const siteName = checkLink(link)
         if (siteName)
           allLinks[siteName] = link
@@ -51,7 +51,7 @@ const SpeakersReducer = handleActions({
 }, INITIAL_STATE())
 
 function checkLink(url) {
-  for (let siteName of supportedSites) {
+  for (const siteName of supportedSites) {
     if (url.includes(siteName))
       return siteName
   }

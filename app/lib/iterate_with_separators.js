@@ -8,9 +8,9 @@ import regeneratorRuntime from 'regenerator-runtime'
  * @param size
  * @param t a translate function
  */
-export default function *iterateWithSeparators(iterator, size, t) {
+export default function* iterateWithSeparators(iterator, size, t) {
   let entryNum = -1
-  for (let value of iterator) {
+  for (const value of iterator) {
     entryNum += 1
     if (entryNum + 3 <= size)
       yield [value, ', ']

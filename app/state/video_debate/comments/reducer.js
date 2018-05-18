@@ -94,13 +94,13 @@ const CommentsReducer = handleActions({
     return state.deleteIn(commentFullPath)
   },
   [updateScores]: (state, {payload}) => {
-    let {comments, replies} =
-    new List(payload).groupBy(c => c.reply_to_id ? 'replies' : 'comments').toObject()
+    const {comments, replies} =
+    new List(payload).groupBy(c => (c.reply_to_id ? 'replies' : 'comments')).toObject()
 
     // Update comments
     if (comments) {
       const groupedComments = comments.groupBy(c => c.statement_id).entries()
-      for (let [statementId, newComments] of groupedComments)
+      for (const [statementId, newComments] of groupedComments)
         state = state.updateIn(['comments', statementId], oldList =>
           mergeCommentsList(oldList, newComments)
         )
@@ -108,7 +108,7 @@ const CommentsReducer = handleActions({
     // Update replies
     if (replies) {
       const groupedReplies = replies.groupBy(r => r.reply_to_id).entries()
-      for (let [commentId, newComments] of groupedReplies)
+      for (const [commentId, newComments] of groupedReplies)
         state = state.updateIn(['replies', commentId], oldList =>
           mergeCommentsList(oldList, newComments)
         )
@@ -152,8 +152,8 @@ function getCommentIdx(state, path, id) {
 function mergeCommentsList(_oldList, newList, addNewComments=false) {
   return _oldList
     .withMutations(oldList => {
-      for (let comment of newList) {
-        let commentIdx = oldList.findIndex(c => c.id === comment.id)
+      for (const comment of newList) {
+        const commentIdx = oldList.findIndex(c => c.id === comment.id)
         if (commentIdx !== -1)
           oldList.update(commentIdx, c => c.merge(comment))
         else if (addNewComments)

@@ -4,7 +4,7 @@ import 'core-js/es7/object.js'
 export const optionsToQueryString = (options) => {
   if (!options || Object.keys(options).length === 0)
     return ''
-  return `?${Object.entries(options).map(([key, value]) => 
+  return `?${Object.entries(options).map(([key, value]) =>
     `${key}=${encodeURIComponent(value)}`
   ).join('&')}`
 }
@@ -19,7 +19,7 @@ export const isExternal = (currentHref, url) =>
 // ---- Private ----
 
 function checkDomain(url) {
-  if (url.indexOf('//') === 0 )
+  if (url.indexOf('//') === 0)
     url = location.protocol + url
-  return url.toLowerCase().replace(/([a-z])?:\/\//,'$1').split('/')[0]
+  return url.toLowerCase().replace(/([a-z])?:\/\//, '$1').split('/')[0]
 }

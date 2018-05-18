@@ -13,10 +13,10 @@ export const joinCommentsChannel = videoId => dispatch => {
   dispatch(setLoading(true))
   dispatch(fetchAll(
     SocketApi.joinChannel(COMMENTS_CHANNEL, `comments:video:${videoId}`, {
-      'comment_removed': c => dispatch(remove(c)),
-      'comment_added': c => dispatch(add(c)),
-      'comment_updated': c => dispatch(update(c)),
-      'comments_scores_updated': ({comments}) => dispatch(updateScores(comments)),
+      comment_removed: c => dispatch(remove(c)),
+      comment_added: c => dispatch(add(c)),
+      comment_updated: c => dispatch(update(c)),
+      comments_scores_updated: ({comments}) => dispatch(updateScores(comments)),
     })
   ))
 }
@@ -50,5 +50,4 @@ export const flagComment = ({id, reason}) => createEffect(
     catch: errorToFlash
   }
 )
-
 

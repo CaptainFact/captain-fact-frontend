@@ -22,10 +22,9 @@ export const handleFormEffectResponse = (handlers={}) => action => {
     if (action.error) {
       if (onError)
         onError(action.payload)
-      if (typeof(action.payload) === 'object' && !(action.payload instanceof Record))
+      if (typeof (action.payload) === 'object' && !(action.payload instanceof Record))
         throw new SubmissionError(action.payload)
-    }
-    else if (onSuccess)
+    } else if (onSuccess)
       onSuccess(action.payload)
   }
   return action
