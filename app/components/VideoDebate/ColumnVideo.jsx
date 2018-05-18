@@ -11,6 +11,7 @@ import { LoadingFrame, Icon } from '../Utils'
 import ReputationGuard from '../Utils/ReputationGuard'
 import VideoDebatePlayer from './VideoDebatePlayer'
 import Presence from './Presence'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
 
 @connect(state => ({
@@ -51,10 +52,10 @@ export class ColumnVideo extends React.PureComponent {
               </Link>
             </li>
             <li>
-              <a href="https://discord.gg/yqFpjgG" target="_blank" rel="noopener noreferrer">
+              <ExternalLinkNewTab href="https://discord.gg/yqFpjgG">
                 <Icon size="small" name="comments-o"/>
                 <span>Chat</span>
-              </a>
+              </ExternalLinkNewTab>
             </li>
           </ul>
         </div>

@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet'
 import i18n from '../../i18n/i18n'
 import { FlashMessages } from '../Utils'
 import { fetchCurrentUser } from '../../state/users/current_user/effects'
-import { default as Sidebar } from './Sidebar'
+import Sidebar from './Sidebar'
 import { MainModalContainer } from '../Modal/MainModalContainer'
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
 

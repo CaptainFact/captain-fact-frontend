@@ -1,9 +1,8 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router'
+import { withRouter, Link } from 'react-router'
 import { translate } from 'react-i18next'
-import { Link } from 'react-router'
 
 import { register, requestInvitation } from '../../state/users/current_user/effects'
 import {
@@ -20,7 +19,11 @@ import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 
 const SignupForm = ({location, t}) => {
   if (location.query.invitation_token)
-    return <RealSignupForm initialValues={{invitation_token: location.query.invitation_token}}/>
+    return (
+      <RealSignupForm initialValues={{
+        invitation_token: location.query.invitation_token}}
+      />
+    )
   return (
     <div className="user-form">
       <Message
@@ -54,7 +57,8 @@ class RealSignupForm extends React.PureComponent {
   }
 
   submit({invitation_token, ...user}) {
-    return this.props.register({invitation_token, user: {...user, locale: this.props.locale}})
+    const registerParams = {invitation_token, user: {...user, locale: this.props.locale}}
+    return this.props.register(registerParams)
       .then(handleFormEffectResponse({
         onError: msg => (typeof (msg) === 'string' ? this.props.errorToFlash(msg) : null)
       }))

@@ -13,7 +13,9 @@ export default class Help extends React.PureComponent {
   render() {
     const { t, routeParams: {splat} } = this.props
 
-    let header, content
+    let header = ''
+    let content = ''
+
     if (!splat) {
       header = <h1 className="title is-1">{t('main:menu.help')}</h1>
       content = this.renderIndexContent()

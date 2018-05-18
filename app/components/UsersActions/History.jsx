@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import Immutable from 'immutable'
 import { translate } from 'react-i18next'
 
-import { connect } from 'react-redux'
 import { UserAction } from './UserAction'
 
 

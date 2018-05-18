@@ -2,6 +2,7 @@ import React from 'react'
 import ReactPlayer from 'react-player'
 import upperCase from 'voca/upper_case'
 import { youtubeRegex } from '../../lib/url_utils'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
 
 const supportedPlayerUrls = [youtubeRegex]
@@ -40,12 +41,12 @@ export const Source = ({ source: { url, title, site_name }, withoutPlayer }) => 
   }
   return (
     <div>
-      <a href={url} target="_BLANK" className="source">
+      <ExternalLinkNewTab href={url} className="source">
         <span className="site-name">
           {upperCase(site_name) || getDisplayableHostname(url)}
         </span>
         <span className="article-title">{title}</span>
-      </a>
+      </ExternalLinkNewTab>
     </div>
   )
 }

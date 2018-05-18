@@ -15,42 +15,51 @@ plugins:
   - jsx-a11y
   - import
 rules:
-  indent:
-    - warn
-    - 2
-  linebreak-style:
-    - error
-    - unix
-  quotes:
-    - warn
-    - single
-    - avoidEscape: true
-  semi:
-    - error
-    - never
   max-len:
     - warn
     - code: 85
       ignoreStrings: true
       ignoreTemplateLiterals: true
       ignoreRegExpLiterals: true
+  indent: ['warn', 2]
+  linebreak-style: ['error', 'unix']
+  quotes: ['warn', 'single', {avoidEscape: true}]
+  semi: ['error', 'never']
   import/first: ['warn']
+  no-continue: off
+  no-plusplus: off
+  radix: off
+  eol-last: ['warn']
+  no-nested-ternary: ['warn']
+  prefer-const: ['warn']
   import/no-named-as-default: ['warn']
+  no-restricted-globals: ["error", "event", "fdescribe"]
+  no-mixed-operators: ['warn']
   react/no-multi-comp: ['warn']
-  react/sort-comp: ['warn']
   react/jsx-no-bind: ['warn']
   react/jsx-indent-props: ['warn']
   react/jsx-first-prop-new-line: ['warn']
   react/jsx-closing-bracket-location: ['warn']
   react/jsx-curly-spacing: ['warn']
-  react/jsx-tag-spacing: ['warn']
+  react/jsx-tag-spacing: ['warn', {beforeSelfClosing: 'allow'}]
   react/jsx-wrap-multilines: ['warn']
-  no-restricted-globals: ["error", "event", "fdescribe"]
+  react/no-unused-state: ['warn']
+  react/jsx-max-props-per-line: ['warn', {when: 'multiline'}]
+  react/jsx-closing-tag-location: ['warn']
+  react/no-unescaped-entities: ['warn']
+  react/no-unused-prop-types: ['warn']
+  react/jsx-indent: ['warn']
+  react/no-array-index-key: ['warn']
   jsx-a11y/anchor-is-valid: 
-    - error
+    - warn
     - components: ['Link']
       specialLink: ['To']
   jsx-a11y/alt-text: ['warn']
+  jsx-a11y/label-has-for: ['warn']
+  jsx-a11y/click-events-have-key-events: ['warn']
+  jsx-a11y/no-static-element-interactions: ['warn']
+  jsx-a11y/media-has-caption: ['warn']
+  jsx-a11y/anchor-has-content: off
 
   # Following rule haves been disabled for compatibility with
   # existing code. Some of them should be re-activated in the future.
@@ -77,10 +86,13 @@ rules:
   import/export: off
   block-spacing: off
   brace-style: off
+  no-multi-spaces: off
   # React-specific temporarily disabled rules
   react/prop-types: off
   react/no-string-refs: off
   react/react-in-jsx-scope: off # Generates erros in tests
+  react/sort-comp: off
+  react/require-default-props: off
 
 globals:
   snapshot: false # For tests

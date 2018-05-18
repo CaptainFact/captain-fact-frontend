@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 
-import { staticResource } from '../../API'
 import ClickableIcon from '../Utils/ClickableIcon'
 import ReputationGuard from '../Utils/ReputationGuard'
 import TimeDisplay from '../Utils/TimeDisplay'

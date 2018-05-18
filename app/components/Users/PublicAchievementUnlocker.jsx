@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { translate } from 'react-i18next'
@@ -22,7 +22,7 @@ import { flashSuccessMsg } from '../../state/flashes/reducer'
   {unlockPublicAchievement, flashSuccessMsg}
 )
 @translate('achievements')
-class PublicAchievementUnlocker extends PureComponent {
+class PublicAchievementUnlocker extends React.PureComponent {
   componentDidMount() {
     this.unlockIfNecessary()
   }

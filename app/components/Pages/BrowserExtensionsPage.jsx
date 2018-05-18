@@ -1,9 +1,9 @@
 import React from 'react'
 import { translate, Trans } from 'react-i18next'
 import { Link } from 'react-router'
-import classNames from 'classnames'
 import ReactPlayer from 'react-player'
 import Icon from '../Utils/Icon'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
 
 export const BrowserExtensionsPage = translate('extension')(({t}) => (
@@ -37,7 +37,7 @@ export const BrowserExtensionsPage = translate('extension')(({t}) => (
         {t('description')}
         <br/><br/>
         <Trans i18nKey="moreInfo">
-          [Is]<a target="_blank" href="https://github.com/CaptainFact/captain-fact-extension">open-source</a>
+          [Is]<ExternalLinkNewTab href="https://github.com/CaptainFact/captain-fact-extension">open-source</ExternalLinkNewTab>
           [Respect]<Link to="/help/extension">[Privacy]</Link>.
         </Trans>
       </h2>
@@ -54,7 +54,7 @@ export const BrowserExtensionsPage = translate('extension')(({t}) => (
 
 const BrowserExtension = ({browser, image, buttonLabel, url, onClick, disabled = false}) => (
   <div className="column">
-    <a href={url} onClick={onClick} target="_BLANK" disabled={disabled}>
+    <ExternalLinkNewTab href={url} onClick={onClick} disabled={disabled}>
       <figure className="image is-128x128">
         <img src={image} alt={browser}/>
       </figure>
@@ -62,12 +62,13 @@ const BrowserExtension = ({browser, image, buttonLabel, url, onClick, disabled =
         <Icon name="plus"/>
         <span>{buttonLabel}</span>
       </span>
-    </a>
+    </ExternalLinkNewTab>
   </div>
 )
 
 function chromeInstall(e) {
   if (typeof chrome !== 'undefined') {
+    // eslint-disable-next-line no-undef
     chrome.webstore.install('https://chrome.google.com/webstore/detail/fnnhlmbnlbgomamcolcpgncflofhjckm')
     e.preventDefault()
     return false

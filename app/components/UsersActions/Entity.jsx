@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { translate } from 'react-i18next'
 
 import { connect } from 'react-redux'
@@ -27,7 +26,7 @@ export default class Entity extends React.PureComponent {
   }
 
   getEntityPreview() {
-    const { reference, speakers, entity, t } = this.props
+    const { reference, speakers, entity } = this.props
     if (entity === ENTITY_STATEMENT) {
       const speakerId = reference.get('speaker_id')
       const speaker = speakers.find(s => s.id === speakerId)
@@ -48,15 +47,4 @@ export default class Entity extends React.PureComponent {
     else if (entity === ENTITY_SPEAKER)
       return <SpeakerPreview speaker={reference} withoutActions/>
   }
-}
-
-Entity.PropTypes = {
-  /**
-   Entity type. See `constants.js` entity section
-   */
-  entity: PropTypes.number.isRequired,
-  /**
-   * Entity key to get its records in store
-   */
-  entityKey: PropTypes.string.isRequired
 }

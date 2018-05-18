@@ -1,11 +1,11 @@
 import React from 'react'
 import isPromise from 'is-promise'
 import classNames from 'classnames'
-
-import { default as Modal } from './Modal'
-import { Icon } from '../Utils'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
+
+import Modal from './Modal'
+import { Icon } from '../Utils'
 import { popModal } from '../../state/modals/reducer'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 

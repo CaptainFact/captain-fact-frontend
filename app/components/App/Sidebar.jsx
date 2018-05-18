@@ -5,8 +5,7 @@ import { translate } from 'react-i18next'
 import classNames from 'classnames'
 
 import { Icon } from '../Utils'
-import { MOBILE_WIDTH_THRESHOLD, USER_PICTURE_SMALL } from '../../constants'
-import { MIN_REPUTATION_MODERATION } from '../../constants'
+import { MOBILE_WIDTH_THRESHOLD, USER_PICTURE_SMALL, MIN_REPUTATION_MODERATION } from '../../constants'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import RawIcon from '../Utils/RawIcon'
 import ReputationGuard from '../Utils/ReputationGuard'
@@ -77,7 +76,9 @@ export default class Sidebar extends React.PureComponent {
           </div>
         </nav>
         <ul className="menu-list user-links">
-          <this.MenuListLink to={`${baseLink}/settings`} iconName="cog" children={t('menu.settings')}/>
+          <this.MenuListLink to={`${baseLink}/settings`} iconName="cog">
+            { t('menu.settings')}
+          </this.MenuListLink>
           <this.MenuListLink to={`${username}/bookmarks`} iconName="bookmark" disabled>
             { t('menu.myBookmarks') }
           </this.MenuListLink>

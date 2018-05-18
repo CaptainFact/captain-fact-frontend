@@ -7,9 +7,7 @@ import {
   ACTION_DELETE, ACTION_REMOVE, ACTION_RESTORE, ENTITY_COMMENT, ENTITY_SPEAKER,
   ENTITY_STATEMENT, ENTITY_VIDEO
 } from '../../constants'
-import parseDateTime from '../../lib/parse_datetime'
 import formatSeconds from '../../lib/seconds_formatter'
-import UserAction from '../../state/user_actions/record'
 import EntityTitle from './EntityTitle'
 
 
@@ -36,15 +34,18 @@ class ActionDiff extends PureComponent {
   renderKeyDiff(key, changes) {
     // Value completely changed, show it like prev -> new
     if (changes.size === 2 && changes.first().removed && changes.last().added)
-      return <div>
-        <span className="removed">{ this.formatChangeValue(changes.first().value, key) }</span>,
-        <span> -> </span>,
-        <span className="added">{ this.formatChangeValue(changes.last().value, key) }</span>
-      </div>
+      return (
+        <div>
+          <span className="removed">{ this.formatChangeValue(changes.first().value, key) }</span>,
+          <span> -> </span>,
+          <span className="added">{ this.formatChangeValue(changes.last().value, key) }</span>
+        </div>
+      )
     // Generate a real diff
     return changes.map((change, idx) => (
-      <span key={idx}
-            className={ change.added ? 'added' : change.removed ? 'removed' : '' }>
+      <span
+        key={idx}
+        className={change.added ? 'added' : change.removed ? 'removed' : ''}>
         { this.formatChangeValue(change.value, key) }
       </span>
     ))

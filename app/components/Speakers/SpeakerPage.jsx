@@ -11,6 +11,7 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
 import { fetchPublicVideos } from '../../state/videos/effects'
 import { reset } from '../../state/speakers/reducer'
 import { reset as resetVideos } from '../../state/videos/reducer'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
 
 @connect(state => ({
@@ -30,7 +31,7 @@ export class SpeakerPage extends React.PureComponent {
   }
 
   componentDidUpdate(oldProps) {
-    const { speaker: {wikidata_item_id}, userLocale, links } = this.props
+    const { speaker: {wikidata_item_id}, userLocale } = this.props
 
     // Target speaker changed
     if (this.props.params.slug_or_id !== oldProps.params.slug_or_id) {
@@ -91,9 +92,9 @@ export class SpeakerPage extends React.PureComponent {
     if (!url)
       return null
     return (
-      <a href={url} key={url} target="_BLANK" className="link-with-icon">
+      <ExternalLinkNewTab href={url} key={url} className="link-with-icon">
         <Icon name="link"/> <span>{siteName}</span>
-      </a>
+      </ExternalLinkNewTab>
     )
   }
 }

@@ -2,11 +2,10 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 
-import { FRONTEND_URL } from '../../config'
+import { FRONTEND_URL, FB_APP_ID } from '../../config'
 import Modal from '../Modal/Modal'
 import {popModal} from '../../state/modals/reducer'
 import {FieldWithButton} from '../FormUtils/index'
-import { FB_APP_ID } from '../../config'
 import {Icon} from './Icon'
 import {flashErrorMsg, flashSuccessMsg} from '../../state/flashes/reducer'
 import ThirdPartyServiceButton from '../Users/ThirdPartyServiceButton'
@@ -64,7 +63,11 @@ export default class ShareModal extends React.PureComponent {
   copyUrlToClipboard() {
     document.getElementsByClassName('share-link-field')[0].select()
     let success = false
-    try {success = document.execCommand('copy')} catch (err) {}
+    try {
+      success = document.execCommand('copy')
+    } catch (err) {
+      console.warn(`Copy failed: ${err}`)
+    }
     if (success)
       this.props.flashSuccessMsg('misc.clipboardSuccess')
     else

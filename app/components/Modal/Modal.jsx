@@ -20,7 +20,7 @@ const Modal = ({
             {title}
           </div>
           {helpLink &&
-          <Link to={helpLink} className="help-link" target="_BLANK">
+          <Link to={helpLink} className="help-link" target="_blank">
             <Icon name="question-circle" size="medium"/>
           </Link>
           }
