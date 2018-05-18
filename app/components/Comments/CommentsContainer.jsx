@@ -1,8 +1,8 @@
-import React from "react"
+import React from 'react'
 import { translate } from 'react-i18next'
 import FlipMove from 'react-flip-move'
 
-import { CommentDisplay } from "./CommentDisplay"
+import { CommentDisplay } from './CommentDisplay'
 
 
 @translate('videoDebate')
@@ -13,7 +13,7 @@ export class CommentsContainer extends React.PureComponent {
   }
 
   render() {
-    const {t, comments, className, header, replyingTo, nesting=1} = this.props
+    const {t, comments, className, header, replyingTo, nesting = 1} = this.props
 
     let numComment = 0
     const displayedComments = comments.takeWhile(c =>

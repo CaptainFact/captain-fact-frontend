@@ -48,8 +48,10 @@ export default class ResetPasswordRequestForm extends React.PureComponent {
 
   render() {
     return (
-      <form className="form user-form"
-            onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}>
+      <form
+        className="form user-form"
+        onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}
+      >
         {this.renderContent()}
       </form>
     )

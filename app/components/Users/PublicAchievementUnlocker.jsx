@@ -53,7 +53,6 @@ class PublicAchievementUnlocker extends PureComponent {
         })
     }
     return true
-
   }
 
   hasAchievement = () => this.props.achievements.includes(this.props.achievementId)
@@ -61,7 +60,7 @@ class PublicAchievementUnlocker extends PureComponent {
   doUnlockAchievement = () => {
     this.props.unlockPublicAchievement(this.props.achievementId).then(() => {
       const achievementTitle = this.props.t(`${this.props.achievementId}.title`)
-      this.props.flashSuccessMsg("achievements:unlocked", {
+      this.props.flashSuccessMsg('achievements:unlocked', {
         i18nParams: {achievement: achievementTitle},
         infoUrl: `/u/${this.props.user.username}`,
         iconName: 'trophy'

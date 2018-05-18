@@ -1,13 +1,13 @@
-import React from "react"
-import { connect } from "react-redux"
-import classNames from "classnames"
+import React from 'react'
+import { connect } from 'react-redux'
+import classNames from 'classnames'
 import { translate } from 'react-i18next'
 import { Link } from 'react-router'
 
 import { MIN_REPUTATION_ADD_SPEAKER } from '../../constants'
 import { videoDebateOnlineUsersCount, videoDebateOnlineViewersCount } from '../../state/video_debate/presence/selectors'
-import { AddSpeakerForm, SpeakerPreview } from "../Speakers"
-import { LoadingFrame, Icon } from "../Utils"
+import { AddSpeakerForm, SpeakerPreview } from '../Speakers'
+import { LoadingFrame, Icon } from '../Utils'
 import ReputationGuard from '../Utils/ReputationGuard'
 import VideoDebatePlayer from './VideoDebatePlayer'
 import Presence from './Presence'

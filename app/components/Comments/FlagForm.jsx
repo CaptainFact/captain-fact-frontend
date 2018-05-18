@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 import { reduxForm } from 'redux-form'
 import FlagReasonSelect from '../Moderation/FlagReasonSelect'
 
@@ -12,7 +12,7 @@ export default class FlagForm extends React.PureComponent {
 
     return (
       <form className="form flag-form" onSubmit={handleSubmit}>
-        <CommentDisplay comment={this.props.comment} withoutActions={true} hideThread={true}/>
+        <CommentDisplay comment={this.props.comment} withoutActions hideThread/>
         <hr/>
         <FlagReasonSelect/>
       </form>

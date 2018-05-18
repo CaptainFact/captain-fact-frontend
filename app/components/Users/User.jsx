@@ -1,12 +1,12 @@
-import React from "react"
-import { connect } from "react-redux"
-import { Link } from "react-router"
+import React from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import { Interpolate, translate } from 'react-i18next'
 import { Helmet } from 'react-helmet'
 
-import UserAppellation from "./UserAppellation"
+import UserAppellation from './UserAppellation'
 import UserPicture from './UserPicture'
-import { Icon, ErrorView } from "../Utils"
+import { Icon, ErrorView } from '../Utils'
 import ScoreTag from './ScoreTag'
 import MediaLayout from '../Utils/MediaLayout'
 import { LoadingFrame } from '../Utils/LoadingFrame'
@@ -18,7 +18,8 @@ import { resetUser } from '../../state/users/displayed_user/reducer'
 
 @connect(({CurrentUser, DisplayedUser: {isLoading, errors, data}}) => ({
   isSelf: CurrentUser.data.id === data.id,
-  isLoading, errors,
+  isLoading,
+  errors,
   user: data
 }), {fetchUser, resetUser})
 @translate('main')
@@ -44,14 +45,14 @@ export default class User extends React.PureComponent {
     this.props.resetUser()
   }
 
-  getActiveTab(section, iconName, menuTKey, isDisabled=false) {
-    const linkTo = `/u/${this.props.user.username}` + (section ? `/${section}` : '')
+  getActiveTab(section, iconName, menuTKey, isDisabled = false) {
+    const linkTo = `/u/${this.props.user.username}${section ? `/${section}` : ''}`
     const isActive = this.props.location.pathname === linkTo
     if (this.props.isLoading)
       isDisabled = true
 
     return (
-      <li className={isActive ? 'is-active' : ""}>
+      <li className={isActive ? 'is-active' : ''}>
         <Link to={linkTo} disabled={isDisabled}>
           <Icon name={iconName}/>
           <span>{this.props.t(menuTKey)}</span>
@@ -62,7 +63,7 @@ export default class User extends React.PureComponent {
 
   render() {
     if (this.props.errors)
-      return <ErrorView error={this.props.errors} canReload={true}/>
+      return <ErrorView error={this.props.errors} canReload/>
     else if (this.props.isLoading)
       return <LoadingFrame/>
 
@@ -77,32 +78,36 @@ export default class User extends React.PureComponent {
         <section className="hero is-light is-bold is-medium user-header">
           {user.id !== 0 &&
             <MediaLayout
-            left={
-              <UserPicture user={user} size={USER_PICTURE_XLARGE}/>
-            }
-            content={
-              <div>
-                <UserAppellation user={user} withoutActions={true}/>
-                <div className="registered-since">
-                  <Icon name="clock-o"/>&nbsp;
-                  <Interpolate i18nKey="user:registeredSince" value={
-                    <TimeSince time={user.registered_at} addSuffix={false} isDateTime={false}/>
-                  }/>
+              left={
+                <UserPicture user={user} size={USER_PICTURE_XLARGE}/>
+              }
+              content={
+                <div>
+                  <UserAppellation user={user} withoutActions/>
+                  <div className="registered-since">
+                    <Icon name="clock-o"/>&nbsp;
+                    <Interpolate
+                      i18nKey="user:registeredSince"
+                      value={
+                        <TimeSince time={user.registered_at} addSuffix={false} isDateTime={false}/>
+                      }
+                    />
+                  </div>
                 </div>
-              </div>
-            }
-            right={<ScoreTag reputation={user.reputation} size="large" withIcon={true}/>}/>
+              }
+              right={<ScoreTag reputation={user.reputation} size="large" withIcon/>}
+            />
           }
         </section>
         <div className="tabs is-centered">
           <ul>
-            {this.getActiveTab("", "user-circle", 'menu.profile')}
-            {isSelf && this.getActiveTab("settings", "cog", 'menu.settings')}
-            {isSelf && this.getActiveTab("bookmarks", "bookmark", 'menu.bookmarks', true)}
-            {this.getActiveTab("activity", "tasks", 'menu.activity', true)}
+            {this.getActiveTab('', 'user-circle', 'menu.profile')}
+            {isSelf && this.getActiveTab('settings', 'cog', 'menu.settings')}
+            {isSelf && this.getActiveTab('bookmarks', 'bookmark', 'menu.bookmarks', true)}
+            {this.getActiveTab('activity', 'tasks', 'menu.activity', true)}
           </ul>
         </div>
         { this.props.children }
-    </div>)
+      </div>)
   }
 }

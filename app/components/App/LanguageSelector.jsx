@@ -15,7 +15,7 @@ const defaultLocales = new Map({
 export default class LanguageSelector extends React.PureComponent {
   render() {
     return (
-      <div className={classNames("language-selector", this.props.className)}>
+      <div className={classNames('language-selector', this.props.className)}>
         {this.props.withIcon && <Icon name="language"/>}
         <span className={classNames('select', this.props.size ? `is-${this.props.size}` : null)}>
           { this.renderSelect() }

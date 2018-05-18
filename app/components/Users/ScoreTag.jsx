@@ -5,10 +5,10 @@ import { Icon } from '../Utils/Icon'
 
 function getTagType(reputation) {
   if (reputation < 0)
-    return "danger"
+    return 'danger'
   else if (reputation < 50)
-    return "warning"
-  return "success"
+    return 'warning'
+  return 'success'
 }
 
 const ScoreTag = ({reputation, size="small", withIcon=false}) =>

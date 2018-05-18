@@ -1,5 +1,5 @@
-import React from "react"
-import { connect } from "react-redux"
+import React from 'react'
+import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
 
 import { SpeakerPreview } from './SpeakerPreview'
@@ -60,7 +60,7 @@ export class SpeakerPage extends React.PureComponent {
         </Helmet>
         <div className="hero is-light is-bold is-primary">
           <div className="hero-body">
-            <SpeakerPreview withoutActions={true} speaker={this.props.speaker}/>
+            <SpeakerPreview withoutActions speaker={this.props.speaker}/>
             <hr/>
             <div className="subtitle">{this.renderWikidata()}</div>
           </div>
@@ -72,7 +72,7 @@ export class SpeakerPage extends React.PureComponent {
 
   renderWikidata() {
     if (this.props.wikiLoading)
-      return "..."
+      return '...'
     return [
       this.renderLink(this.props.links.wikipedia, 'Wikipedia'),
       this.renderLink(this.props.links.wikimedia, 'Wikimedia'),
@@ -91,7 +91,7 @@ export class SpeakerPage extends React.PureComponent {
     if (!url)
       return null
     return (
-      <a href={url} key={url} target="_BLANK" className='link-with-icon'>
+      <a href={url} key={url} target="_BLANK" className="link-with-icon">
         <Icon name="link"/> <span>{siteName}</span>
       </a>
     )

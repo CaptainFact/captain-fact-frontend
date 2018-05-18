@@ -20,7 +20,7 @@ class ActionDiff extends PureComponent {
     return (
       <div className="action-diff">
         {diff.entrySeq().map(([key, changes]) => (
-          <div key={ key } className="diff-entry">
+          <div key={key} className="diff-entry">
             <div className="diff-key">
               { titleCase(this.formatChangeKey(key)) }&nbsp;
             </div>
@@ -55,7 +55,7 @@ class ActionDiff extends PureComponent {
   }
 
   formatChangeValue(value, key) {
-    if (key === "speaker_id")
+    if (key === 'speaker_id')
       return <EntityTitle entity={ENTITY_SPEAKER} entityId={value} withPrefix={false}/>
     return value
   }
@@ -72,7 +72,7 @@ class ActionDiff extends PureComponent {
 
     // Build changes object like key: [diffs]
     return new Map().withMutations(diff => {
-      for (let [key, newValue] of this.getActionChanges(action, prevState).entrySeq()) {
+      for (const [key, newValue] of this.getActionChanges(action, prevState).entrySeq()) {
         const valueDiff = this.diffEntry(key, prevState.get(key), newValue)
         diff.set(key, new List(valueDiff))
       }
@@ -90,15 +90,15 @@ class ActionDiff extends PureComponent {
   completeReference(reference, actions, keysToStore) {
     return reference.withMutations(reference => {
       // Let's look for the most recent entries
-      for (let action of actions) {
+      for (const action of actions) {
         if (action.changes.size === 0)
           continue
-        for (let [idx, key] of keysToStore.entries()) {
+        for (const [idx, key] of keysToStore.entries()) {
           if (!(action.changes.has(key)))
             continue
           // Yihaa ! Changes contains a value for key
           reference.set(key, action.changes.get(key))
-          delete(keysToStore[idx])
+          delete (keysToStore[idx])
           if (keysToStore.length === 0)
             return reference
         }
@@ -107,7 +107,7 @@ class ActionDiff extends PureComponent {
     })
   }
 
-  buildReferenceEntity(actions, base=null) {
+  buildReferenceEntity(actions, base = null) {
     const entity = actions.first().entity
     if (entity === ENTITY_STATEMENT)
       return this.buildReferenceStatement(actions, base)
@@ -117,13 +117,13 @@ class ActionDiff extends PureComponent {
       return new Map()
   }
 
-  buildReferenceStatement(actions, base=null) {
+  buildReferenceStatement(actions, base = null) {
     if (!base)
       base = new Map({ id: actions.last().entity_id })
     return this.completeReference(base, actions, ['text', 'time', 'speaker_id'])
   }
 
-  buildReferenceSpeaker(actions, base=null) {
+  buildReferenceSpeaker(actions, base = null) {
     if (!base)
       base = new Map({ id: actions.first().entity_id })
     return this.completeReference(base, actions, ['full_name', 'title'])
@@ -134,27 +134,26 @@ class ActionDiff extends PureComponent {
       return [{added: true, value: this.formatValue(key, newValue)}]
 
     // Format numbers like prevNumber -> newNumber
-    if (typeof(newValue) === "number") {
+    if (typeof (newValue) === 'number') {
       prevValue = this.formatValue(key, prevValue)
       newValue = this.formatValue(key, newValue)
 
       // Generate diff
       if (prevValue)
         return [{removed: true, value: prevValue}, {added: true, value: newValue}]
-      else
-        return [{added: true, value: newValue}]
+      return [{added: true, value: newValue}]
     }
     // Do a string diff
-    return diffWordsWithSpace((prevValue || "").toString(), newValue ? newValue.toString() : "")
+    return diffWordsWithSpace((prevValue || '').toString(), newValue ? newValue.toString() : '')
   }
 
   formatValue(key, value) {
     if (!value)
       return value
     // Format time like 0:42 -> 1:35
-    else if (key === "time")
-      return value ? formatSeconds(value) : ""
-    else if (key === "source" || key === "url")
+    else if (key === 'time')
+      return value ? formatSeconds(value) : ''
+    else if (key === 'source' || key === 'url')
       return <a href={value} target="_blank">{value}</a>
     return value
   }

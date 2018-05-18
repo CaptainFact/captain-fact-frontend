@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 
 import { CommentDisplay } from './CommentDisplay'
 import ModalConfirmDelete from '../Modal/ModalConfirmDelete'

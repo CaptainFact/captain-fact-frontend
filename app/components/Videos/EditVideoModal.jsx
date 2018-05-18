@@ -29,8 +29,9 @@ export default class EditVideoModal extends React.PureComponent {
   render() {
     return (
       <Modal
-             handleCloseClick={this.props.popModal}
-             title={<span><Icon name="pencil"/> {this.props.t('video.edit')}</span>}>
+        handleCloseClick={this.props.popModal}
+        title={<span><Icon name="pencil"/> {this.props.t('video.edit')}</span>}
+      >
         <h4 className="title is-4">{this.props.t('video.shiftStatements')}</h4>
         <TimeShiftForm onSubmit={this.shiftSubmit}/>
       </Modal>

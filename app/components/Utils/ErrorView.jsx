@@ -14,27 +14,32 @@ const refreshableErrors = ['join_crashed']
 @translate('errors')
 export class ErrorView extends React.PureComponent {
   render() {
-    const { t, error='unknown', canGoBack=true } = this.props
+    const { t, error = 'unknown', canGoBack = true } = this.props
     const canReload = this.props.canReload || refreshableErrors.includes(error)
     return (
       <div className="message-view">
         <Message
           type="danger"
-          header={<p><strong>{t('title')}</strong></p>}>
+          header={<p><strong>{t('title')}</strong></p>}
+        >
           <div>
             <p>{tError(t, error)}{this.getMoreInfo()}</p>
             {(canGoBack || canReload) && <br/>}
             {canGoBack &&
-                <LinkWithIcon iconName="arrow-left"
-                  onClick={() => this.props.router.goBack()}>
-                  {t('main:actions.goBack')}
-                </LinkWithIcon>}
+            <LinkWithIcon
+              iconName="arrow-left"
+              onClick={() => this.props.router.goBack()}
+            >
+              {t('main:actions.goBack')}
+            </LinkWithIcon>}
             {canReload &&
-                <LinkWithIcon iconName="refresh"
-                  onClick={() => location.reload()}
-                  style={{float: 'right'}}>
-                  {t('main:actions.reload')}
-                </LinkWithIcon>}
+            <LinkWithIcon
+              iconName="refresh"
+              onClick={() => location.reload()}
+              style={{float: 'right'}}
+            >
+              {t('main:actions.reload')}
+            </LinkWithIcon>}
           </div>
         </Message>
       </div>

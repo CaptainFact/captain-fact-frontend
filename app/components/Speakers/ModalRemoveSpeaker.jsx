@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 import { translate } from 'react-i18next'
 
 import { SpeakerPreview } from './SpeakerPreview'

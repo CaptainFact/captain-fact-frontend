@@ -1,12 +1,12 @@
-import React from "react"
-import { connect } from "react-redux"
+import React from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { translate } from 'react-i18next'
 import classNames from 'classnames'
 
-import { Icon } from "../Utils"
+import { Icon } from '../Utils'
 import { MOBILE_WIDTH_THRESHOLD, USER_PICTURE_SMALL } from '../../constants'
-import { MIN_REPUTATION_MODERATION } from "../../constants"
+import { MIN_REPUTATION_MODERATION } from '../../constants'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import RawIcon from '../Utils/RawIcon'
 import ReputationGuard from '../Utils/ReputationGuard'
@@ -41,7 +41,7 @@ export default class Sidebar extends React.PureComponent {
   MenuLink({iconName, className, children, ...props}) {
     const classes = classNames(className, {'link-with-icon': !!iconName})
     return (
-      <Link className={classes} activeClassName='is-active' onClick={this.closeSideBarIfMobile} {...props}>
+      <Link className={classes} activeClassName="is-active" onClick={this.closeSideBarIfMobile} {...props}>
         {iconName && <RawIcon name={iconName}/>}
         <span>{children}</span>
       </Link>
@@ -59,7 +59,7 @@ export default class Sidebar extends React.PureComponent {
       <div className="user-section">
         <nav className="level user-quicklinks is-mobile">
           <div className="level-left menu-list">
-            <this.MenuLink to={baseLink} className="my-profile-link" onlyActiveOnIndex={true}>
+            <this.MenuLink to={baseLink} className="my-profile-link" onlyActiveOnIndex>
               <div className="current-user-link">
                 <UserPicture size={USER_PICTURE_SMALL} user={this.props.CurrentUser}/>
                 <span className="username" style={{fontSize: this.usernameFontSize()}}>
@@ -125,10 +125,13 @@ export default class Sidebar extends React.PureComponent {
           <p className="menu-label">{ t('menu.content') }</p>
           {this.renderMenuContent()}
           <p className="menu-label hide-when-collapsed">{ t('menu.language') }</p>
-          <LanguageSelector className="hide-when-collapsed"
-                            handleChange={v => i18n.changeLanguage(v)}
-                            value={i18n.language}
-                            size="small" withIcon={true}/>
+          <LanguageSelector
+            className="hide-when-collapsed"
+            handleChange={v => i18n.changeLanguage(v)}
+            value={i18n.language}
+            size="small"
+            withIcon
+          />
 
           <p className="menu-label">{ t('menu.other') }</p>
           <ul className="menu-list">
@@ -151,7 +154,7 @@ export default class Sidebar extends React.PureComponent {
     const t = this.props.t
     return (
       <ul className="menu-list">
-        <this.MenuListLink to="/videos" iconName="television" onlyActiveOnIndex={true}>
+        <this.MenuListLink to="/videos" iconName="television" onlyActiveOnIndex>
           { capitalize(t('entities.video_plural')) }
         </this.MenuListLink>
         <this.MenuListLink to="/speakers" iconName="users" disabled>

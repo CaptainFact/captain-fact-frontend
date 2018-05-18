@@ -1,7 +1,7 @@
-import React from "react"
-import capitalize from "voca/capitalize"
-import trimLeft from "voca/trim_left"
-import classNames from "classnames"
+import React from 'react'
+import capitalize from 'voca/capitalize'
+import trimLeft from 'voca/trim_left'
+import classNames from 'classnames'
 
 import TextareaAutosize from './TextareaAutosize'
 import { Icon } from '../Utils/Icon'
@@ -11,11 +11,12 @@ import TextareaLengthCounter from './TextareaLengthCounter'
 export const renderInput = ({ input, label, placeholder, type, className, meta }) => {
   const { touched, error, submitting } = (meta || {})
   return (
-    <input  className={classNames('input', className, {'is-danger': touched && error})}
-          {...input}
-          placeholder={placeholder ? placeholder : label}
-          type={type}
-          disabled={submitting}
+    <input
+      className={classNames('input', className, {'is-danger': touched && error})}
+      {...input}
+      placeholder={placeholder || label}
+      type={type}
+      disabled={submitting}
     />
   )
 }
@@ -29,7 +30,7 @@ export const renderField = (params) => {
       {icon &&
         <Icon size="small" name={icon}/>
       }
-      {touched && ((error && <span className='help is-danger'>{error}</span>))}
+      {touched && (error && <span className="help is-danger">{error}</span>)}
     </p>
   )
 }
@@ -45,7 +46,7 @@ export const renderTextareaField = (params) => {
     ...input,
     ...props,
     className: classNames('textarea', {'is-danger': hasError}),
-    placeholder: placeholder ? placeholder : label,
+    placeholder: placeholder || label,
     disabled: submitting,
     type
   }
@@ -57,7 +58,7 @@ export const renderTextareaField = (params) => {
     <p className={classNames('control', {'has-icon': !!icon})}>
       { textarea }
       <TextareaLengthCounter length={input.value.length} maxLength={maxLength}/>
-      { hasError && <span className='help is-danger'>{ error }</span> }
+      { hasError && <span className="help is-danger">{ error }</span> }
     </p>
   )
 }
@@ -78,10 +79,12 @@ export const FieldWithButton = (params) => {
         { renderInput(inputProps) }
       </div>
       <div className="control">
-        <button type="submit"
-                className={classNames('button', buttonClassName, {'is-loading': submitting})}
-                disabled={ submitting || invalid }
-                onClick={buttonClickHandler}>
+        <button
+          type="submit"
+          className={classNames('button', buttonClassName, {'is-loading': submitting})}
+          disabled={submitting || invalid}
+          onClick={buttonClickHandler}
+        >
           { buttonLabel }
         </button>
       </div>
@@ -93,7 +96,7 @@ export const checkLength = (value, range) =>
   value && value.length >= range[0] && (range[1] === -1 || value.length <= range[1])
 
 // TODO Migrate to validateLengthI18n
-export const validateLength = (errors, fieldName, value, range, label=null) => {
+export const validateLength = (errors, fieldName, value, range, label = null) => {
   if (checkLength(value, range))
     return true
   const fieldLabel = label || capitalize(fieldName.replace('_', ' '))
@@ -135,5 +138,5 @@ export const cleanStr = (str) =>
 export const cleanStrMultiline = str =>
   trimLeft(
     str.replace(/(\s(?!\n)){2,}$/g, ' ') // Trim spaces / tabs
-       .replace(/\n{3,}$/g, '\n\n') // Trim newline characters
+      .replace(/\n{3,}$/g, '\n\n') // Trim newline characters
   )

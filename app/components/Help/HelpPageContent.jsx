@@ -47,8 +47,7 @@ class HelpPageContent extends PureComponent {
   renderLink({href, children}) {
     if (isExternal(window.location.href, href))
       return <a href={href} target="_blank">{children}</a>
-    else
-      return <Link to={href} onClick={this.props.onLinkClick}>{children}</Link>
+    return <Link to={href} onClick={this.props.onLinkClick}>{children}</Link>
   }
 }
 

@@ -1,9 +1,9 @@
-import React from "react"
+import React from 'react'
 import { Field } from 'redux-form'
 import isEmail from 'validator/lib/isEmail'
 
-import { PASSWORD_LENGTH, USERNAME_LENGTH, NAME_LENGTH } from "../../constants"
-import { renderField, cleanStr } from "../FormUtils"
+import { PASSWORD_LENGTH, USERNAME_LENGTH, NAME_LENGTH } from '../../constants'
+import { renderField, cleanStr } from '../FormUtils'
 import { validateFieldLength } from '../FormUtils/index'
 
 

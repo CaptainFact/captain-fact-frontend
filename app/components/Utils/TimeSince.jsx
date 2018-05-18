@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 import { connect } from 'react-redux'
 import differenceInSeconds from 'date-fns/difference_in_seconds'
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
@@ -24,12 +24,12 @@ export class TimeSince extends React.PureComponent {
   }
 
   render() {
-    const { time, locale, dispatch, addSuffix=true, isDateTime=true, ...props } = this.props
+    const { time, locale, dispatch, addSuffix = true, isDateTime = true, ...props } = this.props
     const localeObj = locales[locale]
     const dateFormat = isDateTime ? localeObj.defaultDateTimeFormat : localeObj.defaultDateFormat
     return (
       <span title={format(time, dateFormat, {locale: localeObj})} {...props}>
-        { distanceInWordsToNow(time, {addSuffix: addSuffix, locale: localeObj}) }
+        { distanceInWordsToNow(time, {addSuffix, locale: localeObj}) }
       </span>
     )
   }
@@ -57,6 +57,6 @@ export class TimeSince extends React.PureComponent {
   }
 
   static getMinutesSince(time) {
-    return !time ? 0 : Math.trunc(differenceInSeconds(Date.now(), time)  / 60)
+    return !time ? 0 : Math.trunc(differenceInSeconds(Date.now(), time) / 60)
   }
 }

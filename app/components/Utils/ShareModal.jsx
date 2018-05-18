@@ -19,21 +19,25 @@ export default class ShareModal extends React.PureComponent {
     const url = FRONTEND_URL + this.props.path
     const encodedUrl = encodeURIComponent(url)
     return (
-      <Modal handleCloseClick={this.props.popModal}
-             className="modal-share"
-             title={<span><Icon name="share-alt"/> {this.props.t('actions.share')}</span>}>
-        <FieldWithButton className="is-medium share-link-field"
-                         input={{value: url, readOnly: true}}
-                         buttonClassName="is-medium"
-                         buttonLabel={<Icon name="clipboard"/>}
-                         buttonClickHandler={this.copyUrlToClipboard.bind(this)}
-                         expandInput/>
+      <Modal
+        handleCloseClick={this.props.popModal}
+        className="modal-share"
+        title={<span><Icon name="share-alt"/> {this.props.t('actions.share')}</span>}
+      >
+        <FieldWithButton
+          className="is-medium share-link-field"
+          input={{value: url, readOnly: true}}
+          buttonClassName="is-medium"
+          buttonLabel={<Icon name="clipboard"/>}
+          buttonClickHandler={this.copyUrlToClipboard.bind(this)}
+          expandInput
+        />
         <hr/>
         <div style={{textAlign: 'center'}}>
-          <ThirdPartyServiceButton icon="twitter" name="Twitter" url={this.twitterLink(encodedUrl)} newTab={true}/>
-          <ThirdPartyServiceButton icon="facebook" name="Facebook" url={this.facebookLink(encodedUrl)} newTab={true}/>
+          <ThirdPartyServiceButton icon="twitter" name="Twitter" url={this.twitterLink(encodedUrl)} newTab/>
+          <ThirdPartyServiceButton icon="facebook" name="Facebook" url={this.facebookLink(encodedUrl)} newTab/>
           <span style={{marginLeft: 5}}>
-            <ThirdPartyServiceButton icon="envelope" name="Mail" url={this.mailLink(encodedUrl)} newTab={true}/>
+            <ThirdPartyServiceButton icon="envelope" name="Mail" url={this.mailLink(encodedUrl)} newTab/>
           </span>
         </div>
       </Modal>
@@ -62,8 +66,8 @@ export default class ShareModal extends React.PureComponent {
     let success = false
     try {success = document.execCommand('copy')} catch (err) {}
     if (success)
-      this.props.flashSuccessMsg("misc.clipboardSuccess")
+      this.props.flashSuccessMsg('misc.clipboardSuccess')
     else
-      this.props.flashErrorMsg("misc.clipboardFail")
+      this.props.flashErrorMsg('misc.clipboardFail')
   }
 }

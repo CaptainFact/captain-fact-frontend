@@ -14,7 +14,7 @@ export default class ConfirmEmail extends React.PureComponent {
     return (
       <AsyncEffectPage
         effect={() => this.props.confirmEmail(this.props.params.token)}
-        onSuccess={() => "user:emailConfirmed"}
+        onSuccess={() => 'user:emailConfirmed'}
         errorNamespace="user:errors.error"
       />
     )

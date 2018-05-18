@@ -35,15 +35,18 @@ export default class Entity extends React.PureComponent {
       return (
         <h4 className="title is-4">
           { speaker && <strong>{speaker.full_name} </strong> }
-          <TimeDisplay time={ reference.time } capitalize={!speaker}
-                       handleClick={p => this.props.forcePosition(p)}/>
+          <TimeDisplay
+            time={reference.time}
+            capitalize={!speaker}
+            handleClick={p => this.props.forcePosition(p)}
+          />
           <hr/>
           <div className="statement-text">{text}</div>
         </h4>
       )
     }
     else if (entity === ENTITY_SPEAKER)
-      return <SpeakerPreview speaker={reference} withoutActions={true}/>
+      return <SpeakerPreview speaker={reference} withoutActions/>
   }
 }
 
