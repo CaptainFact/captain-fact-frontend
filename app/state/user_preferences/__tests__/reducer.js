@@ -5,7 +5,8 @@ test('has correct defaults', () => {
     sidebarExpended: true,
     locale: 'en',
     enableAutoscroll: true,
-    videosLanguageFilter: null
+    videosLanguageFilter: null,
+    videosOnlyFromPartners: true
   })
 })
 
