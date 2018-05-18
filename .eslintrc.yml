@@ -43,6 +43,8 @@ rules:
   react/jsx-first-prop-new-line: ['warn']
   react/jsx-closing-bracket-location: ['warn']
   react/jsx-curly-spacing: ['warn']
+  react/jsx-tag-spacing: ['warn']
+  react/jsx-wrap-multilines: ['warn']
   no-restricted-globals: ["error", "event", "fdescribe"]
   jsx-a11y/anchor-is-valid: 
     - error
@@ -76,8 +78,6 @@ rules:
   block-spacing: off
   brace-style: off
   # React-specific temporarily disabled rules
-  react/jsx-tag-spacing: off
-  react/jsx-wrap-multilines: off
   react/prop-types: off
   react/no-string-refs: off
   react/react-in-jsx-scope: off # Generates erros in tests
