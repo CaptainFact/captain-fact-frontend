@@ -18,7 +18,7 @@ const Dotenv = require('dotenv-webpack')
 module.exports = {
   mode: 'production',
   entry: {
-    'app': [
+    app: [
       // POLYFILL: Set up an ES6-ish environment
       // 'babel-polyfill',  // The entire babel-polyfill
       // Or pick es6 features needed (included into babel-polyfill)
@@ -30,7 +30,7 @@ module.exports = {
     ]
   },
   output: {
-    publicPath: './',
+    publicPath: '/',
     path: path.join(__dirname, 'public'),
     filename: '[name].[chunkhash].js'
   },
