@@ -3,10 +3,10 @@ import { Map } from 'immutable'
 import { connect } from "react-redux"
 import { Link } from "react-router"
 import { translate } from 'react-i18next'
-import { MIN_REPUTATION_ADD_VIDEO } from '../../constants'
-import { hasReputation } from '../../state/users/current_user/selectors'
-import ReputationGuard from '../Utils/ReputationGuard'
+import capitalize from 'voca/capitalize'
 
+import { MIN_REPUTATION_ADD_VIDEO } from '../../constants'
+import ReputationGuard from '../Utils/ReputationGuard'
 import { VideosGrid } from "../Videos"
 import { LoadingFrame, Icon } from "../Utils"
 import { fetchPublicVideos } from '../../state/videos/effects'
@@ -14,7 +14,6 @@ import { ErrorView } from '../Utils/ErrorView'
 import { reset } from '../../state/videos/reducer'
 import { changeVideosLanguageFilter } from '../../state/user_preferences/reducer'
 import LanguageSelector from '../App/LanguageSelector'
-import capitalize from 'voca/capitalize'
 
 
 @connect(state => ({
@@ -26,7 +25,9 @@ import capitalize from 'voca/capitalize'
 @translate('main')
 export class PublicVideos extends React.PureComponent {
   componentDidMount() {
-    this.props.fetchPublicVideos(this.props.languageFilter && {language: this.props.languageFilter})
+    const {languageFilter} = this.props
+    const filters = languageFilter && {language: languageFilter}
+    this.props.fetchPublicVideos(filters)
   }
 
   componentWillUnmount() {
@@ -81,8 +82,8 @@ export class PublicVideos extends React.PureComponent {
       return <ErrorView error={this.props.error}/>
     else if (this.props.videos.size === 0)
       return <h2>{this.props.t('errors:client.noVideoAvailable')}</h2>
-    else
-      return <VideosGrid videos={this.props.videos}/>
+
+    return <VideosGrid videos={this.props.videos}/>
   }
 
   onVideosFilterChange(value) {
