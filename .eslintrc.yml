@@ -1,0 +1,100 @@
+env:
+  browser: true
+  es6: true
+  jest: true
+  node: true
+extends: 'airbnb'
+parser: babel-eslint
+parserOptions:
+  ecmaFeatures:
+    experimentalObjectRestSpread: true
+    jsx: true
+  sourceType: module
+plugins:
+  - react
+  - jsx-a11y
+  - import
+rules:
+  max-len:
+    - warn
+    - code: 85
+      ignoreStrings: true
+      ignoreTemplateLiterals: true
+      ignoreRegExpLiterals: true
+  indent: ['warn', 2]
+  linebreak-style: ['error', 'unix']
+  quotes: ['warn', 'single', {avoidEscape: true}]
+  semi: ['error', 'never']
+  import/first: ['warn']
+  no-trailing-spaces: ['warn']
+  no-continue: off
+  no-plusplus: off
+  radix: off
+  eol-last: ['warn']
+  no-nested-ternary: ['warn']
+  prefer-const: ['warn']
+  import/no-named-as-default: ['warn']
+  no-restricted-globals: ["error", "event", "fdescribe"]
+  no-mixed-operators: ['warn']
+  react/no-multi-comp: ['warn']
+  react/jsx-no-bind: ['warn']
+  react/jsx-indent-props: ['warn']
+  react/jsx-first-prop-new-line: ['warn']
+  react/jsx-closing-bracket-location: ['warn']
+  react/jsx-curly-spacing: ['warn']
+  react/jsx-tag-spacing: ['warn', {beforeSelfClosing: 'allow'}]
+  react/jsx-wrap-multilines: ['warn']
+  react/no-unused-state: ['warn']
+  react/jsx-max-props-per-line: ['warn', {when: 'multiline'}]
+  react/jsx-closing-tag-location: ['warn']
+  react/no-unescaped-entities: ['warn']
+  react/no-unused-prop-types: ['warn']
+  react/self-closing-comp: ['warn']
+  react/jsx-indent: ['warn']
+  react/no-array-index-key: ['warn']
+  jsx-a11y/anchor-is-valid: 
+    - warn
+    - components: ['Link']
+      specialLink: ['To']
+  jsx-a11y/alt-text: ['warn']
+  jsx-a11y/label-has-for: ['warn']
+  jsx-a11y/click-events-have-key-events: ['warn']
+  jsx-a11y/no-static-element-interactions: ['warn']
+  jsx-a11y/media-has-caption: ['warn']
+  jsx-a11y/anchor-has-content: off
+
+  # Following rule haves been disabled for compatibility with
+  # existing code. Some of them should be re-activated in the future.
+  no-console: off
+  no-shadow: off
+  object-curly-spacing: off
+  object-curly-newline: off
+  object-property-newline: off
+  comma-dangle: off
+  function-paren-newline: off
+  arrow-parens: off
+  arrow-body-style: off
+  curly: off
+  no-use-before-define: off
+  no-param-reassign: off
+  camelcase: off
+  no-underscore-dangle: off
+  no-restricted-syntax: off
+  prefer-destructuring: off
+  consistent-return: off
+  class-methods-use-this: off
+  prefer-promise-reject-errors: off
+  import/prefer-default-export: off
+  import/export: off
+  block-spacing: off
+  brace-style: off
+  no-multi-spaces: off
+  # React-specific temporarily disabled rules
+  react/prop-types: off
+  react/no-string-refs: off
+  react/react-in-jsx-scope: off # Generates erros in tests
+  react/sort-comp: off
+  react/require-default-props: off
+
+globals:
+  snapshot: false # For tests

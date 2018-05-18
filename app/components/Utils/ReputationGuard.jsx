@@ -1,16 +1,15 @@
-import React from "react"
-import { connect } from "react-redux"
+import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { LoadingFrame } from "."
-import { MIN_REPUTATION_MODERATION } from '../../constants'
+import { LoadingFrame } from './LoadingFrame'
 import { hasReputation } from '../../state/users/current_user/selectors'
 import { ErrorView } from './ErrorView'
 
 
 export const DumbReputationGuard = ({
   isLoading, hasReputation, showLoading, showNotEnough, children, user,
-  verifyFunc=null
+  verifyFunc = null
 }) => {
   if (showLoading && isLoading)
     return <LoadingFrame/>
@@ -33,7 +32,7 @@ ReputationGuard.propTypes = {
 }
 
 export const withReputationGuard =
-  (requiredRep, showLoading=true, showNotEnough=true, props = {}) =>
+  (requiredRep, showLoading = true, showNotEnough = true, props = {}) =>
     WrappedComponent =>
       wrappedComponentProps =>
         <ReputationGuard requiredRep={requiredRep} showLoading={showLoading} showNotEnough={showNotEnough} {...props}>

@@ -1,7 +1,7 @@
-import { Record } from "immutable"
+import { Record } from 'immutable'
 import { createAction, handleActions } from 'redux-actions'
 
-import User from "../record"
+import User from '../record'
 
 // Actions
 export const set = createAction('CURRENT_USER/SET')
@@ -21,12 +21,10 @@ const INITIAL_STATE = new Record({
 
 const CurrentUserReducer = handleActions({
   [set]: {
-    next: (state, {payload}) => {
-      return state.merge({data: new User(payload) || {}, error: null, isLoading: false})
-    },
-    throw: (state, {payload}) => {
-      return state.merge({error: payload, isLoading: false})
-    }
+    next: (state, {payload}) =>
+      state.merge({data: new User(payload) || {}, error: null, isLoading: false}),
+    throw: (state, {payload}) =>
+      state.merge({error: payload, isLoading: false})
   },
   [userLogin]: {
     next: (state, {payload}) => {

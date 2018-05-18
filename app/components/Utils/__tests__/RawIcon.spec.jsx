@@ -1,5 +1,5 @@
 import RawIcon from '../RawIcon'
 
-test("render icon", () => {
+test('render icon', () => {
   snapshot(<RawIcon name="plus"/>)
 })

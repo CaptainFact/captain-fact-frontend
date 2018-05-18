@@ -1,4 +1,4 @@
-import { List, Record } from "immutable"
+import { List, Record } from 'immutable'
 import { handleActions, createAction, combineActions } from 'redux-actions'
 import { buildFlash } from './record'
 import { getErrorInfo } from '../../lib/errors'
@@ -20,15 +20,15 @@ export const flashError = options => addFlash({
 })
 export const flashErrorMsg = message => flashError({message})
 export const flashErrorUnauthenticated = () => flashError({
-  message: "errors:server.unauthenticated",
-  infoText: "main:menu.loginSignup",
-  infoUrl: "/login"
+  message: 'errors:server.unauthenticated',
+  infoText: 'main:menu.loginSignup',
+  infoUrl: '/login'
 })
 
-export const flashSuccessMsg = (message, params={}) => addFlash({
+export const flashSuccessMsg = (message, params = {}) => addFlash({
   flashType: 'success',
   iconName: 'check-circle',
-  message: message,
+  message,
   ...params
 })
 export function errorToFlash(msg) {
@@ -46,9 +46,10 @@ export function errorToFlash(msg) {
   action.error = true
   return action
 }
-// Same as errorToFlash but doesn't show anything if payload is not a string (useful for forms)
+// Same as errorToFlash but doesn't show anything if payload is
+// not a string (useful for forms)
 export function errorMsgToFlash(msg) {
-  if (typeof(msg) === 'string')
+  if (typeof (msg) === 'string')
     return errorToFlash(msg)
   return () => () => null
 }
@@ -62,7 +63,8 @@ const INITIAL_STATE = Record({
 const FlashesReducer = handleActions({
   [addFlash]: (state, {payload}) => {
     // Only display one error for connections problems (instead of one per request)
-    if (payload.message === NO_INTERNET_ERROR && state.flashes.find(f => f.message === NO_INTERNET_ERROR))
+    if (payload.message === NO_INTERNET_ERROR &&
+      state.flashes.find(f => f.message === NO_INTERNET_ERROR))
       return state
     return state.update('flashes', l => l.push(payload))
   },
@@ -76,7 +78,7 @@ const FlashesReducer = handleActions({
     state.set('isPaused', payload),
   [update]: (state, {payload}) => {
     if (!state.isPaused)
-      state = state.update('flashes', flashes =>
+      return state.update('flashes', flashes =>
         flashes
           .map(f => f.set('timeLeft', f.timeLeft - payload))
           .filter(msg => msg.timeLeft > 0)

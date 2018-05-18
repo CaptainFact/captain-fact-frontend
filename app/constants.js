@@ -1,10 +1,10 @@
 /* ------ Server & API ------ */
 // Channels
-export const VIDEO_DEBATE_CHANNEL = "video_debate"
-export const VIDEO_DEBATE_HISTORY_CHANNEL = "video_debate_history"
-export const STATEMENTS_HISTORY_CHANNEL = "statement_history"
-export const STATEMENTS_CHANNEL = "statements"
-export const COMMENTS_CHANNEL = "comments"
+export const VIDEO_DEBATE_CHANNEL = 'video_debate'
+export const VIDEO_DEBATE_HISTORY_CHANNEL = 'video_debate_history'
+export const STATEMENTS_HISTORY_CHANNEL = 'statement_history'
+export const STATEMENTS_CHANNEL = 'statements'
+export const COMMENTS_CHANNEL = 'comments'
 
 // Misc
 export const NO_INTERNET_ERROR = 'errors:server.noInternet'
@@ -61,12 +61,12 @@ export const USERNAME_LENGTH = [5, 15]
 export const NAME_LENGTH = [2, 20]
 
 // Comments
-export const COMMENT_LENGTH = [0, 240]
+export const COMMENT_LENGTH = [0, 255]
 
 // Speakers
 export const SPEAKER_NAME_LENGTH = [3, 60]
 export const SPEAKER_TITLE_LENGTH = [3, 60]
 
 // Statement
-export const STATEMENT_LENGTH = [10, 240]
+export const STATEMENT_LENGTH = [10, 255]
 

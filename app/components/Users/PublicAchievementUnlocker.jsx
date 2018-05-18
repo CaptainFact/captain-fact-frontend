@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { translate } from 'react-i18next'
@@ -22,7 +22,7 @@ import { flashSuccessMsg } from '../../state/flashes/reducer'
   {unlockPublicAchievement, flashSuccessMsg}
 )
 @translate('achievements')
-class PublicAchievementUnlocker extends PureComponent {
+class PublicAchievementUnlocker extends React.PureComponent {
   componentDidMount() {
     this.unlockIfNecessary()
   }
@@ -53,7 +53,6 @@ class PublicAchievementUnlocker extends PureComponent {
         })
     }
     return true
-
   }
 
   hasAchievement = () => this.props.achievements.includes(this.props.achievementId)
@@ -61,7 +60,7 @@ class PublicAchievementUnlocker extends PureComponent {
   doUnlockAchievement = () => {
     this.props.unlockPublicAchievement(this.props.achievementId).then(() => {
       const achievementTitle = this.props.t(`${this.props.achievementId}.title`)
-      this.props.flashSuccessMsg("achievements:unlocked", {
+      this.props.flashSuccessMsg('achievements:unlocked', {
         i18nParams: {achievement: achievementTitle},
         infoUrl: `/u/${this.props.user.username}`,
         iconName: 'trophy'

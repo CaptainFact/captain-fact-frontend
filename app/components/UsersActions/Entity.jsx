@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { translate } from 'react-i18next'
 
 import { connect } from 'react-redux'
@@ -27,7 +26,7 @@ export default class Entity extends React.PureComponent {
   }
 
   getEntityPreview() {
-    const { reference, speakers, entity, t } = this.props
+    const { reference, speakers, entity } = this.props
     if (entity === ENTITY_STATEMENT) {
       const speakerId = reference.get('speaker_id')
       const speaker = speakers.find(s => s.id === speakerId)
@@ -35,25 +34,17 @@ export default class Entity extends React.PureComponent {
       return (
         <h4 className="title is-4">
           { speaker && <strong>{speaker.full_name} </strong> }
-          <TimeDisplay time={ reference.time } capitalize={!speaker}
-                       handleClick={p => this.props.forcePosition(p)}/>
+          <TimeDisplay
+            time={reference.time}
+            capitalize={!speaker}
+            handleClick={p => this.props.forcePosition(p)}
+          />
           <hr/>
           <div className="statement-text">{text}</div>
         </h4>
       )
     }
     else if (entity === ENTITY_SPEAKER)
-      return <SpeakerPreview speaker={reference} withoutActions={true}/>
+      return <SpeakerPreview speaker={reference} withoutActions/>
   }
-}
-
-Entity.PropTypes = {
-  /**
-   Entity type. See `constants.js` entity section
-   */
-  entity: PropTypes.number.isRequired,
-  /**
-   * Entity key to get its records in store
-   */
-  entityKey: PropTypes.string.isRequired
 }

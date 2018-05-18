@@ -25,7 +25,7 @@ const animations = {
 
 const Achievement = ({t, id}) => {
   const {title, description} = t(id, {returnObjects: true})
-  const image = pictures[id] ? `/assets/achievements/${pictures[id]}` : "/assets/achievements/default.png"
+  const image = pictures[id] ? `/assets/achievements/${pictures[id]}` : '/assets/achievements/default.png'
   const animation = animations[id] ? `/assets/achievements/${animations[id]}` : null
 
   return (

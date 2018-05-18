@@ -8,8 +8,8 @@ import isPromise from 'is-promise'
  * Errors will always be caught at the end and an object similar to a
  * flux standard action (FSA) will be generated using `generateFSAError()`
  *
- * All opts values are dispatched using `cleverDispatch` meaning you can give an action, an action
- * creator, or an iterable containing any number of these.
+ * All opts values are dispatched using `cleverDispatch` meaning you can give
+ * an action, an action creator, or an iterable containing any number of these.
  *
  * `after` last action / action creator return will be used as the final return
  *
@@ -17,25 +17,29 @@ import isPromise from 'is-promise'
  * @param {{before: *, then: *, catch: *, after: *} || null} opts
  * @return function effect returning the updated promise
  */
-export function createEffect(promise, opts=null) {
+export function createEffect(promise, opts = null) {
   return (dispatch, getState) => {
     // Dispatch a series of actions at different steps of the promise
     if (opts) {
       if (opts.before)
         cleverDispatch(dispatch, getState, opts.before)
       if (promise && opts.then)
-        promise = promise.then(x => cleverDispatch(dispatch, getState, opts.then, x))
+        promise = promise.then(x =>
+          cleverDispatch(dispatch, getState, opts.then, x)
+        )
       if (promise && opts.catch)
-        promise = promise.catch(x => cleverDispatch(dispatch, getState, opts.catch, x))
+        promise = promise.catch(x =>
+          cleverDispatch(dispatch, getState, opts.catch, x)
+        )
       if (opts.after)
         promise = cleverDispatch(dispatch, getState, opts.after, promise)
     }
-    // Handle return value : if none of the functions generated FSA actions, we manually generate
-    // SUCCESS / ERROR actions based on then() / catch()
+    // Handle return value : if none of the functions generated FSA actions,
+    // we manually generate SUCCESS / ERROR actions based on then() / catch()
     if (promise && isPromise(promise)) {
       return promise
-        .then(value => isAction(value) ? value : generateFSASuccess(value))
-        .catch(value => isAction(value) ? value : generateFSAError(value))
+        .then(value => (isAction(value) ? value : generateFSASuccess(value)))
+        .catch(value => (isAction(value) ? value : generateFSAError(value)))
     }
     return promise
   }
@@ -62,8 +66,8 @@ export function returnSuccess(returnValue) {
  * @param params params to give to action creators
  * @returns {*}
  */
-export function cleverDispatch(dispatch, getState, toDispatch, params=null) {
-  if (typeof(toDispatch) === 'function')
+export function cleverDispatch(dispatch, getState, toDispatch, params = null) {
+  if (typeof (toDispatch) === 'function')
     return dispatch(toDispatch(params))
   else if (isAction(toDispatch))
     return dispatch(toDispatch)
@@ -110,9 +114,9 @@ export function generateFSASuccess(payload) {
  * @returns {boolean}
  */
 export function isAction(obj) {
-  return obj !== null && typeof(obj) === 'object' && typeof(obj.type) === 'string'
+  return obj !== null && typeof (obj) === 'object' && typeof (obj.type) === 'string'
 }
 
 function isIterable(obj) {
-  return obj !== null && typeof(obj[Symbol.iterator]) === 'function'
+  return obj !== null && typeof (obj[Symbol.iterator]) === 'function'
 }

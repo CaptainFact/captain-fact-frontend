@@ -1,8 +1,8 @@
-import React from "react"
+import React from 'react'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 
-import Modal from "../Modal/Modal"
+import Modal from '../Modal/Modal'
 import { Icon } from '../Utils/Icon'
 import { joinStatementHistoryChannel, leaveStatementHistoryChannel } from '../../state/video_debate/history/effects'
 import { popModal } from '../../state/modals/reducer'

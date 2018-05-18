@@ -1,27 +1,27 @@
-import { youtubeRegex, optionsToQueryString, isExternal, checkDomain } from '../url_utils'
+import { youtubeRegex, optionsToQueryString, isExternal } from '../url_utils'
 
 
 describe('Youtube regex', () => {
   it('should accept regular urls', () => {
     // Normal form
-    expect(youtubeRegex.test("https://www.youtube.com/watch?v=dQw4w9WgXcQ")).toBe(true)
+    expect(youtubeRegex.test('https://www.youtube.com/watch?v=dQw4w9WgXcQ')).toBe(true)
     // Without https://
-    expect(youtubeRegex.test("www.youtube.com/watch?v=dQw4w9WgXcQ")).toBe(true)
+    expect(youtubeRegex.test('www.youtube.com/watch?v=dQw4w9WgXcQ')).toBe(true)
     // Short form
-    expect(youtubeRegex.test("https://youtu.be/dQw4w9WgXcQ")).toBe(true)
+    expect(youtubeRegex.test('https://youtu.be/dQw4w9WgXcQ')).toBe(true)
     // Short form with get params
-    expect(youtubeRegex.test("https://youtu.be/dQw4w9WgXcQ?t=42s")).toBe(true)
+    expect(youtubeRegex.test('https://youtu.be/dQw4w9WgXcQ?t=42s')).toBe(true)
     // Embedded form
-    expect(youtubeRegex.test("https://www.youtube.com/embed/LMRdn_MQWXM")).toBe(true)
+    expect(youtubeRegex.test('https://www.youtube.com/embed/LMRdn_MQWXM')).toBe(true)
   })
 
   it('should reject invalid urls', () => {
     // Mising id
-    expect(youtubeRegex.test("https://youtu.be")).toBe(false)
+    expect(youtubeRegex.test('https://youtu.be')).toBe(false)
     // Channel
-    expect(youtubeRegex.test("https://www.youtube.com/channel/UCQgWpmt02UtJkyO32HGUASQ")).toBe(false)
+    expect(youtubeRegex.test('https://www.youtube.com/channel/UCQgWpmt02UtJkyO32HGUASQ')).toBe(false)
     // Empty string
-    expect(youtubeRegex.test("")).toBe(false)
+    expect(youtubeRegex.test('')).toBe(false)
     // Random string
     expect(youtubeRegex.test(Math.random().toString(36).substring(7))).toBe(false)
   })
@@ -29,11 +29,11 @@ describe('Youtube regex', () => {
 
 describe('optionsToQueryString', () => {
   it('should return an empty string if given an empty map', () => {
-    expect(optionsToQueryString({})).toBe("")
+    expect(optionsToQueryString({})).toBe('')
   })
 
   it('should map values', () => {
-    expect(optionsToQueryString({hello: "world", value: 42})).toBe("?hello=world&value=42")
+    expect(optionsToQueryString({hello: 'world', value: 42})).toBe('?hello=world&value=42')
   })
 })
 

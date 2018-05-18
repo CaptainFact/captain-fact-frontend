@@ -1,7 +1,7 @@
-import { Record } from "immutable"
+import { Record } from 'immutable'
 
 import User from '../../users/record'
-import Source from "./source_record"
+import Source from './source_record'
 
 
 const Comment = new Record({
@@ -11,7 +11,7 @@ const Comment = new Record({
   user: new User(),
   source: new Source(),
   statement_id: 0,
-  text: "",
+  text: '',
   approve: false,
   inserted_at: new Date(),
   score: 0

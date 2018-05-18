@@ -1,13 +1,13 @@
-import React from "react"
-import { connect } from "react-redux"
+import React from 'react'
+import { connect } from 'react-redux'
 import { Field, reduxForm, getFormValues } from 'redux-form'
 import { translate } from 'react-i18next'
 import isURL from 'validator/lib/isURL'
 import { withRouter } from 'react-router'
 
-import { renderField, validateLength, cleanStrMultiline } from "../FormUtils"
-import { COMMENT_LENGTH, USER_PICTURE_LARGE } from "../../constants"
-import TextareaAutosize from "../FormUtils/TextareaAutosize"
+import { renderField, validateLength, cleanStrMultiline } from '../FormUtils'
+import { COMMENT_LENGTH, USER_PICTURE_LARGE } from '../../constants'
+import TextareaAutosize from '../FormUtils/TextareaAutosize'
 import CloseButton from '../Utils/CloseButton'
 import Icon from '../Utils/Icon'
 import Tag from '../Utils/Tag'
@@ -27,28 +27,29 @@ const validate = ({ source, text }) => {
   const url = source ? source.url : null
   const hasValidUrl = url && isURL(url, {protocols: ['http', 'https']})
   if (url && !hasValidUrl)
-    errors['source'] = {url: 'Invalid URL'}
+    errors.source = {url: 'Invalid URL'}
   if (!hasValidUrl && !text)
-    errors['text'] = true
+    errors.text = true
   else if (text)
-    validateLength(errors, 'text', text, COMMENT_LENGTH, "Comment")
+    validateLength(errors, 'text', text, COMMENT_LENGTH, 'Comment')
   return errors
 }
 
 class CommentField extends React.PureComponent {
   render() {
-    const { input, label, placeholder, isReply, meta: { submitting, error }, autoFocus=false } = this.props
+    const { input, label, placeholder, isReply, meta: { submitting, error }, autoFocus = false } = this.props
 
     return (
       <p className="control">
-        <TextareaAutosize {...input}
-                          placeholder={placeholder ? placeholder : label}
-                          disabled={submitting}
-                          focus={isReply}
-                          autoFocus={autoFocus}
+        <TextareaAutosize
+          {...input}
+          placeholder={placeholder || label}
+          disabled={submitting}
+          focus={isReply}
+          autoFocus={autoFocus}
         />
         <TextareaLengthCounter length={input.value.length} maxLength={COMMENT_LENGTH[1]}/>
-        {error && <span className="help is-danger">{typeof(error) === 'string' ? error : error[0]}</span>}
+        {error && <span className="help is-danger">{typeof (error) === 'string' ? error : error[0]}</span>}
       </p>
     )
   }
@@ -63,7 +64,7 @@ class CommentField extends React.PureComponent {
     isAuthenticated: isAuthenticated(state)
   }
 }, {postComment, flashErrorUnauthenticated})
-@reduxForm({form:'commentForm', validate})
+@reduxForm({form: 'commentForm', validate})
 @translate('videoDebate')
 @withRouter
 export class CommentForm extends React.Component {
@@ -98,22 +99,32 @@ export class CommentForm extends React.Component {
                   {t('comment.replyingTo')} <UserAppellation user={replyTo.user}/>
                 </span>
               </Tag>
-              <CommentDisplay className="quoted"
-                              richMedias={false}
-                              comment={replyTo}
-                              withoutActions withoutHeader hideThread/>
+              <CommentDisplay
+                className="quoted"
+                richMedias={false}
+                comment={replyTo}
+                withoutActions
+                withoutHeader
+                hideThread
+              />
             </div>
             }
-            <Field component={ CommentField } className="textarea" name="text"
-                   isReply={!!replyTo}
-                   normalize={ cleanStrMultiline }
-                   placeholder={t('comment.writeComment')}
-                   autoFocus
+            <Field
+              component={CommentField}
+              className="textarea"
+              name="text"
+              isReply={!!replyTo}
+              normalize={cleanStrMultiline}
+              placeholder={t('comment.writeComment')}
+              autoFocus
             />
             <div className="level">
-              <Field component={ renderField } name="source.url"
-                     label={t('comment.addSource')}
-                     normalize={s => s.trim()}/>
+              <Field
+                component={renderField}
+                name="source.url"
+                label={t('comment.addSource')}
+                normalize={s => s.trim()}
+              />
               <div className="submit-btns">
                 { this.renderSubmit(valid, sourceUrl, replyTo) }
               </div>
@@ -132,23 +143,31 @@ export class CommentForm extends React.Component {
         {this.props.t('comment.post', i18nParams)}
       </button>
     )
-    else return ([
-      <button key="comment" type="submit" className="button" disabled={disabled}>
-        {this.props.t('comment.post', i18nParams)}
-      </button>,
-      <button key="refute" type="submit"
-              className="button is-danger"
-              disabled={disabled}
-              onClick={this.postAndReset(values => this.props.postComment({...values, approve: false}))}>
-        {this.props.t('comment.refute', i18nParams)}
-      </button>,
-      <button key="approve" type="submit"
-              className="button is-success"
-              disabled={disabled}
-              onClick={this.postAndReset(values => this.props.postComment({...values, approve: true}))}>
-        {this.props.t('comment.approve', i18nParams)}
-      </button>
-    ])
+    return (
+      <React.Fragment>
+        <button key="comment" type="submit" className="button" disabled={disabled}>
+          {this.props.t('comment.post', i18nParams)}
+        </button>
+        <button
+          key="refute"
+          type="submit"
+          className="button is-danger"
+          disabled={disabled}
+          onClick={this.postAndReset(values => this.props.postComment({...values, approve: false}))}
+        >
+          {this.props.t('comment.refute', i18nParams)}
+        </button>
+        <button
+          key="approve"
+          type="submit"
+          className="button is-success"
+          disabled={disabled}
+          onClick={this.postAndReset(values => this.props.postComment({...values, approve: true}))}
+        >
+          {this.props.t('comment.approve', i18nParams)}
+        </button>
+      </React.Fragment>
+    )
   }
 
   expandForm() {
@@ -162,7 +181,7 @@ export class CommentForm extends React.Component {
     return this.props.handleSubmit(comment => {
       if (comment.reply_to) {
         comment.reply_to_id = comment.reply_to.id
-        delete(comment.reply_to)
+        delete (comment.reply_to)
       }
       return postFunc(comment).then(handleFormEffectResponse({
         onSuccess: () => this.props.reset()

@@ -1,4 +1,4 @@
-import { Record } from "immutable"
+import { Record } from 'immutable'
 import { createAction, handleActions } from 'redux-actions'
 
 import parseDateTime from '../../../lib/parse_datetime'

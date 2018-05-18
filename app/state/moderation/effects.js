@@ -5,14 +5,14 @@ import { createEffect } from '../utils'
 
 
 export const fetchRandomModeration = () => createEffect(
-  HttpApi.get("moderation/random"), {
+  HttpApi.get('moderation/random'), {
     before: setLoading(true),
     after: setModerationEntry
   }
 )
 
 export const postModerationFeedback = (values) => createEffect(
-  HttpApi.post("moderation/feedback", values), {
+  HttpApi.post('moderation/feedback', values), {
     then: removeModerationEntry,
     catch: errorToFlash
   }

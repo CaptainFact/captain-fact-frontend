@@ -1,13 +1,13 @@
-import React from "react"
+import React from 'react'
 import doCapitalize from 'voca/capitalize'
 
-import formatSeconds from "../../lib/seconds_formatter"
+import formatSeconds from '../../lib/seconds_formatter'
 import { translate } from 'react-i18next'
 
 
 const i18nAtKey = 'misc.timeAt'
 
-const TimeDisplay = ({ time, handleClick, t, textBefore=true, capitalize=true }) => {
+const TimeDisplay = ({ time, handleClick, t, textBefore = true, capitalize = true }) => {
   const formattedTime = formatSeconds(time)
   const content = handleClick ?
     <a onClick={() => handleClick(time)}>{ formattedTime }</a> : formattedTime

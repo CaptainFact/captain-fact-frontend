@@ -1,13 +1,16 @@
-import "core-js/es7/object.js"
+import 'core-js/es7/object'
 
 
-export const optionsToQueryString = (options) => (
-  options && Object.keys(options).length > 0 ?
-    `?${Object.entries(options).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&')}` : ''
-)
+export const optionsToQueryString = (options) => {
+  if (!options || Object.keys(options).length === 0)
+    return ''
+  return `?${Object.entries(options).map(([key, value]) =>
+    `${key}=${encodeURIComponent(value)}`
+  ).join('&')}`
+}
 
 export const youtubeRegex =
-  /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i
+  /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/ ]{11})/i
 
 export const isExternal = (currentHref, url) =>
   (url.indexOf(':') > -1 || url.indexOf('//') > -1) && checkDomain(currentHref) !== checkDomain(url)
@@ -16,7 +19,6 @@ export const isExternal = (currentHref, url) =>
 // ---- Private ----
 
 function checkDomain(url) {
-  if (url.indexOf('//') === 0 )
-    url = location.protocol + url
-  return url.toLowerCase().replace(/([a-z])?:\/\//,'$1').split('/')[0]
+  const fullURL = url.indexOf('//') === 0 ? location.protocol + url : url
+  return fullURL.toLowerCase().replace(/([a-z])?:\/\//, '$1').split('/')[0]
 }

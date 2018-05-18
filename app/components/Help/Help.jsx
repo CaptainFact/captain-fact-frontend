@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 
 import { Link, withRouter } from 'react-router'
 import { Icon } from '../Utils/Icon'
@@ -13,7 +13,9 @@ export default class Help extends React.PureComponent {
   render() {
     const { t, routeParams: {splat} } = this.props
 
-    let header, content
+    let header = ''
+    let content = ''
+
     if (!splat) {
       header = <h1 className="title is-1">{t('main:menu.help')}</h1>
       content = this.renderIndexContent()
@@ -86,7 +88,7 @@ export default class Help extends React.PureComponent {
     return (
       <div>
         <h1 className="title is-1">
-          {t('main:menu.help')}: {t(`help:pages.${splat}`, {defaultValue: "I am lost 😟"})}
+          {t('main:menu.help')}: {t(`help:pages.${splat}`, {defaultValue: 'I am lost 😟'})}
         </h1>
         <Link className="subtitle" to="/help">
           <Icon name="arrow-left"/>

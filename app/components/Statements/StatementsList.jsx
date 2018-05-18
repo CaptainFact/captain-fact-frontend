@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from "react-redux"
+import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import { withRouter } from 'react-router'
 import FlipMove from 'react-flip-move'
@@ -9,7 +9,6 @@ import { Statement } from './Statement'
 import { closeStatementForm, setScrollTo } from '../../state/video_debate/statements/reducer'
 import { postStatement } from '../../state/video_debate/statements/effects'
 import { statementFormValueSelector } from '../../state/video_debate/statements/selectors'
-
 
 
 @connect(state => ({
@@ -32,14 +31,15 @@ export default class StatementsList extends React.PureComponent {
         {statementFormSpeakerId !== undefined &&
         <StatementForm
           initialValues={{speaker_id: statementFormSpeakerId}}
-          enableReinitialize={true}
-          keepDirtyOnReinitialize={true}
+          enableReinitialize
+          keepDirtyOnReinitialize
           handleAbort={() => this.props.closeStatementForm()}
           handleConfirm={s => this.props.postStatement(s).then(
-            e => {if (!e.error) this.props.closeStatementForm(); return e;}
-          )}/>
+            e => {if (!e.error) this.props.closeStatementForm(); return e}
+          )}
+        />
         }
-        <FlipMove enterAnimation='fade'>
+        <FlipMove enterAnimation="fade">
           {statements.map(statement =>
             <Statement key={statement.id} statement={statement}/>
           )}

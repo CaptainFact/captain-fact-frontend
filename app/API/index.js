@@ -1,2 +1,2 @@
-export {default as HttpApi} from "./http_api"
-export * from "./socket_api"
+export {default as HttpApi} from './http_api'
+export {default as SocketApi} from './socket_api'

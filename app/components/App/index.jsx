@@ -1,17 +1,17 @@
-import React from "react"
-import { connect } from "react-redux"
+import React from 'react'
+import { connect } from 'react-redux'
 import { I18nextProvider } from 'react-i18next'
 import { Helmet } from 'react-helmet'
 
 import i18n from '../../i18n/i18n'
-import { FlashMessages } from "../Utils"
+import { FlashMessages } from '../Utils'
 import { fetchCurrentUser } from '../../state/users/current_user/effects'
-import { default as Sidebar } from "./Sidebar"
-import { MainModalContainer } from "../Modal/MainModalContainer"
+import Sidebar from './Sidebar'
+import { MainModalContainer } from '../Modal/MainModalContainer'
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
 
 
-@connect(state => ({locale: state.UserPreferences.locale}), {fetchCurrentUser: fetchCurrentUser})
+@connect(state => ({locale: state.UserPreferences.locale}), {fetchCurrentUser})
 export default class App extends React.PureComponent {
   componentDidMount() {
     this.props.fetchCurrentUser()

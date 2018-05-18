@@ -16,6 +16,7 @@ contributions importantes sur la plateforme en termes de qualité et
 d'implication.
 
 C'est eux qui ont la responsabilité de nommer les futurs ambassadeurs.
+Pour candidater, rendez-vous sur le [Discord spécifique aux ambassadeurs](https://discord.gg/gXhwS4m).
 
 # Charte des ambassadeurs
 

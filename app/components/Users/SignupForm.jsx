@@ -1,9 +1,8 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router'
+import { withRouter, Link } from 'react-router'
 import { translate } from 'react-i18next'
-import { Link } from 'react-router'
 
 import { register, requestInvitation } from '../../state/users/current_user/effects'
 import {
@@ -18,24 +17,27 @@ import { errorToFlash } from '../../state/flashes/reducer'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 
 
-
 const SignupForm = ({location, t}) => {
   if (location.query.invitation_token)
-    return <RealSignupForm initialValues={{invitation_token: location.query.invitation_token}}/>
-  else
     return (
-      <div className="user-form">
-        <Message
-          type="warning"
-          header={t('invitationOnlyTitle')}>
-            <div>
-              {t('invitationOnlyBody')}
-              <hr/>
-              <InvitationRequestForm/>
-            </div>
-        </Message>
-      </div>
+      <RealSignupForm initialValues={{
+        invitation_token: location.query.invitation_token}}
+      />
     )
+  return (
+    <div className="user-form">
+      <Message
+        type="warning"
+        header={t('invitationOnlyTitle')}
+      >
+        <div>
+          {t('invitationOnlyBody')}
+          <hr/>
+          <InvitationRequestForm/>
+        </div>
+      </Message>
+    </div>
+  )
 }
 
 export default withRouter(translate('user')(SignupForm))
@@ -55,9 +57,10 @@ class RealSignupForm extends React.PureComponent {
   }
 
   submit({invitation_token, ...user}) {
-    return this.props.register({invitation_token, user: {...user, locale: this.props.locale}})
+    const registerParams = {invitation_token, user: {...user, locale: this.props.locale}}
+    return this.props.register(registerParams)
       .then(handleFormEffectResponse({
-        onError: msg => typeof(msg) === 'string' ? this.props.errorToFlash(msg) : null
+        onError: msg => (typeof (msg) === 'string' ? this.props.errorToFlash(msg) : null)
       }))
   }
 
@@ -65,8 +68,10 @@ class RealSignupForm extends React.PureComponent {
     const { valid, error, t } = this.props
 
     return (
-      <form className="form user-form"
-            onSubmit={this.props.handleSubmit(this.submit.bind(this))}>
+      <form
+        className="form user-form"
+        onSubmit={this.props.handleSubmit(this.submit.bind(this))}
+      >
         {error && <Notification type="danger">{error}</Notification>}
         {renderAllUserFields(valid, t)}
         {submitButton(t('signup'), valid)}

@@ -1,29 +1,28 @@
 // Import polyfills
-import "core-js/es6/promise.js"
-import "core-js/es6/symbol.js"
-import "core-js/es6/array.js"
-import "core-js/es6/string.js"
-import "core-js/es7/array.js"
-import "core-js/es7/object.js"
-import "core-js/modules/es6.math.trunc.js"
+import 'core-js/es6/promise'
+import 'core-js/es6/symbol'
+import 'core-js/es6/array'
+import 'core-js/es6/string'
+import 'core-js/es7/array'
+import 'core-js/es7/object'
+import 'core-js/modules/es6.math.trunc'
 
 import { polyfill as smoothSrollPolyfill } from 'smoothscroll-polyfill'
-smoothSrollPolyfill()
 
 // Import libs
-import React from "react"
-import ReactDOM from "react-dom"
-import { Router, Route, IndexRoute, browserHistory } from "react-router"
-import { Provider } from "react-redux"
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { Provider } from 'react-redux'
 
 // Load store
-import store from "./state"
+import store from './state'
 
 // Import Views
-import { default as App } from "./components/App"
-import { Home, NotFound, BrowserExtensionsPage } from "./components/Pages"
-import { PublicVideos, AddVideoForm } from "./components/Videos"
-import { VideoDebate } from "./components/VideoDebate"
+import App from './components/App'
+import { Home, NotFound, BrowserExtensionsPage } from './components/Pages'
+import { PublicVideos, AddVideoForm } from './components/Videos'
+import { VideoDebate } from './components/VideoDebate'
 import Help from './components/Help/Help'
 import UserProfile from './components/Users/UserProfile'
 import ThirdPartyCallback from './components/Users/ThirdPartyCallback'
@@ -34,10 +33,13 @@ import User from './components/Users/User'
 import ResetPasswordRequestForm from './components/Users/ResetPasswordRequestForm'
 import ResetPasswordConfirmForm from './components/Users/ResetPasswordConfirmForm'
 import ConfirmEmail from './components/Users/ConfirmEmail'
-import Moderation from './components/Moderation'
+import Moderation from './components/Moderation/Moderation'
 import { SpeakerPage } from './components/Speakers/SpeakerPage'
 import NewsletterSubscription from './components/Users/NewsletterSubscription'
 
+import './styles/application.sass'
+
+smoothSrollPolyfill()
 
 ReactDOM.render(
   <Provider store={store}>
@@ -72,5 +74,5 @@ ReactDOM.render(
       </Route>
     </Router>
   </Provider>,
-  document.getElementById("app")
+  document.getElementById('app')
 )

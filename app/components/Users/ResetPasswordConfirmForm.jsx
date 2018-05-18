@@ -19,7 +19,7 @@ import {handleEffectResponse} from '../../lib/handle_effect_response'
 // Fields are auto-validated, only validate password and repeat are the same
 const validate = params => {
   if (params.password)
-    return params.password === params.passwordRepeat ? {} : {passwordRepeat: "Doesn't match"}
+    return params.password === params.passwordRepeat ? {} : {passwordRepeat: 'Doesn\'t match'}
   return {}
 }
 
@@ -65,7 +65,7 @@ export default class ResetPasswordConfirmForm extends React.PureComponent {
         <div>
           <div className="user-box">
             <UserPicture user={user} size={USER_PICTURE_XLARGE}/>
-            <UserAppellation user={user} withoutActions={true}/>
+            <UserAppellation user={user} withoutActions/>
           </div>
           {passwordField(this.props.t)}
           {passwordRepeatField(this.props.t)}
@@ -79,8 +79,10 @@ export default class ResetPasswordConfirmForm extends React.PureComponent {
 
   render() {
     return (
-      <form className="form user-form"
-            onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}>
+      <form
+        className="form user-form"
+        onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}
+      >
         {this.renderContent()}
       </form>
     )

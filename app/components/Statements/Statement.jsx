@@ -1,17 +1,16 @@
-import React from "react"
-import { connect } from "react-redux"
+import React from 'react'
+import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 
-import { staticResource } from "../../API"
 import ClickableIcon from '../Utils/ClickableIcon'
 import ReputationGuard from '../Utils/ReputationGuard'
 import TimeDisplay from '../Utils/TimeDisplay'
-import { StatementForm } from "./StatementForm"
-import { CommentForm, CommentsContainer } from "../Comments"
-import ModalConfirmDelete from "../Modal/ModalConfirmDelete"
+import { StatementForm } from './StatementForm'
+import { CommentForm, CommentsContainer } from '../Comments'
+import ModalConfirmDelete from '../Modal/ModalConfirmDelete'
 
-import * as statementSelectors from "../../state/video_debate/statements/selectors"
-import * as commentsSelectors from "../../state/video_debate/comments/selectors"
+import * as statementSelectors from '../../state/video_debate/statements/selectors'
+import * as commentsSelectors from '../../state/video_debate/comments/selectors'
 import { ModalHistory } from '../VideoDebate/ModalHistory'
 import Tag from '../Utils/Tag'
 import { addModal } from '../../state/modals/reducer'
@@ -29,8 +28,8 @@ import { setScrollTo } from '../../state/video_debate/statements/reducer'
 @connect((state, props) => ({
   speaker: statementSelectors.getStatementSpeaker(state, props),
   comments: commentsSelectors.getStatementComments(state, props),
-  approvingFacts : commentsSelectors.getStatementApprovingFacts(state, props),
-  refutingFacts : commentsSelectors.getStatementRefutingFacts(state, props),
+  approvingFacts: commentsSelectors.getStatementApprovingFacts(state, props),
+  refutingFacts: commentsSelectors.getStatementRefutingFacts(state, props),
   approveScore: statementSelectors.getStatementApproveScore(state, props),
   refuteScore: statementSelectors.getStatementRefuteScore(state, props),
   isFocused: statementSelectors.isStatementFocused(state, props),
@@ -61,8 +60,8 @@ export class Statement extends React.PureComponent {
           <ModalConfirmDelete
             title={t('statement.remove')}
             className="is-small"
-            isAbsolute={true}
-            isRemove={true}
+            isAbsolute
+            isRemove
             message={t('statement.confirmRemove')}
             handleAbort={() => this.setState({isDeleting: false})}
             handleConfirm={() => this.props.deleteStatement({id: statement.id})}
@@ -80,7 +79,7 @@ export class Statement extends React.PureComponent {
       <StatementForm
         form={`StatementForm-${statement.id}`}
         initialValues={statement.toJS()}
-        isBundled={true}
+        isBundled
         handleAbort={() => this.setState({isEditing: false})}
         handleConfirm={s => this.props.updateStatement(s)
           .then(handleFormEffectResponse({
@@ -96,39 +95,50 @@ export class Statement extends React.PureComponent {
       <div>
         <header className="card-header">
           <p className="card-header-title">
-            <TimeDisplay time={statement.time} handleClick={t => {
-              forcePosition(t)
-              setScrollTo({id: statement.id, __forceAutoScroll: true})
-            }}/>
+            <TimeDisplay
+              time={statement.time}
+              handleClick={t => {
+                forcePosition(t)
+                setScrollTo({id: statement.id, __forceAutoScroll: true})
+              }}
+            />
             {speaker && speaker.picture &&
             <img className="speaker-mini" src={speaker.picture}/>
             }
-            <strong>{speaker ? speaker.full_name : ""}</strong>
+            <strong>{speaker ? speaker.full_name : ''}</strong>
           </p>
 
           <div className="card-header-icon">
-            <ClickableIcon name="history"
-                           size="action-size"
-                           title={t('history')}
-                           onClick={ () => this.showHistory() }/>
+            <ClickableIcon
+              name="history"
+              size="action-size"
+              title={t('history')}
+              onClick={() => this.showHistory()}
+            />
             <ReputationGuard requiredRep={MIN_REPUTATION_UPDATE_STATEMENT}>
-              <ClickableIcon name="pencil"
-                             size="action-size"
-                             title={t('main:actions.edit')}
-                             onClick={() => this.setState({isEditing: true})}/>
+              <ClickableIcon
+                name="pencil"
+                size="action-size"
+                title={t('main:actions.edit')}
+                onClick={() => this.setState({isEditing: true})}
+              />
             </ReputationGuard>
-            <ClickableIcon name="share-alt"
-                           size="action-size"
-                           title={t('main:actions.share')}
-                           onClick={() => addModal({
-                             Modal: ShareModal,
-                             props: {path: `${location.pathname}?statement=${statement.id}`}
-                           })}/>
+            <ClickableIcon
+              name="share-alt"
+              size="action-size"
+              title={t('main:actions.share')}
+              onClick={() => addModal({
+                Modal: ShareModal,
+                props: {path: `${location.pathname}?statement=${statement.id}`}
+              })}
+            />
             <ReputationGuard requiredRep={MIN_REPUTATION_REMOVE_STATEMENT}>
-              <ClickableIcon name="times"
-                             size="action-size"
-                             title={t('main:actions.remove')}
-                             onClick={() => this.setState({isDeleting: true})}/>
+              <ClickableIcon
+                name="times"
+                size="action-size"
+                title={t('main:actions.remove')}
+                onClick={() => this.setState({isDeleting: true})}
+              />
             </ReputationGuard>
           </div>
         </header>
@@ -145,7 +155,7 @@ export class Statement extends React.PureComponent {
         <span>{this.props.t(label)} </span>
         <Tag type={tagType}>{ score }</Tag>
       </div>
-      )
+    )
   }
 
   renderFactsAndComments() {
@@ -156,21 +166,27 @@ export class Statement extends React.PureComponent {
         {(approvingFacts.size > 0 || refutingFacts.size > 0) &&
         <div className="card-footer sourced-comments">
           {refutingFacts.size > 0 &&
-          <CommentsContainer className="card-footer-item refute"
-                             comments={refutingFacts}
-                             header={this.renderCommentsContainerHeader('refute', 'danger', this.props.refuteScore)}/>
+          <CommentsContainer
+            className="card-footer-item refute"
+            comments={refutingFacts}
+            header={this.renderCommentsContainerHeader('refute', 'danger', this.props.refuteScore)}
+          />
           }
           {approvingFacts.size > 0 &&
-          <CommentsContainer className="card-footer-item approve"
-                             comments={approvingFacts}
-                             header={this.renderCommentsContainerHeader('approve', 'success', this.props.approveScore)}/>
+          <CommentsContainer
+            className="card-footer-item approve"
+            comments={approvingFacts}
+            header={this.renderCommentsContainerHeader('approve', 'success', this.props.approveScore)}
+          />
           }
         </div>
         }
         <div className="card-footer comments">
           {comments.size > 0 && <CommentsContainer comments={comments}/>}
-          <CommentForm form={`formAddComment-${statement.id}`}
-                       initialValues={{ statement_id: statement.id }}/>
+          <CommentForm
+            form={`formAddComment-${statement.id}`}
+            initialValues={{ statement_id: statement.id }}
+          />
         </div>
       </div>
     )

@@ -17,7 +17,7 @@ class EntityTitle extends PureComponent {
     if (entity === ENTITY_VIDEO)
       return t(`this.${entity}`)
     if (withPrefix)
-      label = t(`this.${entity}`) + ` #${entityId}`
+      label = `${t(`this.${entity}`)} #${entityId}`
     else
       label = `#${entityId}`
     if (entity === ENTITY_SPEAKER)

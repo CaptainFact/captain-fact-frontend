@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import classNames from 'classnames'
@@ -8,8 +8,8 @@ import { Icon } from '../Utils/Icon'
 
 
 const Modal = ({
-  isActive=true, helpLink, title=null, children=null, footer=null, className=null,
-  isAbsolute=false, overrideContentStructure=false, handleCloseClick=null, popModal
+  isActive = true, helpLink, title = null, children = null, footer = null, className = null,
+  isAbsolute = false, overrideContentStructure = false, handleCloseClick = null, popModal
 }) => (
   <div className={classNames('modal', className, {'is-active': isActive, 'is-absolute': isAbsolute})}>
     <div className="modal-background" onClick={handleCloseClick || popModal}/>
@@ -20,7 +20,7 @@ const Modal = ({
             {title}
           </div>
           {helpLink &&
-          <Link to={helpLink} className="help-link" target="_BLANK">
+          <Link to={helpLink} className="help-link" target="_blank">
             <Icon name="question-circle" size="medium"/>
           </Link>
           }

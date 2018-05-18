@@ -1,6 +1,6 @@
 import { handleActions, createAction } from 'redux-actions'
 import { Record, List } from 'immutable'
-import uuidv1 from "uuid/v1"
+import uuidv1 from 'uuid/v1'
 
 import Video from '../../videos/record'
 import Speaker from '../../speakers/record'
@@ -43,7 +43,8 @@ const VideoReducer = handleActions({
   [setLoading]: (state, {payload}) =>
     state.set('isLoading', payload),
   [addSpeaker]: (state, {payload}) =>
-    state.updateIn(['data', 'speakers'], s => sortSpeakers(s.push(new Speaker(payload)))),
+    state.updateIn(['data', 'speakers'], s =>
+      sortSpeakers(s.push(new Speaker(payload)))),
   [removeSpeaker]: (state, {payload: {id}}) => {
     const speakerIdx = state.data.speakers.findIndex(s => s.id === id)
     if (speakerIdx !== -1)
@@ -58,11 +59,14 @@ const VideoReducer = handleActions({
         .updateIn(['data', 'speakers'], speakers => sortSpeakers(speakers))
     return state
   },
-  [resetVideoDebate]: state => INITIAL_STATE(),
+  [resetVideoDebate]: () => INITIAL_STATE(),
   [setPosition]: (state, {payload}) =>
     state.setIn(['playback', 'position'], Math.trunc(payload)),
   [forcePosition]: (state, {payload}) =>
-    state.update('playback', p => p.mergeDeep({position: payload, forcedPosition: {time: payload, requestId: uuidv1()}}))
+    state.update('playback', p => p.mergeDeep({
+      position: payload,
+      forcedPosition: {time: payload, requestId: uuidv1()}
+    }))
 }, INITIAL_STATE())
 export default VideoReducer
 

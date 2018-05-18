@@ -54,7 +54,7 @@ class ActionsTable extends React.PureComponent {
         {showEntity && <th>{t('entity')}</th>}
         <th>{this.renderCompareAllButton(isMostlyComparing)}</th>
         {canRestore && <th>{t('revert')}</th>}
-        {/*<th>{t('moderation')}</th>*/}
+        {/* <th>{t('moderation')}</th> */}
       </tr>
     )
   }
@@ -66,9 +66,11 @@ class ActionsTable extends React.PureComponent {
     else
       onClick = () => this.setState({expendedDiffs: this.state.expendedDiffs.clear()})
     return (
-      <a className="button"
-         title={this.props.t(isMostlyComparing ? 'hideAll' : 'compareAll')}
-         onClick={onClick}>
+      <a
+        className="button"
+        title={this.props.t(isMostlyComparing ? 'hideAll' : 'compareAll')}
+        onClick={onClick}
+      >
         {this.props.t('changes')}
       </a>
     )
@@ -88,19 +90,19 @@ class ActionsTable extends React.PureComponent {
     return this.renderActionLine(action)
   }
 
-  renderActionLine(action, isDiffing=false) {
+  renderActionLine(action, isDiffing = false) {
     const { canRestore, showEntity, t } = this.props
     const reversible = canRestore && this.props.lastActionsIds.includes(action.id) &&
       ([ACTION_DELETE, ACTION_REMOVE].includes(action.type))
 
     return (
       <tr key={action.id}>
-        <td><TimeSince time={ action.time }/></td>
+        <td><TimeSince time={action.time}/></td>
         <td>{this.renderUser(action.user)}</td>
         <td><ActionIcon type={action.type}/><strong> { t(`action.${action.type}`) }</strong></td>
         {showEntity && <td><EntityTitle entity={action.entity} entityId={action.entity_id}/></td>}
         <td>
-          <a className='button' onClick={() => this.toggleDiff(action, isDiffing)}>
+          <a className="button" onClick={() => this.toggleDiff(action, isDiffing)}>
             <Icon size="small" name="indent"/>
             <span>{ t(isDiffing ? 'compare_hide' : 'compare_show') } </span>
           </a>
@@ -115,31 +117,31 @@ class ActionsTable extends React.PureComponent {
             }
           </td>
         }
-        {/*<td>*/}
-          {/*<a className="button" disabled>*/}
-            {/*<Icon size="small" name="check"/>*/}
-            {/*<span>{t('main:actions.approve')}</span>*/}
-          {/*</a>&nbsp;&nbsp;*/}
-          {/*<a className="button" disabled>*/}
-            {/*<Icon size="small" name="flag"/>*/}
-            {/*<span>{t('main:actions.flag')}</span>*/}
-          {/*</a>*/}
-        {/*</td>*/}
+        {/* <td> */}
+        {/* <a className="button" disabled> */}
+        {/* <Icon size="small" name="check"/> */}
+        {/* <span>{t('main:actions.approve')}</span> */}
+        {/* </a>&nbsp;&nbsp; */}
+        {/* <a className="button" disabled> */}
+        {/* <Icon size="small" name="flag"/> */}
+        {/* <span>{t('main:actions.flag')}</span> */}
+        {/* </a> */}
+        {/* </td> */}
       </tr>
     )
   }
 
   renderUser = user =>
-    user ?
+    (user ?
       <UserAppellation user={user} compact/> :
-      <span className="has-text-grey-lighter is-italic">{this.props.t('deletedUser')}</span>
+      <span className="has-text-grey-lighter is-italic">{this.props.t('deletedUser')}</span>)
 
   renderDiffLine = action =>
-    <tr key={`${action.id}-diff`}>
+    (<tr key={`${action.id}-diff`}>
       <td colSpan={this.getNbCols()} style={{padding: 0}}>
         <ActionDiff action={action} allActions={this.props.actions}/>
       </td>
-    </tr>
+     </tr>)
 
   toggleDiff = (action, isDiffing) => {
     if (isDiffing) {

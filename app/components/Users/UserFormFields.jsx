@@ -1,10 +1,9 @@
-import React from "react"
+import React from 'react'
 import { Field } from 'redux-form'
 import isEmail from 'validator/lib/isEmail'
 
-import { PASSWORD_LENGTH, USERNAME_LENGTH, NAME_LENGTH } from "../../constants"
-import { renderField, cleanStr } from "../FormUtils"
-import { validateFieldLength } from '../FormUtils/index'
+import { PASSWORD_LENGTH, USERNAME_LENGTH, NAME_LENGTH } from '../../constants'
+import { renderField, cleanStr, validateFieldLength } from '../FormUtils'
 
 
 // Common validator for Signup / Login
@@ -25,10 +24,10 @@ export const emailField = t =>
          normalize={s => s.trim()}
          validate={validateEmail(t)}/>
 
-export const passwordField = (t, isOptional=false) =>
+export const passwordField = (t, isOptional = false) =>
   <Field name="password" placeholder={t(isOptional ? 'passwordOptional' : 'password')}
          type="password" component={renderField}
-         validate={v => !v && isOptional ? null : validateFieldLength(t, v, PASSWORD_LENGTH)}
+         validate={v => (!v && isOptional ? null : validateFieldLength(t, v, PASSWORD_LENGTH))}
          icon="lock"/>
 
 export const passwordRepeatField = (t) =>
@@ -45,7 +44,7 @@ export const submitButton = (text, valid) =>
     </button>
   </p>
 
-export const renderAllUserFields = (valid, t, isPasswdOptional=false) => (
+export const renderAllUserFields = (valid, t, isPasswdOptional = false) => (
   <div>
     <Field name="username"
            placeholder={t('username')}
@@ -64,6 +63,4 @@ export const renderAllUserFields = (valid, t, isPasswdOptional=false) => (
     {passwordRepeatField(t)}
   </div>
 )
-
-
 

@@ -1,16 +1,17 @@
-import React from "react"
-import { connect } from "react-redux"
-import classNames from "classnames"
+import React from 'react'
+import { connect } from 'react-redux'
+import classNames from 'classnames'
 import { translate } from 'react-i18next'
 import { Link } from 'react-router'
 
 import { MIN_REPUTATION_ADD_SPEAKER } from '../../constants'
 import { videoDebateOnlineUsersCount, videoDebateOnlineViewersCount } from '../../state/video_debate/presence/selectors'
-import { AddSpeakerForm, SpeakerPreview } from "../Speakers"
-import { LoadingFrame, Icon } from "../Utils"
+import { AddSpeakerForm, SpeakerPreview } from '../Speakers'
+import { LoadingFrame, Icon } from '../Utils'
 import ReputationGuard from '../Utils/ReputationGuard'
 import VideoDebatePlayer from './VideoDebatePlayer'
 import Presence from './Presence'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
 
 @connect(state => ({
@@ -27,7 +28,7 @@ export class ColumnVideo extends React.PureComponent {
 
     const { video, view, t } = this.props
     const { url, title, speakers } = video
-    const isDebate = view === "debate"
+    const isDebate = view === 'debate'
 
     return (
       <div id="col-video" className="column is-5">
@@ -40,7 +41,7 @@ export class ColumnVideo extends React.PureComponent {
           <ul>
             <li className={classNames({'is-active': isDebate})}>
               <Link to={`/videos/${video.id}`}>
-                <Icon size="small" name="comments-o"/>
+                <Icon size="small" name="check-circle"/>
                 <span>{ t('debate') }</span>
               </Link>
             </li>
@@ -49,6 +50,12 @@ export class ColumnVideo extends React.PureComponent {
                 <Icon size="small" name="history"/>
                 <span>{ t('history') }</span>
               </Link>
+            </li>
+            <li>
+              <ExternalLinkNewTab href="https://discord.gg/yqFpjgG">
+                <Icon size="small" name="comments-o"/>
+                <span>Chat</span>
+              </ExternalLinkNewTab>
             </li>
           </ul>
         </div>

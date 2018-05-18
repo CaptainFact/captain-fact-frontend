@@ -32,8 +32,6 @@
     <meta name="theme-color" content="#ffffff">
     <!-- Web extensions -->
     <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/fnnhlmbnlbgomamcolcpgncflofhjckm">
-    <!-- Styles -->
-    <link rel="stylesheet" href="/assets/css/app.css?version={!major!}.{!minor!}.{!maintenance!}">
     <!-- If you edit following <style/> you'll need to generate a new hash in nginx.conf CSP (style-src) -->
     <style>
       #preloading-frame {
@@ -45,7 +43,7 @@
     </style>
   </head>
   <body>
-    <div id='app' data-version="{!major!}.{!minor!}.{!maintenance!}">
+    <div id='app'>
       <!-- The content -->
       <div id="preloading-frame">
         <img src="/assets/img/logo.png" class="animated-logo"/>
@@ -53,7 +51,5 @@
         <noscript>Your browser does not support JavaScript!</noscript>
       </div>
     </div>
-    <script src="/assets/js/vendor.js?v={!major!}.{!minor!}.{!maintenance!}"></script>
-    <script src="/assets/js/app.js?v={!major!}.{!minor!}.{!maintenance!}"></script>
   </body>
 </html>

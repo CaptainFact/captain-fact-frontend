@@ -2,7 +2,7 @@ import { SocketApi } from '../../../API'
 import {
   VIDEO_DEBATE_HISTORY_CHANNEL, STATEMENTS_HISTORY_CHANNEL, ACTION_DELETE,
   ACTION_REMOVE, ENTITY_SPEAKER
-} from "../../../constants"
+} from '../../../constants'
 import { addAction, fetchAll } from '../../user_actions/reducer'
 import { errorToFlash } from '../../flashes/reducer'
 
@@ -26,7 +26,7 @@ export const leaveStatementHistoryChannel = () => () =>
 export const revertVideoDebateUserAction = action => dispatch => {
   if (action.type !== ACTION_DELETE && action.type !== ACTION_REMOVE)
     return
-  const msg = action.entity === ENTITY_SPEAKER ? "restore_speaker" : "restore_statement"
+  const msg = action.entity === ENTITY_SPEAKER ? 'restore_speaker' : 'restore_statement'
   return SocketApi
     .push(VIDEO_DEBATE_HISTORY_CHANNEL, msg, {id: action.entity_id})
     .catch(e => dispatch(errorToFlash(e)))
@@ -35,6 +35,6 @@ export const revertVideoDebateUserAction = action => dispatch => {
 function joinHistoryChannel(dispatch, channelId, topic) {
   // Connect to channel
   dispatch(fetchAll(SocketApi.joinChannel(channelId, topic, {
-    'action_added': a => dispatch(addAction(a))
+    action_added: a => dispatch(addAction(a))
   })))
 }

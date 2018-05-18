@@ -1,8 +1,7 @@
-import { Record, List, Map } from "immutable"
+import { Record, Map } from 'immutable'
 import { createAction, handleActions } from 'redux-actions'
 import parseDateTime from '../../lib/parse_datetime'
 
-import UserAction from '../user_actions/record'
 import ModerationEntry from './record'
 
 
@@ -18,12 +17,12 @@ const INITIAL_STATE = new Record({
 
 const ModerationReducer = handleActions({
   [setModerationEntry]: {
-    next: (state, {payload}) => !payload ?
+    next: (state, {payload}) => (!payload ?
       state.set('isLoading', false) :
       state.merge({
         entry: prepareEntry(payload),
         isLoading: false
-      }),
+      })),
     throw: (state, action) => state.merge({
       isLoading: false,
       error: action.payload

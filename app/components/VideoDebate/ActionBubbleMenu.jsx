@@ -30,42 +30,49 @@ import { destroyStatementForm } from '../../state/video_debate/statements/effect
 export default class ActionBubbleMenu extends React.PureComponent {
   render() {
     return (
-      <div className={classNames("action-bubble-container", {hasForm: this.props.hasStatementForm})}>
+      <div className={classNames('action-bubble-container', {hasForm: this.props.hasStatementForm})}>
         {!this.props.isAuthenticated &&
-          <ActionBubble iconName="sign-in" label={this.props.t('main:menu.loginSignup')}
-                        onClick={() => this.props.router.push('/login')}
+          <ActionBubble
+            iconName="sign-in"
+            label={this.props.t('main:menu.loginSignup')}
+            onClick={() => this.props.router.push('/login')}
           />
         }
         {this.props.isAuthenticated &&
-          <ActionBubble iconName={this.props.hasStatementForm ? 'times' : "commenting-o"}
-                        label={this.props.t(this.props.hasStatementForm ? 'statement.abortAdd' : 'statement.add')}
-                        activated={!this.props.hasStatementForm}
-                        onClick={() => this.onStatementBubbleClick()}
+          <ActionBubble
+            iconName={this.props.hasStatementForm ? 'times' : 'commenting-o'}
+            label={this.props.t(this.props.hasStatementForm ? 'statement.abortAdd' : 'statement.add')}
+            activated={!this.props.hasStatementForm}
+            onClick={() => this.onStatementBubbleClick()}
           />
         }
-        <ActionBubble iconName="arrows-v"
-                      label={this.props.t('statement.autoscroll', {
-                        context: this.props.hasAutoscroll ? 'disable' : 'enable'
-                      })}
-                      activated={this.props.hasAutoscroll}
-                      onClick={() => this.props.toggleAutoscroll()}
+        <ActionBubble
+          iconName="arrows-v"
+          label={this.props.t('statement.autoscroll', {
+            context: this.props.hasAutoscroll ? 'disable' : 'enable'
+          })}
+          activated={this.props.hasAutoscroll}
+          onClick={() => this.props.toggleAutoscroll()}
         />
-        <ActionBubble iconName="share-alt"
-                      label={this.props.t('main:actions.share')}
-                      onClick={() => this.props.addModal({
-                        Modal: ShareModal,
-                        props: {path: location.pathname}
-                      })}
+        <ActionBubble
+          iconName="share-alt"
+          label={this.props.t('main:actions.share')}
+          onClick={() => this.props.addModal({
+            Modal: ShareModal,
+            props: {path: location.pathname}
+          })}
         />
         <ReputationGuard requiredRep={MIN_REPUTATION_UPDATE_VIDEO}>
-          <ActionBubble iconName="pencil"
-                        label={this.props.t('video.edit')}
-                        onClick={() => this.props.addModal({Modal: EditVideoModal})}
+          <ActionBubble
+            iconName="pencil"
+            label={this.props.t('video.edit')}
+            onClick={() => this.props.addModal({Modal: EditVideoModal})}
           />
         </ReputationGuard>
-        <ActionBubble iconName="question"
-                      label={this.props.t('main:menu.help')}
-                      onClick={() => this.props.router.push('/help')}
+        <ActionBubble
+          iconName="question"
+          label={this.props.t('main:menu.help')}
+          onClick={() => this.props.router.push('/help')}
         />
       </div>
     )
@@ -79,7 +86,7 @@ export default class ActionBubbleMenu extends React.PureComponent {
   }
 }
 
-const ActionBubble = ({iconName, label, activated=true, ...props}) => (
+const ActionBubble = ({iconName, label, activated = true, ...props}) => (
   <div className={classNames('action-bubble', {activated})} {...props}>
     <div className="label">{label}</div>
     <Icon name={iconName}/>

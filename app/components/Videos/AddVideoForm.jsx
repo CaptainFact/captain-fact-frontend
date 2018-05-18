@@ -1,12 +1,12 @@
-import React from "react"
-import { withRouter } from "react-router"
+import React from 'react'
+import { withRouter } from 'react-router'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import trim from 'voca/trim'
 import ReactPlayer from 'react-player'
 
 import { youtubeRegex } from '../../lib/url_utils'
-import { FieldWithButton } from "../FormUtils"
+import { FieldWithButton } from '../FormUtils'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { postVideo, searchVideo } from '../../state/videos/effects'
 import { isAuthenticated } from '../../state/users/current_user/selectors'
@@ -14,7 +14,7 @@ import { isAuthenticated } from '../../state/users/current_user/selectors'
 
 const validate = ({ url }) => {
   if (!youtubeRegex.test(url))
-    return {url: "Invalid URL. Only youtube videos are currently supported"}
+    return {url: 'Invalid URL. Only youtube videos are currently supported'}
   return {}
 }
 
@@ -38,14 +38,20 @@ export class AddVideoForm extends React.PureComponent {
   render() {
     return (
       <div id="video-show" className="columns is-gapless">
-        <form id="col-video" className="column is-4 form"
-          onSubmit={ this.props.handleSubmit(this.handleSubmit.bind(this)) }>
-            <Field component={this.renderVideoField} name="url"
-                   buttonLabel="Add Video" placeholder="Video URL"
-                   buttonClassName="is-primary"
-                   normalize={s => trim(s)}
-                   expandInput
-            />
+        <form
+          id="col-video"
+          className="column is-4 form"
+          onSubmit={this.props.handleSubmit(this.handleSubmit.bind(this))}
+        >
+          <Field
+            component={this.renderVideoField}
+            name="url"
+            buttonLabel="Add Video"
+            placeholder="Video URL"
+            buttonClassName="is-primary"
+            normalize={s => trim(s)}
+            expandInput
+          />
         </form>
         <div id="col-debate" className="column">
           {this.props.isSubmitting && <LoadingFrame title="Analysing video"/>}
@@ -61,11 +67,13 @@ export class AddVideoForm extends React.PureComponent {
     return (
       <div>
         {!error &&
-          <ReactPlayer className="video"
-                       url={value}
-                       controls={true}
-                       width=""
-                       height=""/>
+          <ReactPlayer
+            className="video"
+            url={value}
+            controls
+            width=""
+            height=""
+          />
         }
         {error && <div className="video"><div/></div>}
         {urlInput}

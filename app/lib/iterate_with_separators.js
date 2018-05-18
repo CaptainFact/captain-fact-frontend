@@ -1,4 +1,5 @@
-import regeneratorRuntime from "regenerator-runtime"
+/* eslint-disable no-unused-vars */
+import regeneratorRuntime from 'regenerator-runtime'
 
 
 /**
@@ -7,15 +8,15 @@ import regeneratorRuntime from "regenerator-runtime"
  * @param size
  * @param t a translate function
  */
-export default function *iterateWithSeparators(iterator, size, t) {
+export default function* iterateWithSeparators(iterator, size, t) {
   let entryNum = -1
-  for (let value of iterator) {
+  for (const value of iterator) {
     entryNum += 1
     if (entryNum + 3 <= size)
-      yield [value, ", "]
+      yield [value, ', ']
     else if (entryNum + 2 === size)
       yield [value, ` ${t('main:misc.and')} `]
     else
-      yield [value, ""]
+      yield [value, '']
   }
 }
