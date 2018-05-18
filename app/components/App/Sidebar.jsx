@@ -103,9 +103,8 @@ export default class Sidebar extends React.PureComponent {
     if (this.props.isLoadingUser)
       return (<div className="user-section"><LoadingFrame size="mini"/></div>)
     else if (this.props.CurrentUser.id !== 0)
-      return this.renderUserLinks();
-    else
-      return this.renderConnectLinks();
+      return this.renderUserLinks()
+    return this.renderConnectLinks()
   }
 
   render() {

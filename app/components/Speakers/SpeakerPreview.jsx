@@ -9,7 +9,6 @@ import {
 } from '../../constants'
 
 import { isAuthenticated } from '../../state/users/current_user/selectors'
-import { staticResource } from '../../API'
 import { ModalFormContainer } from '../Modal'
 import Icon from '../Utils/Icon'
 import ClickableIcon from '../Utils/ClickableIcon'
@@ -31,7 +30,7 @@ import {getFocusedStatementSpeakerId} from '../../state/video_debate/statements/
 )
 export class SpeakerPreview extends React.PureComponent {
   render() {
-    const { speaker, isAuthenticated, withoutActions , className} = this.props
+    const {speaker, isAuthenticated, withoutActions, className} = this.props
 
     return (
       <MediaLayout

@@ -45,11 +45,10 @@ export default class InvitationRequestForm extends React.PureComponent {
         buttonClassName="is-medium"
         placeholder={this.props.t('emailPlaceholder')}
         buttonLabel={this.props.t('main:actions.send')}/>
-    else
-      return (
-        <Notification type="success">
-          <Icon name="check"/> {this.props.t('home:inviteSuccess')}
-        </Notification>
+    return (
+      <Notification type="success">
+        <Icon name="check"/> {this.props.t('home:inviteSuccess')}
+      </Notification>
       )
   }
 

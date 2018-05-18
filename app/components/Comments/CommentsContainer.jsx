@@ -21,7 +21,7 @@ export class CommentsContainer extends React.PureComponent {
       (numComment <= this.state.nbComments[1] && c.score > -1)
     )
     return (
-      <div className={`comments-list ${className ? className : ''}`}>
+      <div className={`comments-list ${className || ''}`}>
         {header && <div className="comments-list-header">{header}</div>}
         <FlipMove enterAnimation="fade" leaveAnimation={false}>
           {displayedComments.map(comment =>
@@ -31,7 +31,7 @@ export class CommentsContainer extends React.PureComponent {
           )}
         </FlipMove>
         {displayedComments.size < comments.size &&
-          <div className='comments-expender'>
+          <div className="comments-expender">
             <a className="button"
               onClick={() => this.setState({
                 nbComments: [this.state.nbComments[0] + 5, this.state.nbComments[1] + 7]

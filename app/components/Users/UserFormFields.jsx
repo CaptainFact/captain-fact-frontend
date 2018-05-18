@@ -45,7 +45,7 @@ export const submitButton = (text, valid) =>
     </button>
   </p>
 
-export const renderAllUserFields = (valid, t, isPasswdOptional=false) => (
+export const renderAllUserFields = (valid, t, isPasswdOptional = false) => (
   <div>
     <Field name="username"
            placeholder={t('username')}
@@ -64,6 +64,4 @@ export const renderAllUserFields = (valid, t, isPasswdOptional=false) => (
     {passwordRepeatField(t)}
   </div>
 )
-
-
 

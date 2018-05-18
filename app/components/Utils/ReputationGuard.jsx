@@ -9,7 +9,7 @@ import { ErrorView } from './ErrorView'
 
 export const DumbReputationGuard = ({
   isLoading, hasReputation, showLoading, showNotEnough, children, user,
-  verifyFunc=null
+  verifyFunc = null
 }) => {
   if (showLoading && isLoading)
     return <LoadingFrame/>
@@ -32,7 +32,7 @@ ReputationGuard.propTypes = {
 }
 
 export const withReputationGuard =
-  (requiredRep, showLoading=true, showNotEnough=true, props = {}) =>
+  (requiredRep, showLoading = true, showNotEnough = true, props = {}) =>
     WrappedComponent =>
       wrappedComponentProps =>
         <ReputationGuard requiredRep={requiredRep} showLoading={showLoading} showNotEnough={showNotEnough} {...props}>

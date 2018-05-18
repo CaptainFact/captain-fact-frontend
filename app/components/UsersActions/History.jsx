@@ -30,7 +30,7 @@ export class History extends React.PureComponent {
     return (
       <div className="user-actions-history">
         <div className="latest-action">
-          <UserAction key={ latestAction.id } action={ latestAction } isLatest={ true }/>
+          <UserAction key={ latestAction.id } action={ latestAction } isLatest/>
         </div>
         { actions.size > 1 &&
         <a className="expend-old-actions"

@@ -51,7 +51,7 @@ export class ColumnVideo extends React.PureComponent {
               </Link>
             </li>
             <li>
-              <a href="https://discord.gg/yqFpjgG" target="_blank">
+              <a href="https://discord.gg/yqFpjgG" target="_blank" rel="noopener noreferrer">
                 <Icon size="small" name="comments-o"/>
                 <span>Chat</span>
               </a>

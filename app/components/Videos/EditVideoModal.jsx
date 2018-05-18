@@ -14,12 +14,14 @@ import {shiftStatements} from '../../state/video_debate/statements/effects'
 const TimeShiftForm = reduxForm({form: 'shiftStatements', initialValues: {offset: 0}})(translate('main')(
   ({handleSubmit, t}) =>
     <form onSubmit={handleSubmit}>
-      <Field component={FieldWithButton}
-             name="offset"
-             type="number"
-             placeholder="+0s"
-             buttonLabel={t('actions.apply')}
-             validate={offset => !offset}/>
+      <Field
+        component={FieldWithButton}
+        name="offset"
+        type="number"
+        placeholder="+0s"
+        buttonLabel={t('actions.apply')}
+        validate={offset => !offset}
+      />
     </form>
 ))
 

@@ -9,7 +9,7 @@ import { translate } from 'react-i18next'
 const ModalDeleteComment = ({handleAbort, comment, replies, t, ...otherProps}) =>
   <ModalConfirmDelete handleAbort={handleAbort}
                       title={t('comment.deleteThread', {count: replies && replies.size + 1})}
-                      content={(<CommentDisplay comment={comment} withoutActions={true}/>)}
+                      content={(<CommentDisplay comment={comment} withoutActions/>)}
                       {...otherProps}
   />
 
