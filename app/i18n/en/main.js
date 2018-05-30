@@ -19,7 +19,7 @@ export default {
     content: 'Content',
     language: 'Language',
     other: 'Other',
-    contact: 'Contact',
+    donation: 'Support us',
     extension: 'Browser Extension',
     help: 'Help',
     moderation: 'Moderation',
