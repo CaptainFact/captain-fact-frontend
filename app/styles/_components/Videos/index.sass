@@ -3,7 +3,7 @@ $videos-list-max-width: 1500px
 .videos-page
   text-align: center
   margin: 0 auto
-  padding-top: 5vh
+  padding: 5vh 0.5em
 
   .header
     min-height: 100px
@@ -13,6 +13,14 @@ $videos-list-max-width: 1500px
     margin: 0 auto 30px
     border: 1px solid $grey-lighter
     padding: 0.5em 1em
+    .filter
+      display: flex
+      align-items: center
+      margin-left: 1em
+      +mobile
+        margin-bottom: 1em
+      span
+        margin-right: 0.5em
 
 .videos-list
   margin: 0 auto

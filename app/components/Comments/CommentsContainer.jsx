@@ -1,8 +1,8 @@
-import React from "react"
+import React from 'react'
 import { translate } from 'react-i18next'
 import FlipMove from 'react-flip-move'
 
-import { CommentDisplay } from "./CommentDisplay"
+import { CommentDisplay } from './CommentDisplay'
 
 
 @translate('videoDebate')
@@ -13,7 +13,7 @@ export class CommentsContainer extends React.PureComponent {
   }
 
   render() {
-    const {t, comments, className, header, replyingTo, nesting=1} = this.props
+    const {t, comments, className, header, replyingTo, nesting = 1} = this.props
 
     let numComment = 0
     const displayedComments = comments.takeWhile(c =>
@@ -21,7 +21,7 @@ export class CommentsContainer extends React.PureComponent {
       (numComment <= this.state.nbComments[1] && c.score > -1)
     )
     return (
-      <div className={`comments-list ${className ? className : ''}`}>
+      <div className={`comments-list ${className || ''}`}>
         {header && <div className="comments-list-header">{header}</div>}
         <FlipMove enterAnimation="fade" leaveAnimation={false}>
           {displayedComments.map(comment =>
@@ -31,7 +31,7 @@ export class CommentsContainer extends React.PureComponent {
           )}
         </FlipMove>
         {displayedComments.size < comments.size &&
-          <div className='comments-expender'>
+          <div className="comments-expender">
             <a className="button"
               onClick={() => this.setState({
                 nbComments: [this.state.nbComments[0] + 5, this.state.nbComments[1] + 7]

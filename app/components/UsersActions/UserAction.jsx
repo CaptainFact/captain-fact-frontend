@@ -1,8 +1,8 @@
-import React from "react"
+import React from 'react'
 import { translate } from 'react-i18next'
 import classNames from 'classnames'
 
-import UserAppellation from "../Users/UserAppellation"
+import UserAppellation from '../Users/UserAppellation'
 import { TimeSince } from '../Utils/index'
 import Tag from '../Utils/Tag'
 import ActionDiff from './ActionDiff'
@@ -16,9 +16,9 @@ export class UserAction extends React.PureComponent {
     const { user, type, entity, time } = action
 
     return (
-      <div className={ classNames(className, 'user-action', 'card') }>
+      <div className={classNames(className, 'user-action', 'card')}>
         <div className="card-content action-description">
-          <Tag type="info"><TimeSince time={ time }/></Tag>
+          <Tag type="info"><TimeSince time={time}/></Tag>
           <Tag className="action-type" type="info">
             <ActionIcon type={type}/>
           </Tag>

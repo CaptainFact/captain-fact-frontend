@@ -11,11 +11,11 @@ export const joinVideoDebateChannel = videoId => dispatch => {
   dispatch(videoReducer.setLoading(true))
   dispatch(videoReducer.fetchAll(SocketApi.joinChannel(
     VIDEO_DEBATE_CHANNEL, `${VIDEO_DEBATE_CHANNEL}:${videoId}`, {
-      'speaker_added': s => dispatch(videoReducer.addSpeaker(s)),
-      'speaker_removed': s => dispatch(videoReducer.removeSpeaker(s)),
-      'speaker_updated': s => dispatch(videoReducer.updateSpeaker(s)),
-      'presence_state': s => dispatch(setPresence(s)),
-      'presence_diff': s => dispatch(presenceDiff(s)),
+      speaker_added: s => dispatch(videoReducer.addSpeaker(s)),
+      speaker_removed: s => dispatch(videoReducer.removeSpeaker(s)),
+      speaker_updated: s => dispatch(videoReducer.updateSpeaker(s)),
+      presence_state: s => dispatch(setPresence(s)),
+      presence_diff: s => dispatch(presenceDiff(s)),
     }
   )))
 }

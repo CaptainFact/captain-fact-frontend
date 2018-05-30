@@ -10,7 +10,7 @@ import { errorToFlash } from '../flashes/reducer'
  *              'all', or 'unknown' to get untagged videos
  *  - speaker: a speaker id or slug
  */
-export const fetchPublicVideos = (filters=null) => createEffect(
+export const fetchPublicVideos = (filters = null) => createEffect(
   HttpApi.get('videos', filters), {
     before: setLoading(true),
     after: setVideos

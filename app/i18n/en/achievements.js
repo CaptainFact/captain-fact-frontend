@@ -1,41 +1,41 @@
 export default {
-  'title': 'Achievements',
-  'about': 'About',
-  'unlocked': 'You just unlocked the "{{achievement}}" achievement',
-  '1': {
-    'title': 'Welcome',
-    'description': 'You\'ve successfully created an account on CaptainFact'
+  title: 'Achievements',
+  about: 'About',
+  unlocked: 'You just unlocked the "{{achievement}}" achievement',
+  1: {
+    title: 'Welcome',
+    description: 'You\'ve successfully created an account on CaptainFact'
   },
-  '2': {
-    'title': 'Not a robot',
-    'description': 'With such a pretty email address, there\'s no doubt you\'re a human'
+  2: {
+    title: 'Not a robot',
+    description: 'With such a pretty email address, there\'s no doubt you\'re a human'
   },
-  '3': {
-    'title': 'Everybody hurts',
-    'description': 'Looking for help in the help section was the good thing to do'
+  3: {
+    title: 'Everybody hurts',
+    description: 'Looking for help in the help section was the good thing to do'
   },
-  '4': {
-    'title': 'Bulletproof',
-    'description': 'With the browser extension activated, no one will fool you anymore'
+  4: {
+    title: 'Bulletproof',
+    description: 'With the browser extension activated, no one will fool you anymore'
   },
-  '5': {
-    'title': 'You\'re fake news!',
-    'description': 'Well, seems you\'ve destroyed this source'
+  5: {
+    title: 'You\'re fake news!',
+    description: 'Well, seems you\'ve destroyed this source'
   },
-  '6': {
-    'title': 'Social Addict',
-    'description': 'You love having these US companies spying on your data, don\'t you?'
+  6: {
+    title: 'Social Addict',
+    description: 'You love having these US companies spying on your data, don\'t you?'
   },
-  '7': {
-    'title': 'Ambassador',
-    'description': 'You were there before it was cool, and helped the project in a unique way'
+  7: {
+    title: 'Ambassador',
+    description: 'You are an ambassador of the community'
   },
-  '8': {
-    'title': 'Ghostbuster',
-    'description': 'Thanks for reporting that bug!'
+  8: {
+    title: 'Ghostbuster',
+    description: 'Thanks for reporting that bug!'
   },
-  '9': {
-    'title': 'Fact Check Me, I\'m Famous',
-    'description': 'You made your way up to the leaderboard, congrats Captain!'
+  9: {
+    title: 'Fact Check Me, I\'m Famous',
+    description: 'You made your way up to the leaderboard, congrats Captain!'
   }
 }

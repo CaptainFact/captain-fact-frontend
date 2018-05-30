@@ -9,6 +9,7 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
 import { ErrorView } from '../Utils/ErrorView'
 import { fetchHelpPage } from '../../state/help/effects'
 import { reset } from '../../state/help/reducer'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
 
 @connect(state => ({
@@ -46,9 +47,8 @@ class HelpPageContent extends PureComponent {
 
   renderLink({href, children}) {
     if (isExternal(window.location.href, href))
-      return <a href={href} target="_blank">{children}</a>
-    else
-      return <Link to={href} onClick={this.props.onLinkClick}>{children}</Link>
+      return <ExternalLinkNewTab href={href}>{children}</ExternalLinkNewTab>
+    return <Link to={href} onClick={this.props.onLinkClick}>{children}</Link>
   }
 }
 

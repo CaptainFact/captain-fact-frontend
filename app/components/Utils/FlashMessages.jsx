@@ -1,7 +1,7 @@
-import React from "react"
-import { connect } from "react-redux"
+import React from 'react'
+import { connect } from 'react-redux'
 
-import { Icon } from "./Icon"
+import { Icon } from './Icon'
 import { translate } from 'react-i18next'
 import FlipMove from 'react-flip-move'
 import { Link } from 'react-router'
@@ -47,16 +47,21 @@ export class FlashMessages extends React.PureComponent {
       return null
 
     return (
-      <div id="flash-messages"
-          onMouseEnter={() => this.props.pause()}
-          onMouseLeave={() => this.props.unPause()}>
+      <div
+        id="flash-messages"
+        onMouseEnter={() => this.props.pause()}
+        onMouseLeave={() => this.props.unPause()}
+      >
         <FlipMove enterAnimation="fade">
           {this.props.flashes.map(flash =>
-            <div key={flash.id} className={`flash-message is-${flash.flashType}`}
-                data-timeleft={flash.timeLeft}>
+            (<div
+              key={flash.id}
+              className={`flash-message is-${flash.flashType}`}
+              data-timeleft={flash.timeLeft}
+            >
               <button className="delete" onClick={() => this.props.removeFlash(flash)}/>
               <FlashContent flash={flash}/>
-            </div>
+             </div>)
           )}
         </FlipMove>
       </div>
@@ -74,7 +79,7 @@ class FlashContent extends React.Component {
   }
 
   render() {
-    const {iconName, message, isError, i18nParams={}} = this.props.flash
+    const {iconName, message, isError, i18nParams = {}} = this.props.flash
     return (
       <div className="columns">
         { iconName &&

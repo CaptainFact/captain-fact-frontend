@@ -26,8 +26,10 @@ export default class LoginForm extends React.PureComponent {
     const { handleSubmit, valid, error, t } = this.props
 
     return (
-      <form className="form user-form"
-            onSubmit={handleSubmit(user => this.props.login({provider: 'identity', params: user}))}>
+      <form
+        className="form user-form"
+        onSubmit={handleSubmit(user => this.props.login({provider: 'identity', params: user}))}
+      >
         {error && <Notification type="danger">{tError(t, error)}</Notification>}
         {emailField(t)}
         {passwordField(t)}

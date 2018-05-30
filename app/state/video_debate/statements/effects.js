@@ -12,10 +12,10 @@ export const joinStatementsChannel = videoId => dispatch => {
   dispatch(setLoading(true))
   dispatch(fetchStatements(SocketApi.joinChannel(
     STATEMENTS_CHANNEL, `${STATEMENTS_CHANNEL}:video:${videoId}`, {
-      'statement_removed': s => dispatch(remove(s)),
-      'statement_added': s => dispatch(add(s)),
-      'statement_updated': s => dispatch(update(s)),
-      'statements_updated': ({statements}) => dispatch(updateAll(statements))
+      statement_removed: s => dispatch(remove(s)),
+      statement_added: s => dispatch(add(s)),
+      statement_updated: s => dispatch(update(s)),
+      statements_updated: ({statements}) => dispatch(updateAll(statements))
     }
   )))
 }

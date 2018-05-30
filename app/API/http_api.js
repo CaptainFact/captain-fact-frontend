@@ -1,34 +1,33 @@
 import 'isomorphic-fetch'
 import trimRight from 'voca/trim_right'
-import 'isomorphic-fetch'
 
-import { SocketApi } from './socket_api'
+import SocketApi from './socket_api'
 import { HTTP_API_URL } from '../config'
-import { parseServerError } from './server_error'
+import parseServerError from './server_error'
 import flashNoInternetError from './no_internet_error'
 import { optionsToQueryString } from '../lib/url_utils'
 
 
 class CaptainFactHttpApi {
   constructor(baseUrl, token) {
-    this.baseUrl = trimRight(baseUrl, '/') + '/'
+    this.baseUrl = `${trimRight(baseUrl, '/')}/`
     this.hasToken = !!token
     this.headers = {'Content-Type': 'application/json'}
     if (token)
-      this.headers['authorization'] = `Bearer ${token}`
+      this.headers.authorization = `Bearer ${token}`
   }
 
   setAuthorizationToken(token) {
     this.hasToken = true
     localStorage.token = token
     if (token)
-      this.headers['authorization'] = `Bearer ${token}`
+      this.headers.authorization = `Bearer ${token}`
     SocketApi.setAuthorizationToken(token)
   }
 
   resetToken() {
     this.hasToken = false
-    delete(this.headers['authorization'])
+    delete (this.headers.authorization)
     localStorage.removeItem('token')
     SocketApi.resetToken()
   }
@@ -37,11 +36,11 @@ class CaptainFactHttpApi {
     return new Promise((fulfill, reject) => {
       return promise.then(response => {
         return response.text().then((body) => {
-          body = body ? JSON.parse(body) : null
+          const parsedBody = body ? JSON.parse(body) : null
           if (!response.ok)
-            reject(parseServerError(body))
+            reject(parseServerError(parsedBody))
           else
-            fulfill(body)
+            fulfill(parsedBody)
         })
       }).catch(e => {
         console.error(e)

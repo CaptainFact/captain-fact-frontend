@@ -17,3 +17,6 @@ global.mount = mount
 
 // Add a helper to register snapshot
 global.snapshot = component => expect(shallow(component)).toMatchSnapshot()
+
+// Configure global env variables
+process.env.HTTP_API_URL = 'http://test'

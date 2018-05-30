@@ -1,0 +1,4 @@
+Contact: mailto:security@captainfact.io
+Encryption: https://captainfact.io/.well-known/pgp-key.txt
+Policy: https://captainfact.io/help/bug_report
+Hiring: https://captainfact.io/help/jobs

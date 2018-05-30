@@ -1,17 +1,17 @@
-import React from "react"
-import { connect } from "react-redux"
+import React from 'react'
+import { connect } from 'react-redux'
 import { I18nextProvider } from 'react-i18next'
 import Joyride from 'react-joyride'
 import { Helmet } from 'react-helmet'
 
 import i18n from '../../i18n/i18n'
-import { FlashMessages } from "../Utils"
+import { FlashMessages } from '../Utils'
 import { fetchCurrentUser } from '../../state/users/current_user/effects'
 import { stepSeen, tourSkipped } from '../../state/onboarding_steps/effects'
-import { isAuthenticated } from '../../state/users/current_user/selectors'
 import { uncompletedOnboardingSteps } from '../../state/onboarding_steps/selectors'
-import { default as Sidebar } from "./Sidebar"
+import { isAuthenticated } from '../../state/users/current_user/selectors'
 import { MainModalContainer } from "../Modal/MainModalContainer"
+import Sidebar from './Sidebar'
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
 
 @connect(state => ({

@@ -1,10 +1,10 @@
-import React from "react"
-import { connect } from "react-redux"
+import React from 'react'
+import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import { Helmet } from 'react-helmet'
 
-import { ErrorView } from "../Utils"
-import { isAuthenticated } from "../../state/users/current_user/selectors"
+import { ErrorView } from '../Utils'
+import { isAuthenticated } from '../../state/users/current_user/selectors'
 import { joinCommentsChannel, leaveCommentsChannel } from '../../state/video_debate/comments/effects'
 import { joinStatementsChannel, leaveStatementsChannel } from '../../state/video_debate/statements/effects'
 import { joinVideoDebateChannel, leaveVideoDebateChannel } from '../../state/video_debate/effects'

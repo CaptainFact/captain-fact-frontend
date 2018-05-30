@@ -14,12 +14,14 @@ import {shiftStatements} from '../../state/video_debate/statements/effects'
 const TimeShiftForm = reduxForm({form: 'shiftStatements', initialValues: {offset: 0}})(translate('main')(
   ({handleSubmit, t}) =>
     <form onSubmit={handleSubmit}>
-      <Field component={FieldWithButton}
-             name="offset"
-             type="number"
-             placeholder="+0s"
-             buttonLabel={t('actions.apply')}
-             validate={offset => !offset}/>
+      <Field
+        component={FieldWithButton}
+        name="offset"
+        type="number"
+        placeholder="+0s"
+        buttonLabel={t('actions.apply')}
+        validate={offset => !offset}
+      />
     </form>
 ))
 
@@ -29,8 +31,9 @@ export default class EditVideoModal extends React.PureComponent {
   render() {
     return (
       <Modal
-             handleCloseClick={this.props.popModal}
-             title={<span><Icon name="pencil"/> {this.props.t('video.edit')}</span>}>
+        handleCloseClick={this.props.popModal}
+        title={<span><Icon name="pencil"/> {this.props.t('video.edit')}</span>}
+      >
         <h4 className="title is-4">{this.props.t('video.shiftStatements')}</h4>
         <TimeShiftForm onSubmit={this.shiftSubmit}/>
       </Modal>

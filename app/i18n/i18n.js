@@ -9,6 +9,7 @@ import store from '../state/index'
 import { fetchLocale } from '../state/user_preferences/effects'
 import { JS_ENV } from '../config'
 
+
 // Add default formats for dates
 dateLocaleFR.defaultDateTimeFormat = '[Le] D MMM YYYY [à] H:mm'
 dateLocaleFR.defaultDateFormat = '[Le] D MMM YYYY'
@@ -32,7 +33,7 @@ i18n
     interpolation: {
       escapeValue: false, // Not needed for react
       formatSeparator: ',',
-      format: function(value, format) {
+      format(value, format) {
         if (format === 'lowerCase') return value.toLowerCase()
         if (format === 'upperCase') return value.toUpperCase()
         if (format === 'titleCase') return titleCase(value)

@@ -1,8 +1,8 @@
-import React from "react"
-import { Link } from "react-router"
+import React from 'react'
+import { Link } from 'react-router'
 
 
-const UserAppellation = ({user: {username, name}, withoutActions=false, compact=false}) => {
+const UserAppellation = ({user: {username, name}, withoutActions = false, compact = false}) => {
   const prettyUsername = `@${username}`
   const Component = withoutActions ? 'div' : Link
   const componentProps = withoutActions ? {} : {to: `/u/${username}`}

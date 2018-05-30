@@ -1,8 +1,8 @@
-import React from "react"
+import React from 'react'
 import isPromise from 'is-promise'
 import classNames from 'classnames'
 
-import Modal from "./Modal"
+import Modal from './Modal'
 import { Icon } from '../Utils/Icon'
 import { popModal } from '../../state/modals/reducer'
 import { connect } from 'react-redux'
@@ -31,13 +31,15 @@ export class ModalConfirm extends React.PureComponent {
   renderFormButtons() {
     return (
       <div className="form-buttons">
-        <a className={classNames('button', 'is-danger', {'is-loading': (this.state.isSubmitting)})}
-           disabled={this.state.isSubmitting || this.props.confirmDisabled}
-           onClick={this.handleSubmit.bind(this)}>
+        <a
+          className={classNames('button', 'is-danger', {'is-loading': (this.state.isSubmitting)})}
+          disabled={this.state.isSubmitting || this.props.confirmDisabled}
+          onClick={this.handleSubmit.bind(this)}
+        >
           {this.props.confirmIcon && <Icon name={this.props.confirmIcon}/>}
           <span>{ this.props.confirmText }</span>
         </a>
-        <a className='button' disabled={this.state.isSubmitting} onClick={this.close}>
+        <a className="button" disabled={this.state.isSubmitting} onClick={this.close}>
           {this.props.abortIcon && <Icon name={this.props.abortIcon}/>}
           <span>{ this.props.abortText }</span>
         </a>
@@ -54,10 +56,12 @@ export class ModalConfirm extends React.PureComponent {
   render() {
     const { handleConfirm, className, content, message, ...props } = this.props
     return (
-      <Modal className={classNames("modal-confirm", className)}
-             handleCloseClick={this.close}
-             footer={this.renderFormButtons()}
-             {...props}>
+      <Modal
+        className={classNames('modal-confirm', className)}
+        handleCloseClick={this.close}
+        footer={this.renderFormButtons()}
+        {...props}
+      >
         {content &&
         <div>
           {content}

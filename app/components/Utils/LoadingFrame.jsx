@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 import { translate } from 'react-i18next'
 import classNames from 'classnames'
 
@@ -6,7 +6,7 @@ import classNames from 'classnames'
 @translate('main')
 export class LoadingFrame extends React.PureComponent {
   render() {
-    const {title, size="large"} = this.props
+    const {title, size = 'large'} = this.props
 
     return (
       <div className={classNames('loading-frame', `is-${size}`)}>

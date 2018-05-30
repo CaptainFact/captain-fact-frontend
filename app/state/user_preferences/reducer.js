@@ -1,16 +1,16 @@
 import { Record } from 'immutable'
 import { createAction, handleActions } from 'redux-actions'
 import { MOBILE_WIDTH_THRESHOLD } from '../../constants'
+import browserLocale from '../../i18n/browser_locale'
 
 
 export const toggleSidebar = createAction('USER_PREFERENCES/TOGGLE_SIDEBAR')
 export const closeSidebar = createAction('USER_PREFERENCES/CLOSE_SIDEBAR')
 export const changeLocale = createAction('USER_PREFERENCES/CHANGE_LOCALE')
 export const changeVideosLanguageFilter = createAction('USER_PREFERENCES/CHANGE_VIDEOS_LANGUAGE_FILTER')
+export const setVideosOnlyFromPartners = createAction('USER_PREFERENCES/VIDEOS_ONLY_FROM_PATNERS')
 export const toggleAutoscroll = createAction('STATEMENTS/TOGGLE_AUTOSCROLL')
 
-export const browserLocale = () =>
-  (window.navigator.userLanguage || window.navigator.language || 'en').split('-')[0].toLowerCase()
 
 const isMobile = window.innerWidth <= MOBILE_WIDTH_THRESHOLD
 
@@ -19,7 +19,8 @@ const Preferences = new Record({
   sidebarExpended: !isMobile,
   locale: 'en',
   enableAutoscroll: !isMobile,
-  videosLanguageFilter: null
+  videosLanguageFilter: null,
+  videosOnlyFromPartners: true,
 })
 
 const loadState = () => {
@@ -40,11 +41,18 @@ const updateState = (state, key, value) => {
 }
 
 const UserPreferencesReducer = handleActions({
-  [toggleSidebar]: state => updateState(state, 'sidebarExpended', !state.sidebarExpended),
-  [closeSidebar]: state => updateState(state, 'sidebarExpended', false),
-  [changeLocale]: (state, {payload}) => updateState(state, 'locale', payload),
-  [changeVideosLanguageFilter]: (state, {payload}) => updateState(state, 'videosLanguageFilter', payload),
-  [toggleAutoscroll]: state => updateState(state, 'enableAutoscroll', !state.enableAutoscroll)
+  [toggleSidebar]: state =>
+    updateState(state, 'sidebarExpended', !state.sidebarExpended),
+  [closeSidebar]: state =>
+    updateState(state, 'sidebarExpended', false),
+  [changeLocale]: (state, {payload}) =>
+    updateState(state, 'locale', payload),
+  [changeVideosLanguageFilter]: (state, {payload}) =>
+    updateState(state, 'videosLanguageFilter', payload),
+  [setVideosOnlyFromPartners]: (state, {payload}) =>
+    updateState(state, 'videosOnlyFromPartners', payload),
+  [toggleAutoscroll]: state =>
+    updateState(state, 'enableAutoscroll', !state.enableAutoscroll)
 }, loadState())
 
 export default UserPreferencesReducer

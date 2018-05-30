@@ -25,10 +25,10 @@ export const flashErrorUnauthenticated = () => flashError({
   infoUrl: '/login'
 })
 
-export const flashSuccessMsg = (message, params={}) => addFlash({
+export const flashSuccessMsg = (message, params = {}) => addFlash({
   flashType: 'success',
   iconName: 'check-circle',
-  message: message,
+  message,
   ...params
 })
 export function errorToFlash(msg) {
@@ -49,7 +49,7 @@ export function errorToFlash(msg) {
 // Same as errorToFlash but doesn't show anything if payload is
 // not a string (useful for forms)
 export function errorMsgToFlash(msg) {
-  if (typeof(msg) === 'string')
+  if (typeof (msg) === 'string')
     return errorToFlash(msg)
   return () => () => null
 }
@@ -78,7 +78,7 @@ const FlashesReducer = handleActions({
     state.set('isPaused', payload),
   [update]: (state, {payload}) => {
     if (!state.isPaused)
-      state = state.update('flashes', flashes =>
+      return state.update('flashes', flashes =>
         flashes
           .map(f => f.set('timeLeft', f.timeLeft - payload))
           .filter(msg => msg.timeLeft > 0)

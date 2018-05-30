@@ -1,5 +1,5 @@
-import React from "react"
-import { connect } from "react-redux"
+import React from 'react'
+import { connect } from 'react-redux'
 
 import { joinVideoDebateHistoryChannel, leaveVideoDebateHistoryChannel } from '../../state/video_debate/history/effects'
 import { reset } from '../../state/user_actions/reducer'

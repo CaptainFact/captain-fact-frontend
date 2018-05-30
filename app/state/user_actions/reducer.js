@@ -21,11 +21,12 @@ const UsersActionsReducer = handleActions({
   [setLoading]: (state, {payload}) => state.set('isLoading', payload),
   [fetchAll]: {
     next: (state, {payload: {actions}}) => {
-      const preparedActions = new List(actions.map(prepareAction)).sortBy(a => -a.time)
+      const preparedActions = new List(actions.map(prepareAction))
+      const sortedActions = preparedActions.sortBy(a => -a.time)
 
       return state.merge({
-        actions: preparedActions,
-        lastActionsIds: getLastActions(preparedActions),
+        actions: sortedActions,
+        lastActionsIds: getLastActions(sortedActions),
         isLoading: false,
         errors: null
       })
@@ -35,7 +36,9 @@ const UsersActionsReducer = handleActions({
   [addAction]: (state, {payload}) => {
     const action = prepareAction(payload)
     const actions = state.actions.insert(0, action).sortBy(a => -a.time)
-    return state.set('actions', actions).set('lastActionsIds', getLastActions(actions))
+    return state
+      .set('actions', actions)
+      .set('lastActionsIds', getLastActions(actions))
   },
   [combineActions(reset, resetVideoDebate)]: () => INITIAL_STATE()
 }, INITIAL_STATE())
@@ -52,7 +55,9 @@ function getLastActions(actions) {
 }
 
 function prepareAction(action) {
-  action.time = parseDateTime(action.time)
-  action.changes = new Map(action.changes)
-  return UserAction(action)
+  return UserAction({
+    ...action,
+    time: parseDateTime(action.time),
+    changes: new Map(action.changes)
+  })
 }

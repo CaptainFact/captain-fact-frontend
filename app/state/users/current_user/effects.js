@@ -42,10 +42,10 @@ export const requestInvitation = user => createEffect(
 export const updateInfo = user => createEffect(
   HttpApi.put('users/me', user), {
     before: setPosting(true),
-    then: user => (dispatch, getState) => {
-      if (getState().DisplayedUser.data.id === user.id)
-        dispatch(setDisplayedUser(user))
-      return user
+    then: updatedUser => (dispatch, getState) => {
+      if (getState().DisplayedUser.data.id === updatedUser.id)
+        dispatch(setDisplayedUser(updatedUser))
+      return updatedUser
     },
     after: [setPosting(false), setCurrentUser]
   }

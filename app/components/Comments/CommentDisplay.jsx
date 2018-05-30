@@ -1,17 +1,16 @@
-import React from "react"
-import { connect } from "react-redux"
+import React from 'react'
+import { connect } from 'react-redux'
+import { translate } from 'react-i18next'
 import { change } from 'redux-form'
-import { List } from "immutable"
+import { List } from 'immutable'
 import classNames from 'classnames'
 
-import { TimeSince } from "../Utils"
-import { Icon } from "../Utils"
+import { TimeSince, Icon } from '../Utils'
 import ReputationGuard from '../Utils/ReputationGuard'
-import { Source } from "./Source"
-import UserAppellation from "../Users/UserAppellation"
+import { Source } from './Source'
+import UserAppellation from '../Users/UserAppellation'
 import ModalFlag from './ModalFlag'
 import ModalDeleteComment from './ModalDeleteComment'
-import { translate } from 'react-i18next'
 import { CommentsContainer } from './CommentsContainer'
 import Tag from '../Utils/Tag'
 import { addModal } from '../../state/modals/reducer'
@@ -52,7 +51,7 @@ export class CommentDisplay extends React.PureComponent {
 
   render() {
     const { user, text, source, inserted_at, approve } = this.props.comment
-    const { t, withoutActions, withoutHeader, replyingTo, nesting, replies, myVote, isVoting, hideThread, className, richMedias=true } = this.props
+    const { t, withoutActions, withoutHeader, replyingTo, nesting, replies, myVote, isVoting, hideThread, className, richMedias = true } = this.props
     const approveClass = approve !== null && (approve ? 'approve' : 'refute')
     const showReplies = this.state.showReplies
     const isOwnComment = this.props.comment.user.id === this.props.currentUser.id
@@ -66,10 +65,14 @@ export class CommentDisplay extends React.PureComponent {
           })}
           ContainerType="article"
           left={!withoutActions &&
-            <Vote isVoting={isVoting} score={this.getScore()} myVote={myVote}
-                  onVote={value => this.ensureAuthenticated() &&
+            <Vote
+              isVoting={isVoting}
+              score={this.getScore()}
+              myVote={myVote}
+              onVote={value => this.ensureAuthenticated() &&
                     this.props.commentVote({comment: this.props.comment, value})
-                  }/>
+              }
+            />
           }
           content={
             <div>

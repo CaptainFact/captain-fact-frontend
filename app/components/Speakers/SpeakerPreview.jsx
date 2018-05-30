@@ -1,5 +1,5 @@
-import React from "react"
-import { connect } from "react-redux"
+import React from 'react'
+import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router'
 import { translate } from 'react-i18next'
 import classNames from 'classnames'
@@ -17,7 +17,7 @@ import { ModalFormContainer } from "../Modal"
 import Icon from "../Utils/Icon"
 import ClickableIcon from '../Utils/ClickableIcon'
 import ReputationGuard from '../Utils/ReputationGuard'
-import { EditSpeakerForm } from "./SpeakerForm"
+import { EditSpeakerForm } from './SpeakerForm'
 import ModalRemoveSpeaker from './ModalRemoveSpeaker'
 import { addModal } from '../../state/modals/reducer'
 import { addStep } from '../../state/onboarding_steps/reducer'
@@ -54,7 +54,7 @@ export class SpeakerPreview extends React.PureComponent {
     })
   }
   render() {
-    const { speaker, isAuthenticated, withoutActions , className} = this.props
+    const {speaker, isAuthenticated, withoutActions, className} = this.props
 
     return (
       <MediaLayout
@@ -74,7 +74,7 @@ export class SpeakerPreview extends React.PureComponent {
   renderSpeakerThumb(speaker) {
     if (speaker.picture)
       return <img className="speaker-picture" src={speaker.picture}/>
-    return <Icon className="speaker-picture" name="user" size="large" style={{color: "grey"}}/>
+    return <Icon className="speaker-picture" name="user" size="large" style={{color: 'grey'}}/>
   }
 
   renderActions() {
@@ -82,23 +82,29 @@ export class SpeakerPreview extends React.PureComponent {
       <div className="quick-actions">
         {this.props.speaker.is_user_defined &&
           <ReputationGuard requiredRep={MIN_REPUTATION_UPDATE_SPEAKER}>
-            <ClickableIcon name="pencil"
-                           size="action-size"
-                           title={this.props.t('main:actions.edit')}
-                           onClick={() => this.handleEdit()}/>
+            <ClickableIcon
+              name="pencil"
+              size="action-size"
+              title={this.props.t('main:actions.edit')}
+              onClick={() => this.handleEdit()}
+            />
           </ReputationGuard>
         }
         <ReputationGuard requiredRep={MIN_REPUTATION_REMOVE_SPEAKER}>
-          <ClickableIcon name="times"
-                         size="action-size"
-                         title={this.props.t('main:actions.remove')}
-                         onClick={() => this.handleRemove()}/>
+          <ClickableIcon
+            name="times"
+            size="action-size"
+            title={this.props.t('main:actions.remove')}
+            onClick={() => this.handleRemove()}
+          />
         </ReputationGuard>
         <ReputationGuard requiredRep={MIN_REPUTATION_ADD_STATEMENT}>
-          <ClickableIcon name="commenting-o"
-                className="add-statement-button action-size"
-                title={this.props.t('statement.add')}
-                onClick={() => this.handleAddStatement()}/>
+          <ClickableIcon
+            name="commenting-o"
+            size="action-size"
+            title={this.props.t('statement.add')}
+            onClick={() => this.handleAddStatement()}
+          />
         </ReputationGuard>
       </div>
     )
@@ -162,10 +168,10 @@ export class SpeakerPreview extends React.PureComponent {
   }
 
   handleAddStatement() {
-    const historyRegex = new RegExp("/history/?$")
+    const historyRegex = new RegExp('/history/?$')
     const currentPath = this.props.location.pathname
     if (currentPath.match(historyRegex))
-      this.props.router.push(currentPath.replace(historyRegex, ""))
+      this.props.router.push(currentPath.replace(historyRegex, ''))
     this.props.changeStatementFormSpeaker({id: this.props.speaker.id})
   }
 }

@@ -1,7 +1,7 @@
-import React from "react"
+import React from 'react'
 import { Link } from 'react-router'
 
-import { Icon, TimeSince } from "../Utils"
+import { Icon, TimeSince } from '../Utils'
 import iterateWithSeparators from '../../lib/iterate_with_separators'
 import { translate } from 'react-i18next'
 import CardLayout from '../Utils/CardLayout'
@@ -11,15 +11,15 @@ import RawIcon from '../Utils/RawIcon'
 @translate('main')
 export class VideoCard extends React.PureComponent {
   static videoThumb(provider, provider_id) {
-    if (provider === "youtube")
-    return `https://img.youtube.com/vi/${provider_id}/mqdefault.jpg`
+    if (provider === 'youtube')
+      return `https://img.youtube.com/vi/${provider_id}/mqdefault.jpg`
   }
 
   renderSpeakers(speakers) {
     const speakerComponentsList = []
-    for (let [speaker, separator] of iterateWithSeparators(speakers, speakers.size, this.props.t))
+    for (const [speaker, separator] of iterateWithSeparators(speakers, speakers.size, this.props.t))
       speakerComponentsList.push(
-        <span key={ speaker.id }>
+        <span key={speaker.id}>
           <strong>
             {!speaker.is_user_defined && <Link to={`/s/${speaker.slug || speaker.id}`}>{ speaker.full_name }</Link>}
             {speaker.is_user_defined && speaker.full_name }
@@ -35,14 +35,13 @@ export class VideoCard extends React.PureComponent {
         { speakerComponentsList }
       </div>
     )
-
   }
 
   render() {
     const { id, title, posted_at, speakers, provider, provider_id } = this.props.video
 
     return (
-      <div className={`column is-one-quarter`}>
+      <div className="column is-one-quarter">
         <CardLayout
           className="video-card"
           image={
