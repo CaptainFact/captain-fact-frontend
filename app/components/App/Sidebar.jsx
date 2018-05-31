@@ -81,9 +81,6 @@ export default class Sidebar extends React.PureComponent {
           <this.MenuListLink to={`${baseLink}/settings`} iconName="cog">
             { t('menu.settings')}
           </this.MenuListLink>
-          <this.MenuListLink to={`${username}/bookmarks`} iconName="bookmark" disabled>
-            { t('menu.myBookmarks') }
-          </this.MenuListLink>
           <this.MenuListLink to={`${baseLink}/activity`} iconName="tasks" disabled>
             { t('menu.myActivity') }
           </this.MenuListLink>
@@ -167,9 +164,6 @@ export default class Sidebar extends React.PureComponent {
       <ul className="menu-list">
         <this.MenuListLink to="/videos" iconName="television" onlyActiveOnIndex>
           { capitalize(t('entities.video_plural')) }
-        </this.MenuListLink>
-        <this.MenuListLink to="/speakers" iconName="users" disabled>
-          { capitalize(t('entities.speaker_plural')) }
         </this.MenuListLink>
         <ReputationGuard requiredRep={MIN_REPUTATION_MODERATION}>
           <this.MenuListLink to="/moderation" iconName="flag" className="hide-when-collapsed">
