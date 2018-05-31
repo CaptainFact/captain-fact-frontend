@@ -69,8 +69,10 @@ export default class Sidebar extends React.PureComponent {
             </this.MenuLink>
           </div>
           <div className="level-right">
-            <a className="button" title={this.props.t('menu.logout')}
-               onClick={() => this.props.logout()}>
+            <a className="button" 
+              title={this.props.t('menu.logout')}
+              onClick={() => this.props.logout()}
+            >
               <Icon name="sign-out"/>
             </a>
           </div>
@@ -135,9 +137,18 @@ export default class Sidebar extends React.PureComponent {
 
           <p className="menu-label">{ t('menu.other') }</p>
           <ul className="menu-list">
-            <this.MenuListLink to="/help/contact" iconName="envelope" className="hide-when-collapsed">
-              { t('menu.contact') }
-            </this.MenuListLink>
+            <li>
+              <a
+                href="https://opencollective.com/captainfact_io" 
+                target="_blank"
+                rel="noopener noreferrer"
+                iconName="heart"
+                className="hide-when-collapsed link-with-icon"
+              >
+                <RawIcon name="heart"/>
+                { t('menu.donation') }
+              </a>
+            </li>
             <this.MenuListLink to="/extension" iconName="puzzle-piece" className="hide-when-collapsed">
               { t('menu.extension') }
             </this.MenuListLink>
@@ -170,6 +181,6 @@ export default class Sidebar extends React.PureComponent {
   }
 
   usernameFontSize() {
-    return `${1.4 - this.props.CurrentUser.username.length / 40}em`
+    return `${1.4 - (this.props.CurrentUser.username.length / 40)}em`
   }
 }
