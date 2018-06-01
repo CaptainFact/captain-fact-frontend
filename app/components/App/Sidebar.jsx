@@ -69,8 +69,10 @@ export default class Sidebar extends React.PureComponent {
             </this.MenuLink>
           </div>
           <div className="level-right">
-            <a className="button" title={this.props.t('menu.logout')}
-               onClick={() => this.props.logout()}>
+            <a className="button" 
+              title={this.props.t('menu.logout')}
+              onClick={() => this.props.logout()}
+            >
               <Icon name="sign-out"/>
             </a>
           </div>
@@ -78,9 +80,6 @@ export default class Sidebar extends React.PureComponent {
         <ul className="menu-list user-links">
           <this.MenuListLink to={`${baseLink}/settings`} iconName="cog">
             { t('menu.settings')}
-          </this.MenuListLink>
-          <this.MenuListLink to={`${username}/bookmarks`} iconName="bookmark" disabled>
-            { t('menu.myBookmarks') }
           </this.MenuListLink>
           <this.MenuListLink to={`${baseLink}/activity`} iconName="tasks" disabled>
             { t('menu.myActivity') }
@@ -135,9 +134,18 @@ export default class Sidebar extends React.PureComponent {
 
           <p className="menu-label">{ t('menu.other') }</p>
           <ul className="menu-list">
-            <this.MenuListLink to="/help/contact" iconName="envelope" className="hide-when-collapsed">
-              { t('menu.contact') }
-            </this.MenuListLink>
+            <li>
+              <a
+                href="https://opencollective.com/captainfact_io" 
+                target="_blank"
+                rel="noopener noreferrer"
+                iconName="heart"
+                className="hide-when-collapsed link-with-icon"
+              >
+                <RawIcon name="heart"/>
+                { t('menu.donation') }
+              </a>
+            </li>
             <this.MenuListLink to="/extension" iconName="puzzle-piece" className="hide-when-collapsed">
               { t('menu.extension') }
             </this.MenuListLink>
@@ -157,9 +165,6 @@ export default class Sidebar extends React.PureComponent {
         <this.MenuListLink to="/videos" iconName="television" onlyActiveOnIndex>
           { capitalize(t('entities.video_plural')) }
         </this.MenuListLink>
-        <this.MenuListLink to="/speakers" iconName="users" disabled>
-          { capitalize(t('entities.speaker_plural')) }
-        </this.MenuListLink>
         <ReputationGuard requiredRep={MIN_REPUTATION_MODERATION}>
           <this.MenuListLink to="/moderation" iconName="flag" className="hide-when-collapsed">
             { t('menu.moderation') }
@@ -170,6 +175,6 @@ export default class Sidebar extends React.PureComponent {
   }
 
   usernameFontSize() {
-    return `${1.4 - this.props.CurrentUser.username.length / 40}em`
+    return `${1.4 - (this.props.CurrentUser.username.length / 40)}em`
   }
 }
