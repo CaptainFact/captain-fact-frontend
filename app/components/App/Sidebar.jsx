@@ -139,7 +139,6 @@ export default class Sidebar extends React.PureComponent {
                 href="https://opencollective.com/captainfact_io" 
                 target="_blank"
                 rel="noopener noreferrer"
-                iconName="heart"
                 className="hide-when-collapsed link-with-icon"
               >
                 <RawIcon name="heart"/>
