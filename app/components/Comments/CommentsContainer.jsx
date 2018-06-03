@@ -9,38 +9,55 @@ import { CommentDisplay } from './CommentDisplay'
 export class CommentsContainer extends React.PureComponent {
   constructor(props) {
     super(props)
-    this.state = {nbComments: CommentsContainer.getNbDisplayedRange(props.nesting || 1)}
+    this.state = {
+      nbComments: CommentsContainer.getNbDisplayedRange(props.nesting || 1)
+    }
   }
 
   render() {
     const {t, comments, className, header, replyingTo, nesting = 1} = this.props
-
     let numComment = 0
     const displayedComments = comments.takeWhile(c =>
       ++numComment <= this.state.nbComments[0] ||
       (numComment <= this.state.nbComments[1] && c.score > -1)
     )
+
     return (
       <div className={`comments-list ${className || ''}`}>
-        {header && <div className="comments-list-header">{header}</div>}
+        {header &&
+          <div className="comments-list-header">
+            <div/>
+            <span>{header}</span>
+            <div/>
+          </div>
+        }
         <FlipMove enterAnimation="fade" leaveAnimation={false}>
-          {displayedComments.map(comment =>
+          {displayedComments.map(comment => (
             <div key={comment.id}>
-              <CommentDisplay comment={comment} nesting={nesting} replyingTo={replyingTo}/>
+              <CommentDisplay
+                comment={comment}
+                nesting={nesting}
+                replyingTo={replyingTo}
+              />
             </div>
-          )}
+          ))}
         </FlipMove>
         {displayedComments.size < comments.size &&
           <div className="comments-expender">
-            <a className="button"
+            <button
+              className="button"
               onClick={() => this.setState({
-                nbComments: [this.state.nbComments[0] + 5, this.state.nbComments[1] + 7]
-              })}>
+                nbComments: [
+                  this.state.nbComments[0] + 5,
+                  this.state.nbComments[1] + 7
+                ]
+              })}
+            >
               {t('comment.loadMore', {
                 context: nesting === 1 ? 'comments' : 'replies',
                 count: comments.size - displayedComments.size}
               )}
-            </a>
+            </button>
           </div>
         }
       </div>

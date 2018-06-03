@@ -3,6 +3,7 @@ export default {
   history: 'Historique',
   approve: 'Confirme',
   refute: 'Réfute',
+  comments: 'Commentaires',
   flagForm: {
     title: 'Pourquoi signaler ce commentaire ?',
     xAvailable: '{{count}} disponnible',

@@ -149,11 +149,11 @@ export class Statement extends React.PureComponent {
     )
   }
 
-  renderCommentsContainerHeader(label, tagType, score) {
+  renderCommentsContainerHeader(label, tagType, score = null) {
     return (
-      <div>
+      <div className="comments-container-header">
         <span>{this.props.t(label)} </span>
-        <Tag type={tagType}>{ score }</Tag>
+        {score !== null && <Tag type={tagType}>{ score }</Tag>}
       </div>
     )
   }
@@ -182,7 +182,12 @@ export class Statement extends React.PureComponent {
         </div>
         }
         <div className="card-footer comments">
-          {comments.size > 0 && <CommentsContainer comments={comments}/>}
+          {comments.size > 0 &&
+            <CommentsContainer
+              comments={comments}
+              header={this.renderCommentsContainerHeader('comments')}
+            />
+          }
           <CommentForm
             form={`formAddComment-${statement.id}`}
             initialValues={{ statement_id: statement.id }}
