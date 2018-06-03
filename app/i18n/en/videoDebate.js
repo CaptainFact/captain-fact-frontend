@@ -3,6 +3,7 @@ export default {
   history: 'History',
   approve: 'Confirm',
   refute: 'Refute',
+  comments: 'Comments',
   flagForm: {
     title: 'Why do you want to flag this comment ?',
     xAvailable: '{{count}} available',
