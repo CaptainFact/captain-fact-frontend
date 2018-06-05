@@ -4,6 +4,7 @@ export default {
   approve: 'Confirm',
   refute: 'Refute',
   comments: 'Comments',
+  community: 'Community',
   flagForm: {
     title: 'Why do you want to flag this comment ?',
     xAvailable: '{{count}} available',
@@ -33,6 +34,7 @@ export default {
     shiftStatements: 'Shift all statements (in seconds)'
   },
   speaker: {
+    one: 'Speaker',
     remove: 'Remove speaker',
     confirmRemove: 'All statements made by {{speaker.full_name}} on this video will become orphans',
     add: 'Add Speaker',

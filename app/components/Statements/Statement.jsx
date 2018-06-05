@@ -162,19 +162,23 @@ export class Statement extends React.PureComponent {
   }
 
   renderFactsAndComments() {
-    const { statement, comments, approvingFacts, refutingFacts, speaker, selfComments } = this.props
+    const { statement, comments, approvingFacts, refutingFacts, speaker, selfComments, t } = this.props
 
     return (
       <div>
         {selfComments.size > 0 &&
           <div className="card-footer self-comments columns is-gapless">
             <div className="column is-narrow">
+              <div className="sourcesType">{t('speaker.one')}</div>
               <SpeakerPreview speaker={speaker} withoutActions/>
             </div>
             <div className="column">
               <CommentsContainer comments={selfComments}/>
             </div>
           </div>
+        }
+        {(approvingFacts.size > 0 || refutingFacts.size > 0 || comments.size > 0) &&
+          <div className="sourcesType">{t('community')}</div>
         }
         {(approvingFacts.size > 0 || refutingFacts.size > 0) &&
         <div className="card-footer sourced-comments">
