@@ -9,17 +9,31 @@ export const getAllComments = (state) => state.VideoDebate.comments.comments
 export const getStatementAllComments = (state, props) =>
   getAllComments(state).get(props.statement.id, EMPTY_COMMENTS_LIST)
 
-export const getStatementComments = createCachedSelector(
+export const classifyComments = createCachedSelector(
   getStatementAllComments,
-  comments => comments.filter(c => !c.source || c.approve === null)
+  (state, props) => props.statement.speaker_id,
+  (comments, speakerId) => {
+    const selfComments = []
+    const approvingFacts = []
+    const refutingFacts = []
+    const regularComments = []
+
+    for (const comment of comments) {
+      if (comment.user.speaker_id === speakerId)
+        selfComments.push(comment)
+      else if (!comment.source || comment.approve === null)
+        regularComments.push(comment)
+      else if (comment.approve)
+        approvingFacts.push(comment)
+      else
+        refutingFacts.push(comment)
+    }
+    return {
+      regularComments: new List(regularComments),
+      selfComments: new List(selfComments),
+      approvingFacts: new List(approvingFacts),
+      refutingFacts: new List(refutingFacts),
+    }
+  }
 )((state, props) => props.statement.id)
 
-export const getStatementApprovingFacts = createCachedSelector(
-  getStatementAllComments,
-  comments => comments.filter(c => c.source && c.approve === true)
-)((state, props) => props.statement.id)
-
-export const getStatementRefutingFacts = createCachedSelector(
-  getStatementAllComments,
-  comments => comments.filter(c => c.source && c.approve === false)
-)((state, props) => props.statement.id)

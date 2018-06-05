@@ -10,7 +10,7 @@ import { CommentForm, CommentsContainer } from '../Comments'
 import ModalConfirmDelete from '../Modal/ModalConfirmDelete'
 
 import * as statementSelectors from '../../state/video_debate/statements/selectors'
-import * as commentsSelectors from '../../state/video_debate/comments/selectors'
+import { classifyComments } from '../../state/video_debate/comments/selectors'
 import { ModalHistory } from '../VideoDebate/ModalHistory'
 import Tag from '../Utils/Tag'
 import { addModal } from '../../state/modals/reducer'
@@ -26,19 +26,21 @@ import { setScrollTo } from '../../state/video_debate/statements/reducer'
 import { SpeakerPreview } from '../Speakers/SpeakerPreview'
 
 
-@connect((state, props) => ({
-  speaker: statementSelectors.getStatementSpeaker(state, props),
-  comments: commentsSelectors.getStatementComments(state, props),
-  approvingFacts: commentsSelectors.getStatementApprovingFacts(state, props),
-  refutingFacts: commentsSelectors.getStatementRefutingFacts(state, props),
-  approveScore: statementSelectors.getStatementApproveScore(state, props),
-  refuteScore: statementSelectors.getStatementRefuteScore(state, props),
-  isFocused: statementSelectors.isStatementFocused(state, props),
-  currentUser: state.CurrentUser.data,
-  scrollTo: state.VideoDebate.statements.scrollTo,
-  autoscrollEnabled: state.UserPreferences.enableAutoscroll,
-  formEnabled: state.VideoDebate.statements.formsCount > 0
-}), {addModal, updateStatement, deleteStatement, forcePosition, setScrollTo})
+@connect((state, props) => {
+  const classifiedComments = classifyComments(state, props)
+  return {
+    speaker: statementSelectors.getStatementSpeaker(state, props),
+    comments: classifiedComments.regularComments,
+    selfComments: classifiedComments.selfComments,
+    approvingFacts: classifiedComments.approvingFacts,
+    refutingFacts: classifiedComments.refutingFacts,
+    isFocused: statementSelectors.isStatementFocused(state, props),
+    currentUser: state.CurrentUser.data,
+    scrollTo: state.VideoDebate.statements.scrollTo,
+    autoscrollEnabled: state.UserPreferences.enableAutoscroll,
+    formEnabled: state.VideoDebate.statements.formsCount > 0
+  }
+}, {addModal, updateStatement, deleteStatement, forcePosition, setScrollTo})
 @translate('videoDebate')
 export class Statement extends React.PureComponent {
   state = { isDeleting: false, isEditing: false }
@@ -160,32 +162,34 @@ export class Statement extends React.PureComponent {
   }
 
   renderFactsAndComments() {
-    const { statement, comments, approvingFacts, refutingFacts, speaker } = this.props
+    const { statement, comments, approvingFacts, refutingFacts, speaker, selfComments } = this.props
 
     return (
       <div>
-        <div className="card-footer self-comments columns is-gapless">
-          <div className="column is-narrow">
-            <SpeakerPreview speaker={speaker} withoutActions/>
+        {selfComments.size > 0 &&
+          <div className="card-footer self-comments columns is-gapless">
+            <div className="column is-narrow">
+              <SpeakerPreview speaker={speaker} withoutActions/>
+            </div>
+            <div className="column">
+              <CommentsContainer comments={selfComments}/>
+            </div>
           </div>
-          <div className="column">
-            <CommentsContainer comments={comments}/>
-          </div>
-        </div>
+        }
         {(approvingFacts.size > 0 || refutingFacts.size > 0) &&
         <div className="card-footer sourced-comments">
           {refutingFacts.size > 0 &&
           <CommentsContainer
             className="card-footer-item refute"
             comments={refutingFacts}
-            header={this.renderCommentsContainerHeader('refute', 'danger', this.props.refuteScore)}
+            header={this.renderCommentsContainerHeader('refute', 'danger', this.calculateScore(refutingFacts))}
           />
           }
           {approvingFacts.size > 0 &&
           <CommentsContainer
             className="card-footer-item approve"
             comments={approvingFacts}
-            header={this.renderCommentsContainerHeader('approve', 'success', this.props.approveScore)}
+            header={this.renderCommentsContainerHeader('approve', 'success', this.calculateScore(approvingFacts))}
           />
           }
         </div>
@@ -198,6 +202,12 @@ export class Statement extends React.PureComponent {
           />
         </div>
       </div>
+    )
+  }
+
+  calculateScore(comments) {
+    return comments.reduce((score, comment) =>
+      score + (comment.score > 0 ? comment.score : 0), 0
     )
   }
 
