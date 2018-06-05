@@ -7,6 +7,12 @@
 <p align="center">Master: <a href="https://travis-ci.org/CaptainFact/captain-fact-frontend"><img src="https://travis-ci.org/CaptainFact/captain-fact-frontend.svg?branch=travis-configuration" alt="Build Status" /></a> &nbsp;&nbsp;
 Staging: <a href="https://travis-ci.org/CaptainFact/captain-fact-frontend"><img src="https://travis-ci.org/CaptainFact/captain-fact-frontend.svg?branch=staging" alt="Build Status" /></a></p>
 <hr/><br/>
+<p align="center">
+<a href="https://opencollective.com/webpack/donate" target="_blank">
+  <img src="https://opencollective.com/webpack/donate/button@2x.png?color=white" width=300 />
+</a>
+</p>
+<hr/>
 
 ## Getting started
 

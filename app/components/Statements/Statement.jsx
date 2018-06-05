@@ -23,6 +23,7 @@ import {
   MIN_REPUTATION_UPDATE_STATEMENT
 } from '../../constants'
 import { setScrollTo } from '../../state/video_debate/statements/reducer'
+import { SpeakerPreview } from '../Speakers/SpeakerPreview'
 
 
 @connect((state, props) => ({
@@ -159,10 +160,18 @@ export class Statement extends React.PureComponent {
   }
 
   renderFactsAndComments() {
-    const { statement, comments, approvingFacts, refutingFacts } = this.props
+    const { statement, comments, approvingFacts, refutingFacts, speaker } = this.props
 
     return (
       <div>
+        <div className="card-footer self-comments columns is-gapless">
+          <div className="column is-narrow">
+            <SpeakerPreview speaker={speaker} withoutActions/>
+          </div>
+          <div className="column">
+            <CommentsContainer comments={comments}/>
+          </div>
+        </div>
         {(approvingFacts.size > 0 || refutingFacts.size > 0) &&
         <div className="card-footer sourced-comments">
           {refutingFacts.size > 0 &&
