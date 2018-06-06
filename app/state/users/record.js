@@ -14,7 +14,7 @@ const User = new Record({
   achievements: [],
   is_publisher: false,
   onboarding_completed: new List(),
-  onboarding_skipped: false
+  onboarding_skipped: false,
   speaker_id: null
 })
 
