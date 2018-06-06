@@ -16,7 +16,6 @@ the gitlab registry for `./dev/start_api.sh` to run correctly.
 * Install (if you don't have them):
   * [Docker](https://docs.docker.com/install/) (to start the API easily)
   * [Node.js](http://nodejs.org)
-  * [Brunch](http://brunch.io): `npm install -g brunch`
   * App dependencies: `npm install`
     
 * Run:
