@@ -25,6 +25,7 @@ const INITIAL_STATE = new Record({
   errors: null,
   comments: new Map(),
   replies: new Map(),
+  selfSourcing: new Map(),
   voted: new Map(),
   voting: new Set(),
   myFlags: new Set()

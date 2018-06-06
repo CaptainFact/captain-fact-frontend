@@ -3,7 +3,6 @@ import createCachedSelector from 're-reselect'
 import { formValueSelector } from 'redux-form'
 
 import { getVideoDebateSpeakers } from '../../video_debate/selectors'
-import { getStatementApprovingFacts, getStatementRefutingFacts } from '../comments/selectors'
 import { STATEMENT_FOCUS_TIME } from '../../../constants'
 
 
@@ -14,21 +13,6 @@ export const getStatementSpeaker = createCachedSelector(
   getVideoDebateSpeakers,
   (speakerId, speakers) => speakers.find(s => s.id === speakerId)
 )((state, props) => props.statement.id)
-
-export const getStatementApproveScore = createCachedSelector(
-  getStatementApprovingFacts,
-  facts => facts.reduce((score, fact) =>
-    score + (fact.score > 0 ? fact.score : 0), 0
-  )
-)((state, props) => props.statement.id)
-
-export const getStatementRefuteScore = createCachedSelector(
-  getStatementRefutingFacts,
-  facts => facts.reduce((score, fact) =>
-    score + (fact.score > 0 ? fact.score : 0), 0
-  )
-)((state, props) => props.statement.id)
-
 
 export const getFocusedStatementId = createSelector(
   state => state.VideoDebate.statements.data,

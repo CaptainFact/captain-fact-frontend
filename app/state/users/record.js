@@ -15,6 +15,7 @@ const User = new Record({
   is_publisher: false,
   onboarding_completed: new List(),
   onboarding_skipped: false
+  speaker_id: null
 })
 
 export default User
