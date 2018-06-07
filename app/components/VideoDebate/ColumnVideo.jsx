@@ -61,7 +61,10 @@ export class ColumnVideo extends React.PureComponent {
         </div>
         {isDebate &&
           <div>
-            <ReputationGuard requiredRep={MIN_REPUTATION_ADD_SPEAKER}>
+            <ReputationGuard
+              requiredRep={MIN_REPUTATION_ADD_SPEAKER}
+              verifyFunc={(u, hasReputation) => u.is_publisher || hasReputation}
+            >
               <div className="actions">
                 <AddSpeakerForm/>
               </div>
