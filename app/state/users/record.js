@@ -1,4 +1,4 @@
-import { Record, List } from "immutable"
+import { Record, Set } from 'immutable'
 
 const User = new Record({
   id: 0,
@@ -13,8 +13,7 @@ const User = new Record({
   registered_at: null,
   achievements: [],
   is_publisher: false,
-  onboarding_completed: new List(),
-  onboarding_skipped: false,
+  onboarding_completed: new Set(),
   speaker_id: null
 })
 

@@ -1,4 +1,4 @@
-import { Record } from 'immutable'
+import { Record, Set } from 'immutable'
 import { createAction, handleActions } from 'redux-actions'
 
 import User from '../record'
@@ -10,10 +10,9 @@ export const setLoading = createAction('CURRENT_USER/SET_LOADING')
 export const setPosting = createAction('CURRENT_USER/SET_POSTING')
 export const reset = createAction('CURRENT_USER/RESET')
 export const completeOnboardingStep = createAction('CURRENT_USER/COMPLETE_ONBOARDING_STEP')
-export const skipTour = createAction('CURRENT_USER/SKIP_TOUR')
+export const setOnboardingSteps = createAction('CURRENT_USER/SKIP_TOUR')
 
-// Reducer
-
+// Initial reducer state
 const INITIAL_STATE = new Record({
   error: null,
   isLoading: false,
@@ -21,6 +20,7 @@ const INITIAL_STATE = new Record({
   data: new User()
 })
 
+// Reducer
 const CurrentUserReducer = handleActions({
   [set]: {
     next: (state, {payload}) =>
@@ -36,11 +36,18 @@ const CurrentUserReducer = handleActions({
       return state.merge({error: payload, isPosting: false})
     }
   },
-  [setLoading]: (state, {payload}) => state.set('isLoading', payload),
-  [setPosting]: (state, {payload}) => state.set('isPosting', payload),
-  [completeOnboardingStep]: (state, {payload}) => state.updateIn(['data', 'onboarding_completed'], completedSteps => completedSteps.push(payload)),
-  [skipTour]: (state, {payload}) => state.updateIn(['data', 'onboarding_skipped'], onboarding_skipped => true),
-  [reset]: () => INITIAL_STATE()
+  [setLoading]: (state, {payload}) =>
+    state.set('isLoading', payload),
+  [setPosting]: (state, {payload}) =>
+    state.set('isPosting', payload),
+  [completeOnboardingStep]: (state, {payload}) =>
+    state.updateIn(['data', 'onboarding_completed'], completedSteps =>
+      completedSteps.add(payload)
+    ),
+  [setOnboardingSteps]: (state, {payload}) =>
+    state.setIn(['data', 'onboarding_completed'], new Set(payload)),
+  [reset]: () =>
+    INITIAL_STATE()
 }, INITIAL_STATE())
 
 export default CurrentUserReducer
