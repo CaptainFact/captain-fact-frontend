@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 
 import ClickableIcon from '../Utils/ClickableIcon'
+import Icon from '../Utils/Icon'
 import ReputationGuard from '../Utils/ReputationGuard'
 import TimeDisplay from '../Utils/TimeDisplay'
 import { StatementForm } from './StatementForm'
@@ -169,7 +170,9 @@ export class Statement extends React.PureComponent {
         {selfComments.size > 0 &&
           <div className="card-footer self-comments columns is-gapless">
             <div className="column is-narrow">
-              <div className="sourcesType">{t('speaker.one')}</div>
+              <div className="sourcesType">
+                <Icon name="user"/> {t('speaker.one')}
+              </div>
               <SpeakerPreview speaker={speaker} withoutActions/>
             </div>
             <div className="column">
@@ -178,7 +181,9 @@ export class Statement extends React.PureComponent {
           </div>
         }
         {(approvingFacts.size > 0 || refutingFacts.size > 0 || comments.size > 0) &&
-          <div className="sourcesType">{t('community')}</div>
+          <div className="sourcesType">
+            <Icon name="users"/> {t('community')}
+          </div>
         }
         {(approvingFacts.size > 0 || refutingFacts.size > 0) &&
         <div className="card-footer sourced-comments">
