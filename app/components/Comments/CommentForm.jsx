@@ -6,8 +6,7 @@ import isURL from 'validator/lib/isURL'
 import { withRouter } from 'react-router'
 
 import { renderField, validateLength, cleanStrMultiline } from '../FormUtils'
-import { COMMENT_LENGTH, USER_PICTURE_LARGE, ONBOARDING_ADD_SOURCE_OR_COMMENT } from "../../constants"
-import TextareaAutosize from "../FormUtils/TextareaAutosize"
+import { COMMENT_LENGTH, USER_PICTURE_LARGE, ONBOARDING_ADD_SOURCE_OR_COMMENT } from '../../constants'
 import CloseButton from '../Utils/CloseButton'
 import Icon from '../Utils/Icon'
 import Tag from '../Utils/Tag'
@@ -17,11 +16,11 @@ import UserPicture from '../Users/UserPicture'
 import MediaLayout from '../Utils/MediaLayout'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 import { CommentDisplay } from './CommentDisplay'
-import TextareaLengthCounter from '../FormUtils/TextareaLengthCounter'
+import CommentField from './CommentField'
+
 import { isAuthenticated } from '../../state/users/current_user/selectors'
 import { flashErrorUnauthenticated } from '../../state/flashes/reducer'
-import store from '../../state/index'
-import { addStep } from '../../state/onboarding_steps/reducer'
+import { addStep } from '../../state/onboarding/reducer'
 
 
 const validate = ({ source, text }) => {
@@ -37,26 +36,6 @@ const validate = ({ source, text }) => {
   return errors
 }
 
-class CommentField extends React.PureComponent {
-  render() {
-    const { input, label, placeholder, isReply, meta: { submitting, error }, autoFocus = false } = this.props
-
-    return (
-      <p className="control">
-        <TextareaAutosize
-          {...input}
-          placeholder={placeholder || label}
-          disabled={submitting}
-          focus={isReply}
-          autoFocus={autoFocus}
-        />
-        <TextareaLengthCounter length={input.value.length} maxLength={COMMENT_LENGTH[1]}/>
-        {error && <span className="help is-danger">{typeof (error) === 'string' ? error : error[0]}</span>}
-      </p>
-    )
-  }
-}
-
 @connect((state, props) => {
   const formValues = getFormValues(props.form)(state)
   return {
@@ -66,7 +45,7 @@ class CommentField extends React.PureComponent {
     isAuthenticated: isAuthenticated(state)
   }
 }, {postComment, flashErrorUnauthenticated, addStep})
-@reduxForm({form:'commentForm', validate})
+@reduxForm({form: 'commentForm', validate})
 @translate('videoDebate')
 @withRouter
 export class CommentForm extends React.Component {
@@ -77,10 +56,10 @@ export class CommentForm extends React.Component {
 
     addStep({
       uniqueId: ONBOARDING_ADD_SOURCE_OR_COMMENT,
-      title: t("onboarding:add_source_or_comment.title"),
-      text: t("onboarding:add_source_or_comment.text"),
-      selector: ".expand-form-button",
-      position: "left"
+      title: t('onboarding:add_source_or_comment.title'),
+      content: t('onboarding:add_source_or_comment.text'),
+      target: '.expand-form-button',
+      placement: 'left'
     })
   }
 

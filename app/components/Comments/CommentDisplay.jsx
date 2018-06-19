@@ -20,8 +20,7 @@ import UserPicture from '../Users/UserPicture'
 import { USER_PICTURE_SMALL, ONBOARDING_VOTE_BUTTONS, MIN_REPUTATION_FLAG } from '../../constants'
 import MediaLayout from '../Utils/MediaLayout'
 import Vote from './Vote'
-import store from '../../state/index'
-import { addStep } from '../../state/onboarding_steps/reducer'
+import { addStep } from '../../state/onboarding/reducer'
 
 @connect(({CurrentUser, VideoDebate}, props) => ({
   currentUser: CurrentUser.data,
@@ -42,10 +41,10 @@ export class CommentDisplay extends React.PureComponent {
 
     addStep({
       uniqueId: ONBOARDING_VOTE_BUTTONS,
-      title: t("onboarding:vote_buttons.title"),
-      text: t("onboarding:vote_buttons.text"),
-      selector: ".vote",
-      position: "left"
+      title: t('onboarding:vote_buttons.title'),
+      content: t('onboarding:vote_buttons.text'),
+      target: '.vote',
+      placement: 'left'
     })
   }
 
@@ -97,9 +96,9 @@ export class CommentDisplay extends React.PureComponent {
                 <nav className="comment-actions">
                   { isOwnComment ? this.renderOwnCommentActions() : this.renderOtherCommentActions()}
                   { replies &&
-                    <a className={!showReplies ? "reply-collapsed" : null}
+                    <a className={!showReplies ? 'reply-collapsed' : null}
                        onClick={() => this.setState({showReplies: !showReplies})}>
-                      <Icon size="small" name={showReplies ? "eye-slash" : "eye"}/>
+                      <Icon size="small" name={showReplies ? 'eye-slash' : 'eye'}/>
                       <span>
                         {t('videoDebate:comment.replies', {
                           context: showReplies ? 'hide' : 'show',

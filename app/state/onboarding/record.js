@@ -1,12 +1,11 @@
 import { Record } from 'immutable'
 
 const OnboardingStep = new Record({
-  uniqueId: 0,
+  uniqueId: -1,
   title: '',
-  text: '',
-  selector: '',
-  position: '',
-  style: null
+  content: '',
+  target: '',
+  placement: 'auto'
 })
 
 export default OnboardingStep

@@ -13,7 +13,7 @@ const User = new Record({
   registered_at: null,
   achievements: [],
   is_publisher: false,
-  onboarding_completed: new Set(),
+  completed_onboarding_steps: new Set(),
   speaker_id: null
 })
 

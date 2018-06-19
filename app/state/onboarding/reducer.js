@@ -1,4 +1,4 @@
-import { Record, List, Map } from 'immutable'
+import { Record, Map } from 'immutable'
 import { createAction, handleActions } from 'redux-actions'
 
 import OnboardingStep from './record'
@@ -9,15 +9,15 @@ export const disable = createAction('ONBOARDING/DISABLE')
 export const enable = createAction('ONBOARDING/ENABLE')
 
 const INITIAL_STATE = new Record({
-  steps: new List()
+  steps: new Map()
 })
 
-const OnboardingStepsReducer = handleActions({
-  [addStep]: (state, {payload}) => {
-    const step = OnboardingStep(payload)
-    const steps = (state.steps.findIndex(s => s.uniqueId === step.uniqueId) === -1) ? state.steps.insert(state.steps.length, step) : state.steps
-    return state.set('steps', steps)
+const OnboardingReducer = handleActions({
+  [addStep]: (state, {payload: step}) => {
+    return state.steps.has(step.uniqueId) ?
+      state :
+      state.update('steps', steps => steps.set(step.uniqueId, OnboardingStep(step)))
   }
 }, INITIAL_STATE())
 
-export default OnboardingStepsReducer
+export default OnboardingReducer

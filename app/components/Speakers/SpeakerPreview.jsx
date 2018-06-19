@@ -11,16 +11,16 @@ import {
 } from '../../constants'
 
 import store from '../../state/index'
-import { isAuthenticated } from "../../state/users/current_user/selectors"
-import { staticResource } from "../../API"
-import { ModalFormContainer } from "../Modal"
-import Icon from "../Utils/Icon"
+import { isAuthenticated } from '../../state/users/current_user/selectors'
+import { staticResource } from '../../API'
+import { ModalFormContainer } from '../Modal'
+import Icon from '../Utils/Icon'
 import ClickableIcon from '../Utils/ClickableIcon'
 import ReputationGuard from '../Utils/ReputationGuard'
 import { EditSpeakerForm } from './SpeakerForm'
 import ModalRemoveSpeaker from './ModalRemoveSpeaker'
 import { addModal } from '../../state/modals/reducer'
-import { addStep } from '../../state/onboarding_steps/reducer'
+import { addStep } from '../../state/onboarding/reducer'
 import { removeSpeaker, updateSpeaker } from '../../state/video_debate/effects'
 import { changeStatementFormSpeaker } from '../../state/video_debate/statements/reducer'
 import MediaLayout from '../Utils/MediaLayout'
@@ -42,14 +42,15 @@ import {getFocusedStatementSpeakerId} from '../../state/video_debate/statements/
 export class SpeakerPreview extends React.PureComponent {
   componentDidMount() {
     const { t, addStep } = this.props
-  
+
     addStep({
       uniqueId: ONBOARDING_ADD_STATEMENT,
       title: t('onboarding:add_statement.title'),
-      text: t('onboarding:add_statement.text'),
-      selector: ".add-statement-button"
+      content: t('onboarding:add_statement.text'),
+      target: '.add-statement-button'
     })
   }
+
   render() {
     const {speaker, isAuthenticated, withoutActions, className} = this.props
 

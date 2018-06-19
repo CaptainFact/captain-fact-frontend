@@ -4,7 +4,7 @@ import { translate } from 'react-i18next'
 
 import { facebookAuthUrl } from '../../lib/third_party_auth'
 import { deleteAccount } from '../../state/users/current_user/effects'
-import { resetOnboarding } from '../../state/onboarding_steps/effects'
+import { resetOnboarding } from '../../state/onboarding/effects'
 import { addModal } from '../../state/modals/reducer'
 import DeleteUserModal from './DeleteUserModal'
 import EditUserForm from './EditUserForm'

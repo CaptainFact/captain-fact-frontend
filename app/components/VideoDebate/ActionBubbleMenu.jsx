@@ -15,17 +15,19 @@ import ShareModal from '../Utils/ShareModal'
 import EditVideoModal from '../Videos/EditVideoModal'
 import { hasStatementForm } from '../../state/video_debate/statements/selectors'
 import { destroyStatementForm } from '../../state/video_debate/statements/effects'
-import store from '../../state/index'
-import { addStep } from '../../state/onboarding_steps/reducer'
+import { addStep } from '../../state/onboarding/reducer'
 
-@connect(
-  state => ({
-    hasAutoscroll: state.UserPreferences.enableAutoscroll,
-    isAuthenticated: isAuthenticated(state),
-    hasStatementForm: hasStatementForm(state)
-  }),
-  {changeStatementFormSpeaker, toggleAutoscroll, addModal, destroyStatementForm, addStep}
-)
+@connect(state => ({
+  hasAutoscroll: state.UserPreferences.enableAutoscroll,
+  isAuthenticated: isAuthenticated(state),
+  hasStatementForm: hasStatementForm(state)
+}), {
+  changeStatementFormSpeaker,
+  toggleAutoscroll,
+  addModal,
+  destroyStatementForm,
+  addStep
+})
 @translate('videoDebate')
 @withRouter
 export default class ActionBubbleMenu extends React.PureComponent {
@@ -34,9 +36,10 @@ export default class ActionBubbleMenu extends React.PureComponent {
 
     addStep({
       uniqueId: ONBOARDING_PLUS_BUTTON,
-      title: t("onboarding:plus_button.title"),
-      text: t("onboarding:plus_button.text"),
-      selector: ".action-bubble-container"
+      title: t('onboarding:plus_button.title'),
+      content: t('onboarding:plus_button.text'),
+      target: '.action-bubble-container',
+      placement: 'top'
     })
   }
 

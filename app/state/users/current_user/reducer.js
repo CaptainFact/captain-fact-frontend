@@ -10,6 +10,7 @@ export const setLoading = createAction('CURRENT_USER/SET_LOADING')
 export const setPosting = createAction('CURRENT_USER/SET_POSTING')
 export const reset = createAction('CURRENT_USER/RESET')
 export const completeOnboardingStep = createAction('CURRENT_USER/COMPLETE_ONBOARDING_STEP')
+export const removeOnboardingStep = createAction('CURRENT_USER/REMOVE_ONBOARDING_STEP')
 export const setOnboardingSteps = createAction('CURRENT_USER/SKIP_TOUR')
 
 // Initial reducer state
@@ -23,8 +24,13 @@ const INITIAL_STATE = new Record({
 // Reducer
 const CurrentUserReducer = handleActions({
   [set]: {
-    next: (state, {payload}) =>
-      state.merge({data: new User(payload) || {}, error: null, isLoading: false}),
+    next: (state, {payload}) => (
+      state.mergeDeep({
+        data: new User(payload),
+        error: null,
+        isLoading: false
+      })
+    ),
     throw: (state, {payload}) =>
       state.merge({error: payload, isLoading: false})
   },
@@ -41,11 +47,13 @@ const CurrentUserReducer = handleActions({
   [setPosting]: (state, {payload}) =>
     state.set('isPosting', payload),
   [completeOnboardingStep]: (state, {payload}) =>
-    state.updateIn(['data', 'onboarding_completed'], completedSteps =>
+    state.updateIn(['data', 'completed_onboarding_steps'], completedSteps =>
       completedSteps.add(payload)
     ),
   [setOnboardingSteps]: (state, {payload}) =>
-    state.setIn(['data', 'onboarding_completed'], new Set(payload)),
+    state.setIn(['data', 'completed_onboarding_steps'], new Set(payload)),
+  [removeOnboardingStep]: (state, {payload}) =>
+    state.updateIn(['data', 'completed_onboarding_steps'], s => s.delete(payload)),
   [reset]: () =>
     INITIAL_STATE()
 }, INITIAL_STATE())

@@ -7,7 +7,7 @@ import thunk from 'redux-thunk'
 import { JS_ENV } from '../config'
 
 // Reducers
-import OnboardingStepsReducer from './onboarding_steps/reducer'
+import OnboardingReducer from './onboarding/reducer'
 import FlashesReducer from './flashes/reducer'
 import VideoDebateReducer from './video_debate/reducer'
 import CurrentUserReducer from './users/current_user/reducer'
@@ -22,7 +22,7 @@ import ModerationReducer from './moderation/reducer'
 
 // Declare reducers
 const reducers = combineReducers({
-  OnboardingSteps: OnboardingStepsReducer,
+  Onboarding: OnboardingReducer,
   CurrentUser: CurrentUserReducer,
   DisplayedUser: DisplayedUserReducer,
   UserPreferences: UserPreferencesReducer,

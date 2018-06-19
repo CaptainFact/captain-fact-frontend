@@ -51,6 +51,7 @@ rules:
   react/no-unused-prop-types: ['warn']
   react/self-closing-comp: ['warn']
   react/jsx-indent: ['warn']
+  react/jsx-boolean-value: ['warn']
   react/no-array-index-key: ['warn']
   jsx-a11y/anchor-is-valid: 
     - warn
