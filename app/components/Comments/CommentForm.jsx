@@ -20,7 +20,7 @@ import CommentField from './CommentField'
 
 import { isAuthenticated } from '../../state/users/current_user/selectors'
 import { flashErrorUnauthenticated } from '../../state/flashes/reducer'
-import { addStep } from '../../state/onboarding/reducer'
+import OnboardingStep from '../Onboarding/OnboardingStep'
 
 
 const validate = ({ source, text }) => {
@@ -44,36 +44,35 @@ const validate = ({ source, text }) => {
     currentUser: state.CurrentUser.data,
     isAuthenticated: isAuthenticated(state)
   }
-}, {postComment, flashErrorUnauthenticated, addStep})
+}, {postComment, flashErrorUnauthenticated})
 @reduxForm({form: 'commentForm', validate})
 @translate('videoDebate')
 @withRouter
 export class CommentForm extends React.Component {
   state = { isCollapsed: true }
 
-  componentDidMount() {
-    const { t, addStep } = this.props
-
-    addStep({
-      uniqueId: ONBOARDING_ADD_SOURCE_OR_COMMENT,
-      title: t('onboarding:add_source_or_comment.title'),
-      content: t('onboarding:add_source_or_comment.text'),
-      target: '.expand-form-button',
-      placement: 'left'
-    })
-  }
-
   render() {
     const { valid, currentUser, sourceUrl, replyTo, t } = this.props
 
-    if (!this.props.currentUser.id || this.state.isCollapsed && !replyTo)
+    if ((!this.props.isAuthenticated || this.state.isCollapsed) && !replyTo)
       return (
-        <div className="comment-form collapsed">
-          <a className="button is-inverted is-primary expand-form-button" onClick={() => this.expandForm()}>
-            <Icon name="plus" size="medium"/>
-            <span>{t('comment.revealForm')}</span>
-          </a>
-        </div>
+        <OnboardingStep
+          uniqueId={ONBOARDING_ADD_SOURCE_OR_COMMENT}
+          titleI18n="add_source_or_comment.title"
+          contentI18n="add_source_or_comment.text"
+          placement="left"
+          target=".expand-form-button"
+        >
+          <div className="comment-form collapsed">
+            <button
+              className="button is-inverted is-primary expand-form-button"
+              onClick={() => this.expandForm()}
+            >
+              <Icon name="plus" size="medium"/>
+              <span>{t('comment.revealForm')}</span>
+            </button>
+          </div>
+        </OnboardingStep>
       )
 
     return (

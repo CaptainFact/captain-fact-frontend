@@ -20,7 +20,7 @@ import UserPicture from '../Users/UserPicture'
 import { USER_PICTURE_SMALL, ONBOARDING_VOTE_BUTTONS, MIN_REPUTATION_FLAG } from '../../constants'
 import MediaLayout from '../Utils/MediaLayout'
 import Vote from './Vote'
-import { addStep } from '../../state/onboarding/reducer'
+import OnboardingStep from '../Onboarding/OnboardingStep';
 
 @connect(({CurrentUser, VideoDebate}, props) => ({
   currentUser: CurrentUser.data,
@@ -28,24 +28,12 @@ import { addStep } from '../../state/onboarding/reducer'
   isVoting: VideoDebate.comments.voting.has(props.comment.id),
   replies: VideoDebate.comments.replies.get(props.comment.id),
   isFlagged: VideoDebate.comments.myFlags.has(props.comment.id)
-}), {addModal, deleteComment, flagComment, commentVote, change, flashErrorUnauthenticated, addStep})
+}), {addModal, deleteComment, flagComment, commentVote, change, flashErrorUnauthenticated})
 @translate('main')
 export class CommentDisplay extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {isBlurred: false, showReplies: props.nesting !== 4}
-  }
-
-  componentDidMount() {
-    const { t, addStep } = this.props
-
-    addStep({
-      uniqueId: ONBOARDING_VOTE_BUTTONS,
-      title: t('onboarding:vote_buttons.title'),
-      content: t('onboarding:vote_buttons.text'),
-      target: '.vote',
-      placement: 'left'
-    })
   }
 
   render() {
@@ -64,24 +52,34 @@ export class CommentDisplay extends React.PureComponent {
           })}
           ContainerType="article"
           left={!withoutActions &&
-            <Vote
-              isVoting={isVoting}
-              score={this.getScore()}
-              myVote={myVote}
-              onVote={value => this.ensureAuthenticated() &&
-                    this.props.commentVote({comment: this.props.comment, value})
-              }
-            />
+            <OnboardingStep
+              uniqueId={ONBOARDING_VOTE_BUTTONS}
+              titleI18n="vote_buttons.title"
+              contentI18n="vote_buttons.text"
+              placement="right"
+              target=".vote"
+            >
+              <Vote
+                isVoting={isVoting}
+                score={this.getScore()}
+                myVote={myVote}
+                onVote={value => this.ensureAuthenticated() &&
+                      this.props.commentVote({comment: this.props.comment, value})
+                }
+              />
+            </OnboardingStep>
           }
           content={
             <div>
               <div>
-                {!withoutHeader && <div className="comment-header">
-                  <UserPicture user={user} size={USER_PICTURE_SMALL}/>
-                  <UserAppellation user={user} withoutActions={withoutActions}/>
-                  <span> - </span>
-                  <TimeSince className="comment-time" time={inserted_at}/>
-                </div>}
+                {!withoutHeader &&
+                  <div className="comment-header">
+                    <UserPicture user={user} size={USER_PICTURE_SMALL}/>
+                    <UserAppellation user={user} withoutActions={withoutActions}/>
+                    <span> - </span>
+                    <TimeSince className="comment-time" time={inserted_at}/>
+                  </div>
+                }
                 {(text || (replyingTo && nesting > 6)) &&
                 <div className="comment-text">
                   {(replyingTo && nesting > 6) &&
@@ -122,37 +120,43 @@ export class CommentDisplay extends React.PureComponent {
   }
 
   renderOwnCommentActions() {
-    return <React.Fragment>
-      <a onClick={() => this.actionReply()}>
-        <Icon name="plus"/> <span> {this.props.t('actions.addToThread')}</span>
-      </a>
-      <a onClick={this.handleDelete.bind(this)}>
-        <Icon name="times"/>
-        <span> {this.props.t('actions.delete')}</span>
-      </a>
-    </React.Fragment>
+    return (
+      <React.Fragment>
+        <a onClick={() => this.actionReply()}>
+          <Icon name="plus"/> <span> {this.props.t('actions.addToThread')}</span>
+        </a>
+        <a onClick={() => this.handleDelete()}>
+          <Icon name="times"/>
+          <span> {this.props.t('actions.delete')}</span>
+        </a>
+      </React.Fragment>
+    )
   }
 
   renderOtherCommentActions() {
     const {t, isFlagged} = this.props
-    return <React.Fragment>
-      <a onClick={() => this.actionReply()}>
-        <Icon name="reply"/> <span>{t('actions.reply')}</span>
-      </a>
-      <ReputationGuard requiredRep={MIN_REPUTATION_FLAG}>
-        {!isFlagged &&
-        <a onClick={() => this.handleFlag('3')}>
-          <Icon name="ban"/>
-          <span> {t('moderation:reason.3')}</span>
+    return (
+      <React.Fragment>
+        <a onClick={() => this.actionReply()}>
+          <Icon name="reply"/> <span>{t('actions.reply')}</span>
         </a>
-        }
-        <a onClick={() => this.handleFlag()}
-           className={classNames('action-report', {selected: isFlagged})}>
-          <Icon name="flag"/>
-          <span> {t(isFlagged ? 'actions.flagged' : 'misc.otherFlags')}</span>
-        </a>
-      </ReputationGuard>
-    </React.Fragment>
+        <ReputationGuard requiredRep={MIN_REPUTATION_FLAG}>
+          {!isFlagged &&
+          <a onClick={() => this.handleFlag('3')}>
+            <Icon name="ban"/>
+            <span> {t('moderation:reason.3')}</span>
+          </a>
+          }
+          <a
+            onClick={() => this.handleFlag()}
+            className={classNames('action-report', {selected: isFlagged})}
+          >
+            <Icon name="flag"/>
+            <span> {t(isFlagged ? 'actions.flagged' : 'misc.otherFlags')}</span>
+          </a>
+        </ReputationGuard>
+      </React.Fragment>
+    )
   }
 
   getScore() {

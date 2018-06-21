@@ -10,9 +10,7 @@ import {
   ONBOARDING_ADD_STATEMENT
 } from '../../constants'
 
-import store from '../../state/index'
 import { isAuthenticated } from '../../state/users/current_user/selectors'
-import { staticResource } from '../../API'
 import { ModalFormContainer } from '../Modal'
 import Icon from '../Utils/Icon'
 import ClickableIcon from '../Utils/ClickableIcon'
@@ -20,11 +18,11 @@ import ReputationGuard from '../Utils/ReputationGuard'
 import { EditSpeakerForm } from './SpeakerForm'
 import ModalRemoveSpeaker from './ModalRemoveSpeaker'
 import { addModal } from '../../state/modals/reducer'
-import { addStep } from '../../state/onboarding/reducer'
 import { removeSpeaker, updateSpeaker } from '../../state/video_debate/effects'
 import { changeStatementFormSpeaker } from '../../state/video_debate/statements/reducer'
 import MediaLayout from '../Utils/MediaLayout'
 import {getFocusedStatementSpeakerId} from '../../state/video_debate/statements/selectors'
+import OnboardingStep from '../Onboarding/OnboardingStep'
 
 
 @withRouter
@@ -34,45 +32,40 @@ import {getFocusedStatementSpeakerId} from '../../state/video_debate/statements/
   isFocused: getFocusedStatementSpeakerId(state) === props.speaker.id
 }), {
   addModal,
-  addStep,
   changeStatementFormSpeaker,
   removeSpeaker,
   updateSpeaker
 })
 export class SpeakerPreview extends React.PureComponent {
-  componentDidMount() {
-    const { t, addStep } = this.props
-
-    addStep({
-      uniqueId: ONBOARDING_ADD_STATEMENT,
-      title: t('onboarding:add_statement.title'),
-      content: t('onboarding:add_statement.text'),
-      target: '.add-statement-button'
-    })
-  }
-
   render() {
     const {speaker, isAuthenticated, withoutActions, className} = this.props
 
     return (
-      <MediaLayout
-        className={classNames('speaker-preview', className, {isActive: this.props.isFocused})}
-        left={this.renderSpeakerThumb(speaker)}
-        content={
-          <React.Fragment>
-            {this.renderName(speaker)}
-            <p className="subtitle">{this.getTitle()}</p>
-          </React.Fragment>
-        }
-        right={isAuthenticated && !withoutActions && this.renderActions()}
-      />
+      <OnboardingStep
+        uniqueId={ONBOARDING_ADD_STATEMENT}
+        titleI18n="add_statement.title"
+        contentI18n="add_statement.text"
+        target=".speaker-preview .icon-commenting-o"
+      >
+        <MediaLayout
+          className={classNames('speaker-preview', className, {isActive: this.props.isFocused})}
+          left={this.renderSpeakerThumb(speaker)}
+          content={
+            <React.Fragment>
+              {this.renderName(speaker)}
+              <p className="subtitle">{this.getTitle()}</p>
+            </React.Fragment>
+          }
+          right={isAuthenticated && !withoutActions && this.renderActions()}
+        />
+      </OnboardingStep>
     )
   }
 
   renderSpeakerThumb(speaker) {
     if (speaker.picture)
-      return <img className="speaker-picture" src={speaker.picture}/>
-    return <Icon className="speaker-picture" name="user" size="large" style={{color: 'grey'}}/>
+      return <img className="speaker-picture" src={speaker.picture} alt=""/>
+    return <Icon className="speaker-picture" name="user" size="large"/>
   }
 
   renderActions() {

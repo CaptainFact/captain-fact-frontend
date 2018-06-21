@@ -9,7 +9,7 @@ import { fetchCurrentUser } from '../../state/users/current_user/effects'
 import { MainModalContainer } from '../Modal/MainModalContainer'
 import Sidebar from './Sidebar'
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
-import OnBoarding from './OnBoarding'
+import Onboarding from '../Onboarding/Onboarding'
 
 @connect(state => ({
   locale: state.UserPreferences.locale
@@ -29,7 +29,7 @@ export default class App extends React.Component {
             <title>CaptainFact</title>
           </Helmet>
           <MainModalContainer/>
-          <OnBoarding/>
+          <Onboarding/>
           <div className="columns is-mobile is-gapless">
             <Sidebar className="column is-narrow" />
             <div id="main-container" className="column">

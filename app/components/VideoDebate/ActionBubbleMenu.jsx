@@ -15,7 +15,7 @@ import ShareModal from '../Utils/ShareModal'
 import EditVideoModal from '../Videos/EditVideoModal'
 import { hasStatementForm } from '../../state/video_debate/statements/selectors'
 import { destroyStatementForm } from '../../state/video_debate/statements/effects'
-import { addStep } from '../../state/onboarding/reducer'
+import OnboardingStep from '../Onboarding/OnboardingStep'
 
 @connect(state => ({
   hasAutoscroll: state.UserPreferences.enableAutoscroll,
@@ -25,71 +25,66 @@ import { addStep } from '../../state/onboarding/reducer'
   changeStatementFormSpeaker,
   toggleAutoscroll,
   addModal,
-  destroyStatementForm,
-  addStep
+  destroyStatementForm
 })
 @translate('videoDebate')
 @withRouter
 export default class ActionBubbleMenu extends React.PureComponent {
-  componentDidMount() {
-    const { t, addStep } = this.props
-
-    addStep({
-      uniqueId: ONBOARDING_PLUS_BUTTON,
-      title: t('onboarding:plus_button.title'),
-      content: t('onboarding:plus_button.text'),
-      target: '.action-bubble-container',
-      placement: 'top'
-    })
-  }
-
   render() {
     return (
-      <div className={classNames('action-bubble-container', {hasForm: this.props.hasStatementForm})}>
-        {!this.props.isAuthenticated &&
+      <OnboardingStep
+        uniqueId={ONBOARDING_PLUS_BUTTON}
+        titleI18n="plus_button.title"
+        contentI18n="plus_button.text"
+        target=".action-bubble-container"
+        placement="top"
+      >
+        <div className={classNames('action-bubble-container', {hasForm: this.props.hasStatementForm})}>
+          {!this.props.isAuthenticated &&
+            <ActionBubble
+              iconName="sign-in"
+              label={this.props.t('main:menu.loginSignup')}
+              onClick={() => this.props.router.push('/login')}
+            />
+          }
+          {this.props.isAuthenticated &&
+            <ActionBubble
+              iconName={this.props.hasStatementForm ? 'times' : 'commenting-o'}
+              label={this.props.t(this.props.hasStatementForm ? 'statement.abortAdd' : 'statement.add')}
+              activated={!this.props.hasStatementForm}
+              onClick={() => this.onStatementBubbleClick()}
+            />
+          }
           <ActionBubble
-            iconName="sign-in"
-            label={this.props.t('main:menu.loginSignup')}
-            onClick={() => this.props.router.push('/login')}
+            iconName="arrows-v"
+            label={this.props.t('statement.autoscroll', {
+              context: this.props.hasAutoscroll ? 'disable' : 'enable'
+            })}
+            activated={this.props.hasAutoscroll}
+            onClick={() => this.props.toggleAutoscroll()}
           />
-        }
-        {this.props.isAuthenticated &&
           <ActionBubble
-            iconName={this.props.hasStatementForm ? 'times' : 'commenting-o'}
-            label={this.props.t(this.props.hasStatementForm ? 'statement.abortAdd' : 'statement.add')}
-            activated={!this.props.hasStatementForm}
-            onClick={() => this.onStatementBubbleClick()}
+            iconName="share-alt"
+            label={this.props.t('main:actions.share')}
+            onClick={() => this.props.addModal({
+              Modal: ShareModal,
+              props: {path: location.pathname}
+            })}
           />
-        }
-        <ActionBubble
-          iconName="arrows-v"
-          label={this.props.t('statement.autoscroll', {
-            context: this.props.hasAutoscroll ? 'disable' : 'enable'
-          })}
-          activated={this.props.hasAutoscroll}
-          onClick={() => this.props.toggleAutoscroll()}
-        />
-        <ActionBubble
-          iconName="share-alt"
-          label={this.props.t('main:actions.share')}
-          onClick={() => this.props.addModal({
-            Modal: ShareModal,
-            props: {path: location.pathname}
-          })}
-        />
-        <ReputationGuard requiredRep={MIN_REPUTATION_UPDATE_VIDEO}>
+          <ReputationGuard requiredRep={MIN_REPUTATION_UPDATE_VIDEO}>
+            <ActionBubble
+              iconName="pencil"
+              label={this.props.t('video.edit')}
+              onClick={() => this.props.addModal({Modal: EditVideoModal})}
+            />
+          </ReputationGuard>
           <ActionBubble
-            iconName="pencil"
-            label={this.props.t('video.edit')}
-            onClick={() => this.props.addModal({Modal: EditVideoModal})}
+            iconName="question"
+            label={this.props.t('main:menu.help')}
+            onClick={() => this.props.router.push('/help')}
           />
-        </ReputationGuard>
-        <ActionBubble
-          iconName="question"
-          label={this.props.t('main:menu.help')}
-          onClick={() => this.props.router.push('/help')}
-        />
-      </div>
+        </div>
+      </OnboardingStep>
     )
   }
 

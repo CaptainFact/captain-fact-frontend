@@ -5,7 +5,7 @@ import Joyride from 'react-joyride'
 
 import { isAuthenticated } from '../../state/users/current_user/selectors'
 import { uncompletedOnboardingSteps } from '../../state/onboarding/selectors'
-import { stepSeen, stepUnseen, tourSkipped } from '../../state/onboarding/effects'
+import { stepSeen, tourSkipped } from '../../state/onboarding/effects'
 
 
 const JOYRIDE_STYLE = {
@@ -16,25 +16,29 @@ const JOYRIDE_STYLE = {
 
 @connect(state => ({
   onboardingSteps: uncompletedOnboardingSteps(state),
-  isAuthenticated: isAuthenticated(state)
+  isAuthenticated: isAuthenticated(state),
+  isCompleted: state.CurrentUser.completedOnboarding
 }), {
   stepSeen,
-  tourSkipped,
-  stepUnseen
+  tourSkipped
 })
 @translate('onboarding')
-export default class OnBoarding extends React.PureComponent {
+export default class Onboarding extends React.PureComponent {
   render() {
+    console.log(this.props.isAuthenticated, !this.props.isCompleted, this.joyrideSteps())
+    if (!this.props.isAuthenticated || this.props.isCompleted)
+      return null
+
     return (
       <Joyride
         ref={c => {this.joyride = c}}
         steps={this.joyrideSteps()}
         locale={this.props.t('joyride', {returnObjects: true})}
-        run={this.props.isAuthenticated}
         callback={d => this.joyrideCallback(d)}
         styles={JOYRIDE_STYLE}
         showSkipButton
-        continuous
+        hideBackButton
+        debug
       />
     )
   }
@@ -56,9 +60,8 @@ export default class OnBoarding extends React.PureComponent {
    * `react-joyride`
    */
   joyrideSteps() {
-    return Array
-      .from(this.props.onboardingSteps.values())
-      .map(v => v.toJS())
+    const step = this.props.onboardingSteps.first()
+    return step ? [step.toJS()] : []
   }
 
   /**
@@ -68,20 +71,9 @@ export default class OnBoarding extends React.PureComponent {
    * @param {*} data
    */
   joyrideCallback(data) {
-    console.log(`[OnBoarding] Action: ${data.action} | Lifecycle: ${data.lifecycle} | Step unique id: ${data.step.uniqueId}`)
-    if (this.shouldComplete(data))
-      this.props.stepSeen(data.step.uniqueId)
-    else if (this.shouldReverse(data))
-      this.props.stepUnseen(data.step.uniqueId)
-    else if (data.type === 'finished' && data.isTourSkipped)
+    if (data.action === 'close')
+      this.props.stepSeen(this.props.onboardingSteps.first().uniqueId)
+    else if (data.action === 'skip' && data.status === 'skipped')
       this.props.tourSkipped()
-  }
-
-  shouldComplete({lifecycle, action}) {
-    return (action === 'next' && lifecycle === 'complete')
-  }
-
-  shouldReverse({action}) {
-    return (action === 'prev')
   }
 }

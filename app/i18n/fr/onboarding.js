@@ -11,7 +11,7 @@ export default {
     text: 'Cliquez ici pour ajouter une citation de cet·te intervenant·e.',
   },
   add_source_or_comment: {
-    title: "Ajout d'une source ou d'un commentaire",
+    title: 'Ajouter une source ou un commentaire',
     text: 'Vous pouvez maintenant ajouter un commentaire ou une source sur cette citation.',
   },
   plus_button: {
