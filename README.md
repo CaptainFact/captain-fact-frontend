@@ -7,6 +7,12 @@
 <p align="center">Master: <a href="https://travis-ci.org/CaptainFact/captain-fact-frontend"><img src="https://travis-ci.org/CaptainFact/captain-fact-frontend.svg?branch=travis-configuration" alt="Build Status" /></a> &nbsp;&nbsp;
 Staging: <a href="https://travis-ci.org/CaptainFact/captain-fact-frontend"><img src="https://travis-ci.org/CaptainFact/captain-fact-frontend.svg?branch=staging" alt="Build Status" /></a></p>
 <hr/><br/>
+<p align="center">
+<a href="https://opencollective.com/captainfact_io/donate" target="_blank">
+  <img src="https://opencollective.com/captainfact_io/donate/button@2x.png?color=white" width=300 />
+</a>
+</p>
+<hr/>
 
 ## Getting started
 
@@ -16,7 +22,6 @@ the gitlab registry for `./dev/start_api.sh` to run correctly.
 * Install (if you don't have them):
   * [Docker](https://docs.docker.com/install/) (to start the API easily)
   * [Node.js](http://nodejs.org)
-  * [Brunch](http://brunch.io): `npm install -g brunch`
   * App dependencies: `npm install`
     
 * Run:

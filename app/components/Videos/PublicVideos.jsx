@@ -49,10 +49,7 @@ export class PublicVideos extends React.PureComponent {
             <Icon name="television"/>
             <span> {capitalize(this.props.t('entities.video_plural'))}</span>
           </h2>
-          <ReputationGuard
-            requiredRep={MIN_REPUTATION_ADD_VIDEO}
-            verifyFunc={(user, hasReputation) => hasReputation || user.is_publisher}
-          >
+          <ReputationGuard requiredRep={MIN_REPUTATION_ADD_VIDEO}>
             <Link to="/videos/add" className="button is-primary">
               <Icon name="plus-circle"/>
               <span>{this.props.t('videos.add')}</span>

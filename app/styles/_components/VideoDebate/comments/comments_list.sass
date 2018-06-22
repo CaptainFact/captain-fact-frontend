@@ -1,5 +1,24 @@
 @import "./variables"
 
+/* Header above comments list (approve, refute, comments) */
+
+.comments-list-header
+  font-weight: bold
+  -webkit-box-align: center
+  align-items: center
+  margin-bottom: 0.5em
+  display: flex
+  .tag
+    border-radius: 1em
+    padding: 0 1em
+  &> div
+    height: 1px
+    background: $grey-lighter
+    flex: 1
+    vertical-align: baseline
+    
+.comments-container-header
+  padding: 0 0.5em
 
 /* Approve / refute columns */
 
@@ -8,10 +27,8 @@
   .comments-list
     &.approve .comments-list-header
       color: darken($green, 5)
-      border-bottom: 1px solid $green
     &.refute .comments-list-header
       color: darken($red, 5)
-      border-bottom: 1px solid $red
     &.approve, &.refute
       width: 50%
       flex-direction: column
@@ -22,14 +39,10 @@
         flex-basis: 300px
       &> div
         width: 100%
-    .comments-list-header
-      font-weight: bold
-      text-align: center
-      padding-bottom: 0.4em
-      margin-bottom: 1em
-      .tag
-        border-radius: 1em
-        padding: 0 1em
+    &.approve .comments-list-header > div
+      background: $green
+    &.refute .comments-list-header > div
+      background: $red
 
 /* Button to load more comments */
 

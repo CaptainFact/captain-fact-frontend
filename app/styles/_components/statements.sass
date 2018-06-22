@@ -8,75 +8,105 @@ $statement-text-color: #e0e7f1
 .statements-list-container
   height: 100vh
 
-  .statements-list
-    overflow-y: auto
-    height: 100%
-    padding: 20px
-    +mobile
-      padding: 5px
+.statements-list
+  overflow-y: auto
+  height: 100%
+  padding: 20px
+  +mobile
+    padding: 5px
 
-    .statement-container
-      padding: 15px 0
-      &.is-focused .statement
-        box-shadow: 0px 0px 20px 0px rgb(148, 148, 148)
-        max-width: $statement-max-width
-    .statement
-      margin: 0 auto
-      max-width: $statement-max-width - $statement-focus-size
-      transition: box-shadow 0.5s, max-width 0.5s
-      box-shadow: rgba(10, 10, 10, 0.15) 0px 6px 14px -5px
-      border: 1px solid lightgrey
-      .card-header
-        .speaker-mini
-          height: 25px
-          margin-right: 5px
-          border-radius: 15px
-        .card-header-icon
-          font-size: .9em
-      .time-display
-        min-width: 60px
-        color: grey
-        margin-right: 15px
-        padding-right: 10px
-        border-right: 1px solid #e8e8e8
-      &> *:not(:last-child)
-        border-bottom: 1px solid #dbdbdb
-        border-top: none
-      .card-footer
-        border-top: none
-        border-bottom: 1px solid #dbdbdb
-        &.comments
-          display: block
-          .expend-comment-form
-            margin-left: 42px
-          &> .comments-list
-            border-bottom: 1px solid #dbdbdb
+.statement-container
+  padding: 15px 0
+  &.is-focused .statement
+    box-shadow: 0px 0px 20px 0px rgb(148, 148, 148)
+    max-width: $statement-max-width
 
-  .statement-form
-    box-shadow: 0px 3px 15px -3px #b3b3b3
-    &.card
-      @include animate(fadeInDown, 0.3s)
-    .card-header-title
-      .button
-        margin-right: 10px
-      .speaker-select
-        min-width: 235px
-      .time-display
-        border: none
-        padding-right: 0
-        margin-right: 10px
-    .textarea
-      min-height: 50px
-      font-style: italic
-      font-size: 20px
-      font-weight: bold
-      background: none
-      color: $statement-text-color
-      &::placeholder
+.statement
+  margin: 0 auto
+  max-width: $statement-max-width - $statement-focus-size
+  transition: box-shadow 0.5s, max-width 0.5s
+  box-shadow: rgba(10, 10, 10, 0.15) 0px 6px 14px -5px
+  border: 1px solid lightgrey
+  .card-header
+    .speaker-mini
+      height: 25px
+      margin-right: 5px
+      border-radius: 15px
+    .card-header-icon
+      font-size: .9em
+  .time-display
+    min-width: 60px
+    color: grey
+    margin-right: 15px
+    padding-right: 10px
+    border-right: 1px solid #e8e8e8
+  &> *:not(:last-child)
+    border-bottom: 1px solid #dbdbdb
+    border-top: none
+  .card-footer
+    border-top: none
+    border-bottom: 1px solid #dbdbdb
+    &.comments
+      display: block
+      .expend-comment-form
+        margin-left: 42px
+      &> .comments-list
+        border-bottom: 1px solid #dbdbdb
+  .card-footer-item .icon
+    margin: 0
+
+  .sourcesType
+    background: #f1f1f1
+    color: $grey-dark
+    padding: 0.25em
+    text-align: center
+    border-bottom: 1px solid $border
+
+  .self-comments
+    $col-border-style: 3px solid $border
+    border-bottom-width: 1px
+    flex-wrap: wrap
+    box-shadow: 0px 0px 4px lighten($grey-lighter, 0) inset
+    &.columns
+      margin-bottom: 0
+    .speaker-preview
+      padding: 0.5em 2em 0.5em 1em
+      color: $dark-invert
+      .speaker-name
+        color: $grey-dark
+      .subtitle
         color: $grey
-    .card-content
-      @extend .statement-text-container
-      border-bottom: 1px solid #dbdbdb
+    .column:first-child
+      border-right: 1px solid $border
+      background-color: #f1f1f1
+    .column:last-child
+      flex-basis: 350px
+
+.statement-form
+  box-shadow: 0px 3px 15px -3px #b3b3b3
+  &.card
+    @include animate(fadeInDown, 0.3s)
+  .card-header-title
+    .button
+      margin-right: 10px
+    .speaker-select
+      min-width: 235px
+    .time-display
+      border: none
+      padding-right: 0
+      margin-right: 10px
+  .textarea
+    min-height: 50px
+    font-style: italic
+    font-size: 20px
+    font-weight: bold
+    background: none
+    color: $statement-text-color
+    &::placeholder
+      color: $grey
+  .card-content
+    @extend .statement-text-container
+    border-bottom: 1px solid #dbdbdb
 
 .statement-text-container
   background: $statement-text-background
@@ -107,7 +137,3 @@ $statement-text-color: #e0e7f1
   font-weight: bold
   white-space: pre-line
   text-shadow: 0 0 1px black
-
-.statement
-  .card-footer-item .icon
-    margin: 0

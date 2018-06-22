@@ -3,6 +3,8 @@ export default {
   history: 'Historique',
   approve: 'Confirme',
   refute: 'Réfute',
+  comments: 'Commentaires',
+  community: 'Communauté',
   flagForm: {
     title: 'Pourquoi signaler ce commentaire ?',
     xAvailable: '{{count}} disponnible',
@@ -32,6 +34,7 @@ export default {
     shiftStatements: 'Décaler toutes les affirmations (en secondes)'
   },
   speaker: {
+    one: 'Intervenant·e',
     remove: 'Retirer l\'intervenant·e',
     confirmRemove: 'Toutes les déclarations de {{speaker.full_name}} sur cette vidéo vont devenir orphelines',
     add: 'Ajouter un·e intervenant·e',

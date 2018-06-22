@@ -32,11 +32,19 @@ ReputationGuard.propTypes = {
 }
 
 export const withReputationGuard =
-  (requiredRep, showLoading = true, showNotEnough = true, props = {}) =>
-    WrappedComponent =>
-      wrappedComponentProps =>
-        <ReputationGuard requiredRep={requiredRep} showLoading={showLoading} showNotEnough={showNotEnough} {...props}>
+  (requiredRep, showLoading = true, showNotEnough = true, props = {}) => (
+    WrappedComponent => (
+      wrappedComponentProps => (
+        <ReputationGuard
+          requiredRep={requiredRep}
+          showLoading={showLoading}
+          showNotEnough={showNotEnough}
+          {...props}
+        >
           <WrappedComponent {...wrappedComponentProps}/>
         </ReputationGuard>
+      )
+    )
+  )
 
 export default ReputationGuard

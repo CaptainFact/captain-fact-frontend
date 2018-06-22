@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 
 import ClickableIcon from '../Utils/ClickableIcon'
+import Icon from '../Utils/Icon'
 import ReputationGuard from '../Utils/ReputationGuard'
 import TimeDisplay from '../Utils/TimeDisplay'
 import { StatementForm } from './StatementForm'
@@ -10,7 +11,7 @@ import { CommentForm, CommentsContainer } from '../Comments'
 import ModalConfirmDelete from '../Modal/ModalConfirmDelete'
 
 import * as statementSelectors from '../../state/video_debate/statements/selectors'
-import * as commentsSelectors from '../../state/video_debate/comments/selectors'
+import { classifyComments } from '../../state/video_debate/comments/selectors'
 import { ModalHistory } from '../VideoDebate/ModalHistory'
 import Tag from '../Utils/Tag'
 import { addModal } from '../../state/modals/reducer'
@@ -23,21 +24,24 @@ import {
   MIN_REPUTATION_UPDATE_STATEMENT
 } from '../../constants'
 import { setScrollTo } from '../../state/video_debate/statements/reducer'
+import { SpeakerPreview } from '../Speakers/SpeakerPreview'
 
 
-@connect((state, props) => ({
-  speaker: statementSelectors.getStatementSpeaker(state, props),
-  comments: commentsSelectors.getStatementComments(state, props),
-  approvingFacts: commentsSelectors.getStatementApprovingFacts(state, props),
-  refutingFacts: commentsSelectors.getStatementRefutingFacts(state, props),
-  approveScore: statementSelectors.getStatementApproveScore(state, props),
-  refuteScore: statementSelectors.getStatementRefuteScore(state, props),
-  isFocused: statementSelectors.isStatementFocused(state, props),
-  currentUser: state.CurrentUser.data,
-  scrollTo: state.VideoDebate.statements.scrollTo,
-  autoscrollEnabled: state.UserPreferences.enableAutoscroll,
-  formEnabled: state.VideoDebate.statements.formsCount > 0
-}), {addModal, updateStatement, deleteStatement, forcePosition, setScrollTo})
+@connect((state, props) => {
+  const classifiedComments = classifyComments(state, props)
+  return {
+    speaker: statementSelectors.getStatementSpeaker(state, props),
+    comments: classifiedComments.regularComments,
+    selfComments: classifiedComments.selfComments,
+    approvingFacts: classifiedComments.approvingFacts,
+    refutingFacts: classifiedComments.refutingFacts,
+    isFocused: statementSelectors.isStatementFocused(state, props),
+    currentUser: state.CurrentUser.data,
+    scrollTo: state.VideoDebate.statements.scrollTo,
+    autoscrollEnabled: state.UserPreferences.enableAutoscroll,
+    formEnabled: state.VideoDebate.statements.formsCount > 0
+  }
+}, {addModal, updateStatement, deleteStatement, forcePosition, setScrollTo})
 @translate('videoDebate')
 export class Statement extends React.PureComponent {
   state = { isDeleting: false, isEditing: false }
@@ -149,46 +153,75 @@ export class Statement extends React.PureComponent {
     )
   }
 
-  renderCommentsContainerHeader(label, tagType, score) {
+  renderCommentsContainerHeader(label, tagType, score = null) {
     return (
-      <div>
+      <div className="comments-container-header">
         <span>{this.props.t(label)} </span>
-        <Tag type={tagType}>{ score }</Tag>
+        {score !== null && <Tag type={tagType}>{ score }</Tag>}
       </div>
     )
   }
 
   renderFactsAndComments() {
-    const { statement, comments, approvingFacts, refutingFacts } = this.props
+    const { statement, comments, approvingFacts, refutingFacts, speaker, selfComments, t } = this.props
 
     return (
       <div>
+        {selfComments.size > 0 &&
+          <div className="card-footer self-comments columns is-gapless">
+            <div className="column is-narrow">
+              <div className="sourcesType">
+                <Icon name="user"/> {t('speaker.one')}
+              </div>
+              <SpeakerPreview speaker={speaker} withoutActions/>
+            </div>
+            <div className="column">
+              <CommentsContainer comments={selfComments}/>
+            </div>
+          </div>
+        }
+        {(approvingFacts.size > 0 || refutingFacts.size > 0 || comments.size > 0) &&
+          <div className="sourcesType">
+            <Icon name="users"/> {t('community')}
+          </div>
+        }
         {(approvingFacts.size > 0 || refutingFacts.size > 0) &&
         <div className="card-footer sourced-comments">
           {refutingFacts.size > 0 &&
           <CommentsContainer
             className="card-footer-item refute"
             comments={refutingFacts}
-            header={this.renderCommentsContainerHeader('refute', 'danger', this.props.refuteScore)}
+            header={this.renderCommentsContainerHeader('refute', 'danger', this.calculateScore(refutingFacts))}
           />
           }
           {approvingFacts.size > 0 &&
           <CommentsContainer
             className="card-footer-item approve"
             comments={approvingFacts}
-            header={this.renderCommentsContainerHeader('approve', 'success', this.props.approveScore)}
+            header={this.renderCommentsContainerHeader('approve', 'success', this.calculateScore(approvingFacts))}
           />
           }
         </div>
         }
         <div className="card-footer comments">
-          {comments.size > 0 && <CommentsContainer comments={comments}/>}
+          {comments.size > 0 &&
+            <CommentsContainer
+              comments={comments}
+              header={this.renderCommentsContainerHeader('comments')}
+            />
+          }
           <CommentForm
             form={`formAddComment-${statement.id}`}
             initialValues={{ statement_id: statement.id }}
           />
         </div>
       </div>
+    )
+  }
+
+  calculateScore(comments) {
+    return comments.reduce((score, comment) =>
+      score + (comment.score > 0 ? comment.score : 0), 0
     )
   }
 
