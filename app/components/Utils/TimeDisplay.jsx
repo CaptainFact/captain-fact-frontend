@@ -10,7 +10,7 @@ const i18nAtKey = 'misc.timeAt'
 const TimeDisplay = ({ time, handleClick, t, textBefore = true, capitalize = true }) => {
   const formattedTime = formatSeconds(time)
   const content = handleClick ?
-    <a onClick={() => handleClick(time)}>{ formattedTime }</a> : formattedTime
+    <a href="#" onClick={() => handleClick(time)}>{ formattedTime }</a> : formattedTime
   return (
     <span className="time-display">
       {textBefore &&

@@ -84,7 +84,7 @@ export class CommentDisplay extends React.PureComponent {
                 <nav className="comment-actions">
                   { isOwnComment ? this.renderOwnCommentActions() : this.renderOtherCommentActions()}
                   { replies &&
-                    <a className={!showReplies ? "reply-collapsed" : null}
+                    <a href="#" className={!showReplies ? "reply-collapsed" : null}
                        onClick={() => this.setState({showReplies: !showReplies})}>
                       <Icon size="small" name={showReplies ? "eye-slash" : "eye"}/>
                       <span>
@@ -111,10 +111,10 @@ export class CommentDisplay extends React.PureComponent {
 
   renderOwnCommentActions() {
     return <React.Fragment>
-      <a onClick={() => this.actionReply()}>
+      <a href="#" onClick={() => this.actionReply()}>
         <Icon name="plus"/> <span> {this.props.t('actions.addToThread')}</span>
       </a>
-      <a onClick={this.handleDelete.bind(this)}>
+      <a href="#" onClick={this.handleDelete.bind(this)}>
         <Icon name="times"/>
         <span> {this.props.t('actions.delete')}</span>
       </a>
@@ -124,17 +124,17 @@ export class CommentDisplay extends React.PureComponent {
   renderOtherCommentActions() {
     const {t, isFlagged} = this.props
     return <React.Fragment>
-      <a onClick={() => this.actionReply()}>
+      <a href="#" onClick={() => this.actionReply()}>
         <Icon name="reply"/> <span>{t('actions.reply')}</span>
       </a>
       <ReputationGuard requiredRep={MIN_REPUTATION_FLAG}>
         {!isFlagged &&
-        <a onClick={() => this.handleFlag('3')}>
+        <a href="#" onClick={() => this.handleFlag('3')}>
           <Icon name="ban"/>
           <span> {t('moderation:reason.3')}</span>
         </a>
         }
-        <a onClick={() => this.handleFlag()}
+        <a href="#" onClick={() => this.handleFlag()}
            className={classNames('action-report', {selected: isFlagged})}>
           <Icon name="flag"/>
           <span> {t(isFlagged ? 'actions.flagged' : 'misc.otherFlags')}</span>
