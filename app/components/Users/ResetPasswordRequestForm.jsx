@@ -38,7 +38,7 @@ export default class ResetPasswordRequestForm extends React.PureComponent {
     else if (this.state.status === 'ready')
       return (
         <div>
-          {emailField(this.props.t)}
+          {emailField(this.props.t, true)}
           <button type="submit" className="button">{this.props.t('resetPassword')}</button>
         </div>
       )

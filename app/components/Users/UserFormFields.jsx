@@ -17,17 +17,22 @@ const validateEmail = t => email =>
   (!email || !isEmail(email)) && t('errors:server.invalid_email')
 
 // Common fields
-export const emailField = t =>
+export const emailField = (t, required=false) =>
   <Field name="email" placeholder={t('email')}
          component={renderField}
          icon="envelope"
          normalize={s => s.trim()}
+         minlength={5}
+         required={required}
+         spellCheck={false}
          validate={validateEmail(t)}/>
 
 export const passwordField = (t, isOptional = false) =>
   <Field name="password" placeholder={t(isOptional ? 'passwordOptional' : 'password')}
          type="password" component={renderField}
          validate={v => (!v && isOptional ? null : validateFieldLength(t, v, PASSWORD_LENGTH))}
+         minlength={PASSWORD_LENGTH[0]}
+         maxlength={PASSWORD_LENGTH[1]}
          icon="lock"/>
 
 export const passwordRepeatField = (t) =>

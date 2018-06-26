@@ -8,7 +8,7 @@ import { Icon } from '../Utils/Icon'
 import TextareaLengthCounter from './TextareaLengthCounter'
 
 
-export const renderInput = ({ input, label, placeholder, type, className, meta }) => {
+export const renderInput = ({ input, label, placeholder, type, className, meta, minlength, maxlength, required, spellCheck }) => {
   const { touched, error, submitting } = (meta || {})
   return (
     <input
@@ -16,6 +16,10 @@ export const renderInput = ({ input, label, placeholder, type, className, meta }
       {...input}
       placeholder={placeholder || label}
       type={type}
+      minLength={minlength || undefined}
+      maxLength={maxlength || undefined}
+      required={required || undefined}
+      spellCheck={spellCheck}
       disabled={submitting}
     />
   )
