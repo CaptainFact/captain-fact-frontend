@@ -45,6 +45,7 @@ export class ModalFormContainer extends React.PureComponent {
       <div className="form-buttons">
         <a type="submit"
            disabled={isSubmitting || this.props.confirmLoading || this.props.confirmDisabled}
+           href="#"
            className={classNames('button', confirmType, {
              'is-loading': (isSubmitting || this.props.confirmLoading)
            })}
@@ -55,6 +56,7 @@ export class ModalFormContainer extends React.PureComponent {
         <a type="reset"
            className={classNames('button')}
            disabled={isSubmitting}
+           href="#"
            onClick={this.close}>
           <Icon name="ban"/>
           <div>{this.props.t('actions.cancel')}</div>

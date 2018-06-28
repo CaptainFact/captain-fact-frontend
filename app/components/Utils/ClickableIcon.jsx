@@ -7,7 +7,7 @@ export const ClickableIcon = ({name, size, className, ...otherProps}) => {
   const sizeClass = size && `is-${size}`
 
   return (
-    <a className={classNames('icon', sizeClass, className)} {...otherProps}>
+    <a className={classNames('icon', sizeClass, className)} href="#" {...otherProps}>
       <RawIcon name={name}/>
     </a>
   )

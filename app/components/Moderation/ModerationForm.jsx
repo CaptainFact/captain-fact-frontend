@@ -26,15 +26,15 @@ export class ModerationForm extends React.PureComponent {
         </h4>
         <FlagReasonSelect/>
         <div className="buttons field is-grouped">
-          <a className="button" disabled={!flagReason}
+          <a href="#" className="button" disabled={!flagReason}
              onClick={this.getSubmit(MODERATION_ACTION_ABUSIVE)}>
             <span>{t('actions.flag_abusive')}</span>
           </a>
-          <a className="button" disabled={!flagReason}
+          <a href="#" className="button" disabled={!flagReason}
              onClick={this.getSubmit(MODERATION_ACTION_NOTSURE)}>
             <span>{t('actions.unsure')}</span>
           </a>
-          <a className="button" disabled={!flagReason}
+          <a href="#" className="button" disabled={!flagReason}
              onClick={this.getSubmit(MODERATION_ACTION_CONFIRM)}>
             <span>{t('actions.confirm')}</span>
           </a>

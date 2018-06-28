@@ -68,6 +68,7 @@ export class SpeakerPreview extends React.PureComponent {
         }
         <ReputationGuard requiredRep={MIN_REPUTATION_REMOVE_SPEAKER}>
           <ClickableIcon
+            href="#"
             name="times"
             size="action-size"
             title={this.props.t('main:actions.remove')}
@@ -76,6 +77,7 @@ export class SpeakerPreview extends React.PureComponent {
         </ReputationGuard>
         <ReputationGuard requiredRep={MIN_REPUTATION_ADD_STATEMENT}>
           <ClickableIcon
+            href="#"
             name="commenting-o"
             size="action-size"
             title={this.props.t('statement.add')}

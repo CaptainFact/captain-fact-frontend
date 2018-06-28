@@ -32,7 +32,7 @@ export class CommentsContainer extends React.PureComponent {
         </FlipMove>
         {displayedComments.size < comments.size &&
           <div className="comments-expender">
-            <a className="button"
+            <a ref="#" className="button"
               onClick={() => this.setState({
                 nbComments: [this.state.nbComments[0] + 5, this.state.nbComments[1] + 7]
               })}>

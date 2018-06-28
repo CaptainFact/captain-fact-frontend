@@ -67,6 +67,7 @@ class ActionsTable extends React.PureComponent {
       onClick = () => this.setState({expendedDiffs: this.state.expendedDiffs.clear()})
     return (
       <a
+        href="#"
         className="button"
         title={this.props.t(isMostlyComparing ? 'hideAll' : 'compareAll')}
         onClick={onClick}
@@ -102,7 +103,7 @@ class ActionsTable extends React.PureComponent {
         <td><ActionIcon type={action.type}/><strong> { t(`action.${action.type}`) }</strong></td>
         {showEntity && <td><EntityTitle entity={action.entity} entityId={action.entity_id}/></td>}
         <td>
-          <a className="button" onClick={() => this.toggleDiff(action, isDiffing)}>
+          <a href="#" role="button" className="button" onClick={() => this.toggleDiff(action, isDiffing)}>
             <Icon size="small" name="indent"/>
             <span>{ t(isDiffing ? 'compare_hide' : 'compare_show') } </span>
           </a>
@@ -110,7 +111,9 @@ class ActionsTable extends React.PureComponent {
         {canRestore &&
           <td>
             {reversible &&
-              <a className="button" onClick={() => this.props.revertVideoDebateUserAction(action)}>
+              <a href="#" role="button" className="button" 
+                onClick={() => this.props.revertVideoDebateUserAction(action)}
+                >
                 <Icon size="small" name="undo"/>
                 <span>{t('revert')}</span>
               </a>
