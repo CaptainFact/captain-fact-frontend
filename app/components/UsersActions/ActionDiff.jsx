@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
+import { translate } from 'react-i18next'
 import { Map, List } from 'immutable'
 import { diffWordsWithSpace } from 'diff'
-import titleCase from 'voca/title_case'
 
 import {
   ACTION_DELETE, ACTION_REMOVE, ACTION_RESTORE, ENTITY_COMMENT, ENTITY_SPEAKER,
@@ -10,17 +10,18 @@ import {
 import formatSeconds from '../../lib/seconds_formatter'
 import EntityTitle from './EntityTitle'
 
-
+@translate('keys')
 class ActionDiff extends PureComponent {
   render() {
     const allActions = this.props.allActions || new List([this.props.action])
     const diff = this.generateDiff(allActions, this.props.action)
+    const t = this.props.t
     return (
       <div className="action-diff">
         {diff.entrySeq().map(([key, changes]) => (
           <div key={key} className="diff-entry">
             <div className="diff-key">
-              { titleCase(this.formatChangeKey(key)) }&nbsp;
+              { t(this.formatChangeKey(key)) }&nbsp;
             </div>
             <pre className="diff-view">
               { this.renderKeyDiff(key, changes) }
@@ -52,7 +53,7 @@ class ActionDiff extends PureComponent {
   }
 
   formatChangeKey(key) {
-    return key.replace('_id', '').replace('_', ' ')
+    return key.replace('_id', '')
   }
 
   formatChangeValue(value, key) {

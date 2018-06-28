@@ -36,6 +36,7 @@ export default {
     confirmRemove: 'Toutes les déclarations de {{speaker.full_name}} sur cette vidéo vont devenir orphelines',
     add: 'Ajouter un·e intervenant·e',
     create: 'Créer l\'intervenant·e "{{name}}"',
+    edit: 'Modifier les informations de {{speaker.full_name}}',
     search: 'Tapez un nom pour lancer la recherche',
     fullName: 'Nom complet',
     title: 'Titre',
@@ -43,13 +44,14 @@ export default {
     titleFormat: '{{title}}',
     titles: {
       Politician: 'Personnalité politique',
-      Journalist: 'Journaliste'
+      Journalist: 'Journaliste',
+      'Chaine Youtube': 'Chaîne Youtube'
     }
   },
   statement: {
     remove: 'Retirer la citation',
     confirmRemove: 'Êtes-vous sûr·e ?',
-    textPlaceholder: 'Retranscrivez ici les propos de l\'intervenant·e',
+    textPlaceholder: 'Retranscrivez ici les propos de l\'intervenant·e {{speaker.full_name}}',
     noSpeakerTextPlaceholder: 'Décrivez ce qui apparait à l\'image ou ajoutez un intervenant',
     text: 'Le texte',
     add: 'Ajouter une citation',

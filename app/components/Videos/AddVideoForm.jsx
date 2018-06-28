@@ -1,5 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router'
+import { translate } from 'react-i18next'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import trim from 'voca/trim'
@@ -25,6 +26,7 @@ const validate = ({ url }) => {
   isAuthenticated: isAuthenticated(state)
 }), {postVideo, searchVideo})
 @reduxForm({form: 'AddVideo', validate})
+@translate('main')
 export class AddVideoForm extends React.PureComponent {
   componentDidMount() {
     if (this.props.params.videoUrl) {
@@ -46,15 +48,15 @@ export class AddVideoForm extends React.PureComponent {
           <Field
             component={this.renderVideoField}
             name="url"
-            buttonLabel="Add Video"
-            placeholder="Video URL"
+            buttonLabel={this.props.t("Add Video")}
+            placeholder={this.props.t("Video URL")}
             buttonClassName="is-primary"
             normalize={s => trim(s)}
             expandInput
           />
         </form>
         <div id="col-debate" className="column">
-          {this.props.isSubmitting && <LoadingFrame title="Analysing video"/>}
+          {this.props.isSubmitting && <LoadingFrame title={this.props.t("Analysing video")}/>}
         </div>
       </div>
     )

@@ -42,7 +42,7 @@ export class SpeakerPreview extends React.PureComponent {
             <p className="subtitle">{this.getTitle()}</p>
           </React.Fragment>
         }
-        right={isAuthenticated && !withoutActions && this.renderActions()}
+        right={isAuthenticated && !withoutActions && this.renderActions(speaker)}
       />
     )
   }
@@ -53,15 +53,17 @@ export class SpeakerPreview extends React.PureComponent {
     return <Icon className="speaker-picture" name="user" size="large" style={{color: 'grey'}}/>
   }
 
-  renderActions() {
+  renderActions(speaker) {
     return (
       <div className="quick-actions">
         {this.props.speaker.is_user_defined &&
           <ReputationGuard requiredRep={MIN_REPUTATION_UPDATE_SPEAKER}>
             <ClickableIcon
+              href="#"
               name="pencil"
               size="action-size"
-              title={this.props.t('main:actions.edit')}
+              title={this.props.t('main:actions.edit') + ' ' + speaker.full_name}
+              aria-label={this.props.t('main:actions.edit') + ' ' + speaker.full_name}
               onClick={() => this.handleEdit()}
             />
           </ReputationGuard>
@@ -71,7 +73,8 @@ export class SpeakerPreview extends React.PureComponent {
             href="#"
             name="times"
             size="action-size"
-            title={this.props.t('main:actions.remove')}
+            title={this.props.t('main:actions.remove') + ' ' + speaker.full_name}
+            aria-label={this.props.t('main:actions.remove') + ' ' + speaker.full_name}
             onClick={() => this.handleRemove()}
           />
         </ReputationGuard>
@@ -81,6 +84,7 @@ export class SpeakerPreview extends React.PureComponent {
             name="commenting-o"
             size="action-size"
             title={this.props.t('statement.add')}
+            aria-label={this.props.t('statement.add')}
             onClick={() => this.handleAddStatement()}
           />
         </ReputationGuard>
@@ -107,15 +111,11 @@ export class SpeakerPreview extends React.PureComponent {
       return title
 
     let i18nTitle = ''
-    if (this.props.i18n.language === 'en') // No need to translate title for english
-      i18nTitle = title
-    else {
-      // If unknown title, return raw title
-      const i18nTitleKey = `speaker.titles.${title}`
-      i18nTitle = this.props.t(i18nTitleKey)
-      if (i18nTitle === i18nTitleKey)
-        return title
-    }
+    // If unknown title, return raw title
+    const i18nTitleKey = `speaker.titles.${title}`
+    i18nTitle = this.props.t(i18nTitleKey)
+    if (i18nTitle === i18nTitleKey)
+      return title
     // Try to return title + nationality, otherwise fallback on translated title
     return this.props.t('speaker.titleFormat', {
       title: i18nTitle,
@@ -134,10 +134,11 @@ export class SpeakerPreview extends React.PureComponent {
   }
 
   handleEdit() {
+    const speaker = this.props.speaker
     this.props.addModal({
       Modal: ModalFormContainer,
       props: {
-        title: `Edit ${this.props.speaker.full_name} information`,
+        title: this.props.t('speaker.edit', {speaker}),
         FormComponent: EditSpeakerForm,
         handleConfirm: (s) => this.props.updateSpeaker(s),
         formProps: {initialValues: this.props.speaker.toJS()}

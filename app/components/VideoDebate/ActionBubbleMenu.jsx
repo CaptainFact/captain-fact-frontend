@@ -88,7 +88,7 @@ export default class ActionBubbleMenu extends React.PureComponent {
 
 const ActionBubble = ({iconName, label, activated = true, ...props}) => (
   <div className={classNames('action-bubble', {activated})} {...props}>
-    <div className="label">{label}</div>
+    <div className="label" htmlFor={'label-' + label}>{label}</div>
     <Icon name={iconName}/>
   </div>
 )

@@ -10,6 +10,7 @@ const FilterOnlyFromPartners = ({value, onChange, t}) => (
     <select
       value={value ? PARTNERS_KEY : USERS_KEY}
       onChange={e => onChange(e.target.value === PARTNERS_KEY)}
+      id="select-partners"
     >
       <option value={PARTNERS_KEY}>{t(PARTNERS_KEY)}</option>
       <option value={USERS_KEY}>{t(USERS_KEY)}</option>

@@ -45,6 +45,11 @@ export default {
     selectLanguage: 'Choix de la langue',
     apply: 'Appliquer'
   },
+  share: {
+    twitter: 'Partager sur Twitter',
+    facebook: 'Partager sur Facebook',
+    mail: 'Partager par mail'
+  },
   misc: {
     timeAt: 'à',
     staring: 'Avec',
@@ -61,6 +66,7 @@ export default {
   videos: {
     add: 'Ajouter une vidéo'
   },
+  goto: 'Aller à {{formattedTime}}',
   users: 'Utilisateurs',
   partners: 'Partenaires'
 }

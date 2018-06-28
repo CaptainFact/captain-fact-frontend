@@ -53,7 +53,7 @@ export class PublicVideos extends React.PureComponent {
             requiredRep={MIN_REPUTATION_ADD_VIDEO}
             verifyFunc={(user, hasReputation) => hasReputation || user.is_publisher}
           >
-            <Link to="/videos/add" className="button is-primary">
+            <Link to="/videos/add" className="button is-primary" aria-label={this.props.t('videos.add')}>
               <Icon name="plus-circle"/>
               <span>{this.props.t('videos.add')}</span>
             </Link>
@@ -71,14 +71,14 @@ export class PublicVideos extends React.PureComponent {
         <div className="level-left"/>
         <div className="level-right">
           <div className="filter">
-            <span>Source:</span>
+            <label htmlFor="select-partners">{this.props.t('menu.source')}:</label>
             <FilterOnlyFromPartners
               value={this.props.onlyFromPartners}
               onChange={this.props.setVideosOnlyFromPartners}
             />
           </div>
           <div className="filter">
-            <span>Language:</span>
+            <label htmlFor="select-language">{this.props.t('menu.language')}:</label>
             <LanguageSelector
               additionalOptions={new Map({
                 all: this.props.t('misc.all'),

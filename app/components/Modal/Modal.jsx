@@ -24,7 +24,7 @@ const Modal = ({
             <Icon name="question-circle" size="medium"/>
           </Link>
           }
-          <button className="delete" onClick={handleCloseClick || popModal}/>
+          <button className="delete" aria-label="Close" onClick={handleCloseClick || popModal}/>
         </header>
       }
       { overrideContentStructure ? children : (

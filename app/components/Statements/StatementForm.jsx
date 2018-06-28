@@ -87,7 +87,7 @@ export class StatementForm extends React.PureComponent {
             >
               <Icon size="small" name={toggleTimeLockAction}/>
             </a>
-            {speaker && speaker.picture && <img className="speaker-mini" src={speaker.picture}/>}
+            {speaker && speaker.picture && <img alt="StatementForm.jsx" className="speaker-mini" src={speaker.picture}/>}
             <Field name="speaker_id" component={SpeakersSelect} speakers={speakers} placeholder={t('speaker.add')}/>
           </div>
         </header>
@@ -99,10 +99,13 @@ export class StatementForm extends React.PureComponent {
               normalize={cleanStrMultiline}
               maxLength={STATEMENT_LENGTH[1]}
               validate={value => validateFieldLength(t, value, STATEMENT_LENGTH)}
-              placeholder={speaker ? t('statement.textPlaceholder') : t('statement.noSpeakerTextPlaceholder')}
+              placeholder={speaker ?
+                t('statement.textPlaceholder', {speaker}) :
+                t('statement.noSpeakerTextPlaceholder')}
               hideErrorIfEmpty
               autoFocus
               autosize
+              style={{minHeight: '100px'}}
             />
           </h3>
         </div>

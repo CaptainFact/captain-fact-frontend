@@ -103,7 +103,7 @@ export class Statement extends React.PureComponent {
               }}
             />
             {speaker && speaker.picture &&
-            <img className="speaker-mini" src={speaker.picture}/>
+            <img alt="Statement.jsx" className="speaker-mini" src={speaker.picture}/>
             }
             <strong>{speaker ? speaker.full_name : ''}</strong>
           </p>
@@ -143,7 +143,9 @@ export class Statement extends React.PureComponent {
           </div>
         </header>
         <div className="card-content statement-text-container">
-          <h3 className="statement-text">{statement.text}</h3>
+          <h3 className="statement-text">
+            {statement.text}
+          </h3>
         </div>
       </div>
     )

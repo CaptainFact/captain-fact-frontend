@@ -32,8 +32,8 @@ const Achievement = ({t, id}) => {
     <div className="achievement">
       <div className="card has-text-centered">
         <div className="card-image">
-          {!animation && <img src={image}/>}
-          {animation && <video src={animation} poster={image} autoPlay loop controls={false}/>}
+          {!animation && <img alt="achievement" src={image}/>}
+          {animation && <video alt="achievement" src={animation} poster={image} autoPlay loop controls={false}/>}
         </div>
         <div className="card-content">
           <div className="content">

@@ -36,17 +36,23 @@ export default {
     confirmRemove: 'All statements made by {{speaker.full_name}} on this video will become orphans',
     add: 'Add Speaker',
     create: 'Create speaker "{{name}}"',
+    edit: 'Edit {{speaker.full_name}} information',
     search: 'Type a name to search',
     fullName: 'Full name',
     title: 'Title',
     titlePlaceholder: 'Politician, doctor, journalist...',
     titleFormat: '{{title}}',
-    titleFormat_FR: 'French {{title}}'
+    titleFormat_FR: 'French {{title}}',
+    titles: {
+      Politician: 'Politician',
+      Journalist: 'Journalist',
+      'Chaine Youtube': 'Youtube channel'
+    }
   },
   statement: {
     remove: 'Remove statement',
     confirmRemove: 'Do you really want to remove this statement ?',
-    textPlaceholder: 'Type a raw transcript of what the speaker says',
+    textPlaceholder: 'Type a raw transcript of what the speaker {{speaker.full_name}} says',
     noSpeakerTextPlaceholder: 'Describe what you see or select a speaker',
     text: 'Text',
     add: 'Add a Statement',

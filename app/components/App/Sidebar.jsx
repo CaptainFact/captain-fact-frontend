@@ -161,11 +161,20 @@ export default class Sidebar extends React.PureComponent {
     const t = this.props.t
     return (
       <ul className="menu-list">
-        <this.MenuListLink to="/videos" iconName="television" onlyActiveOnIndex>
+        <this.MenuListLink
+          to="/videos"
+          iconName="television"
+          onlyActiveOnIndex
+          aria-label={ capitalize(t('entities.video_plural')) }>
           { capitalize(t('entities.video_plural')) }
         </this.MenuListLink>
         <ReputationGuard requiredRep={MIN_REPUTATION_MODERATION}>
-          <this.MenuListLink to="/moderation" iconName="flag" className="hide-when-collapsed">
+          <this.MenuListLink
+            to="/moderation"
+            iconName="flag"
+            className="hide-when-collapsed"
+            aria-label={ t('menu.moderation') }
+            >
             { t('menu.moderation') }
           </this.MenuListLink>
         </ReputationGuard>

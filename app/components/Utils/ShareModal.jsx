@@ -31,12 +31,24 @@ export default class ShareModal extends React.PureComponent {
           buttonClickHandler={this.copyUrlToClipboard.bind(this)}
           expandInput
         />
-        <hr/>
+      <hr style={{margin: '10px 0px 10px 0px'}} />
         <div style={{textAlign: 'center'}}>
-          <ThirdPartyServiceButton icon="twitter" name="Twitter" url={this.twitterLink(encodedUrl)} newTab/>
-          <ThirdPartyServiceButton icon="facebook" name="Facebook" url={this.facebookLink(encodedUrl)} newTab/>
+          <ThirdPartyServiceButton
+            icon="twitter"
+            label={this.props.t('share.twitter')}
+            url={this.twitterLink(encodedUrl)}
+            newTab/>
+          <ThirdPartyServiceButton
+            icon="facebook"
+            label={this.props.t('share.facebook')}
+            url={this.facebookLink(encodedUrl)}
+            newTab/>
           <span style={{marginLeft: 5}}>
-            <ThirdPartyServiceButton icon="envelope" name="Mail" url={this.mailLink(encodedUrl)} newTab/>
+            <ThirdPartyServiceButton
+              icon="envelope"
+              label={this.props.t('share.mail')}
+              url={this.mailLink(encodedUrl)}
+              newTab/>
           </span>
         </div>
       </Modal>

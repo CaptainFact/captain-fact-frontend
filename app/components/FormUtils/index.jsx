@@ -19,6 +19,7 @@ export const renderInput = ({ input, label, placeholder, type, className, meta, 
       minLength={minlength || undefined}
       maxLength={maxlength || undefined}
       required={required || undefined}
+      aria-required={required || undefined}
       spellCheck={spellCheck}
       disabled={submitting}
     />
@@ -69,8 +70,11 @@ export const renderTextareaField = (params) => {
 
 export const renderFieldWithLabel = (params) => (
   <div>
-    <label className="label">{params.label}</label>
-    { renderField(params) }
+    <label className="label">{params.label}
+      <div style={{marginTop: '7px'}}>
+        { renderField(params) }
+      </div>
+    </label>
   </div>
 )
 

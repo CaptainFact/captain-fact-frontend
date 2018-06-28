@@ -60,7 +60,10 @@ export class FlashMessages extends React.PureComponent {
               className={`flash-message is-${flash.flashType}`}
               data-timeleft={flash.timeLeft}
             >
-              <button className="delete" onClick={() => this.props.removeFlash(flash)}/>
+              <button
+                className="delete"
+                aria-label="Close"
+                onClick={() => this.props.removeFlash(flash)}/>
               <FlashContent flash={flash}/>
              </div>)
           )}

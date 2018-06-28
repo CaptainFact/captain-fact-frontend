@@ -17,6 +17,7 @@ export default {
     bookmarks: 'Favorites',
     myBookmarks: 'My $t(menu.bookmarks)',
     content: 'Content',
+    source: 'Source',
     language: 'Language',
     other: 'Other',
     donation: 'Support us',
@@ -46,6 +47,11 @@ export default {
     selectLanguage: 'Select language',
     apply: 'Apply'
   },
+  share: {
+    twitter: 'Share on Twitter',
+    facebook: 'Share on Facebook',
+    mail: 'Share by mail'
+  },
   misc: {
     timeAt: 'at',
     staring: 'Staring',
@@ -62,6 +68,7 @@ export default {
   videos: {
     add: 'Add Video'
   },
+  goto: 'Go to {{formattedTime}}',
   users: 'Users',
   partners: 'Partners'
 }
