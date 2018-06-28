@@ -3,6 +3,7 @@
 exports[`can set header 1`] = `
 <article
   className="message is-info"
+  role="article"
 >
   <div
     className="message-header"
@@ -20,6 +21,7 @@ exports[`can set header 1`] = `
 exports[`can set type 1`] = `
 <article
   className="message is-warning"
+  role="article"
 >
   <div
     className="message-body"
@@ -32,6 +34,7 @@ exports[`can set type 1`] = `
 exports[`render message 1`] = `
 <article
   className="message is-info"
+  role="article"
 >
   <div
     className="message-body"
@@ -44,6 +47,7 @@ exports[`render message 1`] = `
 exports[`without body 1`] = `
 <article
   className="message is-info"
+  role="article"
 >
   <div
     className="message-body"

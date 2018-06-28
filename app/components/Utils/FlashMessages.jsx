@@ -56,6 +56,7 @@ export class FlashMessages extends React.PureComponent {
           {this.props.flashes.map(flash =>
             (<div
               key={flash.id}
+              role="alert"
               className={`flash-message is-${flash.flashType}`}
               data-timeleft={flash.timeLeft}
             >

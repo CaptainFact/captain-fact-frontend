@@ -58,7 +58,7 @@ export class ColumnDebate extends React.PureComponent {
 
     return (
       <div className="video-debate-help">
-        <article className="message is-info">
+        <article role="article" className="message is-info">
           <div className="message-body">
             <Icon name="info-circle"/>&nbsp;{helpMessage}
           </div>
