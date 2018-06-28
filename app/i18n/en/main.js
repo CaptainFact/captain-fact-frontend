@@ -43,6 +43,7 @@ export default {
     edit: 'Edit',
     loading: 'Loading',
     share: 'Share',
+    selectLanguage: 'Select language',
     apply: 'Apply'
   },
   misc: {

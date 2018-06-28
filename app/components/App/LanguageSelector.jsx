@@ -31,7 +31,9 @@ export default class LanguageSelector extends React.PureComponent {
 
     return (
       <select
-        onChange={e => this.props.handleChange(e.target.value)} 
+        id="select-language"
+        aria-label={this.props.t('actions.selectLanguage')}
+        onChange={e => this.props.handleChange(e.target.value)}
         value={this.props.value}>
         { this.renderLocalesMap(options) }
       </select>
