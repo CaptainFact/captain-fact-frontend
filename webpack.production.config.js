@@ -80,7 +80,8 @@ module.exports = {
     ),
     // load the bundles into an html template
     new HtmlWebpackPlugin({
-      template: 'app/index.html'
+      template: 'app/index.html',
+      minify: true
     }),
     // gzip
     new CompressionPlugin({
