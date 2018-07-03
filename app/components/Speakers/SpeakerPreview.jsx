@@ -62,8 +62,8 @@ export class SpeakerPreview extends React.PureComponent {
               href="#"
               name="pencil"
               size="action-size"
-              title={this.props.t('main:actions.edit') + ' ' + speaker.full_name}
-              aria-label={this.props.t('main:actions.edit') + ' ' + speaker.full_name}
+              title={`${this.props.t('main:actions.edit')} ${speaker.full_name}`}
+              aria-label={`${this.props.t('main:actions.edit')} ${speaker.full_name}`}
               onClick={() => this.handleEdit()}
             />
           </ReputationGuard>
@@ -73,8 +73,8 @@ export class SpeakerPreview extends React.PureComponent {
             href="#"
             name="times"
             size="action-size"
-            title={this.props.t('main:actions.remove') + ' ' + speaker.full_name}
-            aria-label={this.props.t('main:actions.remove') + ' ' + speaker.full_name}
+            title={`${this.props.t('main:actions.remove')} ${speaker.full_name}`}
+            aria-label={`${this.props.t('main:actions.remove')} ${speaker.full_name}`}
             onClick={() => this.handleRemove()}
           />
         </ReputationGuard>
