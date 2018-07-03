@@ -156,7 +156,7 @@ class ActionDiff extends PureComponent {
     else if (key === 'time')
       return value ? formatSeconds(value) : ''
     else if (key === 'source' || key === 'url')
-      return <a href={value} target="_blank">{value}</a>
+      return <a href={value} target="_blank" rel="noopener noreferrer">{value}</a>
     return value
   }
 }
