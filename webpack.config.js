@@ -1,4 +1,4 @@
-'use strict'
+
 
 const webpack = require('webpack')
 const path = require('path')
@@ -18,7 +18,7 @@ const PORT = process.env.PORT || '3333'
 module.exports = {
   mode: 'development',
   entry: {
-    'app': [
+    app: [
       // POLYFILL: Set up an ES6-ish environment
       // 'babel-polyfill',  // The entire babel-polyfill
       // Or pick es6 features needed (included into babel-polyfill)
@@ -45,7 +45,7 @@ module.exports = {
       path.join(__dirname, 'node_modules'), // the old 'fallback' option (needed for npm link-ed packages)
     ],
     alias: {
-      'styles': path.resolve(__dirname, 'styles/'),
+      styles: path.resolve(__dirname, 'styles/'),
     }
   },
   optimization: {
