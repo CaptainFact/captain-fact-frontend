@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should be able to add and remove modals 1`] = `
+Immutable.Stack [
+  Object {
+    "Modal": [Function],
+    "props": Object {
+      "hello": "world",
+      "id": 1,
+    },
+  },
+]
+`;
+
+exports[`should be able to add and remove modals 2`] = `
+Immutable.Stack [
+  Object {
+    "Modal": [Function],
+    "props": Object {
+      "hello": "world",
+      "id": 2,
+    },
+  },
+  Object {
+    "Modal": [Function],
+    "props": Object {
+      "hello": "world",
+      "id": 1,
+    },
+  },
+]
+`;
+
+exports[`should be able to add and remove modals 3`] = `
+Immutable.Stack [
+  Object {
+    "Modal": [Function],
+    "props": Object {
+      "hello": "world",
+      "id": 1,
+    },
+  },
+]
+`;
+
+exports[`should be able to add and remove modals 4`] = `Immutable.Stack []`;
+
+exports[`should return the initial state 1`] = `Immutable.Stack []`;

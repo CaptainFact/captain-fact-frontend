@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reset 1`] = `
+Immutable.Record {
+  "markdownContent": "",
+  "isLoading": false,
+  "error": null,
+}
+`;
+
+exports[`setLoading 1`] = `
+Immutable.Record {
+  "markdownContent": "",
+  "isLoading": true,
+  "error": null,
+}
+`;
+
+exports[`setLoading 2`] = `
+Immutable.Record {
+  "markdownContent": "",
+  "isLoading": false,
+  "error": null,
+}
+`;
+
+exports[`should return the initial state 1`] = `
+Immutable.Record {
+  "markdownContent": "",
+  "isLoading": false,
+  "error": null,
+}
+`;

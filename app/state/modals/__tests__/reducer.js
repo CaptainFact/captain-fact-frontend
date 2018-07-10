@@ -13,7 +13,7 @@ const createTestModal = id => ({
 })
 
 it('should return the initial state', () => {
-  expect(reducer(undefined, {})).toEqual(new Stack([]))
+  expect(reducer(undefined, {})).toMatchSnapshot()
 })
 
 it('should be able to add and remove modals', () => {
@@ -21,14 +21,14 @@ it('should be able to add and remove modals', () => {
   const testModal2 = createTestModal(2)
 
   let state = reducer(new Stack([]), addModal(testModal1))
-  expect(state).toEqual(new Stack([testModal1]))
+  expect(state).toMatchSnapshot()
 
   state = reducer(state, addModal(testModal2))
-  expect(state).toEqual(new Stack([testModal2, testModal1]))
+  expect(state).toMatchSnapshot()
 
   state = reducer(state, popModal())
-  expect(state).toEqual(new Stack([testModal1]))
+  expect(state).toMatchSnapshot()
 
   state = reducer(state, popModal())
-  expect(state).toEqual(new Stack([]))
+  expect(state).toMatchSnapshot()
 })
