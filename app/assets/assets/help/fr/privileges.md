@@ -16,17 +16,18 @@ renforcer leur signification.
 | 0          | Ajouter des citations
 | 0          | Voter positivement
 | 15         | Voter négativement
-| 30         | Mettre à jour une citation                 
-| 75         | Ajouter ou créer des intervenants
-| 75         | Mettre à jour un intervenant                 
-| 75         | Signaler un contenu inapproprié                 
-| 125        | Supprimer / restaurer une citation
-| 125        | Plus de restrictions spécifiques aux nouveaux utilisateurs             
-| 200        | Déplacer toutes les citations d'une vidéo (time shift)                        
-| 200        | Supprimer / restaurer un intervenant
-| 200        | Ajouter une vidéo
-| 200       | Accès aux outils de modération
-
+| 15         | Mettre à jour une citation       
+| 15         | Mettre à jour un intervenant     
+| 15         | Signaler un contenu inapproprié                                       
+| 30         | Ajouter ou créer des intervenants
+| 75         | Supprimer / restaurer une citation
+| 75         | Déplacer toutes les citations d'une vidéo (time shift)
+| 75         | Supprimer un intervenant
+| 125        | Moins de restrictions spécifiques aux nouveaux utilisateurs
+| 125        | Accès aux outils de modération collective
+| 125        | Restaurer un intervenant
+| 200        | Ajouter une vidéo (limitation hebdomadaire)
+| 200        | Voter pour soi-même
 
 # Restrictions spécifiques aux nouveaux utilisateurs
 

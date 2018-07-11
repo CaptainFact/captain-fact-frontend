@@ -16,17 +16,18 @@ Judgement actions such as voting and flagging are limited to avoid abusing them 
 | 0          | Create statements
 | 0          | Vote Up                                 
 | 15         | Vote Down                                    
-| 30         | Update statement  
-| 75         | Add / create speakers
-| 75         | Update speaker
-| 75         | Flag inappropriate content  
-| 125        | Remove / restore statement     
-| 125        | No more new user restrictions               
-| 200        | Shift all video's statements                                 
-| 200        | Remove / restore speaker
-| 200        | Add videos (weekly limitation)                           
-| 200        | Access to the moderation platform                           
-
+| 15         | Update statement  
+| 15         | Update speaker
+| 15         | Flag inappropriate content  
+| 30         | Add / create speakers
+| 75         | Remove / restore statement
+| 75         | Shift all video's statements    
+| 75         | Remove speaker                             
+| 125        | No more new user restrictions
+| 125        | Access to the moderation platform
+| 125        | Restore speaker
+| 200        | Add videos (weekly limitation)
+| 200        | Self-vote                          
 
 # New user restrictions
 
