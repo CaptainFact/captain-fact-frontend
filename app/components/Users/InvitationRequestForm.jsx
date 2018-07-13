@@ -39,6 +39,7 @@ export default class InvitationRequestForm extends React.PureComponent {
   getContent() {
     if (!this.state.confirmed)
       return <Field component={FieldWithButton}
+        type="email"
         name="email"
         className="is-medium"
         buttonClassName="is-medium"
