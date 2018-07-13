@@ -70,3 +70,8 @@ export const SPEAKER_TITLE_LENGTH = [3, 60]
 // Statement
 export const STATEMENT_LENGTH = [10, 255]
 
+
+// Videos
+export const ALL_VIDEOS = 'ALL_VIDEOS'
+export const ONLY_PARTNERS = 'ONLY_PARTNERS'
+export const ONLY_COMMUNITY = 'ONLY_COMMUNITY'

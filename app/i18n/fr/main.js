@@ -58,8 +58,9 @@ export default {
     otherFlags: 'Autres signalements'
   },
   videos: {
-    add: 'Ajouter une vidéo'
+    add: 'Ajouter une vidéo',
   },
-  users: 'Utilisateurs',
-  partners: 'Partenaires'
+  all: 'Toutes',
+  partners: 'Partenaires',
+  users: 'Utilisateurs'
 }
