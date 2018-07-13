@@ -120,6 +120,7 @@ export class CommentForm extends React.Component {
             />
             <div className="level">
               <Field
+                type="url"
                 component={renderField}
                 name="source.url"
                 label={t('comment.addSource')}
