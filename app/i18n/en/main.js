@@ -61,6 +61,7 @@ export default {
   videos: {
     add: 'Add Video'
   },
+  all: 'All',
+  partners: 'Partners',
   users: 'Users',
-  partners: 'Partners'
 }

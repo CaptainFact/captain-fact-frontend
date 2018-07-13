@@ -1,11 +1,11 @@
 import React from 'react'
-import { Map } from 'immutable'
+import { merge, Map } from 'immutable'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { translate } from 'react-i18next'
 import capitalize from 'voca/capitalize'
 
-import { MIN_REPUTATION_ADD_VIDEO } from '../../constants'
+import { MIN_REPUTATION_ADD_VIDEO, ALL_VIDEOS, ONLY_PARTNERS, ONLY_COMMUNITY } from '../../constants'
 import ReputationGuard from '../Utils/ReputationGuard'
 import { VideosGrid } from '../Videos'
 import { LoadingFrame, Icon } from '../Utils'
@@ -23,7 +23,7 @@ import FilterOnlyFromPartners from './FilterOnlyFromPartners'
   error: state.Videos.error,
   languageFilter: state.UserPreferences.videosLanguageFilter,
   onlyFromPartners: state.UserPreferences.videosOnlyFromPartners,
-}), {fetchPublicVideos, reset, changeVideosLanguageFilter, setVideosOnlyFromPartners})
+}), { fetchPublicVideos, reset, changeVideosLanguageFilter, setVideosOnlyFromPartners })
 @translate('main')
 export class PublicVideos extends React.PureComponent {
   componentDidMount() {
@@ -36,7 +36,7 @@ export class PublicVideos extends React.PureComponent {
 
   componentDidUpdate(oldProps) {
     if (oldProps.languageFilter !== this.props.languageFilter ||
-        oldProps.onlyFromPartners !== this.props.onlyFromPartners) {
+      oldProps.onlyFromPartners !== this.props.onlyFromPartners) {
       this.props.fetchPublicVideos(this.buildFilters())
     }
   }
@@ -46,12 +46,12 @@ export class PublicVideos extends React.PureComponent {
       <div className="videos-page">
         <section className="header">
           <h2 className="title is-2">
-            <Icon name="television"/>
+            <Icon name="television" />
             <span> {capitalize(this.props.t('entities.video_plural'))}</span>
           </h2>
           <ReputationGuard requiredRep={MIN_REPUTATION_ADD_VIDEO}>
             <Link to="/videos/add" className="button is-primary">
-              <Icon name="plus-circle"/>
+              <Icon name="plus-circle" />
               <span>{this.props.t('videos.add')}</span>
             </Link>
           </ReputationGuard>
@@ -65,7 +65,7 @@ export class PublicVideos extends React.PureComponent {
   renderFilterBar() {
     return (
       <nav className="level videos-filter">
-        <div className="level-left"/>
+        <div className="level-left" />
         <div className="level-right">
           <div className="filter">
             <span>Source:</span>
@@ -94,11 +94,11 @@ export class PublicVideos extends React.PureComponent {
     if (this.props.isLoading)
       return <LoadingFrame />
     else if (this.props.error)
-      return <ErrorView error={this.props.error}/>
+      return <ErrorView error={this.props.error} />
     else if (this.props.videos.size === 0)
       return <h2>{this.props.t('errors:client.noVideoAvailable')}</h2>
 
-    return <VideosGrid videos={this.props.videos}/>
+    return <VideosGrid videos={this.props.videos} />
   }
 
   onVideosFilterChange(value) {
@@ -107,10 +107,16 @@ export class PublicVideos extends React.PureComponent {
   }
 
   buildFilters() {
-    const {languageFilter, onlyFromPartners} = this.props
-    const filters = {is_partner: onlyFromPartners}
-    if (languageFilter)
-      filters.language = languageFilter
-    return filters
+    const { languageFilter, onlyFromPartners } = this.props
+
+    const partnerFilter = {
+      [ALL_VIDEOS]: {},
+      [ONLY_PARTNERS]: { is_partner: true },
+      [ONLY_COMMUNITY]: { is_partner: false }
+    }[onlyFromPartners]
+
+    const languageVideosFilter = languageFilter ? { language: languageFilter } : {}
+
+    return merge({}, partnerFilter, languageVideosFilter)
   }
 }
