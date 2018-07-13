@@ -1,4 +1,5 @@
 import reducer, { toggleSidebar } from '../reducer'
+import { ALL_VIDEOS } from '../../../constants'
 
 test('has correct defaults', () => {
   expect(reducer(undefined, {}).toJS()).toEqual({
@@ -6,7 +7,7 @@ test('has correct defaults', () => {
     locale: 'en',
     enableAutoscroll: true,
     videosLanguageFilter: null,
-    videosOnlyFromPartners: true
+    videosOnlyFromPartners: ALL_VIDEOS
   })
 })
 
