@@ -8,7 +8,7 @@ export default {
     statement_plural: 'statements'
   },
   menu: {
-    loginSignup: 'Login / Signup',
+    loginSignup: 'Login / Sign up',
     logout: 'Logout',
     settings: 'Settings',
     profile: 'Profile',
@@ -52,7 +52,7 @@ export default {
     fieldMinLength: 'Must be at least {{min}} characters',
     fieldMaxLength: 'Must be less than {{max}} characters',
     and: 'and',
-    clipboardSuccess: 'Url copied to clipboard',
+    clipboardSuccess: 'URL copied to clipboard',
     clipboardFail: 'Cannot copy to clipboard',
     all: 'All',
     unknown: 'Unknown',

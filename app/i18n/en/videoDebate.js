@@ -6,7 +6,7 @@ export default {
   comments: 'Comments',
   community: 'Community',
   flagForm: {
-    title: 'Why do you want to flag this comment ?',
+    title: 'Why do you want to flag this comment?',
     xAvailable: '{{count}} available',
     xAvailable_plural: '{{count}} available'
   },
@@ -48,7 +48,7 @@ export default {
   },
   statement: {
     remove: 'Remove statement',
-    confirmRemove: 'Do you really want to remove this statement ?',
+    confirmRemove: 'Do you really want to remove this statement?',
     textPlaceholder: 'Type a raw transcript of what the speaker says',
     noSpeakerTextPlaceholder: 'Describe what you see or select a speaker',
     text: 'Text',
@@ -66,7 +66,7 @@ export default {
   tips: {
     firstStatement: 'You can <1>add a first statement</1> by clicking on the <3></3> icon next to the speaker\'s name',
     firstSpeaker: 'Start by adding a speaker using left column',
-    noContentUnauthenticated: 'This video hasn\'t been verified yet. Login / Signup to contribute!'
+    noContentUnauthenticated: 'This video hasn\'t been verified yet. Login / Sign up to contribute!'
   },
   presence: {
     viewer: '{{count}} viewer',
