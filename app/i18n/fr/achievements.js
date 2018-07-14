@@ -1,18 +1,18 @@
 export default {
   title: 'Médailles',
-  about: 'A propos',
-  unlocked: 'Vous venez de déverouiller le succès "{{achievement}}"',
+  about: 'À propos',
+  unlocked: 'Vous venez de déverouiller le succès « {{achievement}} »',
   1: {
     title: 'Welcome',
-    description: 'Bienvenue dans l\'aventure!'
+    description: 'Bienvenue dans l\'aventure !'
   },
   2: {
     title: 'Not a robot',
-    description: 'Avec une si belle adresse email, vous ne pouvez pas être un robot'
+    description: 'Avec une si belle adresse e-mail, vous ne pouvez pas être un robot'
   },
   3: {
     title: 'Everybody hurts',
-    description: 'Chercher de l\'aide dans la section "Aide" était la bonne chose à faire'
+    description: 'Chercher de l\'aide dans la section « Aide » était la bonne chose à faire'
   },
   4: {
     title: 'Bulletproof',
