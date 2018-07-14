@@ -6,7 +6,7 @@ export default {
   invitation: 'Demander une invitation',
   inviteFriend: 'Inviter un ami',
   footer: 'Créé avec {{iconLove}} à l\'aide d\'',
-  emailPlaceholder: 'Adresse email',
+  emailPlaceholder: 'Adresse e-mail',
   inviteSuccess: 'Demande d\'invitation enregistrée !',
-  error_invalid_email: 'Adresse email invalide'
+  error_invalid_email: 'Adresse e-mail invalide'
 }
