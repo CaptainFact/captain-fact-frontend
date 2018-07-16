@@ -65,7 +65,7 @@ module.exports = {
     inline: true,
     // serve index.html in place of 404 responses to allow HTML5 history
     historyApiFallback: true,
-    open: true,
+    open: false,
     port: PORT,
     host: HOST
   },
