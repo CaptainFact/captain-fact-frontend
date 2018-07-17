@@ -5,7 +5,7 @@ export default {
     others: 'Autres'
   },
   pages: {
-    about: 'A propos',
+    about: 'À propos',
     achievements: 'Médailles',
     ambassadors: 'Ambassadeurs',
     credits: 'Remerciements',
@@ -16,7 +16,7 @@ export default {
     reputation: 'Réputation',
     bug_report: 'Signaler un bug',
     extension: 'Extension',
-    privacy: 'Vie Privée',
+    privacy: 'Vie privée',
     contact: 'Contact',
     censorship_requests: 'Demandes de censure',
     'contribute/code': 'Développeurs',

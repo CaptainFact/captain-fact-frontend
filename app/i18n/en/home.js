@@ -7,6 +7,6 @@ export default {
   inviteFriend: 'Invite a friend',
   footer: 'Created with {{iconLove}} using ',
   emailPlaceholder: 'Email address',
-  inviteSuccess: 'Invitation request confirmed !',
+  inviteSuccess: 'Invitation request confirmed!',
   error_invalid_email: 'Invalid email address'
 }

@@ -57,8 +57,8 @@ export default {
     text: 'Le texte',
     add: 'Ajouter une citation',
     abortAdd: 'Annuler l\'ajout de citation',
-    autoscroll_enable: 'Activer le scroll automatique',
-    autoscroll_disable: 'Désactiver le scroll automatique',
+    autoscroll_enable: 'Activer le défilement automatique',
+    autoscroll_disable: 'Désactiver le défilement automatique',
     reverseTimeLock_lock: 'Déverrouiller la position',
     reverseTimeLock_unlock: 'Verrouiller la position'
   },
@@ -69,7 +69,7 @@ export default {
   tips: {
     firstStatement: 'Vous pouvez <1>ajouter une citation</1> en cliquant sur l\'icone <3></3> à côté du nom de l\'intervenant',
     firstSpeaker: 'Commencez par ajouter un intervenant en utilisant la colonne de gauche',
-    noContentUnauthenticated: 'Cette vidéo n\'a pas encore été vérifiée. Connectez-vous pour contribuer!'
+    noContentUnauthenticated: 'Cette vidéo n\'a pas encore été vérifiée. Connectez-vous pour contribuer !'
   },
   presence: {
     viewer: '{{count}} spectateur',
