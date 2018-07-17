@@ -1,5 +1,3 @@
-import { Stack } from 'immutable'
-
 import reducer, { addModal, popModal } from '../reducer'
 import Modal from '../../../components/Modal/Modal'
 
@@ -19,7 +17,7 @@ it('should return the initial state', () => {
 })
 
 it('should be able to add and remove modals', () => {
-  snapshotReducer(reducer, INITIAL_STATE, 
+  snapshotReducer(reducer, INITIAL_STATE,
     addModal(createTestModal(1)),
     addModal(createTestModal(2)),
     popModal(),

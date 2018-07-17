@@ -6,6 +6,6 @@ Immutable.Record {
   "locale": "en",
   "enableAutoscroll": true,
   "videosLanguageFilter": null,
-  "videosOnlyFromPartners": true,
+  "videosOnlyFromPartners": "ALL_VIDEOS",
 }
 `;
