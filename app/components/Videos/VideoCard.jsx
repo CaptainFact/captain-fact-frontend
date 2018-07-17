@@ -42,7 +42,6 @@ export class VideoCard extends React.PureComponent {
   }
 
   renderVideoMetadata({speakers, posted_at, is_partner}, t) {
-    console.log(is_partner)
     return (
       <div className="video-metadata">
         <div>
