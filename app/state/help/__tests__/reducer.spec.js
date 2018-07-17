@@ -3,15 +3,13 @@ import reducer, { setLoading, reset } from '../reducer'
 const INITIAL_STATE = reducer(undefined, {})
 
 it('should return the initial state', () => {
-  expect(INITIAL_STATE).toMatchSnapshot()
+  snapshot(INITIAL_STATE)
 })
 
 it('setLoading', () => {
-  expect(reducer(INITIAL_STATE, setLoading(true))).toMatchSnapshot()
-  expect(reducer(INITIAL_STATE, setLoading(false))).toMatchSnapshot()
+  snapshotReducer(reducer, INITIAL_STATE, setLoading(true), setLoading(false))
 })
 
 it('reset', () => {
-  const modifiedState = reducer(INITIAL_STATE, setLoading(true))
-  expect(reducer(modifiedState, reset())).toMatchSnapshot()
+  snapshotReducer(reducer, INITIAL_STATE, setLoading(true), reset())
 })

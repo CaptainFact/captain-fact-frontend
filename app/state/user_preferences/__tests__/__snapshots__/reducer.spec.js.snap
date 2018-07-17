@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`has correct defaults 1`] = `
+Immutable.Record {
+  "sidebarExpended": true,
+  "locale": "en",
+  "enableAutoscroll": true,
+  "videosLanguageFilter": null,
+  "videosOnlyFromPartners": true,
+}
+`;

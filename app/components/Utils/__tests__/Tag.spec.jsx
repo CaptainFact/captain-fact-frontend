@@ -1,9 +1,9 @@
 import Tag from '../Tag'
 
 test('render tag', () => {
-  snapshot(<Tag>Test</Tag>)
+  snapshotComponent(<Tag>Test</Tag>)
 })
 
 test('set size', () => {
-  snapshot(<Tag type="info">Test</Tag>)
+  snapshotComponent(<Tag type="info">Test</Tag>)
 })
