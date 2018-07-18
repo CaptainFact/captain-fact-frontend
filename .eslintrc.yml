@@ -95,6 +95,7 @@ rules:
   react/react-in-jsx-scope: off # Generates erros in tests
   react/sort-comp: off
   react/require-default-props: off
+  react/jsx-one-expression-per-line: off
 
 globals:
   # For tests
