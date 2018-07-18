@@ -1,18 +1,17 @@
-import reducer, { toggleSidebar } from '../reducer'
-import { ALL_VIDEOS } from '../../../constants'
+import reducer, { 
+  toggleSidebar,
+  closeSidebar
+} from '../reducer'
+
+
+const INITIAL_STATE = reducer(undefined, {})
 
 test('has correct defaults', () => {
-  expect(reducer(undefined, {}).toJS()).toEqual({
-    sidebarExpended: true,
-    locale: 'en',
-    enableAutoscroll: true,
-    videosLanguageFilter: null,
-    videosOnlyFromPartners: ALL_VIDEOS
-  })
+  snapshot(INITIAL_STATE)
 })
 
 test('toggle sidebar', () => {
-  let state = reducer(undefined, {})
+  let state = INITIAL_STATE
 
   // Expanded by default
   expect(state.sidebarExpended).toBeTruthy()
@@ -24,4 +23,8 @@ test('toggle sidebar', () => {
   // Expand
   state = reducer(state, toggleSidebar())
   expect(state.sidebarExpended).toBeTruthy()
+})
+
+test('close sidebar', () => {
+  expect(reducer(INITIAL_STATE, closeSidebar()).sidebarExpended).toBeFalsy()
 })

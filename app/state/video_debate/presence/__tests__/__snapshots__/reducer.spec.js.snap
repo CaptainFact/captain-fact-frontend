@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`presenceDiff 1`] = `
+Immutable.Record {
+  "viewers": Immutable.Record {
+    "count": 0,
+  },
+  "users": Immutable.Record {
+    "count": 0,
+  },
+}
+`;
+
+exports[`presenceDiff 2`] = `
+Immutable.Record {
+  "viewers": Immutable.Record {
+    "count": 5,
+  },
+  "users": Immutable.Record {
+    "count": 2,
+  },
+}
+`;
+
+exports[`presenceDiff 3`] = `
+Immutable.Record {
+  "viewers": Immutable.Record {
+    "count": 10,
+  },
+  "users": Immutable.Record {
+    "count": 0,
+  },
+}
+`;
+
+exports[`presenceDiff 4`] = `
+Immutable.Record {
+  "viewers": Immutable.Record {
+    "count": 0,
+  },
+  "users": Immutable.Record {
+    "count": 0,
+  },
+}
+`;
+
+exports[`set presence 1`] = `
+Immutable.Record {
+  "viewers": Immutable.Record {
+    "count": 0,
+  },
+  "users": Immutable.Record {
+    "count": 0,
+  },
+}
+`;
+
+exports[`set presence 2`] = `
+Immutable.Record {
+  "viewers": Object {
+    "count": 42,
+  },
+  "users": Object {
+    "count": 5,
+  },
+}
+`;
+
+exports[`start at 0 1`] = `
+Immutable.Record {
+  "viewers": Immutable.Record {
+    "count": 0,
+  },
+  "users": Immutable.Record {
+    "count": 0,
+  },
+}
+`;

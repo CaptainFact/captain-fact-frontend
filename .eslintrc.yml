@@ -97,4 +97,7 @@ rules:
   react/require-default-props: off
 
 globals:
-  snapshot: false # For tests
+  # For tests
+  snapshot: false
+  snapshotReducer: false
+  snapshotComponent: false

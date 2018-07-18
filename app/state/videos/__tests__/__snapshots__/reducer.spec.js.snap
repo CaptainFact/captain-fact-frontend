@@ -1,0 +1,243 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`has correct defaults 1`] = `
+Immutable.Record {
+  "isLoading": false,
+  "isSubmitting": false,
+  "error": null,
+  "data": Immutable.List [],
+}
+`;
+
+exports[`reset 1`] = `
+Immutable.Record {
+  "isLoading": false,
+  "isSubmitting": false,
+  "error": null,
+  "data": Immutable.List [],
+}
+`;
+
+exports[`reset 2`] = `
+Immutable.Record {
+  "isLoading": false,
+  "isSubmitting": false,
+  "error": null,
+  "data": Immutable.List [],
+}
+`;
+
+exports[`reset 3`] = `
+Immutable.Record {
+  "isLoading": false,
+  "isSubmitting": true,
+  "error": null,
+  "data": Immutable.List [],
+}
+`;
+
+exports[`reset 4`] = `
+Immutable.Record {
+  "isLoading": false,
+  "isSubmitting": false,
+  "error": null,
+  "data": Immutable.List [],
+}
+`;
+
+exports[`setLoading 1`] = `
+Immutable.Record {
+  "isLoading": false,
+  "isSubmitting": false,
+  "error": null,
+  "data": Immutable.List [],
+}
+`;
+
+exports[`setLoading 2`] = `
+Immutable.Record {
+  "isLoading": true,
+  "isSubmitting": false,
+  "error": null,
+  "data": Immutable.List [],
+}
+`;
+
+exports[`setLoading 3`] = `
+Immutable.Record {
+  "isLoading": false,
+  "isSubmitting": false,
+  "error": null,
+  "data": Immutable.List [],
+}
+`;
+
+exports[`setSubmitting 1`] = `
+Immutable.Record {
+  "isLoading": false,
+  "isSubmitting": false,
+  "error": null,
+  "data": Immutable.List [],
+}
+`;
+
+exports[`setSubmitting 2`] = `
+Immutable.Record {
+  "isLoading": false,
+  "isSubmitting": true,
+  "error": null,
+  "data": Immutable.List [],
+}
+`;
+
+exports[`setSubmitting 3`] = `
+Immutable.Record {
+  "isLoading": false,
+  "isSubmitting": false,
+  "error": null,
+  "data": Immutable.List [],
+}
+`;
+
+exports[`setVideos 1`] = `
+Immutable.Record {
+  "isLoading": false,
+  "isSubmitting": false,
+  "error": null,
+  "data": Immutable.List [],
+}
+`;
+
+exports[`setVideos 2`] = `
+Immutable.Record {
+  "isLoading": false,
+  "isSubmitting": false,
+  "error": null,
+  "data": Immutable.List [
+    Immutable.Record {
+      "id": "Gyvg",
+      "posted_at": 2017-12-03T09:07:34.600Z,
+      "provider": "youtube",
+      "provider_id": "8xL6XxKTieA",
+      "url": "https://www.youtube.com/watch?v=8xL6XxKTieA",
+      "title": "Lutter sans violence ? Jean-Marie Muller [EN DIRECT]",
+      "speakers": Immutable.List [
+        Object {
+          "country": "FR",
+          "full_name": "Jean-Marie Muller",
+          "id": 6379,
+          "is_user_defined": false,
+          "picture": null,
+          "slug": null,
+          "title": "Philosophe, écrivain",
+          "wikidata_item_id": 3167761,
+        },
+        Object {
+          "country": null,
+          "full_name": "Thinkerview",
+          "id": 6374,
+          "is_user_defined": false,
+          "picture": "http://localhost:4000/resources/speakers/6374_thumb.jpg?v=63696142025",
+          "slug": "Thinkerview",
+          "title": "Chaine Youtube",
+          "wikidata_item_id": null,
+        },
+      ],
+      "language": "fr",
+    },
+    Immutable.Record {
+      "id": "GRjG",
+      "posted_at": 2017-11-15T11:08:20.616Z,
+      "provider": "youtube",
+      "provider_id": "JDRzEdRQF5s",
+      "url": "https://www.youtube.com/watch?v=JDRzEdRQF5s",
+      "title": "Changement de Civilisation ? Marc Luyckx Ghisi [EN DIRECT]",
+      "speakers": Immutable.List [
+        Object {
+          "country": null,
+          "full_name": "Thinkerview",
+          "id": 6374,
+          "is_user_defined": false,
+          "picture": "http://localhost:4000/resources/speakers/6374_thumb.jpg?v=63696142025",
+          "slug": "Thinkerview",
+          "title": "Chaine Youtube",
+          "wikidata_item_id": null,
+        },
+        Object {
+          "country": null,
+          "full_name": "Marc Luyckx Ghisi",
+          "id": 6378,
+          "is_user_defined": false,
+          "picture": null,
+          "slug": null,
+          "title": "Auteur, philosophe et docteur en théologie",
+          "wikidata_item_id": 17305954,
+        },
+      ],
+      "language": "fr",
+    },
+    Immutable.Record {
+      "id": "G3j4",
+      "posted_at": 2017-11-07T19:39:41.969Z,
+      "provider": "youtube",
+      "provider_id": "QS951xiGGvI",
+      "url": "https://www.youtube.com/watch?v=QS951xiGGvI",
+      "title": "Intelligence artificielle : Laurent Alexandre [EN DIRECT]",
+      "speakers": Immutable.List [
+        Object {
+          "country": null,
+          "full_name": "Thinkerview",
+          "id": 6374,
+          "is_user_defined": false,
+          "picture": "http://localhost:4000/resources/speakers/6374_thumb.jpg?v=63696142025",
+          "slug": "Thinkerview",
+          "title": "Chaine Youtube",
+          "wikidata_item_id": null,
+        },
+        Object {
+          "country": null,
+          "full_name": "Laurent Alexandre",
+          "id": 6377,
+          "is_user_defined": false,
+          "picture": null,
+          "slug": null,
+          "title": "Médecin, chirurgien, chef d'entreprise",
+          "wikidata_item_id": 15973233,
+        },
+      ],
+      "language": "fr",
+    },
+    Immutable.Record {
+      "id": "Jzqg",
+      "posted_at": 2017-10-31T09:32:41.199Z,
+      "provider": "youtube",
+      "provider_id": "TxHqU0ICDr4",
+      "url": "https://www.youtube.com/watch?v=TxHqU0ICDr4",
+      "title": "Mounir Mahjoubi, Ministre chargé du Numérique [EN DIRECT]",
+      "speakers": Immutable.List [
+        Object {
+          "country": null,
+          "full_name": "Mounir Mahjoubi",
+          "id": 6375,
+          "is_user_defined": false,
+          "picture": null,
+          "slug": "Mounir-Mahjoubi",
+          "title": "Ministre du numérique",
+          "wikidata_item_id": 28105164,
+        },
+        Object {
+          "country": null,
+          "full_name": "Thinkerview",
+          "id": 6374,
+          "is_user_defined": false,
+          "picture": "http://localhost:4000/resources/speakers/6374_thumb.jpg?v=63696142025",
+          "slug": "Thinkerview",
+          "title": "Chaine Youtube",
+          "wikidata_item_id": null,
+        },
+      ],
+      "language": "fr",
+    },
+  ],
+}
+`;
