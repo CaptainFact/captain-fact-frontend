@@ -20,15 +20,16 @@ const validate = ({ url }) => {
 
 @withRouter
 @connect((state, props) => ({
-  initialValues: {url: props.params.videoUrl},
+  initialValues: {url: props.params.videoUrl || props.location.query.url},
   isSubmitting: state.Videos.isSubmitting,
   isAuthenticated: isAuthenticated(state)
 }), {postVideo, searchVideo})
 @reduxForm({form: 'AddVideo', validate})
 export class AddVideoForm extends React.PureComponent {
   componentDidMount() {
-    if (this.props.params.videoUrl) {
-      this.props.searchVideo(decodeURI(this.props.params.videoUrl)).then(action => {
+    const videoUrl = this.props.params.videoUrl || this.props.location.query.url
+    if (videoUrl) {
+      this.props.searchVideo(decodeURI(videoUrl)).then(action => {
         if (!action.error && action.payload !== null)
           this.props.router.push(`/videos/${action.payload.id}`)
       })
