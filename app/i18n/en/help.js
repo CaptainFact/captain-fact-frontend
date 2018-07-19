@@ -10,7 +10,7 @@ export default {
     ambassadors: 'Ambassadors',
     contributionGuidelines: 'Contribution guidelines',
     credits: 'Credits',
-    jobs: 'Join us !',
+    jobs: 'Join us!',
     moderation: 'Moderation',
     privileges: 'Privileges',
     reputation: 'Reputation',

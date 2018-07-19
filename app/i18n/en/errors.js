@@ -1,7 +1,7 @@
 export default {
   title: 'Error',
   server: {
-    unknown: 'Something didn\'t work on our side, we\'ll check it out !',
+    unknown: 'Something didn\'t work on our side, we\'ll check it out!',
     invalid_email: 'Invalid email address',
     invalid_token: 'Verification code is either invalid or expired',
     invalid_invitation_token: 'Invitation code is either invalid or expired',
@@ -10,7 +10,7 @@ export default {
     invalid_email_password: 'Invalid email / password combination',
     not_enough_reputation: 'You don\'t have enough reputation to do that',
     limit_reached: 'You reached your daily limit for this action',
-    not_found: 'It looks like this doesn\'t exist, try to refresh the page if problem persists',
+    not_found: 'It looks like this doesn\'t exist, try to refresh the page if the problem persists',
     action_already_done: 'This action has already been done',
     unauthenticated: 'You need an account to do that',
     unauthorized: 'Please (re)connect to continue',
@@ -19,7 +19,7 @@ export default {
   client: {
     joinCrashed: 'Server connection failed',
     thirdParty: 'Third party authentication failed',
-    submissionError: 'An error occured while sending the data',
+    submissionError: 'An error occurred while sending the data',
     noVideoAvailable: 'No video available',
     notEnoughReputation: 'Not enough reputation to access this feature'
   }

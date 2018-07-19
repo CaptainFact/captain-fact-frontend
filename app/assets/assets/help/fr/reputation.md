@@ -24,7 +24,7 @@ montée du nombre d'utilisateurs.
 | Un de vos commentaires recoit un vote positif                  | +2pts
 | Un de vos commentaires **sourcé** recoit un vote positif       | +3pts
 | Quelqu'un approuve une de vos modifications dans l'historique  | +5pts
-| Un de vos signalements est comfirmé                            | +3pts
+| Un de vos signalements est confirmé                            | +3pts
 
 # Vous perdez de la réputation quand...
 

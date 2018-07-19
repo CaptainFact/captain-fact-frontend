@@ -15,7 +15,7 @@ export default {
     activity: 'Activité',
     myActivity: 'Mon $t(menu.activity)',
     bookmarks: 'Signets',
-    myBookmarks: 'Mes Signets',
+    myBookmarks: 'Mes signets',
     content: 'Contenu',
     language: 'Langue',
     other: 'Autre',
@@ -51,15 +51,16 @@ export default {
     fieldMinLength: 'Doit faire au moins {{min}} caractères',
     fieldMaxLength: 'Doit faire moins de {{max}} caractères',
     and: 'et',
-    clipboardSuccess: 'Adresse copiée dans le presse papier',
-    clipboardFail: 'Impossible d\'enregistrer l\'adresse dans le presse papier',
+    clipboardSuccess: 'Adresse copiée dans le presse-papier',
+    clipboardFail: 'Impossible d\'enregistrer l\'adresse dans le presse-papier',
     all: 'Tous',
     unknown: 'Inconnu',
     otherFlags: 'Autres signalements'
   },
   videos: {
-    add: 'Ajouter une vidéo'
+    add: 'Ajouter une vidéo',
   },
-  users: 'Utilisateurs',
-  partners: 'Partenaires'
+  all: 'Toutes',
+  partners: 'Partenaires',
+  users: 'Utilisateurs'
 }
