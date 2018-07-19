@@ -67,7 +67,8 @@ elif [ "$1" = "build" ]; then
   FRONTEND_HOST=$(echo ${FRONTEND_URL} | sed -r "s/^https?:\/\///")
   HTTP_API_BASE_URL=$(echo ${HTTP_API_URL} | sed -E 's,(https?://)([^/]+).*,\1\2,')
   WS_API_BASE_URL=$(echo ${WS_API_URL} | sed -E 's,(wss?://)([^/]+).*,\1\2,')
-  OG_BASE_URL=$(echo ${OG_URL} | sed -r "s/^https?:\/\///")
+  OG_BASE_URL=${OG_URL}
+
   cat ./config/nginx.conf \
     | sed "s/FRONTEND_HOST/$FRONTEND_HOST/" \
     | sed "s,HTTP_API_BASE_URL,$HTTP_API_BASE_URL,g" \
