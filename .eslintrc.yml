@@ -36,6 +36,7 @@ rules:
   import/no-named-as-default: ['warn']
   no-restricted-globals: ["error", "event", "fdescribe"]
   no-mixed-operators: ['warn']
+  react/destructuring-assignment: off
   react/no-multi-comp: ['warn']
   react/jsx-no-bind: ['warn']
   react/jsx-indent-props: ['warn']

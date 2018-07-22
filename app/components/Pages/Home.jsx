@@ -7,12 +7,15 @@ import { Icon } from '../Utils'
 import InvitationRequestForm from '../Users/InvitationRequestForm'
 import { isAuthenticated } from '../../state/users/current_user/selectors'
 import Logo from '../App/Logo'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
 
 @connect(state => ({authenticated: isAuthenticated(state)}))
 @translate('home')
 export class Home extends React.PureComponent {
   render() {
+    const {t} = this.props
+
     return (
       <div className="home-page">
         <section className="hero is-medium is-bold is-warning">
@@ -28,21 +31,22 @@ export class Home extends React.PureComponent {
         <section className="section presentation">
           <div className="has-text-weight-light is-size-3">
             <p>
-              {this.props.t('presentation1')}
+              {t('presentation1')}
               <br/><br/>
-              <strong>CaptainFact</strong> {this.props.t('presentation2')}
+              <strong>CaptainFact</strong> {t('presentation2')}
             </p>
             <br/>
-            <p>
-              <Interpolate
-                i18nKey="journeyStart"
-                videoLink={
-                  <Link to="/videos">{this.props.t('main:entities.video_plural')}</Link>
-                }
-              />
-              <br/>
-              <br/>
-            </p>
+            <div className="actions">
+              <Link className="button is-large" to="/help">
+                <Icon name="question-circle"/>&nbsp;&nbsp; {t('main:menu.help')}
+              </Link>
+              <Link className="button is-large" to="/videos">
+                <Icon name="tv"/>&nbsp;&nbsp; {t('seeVideos')}
+              </Link>
+              <ExternalLinkNewTab className="button is-large" href="https://opencollective.com/captainfact_io">
+                <Icon name="heart"/>&nbsp;&nbsp; {t('main:menu.donation')}
+              </ExternalLinkNewTab>
+            </div>
           </div>
         </section>
         <section className="section request-invitation">

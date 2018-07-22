@@ -20,8 +20,8 @@ export default {
     language: 'Language',
     other: 'Other',
     donation: 'Support us',
-    extension: 'Browser Extension',
-    help: 'Help',
+    extension: 'Browser extension',
+    help: 'Learn more',
     moderation: 'Moderation',
     edit: 'Edit'
   },

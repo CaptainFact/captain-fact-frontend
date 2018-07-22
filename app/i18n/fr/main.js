@@ -22,7 +22,7 @@ export default {
     donation: 'Nous soutenir',
     extension: 'Extension pour navigateur',
     moderation: 'Modération',
-    help: 'Aide'
+    help: 'En apprendre +'
   },
   actions: {
     save: 'Sauvegarder',
