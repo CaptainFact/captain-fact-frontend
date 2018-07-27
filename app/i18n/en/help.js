@@ -7,10 +7,10 @@ export default {
   pages: {
     about: 'About',
     achievements: 'Achievements',
-    ambassadors: 'Ambassadors',
+    ambassadors: 'Become an ambassador',
     contributionGuidelines: 'Contribution guidelines',
     credits: 'Credits',
-    jobs: 'Join us !',
+    jobs: 'Join us!',
     moderation: 'Moderation',
     privileges: 'Privileges',
     reputation: 'Reputation',
@@ -22,5 +22,8 @@ export default {
     'contribute/code': 'Programmers',
     'contribute/tasks': 'Independent tasks'
   },
-  goBack: 'Go back to help index'
+  title: 'Help',
+  goBack: 'Go back to help index',
+  about: 'The help pages are there to make it easier for you to get started with the platform. They are deliberately short and are strongly encouraged to be read before any participation to the fact-checking process.',
+  toStart: 'To get started, take a look at the <1>contribution guidelines</1> as well as explanations of <2>privileges</2> and the <3>reputation system</3>.'
 }

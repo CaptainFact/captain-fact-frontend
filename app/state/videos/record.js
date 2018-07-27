@@ -8,6 +8,8 @@ const Video = new Record({
   url: '',
   title: '',
   speakers: new List(),
-  language: null
+  language: null,
+  is_partner: null
 })
+
 export default Video

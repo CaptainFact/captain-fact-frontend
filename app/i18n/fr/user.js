@@ -4,8 +4,8 @@ export default {
   password: 'Mot de passe',
   passwordOptional: 'Mot de passe - laisser vide pour conserver l\'actuel',
   repeatPassword: 'Répétez le mot de passe',
-  email: 'Email',
-  optional: 'optionel',
+  email: 'Adresse e-mail',
+  optional: 'facultatif',
   login: 'Se connecter',
   signup: 'S\'enregistrer',
   needAnAccountQuestion: 'Besoin d\'un compte ?',
@@ -16,16 +16,16 @@ export default {
   registeredSince: 'Inscrit·e depuis {{value}}',
   forgottenPassword: 'Mot de passe oublié',
   resetPassword: 'Réinitialiser le mot de passe',
-  resetPasswordRequestSuccess: 'Si le compte existe, un email avec un lien de réinitialisation vient d\'être envoyé',
+  resetPasswordRequestSuccess: 'Si le compte existe, un e-mail avec un lien de réinitialisation vient d\'être envoyé',
   resetPasswordSuccess: 'Le mot de passe a bien été changé',
   invitationOnlyTitle: 'Demander une invitation',
-  invitationOnlyBody: 'Vous devez avoir été invité pour créer un compte. Pour demander une invitation, entrez votre email ci-dessous.',
-  emailConfirmed: 'Email confirmé',
+  invitationOnlyBody: 'Vous devez avoir été invité pour créer un compte. Pour demander une invitation, entrez votre adresse e-mail ci-dessous.',
+  emailConfirmed: 'Adresse e-mail confirmé',
   linkedAccounts: 'Comptes liés',
   linkAccount: 'Lier le compte',
   unlinkAccount: 'Délier le compte',
   newsletter: {
     unsubscribe_success: 'Désinscription de la newsletter enregistrée !',
-    unsubscribe_error: 'Erreur lors de la desinscription, le code est probablement invalide. Si le problème persiste, contactez nous'
+    unsubscribe_error: 'Erreur lors de la desinscription, le code est probablement invalide. Si le problème persiste, contactez-nous'
   }
 }

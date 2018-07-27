@@ -36,6 +36,7 @@ rules:
   import/no-named-as-default: ['warn']
   no-restricted-globals: ["error", "event", "fdescribe"]
   no-mixed-operators: ['warn']
+  react/destructuring-assignment: off
   react/no-multi-comp: ['warn']
   react/jsx-no-bind: ['warn']
   react/jsx-indent-props: ['warn']
@@ -96,6 +97,10 @@ rules:
   react/react-in-jsx-scope: off # Generates erros in tests
   react/sort-comp: off
   react/require-default-props: off
+  react/jsx-one-expression-per-line: off
 
 globals:
-  snapshot: false # For tests
+  # For tests
+  snapshot: false
+  snapshotReducer: false
+  snapshotComponent: false

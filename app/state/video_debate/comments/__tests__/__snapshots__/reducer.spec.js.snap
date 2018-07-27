@@ -1,0 +1,366 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`add flag 1`] = `
+Immutable.Record {
+  "isLoading": false,
+  "errors": null,
+  "comments": Immutable.Map {},
+  "replies": Immutable.Map {},
+  "selfSourcing": Immutable.Map {},
+  "voted": Immutable.Map {},
+  "voting": Immutable.Set [],
+  "myFlags": Immutable.Set [],
+}
+`;
+
+exports[`add flag 2`] = `
+Immutable.Record {
+  "isLoading": false,
+  "errors": null,
+  "comments": Immutable.Map {},
+  "replies": Immutable.Map {},
+  "selfSourcing": Immutable.Map {},
+  "voted": Immutable.Map {},
+  "voting": Immutable.Set [],
+  "myFlags": Immutable.Set [
+    42,
+  ],
+}
+`;
+
+exports[`add flag 3`] = `
+Immutable.Record {
+  "isLoading": false,
+  "errors": null,
+  "comments": Immutable.Map {},
+  "replies": Immutable.Map {},
+  "selfSourcing": Immutable.Map {},
+  "voted": Immutable.Map {},
+  "voting": Immutable.Set [],
+  "myFlags": Immutable.Set [
+    42,
+    43,
+  ],
+}
+`;
+
+exports[`add flag 4`] = `
+Immutable.Record {
+  "isLoading": false,
+  "errors": null,
+  "comments": Immutable.Map {},
+  "replies": Immutable.Map {},
+  "selfSourcing": Immutable.Map {},
+  "voted": Immutable.Map {},
+  "voting": Immutable.Set [],
+  "myFlags": Immutable.Set [
+    42,
+    43,
+    44,
+  ],
+}
+`;
+
+exports[`fetch all 1`] = `
+Immutable.Record {
+  "isLoading": false,
+  "errors": null,
+  "comments": Immutable.Map {},
+  "replies": Immutable.Map {},
+  "selfSourcing": Immutable.Map {},
+  "voted": Immutable.Map {},
+  "voting": Immutable.Set [],
+  "myFlags": Immutable.Set [],
+}
+`;
+
+exports[`fetch all 2`] = `
+Immutable.Record {
+  "isLoading": false,
+  "errors": null,
+  "comments": Immutable.OrderedMap {
+    297: Immutable.List [
+      Immutable.Record {
+        "id": 739,
+        "reply_to_id": null,
+        "is_reported": false,
+        "user": Object {
+          "achievements": Array [
+            4,
+            3,
+            6,
+            2,
+            1,
+          ],
+          "id": 1,
+          "mini_picture_url": "http://localhost:4000/resources/users/1_mini_thumb.jpg?v=63690733313",
+          "name": "José",
+          "picture_url": "http://localhost:4000/resources/users/1_thumb.jpg?v=63690733313",
+          "registered_at": "2018-01-01T00:00:00.000000",
+          "reputation": 689,
+          "speaker_id": null,
+          "username": "Betree",
+        },
+        "source": Object {
+          "language": null,
+          "site_name": "www.lejdc.fr",
+          "title": "Sur décision de justice - Alexandre Bain retrouve l'appellation pouilly-fumé",
+          "url": "https://www.lejdc.fr/tracy-sur-loire/economie/viticulture/2017/05/26/alexandre-bain-retrouve-l-appellation-pouilly-fume_12419163.html",
+        },
+        "statement_id": 297,
+        "text": "Le JDC qui cite directement Alexandre Bain va également dans le sens d'un problème de rendez-vous manqué",
+        "approve": false,
+        "inserted_at": 2018-03-13T17:21:14.979Z,
+        "score": 2,
+      },
+      Immutable.Record {
+        "id": 737,
+        "reply_to_id": null,
+        "is_reported": false,
+        "user": Object {
+          "achievements": Array [
+            4,
+            3,
+            6,
+            2,
+            1,
+          ],
+          "id": 1,
+          "mini_picture_url": "http://localhost:4000/resources/users/1_mini_thumb.jpg?v=63690733313",
+          "name": "José",
+          "picture_url": "http://localhost:4000/resources/users/1_thumb.jpg?v=63690733313",
+          "registered_at": "2018-01-01T00:00:00.000000",
+          "reputation": 689,
+          "speaker_id": null,
+          "username": "Betree",
+        },
+        "source": Object {
+          "language": "fr",
+          "site_name": "FIGARO",
+          "title": "La justice rend son AOC pouilly-fumé à un vigneron abusivement sanctionné",
+          "url": "http://www.lefigaro.fr/societes/2017/05/28/20005-20170528ARTFIG00185-la-justice-rend-son-aoc-pouilly-fume-a-un-vigneron-abusivement-sanctionne.php",
+        },
+        "statement_id": 297,
+        "text": "Si l'AOC lui avait bien été retirée (et rendue depuis) la raison invoquée par le Figaro qui cite l'INAO est ailleurs : \\"plusieurs rendez-vous manqués, mais pour des raisons justifiées, avec l'Organisme d'inspection des vins du Centre\\"",
+        "approve": false,
+        "inserted_at": 2018-03-13T16:55:07.288Z,
+        "score": 2,
+      },
+      Immutable.Record {
+        "id": 917,
+        "reply_to_id": null,
+        "is_reported": false,
+        "user": Object {
+          "achievements": Array [
+            4,
+            3,
+            6,
+            2,
+            1,
+          ],
+          "id": 1,
+          "mini_picture_url": "http://localhost:4000/resources/users/1_mini_thumb.jpg?v=63690733313",
+          "name": "José",
+          "picture_url": "http://localhost:4000/resources/users/1_thumb.jpg?v=63690733313",
+          "registered_at": "2018-01-01T00:00:00.000000",
+          "reputation": 689,
+          "speaker_id": null,
+          "username": "Betree",
+        },
+        "source": null,
+        "statement_id": 297,
+        "text": "Hello World",
+        "approve": null,
+        "inserted_at": 2018-07-17T23:02:59.145Z,
+        "score": 0,
+      },
+    ],
+    303: Immutable.List [
+      Immutable.Record {
+        "id": 774,
+        "reply_to_id": null,
+        "is_reported": false,
+        "user": Object {
+          "achievements": Array [
+            6,
+            3,
+            8,
+            4,
+            7,
+            9,
+            2,
+            1,
+          ],
+          "id": 18,
+          "mini_picture_url": "https://api.adorable.io/avatars/24/18.png",
+          "name": "Barbara Collier",
+          "picture_url": "https://api.adorable.io/avatars/96/18.png",
+          "registered_at": "2018-01-01T00:00:00.000000",
+          "reputation": 270,
+          "speaker_id": null,
+          "username": "tad2018",
+        },
+        "source": Object {
+          "language": null,
+          "site_name": null,
+          "title": "Planetoscope - Statistiques : Consommation de pesticides phytosanitaires en France",
+          "url": "https://www.planetoscope.com/sols/47-consommation-de-pesticides-phytosanitaires-en-france.html",
+        },
+        "statement_id": 303,
+        "text": "C'est effectivement le cas sur ces dernières années.",
+        "approve": true,
+        "inserted_at": 2018-03-15T10:47:26.310Z,
+        "score": 1,
+      },
+    ],
+  },
+  "replies": Immutable.OrderedMap {
+    737: Immutable.List [
+      Immutable.Record {
+        "id": 738,
+        "reply_to_id": 737,
+        "is_reported": false,
+        "user": Object {
+          "achievements": Array [
+            4,
+            3,
+            6,
+            2,
+            1,
+          ],
+          "id": 1,
+          "mini_picture_url": "http://localhost:4000/resources/users/1_mini_thumb.jpg?v=63690733313",
+          "name": "José",
+          "picture_url": "http://localhost:4000/resources/users/1_thumb.jpg?v=63690733313",
+          "registered_at": "2018-01-01T00:00:00.000000",
+          "reputation": 689,
+          "speaker_id": null,
+          "username": "Betree",
+        },
+        "source": null,
+        "statement_id": 297,
+        "text": "\\"l'Inao (Institut national de l'origine et de la qualité) a considéré que le viticulteur refusait de se soumettre à un contrôle obligatoire et a décidé, en 2015, de lui retirer son AOC.\\"",
+        "approve": null,
+        "inserted_at": 2018-03-13T16:55:49.045Z,
+        "score": 2,
+      },
+    ],
+    775: Immutable.List [
+      Immutable.Record {
+        "id": 778,
+        "reply_to_id": 775,
+        "is_reported": false,
+        "user": Object {
+          "achievements": Array [
+            4,
+            3,
+            6,
+            2,
+            1,
+          ],
+          "id": 1,
+          "mini_picture_url": "http://localhost:4000/resources/users/1_mini_thumb.jpg?v=63690733313",
+          "name": "José",
+          "picture_url": "http://localhost:4000/resources/users/1_thumb.jpg?v=63690733313",
+          "registered_at": "2018-01-01T00:00:00.000000",
+          "reputation": 689,
+          "speaker_id": null,
+          "username": "Betree",
+        },
+        "source": null,
+        "statement_id": 297,
+        "text": "Si c'est du second degré effectivement mais elle ne clarifie pas son propos par la suite",
+        "approve": null,
+        "inserted_at": 2018-03-15T13:48:20.897Z,
+        "score": 1,
+      },
+    ],
+    739: Immutable.List [
+      Immutable.Record {
+        "id": 775,
+        "reply_to_id": 739,
+        "is_reported": false,
+        "user": Object {
+          "achievements": Array [
+            6,
+            3,
+            8,
+            4,
+            7,
+            9,
+            2,
+            1,
+          ],
+          "id": 18,
+          "mini_picture_url": "https://api.adorable.io/avatars/24/18.png",
+          "name": "Barbara Collier",
+          "picture_url": "https://api.adorable.io/avatars/96/18.png",
+          "registered_at": "2018-01-01T00:00:00.000000",
+          "reputation": 270,
+          "speaker_id": null,
+          "username": "tad2018",
+        },
+        "source": null,
+        "statement_id": 297,
+        "text": "Je valide cette source, mais j'aurais plutôt tendance à confirmer la citation. Certes, il ne s'agit pas d'un problème d'hauteur d'herbe, toutefois, la il s'agissait là de signaler un abus de sanction de l'INAO.",
+        "approve": null,
+        "inserted_at": 2018-03-15T10:55:25.898Z,
+        "score": 1,
+      },
+    ],
+    778: Immutable.List [
+      Immutable.Record {
+        "id": 809,
+        "reply_to_id": 778,
+        "is_reported": false,
+        "user": Object {
+          "achievements": Array [
+            6,
+            3,
+            8,
+            4,
+            7,
+            9,
+            2,
+            1,
+          ],
+          "id": 18,
+          "mini_picture_url": "https://api.adorable.io/avatars/24/18.png",
+          "name": "Barbara Collier",
+          "picture_url": "https://api.adorable.io/avatars/96/18.png",
+          "registered_at": "2018-01-01T00:00:00.000000",
+          "reputation": 270,
+          "speaker_id": null,
+          "username": "tad2018",
+        },
+        "source": null,
+        "statement_id": 297,
+        "text": "Accordé ;)",
+        "approve": null,
+        "inserted_at": 2018-03-28T15:59:26.212Z,
+        "score": 0,
+      },
+    ],
+  },
+  "selfSourcing": Immutable.Map {},
+  "voted": Immutable.Map {
+    774: 1,
+    775: 1,
+  },
+  "voting": Immutable.Set [],
+  "myFlags": Immutable.Set [],
+}
+`;
+
+exports[`has correct defaults 1`] = `
+Immutable.Record {
+  "isLoading": false,
+  "errors": null,
+  "comments": Immutable.Map {},
+  "replies": Immutable.Map {},
+  "selfSourcing": Immutable.Map {},
+  "voted": Immutable.Map {},
+  "voting": Immutable.Set [],
+  "myFlags": Immutable.Set [],
+}
+`;

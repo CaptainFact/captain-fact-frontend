@@ -1,6 +1,6 @@
 import { Record } from 'immutable'
 import { createAction, handleActions } from 'redux-actions'
-import { MOBILE_WIDTH_THRESHOLD } from '../../constants'
+import { ALL_VIDEOS, MOBILE_WIDTH_THRESHOLD } from '../../constants'
 import browserLocale from '../../i18n/browser_locale'
 
 
@@ -20,7 +20,7 @@ const Preferences = new Record({
   locale: 'en',
   enableAutoscroll: !isMobile,
   videosLanguageFilter: null,
-  videosOnlyFromPartners: true,
+  videosOnlyFromPartners: ALL_VIDEOS,
 })
 
 const loadState = () => {
@@ -29,7 +29,7 @@ const loadState = () => {
     localStoragePrefs = JSON.parse(localStorage.preferences)
   } catch (e) {
     localStorage.preferences = JSON.stringify(Preferences())
-    localStoragePrefs = {locale: browserLocale()}
+    localStoragePrefs = { locale: browserLocale() }
   }
   return Preferences().merge(localStoragePrefs)
 }
@@ -45,11 +45,11 @@ const UserPreferencesReducer = handleActions({
     updateState(state, 'sidebarExpended', !state.sidebarExpended),
   [closeSidebar]: state =>
     updateState(state, 'sidebarExpended', false),
-  [changeLocale]: (state, {payload}) =>
+  [changeLocale]: (state, { payload }) =>
     updateState(state, 'locale', payload),
-  [changeVideosLanguageFilter]: (state, {payload}) =>
+  [changeVideosLanguageFilter]: (state, { payload }) =>
     updateState(state, 'videosLanguageFilter', payload),
-  [setVideosOnlyFromPartners]: (state, {payload}) =>
+  [setVideosOnlyFromPartners]: (state, { payload }) =>
     updateState(state, 'videosOnlyFromPartners', payload),
   [toggleAutoscroll]: state =>
     updateState(state, 'enableAutoscroll', !state.enableAutoscroll)
