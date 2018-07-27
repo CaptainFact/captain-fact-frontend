@@ -16,10 +16,10 @@ import { tError } from '../../lib/errors'
 @translate('user')
 export default class LoginForm extends React.PureComponent {
   componentWillReceiveProps(props) {
-    // Redirect when logged in
-    // TODO Redirect to prev page
-    if (props.CurrentUser.id)
+    // Redirect when already logged in
+    if (props.CurrentUser.id) {
       this.props.router.push('/videos')
+    }
   }
 
   render() {
@@ -31,13 +31,14 @@ export default class LoginForm extends React.PureComponent {
         onSubmit={handleSubmit(user => this.props.login({provider: 'identity', params: user}))}
       >
         {error && <Notification type="danger">{tError(t, error)}</Notification>}
+        <div>
+          <strong>{t('needAnAccountQuestion')} <Link to="signup">{t('signup')}</Link> </strong>
+          <Link to="/reset_password" style={{float: 'right'}}>{t('forgottenPassword')}</Link>
+        </div>
+        <hr/>
         {emailField(t)}
         {passwordField(t)}
         {submitButton(t('login'), valid)}
-        <div>
-          {t('needAnAccountQuestion')} <Link to="signup">{t('signup')}</Link>.&nbsp;
-          <Link to="/reset_password" style={{float: 'right'}}>{t('forgottenPassword')}</Link>
-        </div>
         <ThirdPartyAuthList/>
       </form>
     )}

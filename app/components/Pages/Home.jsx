@@ -8,6 +8,7 @@ import InvitationRequestForm from '../Users/InvitationRequestForm'
 import { isAuthenticated } from '../../state/users/current_user/selectors'
 import Logo from '../App/Logo'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
+import { INVITATION_SYSTEM } from '../../config'
 
 
 @connect(state => ({authenticated: isAuthenticated(state)}))
@@ -49,16 +50,18 @@ export class Home extends React.PureComponent {
             </div>
           </div>
         </section>
-        <section className="section request-invitation">
-          <h4 className="title is-4">
-            <Icon name="envelope-o"/>
-            <span>
-              &nbsp;&nbsp;
-              {this.props.t(this.props.authenticated ? 'inviteFriend' : 'invitation')}
-            </span>
-          </h4>
-          <InvitationRequestForm/>
-        </section>
+        {INVITATION_SYSTEM && (
+          <section className="section request-invitation">
+            <h4 className="title is-4">
+              <Icon name="envelope-o"/>
+              <span>
+                &nbsp;&nbsp;
+                {this.props.t(this.props.authenticated ? 'inviteFriend' : 'invitation')}
+              </span>
+            </h4>
+            <InvitationRequestForm/>
+          </section>
+        )}
         <footer className="footer">
           <div className="has-text-centered">
             <Interpolate i18nKey="footer" iconLove={<Icon name="heart"/>}/>

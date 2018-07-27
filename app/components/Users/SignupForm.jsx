@@ -15,15 +15,17 @@ import Message from '../Utils/Message'
 import InvitationRequestForm from './InvitationRequestForm'
 import { errorToFlash } from '../../state/flashes/reducer'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
+import { INVITATION_SYSTEM } from '../../config';
 
 
 const SignupForm = ({location, t}) => {
-  if (location.query.invitation_token)
+  if (!INVITATION_SYSTEM || location.query.invitation_token) {
     return (
       <RealSignupForm initialValues={{
         invitation_token: location.query.invitation_token}}
       />
     )
+  }
   return (
     <div className="user-form">
       <Message
@@ -52,8 +54,9 @@ export default withRouter(translate('user')(SignupForm))
 class RealSignupForm extends React.PureComponent {
   componentWillReceiveProps(props) {
     // Redirect to user profile when logged in
-    if (props.CurrentUser.id)
+    if (props.CurrentUser.id) {
       this.props.router.push(`/u/${props.CurrentUser.username}`)
+    }
   }
 
   submit({invitation_token, ...user}) {
@@ -73,11 +76,12 @@ class RealSignupForm extends React.PureComponent {
         onSubmit={this.props.handleSubmit(this.submit.bind(this))}
       >
         {error && <Notification type="danger">{error}</Notification>}
+        <strong>
+          {t('alreadyHaveAccountQuestion')} <Link to="login">{t('login')}</Link>
+        </strong>
+        <hr/>
         {renderAllUserFields(valid, t)}
         {submitButton(t('signup'), valid)}
-        <div>
-          {t('alreadyHaveAccountQuestion')} <Link to="login">{t('login')}</Link>.
-        </div>
         <ThirdPartyAuthList/>
       </form>
     )}
