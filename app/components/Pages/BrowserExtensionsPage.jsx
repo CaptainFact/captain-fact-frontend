@@ -46,6 +46,7 @@ export const BrowserExtensionsPage = translate('extension')(({t}) => (
       <ReactPlayer
         controls
         className="video"
+        volume={1}
         url="https://youtu.be/k4L0fvwsBg0"
       />
     </section>
