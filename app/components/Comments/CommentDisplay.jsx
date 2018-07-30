@@ -20,6 +20,7 @@ import UserPicture from '../Users/UserPicture'
 import { MIN_REPUTATION_FLAG, USER_PICTURE_SMALL } from '../../constants'
 import MediaLayout from '../Utils/MediaLayout'
 import Vote from './Vote'
+import Button from '../Utils/Button'
 
 
 @connect(({CurrentUser, VideoDebate}, props) => ({
@@ -61,7 +62,7 @@ export class CommentDisplay extends React.PureComponent {
               }
             />
           }
-          content={
+          content={(
             <div>
               <div>
                 {!withoutHeader && <div className="comment-header">
@@ -80,25 +81,25 @@ export class CommentDisplay extends React.PureComponent {
                 }
                 {source && <Source withoutPlayer={!richMedias} source={source}/>}
               </div>
-              {!withoutActions &&
+              {!withoutActions && (
                 <nav className="comment-actions">
-                  { isOwnComment ? this.renderOwnCommentActions() : this.renderOtherCommentActions()}
-                  { replies &&
-                    <a className={!showReplies ? "reply-collapsed" : null}
-                       onClick={() => this.setState({showReplies: !showReplies})}>
-                      <Icon size="small" name={showReplies ? "eye-slash" : "eye"}/>
-                      <span>
-                        {t('videoDebate:comment.replies', {
-                          context: showReplies ? 'hide' : 'show',
-                          count: replies.size
-                        })}
-                      </span>
-                    </a>
+                  { isOwnComment
+                    ? this.renderOwnCommentActions()
+                    : this.renderOtherCommentActions()
                   }
+                  { replies && this.renderAction(
+                    t('videoDebate:comment.replies', {
+                      context: showReplies ? 'hide' : 'show',
+                      count: replies.size
+                    }),
+                    showReplies ? 'eye-slash' : 'eye',
+                    () => this.setState({showReplies: !showReplies}),
+                    {'reply-collapsed': !showReplies},
+                  )}
                 </nav>
-              }
+              )}
             </div>
-          }
+          )}
         />
         {!hideThread && replies &&
         <CommentsContainer comments={this.state.showReplies ? replies : new List()}
@@ -110,37 +111,42 @@ export class CommentDisplay extends React.PureComponent {
   }
 
   renderOwnCommentActions() {
-    return <React.Fragment>
-      <a onClick={() => this.actionReply()}>
-        <Icon name="plus"/> <span> {this.props.t('actions.addToThread')}</span>
-      </a>
-      <a onClick={this.handleDelete.bind(this)}>
-        <Icon name="times"/>
-        <span> {this.props.t('actions.delete')}</span>
-      </a>
-    </React.Fragment>
+    const {t} = this.props
+    return (
+      <React.Fragment>
+        {this.renderAction(t('actions.addToThread'), 'plus', () => this.actionReply())}
+        {this.renderAction(t('actions.delete'), 'times', () => this.handleDelete())}
+      </React.Fragment>
+    )
   }
 
   renderOtherCommentActions() {
-    const {t, isFlagged} = this.props
-    return <React.Fragment>
-      <a onClick={() => this.actionReply()}>
-        <Icon name="reply"/> <span>{t('actions.reply')}</span>
-      </a>
-      <ReputationGuard requiredRep={MIN_REPUTATION_FLAG}>
-        {!isFlagged &&
-        <a onClick={() => this.handleFlag('3')}>
-          <Icon name="ban"/>
-          <span> {t('moderation:reason.3')}</span>
-        </a>
-        }
-        <a onClick={() => this.handleFlag()}
-           className={classNames('action-report', {selected: isFlagged})}>
-          <Icon name="flag"/>
-          <span> {t(isFlagged ? 'actions.flagged' : 'misc.otherFlags')}</span>
-        </a>
-      </ReputationGuard>
-    </React.Fragment>
+    const {isFlagged, t} = this.props
+    return (
+      <React.Fragment>
+        {this.renderAction(t('actions.reply'), 'reply', () => this.actionReply())}
+        <ReputationGuard requiredRep={MIN_REPUTATION_FLAG}>
+          {this.renderAction(
+            isFlagged ? t('actions.flagged') : t('misc.flags'),
+            'flag',
+            () => this.handleFlag(),
+            classNames('action-report', {selected: isFlagged})
+          )}
+        </ReputationGuard>
+      </React.Fragment>
+    )
+  }
+
+  renderAction(title, iconName, onClick, className = null) {
+    return (
+      <Button
+        className={classNames('is-inverted is-primary', className)}
+        onClick={onClick}
+      >
+        <Icon name={iconName}/>
+        <span>{title}</span>
+      </Button>
+    )
   }
 
   getScore() {
@@ -173,7 +179,7 @@ export class CommentDisplay extends React.PureComponent {
 
   actionReply() {
     if (!this.ensureAuthenticated())
-      return
+      return null
     const formName = `formAddComment-${this.props.comment.statement_id}`
     this.props.change(formName, 'reply_to', this.props.comment)
   }
