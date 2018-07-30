@@ -47,6 +47,8 @@ export const BrowserExtensionsPage = translate('extension')(({t}) => (
         controls
         className="video"
         volume={1}
+        muted={0}
+        mute={0}
         url="https://youtu.be/k4L0fvwsBg0"
       />
     </section>

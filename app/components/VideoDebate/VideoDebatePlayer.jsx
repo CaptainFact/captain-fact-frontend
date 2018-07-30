@@ -39,6 +39,8 @@ export default class VideoDebatePlayer extends React.Component {
         width=""
         height=""
         volume={maxVolume}
+        muted={0}
+        mute={0}
         controls
       />
     )

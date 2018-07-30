@@ -39,6 +39,8 @@ export const Source = ({ source: { url, title, site_name }, withoutPlayer }) => 
       url={url}
       config={PLAYER_CONFIG}
       volume={maxVolume}
+      muted={0}
+      mute={0}
     />)
   }
   return (
