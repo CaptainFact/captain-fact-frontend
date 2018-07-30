@@ -22,9 +22,9 @@ class DeleteForm extends React.PureComponent {
         <h4 className="title is-4">Deleting your account will...</h4>
         <ul>
           <li>Delete all your votes</li>
-          <li>Delete all your comments</li>
           <li>Delete all your flags</li>
           <li>Delete all your personal data (email, username...etc)</li>
+          <li>Anonymize all your comments</li>
           <li>Anonymize your actions history</li>
         </ul>
         <hr/>
