@@ -71,6 +71,7 @@ export class AddVideoForm extends React.PureComponent {
           <ReactPlayer
             className="video"
             url={value}
+            volume={1}
             controls
             width=""
             height=""

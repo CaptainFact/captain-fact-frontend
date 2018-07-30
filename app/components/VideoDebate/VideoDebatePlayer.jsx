@@ -28,6 +28,7 @@ export default class VideoDebatePlayer extends React.Component {
 
   render() {
     const { setPosition, url } = this.props
+    const maxVolume = 1
 
     return (
       <ReactPlayer
@@ -37,6 +38,7 @@ export default class VideoDebatePlayer extends React.Component {
         onProgress={({playedSeconds}) => setPosition(playedSeconds)}
         width=""
         height=""
+        volume={maxVolume}
         controls
       />
     )

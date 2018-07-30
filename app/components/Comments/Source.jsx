@@ -30,6 +30,7 @@ const PLAYER_CONFIG = {youtube: {playerVars: { showinfo: 1 }}}
 
 export const Source = ({ source: { url, title, site_name }, withoutPlayer }) => {
   if (!withoutPlayer && isPlayer(url)) {
+    const maxVolume = 1
     return (<ReactPlayer
       className="video"
       controls
@@ -37,6 +38,7 @@ export const Source = ({ source: { url, title, site_name }, withoutPlayer }) => 
       width={352}
       url={url}
       config={PLAYER_CONFIG}
+      volume={maxVolume}
     />)
   }
   return (
