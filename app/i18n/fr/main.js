@@ -62,5 +62,6 @@ export default {
   },
   all: 'Toutes',
   partners: 'Partenaires',
-  users: 'Utilisateurs'
+  users: 'Utilisateurs',
+  anonymous: 'Utilisateur anonyme'
 }

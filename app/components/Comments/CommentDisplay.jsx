@@ -148,7 +148,7 @@ export class CommentDisplay extends React.PureComponent {
     if (!user) {
       return (
         <span className="anonymous">
-          Utilisateur anonyme
+          {this.props.t('anonymous')}
         </span>
       )
     }
