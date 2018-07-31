@@ -87,15 +87,7 @@ export class CommentDisplay extends React.PureComponent {
                     ? this.renderOwnCommentActions()
                     : this.renderOtherCommentActions()
                   }
-                  { replies && this.renderAction(
-                    t('videoDebate:comment.replies', {
-                      context: showReplies ? 'hide' : 'show',
-                      count: replies.size
-                    }),
-                    showReplies ? 'eye-slash' : 'eye',
-                    () => this.setState({showReplies: !showReplies}),
-                    {'reply-collapsed': !showReplies},
-                  )}
+                  {replies && this.renderActionReply(showReplies, replies)}
                 </nav>
               )}
             </div>
@@ -107,6 +99,20 @@ export class CommentDisplay extends React.PureComponent {
                            replyingTo={user}/>
         }
       </div>
+    )
+  }
+
+  renderActionReply(showReplies, replies) {
+    const i18nParams = {
+      context: showReplies ? 'hide' : 'show',
+      count: replies.size
+    }
+
+    return this.renderAction(
+      this.props.t('videoDebate:comment.replies', i18nParams),
+      showReplies ? 'eye-slash' : 'eye',
+      () => this.setState({showReplies: !showReplies}),
+      {'reply-collapsed': !showReplies},
     )
   }
 
