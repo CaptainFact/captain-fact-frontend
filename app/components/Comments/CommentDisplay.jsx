@@ -145,17 +145,14 @@ export class CommentDisplay extends React.PureComponent {
   }
 
   renderUserHeader(user, withoutActions) {
-    if (!user) {
-      return (
-        <span className="anonymous">
-          {this.props.t('anonymous')}
-        </span>
-      )
-    }
-    return (
+    return user ? (
       <span>
         <UserPicture user={user} size={USER_PICTURE_SMALL}/>
         <UserAppellation user={user} withoutActions={withoutActions}/>
+      </span>
+    ) : (
+      <span className="anonymous">
+        {this.props.t('anonymous')}
       </span>
     )
   }
