@@ -19,7 +19,7 @@ export class Home extends React.PureComponent {
 
     return (
       <div className="home-page">
-        <section className="hero is-medium is-bold is-warning">
+        <section className="hero is-medium is-bold">
           <div className="hero-body">
             <div className="has-text-centered">
               <Logo/>

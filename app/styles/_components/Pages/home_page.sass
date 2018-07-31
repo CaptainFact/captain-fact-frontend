@@ -4,6 +4,7 @@
   flex-direction: column
   .hero
     min-height: 25vh
+    background: $primary-gradient
     +mobile
       min-height: 20vh
     .hero-body
@@ -13,6 +14,10 @@
         font-size: 12px
       .site-logo
         @include animate(bounceInDown, 0.7s)
+        .logo-captain
+          color: $logo-inside-color
+        .logo-fact
+          color: lighten($logo-inside-color, 10)
       .subtitle
         @include animate(fadeIn, 1s)
         animation-delay: 0.7s
@@ -25,7 +30,7 @@
           width: 80px
       .subtitle
         font-style: italic
-        color: #3c3c3c
+        color: #f3f3f3
         margin-top: 10px
   .presentation
     @include animate(fadeIn, 1s)
