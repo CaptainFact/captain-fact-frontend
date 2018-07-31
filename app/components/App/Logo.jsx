@@ -1,10 +1,11 @@
 import React from 'react'
 
+const LOGO = '/assets/img/logo.svg'
+const BORDERLESS_LOGO = '/assets/img/logo-borderless.svg'
 
-const Logo = () => (
+const Logo = ({borderless = false}) => (
   <h1 className="site-logo title is-1">
-    <img width="47" src="/assets/img/logo.png" style={{zIndex: 2}}/>
-    <span className="alt-c">C</span>
+    <img alt="C" src={borderless ? BORDERLESS_LOGO : LOGO}/>
     <span className="logo-captain">aptain</span>
     <span className="logo-fact">Fact</span>
     <small className="beta"> (Beta)</small>
