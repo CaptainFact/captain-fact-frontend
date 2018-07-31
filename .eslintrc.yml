@@ -53,6 +53,7 @@ rules:
   react/self-closing-comp: ['warn']
   react/jsx-indent: ['warn']
   react/no-array-index-key: ['warn']
+  react/prefer-stateless-function: ['warn']
   jsx-a11y/anchor-is-valid: 
     - warn
     - components: ['Link']
