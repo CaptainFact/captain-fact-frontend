@@ -15,7 +15,7 @@ if faced with an acceptable approximation.
 
 ## Statements
 
-To have its place on CaptainFact, a quote **must** fill out at least one 
+To have its place on CaptainFact, a quote **must** fill **out at least one** 
 the following criteria:
 
 * Be verifiable
