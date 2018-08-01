@@ -1,21 +1,21 @@
-## Commentaires
+## Commentaires 
 
-CaptainFact n'est pas une plateforme sociale ordinaire. Elle a pour vocation de
-s'intéresser aux faits, aux preuves, aux sources, aux arguments et au contexte
+CaptainFact n'est pas une plateforme sociale ordinaire. Elle a pour vocation de 
+s'intéresser aux faits, aux preuves, aux sources, aux arguments et au contexte 
 **mais pas aux opinions**.
-La partie commentaire peut être utilisée pour ouvrir le contexte mais ne doit
+La partie commentaire peut être utilisée pour ouvrir le contexte mais ne doit 
 pas dévier du sujet initial. Les hors-sujets sont sanctionnés par la communauté.
 
-Les boutons `J'approuve` et `Je réfute` doivent être utilisés quand des preuves
-permettent de faire **nettement** pencher la vérification d'un côté ou de
-l'autre. Une erreur mineure sur une date ou un arrondi un peu grossier sur un
-chiffre ne méritent pas nécessairement d'être infirmés : on peut **confirmer**
-l'affirmation dès lors que l'ordre de grandeur est bon ou poster en commentaire
+Les boutons `J'approuve` et `Je réfute` doivent être utilisés quand des preuves 
+permettent de faire **nettement** pencher la vérification d'un côté ou de 
+l'autre. Une erreur mineure sur une date ou un arrondi un peu grossier sur un 
+chiffre ne méritent pas nécessairement d'être infirmés : on peut **confirmer** 
+l'affirmation dès lors que l'ordre de grandeur est bon ou poster en commentaire 
 si l'on est confrontés à une approximation acceptable.
 
 ## Citations
 
-Pour avoir sa place sur CaptainFact, une citation **doit** remplir **au moins** un
+Pour avoir sa place sur CaptainFact, une citation **doit** remplir au moins un 
 des critères suivants :
 
 * Être vérifiable
@@ -23,20 +23,20 @@ des critères suivants :
 * Présenter des éléments incomplets ou approximatifs
 * Présenter un argument fallacieux, trompeur ou mensonger
 
-Il est également recommandé de se poser les questions suivantes avant d'ajouter
+Il est également recommandé de se poser les questions suivantes avant d'ajouter 
 une citation :
 
-* Une personne typique pourrait-elle, en entendant l'affirmation, se demander
-si elle est vraie ? Par exemple, l'affirmation "Le ciel est bleu" est vérifiable
+* Une personne typique pourrait-elle, en entendant l'affirmation, se demander 
+si elle est vraie ? Par exemple, l'affirmation "Le ciel est bleu" est vérifiable 
 mais n'a pas vraiment besoin d'être sourcée.
 * Est-ce que l'affirmation est susceptible d'être répétée et partagée ?
-* S'agît-t-il d'une erreur mineure ? D'une hyperbole "acceptable" - souvent
+* S'agît-t-il d'une erreur mineure ? D'une hyperbole "acceptable" - souvent 
 utilisées en politique ?
 
 #### A propos des opinions dans les citations
 
-Les opinions doivent autant que possible éviter d'apparaître dans les citations.
-Vous pouvez, si cela ne la prive pas de son sens, remplacer les jugements de
+Les opinions doivent autant que possible éviter d'apparaître dans les citations. 
+Vous pouvez, si cela ne la prive pas de son sens, remplacer les jugements de 
 valeur (le mieux, le pire, stupide...etc) par des `[...]`.
 
 Par exemple :
