@@ -132,10 +132,14 @@ export class SpeakerPreview extends React.PureComponent {
   }
 
   handleEdit() {
+    const titleModal = this.props.t('speaker.edit', {
+      name: this.props.speaker.full_name
+    })
+
     this.props.addModal({
       Modal: ModalFormContainer,
       props: {
-        title: `Edit ${this.props.speaker.full_name} information`,
+        title: titleModal,
         FormComponent: EditSpeakerForm,
         handleConfirm: (s) => this.props.updateSpeaker(s),
         formProps: {initialValues: this.props.speaker.toJS()}

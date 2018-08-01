@@ -40,6 +40,7 @@ export default {
     confirmRemove: 'Toutes les déclarations de {{speaker.full_name}} sur cette vidéo vont devenir orphelines',
     add: 'Ajouter un·e intervenant·e',
     create: 'Créer l\'intervenant·e "{{name}}"',
+    edit: 'Modifier les informations de "{{name}}"',
     search: 'Tapez un nom pour lancer la recherche',
     fullName: 'Nom complet',
     title: 'Titre',

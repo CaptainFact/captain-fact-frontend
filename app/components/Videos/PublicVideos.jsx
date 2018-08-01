@@ -68,14 +68,14 @@ export class PublicVideos extends React.PureComponent {
         <div className="level-left" />
         <div className="level-right">
           <div className="filter">
-            <span>Source:</span>
+            <span>{this.props.t('misc.source')}{this.props.t('misc.colon')}</span>
             <FilterOnlyFromPartners
               value={this.props.onlyFromPartners}
               onChange={this.props.setVideosOnlyFromPartners}
             />
           </div>
           <div className="filter">
-            <span>Language:</span>
+            <span>{this.props.t('misc.languageFilter')}{this.props.t('misc.colon')}</span>
             <LanguageSelector
               additionalOptions={new Map({
                 all: this.props.t('misc.all'),

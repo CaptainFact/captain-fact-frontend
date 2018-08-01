@@ -56,10 +56,15 @@ export default {
     clipboardFail: 'Cannot copy to clipboard',
     all: 'All',
     unknown: 'Unknown',
+    languageFilter: 'Language',
+    source: 'Source',
+    colon: ':',
     flags: 'Flags'
   },
   videos: {
-    add: 'Add Video'
+    add: 'Add Video',
+    placeholder: 'Video URL',
+    analysing: 'Analysing video'
   },
   all: 'All',
   partners: 'Partners',
