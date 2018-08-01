@@ -59,6 +59,10 @@
     text-align: center
     padding: 3rem
     .button
+      animation-name: fadeInUp
+      animation-duration: 1s
+      animation-fill-mode: backwards
+      @include ProgressiveAnimationDelay(0.1s, 0.3s, 3)
       margin: 0.3em 0.25em
       padding: 1.3em 1em
       font-size: 1.6em

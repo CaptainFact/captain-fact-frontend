@@ -8,16 +8,16 @@ const ROLE_DEVELOPER = 'developer'
 const ROLE_DONATOR = 'donator'
 
 const CONTRIBUTORS = [
-  {role: ROLE_AMBASSADOR, name: "Frédéric Bouffetier", picture: "frederic.jpg"},
-  {role: ROLE_AMBASSADOR, name: "Timothée Roland", picture: "timothee.jpg"},
-  {role: ROLE_AMBASSADOR_PADAWAN, name: "Dorian Cazottes"},
+  {role: ROLE_AMBASSADOR, name: 'Frédéric Bouffetier', picture: 'frederic.jpg'},
+  {role: ROLE_AMBASSADOR, name: 'Timothée Roland', picture: 'timothee.jpg'},
+  {role: ROLE_AMBASSADOR_PADAWAN, name: 'Dorian Cazottes'},
   {role: ROLE_DEVELOPER, name: 'Noé Gambini'},
   {role: ROLE_DONATOR, name: 'Thibaut Ladouce'},
   {role: ROLE_DONATOR, name: 'Julien Edmond'},
   {role: ROLE_DONATOR, name: 'Jérôme Bétrancourt'},
   {role: ROLE_DONATOR, name: 'Spiderweak', picture: 'spiderweak.jpg'},
   {role: ROLE_DONATOR, name: 'Coline Piouffle', i18nContext: 'female'},
-  {role: ROLE_DONATOR, name: 'Basile Asti'},
+  {role: ROLE_DONATOR, name: 'Basile Asti', picture: 'basile.jpg'},
   {role: ROLE_DONATOR, name: 'Alexandre Mira'},
   {role: ROLE_DONATOR, name: 'Adrien Albertini'},
   {role: ROLE_DONATOR, name: 'Loic Journet'},
