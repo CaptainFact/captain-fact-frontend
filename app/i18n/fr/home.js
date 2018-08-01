@@ -8,5 +8,12 @@ export default {
   footer: 'Créé avec {{iconLove}} à l\'aide d\'',
   emailPlaceholder: 'Adresse e-mail',
   inviteSuccess: 'Demande d\'invitation enregistrée !',
-  error_invalid_email: 'Adresse e-mail invalide'
+  error_invalid_email: 'Adresse e-mail invalide',
+  roles: {
+    ambassador: 'Ambassadeur',
+    ambassadorPadawan: 'Ambassadeur Padawan',
+    developer: 'Développeur',
+    donator: 'Donateur',
+    donator_female: 'Donatrice'
+  }
 }

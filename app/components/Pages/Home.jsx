@@ -51,15 +51,15 @@ export class Home extends React.PureComponent {
             <Icon name="heart"/>&nbsp;&nbsp; {t('main:menu.donation')}
           </ExternalLinkNewTab>
         </section>
-        <section className="section has-text-centered">
+        <section className="section has-text-centered illustration">
           <img src="assets/img/landing-illustration.jpg" alt=""/>
         </section>
         <section className="section has-text-centered community content">
           <h1>Communauté</h1>
           <p className="is-size-5">
-            <Icon name="user"/> 1783 utilisateurs inscrits
+            <Icon name="user"/> 1800 utilisateurs inscrits
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <Icon name="check"/> 1250 affirmations vérifiées
+            <Icon name="check"/> 638 affirmations vérifiées
           </p>
         </section>
         <section className="section has-text-centered contributors content">

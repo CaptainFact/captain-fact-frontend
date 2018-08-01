@@ -2,10 +2,10 @@
   min-height: 100vh
   display: flex
   flex-direction: column
+  background: $primary-gradient fixed
 
   .hero
     min-height: 25vh
-    background: $primary-gradient
     +mobile
       min-height: 20vh
     .hero-body
@@ -35,32 +35,43 @@
         margin-top: 10px
 
   .section
-    margin-bottom: 0
+    margin: 0
     h1
       margin-bottom: 1em
 
   .presentation
     @include animate(fadeIn, 1s)
-    max-width: 1000px
-    margin: 0 auto
     padding: 4rem 4rem 2rem
     min-height: 45vh
     flex-grow: 1
     display: flex
     flex-direction: column
     justify-content: center
+    background: $white
     +mobile
       padding: 3rem
       min-height: 65vh
+    &> div
+      max-width: 1000px
+      margin: 0 auto
 
   .actions
     text-align: center
-    margin: 1em 0
-    background: #71b1b0
     padding: 3rem
     .button
       margin: 0.3em 0.25em
+      padding: 1.3em 1em
       font-size: 1.6em
+      box-shadow: -1px 2px 8px #457480
+      transition: box-shadow 0.2s, transform 0.2s
+      transform: translateY(0) scale(1)
+      border: 1px solid $grey
+      &:hover
+        box-shadow: -1px 7px 14px #476f79
+        transform: translateY(-0.15em) scale(1.025)
+
+  .illustration
+    background: $white
 
   .community
     background: #5abda8
@@ -69,13 +80,18 @@
       color: $white-bis
 
   .contributors
+    background: $white
     img
       border-radius: 5px
+      height: 96px
+      box-shadow: 0px 0px 10px $grey-lighter
+      &.no-picture
+        padding: 1em
     .columns
       justify-content: center
       flex-wrap: wrap
       margin: 0 auto
-      max-width: 960px
+      max-width: 1300px
       .column
         flex-basis: 96px
     .card-content
