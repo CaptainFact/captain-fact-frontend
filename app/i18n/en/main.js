@@ -64,4 +64,5 @@ export default {
   all: 'All',
   partners: 'Partners',
   users: 'Users',
+  anonymous: 'Anonymous user'
 }

@@ -42,7 +42,7 @@ export class CommentDisplay extends React.PureComponent {
     const { t, withoutActions, withoutHeader, replyingTo, nesting, replies, myVote, isVoting, hideThread, className, richMedias = true } = this.props
     const approveClass = approve !== null && (approve ? 'approve' : 'refute')
     const showReplies = this.state.showReplies
-    const isOwnComment = this.props.comment.user.id === this.props.currentUser.id
+    const isOwnComment = user && user.id === this.props.currentUser.id
 
     return (
       <div>
@@ -65,12 +65,13 @@ export class CommentDisplay extends React.PureComponent {
           content={(
             <div>
               <div>
-                {!withoutHeader && <div className="comment-header">
-                  <UserPicture user={user} size={USER_PICTURE_SMALL}/>
-                  <UserAppellation user={user} withoutActions={withoutActions}/>
-                  <span> - </span>
-                  <TimeSince className="comment-time" time={inserted_at}/>
-                </div>}
+                {!withoutHeader && (
+                  <div className="comment-header">
+                    {this.renderUserHeader(user, withoutActions)}
+                    <span> - </span>
+                    <TimeSince className="comment-time" time={inserted_at}/>
+                  </div>
+                )}
                 {(text || (replyingTo && nesting > 6)) &&
                 <div className="comment-text">
                   {(replyingTo && nesting > 6) &&
@@ -152,6 +153,19 @@ export class CommentDisplay extends React.PureComponent {
         <Icon name={iconName}/>
         <span>{title}</span>
       </Button>
+    )
+  }
+
+  renderUserHeader(user, withoutActions) {
+    return user ? (
+      <span>
+        <UserPicture user={user} size={USER_PICTURE_SMALL}/>
+        <UserAppellation user={user} withoutActions={withoutActions}/>
+      </span>
+    ) : (
+      <span className="anonymous">
+        {this.props.t('anonymous')}
+      </span>
     )
   }
 
