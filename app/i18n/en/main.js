@@ -56,7 +56,7 @@ export default {
     clipboardFail: 'Cannot copy to clipboard',
     all: 'All',
     unknown: 'Unknown',
-    otherFlags: 'Other flags'
+    flags: 'Flags'
   },
   videos: {
     add: 'Add Video'

@@ -55,7 +55,7 @@ export default {
     clipboardFail: 'Impossible d\'enregistrer l\'adresse dans le presse-papier',
     all: 'Tous',
     unknown: 'Inconnu',
-    otherFlags: 'Autres signalements'
+    flags: 'Signalements'
   },
   videos: {
     add: 'Ajouter une vidéo',
