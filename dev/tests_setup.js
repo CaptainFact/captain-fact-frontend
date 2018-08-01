@@ -12,6 +12,7 @@ Enzyme.configure({ adapter: new Adapter() })
 
 // Configure global env variables
 process.env.HTTP_API_URL = 'http://test'
+process.env.INVITATION_SYSTEM = 'off'
 
 // Make Enzyme functions available in all test files without importing
 global.shallow = shallow
