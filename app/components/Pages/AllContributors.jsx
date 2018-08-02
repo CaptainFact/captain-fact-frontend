@@ -13,7 +13,7 @@ const CONTRIBUTORS = [
   {role: ROLE_AMBASSADOR_PADAWAN, name: 'Dorian Cazottes'},
   {role: ROLE_DEVELOPER, name: 'Noé Gambini'},
   {role: ROLE_DONATOR, name: 'Thibaut Ladouce'},
-  {role: ROLE_DONATOR, name: 'Julien Edmond'},
+  {role: ROLE_DONATOR, name: 'Julien Edmond', picture: 'julien.jpg'},
   {role: ROLE_DONATOR, name: 'Jérôme Bétrancourt'},
   {role: ROLE_DONATOR, name: 'Spiderweak', picture: 'spiderweak.jpg'},
   {role: ROLE_DONATOR, name: 'Coline Piouffle', i18nContext: 'female', picture: 'coline.jpg'},
