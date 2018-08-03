@@ -84,6 +84,9 @@
     color: $white
     h1
       color: $white-bis
+    .columns
+      max-width: 500px
+      margin: 0 auto
 
   .contributors
     background: $white
@@ -101,8 +104,18 @@
       max-width: 1300px
       .column
         flex-basis: 96px
+        min-width: 175px
     .card-content
       padding: 1.5rem 0.5em
+    .card-image
+      display: flex
+      justify-content: center
+    .button
+      max-width: 100%
+      span:not(.icon)
+        overflow: hidden
+        white-space: nowrap
+        text-overflow: ellipsis
 
   .footer
     word-spacing: 2px

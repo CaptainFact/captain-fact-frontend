@@ -56,10 +56,13 @@ export class Home extends React.PureComponent {
         </section>
         <section className="section has-text-centered community content">
           <h1>Communauté</h1>
-          <p className="is-size-5">
-            <Icon name="user"/> 1800 utilisateurs inscrits
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <Icon name="check"/> 638 affirmations vérifiées
+          <p className="columns is-size-5">
+            <span className="column">
+              <Icon name="user"/> 1800 utilisateurs inscrits
+            </span>
+            <span className="column">
+              <Icon name="check"/> 638 affirmations vérifiées
+            </span>
           </p>
         </section>
         <section className="section has-text-centered contributors content">
