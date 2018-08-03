@@ -13,6 +13,7 @@ export default {
     ambassador: 'Ambassador',
     ambassadorPadawan: 'Padawan Ambassador',
     developer: 'Developer',
-    donator: 'Donator'
+    donator: 'Donator',
+    partner: 'Partner'
   }
 }

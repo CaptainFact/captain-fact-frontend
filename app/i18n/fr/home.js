@@ -14,6 +14,7 @@ export default {
     ambassadorPadawan: 'Ambassadeur Padawan',
     developer: 'Développeur',
     donator: 'Donateur',
-    donator_female: 'Donatrice'
+    donator_female: 'Donatrice',
+    partner: 'Partenaire'
   }
 }

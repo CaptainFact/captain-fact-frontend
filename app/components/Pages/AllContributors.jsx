@@ -1,17 +1,23 @@
 import React from 'react'
 import {translate} from 'react-i18next'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
 
 const ROLE_AMBASSADOR = 'ambassador'
 const ROLE_AMBASSADOR_PADAWAN = 'ambassadorPadawan'
 const ROLE_DEVELOPER = 'developer'
 const ROLE_DONATOR = 'donator'
+const ROLE_PARTNER = 'partner'
 
 const CONTRIBUTORS = [
   {role: ROLE_AMBASSADOR, name: 'Frédéric Bouffetier', picture: 'frederic.jpg'},
   {role: ROLE_AMBASSADOR, name: 'Timothée Roland', picture: 'timothee.jpg'},
   {role: ROLE_AMBASSADOR_PADAWAN, name: 'Dorian Cazottes'},
-  {role: ROLE_DEVELOPER, name: 'Noé Gambini'},
+  {role: ROLE_PARTNER, name: 'ThinkerView', picture: 'thinkerview.jpg', url: 'https://thinkerview.com'},
+  {role: ROLE_PARTNER, name: 'Heu?reka', picture: 'heureka.jpg', url: 'https://www.youtube.com/channel/UC7sXGI8p8PvKosLWagkK9wQ'},
+  {role: ROLE_PARTNER, name: 'Maia Mater', picture: 'maiamater.jpg', url: 'https://www.maiamater.camp'},
+  {role: ROLE_PARTNER, name: 'TedX Nouméa', picture: 'tedxnoumea.jpg', url: 'https://tedxnoumea.com'},
+  {role: ROLE_DEVELOPER, name: 'Noé Gambini', picture: 'noe.jpg'},
   {role: ROLE_DONATOR, name: 'Thibaut Ladouce'},
   {role: ROLE_DONATOR, name: 'Julien Edmond', picture: 'julien.jpg'},
   {role: ROLE_DONATOR, name: 'Jérôme Bétrancourt'},
@@ -19,14 +25,12 @@ const CONTRIBUTORS = [
   {role: ROLE_DONATOR, name: 'Coline Piouffle', i18nContext: 'female', picture: 'coline.jpg'},
   {role: ROLE_DONATOR, name: 'Basile Asti', picture: 'basile.jpg'},
   {role: ROLE_DONATOR, name: 'Alexandre Mira'},
-  {role: ROLE_DONATOR, name: 'Adrien Albertini'},
+  {role: ROLE_DONATOR, name: 'Adrien Albertini', picture: 'adrien.jpg'},
   {role: ROLE_DONATOR, name: 'Loic Journet'},
   {role: ROLE_DONATOR, name: 'William Amsler', picture: 'william.jpg'},
   {role: ROLE_DONATOR, name: 'Francois  Zedde'},
   {role: ROLE_DONATOR, name: 'William Rode'},
   {role: ROLE_DONATOR, name: 'Hélène Bouffetier', i18nContext: 'female'},
-  {role: ROLE_DONATOR, name: 'Jean-Louis PIOCH'},
-  {role: ROLE_DONATOR, name: 'Nicolas Jeannesson'}
 ]
 
 const AllContributors  = ({t}) => (
@@ -39,7 +43,9 @@ const AllContributors  = ({t}) => (
           </figure>
         </div>
         <div className="card-content">
-          <p className="title is-4">{contributor.name}</p>
+          <p className="title is-4">
+            {contributorName(contributor)}
+          </p>
           <p className="subtitle is-6">
             {t(`roles.${contributor.role}`, {context: contributor.i18nContext})}
           </p>
@@ -48,6 +54,12 @@ const AllContributors  = ({t}) => (
     ))}
   </div>
 )
+
+function contributorName({url, name}) {
+  return url
+    ? <ExternalLinkNewTab href={url}>{name}</ExternalLinkNewTab>
+    : name
+}
 
 function contributorPicture({picture}) {
   return picture

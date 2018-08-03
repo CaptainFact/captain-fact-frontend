@@ -65,6 +65,10 @@ export class Home extends React.PureComponent {
         <section className="section has-text-centered contributors content">
           <h1>Contributeurs</h1>
           <AllContributors/>
+          <ExternalLinkNewTab className="button is-large" href="https://opencollective.com/captainfact_io">
+            <Icon name="external-link"/>
+            <span>Voir tous les contributeurs sur OpenCollective</span>
+          </ExternalLinkNewTab>
         </section>
         {INVITATION_SYSTEM && (
           <section className="section request-invitation">
