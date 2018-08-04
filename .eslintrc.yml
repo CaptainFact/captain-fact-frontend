@@ -53,7 +53,7 @@ rules:
   react/self-closing-comp: ['warn']
   react/jsx-indent: ['warn']
   react/no-array-index-key: ['warn']
-  jsx-a11y/anchor-is-valid: 
+  jsx-a11y/anchor-is-valid:
     - warn
     - components: ['Link']
       specialLink: ['To']
@@ -68,6 +68,7 @@ rules:
   # existing code. Some of them should be re-activated in the future.
   no-console: off
   no-shadow: off
+  nonblock-statement-body-position: off
   object-curly-spacing: off
   object-curly-newline: off
   object-property-newline: off
