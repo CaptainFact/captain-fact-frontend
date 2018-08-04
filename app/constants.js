@@ -38,8 +38,9 @@ export const MIN_REPUTATION_REMOVE_STATEMENT = 75
 export const MIN_REPUTATION_RESTORE_ENTITY = 75
 export const MIN_REPUTATION_REMOVE_SPEAKER = 75
 export const MIN_REPUTATION_UPDATE_VIDEO = 75
+export const MIN_REPUTATION_ADD_VIDEO = 75
 export const MIN_REPUTATION_MODERATION = 125
-export const MIN_REPUTATION_ADD_VIDEO = 200
+
 
 /* ------ UI, animations ------ */
 export const MOBILE_WIDTH_THRESHOLD = 768 // pixels
@@ -61,7 +62,7 @@ export const USERNAME_LENGTH = [5, 15]
 export const NAME_LENGTH = [2, 20]
 
 // Comments
-export const COMMENT_LENGTH = [0, 255]
+export const COMMENT_LENGTH = [0, 512]
 
 // Speakers
 export const SPEAKER_NAME_LENGTH = [3, 60]
