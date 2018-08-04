@@ -9,6 +9,7 @@ import { isAuthenticated } from '../../state/users/current_user/selectors'
 import Logo from '../App/Logo'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import { INVITATION_SYSTEM } from '../../config'
+import AllContributors from './AllContributors'
 
 
 @connect(state => ({authenticated: isAuthenticated(state)}))
@@ -37,18 +38,40 @@ export class Home extends React.PureComponent {
               <strong>CaptainFact</strong> {t('presentation2')}
             </p>
             <br/>
-            <div className="actions">
-              <Link className="button is-large" to="/help">
-                <Icon name="question-circle"/>&nbsp;&nbsp; {t('main:menu.help')}
-              </Link>
-              <Link className="button is-large" to="/videos">
-                <Icon name="tv"/>&nbsp;&nbsp; {t('seeVideos')}
-              </Link>
-              <ExternalLinkNewTab className="button is-large" href="https://opencollective.com/captainfact_io">
-                <Icon name="heart"/>&nbsp;&nbsp; {t('main:menu.donation')}
-              </ExternalLinkNewTab>
-            </div>
           </div>
+        </section>
+        <section className="section has-text-centered actions">
+          <Link className="button is-large" to="/help">
+            <Icon name="question-circle"/>&nbsp;&nbsp; {t('main:menu.help')}
+          </Link>
+          <Link className="button is-large" to="/videos">
+            <Icon name="tv"/>&nbsp;&nbsp; {t('seeVideos')}
+          </Link>
+          <ExternalLinkNewTab className="button is-large" href="https://opencollective.com/captainfact_io">
+            <Icon name="heart"/>&nbsp;&nbsp; {t('main:menu.donation')}
+          </ExternalLinkNewTab>
+        </section>
+        <section className="section has-text-centered illustration">
+          <img src="assets/img/landing-illustration.jpg" alt=""/>
+        </section>
+        <section className="section has-text-centered community content">
+          <h1>{t('videoDebate:community')}</h1>
+          <p className="columns is-size-5">
+            <span className="column">
+              <Icon name="user"/> 1840 {t('registeredUsers')}
+            </span>
+            <span className="column">
+              <Icon name="check"/> 706 {t('verifiedStatements')}
+            </span>
+          </p>
+        </section>
+        <section className="section has-text-centered contributors content">
+          <h1>{t('contributors')}</h1>
+          <AllContributors/>
+          <ExternalLinkNewTab className="button is-large" href="https://opencollective.com/captainfact_io">
+            <Icon name="external-link"/>
+            <span>{t('seeAllContributors')}</span>
+          </ExternalLinkNewTab>
         </section>
         {INVITATION_SYSTEM && (
           <section className="section request-invitation">
