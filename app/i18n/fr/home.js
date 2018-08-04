@@ -9,6 +9,10 @@ export default {
   emailPlaceholder: 'Adresse e-mail',
   inviteSuccess: 'Demande d\'invitation enregistrée !',
   error_invalid_email: 'Adresse e-mail invalide',
+  registeredUsers: 'utilisateurs inscrits',
+  verifiedStatements: 'citations vérifiées',
+  contributors: 'Contributeurs',
+  seeAllContributors: 'Voir tours les contributeurs sur OpenCollective',
   roles: {
     ambassador: 'Ambassadeur',
     ambassadorPadawan: 'Ambassadeur Padawan',

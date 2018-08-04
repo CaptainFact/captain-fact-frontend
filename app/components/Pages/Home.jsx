@@ -55,22 +55,22 @@ export class Home extends React.PureComponent {
           <img src="assets/img/landing-illustration.jpg" alt=""/>
         </section>
         <section className="section has-text-centered community content">
-          <h1>Communauté</h1>
+          <h1>{t('videoDebate:community')}</h1>
           <p className="columns is-size-5">
             <span className="column">
-              <Icon name="user"/> 1800 utilisateurs inscrits
+              <Icon name="user"/> 1840 {t('registeredUsers')}
             </span>
             <span className="column">
-              <Icon name="check"/> 638 affirmations vérifiées
+              <Icon name="check"/> 706 {t('verifiedStatements')}
             </span>
           </p>
         </section>
         <section className="section has-text-centered contributors content">
-          <h1>Contributeurs</h1>
+          <h1>{t('contributors')}</h1>
           <AllContributors/>
           <ExternalLinkNewTab className="button is-large" href="https://opencollective.com/captainfact_io">
             <Icon name="external-link"/>
-            <span>Voir tous les contributeurs sur OpenCollective</span>
+            <span>{t('seeAllContributors')}</span>
           </ExternalLinkNewTab>
         </section>
         {INVITATION_SYSTEM && (
