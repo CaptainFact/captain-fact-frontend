@@ -40,6 +40,7 @@ export default {
     confirmRemove: 'All statements made by {{speaker.full_name}} on this video will become orphans',
     add: 'Add Speaker',
     create: 'Create speaker "{{name}}"',
+    edit: 'Edit "{{name}}" information',
     search: 'Type a name to search',
     fullName: 'Full name',
     title: 'Title',

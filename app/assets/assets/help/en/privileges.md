@@ -20,13 +20,13 @@ Judgement actions such as voting and flagging are limited to avoid abusing them 
 | 15         | Update speaker
 | 15         | Flag inappropriate content  
 | 30         | Add / create speakers
+| 75         | Add videos
 | 75         | Remove / restore statement
 | 75         | Shift all video's statements    
 | 75         | Remove speaker                             
 | 125        | No more new user restrictions
 | 125        | Access to the moderation platform
 | 125        | Restore speaker
-| 200        | Add videos (weekly limitation)
 | 200        | Self-vote                          
 
 # New user restrictions

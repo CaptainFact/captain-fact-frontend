@@ -2,6 +2,9 @@
   min-height: 100vh
   display: flex
   flex-direction: column
+  background: linear-gradient(45deg, #78b4b4, #5c8686 70%, #3c5a73) fixed
+  background-color: #5c8686
+
   .hero
     min-height: 25vh
     +mobile
@@ -13,6 +16,10 @@
         font-size: 12px
       .site-logo
         @include animate(bounceInDown, 0.7s)
+        .logo-captain
+          color: $logo-inside-color
+        .logo-fact
+          color: lighten($logo-inside-color, 10)
       .subtitle
         @include animate(fadeIn, 1s)
         animation-delay: 0.7s
@@ -25,26 +32,97 @@
           width: 80px
       .subtitle
         font-style: italic
-        color: #3c3c3c
+        color: #f3f3f3
         margin-top: 10px
+
+  .section
+    margin: 0
+    h1
+      margin-bottom: 1em
+
   .presentation
     @include animate(fadeIn, 1s)
-    max-width: 1100px
-    margin: 0 auto
     padding: 4rem 4rem 2rem
     min-height: 45vh
     flex-grow: 1
     display: flex
     flex-direction: column
     justify-content: center
+    background: $white
     +mobile
       padding: 3rem
       min-height: 65vh
+    &> div
+      max-width: 1000px
+      margin: 0 auto
+
+  .actions
+    text-align: center
+    padding: 3rem
+    .button
+      animation-name: fadeInUp
+      animation-duration: 1s
+      animation-fill-mode: backwards
+      @include ProgressiveAnimationDelay(0.1s, 0.3s, 3)
+      margin: 0.3em 0.25em
+      padding: 1.3em 1em
+      font-size: 1.6em
+      box-shadow: -1px 2px 8px #457480
+      transition: box-shadow 0.2s, transform 0.2s
+      transform: translateY(0) scale(1)
+      border: 1px solid $grey
+      &:hover
+        box-shadow: -1px 7px 14px #476f79
+        transform: translateY(-0.15em) scale(1.025)
+
+  .illustration
+    background: $white
+    min-height: 15vh
+
+  .community
+    background: #5abda8
+    color: $white
+    h1
+      color: $white-bis
+    .columns
+      max-width: 500px
+      margin: 0 auto
+
+  .contributors
+    background: $white
+    img
+      border-radius: 5px
+      height: 96px
+      box-shadow: 0px 0px 10px $grey-lighter
+      &.no-picture
+        padding: 1em
+    .columns
+      justify-content: center
+      flex-wrap: wrap
+      margin: 0 auto
+      margin-bottom: 3em
+      max-width: 1300px
+      .column
+        flex-basis: 96px
+        min-width: 175px
+    .card-content
+      padding: 1.5rem 0.5em
+    .card-image
+      display: flex
+      justify-content: center
+    .button
+      max-width: 100%
+      span:not(.icon)
+        overflow: hidden
+        white-space: nowrap
+        text-overflow: ellipsis
+
   .footer
     word-spacing: 2px
     min-height: 1vh
     padding: 1.5rem 1.5rem
     justify-content: flex-end
+    border-top: 1px solid lighten($border, 5)
     .icon-heart
       color: $red
 

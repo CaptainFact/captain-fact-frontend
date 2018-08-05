@@ -23,22 +23,25 @@ import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
   videosLoading: state.Videos.isLoading,
   error: state.Speakers.error,
   userLocale: state.UserPreferences.locale
-}), {fetchSpeaker, fetchWikiDataInfo, fetchPublicVideos, reset, resetVideos})
+}), { fetchSpeaker, fetchWikiDataInfo, fetchPublicVideos, reset, resetVideos })
 export class SpeakerPage extends React.PureComponent {
   componentDidMount() {
     this.props.fetchSpeaker(this.props.params.slug_or_id)
-    this.props.fetchPublicVideos({speaker: this.props.params.slug_or_id})
+    this.props.fetchPublicVideos({ speaker: this.props.params.slug_or_id })
   }
 
   componentDidUpdate(oldProps) {
-    const { speaker: {wikidata_item_id}, userLocale } = this.props
+    const { speaker: { wikidata_item_id, slug }, userLocale } = this.props
+
+    if (slug && slug !== this.props.params.slug_or_id)
+      this.props.router.push(`/s/${slug}`)
 
     // Target speaker changed
     if (this.props.params.slug_or_id !== oldProps.params.slug_or_id) {
       this.props.reset()
       this.props.resetVideos()
       this.props.fetchSpeaker(this.props.params.slug_or_id)
-      this.props.fetchPublicVideos({speaker: this.props.params.slug_or_id})
+      this.props.fetchPublicVideos({ speaker: this.props.params.slug_or_id })
     }
 
     // Speaker loaded, fetch its wikidata infos
@@ -53,7 +56,7 @@ export class SpeakerPage extends React.PureComponent {
 
   render() {
     if (this.props.error)
-      return <ErrorView error={this.props.error}/>
+      return <ErrorView error={this.props.error} />
     return (
       <div className="speaker-page">
         <Helmet>
@@ -61,8 +64,8 @@ export class SpeakerPage extends React.PureComponent {
         </Helmet>
         <div className="hero is-light is-bold is-primary">
           <div className="hero-body">
-            <SpeakerPreview withoutActions speaker={this.props.speaker}/>
-            <hr/>
+            <SpeakerPreview withoutActions speaker={this.props.speaker} />
+            <hr />
             <div className="subtitle">{this.renderWikidata()}</div>
           </div>
         </div>
@@ -84,8 +87,8 @@ export class SpeakerPage extends React.PureComponent {
 
   renderVideos() {
     if (this.props.videosLoading)
-      return <LoadingFrame/>
-    return <VideosGrid videos={this.props.videos}/>
+      return <LoadingFrame />
+    return <VideosGrid videos={this.props.videos} />
   }
 
   renderLink(url, siteName) {
@@ -93,7 +96,7 @@ export class SpeakerPage extends React.PureComponent {
       return null
     return (
       <ExternalLinkNewTab href={url} key={url} className="link-with-icon">
-        <Icon name="link"/> <span>{siteName}</span>
+        <Icon name="link" /> <span>{siteName}</span>
       </ExternalLinkNewTab>
     )
   }

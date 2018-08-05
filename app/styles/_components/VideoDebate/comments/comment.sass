@@ -42,6 +42,10 @@
 
   /* Comment metadata */
 
+  .comment-header
+    .anonymous
+      color: $grey
+      font-style: italic
   .user-picture
     margin-right: 0.25em
     display: inline-block
@@ -92,6 +96,7 @@
     max-width: 100%
 
   /* Text */
+
   &:not(.quoted) .comment-text
     white-space: pre-wrap
     word-wrap: break-word
@@ -114,21 +119,12 @@
 
   /* ---- Actions ---- */
 
-  .comment-actions a
-    font-size: 0.8em
-    color: $grey-light
-    margin-right: 1em
-    &:hover
-      color: darken(#c7c7c7, 25)
-      text-decoration: underline
-    &.action-report.selected
-      color: $red
-      pointer-events: none
-    &.reply-collapsed
-      color: $grey
-    .icon
-      font-size: 0.8em
-      vertical-align: middle
+  .comment-actions
+    padding: 0.2em 0.15em
+    .button
+      font-size: 0.95em
+      &:not(:hover)
+        background: none
 
 .comment .score .icon.reported
   color: lighten($red, 30)

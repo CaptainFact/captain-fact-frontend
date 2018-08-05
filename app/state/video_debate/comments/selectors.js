@@ -19,7 +19,7 @@ export const classifyComments = createCachedSelector(
     const regularComments = []
 
     for (const comment of comments) {
-      if (comment.user.speaker_id && comment.user.speaker_id === speakerId)
+      if (isSelfComment(comment, speakerId))
         selfComments.push(comment)
       else if (!comment.source || comment.approve === null)
         regularComments.push(comment)
@@ -37,3 +37,7 @@ export const classifyComments = createCachedSelector(
   }
 )((state, props) => props.statement.id)
 
+// ---- Private ----
+function isSelfComment({user}, speakerId) {
+  return user && user.speaker_id && user.speaker_id === speakerId 
+}

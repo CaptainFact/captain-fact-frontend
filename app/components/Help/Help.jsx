@@ -1,10 +1,11 @@
 import React from 'react'
+import { translate, Trans } from 'react-i18next'
 
 import { Link, withRouter } from 'react-router'
 import { Icon } from '../Utils/Icon'
-import { translate } from 'react-i18next'
 import HelpPageContent from './HelpPageContent'
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
+import Message from '../Utils/Message'
 
 
 @translate('help')
@@ -17,7 +18,7 @@ export default class Help extends React.PureComponent {
     let content = ''
 
     if (!splat) {
-      header = <h1 className="title is-1">{t('main:menu.help')}</h1>
+      header = <h1 className="title is-1">{t('title')}</h1>
       content = this.renderIndexContent()
     }
     else {
@@ -43,43 +44,58 @@ export default class Help extends React.PureComponent {
 
   renderIndexContent() {
     return (
-      <div className="">
+      <div>
+        <Message type="info" header="A propos des pages d'aide">
+          {this.props.t('about')}&nbsp;
+          <Trans i18nKey="toStart">
+            toStart
+            {this.renderPageLink('contributionGuidelines')}
+            {this.renderPageLink('privileges')}
+            {this.renderPageLink('reputation')}
+          </Trans>
+        </Message>
         <div className="columns">
           <div className="column panel">
             <p className="panel-heading">{this.props.t('categories.siteUsage')}</p>
-            {this.renderPageLink('contributionGuidelines')}
-            {this.renderPageLink('reputation')}
-            {this.renderPageLink('privileges')}
-            {this.renderPageLink('moderation')}
-            {this.renderPageLink('achievements')}
-            {this.renderPageLink('extension')}
+            {this.renderPageMenuEntry('contributionGuidelines')}
+            {this.renderPageMenuEntry('privileges')}
+            {this.renderPageMenuEntry('reputation')}
+            {this.renderPageMenuEntry('moderation')}
+            {this.renderPageMenuEntry('achievements')}
+            {this.renderPageMenuEntry('extension')}
           </div>
           <div className="column panel">
             <p className="panel-heading">{this.props.t('categories.contribute')}</p>
-            {this.renderPageLink('jobs')}
-            {this.renderPageLink('contribute/tasks')}
-            {this.renderPageLink('bug_report')}
+            {this.renderPageMenuEntry('ambassadors')}
+            {this.renderPageMenuEntry('contribute/tasks')}
+            {this.renderPageMenuEntry('bug_report')}
           </div>
           <div className="column panel">
             <p className="panel-heading">{this.props.t('categories.others')}</p>
-            {this.renderPageLink('about')}
-            {this.renderPageLink('ambassadors')}
-            {this.renderPageLink('contact')}
-            {this.renderPageLink('credits')}
-            {this.renderPageLink('privacy')}
+            {this.renderPageMenuEntry('about')}
+            {this.renderPageMenuEntry('contact')}
+            {this.renderPageMenuEntry('credits')}
+            {this.renderPageMenuEntry('privacy')}
           </div>
         </div>
       </div>
     )
   }
 
-  renderPageLink(splat) {
+  renderPageMenuEntry(splat) {
+    const label = this.props.t(`pages.${splat}`, {defaultValue: splat})
     return (
       <div className="panel-block">
-        <Link to={`/help/${splat}`} style={{width: '100%', height: '100%'}}>
-          {this.props.t(`pages.${splat}`, {defaultValue: splat})}
-        </Link>
+        {this.renderPageLink(splat, label)}
       </div>
+    )
+  }
+
+  renderPageLink(splat, label) {
+    return (
+      <Link to={`/help/${splat}`}>
+        {label || splat}
+      </Link>
     )
   }
 
@@ -88,7 +104,7 @@ export default class Help extends React.PureComponent {
     return (
       <div>
         <h1 className="title is-1">
-          {t('main:menu.help')}: {t(`help:pages.${splat}`, {defaultValue: 'I am lost 😟'})}
+          {t('title')}: {t(`help:pages.${splat}`, {defaultValue: 'I am lost 😟'})}
         </h1>
         <Link className="subtitle" to="/help">
           <Icon name="arrow-left"/>

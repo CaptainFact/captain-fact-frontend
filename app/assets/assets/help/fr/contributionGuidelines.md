@@ -15,7 +15,7 @@ si l'on est confrontés à une approximation acceptable.
 
 ## Citations
 
-Pour avoir sa place sur CaptainFact, une citation **doit** remplir au moins un 
+Pour avoir sa place sur CaptainFact, une citation **doit** remplir **au moins** un 
 des critères suivants :
 
 * Être vérifiable

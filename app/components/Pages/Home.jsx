@@ -7,15 +7,20 @@ import { Icon } from '../Utils'
 import InvitationRequestForm from '../Users/InvitationRequestForm'
 import { isAuthenticated } from '../../state/users/current_user/selectors'
 import Logo from '../App/Logo'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
+import { INVITATION_SYSTEM } from '../../config'
+import AllContributors from './AllContributors'
 
 
 @connect(state => ({authenticated: isAuthenticated(state)}))
 @translate('home')
 export class Home extends React.PureComponent {
   render() {
+    const {t} = this.props
+
     return (
       <div className="home-page">
-        <section className="hero is-medium is-bold is-warning">
+        <section className="hero is-medium is-bold">
           <div className="hero-body">
             <div className="has-text-centered">
               <Logo/>
@@ -28,33 +33,58 @@ export class Home extends React.PureComponent {
         <section className="section presentation">
           <div className="has-text-weight-light is-size-3">
             <p>
-              {this.props.t('presentation1')}
+              {t('presentation1')}
               <br/><br/>
-              <strong>CaptainFact</strong> {this.props.t('presentation2')}
+              <strong>CaptainFact</strong> {t('presentation2')}
             </p>
             <br/>
-            <p>
-              <Interpolate
-                i18nKey="journeyStart"
-                videoLink={
-                  <Link to="/videos">{this.props.t('main:entities.video_plural')}</Link>
-                }
-              />
-              <br/>
-              <br/>
-            </p>
           </div>
         </section>
-        <section className="section request-invitation">
-          <h4 className="title is-4">
-            <Icon name="envelope-o"/>
-            <span>
-              &nbsp;&nbsp;
-              {this.props.t(this.props.authenticated ? 'inviteFriend' : 'invitation')}
-            </span>
-          </h4>
-          <InvitationRequestForm/>
+        <section className="section has-text-centered actions">
+          <Link className="button is-large" to="/help">
+            <Icon name="question-circle"/>&nbsp;&nbsp; {t('main:menu.help')}
+          </Link>
+          <Link className="button is-large" to="/videos">
+            <Icon name="tv"/>&nbsp;&nbsp; {t('seeVideos')}
+          </Link>
+          <ExternalLinkNewTab className="button is-large" href="https://opencollective.com/captainfact_io">
+            <Icon name="heart"/>&nbsp;&nbsp; {t('main:menu.donation')}
+          </ExternalLinkNewTab>
         </section>
+        <section className="section has-text-centered illustration">
+          <img src="assets/img/landing-illustration.jpg" alt=""/>
+        </section>
+        <section className="section has-text-centered community content">
+          <h1>{t('videoDebate:community')}</h1>
+          <p className="columns is-size-5">
+            <span className="column">
+              <Icon name="user"/> 1840 {t('registeredUsers')}
+            </span>
+            <span className="column">
+              <Icon name="check"/> 706 {t('verifiedStatements')}
+            </span>
+          </p>
+        </section>
+        <section className="section has-text-centered contributors content">
+          <h1>{t('contributors')}</h1>
+          <AllContributors/>
+          <ExternalLinkNewTab className="button is-large" href="https://opencollective.com/captainfact_io">
+            <Icon name="external-link"/>
+            <span>{t('seeAllContributors')}</span>
+          </ExternalLinkNewTab>
+        </section>
+        {INVITATION_SYSTEM && (
+          <section className="section request-invitation">
+            <h4 className="title is-4">
+              <Icon name="envelope-o"/>
+              <span>
+                &nbsp;&nbsp;
+                {this.props.t(this.props.authenticated ? 'inviteFriend' : 'invitation')}
+              </span>
+            </h4>
+            <InvitationRequestForm/>
+          </section>
+        )}
         <footer className="footer">
           <div className="has-text-centered">
             <Interpolate i18nKey="footer" iconLove={<Icon name="heart"/>}/>

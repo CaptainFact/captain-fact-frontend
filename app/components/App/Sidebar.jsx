@@ -116,7 +116,9 @@ export default class Sidebar extends React.PureComponent {
           <div className="menu-collapse-button" onClick={() => this.props.toggleSidebar()}>
             <RawIcon name="bars"/>
           </div>
-          <Link to="/"><Logo/></Link>
+          <Link to="/">
+            <Logo borderless/>
+          </Link>
         </div>
 
         <div className="menu-content">

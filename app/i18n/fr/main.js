@@ -22,7 +22,7 @@ export default {
     donation: 'Nous soutenir',
     extension: 'Extension pour navigateur',
     moderation: 'Modération',
-    help: 'Aide'
+    help: 'En apprendre +'
   },
   actions: {
     save: 'Sauvegarder',
@@ -55,12 +55,18 @@ export default {
     clipboardFail: 'Impossible d\'enregistrer l\'adresse dans le presse-papier',
     all: 'Tous',
     unknown: 'Inconnu',
-    otherFlags: 'Autres signalements'
+    languageFilter: 'Langue',
+    source: 'Source',
+    colon: '\u00A0:',
+    flags: 'Signalements'
   },
   videos: {
     add: 'Ajouter une vidéo',
+    placeholder: 'Adresse de la vidéo',
+    analysing: 'Analyse en cours de la vidéo'
   },
   all: 'Toutes',
   partners: 'Partenaires',
-  users: 'Utilisateurs'
+  users: 'Utilisateurs',
+  anonymous: 'Utilisateur anonyme'
 }

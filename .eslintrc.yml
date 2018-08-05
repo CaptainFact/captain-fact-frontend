@@ -36,6 +36,7 @@ rules:
   import/no-named-as-default: ['warn']
   no-restricted-globals: ["error", "event", "fdescribe"]
   no-mixed-operators: ['warn']
+  react/destructuring-assignment: off
   react/no-multi-comp: ['warn']
   react/jsx-no-bind: ['warn']
   react/jsx-indent-props: ['warn']
@@ -52,7 +53,8 @@ rules:
   react/self-closing-comp: ['warn']
   react/jsx-indent: ['warn']
   react/no-array-index-key: ['warn']
-  jsx-a11y/anchor-is-valid: 
+  react/prefer-stateless-function: ['warn']
+  jsx-a11y/anchor-is-valid:
     - warn
     - components: ['Link']
       specialLink: ['To']
@@ -67,6 +69,7 @@ rules:
   # existing code. Some of them should be re-activated in the future.
   no-console: off
   no-shadow: off
+  nonblock-statement-body-position: off
   object-curly-spacing: off
   object-curly-newline: off
   object-property-newline: off

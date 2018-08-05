@@ -8,14 +8,15 @@ function getTagType(reputation) {
     return 'danger'
   else if (reputation < 50)
     return 'warning'
-  return 'success'
+  return 'normal'
 }
 
-const ScoreTag = ({reputation, size = "small", withIcon = false}) =>
-  <Tag type={getTagType(reputation)} size={size}>
+const ScoreTag = ({reputation, size = "small", withIcon = false}) => (
+  <Tag className="scoreTag" type={getTagType(reputation)} size={size}>
     { withIcon && <Icon name="star" style={{marginRight: 5, color: 'yellow'}}/> }
     { reputation }
   </Tag>
+)
 
 
 export default ScoreTag
