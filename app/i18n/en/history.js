@@ -16,12 +16,23 @@ export default {
     3: 'Updated',
     4: 'Deleted',
     5: 'Added',
-    6: 'Reverted'
+    6: 'Reverted',
+    7: 'Approved',
+    8: 'Flagged',
+    9: 'Voted up',
+    10: 'Voted down',
+    11: 'Self voted',
+    12: 'Reverted upvote',
+    13: 'Reverted downvote',
+    14: 'Reverted self vote',
   },
   this: {
     1: 'Video',
     2: 'Speaker',
     3: 'Statement',
-    4: 'Comment'
+    4: 'Comment',
+    5: 'Fact',
+    6: 'Action',
+    7: 'User'
   }
 }

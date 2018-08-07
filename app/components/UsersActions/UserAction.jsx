@@ -12,7 +12,7 @@ import ActionIcon from './ActionIcon'
 @translate('history')
 export class UserAction extends React.PureComponent {
   render() {
-    const { action, className, t } = this.props
+    const { action, className, t, withoutDiff } = this.props
     const { user, type, entity, time } = action
 
     return (
@@ -30,7 +30,7 @@ export class UserAction extends React.PureComponent {
             { t(`this.${entity}`) }
           </span>
         </div>
-        <ActionDiff action={action}/>
+        {!withoutDiff && <ActionDiff action={action}/>}
       </div>
     )
   }
