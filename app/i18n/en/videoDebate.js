@@ -37,6 +37,7 @@ export default {
   speaker: {
     one: 'Speaker',
     remove: 'Remove speaker',
+    cantBeBlank: 'A speaker has to be provided',
     confirmRemove: 'All statements made by {{speaker.full_name}} on this video will become orphans',
     add: 'Add Speaker',
     create: 'Create speaker "{{name}}"',

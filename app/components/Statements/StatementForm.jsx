@@ -2,35 +2,36 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
+import { translate } from 'react-i18next'
 import SpeakersSelect from '../Speakers/SpeakersSelect'
 
 import { Icon, LinkWithIcon } from '../Utils'
 import TimeDisplay from '../Utils/TimeDisplay'
 import { renderTextareaField, validateFieldLength, cleanStrMultiline } from '../FormUtils'
 import { STATEMENT_LENGTH } from '../../constants'
-import { translate } from 'react-i18next'
 import { forcePosition } from '../../state/video_debate/video/reducer'
 import { decrementFormCount, incrementFormCount, setScrollTo, STATEMENT_FORM_NAME } from '../../state/video_debate/statements/reducer'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
+import Button from '../Utils/Button'
 
 
-@connect(({VideoDebate: {video, statements}}) => ({
+@connect(({ VideoDebate: { video, statements } }) => ({
   position: video.playback.position,
   speakers: video.data.speakers,
   submitting: statements.isSubmitting
-}), {forcePosition, setScrollTo, incrementFormCount, decrementFormCount})
-@reduxForm({form: STATEMENT_FORM_NAME})
+}), { forcePosition, setScrollTo, incrementFormCount, decrementFormCount })
+@reduxForm({ form: STATEMENT_FORM_NAME })
 @translate('videoDebate')
 export class StatementForm extends React.PureComponent {
   constructor(props) {
     super(props)
     const lockedTime = props.initialValues.time === undefined ? props.position : props.initialValues.time
-    this.state = {lockedTime}
+    this.state = { lockedTime }
   }
 
   componentDidMount() {
     this.props.incrementFormCount()
-    this.refs.container.scrollIntoView({behavior: 'smooth'})
+    this.refs.container.scrollIntoView({ behavior: 'smooth' })
   }
 
   componentWillUnmount() {
@@ -39,15 +40,15 @@ export class StatementForm extends React.PureComponent {
 
   toggleLock() {
     if (this.state.lockedTime === false)
-      this.setState({lockedTime: this.props.position || 0})
+      this.setState({ lockedTime: this.props.position || 0 })
     else
-      this.setState({lockedTime: false})
+      this.setState({ lockedTime: false })
   }
 
   moveTimeMarker(position) {
     this.props.forcePosition(position)
     if (this.state.lockedTime !== false)
-      this.setState({lockedTime: position})
+      this.setState({ lockedTime: position })
   }
 
   handleSubmit(statement) {
@@ -58,8 +59,8 @@ export class StatementForm extends React.PureComponent {
       statement.time = currentTime || 0
     if (!statement.speaker_id)
       statement.speaker_id = null
-    this.props.handleConfirm(statement).then(handleFormEffectResponse({
-      onSuccess: ({id}) => this.props.setScrollTo({id, __forceAutoScroll: true})
+    return this.props.handleConfirm(statement).then(handleFormEffectResponse({
+      onSuccess: ({ id }) => this.props.setScrollTo({ id, __forceAutoScroll: true })
     }))
   }
 
@@ -70,25 +71,24 @@ export class StatementForm extends React.PureComponent {
     const toggleTimeLockAction = this.state.lockedTime === false ? 'unlock' : 'lock'
 
     return (
-      <form className={classNames('statement-form', {'card statement': !this.props.isBundled})} ref="container">
+      <form className={classNames('statement-form', { 'card statement': !this.props.isBundled })} ref="container">
         <header className="card-header">
           <div className="card-header-title">
-            <a className="button" onClick={() => this.moveTimeMarker(currentTime - 1)}>
-              <Icon name="caret-left"/>
-            </a>
-            <TimeDisplay time={currentTime} handleClick={() => this.props.forcePosition(currentTime)}/>
-            <a className="button" onClick={() => this.moveTimeMarker(currentTime + 1)}>
-              <Icon name="caret-right"/>
-            </a>
-            <a
-              className="button"
-              title={t('statement.reverseTimeLock', {context: toggleTimeLockAction})}
+            <Button onClick={() => this.moveTimeMarker(currentTime - 1)} >
+              <Icon name="caret-left" />
+            </Button>
+            <TimeDisplay time={currentTime} handleClick={() => this.props.forcePosition(currentTime)} />
+            <Button onClick={() => this.moveTimeMarker(currentTime + 1)}>
+              <Icon name="caret-right" />
+            </Button>
+            <Button
+              title={t('statement.reverseTimeLock', { context: toggleTimeLockAction })}
               onClick={this.toggleLock.bind(this)}
             >
-              <Icon size="small" name={toggleTimeLockAction}/>
-            </a>
-            {speaker && speaker.picture && <img className="speaker-mini" src={speaker.picture}/>}
-            <Field name="speaker_id" component={SpeakersSelect} speakers={speakers} placeholder={t('speaker.add')}/>
+              <Icon size="small" name={toggleTimeLockAction} />
+            </Button>
+            {speaker && speaker.picture && <img className="speaker-mini" src={speaker.picture} />}
+            <Field name="speaker_id" component={SpeakersSelect} speakers={speakers} placeholder={t('speaker.add')} t={t} />
           </div>
         </header>
         <div className="card-content">

@@ -37,6 +37,7 @@ export default {
   speaker: {
     one: 'Intervenant·e',
     remove: 'Retirer l\'intervenant·e',
+    cantBeBlank: 'Un·e intervenant·e doit être séléctionné·e',
     confirmRemove: 'Toutes les déclarations de {{speaker.full_name}} sur cette vidéo vont devenir orphelines',
     add: 'Ajouter un·e intervenant·e',
     create: 'Créer l\'intervenant·e "{{name}}"',
