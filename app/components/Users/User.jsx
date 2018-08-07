@@ -102,8 +102,8 @@ export default class User extends React.PureComponent {
         <div className="tabs is-centered">
           <ul>
             {this.getActiveTab('', 'user-circle', 'menu.profile')}
-            {isSelf && this.getActiveTab('settings', 'cog', 'menu.settings')}
             {this.getActiveTab('activity', 'tasks', 'menu.activity')}
+            {isSelf && this.getActiveTab('settings', 'cog', 'menu.settings')}
           </ul>
         </div>
         { this.props.children }

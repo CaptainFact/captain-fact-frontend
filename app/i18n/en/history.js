@@ -17,7 +17,6 @@ export default {
     4: 'Deleted',
     5: 'Added',
     6: 'Reverted',
-    7: 'Approved',
     8: 'Flagged',
     9: 'Voted up',
     10: 'Voted down',
@@ -31,7 +30,7 @@ export default {
     2: 'Speaker',
     3: 'Statement',
     4: 'Comment',
-    5: 'Fact',
+    5: 'Sourced comment',
     6: 'Action',
     7: 'User'
   }

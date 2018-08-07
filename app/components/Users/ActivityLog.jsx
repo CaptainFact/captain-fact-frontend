@@ -4,29 +4,31 @@ import gql from 'graphql-tag'
 import { UserAction } from '../UsersActions/UserAction'
 
 
-const ActivityLog = () => (
-  <Query query={gql`
-    {
-      user(username: "coucou") {
-        actions {
+const QUERY = gql`
+  query UserActivityLog($username: String!) {
+    user(username: $username) {
+      actions {
+        id
+        type
+        entity
+        time
+        user {
           id
-          type
-          entity
-          user {
-            id
-            name
-            username
-          }
+          name
+          username
         }
       }
     }
-  `}
-  >
+  }
+`
+
+const ActivityLog = ({params: {username}}) => (
+  <Query query={QUERY} variables={{username}}>
     {({loading, data: {user}}) => (
       !loading && (
-        user.actions.map(a => (
-          <UserAction key={a.id} action={a} withoutDiff/>
-        ))
+        user.actions.map(a => {
+          return (<UserAction key={a.id} action={a} withoutDiff/>)
+        })
       )
     )}
   </Query>

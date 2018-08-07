@@ -16,12 +16,22 @@ export default {
     3: 'Mis à jour',
     4: 'Supprimé',
     5: 'Ajouté',
-    6: 'Restauré'
+    6: 'Restauré',
+    8: 'Signalé',
+    9: 'Voté positivement',
+    10: 'Voté négativement',
+    11: 'Voté pour lui-même',
+    12: 'Annulé son vote positif',
+    13: 'Annulé son vote négatif',
+    14: 'Annulé son vote pour lui-même',
   },
   this: {
     1: 'Vidéo',
     2: 'Intervenant',
     3: 'Affirmation',
-    4: 'Commentaire'
+    4: 'Commentaire',
+    5: 'Commentaire sourcé',
+    6: 'Action',
+    7: 'Utilisateur'
   }
 }
