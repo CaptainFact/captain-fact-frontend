@@ -14,8 +14,6 @@ export default {
     profile: 'Profil',
     activity: 'Activité',
     myActivity: 'Mon $t(menu.activity)',
-    bookmarks: 'Signets',
-    myBookmarks: 'Mes signets',
     content: 'Contenu',
     language: 'Langue',
     other: 'Autre',
