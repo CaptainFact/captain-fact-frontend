@@ -28,9 +28,9 @@ const ActivityLog = ({params: {username}}) => (
   <Query query={QUERY} variables={{username}} fetchPolicy="cache-and-network">
     {({loading, data: {user}}) => {
       const paginationMenu = (
-        <p className="panel-heading">
+        <div className="panel-heading">
           <PaginationMenu disabled={loading}/>
-        </p>
+        </div>
       )
 
       return (

@@ -10,6 +10,7 @@ export default {
   entity: 'Entity',
   moderation: 'Moderation',
   deletedUser: 'Deleted user',
+  madeAction: '{{action}}',
   action: {
     1: 'Created',
     2: 'Removed',
@@ -26,12 +27,12 @@ export default {
     14: 'Reverted self vote',
   },
   this: {
-    1: 'Video',
-    2: 'Speaker',
-    3: 'Statement',
-    4: 'Comment',
-    5: 'Sourced comment',
-    6: 'Action',
-    7: 'User'
+    1: 'video',
+    2: 'speaker',
+    3: 'statement',
+    4: 'comment',
+    5: 'sourced comment',
+    6: 'action',
+    7: 'user'
   }
 }
