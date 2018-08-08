@@ -1,7 +1,8 @@
 import React from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
-import { UserAction } from '../UsersActions/UserAction'
+import { Map } from 'immutable'
+import UserAction from '../UsersActions/UserAction'
 import PaginationMenu from '../Utils/PaginationMenu'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 
@@ -13,11 +14,13 @@ const QUERY = gql`
         id
         type
         entity
+        entityId
         time
-        user {
-          id
-          name
+        changes
+        context
+        targetUser {
           username
+          name
         }
       }
     }
@@ -38,9 +41,13 @@ const ActivityLog = ({params: {username}}) => (
           {paginationMenu}
           {loading
             ? <div className="panel-block"><LoadingFrame /></div>
-            : user.actions.map(a => {
-              return (<UserAction key={a.id} action={a} withoutDiff withoutUser/>)
-            })
+            : user.actions.map(a => (
+              <UserAction
+                key={a.id}
+                action={{...a, changes: new Map(JSON.parse(a.changes))}}
+                withoutUser
+              />
+            ))
           }
           {paginationMenu}
         </div>

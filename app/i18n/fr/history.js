@@ -29,7 +29,7 @@ export default {
   this: {
     1: 'vidéo',
     2: 'intervenant',
-    3: 'affirmation',
+    3: 'citation',
     4: 'commentaire',
     5: 'commentaire sourcé',
     6: 'action',

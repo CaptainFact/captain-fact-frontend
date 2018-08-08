@@ -8,13 +8,18 @@ import {
   ENTITY_STATEMENT, ENTITY_VIDEO
 } from '../../constants'
 import formatSeconds from '../../lib/seconds_formatter'
-import EntityTitle from './EntityTitle'
+import EntityLink from './EntityLink'
 
 
 class ActionDiff extends PureComponent {
   render() {
     const allActions = this.props.allActions || new List([this.props.action])
     const diff = this.generateDiff(allActions, this.props.action)
+
+    if (diff.size === 0) {
+      return null
+    }
+
     return (
       <div className="action-diff">
         {diff.entrySeq().map(([key, changes]) => (
@@ -22,9 +27,9 @@ class ActionDiff extends PureComponent {
             <div className="diff-key">
               { titleCase(this.formatChangeKey(key)) }&nbsp;
             </div>
-            <pre className="diff-view">
+            <span className="diff-view">
               { this.renderKeyDiff(key, changes) }
-            </pre>
+            </span>
           </div>
         ))}
       </div>
@@ -45,7 +50,8 @@ class ActionDiff extends PureComponent {
     return changes.map((change, idx) => (
       <span
         key={idx}
-        className={change.added ? 'added' : change.removed ? 'removed' : ''}>
+        className={change.added ? 'added' : change.removed ? 'removed' : ''}
+      >
         { this.formatChangeValue(change.value, key) }
       </span>
     ))
@@ -57,13 +63,12 @@ class ActionDiff extends PureComponent {
 
   formatChangeValue(value, key) {
     if (key === 'speaker_id')
-      return <EntityTitle entity={ENTITY_SPEAKER} entityId={value} withPrefix={false}/>
+      return <EntityLink entity={ENTITY_SPEAKER} entityId={value} withPrefix={false}/>
     return value
   }
 
   generateDiff(allActions, action) {
-    const entityActions = allActions.filter(a =>
-      a.entity_id === action.entity_id && a.entity === action.entity
+    const entityActions = allActions.filter(a => a.entity_id === action.entity_id && a.entity === action.entity
     )
     const actionIdx = entityActions.findIndex(a => a.id === action.id)
     // Get previous state
@@ -83,7 +88,7 @@ class ActionDiff extends PureComponent {
   getActionChanges(action, prevState) {
     if ([ACTION_DELETE, ACTION_REMOVE].includes(action.type))
       return prevState.map(() => null)
-    else if (action.type === ACTION_RESTORE)
+    if (action.type === ACTION_RESTORE)
       return prevState
     return action.changes
   }
@@ -112,9 +117,9 @@ class ActionDiff extends PureComponent {
     const entity = actions.first().entity
     if (entity === ENTITY_STATEMENT)
       return this.buildReferenceStatement(actions, base)
-    else if (entity === ENTITY_SPEAKER)
+    if (entity === ENTITY_SPEAKER)
       return this.buildReferenceSpeaker(actions, base)
-    else if (entity === ENTITY_VIDEO || entity === ENTITY_COMMENT)
+    if (entity === ENTITY_VIDEO || entity === ENTITY_COMMENT)
       return new Map()
   }
 
@@ -152,9 +157,9 @@ class ActionDiff extends PureComponent {
     if (!value)
       return value
     // Format time like 0:42 -> 1:35
-    else if (key === 'time')
+    if (key === 'time')
       return value ? formatSeconds(value) : ''
-    else if (key === 'source' || key === 'url')
+    if (key === 'source' || key === 'url')
       return <a href={value} target="_blank">{value}</a>
     return value
   }
