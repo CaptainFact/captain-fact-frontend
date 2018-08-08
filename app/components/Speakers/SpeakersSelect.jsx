@@ -1,3 +1,4 @@
+import classnames from 'classnames'
 import React from 'react'
 import Select from 'react-select'
 
@@ -6,7 +7,7 @@ const SpeakersSelect = ({ input, speakers, placeholder, meta, t }) => {
   return (
     <div className="level columns">
       <Select
-        className={`speaker-select level-item column${meta.error ? ' is-danger' : ''}`}
+        className={classnames('speaker select level-item column', { ' is-danger': meta.error })}
         onChange={s => (s && s.id ? input.onChange(s.id) : input.onChange(null))}
         onBlur={() => input.onBlur(input.value.id)}
         value={input.value}
