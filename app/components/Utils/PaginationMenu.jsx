@@ -4,11 +4,12 @@ import classNames from 'classnames'
 import Button from './Button'
 
 
-const PaginationLink = ({label, isCurrent = false}) => (
+const PaginationLink = ({label, isCurrent = false, ...props}) => (
   <li>
     <Button
       className={classNames('pagination-link', {'is-current': isCurrent})}
       aria-label={`Go to page ${label}`}
+      {...props}
     >
       {label}
     </Button>
@@ -19,18 +20,22 @@ const PaginationEllipsis = () => (
   <li><span className="pagination-ellipsis">&hellip;</span></li>
 )
 
-const PaginationMenu = () => (
+const PaginationMenu = ({disabled}) => (
   <nav className="pagination is-centered" role="navigation" aria-label="pagination">
-    <Button className="pagination-previous">Previous</Button>
-    <Button className="pagination-next">Next page</Button>
+    <Button disabled={disabled} className="pagination-previous">
+      Previous
+    </Button>
+    <Button disabled={disabled} className="pagination-next">
+      Next page
+    </Button>
     <ul className="pagination-list">
-      <PaginationLink label="1"/>
+      <PaginationLink disabled={disabled} label="1"/>
       <PaginationEllipsis/>
-      <PaginationLink label="45"/>
-      <PaginationLink label="46" isCurrent/>
-      <PaginationLink label="47"/>
+      <PaginationLink disabled={disabled} label="45"/>
+      <PaginationLink disabled={disabled} label="46" isCurrent/>
+      <PaginationLink disabled={disabled} label="47"/>
       <PaginationEllipsis/>
-      <PaginationLink label="86"/>
+      <PaginationLink disabled={disabled} label="86"/>
     </ul>
   </nav>
 )

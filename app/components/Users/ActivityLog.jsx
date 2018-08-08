@@ -3,6 +3,7 @@ import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import { UserAction } from '../UsersActions/UserAction'
 import PaginationMenu from '../Utils/PaginationMenu'
+import { LoadingFrame } from '../Utils/LoadingFrame'
 
 
 const QUERY = gql`
@@ -25,21 +26,26 @@ const QUERY = gql`
 
 const ActivityLog = ({params: {username}}) => (
   <Query query={QUERY} variables={{username}} fetchPolicy="cache-and-network">
-    {({loading, data: {user}}) => (
-      !loading && (
+    {({loading, data: {user}}) => {
+      const paginationMenu = (
+        <p className="panel-heading">
+          <PaginationMenu disabled={loading}/>
+        </p>
+      )
+
+      return (
         <div className="activity-log container">
-          <p className="panel-heading">
-            <PaginationMenu/>
-          </p>
-          {user.actions.map(a => {
-            return (<UserAction key={a.id} action={a} withoutDiff withoutUser/>)
-          })}
-          <p className="panel-heading">
-            <PaginationMenu/>
-          </p>
+          {paginationMenu}
+          {loading
+            ? <div className="panel-block"><LoadingFrame /></div>
+            : user.actions.map(a => {
+              return (<UserAction key={a.id} action={a} withoutDiff withoutUser/>)
+            })
+          }
+          {paginationMenu}
         </div>
       )
-    )}
+    }}
   </Query>
 )
 
