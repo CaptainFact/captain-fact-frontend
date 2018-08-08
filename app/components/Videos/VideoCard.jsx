@@ -8,7 +8,7 @@ import CardLayout from '../Utils/CardLayout'
 import RawIcon from '../Utils/RawIcon'
 
 
-@translate('main')
+@translate('videoDebate')
 export class VideoCard extends React.PureComponent {
   render() {
     const { t, video } = this.props
@@ -49,26 +49,23 @@ export class VideoCard extends React.PureComponent {
           &nbsp;
           <TimeSince time={posted_at}/>
         </div>
-        {speakers.size > 0 && 
-          this.renderSpeakersList(speakers, t)
+        {speakers.size > 0
+          && this.renderSpeakersList(speakers, t)
         }
       </div>
     )
   }
 
-  renderAddedByLabel(is_partner, t) {
-    if (is_partner) {
-      return (
-        <span>
-          <Icon name="star" />
-          <span>{t('videoDebate:video.addedByParner')}</span>
-        </span>
-      )
-    }
-    return (
-      <span>
+  renderAddedByLabel(isPartner, t) {
+    return isPartner ? (
+      <span className="added-by">
+        <Icon name="star" />
+        <strong>{t('video.addedBy', {userType: '$t(video.partner)'})}</strong>
+      </span>
+    ) : (
+      <span className="added-by">
         <Icon name="user" />
-        <span>{t('videoDebate:video.addedByUser')}</span>
+        <span>{t('video.addedBy', {userType: '$t(video.user)'})}</span>
       </span>
     )
   }
@@ -88,7 +85,7 @@ export class VideoCard extends React.PureComponent {
     return (
       <div className="speakers-list">
         <Icon name="users"/>
-        { t('misc.staring') }
+        { t('main:misc.staring') }
         &nbsp;
         { speakerComponentsList }
       </div>
