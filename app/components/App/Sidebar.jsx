@@ -113,7 +113,7 @@ export default class Sidebar extends React.PureComponent {
     return (
       <aside
         id="sidebar"
-        className={`menu ${className} ${sidebarExpended ? 'expended' : ''}`}
+        className={classNames('menu', className, {expended: sidebarExpended})}
       >
         <div className="logo-banner">
           <div className="menu-collapse-button" onClick={() => this.props.toggleSidebar()}>
