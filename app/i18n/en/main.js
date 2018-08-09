@@ -64,6 +64,10 @@ export default {
     placeholder: 'Video URL',
     analysing: 'Analysing video'
   },
+  pagination: {
+    prev: 'Previous page',
+    next: 'Next page'
+  },
   all: 'All',
   partners: 'Partners',
   users: 'Users',

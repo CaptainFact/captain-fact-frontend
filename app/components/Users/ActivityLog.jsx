@@ -2,6 +2,8 @@ import React from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Map } from 'immutable'
+import { translate } from 'react-i18next'
+
 import UserAction from '../UsersActions/UserAction'
 import PaginationMenu from '../Utils/PaginationMenu'
 import { LoadingFrame } from '../Utils/LoadingFrame'
@@ -46,7 +48,7 @@ const renderPaginationMenu = (loading, user, fetchMore) => (
   </div>
 )
 
-const ActivityLog = ({params: {username}}) => (
+const ActivityLog = ({params: {username}, t}) => (
   <Query
     query={QUERY}
     variables={{username, offset: 1, limit: 10}}
@@ -54,7 +56,7 @@ const ActivityLog = ({params: {username}}) => (
   >
     {({loading, data: {user}, fetchMore}) => {
       if (!loading && user.actions.entries.length === 0) {
-        return (<MessageView>No activity yet</MessageView>)
+        return (<MessageView>{t('noActivity')}</MessageView>)
       }
 
       const paginationMenu = renderPaginationMenu(loading, user, fetchMore)
@@ -78,4 +80,4 @@ const ActivityLog = ({params: {username}}) => (
   </Query>
 )
 
-export default ActivityLog
+export default translate('user')(ActivityLog)

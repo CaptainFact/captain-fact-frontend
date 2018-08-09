@@ -27,5 +27,6 @@ export default {
   newsletter: {
     unsubscribe_success: 'You\'ve been unsubscribed from our newsletter',
     unsubscribe_error: 'Given token seems invalid. If the problem persist, contact us'
-  }
+  },
+  noActivity: 'No action recorded yet.'
 }

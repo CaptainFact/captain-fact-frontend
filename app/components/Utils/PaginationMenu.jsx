@@ -1,6 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 
+import translate from 'react-i18next/dist/commonjs/translate';
 import Button from './Button'
 
 
@@ -38,21 +39,21 @@ const pageSelectButtonsList = (nbStart, nbEnd, disabled, onPageChange) => {
   )
 }
 
-const PaginationMenu = ({disabled, currentPage, total, onPageChange}) => (
+const PaginationMenu = ({disabled, currentPage, total, onPageChange, t}) => (
   <nav className="pagination is-centered" role="navigation" aria-label="pagination">
     <Button
       onClick={() => onPageChange(currentPage - 1)}
       disabled={disabled || currentPage === 1}
       className="pagination-previous"
     >
-      Previous
+      {t('pagination.prev')}
     </Button>
     <Button
       onClick={() => onPageChange(currentPage + 1)}
       disabled={disabled || currentPage === total}
       className="pagination-next"
     >
-      Next page
+      {t('pagination.next')}
     </Button>
     <ul className="pagination-list">
       {pageSelectButtonsList(1, currentPage - 1, disabled, onPageChange)}
@@ -62,4 +63,4 @@ const PaginationMenu = ({disabled, currentPage, total, onPageChange}) => (
   </nav>
 )
 
-export default PaginationMenu
+export default translate('main')(PaginationMenu)
