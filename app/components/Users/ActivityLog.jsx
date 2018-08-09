@@ -5,6 +5,7 @@ import { Map } from 'immutable'
 import UserAction from '../UsersActions/UserAction'
 import PaginationMenu from '../Utils/PaginationMenu'
 import { LoadingFrame } from '../Utils/LoadingFrame'
+import MessageView from '../Utils/MessageView'
 
 
 const QUERY = gql`
@@ -31,6 +32,20 @@ const QUERY = gql`
   }
 `
 
+const renderPaginationMenu = (loading, user, fetchMore) => (
+  <div className="panel-heading">
+    <PaginationMenu
+      disabled={loading}
+      currentPage={user ? user.actions.pageNumber : 1}
+      total={user ? user.actions.totalPages : 1}
+      onPageChange={selectedPage => fetchMore({
+        variables: {offset: selectedPage},
+        updateQuery: (_, {fetchMoreResult}) => fetchMoreResult
+      })}
+    />
+  </div>
+)
+
 const ActivityLog = ({params: {username}}) => (
   <Query
     query={QUERY}
@@ -38,20 +53,11 @@ const ActivityLog = ({params: {username}}) => (
     fetchPolicy="cache-and-network"
   >
     {({loading, data: {user}, fetchMore}) => {
-      const paginationMenu = (
-        <div className="panel-heading">
-          <PaginationMenu
-            disabled={loading}
-            currentPage={user ? user.actions.pageNumber : 1}
-            total={user ? user.actions.totalPages : 1}
-            onPageChange={selectedPage => fetchMore({
-              variables: {offset: selectedPage},
-              updateQuery: (_, {fetchMoreResult}) => fetchMoreResult
-            })}
-          />
-        </div>
-      )
+      if (!loading && user.actions.entries.length === 0) {
+        return (<MessageView>No activity yet</MessageView>)
+      }
 
+      const paginationMenu = renderPaginationMenu(loading, user, fetchMore)
       return (
         <div className="activity-log container">
           {paginationMenu}

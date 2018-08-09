@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { translate } from 'react-i18next'
 import classNames from 'classnames'
-
 import capitalize from 'voca/capitalize'
+
 import { Icon } from '../Utils'
 import { MOBILE_WIDTH_THRESHOLD, USER_PICTURE_SMALL, MIN_REPUTATION_MODERATION } from '../../constants'
 import { LoadingFrame } from '../Utils/LoadingFrame'
