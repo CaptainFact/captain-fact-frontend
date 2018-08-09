@@ -10,17 +10,21 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
 const QUERY = gql`
   query UserActivityLog($username: String!) {
     user(username: $username) {
-      actions {
-        id
-        type
-        entity
-        entityId
-        time
-        changes
-        context
-        targetUser {
-          username
-          name
+      actions(limit: 10, offset: 0) {
+        pageNumber
+        totalPages
+        entries {
+          id
+          type
+          entity
+          entityId
+          time
+          changes
+          context
+          targetUser {
+            username
+            name
+          }
         }
       }
     }
@@ -32,7 +36,11 @@ const ActivityLog = ({params: {username}}) => (
     {({loading, data: {user}}) => {
       const paginationMenu = (
         <div className="panel-heading">
-          <PaginationMenu disabled={loading}/>
+          <PaginationMenu
+            disabled={loading}
+            currentPage={user ? user.actions.pageNumber : 1}
+            total={user ? user.actions.totalPages : 1}
+          />
         </div>
       )
 
@@ -41,7 +49,7 @@ const ActivityLog = ({params: {username}}) => (
           {paginationMenu}
           {loading
             ? <div className="panel-block"><LoadingFrame /></div>
-            : user.actions.map(a => (
+            : user.actions.entries.map(a => (
               <UserAction
                 key={a.id}
                 action={{...a, changes: new Map(JSON.parse(a.changes))}}

@@ -62,7 +62,7 @@ class ActionDiff extends PureComponent {
   }
 
   formatChangeValue(value, key) {
-    if (key === 'speaker_id')
+    if (key === 'speaker_id' && value)
       return <EntityLink entity={ENTITY_SPEAKER} entityId={value} withPrefix={false}/>
     return value
   }

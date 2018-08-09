@@ -7,6 +7,7 @@
     "dev": "webpack-dashboard -- webpack-dev-server",
     "serve": "webpack-dashboard -- webpack-dev-server",
     "start": "webpack-dashboard -- webpack-dev-server",
+    "start_simple": "webpack-dev-server",
     "watch": "jest --watch",
     "test": "jest",
     "wtest": "jest --watch",

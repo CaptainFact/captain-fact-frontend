@@ -20,22 +20,33 @@ const PaginationEllipsis = () => (
   <li><span className="pagination-ellipsis">&hellip;</span></li>
 )
 
-const PaginationMenu = ({disabled}) => (
+const pageSelectButtonsList = (nbStart, nbEnd, disabled) => {
+  if (nbStart > nbEnd) {
+    return null
+  } if (nbStart === nbEnd) {
+    return <PaginationLink label={nbStart} disabled={disabled}/>
+  }
+  return (
+    <React.Fragment>
+      <PaginationLink label={nbStart} disabled={disabled}/>
+      {nbStart + 1 <= nbEnd && <PaginationEllipsis/>}
+      <PaginationLink label={nbEnd} disabled={disabled}/>
+    </React.Fragment>
+  )
+}
+
+const PaginationMenu = ({disabled, currentPage, total}) => (
   <nav className="pagination is-centered" role="navigation" aria-label="pagination">
-    <Button disabled={disabled} className="pagination-previous">
+    <Button disabled={disabled || currentPage === 1} className="pagination-previous">
       Previous
     </Button>
-    <Button disabled={disabled} className="pagination-next">
+    <Button disabled={disabled || currentPage === total} className="pagination-next">
       Next page
     </Button>
     <ul className="pagination-list">
-      <PaginationLink disabled={disabled} label="1"/>
-      <PaginationEllipsis/>
-      <PaginationLink disabled={disabled} label="45"/>
-      <PaginationLink disabled={disabled} label="46" isCurrent/>
-      <PaginationLink disabled={disabled} label="47"/>
-      <PaginationEllipsis/>
-      <PaginationLink disabled={disabled} label="86"/>
+      {pageSelectButtonsList(1, currentPage - 1, disabled)}
+      <PaginationLink disabled={disabled} label={currentPage} isCurrent/>
+      {pageSelectButtonsList(currentPage + 1, total, disabled)}
     </ul>
   </nav>
 )
