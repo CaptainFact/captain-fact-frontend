@@ -4,49 +4,60 @@ import classNames from 'classnames'
 import Button from './Button'
 
 
-const PaginationLink = ({label, isCurrent = false, ...props}) => (
+const PAGINATION_ELLIPSIS = (
+  <li><span className="pagination-ellipsis">&hellip;</span></li>
+)
+
+const makeLink = (page, disabled, onPageChange = null, isCurrent = false) => (
   <li>
     <Button
       className={classNames('pagination-link', {'is-current': isCurrent})}
-      aria-label={`Go to page ${label}`}
-      {...props}
+      disabled={disabled}
+      aria-label={`Go to page ${page}`}
+      onClick={onPageChange && (() => onPageChange(page))}
     >
-      {label}
+      {page}
     </Button>
   </li>
 )
 
-const PaginationEllipsis = () => (
-  <li><span className="pagination-ellipsis">&hellip;</span></li>
-)
-
-const pageSelectButtonsList = (nbStart, nbEnd, disabled) => {
+const pageSelectButtonsList = (nbStart, nbEnd, disabled, onPageChange) => {
   if (nbStart > nbEnd) {
     return null
-  } if (nbStart === nbEnd) {
-    return <PaginationLink label={nbStart} disabled={disabled}/>
+  }
+
+  if (nbStart === nbEnd) {
+    return makeLink(nbStart, disabled, onPageChange)
   }
   return (
     <React.Fragment>
-      <PaginationLink label={nbStart} disabled={disabled}/>
-      {nbStart + 1 <= nbEnd && <PaginationEllipsis/>}
-      <PaginationLink label={nbEnd} disabled={disabled}/>
+      {makeLink(nbStart, disabled, onPageChange)}
+      {nbStart + 1 <= nbEnd && PAGINATION_ELLIPSIS}
+      {makeLink(nbEnd, disabled, onPageChange)}
     </React.Fragment>
   )
 }
 
-const PaginationMenu = ({disabled, currentPage, total}) => (
+const PaginationMenu = ({disabled, currentPage, total, onPageChange}) => (
   <nav className="pagination is-centered" role="navigation" aria-label="pagination">
-    <Button disabled={disabled || currentPage === 1} className="pagination-previous">
+    <Button
+      onClick={() => onPageChange(currentPage - 1)}
+      disabled={disabled || currentPage === 1}
+      className="pagination-previous"
+    >
       Previous
     </Button>
-    <Button disabled={disabled || currentPage === total} className="pagination-next">
+    <Button
+      onClick={() => onPageChange(currentPage + 1)}
+      disabled={disabled || currentPage === total}
+      className="pagination-next"
+    >
       Next page
     </Button>
     <ul className="pagination-list">
-      {pageSelectButtonsList(1, currentPage - 1, disabled)}
-      <PaginationLink disabled={disabled} label={currentPage} isCurrent/>
-      {pageSelectButtonsList(currentPage + 1, total, disabled)}
+      {pageSelectButtonsList(1, currentPage - 1, disabled, onPageChange)}
+      {makeLink(currentPage, disabled, null, true)}
+      {pageSelectButtonsList(currentPage + 1, total, disabled, onPageChange)}
     </ul>
   </nav>
 )

@@ -8,9 +8,9 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
 
 
 const QUERY = gql`
-  query UserActivityLog($username: String!) {
+  query UserActivityLog($username: String!, $offset: Int!, $limit: Int!) {
     user(username: $username) {
-      actions(limit: 10, offset: 0) {
+      actions(limit: $limit, offset: $offset) {
         pageNumber
         totalPages
         entries {
@@ -32,14 +32,22 @@ const QUERY = gql`
 `
 
 const ActivityLog = ({params: {username}}) => (
-  <Query query={QUERY} variables={{username}} fetchPolicy="cache-and-network">
-    {({loading, data: {user}}) => {
+  <Query
+    query={QUERY}
+    variables={{username, offset: 1, limit: 10}}
+    fetchPolicy="cache-and-network"
+  >
+    {({loading, data: {user}, fetchMore}) => {
       const paginationMenu = (
         <div className="panel-heading">
           <PaginationMenu
             disabled={loading}
             currentPage={user ? user.actions.pageNumber : 1}
             total={user ? user.actions.totalPages : 1}
+            onPageChange={selectedPage => fetchMore({
+              variables: {offset: selectedPage},
+              updateQuery: (_, {fetchMoreResult}) => fetchMoreResult
+            })}
           />
         </div>
       )
