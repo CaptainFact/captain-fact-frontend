@@ -12,7 +12,7 @@ export default {
   registeredUsers: 'utilisateurs inscrits',
   verifiedStatements: 'citations vérifiées',
   contributors: 'Contributeurs',
-  seeAllContributors: 'Voir tours les contributeurs sur OpenCollective',
+  seeAllContributors: 'Voir tous les contributeurs sur OpenCollective',
   roles: {
     ambassador: 'Ambassadeur',
     ambassadorPadawan: 'Ambassadeur Padawan',
