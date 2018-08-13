@@ -1,4 +1,5 @@
 /* ------ Server & API ------ */
+
 // Channels
 export const VIDEO_DEBATE_CHANNEL = 'video_debate'
 export const VIDEO_DEBATE_HISTORY_CHANNEL = 'video_debate_history'
@@ -43,6 +44,7 @@ export const MIN_REPUTATION_MODERATION = 125
 
 
 /* ------ UI, animations ------ */
+
 export const MOBILE_WIDTH_THRESHOLD = 768 // pixels
 
 export const USER_PICTURE_SMALL = 24
@@ -55,7 +57,11 @@ export const STATEMENT_FOCUS_TIME = 30 // seconds
 // Flash messages duration
 export const DEFAULT_FLASH_DURATION = 6000 // milliseconds
 
+// Above this nesting, comments will be automatically collapsed
+export const COLLAPSE_REPLIES_AT_NESTING = 2
+
 /* ------ Forms ------ */
+
 // User
 export const PASSWORD_LENGTH = [6, 255]
 export const USERNAME_LENGTH = [5, 15]
