@@ -47,7 +47,9 @@ export default class ModalFlag extends React.PureComponent {
   renderConfirmText(t, flagsAvailable) {
     return (
       <span>
-        {t('main:actions.flag')} <small>({t('flagForm.xAvailable', {count: flagsAvailable})})</small>
+        {t('main:actions.flag')} {flagsAvailable === -1 ? null : (
+          <small>({t('flagForm.xAvailable', {count: flagsAvailable})})</small>
+        )}
       </span>
     )
   }
