@@ -77,12 +77,11 @@ export class SpeakerPage extends React.PureComponent {
   renderWikidata() {
     if (this.props.wikiLoading)
       return '...'
-    return [
-      this.renderLink(this.props.links.wikipedia, 'Wikipedia'),
-      this.renderLink(this.props.links.wikimedia, 'Wikimedia'),
-      this.renderLink(this.props.links.wikiquote, 'Wikiquote'),
-      this.renderLink(this.props.links.wikinews, 'Wikinews'),
-    ]
+    return (
+      <React.Fragment>
+        {this.renderLink(this.props.links.wikipedia, 'Wikipedia')}
+      </React.Fragment>
+    )
   }
 
   renderVideos() {
@@ -95,8 +94,8 @@ export class SpeakerPage extends React.PureComponent {
     if (!url)
       return null
     return (
-      <ExternalLinkNewTab href={url} key={url} className="link-with-icon">
-        <Icon name="link" /> <span>{siteName}</span>
+      <ExternalLinkNewTab href={url} className="link-with-icon">
+        <Icon name="external-link" /> <span>{siteName}</span>
       </ExternalLinkNewTab>
     )
   }
