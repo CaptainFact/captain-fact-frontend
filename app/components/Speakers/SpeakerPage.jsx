@@ -77,11 +77,7 @@ export class SpeakerPage extends React.PureComponent {
   renderWikidata() {
     if (this.props.wikiLoading)
       return '...'
-    return (
-      <React.Fragment>
-        {this.renderLink(this.props.links.wikipedia, 'Wikipedia')}
-      </React.Fragment>
-    )
+    return this.renderLink(this.props.links.wikipedia, 'Wikipedia')
   }
 
   renderVideos() {
