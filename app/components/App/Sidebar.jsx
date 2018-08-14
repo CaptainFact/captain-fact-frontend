@@ -123,8 +123,6 @@ export default class Sidebar extends React.PureComponent {
 
         <div className="menu-content">
           { this.renderUserSection() }
-          <p className="menu-label">{ t('menu.content') }</p>
-          {this.renderMenuContent()}
           <p className="menu-label hide-when-collapsed">{ t('menu.language') }</p>
           <LanguageSelector
             className="hide-when-collapsed"
@@ -133,7 +131,8 @@ export default class Sidebar extends React.PureComponent {
             size="small"
             withIcon
           />
-
+          <p className="menu-label">{ t('menu.content') }</p>
+          {this.renderMenuContent()}
           <p className="menu-label">{ t('menu.other') }</p>
           <ul className="menu-list">
             <li>

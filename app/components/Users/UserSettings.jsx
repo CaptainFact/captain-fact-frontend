@@ -3,88 +3,74 @@ import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 
 import { facebookAuthUrl } from '../../lib/third_party_auth'
-import {deleteAccount, unlinkProvider} from '../../state/users/current_user/effects'
+import {deleteAccount} from '../../state/users/current_user/effects'
 import { addModal } from '../../state/modals/reducer'
 import DeleteUserModal from './DeleteUserModal'
 import EditUserForm from './EditUserForm'
 import { LoadingFrame } from '../Utils/LoadingFrame'
+import Button from '../Utils/Button'
+import ThirdPartyAccountLinker from './ThirdPartyAccountLinker'
+import LanguageSelector from '../App/LanguageSelector'
+import i18n from '../../i18n/i18n'
 
 
-@connect(null, {unlinkProvider})
-@translate('user')
-class ThirdPartyAccountLinker extends React.PureComponent {
-  render() {
-    return (
-      <div className="field has-addons" style={{width: 200, margin: 'auto'}}>
-        <div className="control">
-          <div className="linked-account-title">
-            {this.props.title}
-          </div>
-        </div>
-        <div className="control">
-          {this.props.isLinked ? this.renderUnlinkAccount() : this.renderLinkAccount()}
-        </div>
-      </div>
-    )
-  }
+const mapStateToProps = state => ({
+  user: state.CurrentUser.data,
+  isLoading: state.CurrentUser.isLoading || state.CurrentUser.isPosting
+})
 
-  renderLinkAccount() {
-    return (
-      <a type="submit" className="button" href={this.props.authUrl}>
-        {this.props.t('linkAccount')}
-      </a>
-    )
-  }
+const mapDispatchToProps = {deleteAccount, addModal}
 
-  renderUnlinkAccount() {
-    return (
-      <button type="submit" className="button is-danger" onClick={() => this.props.unlinkProvider(this.props.provider)}>
-        {this.props.t('unlinkAccount')}
-      </button>
-    )
-  }
-}
-
-@connect(state =>
-  ({user: state.CurrentUser.data, isLoading: state.CurrentUser.isLoading || state.CurrentUser.isPosting}),
-  {deleteAccount, addModal}
-)
+@connect(mapStateToProps, mapDispatchToProps)
 @translate('user')
 export default class UserSettings extends React.PureComponent {
   render() {
-    if (this.props.isLoading)
-      return <LoadingFrame/>
-    return (
+    const {t, deleteAccount, addModal, user} = this.props
+
+    return this.props.isLoading ? (<LoadingFrame/>) : (
       <div className="section">
         <div className="has-text-centered">
-          <h3 className="title is-3">{this.props.t('main:menu.settings')}</h3>
+          <h3 className="title is-3">{t('accountSettings')}</h3>
         </div>
         <EditUserForm/>
         <br/>
         <hr/>
-        <br/>
         <div className="has-text-centered">
-          <h3 className="title is-3">{this.props.t('linkedAccounts')}</h3>
-          <ThirdPartyAccountLinker
-            provider="facebook"
-            title="Facebook"
-            isLinked={!!this.props.user.fb_user_id}
-            authUrl={facebookAuthUrl()}
+          <h3 className="title is-3">{t('main:menu.language')}</h3>
+          <LanguageSelector
+            className="hide-when-collapsed"
+            handleChange={v => i18n.changeLanguage(v)}
+            value={i18n.language}
+            size="medium"
+            withIcon
           />
         </div>
         <br/>
         <hr/>
         <br/>
         <div className="has-text-centered">
-          <h3 className="title is-3">{this.props.t('dangerZone')}</h3>
-          <button
-            className="button is-danger"
-            onClick={() => this.props.addModal({
+          <h3 className="title is-3">{t('linkedAccounts')}</h3>
+          <ThirdPartyAccountLinker
+            provider="facebook"
+            title="Facebook"
+            isLinked={!!user.fb_user_id}
+            authURL={facebookAuthUrl()}
+          />
+        </div>
+        <br/>
+        <hr/>
+        <br/>
+        <div className="has-text-centered">
+          <h3 className="title is-3">{t('dangerZone')}</h3>
+          <Button
+            className="is-danger"
+            onClick={() => addModal({
               Modal: DeleteUserModal,
-              props: { handleConfirm: () => this.props.deleteAccount() }
+              props: { handleConfirm: () => deleteAccount() }
             })}
-          >{this.props.t('deleteAccount')}
-          </button>
+          >
+            {t('deleteAccount')}
+          </Button>
         </div>
       </div>
     )
