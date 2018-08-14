@@ -1,17 +1,19 @@
 $border-color: lightgrey
 
 #sidebar
+  position: fixed
+  height: 100vh
+  top: 0
+  left: 0
+  width: $sidebar_width
   background: $white-bis
   overflow-y: auto
   overflow-x: hidden
   z-index: 999
   box-shadow: -15px 0px 40px -14px rgba(173, 173, 173, .3) inset
-  height: 100vh
-  top: 0
-  width: $sidebar_width
   border-right: 1px solid #e8e8e8
   +tablet
-    transition: width 0.15s
+    transition: width $sidebar_collapse_transition_duration
   +mobile
     width: 100vw
   @media screen and (max-height: 600px)
@@ -78,11 +80,11 @@ $border-color: lightgrey
       margin-right: 5px
 
   .link-with-icon > i
-    transition: font-size 0.2s
+    transition: font-size $sidebar_collapse_transition_duration
     width: 20px
 
 #sidebar:not(.expended)
-  width: 60px
+  width: $sidebar_collapsed_width
   text-align: center
 
   @media screen and (max-width: 400px)

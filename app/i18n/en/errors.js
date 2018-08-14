@@ -21,6 +21,7 @@ export default {
     thirdParty: 'Third party authentication failed',
     submissionError: 'An error occurred while sending the data',
     noVideoAvailable: 'No video available',
-    notEnoughReputation: 'Not enough reputation to access this feature'
+    notEnoughReputation: 'Not enough reputation to access this feature',
+    needReputation: 'You need at least {{count}} {{reputationLink}} points to do that'
   }
 }
