@@ -51,6 +51,7 @@ $border-color: lightgrey
     @extend .is-fullwidth
 
   .user-quicklinks
+    margin-bottom: 0.5em
     figure.image, .title
       display: inline-block
       vertical-align: middle
@@ -78,8 +79,9 @@ $border-color: lightgrey
       margin-right: 5px
 
   .link-with-icon > i
-    transition: font-size 0.2s
     width: 20px
+    +desktop
+      transition: font-size 0.2s
 
 #sidebar:not(.expended)
   width: 60px
@@ -135,7 +137,7 @@ $border-color: lightgrey
       &> li > a.link-with-icon
         padding: 7px 0
         &> i
-          width: 30px
+          width: 100%
         &> span
           display: none
 
