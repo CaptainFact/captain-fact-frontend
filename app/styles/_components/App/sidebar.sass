@@ -2,7 +2,7 @@ $border-color: lightgrey
 
 #sidebar
   position: fixed
-  height: 100vh
+  height: 100%
   top: 0
   left: 0
   width: $sidebar_width
@@ -15,7 +15,7 @@ $border-color: lightgrey
   +tablet
     transition: width $sidebar_collapse_transition_duration
   +mobile
-    width: 100vw
+    width: 100%
   @media screen and (max-height: 600px)
     .user-links
       display: none
@@ -41,7 +41,7 @@ $border-color: lightgrey
       &:not(:hover)
         color: grey
 
-    @media screen and (max-width: 400px)
+    @media screen and (max-width: $sidebar_full_collapse_under)
       width: 100%
       .menu-collapse-button
         float: right
@@ -87,8 +87,9 @@ $border-color: lightgrey
   width: $sidebar_collapsed_width
   text-align: center
 
-  @media screen and (max-width: 400px)
+  @media screen and (max-width: $sidebar_full_collapse_under)
     position: fixed
+    left: auto
     right: 0
     z-index: 9
     height: inherit
