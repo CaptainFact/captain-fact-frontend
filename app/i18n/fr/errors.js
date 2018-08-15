@@ -1,4 +1,7 @@
 export default {
+  extension: {
+    alreadyInstalled: 'L\'extension est déjà installée dans votre navigateur !'
+  },
   title: 'Erreur',
   server: {
     unknown: 'Quelque chose a mal fonctionné de notre côté, on regarde ça !',

@@ -1,4 +1,7 @@
 export default {
+  extension: {
+    alreadyInstalled: 'The extension is already installed on your browser!'
+  },
   title: 'Error',
   server: {
     unknown: 'Something didn\'t work on our side, we\'ll check it out!',

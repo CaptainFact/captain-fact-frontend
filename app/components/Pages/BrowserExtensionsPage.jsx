@@ -4,6 +4,8 @@ import { Link } from 'react-router'
 import ReactPlayer from 'react-player'
 import Icon from '../Utils/Icon'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
+import { checkExtensionInstall } from '../Utils'
+import AlreadyInstalled from '../Utils/AlreadyInstalled'
 
 
 export const BrowserExtensionsPage = translate('extension')(({t}) => (
@@ -32,6 +34,7 @@ export const BrowserExtensionsPage = translate('extension')(({t}) => (
         />
       </div>
     </section>
+    <AlreadyInstalled/>
     <section className="section content has-text-centered box">
       <h2>
         {t('description')}
