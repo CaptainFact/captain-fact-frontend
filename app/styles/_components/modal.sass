@@ -6,6 +6,7 @@ $modal-background: rgba(10, 10, 10, 0.50)
 
 .modal
   z-index: 10000
+
   &.is-absolute
     position: absolute
   .modal-background
@@ -16,6 +17,8 @@ $modal-background: rgba(10, 10, 10, 0.50)
       font-size: 1.2em
   .modal-card-body
     font-size: 1em
+    +mobile
+      padding: 1em 0.1em
   .help-link
     margin-right: 5px
     color: #c6c6c6
@@ -23,6 +26,11 @@ $modal-background: rgba(10, 10, 10, 0.50)
       color: #aeaeae
 
 .modal-card
+  +mobile
+    margin: 0.25em
+    max-height: 100%
+
+
   @include animate(fadeInDown, 0.4s)
 
 .modal.is-small
@@ -47,6 +55,10 @@ $modal-background: rgba(10, 10, 10, 0.50)
   width: 100%
   .button
     @extend .is-large
+
+    +mobile
+      font-size: 1em
+
     width: 49%
     &:first-child
       margin-right: 1%
