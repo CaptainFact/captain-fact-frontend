@@ -4,63 +4,96 @@ import isEmail from 'validator/lib/isEmail'
 
 import { PASSWORD_LENGTH, USERNAME_LENGTH, NAME_LENGTH } from '../../constants'
 import { renderField, cleanStr, validateFieldLength } from '../FormUtils'
+import Button from '../Utils/Button'
 
 
-// Common validator for Signup / Login
+// Common validators for Signup / Login
+
 export const validatePasswordRepeat = ({password, passwordRepeat}) => {
   if (passwordRepeat !== password)
     return {passwordRepeat: "Passwords doesn't match"}
   return {}
 }
 
-const validateEmail = t => email =>
-  (!email || !isEmail(email)) && t('errors:server.invalid_email')
+const validateEmail = t => email => {
+  return (!email || !isEmail(email)) && t('errors:server.invalid_email')
+}
+
+const validatePassword = (t, password) => {
+  return validateFieldLength(t, password, PASSWORD_LENGTH)
+}
 
 // Common fields
-export const emailField = t =>
-  <Field name="email" placeholder={t('email')}
-         component={renderField}
-         icon="envelope"
-         normalize={s => s.trim()}
-         validate={validateEmail(t)}/>
 
-export const passwordField = (t, isOptional = false) =>
-  <Field name="password" placeholder={t(isOptional ? 'passwordOptional' : 'password')}
-         type="password" component={renderField}
-         validate={v => (!v && isOptional ? null : validateFieldLength(t, v, PASSWORD_LENGTH))}
-         icon="lock"/>
+export const emailField = t => (
+  <Field
+    name="email"
+    type="email"
+    placeholder={t('email')}
+    component={renderField}
+    icon="envelope"
+    normalize={s => s.trim()}
+    validate={validateEmail(t)}
+  />
+)
 
-export const passwordRepeatField = (t) =>
-  <Field name="passwordRepeat"
-         placeholder={t('repeatPassword')}
-         type="password"
-         component={renderField}
-         icon="lock"/>
+export const passwordField = (t, isOptional = false) => (
+  <Field
+    name="password"
+    placeholder={t(isOptional ? 'passwordOptional' : 'password')}
+    type="password"
+    component={renderField}
+    validate={v => (!v && isOptional ? null : validatePassword(t, v))}
+    icon="lock"
+  />
+)
 
-export const submitButton = (text, valid) =>
+export const passwordRepeatField = (t) => (
+  <Field
+    name="passwordRepeat"
+    placeholder={t('repeatPassword')}
+    type="password"
+    component={renderField}
+    icon="lock"
+  />
+)
+
+export const usernameField = (t) => (
+  <Field
+    name="username"
+    placeholder={t('username')}
+    component={renderField}
+    normalize={s => s.trim()}
+    icon="at"
+    validate={v => validateFieldLength(t, v, USERNAME_LENGTH)}
+  />
+)
+
+export const nameField = (t) => (
+  <Field
+    name="name"
+    placeholder={`${t('realName')} (${t('optional')})`}
+    component={renderField}
+    normalize={cleanStr}
+    icon="identity"
+    validate={v => v && validateFieldLength(t, v, NAME_LENGTH)}
+  />
+)
+
+export const submitButton = (text, valid) => (
   <p className="control">
-    <button type="submit" className="button is-success is-medium" disabled={!valid}>
+    <Button type="submit" className="is-success is-medium" disabled={!valid}>
       {text}
-    </button>
+    </Button>
   </p>
+)
 
 export const renderAllUserFields = (valid, t, isPasswdOptional = false) => (
   <div>
-    <Field name="username"
-           placeholder={t('username')}
-           component={renderField}
-           normalize={s => s.trim()}
-           icon="at"
-           validate={v => validateFieldLength(t, v, USERNAME_LENGTH)}/>
-    <Field name="name"
-           placeholder={`${t('realName')} (${t('optional')})`}
-           component={renderField}
-           normalize={cleanStr}
-           icon="identity"
-          validate={v => v && validateFieldLength(t, v, NAME_LENGTH)}/>
+    {usernameField(t)}
+    {nameField(t)}
     {emailField(t)}
     {passwordField(t, isPasswdOptional)}
     {passwordRepeatField(t)}
   </div>
 )
-
