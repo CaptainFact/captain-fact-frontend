@@ -13,7 +13,12 @@ const mapStateToProps = (state, {requiredRep}) => ({
   hasReputation: hasReputation(state, requiredRep)
 })
 
-const ReputationGuardTooltip = ({t, hasReputation, requiredRep, children}) => {
+export const ReputationGuardTooltip = ({
+  t,
+  hasReputation,
+  requiredRep,
+  children
+}) => {
   const childProps = {hasReputation}
   return hasReputation
     ? children(childProps)

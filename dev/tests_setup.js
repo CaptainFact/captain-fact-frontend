@@ -36,3 +36,21 @@ global.snapshotReducer = ((reducer, initialState, ...actions) => {
     return newState
   }, initialState)
 })
+
+/**
+ * This mock makes sure any components using the translate HoC
+ * receive the t function as a prop
+ */
+jest.mock('react-i18next', () => ({
+  Interpolate: ({i18nKey, ...props}) => (
+    `Interpolated[${i18nKey}] with props ${JSON.stringify(props)}`
+  ),
+  translate: () => Component => {
+    Component.defaultProps = {
+      ...Component.defaultProps,
+      t: str => `Translated[${str}]`
+    }
+    return Component
+  },
+  t: str => `Translated[${str}]`
+}))
