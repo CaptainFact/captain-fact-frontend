@@ -27,7 +27,7 @@ export default class Help extends React.PureComponent {
     }
     return (
       <div className="help-page">
-        <section className="hero is-info is-bold">
+        <section className="hero is-primary is-bold">
           <div className="hero-body">
             <div className="section">
               { header }
@@ -45,7 +45,7 @@ export default class Help extends React.PureComponent {
   renderIndexContent() {
     return (
       <div>
-        <Message type="info" header="A propos des pages d'aide">
+        <Message type="primary" header={this.props.t('aboutTitle')}>
           {this.props.t('about')}&nbsp;
           <Trans i18nKey="toStart">
             toStart
