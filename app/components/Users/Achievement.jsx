@@ -38,7 +38,7 @@ const KNOWN_ACHIEVEMENTS = {
   11: {img: imgGoodVibes}
 }
 
-const UNKNWON_ACHIEVEMENT = {img: imgDefault}
+const UNKNOWN_ACHIEVEMENT = {img: imgDefault}
 
 const renderVisual = ({img, video}) => (
   video
@@ -48,7 +48,7 @@ const renderVisual = ({img, video}) => (
 
 const Achievement = ({t, id}) => {
   const {title, description} = t(id, {returnObjects: true})
-  const achievement = KNOWN_ACHIEVEMENTS[id] || UNKNWON_ACHIEVEMENT
+  const achievement = KNOWN_ACHIEVEMENTS[id] || UNKNOWN_ACHIEVEMENT
 
   return (
     <div className="achievement">
