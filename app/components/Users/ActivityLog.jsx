@@ -8,6 +8,7 @@ import UserAction from '../UsersActions/UserAction'
 import PaginationMenu from '../Utils/PaginationMenu'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import MessageView from '../Utils/MessageView'
+import { ErrorView } from '../Utils/ErrorView'
 
 
 const QUERY = gql`
@@ -52,20 +53,24 @@ const ActivityLog = ({params: {username}, t}) => (
   <Query
     query={QUERY}
     variables={{username, offset: 1, limit: 10}}
-    fetchPolicy="cache-and-network"
+    fetchPolicy="network-only"
   >
-    {({loading, data: {user}, fetchMore}) => {
-      if (!loading && user.actions.entries.length === 0) {
+    {({loading, data, fetchMore, error}) => {
+      if (error) {
+        return (<ErrorView error={error}/>)
+      }
+
+      if (!loading && data.user.actions.entries.length === 0) {
         return (<MessageView>{t('noActivity')}</MessageView>)
       }
 
-      const paginationMenu = renderPaginationMenu(loading, user, fetchMore)
+      const paginationMenu = renderPaginationMenu(loading, data.user, fetchMore)
       return (
         <div className="activity-log container">
           {paginationMenu}
           {loading
             ? <div className="panel-block"><LoadingFrame /></div>
-            : user.actions.entries.map(a => (
+            : data.user.actions.entries.map(a => (
               <UserAction
                 key={a.id}
                 action={{...a, changes: new Map(JSON.parse(a.changes))}}
