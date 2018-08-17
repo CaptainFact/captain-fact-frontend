@@ -1,8 +1,7 @@
-'use strict'
+
 
 const webpack = require('webpack')
 const path = require('path')
-const loadersConf = require('./webpack.loaders')
 
 // Plugins
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
@@ -14,6 +13,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
+const loadersConf = require('./webpack.loaders')
 
 module.exports = {
   mode: 'production',
@@ -26,7 +26,7 @@ module.exports = {
       'core-js/es6/object',
       'core-js/es6/array',
       // app entry point
-      './app/router.jsx'
+      './app/index.jsx'
     ]
   },
   output: {
@@ -41,7 +41,7 @@ module.exports = {
       path.join(__dirname, 'node_modules'), // the old 'fallback' option (needed for npm link-ed packages)
     ],
     alias: {
-      'styles': path.resolve(__dirname, 'styles/'),
+      styles: path.resolve(__dirname, 'styles/'),
     }
   },
   optimization: {

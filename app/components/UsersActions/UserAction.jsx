@@ -7,31 +7,40 @@ import { TimeSince } from '../Utils/index'
 import Tag from '../Utils/Tag'
 import ActionDiff from './ActionDiff'
 import ActionIcon from './ActionIcon'
+import { Icon } from '../Utils/Icon'
+import EntityLink from './EntityLink'
 
 
-@translate('history')
-export class UserAction extends React.PureComponent {
-  render() {
-    const { action, className, t } = this.props
-    const { user, type, entity, time } = action
+const UserAction = ({ action, className, t, withoutUser }) => {
+  const { user, type, entity, entityId, time, targetUser, context } = action
 
-    return (
-      <div className={classNames(className, 'user-action', 'card')}>
-        <div className="card-content action-description">
-          <Tag type="info"><TimeSince time={time}/></Tag>
-          <Tag className="action-type" type="info">
-            <ActionIcon type={type}/>
-          </Tag>
-          <UserAppellation user={user}/>
-          <span className="action-name">
-            <strong>{ t(`action.${type}`) }</strong>
-          </span>
-          <span className="entity-type">
-            { t(`this.${entity}`) }
-          </span>
-        </div>
-        <ActionDiff action={action}/>
+  return (
+    <div className={classNames(className, 'user-action', 'card')}>
+      <div className="card-content action-description">
+        <Tag type="info">
+          <Icon name="clock-o"/>
+          &nbsp;
+          <TimeSince time={time}/>
+        </Tag>
+        <Tag className="action-type" type="info">
+          <ActionIcon type={type}/>
+        </Tag>
+        {!withoutUser && <UserAppellation user={user}/>}
+        <span className="action-name">
+          <strong>
+            { t('madeAction', {action: `$t(action.${type})`}) }
+          </strong>
+        </span>
+        <span className="entity-type">
+          <EntityLink entity={entity} entityId={entityId} context={context} />
+        </span>
+        {targetUser
+          && <span>de <UserAppellation user={targetUser}/></span>
+        }
       </div>
-    )
-  }
+      <ActionDiff action={action}/>
+    </div>
+  )
 }
+
+export default translate('history')(UserAction)

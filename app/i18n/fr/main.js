@@ -14,8 +14,6 @@ export default {
     profile: 'Profil',
     activity: 'Activité',
     myActivity: 'Mon $t(menu.activity)',
-    bookmarks: 'Signets',
-    myBookmarks: 'Mes signets',
     content: 'Contenu',
     language: 'Langue',
     other: 'Autre',
@@ -64,6 +62,10 @@ export default {
     add: 'Ajouter une vidéo',
     placeholder: 'Adresse de la vidéo',
     analysing: 'Analyse en cours de la vidéo'
+  },
+  pagination: {
+    prev: 'Page précédente',
+    next: 'Page suivante'
   },
   all: 'Toutes',
   partners: 'Partenaires',

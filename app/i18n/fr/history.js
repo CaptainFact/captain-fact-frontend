@@ -10,18 +10,29 @@ export default {
   entity: 'Entité',
   moderation: 'Modération',
   deletedUser: 'Compte supprimé',
+  madeAction: 'A {{action}}\u00A0:',
   action: {
-    1: 'Créé',
-    2: 'Retiré',
-    3: 'Mis à jour',
-    4: 'Supprimé',
-    5: 'Ajouté',
-    6: 'Restauré'
+    1: 'créé',
+    2: 'retiré',
+    3: 'mis à jour',
+    4: 'supprimé',
+    5: 'ajouté',
+    6: 'restauré',
+    8: 'signalé',
+    9: 'voté positivement',
+    10: 'voté négativement',
+    11: 'voté pour lui-même',
+    12: 'annulé son vote positif',
+    13: 'annulé son vote négatif',
+    14: 'annulé son vote pour lui-même',
   },
   this: {
-    1: 'Vidéo',
-    2: 'Intervenant',
-    3: 'Affirmation',
-    4: 'Commentaire'
+    1: 'vidéo',
+    2: 'intervenant',
+    3: 'citation',
+    4: 'commentaire',
+    5: 'commentaire sourcé',
+    6: 'action',
+    7: 'utilisateur'
   }
 }

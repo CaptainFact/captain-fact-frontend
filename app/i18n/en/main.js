@@ -14,8 +14,6 @@ export default {
     profile: 'Profile',
     activity: 'Activity',
     myActivity: 'My $t(menu.activity)',
-    bookmarks: 'Favorites',
-    myBookmarks: 'My $t(menu.bookmarks)',
     content: 'Content',
     language: 'Language',
     other: 'Other',
@@ -65,6 +63,10 @@ export default {
     add: 'Add Video',
     placeholder: 'Video URL',
     analysing: 'Analysing video'
+  },
+  pagination: {
+    prev: 'Previous page',
+    next: 'Next page'
   },
   all: 'All',
   partners: 'Partners',

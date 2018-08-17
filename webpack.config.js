@@ -2,7 +2,6 @@
 
 const webpack = require('webpack')
 const path = require('path')
-const loadersConf = require('./webpack.loaders')
 
 // Plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -10,6 +9,7 @@ const DashboardPlugin = require('webpack-dashboard/plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
+const loadersConf = require('./webpack.loaders')
 
 const HOST = process.env.HOST || 'localhost'
 const PORT = process.env.PORT || '3333'
@@ -26,7 +26,7 @@ module.exports = {
       'core-js/es6/object',
       'core-js/es6/array',
       // app entry point
-      './app/router.jsx'
+      './app/index.jsx'
     ]
   },
   // sourcemap complexity

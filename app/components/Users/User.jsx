@@ -30,11 +30,11 @@ export default class User extends React.PureComponent {
 
   componentDidUpdate(oldProps) {
     // If user's username was updated
-    if (this.props.user.id === oldProps.user.id &&
-        this.props.user.username !== oldProps.user.username)
-          // TODO Remove old user profile from history
-          // Redirect
-          this.props.router.replace(`/u/${this.props.user.username}`)
+    if (this.props.user.id === oldProps.user.id
+        && this.props.user.username !== oldProps.user.username)
+    // TODO Remove old user profile from history
+    // Redirect
+      this.props.router.replace(`/u/${this.props.user.username}`)
 
     // Showing another user
     else if (this.props.params.username !== oldProps.params.username)
@@ -64,7 +64,7 @@ export default class User extends React.PureComponent {
   render() {
     if (this.props.errors)
       return <ErrorView error={this.props.errors} canReload/>
-    else if (this.props.isLoading)
+    if (this.props.isLoading)
       return <LoadingFrame/>
 
     const user = this.props.user
@@ -76,13 +76,13 @@ export default class User extends React.PureComponent {
           <title>{user.name || prettyUsername}</title>
         </Helmet>
         <section className="hero is-light is-bold is-medium user-header">
-          {user.id !== 0 &&
-            <MediaLayout
+          {user.id !== 0
+            && <MediaLayout
               left={
                 <UserPicture user={user} size={USER_PICTURE_XLARGE}/>
               }
-              content={
-                <div>
+              content={(
+<div>
                   <UserAppellation user={user} withoutActions/>
                   <div className="registered-since">
                     <Icon name="clock-o"/>&nbsp;
@@ -94,7 +94,7 @@ export default class User extends React.PureComponent {
                     />
                   </div>
                 </div>
-              }
+)}
               right={<ScoreTag reputation={user.reputation} size="large" withIcon/>}
             />
           }
@@ -102,9 +102,8 @@ export default class User extends React.PureComponent {
         <div className="tabs is-centered">
           <ul>
             {this.getActiveTab('', 'user-circle', 'menu.profile')}
+            {this.getActiveTab('activity', 'tasks', 'menu.activity')}
             {isSelf && this.getActiveTab('settings', 'cog', 'menu.settings')}
-            {isSelf && this.getActiveTab('bookmarks', 'bookmark', 'menu.bookmarks', true)}
-            {this.getActiveTab('activity', 'tasks', 'menu.activity', true)}
           </ul>
         </div>
         { this.props.children }

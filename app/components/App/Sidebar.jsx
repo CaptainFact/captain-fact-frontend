@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { translate } from 'react-i18next'
 import classNames from 'classnames'
+import capitalize from 'voca/capitalize'
 
 import { Icon } from '../Utils'
 import { MOBILE_WIDTH_THRESHOLD, USER_PICTURE_SMALL, MIN_REPUTATION_MODERATION } from '../../constants'
@@ -10,13 +11,13 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
 import RawIcon from '../Utils/RawIcon'
 import ReputationGuard from '../Utils/ReputationGuard'
 import LanguageSelector from './LanguageSelector'
-import capitalize from 'voca/capitalize'
 import ScoreTag from '../Users/ScoreTag'
 import { logout } from '../../state/users/current_user/effects'
 import { closeSidebar, toggleSidebar } from '../../state/user_preferences/reducer'
 import UserPicture from '../Users/UserPicture'
 import i18n from '../../i18n/i18n'
 import Logo from './Logo'
+import Button from '../Utils/Button'
 
 @connect(state => ({
   CurrentUser: state.CurrentUser.data,
@@ -69,20 +70,20 @@ export default class Sidebar extends React.PureComponent {
             </this.MenuLink>
           </div>
           <div className="level-right">
-            <a className="button" 
+            <Button
               title={this.props.t('menu.logout')}
               onClick={() => this.props.logout()}
             >
               <Icon name="sign-out"/>
-            </a>
+            </Button>
           </div>
         </nav>
         <ul className="menu-list user-links">
+          <this.MenuListLink to={`${baseLink}/activity`} iconName="tasks">
+            { t('menu.myActivity') }
+          </this.MenuListLink>
           <this.MenuListLink to={`${baseLink}/settings`} iconName="cog">
             { t('menu.settings')}
-          </this.MenuListLink>
-          <this.MenuListLink to={`${baseLink}/activity`} iconName="tasks" disabled>
-            { t('menu.myActivity') }
           </this.MenuListLink>
         </ul>
       </div>)
@@ -102,7 +103,7 @@ export default class Sidebar extends React.PureComponent {
   renderUserSection() {
     if (this.props.isLoadingUser)
       return (<div className="user-section"><LoadingFrame size="mini"/></div>)
-    else if (this.props.CurrentUser.id !== 0)
+    if (this.props.CurrentUser.id !== 0)
       return this.renderUserLinks()
     return this.renderConnectLinks()
   }
@@ -110,8 +111,10 @@ export default class Sidebar extends React.PureComponent {
   render() {
     const { sidebarExpended, className, t } = this.props
     return (
-      <aside id="sidebar"
-        className={`menu ${className} ${sidebarExpended ? 'expended' : ''}`}>
+      <aside
+        id="sidebar"
+        className={classNames('menu', className, {expended: sidebarExpended})}
+      >
         <div className="logo-banner">
           <div className="menu-collapse-button" onClick={() => this.props.toggleSidebar()}>
             <RawIcon name="bars"/>
@@ -137,7 +140,7 @@ export default class Sidebar extends React.PureComponent {
           <ul className="menu-list">
             <li>
               <a
-                href="https://opencollective.com/captainfact_io" 
+                href="https://opencollective.com/captainfact_io"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hide-when-collapsed link-with-icon"
