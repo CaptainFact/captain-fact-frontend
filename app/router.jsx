@@ -4,7 +4,8 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
 // Import Views
 import App from './components/App'
-import { Home, NotFound, BrowserExtensionsPage } from './components/Pages'
+import Home from './components/Home/Home'
+import { NotFound, BrowserExtensionsPage } from './components/Pages'
 import { PublicVideos, AddVideoForm } from './components/Videos'
 import { VideoDebate } from './components/VideoDebate'
 import Help from './components/Help/Help'
