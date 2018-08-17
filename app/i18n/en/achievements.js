@@ -37,5 +37,13 @@ export default {
   9: {
     title: 'Fact Check Me, I\'m Famous',
     description: 'You made your way up to the leaderboard, congrats Captain!'
+  },
+  10: {
+    title: 'Artist',
+    description: 'One of your creations is integrated to the project'
+  },
+  11: {
+    title: 'Good Vibes',
+    description: 'You made some suggestions for improvements or new features, and we find them interesting!'
   }
 }
