@@ -2,219 +2,178 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import { change } from 'redux-form'
-import { List } from 'immutable'
 import classNames from 'classnames'
 
-import { TimeSince, Icon } from '../Utils'
-import ReputationGuard from '../Utils/ReputationGuard'
-import { Source } from './Source'
-import UserAppellation from '../Users/UserAppellation'
-import ModalFlag from './ModalFlag'
-import ModalDeleteComment from './ModalDeleteComment'
-import { CommentsContainer } from './CommentsContainer'
-import Tag from '../Utils/Tag'
 import { addModal } from '../../state/modals/reducer'
 import { commentVote, deleteComment, flagComment } from '../../state/video_debate/comments/effects'
+import { isAuthenticated } from '../../state/users/current_user/selectors'
+import { isOwnComment } from '../../state/video_debate/comments/selectors'
 import {flashErrorUnauthenticated} from '../../state/flashes/reducer'
-import UserPicture from '../Users/UserPicture'
-import { MIN_REPUTATION_FLAG, USER_PICTURE_SMALL } from '../../constants'
 import MediaLayout from '../Utils/MediaLayout'
 import Vote from './Vote'
-import Button from '../Utils/Button'
+import CommentActions from './CommentActions'
+import CommentHeader from './CommentHeader'
+import CommentContent from './CommentContent'
+import { COLLAPSE_REPLIES_AT_NESTING } from '../../constants'
+import ModalFlag from './ModalFlag'
+import ModalDeleteComment from './ModalDeleteComment'
+import { CommentsList } from './CommentsList'
 
 
-@connect(({CurrentUser, VideoDebate}, props) => ({
-  currentUser: CurrentUser.data,
-  myVote: VideoDebate.comments.voted.get(props.comment.id, 0),
-  isVoting: VideoDebate.comments.voting.has(props.comment.id),
-  replies: VideoDebate.comments.replies.get(props.comment.id),
-  isFlagged: VideoDebate.comments.myFlags.has(props.comment.id)
+@connect((state, {comment}) => ({
+  isOwnComment: isOwnComment(state, comment),
+  isAuthenticated: isAuthenticated(state),
+  myVote: state.VideoDebate.comments.voted.get(comment.id, 0),
+  isVoting: state.VideoDebate.comments.voting.has(comment.id),
+  replies: state.VideoDebate.comments.replies.get(comment.id),
+  isFlagged: state.VideoDebate.comments.myFlags.has(comment.id)
 }), {addModal, deleteComment, flagComment, commentVote, change, flashErrorUnauthenticated})
 @translate('main')
 export class CommentDisplay extends React.PureComponent {
   constructor(props) {
     super(props)
-    this.state = {isBlurred: false, showReplies: props.nesting !== 4}
+    this.state = {
+      isBlurred: false,
+      repliesCollapsed: props.nesting === COLLAPSE_REPLIES_AT_NESTING
+    }
   }
 
   render() {
-    const { user, text, source, inserted_at, approve } = this.props.comment
-    const { t, withoutActions, withoutHeader, replyingTo, nesting, replies, myVote, isVoting, hideThread, className, richMedias = true } = this.props
-    const approveClass = approve !== null && (approve ? 'approve' : 'refute')
-    const showReplies = this.state.showReplies
-    const isOwnComment = user && user.id === this.props.currentUser.id
+    const { comment, withoutActions, className, replies, hideThread } = this.props
+    const { isBlurred, repliesCollapsed } = this.state
+    const approveClass = this.getApproveClass(comment.approve)
+    const allClassNames = classNames('comment', className, approveClass, {
+      isBlurred,
+      hasSource: !!comment.source,
+    })
 
     return (
       <div>
         <MediaLayout
-          className={classNames('comment', className, approveClass, {
-            isBlurred: this.state.isBlurred,
-            hasSource: !!source,
-          })}
           ContainerType="article"
-          left={!withoutActions &&
-            <Vote
-              isVoting={isVoting}
-              score={this.getScore()}
-              myVote={myVote}
-              onVote={value => this.ensureAuthenticated() &&
-                    this.props.commentVote({comment: this.props.comment, value})
-              }
-            />
-          }
-          content={(
-            <div>
-              <div>
-                {!withoutHeader && (
-                  <div className="comment-header">
-                    {this.renderUserHeader(user, withoutActions)}
-                    <span> - </span>
-                    <TimeSince className="comment-time" time={inserted_at}/>
-                  </div>
-                )}
-                {(text || (replyingTo && nesting > 6)) &&
-                <div className="comment-text">
-                  {(replyingTo && nesting > 6) &&
-                  <Tag style={{marginRight: 5}}>@{replyingTo.username}</Tag>
-                  }
-                  { text }
-                </div>
-                }
-                {source && <Source withoutPlayer={!richMedias} source={source}/>}
-              </div>
-              {!withoutActions && (
-                <nav className="comment-actions">
-                  { isOwnComment
-                    ? this.renderOwnCommentActions()
-                    : this.renderOtherCommentActions()
-                  }
-                  {replies && this.renderActionReply(showReplies, replies)}
-                </nav>
-              )}
-            </div>
-          )}
+          className={allClassNames}
+          left={!withoutActions && this.renderCommentLeft()}
+          content={this.renderCommentContent()}
         />
-        {!hideThread && replies &&
-        <CommentsContainer comments={this.state.showReplies ? replies : new List()}
-                           nesting={nesting + 1}
-                           replyingTo={user}/>
-        }
+        {!hideThread && !repliesCollapsed && replies && (
+          <CommentsList
+            comments={this.props.replies}
+            nesting={this.props.nesting + 1}
+            replyingTo={this.props.comment.user}
+          />
+        )}
       </div>
     )
   }
 
-  renderActionReply(showReplies, replies) {
-    const i18nParams = {
-      context: showReplies ? 'hide' : 'show',
-      count: replies.size
+  renderCommentLeft() {
+    const { myVote, isVoting, comment } = this.props
+
+    return (
+      <Vote
+        isVoting={isVoting}
+        score={comment.score}
+        myVote={myVote}
+        onVote={value => this.handleVote(value)}
+        isReported={comment.is_reported}
+      />
+    )
+  }
+
+  renderCommentContent() {
+    const { repliesCollapsed } = this.state
+    const { comment, withoutActions, replies, richMedias = true} = this.props
+
+    return (
+      <React.Fragment>
+        {!this.props.withoutHeader && (
+          <CommentHeader comment={comment} withoutActions={withoutActions}/>
+        )}
+        <CommentContent
+          comment={comment}
+          nesting={this.props.nesting}
+          replyingTo={this.props.replyingTo}
+          richMedias={richMedias}
+        />
+        {!withoutActions && (
+          <CommentActions
+            isOwnComment={this.props.isOwnComment}
+            nbReplies={replies ? replies.size : 0}
+            repliesCollapsed={repliesCollapsed}
+            handleReply={() => this.handleReply()}
+            handleDelete={() => this.handleDelete()}
+            handleFlag={() => this.handleFlag()}
+            handleToggleShowReplies={() => this.toggleShowReplies(repliesCollapsed)}
+          />
+        )}
+      </React.Fragment>
+    )
+  }
+
+  getApproveClass(approve) {
+    return approve !== null && (approve ? 'approve' : 'refute')
+  }
+
+  // ---- State modifiers ----
+
+  setIsBlurred(isBlurred) {
+    this.setState({isBlurred})
+  }
+
+  toggleShowReplies(currentState) {
+    this.setState({repliesCollapsed: !currentState})
+  }
+
+  // ---- Authenticated actions ----
+
+  ensureAuthenticated() {
+    if (this.props.isAuthenticated) {
+      return true
     }
 
-    return this.renderAction(
-      this.props.t('videoDebate:comment.replies', i18nParams),
-      showReplies ? 'eye-slash' : 'eye',
-      () => this.setState({showReplies: !showReplies}),
-      {'reply-collapsed': !showReplies},
-    )
-  }
-
-  renderOwnCommentActions() {
-    const {t} = this.props
-    return (
-      <React.Fragment>
-        {this.renderAction(t('actions.addToThread'), 'plus', () => this.actionReply())}
-        {this.renderAction(t('actions.delete'), 'times', () => this.handleDelete())}
-      </React.Fragment>
-    )
-  }
-
-  renderOtherCommentActions() {
-    const {isFlagged, t} = this.props
-    return (
-      <React.Fragment>
-        {this.renderAction(t('actions.reply'), 'reply', () => this.actionReply())}
-        <ReputationGuard requiredRep={MIN_REPUTATION_FLAG}>
-          {this.renderAction(
-            isFlagged ? t('actions.flagged') : t('misc.flags'),
-            'flag',
-            () => this.handleFlag(),
-            classNames('action-report', {selected: isFlagged})
-          )}
-        </ReputationGuard>
-      </React.Fragment>
-    )
-  }
-
-  renderAction(title, iconName, onClick, className = null) {
-    return (
-      <Button
-        className={classNames('is-inverted is-primary', className)}
-        onClick={onClick}
-      >
-        <Icon name={iconName}/>
-        <span>{title}</span>
-      </Button>
-    )
-  }
-
-  renderUserHeader(user, withoutActions) {
-    return user ? (
-      <span>
-        <UserPicture user={user} size={USER_PICTURE_SMALL}/>
-        <UserAppellation user={user} withoutActions={withoutActions}/>
-      </span>
-    ) : (
-      <span className="anonymous">
-        {this.props.t('anonymous')}
-      </span>
-    )
-  }
-
-  getScore() {
-    if (this.props.comment.is_reported)
-      return <Icon className="reported" name="ban" title={this.props.t('moderation:pending')}/>
-    return this.props.comment.score
+    this.props.flashErrorUnauthenticated()
+    return false
   }
 
   handleDelete() {
-    this.setState({isBlurred: true})
+    this.setIsBlurred(true)
     this.props.addModal({
       Modal: ModalDeleteComment,
       props: {
-        handleAbort: () => this.setState({isBlurred: false}),
+        handleAbort: () => this.setIsBlurred(false),
         handleConfirm: () => this.props.deleteComment(this.props.comment),
         comment: this.props.comment
       }
     })
   }
 
-  // ---- Authenticated actions ----
-
-  ensureAuthenticated() {
-    if (!this.props.currentUser.id) {
-      this.props.flashErrorUnauthenticated()
+  handleVote(value) {
+    if (!this.ensureAuthenticated())
       return false
-    }
-    return true
+    return this.props.commentVote({comment: this.props.comment, value})
   }
 
-  actionReply() {
+  handleReply() {
     if (!this.ensureAuthenticated())
       return null
     const formName = `formAddComment-${this.props.comment.statement_id}`
-    this.props.change(formName, 'reply_to', this.props.comment)
+    return this.props.change(formName, 'reply_to', this.props.comment)
   }
 
   handleFlag(initialReason) {
     if (!this.ensureAuthenticated())
       return
-    this.setState({isBlurred: true})
+    this.setIsBlurred(true)
     this.props.addModal({
       Modal: ModalFlag,
       props: {
-        handleAbort: () => this.setState({isBlurred: false}),
+        handleAbort: () => this.setIsBlurred(false),
         handleConfirm: ({reason}) => {
-          this.setState({isBlurred: false})
-          return this.props.flagComment({id: this.props.comment.id, reason: parseInt(reason)})
+          this.setIsBlurred(false)
+          return this.props.flagComment({
+            id: this.props.comment.id,
+            reason: parseInt(reason)
+          })
         },
         comment: this.props.comment,
         initialReason

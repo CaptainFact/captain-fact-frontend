@@ -7,7 +7,7 @@ import Icon from '../Utils/Icon'
 import ReputationGuard from '../Utils/ReputationGuard'
 import TimeDisplay from '../Utils/TimeDisplay'
 import { StatementForm } from './StatementForm'
-import { CommentForm, CommentsContainer } from '../Comments'
+import { CommentForm, CommentsList } from '../Comments'
 import ModalConfirmDelete from '../Modal/ModalConfirmDelete'
 
 import * as statementSelectors from '../../state/video_debate/statements/selectors'
@@ -153,7 +153,7 @@ export class Statement extends React.PureComponent {
     )
   }
 
-  renderCommentsContainerHeader(label, tagType, score = null) {
+  renderCommentsListHeader(label, tagType, score = null) {
     return (
       <div className="comments-container-header">
         <span>{this.props.t(label)} </span>
@@ -176,7 +176,7 @@ export class Statement extends React.PureComponent {
               <SpeakerPreview speaker={speaker} withoutActions/>
             </div>
             <div className="column">
-              <CommentsContainer comments={selfComments}/>
+              <CommentsList comments={selfComments}/>
             </div>
           </div>
         }
@@ -188,26 +188,26 @@ export class Statement extends React.PureComponent {
         {(approvingFacts.size > 0 || refutingFacts.size > 0) &&
         <div className="card-footer sourced-comments">
           {refutingFacts.size > 0 &&
-          <CommentsContainer
+          <CommentsList
             className="card-footer-item refute"
             comments={refutingFacts}
-            header={this.renderCommentsContainerHeader('refute', 'danger', this.calculateScore(refutingFacts))}
+            header={this.renderCommentsListHeader('refute', 'danger', this.calculateScore(refutingFacts))}
           />
           }
           {approvingFacts.size > 0 &&
-          <CommentsContainer
+          <CommentsList
             className="card-footer-item approve"
             comments={approvingFacts}
-            header={this.renderCommentsContainerHeader('approve', 'success', this.calculateScore(approvingFacts))}
+            header={this.renderCommentsListHeader('approve', 'success', this.calculateScore(approvingFacts))}
           />
           }
         </div>
         }
         <div className="card-footer comments">
           {comments.size > 0 &&
-            <CommentsContainer
+            <CommentsList
               comments={comments}
-              header={this.renderCommentsContainerHeader('comments')}
+              header={this.renderCommentsListHeader('comments')}
             />
           }
           <CommentForm
