@@ -11,27 +11,31 @@ import { MainModalContainer } from '../Modal/MainModalContainer'
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
 
 
-@connect(state => ({locale: state.UserPreferences.locale}), {fetchCurrentUser})
+@connect(state => ({
+  locale: state.UserPreferences.locale,
+  sidebarExpended: state.UserPreferences.sidebarExpended
+}), {fetchCurrentUser})
 export default class App extends React.PureComponent {
   componentDidMount() {
     this.props.fetchCurrentUser()
   }
 
   render() {
+    const {locale, sidebarExpended, children} = this.props
+    const mainContainerClass = sidebarExpended ? undefined : 'expended'
+
     return (
       <I18nextProvider i18n={i18n}>
-        <div lang={this.props.locale}>
+        <div lang={locale}>
           <Helmet>
             <title>CaptainFact</title>
           </Helmet>
           <MainModalContainer/>
-          <div className="columns is-mobile is-gapless">
-            <Sidebar className="column is-narrow"/>
-            <div id="main-container" className="column">
-              {this.props.children}
-            </div>
-          </div>
           <FlashMessages/>
+          <Sidebar/>
+          <div id="main-container" className={mainContainerClass}>
+            {children}
+          </div>
           <PublicAchievementUnlocker achievementId={4} meetConditionsFunc={this.checkExtensionInstall}/>
         </div>
       </I18nextProvider>
