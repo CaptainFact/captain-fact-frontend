@@ -1,6 +1,6 @@
 {
   "name": "captain-fact-frontend",
-  "version": "0.8.13",
+  "version": "0.8.14",
   "private": true,
   "scripts": {
     "build": "webpack-cli --config webpack.production.config.js",
