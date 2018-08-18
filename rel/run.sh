@@ -82,9 +82,16 @@ elif [ "$1" = "build" ]; then
   cat /etc/nginx/captain_fact.conf | sed "s/captain_fact/maintenance/" > /etc/nginx/maintenance.conf
   cp ./config/mime.types /etc/nginx/mime.types
 
-  # Build and copy actual site and maintenance site
-  HTTP_API_URL=${HTTP_API_URL} WS_API_URL=${WS_API_URL} FRONTEND_URL=${FRONTEND_URL} FB_APP_ID=${FB_APP_ID} JS_ENV=${JS_ENV} \
+  # Build
+  HTTP_API_URL=${HTTP_API_URL} \
+  GRAPHQL_API_URL=${GRAPHQL_API_URL} \
+  WS_API_URL=${WS_API_URL} \
+  FRONTEND_URL=${FRONTEND_URL} \
+  FB_APP_ID=${FB_APP_ID} \
+  JS_ENV=${JS_ENV} \
     npm run build || exit 1
+
+  # Copy actual site and maintenance site
   mv ./public/* /var/www/captain_fact
   cp ./rel/maintenance.html /var/www/maintenance/index.html
   cp ./app/assets/assets/img/logo.png ./app/assets/favicon.ico /var/www/maintenance
