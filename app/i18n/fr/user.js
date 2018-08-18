@@ -24,8 +24,10 @@ export default {
   linkedAccounts: 'Comptes liés',
   linkAccount: 'Lier le compte',
   unlinkAccount: 'Délier le compte',
+  accountSettings: 'Paramètres du compte',
   newsletter: {
     unsubscribe_success: 'Désinscription de la newsletter enregistrée !',
     unsubscribe_error: 'Erreur lors de la desinscription, le code est probablement invalide. Si le problème persiste, contactez-nous'
-  }
+  },
+  noActivity: "Aucune action n'a été effectuée pour le moment"
 }

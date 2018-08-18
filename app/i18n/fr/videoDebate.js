@@ -29,8 +29,9 @@ export default {
     revealForm: 'Ajouter une source ou un commentaire'
   },
   video: {
-    addedByParner: 'Vidéo partenaire ajoutée',
-    addedByUser: 'Ajoutée par un utilisateur',
+    addedBy: 'Ajoutée par un {{userType}}',
+    partner: 'partenaire',
+    user: 'utilisateur',
     edit: 'Editer la vidéo',
     shiftStatements: 'Décaler toutes les affirmations (en secondes)'
   },

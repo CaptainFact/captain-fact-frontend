@@ -24,6 +24,7 @@ export default {
   },
   title: 'Aide',
   goBack: 'Retourner au menu d\'aide principal',
+  aboutTitle: "À propos des pages d'aide",
   about: "Les pages d'aide sont là pour faciliter la prise en main de la plateforme. Elles sont volontairement courtes et leur lecture est fortement encouragée avant de participer au travail de vérification.",
   toStart: "Pour commencer, jetez un coup d'oeuil au <1>guide de contribution</1> ainsi qu'aux explications des <2>privilèges</2> et du <3>système de réputation</3>."
 }

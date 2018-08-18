@@ -1,19 +1,21 @@
 $border-color: lightgrey
 
 #sidebar
+  position: fixed
+  height: 100%
+  top: 0
+  left: 0
+  width: $sidebar_width
   background: $white-bis
   overflow-y: auto
   overflow-x: hidden
   z-index: 999
   box-shadow: -15px 0px 40px -14px rgba(173, 173, 173, .3) inset
-  height: 100vh
-  top: 0
-  width: $sidebar_width
   border-right: 1px solid #e8e8e8
   +tablet
-    transition: width 0.15s
+    transition: width $sidebar_collapse_transition_duration
   +mobile
-    width: 100vw
+    width: 100%
   @media screen and (max-height: 600px)
     .user-links
       display: none
@@ -39,18 +41,14 @@ $border-color: lightgrey
       &:not(:hover)
         color: grey
 
-    @media screen and (max-width: 400px)
+    @media screen and (max-width: $sidebar_full_collapse_under)
       width: 100%
-      .menu-collapse-button
-        float: right
-        margin-right: 0
-        text-align: right
-
 
   .connect-register-buttons .button
     @extend .is-fullwidth
 
   .user-quicklinks
+    margin-bottom: 0.5em
     figure.image, .title
       display: inline-block
       vertical-align: middle
@@ -78,23 +76,23 @@ $border-color: lightgrey
       margin-right: 5px
 
   .link-with-icon > i
-    transition: font-size 0.2s
     width: 20px
+    +desktop
+      transition: font-size $sidebar_collapse_transition_duration
 
 #sidebar:not(.expended)
-  width: 60px
+  width: $sidebar_collapsed_width
   text-align: center
 
-  @media screen and (max-width: 400px)
+  @media screen and (max-width: $sidebar_full_collapse_under)
     position: fixed
-    right: 0
-    z-index: 9
+    width: 100%
+    z-index: 9999
     height: inherit
     background: transparentize($white, 0.1)
     border-bottom: 1px solid $border-color
-    border-left: 1px solid $border-color
     .logo-banner
-      height: 65px
+      height: $sidebar_full_collapse_banner_height
     .menu-content
       display: none
 
@@ -114,9 +112,10 @@ $border-color: lightgrey
     .link-with-icon
       padding: 5px
 
-  .logo-banner
-    .title, .logo
-      display: none
+  +from($sidebar_full_collapse_under + 1)
+    .logo-banner
+      .title, .logo
+        display: none
 
   .username
     display: none
@@ -135,11 +134,12 @@ $border-color: lightgrey
       &> li > a.link-with-icon
         padding: 7px 0
         &> i
-          width: 30px
+          width: 100%
         &> span
           display: none
 
   .connect-register-buttons
+    margin-bottom: 5px
     span:not(.icon)
       display: none
     .icon > i

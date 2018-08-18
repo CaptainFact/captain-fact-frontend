@@ -6,8 +6,13 @@ const EMPTY_COMMENTS_LIST = new List()
 
 export const getAllComments = (state) => state.VideoDebate.comments.comments
 
-export const getStatementAllComments = (state, props) =>
-  getAllComments(state).get(props.statement.id, EMPTY_COMMENTS_LIST)
+export const getStatementAllComments = (state, props) => {
+  return getAllComments(state).get(props.statement.id, EMPTY_COMMENTS_LIST)
+}
+
+export const isOwnComment = ({CurrentUser}, comment) => {
+  return comment.user && comment.user.id === CurrentUser.data.id
+}
 
 export const classifyComments = createCachedSelector(
   getStatementAllComments,
@@ -39,5 +44,5 @@ export const classifyComments = createCachedSelector(
 
 // ---- Private ----
 function isSelfComment({user}, speakerId) {
-  return user && user.speaker_id && user.speaker_id === speakerId 
+  return user && user.speaker_id && user.speaker_id === speakerId
 }

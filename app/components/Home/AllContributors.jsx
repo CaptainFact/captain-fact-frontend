@@ -10,24 +10,24 @@ const ROLE_DONATOR = 'donator'
 const ROLE_PARTNER = 'partner'
 
 const CONTRIBUTORS = [
-  {role: ROLE_AMBASSADOR, name: 'Frédéric Bouffetier', picture: 'frederic.jpg'},
-  {role: ROLE_AMBASSADOR, name: 'Timothée Roland', picture: 'timothee.jpg'},
-  {role: ROLE_AMBASSADOR_PADAWAN, name: 'Dorian Cazottes'},
-  {role: ROLE_PARTNER, name: 'ThinkerView', picture: 'thinkerview.jpg', url: 'https://thinkerview.com'},
-  {role: ROLE_PARTNER, name: 'Heu?reka', picture: 'heureka.jpg', url: 'https://www.youtube.com/channel/UC7sXGI8p8PvKosLWagkK9wQ'},
-  {role: ROLE_PARTNER, name: 'Maia Mater', picture: 'maiamater.jpg', url: 'https://www.maiamater.camp'},
-  {role: ROLE_PARTNER, name: 'TedX Nouméa', picture: 'tedxnoumea.jpg', url: 'https://tedxnoumea.com'},
-  {role: ROLE_DEVELOPER, name: 'Noé Gambini', picture: 'noe.jpg'},
+  {role: ROLE_AMBASSADOR, name: 'Frédéric Bouffetier', picture: 'frederic'},
+  {role: ROLE_AMBASSADOR, name: 'Timothée Roland', picture: 'timothee'},
+  {role: ROLE_AMBASSADOR_PADAWAN, name: 'Dorian Cazottes', picture: 'dorian'},
+  {role: ROLE_PARTNER, name: 'ThinkerView', picture: 'thinkerview', url: 'https://thinkerview.com'},
+  {role: ROLE_PARTNER, name: 'Heu?reka', picture: 'heureka', url: 'https://www.youtube.com/channel/UC7sXGI8p8PvKosLWagkK9wQ'},
+  {role: ROLE_PARTNER, name: 'Maia Mater', picture: 'maiamater', url: 'https://www.maiamater.camp'},
+  {role: ROLE_PARTNER, name: 'TedX Nouméa', picture: 'tedxnoumea', url: 'https://tedxnoumea.com'},
+  {role: ROLE_DEVELOPER, name: 'Noé Gambini', picture: 'noe'},
   {role: ROLE_DONATOR, name: 'Thibaut Ladouce'},
-  {role: ROLE_DONATOR, name: 'Julien Edmond', picture: 'julien.jpg'},
+  {role: ROLE_DONATOR, name: 'Julien Edmond', picture: 'julien'},
   {role: ROLE_DONATOR, name: 'Jérôme Bétrancourt'},
-  {role: ROLE_DONATOR, name: 'Spiderweak', picture: 'spiderweak.jpg'},
-  {role: ROLE_DONATOR, name: 'Coline Piouffle', i18nContext: 'female', picture: 'coline.jpg'},
-  {role: ROLE_DONATOR, name: 'Basile Asti', picture: 'basile.jpg'},
+  {role: ROLE_DONATOR, name: 'Spiderweak', picture: 'spiderweak'},
+  {role: ROLE_DONATOR, name: 'Coline Piouffle', i18nContext: 'female', picture: 'coline'},
+  {role: ROLE_DONATOR, name: 'Basile Asti', picture: 'basile'},
   {role: ROLE_DONATOR, name: 'Alexandre Mira'},
-  {role: ROLE_DONATOR, name: 'Adrien Albertini', picture: 'adrien.jpg'},
+  {role: ROLE_DONATOR, name: 'Adrien Albertini', picture: 'adrien'},
   {role: ROLE_DONATOR, name: 'Loic Journet'},
-  {role: ROLE_DONATOR, name: 'William Amsler', picture: 'william.jpg'},
+  {role: ROLE_DONATOR, name: 'William Amsler', picture: 'william'},
   {role: ROLE_DONATOR, name: 'Francois  Zedde'},
   {role: ROLE_DONATOR, name: 'William Rode'},
   {role: ROLE_DONATOR, name: 'Hélène Bouffetier', i18nContext: 'female'},
@@ -63,7 +63,7 @@ function contributorName({url, name}) {
 
 function contributorPicture({picture}) {
   return picture
-    ? <img src={`/assets/img/contributors/${picture}`} alt=""/>
+    ? <img src={`/assets/img/contributors/${picture}.jpg`} alt=""/>
     : <img src="/assets/img/contributors/no-picture.svg" className="no-picture" alt=""/>
 }
 

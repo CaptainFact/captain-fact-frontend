@@ -2,14 +2,12 @@ import React from 'react'
 import classNames from 'classnames'
 
 
-const Button = ({children, className, onClick, type = 'button'}) => (
+const Button = ({className, type = 'button', ...props}) => (
   <button
     className={classNames('button', className)}
     type={type}
-    onClick={onClick}
-  >
-    {children}
-  </button>
+    {...props}
+  />
 )
 
 export default Button

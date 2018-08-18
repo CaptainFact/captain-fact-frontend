@@ -14,10 +14,12 @@ const defaultLocales = new Map({
 @translate() // Force waiting for translations to be loaded
 export default class LanguageSelector extends React.PureComponent {
   render() {
+    const sizeClass = this.props.size ? `is-${this.props.size}` : null
     return (
       <div className={classNames('language-selector', this.props.className)}>
-        {this.props.withIcon && <Icon name="language"/>}
-        <span className={classNames('select', this.props.size ? `is-${this.props.size}` : null)}>
+        {this.props.withIcon && <Icon name="language" size={this.props.size}/>}
+        &nbsp;
+        <span className={classNames('select', sizeClass)}>
           { this.renderSelect() }
         </span>
       </div>
@@ -31,8 +33,9 @@ export default class LanguageSelector extends React.PureComponent {
 
     return (
       <select
-        onChange={e => this.props.handleChange(e.target.value)} 
-        value={this.props.value}>
+        onChange={e => this.props.handleChange(e.target.value)}
+        value={this.props.value}
+      >
         { this.renderLocalesMap(options) }
       </select>
     )

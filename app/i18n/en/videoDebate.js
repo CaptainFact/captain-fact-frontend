@@ -29,8 +29,9 @@ export default {
     revealForm: 'Add a source or comment'
   },
   video: {
-    addedByParner: 'Added by partner',
-    addedByUser: 'Added by user',
+    addedBy: 'Added by a {{userType}}',
+    partner: 'partner',
+    user: 'user',
     edit: 'Edit Video',
     shiftStatements: 'Shift all statements (in seconds)'
   },

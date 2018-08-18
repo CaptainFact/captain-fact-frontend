@@ -6,8 +6,7 @@ import { translate } from 'react-i18next'
 import capitalize from 'voca/capitalize'
 
 import { MIN_REPUTATION_ADD_VIDEO, ALL_VIDEOS, ONLY_PARTNERS, ONLY_COMMUNITY } from '../../constants'
-import ReputationGuard from '../Utils/ReputationGuard'
-import { VideosGrid } from '../Videos'
+import { VideosGrid } from './VideosGrid'
 import { LoadingFrame, Icon } from '../Utils'
 import { fetchPublicVideos } from '../../state/videos/effects'
 import { ErrorView } from '../Utils/ErrorView'
@@ -15,6 +14,7 @@ import { reset } from '../../state/videos/reducer'
 import { changeVideosLanguageFilter, setVideosOnlyFromPartners } from '../../state/user_preferences/reducer'
 import LanguageSelector from '../App/LanguageSelector'
 import FilterOnlyFromPartners from './FilterOnlyFromPartners'
+import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
 
 
 @connect(state => ({
@@ -35,26 +35,29 @@ export class PublicVideos extends React.PureComponent {
   }
 
   componentDidUpdate(oldProps) {
-    if (oldProps.languageFilter !== this.props.languageFilter ||
-      oldProps.onlyFromPartners !== this.props.onlyFromPartners) {
+    if (oldProps.languageFilter !== this.props.languageFilter
+      || oldProps.onlyFromPartners !== this.props.onlyFromPartners) {
       this.props.fetchPublicVideos(this.buildFilters())
     }
   }
 
   render() {
+    const {t} = this.props
     return (
       <div className="videos-page">
         <section className="header">
           <h2 className="title is-2">
             <Icon name="television" />
-            <span> {capitalize(this.props.t('entities.video_plural'))}</span>
+            <span> {capitalize(t('entities.video_plural'))}</span>
           </h2>
-          <ReputationGuard requiredRep={MIN_REPUTATION_ADD_VIDEO}>
-            <Link to="/videos/add" className="button is-primary">
-              <Icon name="plus-circle" />
-              <span>{this.props.t('videos.add')}</span>
-            </Link>
-          </ReputationGuard>
+          <ReputationGuardTooltip requiredRep={MIN_REPUTATION_ADD_VIDEO}>
+            {({hasReputation}) => (
+              <Link to="/videos/add" className="button is-primary" disabled={!hasReputation}>
+                <Icon name="plus-circle" />
+                <span>{t('videos.add')}</span>
+              </Link>
+            )}
+          </ReputationGuardTooltip>
         </section>
         {this.renderFilterBar()}
         {this.renderContent()}
@@ -93,9 +96,9 @@ export class PublicVideos extends React.PureComponent {
   renderContent() {
     if (this.props.isLoading)
       return <LoadingFrame />
-    else if (this.props.error)
+    if (this.props.error)
       return <ErrorView error={this.props.error} />
-    else if (this.props.videos.size === 0)
+    if (this.props.videos.size === 0)
       return <h2>{this.props.t('errors:client.noVideoAvailable')}</h2>
 
     return <VideosGrid videos={this.props.videos} />

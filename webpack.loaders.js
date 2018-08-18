@@ -126,6 +126,23 @@ module.exports = isProd => [
       }
     ]
   },
+  {
+    test: /\.mp4/,
+    include: [
+      path.resolve(__dirname, 'app/assets')
+    ],
+    exclude: path.resolve(__dirname, 'node_modules'),
+    use: [
+      {
+        loader: 'file-loader',
+        options: {
+          limit: 10000,
+          mimetype: 'video/mp4',
+          name: '[path][name].[ext]'
+        }
+      }
+    ]
+  },
   // ==========
   // = Styles =
   // ==========
