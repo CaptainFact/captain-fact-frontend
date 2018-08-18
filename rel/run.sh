@@ -45,7 +45,8 @@ elif [ "$1" = "build" ]; then
   fi
   source "./config/env/$BUILD_ENV.env"
   echo "Building Frontend for env $BUILD_ENV:"
-  echo "  - HTTP API:     $HTTP_API_URL"
+  echo "  - REST API:     $HTTP_API_URL"
+  echo "  - GRAPHQL API:  $GRAPHQL_API_URL"
   echo "  - WSS API:      $WS_API_URL"
   echo "  - OG:           $OG_URL"
   echo "  - Frontend URL: $FRONTEND_URL"
@@ -66,12 +67,14 @@ elif [ "$1" = "build" ]; then
   # Copy NGinx config
   FRONTEND_HOST=$(echo ${FRONTEND_URL} | sed -r "s/^https?:\/\///")
   HTTP_API_BASE_URL=$(echo ${HTTP_API_URL} | sed -E 's,(https?://)([^/]+).*,\1\2,')
+  GRAPHQL_API_BASE_URL=$(echo ${GRAPHQL_API_URL} | sed -E 's,(https?://)([^/]+).*,\1\2,')
   WS_API_BASE_URL=$(echo ${WS_API_URL} | sed -E 's,(wss?://)([^/]+).*,\1\2,')
   OG_BASE_URL=${OG_URL}
 
   cat ./config/nginx.conf \
     | sed "s/FRONTEND_HOST/$FRONTEND_HOST/" \
     | sed "s,HTTP_API_BASE_URL,$HTTP_API_BASE_URL,g" \
+    | sed "s,GRAPHQL_API_BASE_URL,$GRAPHQL_API_BASE_URL,g" \
     | sed "s,WS_API_BASE_URL,$WS_API_BASE_URL,g" \
     | sed "s,OG_BASE_URL,$OG_BASE_URL,g" \
     | sed "s,STATIC_RESOURCES_URL,$STATIC_RESOURCES_URL,g" \
