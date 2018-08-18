@@ -10,11 +10,12 @@ import Logo from '../App/Logo'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import { INVITATION_SYSTEM } from '../../config'
 import AllContributors from './AllContributors'
+import Statistics from './Statistics'
 
 
 @connect(state => ({authenticated: isAuthenticated(state)}))
 @translate('home')
-export class Home extends React.PureComponent {
+export default class Home extends React.PureComponent {
   render() {
     const {t} = this.props
 
@@ -56,14 +57,7 @@ export class Home extends React.PureComponent {
         </section>
         <section className="section has-text-centered community content">
           <h1>{t('videoDebate:community')}</h1>
-          <p className="columns is-size-5">
-            <span className="column">
-              <Icon name="user"/> 1840 {t('registeredUsers')}
-            </span>
-            <span className="column">
-              <Icon name="check"/> 706 {t('verifiedStatements')}
-            </span>
-          </p>
+          <Statistics/>
         </section>
         <section className="section has-text-centered contributors content">
           <h1>{t('contributors')}</h1>
