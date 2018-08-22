@@ -6,7 +6,7 @@ import { Icon } from '../Utils'
 import Tag from '../Utils/Tag'
 
 
-const Presence = ({t, nbUsers, nbViewers}) =>
+const Presence = ({t, nbUsers, nbViewers}) => (
   <div className="presence">
     <Tag type="primary">
       <Icon size="small" name="group"/>
@@ -17,6 +17,7 @@ const Presence = ({t, nbUsers, nbViewers}) =>
       <span>{t('presence.viewer', {count: nbViewers})}</span>
     </Tag>
   </div>
+)
 
 Presence.propTypes = {
   nbUsers: PropTypes.number.isRequired,

@@ -10,16 +10,17 @@ const INITIAL_STATE = new Record({
   viewers: new Record({count: 0})(),
   users: new Record({count: 0})(),
 })
+
 const PresenceReducer = handleActions({
   [setPresence]: (state, {payload}) => state.merge(payload),
   [presenceDiff]: (state, {payload: {leaves, joins}}) => {
     return state.withMutations(record => record
-      .updateIn(['viewers', 'count'], x =>
-        (x + joins.viewers.count) - leaves.viewers.count
-      )
-      .updateIn(['users', 'count'], x =>
-        (x + joins.users.count) - leaves.users.count
-      )
+      .updateIn(['viewers', 'count'], x => {
+        return (x + joins.viewers.count) - leaves.viewers.count
+      })
+      .updateIn(['users', 'count'], x => {
+        return (x + joins.users.count) - leaves.users.count
+      })
     )
   }
 }, INITIAL_STATE())
