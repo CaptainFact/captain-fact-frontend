@@ -16,14 +16,14 @@ Staging: <a href="https://travis-ci.org/CaptainFact/captain-fact-frontend"><img 
 
 ## Getting started
 
-The REST API has not been open-sourced yet so you must have been invited to
-the gitlab registry for `./dev/start_api.sh` to run correctly.
+If you're already have the API running locally, a simple `npm install && npm start`
+should be enough. Otherwise follow the procedure below:
 
 * Install (if you don't have them):
   * [Docker](https://docs.docker.com/install/) (to start the API easily)
   * [Node.js](http://nodejs.org)
   * App dependencies: `npm install`
-    
+
 * Run:
   * `./dev/start_api.sh` - Start the API (with an Elixir console attached)
   * `npm start` - Start the frontend

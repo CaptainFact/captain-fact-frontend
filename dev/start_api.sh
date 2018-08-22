@@ -14,7 +14,7 @@
 
 DB_HOSTNAME="postgres_dev"
 DOCKER_DB_IMAGE="captainfact/dev-db:latest"
-DOCKER_API_IMAGE="registry.gitlab.com/captainfact/captain-fact-api/rest:dev"
+DOCKER_API_IMAGE="captainfact/rest-api:dev"
 HTTP_PORT=4000
 HTTPS_PORT=4001
 
