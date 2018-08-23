@@ -6,9 +6,10 @@ import { Link } from 'react-router'
 
 import { MIN_REPUTATION_ADD_SPEAKER } from '../../constants'
 import { videoDebateOnlineUsersCount, videoDebateOnlineViewersCount } from '../../state/video_debate/presence/selectors'
-import { AddSpeakerForm, SpeakerPreview } from '../Speakers'
+import AddSpeakerForm from '../Speakers/AddSpeakerForm'
+import { SpeakerPreview } from '../Speakers/SpeakerPreview'
 import { LoadingFrame, Icon } from '../Utils'
-import ReputationGuard from '../Utils/ReputationGuard'
+import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
 import VideoDebatePlayer from './VideoDebatePlayer'
 import Presence from './Presence'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
@@ -59,20 +60,22 @@ export class ColumnVideo extends React.PureComponent {
             </li>
           </ul>
         </div>
-        {isDebate &&
+        {isDebate && (
           <div>
-            <ReputationGuard requiredRep={MIN_REPUTATION_ADD_SPEAKER}>
-              <div className="actions">
-                <AddSpeakerForm/>
-              </div>
-            </ReputationGuard>
+            <div className="actions">
+              <ReputationGuardTooltip requiredRep={MIN_REPUTATION_ADD_SPEAKER} tooltipPosition="top center">
+                {({hasReputation}) => (
+                  <AddSpeakerForm disabled={!hasReputation}/>
+                )}
+              </ReputationGuardTooltip>
+            </div>
             <div className="speakers-list">
-              {speakers.map(speaker =>
+              {speakers.map(speaker => (
                 <SpeakerPreview key={speaker.id} speaker={speaker}/>
-              )}
+              ))}
             </div>
           </div>
-        }
+        )}
       </div>
     )
   }

@@ -17,14 +17,15 @@ export const ReputationGuardTooltip = ({
   t,
   hasReputation,
   requiredRep,
-  children
+  children,
+  tooltipPosition = 'bottom center'
 }) => {
   const childProps = {hasReputation}
   return hasReputation
     ? children(childProps)
     : (
       <Popup
-        position="bottom center"
+        position={tooltipPosition}
         on="hover"
         trigger={(
           <div className="help-tooltip-trigger">{children(childProps)}</div>
