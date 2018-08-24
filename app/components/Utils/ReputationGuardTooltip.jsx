@@ -13,18 +13,29 @@ const mapStateToProps = (state, {requiredRep}) => ({
   hasReputation: hasReputation(state, requiredRep)
 })
 
+const POPUP_STYLE = {
+  zIndex: 999
+}
+
+const ARROW_STYLE = {
+  background: '#f9fbfb'
+}
+
 export const ReputationGuardTooltip = ({
   t,
   hasReputation,
   requiredRep,
-  children
+  children,
+  tooltipPosition = 'bottom center'
 }) => {
   const childProps = {hasReputation}
   return hasReputation
     ? children(childProps)
     : (
       <Popup
-        position="bottom center"
+        position={tooltipPosition}
+        contentStyle={POPUP_STYLE}
+        arrowStyle={ARROW_STYLE}
         on="hover"
         trigger={(
           <div className="help-tooltip-trigger">{children(childProps)}</div>
