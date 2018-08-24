@@ -17,6 +17,10 @@ const POPUP_STYLE = {
   zIndex: 999
 }
 
+const ARROW_STYLE = {
+  background: '#f9fbfb'
+}
+
 export const ReputationGuardTooltip = ({
   t,
   hasReputation,
@@ -31,6 +35,7 @@ export const ReputationGuardTooltip = ({
       <Popup
         position={tooltipPosition}
         contentStyle={POPUP_STYLE}
+        arrowStyle={ARROW_STYLE}
         on="hover"
         trigger={(
           <div className="help-tooltip-trigger">{children(childProps)}</div>
