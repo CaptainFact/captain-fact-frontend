@@ -3,11 +3,19 @@
 exports[`user doesn't have required reputation 1`] = `
 <Popup
   arrow={true}
-  arrowStyle={Object {}}
+  arrowStyle={
+    Object {
+      "background": "#f9fbfb",
+    }
+  }
   className=""
   closeOnDocumentClick={true}
   closeOnEscape={true}
-  contentStyle={Object {}}
+  contentStyle={
+    Object {
+      "zIndex": 999,
+    }
+  }
   defaultOpen={false}
   lockScroll={false}
   modal={false}
