@@ -13,6 +13,10 @@ const mapStateToProps = (state, {requiredRep}) => ({
   hasReputation: hasReputation(state, requiredRep)
 })
 
+const POPUP_STYLE = {
+  zIndex: 999
+}
+
 export const ReputationGuardTooltip = ({
   t,
   hasReputation,
@@ -26,6 +30,7 @@ export const ReputationGuardTooltip = ({
     : (
       <Popup
         position={tooltipPosition}
+        contentStyle={POPUP_STYLE}
         on="hover"
         trigger={(
           <div className="help-tooltip-trigger">{children(childProps)}</div>
