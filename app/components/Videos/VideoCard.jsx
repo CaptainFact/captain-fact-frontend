@@ -6,20 +6,22 @@ import { Icon, TimeSince } from '../Utils'
 import iterateWithSeparators from '../../lib/iterate_with_separators'
 import CardLayout from '../Utils/CardLayout'
 import RawIcon from '../Utils/RawIcon'
+import { videoURL } from '../../lib/cf_routes'
 
 
 @translate('videoDebate')
 export class VideoCard extends React.PureComponent {
   render() {
     const { t, video } = this.props
-    const { id, title, provider, provider_id } = video
+    const { hash_id, title, provider, provider_id } = video
+    const linkTarget = videoURL(hash_id)
 
     return (
       <div className="column is-one-quarter">
         <CardLayout
           className="video-card"
           image={(
-            <Link to={`/videos/${id}`}>
+            <Link to={linkTarget}>
               <div className="play-overlay">
                 <RawIcon name="play-circle"/>
               </div>
@@ -29,7 +31,7 @@ export class VideoCard extends React.PureComponent {
             </Link>
           )}
           content={(
-            <Link to={`/videos/${id}`}>
+            <Link to={linkTarget}>
               <h4 className="title is-5">
                 { title }
               </h4>
