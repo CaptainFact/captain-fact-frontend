@@ -4,11 +4,10 @@
     "title": "Lutter sans violence ? Jean-Marie Muller [EN DIRECT]",
     "speakers": [
       {
-        "wikidata_item_id": 3167761,
+        "wikidata_item_id": "Q3167761",
         "title": "Philosophe, écrivain",
         "slug": null,
         "picture": null,
-        "is_user_defined": false,
         "id": 6379,
         "full_name": "Jean-Marie Muller",
         "country": "FR"
@@ -18,7 +17,6 @@
         "title": "Chaine Youtube",
         "slug": "Thinkerview",
         "picture": "http://localhost:4000/resources/speakers/6374_thumb.jpg?v=63696142025",
-        "is_user_defined": false,
         "id": 6374,
         "full_name": "Thinkerview",
         "country": null
@@ -40,17 +38,15 @@
         "title": "Chaine Youtube",
         "slug": "Thinkerview",
         "picture": "http://localhost:4000/resources/speakers/6374_thumb.jpg?v=63696142025",
-        "is_user_defined": false,
         "id": 6374,
         "full_name": "Thinkerview",
         "country": null
       },
       {
-        "wikidata_item_id": 17305954,
+        "wikidata_item_id": "Q17305954",
         "title": "Auteur, philosophe et docteur en théologie",
         "slug": null,
         "picture": null,
-        "is_user_defined": false,
         "id": 6378,
         "full_name": "Marc Luyckx Ghisi",
         "country": null
@@ -72,17 +68,15 @@
         "title": "Chaine Youtube",
         "slug": "Thinkerview",
         "picture": "http://localhost:4000/resources/speakers/6374_thumb.jpg?v=63696142025",
-        "is_user_defined": false,
         "id": 6374,
         "full_name": "Thinkerview",
         "country": null
       },
       {
-        "wikidata_item_id": 15973233,
+        "wikidata_item_id": "Q15973233",
         "title": "Médecin, chirurgien, chef d'entreprise",
         "slug": null,
         "picture": null,
-        "is_user_defined": false,
         "id": 6377,
         "full_name": "Laurent Alexandre",
         "country": null
@@ -100,11 +94,10 @@
     "title": "Mounir Mahjoubi, Ministre chargé du Numérique [EN DIRECT]",
     "speakers": [
       {
-        "wikidata_item_id": 28105164,
+        "wikidata_item_id": "Q28105164",
         "title": "Ministre du numérique",
         "slug": "Mounir-Mahjoubi",
         "picture": null,
-        "is_user_defined": false,
         "id": 6375,
         "full_name": "Mounir Mahjoubi",
         "country": null
@@ -114,7 +107,6 @@
         "title": "Chaine Youtube",
         "slug": "Thinkerview",
         "picture": "http://localhost:4000/resources/speakers/6374_thumb.jpg?v=63696142025",
-        "is_user_defined": false,
         "id": 6374,
         "full_name": "Thinkerview",
         "country": null

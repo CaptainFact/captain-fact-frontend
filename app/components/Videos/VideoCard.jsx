@@ -93,14 +93,11 @@ export class VideoCard extends React.PureComponent {
   }
 
   renderSpeakerName(speaker) {
-    if (!speaker.is_user_defined) {
-      return (
-        <Link to={`/s/${speaker.slug || speaker.id}`}>
-          { speaker.full_name }
-        </Link>
-      )
-    }
-    return speaker.full_name
+    return (
+      <Link to={`/s/${speaker.slug || speaker.id}`}>
+        { speaker.full_name }
+      </Link>
+    )
   }
 
   static videoThumb(provider, provider_id) {
