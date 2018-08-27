@@ -13,6 +13,7 @@ import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
 import VideoDebatePlayer from './VideoDebatePlayer'
 import Presence from './Presence'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
+import { videoURL, videoHistoryURL } from '../../lib/cf_routes'
 
 
 @connect(state => ({
@@ -41,13 +42,13 @@ export class ColumnVideo extends React.PureComponent {
         <div className="tabs is-toggle is-fullwidth">
           <ul>
             <li className={classNames({'is-active': isDebate})}>
-              <Link to={`/videos/${video.id}`}>
+              <Link to={videoURL(video.hash_id)}>
                 <Icon size="small" name="check-circle"/>
                 <span>{ t('debate') }</span>
               </Link>
             </li>
             <li className={classNames({'is-active': !isDebate})}>
-              <Link to={`/videos/${video.id}/history`}>
+              <Link to={videoHistoryURL(video.hash_id)}>
                 <Icon size="small" name="history"/>
                 <span>{ t('history') }</span>
               </Link>

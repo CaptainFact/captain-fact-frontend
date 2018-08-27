@@ -27,7 +27,7 @@ export default translate('videoDebate')(({
     <div className="card-header-icon">
       <ReputationGuardTooltip
         requiredRep={MIN_REPUTATION_REMOVE_STATEMENT}
-        tooltipPosition="left"
+        tooltipPosition="left center"
       >
         {({hasReputation}) => (
           <ClickableIcon
@@ -41,7 +41,7 @@ export default translate('videoDebate')(({
       </ReputationGuardTooltip>
       <ReputationGuardTooltip
         requiredRep={MIN_REPUTATION_UPDATE_STATEMENT}
-        tooltipPosition="left"
+        tooltipPosition="left center"
       >
         {({hasReputation}) => (
           <ClickableIcon
