@@ -27,7 +27,8 @@
     "posted_at": "2017-12-03T09:07:34.600875",
     "language": "fr",
     "is_partner": false,
-    "id": "Gyvg"
+    "hash_id": "Gyvg",
+    "id": 4
   },
   {
     "url": "https://www.youtube.com/watch?v=JDRzEdRQF5s",
@@ -57,7 +58,8 @@
     "posted_at": "2017-11-15T11:08:20.616949",
     "language": "fr",
     "is_partner": false,
-    "id": "GRjG"
+    "hash_id": "GRjG",
+    "id": 3
   },
   {
     "url": "https://www.youtube.com/watch?v=QS951xiGGvI",
@@ -87,7 +89,8 @@
     "posted_at": "2017-11-07T19:39:41.969945",
     "language": "fr",
     "is_partner": false,
-    "id": "G3j4"
+    "hash_id": "G3j4",
+    "id": 2
   },
   {
     "url": "https://www.youtube.com/watch?v=TxHqU0ICDr4",
@@ -117,6 +120,7 @@
     "posted_at": "2017-10-31T09:32:41.199113",
     "language": "fr",
     "is_partner": false,
-    "id": "Jzqg"
+    "hash_id": "Jzqg",
+    "id": 1
   }
 ]
