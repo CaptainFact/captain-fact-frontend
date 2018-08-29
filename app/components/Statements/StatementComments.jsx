@@ -5,7 +5,6 @@ import { translate } from 'react-i18next'
 import { CommentsList } from '../Comments'
 
 import { classifyComments } from '../../state/video_debate/comments/selectors'
-import { SpeakerPreview } from '../Speakers/SpeakerPreview'
 import Tag from '../Utils/Tag'
 import VerificationsOriginHeader from './VerificationsOriginHeader'
 import SpeakerComments from './SpeakerComments'

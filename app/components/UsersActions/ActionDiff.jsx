@@ -1,14 +1,17 @@
 import React, { PureComponent } from 'react'
+import { Link } from 'react-router'
 import { Map, List } from 'immutable'
 import { diffWordsWithSpace } from 'diff'
 import titleCase from 'voca/title_case'
 
 import {
   ACTION_DELETE, ACTION_REMOVE, ACTION_RESTORE, ENTITY_COMMENT, ENTITY_SPEAKER,
-  ENTITY_STATEMENT, ENTITY_VIDEO
+  ENTITY_STATEMENT, ENTITY_VIDEO, ENTITY_SOURCED_COMMENT
 } from '../../constants'
 import formatSeconds from '../../lib/seconds_formatter'
-import EntityLink from './EntityLink'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
+import { speakerURL } from '../../lib/cf_routes'
+import { getEntityIdKey } from '../../lib/user_action_entity_id'
 
 
 class ActionDiff extends PureComponent {
@@ -63,15 +66,19 @@ class ActionDiff extends PureComponent {
 
   formatChangeValue(value, key) {
     if (key === 'speaker_id' && value)
-      return <EntityLink entity={ENTITY_SPEAKER} entityId={value} withPrefix={false}/>
+      return <Link to={speakerURL(value)}>#{value}</Link>
     return value
   }
 
   generateDiff(allActions, action) {
-    const entityActions = allActions.filter(a => a.entity_id === action.entity_id && a.entity === action.entity
-    )
-    const actionIdx = entityActions.findIndex(a => a.id === action.id)
+    // Filter to get only actions referencing the same entity
+    const idKey = getEntityIdKey(action.entity)
+    const entityActions = !idKey ? [] : allActions.filter(a => {
+      return a.entity === action.entity && a[idKey] === action[idKey]
+    })
+
     // Get previous state
+    const actionIdx = entityActions.findIndex(a => a.id === action.id)
     let prevState = new Map()
     if (actionIdx + 1 < entityActions.size)
       prevState = this.buildReferenceEntity(entityActions.slice(actionIdx + 1))
@@ -119,19 +126,18 @@ class ActionDiff extends PureComponent {
       return this.buildReferenceStatement(actions, base)
     if (entity === ENTITY_SPEAKER)
       return this.buildReferenceSpeaker(actions, base)
-    if (entity === ENTITY_VIDEO || entity === ENTITY_COMMENT)
-      return new Map()
+    return new Map()
   }
 
   buildReferenceStatement(actions, base = null) {
     if (!base)
-      base = new Map({ id: actions.last().entity_id })
+      base = new Map({ id: actions.last().statementId })
     return this.completeReference(base, actions, ['text', 'time', 'speaker_id'])
   }
 
   buildReferenceSpeaker(actions, base = null) {
     if (!base)
-      base = new Map({ id: actions.first().entity_id })
+      base = new Map({ id: actions.first().speakerId })
     return this.completeReference(base, actions, ['full_name', 'title'])
   }
 
@@ -160,7 +166,7 @@ class ActionDiff extends PureComponent {
     if (key === 'time')
       return value ? formatSeconds(value) : ''
     if (key === 'source' || key === 'url')
-      return <a href={value} target="_blank">{value}</a>
+      return <ExternalLinkNewTab href={value}>{value}</ExternalLinkNewTab>
     return value
   }
 }

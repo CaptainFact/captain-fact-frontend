@@ -12,9 +12,10 @@ import UserAppellation from '../Users/UserAppellation'
 import { Icon } from '../Utils/Icon'
 import ActionDiff from './ActionDiff'
 import ActionIcon from './ActionIcon'
-import EntityLink from './EntityLink'
+import ActionEntityLink from './ActionEntityLink'
 import { ACTION_DELETE, ACTION_REMOVE, MIN_REPUTATION_RESTORE_ENTITY } from '../../constants'
 import { LoadingFrame } from '../Utils/LoadingFrame'
+import Button from '../Utils/Button'
 
 
 @translate('history')
@@ -60,19 +61,15 @@ class ActionsTable extends React.PureComponent {
   }
 
   renderCompareAllButton = isMostlyComparing => {
-    let onClick = null
-    if (!isMostlyComparing)
-      onClick = () => this.setState({expendedDiffs: this.props.actions.map(a => a.id)})
-    else
-      onClick = () => this.setState({expendedDiffs: this.state.expendedDiffs.clear()})
     return (
-      <a
-        className="button"
-        title={this.props.t(isMostlyComparing ? 'hideAll' : 'compareAll')}
-        onClick={onClick}
+      <Button onClick={
+        isMostlyComparing
+          ? () => this.setState({expendedDiffs: this.state.expendedDiffs.clear()})
+          : () => this.setState({expendedDiffs: this.props.actions.map(a => a.id)})
+      }
       >
-        {this.props.t('changes')}
-      </a>
+        {this.props.t(isMostlyComparing ? 'hideAll' : 'compareAll')}
+      </Button>
     )
   }
 
@@ -102,30 +99,25 @@ class ActionsTable extends React.PureComponent {
         <td><ActionIcon type={action.type}/><strong> { t(`action.${action.type}`) }</strong></td>
         {showEntity && (
           <td>
-            <EntityLink
-              entity={action.entity}
-              entityId={action.entity_id}
-              context={action.context}
-            />
+            <ActionEntityLink action={action}/>
           </td>
         )}
         <td>
-          <a className="button" onClick={() => this.toggleDiff(action, isDiffing)}>
+          <Button onClick={() => this.toggleDiff(action, isDiffing)}>
             <Icon size="small" name="indent"/>
             <span>{ t(isDiffing ? 'compare_hide' : 'compare_show') } </span>
-          </a>
+          </Button>
         </td>
-        {canRestore
-          && (
-<td>
-            {reversible
-              && <a className="button" onClick={() => this.props.revertVideoDebateUserAction(action)}>
+        {canRestore && (
+          <td>
+            {reversible && (
+              <Button onClick={() => this.props.revertVideoDebateUserAction(action)}>
                 <Icon size="small" name="undo"/>
                 <span>{t('revert')}</span>
-              </a>
-            }
+              </Button>
+            )}
           </td>
-)
+        )
         }
         {/* <td> */}
         {/* <a className="button" disabled> */}
@@ -146,8 +138,8 @@ class ActionsTable extends React.PureComponent {
     : <span className="has-text-grey-lighter is-italic">{this.props.t('deletedUser')}</span>)
 
   renderDiffLine = action => (
-        <tr key={`${action.id}-diff`}>
-  <td colSpan={this.getNbCols()} style={{padding: 0}}>
+    <tr key={`${action.id}-diff`}>
+      <td colSpan={this.getNbCols()} style={{padding: 0}}>
         <ActionDiff action={action} allActions={this.props.actions}/>
       </td>
     </tr>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
+import titleCase from 'voca/title_case'
 
 import Modal from '../Modal/Modal'
 import { Icon } from '../Utils/Icon'
@@ -31,18 +32,26 @@ export class ModalHistory extends React.PureComponent {
   render() {
     const { entity, entityId, actions, isLoading, t, ...props } = this.props
     return (
-      <Modal className="modal modal-history"
-             title={this.renderTitle(t, entity, entityId)}
-             handleCloseClick={ this.props.popModal }
-             {...props}>
-        <ActionsTable actions={actions} isLoading={isLoading} showRestore={false} showEntity={false}/>
+      <Modal
+        className="modal modal-history"
+        title={this.renderTitle(t, entity, entityId)}
+        handleCloseClick={this.props.popModal}
+        {...props}
+      >
+        <ActionsTable
+          actions={actions}
+          isLoading={isLoading}
+          showRestore={false}
+          showEntity={false}
+        />
       </Modal>
     )
   }
 
-  renderTitle = (t, entity, entityId) =>
+  renderTitle = (t, entity, entityId) => (
     <div>
       <Icon name="history"/>
-      <span> {t(`this.${entity}`)} #{entityId}</span>
+      <span> {titleCase(t(`this.${entity}`))} #{entityId}</span>
     </div>
+  )
 }

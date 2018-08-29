@@ -8,11 +8,11 @@ import Tag from '../Utils/Tag'
 import ActionDiff from './ActionDiff'
 import ActionIcon from './ActionIcon'
 import { Icon } from '../Utils/Icon'
-import EntityLink from './EntityLink'
+import ActionEntityLink from './ActionEntityLink'
 
 
 const UserAction = ({ action, className, t, withoutUser }) => {
-  const { user, type, entity, entityId, time, targetUser, context } = action
+  const { user, type, time, targetUser } = action
 
   return (
     <div className={classNames(className, 'user-action', 'card')}>
@@ -32,7 +32,7 @@ const UserAction = ({ action, className, t, withoutUser }) => {
           </strong>
         </span>
         <span className="entity-type">
-          <EntityLink entity={entity} entityId={entityId} context={context} />
+          <ActionEntityLink action={action} />
         </span>
         {targetUser
           && <span>de <UserAppellation user={targetUser}/></span>
