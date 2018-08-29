@@ -34,7 +34,7 @@ export class SpeakerPage extends React.PureComponent {
     const { speaker: { wikidata_item_id, slug }, userLocale } = this.props
 
     if (slug && slug !== this.props.params.slug_or_id)
-      this.props.router.push(`/s/${slug}`)
+      this.props.router.replace(`/s/${slug}`)
 
     // Target speaker changed
     if (this.props.params.slug_or_id !== oldProps.params.slug_or_id) {
