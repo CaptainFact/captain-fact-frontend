@@ -11,7 +11,7 @@ export default translate('videoDebate')(({t, speaker, comments}) => {
     <div className="self-comments columns is-gapless">
       <div className="column is-narrow">
         <VerificationsOriginHeader iconName="user" label={t('speaker.one')} />
-        <SpeakerPreview speaker={speaker} withoutActions/>
+        {speaker && <SpeakerPreview speaker={speaker} withoutActions/>}
       </div>
       <div className="column">
         <CommentsList comments={comments}/>
