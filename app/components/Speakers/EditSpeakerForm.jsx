@@ -2,9 +2,11 @@ import React from 'react'
 import { translate } from 'react-i18next'
 import { Field, reduxForm } from 'redux-form'
 
-import { renderFieldWithLabel, validateLength, cleanStr } from '../FormUtils'
+import { validateLength } from '../../lib/form_validators'
 import { SPEAKER_NAME_LENGTH, SPEAKER_TITLE_LENGTH } from '../../constants'
 import capitalizeName from '../../lib/name_formatter'
+import ControlInputWithLabel from '../FormUtils/ControlInputWithLabel'
+import { cleanStr } from '../../lib/clean_str'
 
 
 const validate = ({full_name, title}) => {
@@ -25,7 +27,7 @@ export default class EditSpeakerForm extends React.PureComponent {
             className="input"
             name="full_name"
             type="text"
-            component={renderFieldWithLabel}
+            component={ControlInputWithLabel}
             label={this.props.t('speaker.fullName')}
             placeholder="Barack Obama, Dark Vador..."
             normalize={s => capitalizeName(cleanStr(s))}
@@ -34,7 +36,7 @@ export default class EditSpeakerForm extends React.PureComponent {
             className="input"
             name="title"
             type="text"
-            component={renderFieldWithLabel}
+            component={ControlInputWithLabel}
             label={this.props.t('speaker.title')}
             normalize={cleanStr}
             placeholder={this.props.t('speaker.titlePlaceholder')}

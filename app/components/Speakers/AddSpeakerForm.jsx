@@ -6,11 +6,12 @@ import { AsyncCreatable } from 'react-select'
 import debounce from 'debounce-promise'
 import latinise from 'voca/latinise'
 
-import { cleanStr, checkLength } from '../FormUtils'
+import { checkLength } from '../../lib/form_validators'
 import { SocketApi } from '../../API'
 import { SPEAKER_NAME_LENGTH } from '../../constants'
 import { addSpeaker } from '../../state/video_debate/effects'
 import capitalizeName from '../../lib/name_formatter'
+import { cleanStr } from '../../lib/clean_str'
 
 
 const searchSpeakerRequest = debounce((query) => (

@@ -7,7 +7,7 @@ import Modal from '../Modal/Modal'
 import {popModal} from '../../state/modals/reducer'
 import {Icon} from '../Utils/Icon'
 import {flashErrorMsg, flashSuccessMsg} from '../../state/flashes/reducer'
-import {FieldWithButton} from '../FormUtils/index'
+import FieldWithButton from '../FormUtils/FieldWithButton'
 import {shiftStatements} from '../../state/video_debate/statements/effects'
 
 

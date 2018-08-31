@@ -5,7 +5,7 @@ import { translate } from 'react-i18next'
 import isURL from 'validator/lib/isURL'
 import { withRouter } from 'react-router'
 
-import { renderField, validateLength, cleanStrMultiline } from '../FormUtils'
+import { validateLength } from '../../lib/form_validators'
 import { COMMENT_LENGTH, USER_PICTURE_LARGE } from '../../constants'
 import TextareaAutosize from '../FormUtils/TextareaAutosize'
 import CloseButton from '../Utils/CloseButton'
@@ -20,6 +20,8 @@ import { CommentDisplay } from './CommentDisplay'
 import TextareaLengthCounter from '../FormUtils/TextareaLengthCounter'
 import { isAuthenticated } from '../../state/users/current_user/selectors'
 import { flashErrorUnauthenticated } from '../../state/flashes/reducer'
+import ControlInput from '../FormUtils/ControlInput'
+import { cleanStrMultiline } from '../../lib/clean_str'
 
 
 const validate = ({ source, text }) => {
@@ -120,7 +122,7 @@ export class CommentForm extends React.Component {
             />
             <div className="level">
               <Field
-                component={renderField}
+                component={ControlInput}
                 name="source.url"
                 label={t('comment.addSource')}
                 normalize={s => s.trim()}

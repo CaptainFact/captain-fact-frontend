@@ -7,7 +7,7 @@ import trim from 'voca/trim'
 import ReactPlayer from 'react-player'
 
 import { youtubeRegex } from '../../lib/url_utils'
-import { FieldWithButton } from '../FormUtils'
+import FieldWithButton from '../FormUtils/FieldWithButton'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { postVideo, searchVideo } from '../../state/videos/effects'
 import { isAuthenticated } from '../../state/users/current_user/selectors'

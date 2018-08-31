@@ -2,16 +2,18 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import SpeakersSelect from '../Speakers/SpeakersSelect'
+import { translate } from 'react-i18next'
 
+import SpeakersSelect from '../Speakers/SpeakersSelect'
 import { Icon, LinkWithIcon } from '../Utils'
 import TimeDisplay from '../Utils/TimeDisplay'
-import { renderTextareaField, validateFieldLength, cleanStrMultiline } from '../FormUtils'
+import { validateFieldLength } from '../../lib/form_validators'
 import { STATEMENT_LENGTH } from '../../constants'
-import { translate } from 'react-i18next'
 import { forcePosition } from '../../state/video_debate/video/reducer'
 import { decrementFormCount, incrementFormCount, setScrollTo, STATEMENT_FORM_NAME } from '../../state/video_debate/statements/reducer'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
+import ControlTextarea from '../FormUtils/ControlTextarea'
+import { cleanStrMultiline } from '../../lib/clean_str'
 
 
 @connect(({VideoDebate: {video, statements}}) => ({
@@ -95,7 +97,7 @@ export class StatementForm extends React.PureComponent {
           <h3 className="statement-text">
             <Field
               name="text"
-              component={renderTextareaField}
+              component={ControlTextarea}
               normalize={cleanStrMultiline}
               maxLength={STATEMENT_LENGTH[1]}
               validate={value => validateFieldLength(t, value, STATEMENT_LENGTH)}
