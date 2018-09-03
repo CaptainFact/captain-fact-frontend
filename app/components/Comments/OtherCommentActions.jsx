@@ -20,6 +20,7 @@ const OtherCommentActions = ({t, isFlagged, handleReply, handleFlag}) => (
         title={isFlagged ? t('actions.flagged') : t('misc.flags')}
         iconName="flag"
         onClick={handleFlag}
+        disabled={isFlagged}
       />
     </ReputationGuard>
   </React.Fragment>

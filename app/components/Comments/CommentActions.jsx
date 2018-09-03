@@ -8,6 +8,7 @@ import CommentAction from './CommentAction'
 const CommentActions = ({
   t,
   isOwnComment,
+  isFlagged,
   nbReplies,
   repliesCollapsed,
   handleReply,
@@ -26,6 +27,7 @@ const CommentActions = ({
         <OtherCommentActions
           handleReply={handleReply}
           handleFlag={handleFlag}
+          isFlagged={isFlagged}
         />
       )
     }
