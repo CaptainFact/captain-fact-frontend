@@ -4,6 +4,7 @@ import { createAction, handleActions, combineActions } from 'redux-actions'
 import parseDateTime from '../../lib/parse_datetime'
 import UserAction from './record'
 import { resetVideoDebate } from '../video_debate/actions'
+import { getEntityIDFromAction } from '../../lib/user_action_entity_id'
 
 export const setLoading = createAction('VIDEO_DEBATE_HISTORY/SET_LOADING')
 export const reset = createAction('VIDEO_DEBATE_HISTORY/RESET')
@@ -47,7 +48,7 @@ export default UsersActionsReducer
 function getLastActions(actions) {
   const lastActionsMap = {}
   actions.forEach(action => {
-    const entityKey = `${action.entity}:${action.entity_id}`
+    const entityKey = `${action.entity}:${getEntityIDFromAction(action)}`
     if (!lastActionsMap[entityKey])
       lastActionsMap[entityKey] = action.id
   })

@@ -28,6 +28,7 @@ export const ENTITY_VIDEO = 1
 export const ENTITY_SPEAKER = 2
 export const ENTITY_STATEMENT = 3
 export const ENTITY_COMMENT = 4
+export const ENTITY_SOURCED_COMMENT = 5
 
 // Required reputations
 export const MIN_REPUTATION_ADD_STATEMENT = -5

@@ -21,10 +21,12 @@ const QUERY = gql`
           id
           type
           entity
-          entityId
           time
           changes
-          context
+          videoHashId
+          statementId
+          commentId
+          speakerId
           targetUser {
             username
             name
