@@ -2,8 +2,8 @@
 <h1 align="center"><a href="https://captainfact.io">CaptainFact.io</a></h1>
 <p align="center"><a href="https://discord.gg/2Qd7hMz" title="Discord"><img src="https://discordapp.com/api/guilds/416782744748687361/widget.png" alt="Discord"></a>
 <a href="https://twitter.com/CaptainFact_io" title="Twitter"><img src="https://img.shields.io/twitter/follow/CaptainFact_io.svg?style=social&label=Follow"></a>
+<a href="https://opencollective.com/captainfact_io" title="Backers on Open Collective"><img src="https://opencollective.com/captainfact_io/backers/badge.svg"></a>
 <a href="./LICENSE"><img src="https://img.shields.io/github/license/CaptainFact/captain-fact-frontend.svg" alt="AGPL3"></a>
-<a href="https://trello.com/b/5s6F5iTv/development"><img src="https://img.shields.io/badge/Trello-Development-blue.svg" alt="Trello"></a>
 <a href="https://travis-ci.org/CaptainFact/captain-fact-frontend"><img src="https://travis-ci.org/CaptainFact/captain-fact-frontend.svg?branch=travis-configuration" alt="Build Status" /></a>
 <a href='https://coveralls.io/github/CaptainFact/captain-fact-frontend?branch=master'><img src='https://coveralls.io/repos/github/CaptainFact/captain-fact-frontend/badge.svg?branch=master' alt='Coverage Status' /></a>
 </p>
@@ -67,6 +67,8 @@ app
 
 ## Linked projects
 
+* [Community discussions and documentation](https://github.com/CaptainFact/captain-fact/)
+* [API](https://github.com/CaptainFact/captain-fact-api)
 * [Extension](https://github.com/CaptainFact/captain-fact-extension)
 * [Overlay injector](https://github.com/CaptainFact/captain-fact-overlay-injector)
 
