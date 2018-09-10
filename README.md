@@ -72,6 +72,10 @@ app
 * [Extension](https://github.com/CaptainFact/captain-fact-extension)
 * [Overlay injector](https://github.com/CaptainFact/captain-fact-overlay-injector)
 
+# Feature requests
+
+[![Feature Requests](http://feathub.com/CaptainFact/captain-fact?format=svg)](http://feathub.com/CaptainFact/captain-fact)
+
 ## License
 
 GNU AFFERO GENERAL PUBLIC LICENSE Version 3
