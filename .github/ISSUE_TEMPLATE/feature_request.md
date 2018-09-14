@@ -4,6 +4,8 @@ about: Suggest an idea for this project
 
 ---
 
+**Ensure that the feature request is not already listed on [Feathub](https://feathub.com/CaptainFact/captain-fact)**
+
 **Is your feature request related to a problem? Please describe.**
 A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
 
