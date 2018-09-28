@@ -6,7 +6,8 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import App from './components/App'
 import Home from './components/Home/Home'
 import { NotFound, BrowserExtensionsPage } from './components/Pages'
-import { PublicVideos, AddVideoForm } from './components/Videos'
+import { AddVideoForm } from './components/Videos'
+import VideosIndexPage from './components/Videos/VideosIndexPage'
 import { VideoDebate } from './components/VideoDebate'
 import Help from './components/Help/Help'
 import UserProfile from './components/Users/UserProfile'
@@ -28,30 +29,30 @@ const CFRouter = () => (
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Home} />
-      <Route path="/signup" component={SignupForm}/>
-      <Route path="/signup/callback/:provider" component={ThirdPartyCallback}/>
-      <Route path="/login" component={LoginForm}/>
-      <Route path="/login/callback/:provider" component={ThirdPartyCallback}/>
-      <Route path="/confirm_email/:token" component={ConfirmEmail}/>
-      <Route path="/reset_password" component={ResetPasswordRequestForm}/>
-      <Route path="/reset_password/confirm/:token" component={ResetPasswordConfirmForm}/>
-      <Route path="/newsletter/unsubscribe/:token" component={NewsletterSubscription}/>
+      <Route path="/signup" component={SignupForm} />
+      <Route path="/signup/callback/:provider" component={ThirdPartyCallback} />
+      <Route path="/login" component={LoginForm} />
+      <Route path="/login/callback/:provider" component={ThirdPartyCallback} />
+      <Route path="/confirm_email/:token" component={ConfirmEmail} />
+      <Route path="/reset_password" component={ResetPasswordRequestForm} />
+      <Route path="/reset_password/confirm/:token" component={ResetPasswordConfirmForm} />
+      <Route path="/newsletter/unsubscribe/:token" component={NewsletterSubscription} />
       <Route path="/u/:username" component={User}>
-        <IndexRoute component={UserProfile}/>
-        <Route path="/u/:username/activity" component={ActivityLog}/>
-        <Route path="/u/:username/settings" component={UserSettings}/>
+        <IndexRoute component={UserProfile} />
+        <Route path="/u/:username/activity" component={ActivityLog} />
+        <Route path="/u/:username/settings" component={UserSettings} />
       </Route>
-      <Route path="/videos" component={PublicVideos}/>
-      <Route path="/videos/add" component={AddVideoForm}/>
-      <Route path="/videos/add/:videoUrl" component={AddVideoForm}/>
-      <Route path="/videos/:videoId" component={VideoDebate} view="debate"/>
-      <Route path="/videos/:videoId/history" component={VideoDebate} view="history"/>
-      <Route path="/s/:slug_or_id" component={SpeakerPage}/>
-      <Route path="/help" component={Help}/>
-      <Route path="/help/*" component={Help}/>
-      <Route path="/extension" component={BrowserExtensionsPage}/>
-      <Route path="/moderation" component={Moderation}/>
-      <Route path="*" component={NotFound}/>
+      <Route path="/videos" component={VideosIndexPage} />
+      <Route path="/videos/add" component={AddVideoForm} />
+      <Route path="/videos/add/:videoUrl" component={AddVideoForm} />
+      <Route path="/videos/:videoId" component={VideoDebate} view="debate" />
+      <Route path="/videos/:videoId/history" component={VideoDebate} view="history" />
+      <Route path="/s/:slug_or_id" component={SpeakerPage} />
+      <Route path="/help" component={Help} />
+      <Route path="/help/*" component={Help} />
+      <Route path="/extension" component={BrowserExtensionsPage} />
+      <Route path="/moderation" component={Moderation} />
+      <Route path="*" component={NotFound} />
     </Route>
   </Router>
 )
