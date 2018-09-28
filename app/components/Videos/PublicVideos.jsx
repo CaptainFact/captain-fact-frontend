@@ -15,6 +15,10 @@ import { changeVideosLanguageFilter, setVideosOnlyFromPartners } from '../../sta
 import LanguageSelector from '../App/LanguageSelector'
 import FilterOnlyFromPartners from './FilterOnlyFromPartners'
 import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
+import PaginationMenu from '../Utils/PaginationMenu'
+import FieldWithLabelAddon from '../FormUtils/FieldWithLabelAddon'
+import VideosFilterBar from './VideosFilterBar'
+import AddVideoBtn from './AddVideoBtn'
 
 
 @connect(state => ({
@@ -42,7 +46,8 @@ export class PublicVideos extends React.PureComponent {
   }
 
   render() {
-    const {t} = this.props
+    const { t, languageFilter, onlyFromPartners } = this.props
+
     return (
       <div className="videos-page">
         <section className="header">
@@ -50,46 +55,26 @@ export class PublicVideos extends React.PureComponent {
             <Icon name="television" />
             <span> {capitalize(t('entities.video_plural'))}</span>
           </h2>
-          <ReputationGuardTooltip requiredRep={MIN_REPUTATION_ADD_VIDEO}>
-            {({hasReputation}) => (
-              <Link to="/videos/add" className="button is-primary" disabled={!hasReputation}>
-                <Icon name="plus-circle" />
-                <span>{t('videos.add')}</span>
-              </Link>
-            )}
-          </ReputationGuardTooltip>
+          <AddVideoBtn />
         </section>
-        {this.renderFilterBar()}
+        <VideosFilterBar
+          onLanguageChange={(v) => this.onVideosFilterChange(v)}
+          onSourceChange={setVideosOnlyFromPartners}
+          language={languageFilter}
+          source={onlyFromPartners}
+        />
         {this.renderContent()}
       </div>
     )
   }
 
-  renderFilterBar() {
+  renderPaginationMenu() {
     return (
-      <nav className="level videos-filter">
-        <div className="level-left" />
-        <div className="level-right">
-          <div className="filter">
-            <span>{this.props.t('misc.source')}{this.props.t('misc.colon')}</span>
-            <FilterOnlyFromPartners
-              value={this.props.onlyFromPartners}
-              onChange={this.props.setVideosOnlyFromPartners}
-            />
-          </div>
-          <div className="filter">
-            <span>{this.props.t('misc.languageFilter')}{this.props.t('misc.colon')}</span>
-            <LanguageSelector
-              additionalOptions={new Map({
-                all: this.props.t('misc.all'),
-                unknown: this.props.t('misc.unknown')
-              })}
-              handleChange={(v) => this.onVideosFilterChange(v)}
-              value={this.props.languageFilter || 'all'}
-            />
-          </div>
-        </div>
-      </nav>
+      <PaginationMenu
+        currentPage={1}
+        total={5}
+        isRounded
+      />
     )
   }
 
@@ -101,7 +86,14 @@ export class PublicVideos extends React.PureComponent {
     if (this.props.videos.size === 0)
       return <h2>{this.props.t('errors:client.noVideoAvailable')}</h2>
 
-    return <VideosGrid videos={this.props.videos} />
+    const paginationMenu = this.renderPaginationMenu()
+    return (
+      <div>
+        {paginationMenu}
+        <VideosGrid videos={this.props.videos} />
+        {paginationMenu}
+      </div>
+    )
   }
 
   onVideosFilterChange(value) {
