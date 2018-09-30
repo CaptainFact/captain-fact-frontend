@@ -7,23 +7,24 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
 import { ErrorView } from '../Utils/ErrorView'
 import { VideosGrid } from './VideosGrid'
 import PaginationMenu from '../Utils/PaginationMenu'
+import { ALL_VIDEOS, ONLY_PARTNERS } from '../../constants'
 
 
 const QUERY = gql`
-  query VideosIndex($offset: Int!, $limit: Int!) {
-    videos(limit: $limit, offset: $offset) {
+  query VideosIndex($offset: Int!, $limit: Int!, $filters: VideoFilter) {
+    videos(limit: $limit, offset: $offset, filters: $filters) {
       pageNumber
       totalPages
       entries {
         hash_id: hashId
         provider_id: providerId
         provider
+        title
         speakers {
           full_name: fullName
           id
           slug
         }
-        title
       }
     }
   }
@@ -31,11 +32,22 @@ const QUERY = gql`
 
 const INITIAL_VIDEOS = { pageNumber: 1, totalPages: 1, entries: [] }
 
-const PaginatedVideosContainer = ({ t, currentPage = 1 }) => {
+const buildFiltersFromProps = ({ language, source }) => {
+  const filters = {}
+  const onlyPartnersFilter = source && source !== ALL_VIDEOS
+  if (language)
+    filters.language = language
+  if (onlyPartnersFilter)
+    filters.is_partner = source === ONLY_PARTNERS
+  return filters
+}
+
+const PaginatedVideosContainer = ({ t, currentPage = 1, ...props }) => {
+  const filters = buildFiltersFromProps(props)
   return (
     <Query
       query={QUERY}
-      variables={{ offset: currentPage, limit: 16 }}
+      variables={{ offset: currentPage, limit: 16, filters }}
       fetchPolicy="network-only"
     >
       {

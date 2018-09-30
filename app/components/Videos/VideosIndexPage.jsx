@@ -5,13 +5,8 @@ import { translate } from 'react-i18next'
 import capitalize from 'voca/capitalize'
 
 import { ALL_VIDEOS, ONLY_PARTNERS, ONLY_COMMUNITY } from '../../constants'
-import { VideosGrid } from './VideosGrid'
-import { LoadingFrame, Icon } from '../Utils'
-import { fetchPublicVideos } from '../../state/videos/effects'
-import { ErrorView } from '../Utils/ErrorView'
-import { reset } from '../../state/videos/reducer'
+import { Icon } from '../Utils'
 import { changeVideosLanguageFilter, setVideosOnlyFromPartners } from '../../state/user_preferences/reducer'
-import PaginationMenu from '../Utils/PaginationMenu'
 import VideosFilterBar from './VideosFilterBar'
 import AddVideoBtn from './AddVideoBtn'
 import PaginatedVideosContainer from './PaginatedVideosContainer'
@@ -24,7 +19,7 @@ import PaginatedVideosContainer from './PaginatedVideosContainer'
 @translate('main')
 export default class VideosIndexPage extends React.PureComponent {
   render() {
-    const { t, languageFilter, onlyFromPartners, location } = this.props
+    const { t, languageFilter, onlyFromPartners, setVideosOnlyFromPartners, location } = this.props
     const currentPage = parseInt(location.query.page) || 1
 
     return (
@@ -37,8 +32,8 @@ export default class VideosIndexPage extends React.PureComponent {
           <AddVideoBtn />
         </section>
         <VideosFilterBar
-          onLanguageChange={(v) => this.onVideosFilterChange(v)}
-          onSourceChange={setVideosOnlyFromPartners}
+          onLanguageChange={v => this.onVideosFilterChange(v)}
+          onSourceChange={v => setVideosOnlyFromPartners(v)}
           language={languageFilter}
           source={onlyFromPartners}
         />
