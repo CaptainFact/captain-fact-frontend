@@ -20,6 +20,8 @@ const QUERY = gql`
         provider_id: providerId
         provider
         title
+        insertedAt
+        isPartner
         speakers {
           full_name: fullName
           id
@@ -32,17 +34,19 @@ const QUERY = gql`
 
 const INITIAL_VIDEOS = { pageNumber: 1, totalPages: 1, entries: [] }
 
-const buildFiltersFromProps = ({ language, source }) => {
+const buildFiltersFromProps = ({ language, source, speakerID }) => {
   const filters = {}
   const onlyPartnersFilter = source && source !== ALL_VIDEOS
   if (language)
     filters.language = language
   if (onlyPartnersFilter)
     filters.is_partner = source === ONLY_PARTNERS
+  if (speakerID)
+    filters.speaker_id = speakerID
   return filters
 }
 
-const PaginatedVideosContainer = ({ t, currentPage = 1, ...props }) => {
+const PaginatedVideosContainer = ({ t, currentPage = 1, baseURL, ...props }) => {
   const filters = buildFiltersFromProps(props)
   return (
     <Query
@@ -68,7 +72,7 @@ const PaginatedVideosContainer = ({ t, currentPage = 1, ...props }) => {
                 const urlParams = page > 1 ? `?page=${page}` : ''
                 return (
                   <Link
-                    to={`videos${urlParams}`}
+                    to={`${baseURL}${urlParams}`}
                     className="button"
                     {...props}
                   />

@@ -38,6 +38,7 @@ export default class VideosIndexPage extends React.PureComponent {
           source={onlyFromPartners}
         />
         <PaginatedVideosContainer
+          baseURL={this.props.location.pathname}
           currentPage={currentPage}
           language={languageFilter}
           source={onlyFromPartners}
