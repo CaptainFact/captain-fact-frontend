@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
 
@@ -6,28 +7,26 @@ import { SpeakerPreview } from './SpeakerPreview'
 import { fetchSpeaker, fetchWikiDataInfo } from '../../state/speakers/effects'
 import { ErrorView } from '../Utils/ErrorView'
 import { Icon } from '../Utils/Icon'
-import { VideosGrid } from '../Videos/VideosGrid'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { fetchPublicVideos } from '../../state/videos/effects'
 import { reset } from '../../state/speakers/reducer'
 import { reset as resetVideos } from '../../state/videos/reducer'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
+import PaginatedVideosContainer from '../Videos/PaginatedVideosContainer'
 
 
+@withRouter
 @connect(state => ({
   speaker: state.Speakers.currentSpeaker,
   links: state.Speakers.currentSpeakerLinks,
-  videos: state.Videos.data,
   speakerLoading: state.Speakers.isLoading,
   wikiLoading: state.Speakers.isLoadingWiki,
-  videosLoading: state.Videos.isLoading,
   error: state.Speakers.error,
   userLocale: state.UserPreferences.locale
 }), { fetchSpeaker, fetchWikiDataInfo, fetchPublicVideos, reset, resetVideos })
 export class SpeakerPage extends React.PureComponent {
   componentDidMount() {
     this.props.fetchSpeaker(this.props.params.slug_or_id)
-    this.props.fetchPublicVideos({ speaker: this.props.params.slug_or_id })
   }
 
   componentDidUpdate(oldProps) {
@@ -39,9 +38,7 @@ export class SpeakerPage extends React.PureComponent {
     // Target speaker changed
     if (this.props.params.slug_or_id !== oldProps.params.slug_or_id) {
       this.props.reset()
-      this.props.resetVideos()
       this.props.fetchSpeaker(this.props.params.slug_or_id)
-      this.props.fetchPublicVideos({ speaker: this.props.params.slug_or_id })
     }
 
     // Speaker loaded, fetch its wikidata infos
@@ -51,7 +48,6 @@ export class SpeakerPage extends React.PureComponent {
 
   componentWillUnmount() {
     this.props.reset()
-    this.props.resetVideos()
   }
 
   render() {
@@ -81,9 +77,17 @@ export class SpeakerPage extends React.PureComponent {
   }
 
   renderVideos() {
-    if (this.props.videosLoading)
+    if (this.props.videosLoading || !this.props.speaker)
       return <LoadingFrame />
-    return <VideosGrid videos={this.props.videos} />
+
+    const currentPage = parseInt(this.props.location.query.page) || 1
+    return (
+      <PaginatedVideosContainer
+        baseURL={this.props.location.pathname}
+        currentPage={currentPage}
+        speakerID={this.props.speaker.id}
+      />
+    )
   }
 
   renderLink(url, siteName) {

@@ -23,17 +23,17 @@ export class VideoCard extends React.PureComponent {
           image={(
             <Link to={linkTarget}>
               <div className="play-overlay">
-                <RawIcon name="play-circle"/>
+                <RawIcon name="play-circle" />
               </div>
               <figure className="image is-16by9">
-                <img alt="" src={VideoCard.videoThumb(provider, provider_id)}/>
+                <img alt="" src={VideoCard.videoThumb(provider, provider_id)} />
               </figure>
             </Link>
           )}
           content={(
             <Link to={linkTarget}>
               <h4 className="title is-5">
-                { title }
+                {title}
               </h4>
             </Link>
           )}
@@ -43,17 +43,15 @@ export class VideoCard extends React.PureComponent {
     )
   }
 
-  renderVideoMetadata({speakers, posted_at, is_partner}, t) {
+  renderVideoMetadata({ speakers, insertedAt, isPartner }, t) {
     return (
       <div className="video-metadata">
         <div>
-          {this.renderAddedByLabel(is_partner, t)}
+          {this.renderAddedByLabel(isPartner, t)}
           &nbsp;
-          <TimeSince time={posted_at}/>
+          <TimeSince time={insertedAt} />
         </div>
-        {speakers.size > 0
-          && this.renderSpeakersList(speakers, t)
-        }
+        {speakers.length > 0 && this.renderSpeakersList(speakers, t)}
       </div>
     )
   }
@@ -62,34 +60,34 @@ export class VideoCard extends React.PureComponent {
     return isPartner ? (
       <span className="added-by">
         <Icon name="star" />
-        <strong>{t('video.addedBy', {userType: '$t(video.partner)'})}</strong>
+        <strong>{t('video.addedBy', { userType: '$t(video.partner)' })}</strong>
       </span>
     ) : (
       <span className="added-by">
         <Icon name="user" />
-        <span>{t('video.addedBy', {userType: '$t(video.user)'})}</span>
+        <span>{t('video.addedBy', { userType: '$t(video.user)' })}</span>
       </span>
     )
   }
 
   renderSpeakersList(speakers, t) {
     const speakerComponentsList = []
-    const speakerIterator = iterateWithSeparators(speakers, speakers.size, t)
+    const speakerIterator = iterateWithSeparators(speakers, speakers.length, t)
     for (const [speaker, separator] of speakerIterator) {
       speakerComponentsList.push(
         <span key={speaker.id}>
           <strong>{this.renderSpeakerName(speaker)}</strong>
-          { separator }
+          {separator}
         </span>
       )
     }
 
     return (
       <div className="speakers-list">
-        <Icon name="users"/>
-        { t('main:misc.staring') }
+        <Icon name="users" />
+        {t('main:misc.staring')}
         &nbsp;
-        { speakerComponentsList }
+        {speakerComponentsList}
       </div>
     )
   }
@@ -97,7 +95,7 @@ export class VideoCard extends React.PureComponent {
   renderSpeakerName(speaker) {
     return (
       <Link to={`/s/${speaker.slug || speaker.id}`}>
-        { speaker.full_name }
+        {speaker.full_name}
       </Link>
     )
   }

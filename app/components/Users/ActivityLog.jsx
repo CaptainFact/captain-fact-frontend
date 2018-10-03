@@ -44,22 +44,22 @@ const renderPaginationMenu = (loading, user, fetchMore) => (
       currentPage={user ? user.actions.pageNumber : 1}
       total={user ? user.actions.totalPages : 1}
       onPageChange={selectedPage => fetchMore({
-        variables: {offset: selectedPage},
-        updateQuery: (_, {fetchMoreResult}) => fetchMoreResult
+        variables: { offset: selectedPage },
+        updateQuery: (_, { fetchMoreResult }) => fetchMoreResult
       })}
     />
   </div>
 )
 
-const ActivityLog = ({params: {username}, t}) => (
+const ActivityLog = ({ params: { username }, t }) => (
   <Query
     query={QUERY}
-    variables={{username, offset: 1, limit: 10}}
+    variables={{ username, offset: 1, limit: 10 }}
     fetchPolicy="network-only"
   >
-    {({loading, data, fetchMore, error}) => {
+    {({ loading, data, fetchMore, error }) => {
       if (error) {
-        return (<ErrorView error={error}/>)
+        return (<ErrorView error={error} />)
       }
 
       if (!loading && data.user.actions.entries.length === 0) {
@@ -75,7 +75,7 @@ const ActivityLog = ({params: {username}, t}) => (
             : data.user.actions.entries.map(a => (
               <UserAction
                 key={a.id}
-                action={{...a, changes: new Map(JSON.parse(a.changes))}}
+                action={{ ...a, changes: new Map(JSON.parse(a.changes)) }}
                 withoutUser
               />
             ))

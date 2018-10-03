@@ -1,4 +1,4 @@
-$videos-list-max-width: 1500px
+$videos-list-max-width: 1300px
 
 .videos-page
   text-align: center
@@ -9,23 +9,28 @@ $videos-list-max-width: 1500px
     min-height: 100px
     margin-bottom: 20px
   .videos-filter
-    max-width: $videos-list-max-width
+    max-width: 450px
     margin: 0 auto 30px
     border: 1px solid $grey-lighter
     padding: 0.5em 1em
-    .filter
-      display: flex
-      align-items: center
-      margin-left: 1em
-      +mobile
-        margin-bottom: 1em
-      span
-        margin-right: 0.5em
+    border-radius: 10px
+    justify-content: space-around
+    box-shadow: 0px 3px 5px #f1f1f1
+    .field
+      justify-content: center
+    .field, .control
+      margin: 0
+  .pagination
+    max-width: 500px
+    margin: 0 auto 1em auto
 
 .videos-list
   margin: 0 auto
   justify-content: center
   max-width: $videos-list-max-width
+  border-top: 1px solid #e8e8e8
+  border-bottom: 1px solid #e8e8e8
+  padding: 1em 0
 
   .column
     min-width: 300px

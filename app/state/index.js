@@ -12,7 +12,6 @@ import VideoDebateReducer from './video_debate/reducer'
 import CurrentUserReducer from './users/current_user/reducer'
 import UserPreferencesReducer from './user_preferences/reducer'
 import DisplayedUserReducer from './users/displayed_user/reducer'
-import VideosReducer from './videos/reducer'
 import ModalsReducer from './modals/reducer'
 import HelpReducer from './help/reducer'
 import UsersActionsReducer from './user_actions/reducer'
@@ -25,7 +24,6 @@ const reducers = combineReducers({
   DisplayedUser: DisplayedUserReducer,
   UserPreferences: UserPreferencesReducer,
   Flashes: FlashesReducer,
-  Videos: VideosReducer,
   Speakers: SpeakersReducer,
   VideoDebate: VideoDebateReducer,
   Modals: ModalsReducer,
@@ -44,7 +42,7 @@ const getComposer = () => {
   if (JS_ENV === 'prod' || !window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
     return compose
   return window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-    serialize: {immutable: Immutable},
+    serialize: { immutable: Immutable },
     shouldCatchErrors: true
   })
 }
