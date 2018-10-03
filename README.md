@@ -22,7 +22,7 @@ should be enough. Otherwise follow the procedure below:
 
 * Install (if you don't have them):
   * [Docker](https://docs.docker.com/install/) (to start the API easily)
-  * NodeJS, ideally using [asdf](https://github.com/asdf-vm/asdf) with `asdf install`
+  * NodeJS, ideally using [asdf](https://github.com/asdf-vm/asdf) with `NODEJS_CHECK_SIGNATURES=no asdf install`
   * App dependencies: `npm install`
 
 * Run:
