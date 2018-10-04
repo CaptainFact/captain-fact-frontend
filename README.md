@@ -2,11 +2,12 @@
 <h1 align="center"><a href="https://captainfact.io">CaptainFact.io</a></h1>
 <p align="center"><a href="https://discord.gg/2Qd7hMz" title="Discord"><img src="https://discordapp.com/api/guilds/416782744748687361/widget.png" alt="Discord"></a>
 <a href="https://twitter.com/CaptainFact_io" title="Twitter"><img src="https://img.shields.io/twitter/follow/CaptainFact_io.svg?style=social&label=Follow"></a>
-<a href="./LICENSE"><img src="https://img.shields.io/github/license/CaptainFact/captain-fact-frontend.svg" alt="AGPL3"></a></p>
+<a href="https://opencollective.com/captainfact_io" title="Backers on Open Collective"><img src="https://opencollective.com/captainfact_io/backers/badge.svg"></a>
+<a href="./LICENSE"><img src="https://img.shields.io/github/license/CaptainFact/captain-fact-frontend.svg" alt="AGPL3"></a>
+<a href="https://travis-ci.org/CaptainFact/captain-fact-frontend"><img src="https://travis-ci.org/CaptainFact/captain-fact-frontend.svg?branch=travis-configuration" alt="Build Status" /></a>
+<a href='https://coveralls.io/github/CaptainFact/captain-fact-frontend?branch=master'><img src='https://coveralls.io/repos/github/CaptainFact/captain-fact-frontend/badge.svg?branch=master' alt='Coverage Status' /></a>
+</p>
 <hr/>
-<p align="center">Master: <a href="https://travis-ci.org/CaptainFact/captain-fact-frontend"><img src="https://travis-ci.org/CaptainFact/captain-fact-frontend.svg?branch=travis-configuration" alt="Build Status" /></a> &nbsp;&nbsp;
-Staging: <a href="https://travis-ci.org/CaptainFact/captain-fact-frontend"><img src="https://travis-ci.org/CaptainFact/captain-fact-frontend.svg?branch=staging" alt="Build Status" /></a></p>
-<hr/><br/>
 <p align="center">
 <a href="https://opencollective.com/captainfact_io/donate" target="_blank">
   <img src="https://opencollective.com/captainfact_io/donate/button@2x.png?color=white" width=300 />
@@ -16,14 +17,14 @@ Staging: <a href="https://travis-ci.org/CaptainFact/captain-fact-frontend"><img 
 
 ## Getting started
 
-The REST API has not been open-sourced yet so you must have been invited to
-the gitlab registry for `./dev/start_api.sh` to run correctly.
+If you're already have the API running locally, a simple `npm install && npm start`
+should be enough. Otherwise follow the procedure below:
 
 * Install (if you don't have them):
   * [Docker](https://docs.docker.com/install/) (to start the API easily)
-  * [Node.js](http://nodejs.org)
+  * NodeJS, ideally using [asdf](https://github.com/asdf-vm/asdf) with `NODEJS_CHECK_SIGNATURES=no asdf install`
   * App dependencies: `npm install`
-    
+
 * Run:
   * `./dev/start_api.sh` - Start the API (with an Elixir console attached)
   * `npm start` - Start the frontend
@@ -66,8 +67,14 @@ app
 
 ## Linked projects
 
+* [Community discussions and documentation](https://github.com/CaptainFact/captain-fact/)
+* [API](https://github.com/CaptainFact/captain-fact-api)
 * [Extension](https://github.com/CaptainFact/captain-fact-extension)
 * [Overlay injector](https://github.com/CaptainFact/captain-fact-overlay-injector)
+
+# Feature requests
+
+[![Feature Requests](http://feathub.com/CaptainFact/captain-fact?format=svg)](http://feathub.com/CaptainFact/captain-fact)
 
 ## License
 

@@ -98,6 +98,7 @@ export class CommentDisplay extends React.PureComponent {
         {!withoutActions && (
           <CommentActions
             isOwnComment={this.props.isOwnComment}
+            isFlagged={this.props.isFlagged}
             nbReplies={replies ? replies.size : 0}
             repliesCollapsed={repliesCollapsed}
             handleReply={() => this.handleReply()}

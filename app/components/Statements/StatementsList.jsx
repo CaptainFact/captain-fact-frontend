@@ -5,10 +5,10 @@ import { withRouter } from 'react-router'
 import FlipMove from 'react-flip-move'
 
 import { StatementForm } from './StatementForm'
-import { Statement } from './Statement'
 import { closeStatementForm, setScrollTo } from '../../state/video_debate/statements/reducer'
 import { postStatement } from '../../state/video_debate/statements/effects'
 import { statementFormValueSelector } from '../../state/video_debate/statements/selectors'
+import StatementContainer from './StatementContainer'
 
 
 @connect(state => ({
@@ -28,21 +28,21 @@ export default class StatementsList extends React.PureComponent {
     const {statementFormSpeakerId, statements} = this.props
     return (
       <div className="statements-list">
-        {statementFormSpeakerId !== undefined &&
-        <StatementForm
-          initialValues={{speaker_id: statementFormSpeakerId}}
-          enableReinitialize
-          keepDirtyOnReinitialize
-          handleAbort={() => this.props.closeStatementForm()}
-          handleConfirm={s => this.props.postStatement(s).then(
-            e => {if (!e.error) this.props.closeStatementForm(); return e}
-          )}
-        />
-        }
+        {statementFormSpeakerId !== undefined && (
+          <StatementForm
+            initialValues={{speaker_id: statementFormSpeakerId}}
+            enableReinitialize
+            keepDirtyOnReinitialize
+            handleAbort={() => this.props.closeStatementForm()}
+            handleConfirm={s => this.props.postStatement(s).then(
+              e => {if (!e.error) this.props.closeStatementForm(); return e}
+            )}
+          />
+        )}
         <FlipMove enterAnimation="fade">
-          {statements.map(statement =>
-            <Statement key={statement.id} statement={statement}/>
-          )}
+          {statements.map(statement => (
+            <StatementContainer key={statement.id} statement={statement}/>
+          ))}
         </FlipMove>
       </div>
     )

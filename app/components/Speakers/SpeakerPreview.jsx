@@ -13,7 +13,7 @@ import { ModalFormContainer } from '../Modal'
 import Icon from '../Utils/Icon'
 import ClickableIcon from '../Utils/ClickableIcon'
 import ReputationGuard from '../Utils/ReputationGuard'
-import { EditSpeakerForm } from './SpeakerForm'
+import EditSpeakerForm from './EditSpeakerForm'
 import ModalRemoveSpeaker from './ModalRemoveSpeaker'
 import { addModal } from '../../state/modals/reducer'
 import { removeSpeaker, updateSpeaker } from '../../state/video_debate/effects'
@@ -56,16 +56,14 @@ export class SpeakerPreview extends React.PureComponent {
   renderActions() {
     return (
       <div className="quick-actions">
-        {this.props.speaker.is_user_defined &&
-          <ReputationGuard requiredRep={MIN_REPUTATION_UPDATE_SPEAKER}>
-            <ClickableIcon
-              name="pencil"
-              size="action-size"
-              title={this.props.t('main:actions.edit')}
-              onClick={() => this.handleEdit()}
-            />
-          </ReputationGuard>
-        }
+        <ReputationGuard requiredRep={MIN_REPUTATION_UPDATE_SPEAKER}>
+          <ClickableIcon
+            name="pencil"
+            size="action-size"
+            title={this.props.t('main:actions.edit')}
+            onClick={() => this.handleEdit()}
+          />
+        </ReputationGuard>
         <ReputationGuard requiredRep={MIN_REPUTATION_REMOVE_SPEAKER}>
           <ClickableIcon
             name="times"
@@ -87,8 +85,6 @@ export class SpeakerPreview extends React.PureComponent {
   }
 
   renderName(speaker) {
-    if (speaker.is_user_defined)
-      return <div className="speaker-name">{speaker.full_name}</div>
     return (
       <Link to={`/s/${speaker.slug || speaker.id}`} className="speaker-name" target="_blank">
         {speaker.full_name}
@@ -97,12 +93,10 @@ export class SpeakerPreview extends React.PureComponent {
   }
 
   getTitle() {
-    const { title, is_user_defined, country } = this.props.speaker
+    const { title, country } = this.props.speaker
     // Only translate if title exists and is not user defined
     if (!title)
       return '...'
-    else if (is_user_defined)
-      return title
 
     let i18nTitle = ''
     if (this.props.i18n.language === 'en') // No need to translate title for english

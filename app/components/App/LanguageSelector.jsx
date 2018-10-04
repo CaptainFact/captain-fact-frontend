@@ -17,10 +17,9 @@ export default class LanguageSelector extends React.PureComponent {
     const sizeClass = this.props.size ? `is-${this.props.size}` : null
     return (
       <div className={classNames('language-selector', this.props.className)}>
-        {this.props.withIcon && <Icon name="language" size={this.props.size}/>}
-        &nbsp;
+        {this.props.withIcon && <Icon name="language" size={this.props.size} />}
         <span className={classNames('select', sizeClass)}>
-          { this.renderSelect() }
+          {this.renderSelect()}
         </span>
       </div>
     )
@@ -36,7 +35,7 @@ export default class LanguageSelector extends React.PureComponent {
         onChange={e => this.props.handleChange(e.target.value)}
         value={this.props.value}
       >
-        { this.renderLocalesMap(options) }
+        {this.renderLocalesMap(options)}
       </select>
     )
   }

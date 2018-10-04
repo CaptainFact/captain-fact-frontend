@@ -29,6 +29,15 @@ module.exports = isProd => [
       ]
     }
   },
+  // =======================
+  // = Fix for node stable =
+  // = See https://github.com/graphql/graphql-js/issues/1272 =
+  // =======================
+  {
+    test: /\.mjs$/,
+    include: /node_modules/,
+    type: "javascript/auto",
+  },
   // =========
   // = Fonts =
   // =========

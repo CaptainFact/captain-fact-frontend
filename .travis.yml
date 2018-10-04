@@ -12,6 +12,7 @@ jobs:
       script:
         - npm run coverage && cat ./coverage/lcov.info | coveralls
     - stage: deploy
+      if: branch IN (master, staging)
       language: generic
       sudo: required
       services: [docker]

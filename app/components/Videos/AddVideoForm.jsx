@@ -7,7 +7,7 @@ import trim from 'voca/trim'
 import ReactPlayer from 'react-player'
 
 import { youtubeRegex } from '../../lib/url_utils'
-import { FieldWithButton } from '../FormUtils'
+import FieldWithButton from '../FormUtils/FieldWithButton'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { postVideo, searchVideo } from '../../state/videos/effects'
 import { isAuthenticated } from '../../state/users/current_user/selectors'
@@ -33,7 +33,7 @@ export class AddVideoForm extends React.PureComponent {
     if (videoUrl) {
       this.props.searchVideo(decodeURI(videoUrl)).then(action => {
         if (!action.error && action.payload !== null)
-          this.props.router.push(`/videos/${action.payload.id}`)
+          this.props.router.push(`/videos/${action.payload.hash_id}`)
       })
     }
   }
@@ -69,7 +69,7 @@ export class AddVideoForm extends React.PureComponent {
 
     return (
       <div>
-        {!error &&
+        {!error && (
           <ReactPlayer
             className="video"
             url={value}
@@ -77,7 +77,7 @@ export class AddVideoForm extends React.PureComponent {
             width=""
             height=""
           />
-        }
+        )}
         {error && <div className="video"><div/></div>}
         {urlInput}
       </div>
@@ -88,7 +88,7 @@ export class AddVideoForm extends React.PureComponent {
     const promise = this.props.postVideo(video)
     return promise.then(action => {
       if (!action.error)
-        this.props.router.push(`/videos/${action.payload.id}`)
+        this.props.router.push(`/videos/${action.payload.hash_id}`)
       else if (action.payload === 'unauthorized' && !this.props.isAuthenticated)
         this.props.router.push('/login')
     })

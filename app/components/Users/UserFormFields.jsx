@@ -3,8 +3,10 @@ import { Field } from 'redux-form'
 import isEmail from 'validator/lib/isEmail'
 
 import { PASSWORD_LENGTH, USERNAME_LENGTH, NAME_LENGTH } from '../../constants'
-import { renderField, cleanStr, validateFieldLength } from '../FormUtils'
+import { validateFieldLength } from '../../lib/form_validators'
 import Button from '../Utils/Button'
+import ControlInput from '../FormUtils/ControlInput'
+import { cleanStr } from '../../lib/clean_str'
 
 
 // Common validators for Signup / Login
@@ -30,7 +32,7 @@ export const emailField = t => (
     name="email"
     type="email"
     placeholder={t('email')}
-    component={renderField}
+    component={ControlInput}
     icon="envelope"
     normalize={s => s.trim()}
     validate={validateEmail(t)}
@@ -42,7 +44,7 @@ export const passwordField = (t, isOptional = false) => (
     name="password"
     placeholder={t(isOptional ? 'passwordOptional' : 'password')}
     type="password"
-    component={renderField}
+    component={ControlInput}
     validate={v => (!v && isOptional ? null : validatePassword(t, v))}
     icon="lock"
   />
@@ -53,7 +55,7 @@ export const passwordRepeatField = (t) => (
     name="passwordRepeat"
     placeholder={t('repeatPassword')}
     type="password"
-    component={renderField}
+    component={ControlInput}
     icon="lock"
   />
 )
@@ -62,7 +64,7 @@ export const usernameField = (t) => (
   <Field
     name="username"
     placeholder={t('username')}
-    component={renderField}
+    component={ControlInput}
     normalize={s => s.trim()}
     icon="at"
     validate={v => validateFieldLength(t, v, USERNAME_LENGTH)}
@@ -73,7 +75,7 @@ export const nameField = (t) => (
   <Field
     name="name"
     placeholder={`${t('realName')} (${t('optional')})`}
-    component={renderField}
+    component={ControlInput}
     normalize={cleanStr}
     icon="identity"
     validate={v => v && validateFieldLength(t, v, NAME_LENGTH)}

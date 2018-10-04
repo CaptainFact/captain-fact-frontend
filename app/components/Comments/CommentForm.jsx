@@ -5,9 +5,8 @@ import { translate } from 'react-i18next'
 import isURL from 'validator/lib/isURL'
 import { withRouter } from 'react-router'
 
-import { renderField, validateLength, cleanStrMultiline } from '../FormUtils'
+import { validateLength } from '../../lib/form_validators'
 import { COMMENT_LENGTH, USER_PICTURE_LARGE } from '../../constants'
-import TextareaAutosize from '../FormUtils/TextareaAutosize'
 import CloseButton from '../Utils/CloseButton'
 import Icon from '../Utils/Icon'
 import Tag from '../Utils/Tag'
@@ -17,9 +16,12 @@ import UserPicture from '../Users/UserPicture'
 import MediaLayout from '../Utils/MediaLayout'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 import { CommentDisplay } from './CommentDisplay'
-import TextareaLengthCounter from '../FormUtils/TextareaLengthCounter'
 import { isAuthenticated } from '../../state/users/current_user/selectors'
 import { flashErrorUnauthenticated } from '../../state/flashes/reducer'
+import ControlInput from '../FormUtils/ControlInput'
+import { cleanStrMultiline } from '../../lib/clean_str'
+import CommentField from './CommentField'
+import Button from '../Utils/Button'
 
 
 const validate = ({ source, text }) => {
@@ -33,26 +35,6 @@ const validate = ({ source, text }) => {
   else if (text)
     validateLength(errors, 'text', text, COMMENT_LENGTH, 'Comment')
   return errors
-}
-
-class CommentField extends React.PureComponent {
-  render() {
-    const { input, label, placeholder, isReply, meta: { submitting, error }, autoFocus = false } = this.props
-
-    return (
-      <p className="control">
-        <TextareaAutosize
-          {...input}
-          placeholder={placeholder || label}
-          disabled={submitting}
-          focus={isReply}
-          autoFocus={autoFocus}
-        />
-        <TextareaLengthCounter length={input.value.length} maxLength={COMMENT_LENGTH[1]}/>
-        {error && <span className="help is-danger">{typeof (error) === 'string' ? error : error[0]}</span>}
-      </p>
-    )
-  }
 }
 
 @connect((state, props) => {
@@ -76,10 +58,10 @@ export class CommentForm extends React.Component {
     if (!this.props.currentUser.id || this.state.isCollapsed && !replyTo)
       return (
         <div className="comment-form collapsed">
-          <a className="button is-inverted is-primary" onClick={() => this.expandForm()}>
+          <Button className="is-inverted is-primary" onClick={() => this.expandForm()}>
             <Icon name="plus" size="medium"/>
             <span>{t('comment.revealForm')}</span>
-          </a>
+          </Button>
         </div>
       )
 
@@ -89,25 +71,26 @@ export class CommentForm extends React.Component {
         containerProps={{onSubmit: this.postAndReset(c => this.props.postComment(c))}}
         className="comment-form"
         left={<UserPicture user={currentUser} size={USER_PICTURE_LARGE}/>}
-        content={
+        content={(
           <div>
-            {replyTo &&
-            <div>
-              <Tag size="medium" className="replyTo">
-                <CloseButton onClick={() => this.props.change('reply_to', null)}/>
-                <span>
-                  {t('comment.replyingTo')} <UserAppellation user={replyTo.user}/>
-                </span>
-              </Tag>
-              <CommentDisplay
-                className="quoted"
-                richMedias={false}
-                comment={replyTo}
-                withoutActions
-                withoutHeader
-                hideThread
-              />
-            </div>
+            {replyTo && (
+              <div>
+                <Tag size="medium" className="replyTo">
+                  <CloseButton onClick={() => this.props.change('reply_to', null)}/>
+                  <span>
+                    {t('comment.replyingTo')} <UserAppellation user={replyTo.user}/>
+                  </span>
+                </Tag>
+                <CommentDisplay
+                  className="quoted"
+                  richMedias={false}
+                  comment={replyTo}
+                  withoutActions
+                  withoutHeader
+                  hideThread
+                />
+              </div>
+            )
             }
             <Field
               component={CommentField}
@@ -120,7 +103,7 @@ export class CommentForm extends React.Component {
             />
             <div className="level">
               <Field
-                component={renderField}
+                component={ControlInput}
                 name="source.url"
                 label={t('comment.addSource')}
                 normalize={s => s.trim()}
@@ -130,7 +113,7 @@ export class CommentForm extends React.Component {
               </div>
             </div>
           </div>
-        }
+        )}
       />
     )
   }
@@ -145,27 +128,25 @@ export class CommentForm extends React.Component {
     )
     return (
       <React.Fragment>
-        <button key="comment" type="submit" className="button" disabled={disabled}>
+        <Button type="submit" disabled={disabled}>
           {this.props.t('comment.post', i18nParams)}
-        </button>
-        <button
-          key="refute"
+        </Button>
+        <Button
           type="submit"
-          className="button is-danger"
+          className="is-danger"
           disabled={disabled}
           onClick={this.postAndReset(values => this.props.postComment({...values, approve: false}))}
         >
           {this.props.t('comment.refute', i18nParams)}
-        </button>
-        <button
-          key="approve"
+        </Button>
+        <Button
           type="submit"
-          className="button is-success"
+          className="is-success"
           disabled={disabled}
           onClick={this.postAndReset(values => this.props.postComment({...values, approve: true}))}
         >
           {this.props.t('comment.approve', i18nParams)}
-        </button>
+        </Button>
       </React.Fragment>
     )
   }
