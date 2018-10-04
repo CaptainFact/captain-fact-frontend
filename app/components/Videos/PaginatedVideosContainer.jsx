@@ -56,7 +56,7 @@ const PaginatedVideosContainer = ({ t, currentPage = 1, baseURL, ...props }) => 
     >
       {
         (({ loading, error, data }) => {
-          const videos = data.videos || INITIAL_VIDEOS
+          const videos = (data && data.videos) || INITIAL_VIDEOS
           if (error)
             return <ErrorView error={error} />
           if (!loading && videos.entries.length === 0)
