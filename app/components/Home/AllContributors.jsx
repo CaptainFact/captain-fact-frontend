@@ -16,7 +16,7 @@ const CONTRIBUTORS = [
   {role: ROLE_PARTNER, name: 'ThinkerView', picture: 'thinkerview', url: 'https://thinkerview.com'},
   {role: ROLE_PARTNER, name: 'Heu?reka', picture: 'heureka', url: 'https://www.youtube.com/channel/UC7sXGI8p8PvKosLWagkK9wQ'},
   {role: ROLE_PARTNER, name: 'La Tronche en Biais', picture: 'troncheenbiais', url: 'https://www.youtube.com/user/TroncheEnBiais'},
-  {role: ROLE_PARTNER, name: 'IMAGO', picture: 'imago', url: 'http://imagotv.fr'},
+  {role: ROLE_PARTNER, name: 'IMAGO', picture: 'imago', url: 'http://imagotv.fr/pdf/imago_presentation.pdf'},
   {role: ROLE_PARTNER, name: 'TedX Nouméa', picture: 'tedxnoumea', url: 'https://tedxnoumea.com'},
   {role: ROLE_PARTNER, name: 'Maia Mater', picture: 'maiamater', url: 'https://www.maiamater.camp'},
   {role: ROLE_DEVELOPER, name: 'Noé Gambini', picture: 'noe'},
