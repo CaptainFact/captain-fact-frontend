@@ -22,7 +22,6 @@ module.exports = {
       // POLYFILL: Set up an ES6-ish environment
       // 'babel-polyfill',  // The entire babel-polyfill
       // Or pick es6 features needed (included into babel-polyfill)
-      'babel-polyfill',
       'core-js/fn/promise',
       'core-js/es6/object',
       'core-js/es6/array',
@@ -74,9 +73,6 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.ProvidePlugin({
-      fetch: 'exports-loader?self.fetch!whatwg-fetch/dist/fetch.umd'
-    }),
     // regroup styles in app.css bundle
     new MiniCssExtractPlugin({
       filename: '[name].css',
