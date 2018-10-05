@@ -57,8 +57,6 @@ module.exports = {
   },
   devServer: {
     contentBase: './public',
-    // do not print bundle build stats
-    noInfo: true,
     // enable HMR
     hot: true,
     // embed the webpack-dev-server runtime into the bundle
