@@ -25,8 +25,7 @@ cd -- "$(dirname $0)"
 # Pull API image
 if [[ "$(docker images -q ${DOCKER_API_IMAGE} 2> /dev/null)" == "" ]] || [[ $1 == "--update" ]]; then
   # Login to Gitlab registry (if not already done) and pull image
-  docker pull ${DOCKER_API_IMAGE} 2>/dev/null || \
-    (echo "Please login to Gitlab to pull API image" && docker login registry.gitlab.com && docker pull ${DOCKER_API_IMAGE}) || exit 1
+  docker pull ${DOCKER_API_IMAGE} 2>/dev/null
 fi
 
 # Create database container
