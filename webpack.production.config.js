@@ -1,7 +1,9 @@
 
 
 const webpack = require('webpack')
+const glob = require('glob')
 const path = require('path')
+const PurgeCssPlugin = require('purgecss-webpack-plugin')
 
 // Plugins
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
@@ -73,6 +75,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'app.[chunkhash].css',
       allChunks: true
+    }),
+    new PurgeCssPlugin({
+      paths: glob.sync('app/**/*', { nodir: true }),
     }),
     new CopyWebpackPlugin(
       [{ from: 'app/assets', to: '', toType: 'dir' }], // patterns
