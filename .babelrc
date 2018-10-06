@@ -1,5 +1,18 @@
 {
-  "presets": ["es2015", "react"],
+  "presets": ["es2015", "react",
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": [
+            "> 1%",
+            "Last 2 versions",
+            "IE 11"
+          ]
+        }
+      }
+    ],
+  ],
   "plugins": [
     "transform-decorators-legacy",
     "transform-runtime",
