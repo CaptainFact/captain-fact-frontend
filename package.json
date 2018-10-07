@@ -3,19 +3,21 @@
   "version": "0.8.15",
   "private": true,
   "scripts": {
-    "build": "webpack-cli --config webpack.production.config.js",
-    "dev": "webpack-dashboard -- webpack-dev-server",
-    "serve": "webpack-dashboard -- webpack-dev-server",
-    "start": "webpack-dashboard -- webpack-dev-server",
-    "start_simple": "webpack-dev-server",
-    "watch": "jest --watch",
-    "test": "jest",
-    "test_update": "jest -u",
-    "wtest": "jest --watch",
-    "coverage": "jest --coverage '--collectCoverageFrom=app/+(API|components|lib|state)/**/!(record).{js,jsx}'",
-    "lint": "./node_modules/.bin/eslint app",
-    "lint_all": "./node_modules/.bin/eslint app/**/*.jsx",
-    "lint_fix": "./node_modules/.bin/eslint app --fix"
+    "prod:build": "npx webpack-cli --config webpack.production.config.js",
+    "dev:build": "npx webpack",
+    "dev": "npm run dev:build && npm run serve",
+    "prod": "npm run prod:build && npm run serve",
+    "serve": "npx webpack-dev-server",
+    "start": "npm run dev",
+    "watch": "npx jest --watch",
+    "test": "npx jest",
+    "test_update": "npx jest -u",
+    "wtest": "npx jest --watch",
+    "coverage": "npx jest --coverage '--collectCoverageFrom=app/+(API|components|lib|state)/**/!(record).{js,jsx}'",
+    "lint": "npx eslint app",
+    "lint_all": "npx eslint app/**/*.jsx",
+    "lint_fix": "npx eslint app --fix",
+    "precommit": "npx lint-staged"
   },
   "jest": {
     "setupFiles": [
@@ -29,6 +31,21 @@
       "^.+\\.(css|scss)$": "identity-obj-proxy",
       "\\.(jpg|jpeg|png)$": "<rootDir>/src/__mocks__/fileMock.js"
     }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "npx eslint --fix \"app/**/*.js\""
+    ]
+  },
+  "browserslist": {
+    "production": [
+      "> 2%",
+      "not ie <=10",
+      "not ie_mob <=11",
+      "not bb <=10",
+      "not op_mob <= 37",
+      "not samsung <= 7"
+    ]
   },
   "dependencies": {
     "animate.scss": "0.0.6",
@@ -91,6 +108,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.16.0",
     "babel-register": "^6.22.0",
+    "browserslist": "^4.1.2",
     "clean-webpack-plugin": "^0.1.19",
     "compression-webpack-plugin": "^1.1.11",
     "copy-webpack-plugin": "^4.5.2",
@@ -107,13 +125,17 @@
     "exports-loader": "^0.7.0",
     "fetch-mock": "^6.5.2",
     "file-loader": "^1.1.11",
+    "glob": "^7.1.3",
     "html-webpack-plugin": "^3.2.0",
     "imports-loader": "^0.8.0",
+    "husky": "^1.1.1",
     "jest": "^23.5.0",
     "jest-localstorage-mock": "^2.2.0",
+    "lint-staged": "^7.3.0",
     "mini-css-extract-plugin": "^0.4.1",
     "node-sass": "^4.9.3",
     "optimize-css-assets-webpack-plugin": "^5.0.0",
+    "purgecss-webpack-plugin": "^1.3.1",
     "react-hot-loader": "^4.3.4",
     "sass-lint": "^1.12.1",
     "sass-loader": "^7.1.0",
@@ -123,7 +145,6 @@
     "webpack": "^4.16.5",
     "webpack-bundle-analyzer": "^2.13.1",
     "webpack-cli": "^3.1.0",
-    "webpack-dashboard": "^2.0.0",
     "webpack-dev-server": "^3.1.5"
   }
 }
