@@ -184,7 +184,7 @@ Immutable.Record {
       "position": 4,
     },
     "forcedPosition": Immutable.Record {
-      "requestId": "c28f71b0-c9be-11e8-906f-d1436ce1bc3a",
+      "requestId": "A-UNIQUE-UUID",
       "time": Object {
         "forcedPosition": Object {
           "requestId": 1,

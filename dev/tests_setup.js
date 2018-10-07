@@ -54,3 +54,8 @@ jest.mock('react-i18next', () => ({
   },
   t: str => `Translated[${str}]`
 }))
+
+/**
+ * Mock the uuid module
+ */
+jest.mock('uuid/v1', () => jest.fn(() => 'A-UNIQUE-UUID'))
