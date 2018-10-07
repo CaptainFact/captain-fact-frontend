@@ -8,6 +8,8 @@ jobs:
     - stage: test
       language: node_js
       node_js: [node]
+      before_install:
+        - npm install -g npm@latest
       cache: {directories: [node_modules]}
       script:
         - npm run coverage && cat ./coverage/lcov.info | coveralls
