@@ -21,12 +21,14 @@ If you're already have the API running locally, a simple `npm install && npm sta
 should be enough. Otherwise follow the procedure below:
 
 * Install (if you don't have them):
-  * [Docker](https://docs.docker.com/install/) (to start the API easily)
+  * [Docker](https://docs.docker.com/install/) 
+    and [docker-compose](https://docs.docker.com/compose/install/)
+    (to start the API easily)
   * NodeJS, ideally using [asdf](https://github.com/asdf-vm/asdf) with `NODEJS_CHECK_SIGNATURES=no asdf install`
   * App dependencies: `npm install`
 
 * Run:
-  * `./dev/start_api.sh` - Start the API (with an Elixir console attached)
+  * `docker-compose up` - Start the API
   * `npm start` - Start the frontend
   * `npm run test` - run all unit tests
 
