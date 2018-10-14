@@ -37,8 +37,8 @@ const CommentsReducer = handleActions({
   // Votes
   [addMyVote]: (state, {payload: {comment, value}}) => {
     const prevVote = state.voted.get(comment.id, 0)
-    const voteChange = value === 0 ?
-      -prevVote : Math.abs(prevVote - value) * (value >= 0 ? 1 : -1)
+    const voteChange = value === 0
+      ? -prevVote : Math.abs(prevVote - value) * (value >= 0 ? 1 : -1)
     const commentPath = getCommentPath(comment)
     const commentIdx = getCommentIdx(state, commentPath, comment.id)
     if (commentIdx !== -1)
@@ -56,10 +56,9 @@ const CommentsReducer = handleActions({
   [setLoading]: (state, {payload}) => state.set('isLoading', payload),
   [fetchAll]: {
     next: (state, {payload: {comments, my_votes, my_flags}}) => {
-      const preparedComments =
-        new List(comments.map(prepareComment)
-          .sort(commentsComparator))
-          .groupBy(c => c.reply_to_id)
+      const preparedComments =        new List(comments.map(prepareComment)
+        .sort(commentsComparator))
+        .groupBy(c => c.reply_to_id)
 
       const replies = preparedComments.delete(null)
       const notReplies = preparedComments.get(null) || new List()
@@ -69,8 +68,7 @@ const CommentsReducer = handleActions({
         errors: null,
         isLoading: false,
         replies,
-        voted: !my_votes ? new Map() : new Map().withMutations(map =>
-          my_votes.forEach(vote => map.set(vote.comment_id, vote.value))
+        voted: !my_votes ? new Map() : new Map().withMutations(map => my_votes.forEach(vote => map.set(vote.comment_id, vote.value))
         ),
         myFlags: new Set(my_flags)
       })
@@ -102,23 +100,20 @@ const CommentsReducer = handleActions({
     return state.deleteIn(commentFullPath)
   },
   [updateScores]: (state, {payload}) => {
-    const {comments, replies} =
-    new List(payload).groupBy(c => (c.reply_to_id ? 'replies' : 'comments')).toObject()
+    const {comments, replies} =    new List(payload).groupBy(c => (c.reply_to_id ? 'replies' : 'comments')).toObject()
 
     // Update comments
     if (comments) {
       const groupedComments = comments.groupBy(c => c.statement_id).entries()
       for (const [statementId, newComments] of groupedComments)
-        state = state.updateIn(['comments', statementId], oldList =>
-          mergeCommentsList(oldList, newComments)
+        state = state.updateIn(['comments', statementId], oldList => mergeCommentsList(oldList, newComments)
         )
     }
     // Update replies
     if (replies) {
       const groupedReplies = replies.groupBy(r => r.reply_to_id).entries()
       for (const [commentId, newComments] of groupedReplies)
-        state = state.updateIn(['replies', commentId], oldList =>
-          mergeCommentsList(oldList, newComments)
+        state = state.updateIn(['replies', commentId], oldList => mergeCommentsList(oldList, newComments)
         )
     }
     return state
@@ -149,8 +144,8 @@ function getCommentFullPath(state, comment) {
 }
 
 function getCommentPath(comment) {
-  return comment.reply_to_id ?
-    ['replies', comment.reply_to_id] : ['comments', comment.statement_id]
+  return comment.reply_to_id
+    ? ['replies', comment.reply_to_id] : ['comments', comment.statement_id]
 }
 
 function getCommentIdx(state, path, id) {

@@ -40,8 +40,7 @@ const StatementsReducer = handleActions({
     }),
     throw: (state, {payload}) => state.merge({isLoading: false, errors: payload})
   },
-  [setLoading]: (state, isLoading) =>
-    state.set('isLoading', isLoading),
+  [setLoading]: (state, isLoading) => state.set('isLoading', isLoading),
   [setSubmitting]: (state, {payload}) => state.set('isSubmitting', payload),
   [add]: (state, {payload}) => {
     const statementIdx = getInsertPosition(state.data, payload)
@@ -64,8 +63,7 @@ const StatementsReducer = handleActions({
       for (const newStatement of payload) {
         const statementIdx = statements.findIndex(s => s.id === newStatement.id)
         if (statementIdx !== -1)
-          statements.update(statementIdx, oldStatement =>
-            oldStatement.merge(newStatement)
+          statements.update(statementIdx, oldStatement => oldStatement.merge(newStatement)
           )
       }
       // Re-sort them
@@ -79,8 +77,7 @@ const StatementsReducer = handleActions({
     return state
   },
   [setScrollTo]: (state, {payload}) => state.set('scrollTo', payload),
-  [combineActions(incrementFormCount, decrementFormCount)]: (state, {payload}) =>
-    state.set('formsCount', state.formsCount + payload),
+  [combineActions(incrementFormCount, decrementFormCount)]: (state, {payload}) => state.set('formsCount', state.formsCount + payload),
   [resetVideoDebate]: () => INITIAL_STATE()
 }, INITIAL_STATE())
 

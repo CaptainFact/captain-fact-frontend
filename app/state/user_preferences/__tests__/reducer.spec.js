@@ -1,4 +1,4 @@
-import reducer, { 
+import reducer, {
   toggleSidebar,
   closeSidebar
 } from '../reducer'

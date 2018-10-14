@@ -17,9 +17,9 @@ const INITIAL_STATE = new Record({
 
 const ModerationReducer = handleActions({
   [setModerationEntry]: {
-    next: (state, {payload}) => (!payload ?
-      state.set('isLoading', false) :
-      state.merge({
+    next: (state, {payload}) => (!payload
+      ? state.set('isLoading', false)
+      : state.merge({
         entry: prepareEntry(payload),
         isLoading: false
       })),

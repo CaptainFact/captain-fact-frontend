@@ -24,12 +24,10 @@ export function createEffect(promise, opts = null) {
       if (opts.before)
         cleverDispatch(dispatch, getState, opts.before)
       if (promise && opts.then)
-        promise = promise.then(x =>
-          cleverDispatch(dispatch, getState, opts.then, x)
+        promise = promise.then(x => cleverDispatch(dispatch, getState, opts.then, x)
         )
       if (promise && opts.catch)
-        promise = promise.catch(x =>
-          cleverDispatch(dispatch, getState, opts.catch, x)
+        promise = promise.catch(x => cleverDispatch(dispatch, getState, opts.catch, x)
         )
       if (opts.after)
         promise = cleverDispatch(dispatch, getState, opts.after, promise)
@@ -69,9 +67,9 @@ export function returnSuccess(returnValue) {
 export function cleverDispatch(dispatch, getState, toDispatch, params = null) {
   if (typeof (toDispatch) === 'function')
     return dispatch(toDispatch(params))
-  else if (isAction(toDispatch))
+  if (isAction(toDispatch))
     return dispatch(toDispatch)
-  else if (isIterable(toDispatch)) {
+  if (isIterable(toDispatch)) {
     let lastValue = null
     toDispatch.forEach(a => {
       lastValue = cleverDispatch(dispatch, getState, a, params)

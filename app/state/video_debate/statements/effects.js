@@ -20,8 +20,7 @@ export const joinStatementsChannel = videoId => dispatch => {
   )))
 }
 
-export const leaveStatementsChannel = () => () =>
-  SocketApi.leaveChannel(STATEMENTS_CHANNEL)
+export const leaveStatementsChannel = () => () => SocketApi.leaveChannel(STATEMENTS_CHANNEL)
 
 export const postStatement = statement => createEffect(
   SocketApi.push(STATEMENTS_CHANNEL, 'new_statement', statement),

@@ -25,11 +25,9 @@ export const fetchCurrentUser = () => (dispatch, getState) => {
   ))
 }
 
-export const register = ({user, invitation_token}) =>
-  userConnect(HttpApi.post('users', {user, invitation_token}))
+export const register = ({user, invitation_token}) => userConnect(HttpApi.post('users', {user, invitation_token}))
 
-export const login = ({provider, params}) =>
-  userConnect(HttpApi.post(`auth/${provider}/callback`, params))
+export const login = ({provider, params}) => userConnect(HttpApi.post(`auth/${provider}/callback`, params))
 
 // Ask for an invitation
 
@@ -65,27 +63,21 @@ export const unlinkProvider = provider => createEffect(
 
 // Confirm email
 
-export const confirmEmail = token =>
-  createEffect(HttpApi.put(`users/me/confirm_email/${token}`))
+export const confirmEmail = token => createEffect(HttpApi.put(`users/me/confirm_email/${token}`))
 
 // Reset password
 
-export const resetPasswordRequest = ({email}) =>
-  createEffect(HttpApi.post('users/reset_password/request', {email}))
+export const resetPasswordRequest = ({email}) => createEffect(HttpApi.post('users/reset_password/request', {email}))
 
-export const resetPasswordVerify = token =>
-  createEffect(HttpApi.get(`users/reset_password/verify/${token}`))
+export const resetPasswordVerify = token => createEffect(HttpApi.get(`users/reset_password/verify/${token}`))
 
-export const resetPasswordConfirm = ({password, token}) =>
-  createEffect(HttpApi.post('users/reset_password/confirm', {password, token}))
+export const resetPasswordConfirm = ({password, token}) => createEffect(HttpApi.post('users/reset_password/confirm', {password, token}))
 
 // Logout / delete
 
-export const logout = () =>
-  resetUser(HttpApi.delete('auth'))
+export const logout = () => resetUser(HttpApi.delete('auth'))
 
-export const deleteAccount = () =>
-  resetUser(HttpApi.delete('users/me'))
+export const deleteAccount = () => resetUser(HttpApi.delete('users/me'))
 
 // Achievements
 export const unlockPublicAchievement = achievementId => createEffect(

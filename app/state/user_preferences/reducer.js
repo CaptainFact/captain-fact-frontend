@@ -41,18 +41,12 @@ const updateState = (state, key, value) => {
 }
 
 const UserPreferencesReducer = handleActions({
-  [toggleSidebar]: state =>
-    updateState(state, 'sidebarExpended', !state.sidebarExpended),
-  [closeSidebar]: state =>
-    updateState(state, 'sidebarExpended', false),
-  [changeLocale]: (state, { payload }) =>
-    updateState(state, 'locale', payload),
-  [changeVideosLanguageFilter]: (state, { payload }) =>
-    updateState(state, 'videosLanguageFilter', payload),
-  [setVideosOnlyFromPartners]: (state, { payload }) =>
-    updateState(state, 'videosOnlyFromPartners', payload),
-  [toggleAutoscroll]: state =>
-    updateState(state, 'enableAutoscroll', !state.enableAutoscroll)
+  [toggleSidebar]: state => updateState(state, 'sidebarExpended', !state.sidebarExpended),
+  [closeSidebar]: state => updateState(state, 'sidebarExpended', false),
+  [changeLocale]: (state, { payload }) => updateState(state, 'locale', payload),
+  [changeVideosLanguageFilter]: (state, { payload }) => updateState(state, 'videosLanguageFilter', payload),
+  [setVideosOnlyFromPartners]: (state, { payload }) => updateState(state, 'videosOnlyFromPartners', payload),
+  [toggleAutoscroll]: state => updateState(state, 'enableAutoscroll', !state.enableAutoscroll)
 }, loadState())
 
 export default UserPreferencesReducer

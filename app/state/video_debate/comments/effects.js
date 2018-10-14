@@ -21,8 +21,7 @@ export const joinCommentsChannel = videoId => dispatch => {
   ))
 }
 
-export const leaveCommentsChannel = () => () =>
-  SocketApi.leaveChannel(COMMENTS_CHANNEL)
+export const leaveCommentsChannel = () => () => SocketApi.leaveChannel(COMMENTS_CHANNEL)
 
 export const postComment = comment => createEffect(
   SocketApi.push(COMMENTS_CHANNEL, 'new_comment', comment),
@@ -51,4 +50,3 @@ export const flagComment = ({id, reason}) => createEffect(
     catch: errorToFlash
   }
 )
-

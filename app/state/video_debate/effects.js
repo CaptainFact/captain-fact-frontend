@@ -20,8 +20,7 @@ export const joinVideoDebateChannel = videoId => dispatch => {
   )))
 }
 
-export const leaveVideoDebateChannel = () => () =>
-  SocketApi.leaveChannel(VIDEO_DEBATE_CHANNEL)
+export const leaveVideoDebateChannel = () => () => SocketApi.leaveChannel(VIDEO_DEBATE_CHANNEL)
 
 export const addSpeaker = speaker => createEffect(
   SocketApi.push(VIDEO_DEBATE_CHANNEL, 'new_speaker', speaker),
@@ -37,4 +36,3 @@ export const updateSpeaker = speaker => createEffect(
   SocketApi.push(VIDEO_DEBATE_CHANNEL, 'update_speaker', speaker),
   {catch: [errorMsgToFlash, generateFSAError]}
 )
-

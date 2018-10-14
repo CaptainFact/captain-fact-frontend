@@ -28,10 +28,8 @@ const INITIAL_STATE = new Record({
 
 const SpeakersReducer = handleActions({
   [actionFetchSpeaker]: {
-    next: (state, {payload}) =>
-      state.mergeDeep({isLoading: false, currentSpeaker: payload}),
-    throw: (state, {payload}) =>
-      state.merge({isLoading: false, error: payload})
+    next: (state, {payload}) => state.mergeDeep({isLoading: false, currentSpeaker: payload}),
+    throw: (state, {payload}) => state.merge({isLoading: false, error: payload})
   },
   [actionFetchSpeakerWikiLinks]: {
     next: (state, {payload}) => {
