@@ -3,12 +3,12 @@ import { withRouter } from 'react-router'
 import AsyncEffectPage from '../Utils/AsyncEffectPage'
 import { confirmEmail } from '../../state/users/current_user/effects'
 import { connect } from 'react-redux'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
 
 @withRouter
-@connect(null, {confirmEmail})
-@translate('user')
+@connect(null, { confirmEmail })
+@withNamespaces('user')
 export default class ConfirmEmail extends React.PureComponent {
   render() {
     return (

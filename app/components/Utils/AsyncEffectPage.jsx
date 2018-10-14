@@ -3,10 +3,10 @@ import AsyncEffect from './AsyncEffect'
 import { ErrorView } from './ErrorView'
 import Notification from './Notification'
 import { Icon } from './Icon'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
 
-@translate('main')
+@withNamespaces('main')
 export default class AsyncEffectPage extends React.PureComponent {
   constructor(props) {
     super(props)

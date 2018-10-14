@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { Icon } from './Icon'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import FlipMove from 'react-flip-move'
 import { Link } from 'react-router'
 import { addFlash, pause, removeFlash, unPause, update } from '../../state/flashes/reducer'
@@ -70,7 +70,7 @@ export class FlashMessages extends React.PureComponent {
 }
 
 
-@translate('main')
+@withNamespaces('main')
 @connect(null, {popModal, removeFlash})
 class FlashContent extends React.Component {
   shouldComponentUpdate(nextProps) {

@@ -1,7 +1,7 @@
 import React from 'react'
 import Immutable from 'immutable'
 import PropTypes from 'prop-types'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import { connect } from 'react-redux'
 
 import { flashErrorUnauthenticated } from '../../state/flashes/reducer'
@@ -18,7 +18,7 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
 import Button from '../Utils/Button'
 
 
-@translate('history')
+@withNamespaces('history')
 @connect(
   (state, props) => ({
     lastActionsIds: state.UsersActions.lastActionsIds,

@@ -1,7 +1,7 @@
 import React from 'react'
 import { merge } from 'immutable'
 import { connect } from 'react-redux'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import capitalize from 'voca/capitalize'
 
 import { ALL_VIDEOS, ONLY_PARTNERS, ONLY_COMMUNITY } from '../../constants'
@@ -16,7 +16,7 @@ import PaginatedVideosContainer from './PaginatedVideosContainer'
   languageFilter: state.UserPreferences.videosLanguageFilter,
   onlyFromPartners: state.UserPreferences.videosOnlyFromPartners,
 }), { changeVideosLanguageFilter, setVideosOnlyFromPartners })
-@translate('main')
+@withNamespaces('main')
 export default class VideosIndexPage extends React.PureComponent {
   render() {
     const { t, languageFilter, onlyFromPartners, setVideosOnlyFromPartners, location } = this.props

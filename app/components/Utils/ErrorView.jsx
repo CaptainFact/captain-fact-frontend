@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
 import { LinkWithIcon } from '../Utils'
 import Message from './Message'
@@ -11,7 +11,7 @@ const refreshableErrors = ['join_crashed']
 
 
 @withRouter
-@translate('errors')
+@withNamespaces('errors')
 export class ErrorView extends React.PureComponent {
   render() {
     const { t, error = 'unknown', canGoBack = true } = this.props

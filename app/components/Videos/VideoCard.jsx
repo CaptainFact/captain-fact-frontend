@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
 import { Icon, TimeSince } from '../Utils'
 import iterateWithSeparators from '../../lib/iterate_with_separators'
@@ -9,7 +9,7 @@ import RawIcon from '../Utils/RawIcon'
 import { videoURL } from '../../lib/cf_routes'
 
 
-@translate('videoDebate')
+@withNamespaces('videoDebate')
 export class VideoCard extends React.PureComponent {
   render() {
     const { t, video } = this.props
@@ -63,11 +63,11 @@ export class VideoCard extends React.PureComponent {
         <strong>{t('video.addedBy', { userType: '$t(video.partner)' })}</strong>
       </span>
     ) : (
-      <span className="added-by">
-        <Icon name="user" />
-        <span>{t('video.addedBy', { userType: '$t(video.user)' })}</span>
-      </span>
-    )
+        <span className="added-by">
+          <Icon name="user" />
+          <span>{t('video.addedBy', { userType: '$t(video.user)' })}</span>
+        </span>
+      )
   }
 
   renderSpeakersList(speakers, t) {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import { formValueSelector } from 'redux-form'
 
 import FlagForm from './FlagForm'
@@ -11,7 +11,7 @@ import HttpApi from '../../API/http_api'
 const flagFormValueSelector = formValueSelector('flagForm')
 
 @connect(state => ({selectedReason: flagFormValueSelector(state, 'reason')}))
-@translate('videoDebate')
+@withNamespaces('videoDebate')
 export default class ModalFlag extends React.PureComponent {
   state = {isLoading: true, flagsAvailable: 0, error: null}
 

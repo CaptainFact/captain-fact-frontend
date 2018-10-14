@@ -13,7 +13,7 @@ export default {
   actionWithThirdParty: 'Or login using a third party service',
   deleteAccount: 'Delete Account',
   dangerZone: 'Danger Zone',
-  registeredSince: 'Registered for {{value}}',
+  registeredSince: 'Registered for <1/>',
   forgottenPassword: 'Forgotten password',
   resetPassword: 'Reset password',
   resetPasswordRequestSuccess: 'If an account is associated with this address, an email with a link to reset your password has been sent',

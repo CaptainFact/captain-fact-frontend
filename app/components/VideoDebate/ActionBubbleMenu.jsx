@@ -2,13 +2,13 @@ import React from 'react'
 import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import { MIN_REPUTATION_UPDATE_VIDEO } from '../../constants'
 
 import { changeStatementFormSpeaker } from '../../state/video_debate/statements/reducer'
 import { toggleAutoscroll } from '../../state/user_preferences/reducer'
 import { addModal } from '../../state/modals/reducer'
-import {isAuthenticated} from '../../state/users/current_user/selectors'
+import { isAuthenticated } from '../../state/users/current_user/selectors'
 import { Icon } from '../Utils/Icon'
 import ReputationGuard from '../Utils/ReputationGuard'
 import ShareModal from '../Utils/ShareModal'
@@ -23,14 +23,14 @@ import { destroyStatementForm } from '../../state/video_debate/statements/effect
     isAuthenticated: isAuthenticated(state),
     hasStatementForm: hasStatementForm(state)
   }),
-  {changeStatementFormSpeaker, toggleAutoscroll, addModal, destroyStatementForm}
+  { changeStatementFormSpeaker, toggleAutoscroll, addModal, destroyStatementForm }
 )
-@translate('videoDebate')
+@withNamespaces('videoDebate')
 @withRouter
 export default class ActionBubbleMenu extends React.PureComponent {
   render() {
     return (
-      <div className={classNames('action-bubble-container', {hasForm: this.props.hasStatementForm})}>
+      <div className={classNames('action-bubble-container', { hasForm: this.props.hasStatementForm })}>
         {!this.props.isAuthenticated &&
           <ActionBubble
             iconName="sign-in"
@@ -59,14 +59,14 @@ export default class ActionBubbleMenu extends React.PureComponent {
           label={this.props.t('main:actions.share')}
           onClick={() => this.props.addModal({
             Modal: ShareModal,
-            props: {path: location.pathname}
+            props: { path: location.pathname }
           })}
         />
         <ReputationGuard requiredRep={MIN_REPUTATION_UPDATE_VIDEO}>
           <ActionBubble
             iconName="pencil"
             label={this.props.t('video.edit')}
-            onClick={() => this.props.addModal({Modal: EditVideoModal})}
+            onClick={() => this.props.addModal({ Modal: EditVideoModal })}
           />
         </ReputationGuard>
         <ActionBubble
@@ -82,13 +82,13 @@ export default class ActionBubbleMenu extends React.PureComponent {
     if (this.props.hasStatementForm)
       this.props.destroyStatementForm()
     else
-      this.props.changeStatementFormSpeaker({id: 0})
+      this.props.changeStatementFormSpeaker({ id: 0 })
   }
 }
 
-const ActionBubble = ({iconName, label, activated = true, ...props}) => (
-  <div className={classNames('action-bubble', {activated})} {...props}>
+const ActionBubble = ({ iconName, label, activated = true, ...props }) => (
+  <div className={classNames('action-bubble', { activated })} {...props}>
     <div className="label">{label}</div>
-    <Icon name={iconName}/>
+    <Icon name={iconName} />
   </div>
 )

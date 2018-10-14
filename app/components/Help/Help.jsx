@@ -1,5 +1,5 @@
 import React from 'react'
-import { translate, Trans } from 'react-i18next'
+import { withNamespaces, Trans } from 'react-i18next'
 
 import { Link, withRouter } from 'react-router'
 import { Icon } from '../Utils/Icon'
@@ -8,7 +8,7 @@ import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
 import Message from '../Utils/Message'
 
 
-@translate('help')
+@withNamespaces('help')
 @withRouter
 export default class Help extends React.PureComponent {
   render() {

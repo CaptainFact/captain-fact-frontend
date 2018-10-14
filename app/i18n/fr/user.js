@@ -13,7 +13,7 @@ export default {
   actionWithThirdParty: 'Ou connectez-vous avec...',
   deleteAccount: 'Supprimer le compte',
   dangerZone: 'Zone dangereuse',
-  registeredSince: 'Inscrit·e depuis {{value}}',
+  registeredSince: 'Inscrit·e depuis <1/>',
   forgottenPassword: 'Mot de passe oublié',
   resetPassword: 'Réinitialiser le mot de passe',
   resetPasswordRequestSuccess: 'Si le compte existe, un e-mail avec un lien de réinitialisation vient d\'être envoyé',

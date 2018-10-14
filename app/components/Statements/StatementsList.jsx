@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import { withRouter } from 'react-router'
 import FlipMove from 'react-flip-move'
 
@@ -15,7 +15,7 @@ import StatementContainer from './StatementContainer'
   statements: state.VideoDebate.statements.data,
   statementFormSpeakerId: statementFormValueSelector(state, 'speaker_id')
 }), {closeStatementForm, postStatement, setScrollTo})
-@translate('videoDebate')
+@withNamespaces('videoDebate')
 @withRouter
 export default class StatementsList extends React.PureComponent {
   componentDidMount() {

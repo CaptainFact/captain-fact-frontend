@@ -1,5 +1,5 @@
 import React from 'react'
-import  { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
 import { USER_PICTURE_SMALL } from '../../constants'
 import UserPicture from '../Users/UserPicture'
@@ -24,4 +24,4 @@ const CommentHeader = ({t, comment: {user, inserted_at}, withoutActions}) => (
   </div>
 )
 
-export default translate('main')(CommentHeader)
+export default withNamespaces('main')(CommentHeader)

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, formValueSelector } from 'redux-form'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import {
   MODERATION_ACTION_ABUSIVE, MODERATION_ACTION_CONFIRM,
   MODERATION_ACTION_NOTSURE
@@ -13,7 +13,7 @@ const FORM_NAME = 'moderationForm'
 
 const valueSelector = formValueSelector(FORM_NAME)
 
-@translate('moderation')
+@withNamespaces('moderation')
 @reduxForm({form: FORM_NAME})
 @connect(state => ({flagReason: valueSelector(state, 'reason')}))
 export class ModerationForm extends React.PureComponent {

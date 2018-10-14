@@ -1,5 +1,5 @@
 import React from 'react'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
 import { connect } from 'react-redux'
 import TimeDisplay from '../Utils/TimeDisplay'
@@ -15,7 +15,7 @@ import { SpeakerPreview } from '../Speakers/SpeakerPreview'
   reference: state.UsersActions.referenceEntities.get(props.entityKey),
   speakers: state.VideoDebate.video.data.speakers
 }), {forcePosition})
-@translate('main')
+@withNamespaces('main')
 export default class Entity extends React.PureComponent {
   render() {
     return (

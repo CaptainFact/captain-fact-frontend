@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import classNames from 'classnames'
 import {
   MIN_REPUTATION_ADD_STATEMENT,
@@ -23,7 +23,7 @@ import {getFocusedStatementSpeakerId} from '../../state/video_debate/statements/
 
 
 @withRouter
-@translate('videoDebate')
+@withNamespaces('videoDebate')
 @connect((state, props) => (
   {isAuthenticated: isAuthenticated(state), isFocused: getFocusedStatementSpeakerId(state) === props.speaker.id}),
   {addModal, changeStatementFormSpeaker, removeSpeaker, updateSpeaker}

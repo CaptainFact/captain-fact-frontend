@@ -1,18 +1,18 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {translate} from 'react-i18next'
+import { connect } from 'react-redux'
+import { withNamespaces } from 'react-i18next'
 import { Field, reduxForm } from 'redux-form'
 
 import Modal from '../Modal/Modal'
-import {popModal} from '../../state/modals/reducer'
-import {Icon} from '../Utils/Icon'
-import {flashErrorMsg, flashSuccessMsg} from '../../state/flashes/reducer'
+import { popModal } from '../../state/modals/reducer'
+import { Icon } from '../Utils/Icon'
+import { flashErrorMsg, flashSuccessMsg } from '../../state/flashes/reducer'
 import FieldWithButton from '../FormUtils/FieldWithButton'
-import {shiftStatements} from '../../state/video_debate/statements/effects'
+import { shiftStatements } from '../../state/video_debate/statements/effects'
 
 
-const TimeShiftForm = reduxForm({form: 'shiftStatements', initialValues: {offset: 0}})(translate('main')(
-  ({handleSubmit, t}) =>
+const TimeShiftForm = reduxForm({ form: 'shiftStatements', initialValues: { offset: 0 } })(withNamespaces('main')(
+  ({ handleSubmit, t }) =>
     <form onSubmit={handleSubmit}>
       <Field
         component={FieldWithButton}
@@ -25,22 +25,22 @@ const TimeShiftForm = reduxForm({form: 'shiftStatements', initialValues: {offset
     </form>
 ))
 
-@connect(null, {popModal, flashErrorMsg, flashSuccessMsg, shiftStatements})
-@translate('videoDebate')
+@connect(null, { popModal, flashErrorMsg, flashSuccessMsg, shiftStatements })
+@withNamespaces('videoDebate')
 export default class EditVideoModal extends React.PureComponent {
   render() {
     return (
       <Modal
         handleCloseClick={this.props.popModal}
-        title={<span><Icon name="pencil"/> {this.props.t('video.edit')}</span>}
+        title={<span><Icon name="pencil" /> {this.props.t('video.edit')}</span>}
       >
         <h4 className="title is-4">{this.props.t('video.shiftStatements')}</h4>
-        <TimeShiftForm onSubmit={this.shiftSubmit}/>
+        <TimeShiftForm onSubmit={this.shiftSubmit} />
       </Modal>
     )
   }
 
-  shiftSubmit = ({offset}) => {
+  shiftSubmit = ({ offset }) => {
     if (offset) {
       return this.props.shiftStatements(offset).then(() => this.props.popModal())
     }

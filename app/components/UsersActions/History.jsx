@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Immutable from 'immutable'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
 import { UserAction } from './UserAction'
 
@@ -9,7 +9,7 @@ import { UserAction } from './UserAction'
 /**
  * Display a list of `UserAction` record as an history
  */
-@translate('main')
+@withNamespaces('main')
 export class History extends React.PureComponent {
   constructor(props) {
     super(props)

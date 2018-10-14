@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import { Link } from 'react-router'
 
 import { MIN_REPUTATION_MODERATION } from '../../constants'
@@ -20,7 +20,7 @@ import { ModerationForm } from './ModerationForm'
   error: state.Moderation.error,
   entry: state.Moderation.entry,
 }), { fetchRandomModeration, postModerationFeedback })
-@translate('moderation')
+@withNamespaces('moderation')
 @withReputationGuard(MIN_REPUTATION_MODERATION)
 export default class Moderation extends React.PureComponent {
   componentDidMount() {

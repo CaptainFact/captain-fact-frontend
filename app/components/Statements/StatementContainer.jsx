@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import classNames from 'classnames'
 
 import { StatementForm } from './StatementForm'
@@ -21,7 +21,7 @@ import Statement from './Statement'
   autoscrollEnabled: state.UserPreferences.enableAutoscroll,
   formEnabled: state.VideoDebate.statements.formsCount > 0
 }), {updateStatement, deleteStatement})
-@translate('videoDebate')
+@withNamespaces('videoDebate')
 export default class StatementContainer extends React.PureComponent {
   state = { isDeleting: false, isEditing: false }
 

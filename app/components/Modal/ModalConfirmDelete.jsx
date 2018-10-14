@@ -1,10 +1,10 @@
 import React from 'react'
 
 import { ModalConfirm } from './ModalConfirm'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
 
-const ModalConfirmDelete = ({t, isRemove = false, ...props}) => (
+const ModalConfirmDelete = ({ t, isRemove = false, ...props }) => (
   <ModalConfirm
     confirmIcon={isRemove ? 'trash-o' : 'times'}
     confirmText={isRemove ? t('actions.remove') : t('actions.delete')}
@@ -14,4 +14,4 @@ const ModalConfirmDelete = ({t, isRemove = false, ...props}) => (
   />
 )
 
-export default translate('main')(ModalConfirmDelete)
+export default withNamespaces('main')(ModalConfirmDelete)

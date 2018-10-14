@@ -1,7 +1,7 @@
 import React from 'react'
 import isPromise from 'is-promise'
 import classNames from 'classnames'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import { connect } from 'react-redux'
 
 import Modal from './Modal'
@@ -10,7 +10,7 @@ import { popModal } from '../../state/modals/reducer'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 
 
-@translate('main')
+@withNamespaces('main')
 @connect(null, {popModal})
 export class ModalFormContainer extends React.PureComponent {
   constructor(props) {

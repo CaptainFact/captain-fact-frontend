@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { withRouter } from 'react-router'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import React from 'react'
 
 import { renderAllUserFields, submitButton, validatePasswordRepeat } from './UserFormFields'
@@ -10,15 +10,15 @@ import { Icon } from '../Utils/Icon'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 
 
-@connect(({CurrentUser: {data, isLoading}}) => ({
+@connect(({ CurrentUser: { data, isLoading } }) => ({
   initialValues: data.toObject(),
   user: data,
   enableReinitialize: true,
   isLoading
-}), {updateInfo})
+}), { updateInfo })
 @reduxForm({ form: 'editUserForm', validate: validatePasswordRepeat })
 @withRouter
-@translate('user')
+@withNamespaces('user')
 export default class EditUserForm extends React.PureComponent {
   componentDidUpdate() {
     // Redirect to user profile when logged in
@@ -31,7 +31,7 @@ export default class EditUserForm extends React.PureComponent {
   }
 
   render() {
-    const {handleSubmit, valid, t} = this.props
+    const { handleSubmit, valid, t } = this.props
     return (
       <form
         className="edit-user-form form"
@@ -39,9 +39,10 @@ export default class EditUserForm extends React.PureComponent {
       >
         {renderAllUserFields(valid, t, true)}
         {submitButton((<div>
-          <Icon name="floppy-o"/>
+          <Icon name="floppy-o" />
           <span>{t('main:actions.save')}</span>
         </div>), valid)}
       </form>
-    )}
+    )
+  }
 }
