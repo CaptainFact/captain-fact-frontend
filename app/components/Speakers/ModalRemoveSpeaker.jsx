@@ -6,7 +6,8 @@ import ModalConfirmDelete from '../Modal/ModalConfirmDelete'
 
 
 const ModalRemoveSpeaker = ({ handleAbort, speaker, t, ...props }) => (
-  <ModalConfirmDelete handleAbort={handleAbort}
+  <ModalConfirmDelete
+    handleAbort={handleAbort}
     title={t('speaker.remove')}
     isRemove
     content={(<SpeakerPreview speaker={speaker} withoutActions />)}
