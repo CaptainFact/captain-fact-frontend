@@ -1,23 +1,16 @@
 {
-  "presets": ["es2015", "react",
-    [
-      "env",
-      {
-        "targets": {
-          "browsers": [
-            "> 1%",
-            "Last 2 versions",
-            "IE 11"
-          ]
-        }
-      }
-    ],
+  "presets": [
+    "es2015",
+    "react"
   ],
   "plugins": [
     "transform-decorators-legacy",
     "transform-runtime",
     "transform-class-properties",
     "transform-object-rest-spread",
-    ["inline-json-import", {}]
+    [
+      "inline-json-import",
+      {}
+    ]
   ]
 }

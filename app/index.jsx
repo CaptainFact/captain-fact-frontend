@@ -1,4 +1,5 @@
 // Import polyfills
+import 'babel-polyfill'
 import { polyfill as smoothSrollPolyfill } from 'smoothscroll-polyfill'
 
 // Import libs
