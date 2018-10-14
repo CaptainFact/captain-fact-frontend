@@ -87,7 +87,7 @@
     "redux": "^4.0.1",
     "redux-actions": "^2.6.1",
     "redux-form": "6.8.0",
-    "redux-promise": "^0.5.3",
+    "redux-promise": "^0.6.0",
     "redux-thunk": "^2.2.0",
     "reselect": "^4.0.0",
     "smoothscroll-polyfill": "^0.4.0",
