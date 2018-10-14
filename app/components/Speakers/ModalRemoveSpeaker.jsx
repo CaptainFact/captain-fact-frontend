@@ -5,7 +5,7 @@ import { SpeakerPreview } from './SpeakerPreview'
 import ModalConfirmDelete from '../Modal/ModalConfirmDelete'
 
 
-const ModalRemoveSpeaker = ({ handleAbort, speaker, t, ...props }) =>
+const ModalRemoveSpeaker = ({ handleAbort, speaker, t, ...props }) => (
   <ModalConfirmDelete handleAbort={handleAbort}
     title={t('speaker.remove')}
     isRemove
@@ -13,5 +13,6 @@ const ModalRemoveSpeaker = ({ handleAbort, speaker, t, ...props }) =>
     message={t('speaker.confirmRemove', { speaker })}
     {...props}
   />
+)
 
 export default withNamespaces('videoDebate')(ModalRemoveSpeaker)

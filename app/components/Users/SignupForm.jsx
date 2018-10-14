@@ -15,7 +15,7 @@ import Message from '../Utils/Message'
 import InvitationRequestForm from './InvitationRequestForm'
 import { errorToFlash } from '../../state/flashes/reducer'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
-import { INVITATION_SYSTEM } from '../../config';
+import { INVITATION_SYSTEM } from '../../config'
 
 
 const SignupForm = ({ location, t }) => {

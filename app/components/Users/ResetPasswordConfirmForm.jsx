@@ -1,12 +1,12 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
 import { withNamespaces } from 'react-i18next'
+import { connect } from 'react-redux'
 import { passwordField, passwordRepeatField } from './UserFormFields'
 import {
   resetPasswordRequest, resetPasswordVerify, resetPasswordConfirm,
   login
 } from '../../state/users/current_user/effects'
-import { connect } from 'react-redux'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { ErrorView } from '../Utils/ErrorView'
 import UserPicture from './UserPicture'
@@ -59,7 +59,7 @@ export default class ResetPasswordConfirmForm extends React.PureComponent {
       return <ErrorView error={this.state.payload} i18nNS="user:errors.error" canGoBack={false} />
     if (this.state.status === 'verify')
       return <LoadingFrame />
-    else if (this.state.status === 'confirm') {
+    if (this.state.status === 'confirm') {
       const user = this.state.payload
       return (
         <div>
@@ -73,7 +73,7 @@ export default class ResetPasswordConfirmForm extends React.PureComponent {
         </div>
       )
     }
-    else if (this.state.status === 'confirm_success')
+    if (this.state.status === 'confirm_success')
       return <Notification>{this.props.t('resetPasswordSuccess')}</Notification>
   }
 

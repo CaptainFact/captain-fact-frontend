@@ -1,9 +1,9 @@
 import React from 'react'
+import { withNamespaces } from 'react-i18next'
 import AsyncEffect from './AsyncEffect'
 import { ErrorView } from './ErrorView'
 import Notification from './Notification'
 import { Icon } from './Icon'
-import { withNamespaces } from 'react-i18next'
 
 
 @withNamespaces('main')
@@ -40,14 +40,14 @@ export default class AsyncEffectPage extends React.PureComponent {
           onError={this.onError.bind(this)}
         />
       )
-    else if (this.state.step === 'error')
+    if (this.state.step === 'error')
       return (
         <ErrorView
           error={this.state.payload}
           i18nNS={this.props.errorNamespace}
         />
       )
-    else if (this.state.step === 'success' && typeof (this.state.payload) === 'string')
+    if (this.state.step === 'success' && typeof (this.state.payload) === 'string')
       return (
         <div className="message-view">
           <Notification type="success">

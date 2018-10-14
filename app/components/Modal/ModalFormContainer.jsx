@@ -43,34 +43,39 @@ export class ModalFormContainer extends React.PureComponent {
     const isSubmitting = this.props.isSubmitting || this.state.isSubmitting
     return (
       <div className="form-buttons">
-        <a type="submit"
-           disabled={isSubmitting || this.props.confirmLoading || this.props.confirmDisabled}
-           className={classNames('button', confirmType, {
-             'is-loading': (isSubmitting || this.props.confirmLoading)
-           })}
-           onClick={() => this.refs.form.submit()}>
-          <Icon name={this.props.confirmIcon || "floppy-o"}/>
+        <a
+          type="submit"
+          disabled={isSubmitting || this.props.confirmLoading || this.props.confirmDisabled}
+          className={classNames('button', confirmType, {
+            'is-loading': (isSubmitting || this.props.confirmLoading)
+          })}
+          onClick={() => this.refs.form.submit()}
+        >
+          <Icon name={this.props.confirmIcon || 'floppy-o'}/>
           <div>{this.props.confirmText || this.props.t('actions.save')}</div>
         </a>
-        <a type="reset"
-           className={classNames('button')}
-           disabled={isSubmitting}
-           onClick={this.close}>
+        <a
+          type="reset"
+          className={classNames('button')}
+          disabled={isSubmitting}
+          onClick={this.close}
+        >
           <Icon name="ban"/>
           <div>{this.props.t('actions.cancel')}</div>
         </a>
       </div>
-  )}
+    )}
 
   render() {
     const { FormComponent, handleConfirm, className, formProps = {}, ...modalParams } = this.props
     return (
-      <Modal {...modalParams}
-             handleCloseClick={this.close}
-             className={classNames('modal-form', className)}
-             footer={this.renderFormButtons()}>
+      <Modal
+        {...modalParams}
+        handleCloseClick={this.close}
+        className={classNames('modal-form', className)}
+        footer={this.renderFormButtons()}
+      >
         <FormComponent ref="form" {...formProps} onSubmit={this.handleSubmit(handleConfirm)}/>
       </Modal>
     )}
 }
-

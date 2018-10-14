@@ -26,7 +26,7 @@ import {getFocusedStatementSpeakerId} from '../../state/video_debate/statements/
 @withNamespaces('videoDebate')
 @connect((state, props) => (
   {isAuthenticated: isAuthenticated(state), isFocused: getFocusedStatementSpeakerId(state) === props.speaker.id}),
-  {addModal, changeStatementFormSpeaker, removeSpeaker, updateSpeaker}
+{addModal, changeStatementFormSpeaker, removeSpeaker, updateSpeaker}
 )
 export class SpeakerPreview extends React.PureComponent {
   render() {
@@ -34,14 +34,14 @@ export class SpeakerPreview extends React.PureComponent {
 
     return (
       <MediaLayout
-        className={classNames("speaker-preview", className, {isActive: this.props.isFocused})}
+        className={classNames('speaker-preview', className, {isActive: this.props.isFocused})}
         left={this.renderSpeakerThumb(speaker)}
-        content={
+        content={(
           <React.Fragment>
             {this.renderName(speaker)}
             <p className="subtitle">{this.getTitle()}</p>
           </React.Fragment>
-        }
+        )}
         right={isAuthenticated && !withoutActions && this.renderActions()}
       />
     )

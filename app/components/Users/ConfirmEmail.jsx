@@ -1,9 +1,9 @@
 import React from 'react'
 import { withRouter } from 'react-router'
-import AsyncEffectPage from '../Utils/AsyncEffectPage'
-import { confirmEmail } from '../../state/users/current_user/effects'
 import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
+import AsyncEffectPage from '../Utils/AsyncEffectPage'
+import { confirmEmail } from '../../state/users/current_user/effects'
 
 
 @withRouter

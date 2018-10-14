@@ -15,12 +15,14 @@ export const joinStatementsChannel = videoId => dispatch => {
       statement_removed: s => dispatch(remove(s)),
       statement_added: s => dispatch(add(s)),
       statement_updated: s => dispatch(update(s)),
-      statements_updated: ({statements}) => dispatch(updateAll(statements))
+      statements_updated: ({ statements }) => dispatch(updateAll(statements))
     }
   )))
 }
 
-export const leaveStatementsChannel = () => () => SocketApi.leaveChannel(STATEMENTS_CHANNEL)
+export const leaveStatementsChannel = () => () => {
+  return SocketApi.leaveChannel(STATEMENTS_CHANNEL)
+}
 
 export const postStatement = statement => createEffect(
   SocketApi.push(STATEMENTS_CHANNEL, 'new_statement', statement),
@@ -33,17 +35,17 @@ export const postStatement = statement => createEffect(
 
 export const updateStatement = statement => createEffect(
   SocketApi.push(STATEMENTS_CHANNEL, 'update_statement', statement),
-  {catch: errorToFlash}
+  { catch: errorToFlash }
 )
 
 export const deleteStatement = statement => createEffect(
   SocketApi.push(STATEMENTS_CHANNEL, 'remove_statement', statement),
-  {catch: errorToFlash}
+  { catch: errorToFlash }
 )
 
 export const shiftStatements = offset => createEffect(
   SocketApi.push(STATEMENTS_CHANNEL, 'shift_all', offset),
-  {catch: errorToFlash}
+  { catch: errorToFlash }
 )
 
 export const destroyStatementForm = () => destroy('StatementForm')

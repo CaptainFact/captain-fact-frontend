@@ -29,23 +29,29 @@ export class History extends React.PureComponent {
     return (
       <div className="user-actions-history">
         <div className="latest-action">
-          <UserAction key={ latestAction.id } action={ latestAction } isLatest/>
+          <UserAction key={latestAction.id} action={latestAction} isLatest/>
         </div>
-        { actions.size > 1 &&
-        <a className="expend-old-actions"
-           onClick={() => this.setState({ isExpended: !isExpended })}>
-          { isExpended ? 'Hide' : `Show full history (${actions.size - 1} elements)` }
-        </a>
+        { actions.size > 1
+        && (
+          <a
+            className="expend-old-actions"
+            onClick={() => this.setState({ isExpended: !isExpended })}
+          >
+            { isExpended ? 'Hide' : `Show full history (${actions.size - 1} elements)` }
+          </a>
+        )
         }
-        { isExpended &&
-        <div className="old-actions">
-          {oldActions.map(action =>
-            <div key={ action.id }>
-              <div className="separator"/>
-              <UserAction action={ action } isLatest={ false }/>
-            </div>
-          )}
-        </div>
+        { isExpended
+        && (
+          <div className="old-actions">
+            {oldActions.map(action => (
+              <div key={action.id}>
+                <div className="separator"/>
+                <UserAction action={action} isLatest={false}/>
+              </div>
+            ))}
+          </div>
+        )
         }
       </div>
     )

@@ -39,16 +39,18 @@ export default class Moderation extends React.PureComponent {
           <Icon name="flag"/> {t('title')}
         </h1>
         {!entry && <Message className="has-text-centered">{t('emptyModeration')}</Message>}
-        {entry &&
-          <div>
-            {this.renderAction(entry.action)}
-            <hr/>
-            {entry.flags.map(({source_user, reason}) =>
-              <div key={source_user.id} className="has-text-centered">
-                <UserAppellation user={source_user}/> {t('flaggedFor', {reason})}
-              </div>
-            )}
-          </div>
+        {entry
+          && (
+            <div>
+              {this.renderAction(entry.action)}
+              <hr/>
+              {entry.flags.map(({source_user, reason}) => (
+                <div key={source_user.id} className="has-text-centered">
+                  <UserAppellation user={source_user}/> {t('flaggedFor', {reason})}
+                </div>
+              ))}
+            </div>
+          )
         }
       </div>
     )
@@ -71,9 +73,8 @@ export default class Moderation extends React.PureComponent {
         <ModerationForm
           action={action}
           initialValues={{action_id: action.id}}
-          onSubmit={values =>
-            this.props.postModerationFeedback(values)
-              .then(() => this.props.fetchRandomModeration())
+          onSubmit={values => this.props.postModerationFeedback(values)
+            .then(() => this.props.fetchRandomModeration())
           }
         />
       </div>

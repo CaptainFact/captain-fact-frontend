@@ -19,10 +19,10 @@ import { ColumnDebate } from './ColumnDebate'
   videoTitle: state.VideoDebate.video.data.title,
   authenticated: isAuthenticated(state),
 }), {
-    joinVideoDebateChannel, joinCommentsChannel, joinStatementsChannel,
-    leaveCommentsChannel, leaveStatementsChannel, leaveVideoDebateChannel,
-    resetVideoDebate
-  })
+  joinVideoDebateChannel, joinCommentsChannel, joinStatementsChannel,
+  leaveCommentsChannel, leaveStatementsChannel, leaveVideoDebateChannel,
+  resetVideoDebate
+})
 @withNamespaces('videoDebate')
 export class VideoDebate extends React.PureComponent {
   componentDidMount() {

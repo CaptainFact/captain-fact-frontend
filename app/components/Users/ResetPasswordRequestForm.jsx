@@ -1,9 +1,9 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
 import { withNamespaces } from 'react-i18next'
+import { connect } from 'react-redux'
 import { emailField } from './UserFormFields'
 import { resetPasswordRequest, resetPasswordVerify, resetPasswordConfirm } from '../../state/users/current_user/effects'
-import { connect } from 'react-redux'
 import { ErrorView } from '../Utils/ErrorView'
 import Notification from '../Utils/Notification'
 import { handleEffectResponse } from '../../lib/handle_effect_response'
@@ -35,14 +35,14 @@ export default class ResetPasswordRequestForm extends React.PureComponent {
   renderContent() {
     if (this.state.status === 'error')
       return <ErrorView error={this.state.payload} i18nNS="user:errors.error" canGoBack={false} />
-    else if (this.state.status === 'ready')
+    if (this.state.status === 'ready')
       return (
         <div>
           {emailField(this.props.t)}
           <button type="submit" className="button">{this.props.t('resetPassword')}</button>
         </div>
       )
-    else if (this.state.status === 'done')
+    if (this.state.status === 'done')
       return <Notification>{this.props.t('resetPasswordRequestSuccess')}</Notification>
   }
 

@@ -17,8 +17,7 @@ export default class ModalFlag extends React.PureComponent {
 
   componentDidMount() {
     HttpApi.get('users/me/available_flags')
-      .then(({flags_available}) =>
-        this.setState({isLoading: false, flagsAvailable: flags_available})
+      .then(({flags_available}) => this.setState({isLoading: false, flagsAvailable: flags_available})
       )
       .catch(e => this.setState({isLoading: false, error: e}))
   }

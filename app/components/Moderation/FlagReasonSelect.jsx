@@ -12,12 +12,11 @@ const FlagReason = ({ value, label }) => (
 )
 
 const FlagReasonSelect = ({ t }) => {
-  const labels = t("reason", { returnObjects: true })
+  const labels = t('reason', { returnObjects: true })
   return (
     <div className="flag-reason-select field">
       <p className="control">
-        {VALID_REASONS.map(key =>
-          <FlagReason key={key} value={key} label={labels[key]} />
+        {VALID_REASONS.map(key => <FlagReason key={key} value={key} label={labels[key]} />
         )}
       </p>
     </div>

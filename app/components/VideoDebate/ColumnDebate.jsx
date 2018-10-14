@@ -30,7 +30,7 @@ export class ColumnDebate extends React.PureComponent {
 
     if (view === 'history')
       return <VideoDebateHistory videoId={videoId} />
-    else if (view === 'debate') {
+    if (view === 'debate') {
       if (isLoading)
         return <LoadingFrame title={this.props.t('loading.statements')} />
       return (

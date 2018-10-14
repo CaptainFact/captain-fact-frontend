@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { ModalConfirm } from './ModalConfirm'
 import { withNamespaces } from 'react-i18next'
+import { ModalConfirm } from './ModalConfirm'
 
 
 const ModalConfirmDelete = ({ t, isRemove = false, ...props }) => (

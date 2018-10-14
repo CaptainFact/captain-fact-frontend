@@ -12,7 +12,7 @@ import { shiftStatements } from '../../state/video_debate/statements/effects'
 
 
 const TimeShiftForm = reduxForm({ form: 'shiftStatements', initialValues: { offset: 0 } })(withNamespaces('main')(
-  ({ handleSubmit, t }) =>
+  ({ handleSubmit, t }) => (
     <form onSubmit={handleSubmit}>
       <Field
         component={FieldWithButton}
@@ -23,7 +23,7 @@ const TimeShiftForm = reduxForm({ form: 'shiftStatements', initialValues: { offs
         validate={offset => !offset}
       />
     </form>
-))
+  )))
 
 @connect(null, { popModal, flashErrorMsg, flashSuccessMsg, shiftStatements })
 @withNamespaces('videoDebate')

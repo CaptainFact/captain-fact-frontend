@@ -18,4 +18,3 @@ export class LoadingFrame extends React.PureComponent {
     )
   }
 }
-

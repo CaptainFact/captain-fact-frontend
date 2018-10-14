@@ -31,20 +31,24 @@ export default class ActionBubbleMenu extends React.PureComponent {
   render() {
     return (
       <div className={classNames('action-bubble-container', { hasForm: this.props.hasStatementForm })}>
-        {!this.props.isAuthenticated &&
-          <ActionBubble
-            iconName="sign-in"
-            label={this.props.t('main:menu.loginSignup')}
-            onClick={() => this.props.router.push('/login')}
-          />
+        {!this.props.isAuthenticated
+          && (
+            <ActionBubble
+              iconName="sign-in"
+              label={this.props.t('main:menu.loginSignup')}
+              onClick={() => this.props.router.push('/login')}
+            />
+          )
         }
-        {this.props.isAuthenticated &&
-          <ActionBubble
-            iconName={this.props.hasStatementForm ? 'times' : 'commenting-o'}
-            label={this.props.t(this.props.hasStatementForm ? 'statement.abortAdd' : 'statement.add')}
-            activated={!this.props.hasStatementForm}
-            onClick={() => this.onStatementBubbleClick()}
-          />
+        {this.props.isAuthenticated
+          && (
+            <ActionBubble
+              iconName={this.props.hasStatementForm ? 'times' : 'commenting-o'}
+              label={this.props.t(this.props.hasStatementForm ? 'statement.abortAdd' : 'statement.add')}
+              activated={!this.props.hasStatementForm}
+              onClick={() => this.onStatementBubbleClick()}
+            />
+          )
         }
         <ActionBubble
           iconName="arrows-v"

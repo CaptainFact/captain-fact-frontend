@@ -44,7 +44,7 @@ export default class Entity extends React.PureComponent {
         </h4>
       )
     }
-    else if (entity === ENTITY_SPEAKER)
+    if (entity === ENTITY_SPEAKER)
       return <SpeakerPreview speaker={reference} withoutActions/>
   }
 }

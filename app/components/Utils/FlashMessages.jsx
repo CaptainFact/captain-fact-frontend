@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { Icon } from './Icon'
 import { withNamespaces } from 'react-i18next'
 import FlipMove from 'react-flip-move'
 import { Link } from 'react-router'
+import { Icon } from './Icon'
 import { addFlash, pause, removeFlash, unPause, update } from '../../state/flashes/reducer'
 import { tError } from '../../lib/errors'
 import { popModal } from '../../state/modals/reducer'
@@ -53,15 +53,16 @@ export class FlashMessages extends React.PureComponent {
         onMouseLeave={() => this.props.unPause()}
       >
         <FlipMove enterAnimation="fade">
-          {this.props.flashes.map(flash =>
-            (<div
+          {this.props.flashes.map(flash => (
+            <div
               key={flash.id}
               className={`flash-message is-${flash.flashType}`}
               data-timeleft={flash.timeLeft}
             >
               <button className="delete" onClick={() => this.props.removeFlash(flash)}/>
               <FlashContent flash={flash}/>
-             </div>)
+            </div>
+          )
           )}
         </FlipMove>
       </div>
@@ -82,10 +83,12 @@ class FlashContent extends React.Component {
     const {iconName, message, isError, i18nParams = {}} = this.props.flash
     return (
       <div className="columns">
-        { iconName &&
-        <div className="column is-narrow">
-          <Icon size="medium" name={iconName}/>
-        </div>
+        { iconName
+        && (
+          <div className="column is-narrow">
+            <Icon size="medium" name={iconName}/>
+          </div>
+        )
         }
         <div className="column">
           <div>

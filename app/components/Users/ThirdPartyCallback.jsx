@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { withNamespaces } from 'react-i18next'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { ErrorView } from '../Utils/ErrorView'
 import { login } from '../../state/users/current_user/effects'
-import { withNamespaces } from 'react-i18next'
 import { isAuthenticated } from '../../state/users/current_user/selectors'
 
 

@@ -63,11 +63,11 @@ export class VideoCard extends React.PureComponent {
         <strong>{t('video.addedBy', { userType: '$t(video.partner)' })}</strong>
       </span>
     ) : (
-        <span className="added-by">
-          <Icon name="user" />
-          <span>{t('video.addedBy', { userType: '$t(video.user)' })}</span>
-        </span>
-      )
+      <span className="added-by">
+        <Icon name="user" />
+        <span>{t('video.addedBy', { userType: '$t(video.user)' })}</span>
+      </span>
+    )
   }
 
   renderSpeakersList(speakers, t) {
