@@ -5,10 +5,9 @@
   "scripts": {
     "build": "npx webpack-cli --config webpack.production.config.js",
     "prod:build": "npx webpack-cli --config webpack.production.config.js",
-    "dev:build": "npx webpack",
-    "dev": "npm run dev:build && npm run serve",
-    "prod": "npm run prod:build && npm run serve",
-    "serve": "npx webpack-dev-server",
+    "dev": "npx webpack-dev-server",
+    "dev:build": "npx webpack-cli",
+    "dev:serve": "npm run dev -- --host 0.0.0.0 --disable-host-check",
     "start": "npm run dev",
     "watch": "npx jest --watch",
     "test": "npx jest",

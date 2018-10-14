@@ -1,5 +1,4 @@
 // Import polyfills
-import 'babel-polyfill'
 import { polyfill as smoothSrollPolyfill } from 'smoothscroll-polyfill'
 
 // Import libs
@@ -16,7 +15,6 @@ import GraphQLClient from './API/graphql_api'
 
 // Import router
 import CFRouter from './router'
-
 // Import styles
 import './styles/application.sass'
 

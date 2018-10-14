@@ -18,6 +18,7 @@ module.exports = {
   mode: 'development',
   entry: {
     app: [
+      'babel-polyfill',
       './app/index.jsx'
     ]
   },
@@ -50,7 +51,7 @@ module.exports = {
   devServer: {
     contentBase: './public',
     // do not print bundle build stats
-    noInfo: true,
+    noInfo: false,
     // enable HMR
     hot: true,
     // embed the webpack-dev-server runtime into the bundle
