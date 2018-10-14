@@ -1,5 +1,3 @@
-
-
 const webpack = require('webpack')
 const path = require('path')
 
@@ -19,13 +17,7 @@ module.exports = {
   mode: 'production',
   entry: {
     app: [
-      // POLYFILL: Set up an ES6-ish environment
-      // 'babel-polyfill',  // The entire babel-polyfill
-      // Or pick es6 features needed (included into babel-polyfill)
-      'core-js/fn/promise',
-      'core-js/es6/object',
-      'core-js/es6/array',
-      // app entry point
+      'babel-polyfill',
       './app/index.jsx'
     ]
   },
@@ -38,16 +30,20 @@ module.exports = {
     extensions: ['.js', '.jsx'],
     modules: [
       path.join(__dirname, 'src'),
-      path.join(__dirname, 'node_modules'), // the old 'fallback' option (needed for npm link-ed packages)
+      path.join(__dirname, 'node_modules') // the old 'fallback' option (needed for npm link-ed packages)
     ],
     alias: {
-      styles: path.resolve(__dirname, 'styles/'),
+      styles: path.resolve(__dirname, 'styles/')
     }
   },
   optimization: {
     splitChunks: {
       cacheGroups: {
-        commons: { test: /[\\/]node_modules[\\/]/, name: 'vendor', chunks: 'all' }
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all'
+        }
       }
     },
     minimizer: [
@@ -65,6 +61,10 @@ module.exports = {
   plugins: [
     // provides a nice visualisation on http://localhost:8888 for debugging bundle size
     // new BundleAnalyzerPlugin(),
+    // Fetch polyfill
+    new webpack.ProvidePlugin({
+      fetch: 'exports-loader?self.fetch!whatwg-fetch/dist/fetch.umd'
+    }),
     // cleans output folder
     new CleanWebpackPlugin(['public']),
     // minimizing is done by webpack as we are in prod mode

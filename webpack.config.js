@@ -5,7 +5,6 @@ const path = require('path')
 
 // Plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const DashboardPlugin = require('webpack-dashboard/plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
@@ -19,14 +18,7 @@ module.exports = {
   mode: 'development',
   entry: {
     app: [
-      // POLYFILL: Set up an ES6-ish environment
-      // 'babel-polyfill',  // The entire babel-polyfill
-      // Or pick es6 features needed (included into babel-polyfill)
       'babel-polyfill',
-      'core-js/fn/promise',
-      'core-js/es6/object',
-      'core-js/es6/array',
-      // app entry point
       './app/index.jsx'
     ]
   },
@@ -59,7 +51,7 @@ module.exports = {
   devServer: {
     contentBase: './public',
     // do not print bundle build stats
-    noInfo: true,
+    noInfo: false,
     // enable HMR
     hot: true,
     // embed the webpack-dev-server runtime into the bundle
@@ -80,11 +72,6 @@ module.exports = {
     // regroup styles in app.css bundle
     new MiniCssExtractPlugin({
       filename: '[name].css',
-    }),
-    // beautiful output
-    new DashboardPlugin({
-      minified: false,
-      gzip: false
     }),
     // copy static assets as they are required from external sources
     new CopyWebpackPlugin(

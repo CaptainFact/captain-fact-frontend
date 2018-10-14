@@ -1,12 +1,12 @@
 # CaptainFact frontend container
 # You must attach a volume containing cert.pem + privkey.pem at /etc/nginx/cert/
-FROM betree/centos-nginx-nodejs-sass:latest
+FROM betree/centos-nginx-nodejs:latest
 MAINTAINER Benjamin Piouffle <benjamin.piouffle@gmail.com>
 
 WORKDIR /opt/app
 
 # Cache dependencies
-COPY package.json .
+COPY package.json package-lock.json ./
 RUN npm install
 
 # Build project
