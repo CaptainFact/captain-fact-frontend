@@ -1,5 +1,4 @@
 const webpack = require('webpack')
-const glob = require('glob')
 const path = require('path')
 
 // Plugins
@@ -37,16 +36,20 @@ module.exports = {
     extensions: ['.js', '.jsx'],
     modules: [
       path.join(__dirname, 'src'),
-      path.join(__dirname, 'node_modules'), // the old 'fallback' option (needed for npm link-ed packages)
+      path.join(__dirname, 'node_modules') // the old 'fallback' option (needed for npm link-ed packages)
     ],
     alias: {
-      styles: path.resolve(__dirname, 'styles/'),
+      styles: path.resolve(__dirname, 'styles/')
     }
   },
   optimization: {
     splitChunks: {
       cacheGroups: {
-        commons: { test: /[\\/]node_modules[\\/]/, name: 'vendor', chunks: 'all' }
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all'
+        }
       }
     },
     minimizer: [
