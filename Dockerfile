@@ -6,7 +6,7 @@ MAINTAINER Benjamin Piouffle <benjamin.piouffle@gmail.com>
 WORKDIR /opt/app
 
 # Cache dependencies
-COPY package.json .
+COPY package.json package-lock.json ./
 RUN npm install
 
 # Build project
