@@ -5,7 +5,6 @@ const path = require('path')
 
 // Plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const DashboardPlugin = require('webpack-dashboard/plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
@@ -80,11 +79,6 @@ module.exports = {
     // regroup styles in app.css bundle
     new MiniCssExtractPlugin({
       filename: '[name].css',
-    }),
-    // beautiful output
-    new DashboardPlugin({
-      minified: false,
-      gzip: false
     }),
     // copy static assets as they are required from external sources
     new CopyWebpackPlugin(
