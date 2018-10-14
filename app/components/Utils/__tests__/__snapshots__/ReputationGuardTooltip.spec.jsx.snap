@@ -17,6 +17,7 @@ exports[`user doesn't have required reputation 1`] = `
     }
   }
   defaultOpen={false}
+  keepTooltipInside={false}
   lockScroll={false}
   modal={false}
   mouseEnterDelay={100}
