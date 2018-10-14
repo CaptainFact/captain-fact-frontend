@@ -61,6 +61,10 @@ module.exports = {
   plugins: [
     // provides a nice visualisation on http://localhost:8888 for debugging bundle size
     // new BundleAnalyzerPlugin(),
+    // Fetch polyfill
+    new webpack.ProvidePlugin({
+      fetch: 'exports-loader?self.fetch!whatwg-fetch/dist/fetch.umd'
+    }),
     // cleans output folder
     new CleanWebpackPlugin(['public']),
     // minimizing is done by webpack as we are in prod mode
