@@ -76,7 +76,7 @@ app
 
 # Feature requests
 
-[![Feature Requests](http://feathub.com/CaptainFact/captain-fact?format=svg)](http://feathub.com/CaptainFact/captain-fact)
+[![Feature Requests](http://feathub.com/CaptainFact/captain-fact?format=svg)](http://feathub.com/CaptainFact/captain-fact) [![Greenkeeper badge](https://badges.greenkeeper.io/CaptainFact/captain-fact-frontend.svg)](https://greenkeeper.io/)
 
 ## License
 
