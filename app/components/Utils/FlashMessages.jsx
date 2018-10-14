@@ -13,8 +13,8 @@ import { popModal } from '../../state/modals/reducer'
 const UPDATE_INTERVAL = 1000
 
 @connect(
-  ({Flashes: {flashes, isPaused}}) => ({flashes, isPaused}),
-  {addFlash, removeFlash, pause, unPause, update}
+  ({ Flashes: { flashes, isPaused } }) => ({ flashes, isPaused }),
+  { addFlash, removeFlash, pause, unPause, update }
 )
 export class FlashMessages extends React.PureComponent {
   constructor(props) {
@@ -59,8 +59,12 @@ export class FlashMessages extends React.PureComponent {
               className={`flash-message is-${flash.flashType}`}
               data-timeleft={flash.timeLeft}
             >
-              <button className="delete" onClick={() => this.props.removeFlash(flash)}/>
-              <FlashContent flash={flash}/>
+              <button
+                type="button"
+                className="delete"
+                onClick={() => this.props.removeFlash(flash)}
+              />
+              <FlashContent flash={flash} />
             </div>
           )
           )}
@@ -72,7 +76,7 @@ export class FlashMessages extends React.PureComponent {
 
 
 @withNamespaces('main')
-@connect(null, {popModal, removeFlash})
+@connect(null, { popModal, removeFlash })
 class FlashContent extends React.Component {
   shouldComponentUpdate(nextProps) {
     // To avoid re-rendering every second, we only compare flash id
@@ -80,19 +84,19 @@ class FlashContent extends React.Component {
   }
 
   render() {
-    const {iconName, message, isError, i18nParams = {}} = this.props.flash
+    const { iconName, message, isError, i18nParams = {} } = this.props.flash
     return (
       <div className="columns">
-        { iconName
-        && (
-          <div className="column is-narrow">
-            <Icon size="medium" name={iconName}/>
-          </div>
-        )
+        {iconName
+          && (
+            <div className="column is-narrow">
+              <Icon size="medium" name={iconName} />
+            </div>
+          )
         }
         <div className="column">
           <div>
-            { isError ? tError(this.props.t, message) : this.props.t(message, i18nParams) }
+            {isError ? tError(this.props.t, message) : this.props.t(message, i18nParams)}
           </div>
           {this.renderInfoLink()}
         </div>
@@ -101,7 +105,7 @@ class FlashContent extends React.Component {
   }
 
   renderInfoLink() {
-    let {infoUrl, infoText} = this.props.flash
+    let { infoUrl, infoText } = this.props.flash
     let onClick = () => {
       this.props.popModal()
       this.props.removeFlash(this.props.flash)
