@@ -55,7 +55,7 @@
     "animate.scss": "0.0.6",
     "apollo-boost": "^0.1.12",
     "babel-polyfill": "^6.26.0",
-    "bulma": "^0.7.1",
+    "bulma": "^0.7.2",
     "classnames": "^2.2.6",
     "core-js": "^2.5.6",
     "date-fns": "^1.28.5",
