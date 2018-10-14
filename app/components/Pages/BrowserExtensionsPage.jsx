@@ -1,12 +1,12 @@
 import React from 'react'
-import { translate, Trans } from 'react-i18next'
+import { withNamespaces, Trans } from 'react-i18next'
 import { Link } from 'react-router'
 import ReactPlayer from 'react-player'
 import Icon from '../Utils/Icon'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
 
-export const BrowserExtensionsPage = translate('extension')(({t}) => (
+export const BrowserExtensionsPage = withNamespaces('extension')(({ t }) => (
   <div className="browser-extension-page">
     <section className="section">
       <div className="columns">
@@ -35,7 +35,7 @@ export const BrowserExtensionsPage = translate('extension')(({t}) => (
     <section className="section content has-text-centered box">
       <h2>
         {t('description')}
-        <br/><br/>
+        <br /><br />
         <Trans i18nKey="moreInfo">
           [Is]<ExternalLinkNewTab href="https://github.com/CaptainFact/captain-fact-extension">open-source</ExternalLinkNewTab>
           [Respect]<Link to="/help/extension">[Privacy]</Link>.
@@ -52,14 +52,14 @@ export const BrowserExtensionsPage = translate('extension')(({t}) => (
   </div>
 ))
 
-const BrowserExtension = ({browser, image, buttonLabel, url, onClick, disabled = false}) => (
+const BrowserExtension = ({ browser, image, buttonLabel, url, onClick, disabled = false }) => (
   <div className="column">
     <ExternalLinkNewTab href={url} onClick={onClick} disabled={disabled}>
       <figure className="image is-128x128">
-        <img src={image} alt={browser}/>
+        <img src={image} alt={browser} />
       </figure>
       <span className="button is-large is-info is-inverted" disabled={disabled}>
-        <Icon name="plus"/>
+        <Icon name="plus" />
         <span>{buttonLabel}</span>
       </span>
     </ExternalLinkNewTab>

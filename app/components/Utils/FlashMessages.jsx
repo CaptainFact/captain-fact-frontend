@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { Icon } from './Icon'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import FlipMove from 'react-flip-move'
 import { Link } from 'react-router'
+import { Icon } from './Icon'
 import { addFlash, pause, removeFlash, unPause, update } from '../../state/flashes/reducer'
 import { tError } from '../../lib/errors'
 import { popModal } from '../../state/modals/reducer'
@@ -13,8 +13,8 @@ import { popModal } from '../../state/modals/reducer'
 const UPDATE_INTERVAL = 1000
 
 @connect(
-  ({Flashes: {flashes, isPaused}}) => ({flashes, isPaused}),
-  {addFlash, removeFlash, pause, unPause, update}
+  ({ Flashes: { flashes, isPaused } }) => ({ flashes, isPaused }),
+  { addFlash, removeFlash, pause, unPause, update }
 )
 export class FlashMessages extends React.PureComponent {
   constructor(props) {
@@ -53,15 +53,20 @@ export class FlashMessages extends React.PureComponent {
         onMouseLeave={() => this.props.unPause()}
       >
         <FlipMove enterAnimation="fade">
-          {this.props.flashes.map(flash =>
-            (<div
+          {this.props.flashes.map(flash => (
+            <div
               key={flash.id}
               className={`flash-message is-${flash.flashType}`}
               data-timeleft={flash.timeLeft}
             >
-              <button className="delete" onClick={() => this.props.removeFlash(flash)}/>
-              <FlashContent flash={flash}/>
-             </div>)
+              <button
+                type="button"
+                className="delete"
+                onClick={() => this.props.removeFlash(flash)}
+              />
+              <FlashContent flash={flash} />
+            </div>
+          )
           )}
         </FlipMove>
       </div>
@@ -70,8 +75,8 @@ export class FlashMessages extends React.PureComponent {
 }
 
 
-@translate('main')
-@connect(null, {popModal, removeFlash})
+@withNamespaces('main')
+@connect(null, { popModal, removeFlash })
 class FlashContent extends React.Component {
   shouldComponentUpdate(nextProps) {
     // To avoid re-rendering every second, we only compare flash id
@@ -79,17 +84,19 @@ class FlashContent extends React.Component {
   }
 
   render() {
-    const {iconName, message, isError, i18nParams = {}} = this.props.flash
+    const { iconName, message, isError, i18nParams = {} } = this.props.flash
     return (
       <div className="columns">
-        { iconName &&
-        <div className="column is-narrow">
-          <Icon size="medium" name={iconName}/>
-        </div>
+        {iconName
+          && (
+            <div className="column is-narrow">
+              <Icon size="medium" name={iconName} />
+            </div>
+          )
         }
         <div className="column">
           <div>
-            { isError ? tError(this.props.t, message) : this.props.t(message, i18nParams) }
+            {isError ? tError(this.props.t, message) : this.props.t(message, i18nParams)}
           </div>
           {this.renderInfoLink()}
         </div>
@@ -98,7 +105,7 @@ class FlashContent extends React.Component {
   }
 
   renderInfoLink() {
-    let {infoUrl, infoText} = this.props.flash
+    let { infoUrl, infoText } = this.props.flash
     let onClick = () => {
       this.props.popModal()
       this.props.removeFlash(this.props.flash)

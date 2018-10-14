@@ -1,10 +1,10 @@
 import React from 'react'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
 import CommentAction from './CommentAction'
 
 
-const OwnCommentActions = ({t, handleAddToThread, handleDelete}) => (
+const OwnCommentActions = ({ t, handleAddToThread, handleDelete }) => (
   <React.Fragment>
     <CommentAction
       title={t('actions.addToThread')}
@@ -19,4 +19,4 @@ const OwnCommentActions = ({t, handleAddToThread, handleDelete}) => (
   </React.Fragment>
 )
 
-export default translate('main')(OwnCommentActions)
+export default withNamespaces('main')(OwnCommentActions)

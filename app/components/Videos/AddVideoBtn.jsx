@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
 import { MIN_REPUTATION_ADD_VIDEO } from '../../constants'
 import { Icon } from '../Utils/Icon'
@@ -18,4 +18,4 @@ const AddVideoBtn = ({ t }) => {
   )
 }
 
-export default translate('main')(AddVideoBtn)
+export default withNamespaces('main')(AddVideoBtn)

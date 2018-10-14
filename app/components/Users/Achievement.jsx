@@ -1,5 +1,5 @@
 import React from 'react'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
 // Import all achievements images
 import imgDefault from '../../assets/assets/achievements/default.png'
@@ -25,29 +25,29 @@ import videoFamous from '../../assets/assets/achievements/famous.mp4'
 
 
 const KNOWN_ACHIEVEMENTS = {
-  1: {img: imgWelcome, video: videoWelcome},
-  2: {img: imgRobot, video: videoRobot},
-  3: {img: imgHelp},
-  4: {img: imgBulletproof},
-  5: {img: imgTrump},
-  6: {img: imgSocialAddict, video: videoSocialAddict},
-  7: {img: imgAmbassador, video: videoAmbassador},
-  8: {img: imgBug, video: videoBug},
-  9: {img: imgFamous, video: videoFamous},
-  10: {img: imgArtist},
-  11: {img: imgGoodVibes}
+  1: { img: imgWelcome, video: videoWelcome },
+  2: { img: imgRobot, video: videoRobot },
+  3: { img: imgHelp },
+  4: { img: imgBulletproof },
+  5: { img: imgTrump },
+  6: { img: imgSocialAddict, video: videoSocialAddict },
+  7: { img: imgAmbassador, video: videoAmbassador },
+  8: { img: imgBug, video: videoBug },
+  9: { img: imgFamous, video: videoFamous },
+  10: { img: imgArtist },
+  11: { img: imgGoodVibes }
 }
 
-const UNKNOWN_ACHIEVEMENT = {img: imgDefault}
+const UNKNOWN_ACHIEVEMENT = { img: imgDefault }
 
-const renderVisual = ({img, video}) => (
+const renderVisual = ({ img, video }) => (
   video
-    ? (<video src={video} poster={img} autoPlay loop controls={false}/>)
-    : (<img src={img} alt=""/>)
+    ? (<video src={video} poster={img} autoPlay loop controls={false} />)
+    : (<img src={img} alt="" />)
 )
 
-const Achievement = ({t, id}) => {
-  const {title, description} = t(id, {returnObjects: true})
+const Achievement = ({ t, id }) => {
+  const { title, description } = t(id, { returnObjects: true })
   const achievement = KNOWN_ACHIEVEMENTS[id] || UNKNOWN_ACHIEVEMENT
 
   return (
@@ -67,4 +67,4 @@ const Achievement = ({t, id}) => {
   )
 }
 
-export default translate('achievements')(Achievement)
+export default withNamespaces('achievements')(Achievement)

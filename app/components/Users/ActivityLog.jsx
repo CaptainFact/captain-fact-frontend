@@ -2,7 +2,7 @@ import React from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Map } from 'immutable'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
 import UserAction from '../UsersActions/UserAction'
 import PaginationMenu from '../Utils/PaginationMenu'
@@ -87,4 +87,4 @@ const ActivityLog = ({ params: { username }, t }) => (
   </Query>
 )
 
-export default translate('user')(ActivityLog)
+export default withNamespaces('user')(ActivityLog)

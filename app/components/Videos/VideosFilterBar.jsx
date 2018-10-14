@@ -1,6 +1,6 @@
 import React from 'react'
 import { Map } from 'immutable'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import FieldWithLabelAddon from '../FormUtils/FieldWithLabelAddon'
 import FilterOnlyFromPartners from './FilterOnlyFromPartners'
 import LanguageSelector from '../App/LanguageSelector'
@@ -34,4 +34,4 @@ const VideosFilterBar = ({
   )
 }
 
-export default translate('main')(VideosFilterBar)
+export default withNamespaces('main')(VideosFilterBar)

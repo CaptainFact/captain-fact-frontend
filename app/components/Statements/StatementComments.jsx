@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
 import { CommentsList } from '../Comments'
 
@@ -10,7 +10,7 @@ import VerificationsOriginHeader from './VerificationsOriginHeader'
 import SpeakerComments from './SpeakerComments'
 
 
-@translate('videoDebate')
+@withNamespaces('videoDebate')
 @connect((state, props) => {
   const classifiedComments = classifyComments(state, props)
   return {

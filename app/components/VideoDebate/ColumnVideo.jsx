@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import { Link } from 'react-router'
 
 import { MIN_REPUTATION_ADD_SPEAKER } from '../../constants'
@@ -22,11 +22,11 @@ import { videoURL, videoHistoryURL } from '../../lib/cf_routes'
   nbUsers: videoDebateOnlineUsersCount(state),
   nbViewers: videoDebateOnlineViewersCount(state),
 }))
-@translate('videoDebate')
+@withNamespaces('videoDebate')
 export class ColumnVideo extends React.PureComponent {
   render() {
     if (this.props.isLoading)
-      return <LoadingFrame title={this.props.t('loading.video')}/>
+      return <LoadingFrame title={this.props.t('loading.video')} />
 
     const { video, view, t } = this.props
     const { url, title, speakers } = video
@@ -34,28 +34,28 @@ export class ColumnVideo extends React.PureComponent {
 
     return (
       <div id="col-video" className="column is-5">
-        <VideoDebatePlayer url={url}/>
+        <VideoDebatePlayer url={url} />
         <div className="videoInfo">
           <h2 className="title is-4 has-text-weight-light">{title}</h2>
-          <Presence nbUsers={this.props.nbUsers} nbViewers={this.props.nbViewers}/>
+          <Presence nbUsers={this.props.nbUsers} nbViewers={this.props.nbViewers} />
         </div>
         <div className="tabs is-toggle is-fullwidth">
           <ul>
-            <li className={classNames({'is-active': isDebate})}>
+            <li className={classNames({ 'is-active': isDebate })}>
               <Link to={videoURL(video.hash_id)}>
-                <Icon size="small" name="check-circle"/>
-                <span>{ t('debate') }</span>
+                <Icon size="small" name="check-circle" />
+                <span>{t('debate')}</span>
               </Link>
             </li>
-            <li className={classNames({'is-active': !isDebate})}>
+            <li className={classNames({ 'is-active': !isDebate })}>
               <Link to={videoHistoryURL(video.hash_id)}>
-                <Icon size="small" name="history"/>
-                <span>{ t('history') }</span>
+                <Icon size="small" name="history" />
+                <span>{t('history')}</span>
               </Link>
             </li>
             <li>
               <ExternalLinkNewTab href="https://discord.gg/yqFpjgG">
-                <Icon size="small" name="comments-o"/>
+                <Icon size="small" name="comments-o" />
                 <span>Chat</span>
               </ExternalLinkNewTab>
             </li>
@@ -65,14 +65,14 @@ export class ColumnVideo extends React.PureComponent {
           <div>
             <div className="actions">
               <ReputationGuardTooltip requiredRep={MIN_REPUTATION_ADD_SPEAKER} tooltipPosition="top center">
-                {({hasReputation}) => (
-                  <AddSpeakerForm disabled={!hasReputation}/>
+                {({ hasReputation }) => (
+                  <AddSpeakerForm disabled={!hasReputation} />
                 )}
               </ReputationGuardTooltip>
             </div>
             <div className="speakers-list">
               {speakers.map(speaker => (
-                <SpeakerPreview key={speaker.id} speaker={speaker}/>
+                <SpeakerPreview key={speaker.id} speaker={speaker} />
               ))}
             </div>
           </div>

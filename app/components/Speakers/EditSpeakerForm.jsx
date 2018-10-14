@@ -1,5 +1,5 @@
 import React from 'react'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import { Field, reduxForm } from 'redux-form'
 
 import { validateLength } from '../../lib/form_validators'
@@ -9,15 +9,15 @@ import ControlInputWithLabel from '../FormUtils/ControlInputWithLabel'
 import { cleanStr } from '../../lib/clean_str'
 
 
-const validate = ({full_name, title}) => {
+const validate = ({ full_name, title }) => {
   const errors = {}
   validateLength(errors, 'full_name', full_name, SPEAKER_NAME_LENGTH)
   if (title) validateLength(errors, 'title', title, SPEAKER_TITLE_LENGTH)
   return errors
 }
 
-@reduxForm({form: 'editSpeaker', validate})
-@translate('videoDebate')
+@reduxForm({ form: 'editSpeaker', validate })
+@withNamespaces('videoDebate')
 export default class EditSpeakerForm extends React.PureComponent {
   render() {
     return (
@@ -41,7 +41,7 @@ export default class EditSpeakerForm extends React.PureComponent {
             normalize={cleanStr}
             placeholder={this.props.t('speaker.titlePlaceholder')}
           />
-          <button type="submit" className="not-displayed"/>
+          <button type="submit" className="not-displayed" />
         </div>
       </div>
     )

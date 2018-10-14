@@ -1,5 +1,5 @@
 import React from 'react'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
 import OwnCommentActions from './OwnCommentActions'
 import OtherCommentActions from './OtherCommentActions'
@@ -44,4 +44,4 @@ const CommentActions = ({
   </nav>
 )
 
-export default translate('videoDebate')(CommentActions)
+export default withNamespaces('videoDebate')(CommentActions)

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, getFormValues } from 'redux-form'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import isURL from 'validator/lib/isURL'
 import { withRouter } from 'react-router'
 
@@ -47,7 +47,7 @@ const validate = ({ source, text }) => {
   }
 }, {postComment, flashErrorUnauthenticated})
 @reduxForm({form: 'commentForm', validate})
-@translate('videoDebate')
+@withNamespaces('videoDebate')
 @withRouter
 export class CommentForm extends React.Component {
   state = { isCollapsed: true }

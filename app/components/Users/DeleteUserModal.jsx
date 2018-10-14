@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import { Field, formValueSelector, reduxForm } from 'redux-form'
 
 import { ModalFormContainer } from '../Modal/ModalFormContainer'
@@ -15,10 +15,10 @@ class DeleteForm extends React.PureComponent {
     return (
       <div className="delete-account-form">
         <h2 className="title is-2 has-text-centered">
-          <Icon size="large" name="exclamation-triangle"/>
+          <Icon size="large" name="exclamation-triangle" />
           This action is irreversible
         </h2>
-        <hr/>
+        <hr />
         <h4 className="title is-4">Deleting your account will...</h4>
         <ul>
           <li>Delete all your votes</li>
@@ -27,9 +27,9 @@ class DeleteForm extends React.PureComponent {
           <li>Anonymize all your comments</li>
           <li>Anonymize your actions history</li>
         </ul>
-        <hr/>
+        <hr />
         <p className="is-size-5">Type your username below to confirm the deletion :</p>
-        <Field component="input" className="input" name="usernameConfirm"/>
+        <Field component="input" className="input" name="usernameConfirm" />
       </div>
     )
   }
@@ -41,7 +41,7 @@ const valueSelector = formValueSelector(DELETE_FORM)
 @connect(state => ({
   isValid: valueSelector(state, 'usernameConfirm') === state.CurrentUser.data.username
 }))
-@translate('main')
+@withNamespaces('main')
 export default class DeleteUserModal extends React.PureComponent {
   render() {
     const { t, isValid, ...otherProps } = this.props
