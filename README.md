@@ -6,6 +6,7 @@
 <a href="./LICENSE"><img src="https://img.shields.io/github/license/CaptainFact/captain-fact-frontend.svg" alt="AGPL3"></a>
 <a href="https://travis-ci.org/CaptainFact/captain-fact-frontend"><img src="https://travis-ci.org/CaptainFact/captain-fact-frontend.svg?branch=travis-configuration" alt="Build Status" /></a>
 <a href='https://coveralls.io/github/CaptainFact/captain-fact-frontend?branch=master'><img src='https://coveralls.io/repos/github/CaptainFact/captain-fact-frontend/badge.svg?branch=master' alt='Coverage Status' /></a>
+<a href='https://greenkeeper.io/'><img src='https://badges.greenkeeper.io/CaptainFact/captain-fact-frontend.svg' alt='Greenkeeper badge' /></a>
 </p>
 <hr/>
 <p align="center">
