@@ -1,9 +1,9 @@
 import React from 'react'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import classNames from 'classnames'
 
 
-@translate('main')
+@withNamespaces('main')
 export class LoadingFrame extends React.PureComponent {
   render() {
     const {title, size = 'large'} = this.props
@@ -18,4 +18,3 @@ export class LoadingFrame extends React.PureComponent {
     )
   }
 }
-

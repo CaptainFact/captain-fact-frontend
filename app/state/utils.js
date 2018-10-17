@@ -21,18 +21,22 @@ export function createEffect(promise, opts = null) {
   return (dispatch, getState) => {
     // Dispatch a series of actions at different steps of the promise
     if (opts) {
-      if (opts.before)
+      if (opts.before) {
         cleverDispatch(dispatch, getState, opts.before)
-      if (promise && opts.then)
-        promise = promise.then(x =>
-          cleverDispatch(dispatch, getState, opts.then, x)
-        )
-      if (promise && opts.catch)
-        promise = promise.catch(x =>
-          cleverDispatch(dispatch, getState, opts.catch, x)
-        )
-      if (opts.after)
+      }
+      if (promise && opts.then) {
+        promise = promise.then(x => {
+          return cleverDispatch(dispatch, getState, opts.then, x)
+        })
+      }
+      if (promise && opts.catch) {
+        promise = promise.catch(x => {
+          return cleverDispatch(dispatch, getState, opts.catch, x)
+        })
+      }
+      if (opts.after) {
         promise = cleverDispatch(dispatch, getState, opts.after, promise)
+      }
     }
     // Handle return value : if none of the functions generated FSA actions,
     // we manually generate SUCCESS / ERROR actions based on then() / catch()
@@ -69,9 +73,9 @@ export function returnSuccess(returnValue) {
 export function cleverDispatch(dispatch, getState, toDispatch, params = null) {
   if (typeof (toDispatch) === 'function')
     return dispatch(toDispatch(params))
-  else if (isAction(toDispatch))
+  if (isAction(toDispatch))
     return dispatch(toDispatch)
-  else if (isIterable(toDispatch)) {
+  if (isIterable(toDispatch)) {
     let lastValue = null
     toDispatch.forEach(a => {
       lastValue = cleverDispatch(dispatch, getState, a, params)

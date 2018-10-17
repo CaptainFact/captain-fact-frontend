@@ -5,7 +5,7 @@ export default {
   creatingAnAccount: 'creating an account',
   invitation: 'Ask for an invitation',
   inviteFriend: 'Invite a friend',
-  footer: 'Created with {{iconLove}} using ',
+  footer: 'Created with <1/> using ',
   emailPlaceholder: 'Email address',
   inviteSuccess: 'Invitation request confirmed!',
   error_invalid_email: 'Invalid email address',

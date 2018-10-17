@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { translate, Interpolate } from 'react-i18next'
+import { withNamespaces, Trans } from 'react-i18next'
 import { Link } from 'react-router'
 import Popup from 'reactjs-popup'
 
@@ -9,7 +9,7 @@ import { Icon } from './Icon'
 import Message from './Message'
 
 
-const mapStateToProps = (state, {requiredRep}) => ({
+const mapStateToProps = (state, { requiredRep }) => ({
   hasReputation: hasReputation(state, requiredRep)
 })
 
@@ -28,7 +28,7 @@ export const ReputationGuardTooltip = ({
   children,
   tooltipPosition = 'bottom center'
 }) => {
-  const childProps = {hasReputation}
+  const childProps = { hasReputation }
   return hasReputation
     ? children(childProps)
     : (
@@ -42,19 +42,17 @@ export const ReputationGuardTooltip = ({
         )}
       >
         <Message type="primary">
-          <Icon name="info-circle"/>&nbsp;
-          <Interpolate
-            i18nKey="errors:client.needReputation"
-            count={requiredRep}
-            reputationLink={(
-              <Link to="/help/reputation">
-                {t('pages.reputation').toLowerCase()}
-              </Link>
-            )}
-          />
+          <Icon name="info-circle" />&nbsp;
+          <Trans i18nKey="errors:client.needReputation" requiredRep={requiredRep}>
+            You need at least {{ requiredRep }}
+            <Link to="/help/reputation">
+              {t('pages.reputation').toLowerCase()}
+            </Link>
+            points to do that
+          </Trans>
         </Message>
       </Popup>
     )
 }
 
-export default connect(mapStateToProps)(translate('help')(ReputationGuardTooltip))
+export default connect(mapStateToProps)(withNamespaces('help')(ReputationGuardTooltip))

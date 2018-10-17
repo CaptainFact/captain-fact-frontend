@@ -17,6 +17,7 @@ import HelpReducer from './help/reducer'
 import UsersActionsReducer from './user_actions/reducer'
 import SpeakersReducer from './speakers/reducer'
 import ModerationReducer from './moderation/reducer'
+import VideosReducer from './videos/reducer'
 
 // Declare reducers
 const reducers = combineReducers({
@@ -30,6 +31,7 @@ const reducers = combineReducers({
   Help: HelpReducer,
   UsersActions: UsersActionsReducer,
   Moderation: ModerationReducer,
+  Videos: VideosReducer,
   form: formReducer
 })
 

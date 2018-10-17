@@ -2,7 +2,7 @@ import React from 'react'
 import { Query } from 'react-apollo'
 import { Link } from 'react-router'
 import gql from 'graphql-tag'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { ErrorView } from '../Utils/ErrorView'
 import { VideosGrid } from './VideosGrid'
@@ -97,4 +97,4 @@ const PaginatedVideosContainer = ({ t, currentPage = 1, baseURL, ...props }) => 
   )
 }
 
-export default translate('main')(PaginatedVideosContainer)
+export default withNamespaces('main')(PaginatedVideosContainer)

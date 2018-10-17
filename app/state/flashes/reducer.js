@@ -63,8 +63,8 @@ const INITIAL_STATE = Record({
 const FlashesReducer = handleActions({
   [addFlash]: (state, {payload}) => {
     // Only display one error for connections problems (instead of one per request)
-    if (payload.message === NO_INTERNET_ERROR &&
-      state.flashes.find(f => f.message === NO_INTERNET_ERROR))
+    if (payload.message === NO_INTERNET_ERROR
+      && state.flashes.find(f => f.message === NO_INTERNET_ERROR))
       return state
     return state.update('flashes', l => l.push(payload))
   },
@@ -74,14 +74,12 @@ const FlashesReducer = handleActions({
       return state.update('flashes', l => l.delete(flashIdx))
     return state
   },
-  [combineActions(pause, unPause)]: (state, {payload}) =>
-    state.set('isPaused', payload),
+  [combineActions(pause, unPause)]: (state, {payload}) => state.set('isPaused', payload),
   [update]: (state, {payload}) => {
     if (!state.isPaused)
-      return state.update('flashes', flashes =>
-        flashes
-          .map(f => f.set('timeLeft', f.timeLeft - payload))
-          .filter(msg => msg.timeLeft > 0)
+      return state.update('flashes', flashes => flashes
+        .map(f => f.set('timeLeft', f.timeLeft - payload))
+        .filter(msg => msg.timeLeft > 0)
       )
     return state
   }

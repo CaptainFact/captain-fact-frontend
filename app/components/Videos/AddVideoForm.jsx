@@ -1,6 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import trim from 'voca/trim'
@@ -20,7 +20,7 @@ const validate = ({ url }) => {
 }
 
 @withRouter
-@translate('main')
+@withNamespaces('main')
 @connect((state, props) => ({
   initialValues: {url: props.params.videoUrl || props.location.query.url},
   isSubmitting: state.Videos.isSubmitting,
