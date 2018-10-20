@@ -73,6 +73,7 @@
     "isomorphic-fetch": "^2.2.1",
     "lodash-webpack-plugin": "^0.11.5",
     "phoenix": "^1.3.4",
+    "prerender-spa-plugin": "^3.4.0",
     "prop-types": "^15.6.2",
     "re-reselect": "^2.1.0",
     "react": "^16.5.2",

@@ -2,117 +2,110 @@
 import React from 'react'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import Loadable from 'react-loadable'
+import { LoadingFrame } from './components/Utils/LoadingFrame'
 
 // Views that can't be dynamically loaded
 import { BrowserExtensionsPage } from './components/Pages'
 
-// Loading component
-const Loading = () => (
-  <div id="preloading-frame">
-    <img src="/assets/img/logo.svg?v=2" width="150" class="animated-logo" />
-    <p>Loading...</p>
-  </div>
-)
-
 // Dynamically loaded Views
 const App = Loadable({
   loader: () => import('./components/App'),
-  loading: Loading,
+  loading: LoadingFrame
 })
 
 const Home = Loadable({
   loader: () => import('./components/Home/Home'),
-  loading: Loading,
+  loading: LoadingFrame
 })
 
 const NotFound = Loadable({
   loader: () => import('./components/Pages/NotFound'),
-  loading: Loading,
+  loading: LoadingFrame
 })
 
 const AddVideoForm = Loadable({
   loader: () => import('./components/Videos/AddVideoForm'),
-  loading: Loading,
+  loading: LoadingFrame
 })
 
 const VideosIndexPage = Loadable({
   loader: () => import('./components/Videos/VideosIndexPage'),
-  loading: Loading,
+  loading: LoadingFrame
 })
 
 const VideoDebate = Loadable({
   loader: () => import('./components/VideoDebate'),
-  loading: Loading,
+  loading: LoadingFrame
 })
 
 const Help = Loadable({
   loader: () => import('./components/Help/Help'),
-  loading: Loading,
+  loading: LoadingFrame
 })
 
 const UserProfile = Loadable({
   loader: () => import('./components/Users/UserProfile'),
-  loading: Loading,
+  loading: LoadingFrame
 })
 
 const ThirdPartyCallback = Loadable({
   loader: () => import('./components/Users/ThirdPartyCallback'),
-  loading: Loading,
+  loading: LoadingFrame
 })
 
 const UserSettings = Loadable({
   loader: () => import('./components/Users/UserSettings'),
-  loading: Loading,
+  loading: LoadingFrame
 })
 
 const LoginForm = Loadable({
   loader: () => import('./components/Users/LoginForm'),
-  loading: Loading,
+  loading: LoadingFrame
 })
 
 const SignupForm = Loadable({
   loader: () => import('./components/Users/SignupForm'),
-  loading: Loading,
+  loading: LoadingFrame
 })
 
 const User = Loadable({
   loader: () => import('./components/Users/User'),
-  loading: Loading,
+  loading: LoadingFrame
 })
 
 const ResetPasswordRequestForm = Loadable({
   loader: () => import('./components/Users/ResetPasswordRequestForm'),
-  loading: Loading,
+  loading: LoadingFrame
 })
 
 const ResetPasswordConfirmForm = Loadable({
   loader: () => import('./components/Users/ResetPasswordConfirmForm'),
-  loading: Loading,
+  loading: LoadingFrame
 })
 
 const ConfirmEmail = Loadable({
   loader: () => import('./components/Users/ConfirmEmail'),
-  loading: Loading,
+  loading: LoadingFrame
 })
 
 const ActivityLog = Loadable({
   loader: () => import('./components/Users/ActivityLog'),
-  loading: Loading,
+  loading: LoadingFrame
 })
 
 const NewsletterSubscription = Loadable({
   loader: () => import('./components/Users/NewsletterSubscription'),
-  loading: Loading,
+  loading: LoadingFrame
 })
 
 const Moderation = Loadable({
   loader: () => import('./components/Moderation/Moderation'),
-  loading: Loading,
+  loading: LoadingFrame
 })
 
 const SpeakerPage = Loadable({
   loader: () => import('./components/Speakers/SpeakerPage'),
-  loading: Loading,
+  loading: LoadingFrame
 })
 
 

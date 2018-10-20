@@ -18,15 +18,18 @@ import CFRouter from './router'
 // Import styles
 import './styles/application.sass'
 
-// Activate polyfills
-smoothSrollPolyfill()
+// Wait for our document to be fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+  // Activate polyfills
+  smoothSrollPolyfill()
 
-// Inject React app in DOM
-ReactDOM.render(
-  <Provider store={store}>
-    <ApolloProvider client={GraphQLClient}>
-      <CFRouter />
-    </ApolloProvider>
-  </Provider>,
-  document.getElementById('app')
-)
+  // Inject React app in DOM
+  ReactDOM.render(
+    <Provider store={store}>
+      <ApolloProvider client={GraphQLClient}>
+        <CFRouter />
+      </ApolloProvider>
+    </Provider>,
+    document.getElementById('app')
+  )
+})
