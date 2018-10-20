@@ -1,12 +1,22 @@
 {
   "presets": [
-    "es2015",
+    "env",
     "react"
   ],
   "plugins": [
     "transform-decorators-legacy",
-    "transform-runtime",
+    "syntax-dynamic-import",
     "transform-class-properties",
     "transform-object-rest-spread"
-  ]
+  ],
+    "env": {
+      "production": {
+        "plugins": [
+          "lodash",
+          "transform-runtime",
+          "transform-react-inline-elements",
+          "babel-plugin-transform-react-remove-prop-types"
+        ]
+      }
+    }
 }
