@@ -15,7 +15,7 @@
           "lodash",
           "transform-runtime",
           "transform-react-inline-elements",
-          "babel-plugin-transform-react-remove-prop-types"
+          "transform-react-remove-prop-types"
         ]
       }
     }
