@@ -1,28 +1,119 @@
 // Import libs
 import React from 'react'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import Loadable from 'react-loadable'
 
-// Import Views
-import App from './components/App'
-import Home from './components/Home/Home'
-import { NotFound, BrowserExtensionsPage } from './components/Pages'
-import { AddVideoForm } from './components/Videos'
-import VideosIndexPage from './components/Videos/VideosIndexPage'
-import { VideoDebate } from './components/VideoDebate'
-import Help from './components/Help/Help'
-import UserProfile from './components/Users/UserProfile'
-import ThirdPartyCallback from './components/Users/ThirdPartyCallback'
-import UserSettings from './components/Users/UserSettings'
-import LoginForm from './components/Users/LoginForm'
-import SignupForm from './components/Users/SignupForm'
-import User from './components/Users/User'
-import ResetPasswordRequestForm from './components/Users/ResetPasswordRequestForm'
-import ResetPasswordConfirmForm from './components/Users/ResetPasswordConfirmForm'
-import ConfirmEmail from './components/Users/ConfirmEmail'
-import Moderation from './components/Moderation/Moderation'
-import { SpeakerPage } from './components/Speakers/SpeakerPage'
-import NewsletterSubscription from './components/Users/NewsletterSubscription'
-import ActivityLog from './components/Users/ActivityLog'
+// Views that can't be dynamically loaded
+import { BrowserExtensionsPage } from './components/Pages'
+
+// Loading component
+const Loading = () => (
+  <div id="preloading-frame">
+    <img src="/assets/img/logo.svg?v=2" width="150" class="animated-logo" />
+    <p>Loading...</p>
+  </div>
+)
+
+// Dynamically loaded Views
+const App = Loadable({
+  loader: () => import('./components/App'),
+  loading: Loading,
+})
+
+const Home = Loadable({
+  loader: () => import('./components/Home/Home'),
+  loading: Loading,
+})
+
+const NotFound = Loadable({
+  loader: () => import('./components/Pages/NotFound'),
+  loading: Loading,
+})
+
+const AddVideoForm = Loadable({
+  loader: () => import('./components/Videos/AddVideoForm'),
+  loading: Loading,
+})
+
+const VideosIndexPage = Loadable({
+  loader: () => import('./components/Videos/VideosIndexPage'),
+  loading: Loading,
+})
+
+const VideoDebate = Loadable({
+  loader: () => import('./components/VideoDebate'),
+  loading: Loading,
+})
+
+const Help = Loadable({
+  loader: () => import('./components/Help/Help'),
+  loading: Loading,
+})
+
+const UserProfile = Loadable({
+  loader: () => import('./components/Users/UserProfile'),
+  loading: Loading,
+})
+
+const ThirdPartyCallback = Loadable({
+  loader: () => import('./components/Users/ThirdPartyCallback'),
+  loading: Loading,
+})
+
+const UserSettings = Loadable({
+  loader: () => import('./components/Users/UserSettings'),
+  loading: Loading,
+})
+
+const LoginForm = Loadable({
+  loader: () => import('./components/Users/LoginForm'),
+  loading: Loading,
+})
+
+const SignupForm = Loadable({
+  loader: () => import('./components/Users/SignupForm'),
+  loading: Loading,
+})
+
+const User = Loadable({
+  loader: () => import('./components/Users/User'),
+  loading: Loading,
+})
+
+const ResetPasswordRequestForm = Loadable({
+  loader: () => import('./components/Users/ResetPasswordRequestForm'),
+  loading: Loading,
+})
+
+const ResetPasswordConfirmForm = Loadable({
+  loader: () => import('./components/Users/ResetPasswordConfirmForm'),
+  loading: Loading,
+})
+
+const ConfirmEmail = Loadable({
+  loader: () => import('./components/Users/ConfirmEmail'),
+  loading: Loading,
+})
+
+const ActivityLog = Loadable({
+  loader: () => import('./components/Users/ActivityLog'),
+  loading: Loading,
+})
+
+const NewsletterSubscription = Loadable({
+  loader: () => import('./components/Users/NewsletterSubscription'),
+  loading: Loading,
+})
+
+const Moderation = Loadable({
+  loader: () => import('./components/Moderation/Moderation'),
+  loading: Loading,
+})
+
+const SpeakerPage = Loadable({
+  loader: () => import('./components/Speakers/SpeakerPage'),
+  loading: Loading,
+})
 
 
 const CFRouter = () => (
