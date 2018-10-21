@@ -3,7 +3,7 @@ import { polyfill as smoothSrollPolyfill } from 'smoothscroll-polyfill'
 
 // Import libs
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { hydrate, render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { ApolloProvider } from 'react-apollo'
 
@@ -20,16 +20,23 @@ import './styles/application.sass'
 
 // Wait for our document to be fully loaded
 document.addEventListener('DOMContentLoaded', () => {
+  const rootElement = document.getElementById('app')
+
   // Activate polyfills
   smoothSrollPolyfill()
 
   // Inject React app in DOM
-  ReactDOM.render(
-    <Provider store={store}>
+  if (rootElement.hasChildNodes()) {
+    hydrate(<Provider store={store}>
       <ApolloProvider client={GraphQLClient}>
         <CFRouter />
       </ApolloProvider>
-    </Provider>,
-    document.getElementById('app')
-  )
+    </Provider>, rootElement)
+  } else {
+    render(<Provider store={store}>
+      <ApolloProvider client={GraphQLClient}>
+        <CFRouter />
+      </ApolloProvider>
+    </Provider>, rootElement)
+  }
 })

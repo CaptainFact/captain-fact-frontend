@@ -2,112 +2,124 @@
 import React from 'react'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import Loadable from 'react-loadable'
-import { LoadingFrame } from './components/Utils/LoadingFrame'
 
 // Views that can't be dynamically loaded
 import { BrowserExtensionsPage } from './components/Pages'
 
+// Loading component
+const Loading = (props) => {
+  const { pastDelay } = props
+  if (pastDelay) return <div className='loading-frame'>
+    <div className="spinner" />
+  </div>
+  return null
+}
+
+const dynamicViewOptions = {
+  loading: Loading,
+  delay: 750,
+}
+
 // Dynamically loaded Views
 const App = Loadable({
   loader: () => import('./components/App'),
-  loading: LoadingFrame
+  ...dynamicViewOptions,
 })
 
 const Home = Loadable({
   loader: () => import('./components/Home/Home'),
-  loading: LoadingFrame
+  ...dynamicViewOptions,
 })
 
 const NotFound = Loadable({
   loader: () => import('./components/Pages/NotFound'),
-  loading: LoadingFrame
+  ...dynamicViewOptions,
 })
 
 const AddVideoForm = Loadable({
   loader: () => import('./components/Videos/AddVideoForm'),
-  loading: LoadingFrame
+  ...dynamicViewOptions,
 })
 
 const VideosIndexPage = Loadable({
   loader: () => import('./components/Videos/VideosIndexPage'),
-  loading: LoadingFrame
+  ...dynamicViewOptions,
 })
 
 const VideoDebate = Loadable({
   loader: () => import('./components/VideoDebate'),
-  loading: LoadingFrame
+  ...dynamicViewOptions,
 })
 
 const Help = Loadable({
   loader: () => import('./components/Help/Help'),
-  loading: LoadingFrame
+  ...dynamicViewOptions,
 })
 
 const UserProfile = Loadable({
   loader: () => import('./components/Users/UserProfile'),
-  loading: LoadingFrame
+  ...dynamicViewOptions,
 })
 
 const ThirdPartyCallback = Loadable({
   loader: () => import('./components/Users/ThirdPartyCallback'),
-  loading: LoadingFrame
+  ...dynamicViewOptions,
 })
 
 const UserSettings = Loadable({
   loader: () => import('./components/Users/UserSettings'),
-  loading: LoadingFrame
+  ...dynamicViewOptions,
 })
 
 const LoginForm = Loadable({
   loader: () => import('./components/Users/LoginForm'),
-  loading: LoadingFrame
+  ...dynamicViewOptions,
 })
 
 const SignupForm = Loadable({
   loader: () => import('./components/Users/SignupForm'),
-  loading: LoadingFrame
+  ...dynamicViewOptions,
 })
 
 const User = Loadable({
   loader: () => import('./components/Users/User'),
-  loading: LoadingFrame
+  ...dynamicViewOptions,
 })
 
 const ResetPasswordRequestForm = Loadable({
   loader: () => import('./components/Users/ResetPasswordRequestForm'),
-  loading: LoadingFrame
+  ...dynamicViewOptions,
 })
 
 const ResetPasswordConfirmForm = Loadable({
   loader: () => import('./components/Users/ResetPasswordConfirmForm'),
-  loading: LoadingFrame
+  ...dynamicViewOptions,
 })
 
 const ConfirmEmail = Loadable({
   loader: () => import('./components/Users/ConfirmEmail'),
-  loading: LoadingFrame
+  ...dynamicViewOptions,
 })
 
 const ActivityLog = Loadable({
   loader: () => import('./components/Users/ActivityLog'),
-  loading: LoadingFrame
+  ...dynamicViewOptions,
 })
 
 const NewsletterSubscription = Loadable({
   loader: () => import('./components/Users/NewsletterSubscription'),
-  loading: LoadingFrame
+  ...dynamicViewOptions,
 })
 
 const Moderation = Loadable({
   loader: () => import('./components/Moderation/Moderation'),
-  loading: LoadingFrame
+  ...dynamicViewOptions,
 })
 
 const SpeakerPage = Loadable({
   loader: () => import('./components/Speakers/SpeakerPage'),
-  loading: LoadingFrame
+  ...dynamicViewOptions,
 })
-
 
 const CFRouter = () => (
   <Router history={browserHistory}>
