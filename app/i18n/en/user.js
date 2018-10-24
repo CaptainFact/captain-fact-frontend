@@ -5,6 +5,7 @@ export default {
   passwordOptional: 'Password - leave empty to keep it unchanged',
   repeatPassword: 'Repeat password',
   email: 'Email',
+  emailOrUsername: 'Email address or username',
   optional: 'Optional',
   login: 'Login',
   signup: 'Sign up',
