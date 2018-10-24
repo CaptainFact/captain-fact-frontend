@@ -1,9 +1,16 @@
 .git
-.gitignore
+.github
 .idea
+.eslintrc.yml
+.gitignore
+.sass-lint.yml
+.travis.yml
+
 node_modules
 public
 
+dev
 rel/dev*
+docker-compose.yml
 Dockerfile
-
+netlify.toml
