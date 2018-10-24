@@ -2,8 +2,8 @@
 
 * Stack: Elixir, Phoenix, GraphQL
 * Status: Not open sourced yet (waiting for code reviews & documentation)
-* Repository: *TODO*
-* Issues: *TODO*
+* Repository: https://github.com/CaptainFact/captain-fact-api
+* Issues: https://github.com/CaptainFact/captain-fact-api/issues
 
 # Frontend
 
