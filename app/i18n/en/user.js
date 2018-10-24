@@ -10,7 +10,7 @@ export default {
   signup: 'Sign up',
   needAnAccountQuestion: 'Need an account?',
   alreadyHaveAccountQuestion: 'Already have an account?',
-  actionWithThirdParty: 'Or login using a third party service',
+  actionWithThirdParty: 'Or login using a third party service:',
   deleteAccount: 'Delete Account',
   dangerZone: 'Danger Zone',
   registeredSince: 'Registered for <1/>',
