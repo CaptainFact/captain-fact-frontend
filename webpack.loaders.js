@@ -36,7 +36,7 @@ module.exports = isProd => [
   {
     test: /\.mjs$/,
     include: /node_modules/,
-    type: "javascript/auto",
+    type: 'javascript/auto',
   },
   // =========
   // = Fonts =
@@ -44,7 +44,12 @@ module.exports = isProd => [
   {
     test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
     exclude: path.resolve(__dirname, 'node_modules'),
-    use: ['file-loader']
+    use: [{
+      loader: 'file-loader',
+      options: {
+        name: 'res/[name].[hash].[ext]'
+      }
+    }]
   },
   {
     test: /\.(woff|woff2)$/,
@@ -52,7 +57,11 @@ module.exports = isProd => [
     use: [
       {
         loader: 'url-loader',
-        options: { prefix: 'font', limit: 5000 }
+        options: {
+          prefix: 'font',
+          limit: 5000,
+          name: 'res/[name].[hash].[ext]'
+        }
       }
     ]
   },
@@ -65,7 +74,8 @@ module.exports = isProd => [
         options: {
           prefix: 'font',
           limit: 10000,
-          mimetype: 'application/octet-stream'
+          mimetype: 'application/octet-stream',
+          name: 'res/[name].[hash].[ext]'
         }
       }
     ]
@@ -81,7 +91,8 @@ module.exports = isProd => [
         loader: 'url-loader',
         options: {
           limit: 10000,
-          mimetype: 'image/svg+xml'
+          mimetype: 'image/svg+xml',
+          name: 'res/[name].[hash].svg'
         }
       }
     ]
@@ -97,7 +108,8 @@ module.exports = isProd => [
         loader: 'file-loader',
         options: {
           limit: 10000,
-          mimetype: 'image/gif'
+          mimetype: 'image/gif',
+          name: 'res/[name].[hash].gif'
         }
       }
     ]
@@ -113,7 +125,8 @@ module.exports = isProd => [
         loader: 'file-loader',
         options: {
           limit: 10000,
-          mimetype: 'image/jpg'
+          mimetype: 'image/jpg',
+          name: 'res/[name].[hash].jpg'
         }
       }
     ]
@@ -130,7 +143,7 @@ module.exports = isProd => [
         options: {
           limit: 10000,
           mimetype: 'image/png',
-          name: '[path][name].[ext]'
+          name: 'res/[name].[hash].png'
         }
       }
     ]
@@ -147,7 +160,7 @@ module.exports = isProd => [
         options: {
           limit: 10000,
           mimetype: 'video/mp4',
-          name: '[path][name].[ext]'
+          name: 'res/[name].[hash].mp4'
         }
       }
     ]

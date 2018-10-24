@@ -99,7 +99,7 @@ elif [ "$1" = "build" ]; then
   # Copy actual site and maintenance site
   mv ./public/* /var/www/captain_fact
   cp ./rel/maintenance.html /var/www/maintenance/index.html
-  cp ./app/assets/assets/img/logo.png ./app/assets/favicon.ico /var/www/maintenance
+  cp ./app/static/assets/img/logo.png ./app/static/favicon.ico /var/www/maintenance
 
 # Serve
 elif [ "$1" = "serve" ]; then
