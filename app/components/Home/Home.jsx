@@ -57,11 +57,11 @@ export default class Home extends React.PureComponent {
           <img src={landingIllustration} alt="" />
         </section>
         <section className="section has-text-centered community content">
-          <h1>{t('videoDebate:community')}</h1>
+          <h2 className="title is-2">{t('videoDebate:community')}</h2>
           <Statistics />
         </section>
         <section className="section has-text-centered contributors content">
-          <h1>{t('contributors')}</h1>
+          <h2 className="title is-2">{t('contributors')}</h2>
           <AllContributors />
           <ExternalLinkNewTab className="button is-large" href="https://opencollective.com/captainfact_io">
             <Icon name="external-link" />
