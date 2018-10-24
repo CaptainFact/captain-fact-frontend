@@ -32,7 +32,7 @@ export default class LoginForm extends React.PureComponent {
       >
         {error && <Notification type="danger">{tError(t, error)}</Notification>}
         <div>
-          <strong>{t('needAnAccountQuestion')} <Link to="signup">{t('signup')}</Link> </strong>
+          <strong>{t('needAnAccountQuestion')} <Link to="/signup">{t('signup')}</Link> </strong>
           <Link to="/reset_password" style={{ float: 'right' }}>{t('forgottenPassword')}</Link>
         </div>
         <hr />
