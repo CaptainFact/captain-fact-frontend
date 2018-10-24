@@ -11,6 +11,7 @@ import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import { INVITATION_SYSTEM } from '../../config'
 import AllContributors from './AllContributors'
 import Statistics from './Statistics'
+import landingIllustration from '../../assets/landing-illustration.jpg'
 
 
 @connect(state => ({ authenticated: isAuthenticated(state) }))
@@ -53,7 +54,7 @@ export default class Home extends React.PureComponent {
           </ExternalLinkNewTab>
         </section>
         <section className="section has-text-centered illustration">
-          <img src="assets/img/landing-illustration.jpg" alt="" />
+          <img src={landingIllustration} alt="" />
         </section>
         <section className="section has-text-centered community content">
           <h1>{t('videoDebate:community')}</h1>
