@@ -44,6 +44,7 @@ elif [ "$1" = "build" ]; then
     BUILD_ENV="prod"
   fi
   source "./config/env/$BUILD_ENV.env"
+  echo "---------------------------------------------"
   echo "Building Frontend for env $BUILD_ENV:"
   echo "  - REST API:     $HTTP_API_URL"
   echo "  - GRAPHQL API:  $GRAPHQL_API_URL"
@@ -51,6 +52,10 @@ elif [ "$1" = "build" ]; then
   echo "  - OG:           $OG_URL"
   echo "  - Frontend URL: $FRONTEND_URL"
   echo "  - FB APP ID:    $FB_APP_ID"
+  echo ""
+  echo "Node:" `node --version`
+  echo "NPM:" `npm --version`
+  echo "---------------------------------------------"
 
   # Create initial structure
   mkdir -p /var/www && rm -rf /var/www/*
@@ -94,7 +99,7 @@ elif [ "$1" = "build" ]; then
   # Copy actual site and maintenance site
   mv ./public/* /var/www/captain_fact
   cp ./rel/maintenance.html /var/www/maintenance/index.html
-  cp ./app/assets/assets/img/logo.png ./app/assets/favicon.ico /var/www/maintenance
+  cp ./app/static/assets/img/logo.png ./app/static/favicon.ico /var/www/maintenance
 
 # Serve
 elif [ "$1" = "serve" ]; then

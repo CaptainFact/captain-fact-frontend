@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import isPromise from 'is-promise'
 
 import { isAuthenticated } from '../../state/users/current_user/selectors'
@@ -19,9 +19,9 @@ import { flashSuccessMsg } from '../../state/flashes/reducer'
     achievements: state.CurrentUser.data.achievements,
     user: state.CurrentUser.data
   }),
-  {unlockPublicAchievement, flashSuccessMsg}
+  { unlockPublicAchievement, flashSuccessMsg }
 )
-@translate('achievements')
+@withNamespaces('achievements')
 class PublicAchievementUnlocker extends React.PureComponent {
   componentDidMount() {
     this.unlockIfNecessary()
@@ -61,7 +61,7 @@ class PublicAchievementUnlocker extends React.PureComponent {
     this.props.unlockPublicAchievement(this.props.achievementId).then(() => {
       const achievementTitle = this.props.t(`${this.props.achievementId}.title`)
       this.props.flashSuccessMsg('achievements:unlocked', {
-        i18nParams: {achievement: achievementTitle},
+        i18nParams: { achievement: achievementTitle },
         infoUrl: `/u/${this.props.user.username}`,
         iconName: 'trophy'
       })

@@ -3,7 +3,9 @@ import trimLeft from 'voca/trim_left'
 export const cleanStr = (str) => trimLeft(str.replace(/\s{2,}/g, ' '))
 
 /**
-* Same as cleanStr but preserve multiple lines. Only trim the end of input to avoid breaking caret position
+* Same as cleanStr but preserve multiple lines. Only trim the end of input
+* to avoid breaking caret position.
+*
 * @param {String} str
 * @return {String} clean string
 */

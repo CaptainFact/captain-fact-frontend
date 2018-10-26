@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
-import {unlinkProvider} from '../../state/users/current_user/effects'
+import { unlinkProvider } from '../../state/users/current_user/effects'
 import Button from '../Utils/Button'
 
 
-const mapDispatchToProps = {unlinkProvider}
+const mapDispatchToProps = { unlinkProvider }
 
 const ThirdPartyAccountLinker = ({
   t,
@@ -16,7 +16,7 @@ const ThirdPartyAccountLinker = ({
   isLinked,
   authURL
 }) => (
-  <div className="field has-addons" style={{width: 200, margin: 'auto'}}>
+  <div className="field has-addons" style={{ width: 200, margin: 'auto' }}>
     <div className="control">
       <div className="linked-account-title">
         {title}
@@ -41,6 +41,6 @@ const ThirdPartyAccountLinker = ({
   </div>
 )
 
-export default translate('user')(
+export default withNamespaces('user')(
   connect(null, mapDispatchToProps)(ThirdPartyAccountLinker)
 )

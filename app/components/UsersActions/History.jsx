@@ -1,15 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Immutable from 'immutable'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
-import { UserAction } from './UserAction'
+import UserAction from './UserAction'
 
 
 /**
  * Display a list of `UserAction` record as an history
  */
-@translate('main')
+@withNamespaces('main')
 export class History extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -21,7 +21,7 @@ export class History extends React.PureComponent {
     const { isExpended } = this.state
 
     if (actions.size === 0)
-      return <div/>
+      return <div />
 
     const latestAction = actions.first()
     const oldActions = actions.rest()
@@ -29,23 +29,29 @@ export class History extends React.PureComponent {
     return (
       <div className="user-actions-history">
         <div className="latest-action">
-          <UserAction key={ latestAction.id } action={ latestAction } isLatest/>
+          <UserAction key={latestAction.id} action={latestAction} isLatest />
         </div>
-        { actions.size > 1 &&
-        <a className="expend-old-actions"
-           onClick={() => this.setState({ isExpended: !isExpended })}>
-          { isExpended ? 'Hide' : `Show full history (${actions.size - 1} elements)` }
-        </a>
+        {actions.size > 1
+          && (
+            <a
+              className="expend-old-actions"
+              onClick={() => this.setState({ isExpended: !isExpended })}
+            >
+              {isExpended ? 'Hide' : `Show full history (${actions.size - 1} elements)`}
+            </a>
+          )
         }
-        { isExpended &&
-        <div className="old-actions">
-          {oldActions.map(action =>
-            <div key={ action.id }>
-              <div className="separator"/>
-              <UserAction action={ action } isLatest={ false }/>
+        {isExpended
+          && (
+            <div className="old-actions">
+              {oldActions.map(action => (
+                <div key={action.id}>
+                  <div className="separator" />
+                  <UserAction action={action} isLatest={false} />
+                </div>
+              ))}
             </div>
-          )}
-        </div>
+          )
         }
       </div>
     )

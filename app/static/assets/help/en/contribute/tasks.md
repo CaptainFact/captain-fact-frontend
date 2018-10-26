@@ -25,7 +25,7 @@ of replacing strings in files.
 1. Fork the [repo](https://github.com/CaptainFact/captain-fact-frontend)
 2. Edit or create files in `app/i18n/${YOUR_LOCALE}/${namespace}.js`
    to translate the user interface
-3. Edit or create files in `app/assets/assets/help/${YOUR_LOCALE}/${page}.md`
+3. Edit or create files in `app/static/assets/help/${YOUR_LOCALE}/${page}.md`
    to translate help pages like this one
 4. Make a pull request against `staging` branch
 

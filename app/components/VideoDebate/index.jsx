@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import { Helmet } from 'react-helmet'
 
 import { ErrorView } from '../Utils'
@@ -23,7 +23,7 @@ import { ColumnDebate } from './ColumnDebate'
   leaveCommentsChannel, leaveStatementsChannel, leaveVideoDebateChannel,
   resetVideoDebate
 })
-@translate('videoDebate')
+@withNamespaces('videoDebate')
 export class VideoDebate extends React.PureComponent {
   componentDidMount() {
     // Join channels
@@ -44,14 +44,14 @@ export class VideoDebate extends React.PureComponent {
 
   render() {
     if (this.props.videoErrors)
-      return <ErrorView error={this.props.videoErrors}/>
+      return <ErrorView error={this.props.videoErrors} />
     return (
       <div id="video-show" className="columns is-gapless">
         <Helmet>
           {!this.props.isLoading && <title>{this.props.videoTitle}</title>}
         </Helmet>
-        <ColumnVideo view={this.props.route.view}/>
-        <ColumnDebate view={this.props.route.view} videoId={this.props.params.videoId}/>
+        <ColumnVideo view={this.props.route.view} />
+        <ColumnDebate view={this.props.route.view} videoId={this.props.params.videoId} />
       </div>
     )
   }

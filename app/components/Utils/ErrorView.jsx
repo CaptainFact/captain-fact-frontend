@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
-import { LinkWithIcon } from '../Utils'
+import { LinkWithIcon } from '.'
 import Message from './Message'
 import { getErrorInfo, tError } from '../../lib/errors'
 
@@ -11,7 +11,7 @@ const refreshableErrors = ['join_crashed']
 
 
 @withRouter
-@translate('errors')
+@withNamespaces('errors')
 export class ErrorView extends React.PureComponent {
   render() {
     const { t, error = 'unknown', canGoBack = true } = this.props
@@ -25,21 +25,25 @@ export class ErrorView extends React.PureComponent {
           <div>
             <p>{tError(t, error)}{this.getMoreInfo()}</p>
             {(canGoBack || canReload) && <br/>}
-            {canGoBack &&
-            <LinkWithIcon
-              iconName="arrow-left"
-              onClick={() => this.props.router.goBack()}
-            >
-              {t('main:actions.goBack')}
-            </LinkWithIcon>}
-            {canReload &&
-            <LinkWithIcon
-              iconName="refresh"
-              onClick={() => location.reload()}
-              style={{float: 'right'}}
-            >
-              {t('main:actions.reload')}
-            </LinkWithIcon>}
+            {canGoBack
+            && (
+              <LinkWithIcon
+                iconName="arrow-left"
+                onClick={() => this.props.router.goBack()}
+              >
+                {t('main:actions.goBack')}
+              </LinkWithIcon>
+            )}
+            {canReload
+            && (
+              <LinkWithIcon
+                iconName="refresh"
+                onClick={() => location.reload()}
+                style={{float: 'right'}}
+              >
+                {t('main:actions.reload')}
+              </LinkWithIcon>
+            )}
           </div>
         </Message>
       </div>

@@ -28,25 +28,25 @@ const INITIAL_STATE = new Record({
 
 const SpeakersReducer = handleActions({
   [actionFetchSpeaker]: {
-    next: (state, {payload}) =>
-      state.mergeDeep({isLoading: false, currentSpeaker: payload}),
-    throw: (state, {payload}) =>
-      state.merge({isLoading: false, error: payload})
+    next: (state, { payload }) => {
+      return state.mergeDeep({ isLoading: false, currentSpeaker: payload })
+    },
+    throw: (state, { payload }) => state.merge({ isLoading: false, error: payload })
   },
   [actionFetchSpeakerWikiLinks]: {
-    next: (state, {payload}) => {
+    next: (state, { payload }) => {
       const allLinks = {}
       for (const link of payload) {
         const siteName = checkLink(link)
         if (siteName)
           allLinks[siteName] = link
       }
-      return state.mergeDeep({isLoadingWiki: false, currentSpeakerLinks: allLinks})
+      return state.mergeDeep({ isLoadingWiki: false, currentSpeakerLinks: allLinks })
     },
-    throw: state => state.merge({isLoadingWiki: false})
+    throw: state => state.merge({ isLoadingWiki: false })
   },
-  [setLoading]: (state, {payload}) => state.set('isLoading', payload),
-  [setLoadingWiki]: (state, {payload}) => state.set('isLoadingWiki', payload),
+  [setLoading]: (state, { payload }) => state.set('isLoading', payload),
+  [setLoadingWiki]: (state, { payload }) => state.set('isLoadingWiki', payload),
   [reset]: () => INITIAL_STATE()
 }, INITIAL_STATE())
 

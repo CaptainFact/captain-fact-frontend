@@ -33,12 +33,12 @@ const INITIAL_STATE = new Record({
 
 const CommentsReducer = handleActions({
   // Flags
-  [addFlag]: (state, {payload}) => state.update('myFlags', f => f.add(payload)),
+  [addFlag]: (state, { payload }) => state.update('myFlags', f => f.add(payload)),
   // Votes
-  [addMyVote]: (state, {payload: {comment, value}}) => {
+  [addMyVote]: (state, { payload: { comment, value } }) => {
     const prevVote = state.voted.get(comment.id, 0)
-    const voteChange = value === 0 ?
-      -prevVote : Math.abs(prevVote - value) * (value >= 0 ? 1 : -1)
+    const voteChange = value === 0
+      ? -prevVote : Math.abs(prevVote - value) * (value >= 0 ? 1 : -1)
     const commentPath = getCommentPath(comment)
     const commentIdx = getCommentIdx(state, commentPath, comment.id)
     if (commentIdx !== -1)
@@ -50,16 +50,15 @@ const CommentsReducer = handleActions({
       .setIn(['voted', comment.id], value)
       .update('voting', s => s.delete(comment.id))
   },
-  [setVoting]: (state, {payload}) => state.update('voting', s => s.add(payload)),
-  [endVoting]: (state, {payload}) => state.update('voting', s => s.remove(payload)),
+  [setVoting]: (state, { payload }) => state.update('voting', s => s.add(payload)),
+  [endVoting]: (state, { payload }) => state.update('voting', s => s.remove(payload)),
   // Comments
-  [setLoading]: (state, {payload}) => state.set('isLoading', payload),
+  [setLoading]: (state, { payload }) => state.set('isLoading', payload),
   [fetchAll]: {
-    next: (state, {payload: {comments, my_votes, my_flags}}) => {
-      const preparedComments =
-        new List(comments.map(prepareComment)
-          .sort(commentsComparator))
-          .groupBy(c => c.reply_to_id)
+    next: (state, { payload: { comments, my_votes, my_flags } }) => {
+      const preparedComments = new List(comments.map(prepareComment)
+        .sort(commentsComparator))
+        .groupBy(c => c.reply_to_id)
 
       const replies = preparedComments.delete(null)
       const notReplies = preparedComments.get(null) || new List()
@@ -69,15 +68,17 @@ const CommentsReducer = handleActions({
         errors: null,
         isLoading: false,
         replies,
-        voted: !my_votes ? new Map() : new Map().withMutations(map =>
-          my_votes.forEach(vote => map.set(vote.comment_id, vote.value))
-        ),
+        voted: !my_votes
+          ? new Map()
+          : new Map().withMutations(map => {
+            return my_votes.forEach(vote => map.set(vote.comment_id, vote.value))
+          }),
         myFlags: new Set(my_flags)
       })
     },
-    throw: (state, {payload}) => state.merge({errors: payload, isLoading: false})
+    throw: (state, { payload }) => state.merge({ errors: payload, isLoading: false })
   },
-  [add]: (state, {payload}) => {
+  [add]: (state, { payload }) => {
     const comment = prepareComment(payload)
     const commentPath = getCommentPath(comment)
     const commentsList = state.getIn(commentPath, new List())
@@ -88,37 +89,34 @@ const CommentsReducer = handleActions({
     )
     return state.setIn(commentPath, newCommentsList)
   },
-  [update]: (state, {payload}) => {
+  [update]: (state, { payload }) => {
     const commentFullPath = getCommentFullPath(state, payload)
     if (!commentFullPath)
       return state
     const comment = payload.__partial ? payload : prepareComment(payload)
     return state.updateIn(commentFullPath, c => c.merge(comment))
   },
-  [remove]: (state, {payload}) => {
+  [remove]: (state, { payload }) => {
     const commentFullPath = getCommentFullPath(state, payload)
     if (!commentFullPath)
       return state
     return state.deleteIn(commentFullPath)
   },
-  [updateScores]: (state, {payload}) => {
-    const {comments, replies} =
-    new List(payload).groupBy(c => (c.reply_to_id ? 'replies' : 'comments')).toObject()
+  [updateScores]: (state, { payload }) => {
+    const { comments, replies } = new List(payload).groupBy(c => (c.reply_to_id ? 'replies' : 'comments')).toObject()
 
     // Update comments
     if (comments) {
       const groupedComments = comments.groupBy(c => c.statement_id).entries()
       for (const [statementId, newComments] of groupedComments)
-        state = state.updateIn(['comments', statementId], oldList =>
-          mergeCommentsList(oldList, newComments)
+        state = state.updateIn(['comments', statementId], oldList => mergeCommentsList(oldList, newComments)
         )
     }
     // Update replies
     if (replies) {
       const groupedReplies = replies.groupBy(r => r.reply_to_id).entries()
       for (const [commentId, newComments] of groupedReplies)
-        state = state.updateIn(['replies', commentId], oldList =>
-          mergeCommentsList(oldList, newComments)
+        state = state.updateIn(['replies', commentId], oldList => mergeCommentsList(oldList, newComments)
         )
     }
     return state
@@ -149,8 +147,8 @@ function getCommentFullPath(state, comment) {
 }
 
 function getCommentPath(comment) {
-  return comment.reply_to_id ?
-    ['replies', comment.reply_to_id] : ['comments', comment.statement_id]
+  return comment.reply_to_id
+    ? ['replies', comment.reply_to_id] : ['comments', comment.statement_id]
 }
 
 function getCommentIdx(state, path, id) {

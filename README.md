@@ -1,4 +1,4 @@
-<p align="center"><img src="app/assets/assets/img/logo.png" height="100"/></p>
+<p align="center"><img src="app/static/assets/img/logo.png" height="100"/></p>
 <h1 align="center"><a href="https://captainfact.io">CaptainFact.io</a></h1>
 <p align="center"><a href="https://discord.gg/2Qd7hMz" title="Discord"><img src="https://discordapp.com/api/guilds/416782744748687361/widget.png" alt="Discord"></a>
 <a href="https://twitter.com/CaptainFact_io" title="Twitter"><img src="https://img.shields.io/twitter/follow/CaptainFact_io.svg?style=social&label=Follow"></a>
@@ -6,6 +6,7 @@
 <a href="./LICENSE"><img src="https://img.shields.io/github/license/CaptainFact/captain-fact-frontend.svg" alt="AGPL3"></a>
 <a href="https://travis-ci.org/CaptainFact/captain-fact-frontend"><img src="https://travis-ci.org/CaptainFact/captain-fact-frontend.svg?branch=travis-configuration" alt="Build Status" /></a>
 <a href='https://coveralls.io/github/CaptainFact/captain-fact-frontend?branch=master'><img src='https://coveralls.io/repos/github/CaptainFact/captain-fact-frontend/badge.svg?branch=master' alt='Coverage Status' /></a>
+<a href='https://greenkeeper.io/'><img src='https://badges.greenkeeper.io/CaptainFact/captain-fact-frontend.svg' alt='Greenkeeper badge' /></a>
 </p>
 <hr/>
 <p align="center">
@@ -21,12 +22,14 @@ If you're already have the API running locally, a simple `npm install && npm sta
 should be enough. Otherwise follow the procedure below:
 
 * Install (if you don't have them):
-  * [Docker](https://docs.docker.com/install/) (to start the API easily)
+  * [Docker](https://docs.docker.com/install/) 
+    and [docker-compose](https://docs.docker.com/compose/install/)
+    (to start the API easily)
   * NodeJS, ideally using [asdf](https://github.com/asdf-vm/asdf) with `NODEJS_CHECK_SIGNATURES=no asdf install`
   * App dependencies: `npm install`
 
 * Run:
-  * `./dev/start_api.sh` - Start the API (with an Elixir console attached)
+  * `docker-compose up` - Start the API
   * `npm start` - Start the frontend
   * `npm run test` - run all unit tests
 
@@ -41,7 +44,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
 ```
 app
 ├── API => Api libraries for both REST API and websockets
-├── assets => static assets, directly copied to the public directory
+├── assets => assets imported from JS
 ├── components => All react components
 ├── i18n => Translations
 ├── lib => Misc utilities
@@ -52,6 +55,7 @@ app
 │   │   ├── reducer.js => Reducer + actions creators, always return an action object
 │   │   └── selectors.js => re-select selectors to select data in state
 │   └── ...
+├── static => static assets, directly copied to the public directory
 ├── styles => stylesheets in .sass format, all included from application.sass
 └── router.jsx => Application router and main entry point
 ```

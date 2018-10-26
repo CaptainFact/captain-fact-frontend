@@ -2,10 +2,10 @@ import React from 'react'
 import isPromise from 'is-promise'
 import classNames from 'classnames'
 
+import { connect } from 'react-redux'
 import Modal from './Modal'
 import { Icon } from '../Utils/Icon'
 import { popModal } from '../../state/modals/reducer'
-import { connect } from 'react-redux'
 import { handleEffectResponse } from '../../lib/handle_effect_response'
 
 
@@ -62,11 +62,13 @@ export class ModalConfirm extends React.PureComponent {
         footer={this.renderFormButtons()}
         {...props}
       >
-        {content &&
-        <div>
-          {content}
-          {message && <hr/>}
-        </div>
+        {content
+        && (
+          <div>
+            {content}
+            {message && <hr/>}
+          </div>
+        )
         }
         <h3 className="title is-4">{message}</h3>
       </Modal>

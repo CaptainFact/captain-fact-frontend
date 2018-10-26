@@ -21,21 +21,25 @@ const INITIAL_STATE = new Record({
 
 const CurrentUserReducer = handleActions({
   [set]: {
-    next: (state, {payload}) =>
-      state.merge({data: new User(payload) || {}, error: null, isLoading: false}),
-    throw: (state, {payload}) =>
-      state.merge({error: payload, isLoading: false})
+    next: (state, { payload }) => {
+      return state.merge({
+        data: new User(payload) || {},
+        error: null,
+        isLoading: false
+      })
+    },
+    throw: (state, { payload }) => state.merge({ error: payload, isLoading: false })
   },
   [userLogin]: {
-    next: (state, {payload}) => {
-      return state.mergeDeep({data: payload || {}, error: null, isPosting: false})
+    next: (state, { payload }) => {
+      return state.mergeDeep({ data: payload || {}, error: null, isPosting: false })
     },
-    throw: (state, {payload}) => {
-      return state.merge({error: payload, isPosting: false})
+    throw: (state, { payload }) => {
+      return state.merge({ error: payload, isPosting: false })
     }
   },
-  [setLoading]: (state, {payload}) => state.set('isLoading', payload),
-  [setPosting]: (state, {payload}) => state.set('isPosting', payload),
+  [setLoading]: (state, { payload }) => state.set('isLoading', payload),
+  [setPosting]: (state, { payload }) => state.set('isPosting', payload),
   [reset]: () => INITIAL_STATE()
 }, INITIAL_STATE())
 

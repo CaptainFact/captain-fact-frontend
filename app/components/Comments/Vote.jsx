@@ -1,22 +1,22 @@
 import React from 'react'
 import classNames from 'classnames'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
 import ClickableIcon from '../Utils/ClickableIcon'
 import IconModerationPending from './IconModerationPending'
 
 
-const Score = ({isVoting, isReported, score}) => {
+const Score = ({ isVoting, isReported, score }) => {
   if (isVoting) {
-    return <span className="round-spinner"/>
+    return <span className="round-spinner" />
   }
   if (isReported) {
-    return <IconModerationPending/>
+    return <IconModerationPending />
   }
   return score
 }
 
-const Vote = ({isVoting, score, myVote, onVote, isReported}) => (
+const Vote = ({ isVoting, score, myVote, onVote, isReported }) => (
   <figure>
     <div className="vote">
       <ClickableIcon
@@ -25,7 +25,7 @@ const Vote = ({isVoting, score, myVote, onVote, isReported}) => (
         onClick={() => (myVote <= 0 ? onVote(1) : onVote(0))}
       />
       <div className="score">
-        <Score isVoting={isVoting} isReported={isReported} score={score}/>
+        <Score isVoting={isVoting} isReported={isReported} score={score} />
       </div>
       <ClickableIcon
         name="chevron-down"
@@ -36,4 +36,4 @@ const Vote = ({isVoting, score, myVote, onVote, isReported}) => (
   </figure>
 )
 
-export default translate('modetation')(Vote)
+export default withNamespaces('modetation')(Vote)

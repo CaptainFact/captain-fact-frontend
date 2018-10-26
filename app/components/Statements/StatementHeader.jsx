@@ -1,12 +1,12 @@
 import React from 'react'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import TimeDisplay from '../Utils/TimeDisplay'
 import ClickableIcon from '../Utils/ClickableIcon'
 import { MIN_REPUTATION_UPDATE_STATEMENT, MIN_REPUTATION_REMOVE_STATEMENT } from '../../constants'
 import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
 
 
-export default translate('videoDebate')(({
+export default withNamespaces('videoDebate')(({
   t,
   statement,
   speaker,
@@ -18,9 +18,9 @@ export default translate('videoDebate')(({
 }) => (
   <header className="card-header">
     <p className="card-header-title">
-      <TimeDisplay time={statement.time} handleClick={handleTimeClick}/>
+      <TimeDisplay time={statement.time} handleClick={handleTimeClick} />
       {speaker && speaker.picture && (
-        <img className="speaker-mini" src={speaker.picture} alt=""/>
+        <img className="speaker-mini" src={speaker.picture} alt="" />
       )}
       <strong>{speaker ? speaker.full_name : ''}</strong>
     </p>
@@ -29,7 +29,7 @@ export default translate('videoDebate')(({
         requiredRep={MIN_REPUTATION_REMOVE_STATEMENT}
         tooltipPosition="left center"
       >
-        {({hasReputation}) => (
+        {({ hasReputation }) => (
           <ClickableIcon
             name="times"
             size="action-size"
@@ -43,7 +43,7 @@ export default translate('videoDebate')(({
         requiredRep={MIN_REPUTATION_UPDATE_STATEMENT}
         tooltipPosition="left center"
       >
-        {({hasReputation}) => (
+        {({ hasReputation }) => (
           <ClickableIcon
             name="pencil"
             size="action-size"
