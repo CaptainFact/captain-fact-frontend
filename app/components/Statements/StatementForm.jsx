@@ -2,7 +2,7 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
 import SpeakersSelect from '../Speakers/SpeakersSelect'
 import { Icon, LinkWithIcon } from '../Utils'
@@ -22,7 +22,7 @@ import { cleanStrMultiline } from '../../lib/clean_str'
   submitting: statements.isSubmitting
 }), {forcePosition, setScrollTo, incrementFormCount, decrementFormCount})
 @reduxForm({form: STATEMENT_FORM_NAME})
-@translate('videoDebate')
+@withNamespaces('videoDebate')
 export class StatementForm extends React.PureComponent {
   constructor(props) {
     super(props)

@@ -11,9 +11,9 @@ import { cleanStr } from '../../lib/clean_str'
 
 // Common validators for Signup / Login
 
-export const validatePasswordRepeat = ({password, passwordRepeat}) => {
+export const validatePasswordRepeat = ({ password, passwordRepeat }) => {
   if (passwordRepeat !== password)
-    return {passwordRepeat: "Passwords doesn't match"}
+    return { passwordRepeat: "Passwords doesn't match" }
   return {}
 }
 
@@ -36,6 +36,17 @@ export const emailField = t => (
     icon="envelope"
     normalize={s => s.trim()}
     validate={validateEmail(t)}
+  />
+)
+
+export const emailOrUsernameField = t => (
+  <Field
+    name="email"
+    type="text"
+    placeholder={t('emailOrUsername')}
+    component={ControlInput}
+    icon="user"
+    normalize={s => s.trim()}
   />
 )
 

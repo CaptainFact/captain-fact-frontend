@@ -1,7 +1,3 @@
-/* eslint-disable no-unused-vars */
-import regeneratorRuntime from 'regenerator-runtime'
-
-
 /**
  * Iterate a list, returning for each entry a tuple like [item, textSeparatorAfter]
  * @param iterator

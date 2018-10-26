@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
 import { ModalHistory } from '../VideoDebate/ModalHistory'
 import { addModal } from '../../state/modals/reducer'
@@ -12,7 +12,7 @@ import StatementHeader from './StatementHeader'
 
 
 @connect(null, {addModal, forcePosition, setScrollTo})
-@translate('videoDebate')
+@withNamespaces('videoDebate')
 export default class Statement extends React.PureComponent {
   render() {
     const {statement, speaker, handleEdit, handleDelete} = this.props

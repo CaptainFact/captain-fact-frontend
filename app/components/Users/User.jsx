@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { Interpolate, translate } from 'react-i18next'
+import { Trans, withNamespaces } from 'react-i18next'
 import { Helmet } from 'react-helmet'
 
 import UserAppellation from './UserAppellation'
@@ -16,13 +16,13 @@ import { fetchUser } from '../../state/users/displayed_user/effects'
 import { resetUser } from '../../state/users/displayed_user/reducer'
 
 
-@connect(({CurrentUser, DisplayedUser: {isLoading, errors, data}}) => ({
+@connect(({ CurrentUser, DisplayedUser: { isLoading, errors, data } }) => ({
   isSelf: CurrentUser.data.id === data.id,
   isLoading,
   errors,
   user: data
-}), {fetchUser, resetUser})
-@translate('main')
+}), { fetchUser, resetUser })
+@withNamespaces('main')
 export default class User extends React.PureComponent {
   componentDidMount() {
     this.props.fetchUser(this.props.params.username)
@@ -31,9 +31,9 @@ export default class User extends React.PureComponent {
   componentDidUpdate(oldProps) {
     // If user's username was updated
     if (this.props.user.id === oldProps.user.id
-        && this.props.user.username !== oldProps.user.username)
-    // TODO Remove old user profile from history
-    // Redirect
+      && this.props.user.username !== oldProps.user.username)
+      // TODO Remove old user profile from history
+      // Redirect
       this.props.router.replace(`/u/${this.props.user.username}`)
 
     // Showing another user
@@ -54,7 +54,7 @@ export default class User extends React.PureComponent {
     return (
       <li className={isActive ? 'is-active' : ''}>
         <Link to={linkTo} disabled={isDisabled}>
-          <Icon name={iconName}/>
+          <Icon name={iconName} />
           <span>{this.props.t(menuTKey)}</span>
         </Link>
       </li>
@@ -63,9 +63,9 @@ export default class User extends React.PureComponent {
 
   render() {
     if (this.props.errors)
-      return <ErrorView error={this.props.errors} canReload/>
+      return <ErrorView error={this.props.errors} canReload />
     if (this.props.isLoading)
-      return <LoadingFrame/>
+      return <LoadingFrame />
 
     const user = this.props.user
     const prettyUsername = `@${user.username}`
@@ -76,28 +76,30 @@ export default class User extends React.PureComponent {
           <title>{user.name || prettyUsername}</title>
         </Helmet>
         <section className="hero is-light is-bold is-medium user-header">
-          {user.id !== 0
-            && <MediaLayout
+          {user.id !== 0 && (
+            <MediaLayout
               left={
-                <UserPicture user={user} size={USER_PICTURE_XLARGE}/>
+                <UserPicture user={user} size={USER_PICTURE_XLARGE} />
               }
               content={(
-<div>
-                  <UserAppellation user={user} withoutActions/>
+                <div>
+                  <UserAppellation user={user} withoutActions />
                   <div className="registered-since">
-                    <Icon name="clock-o"/>&nbsp;
-                    <Interpolate
-                      i18nKey="user:registeredSince"
-                      value={
-                        <TimeSince time={user.registered_at} addSuffix={false} isDateTime={false}/>
-                      }
-                    />
+                    <Icon name="clock-o" />&nbsp;
+                    <Trans i18nKey="user:registeredSince">
+                      Registered for
+                      <TimeSince
+                        time={user.registered_at}
+                        addSuffix={false}
+                        isDateTime={false}
+                      />
+                    </Trans>
                   </div>
                 </div>
-)}
-              right={<ScoreTag reputation={user.reputation} size="large" withIcon/>}
+              )}
+              right={<ScoreTag reputation={user.reputation} size="large" withIcon />}
             />
-          }
+          )}
         </section>
         <div className="tabs is-centered">
           <ul>
@@ -106,7 +108,7 @@ export default class User extends React.PureComponent {
             {isSelf && this.getActiveTab('settings', 'cog', 'menu.settings')}
           </ul>
         </div>
-        { this.props.children }
+        {this.props.children}
       </div>)
   }
 }

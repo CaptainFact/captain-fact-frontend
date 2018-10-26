@@ -1,10 +1,10 @@
 import React from 'react'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
 import { Icon } from '../Utils/Icon'
 
 
-const IconModerationPending = ({t}) => (
+const IconModerationPending = ({ t }) => (
   <Icon
     className="reported"
     name="ban"
@@ -12,4 +12,4 @@ const IconModerationPending = ({t}) => (
   />
 )
 
-export default translate('moderation')(IconModerationPending)
+export default withNamespaces('moderation')(IconModerationPending)

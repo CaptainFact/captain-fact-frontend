@@ -20,8 +20,8 @@ export default class VideoDebatePlayer extends React.Component {
 
   componentWillReceiveProps(newProps) {
     const { forcedPosition } = newProps
-    if (forcedPosition.requestId !== null &&
-      forcedPosition.requestId !== this.props.forcedPosition.requestId) {
+    if (forcedPosition.requestId !== null
+      && forcedPosition.requestId !== this.props.forcedPosition.requestId) {
       this.refs.player.seekTo(forcedPosition.time)
     }
   }

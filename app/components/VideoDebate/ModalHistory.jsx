@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import titleCase from 'voca/title_case'
 
 import Modal from '../Modal/Modal'
@@ -16,7 +16,7 @@ import { reset } from '../../state/user_actions/reducer'
   actions: state.UsersActions.actions,
   isLoading: state.UsersActions.isLoading
 }), {joinStatementHistoryChannel, leaveStatementHistoryChannel, popModal, reset})
-@translate('history')
+@withNamespaces('history')
 export class ModalHistory extends React.PureComponent {
   componentDidMount() {
     if (this.props.entity === ENTITY_STATEMENT)

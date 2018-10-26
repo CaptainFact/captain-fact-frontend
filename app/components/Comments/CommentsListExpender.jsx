@@ -1,10 +1,10 @@
 import React from 'react'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
 import Button from '../Utils/Button'
 
 
-const CommentsListExpender = ({t, onClick, nesting, count}) => (
+const CommentsListExpender = ({ t, onClick, nesting, count }) => (
   <div className="comments-expender">
     <Button onClick={onClick}>
       {t('comment.loadMore', {
@@ -15,4 +15,4 @@ const CommentsListExpender = ({t, onClick, nesting, count}) => (
   </div>
 )
 
-export default translate('videoDebate')(CommentsListExpender)
+export default withNamespaces('videoDebate')(CommentsListExpender)

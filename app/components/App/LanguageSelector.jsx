@@ -1,7 +1,7 @@
 import React from 'react'
 import { Map } from 'immutable'
 import classNames from 'classnames'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
 import { Icon } from '../Utils/Icon'
 
@@ -11,7 +11,7 @@ const defaultLocales = new Map({
   fr: 'Français'
 })
 
-@translate() // Force waiting for translations to be loaded
+@withNamespaces() // Force waiting for translations to be loaded
 export default class LanguageSelector extends React.PureComponent {
   render() {
     const sizeClass = this.props.size ? `is-${this.props.size}` : null

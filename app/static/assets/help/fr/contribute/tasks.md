@@ -27,7 +27,7 @@ simplement de remplacer des bouts de texte dans des fichiers.
 1. Forker le [dépôt](https://github.com/CaptainFact/captain-fact-frontend)
 2. Editer ou créer les fichiers dans `app/i18n/${YOUR_LOCALE}/${namespace}.js`
    pour traduire l'interface utilisateur
-3. Editer ou créer les fichiers dans `app/assets/assets/help/${YOUR_LOCALE}/${page}.md`
+3. Editer ou créer les fichiers dans `app/static/assets/help/${YOUR_LOCALE}/${page}.md`
    pour traduire les pages d'aide (comme celle-ci).
 4. Faites une pull request sur la branche `staging`
 

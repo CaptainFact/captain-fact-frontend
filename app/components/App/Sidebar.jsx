@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import classNames from 'classnames'
 import capitalize from 'voca/capitalize'
 
@@ -24,7 +24,7 @@ import Button from '../Utils/Button'
   isLoadingUser: state.CurrentUser.isLoading,
   sidebarExpended: state.UserPreferences.sidebarExpended
 }), {logout, toggleSidebar, closeSidebar})
-@translate('main')
+@withNamespaces('main')
 export default class Sidebar extends React.PureComponent {
   constructor(props) {
     super(props)

@@ -22,6 +22,6 @@ export default {
     submissionError: 'An error occurred while sending the data',
     noVideoAvailable: 'No video available',
     notEnoughReputation: 'Not enough reputation to access this feature',
-    needReputation: 'You need at least {{count}} {{reputationLink}} points to do that'
+    needReputation: 'You need at least {{requiredRep}} <2>reputation</2> points to do that'
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import { Field, reduxForm, reset } from 'redux-form'
 import { AsyncCreatable } from 'react-select'
 import debounce from 'debounce-promise'
@@ -16,13 +16,13 @@ import { cleanStr } from '../../lib/clean_str'
 
 const searchSpeakerRequest = debounce((query) => (
   // TODO This request has nothing to do here !
-  SocketApi.push('video_debate', 'search_speaker', {query})
-    .then(({speakers}) => ({options: speakers}))
+  SocketApi.push('video_debate', 'search_speaker', { query })
+    .then(({ speakers }) => ({ options: speakers }))
 ), 250)
 
-@reduxForm({form: 'addSpeaker'})
-@connect(null, {addSpeaker, reset})
-@translate('videoDebate')
+@reduxForm({ form: 'addSpeaker' })
+@connect(null, { addSpeaker, reset })
+@withNamespaces('videoDebate')
 export default class AddSpeakerForm extends React.PureComponent {
   render() {
     return (
@@ -36,7 +36,7 @@ export default class AddSpeakerForm extends React.PureComponent {
     )
   }
 
-  renderSpeakerField({input, disabled}) {
+  renderSpeakerField({ input, disabled }) {
     return (
       <AsyncCreatable
         disabled={disabled}
@@ -69,11 +69,11 @@ export default class AddSpeakerForm extends React.PureComponent {
   }
 
   onChange(e) {
-    const {addSpeaker, reset} = this.props
+    const { addSpeaker, reset } = this.props
 
     if (!e)
       return
-    const speaker = {full_name: capitalizeName(cleanStr(e.full_name))}
+    const speaker = { full_name: capitalizeName(cleanStr(e.full_name)) }
     if (e.id !== e.full_name)
       speaker.id = e.id
     if (checkLength(e.full_name, SPEAKER_NAME_LENGTH))
@@ -82,7 +82,7 @@ export default class AddSpeakerForm extends React.PureComponent {
 
   promptTextCreator(speakerName) {
     return checkLength(speakerName, SPEAKER_NAME_LENGTH)
-      ? this.props.t('speaker.create', {name: capitalizeName(speakerName)})
+      ? this.props.t('speaker.create', { name: capitalizeName(speakerName) })
       : '...'
   }
 }

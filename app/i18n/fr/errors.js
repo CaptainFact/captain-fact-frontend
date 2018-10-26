@@ -22,6 +22,6 @@ export default {
     submissionError: 'Un problème est survenu lors de l\'envoi des données',
     noVideoAvailable: 'Aucune vidéo n\'est disponible',
     notEnoughReputation: 'Pas assez de réputation pour accéder à cette fonctionnalité',
-    needReputation: "Vous avez besoin d'au moins {{count}} points de {{reputationLink}} pour faire ça"
+    needReputation: "Vous avez besoin d'au moins {{requiredRep}} points de <2>réputation</2> pour faire ça"
   }
 }

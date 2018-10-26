@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, SubmissionError } from 'redux-form'
 import isEmail from 'validator/lib/isEmail'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
 import browserLocale from '../../i18n/browser_locale'
 import { requestInvitation } from '../../state/users/current_user/effects'
@@ -20,7 +20,7 @@ const validate = ({email}) => {
 }
 
 @reduxForm({form: 'newsletterSubscribeForm', validate})
-@translate('home')
+@withNamespaces('home')
 @connect(null, {addFlash, errorToFlash, requestInvitation})
 export default class InvitationRequestForm extends React.PureComponent {
   state = { confirmed: false }

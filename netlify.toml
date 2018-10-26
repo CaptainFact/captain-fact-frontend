@@ -1,0 +1,7 @@
+# Netlify configuration. We use Netlify for pull requests previews. |
+# ------------------------------------------------------------------/
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

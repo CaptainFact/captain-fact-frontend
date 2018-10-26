@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, formValueSelector } from 'redux-form'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import {
   MODERATION_ACTION_ABUSIVE, MODERATION_ACTION_CONFIRM,
   MODERATION_ACTION_NOTSURE
@@ -13,7 +13,7 @@ const FORM_NAME = 'moderationForm'
 
 const valueSelector = formValueSelector(FORM_NAME)
 
-@translate('moderation')
+@withNamespaces('moderation')
 @reduxForm({form: FORM_NAME})
 @connect(state => ({flagReason: valueSelector(state, 'reason')}))
 export class ModerationForm extends React.PureComponent {
@@ -22,20 +22,29 @@ export class ModerationForm extends React.PureComponent {
     return (
       <div>
         <h4 className="title is-4">
-          {t("whyReport")}
+          {t('whyReport')}
         </h4>
         <FlagReasonSelect/>
         <div className="buttons field is-grouped">
-          <a className="button" disabled={!flagReason}
-             onClick={this.getSubmit(MODERATION_ACTION_ABUSIVE)}>
+          <a
+            className="button"
+            disabled={!flagReason}
+            onClick={this.getSubmit(MODERATION_ACTION_ABUSIVE)}
+          >
             <span>{t('actions.flag_abusive')}</span>
           </a>
-          <a className="button" disabled={!flagReason}
-             onClick={this.getSubmit(MODERATION_ACTION_NOTSURE)}>
+          <a
+            className="button"
+            disabled={!flagReason}
+            onClick={this.getSubmit(MODERATION_ACTION_NOTSURE)}
+          >
             <span>{t('actions.unsure')}</span>
           </a>
-          <a className="button" disabled={!flagReason}
-             onClick={this.getSubmit(MODERATION_ACTION_CONFIRM)}>
+          <a
+            className="button"
+            disabled={!flagReason}
+            onClick={this.getSubmit(MODERATION_ACTION_CONFIRM)}
+          >
             <span>{t('actions.confirm')}</span>
           </a>
         </div>

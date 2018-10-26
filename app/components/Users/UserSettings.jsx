@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 
 import { facebookAuthUrl } from '../../lib/third_party_auth'
 import {deleteAccount} from '../../state/users/current_user/effects'
@@ -22,7 +22,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {deleteAccount, addModal}
 
 @connect(mapStateToProps, mapDispatchToProps)
-@translate('user')
+@withNamespaces('user')
 export default class UserSettings extends React.PureComponent {
   render() {
     const {t, deleteAccount, addModal, user} = this.props

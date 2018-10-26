@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 
-import translate from 'react-i18next/dist/commonjs/translate'
+import { withNamespaces } from 'react-i18next'
 import Button from './Button'
 
 
@@ -78,4 +78,4 @@ const PaginationMenu = ({
   )
 }
 
-export default translate('main')(PaginationMenu)
+export default withNamespaces('main')(PaginationMenu)
