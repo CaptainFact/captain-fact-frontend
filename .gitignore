@@ -28,6 +28,9 @@ public/
 # Ignore tests coverage
 coverage
 
+# Ignore cypress videos and screenshots
+cypress/videos
+
 # API dev image resources
 dev/dev_docker_api_resources/*
 !dev/dev_docker_api_resources/.keep

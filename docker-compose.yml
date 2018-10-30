@@ -7,7 +7,7 @@ services:
 
   # Main API - REST + Websockets
   api:
-    image: captainfact/rest-api:dev
+    image: captainfact/rest-api:staging
     command: foreground
     ports: ["4000:80"]
     depends_on: ["database"]
@@ -26,7 +26,7 @@ services:
 
   # Public GaphQL API 
   graphql-api:
-    image: captainfact/graphql-api:dev
+    image: captainfact/graphql-api:staging
     command: foreground
     ports: ["4002:80"]
     depends_on: ["database", "api"]
@@ -41,7 +41,7 @@ services:
   
   # ATOM / RSS Feeds
   atom-feed:
-    image: captainfact/atom-feed:dev
+    image: captainfact/atom-feed:staging
     command: foreground
     ports: ["4004:80"]
     depends_on: ["database", "api"]
@@ -55,7 +55,7 @@ services:
 
   # OpenGraph service (for crawlers)
   opengraph:
-    image: captainfact/opengraph:dev
+    image: captainfact/opengraph:staging
     command: foreground
     ports: ["4005:80"]
     depends_on: ["database", "api"]
