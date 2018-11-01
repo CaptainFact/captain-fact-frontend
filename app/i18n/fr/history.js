@@ -1,3 +1,26 @@
+import {
+  ENTITY_VIDEO,
+  ENTITY_SPEAKER,
+  ENTITY_STATEMENT,
+  ENTITY_SOURCED_COMMENT,
+  ENTITY_COMMENT,
+  ENTITY_USER_ACTION,
+  ENTITY_USER,
+  ACTION_CREATE,
+  ACTION_REMOVE,
+  ACTION_UPDATE,
+  ACTION_DELETE,
+  ACTION_ADD,
+  ACTION_RESTORE,
+  ACTION_REVERT_SELF_VOTE,
+  ACTION_REVERT_VOTE_DOWN,
+  ACTION_REVERT_VOTE_UP,
+  ACTION_SELF_VOTE,
+  ACTION_VOTE_DOWN,
+  ACTION_VOTE_UP,
+  ACTION_FLAG
+} from '../../constants'
+
 export default {
   compare_show: 'Comparer',
   compare_hide: 'Masquer',
@@ -12,27 +35,27 @@ export default {
   deletedUser: 'Compte supprimé',
   madeAction: '{{action}}\u00A0:',
   action: {
-    1: 'Créé',
-    2: 'Retiré',
-    3: 'Mis à jour',
-    4: 'Supprimé',
-    5: 'Ajouté',
-    6: 'Restauré',
-    8: 'Signalé',
-    9: 'Voté positivement',
-    10: 'Voté négativement',
-    11: 'Voté pour lui-même',
-    12: 'Annulé son vote positif',
-    13: 'Annulé son vote négatif',
-    14: 'Annulé son vote pour lui-même',
+    [ACTION_CREATE]: 'Créé',
+    [ACTION_REMOVE]: 'Retiré',
+    [ACTION_UPDATE]: 'Mis à jour',
+    [ACTION_DELETE]: 'Supprimé',
+    [ACTION_ADD]: 'Ajouté',
+    [ACTION_RESTORE]: 'Restauré',
+    [ACTION_FLAG]: 'Signalé',
+    [ACTION_VOTE_UP]: 'Voté positivement',
+    [ACTION_VOTE_DOWN]: 'Voté négativement',
+    [ACTION_SELF_VOTE]: 'Voté pour lui-même',
+    [ACTION_REVERT_VOTE_UP]: 'Annulé son vote positif',
+    [ACTION_REVERT_VOTE_DOWN]: 'Annulé son vote négatif',
+    [ACTION_REVERT_SELF_VOTE]: 'Annulé son vote pour lui-même'
   },
-  this: {
-    1: 'vidéo',
-    2: 'intervenant',
-    3: 'citation',
-    4: 'commentaire',
-    5: 'commentaire sourcé',
-    6: 'action',
-    7: 'utilisateur'
+  entities: {
+    [ENTITY_VIDEO]: 'vidéo',
+    [ENTITY_SPEAKER]: 'intervenant',
+    [ENTITY_STATEMENT]: 'citation',
+    [ENTITY_COMMENT]: 'commentaire',
+    [ENTITY_SOURCED_COMMENT]: 'commentaire sourcé',
+    [ENTITY_USER_ACTION]: 'action',
+    [ENTITY_USER]: 'utilisateur'
   }
 }

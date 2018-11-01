@@ -2,7 +2,13 @@ import React from 'react'
 import { withNamespaces } from 'react-i18next'
 import { Link } from 'react-router'
 
-import { ENTITY_SPEAKER, ENTITY_VIDEO, ENTITY_STATEMENT, ENTITY_COMMENT, ENTITY_SOURCED_COMMENT } from '../../constants'
+import {
+  ENTITY_SPEAKER,
+  ENTITY_VIDEO,
+  ENTITY_STATEMENT,
+  ENTITY_COMMENT,
+  ENTITY_SOURCED_COMMENT
+} from '../../constants'
 import { speakerURL, statementURL, videoURL, commentURL } from '../../lib/cf_routes'
 
 const comment_mapper = ({ videoHashId, statementId, commentId }) => {
@@ -24,14 +30,13 @@ const ENTITY_DISPLAY_MAPPER = {
 }
 
 const ActionEntityLink = ({ t, action }) => {
-  const label = t(`this.${action.entity}`)
+  const label = t(`entities.${action.entity}`)
   const entityLinker = ENTITY_DISPLAY_MAPPER[action.entity]
-  if (!entityLinker)
-    return label
+  if (!entityLinker) return label
 
   const [entityId, url] = entityLinker(action)
   const full_label = entityId ? `${label} #${entityId}` : label
-  return url ? (<Link to={url}>{full_label}</Link>) : full_label
+  return url ? <Link to={url}>{full_label}</Link> : full_label
 }
 
 export default withNamespaces('history')(ActionEntityLink)
