@@ -9,19 +9,23 @@ import { fetchCurrentUser } from '../../state/users/current_user/effects'
 import Sidebar from './Sidebar'
 import { MainModalContainer } from '../Modal/MainModalContainer'
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
+import { isAuthenticated } from '../../state/users/current_user/selectors'
 
 
 @connect(state => ({
   locale: state.UserPreferences.locale,
-  sidebarExpended: state.UserPreferences.sidebarExpended
-}), {fetchCurrentUser})
+  sidebarExpended: state.UserPreferences.sidebarExpended,
+  isAuthenticated: isAuthenticated(state)
+}), { fetchCurrentUser })
 export default class App extends React.PureComponent {
   componentDidMount() {
-    this.props.fetchCurrentUser()
+    if (!this.props.isAuthenticated) {
+      this.props.fetchCurrentUser()
+    }
   }
 
   render() {
-    const {locale, sidebarExpended, children} = this.props
+    const { locale, sidebarExpended, children } = this.props
     const mainContainerClass = sidebarExpended ? undefined : 'expended'
 
     return (
@@ -30,13 +34,13 @@ export default class App extends React.PureComponent {
           <Helmet>
             <title>CaptainFact</title>
           </Helmet>
-          <MainModalContainer/>
-          <FlashMessages/>
-          <Sidebar/>
+          <MainModalContainer />
+          <FlashMessages />
+          <Sidebar />
           <div id="main-container" className={mainContainerClass}>
             {children}
           </div>
-          <PublicAchievementUnlocker achievementId={4} meetConditionsFunc={this.checkExtensionInstall}/>
+          <PublicAchievementUnlocker achievementId={4} meetConditionsFunc={this.checkExtensionInstall} />
         </div>
       </I18nextProvider>
     )

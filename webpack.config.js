@@ -75,7 +75,7 @@ module.exports = {
     }),
     // copy static assets as they are required from external sources
     new CopyWebpackPlugin(
-      [{ from: 'app/assets', to: '', toType: 'dir' }], // patterns
+      [{ from: 'app/static', to: '', toType: 'dir' }], // patterns
       {} // options
     ),
     // load the bundles into an html template

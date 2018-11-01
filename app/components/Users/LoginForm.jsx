@@ -5,7 +5,7 @@ import { Link, withRouter } from 'react-router'
 import { withNamespaces } from 'react-i18next'
 
 import ThirdPartyAuthList from './ThirdPartyAuthList'
-import { emailField, passwordField, submitButton } from './UserFormFields'
+import { emailOrUsernameField, passwordField, submitButton } from './UserFormFields'
 import { login } from '../../state/users/current_user/effects'
 import Notification from '../Utils/Notification'
 import { tError } from '../../lib/errors'
@@ -32,11 +32,11 @@ export default class LoginForm extends React.PureComponent {
       >
         {error && <Notification type="danger">{tError(t, error)}</Notification>}
         <div>
-          <strong>{t('needAnAccountQuestion')} <Link to="signup">{t('signup')}</Link> </strong>
+          <strong>{t('needAnAccountQuestion')} <Link to="/signup">{t('signup')}</Link> </strong>
           <Link to="/reset_password" style={{ float: 'right' }}>{t('forgottenPassword')}</Link>
         </div>
         <hr />
-        {emailField(t)}
+        {emailOrUsernameField(t)}
         {passwordField(t)}
         {submitButton(t('login'), valid)}
         <ThirdPartyAuthList />

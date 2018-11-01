@@ -3,6 +3,7 @@ env:
   es6: true
   jest: true
   node: true
+  cypress/globals: true
 extends: 'airbnb'
 parser: babel-eslint
 parserOptions:
@@ -14,6 +15,8 @@ plugins:
   - react
   - jsx-a11y
   - import
+  - cypress
+  - chai-friendly # See https://github.com/cypress-io/eslint-plugin-cypress#chai-and-no-unused-expressions
 rules:
   max-len:
     - warn
@@ -36,6 +39,10 @@ rules:
   import/no-named-as-default: ['warn']
   no-restricted-globals: ["error", "event", "fdescribe"]
   no-mixed-operators: ['warn']
+  # See https://github.com/cypress-io/eslint-plugin-cypress#chai-and-no-unused-expressions
+  no-unused-expressions: 0
+  chai-friendly/no-unused-expressions: 2
+  # React
   react/destructuring-assignment: off
   react/no-multi-comp: ['warn']
   react/jsx-no-bind: ['warn']
@@ -54,6 +61,7 @@ rules:
   react/jsx-indent: ['warn']
   react/no-array-index-key: ['warn']
   react/prefer-stateless-function: ['warn']
+  # JSX
   jsx-a11y/anchor-is-valid:
     - warn
     - components: ['Link']

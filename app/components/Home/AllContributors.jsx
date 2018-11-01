@@ -18,6 +18,7 @@ const CONTRIBUTORS = [
   { role: ROLE_PARTNER, name: 'La Tronche en Biais', picture: 'troncheenbiais', url: 'https://www.youtube.com/user/TroncheEnBiais' },
   { role: ROLE_PARTNER, name: 'IMAGO', picture: 'imago', url: 'http://imagotv.fr/pdf/imago_presentation.pdf' },
   { role: ROLE_PARTNER, name: 'TedX Nouméa', picture: 'tedxnoumea', url: 'https://tedxnoumea.com' },
+  { role: ROLE_PARTNER, name: 'YesWeHack', picture: 'yeswehack', url: 'https://yeswehack.com' },
   { role: ROLE_PARTNER, name: 'Maia Mater', picture: 'maiamater', url: 'https://www.maiamater.camp' },
   { role: ROLE_DEVELOPER, name: 'Noé Gambini', picture: 'noe' },
   { role: ROLE_DONATOR, name: 'Julien Edmond', picture: 'julien' },
