@@ -4,8 +4,8 @@ import User from '../users/record'
 const UserAction = new Record({
   id: 0,
   user: new User(),
-  type: 0,
-  entity: 0,
+  type: 'unknown',
+  entity: 'unknown',
   videoId: null,
   videoHashId: null,
   speakerId: null,
