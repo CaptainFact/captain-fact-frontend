@@ -24,10 +24,13 @@ import { SpeakerPage } from './components/Speakers/SpeakerPage'
 import NewsletterSubscription from './components/Users/NewsletterSubscription'
 import ActivityLog from './components/Users/ActivityLog'
 
+import Layout from './components/V2'
+import Video from './components/V2/Video'
+
 
 const CFRouter = () => (
   <Router history={browserHistory}>
-    <Route path="/" component={App}>
+    <Route path="/old" component={App}>
       <IndexRoute component={Home} />
       <Route path="/signup" component={SignupForm} />
       <Route path="/signup/callback/:provider" component={ThirdPartyCallback} />
@@ -53,6 +56,9 @@ const CFRouter = () => (
       <Route path="/extension" component={BrowserExtensionsPage} />
       <Route path="/moderation" component={Moderation} />
       <Route path="*" component={NotFound} />
+    </Route>
+    <Route path="/" component={Layout}>
+      <IndexRoute component={Video} />
     </Route>
   </Router>
 )

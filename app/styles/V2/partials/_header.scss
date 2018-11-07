@@ -1,0 +1,42 @@
+.navbar {
+  background-color: transparent !important;
+  padding: 0 3vw;
+  img.user, .logo > img {
+    max-height: none;
+    width: 40px;
+    height: 40px;
+  }
+  .logo {
+    span {
+      font-size: 1.5rem;
+      color: $white;
+      margin-left: 15px;
+    }
+  }
+  .navbar-item {
+    a {
+      font-size: 1.3rem;
+      padding: 5px 25px;
+      color: $white;
+      word-wrap: normal;
+      text-transform: uppercase;
+      &.notificationV2 {
+        position: relative;
+        img {
+          width: 30px;
+          height: 30px;
+          max-height: none;
+        }
+        span.count {
+          position: absolute;
+          bottom: 0px;
+          right: 15px;
+          background: $lightblue;
+          padding: 1px 5px;
+          font-size: 1rem;
+          border-radius: 100px
+        }
+      }
+    }
+  }
+}

@@ -34,3 +34,5 @@ cypress/videos
 # API dev image resources
 dev/dev_docker_api_resources/*
 !dev/dev_docker_api_resources/.keep
+
+.idea/
