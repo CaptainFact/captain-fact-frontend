@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3f8fc03f-8e1e-4c85-bed5-88c8512cf394" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/app/logger.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/static/assets/img/contributors/yeswehack.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/styles/_components/Videos/videos_pagination.sass" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/styles/_fonts/Merriweather.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/styles/_fonts/Merriweather.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/styles/_fonts/Merriweather.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/styles/_fonts/Merriweather.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/styles/_fonts/Merriweather.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cypress.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cypress/integration/sidebar/logged_out_spec.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cypress/integration/sidebar/user_section_spec.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cypress/integration/user/password_login_spec.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cypress/integration/user/settings_spec.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cypress/plugins/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cypress/support/commands.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cypress/support/helpers.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cypress/support/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/App/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/App/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Home/AllContributors.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Home/AllContributors.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Home/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Home/Home.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Users/LoginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Users/LoginForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/UsersActions/ActionEntityLink.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/UsersActions/ActionEntityLink.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/UsersActions/ActionIcon.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/UsersActions/ActionIcon.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Utils/PaginationMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Utils/PaginationMenu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/VideoDebate/ModalHistory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/VideoDebate/ModalHistory.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Videos/PaginatedVideosContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Videos/PaginatedVideosContainer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/i18n/en/history.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/i18n/en/history.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/i18n/fr/history.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/i18n/fr/history.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/state/user_actions/record.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/state/user_actions/record.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/state/video_debate/comments/effects.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/state/video_debate/comments/effects.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/state/video_debate/comments/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/state/video_debate/comments/reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/styles/_components/App/logo.sass" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_components/App/logo.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/styles/_components/Pages/home_page.sass" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_components/Pages/home_page.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/styles/_components/Speakers/speaker_page.sass" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_components/Speakers/speaker_page.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/styles/_components/Videos/index.sass" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_components/Videos/index.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/styles/_global/global.sass" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_global/global.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/styles/_global/icons.sass" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_global/icons.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/styles/_global/variables.sass" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_global/variables.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/styles/application.sass" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/application.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="router.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/router.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="539">
+              <caret line="58" selection-start-line="58" selection-end-line="58" />
+              <folding>
+                <element signature="e#15#40#0" expanded="true" />
+                <element signature="e#131#165#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="595">
+              <caret line="35" column="35" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Sidebar.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/components/App/Sidebar.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-899">
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>route</find>
+      <find>sidebar</find>
+    </findStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/app</dir>
+      <dir>$PROJECT_DIR$/app/components</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app/router.jsx" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/node_modules" />
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="y" value="23" />
+    <option name="width" value="1440" />
+    <option name="height" value="817" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="captain-fact-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="captain-fact-frontend" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="captain-fact-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="captain-fact-frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="captain-fact-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="captain-fact-frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="captain-fact-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="captain-fact-frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="styles" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.prettier" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.prettier" value="project" />
+    <property name="node.js.selected.package.eslint" value="$PROJECT_DIR$/node_modules/eslint" />
+    <property name="node.js.selected.package.prettier" value="" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3f8fc03f-8e1e-4c85-bed5-88c8512cf394" name="Default" comment="" />
+      <created>1538749007419</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1538749007419</updated>
+      <workItem from="1538749011273" duration="70000" />
+      <workItem from="1538749129242" duration="47000" />
+      <workItem from="1538749201408" duration="1673000" />
+      <workItem from="1540559935630" duration="2555000" />
+      <workItem from="1541750498432" duration="3517000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="7862000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1440" height="817" extended-state="6" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21775898" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="7" visible="true" weight="0.32916668" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/router.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+          <folding>
+            <element signature="e#15#40#0" expanded="true" />
+            <element signature="e#131#165#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webpack.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="24" lean-forward="true" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="4" lean-forward="true" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/components/App/Sidebar.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-899">
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/components/Menu/Menu.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/router.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="539">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
+          <folding>
+            <element signature="e#15#40#0" expanded="true" />
+            <element signature="e#131#165#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="35" column="35" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
