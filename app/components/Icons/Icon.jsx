@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 
-export default class Icon extends Component {
-  state = {
-
-  };
-
-  render() {
-    return ( 
-      <svg className={`i icon-${this.props.name}`}>
-        <use xlinkHref={`#icon-${this.props.name}`}></use>
-      </svg>
-    )
-  }
+export default Icon = ({name}) => {
+  return ( 
+    <svg className={`i icon-${name}`}>
+      <use xlinkHref={`#icon-${name}`}></use>
+    </svg>
+  )
 }
+
+Icon.propTypes = {
+  name: PropTypes.string.isRequired
+};
