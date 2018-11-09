@@ -1,16 +1,46 @@
 stages:
-  - name: test
+  - name: Unit-Testing
+  - name: E2E-Testing
+    if: branch =~ /cypress/ OR (type = pull_request AND branch = master)
   - name: deploy
-    if: branch IN (master, staging) OR tag =~ ^v\d+
+    if: type IN (push, api) AND (branch IN (master, staging) OR tag =~ ^v\d+)
 
 jobs:
   include:
-    - stage: test
+    - stage: Unit-Testing
       language: node_js
       node_js: [node]
-      cache: {directories: [node_modules]}
+      cache: { directories: [node_modules, "~/.npm", "~/.cache"] }
       script:
         - npm run coverage && cat ./coverage/lcov.info | coveralls
+
+    - stage: E2E-Testing
+      language: node_js
+      node_js: [node]
+      sudo: required
+      services: [docker]
+      cache: { directories: [node_modules, "~/.npm", "~/.cache"] }
+      script:
+        # Shutdown postgres instances - see https://github.com/travis-ci/travis-ci/issues/4842#issuecomment-311527059
+        - sudo service postgresql stop
+        - while sudo lsof -Pi :5432 -sTCP:LISTEN -t; do sleep 1; done
+        # Start API
+        - docker-compose up -d || exit 1
+        # Build and start Frontend
+        - docker build --build-arg BUILD_ENV=dev -t cf-frontend-e2e-testing . || exit 1
+        - docker run  --rm -d -p 3333:80
+          -v ${TRAVIS_BUILD_DIR}/rel/dev_localhost_keys:/run/secrets
+          -v ${TRAVIS_BUILD_DIR}/node_modules:/opt/app/node_modules
+          cf-frontend-e2e-testing serve
+        # Install cypress
+        - npm install -g cypress
+        # Run Cypress
+        - npm run cypress -- --record --key ${CYPRESS_RECORD_KEY}
+        # Shutdown Frontend and API
+        - kill $(jobs -p) || true
+        - docker-compose down
+        - docker rmi -f cf-frontend-e2e-testing
+
     - stage: deploy
       if: branch IN (master, staging)
       language: generic
@@ -20,9 +50,6 @@ jobs:
         - CF_FRONTEND_IMAGE=captainfact/frontend:$TRAVIS_BRANCH
       script:
         - docker build --build-arg BUILD_ENV=$TRAVIS_BRANCH -t $CF_FRONTEND_IMAGE . &&
-          if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
-              docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-              echo "Pushing $CF_FRONTEND_IMAGE";
-              docker push $CF_FRONTEND_IMAGE;
-          fi
-
+          docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+          echo "Pushing $CF_FRONTEND_IMAGE";
+          docker push $CF_FRONTEND_IMAGE;
