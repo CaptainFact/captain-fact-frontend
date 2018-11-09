@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withNamespaces } from 'react-i18next'
 import Icon from '../Icons/Icon';
+import { Link } from 'react-router'
 
 export default class Menu extends Component {
   state = {
@@ -19,20 +20,30 @@ export default class Menu extends Component {
 
         <nav className='sidebar-nav' role='navigation'>
           <ul className='sidebar-nav-items' >
-            <li className='sidebar-nav-item active'>
-              <Icon name='guide'/>
+            <li className='sidebar-nav-item'>
+              <Link to={'/new/guide'} activeClassName="active">
+                <Icon name='guide'/>
+              </Link>
             </li>
             <li className='sidebar-nav-item'>
-              <Icon name='videos'/>
+              <Link to={'/new'} onlyActiveOnIndex activeClassName="active">
+                <Icon name='videos'/>
+              </Link>
             </li>
             <li className='sidebar-nav-item'>
-              <Icon name='limitations'/>  
+            <Link to={'/new/limitations'} activeClassName="active">
+                <Icon name='limitations'/>  
+              </Link>
             </li>
             <li className='sidebar-nav-item'>
-              <Icon name='help'/>
+              <Link to={'/new/help'} activeClassName="active">
+                <Icon name='help'/>
+              </Link>
             </li>
             <li className='sidebar-nav-item'>
-              <Icon name='settings'/>
+              <Link to={'/new/settings'} activeClassName="active">
+                <Icon name='settings'/>
+              </Link>
             </li>
           </ul>
         </nav>

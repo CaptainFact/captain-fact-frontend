@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 
-export default Icon = ({name}) => {
+const Icon = ({name}) => {
   return ( 
     <svg className={`i icon-${name}`}>
       <use xlinkHref={`#icon-${name}`}></use>
@@ -12,3 +12,5 @@ export default Icon = ({name}) => {
 Icon.propTypes = {
   name: PropTypes.string.isRequired
 };
+
+export default Icon;
