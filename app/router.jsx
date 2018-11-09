@@ -4,6 +4,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
 // Import Views
 import App from './components/App'
+import Layout from './components/Layout'
 import Home from './components/Home/Home'
 import { NotFound, BrowserExtensionsPage } from './components/Pages'
 import { AddVideoForm } from './components/Videos'
@@ -16,6 +17,7 @@ import UserSettings from './components/Users/UserSettings'
 import LoginForm from './components/Users/LoginForm'
 import SignupForm from './components/Users/SignupForm'
 import User from './components/Users/User'
+import Guide from './components/Guide/Guide'
 import ResetPasswordRequestForm from './components/Users/ResetPasswordRequestForm'
 import ResetPasswordConfirmForm from './components/Users/ResetPasswordConfirmForm'
 import ConfirmEmail from './components/Users/ConfirmEmail'
@@ -27,7 +29,7 @@ import ActivityLog from './components/Users/ActivityLog'
 
 const CFRouter = () => (
   <Router history={browserHistory}>
-    <Route path="/" component={App}>
+    <Route path="/app" component={App}>
       <IndexRoute component={Home} />
       <Route path="/signup" component={SignupForm} />
       <Route path="/signup/callback/:provider" component={ThirdPartyCallback} />
@@ -53,6 +55,9 @@ const CFRouter = () => (
       <Route path="/extension" component={BrowserExtensionsPage} />
       <Route path="/moderation" component={Moderation} />
       <Route path="*" component={NotFound} />
+    </Route>
+    <Route path="/new" component={Layout}>
+      <Route path="/new/guide" component={Guide} />
     </Route>
   </Router>
 )

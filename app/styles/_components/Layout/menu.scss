@@ -1,0 +1,122 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 75px;
+  padding: 25px 0 30px;
+  box-shadow: -3px 0 34px 0 rgba(0, 0, 0, 0.07);
+  font-family: $maison;
+  &-pp{
+    width: 34px;
+    height: 34px;
+    background-size: cover;
+    border-radius: 50%;
+  }
+  &-reputation{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 41px;
+    width: 38px;
+    margin: 35px 0;
+    font-size: 1.1rem;
+    color: $white;
+    border-radius: 3px;
+    background: rgb(56,239,125);
+    background: linear-gradient(161deg, rgba(56,239,125,1) 0%, rgba(34,191,116,1) 100%);
+    > .current{
+      font-weight: bold;
+      font-size: 1.4rem;
+      margin-bottom: 2px;
+      &:after{
+        content: '';
+        display: block;
+        width: 25px;
+        height: 1px;
+        margin-top: 1px;
+        background-color: $white;
+      }
+    }
+  }
+  &-nav{
+    width: 100%;
+    &-items{
+      width: 100%;
+    }
+    &-item{
+      display: flex;
+      width: 100%;
+      padding: 22px 0;
+      &.active{
+        position: relative;
+        background-color: #F0F8FC;
+        &:before{
+          content: '';
+          display: block;
+          position: absolute;
+          width: 5px;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          background: $gradient;
+        }
+        .i{
+          fill: url('#lgrad');
+        }
+      }
+    }
+    .i{
+      margin: auto;
+      color: $n-lg;
+      &.icon-settings{
+        width: 25px;
+        height: 25px;
+      }
+      &.icon-limitations{
+        width: 18px;
+        height: 33px;
+      }
+      &.icon-help{
+        width: 26px;
+        height: 26px;
+      }
+      &.icon-videos{
+        width: 25px;
+        height: 16px;
+      }
+      &.icon-guide{
+        width: 29px;
+        height: 20px;
+      }
+    }
+  }
+  &-bottom {
+    margin-top: auto;
+    display: flex;
+    justify-content: center;  
+    width: 100%;
+    &-btn, &:after, &:before{
+      display: block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: $n-lg;
+    }
+    &-btn{
+      margin: 0 4px;
+    }
+    &:after, &:before{
+      content: '';
+    }
+  }
+}
+
+#main-wrapper{
+  margin-left: 75px;
+  width: calc(100% - 75px)
+}
