@@ -1,0 +1,93 @@
+/*
+  font-face rules
+*/
+@import "./typographies/_font-face.css";
+
+/*
+  Normalize
+*/
+@import-normalize;
+
+/*
+  Atomic classes
+*/
+@tailwind utilities;
+
+/*
+  Custom selectors
+*/
+@custom-selector :--heading h1,
+h2,
+h3,
+h4,
+h5,
+h6;
+@custom-selector :--link a,
+a:visited,
+a:active,
+a:link;
+@custom-selector :--select-input select,
+option;
+
+/*
+  Base styles
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  @extend .text-px;
+}
+
+@screen sm {
+  html {
+    @extend .text-px-sm;
+  }
+}
+
+body {
+  @extend .min-h-screen;
+  @extend .m-0;
+}
+
+
+/*
+  Reset
+*/
+html,
+body {
+  @extend .overflow-x-hidden;
+  @extend .font-base;
+}
+
+:--heading,
+ol,
+ul,
+li,
+p {
+  @extend .p-0;
+  @extend .m-0;
+}
+
+:--link {
+  @extend .text-inherit;
+}
+
+:--link,
+button,
+select {
+  @extend .md\:cursor-pointer;
+}
+
+ul {
+  @extend .list-reset;
+}
+
+:--select-input,
+button {
+  @extend .font-inherit;
+  @extend .bg-transparent;
+}
