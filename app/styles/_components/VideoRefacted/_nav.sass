@@ -6,21 +6,75 @@
   flex-flow: row nowrap
   height: 70px
   justify-content: flex-start
-  padding: .5rem 2.5rem
+  padding: .5rem 30px
   position: relative
   width: 100%
 
-  .wrapper-man-svg
-    align-items: center
-    border: 2px solid $green-new
-    border-radius: 100%
-    display: flex
-    height: 44px
-    width: 44px
-    .man-svg
-      height: 30px
-      margin: auto
-      width: 30px
+  .dropdown
+    position: relative
+    .dropdown-menu
+      @include box-shadow
+      background: $secondary-bg
+      border-radius: 4px
+      max-height: 0
+      min-width: 17.5rem
+      overflow: hidden
+      padding: 0
+      position: absolute
+      right: 0
+      top: calc(100% + 15px)
+      z-index: 1000
+      transition: max-height .15s, padding .15s
+      &::before
+        border-color: transparent $green-new transparent transparent
+        border-style: solid
+        border-width: 10px 15px 10px 0
+        content: "\A"
+        position: absolute
+        right: 7px
+        top: -15px
+        transform: rotate(90deg)
+      &:hover
+        @include dropdown-menu
+
+      .dropdown-divider
+        border-top: 1px solid lightgrey
+        height: 0
+        margin: .5rem auto
+        overflow: hidden
+        width: 50px
+
+      .dropdown-item
+        display: block
+        margin: 20px 0
+        width: 100%
+        white-space: nowrap
+
+        &:last-child
+          margin-bottom: 0
+
+      .dropdown-title
+        background: $green-new
+        border-top-left-radius: 4px
+        border-top-right-radius: 4px
+        color: $secondary-bg
+        margin-left: -1.5rem
+        margin-top: -.75rem
+        padding-bottom: .75rem
+        padding-left: 1.5rem
+        padding-top: .75rem
+        width: calc(100% + 3rem)
+        > *
+          display: inline-block
+          vertical-align: middle
+        p
+          margin-left: 10px
+    .dropdown-toggle
+      &:focus ~ .dropdown-menu
+        @include dropdown-menu
+
+  .logo-svg-30
+    margin: auto
 
 
   .navbar-collapse
@@ -35,7 +89,11 @@
       flex-direction: row
 
       .nav-item
-        margin: auto 5px
+        margin: auto 25px
+        &:first-child
+          margin-left: 0
+        &:last-child
+          margin-right: 0
 
   .site-logo
     margin: 0
