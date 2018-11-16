@@ -1,0 +1,110 @@
+.video-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: stretch;
+  .single-video {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: $lightblue;
+    box-shadow: 0px 2px 12px 1px transparentize($color: #000000, $amount: 0.8);
+    margin: 10px;
+    max-width: 425px;
+    flex: 15%;
+    .video-prev {
+      overflow: hidden;
+      height: 250px;
+      width: 100%;
+      img {
+        min-height: 100%;
+        min-width: 100%;
+        max-width: none;
+        max-height: none;
+      }
+    }
+    .details {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      .left-col {
+        .title {
+          color: white;
+          font-weight: normal;
+          font-size: 1.6rem;
+          text-align: center;
+          padding: 0 20px;
+        }
+        .quote-container {
+          padding: 0 30px;
+          .quote {
+            font-size: 1.3rem;
+            text-align: center;
+            font-style: italic;
+            position: relative;
+            .quote-img {
+              position: absolute;
+              left: -20px;
+              top: 0;
+              width: 20px;
+              height: 15px;
+              &.right {
+                left: auto;
+                right: -20px;
+                transform: rotateY(180deg);
+              }
+            }
+          }
+        }
+        .quote-author {
+          padding: 0 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-weight: bolder;
+          flex: 1;
+          flex-wrap: wrap;
+          margin-top: 10px;
+          img {
+            border-radius: 100%;
+            margin-right: 15px;
+            box-shadow: 0 1px 5px 1px
+              transparentize($color: #000000, $amount: 0.7);
+          }
+        }
+      }
+      .featuring {
+        display: flex;
+        justify-content: center;
+        div {
+          margin: 5px 5px 0 5px;
+          font-style: italic;
+          &::after {
+            content: ','
+          }
+          &:first-of-type, &:last-of-type {
+            &::after {
+              content: none;
+            }
+          }
+        }
+      }
+      .right-col {
+        padding: 0 10px 0 10px;
+        text-align: center;
+        .icon {
+          &.commentsnb {
+            background-color: #fff;
+            width: 30px;
+            height: 30px;
+            border-radius: 50px;
+            color: $lightblue;
+            font-size: 1.2rem;
+            vertical-align: middle;
+            font-weight: bold;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

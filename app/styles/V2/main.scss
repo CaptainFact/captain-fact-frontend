@@ -1,5 +1,7 @@
 @import "./partials/variables";
 @import "./partials/header";
+@import "./partials/video";
+@import "./partials/body";
 
 body {
   background: linear-gradient(to bottom, $darkblue, $lightblue);
@@ -7,4 +9,5 @@ body {
   @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
   font-family: Roboto Condensed, serif !important;
   font-size: 1rem;
+  color: $white !important;
 }

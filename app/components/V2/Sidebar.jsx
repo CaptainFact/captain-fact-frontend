@@ -1,7 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router'
 import { withNamespaces } from 'react-i18next'
-import classNames from 'classnames'
 import XPBar from './sidebar/XPBar'
 import V2Notifications from './sidebar/V2Notifications'
 

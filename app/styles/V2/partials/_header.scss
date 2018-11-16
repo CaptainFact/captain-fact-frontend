@@ -1,6 +1,14 @@
 .navbar {
   background-color: transparent !important;
   padding: 0 3vw;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  .navbar-menu {
+    display: block !important;
+    background-color: transparent;
+    box-shadow: none;
+  }
   img.user, .logo > img {
     max-height: none;
     width: 40px;
