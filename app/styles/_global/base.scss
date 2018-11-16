@@ -30,7 +30,9 @@ img{
 /******* CLASSES GENERALES  *******/
 
 .hidden{
-  display: none !important;
+  // display: none !important;
+  position: absolute;
+  opacity: 0;
 }
 
 .i{

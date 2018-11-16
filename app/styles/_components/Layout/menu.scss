@@ -7,39 +7,104 @@
   flex-direction: column;
   align-items: center;
   width: 75px;
-  padding: 25px 0 30px;
+  padding: 25px 0 0;
   box-shadow: -3px 0 34px 0 rgba(0, 0, 0, 0.07);
+  background-color: $white;
   font-family: $maison;
+  transition: width 0.2s ease-in-out;
+  .hidden{
+    top: 0;
+    left: 0;
+    // opacity: 0;
+    transition: position 0s 0.5s, opacity 0.2s;
+  }
+  .visible{
+    position: static;
+    opacity: 1;
+    transition: position 0s 0s, opacity 0.2s 0s;
+  }
+  &.opened{
+    width: 300px;
+    .sidebar-reputation-score{
+      flex-direction: row;
+      width: 75px;
+      height: 30px;
+      font-size: 1.3rem;
+      .current{
+        display: flex;
+        align-items: center;
+        font-size: 1.6rem;
+        margin-bottom: 0;
+        margin-top: 2px;
+        &:after{
+          width: 1px;
+          height: 16px;
+          margin: -2px 4px 0;
+        }
+      }
+    }
+  }
   &-pp{
-    width: 34px;
-    height: 34px;
+    width: 35px;
+    height: 35px;
     background-size: cover;
     border-radius: 50%;
+    flex-shrink: 0;
+  }
+  &-profile{
+    position: relative;
+    display: flex;
+    width: 100%;
+    padding: 0 20px;
+    &-infos{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      left: 55px;
+      margin-left: 18px;
+      font-size: 1.4rem;
+      font-weight: 500;
+       > a{
+         margin: 4px 0 0;
+         font-size: 1.2rem;
+         color: $n-llg;
+       }
+    }
   }
   &-reputation{
+    width: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 41px;
-    width: 38px;
     margin: 35px 0;
-    font-size: 1.1rem;
-    color: $white;
-    border-radius: 3px;
-    background: rgb(56,239,125);
-    background: linear-gradient(161deg, rgba(56,239,125,1) 0%, rgba(34,191,116,1) 100%);
-    > .current{
-      font-weight: bold;
-      font-size: 1.4rem;
-      margin-bottom: 2px;
-      &:after{
-        content: '';
-        display: block;
-        width: 25px;
-        height: 1px;
-        margin-top: 1px;
-        background-color: $white;
+    padding: 0 20px;
+    color: $n-dg;
+    font-weight: bold;
+    &-score{
+      display: flex;
+      margin-left: auto;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 41px;
+      width: 35px;
+      font-size: 1.1rem;
+      font-weight: normal;
+      color: $white;
+      border-radius: 3px;
+      background: rgb(56,239,125);
+      background: linear-gradient(161deg, rgba(56,239,125,1) 0%, rgba(34,191,116,1) 100%);
+      > .current{
+        font-weight: bold;
+        font-size: 1.4rem;
+        margin-bottom: 2px;
+        &:after{
+          content: '';
+          display: block;
+          width: 25px;
+          height: 1px;
+          margin-top: 1px;
+          background-color: $white;
+        }
       }
     }
   }
@@ -78,6 +143,9 @@
     .i{
       margin: auto;
       color: $n-lg;
+      .opened &{
+        margin: 0;
+      }
       &.icon-settings{
         width: 25px;
         height: 25px;
@@ -103,8 +171,13 @@
   &-bottom {
     margin-top: auto;
     display: flex;
-    justify-content: center;  
+    justify-content: flex-end;  
+    align-items: center;
+    padding: 0 20px;
+    height: 75px;
     width: 100%;
+    background-color: $white;
+    cursor: pointer;
     &-btn, &:after, &:before{
       display: block;
       width: 5px;
@@ -113,7 +186,13 @@
       background-color: $n-lg;
     }
     &-btn{
-      margin: 0 4px;
+      margin: 0 5px;
+    }
+    &:after{
+      margin-right: 5px;
+    }
+    &:before{
+      margin-left: 5px;
     }
     &:after, &:before{
       content: '';
@@ -122,6 +201,8 @@
 }
 
 #main-wrapper{
+  position: relative;
   margin-left: 75px;
-  width: calc(100% - 75px)
+  width: calc(100% - 75px);
+  z-index: -1;
 }
