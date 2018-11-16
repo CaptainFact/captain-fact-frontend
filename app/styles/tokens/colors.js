@@ -1,0 +1,25 @@
+module.exports = {
+  default: {
+    transparent: 'transparent',
+    orangeLight: '#FFE8AB',
+    orangeRegular: '#FFB077',
+    orangeMedium: '#8C6447',
+    orangeDark: '#643B1D',
+    orangeDarkest: '#413E3B',
+    cyanRegular: '#77FFEF',
+    cyanMedium: '#72B3AB',
+    cyanDark: '#188779',
+    purpleLight: '#C7B3FF',
+    purpleRegular: '#7F65E6',
+    purpleMedium: '##7F65E7',
+    purpleDark: '#342863',
+    white: '#FFFFFF',
+    midnightLightest: '#2B1E61',
+    midnightLight: '#1F173F',
+    midnightRegular: '#160C3C',
+    midnightDark: '#09051C',
+    grayLight: '#E0E0E0',
+    grayRegular: '#B9B9B9',
+    grayDark: '#868686',
+  }
+}

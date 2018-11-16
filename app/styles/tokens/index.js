@@ -1,19 +1,15 @@
+const colors = require('./colors').default
+const fontFamilies = require('./fontFamilies').default
+const fontSizes = require('./fontSizes').default
 const DesignSystem = require("design-system-utils").default
 
 const pxFontSize = {
-  base: 16,
-}
-
-const fontFamily = {
-  inherit: 'inherit',
-  base: '"Gotham-Regular","system"',
-  semibold: '"Gotham-Medium", "system-medium"',
-  bold: '"Gotham-Bold", "system-bold"',
-  black: '"Gotham-Black", "system-bold"',
+  base: fontSizes.base,
 }
 
 const colorPalette = {
   transparent: 'transparent',
+  ...colors,
 }
 
 const myDesignSystem = {
@@ -37,17 +33,8 @@ const myDesignSystem = {
       xl: 1365,
   },
   type: {
-    sizes: {
-      xs: 12,
-      sm: 14,
-      md: 15,
-      regular: 16,
-      base: 18,
-      md: 20,
-      lg: 36,
-      xl: 43
-    },
-    fontFamily,
+    sizes: fontSizes,
+    fontFamily: fontFamilies,
   },
   colors: {
     ...colorPalette,
@@ -62,5 +49,5 @@ const ds = new DesignSystem(myDesignSystem, {
 module.exports = {
   ds,
   colorPalette,
-  fontFamily,
+  fontFamilies,
 }

@@ -168,9 +168,8 @@ module.exports = isProd => [
         loader: 'css-loader',
         options: {
           minimize: false,
-          modules: true,
+          modules: false,
           importLoaders: 1,
-          localIdentName: 'purr_[name]__[local]___[hash:base64:5]'
         },
       },
       'postcss-loader',

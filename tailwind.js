@@ -1,7 +1,7 @@
 const  pxTo = require('design-system-utils').pxTo
 const ds = require('./app/styles/tokens/index.js').ds
-const colorPalette = require('./app/styles/tokens/index.js').colorPalette
-const fontFamily = require('./app/styles/tokens/index.js').fontFamily
+const colors = require('./app/styles/tokens/index.js').colorPalette
+const fontFamilies = require('./app/styles/tokens/index.js').fontFamilies
 
 const baseFontSize = ds.get('type.baseFontSize')
 const columns = ds.get('grid.columns.number')
@@ -9,6 +9,7 @@ const widths = {}
 for (let index = 1; index < columns + 1; index++) {
   widths[`${index}/${columns}`] = `${index / columns * 100}%`
 }
+
 
 /*
 
@@ -23,9 +24,6 @@ View the full documentation at https://tailwindcss.com.
 |-------------------------------------------------------------------------------
 */
 
-const colors = {
-  ...colorPalette,
-}
 
 module.exports = {
 
@@ -59,10 +57,8 @@ module.exports = {
   fonts: {
     unset: ['unset'],
     inherit: ['inherit'],
-    base: fontFamily.base.split(),
-    semibold: fontFamily.semibold.split(),
-    bold: fontFamily.bold.split(),
-    black: fontFamily.black.split(),
+    base: fontFamilies.base.split(),
+    secondary: fontFamilies.secondary.split(),
   },
 
   /*

@@ -1,5 +1,5 @@
 // Import libs
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
 // Import Views
@@ -24,10 +24,12 @@ import { SpeakerPage } from './components/Speakers/SpeakerPage'
 import NewsletterSubscription from './components/Users/NewsletterSubscription'
 import ActivityLog from './components/Users/ActivityLog'
 
+import City from './views/City'
 
 const CFRouter = () => (
   <Router history={browserHistory}>
-    <Route path="/" component={App}>
+  <Route path="/city" component={City} />
+  <Route path="/" component={App}>
       <IndexRoute component={Home} />
       <Route path="/signup" component={SignupForm} />
       <Route path="/signup/callback/:provider" component={ThirdPartyCallback} />

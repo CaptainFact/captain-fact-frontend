@@ -1,5 +1,5 @@
 @font-face {
-  font-family: "system-regular";
+  font-family: "system";
   font-style: normal;
   font-weight: 400;
   src: local(".SFNSText-Regular"), local(".HelveticaNeueDeskInterface-Regular"), local(".LucidaGrandeUI"),
@@ -7,7 +7,7 @@
 }
 
 @font-face {
-  font-family: "system-medium";
+  font-family: "system";
   font-style: normal;
   font-weight: 500;
   src: local(".SFNSText-Medium"), local(".HelveticaNeueDeskInterface-MediumP4"), local(".LucidaGrandeUI"),
@@ -16,9 +16,60 @@
 }
 
 @font-face {
-  font-family: "system-bold";
+  font-family: "system";
   font-style: normal;
   font-weight: 700;
   src: local(".SFNSText-Bold"), local(".HelveticaNeueDeskInterface-Bold"), local(".LucidaGrandeUI"),
     local("Segoe UI Bold"), local("Ubuntu Bold"), local("Roboto-Bold"), local("DroidSans-Bold"), local("Tahoma Bold");
+}
+
+@font-face {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./_fonts/Raleway-Regular.woff2") format("woff2");
+}
+
+
+@font-face {
+  font-family: "Raleway";
+  font-style: italic;
+  font-weight: 400;
+  src: url("./_fonts/Raleway-Italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 500;
+  src: url("./_fonts/Raleway-Medium.woff2") format("woff2");
+}
+
+
+@font-face {
+  font-family: "Raleway";
+  font-style: italic;
+  font-weight: 500;
+  src: url("./_fonts/Raleway-MediumItalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 700;
+  src: url("./_fonts/Raleway-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Raleway";
+  font-style: italic;
+  font-weight: 700;
+  src: url("./_fonts/Raleway-BoldItalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: normal;
+  src: url("./_fonts/Roboto-Regular.woff2") format("woff2");
 }
