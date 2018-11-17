@@ -6,7 +6,6 @@ import { withNamespaces } from 'react-i18next'
 import { MIN_REPUTATION_UPDATE_VIDEO } from '../../constants'
 
 import { changeStatementFormSpeaker } from '../../state/video_debate/statements/reducer'
-import { toggleAutoscroll } from '../../state/user_preferences/reducer'
 import { addModal } from '../../state/modals/reducer'
 import { isAuthenticated } from '../../state/users/current_user/selectors'
 import { Icon } from '../Utils/Icon'
@@ -15,67 +14,88 @@ import ShareModal from '../Utils/ShareModal'
 import EditVideoModal from '../Videos/EditVideoModal'
 import { hasStatementForm } from '../../state/video_debate/statements/selectors'
 import { destroyStatementForm } from '../../state/video_debate/statements/effects'
-
+import {
+  toggleAutoscroll,
+  toggleBackgroundSound
+} from '../../state/user_preferences/reducer'
 
 @connect(
   state => ({
     hasAutoscroll: state.UserPreferences.enableAutoscroll,
+    soundOnBackgroundFocus: state.UserPreferences.enableSoundOnBackgroundFocus,
     isAuthenticated: isAuthenticated(state),
     hasStatementForm: hasStatementForm(state)
   }),
-  { changeStatementFormSpeaker, toggleAutoscroll, addModal, destroyStatementForm }
+  {
+    changeStatementFormSpeaker,
+    toggleAutoscroll,
+    toggleBackgroundSound,
+    addModal,
+    destroyStatementForm
+  }
 )
 @withNamespaces('videoDebate')
 @withRouter
 export default class ActionBubbleMenu extends React.PureComponent {
   render() {
+    const { t, hasStatementForm, soundOnBackgroundFocus } = this.props
+
     return (
-      <div className={classNames('action-bubble-container', { hasForm: this.props.hasStatementForm })}>
-        {!this.props.isAuthenticated
-          && (
-            <ActionBubble
-              iconName="sign-in"
-              label={this.props.t('main:menu.loginSignup')}
-              onClick={() => this.props.router.push('/login')}
-            />
-          )
-        }
-        {this.props.isAuthenticated
-          && (
-            <ActionBubble
-              iconName={this.props.hasStatementForm ? 'times' : 'commenting-o'}
-              label={this.props.t(this.props.hasStatementForm ? 'statement.abortAdd' : 'statement.add')}
-              activated={!this.props.hasStatementForm}
-              onClick={() => this.onStatementBubbleClick()}
-            />
-          )
-        }
+      <div
+        className={classNames('action-bubble-container', {
+          hasForm: hasStatementForm
+        })}
+      >
+        {!this.props.isAuthenticated && (
+          <ActionBubble
+            iconName="sign-in"
+            label={t('main:menu.loginSignup')}
+            onClick={() => this.props.router.push('/login')}
+          />
+        )}
+        {this.props.isAuthenticated && (
+          <ActionBubble
+            iconName={hasStatementForm ? 'times' : 'commenting-o'}
+            label={t(hasStatementForm ? 'statement.abortAdd' : 'statement.add')}
+            activated={!hasStatementForm}
+            onClick={() => this.onStatementBubbleClick()}
+          />
+        )}
         <ActionBubble
           iconName="arrows-v"
-          label={this.props.t('statement.autoscroll', {
+          label={t('statement.autoscroll', {
             context: this.props.hasAutoscroll ? 'disable' : 'enable'
           })}
           activated={this.props.hasAutoscroll}
           onClick={() => this.props.toggleAutoscroll()}
         />
         <ActionBubble
+          iconName={soundOnBackgroundFocus ? 'sound' : 'sound-mute'}
+          label={t('statement.soundOnBackgroundFocus', {
+            context: soundOnBackgroundFocus ? 'disable' : 'enable'
+          })}
+          activated={soundOnBackgroundFocus}
+          onClick={() => this.props.toggleBackgroundSound()}
+        />
+        <ActionBubble
           iconName="share-alt"
-          label={this.props.t('main:actions.share')}
+          label={t('main:actions.share')}
           onClick={() => this.props.addModal({
             Modal: ShareModal,
             props: { path: location.pathname }
-          })}
+          })
+          }
         />
         <ReputationGuard requiredRep={MIN_REPUTATION_UPDATE_VIDEO}>
           <ActionBubble
             iconName="pencil"
-            label={this.props.t('video.edit')}
+            label={t('video.edit')}
             onClick={() => this.props.addModal({ Modal: EditVideoModal })}
           />
         </ReputationGuard>
         <ActionBubble
           iconName="question"
-          label={this.props.t('main:menu.help')}
+          label={t('main:menu.help')}
           onClick={() => this.props.router.push('/help')}
         />
       </div>
@@ -83,10 +103,11 @@ export default class ActionBubbleMenu extends React.PureComponent {
   }
 
   onStatementBubbleClick() {
-    if (this.props.hasStatementForm)
+    if (this.props.hasStatementForm) {
       this.props.destroyStatementForm()
-    else
+    } else {
       this.props.changeStatementFormSpeaker({ id: 0 })
+    }
   }
 }
 

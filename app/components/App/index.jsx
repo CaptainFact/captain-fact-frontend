@@ -10,13 +10,16 @@ import Sidebar from './Sidebar'
 import { MainModalContainer } from '../Modal/MainModalContainer'
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
 import { isAuthenticated } from '../../state/users/current_user/selectors'
+import BackgroundNotifier from './BackgroundNotifier'
 
-
-@connect(state => ({
-  locale: state.UserPreferences.locale,
-  sidebarExpended: state.UserPreferences.sidebarExpended,
-  isAuthenticated: isAuthenticated(state)
-}), { fetchCurrentUser })
+@connect(
+  state => ({
+    locale: state.UserPreferences.locale,
+    sidebarExpended: state.UserPreferences.sidebarExpended,
+    isAuthenticated: isAuthenticated(state)
+  }),
+  { fetchCurrentUser }
+)
 export default class App extends React.PureComponent {
   componentDidMount() {
     if (!this.props.isAuthenticated) {
@@ -40,7 +43,11 @@ export default class App extends React.PureComponent {
           <div id="main-container" className={mainContainerClass}>
             {children}
           </div>
-          <PublicAchievementUnlocker achievementId={4} meetConditionsFunc={this.checkExtensionInstall} />
+          <BackgroundNotifier />
+          <PublicAchievementUnlocker
+            achievementId={4}
+            meetConditionsFunc={this.checkExtensionInstall}
+          />
         </div>
       </I18nextProvider>
     )
@@ -54,7 +61,10 @@ export default class App extends React.PureComponent {
    */
   checkExtensionInstall() {
     return new Promise(fulfill => {
-      setTimeout(() => fulfill(!!document.getElementById('captainfact-extension-installed')), 5000)
+      setTimeout(
+        () => fulfill(!!document.getElementById('captainfact-extension-installed')),
+        5000
+      )
     })
   }
 }
