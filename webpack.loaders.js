@@ -1,7 +1,6 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-
 // noinspection WebpackConfigHighlighting
 module.exports = isProd => [
   // =========
@@ -18,10 +17,7 @@ module.exports = isProd => [
       // It enables caching results in ./node_modules/.cache/babel-loader/
       // directory for faster rebuilds.
       cacheDirectory: true,
-      presets: [
-        ['es2015', { loose: true, modules: 'umd' }],
-        'react'
-      ],
+      presets: [['es2015', { loose: true, modules: 'umd' }], 'react'],
       plugins: [
         'transform-class-properties',
         'transform-decorators-legacy',
@@ -36,7 +32,7 @@ module.exports = isProd => [
   {
     test: /\.mjs$/,
     include: /node_modules/,
-    type: 'javascript/auto',
+    type: 'javascript/auto'
   },
   // =========
   // = Fonts =
@@ -44,12 +40,14 @@ module.exports = isProd => [
   {
     test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
     exclude: path.resolve(__dirname, 'node_modules'),
-    use: [{
-      loader: 'file-loader',
-      options: {
-        name: 'res/[name].[hash].[ext]'
+    use: [
+      {
+        loader: 'file-loader',
+        options: {
+          name: 'res/[name].[hash].[ext]'
+        }
       }
-    }]
+    ]
   },
   {
     test: /\.(woff|woff2)$/,
@@ -99,9 +97,7 @@ module.exports = isProd => [
   },
   {
     test: /\.gif/,
-    include: [
-      path.resolve(__dirname, 'app/assets')
-    ],
+    include: [path.resolve(__dirname, 'app/assets')],
     exclude: path.resolve(__dirname, 'node_modules'),
     use: [
       {
@@ -116,9 +112,7 @@ module.exports = isProd => [
   },
   {
     test: /\.jpg/,
-    include: [
-      path.resolve(__dirname, 'app/assets')
-    ],
+    include: [path.resolve(__dirname, 'app/assets')],
     exclude: path.resolve(__dirname, 'node_modules'),
     use: [
       {
@@ -133,9 +127,7 @@ module.exports = isProd => [
   },
   {
     test: /\.png/,
-    include: [
-      path.resolve(__dirname, 'app/assets')
-    ],
+    include: [path.resolve(__dirname, 'app/assets')],
     exclude: path.resolve(__dirname, 'node_modules'),
     use: [
       {
@@ -150,9 +142,7 @@ module.exports = isProd => [
   },
   {
     test: /\.mp4/,
-    include: [
-      path.resolve(__dirname, 'app/assets')
-    ],
+    include: [path.resolve(__dirname, 'app/assets')],
     exclude: path.resolve(__dirname, 'node_modules'),
     use: [
       {
@@ -164,6 +154,11 @@ module.exports = isProd => [
         }
       }
     ]
+  },
+  {
+    test: /\.(ogg|mp3)/,
+    include: [path.resolve(__dirname, 'app/assets')],
+    use: [{ loader: 'file-loader' }]
   },
   // ==========
   // = Styles =
@@ -190,7 +185,7 @@ module.exports = isProd => [
     ],
     use: [
       {
-        loader: !isProd ? 'style-loader' : MiniCssExtractPlugin.loader,
+        loader: !isProd ? 'style-loader' : MiniCssExtractPlugin.loader
       },
       {
         loader: 'css-loader'
@@ -201,7 +196,10 @@ module.exports = isProd => [
           includePaths: [
             path.resolve(__dirname, 'node_modules'),
             path.resolve(__dirname, 'app/styles'),
-            path.resolve(__dirname, 'node_modules/animate.scss/vendor/assets/stylesheets')
+            path.resolve(
+              __dirname,
+              'node_modules/animate.scss/vendor/assets/stylesheets'
+            )
           ]
         }
       }
