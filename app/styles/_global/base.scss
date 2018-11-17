@@ -35,6 +35,16 @@ img{
   opacity: 0;
 }
 
+.link{
+  font-weight: 700;
+  color: #16CBF8;
+  font-size: 1.3rem;
+  transition: 0.2s ease-in-out;
+  &:hover{
+    color: #8AE8FF;
+  }
+}
+
 .i{
   width: 1.2em;
   height: 1.2em;
