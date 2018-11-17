@@ -9,6 +9,7 @@ import { closeStatementForm, setScrollTo } from '../../state/video_debate/statem
 import { postStatement } from '../../state/video_debate/statements/effects'
 import { statementFormValueSelector } from '../../state/video_debate/statements/selectors'
 import StatementContainer from './StatementContainer'
+import { FULLHD_WIDTH_THRESHOLD } from '../../constants'
 
 
 @connect(state => ({
@@ -39,9 +40,12 @@ export default class StatementsList extends React.PureComponent {
             )}
           />
         )}
-        <FlipMove enterAnimation="fade">
+        <FlipMove
+          enterAnimation="fade"
+          disableAllAnimations={window.innerWidth < FULLHD_WIDTH_THRESHOLD}
+        >
           {statements.map(statement => (
-            <StatementContainer key={statement.id} statement={statement}/>
+            <StatementContainer key={statement.id} statement={statement} />
           ))}
         </FlipMove>
       </div>
