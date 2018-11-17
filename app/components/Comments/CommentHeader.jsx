@@ -14,7 +14,7 @@ const CommentHeader = ({ t, comment: { user, inserted_at }, withoutActions }) =>
         <UserAppellation user={user} withoutActions={withoutActions} />
       </span>
     ) : (
-      <span className="deleted-account">{t('deleted')}</span>
+      <UserAppellation />
     )}
     <span> - </span>
     <TimeSince className="comment-time" time={inserted_at} />

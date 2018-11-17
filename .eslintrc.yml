@@ -4,7 +4,7 @@ env:
   jest: true
   node: true
   cypress/globals: true
-extends: 'airbnb'
+extends: "airbnb"
 parser: babel-eslint
 parserOptions:
   ecmaFeatures:
@@ -20,61 +20,61 @@ plugins:
 rules:
   max-len:
     - warn
-    - code: 85
+    - code: 80
       ignoreStrings: true
       ignoreTemplateLiterals: true
       ignoreRegExpLiterals: true
-  indent: ['warn', 2]
-  linebreak-style: ['error', 'unix']
-  quotes: ['warn', 'single', {avoidEscape: true}]
-  semi: ['error', 'never']
-  import/first: ['warn']
-  no-trailing-spaces: ['warn']
+  indent: ["warn", 2]
+  linebreak-style: ["error", "unix"]
+  quotes: ["warn", "single", { avoidEscape: true }]
+  semi: ["error", "never"]
+  import/first: ["warn"]
+  no-trailing-spaces: ["warn"]
   no-continue: off
   no-plusplus: off
   radix: off
-  eol-last: ['warn']
-  no-nested-ternary: ['warn']
-  prefer-const: ['warn']
-  import/no-named-as-default: ['warn']
+  eol-last: ["warn"]
+  no-nested-ternary: ["warn"]
+  prefer-const: ["warn"]
+  import/no-named-as-default: ["warn"]
   no-restricted-globals: ["error", "event", "fdescribe"]
-  no-mixed-operators: ['warn']
+  no-mixed-operators: ["warn"]
   # See https://github.com/cypress-io/eslint-plugin-cypress#chai-and-no-unused-expressions
   no-unused-expressions: 0
   chai-friendly/no-unused-expressions: 2
   # React
   react/destructuring-assignment: off
-  react/no-multi-comp: ['warn']
-  react/jsx-no-bind: ['warn']
-  react/jsx-indent-props: ['warn']
-  react/jsx-first-prop-new-line: ['warn']
-  react/jsx-closing-bracket-location: ['warn']
-  react/jsx-curly-spacing: ['warn']
-  react/jsx-tag-spacing: ['warn', {beforeSelfClosing: 'allow'}]
-  react/jsx-wrap-multilines: ['warn']
-  react/no-unused-state: ['warn']
-  react/jsx-max-props-per-line: ['warn', {when: 'multiline'}]
-  react/jsx-closing-tag-location: ['warn']
-  react/no-unescaped-entities: ['warn']
-  react/no-unused-prop-types: ['warn']
-  react/self-closing-comp: ['warn']
-  react/jsx-indent: ['warn']
-  react/no-array-index-key: ['warn']
-  react/prefer-stateless-function: ['warn']
+  react/no-multi-comp: ["warn"]
+  react/jsx-no-bind: ["warn"]
+  react/jsx-indent-props: ["warn"]
+  react/jsx-first-prop-new-line: ["warn"]
+  react/jsx-closing-bracket-location: ["warn"]
+  react/jsx-curly-spacing: ["warn"]
+  react/jsx-tag-spacing: ["warn", { beforeSelfClosing: "allow" }]
+  react/jsx-wrap-multilines: ["warn"]
+  react/no-unused-state: ["warn"]
+  react/jsx-max-props-per-line: ["warn", { when: "multiline" }]
+  react/jsx-closing-tag-location: ["warn"]
+  react/no-unescaped-entities: ["warn"]
+  react/no-unused-prop-types: ["warn"]
+  react/self-closing-comp: ["warn"]
+  react/jsx-indent: ["warn"]
+  react/no-array-index-key: ["warn"]
+  react/prefer-stateless-function: ["warn"]
   # JSX
   jsx-a11y/anchor-is-valid:
     - warn
-    - components: ['Link']
-      specialLink: ['To']
-  jsx-a11y/alt-text: ['warn']
-  jsx-a11y/label-has-for: ['warn']
+    - components: ["Link"]
+      specialLink: ["To"]
+  jsx-a11y/alt-text: ["warn"]
+  jsx-a11y/label-has-for: ["warn"]
   jsx-a11y/label-has-associated-control:
     - warn
     - controlComponents:
-      - "Field"
-  jsx-a11y/click-events-have-key-events: ['warn']
-  jsx-a11y/no-static-element-interactions: ['warn']
-  jsx-a11y/media-has-caption: ['warn']
+        - "Field"
+  jsx-a11y/click-events-have-key-events: ["warn"]
+  jsx-a11y/no-static-element-interactions: ["warn"]
+  jsx-a11y/media-has-caption: ["warn"]
   jsx-a11y/anchor-has-content: off
 
   # Following rule haves been disabled for compatibility with

@@ -69,6 +69,5 @@ export default {
   },
   all: 'Toutes',
   partners: 'Partenaires',
-  users: 'Utilisateurs',
-  deleted: 'Compte supprimé'
+  users: 'Utilisateurs'
 }
