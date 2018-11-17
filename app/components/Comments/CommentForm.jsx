@@ -77,8 +77,10 @@ export class CommentForm extends React.Component {
               <div>
                 <Tag size="medium" className="replyTo">
                   <CloseButton onClick={() => this.props.change('reply_to', null)}/>
-                  <span>
-                    {t('comment.replyingTo')} <UserAppellation user={replyTo.user}/>
+                  <span className="replyToLabel">
+                    {t('comment.replyingTo')}
+                    {' '}
+                    <UserAppellation defaultComponent="span" user={replyTo.user}/>
                   </span>
                 </Tag>
                 <CommentDisplay

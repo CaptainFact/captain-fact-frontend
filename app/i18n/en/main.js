@@ -70,6 +70,5 @@ export default {
   },
   all: 'All',
   partners: 'Partners',
-  users: 'Users',
-  deleted: 'Deleted account'
+  users: 'Users'
 }
