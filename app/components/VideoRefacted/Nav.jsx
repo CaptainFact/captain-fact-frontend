@@ -57,56 +57,58 @@ const Nav = () => {
               }}
             />
             <div className="dropdown-menu" aria-labelledby="loginDropdown">
-              <div className="dropdown-title">
-                <img className="logo-svg-50" src={ UserWhite } alt="User" />
-                <p>Session Visiteur</p>
+              <div className="dropdown-wrapper-menu">
+                <div className="dropdown-title">
+                  <img className="logo-svg-50" src={ UserWhite } alt="User" />
+                  <p>Session Visiteur</p>
+                </div>
+                <IconLink navlink
+                          text="S'inscrire"
+                          className="dropdown-item"
+                          href="javascript:void(0);"
+                          propsImg={{
+                            'className': 'logo-svg-30',
+                            'src': User,
+                            'alt': 'User'
+                          }}
+                />
+                <div className="dropdown-divider"></div>
+                <IconLink navlink
+                          text="Aide"
+                          className="dropdown-item"
+                          href="/help"
+                          propsImg={{
+                            'className': 'logo-svg-30',
+                            'src': Question,
+                            'alt': 'Help'
+                          }}
+                />
+                <IconLink
+                  text="Nous supporter"
+                  className="dropdown-item"
+                  href="https://opencollective.com/captainfact_io"
+                  propsAnchor={{
+                    'target': '_blank',
+                    'rel': 'noreferrer noopener'
+                  }}
+                  propsImg={{
+                    'className': 'logo-svg-30',
+                    'src': Heart,
+                    'alt': 'Support us'
+                  }}
+                />
+                <IconLink navlink
+                          text="Extension pour navigateur +"
+                          className="dropdown-item"
+                          href="/help"
+                          propsImg={{
+                            'className': 'logo-svg-30',
+                            'src': Puzzle,
+                            'alt': 'Extension'
+                          }}
+                />
+                <a href="#" className="dropdown-item btn btn-primary">Se connecter</a>
               </div>
-              <IconLink navlink
-                        text="S'inscrire"
-                        className="dropdown-item"
-                        href="javascript:void(0);"
-                        propsImg={{
-                          'className': 'logo-svg-30',
-                          'src': User,
-                          'alt': 'User'
-                        }}
-              />
-              <div className="dropdown-divider"></div>
-              <IconLink navlink
-                        text="Aide"
-                        className="dropdown-item"
-                        href="/help"
-                        propsImg={{
-                          'className': 'logo-svg-30',
-                          'src': Question,
-                          'alt': 'Help'
-                        }}
-              />
-              <IconLink
-                text="Nous supporter"
-                className="dropdown-item"
-                href="https://opencollective.com/captainfact_io"
-                propsAnchor={{
-                  'target': '_blank',
-                  'rel': 'noreferrer noopener'
-                }}
-                propsImg={{
-                  'className': 'logo-svg-30',
-                  'src': Heart,
-                  'alt': 'Support us'
-                }}
-              />
-              <IconLink navlink
-                        text="Extension pour navigateur +"
-                        className="dropdown-item"
-                        href="/help"
-                        propsImg={{
-                          'className': 'logo-svg-30',
-                          'src': Puzzle,
-                          'alt': 'Extension'
-                        }}
-              />
-              <a href="#" className="dropdown-item btn btn-primary">Se connecter</a>
             </div>
           </li>
         </ul>
