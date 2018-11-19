@@ -2,106 +2,288 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f8fc03f-8e1e-4c85-bed5-88c8512cf394" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/logger.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/assets/img/contributors/yeswehack.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/styles/_components/Videos/videos_pagination.sass" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/styles/_fonts/Merriweather.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/styles/_fonts/Merriweather.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/styles/_fonts/Merriweather.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/styles/_fonts/Merriweather.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/styles/_fonts/Merriweather.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cypress.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cypress/integration/sidebar/logged_out_spec.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cypress/integration/sidebar/user_section_spec.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cypress/integration/user/password_login_spec.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cypress/integration/user/settings_spec.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cypress/plugins/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cypress/support/commands.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cypress/support/helpers.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cypress/support/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/assets/sounds/background_statement_focus.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/components/App/BackgroundNotifier.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.eslintrc.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/App/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/App/Sidebar.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/App/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/App/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Home/AllContributors.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Home/AllContributors.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Home/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Home/Home.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Users/LoginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Users/LoginForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/UsersActions/ActionEntityLink.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/UsersActions/ActionEntityLink.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/UsersActions/ActionIcon.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/UsersActions/ActionIcon.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Utils/PaginationMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Utils/PaginationMenu.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/VideoDebate/ModalHistory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/VideoDebate/ModalHistory.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Videos/PaginatedVideosContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Videos/PaginatedVideosContainer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Comments/CommentForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Comments/CommentForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Comments/CommentHeader.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Comments/CommentHeader.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Statements/StatementsList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Statements/StatementsList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Users/UserAppellation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Users/UserAppellation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/UsersActions/ActionsTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/UsersActions/ActionsTable.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Utils/CloseButton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Utils/CloseButton.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Utils/ShareModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Utils/ShareModal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Utils/__tests__/__snapshots__/ReputationGuardTooltip.spec.jsx.snap" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Utils/__tests__/__snapshots__/ReputationGuardTooltip.spec.jsx.snap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/VideoDebate/ActionBubbleMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/VideoDebate/ActionBubbleMenu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/VideoDebate/VideoDebatePlayer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/VideoDebate/VideoDebatePlayer.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/i18n/en/history.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/i18n/en/history.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/i18n/fr/history.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/i18n/fr/history.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/i18n/en/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/i18n/en/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/i18n/en/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/i18n/en/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/i18n/en/videoDebate.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/i18n/en/videoDebate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/i18n/fr/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/i18n/fr/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/i18n/fr/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/i18n/fr/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/i18n/fr/videoDebate.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/i18n/fr/videoDebate.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/state/user_actions/record.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/state/user_actions/record.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/state/video_debate/comments/effects.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/state/video_debate/comments/effects.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/state/video_debate/comments/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/state/video_debate/comments/reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/state/user_preferences/__tests__/__snapshots__/reducer.spec.js.snap" beforeDir="false" afterPath="$PROJECT_DIR$/app/state/user_preferences/__tests__/__snapshots__/reducer.spec.js.snap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/state/user_preferences/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/state/user_preferences/reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/state/video_debate/video/__tests__/__snapshots__/reducer.spec.js.snap" beforeDir="false" afterPath="$PROJECT_DIR$/app/state/video_debate/video/__tests__/__snapshots__/reducer.spec.js.snap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/state/video_debate/video/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/state/video_debate/video/reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/assets/help/fr/contributionGuidelines.md" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/assets/help/fr/contributionGuidelines.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/assets/img/contributors/noe.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/assets/img/contributors/noe.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/assets/img/contributors/troncheenbiais.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/assets/img/contributors/troncheenbiais.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/styles/_components/App/logo.sass" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_components/App/logo.sass" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/styles/_components/Pages/home_page.sass" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_components/Pages/home_page.sass" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/styles/_components/Speakers/speaker_page.sass" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_components/Speakers/speaker_page.sass" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/styles/_components/Videos/index.sass" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_components/Videos/index.sass" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/styles/_global/global.sass" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_global/global.sass" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/styles/_global/icons.sass" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_global/icons.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/styles/_components/App/sidebar.sass" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_components/App/sidebar.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/styles/_components/User/user_appellation.sass" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_components/User/user_appellation.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/styles/_components/VideoDebate/comments/comment.sass" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_components/VideoDebate/comments/comment.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/styles/_components/VideoDebate/comments/comment_form.sass" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_components/VideoDebate/comments/comment_form.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/styles/_fonts/icomoon.eot" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_fonts/icomoon.eot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/styles/_fonts/icomoon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_fonts/icomoon.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/styles/_fonts/icomoon.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_fonts/icomoon.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/styles/_fonts/icomoon.woff" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_fonts/icomoon.woff" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/styles/_fonts/icomoon.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_fonts/icomoon.woff2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/styles/_global/icons_list.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_global/icons_list.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/styles/_global/variables.sass" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/_global/variables.sass" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/styles/application.sass" beforeDir="false" afterPath="$PROJECT_DIR$/app/styles/application.sass" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/icomoon_icons.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/icomoon_icons.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/icomoon_bundle_extractor.sh" beforeDir="false" afterPath="$PROJECT_DIR$/dev/icomoon_bundle_extractor.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.loaders.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.loaders.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-1093839833">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts">
+        <counts>
+          <entry key="ESLintLanguageService" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="jsx" value="1255" />
+          <entry key="sass" value="1043" />
+          <entry key="scss" value="17" />
+          <entry key="svg" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JSX Harmony" value="1255" />
+          <entry key="SCSS" value="17" />
+          <entry key="SVG" value="1" />
+          <entry key="Sass" value="1043" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="js" value="3" />
+          <entry key="jsx" value="8" />
+          <entry key="sass" value="4" />
+          <entry key="scss" value="2" />
+          <entry key="sh" value="1" />
+          <entry key="svg" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JSX Harmony" value="8" />
+          <entry key="JavaScript" value="3" />
+          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="SCSS" value="2" />
+          <entry key="SVG" value="4" />
+          <entry key="Sass" value="4" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="router.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/router.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="539">
-              <caret line="58" selection-start-line="58" selection-end-line="58" />
-              <folding>
-                <element signature="e#15#40#0" expanded="true" />
-                <element signature="e#131#165#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="35" column="35" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Sidebar.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/components/App/Sidebar.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-899">
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.627907">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/router.jsx">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="429">
+                  <caret line="56" column="45" selection-start-line="56" selection-start-column="45" selection-end-line="56" selection-end-column="45" />
+                  <folding>
+                    <element signature="e#15#40#0" expanded="true" />
+                    <element signature="e#131#165#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/components/App/index.jsx">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="631">
+                  <caret line="42" column="22" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
+                  <folding>
+                    <element signature="e#0#25#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/components/Home/Home.jsx">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="290">
+                  <caret line="80" column="20" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="20" />
+                  <folding>
+                    <element signature="e#0#25#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/API/socket_api.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="286">
+                  <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+                  <folding>
+                    <element signature="e#0#32#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/components/Videos/VideosIndexPage.jsx">
+              <provider selected="true" editor-type-id="text-editor">
+                <state>
+                  <folding>
+                    <element signature="e#0#25#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/app/config.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="88">
+                  <caret line="11" selection-start-line="11" selection-end-line="11" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/components/menu/Menu.jsx">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="485">
+                  <caret line="30" column="60" selection-start-line="30" selection-start-column="60" selection-end-line="30" selection-end-column="60" />
+                  <folding>
+                    <element signature="e#0#25#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/components/buttons/ClassicButton.jsx">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="338">
+                  <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
+                  <folding>
+                    <element signature="e#0#25#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/components/App/LanguageSelector.jsx">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="530">
+                  <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+                  <folding>
+                    <element signature="e#0#25#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/styles/_components/common.sass">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="910">
+                  <caret line="35" column="27" selection-start-line="35" selection-start-column="27" selection-end-line="35" selection-end-column="27" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/styles/_components/menu.sass">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="182">
+                  <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/styles/_components/classicButton.sass">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="208">
+                  <caret line="8" selection-start-line="8" selection-end-line="8" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/app/styles/_components/selectButton.sass">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="136">
+                  <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/styles/application.sass">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="597">
+                  <caret line="116" selection-start-line="116" selection-end-line="116" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>route</find>
       <find>sidebar</find>
+      <find>button</find>
+      <find>set</find>
+      <find>disc</find>
+      <find>lang</find>
     </findStrings>
     <dirStrings>
-      <dir>$PROJECT_DIR$/app</dir>
       <dir>$PROJECT_DIR$/app/components</dir>
+      <dir>$PROJECT_DIR$/app</dir>
+      <dir>$PROJECT_DIR$/app/styles/_components</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -110,8 +292,34 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/router.jsx" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/app/screens/Videos.js" />
+        <option value="$PROJECT_DIR$/app/components/menu/Menu.js" />
+        <option value="$PROJECT_DIR$/app/styles/_components/button/Button.jsx" />
+        <option value="$PROJECT_DIR$/app/assets/ic-exit.svg" />
+        <option value="$PROJECT_DIR$/app/components/Icons/ExitIcon.jsx" />
+        <option value="$PROJECT_DIR$/app/styles/_components/common.sass" />
+        <option value="$PROJECT_DIR$/app/assets/ic-discord.svg" />
+        <option value="$PROJECT_DIR$/app/components/button/Button.jsx" />
+        <option value="$PROJECT_DIR$/app/assets/logo.svg" />
+        <option value="$PROJECT_DIR$/app/styles/_components/colors.sass" />
+        <option value="$PROJECT_DIR$/app/styles/_components/button.sass" />
+        <option value="$PROJECT_DIR$/app/styles/_global/colors.sass" />
+        <option value="$PROJECT_DIR$/app/styles/application.sass" />
+        <option value="$PROJECT_DIR$/app/styles/_components/selectButton.scss" />
+        <option value="$PROJECT_DIR$/app/assets/ic-flag-fr.svg" />
+        <option value="$PROJECT_DIR$/app/components/buttons/SelectButton.jsx" />
+        <option value="$PROJECT_DIR$/app/styles/_components/classicButton.sass" />
+        <option value="$PROJECT_DIR$/app/screens/Videos.jsx" />
+        <option value="$PROJECT_DIR$/app/components/App/index.jsx" />
+        <option value="$PROJECT_DIR$/app/components/Home/Home.jsx" />
+        <option value="$PROJECT_DIR$/app/router.jsx" />
+        <option value="$PROJECT_DIR$/app/styles/_components/menu.sass" />
+        <option value="$PROJECT_DIR$/app/styles/_components/App/sidebar.sass" />
+        <option value="$PROJECT_DIR$/app/components/App/LanguageSelector.jsx" />
+        <option value="$PROJECT_DIR$/app/styles/_components/selectButton.sass" />
+        <option value="$PROJECT_DIR$/app/components/buttons/ClassicButton.jsx" />
+        <option value="$PROJECT_DIR$/app/components/menu/Menu.jsx" />
       </list>
     </option>
   </component>
@@ -156,13 +364,68 @@
               <item name="captain-fact-frontend" type="b2602c69:ProjectViewProjectNode" />
               <item name="captain-fact-frontend" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="API" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="captain-fact-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="captain-fact-frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="captain-fact-frontend" type="b2602c69:ProjectViewProjectNode" />
               <item name="captain-fact-frontend" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="styles" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="App" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="captain-fact-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="captain-fact-frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="buttons" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="captain-fact-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="captain-fact-frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="captain-fact-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="captain-fact-frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="Icons" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="captain-fact-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="captain-fact-frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="menu" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="captain-fact-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="captain-fact-frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="VideoDebate" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="captain-fact-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="captain-fact-frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="Videos" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="captain-fact-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="captain-fact-frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="screens" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -175,11 +438,21 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.prettier" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.prettier" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
     <property name="node.js.selected.package.eslint" value="$PROJECT_DIR$/node_modules/eslint" />
     <property name="node.js.selected.package.prettier" value="" />
+    <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/styles/_global" />
+      <recent name="$PROJECT_DIR$/app/components" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -207,33 +480,34 @@
       <workItem from="1538749129242" duration="47000" />
       <workItem from="1538749201408" duration="1673000" />
       <workItem from="1540559935630" duration="2555000" />
-      <workItem from="1541750498432" duration="3517000" />
+      <workItem from="1541750498432" duration="15231000" />
+      <workItem from="1542355206248" duration="35569000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7862000" />
+    <option name="totallyTimeSpent" value="55145000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="817" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="821" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21775898" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18463707" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3287483" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3287483" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="7" visible="true" weight="0.32916668" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3287483" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="10" visible="true" weight="0.6863824" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -243,17 +517,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/router.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
-          <folding>
-            <element signature="e#15#40#0" expanded="true" />
-            <element signature="e#131#165#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webpack.config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
@@ -268,22 +531,86 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/components/App/Sidebar.jsx">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-899">
+        <state relative-caret-position="595">
+          <caret line="35" column="35" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/components/Comments/CommentAction.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/components/Menu/Menu.js">
+    <entry file="file://$PROJECT_DIR$/app/components/Comments/index.js">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.eslintrc.yml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/styles/_components/help.sass">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/styles/_components/modal.sass">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/logo-borderless.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/styles/_components/form.sass">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/ic-exit.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/logo.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/ic-discord.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/styles/_components/common.sass">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="910">
+          <caret line="35" column="27" selection-start-line="35" selection-start-column="27" selection-end-line="35" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/styles/application.sass">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="597">
+          <caret line="116" selection-start-line="116" selection-end-line="116" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/ic-flag-fr.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/styles/_global/colors.sass">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/components/App/Logo.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/router.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="58" selection-start-line="58" selection-end-line="58" />
+        <state relative-caret-position="429">
+          <caret line="56" column="45" selection-start-line="56" selection-start-column="45" selection-end-line="56" selection-end-column="45" />
           <folding>
             <element signature="e#15#40#0" expanded="true" />
             <element signature="e#131#165#0" expanded="true" />
@@ -291,10 +618,150 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/app/styles/_components/menu.sass">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="35" column="35" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
+        <state relative-caret-position="182">
+          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/components/Icons/ExitIcon.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/components/App/index.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="631">
+          <caret line="42" column="22" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/components/App/Sidebar.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="135" column="12" lean-forward="true" selection-start-line="135" selection-start-column="12" selection-end-line="135" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/styles/_components/classicButton.sass">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/styles/_components/selectButton.sass">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/components/buttons/SelectButton.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/styles/_components/App/sidebar.sass">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="78" column="22" lean-forward="true" selection-start-line="78" selection-start-column="22" selection-end-line="78" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/components/App/LanguageSelector.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="530">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/components/menu/Menu.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="485">
+          <caret line="30" column="60" selection-start-line="30" selection-start-column="60" selection-end-line="30" selection-end-column="60" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/components/buttons/ClassicButton.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/screens/Videos.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="10" column="21" lean-forward="true" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/components/Home/Home.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="80" column="20" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/check_nginx_config.sh">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/API/socket_api.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/constants.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/components/Videos/VideosIndexPage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
