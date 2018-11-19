@@ -11,6 +11,7 @@ import { MainModalContainer } from '../Modal/MainModalContainer'
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
 import { isAuthenticated } from '../../state/users/current_user/selectors'
 
+import Menu from '../menu/Menu'
 
 @connect(state => ({
   locale: state.UserPreferences.locale,
@@ -36,8 +37,8 @@ export default class App extends React.PureComponent {
           </Helmet>
           <MainModalContainer />
           <FlashMessages />
-          <Sidebar />
-          <div id="main-container" className={mainContainerClass}>
+          <Menu />
+          <div className="cf-container">
             {children}
           </div>
           <PublicAchievementUnlocker achievementId={4} meetConditionsFunc={this.checkExtensionInstall} />

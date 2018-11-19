@@ -1,0 +1,52 @@
+.menu
+  border-bottom: 1px solid $grey
+  height: 70px
+  padding: 0 30px
+
+  .logo-link
+    display: flex
+    color: inherit
+
+  h1
+    font-size: 30px
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif
+
+    .logo
+      width: 50px
+      margin: auto
+
+    p
+      margin: auto auto auto 5px
+
+      span
+        font-weight: bold
+        color: $blue
+
+  ul
+    margin: auto 0 auto 30px
+
+    li
+      position: relative
+
+      p
+        margin: auto
+
+    li:not(:first-child), li:not(:last-child)
+      margin: auto 10px
+
+    li:first-child()
+      margin-left: 0
+
+    li:last-child()
+      margin-right: 0
+
+    .score
+      background-color: $blue
+      padding: 4px 5px
+      border-radius: 5px
+      margin-left: 10px
+      color: $white
+
+    .post-separator
+      padding-right: 20px!important
+      border-right: 1px solid $grey

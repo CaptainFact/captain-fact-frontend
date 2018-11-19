@@ -24,7 +24,7 @@ describe('Settings', () => {
   it("fails to change password if they doesn't match", () => {
     cy.get('input[name="password"]').clear().type('password{enter}')
     cy.get('input[name="passwordRepeat"]').clear().type('notTheSame{enter}')
-    cy.get('.edit-user-form button[type="submit"]').focus()
+    cy.get('.edit-user-form buttons[type="submit"]').focus()
     cy.contains("Passwords doesn't match").should('exist')
   })
 })

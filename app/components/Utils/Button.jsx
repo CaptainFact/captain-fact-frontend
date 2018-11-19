@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 
 
-/* eslint-disable react/button-has-type */
+/* eslint-disable react/buttons-has-type */
 
 const Button = ({ className, type = 'button', ...props }) => (
   <button

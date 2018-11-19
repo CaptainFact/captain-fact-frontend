@@ -24,6 +24,7 @@ import { SpeakerPage } from './components/Speakers/SpeakerPage'
 import NewsletterSubscription from './components/Users/NewsletterSubscription'
 import ActivityLog from './components/Users/ActivityLog'
 
+import Videos from './screens/Videos'
 
 const CFRouter = () => (
   <Router history={browserHistory}>
@@ -52,6 +53,7 @@ const CFRouter = () => (
       <Route path="/help/*" component={Help} />
       <Route path="/extension" component={BrowserExtensionsPage} />
       <Route path="/moderation" component={Moderation} />
+      <Route path="/discord" component={() => window.location = 'https://discord.gg/2Qd7hMz'} />
       <Route path="*" component={NotFound} />
     </Route>
   </Router>
