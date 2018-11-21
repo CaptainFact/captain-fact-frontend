@@ -1,10 +1,12 @@
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
-import XPBar from './sidebar/XPBar'
-import V2Notifications from './sidebar/V2Notifications'
+import { Link } from 'react-router'
 
-import Logo from '../../assets/logo.svg'
-import User from '../../assets/V2/user.svg'
+import { withNamespaces } from 'react-i18next'
+import XPBar from './XPBar'
+import V2Notifications from './V2Notifications'
+
+import Logo from '../../../assets/logo.svg'
+import User from '../../../assets/V2/user.svg'
 
 @withNamespaces('main')
 export default class Sidebar extends React.PureComponent {
@@ -12,24 +14,23 @@ export default class Sidebar extends React.PureComponent {
     return (
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <a className="navbar-item logo" href="https://bulma.io">
-            <img src={Logo} alt=""/>
+          <Link className="navbar-item logo" to="/">
+            <img src={Logo} alt="" />
             <span>Captain Fact</span>
-          </a>
+          </Link>
         </div>
 
         <div id="navbarBasicExample" className="navbar-menu">
-
           <div className="navbar-end">
             <div className="navbar-item">
-              <a href="#">VIDEOS</a>
-              <a href="#">NOUS SUPPORTER</a>
-              <a href="#">EXTENSION NAV</a>
+              <Link to="videos">VIDEOS</Link>
+              <Link to="/">NOUS SUPPORTER</Link>
+              <Link to="/">EXTENSION NAV</Link>
               <XPBar value="220" />
               <V2Notifications count="2" />
-              <a href="#">
+              <Link to="/">
                 <img src={User} className="user" alt="" />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -47,4 +47,36 @@
       }
     }
   }
+  .xp-total, .xp-current {
+    border-radius: 5px;
+    height: 25px;
+    border: 2px solid white;
+    display: block;
+  }
+  .xp-total {
+    width: 150px;
+    position: relative;
+    .xp-current {
+      background-color: #fff;
+      position: absolute;
+      top: -2px;
+      left: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .xp-current-desc {
+      position: absolute;
+      left: 5px;
+      text-transform: uppercase;
+      color: $darkblue;
+      width: 100%;
+    }
+    svg {
+      fill: white;
+      height: 20px;
+      top: 0;
+      right: 0;
+      position: absolute;
+    }
+  }
 }
