@@ -10,8 +10,8 @@
   padding: 25px 0 0;
   box-shadow: -3px 0 34px 0 rgba(0, 0, 0, 0.07);
   background-color: $white;
-  font-family: $maison;
   transition: width 0.1s ease-in;
+  z-index: 1;
   .hidden{
     top: 0;
     left: 0;
@@ -310,5 +310,4 @@
   position: relative;
   margin-left: 75px;
   width: calc(100% - 75px);
-  z-index: -1;
 }

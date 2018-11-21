@@ -1,0 +1,17 @@
+@import './guide-item.scss';
+
+.guide-subject{
+  margin: 0 0 60px;
+  padding: 0 25px 0 0;
+  h3{
+    margin: 0 0 25px;
+    padding: 0 0 15px;
+    border-bottom: 1px solid #E9EAED;
+    font-size: 2.4rem;
+    font-weight: 500;
+  }
+  > ul {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -19,6 +19,10 @@ body{
   font: 1.6em / 1.2 sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  .new-app{
+    font-family: $maison;
+    color: $n-dg;
+  }
 }
 
 img{

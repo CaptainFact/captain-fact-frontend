@@ -1,0 +1,29 @@
+.btn{
+  border: none;
+  cursor: pointer;
+}
+
+.btn-link{
+  font-family: $maison;
+  font-size: 1.3rem;
+  color: $n-blue;
+  text-transform: lowercase;
+  &:after{
+    content: '';
+    display: block;
+    height: 1px;
+    background-color: currentColor;
+    width: calc(100% + 4px);
+    margin: 3px 0 0 -2px;
+  }
+}
+.btn-outline{
+  padding: 10px 18px 8px;
+  border-radius: 3px;
+  font-family: $maison;
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-transform: lowercase;
+  color: $n-orange;
+  border: 1px solid currentColor;
+}
