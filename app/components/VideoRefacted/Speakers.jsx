@@ -7,8 +7,10 @@ const Speakers = ({ speakers }) => {
 
   for (let i = 0; i < speakers.length; i++) {
     domSpeakers.push(
-      <div key={ `speaker-${ i }` } className="speaker">
-        <img src={ speakers[i].img } alt=""/>
+      <div key={ `speaker-${ i }` } className="col-3 mx-3 pb-5 pt-3 px-0 text-center speaker">
+        <div className="wrapper-img mx-auto mb-3">
+          <img src={ speakers[i].img } alt=""/>
+        </div>
         <Link to={ speakers[i].link }>
           <h5>{ speakers[i].name }</h5>
         </Link>
@@ -19,7 +21,7 @@ const Speakers = ({ speakers }) => {
 
   return (
     <div className="wrapper-speakers">
-      <div className="speakers">
+      <div className="row justify-content-center speakers">
         { domSpeakers }
       </div>
     </div>

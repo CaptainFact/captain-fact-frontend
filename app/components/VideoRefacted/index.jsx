@@ -104,7 +104,7 @@ class VideoRefacted extends PureComponent {
             </Block>
 
             <Block className="col-12 sub-container o-hidden">
-              <div className="wrapper-tabs">
+              <div className="wrapper-tabs mb-5">
                 <ul className="ml-auto tabs">
                   <li className="mr-2 tab" onClick={ () => this.switchTab('speakers') }>
                     <IconLink navlink

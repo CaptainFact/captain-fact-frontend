@@ -1,13 +1,41 @@
 @import "mixins/grid"
 @import "mixins/spacing"
-@import "mixins"
+@import "mixins/others"
 @import "button"
-@import "container"
-@import "icon-link"
-@import "nav"
-@import "tabs"
-@import "timeline"
-@import "video"
+@import "components/container"
+@import "components/icon-link"
+@import "components/nav"
+@import "components/speakers"
+@import "components/tabs"
+@import "components/timeline"
+@import "components/video"
+
+::-webkit-scrollbar
+  width: 8px
+
+::-webkit-scrollbar-track
+  border: 0 solid $green-new
+
+  &:horizontal
+    border-bottom-width: 1px
+
+  &:vertical
+    border-right-width: 1px
+
+::-webkit-scrollbar-thumb
+  border: 0 solid $green-new
+
+  &:horizontal
+    border-bottom-width: 4px
+
+    &:hover
+      border-bottom-width: 8px
+
+  &:vertical
+    border-right-width: 4px
+
+    &:hover
+      border-right-width: 8px
 
 .align-middle
   vertical-align: middle

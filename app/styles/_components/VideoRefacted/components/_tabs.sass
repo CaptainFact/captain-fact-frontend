@@ -26,21 +26,43 @@
           animation: setActive .3s linear forwards
 
 .wrapper-speakers, .wrapper-quotes
-  //opacity: 0
+  position: relative
   -webkit-animation: slideTab 1s linear forwards
   -moz-animation: slideTab 1s linear forwards
   animation: slideTab 1s linear forwards
 
+@-webkit-keyframes slideTab
+  0%
+    left: 0
+    opacity: 0
+  50%
+    left: -100%
+    opacity: 0
+  100%
+    left: 0
+    opacity: 1
+
+@-moz-keyframes slideTab
+  0%
+    left: 0
+    opacity: 0
+  50%
+    left: -100%
+    opacity: 0
+  100%
+    left: 0
+    opacity: 1
+
 @keyframes slideTab
   0%
-    margin-left: 0
-    //opacity: 0
+    left: 0
+    opacity: 0
   50%
-    margin-left: -100%
-    //opacity: .5
+    left: -100%
+    opacity: 0
   100%
-    margin-left: 0
-    //opacity: 1
+    left: 0
+    opacity: 1
 
 @-webkit-keyframes setActive
   from
