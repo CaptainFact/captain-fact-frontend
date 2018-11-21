@@ -1,0 +1,67 @@
+.wrapper-tabs
+  align-items: flex-end
+  display: flex
+  flex-basis: auto
+  flex-direction: column
+  flex-grow: 1
+
+  .tabs
+    display: flex
+    flex-direction: row
+
+    .tab
+      height: 43px
+      width: 135px
+
+      a
+        background: $secondary-bg
+        border: 0
+        border-radius: 25px
+        color: $green-new
+        padding: 10px
+
+        &.active
+          -webkit-animation: setActive .3s linear forwards
+          -moz-animation: setActive .3s linear forwards
+          animation: setActive .3s linear forwards
+
+.wrapper-speakers, .wrapper-quotes
+  //opacity: 0
+  -webkit-animation: slideTab 1s linear forwards
+  -moz-animation: slideTab 1s linear forwards
+  animation: slideTab 1s linear forwards
+
+@keyframes slideTab
+  0%
+    margin-left: 0
+    //opacity: 0
+  50%
+    margin-left: -100%
+    //opacity: .5
+  100%
+    margin-left: 0
+    //opacity: 1
+
+@-webkit-keyframes setActive
+  from
+    background: $secondary-bg
+    color: $green-new
+  to
+    background: $green-new
+    color: $secondary-bg
+
+@-moz-keyframes setActive
+  from
+    background: $secondary-bg
+    color: $green-new
+  to
+    background: $green-new
+    color: $secondary-bg
+
+@keyframes setActive
+  from
+    background: $secondary-bg
+    color: $green-new
+  to
+    background: $green-new
+    color: $secondary-bg
