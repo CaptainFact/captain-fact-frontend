@@ -85,7 +85,7 @@ class VideoRefacted extends PureComponent {
       <div id="VideoRefacted">
         <Nav />
         <div className="content-container">
-          <div className="row main-container">
+          <div className="main-container">
             <Block className="col-12 sub-container p-0">
               <div className="wrapper-video m-auto">
                 <ReactPlayer
@@ -139,7 +139,7 @@ class VideoRefacted extends PureComponent {
                 </ul>
               </div>
 
-              { tabActive === 'speakers' ? <Speakers /> : <Quotes /> }
+              { tabActive === 'speakers' ? <Speakers speakers={ data.speakers } /> : <Quotes /> }
 
             </Block>
           </div>
