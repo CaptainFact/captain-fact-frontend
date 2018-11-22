@@ -32,9 +32,9 @@ const submenuTheme = {
     dark: 'shadow-slightDark',
     light: 'shadow-slightLight',
   },
-  arrows: {
-    dark: ds.get('colors.midnightDark'),
-    light: ds.get('colors.whiteMedium'),
+  hoverBackgrounds: {
+    light: 'bg-white',
+    dark: 'bg-midnightMedium',
   },
   itemsBorders: {
     dark: 'border-navy',
@@ -86,28 +86,25 @@ const Navbar = (props) => {
     <div className={
       `relative`.concat(' ', css({
         '&:hover ul': {
-          display: 'block',
-        },
-        '&:hover button::after': {
-          width: 0,
-          height: 0,
-          borderStyle: 'solid',
-          borderWidth: `0 ${pxTo(7.5, baseFontSize, 'rem')} ${pxTo(10, baseFontSize, 'rem')} ${pxTo(7.5, baseFontSize, 'rem')}`,
-          borderColor: `transparent transparent ${submenuTheme.arrows[theme]} transparent`,
-          position: 'absolute',
-          content: '" "',
-          display: 'block',
+          zIndex: 0,
+          opacity: 1,
+          transform: 'translateY(0)',
         },
       }))}>
       <button className='bg-transparent border-transparent hover:outline-none h-75 w-75 relative'>
         <img className='rounded-full w-full' src={avatarSrc} />
       </button>
-      <ul className={`hidden absolute ${submenuTheme.shadows[theme]} rounded`.concat(' ', css({
+      <ul className={`opacity-0 absolute ${submenuTheme.shadows[theme]} rounded`.concat(' ', css({
         background: `${submenuTheme.backgrounds[theme]}`,
         minWidth: pxTo(150, baseFontSize, 'rem'),
+        transform: 'translateY(-5%)',
+        transition: '450ms ease-in-out',
+        '> li': {
+          transition: '250ms ease-in-out'
+        },
         }))}
       >
-        {submenuItems.map((item, index) => <li key={item.name} className={`text-sm ${index < submenuItems.length - 1 && `border-solid ${submenuTheme.itemsBorders[theme]} border-0 border-b-1` }`}>
+        {submenuItems.map((item, index) => <li key={item.name} className={`hover:${submenuTheme.hoverBackgrounds[theme]} text-sm ${index < submenuItems.length - 1 && `border-solid ${submenuTheme.itemsBorders[theme]} border-0 border-b-1` }`}>
           <Link staticStyles='font-700 p-10 block' underline={false} component={RouterLink} key={item.path} to={item.path}>
             {t(`${item.name}`)}
           </Link>

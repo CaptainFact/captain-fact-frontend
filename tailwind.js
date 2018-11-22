@@ -412,6 +412,7 @@ module.exports = {
     unset: 'unset',
     inherit: 'inherit',
     auto: 'auto',
+    n: '-1',
     0: 0,
     10: 10,
     20: 20,

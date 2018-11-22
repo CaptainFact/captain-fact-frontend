@@ -7,6 +7,10 @@ import Layout from './../Layout'
 import Grid from './../../components/presentationals/Grid'
 import Link from './../../components/presentationals/Link'
 import Col from './../../components/presentationals/Col'
+import ObjectiveBlob from './../../components/presentationals/ObjectiveBlob'
+import ObjectiveList from './../../components/presentationals/ObjectiveList'
+import ObjectiveTasks from './../../components/presentationals/ObjectiveTasks'
+
 import { withTheme } from './../../components/smart/ThemeProvider'
 import { withNamespaces } from 'react-i18next'
 import { cell, cityDarkDarkest, cityDarkBrightest, cityLight, cityDark } from './images'
@@ -22,7 +26,7 @@ const cityTheme = {
   facts: {
     labelsColor: {
       dark: 'text-lavenderRegular',
-      light: 'text-brownRegular',
+      light: 'text-orangeMedium',
     },
     valuesColor: {
       dark: 'text-white',
@@ -47,9 +51,28 @@ const cityTheme = {
     }
   }
 
-const Page = ({reputation, theme, city, ...props}) => {
+const mapObjectivesPosition = {
+  west: css({
+    left: '50%',
+    bottom: '25%',
+  }),
+  sun: css({
+    right: '30%',
+    top: '25%',
+  }),
+  port: css({
+    left: '45%',
+    bottom: '15%',
+  })
+}
+
+const Page = ({reputation, theme, city, objectives, entities, ...props}) => {
   let image
-  console.log(city)
+  let userEntities ={
+    ...entities,
+    reputation,
+  }
+
   switch(true) {
     case reputation < 150:
       image = cityDarkDarkest
@@ -99,6 +122,7 @@ const Page = ({reputation, theme, city, ...props}) => {
       path: '/diary'
     }
   ]
+
   return <Layout>
     <Grid staticStyles='mb-auto'>
       <Col baseWidth={4}>
@@ -156,7 +180,39 @@ const Page = ({reputation, theme, city, ...props}) => {
         </div>)}
 
       </Col>
-      <Col baseWidth={8}>
+      <Col baseWidth={8} staticStyles='relative'>
+        {objectives.map(objective => {
+          const done = objective.tasks.filter(task => parseInt(task.goal) < parseInt(userEntities[task.entity]))
+          const wip = objective.tasks.filter(task => parseInt(task.goal) >= parseInt(userEntities[task.entity]))
+
+          return <div
+            className={`absolute ${mapObjectivesPosition[objective.zone]}`.concat(' ', css({
+          '&:focus-within': {
+            zIndex: 5,
+            '> button + div': {
+            opacity: 1,
+        transform: 'translate(5%, -5%)',
+        zIndex: 2,
+      }
+      },
+    }))}>
+          <button className='bg-transparent border-transparent focus:outline-none'>
+              <ObjectiveBlob done={done.length === objective.tasks.length}/>
+          </button>
+          <div className={`opacity-0 z-n`.concat(' ', css({
+            transition: 'all 250ms ease-in-out',
+            transform: 'translate(0, 0)',
+            maxWidth: pxTo(300, baseFontSize, "rem"),
+          }))}>
+            <ObjectiveList
+                name={`${objective.name}: ${done.length / objective.tasks.length * 100}%`}
+              story={objective.story}
+                content={<ObjectiveTasks tasksDone={done} tasksWip={wip} entities={userEntities} />}
+              />
+          </div>
+        </div>}
+      )}
+
         {image}
       </Col>
     </Grid>
