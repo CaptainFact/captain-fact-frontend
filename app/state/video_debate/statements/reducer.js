@@ -19,7 +19,7 @@ export const decrementFormCount = createAction('STATEMENTS/DECREMENT_FORM_COUNT'
 
 // Statement form actions
 export const STATEMENT_FORM_NAME = 'StatementForm'
-export const changeStatementFormSpeaker = ({id}) => change(STATEMENT_FORM_NAME, 'speaker_id', id)
+export const changeStatementFormSpeaker = ({ id }) => change(STATEMENT_FORM_NAME, 'speaker_id', id)
 export const closeStatementForm = () => destroy(STATEMENT_FORM_NAME)
 
 
@@ -34,21 +34,20 @@ const INITIAL_STATE = new Record({
 
 const StatementsReducer = handleActions({
   [fetchStatements]: {
-    next: (state, {payload}) => state.merge({
+    next: (state, { payload }) => state.merge({
       data: new List(payload.map(s => new Statement(s))).sortBy(st => st.time),
       isLoading: false
     }),
-    throw: (state, {payload}) => state.merge({isLoading: false, errors: payload})
+    throw: (state, { payload }) => state.merge({ isLoading: false, errors: payload })
   },
-  [setLoading]: (state, isLoading) =>
-    state.set('isLoading', isLoading),
-  [setSubmitting]: (state, {payload}) => state.set('isSubmitting', payload),
-  [add]: (state, {payload}) => {
+  [setLoading]: (state, isLoading) => state.set('isLoading', isLoading),
+  [setSubmitting]: (state, { payload }) => state.set('isSubmitting', payload),
+  [add]: (state, { payload }) => {
     const statementIdx = getInsertPosition(state.data, payload)
     const statement = new Statement(payload)
     return state.update('data', statements => statements.insert(statementIdx, statement))
   },
-  [update]: (state, {payload}) => {
+  [update]: (state, { payload }) => {
     const statementIdx = state.data.findIndex(s => s.id === payload.id)
     if (statementIdx !== -1)
       return state.update('data', data => {
@@ -58,29 +57,29 @@ const StatementsReducer = handleActions({
       })
     return state
   },
-  [updateAll]: (state, {payload}) => {
+  [updateAll]: (state, { payload }) => {
     return state.update('data', data => data.withMutations(statements => {
       // Update all statements
       for (const newStatement of payload) {
         const statementIdx = statements.findIndex(s => s.id === newStatement.id)
-        if (statementIdx !== -1)
-          statements.update(statementIdx, oldStatement =>
-            oldStatement.merge(newStatement)
-          )
+        if (statementIdx !== -1) {
+          statements.update(statementIdx, oldStatement => {
+            return oldStatement.merge(newStatement)
+          })
+        }
       }
       // Re-sort them
       return statements.sortBy(st => st.time)
     }))
   },
-  [remove]: (state, {payload: {id}}) => {
+  [remove]: (state, { payload: { id } }) => {
     const statementIdx = state.data.findIndex(s => s.id === id)
     if (statementIdx !== -1)
       return state.update('data', data => data.delete(statementIdx))
     return state
   },
-  [setScrollTo]: (state, {payload}) => state.set('scrollTo', payload),
-  [combineActions(incrementFormCount, decrementFormCount)]: (state, {payload}) =>
-    state.set('formsCount', state.formsCount + payload),
+  [setScrollTo]: (state, { payload }) => state.set('scrollTo', payload),
+  [combineActions(incrementFormCount, decrementFormCount)]: (state, { payload }) => state.set('formsCount', state.formsCount + payload),
   [resetVideoDebate]: () => INITIAL_STATE()
 }, INITIAL_STATE())
 

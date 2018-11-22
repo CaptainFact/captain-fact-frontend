@@ -1,4 +1,5 @@
-// Vendors
+// ---- Vendors ----
+// Bulma
 @import "_global/variables"
 @import "bulma/sass/utilities/animations"
 @import "bulma/sass/utilities/mixins"
@@ -19,6 +20,7 @@
 @import "bulma/sass/components/level"
 @import "bulma/sass/components/menu"
 @import "bulma/sass/components/modal"
+@import "bulma/sass/components/navbar"
 @import "bulma/sass/components/pagination"
 @import "bulma/sass/components/panel"
 @import "bulma/sass/components/media"
@@ -39,11 +41,17 @@
 @import "animate/bounceInDown"
 @import "animate/flipInX"
 
+// React-select
 @import "react-select/scss/default"
 
+// ---- Home made ----
 // Mixins
 @import "_mixins/font_face"
 @import "_mixins/progressive_animation_delay"
+
+// Fonts
+@include font-face(icomoon, "./_fonts/icomoon", normal, normal, eot woff2 woff ttf svg)
+@include font-face(Merriweather, "./_fonts/Merriweather", normal, normal, eot woff2 woff ttf svg)
 
 // Custom styles
 @import "_global/global"
@@ -85,6 +93,7 @@
 @import "_components/Videos/card"
 @import "_components/Videos/index"
 @import "_components/Videos/player"
+@import "_components/Videos/videos_pagination"
 @import "_components/modal"
 @import "_components/VideoDebate/comments/comment_form"
 @import "_components/VideoDebate/comments/comments_list"

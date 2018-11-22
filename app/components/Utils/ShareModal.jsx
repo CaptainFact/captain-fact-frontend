@@ -1,18 +1,18 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {translate} from 'react-i18next'
+import { connect } from 'react-redux'
+import { withNamespaces } from 'react-i18next'
 
 import { FRONTEND_URL, FB_APP_ID } from '../../config'
 import Modal from '../Modal/Modal'
-import {popModal} from '../../state/modals/reducer'
+import { popModal } from '../../state/modals/reducer'
 import FieldWithButton from '../FormUtils/FieldWithButton'
-import {Icon} from './Icon'
-import {flashErrorMsg, flashSuccessMsg} from '../../state/flashes/reducer'
+import { Icon } from './Icon'
+import { flashErrorMsg, flashSuccessMsg } from '../../state/flashes/reducer'
 import ThirdPartyServiceButton from '../Users/ThirdPartyServiceButton'
 
 
-@connect(null, {popModal, flashErrorMsg, flashSuccessMsg})
-@translate('main')
+@connect(null, { popModal, flashErrorMsg, flashSuccessMsg })
+@withNamespaces('main')
 export default class ShareModal extends React.PureComponent {
   render() {
     const url = FRONTEND_URL + this.props.path
@@ -21,22 +21,22 @@ export default class ShareModal extends React.PureComponent {
       <Modal
         handleCloseClick={this.props.popModal}
         className="modal-share"
-        title={<span><Icon name="share-alt"/> {this.props.t('actions.share')}</span>}
+        title={<span><Icon name="share-alt" /> {this.props.t('actions.share')}</span>}
       >
         <FieldWithButton
           className="is-medium share-link-field"
-          input={{value: url, readOnly: true}}
+          input={{ value: url, readOnly: true }}
           buttonClassName="is-medium"
-          buttonLabel={<Icon name="clipboard"/>}
+          buttonLabel={<Icon name="clipboard" />}
           buttonClickHandler={this.copyUrlToClipboard.bind(this)}
           expandInput
         />
-        <hr/>
-        <div style={{textAlign: 'center'}}>
-          <ThirdPartyServiceButton icon="twitter" name="Twitter" url={this.twitterLink(encodedUrl)} newTab/>
-          <ThirdPartyServiceButton icon="facebook" name="Facebook" url={this.facebookLink(encodedUrl)} newTab/>
-          <span style={{marginLeft: 5}}>
-            <ThirdPartyServiceButton icon="envelope" name="Mail" url={this.mailLink(encodedUrl)} newTab/>
+        <hr />
+        <div style={{ textAlign: 'center' }}>
+          <ThirdPartyServiceButton icon="twitter" name="Twitter" url={this.twitterLink(encodedUrl)} newTab />
+          <ThirdPartyServiceButton icon="facebook" name="Facebook" url={this.facebookLink(encodedUrl)} newTab />
+          <span style={{ marginLeft: 5 }}>
+            <ThirdPartyServiceButton icon="envelope" name="Mail" url={this.mailLink(encodedUrl)} newTab />
           </span>
         </div>
       </Modal>
@@ -50,10 +50,6 @@ export default class ShareModal extends React.PureComponent {
   facebookLink(url) {
     // Doesn't work with localhost
     return `https://www.facebook.com/dialog/share?app_id=${FB_APP_ID}&display=popup&href=${url}`
-  }
-
-  googlePlusLink(url) {
-    return `https://plus.google.com/share?url=${url}`
   }
 
   mailLink(url) {

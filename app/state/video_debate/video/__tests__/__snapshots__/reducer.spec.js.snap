@@ -1,0 +1,474 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`add speaker 1`] = `
+Immutable.Record {
+  "data": Immutable.Record {
+    "id": 0,
+    "hash_id": null,
+    "posted_at": 0,
+    "provider": "",
+    "provider_id": 0,
+    "url": "",
+    "title": "",
+    "speakers": Immutable.List [],
+    "language": null,
+    "is_partner": null,
+  },
+  "errors": null,
+  "isLoading": false,
+  "playback": Immutable.Record {
+    "position": null,
+    "forcedPosition": Immutable.Record {
+      "requestId": null,
+      "time": 0,
+    },
+    "isPlaying": false,
+  },
+}
+`;
+
+exports[`add speaker 2`] = `
+Immutable.Record {
+  "data": Immutable.Record {
+    "id": 0,
+    "hash_id": null,
+    "posted_at": 0,
+    "provider": "",
+    "provider_id": 0,
+    "url": "",
+    "title": "",
+    "speakers": Immutable.List [
+      Immutable.Record {
+        "id": 3,
+        "slug": null,
+        "full_name": "Max Fray",
+        "title": "Title 3",
+        "picture": "",
+        "country": null,
+        "wikidata_item_id": null,
+      },
+    ],
+    "language": null,
+    "is_partner": null,
+  },
+  "errors": null,
+  "isLoading": false,
+  "playback": Immutable.Record {
+    "position": null,
+    "forcedPosition": Immutable.Record {
+      "requestId": null,
+      "time": 0,
+    },
+    "isPlaying": false,
+  },
+}
+`;
+
+exports[`fetch all 1`] = `
+Immutable.Record {
+  "data": Immutable.Record {
+    "id": 0,
+    "hash_id": null,
+    "posted_at": 0,
+    "provider": "",
+    "provider_id": 0,
+    "url": "",
+    "title": "",
+    "speakers": Immutable.List [],
+    "language": null,
+    "is_partner": null,
+  },
+  "errors": null,
+  "isLoading": false,
+  "playback": Immutable.Record {
+    "position": null,
+    "forcedPosition": Immutable.Record {
+      "requestId": null,
+      "time": 0,
+    },
+    "isPlaying": false,
+  },
+}
+`;
+
+exports[`fetch all 2`] = `
+Immutable.Record {
+  "data": Immutable.Record {
+    "id": 0,
+    "hash_id": null,
+    "posted_at": 0,
+    "provider": "",
+    "provider_id": 0,
+    "url": "",
+    "title": "",
+    "speakers": Immutable.List [
+      Immutable.Record {
+        "id": 1,
+        "slug": null,
+        "full_name": "Joseph Philips",
+        "title": "Title 1",
+        "picture": "",
+        "country": null,
+        "wikidata_item_id": null,
+      },
+      Immutable.Record {
+        "id": 2,
+        "slug": null,
+        "full_name": "Jonh Mac",
+        "title": "Title 2",
+        "picture": "",
+        "country": null,
+        "wikidata_item_id": null,
+      },
+    ],
+    "language": null,
+    "is_partner": null,
+  },
+  "errors": null,
+  "isLoading": false,
+  "playback": Immutable.Record {
+    "position": null,
+    "forcedPosition": Immutable.Record {
+      "requestId": null,
+      "time": 0,
+    },
+    "isPlaying": false,
+  },
+}
+`;
+
+exports[`force Position 1`] = `
+Immutable.Record {
+  "data": Immutable.Record {
+    "id": 0,
+    "hash_id": null,
+    "posted_at": 0,
+    "provider": "",
+    "provider_id": 0,
+    "url": "",
+    "title": "",
+    "speakers": Immutable.List [],
+    "language": null,
+    "is_partner": null,
+  },
+  "errors": null,
+  "isLoading": false,
+  "playback": Immutable.Record {
+    "position": null,
+    "forcedPosition": Immutable.Record {
+      "requestId": null,
+      "time": 0,
+    },
+    "isPlaying": false,
+  },
+}
+`;
+
+exports[`force Position 2`] = `
+Immutable.Record {
+  "data": Immutable.Record {
+    "id": 0,
+    "hash_id": null,
+    "posted_at": 0,
+    "provider": "",
+    "provider_id": 0,
+    "url": "",
+    "title": "",
+    "speakers": Immutable.List [],
+    "language": null,
+    "is_partner": null,
+  },
+  "errors": null,
+  "isLoading": false,
+  "playback": Immutable.Record {
+    "position": Object {
+      "forcedPosition": Object {
+        "requestId": 1,
+        "time": 0,
+      },
+      "position": 4,
+    },
+    "forcedPosition": Immutable.Record {
+      "requestId": "A-UNIQUE-UUID",
+      "time": Object {
+        "forcedPosition": Object {
+          "requestId": 1,
+          "time": 0,
+        },
+        "position": 4,
+      },
+    },
+    "isPlaying": false,
+  },
+}
+`;
+
+exports[`has correct defaults 1`] = `
+Immutable.Record {
+  "data": Immutable.Record {
+    "id": 0,
+    "hash_id": null,
+    "posted_at": 0,
+    "provider": "",
+    "provider_id": 0,
+    "url": "",
+    "title": "",
+    "speakers": Immutable.List [],
+    "language": null,
+    "is_partner": null,
+  },
+  "errors": null,
+  "isLoading": false,
+  "playback": Immutable.Record {
+    "position": null,
+    "forcedPosition": Immutable.Record {
+      "requestId": null,
+      "time": 0,
+    },
+    "isPlaying": false,
+  },
+}
+`;
+
+exports[`remove speaker 1`] = `
+Immutable.Record {
+  "data": Immutable.Record {
+    "id": 0,
+    "hash_id": null,
+    "posted_at": 0,
+    "provider": "",
+    "provider_id": 0,
+    "url": "",
+    "title": "",
+    "speakers": Immutable.List [],
+    "language": null,
+    "is_partner": null,
+  },
+  "errors": null,
+  "isLoading": false,
+  "playback": Immutable.Record {
+    "position": null,
+    "forcedPosition": Immutable.Record {
+      "requestId": null,
+      "time": 0,
+    },
+    "isPlaying": false,
+  },
+}
+`;
+
+exports[`remove speaker 2`] = `
+Immutable.Record {
+  "data": Immutable.Record {
+    "id": 0,
+    "hash_id": null,
+    "posted_at": 0,
+    "provider": "",
+    "provider_id": 0,
+    "url": "",
+    "title": "",
+    "speakers": Immutable.List [],
+    "language": null,
+    "is_partner": null,
+  },
+  "errors": null,
+  "isLoading": false,
+  "playback": Immutable.Record {
+    "position": null,
+    "forcedPosition": Immutable.Record {
+      "requestId": null,
+      "time": 0,
+    },
+    "isPlaying": false,
+  },
+}
+`;
+
+exports[`set Loading 1`] = `
+Immutable.Record {
+  "data": Immutable.Record {
+    "id": 0,
+    "hash_id": null,
+    "posted_at": 0,
+    "provider": "",
+    "provider_id": 0,
+    "url": "",
+    "title": "",
+    "speakers": Immutable.List [],
+    "language": null,
+    "is_partner": null,
+  },
+  "errors": null,
+  "isLoading": false,
+  "playback": Immutable.Record {
+    "position": null,
+    "forcedPosition": Immutable.Record {
+      "requestId": null,
+      "time": 0,
+    },
+    "isPlaying": false,
+  },
+}
+`;
+
+exports[`set Loading 2`] = `
+Immutable.Record {
+  "data": Immutable.Record {
+    "id": 0,
+    "hash_id": null,
+    "posted_at": 0,
+    "provider": "",
+    "provider_id": 0,
+    "url": "",
+    "title": "",
+    "speakers": Immutable.List [],
+    "language": null,
+    "is_partner": null,
+  },
+  "errors": null,
+  "isLoading": true,
+  "playback": Immutable.Record {
+    "position": null,
+    "forcedPosition": Immutable.Record {
+      "requestId": null,
+      "time": 0,
+    },
+    "isPlaying": false,
+  },
+}
+`;
+
+exports[`set Loading 3`] = `
+Immutable.Record {
+  "data": Immutable.Record {
+    "id": 0,
+    "hash_id": null,
+    "posted_at": 0,
+    "provider": "",
+    "provider_id": 0,
+    "url": "",
+    "title": "",
+    "speakers": Immutable.List [],
+    "language": null,
+    "is_partner": null,
+  },
+  "errors": null,
+  "isLoading": false,
+  "playback": Immutable.Record {
+    "position": null,
+    "forcedPosition": Immutable.Record {
+      "requestId": null,
+      "time": 0,
+    },
+    "isPlaying": false,
+  },
+}
+`;
+
+exports[`set Position 1`] = `
+Immutable.Record {
+  "data": Immutable.Record {
+    "id": 0,
+    "hash_id": null,
+    "posted_at": 0,
+    "provider": "",
+    "provider_id": 0,
+    "url": "",
+    "title": "",
+    "speakers": Immutable.List [],
+    "language": null,
+    "is_partner": null,
+  },
+  "errors": null,
+  "isLoading": false,
+  "playback": Immutable.Record {
+    "position": null,
+    "forcedPosition": Immutable.Record {
+      "requestId": null,
+      "time": 0,
+    },
+    "isPlaying": false,
+  },
+}
+`;
+
+exports[`set Position 2`] = `
+Immutable.Record {
+  "data": Immutable.Record {
+    "id": 0,
+    "hash_id": null,
+    "posted_at": 0,
+    "provider": "",
+    "provider_id": 0,
+    "url": "",
+    "title": "",
+    "speakers": Immutable.List [],
+    "language": null,
+    "is_partner": null,
+  },
+  "errors": null,
+  "isLoading": false,
+  "playback": Immutable.Record {
+    "position": NaN,
+    "forcedPosition": Immutable.Record {
+      "requestId": null,
+      "time": 0,
+    },
+    "isPlaying": false,
+  },
+}
+`;
+
+exports[`update speaker 1`] = `
+Immutable.Record {
+  "data": Immutable.Record {
+    "id": 0,
+    "hash_id": null,
+    "posted_at": 0,
+    "provider": "",
+    "provider_id": 0,
+    "url": "",
+    "title": "",
+    "speakers": Immutable.List [],
+    "language": null,
+    "is_partner": null,
+  },
+  "errors": null,
+  "isLoading": false,
+  "playback": Immutable.Record {
+    "position": null,
+    "forcedPosition": Immutable.Record {
+      "requestId": null,
+      "time": 0,
+    },
+    "isPlaying": false,
+  },
+}
+`;
+
+exports[`update speaker 2`] = `
+Immutable.Record {
+  "data": Immutable.Record {
+    "id": 0,
+    "hash_id": null,
+    "posted_at": 0,
+    "provider": "",
+    "provider_id": 0,
+    "url": "",
+    "title": "",
+    "speakers": Immutable.List [],
+    "language": null,
+    "is_partner": null,
+  },
+  "errors": null,
+  "isLoading": false,
+  "playback": Immutable.Record {
+    "position": null,
+    "forcedPosition": Immutable.Record {
+      "requestId": null,
+      "time": 0,
+    },
+    "isPlaying": false,
+  },
+}
+`;

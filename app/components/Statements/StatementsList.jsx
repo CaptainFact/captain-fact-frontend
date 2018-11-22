@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import { withRouter } from 'react-router'
 import FlipMove from 'react-flip-move'
 
@@ -9,13 +9,14 @@ import { closeStatementForm, setScrollTo } from '../../state/video_debate/statem
 import { postStatement } from '../../state/video_debate/statements/effects'
 import { statementFormValueSelector } from '../../state/video_debate/statements/selectors'
 import StatementContainer from './StatementContainer'
+import { FULLHD_WIDTH_THRESHOLD } from '../../constants'
 
 
 @connect(state => ({
   statements: state.VideoDebate.statements.data,
   statementFormSpeakerId: statementFormValueSelector(state, 'speaker_id')
 }), {closeStatementForm, postStatement, setScrollTo})
-@translate('videoDebate')
+@withNamespaces('videoDebate')
 @withRouter
 export default class StatementsList extends React.PureComponent {
   componentDidMount() {
@@ -39,9 +40,12 @@ export default class StatementsList extends React.PureComponent {
             )}
           />
         )}
-        <FlipMove enterAnimation="fade">
+        <FlipMove
+          enterAnimation="fade"
+          disableAllAnimations={window.innerWidth < FULLHD_WIDTH_THRESHOLD}
+        >
           {statements.map(statement => (
-            <StatementContainer key={statement.id} statement={statement}/>
+            <StatementContainer key={statement.id} statement={statement} />
           ))}
         </FlipMove>
       </div>

@@ -38,7 +38,8 @@ export default {
   speaker: {
     one: 'Speaker',
     remove: 'Remove speaker',
-    confirmRemove: 'All statements made by {{speaker.full_name}} on this video will become orphans',
+    confirmRemove:
+      'All statements made by {{speaker.full_name}} on this video will become orphans',
     add: 'Add Speaker',
     create: 'Create speaker "{{name}}"',
     edit: 'Edit "{{name}}" information',
@@ -59,6 +60,10 @@ export default {
     abortAdd: 'Close Statement Form',
     autoscroll_enable: 'Enable Autoscroll',
     autoscroll_disable: 'Disable Autoscroll',
+    soundOnBackgroundFocus_enable:
+      'Enable sound when the focus change in background',
+    soundOnBackgroundFocus_disable:
+      'Disable sound when the focus change in background',
     reverseTimeLock_lock: 'Unlock time marker',
     reverseTimeLock_unlock: 'Lock time marker'
   },
@@ -67,9 +72,11 @@ export default {
     video: 'Loading Video'
   },
   tips: {
-    firstStatement: 'You can <1>add a first statement</1> by clicking on the <3></3> icon next to the speaker\'s name',
+    firstStatement:
+      "You can <1>add a first statement</1> by clicking on the <3></3> icon next to the speaker's name",
     firstSpeaker: 'Start by adding a speaker using left column',
-    noContentUnauthenticated: 'This video hasn\'t been verified yet. Login / Sign up to contribute!'
+    noContentUnauthenticated:
+      "This video hasn't been verified yet. Login / Sign up to contribute!"
   },
   presence: {
     viewer: '{{count}} viewer',

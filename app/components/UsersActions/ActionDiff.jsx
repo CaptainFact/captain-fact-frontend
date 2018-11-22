@@ -5,8 +5,7 @@ import { diffWordsWithSpace } from 'diff'
 import titleCase from 'voca/title_case'
 
 import {
-  ACTION_DELETE, ACTION_REMOVE, ACTION_RESTORE, ENTITY_COMMENT, ENTITY_SPEAKER,
-  ENTITY_STATEMENT, ENTITY_VIDEO, ENTITY_SOURCED_COMMENT
+  ACTION_DELETE, ACTION_REMOVE, ACTION_RESTORE, ENTITY_SPEAKER, ENTITY_STATEMENT
 } from '../../constants'
 import formatSeconds from '../../lib/seconds_formatter'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
@@ -28,10 +27,10 @@ class ActionDiff extends PureComponent {
         {diff.entrySeq().map(([key, changes]) => (
           <div key={key} className="diff-entry">
             <div className="diff-key">
-              { titleCase(this.formatChangeKey(key)) }&nbsp;
+              {titleCase(this.formatChangeKey(key))}&nbsp;
             </div>
             <span className="diff-view">
-              { this.renderKeyDiff(key, changes) }
+              {this.renderKeyDiff(key, changes)}
             </span>
           </div>
         ))}
@@ -44,9 +43,9 @@ class ActionDiff extends PureComponent {
     if (changes.size === 2 && changes.first().removed && changes.last().added)
       return (
         <div>
-          <span className="removed">{ this.formatChangeValue(changes.first().value, key) }</span>,
+          <span className="removed">{this.formatChangeValue(changes.first().value, key)}</span>,
           <span> -> </span>,
-          <span className="added">{ this.formatChangeValue(changes.last().value, key) }</span>
+          <span className="added">{this.formatChangeValue(changes.last().value, key)}</span>
         </div>
       )
     // Generate a real diff
@@ -55,7 +54,7 @@ class ActionDiff extends PureComponent {
         key={idx}
         className={change.added ? 'added' : change.removed ? 'removed' : ''}
       >
-        { this.formatChangeValue(change.value, key) }
+        {this.formatChangeValue(change.value, key)}
       </span>
     ))
   }
@@ -143,7 +142,7 @@ class ActionDiff extends PureComponent {
 
   diffEntry(key, prevValue, newValue) {
     if (!prevValue && newValue)
-      return [{added: true, value: this.formatValue(key, newValue)}]
+      return [{ added: true, value: this.formatValue(key, newValue) }]
 
     // Format numbers like prevNumber -> newNumber
     if (typeof (newValue) === 'number') {
@@ -152,8 +151,8 @@ class ActionDiff extends PureComponent {
 
       // Generate diff
       if (prevValue)
-        return [{removed: true, value: prevValue}, {added: true, value: newValue}]
-      return [{added: true, value: newValue}]
+        return [{ removed: true, value: prevValue }, { added: true, value: newValue }]
+      return [{ added: true, value: newValue }]
     }
     // Do a string diff
     return diffWordsWithSpace((prevValue || '').toString(), newValue ? newValue.toString() : '')

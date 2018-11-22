@@ -9,14 +9,22 @@ export const COMMENTS_CHANNEL = 'comments'
 
 // Misc
 export const NO_INTERNET_ERROR = 'errors:server.noInternet'
+export const SUPPORTED_LOCALES = ['en', 'fr']
 
 // Actions
-export const ACTION_CREATE = 1
-export const ACTION_REMOVE = 2
-export const ACTION_UPDATE = 3
-export const ACTION_DELETE = 4
-export const ACTION_ADD = 5
-export const ACTION_RESTORE = 6
+export const ACTION_CREATE = 'create'
+export const ACTION_REMOVE = 'remove'
+export const ACTION_UPDATE = 'update'
+export const ACTION_DELETE = 'delete'
+export const ACTION_ADD = 'add'
+export const ACTION_RESTORE = 'restore'
+export const ACTION_FLAG = 'flag'
+export const ACTION_VOTE_UP = 'vote_up'
+export const ACTION_VOTE_DOWN = 'vote_down'
+export const ACTION_SELF_VOTE = 'self_vote'
+export const ACTION_REVERT_VOTE_UP = 'revert_vote_up'
+export const ACTION_REVERT_VOTE_DOWN = 'revert_vote_down'
+export const ACTION_REVERT_SELF_VOTE = 'revert_self_vote'
 
 // Moderation actions
 export const MODERATION_ACTION_CONFIRM = 1
@@ -24,11 +32,13 @@ export const MODERATION_ACTION_NOTSURE = 0
 export const MODERATION_ACTION_ABUSIVE = -1
 
 // Entities
-export const ENTITY_VIDEO = 1
-export const ENTITY_SPEAKER = 2
-export const ENTITY_STATEMENT = 3
-export const ENTITY_COMMENT = 4
-export const ENTITY_SOURCED_COMMENT = 5
+export const ENTITY_VIDEO = 'video'
+export const ENTITY_SPEAKER = 'speaker'
+export const ENTITY_STATEMENT = 'statement'
+export const ENTITY_COMMENT = 'comment'
+export const ENTITY_SOURCED_COMMENT = 'fact'
+export const ENTITY_USER = 'user'
+export const ENTITY_USER_ACTION = 'user_action'
 
 // Required reputations
 export const MIN_REPUTATION_ADD_STATEMENT = -5
@@ -43,10 +53,10 @@ export const MIN_REPUTATION_UPDATE_VIDEO = 75
 export const MIN_REPUTATION_ADD_VIDEO = 75
 export const MIN_REPUTATION_MODERATION = 125
 
-
 /* ------ UI, animations ------ */
 
 export const MOBILE_WIDTH_THRESHOLD = 768 // pixels
+export const FULLHD_WIDTH_THRESHOLD = 1408 // pixels
 
 export const USER_PICTURE_SMALL = 24
 export const USER_PICTURE_LARGE = 48
@@ -77,7 +87,6 @@ export const SPEAKER_TITLE_LENGTH = [3, 60]
 
 // Statement
 export const STATEMENT_LENGTH = [10, 255]
-
 
 // Videos
 export const ALL_VIDEOS = 'ALL_VIDEOS'

@@ -1,10 +1,27 @@
 {
-  "presets": ["es2015", "react"],
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react"
+  ],
   "plugins": [
-    "transform-decorators-legacy",
-    "transform-runtime",
-    "transform-class-properties",
-    "transform-object-rest-spread",
-    ["inline-json-import", {}]
-  ]
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
+    ],
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-syntax-dynamic-import"
+  ],
+  "env": {
+    "production": {
+      "plugins": [
+        "lodash",
+        "@babel/plugin-transform-runtime",
+        "@babel/plugin-transform-react-inline-elements",
+        "babel-plugin-transform-react-remove-prop-types"
+      ]
+    }
+  }
 }

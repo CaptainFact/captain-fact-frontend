@@ -2,7 +2,7 @@ import reducer, {
   addFlag,
   fetchAll
 } from '../reducer'
-import fetchAllSuccess from './__fixtures__/fetch_all_success.json'
+import fetchAllSuccess from './__fixtures__/fetch_all_success'
 
 const INITIAL_STATE = reducer(undefined, {})
 

@@ -5,6 +5,7 @@ Immutable.Record {
   "sidebarExpended": true,
   "locale": "en",
   "enableAutoscroll": true,
+  "enableSoundOnBackgroundFocus": true,
   "videosLanguageFilter": null,
   "videosOnlyFromPartners": "ALL_VIDEOS",
 }

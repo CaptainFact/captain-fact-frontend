@@ -22,7 +22,7 @@ const mockPresenceEvent = ({
 test('start at 0', () => snapshot(INITIAL_STATE))
 
 test('set presence', () => {
-  snapshotReducer(reducer, INITIAL_STATE, 
+  snapshotReducer(reducer, INITIAL_STATE,
     setPresence({viewers: {count: 42}, users: {count: 5}})
   )
 })

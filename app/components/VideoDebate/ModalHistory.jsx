@@ -1,22 +1,27 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import titleCase from 'voca/title_case'
 
 import Modal from '../Modal/Modal'
 import { Icon } from '../Utils/Icon'
-import { joinStatementHistoryChannel, leaveStatementHistoryChannel } from '../../state/video_debate/history/effects'
+import {
+  joinStatementHistoryChannel,
+  leaveStatementHistoryChannel
+} from '../../state/video_debate/history/effects'
 import { popModal } from '../../state/modals/reducer'
 import { ENTITY_STATEMENT } from '../../constants'
 import ActionsTable from '../UsersActions/ActionsTable'
 import { reset } from '../../state/user_actions/reducer'
 
-
-@connect(state => ({
-  actions: state.UsersActions.actions,
-  isLoading: state.UsersActions.isLoading
-}), {joinStatementHistoryChannel, leaveStatementHistoryChannel, popModal, reset})
-@translate('history')
+@connect(
+  state => ({
+    actions: state.UsersActions.actions,
+    isLoading: state.UsersActions.isLoading
+  }),
+  { joinStatementHistoryChannel, leaveStatementHistoryChannel, popModal, reset }
+)
+@withNamespaces('history')
 export class ModalHistory extends React.PureComponent {
   componentDidMount() {
     if (this.props.entity === ENTITY_STATEMENT)
@@ -50,8 +55,11 @@ export class ModalHistory extends React.PureComponent {
 
   renderTitle = (t, entity, entityId) => (
     <div>
-      <Icon name="history"/>
-      <span> {titleCase(t(`this.${entity}`))} #{entityId}</span>
+      <Icon name="history" />
+      <span>
+        {' '}
+        {titleCase(t(`entities.${entity}`))} #{entityId}
+      </span>
     </div>
   )
 }

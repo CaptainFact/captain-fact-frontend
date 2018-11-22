@@ -1,0 +1,80 @@
+version: "3.1"
+services:
+  # Pre-seeded postgres Database
+  database:
+    image: "captainfact/dev-db:latest"
+    ports: ["5432:5432"]
+
+  # Main API - REST + Websockets
+  api:
+    image: captainfact/rest-api:staging
+    command: foreground
+    ports: ["4000:80"]
+    depends_on: ["database"]
+    environment:
+      MIX_ENV: dev
+      CF_SECRET_KEY_BASE: "8C6FsJwjV11d+1WPUIbkEH6gB/VavJrcXWoPLujgpclfxjkLkoNFSjVU9XfeNm6s"
+      CF_HOST: localhost
+      CF_DB_HOSTNAME: database
+      CF_DB_USERNAME: postgres
+      CF_DB_PASSWORD: postgres
+      CF_DB_NAME: captain_fact_dev
+      CF_FACEBOOK_APP_ID: xxxxxxxxxxxxxxxxxxxx
+      CF_FACEBOOK_APP_SECRET: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      CF_FRONTEND_URL: "http://localhost:3333"
+      CF_CHROME_EXTENSION_ID: "chrome-extension://fnnhlmbnlbgomamcolcpgncflofhjckm"
+
+  # Public GaphQL API
+  graphql-api:
+    image: captainfact/graphql-api:staging
+    command: foreground
+    ports: ["4002:80"]
+    depends_on: ["database", "api"]
+    environment:
+      MIX_ENV: dev
+      CF_HOST: "localhost"
+      CF_BASIC_AUTH_PASSWORD: ""
+      CF_DB_HOSTNAME: database
+      CF_DB_USERNAME: postgres
+      CF_DB_PASSWORD: postgres
+      CF_DB_NAME: captain_fact_dev
+
+  # ATOM / RSS Feeds
+  atom-feed:
+    image: captainfact/atom-feed:staging
+    command: foreground
+    ports: ["4004:80"]
+    depends_on: ["database", "api"]
+    environment:
+      MIX_ENV: dev
+      CF_HOST: "localhost"
+      CF_DB_HOSTNAME: database
+      CF_DB_USERNAME: postgres
+      CF_DB_PASSWORD: postgres
+      CF_DB_NAME: captain_fact_dev
+
+  # OpenGraph service (for crawlers)
+  opengraph:
+    image: captainfact/opengraph:staging
+    command: foreground
+    ports: ["4005:80"]
+    depends_on: ["database", "api"]
+    environment:
+      MIX_ENV: dev
+      CF_HOST: "localhost"
+      CF_DB_HOSTNAME: database
+      CF_DB_USERNAME: postgres
+      CF_DB_PASSWORD: postgres
+      CF_DB_NAME: captain_fact_dev
+
+  # Jobs
+  jobs:
+    image: captainfact/jobs:staging
+    command: foreground
+    depends_on: ["database"]
+    environment:
+      MIX_ENV: dev
+      CF_DB_HOSTNAME: database
+      CF_DB_USERNAME: postgres
+      CF_DB_PASSWORD: postgres
+      CF_DB_NAME: captain_fact_dev

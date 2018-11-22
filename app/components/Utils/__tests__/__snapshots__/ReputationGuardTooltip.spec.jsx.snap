@@ -17,6 +17,8 @@ exports[`user doesn't have required reputation 1`] = `
     }
   }
   defaultOpen={false}
+  disabled={false}
+  keepTooltipInside={false}
   lockScroll={false}
   modal={false}
   mouseEnterDelay={100}
@@ -44,19 +46,21 @@ exports[`user doesn't have required reputation 1`] = `
       name="info-circle"
     />
      
-    <Interpolate
-      count={42}
+    <Trans
       i18nKey="errors:client.needReputation"
-      reputationLink={
-        <Link
-          onlyActiveOnIndex={false}
-          style={Object {}}
-          to="/help/reputation"
-        >
-          translated[pages.reputation]
-        </Link>
-      }
-    />
+      requiredRep={42}
+    >
+      You need at least 
+      <Component />
+      <Link
+        onlyActiveOnIndex={false}
+        style={Object {}}
+        to="/help/reputation"
+      >
+        translated[pages.reputation]
+      </Link>
+      points to do that
+    </Trans>
   </Message>
 </Popup>
 `;

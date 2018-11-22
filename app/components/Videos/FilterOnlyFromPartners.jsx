@@ -1,5 +1,5 @@
 import React from 'react'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import { ALL_VIDEOS, ONLY_PARTNERS, ONLY_COMMUNITY } from '../../constants'
 
 const FilterOnlyFromPartners = ({ value, onChange, t }) => (
@@ -15,4 +15,4 @@ const FilterOnlyFromPartners = ({ value, onChange, t }) => (
   </div>
 )
 
-export default translate('main')(FilterOnlyFromPartners)
+export default withNamespaces('main')(FilterOnlyFromPartners)

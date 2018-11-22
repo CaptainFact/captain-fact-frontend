@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { translate } from 'react-i18next'
+import { withNamespaces } from 'react-i18next'
 import { change } from 'redux-form'
 import classNames from 'classnames'
 
@@ -28,7 +28,7 @@ import { CommentsList } from './CommentsList'
   replies: state.VideoDebate.comments.replies.get(comment.id),
   isFlagged: state.VideoDebate.comments.myFlags.has(comment.id)
 }), {addModal, deleteComment, flagComment, commentVote, change, flashErrorUnauthenticated})
-@translate('main')
+@withNamespaces('main')
 export class CommentDisplay extends React.PureComponent {
   constructor(props) {
     super(props)

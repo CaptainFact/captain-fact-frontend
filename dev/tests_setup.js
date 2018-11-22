@@ -37,20 +37,31 @@ global.snapshotReducer = ((reducer, initialState, ...actions) => {
   }, initialState)
 })
 
+const mockWithNamespaces = () => Component => {
+  Component.defaultProps = {
+    ...Component.defaultProps,
+    t: str => `Translated[${str}]`
+  }
+  return Component
+}
+
 /**
  * This mock makes sure any components using the translate HoC
  * receive the t function as a prop
  */
 jest.mock('react-i18next', () => ({
-  Interpolate: ({i18nKey, ...props}) => (
+  Interpolate: ({ i18nKey, ...props }) => (
     `Interpolated[${i18nKey}] with props ${JSON.stringify(props)}`
   ),
-  translate: () => Component => {
-    Component.defaultProps = {
-      ...Component.defaultProps,
-      t: str => `Translated[${str}]`
-    }
-    return Component
-  },
+  Trans: ({ i18nKey, ...props }) => (
+    `Trans[${i18nKey}] with props ${JSON.stringify(props)}`
+  ),
+  translate: mockWithNamespaces,
+  withNamespaces: mockWithNamespaces,
   t: str => `Translated[${str}]`
 }))
+
+/**
+ * Mock the uuid module
+ */
+jest.mock('uuid/v1', () => jest.fn(() => 'A-UNIQUE-UUID'))
