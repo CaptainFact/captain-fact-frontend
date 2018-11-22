@@ -78,8 +78,8 @@ const Navbar = (props) => {
   return <nav className={'flex w-8/12 ml-auto items-center justify-between'}>
     <ul className={`flex list-reset flex-grow items-evenly`}>
       {pages.map(page => <li key={page.path}>
-        <Link staticStyles='font-700' activeClassName="opacity-45" component={RouterLink} key={page.path} path={page.path}>
-          {t(`${page.name}`)} <small className={`text-sm ${page.name.length > 8 ? 'block' : ''}`}>{page.subname}</small>
+        <Link staticStyles='font-700' activeClassName="opacity-45 no-underline" component={RouterLink} key={page.path} to={page.path}>
+          {t(`${page.name}`)} <small className={`text-sm opacity-inherit ${page.name.length > 8 ? 'block' : ''}`}>{page.subname}</small>
         </Link>
       </li>)}
     </ul>
@@ -108,7 +108,7 @@ const Navbar = (props) => {
         }))}
       >
         {submenuItems.map((item, index) => <li key={item.name} className={`text-sm ${index < submenuItems.length - 1 && `border-solid ${submenuTheme.itemsBorders[theme]} border-0 border-b-1` }`}>
-          <Link staticStyles='font-700 p-10 block' underline={false} component={RouterLink} key={item.path} path={item.path}>
+          <Link staticStyles='font-700 p-10 block' underline={false} component={RouterLink} key={item.path} to={item.path}>
             {t(`${item.name}`)}
           </Link>
         </li>)
