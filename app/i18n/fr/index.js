@@ -8,6 +8,7 @@ import main from './main'
 import user from './user'
 import videoDebate from './videoDebate'
 import moderation from './moderation'
+import menu from './menu'
 
 export default {
   achievements,
@@ -19,5 +20,6 @@ export default {
   main,
   user,
   videoDebate,
-  moderation
+  moderation,
+  menu,
 }
