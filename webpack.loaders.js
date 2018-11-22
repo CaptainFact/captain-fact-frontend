@@ -76,18 +76,9 @@ module.exports = isProd => [
   // = Images =
   // ==========
   {
-    test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+    test: /\.svg$/,
     exclude: path.resolve(__dirname, 'node_modules'),
-    use: [
-      {
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          mimetype: 'image/svg+xml',
-          name: 'res/[name].[hash].svg'
-        }
-      }
-    ]
+    loader: 'svg-inline-loader'
   },
   {
     test: /\.gif/,

@@ -2,6 +2,7 @@ const  pxTo = require('design-system-utils').pxTo
 const ds = require('./app/styles/tokens/index.js').ds
 const colors = require('./app/styles/tokens/index.js').colorPalette
 const fontFamilies = require('./app/styles/tokens/index.js').fontFamilies
+const fontWeights = require('./app/styles/tokens/index.js').fontWeights
 
 const baseFontSize = ds.get('type.baseFontSize')
 const columns = ds.get('grid.columns.number')
@@ -72,7 +73,6 @@ module.exports = {
     unset: 'unset',
     inherit: 'inherit',
     px: `${ds.get('type.sizes.base')}px`, // 18px
-    'px-sm': `${ds.get('type.sizes.regular')}px`, // 16px
     xs: pxTo(ds.get('type.sizes.xs'), baseFontSize, 'rem'),
     sm: pxTo(ds.get('type.sizes.sm'), baseFontSize, 'rem'),
     regular: pxTo(ds.get('type.sizes.regular'), baseFontSize, 'rem'),
@@ -91,15 +91,7 @@ module.exports = {
   fontWeights: {
     unset: 'unset',
     inherit: 'inherit',
-    100: 100,
-    200: 200,
-    300: 300,
-    400: 400,
-    500: 500,
-    600: 600,
-    700: 700,
-    800: 800,
-    900: 900,
+    ...fontWeights,
   },
 
   /*
@@ -180,7 +172,7 @@ module.exports = {
     unset: 'unset',
     inherit: 'inherit',
     initial: 'initial',
-    default: pxTo(1, baseFontSize, 'rem'),
+    1: pxTo(1, baseFontSize, 'rem'),
     0: '0',
     2: pxTo(2, baseFontSize, 'rem'),
   },
@@ -206,10 +198,8 @@ module.exports = {
     inherit: 'inherit',
     initial: 'initial',
     none: '0',
-    2: pxTo(2, baseFontSize, 'rem'),
-    default: pxTo(3, baseFontSize, 'rem'),
-    5: pxTo(5, baseFontSize, 'rem'),
     full: '9999px',
+    ...ds.get('radius'),
   },
 
   /*
@@ -225,7 +215,15 @@ module.exports = {
     initial: 'initial',
     auto: 'auto',
     0: '0',
+    15: pxTo(15, baseFontSize, 'rem'),
+    20: pxTo(20, baseFontSize, 'rem'),
+    25: pxTo(25, baseFontSize, 'rem'),
+    30: pxTo(30, baseFontSize, 'rem'),
+    35: pxTo(35, baseFontSize, 'rem'),
+    50: pxTo(50, baseFontSize, 'rem'),
+    75: pxTo(75, baseFontSize, 'rem'),
     screen: '100vw',
+    full: '100%',
     ...widths,
   },
 
@@ -242,6 +240,13 @@ module.exports = {
     initial: 'initial',
     auto: 'auto',
     0: '0',
+    15: pxTo(15, baseFontSize, 'rem'),
+    20: pxTo(20, baseFontSize, 'rem'),
+    25: pxTo(25, baseFontSize, 'rem'),
+    30: pxTo(30, baseFontSize, 'rem'),
+    35: pxTo(35, baseFontSize, 'rem'),
+    50: pxTo(50, baseFontSize, 'rem'),
+    75: pxTo(75, baseFontSize, 'rem'),
     full: '100%',
     screen: '100vh'
   },
@@ -393,12 +398,7 @@ module.exports = {
   shadows: {
     unset: 'unset',
     inherit: 'inherit',
-    default: '0 2px 4px 0 rgba(0,0,0,0.10)',
-    md: '0 4px 8px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.08)',
-    lg: '0 15px 30px 0 rgba(0,0,0,0.11), 0 5px 15px 0 rgba(0,0,0,0.08)',
-    inner: 'inset 0 2px 4px 0 rgba(0,0,0,0.06)',
-    outline: '0 0 0 3px rgba(52,144,220,0.5)',
-    none: 'none',
+    ...ds.get('shadows'),
   },
 
   /*

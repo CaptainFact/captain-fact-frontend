@@ -1,3 +1,4 @@
+
 /*
   font-face rules
 */
@@ -12,6 +13,14 @@
   Atomic classes
 */
 @tailwind utilities;
+
+/*
+  Vendors
+*/
+
+@responsive {
+  @import "./vendors/tailwindcss/_flex.css";
+}
 
 /*
   Custom selectors
@@ -79,7 +88,7 @@ p {
 :--link,
 button,
 select {
-  @extend .md\:cursor-pointer;
+  @extend .cursor-pointer;
 }
 
 ul {

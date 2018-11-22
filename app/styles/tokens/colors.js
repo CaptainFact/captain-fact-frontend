@@ -13,13 +13,18 @@ module.exports = {
     purpleRegular: '#7F65E6',
     purpleMedium: '##7F65E7',
     purpleDark: '#342863',
+    whiteMedium: '#FAFAFA',
     white: '#FFFFFF',
     midnightLightest: '#2B1E61',
     midnightLight: '#1F173F',
     midnightRegular: '#160C3C',
+    midnightMedium: '#140B37',
     midnightDark: '#09051C',
+    navy: '#110930',
     grayLight: '#E0E0E0',
+    grayMedium: '#E5E5E5',
     grayRegular: '#B9B9B9',
     grayDark: '#868686',
+    black: '#343434'
   }
 }
