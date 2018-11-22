@@ -1,18 +1,20 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { withNamespaces } from 'react-i18next'
+import React from "react"
+import { connect } from "react-redux"
+import { withNamespaces } from "react-i18next"
 
-import { FRONTEND_URL, FB_APP_ID } from '../../config'
-import Modal from '../Modal/Modal'
-import { popModal } from '../../state/modals/reducer'
-import FieldWithButton from '../FormUtils/FieldWithButton'
-import { Icon } from './Icon'
-import { flashErrorMsg, flashSuccessMsg } from '../../state/flashes/reducer'
-import ThirdPartyServiceButton from '../Users/ThirdPartyServiceButton'
+import { FRONTEND_URL, FB_APP_ID } from "../../config"
+import Modal from "../Modal/Modal"
+import { popModal } from "../../state/modals/reducer"
+import FieldWithButton from "../FormUtils/FieldWithButton"
+import { Icon } from "./Icon"
+import { flashErrorMsg, flashSuccessMsg } from "../../state/flashes/reducer"
+import ThirdPartyServiceButton from "../Users/ThirdPartyServiceButton"
 
-
-@connect(null, { popModal, flashErrorMsg, flashSuccessMsg })
-@withNamespaces('main')
+@connect(
+  null,
+  { popModal, flashErrorMsg, flashSuccessMsg },
+)
+@withNamespaces("main")
 export default class ShareModal extends React.PureComponent {
   render() {
     const url = FRONTEND_URL + this.props.path
@@ -21,7 +23,11 @@ export default class ShareModal extends React.PureComponent {
       <Modal
         handleCloseClick={this.props.popModal}
         className="modal-share"
-        title={<span><Icon name="share-alt" /> {this.props.t('actions.share')}</span>}
+        title={
+          <span>
+            <Icon name="share-alt" /> {this.props.t("actions.share")}
+          </span>
+        }
       >
         <FieldWithButton
           className="is-medium share-link-field"
@@ -32,7 +38,7 @@ export default class ShareModal extends React.PureComponent {
           expandInput
         />
         <hr />
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ textAlign: "center" }}>
           <ThirdPartyServiceButton icon="twitter" name="Twitter" url={this.twitterLink(encodedUrl)} newTab />
           <ThirdPartyServiceButton icon="facebook" name="Facebook" url={this.facebookLink(encodedUrl)} newTab />
           <span style={{ marginLeft: 5 }}>
@@ -57,16 +63,14 @@ export default class ShareModal extends React.PureComponent {
   }
 
   copyUrlToClipboard() {
-    document.getElementsByClassName('share-link-field')[0].select()
+    document.getElementsByClassName("share-link-field")[0].select()
     let success = false
     try {
-      success = document.execCommand('copy')
+      success = document.execCommand("copy")
     } catch (err) {
       console.warn(`Copy failed: ${err}`)
     }
-    if (success)
-      this.props.flashSuccessMsg('misc.clipboardSuccess')
-    else
-      this.props.flashErrorMsg('misc.clipboardFail')
+    if (success) this.props.flashSuccessMsg("misc.clipboardSuccess")
+    else this.props.flashErrorMsg("misc.clipboardFail")
   }
 }

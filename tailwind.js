@@ -119,12 +119,12 @@ module.exports = {
   */
 
   tracking: {
-    unset: 'unset',
-    inherit: 'inherit',
-    initial: 'initial',
-    tight: '-0.05em',
-    normal: '0',
-    wide: '0.05em',
+    0: 0,
+    1: pxTo(1, baseFontSize, 'rem'),
+    2: pxTo(2, baseFontSize, 'rem'),
+    3: pxTo(3, baseFontSize, 'rem'),
+    4: pxTo(4, baseFontSize, 'rem'),
+    5: pxTo(5, baseFontSize, 'rem'),
   },
 
   /*
@@ -412,6 +412,7 @@ module.exports = {
     unset: 'unset',
     inherit: 'inherit',
     auto: 'auto',
+    n: '-1',
     0: 0,
     10: 10,
     20: 20,
@@ -432,6 +433,7 @@ module.exports = {
     inherit: 'inherit',
     0: '0',
     25: '.25',
+    45: '.45',
     50: '.5',
     75: '.75',
     100: '1',

@@ -1,40 +1,37 @@
-import React from 'react'
-import classNames from 'classnames'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router'
-import { withNamespaces } from 'react-i18next'
-import { MIN_REPUTATION_UPDATE_VIDEO } from '../../constants'
+import React from "react"
+import classNames from "classnames"
+import { connect } from "react-redux"
+import { withRouter } from "react-router"
+import { withNamespaces } from "react-i18next"
+import { MIN_REPUTATION_UPDATE_VIDEO } from "../../constants"
 
-import { changeStatementFormSpeaker } from '../../state/video_debate/statements/reducer'
-import { addModal } from '../../state/modals/reducer'
-import { isAuthenticated } from '../../state/users/current_user/selectors'
-import { Icon } from '../Utils/Icon'
-import ReputationGuard from '../Utils/ReputationGuard'
-import ShareModal from '../Utils/ShareModal'
-import EditVideoModal from '../Videos/EditVideoModal'
-import { hasStatementForm } from '../../state/video_debate/statements/selectors'
-import { destroyStatementForm } from '../../state/video_debate/statements/effects'
-import {
-  toggleAutoscroll,
-  toggleBackgroundSound
-} from '../../state/user_preferences/reducer'
+import { changeStatementFormSpeaker } from "../../state/video_debate/statements/reducer"
+import { addModal } from "../../state/modals/reducer"
+import { isAuthenticated } from "../../state/users/current_user/selectors"
+import { Icon } from "../Utils/Icon"
+import ReputationGuard from "../Utils/ReputationGuard"
+import ShareModal from "../Utils/ShareModal"
+import EditVideoModal from "../Videos/EditVideoModal"
+import { hasStatementForm } from "../../state/video_debate/statements/selectors"
+import { destroyStatementForm } from "../../state/video_debate/statements/effects"
+import { toggleAutoscroll, toggleBackgroundSound } from "../../state/user_preferences/reducer"
 
 @connect(
-  state => ({
+  (state) => ({
     hasAutoscroll: state.UserPreferences.enableAutoscroll,
     soundOnBackgroundFocus: state.UserPreferences.enableSoundOnBackgroundFocus,
     isAuthenticated: isAuthenticated(state),
-    hasStatementForm: hasStatementForm(state)
+    hasStatementForm: hasStatementForm(state),
   }),
   {
     changeStatementFormSpeaker,
     toggleAutoscroll,
     toggleBackgroundSound,
     addModal,
-    destroyStatementForm
-  }
+    destroyStatementForm,
+  },
 )
-@withNamespaces('videoDebate')
+@withNamespaces("videoDebate")
 @withRouter
 export default class ActionBubbleMenu extends React.PureComponent {
   render() {
@@ -42,62 +39,59 @@ export default class ActionBubbleMenu extends React.PureComponent {
 
     return (
       <div
-        className={classNames('action-bubble-container', {
-          hasForm: hasStatementForm
+        className={classNames("action-bubble-container", {
+          hasForm: hasStatementForm,
         })}
       >
         {!this.props.isAuthenticated && (
           <ActionBubble
             iconName="sign-in"
-            label={t('main:menu.loginSignup')}
-            onClick={() => this.props.router.push('/login')}
+            label={t("main:menu.loginSignup")}
+            onClick={() => this.props.router.push("/login")}
           />
         )}
         {this.props.isAuthenticated && (
           <ActionBubble
-            iconName={hasStatementForm ? 'times' : 'commenting-o'}
-            label={t(hasStatementForm ? 'statement.abortAdd' : 'statement.add')}
+            iconName={hasStatementForm ? "times" : "commenting-o"}
+            label={t(hasStatementForm ? "statement.abortAdd" : "statement.add")}
             activated={!hasStatementForm}
             onClick={() => this.onStatementBubbleClick()}
           />
         )}
         <ActionBubble
           iconName="arrows-v"
-          label={t('statement.autoscroll', {
-            context: this.props.hasAutoscroll ? 'disable' : 'enable'
+          label={t("statement.autoscroll", {
+            context: this.props.hasAutoscroll ? "disable" : "enable",
           })}
           activated={this.props.hasAutoscroll}
           onClick={() => this.props.toggleAutoscroll()}
         />
         <ActionBubble
-          iconName={soundOnBackgroundFocus ? 'sound' : 'sound-mute'}
-          label={t('statement.soundOnBackgroundFocus', {
-            context: soundOnBackgroundFocus ? 'disable' : 'enable'
+          iconName={soundOnBackgroundFocus ? "sound" : "sound-mute"}
+          label={t("statement.soundOnBackgroundFocus", {
+            context: soundOnBackgroundFocus ? "disable" : "enable",
           })}
           activated={soundOnBackgroundFocus}
           onClick={() => this.props.toggleBackgroundSound()}
         />
         <ActionBubble
           iconName="share-alt"
-          label={t('main:actions.share')}
-          onClick={() => this.props.addModal({
-            Modal: ShareModal,
-            props: { path: location.pathname }
-          })
+          label={t("main:actions.share")}
+          onClick={() =>
+            this.props.addModal({
+              Modal: ShareModal,
+              props: { path: location.pathname },
+            })
           }
         />
         <ReputationGuard requiredRep={MIN_REPUTATION_UPDATE_VIDEO}>
           <ActionBubble
             iconName="pencil"
-            label={t('video.edit')}
+            label={t("video.edit")}
             onClick={() => this.props.addModal({ Modal: EditVideoModal })}
           />
         </ReputationGuard>
-        <ActionBubble
-          iconName="question"
-          label={t('main:menu.help')}
-          onClick={() => this.props.router.push('/help')}
-        />
+        <ActionBubble iconName="question" label={t("main:menu.help")} onClick={() => this.props.router.push("/help")} />
       </div>
     )
   }
@@ -112,7 +106,7 @@ export default class ActionBubbleMenu extends React.PureComponent {
 }
 
 const ActionBubble = ({ iconName, label, activated = true, ...props }) => (
-  <div className={classNames('action-bubble', { activated })} {...props}>
+  <div className={classNames("action-bubble", { activated })} {...props}>
     <div className="label">{label}</div>
     <Icon name={iconName} />
   </div>

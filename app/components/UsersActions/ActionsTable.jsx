@@ -1,30 +1,29 @@
-import React from 'react'
-import Immutable from 'immutable'
-import PropTypes from 'prop-types'
-import { withNamespaces } from 'react-i18next'
-import { connect } from 'react-redux'
+import React from "react"
+import Immutable from "immutable"
+import PropTypes from "prop-types"
+import { withNamespaces } from "react-i18next"
+import { connect } from "react-redux"
 
-import { flashErrorUnauthenticated } from '../../state/flashes/reducer'
-import { hasReputation } from '../../state/users/current_user/selectors'
-import { revertVideoDebateUserAction } from '../../state/video_debate/history/effects'
-import { TimeSince } from '../Utils/TimeSince'
-import UserAppellation from '../Users/UserAppellation'
-import { Icon } from '../Utils/Icon'
-import ActionDiff from './ActionDiff'
-import ActionIcon from './ActionIcon'
-import ActionEntityLink from './ActionEntityLink'
-import { ACTION_DELETE, ACTION_REMOVE, MIN_REPUTATION_RESTORE_ENTITY } from '../../constants'
-import { LoadingFrame } from '../Utils/LoadingFrame'
-import Button from '../Utils/Button'
+import { flashErrorUnauthenticated } from "../../state/flashes/reducer"
+import { hasReputation } from "../../state/users/current_user/selectors"
+import { revertVideoDebateUserAction } from "../../state/video_debate/history/effects"
+import { TimeSince } from "../Utils/TimeSince"
+import UserAppellation from "../Users/UserAppellation"
+import { Icon } from "../Utils/Icon"
+import ActionDiff from "./ActionDiff"
+import ActionIcon from "./ActionIcon"
+import ActionEntityLink from "./ActionEntityLink"
+import { ACTION_DELETE, ACTION_REMOVE, MIN_REPUTATION_RESTORE_ENTITY } from "../../constants"
+import { LoadingFrame } from "../Utils/LoadingFrame"
+import Button from "../Utils/Button"
 
-
-@withNamespaces('history')
+@withNamespaces("history")
 @connect(
   (state, props) => ({
     lastActionsIds: state.UsersActions.lastActionsIds,
-    canRestore: props.showRestore && hasReputation(state, MIN_REPUTATION_RESTORE_ENTITY)
+    canRestore: props.showRestore && hasReputation(state, MIN_REPUTATION_RESTORE_ENTITY),
   }),
-  { revertVideoDebateUserAction, flashErrorUnauthenticated }
+  { revertVideoDebateUserAction, flashErrorUnauthenticated },
 )
 class ActionsTable extends React.PureComponent {
   constructor(props) {
@@ -49,42 +48,47 @@ class ActionsTable extends React.PureComponent {
 
     return (
       <tr>
-        <th>{t('when')}</th>
-        <th>{t('who')}</th>
+        <th>{t("when")}</th>
+        <th>{t("who")}</th>
         <th>Action</th>
-        {showEntity && <th>{t('entity')}</th>}
+        {showEntity && <th>{t("entity")}</th>}
         <th>{this.renderCompareAllButton(isMostlyComparing)}</th>
-        {canRestore && <th>{t('revert')}</th>}
+        {canRestore && <th>{t("revert")}</th>}
         {/* <th>{t('moderation')}</th> */}
       </tr>
     )
   }
 
-  renderCompareAllButton = isMostlyComparing => {
+  renderCompareAllButton = (isMostlyComparing) => {
     return (
-      <Button onClick={
-        isMostlyComparing
-          ? () => this.collapseDiffs()
-          : () => this.setState({ expendedDiffs: this.props.actions.map(a => a.id) })
-      }
+      <Button
+        onClick={
+          isMostlyComparing
+            ? () => this.collapseDiffs()
+            : () => this.setState({ expendedDiffs: this.props.actions.map((a) => a.id) })
+        }
       >
-        {this.props.t(isMostlyComparing ? 'hideAll' : 'compareAll')}
+        {this.props.t(isMostlyComparing ? "hideAll" : "compareAll")}
       </Button>
     )
   }
 
   collapseDiffs() {
-    this.setState(prevState => (
-      { expendedDiffs: prevState.expendedDiffs.clear() }
-    ))
+    this.setState((prevState) => ({ expendedDiffs: prevState.expendedDiffs.clear() }))
   }
 
   // ---- Table body ----
 
   renderBody = () => {
     if (this.props.isLoading)
-      return <tr style={{ background: 'none' }}><td colSpan={this.getNbCols()}><LoadingFrame /></td></tr>
-    return this.props.actions.map(a => this.renderAction(a))
+      return (
+        <tr style={{ background: "none" }}>
+          <td colSpan={this.getNbCols()}>
+            <LoadingFrame />
+          </td>
+        </tr>
+      )
+    return this.props.actions.map((a) => this.renderAction(a))
   }
 
   renderAction = (action) => {
@@ -95,14 +99,21 @@ class ActionsTable extends React.PureComponent {
 
   renderActionLine(action, isDiffing = false) {
     const { canRestore, showEntity, t } = this.props
-    const reversible = canRestore && this.props.lastActionsIds.includes(action.id)
-      && ([ACTION_DELETE, ACTION_REMOVE].includes(action.type))
+    const reversible =
+      canRestore &&
+      this.props.lastActionsIds.includes(action.id) &&
+      [ACTION_DELETE, ACTION_REMOVE].includes(action.type)
 
     return (
       <tr key={action.id}>
-        <td><TimeSince time={action.time} /></td>
+        <td>
+          <TimeSince time={action.time} />
+        </td>
         <td>{this.renderUser(action.user)}</td>
-        <td><ActionIcon type={action.type} /><strong> {t(`action.${action.type}`)}</strong></td>
+        <td>
+          <ActionIcon type={action.type} />
+          <strong> {t(`action.${action.type}`)}</strong>
+        </td>
         {showEntity && (
           <td>
             <ActionEntityLink action={action} />
@@ -111,7 +122,7 @@ class ActionsTable extends React.PureComponent {
         <td>
           <Button onClick={() => this.toggleDiff(action, isDiffing)}>
             <Icon size="small" name="indent" />
-            <span>{t(isDiffing ? 'compare_hide' : 'compare_show')} </span>
+            <span>{t(isDiffing ? "compare_hide" : "compare_show")} </span>
           </Button>
         </td>
         {canRestore && (
@@ -119,12 +130,11 @@ class ActionsTable extends React.PureComponent {
             {reversible && (
               <Button onClick={() => this.props.revertVideoDebateUserAction(action)}>
                 <Icon size="small" name="undo" />
-                <span>{t('revert')}</span>
+                <span>{t("revert")}</span>
               </Button>
             )}
           </td>
-        )
-        }
+        )}
         {/* <td> */}
         {/* <a className="button" disabled> */}
         {/* <Icon size="small" name="check"/> */}
@@ -139,9 +149,9 @@ class ActionsTable extends React.PureComponent {
     )
   }
 
-  renderUser = user => <UserAppellation user={user} compact />
+  renderUser = (user) => <UserAppellation user={user} compact />
 
-  renderDiffLine = action => (
+  renderDiffLine = (action) => (
     <tr key={`${action.id}-diff`}>
       <td colSpan={this.getNbCols()} style={{ padding: 0 }}>
         <ActionDiff action={action} allActions={this.props.actions} />
@@ -151,15 +161,9 @@ class ActionsTable extends React.PureComponent {
 
   toggleDiff = (action, isDiffing) => {
     if (isDiffing) {
-      const actionIdx = this.state.expendedDiffs.findIndex(id => id === action.id)
-      this.setState(prevState => (
-        { expendedDiffs: prevState.expendedDiffs.delete(actionIdx) }
-      ))
-    }
-    else
-      this.setState(prevState => (
-        { expendedDiffs: prevState.expendedDiffs.push(action.id) }
-      ))
+      const actionIdx = this.state.expendedDiffs.findIndex((id) => id === action.id)
+      this.setState((prevState) => ({ expendedDiffs: prevState.expendedDiffs.delete(actionIdx) }))
+    } else this.setState((prevState) => ({ expendedDiffs: prevState.expendedDiffs.push(action.id) }))
   }
 
   getNbCols = () => 7 - !this.props.canRestore - !this.props.showEntity
@@ -168,14 +172,14 @@ class ActionsTable extends React.PureComponent {
 ActionsTable.defaultProps = {
   isLoading: false,
   showRestore: true,
-  showEntity: true
+  showEntity: true,
 }
 
 ActionsTable.propTypes = {
   actions: PropTypes.instanceOf(Immutable.List).isRequired,
   isLoading: PropTypes.bool,
   showRestore: PropTypes.bool,
-  showEntity: PropTypes.bool
+  showEntity: PropTypes.bool,
 }
 
 export default ActionsTable

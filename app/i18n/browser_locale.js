@@ -1,8 +1,8 @@
-import { SUPPORTED_LOCALES } from '../constants'
+import { SUPPORTED_LOCALES } from "../constants"
 
 // Util to get browser locale
 const navigatorLocale = () => {
-  return window.navigator.userLanguage || window.navigator.language || 'en'
+  return window.navigator.userLanguage || window.navigator.language || "en"
 }
 
 /**
@@ -11,10 +11,10 @@ const navigatorLocale = () => {
  */
 const browserLocale = () => {
   const browserLocale = navigatorLocale()
-    .split('-')[0]
+    .split("-")[0]
     .toLowerCase()
 
-  return SUPPORTED_LOCALES.includes(browserLocale) ? browserLocale : 'en'
+  return SUPPORTED_LOCALES.includes(browserLocale) ? browserLocale : "en"
 }
 
 export default browserLocale

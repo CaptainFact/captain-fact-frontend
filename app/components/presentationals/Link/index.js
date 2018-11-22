@@ -12,7 +12,7 @@ const Anchor = (props) => <a {...props} /> // fallback component if none is prov
 const Link = ({ path, component, staticStyles, theme, underline, ...props }) => {
   const NavLink = component || Anchor
   return <NavLink
-    className={`${underline === true ? 'underline hover:no-underline' : '' } ${colors[theme]} hover:${colors[theme]} ${staticStyles ? staticStyles : ''}`}
+    className={`${underline === true ? 'underline hover:no-underline' : 'no-underline' } ${colors[theme]} hover:${colors[theme]} ${staticStyles ? staticStyles : ''}`}
     {...props}
   />
 }

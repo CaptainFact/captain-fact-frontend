@@ -27,14 +27,17 @@ class Layout extends PureComponent {
     return <I18nextProvider i18n={i18n}>
         <main lang={locale} className={
           ` min-h-screen
+            flex
+            flex-column
+            m-0
             ${textColors[theme]}
           `
           .concat(' ', css({
             background: backgrounds[theme]
           }))
         }>
-        <Container contained>
-            <header className='pt-5'>
+        <Container contained staticStyles='flex flex-col justify-center'>
+            <header className='pt-5 mb-auto'>
               <Navbar reputation={reputation} avatarSrc={avatarSrc}/>
             </header>
             {children}

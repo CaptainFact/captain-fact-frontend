@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React from "react"
 
 const RawIcon = ({ name }) => <i className={`fa icon-${name}`} />
 

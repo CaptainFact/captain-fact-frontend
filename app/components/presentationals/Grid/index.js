@@ -11,7 +11,7 @@ const Grid = (props) => {
     `${staticStyles}`.concat(' ',
       css({
         display: "grid",
-        gridTemplateColumns: `repeat(${col ? col : ds.get("grid.columns")}, ${colBaseWidth ? colBaseWidth : "1fr"})`,
+        gridTemplateColumns: `repeat(${col ? col : ds.get("grid.columns.number")}, ${colBaseWidth ? colBaseWidth : "1fr"})`,
         gridTemplateRows: "auto 1fr auto",
         gridColumnGap: gutterWidth ? gutterWidth : pxTo(ds.get("grid.gutterWidth"), baseFontSize, "rem"),
         ...dynamicStyles
@@ -22,4 +22,6 @@ const Grid = (props) => {
     { children}
   </div>
 }
+
+export default Grid
 

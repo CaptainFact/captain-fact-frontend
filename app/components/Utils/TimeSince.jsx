@@ -1,16 +1,15 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import differenceInSeconds from 'date-fns/difference_in_seconds'
-import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
-import format from 'date-fns/format'
-import { locales } from '../../i18n/i18n'
+import React from "react"
+import { connect } from "react-redux"
+import differenceInSeconds from "date-fns/difference_in_seconds"
+import distanceInWordsToNow from "date-fns/distance_in_words_to_now"
+import format from "date-fns/format"
+import { locales } from "../../i18n/i18n"
 
-
-@connect(state => ({locale: state.UserPreferences.locale}))
+@connect((state) => ({ locale: state.UserPreferences.locale }))
 export class TimeSince extends React.PureComponent {
   constructor(props) {
     super(props)
-    this.state = {minutesDiff: TimeSince.getMinutesSince(props.time)}
+    this.state = { minutesDiff: TimeSince.getMinutesSince(props.time) }
     this.timeoutUpdate = this.timeoutUpdate.bind(this)
     this.timeout = null
   }
@@ -28,8 +27,8 @@ export class TimeSince extends React.PureComponent {
     const localeObj = locales[locale]
     const dateFormat = isDateTime ? localeObj.defaultDateTimeFormat : localeObj.defaultDateFormat
     return (
-      <span title={format(time, dateFormat, {locale: localeObj})} {...props}>
-        { distanceInWordsToNow(time, {addSuffix, locale: localeObj}) }
+      <span title={format(time, dateFormat, { locale: localeObj })} {...props}>
+        {distanceInWordsToNow(time, { addSuffix, locale: localeObj })}
       </span>
     )
   }
@@ -39,20 +38,17 @@ export class TimeSince extends React.PureComponent {
     const minutesSince = Math.trunc(secondsSince / 60)
 
     // Update state
-    this.setState({minutesDiff: minutesSince})
+    this.setState({ minutesDiff: minutesSince })
 
     // Configure next timeout
     // Under 1h, update when next minute begin
-    if (minutesSince < 60)
-      this.timeout = setTimeout(this.timeoutUpdate, (60 - (secondsSince % 60)) * 1000)
+    if (minutesSince < 60) this.timeout = setTimeout(this.timeoutUpdate, (60 - (secondsSince % 60)) * 1000)
     // Otherwise update when next hour begin
-    else
-      this.timeout = setTimeout(this.timeoutUpdate, (60 - (minutesSince % 60)) * 60 * 1000)
+    else this.timeout = setTimeout(this.timeoutUpdate, (60 - (minutesSince % 60)) * 60 * 1000)
   }
 
   clearTimeout() {
-    if (this.timeout)
-      clearTimeout(this.timeout)
+    if (this.timeout) clearTimeout(this.timeout)
     this.timeout = null
   }
 

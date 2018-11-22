@@ -1,10 +1,9 @@
-import React from 'react'
-import classNames from 'classnames'
-import { withNamespaces } from 'react-i18next'
+import React from "react"
+import classNames from "classnames"
+import { withNamespaces } from "react-i18next"
 
-import ClickableIcon from '../Utils/ClickableIcon'
-import IconModerationPending from './IconModerationPending'
-
+import ClickableIcon from "../Utils/ClickableIcon"
+import IconModerationPending from "./IconModerationPending"
 
 const Score = ({ isVoting, isReported, score }) => {
   if (isVoting) {
@@ -36,4 +35,4 @@ const Vote = ({ isVoting, score, myVote, onVote, isReported }) => (
   </figure>
 )
 
-export default withNamespaces('modetation')(Vote)
+export default withNamespaces("modetation")(Vote)

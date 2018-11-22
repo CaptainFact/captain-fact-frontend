@@ -1,46 +1,34 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { withNamespaces } from 'react-i18next'
+import React from "react"
+import { connect } from "react-redux"
+import { withNamespaces } from "react-i18next"
 
-import { unlinkProvider } from '../../state/users/current_user/effects'
-import Button from '../Utils/Button'
-
+import { unlinkProvider } from "../../state/users/current_user/effects"
+import Button from "../Utils/Button"
 
 const mapDispatchToProps = { unlinkProvider }
 
-const ThirdPartyAccountLinker = ({
-  t,
-  unlinkProvider,
-  title,
-  provider,
-  isLinked,
-  authURL
-}) => (
-  <div className="field has-addons" style={{ width: 200, margin: 'auto' }}>
+const ThirdPartyAccountLinker = ({ t, unlinkProvider, title, provider, isLinked, authURL }) => (
+  <div className="field has-addons" style={{ width: 200, margin: "auto" }}>
     <div className="control">
-      <div className="linked-account-title">
-        {title}
-      </div>
+      <div className="linked-account-title">{title}</div>
     </div>
     <div className="control">
       {isLinked ? (
-        <Button
-          type="submit"
-          className="is-danger"
-          onClick={() => unlinkProvider(provider)}
-        >
-          {t('unlinkAccount')}
+        <Button type="submit" className="is-danger" onClick={() => unlinkProvider(provider)}>
+          {t("unlinkAccount")}
         </Button>
       ) : (
         <a type="submit" className="button" href={authURL}>
-          {t('linkAccount')}
+          {t("linkAccount")}
         </a>
-      )
-      }
+      )}
     </div>
   </div>
 )
 
-export default withNamespaces('user')(
-  connect(null, mapDispatchToProps)(ThirdPartyAccountLinker)
+export default withNamespaces("user")(
+  connect(
+    null,
+    mapDispatchToProps,
+  )(ThirdPartyAccountLinker),
 )

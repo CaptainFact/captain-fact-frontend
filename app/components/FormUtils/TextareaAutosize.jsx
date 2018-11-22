@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React from "react"
 
 export default class TextareaAutosize extends React.PureComponent {
   componentDidMount() {
@@ -7,26 +6,17 @@ export default class TextareaAutosize extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (!prevProps.focus && this.props.focus)
-      this.refs.textarea.focus()
+    if (!prevProps.focus && this.props.focus) this.refs.textarea.focus()
   }
 
   render() {
     const { onChange, focus, ...props } = this.props
-    return (
-      <textarea
-        className="textarea"
-        ref="textarea"
-        onChange={this._handleChange.bind(this)}
-        {...props}
-      />
-    )
+    return <textarea className="textarea" ref="textarea" onChange={this._handleChange.bind(this)} {...props} />
   }
 
   _handleChange(e) {
     const { onChange } = this.props
-    if (onChange)
-      onChange(e)
+    if (onChange) onChange(e)
     this._adjustHeight(e)
   }
 

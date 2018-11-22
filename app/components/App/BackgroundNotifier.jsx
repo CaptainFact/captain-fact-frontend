@@ -1,9 +1,9 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import Tinycon from 'tinycon'
+import React from "react"
+import { connect } from "react-redux"
+import Tinycon from "tinycon"
 
-import notificationSoundFileURL from '../../assets/sounds/background_statement_focus.mp3'
-import { getFocusedStatementId } from '../../state/video_debate/statements/selectors'
+import notificationSoundFileURL from "../../assets/sounds/background_statement_focus.mp3"
+import { getFocusedStatementId } from "../../state/video_debate/statements/selectors"
 
 const notificationAudioFile = new Audio(notificationSoundFileURL)
 
@@ -19,8 +19,8 @@ class BackgroundNotifier extends React.PureComponent {
     this.onFocus = this.onFocus.bind(this)
 
     Tinycon.setOptions({
-      background: 'transparent',
-      fallback: false
+      background: "transparent",
+      fallback: false,
     })
   }
 
@@ -30,21 +30,18 @@ class BackgroundNotifier extends React.PureComponent {
 
   hasNewStatementFocus(prevProps) {
     const { focusedStatementId } = this.props
-    return (
-      focusedStatementId !== -1
-      && focusedStatementId !== prevProps.focusedStatementId
-    )
+    return focusedStatementId !== -1 && focusedStatementId !== prevProps.focusedStatementId
   }
 
   setFavicon(value) {
     // Reset favicon URL each time we interact with it to fix ugly background
     // See https://github.com/tommoor/tinycon/issues/85#issuecomment-244999536
-    Tinycon.setImage('/favicons/favicon-32x32.png')
+    Tinycon.setImage("/favicons/favicon-32x32.png")
     Tinycon.setBubble(value)
   }
 
   componentDidMount() {
-    this.focusEventListener = window.addEventListener('focus', this.onFocus)
+    this.focusEventListener = window.addEventListener("focus", this.onFocus)
   }
 
   componentWillUnmount() {
@@ -70,8 +67,8 @@ class BackgroundNotifier extends React.PureComponent {
     // If new focus and backgrounded
     if (this.hasNewStatementFocus(prevProps)) {
       // Show a bell on favicon
-      Tinycon.setImage('/favicons/favicon-32x32.png')
-      this.setFavicon('🔔')
+      Tinycon.setImage("/favicons/favicon-32x32.png")
+      this.setFavicon("🔔")
 
       // Play a sound
       if (this.props.soundEnabled) {
@@ -85,7 +82,7 @@ class BackgroundNotifier extends React.PureComponent {
   }
 }
 
-export default connect(state => ({
+export default connect((state) => ({
   soundEnabled: state.UserPreferences.enableSoundOnBackgroundFocus,
-  focusedStatementId: getFocusedStatementId(state)
+  focusedStatementId: getFocusedStatementId(state),
 }))(BackgroundNotifier)

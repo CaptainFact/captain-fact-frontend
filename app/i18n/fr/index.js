@@ -9,6 +9,7 @@ import user from './user'
 import videoDebate from './videoDebate'
 import moderation from './moderation'
 import menu from './menu'
+import city from './city'
 
 export default {
   achievements,
@@ -22,4 +23,5 @@ export default {
   videoDebate,
   moderation,
   menu,
+  city,
 }

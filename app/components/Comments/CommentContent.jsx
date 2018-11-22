@@ -1,15 +1,10 @@
-import React from 'react'
-import Tag from '../Utils/Tag'
-import { Source } from './Source'
+import React from "react"
+import Tag from "../Utils/Tag"
+import { Source } from "./Source"
 
 const COLLAPSE_CONTENT_ABOVE_NESTING = 6
 
-const CommentContent = ({
-  comment: {source, text},
-  nesting,
-  replyingTo,
-  richMedias
-}) => {
+const CommentContent = ({ comment: { source, text }, nesting, replyingTo, richMedias }) => {
   const isCollapsed = replyingTo && nesting > COLLAPSE_CONTENT_ABOVE_NESTING
   const shouldRenderTextBlock = text || isCollapsed
 
@@ -17,13 +12,11 @@ const CommentContent = ({
     <div>
       {shouldRenderTextBlock && (
         <div className="comment-text">
-          {isCollapsed && (
-            <Tag style={{marginRight: 5}}>@{replyingTo.username}</Tag>
-          )}
-          { text }
+          {isCollapsed && <Tag style={{ marginRight: 5 }}>@{replyingTo.username}</Tag>}
+          {text}
         </div>
       )}
-      {source && <Source withoutPlayer={!richMedias} source={source}/>}
+      {source && <Source withoutPlayer={!richMedias} source={source} />}
     </div>
   )
 }

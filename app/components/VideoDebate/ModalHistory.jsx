@@ -1,36 +1,31 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { withNamespaces } from 'react-i18next'
-import titleCase from 'voca/title_case'
+import React from "react"
+import { connect } from "react-redux"
+import { withNamespaces } from "react-i18next"
+import titleCase from "voca/title_case"
 
-import Modal from '../Modal/Modal'
-import { Icon } from '../Utils/Icon'
-import {
-  joinStatementHistoryChannel,
-  leaveStatementHistoryChannel
-} from '../../state/video_debate/history/effects'
-import { popModal } from '../../state/modals/reducer'
-import { ENTITY_STATEMENT } from '../../constants'
-import ActionsTable from '../UsersActions/ActionsTable'
-import { reset } from '../../state/user_actions/reducer'
+import Modal from "../Modal/Modal"
+import { Icon } from "../Utils/Icon"
+import { joinStatementHistoryChannel, leaveStatementHistoryChannel } from "../../state/video_debate/history/effects"
+import { popModal } from "../../state/modals/reducer"
+import { ENTITY_STATEMENT } from "../../constants"
+import ActionsTable from "../UsersActions/ActionsTable"
+import { reset } from "../../state/user_actions/reducer"
 
 @connect(
-  state => ({
+  (state) => ({
     actions: state.UsersActions.actions,
-    isLoading: state.UsersActions.isLoading
+    isLoading: state.UsersActions.isLoading,
   }),
-  { joinStatementHistoryChannel, leaveStatementHistoryChannel, popModal, reset }
+  { joinStatementHistoryChannel, leaveStatementHistoryChannel, popModal, reset },
 )
-@withNamespaces('history')
+@withNamespaces("history")
 export class ModalHistory extends React.PureComponent {
   componentDidMount() {
-    if (this.props.entity === ENTITY_STATEMENT)
-      this.props.joinStatementHistoryChannel(this.props.entityId)
+    if (this.props.entity === ENTITY_STATEMENT) this.props.joinStatementHistoryChannel(this.props.entityId)
   }
 
   componentWillUnmount() {
-    if (this.props.entity === ENTITY_STATEMENT)
-      this.props.leaveStatementHistoryChannel()
+    if (this.props.entity === ENTITY_STATEMENT) this.props.leaveStatementHistoryChannel()
     this.props.reset()
   }
 
@@ -43,12 +38,7 @@ export class ModalHistory extends React.PureComponent {
         handleCloseClick={this.props.popModal}
         {...props}
       >
-        <ActionsTable
-          actions={actions}
-          isLoading={isLoading}
-          showRestore={false}
-          showEntity={false}
-        />
+        <ActionsTable actions={actions} isLoading={isLoading} showRestore={false} showEntity={false} />
       </Modal>
     )
   }
@@ -57,7 +47,7 @@ export class ModalHistory extends React.PureComponent {
     <div>
       <Icon name="history" />
       <span>
-        {' '}
+        {" "}
         {titleCase(t(`entities.${entity}`))} #{entityId}
       </span>
     </div>

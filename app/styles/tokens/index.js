@@ -47,11 +47,14 @@ const myDesignSystem = {
   shadows: {
     slightDark: `0 ${pxTo(3, pxFontSize.base, "rem")} ${pxTo(36, pxFontSize.base, "rem")} rgba(140, 100, 255, 0.17)`,
     slightLight: `0 ${pxTo(5, pxFontSize.base, "rem")} ${pxTo(21, pxFontSize.base, "rem")} rgba(47, 47, 47, 0.19)`,
+    mediumDark: `0 0 ${pxTo(4, pxFontSize.base, "rem")} rgba(0, 0, 0, 0.25);`,
+    mediumLight: `0 0 ${pxTo(4, pxFontSize.base, "rem")} rgba(0, 0, 0, 0.25)`,
   },
   radius: {
     default: pxTo(3, pxFontSize.base, "rem"),
     md: pxTo(5, pxFontSize.base, "rem"),
-    large: pxTo(35, pxFontSize.base, "rem")
+    lg: pxTo(20, pxFontSize.base, "rem"),
+    xl: pxTo(35, pxFontSize.base, "rem"),
   },
 }
 

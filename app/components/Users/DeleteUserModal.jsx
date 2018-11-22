@@ -1,13 +1,12 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { withNamespaces } from 'react-i18next'
-import { Field, formValueSelector, reduxForm } from 'redux-form'
+import React from "react"
+import { connect } from "react-redux"
+import { withNamespaces } from "react-i18next"
+import { Field, formValueSelector, reduxForm } from "redux-form"
 
-import { ModalFormContainer } from '../Modal/ModalFormContainer'
-import { Icon } from '../Utils/Icon'
+import { ModalFormContainer } from "../Modal/ModalFormContainer"
+import { Icon } from "../Utils/Icon"
 
-
-const DELETE_FORM = 'deleteAccount'
+const DELETE_FORM = "deleteAccount"
 
 @reduxForm({ form: DELETE_FORM })
 class DeleteForm extends React.PureComponent {
@@ -37,22 +36,21 @@ class DeleteForm extends React.PureComponent {
 
 const valueSelector = formValueSelector(DELETE_FORM)
 
-
-@connect(state => ({
-  isValid: valueSelector(state, 'usernameConfirm') === state.CurrentUser.data.username
+@connect((state) => ({
+  isValid: valueSelector(state, "usernameConfirm") === state.CurrentUser.data.username,
 }))
-@withNamespaces('main')
+@withNamespaces("main")
 export default class DeleteUserModal extends React.PureComponent {
   render() {
     const { t, isValid, ...otherProps } = this.props
     return (
       <ModalFormContainer
-        title={t('user:deleteAccount')}
+        title={t("user:deleteAccount")}
         FormComponent={DeleteForm}
         confirmIcon="trash-o"
         confirmType="danger"
         confirmDisabled={!isValid}
-        confirmText={t('actions.delete')}
+        confirmText={t("actions.delete")}
         {...otherProps}
       />
     )

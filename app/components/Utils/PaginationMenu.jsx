@@ -1,8 +1,8 @@
-import React from 'react'
-import classNames from 'classnames'
+import React from "react"
+import classNames from "classnames"
 
-import { withNamespaces } from 'react-i18next'
-import Button from './Button'
+import { withNamespaces } from "react-i18next"
+import Button from "./Button"
 
 const PaginationEllipsis = () => (
   <li>
@@ -10,16 +10,10 @@ const PaginationEllipsis = () => (
   </li>
 )
 
-const makeLink = (
-  LinkBuilder,
-  page,
-  disabled,
-  onPageChange = null,
-  isCurrent = false
-) => (
+const makeLink = (LinkBuilder, page, disabled, onPageChange = null, isCurrent = false) => (
   <li key={page}>
     <LinkBuilder
-      className={classNames('pagination-link', { 'is-current': isCurrent })}
+      className={classNames("pagination-link", { "is-current": isCurrent })}
       disabled={disabled}
       aria-label={`Go to page ${page}`}
       onClick={onPageChange ? () => onPageChange(page) : undefined}
@@ -30,15 +24,7 @@ const makeLink = (
   </li>
 )
 
-const pageSelectButtonsList = (
-  LinkBuilder,
-  nbStart,
-  nbCur,
-  nbEnd,
-  disabled,
-  onPageChange,
-  nbShowArround = 2
-) => {
+const pageSelectButtonsList = (LinkBuilder, nbStart, nbCur, nbEnd, disabled, onPageChange, nbShowArround = 2) => {
   const result = []
   let curPage = nbStart
   while (curPage <= nbEnd) {
@@ -81,11 +67,11 @@ const PaginationMenu = ({
   total = 1,
   isRounded,
   onPageChange,
-  LinkBuilder = props => <Button {...props} />,
-  t
+  LinkBuilder = (props) => <Button {...props} />,
+  t,
 }) => {
-  const allClasses = classNames('pagination is-centered', className, {
-    'is-rounded': isRounded
+  const allClasses = classNames("pagination is-centered", className, {
+    "is-rounded": isRounded,
   })
 
   return (
@@ -96,7 +82,7 @@ const PaginationMenu = ({
         className="pagination-previous"
         data-page={currentPage - 1}
       >
-        {t('pagination.prev')}
+        {t("pagination.prev")}
       </LinkBuilder>
       <LinkBuilder
         onClick={onPageChange ? () => onPageChange(currentPage + 1) : undefined}
@@ -104,20 +90,13 @@ const PaginationMenu = ({
         className="pagination-next"
         data-page={currentPage + 1}
       >
-        {t('pagination.next')}
+        {t("pagination.next")}
       </LinkBuilder>
       <ul className="pagination-list">
-        {pageSelectButtonsList(
-          LinkBuilder,
-          1,
-          currentPage,
-          total,
-          disabled,
-          onPageChange
-        )}
+        {pageSelectButtonsList(LinkBuilder, 1, currentPage, total, disabled, onPageChange)}
       </ul>
     </nav>
   )
 }
 
-export default withNamespaces('main')(PaginationMenu)
+export default withNamespaces("main")(PaginationMenu)
