@@ -32,7 +32,7 @@ const reducers = combineReducers({
   UsersActions: UsersActionsReducer,
   Moderation: ModerationReducer,
   Videos: VideosReducer,
-  form: formReducer
+  form: formReducer,
 })
 
 
