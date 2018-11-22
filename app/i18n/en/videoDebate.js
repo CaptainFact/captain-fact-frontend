@@ -61,9 +61,9 @@ export default {
     autoscroll_enable: 'Enable Autoscroll',
     autoscroll_disable: 'Disable Autoscroll',
     soundOnBackgroundFocus_enable:
-      'Enable sound when the focus change in background',
+      'Play a sound when the focus change in background',
     soundOnBackgroundFocus_disable:
-      'Disable sound when the focus change in background',
+      "Don't play a sound when the focus change in background",
     reverseTimeLock_lock: 'Unlock time marker',
     reverseTimeLock_unlock: 'Lock time marker'
   },
