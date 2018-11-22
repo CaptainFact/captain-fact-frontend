@@ -1,11 +1,13 @@
 module.exports = {
   default: {
     transparent: 'transparent',
+    orangeLightest: '#FFCE93',
     orangeLight: '#FFE8AB',
     orangeRegular: '#FFB077',
     orangeMedium: '#8C6447',
     orangeDark: '#643B1D',
     orangeDarkest: '#413E3B',
+    brownRegular: '#8C6447',
     cyanRegular: '#77FFEF',
     cyanMedium: '#72B3AB',
     cyanDark: '#188779',
@@ -13,6 +15,8 @@ module.exports = {
     purpleRegular: '#7F65E6',
     purpleMedium: '##7F65E7',
     purpleDark: '#342863',
+    lavenderRegular: '#8C64FF',
+    whiteDark: '#C7C7C7',
     whiteMedium: '#FAFAFA',
     white: '#FFFFFF',
     midnightLightest: '#2B1E61',

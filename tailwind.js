@@ -119,12 +119,12 @@ module.exports = {
   */
 
   tracking: {
-    unset: 'unset',
-    inherit: 'inherit',
-    initial: 'initial',
-    tight: '-0.05em',
-    normal: '0',
-    wide: '0.05em',
+    0: 0,
+    1: pxTo(1, baseFontSize, 'rem'),
+    2: pxTo(2, baseFontSize, 'rem'),
+    3: pxTo(3, baseFontSize, 'rem'),
+    4: pxTo(4, baseFontSize, 'rem'),
+    5: pxTo(5, baseFontSize, 'rem'),
   },
 
   /*

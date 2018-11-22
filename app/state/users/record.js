@@ -14,7 +14,12 @@ const User = new Record({
   registered_at: null,
   achievements: [],
   is_publisher: false,
-  speaker_id: null
+  speaker_id: null,
+  city: {
+    name: 'Trjvednaja',
+    temperature: '19.5°C',
+    population: 9.854
+  }, // fake data for POC ; user should be able to set his/her city name
 })
 
 export default User
