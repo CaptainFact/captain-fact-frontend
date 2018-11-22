@@ -96,6 +96,7 @@
     "redux-thunk": "^2.2.0",
     "reselect": "^4.0.0",
     "smoothscroll-polyfill": "^0.4.3",
+    "tinycon": "^0.6.8",
     "uuid": "^3.3.2",
     "validator": "^10.9.0",
     "voca": "^1.4.0",

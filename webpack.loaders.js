@@ -1,12 +1,9 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-<<<<<<< HEAD
-=======
 const exludedFolders = [path.join(__dirname, 'node_modules')]
 
 
->>>>>>> wip: setup design system
 // noinspection WebpackConfigHighlighting
 module.exports = isProd => [
   // =========
