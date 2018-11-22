@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 
 const CloseButton = ({ onClick }) => <a className="delete" onClick={onClick} />
 

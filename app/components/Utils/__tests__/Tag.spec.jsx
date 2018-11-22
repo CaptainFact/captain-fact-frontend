@@ -1,9 +1,9 @@
-import Tag from '../Tag'
+import Tag from "../Tag"
 
-test('render tag', () => {
+test("render tag", () => {
   snapshotComponent(<Tag>Test</Tag>)
 })
 
-test('set size', () => {
+test("set size", () => {
   snapshotComponent(<Tag type="info">Test</Tag>)
 })

@@ -1,9 +1,8 @@
-import React from 'react'
-import { Icon } from '../Utils/Icon'
+import React from "react"
+import { Icon } from "../Utils/Icon"
 
-
-export default ({iconName, label}) => (
+export default ({ iconName, label }) => (
   <div className="sourcesType">
-    <Icon name={iconName}/> {label}
+    <Icon name={iconName} /> {label}
   </div>
 )

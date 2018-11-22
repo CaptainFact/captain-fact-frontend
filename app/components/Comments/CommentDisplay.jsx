@@ -1,40 +1,42 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { withNamespaces } from 'react-i18next'
-import { change } from 'redux-form'
-import classNames from 'classnames'
+import React from "react"
+import { connect } from "react-redux"
+import { withNamespaces } from "react-i18next"
+import { change } from "redux-form"
+import classNames from "classnames"
 
-import { addModal } from '../../state/modals/reducer'
-import { commentVote, deleteComment, flagComment } from '../../state/video_debate/comments/effects'
-import { isAuthenticated } from '../../state/users/current_user/selectors'
-import { isOwnComment } from '../../state/video_debate/comments/selectors'
-import {flashErrorUnauthenticated} from '../../state/flashes/reducer'
-import MediaLayout from '../Utils/MediaLayout'
-import Vote from './Vote'
-import CommentActions from './CommentActions'
-import CommentHeader from './CommentHeader'
-import CommentContent from './CommentContent'
-import { COLLAPSE_REPLIES_AT_NESTING } from '../../constants'
-import ModalFlag from './ModalFlag'
-import ModalDeleteComment from './ModalDeleteComment'
-import { CommentsList } from './CommentsList'
+import { addModal } from "../../state/modals/reducer"
+import { commentVote, deleteComment, flagComment } from "../../state/video_debate/comments/effects"
+import { isAuthenticated } from "../../state/users/current_user/selectors"
+import { isOwnComment } from "../../state/video_debate/comments/selectors"
+import { flashErrorUnauthenticated } from "../../state/flashes/reducer"
+import MediaLayout from "../Utils/MediaLayout"
+import Vote from "./Vote"
+import CommentActions from "./CommentActions"
+import CommentHeader from "./CommentHeader"
+import CommentContent from "./CommentContent"
+import { COLLAPSE_REPLIES_AT_NESTING } from "../../constants"
+import ModalFlag from "./ModalFlag"
+import ModalDeleteComment from "./ModalDeleteComment"
+import { CommentsList } from "./CommentsList"
 
-
-@connect((state, {comment}) => ({
-  isOwnComment: isOwnComment(state, comment),
-  isAuthenticated: isAuthenticated(state),
-  myVote: state.VideoDebate.comments.voted.get(comment.id, 0),
-  isVoting: state.VideoDebate.comments.voting.has(comment.id),
-  replies: state.VideoDebate.comments.replies.get(comment.id),
-  isFlagged: state.VideoDebate.comments.myFlags.has(comment.id)
-}), {addModal, deleteComment, flagComment, commentVote, change, flashErrorUnauthenticated})
-@withNamespaces('main')
+@connect(
+  (state, { comment }) => ({
+    isOwnComment: isOwnComment(state, comment),
+    isAuthenticated: isAuthenticated(state),
+    myVote: state.VideoDebate.comments.voted.get(comment.id, 0),
+    isVoting: state.VideoDebate.comments.voting.has(comment.id),
+    replies: state.VideoDebate.comments.replies.get(comment.id),
+    isFlagged: state.VideoDebate.comments.myFlags.has(comment.id),
+  }),
+  { addModal, deleteComment, flagComment, commentVote, change, flashErrorUnauthenticated },
+)
+@withNamespaces("main")
 export class CommentDisplay extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
       isBlurred: false,
-      repliesCollapsed: props.nesting === COLLAPSE_REPLIES_AT_NESTING
+      repliesCollapsed: props.nesting === COLLAPSE_REPLIES_AT_NESTING,
     }
   }
 
@@ -42,7 +44,7 @@ export class CommentDisplay extends React.PureComponent {
     const { comment, withoutActions, className, replies, hideThread } = this.props
     const { isBlurred, repliesCollapsed } = this.state
     const approveClass = this.getApproveClass(comment.approve)
-    const allClassNames = classNames('comment', className, approveClass, {
+    const allClassNames = classNames("comment", className, approveClass, {
       isBlurred,
       hasSource: !!comment.source,
     })
@@ -74,7 +76,7 @@ export class CommentDisplay extends React.PureComponent {
         isVoting={isVoting}
         score={comment.score}
         myVote={myVote}
-        onVote={value => this.handleVote(value)}
+        onVote={(value) => this.handleVote(value)}
         isReported={comment.is_reported}
       />
     )
@@ -82,13 +84,11 @@ export class CommentDisplay extends React.PureComponent {
 
   renderCommentContent() {
     const { repliesCollapsed } = this.state
-    const { comment, withoutActions, replies, richMedias = true} = this.props
+    const { comment, withoutActions, replies, richMedias = true } = this.props
 
     return (
       <React.Fragment>
-        {!this.props.withoutHeader && (
-          <CommentHeader comment={comment} withoutActions={withoutActions}/>
-        )}
+        {!this.props.withoutHeader && <CommentHeader comment={comment} withoutActions={withoutActions} />}
         <CommentContent
           comment={comment}
           nesting={this.props.nesting}
@@ -112,17 +112,17 @@ export class CommentDisplay extends React.PureComponent {
   }
 
   getApproveClass(approve) {
-    return approve !== null && (approve ? 'approve' : 'refute')
+    return approve !== null && (approve ? "approve" : "refute")
   }
 
   // ---- State modifiers ----
 
   setIsBlurred(isBlurred) {
-    this.setState({isBlurred})
+    this.setState({ isBlurred })
   }
 
   toggleShowReplies(currentState) {
-    this.setState({repliesCollapsed: !currentState})
+    this.setState({ repliesCollapsed: !currentState })
   }
 
   // ---- Authenticated actions ----
@@ -143,42 +143,39 @@ export class CommentDisplay extends React.PureComponent {
       props: {
         handleAbort: () => this.setIsBlurred(false),
         handleConfirm: () => this.props.deleteComment(this.props.comment),
-        comment: this.props.comment
-      }
+        comment: this.props.comment,
+      },
     })
   }
 
   handleVote(value) {
-    if (!this.ensureAuthenticated())
-      return false
-    return this.props.commentVote({comment: this.props.comment, value})
+    if (!this.ensureAuthenticated()) return false
+    return this.props.commentVote({ comment: this.props.comment, value })
   }
 
   handleReply() {
-    if (!this.ensureAuthenticated())
-      return null
+    if (!this.ensureAuthenticated()) return null
     const formName = `formAddComment-${this.props.comment.statement_id}`
-    return this.props.change(formName, 'reply_to', this.props.comment)
+    return this.props.change(formName, "reply_to", this.props.comment)
   }
 
   handleFlag(initialReason) {
-    if (!this.ensureAuthenticated())
-      return
+    if (!this.ensureAuthenticated()) return
     this.setIsBlurred(true)
     this.props.addModal({
       Modal: ModalFlag,
       props: {
         handleAbort: () => this.setIsBlurred(false),
-        handleConfirm: ({reason}) => {
+        handleConfirm: ({ reason }) => {
           this.setIsBlurred(false)
           return this.props.flagComment({
             id: this.props.comment.id,
-            reason: parseInt(reason)
+            reason: parseInt(reason),
           })
         },
         comment: this.props.comment,
-        initialReason
-      }
+        initialReason,
+      },
     })
   }
 }

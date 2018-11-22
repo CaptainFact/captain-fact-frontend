@@ -1,40 +1,34 @@
-import React from 'react'
-import { reduxForm } from 'redux-form'
-import { connect } from 'react-redux'
-import { withRouter, Link } from 'react-router'
-import { withNamespaces } from 'react-i18next'
+import React from "react"
+import { reduxForm } from "redux-form"
+import { connect } from "react-redux"
+import { withRouter, Link } from "react-router"
+import { withNamespaces } from "react-i18next"
 
-import { register, requestInvitation } from '../../state/users/current_user/effects'
-import {
-  renderAllUserFields, submitButton,
-  validatePasswordRepeat
-} from './UserFormFields'
-import ThirdPartyAuthList from './ThirdPartyAuthList'
-import Notification from '../Utils/Notification'
-import Message from '../Utils/Message'
-import InvitationRequestForm from './InvitationRequestForm'
-import { errorToFlash } from '../../state/flashes/reducer'
-import { handleFormEffectResponse } from '../../lib/handle_effect_response'
-import { INVITATION_SYSTEM } from '../../config'
-
+import { register, requestInvitation } from "../../state/users/current_user/effects"
+import { renderAllUserFields, submitButton, validatePasswordRepeat } from "./UserFormFields"
+import ThirdPartyAuthList from "./ThirdPartyAuthList"
+import Notification from "../Utils/Notification"
+import Message from "../Utils/Message"
+import InvitationRequestForm from "./InvitationRequestForm"
+import { errorToFlash } from "../../state/flashes/reducer"
+import { handleFormEffectResponse } from "../../lib/handle_effect_response"
+import { INVITATION_SYSTEM } from "../../config"
 
 const SignupForm = ({ location, t }) => {
   if (!INVITATION_SYSTEM || location.query.invitation_token) {
     return (
-      <RealSignupForm initialValues={{
-        invitation_token: location.query.invitation_token
-      }}
+      <RealSignupForm
+        initialValues={{
+          invitation_token: location.query.invitation_token,
+        }}
       />
     )
   }
   return (
     <div className="user-form">
-      <Message
-        type="warning"
-        header={t('invitationOnlyTitle')}
-      >
+      <Message type="warning" header={t("invitationOnlyTitle")}>
         <div>
-          {t('invitationOnlyBody')}
+          {t("invitationOnlyBody")}
           <hr />
           <InvitationRequestForm />
         </div>
@@ -43,14 +37,14 @@ const SignupForm = ({ location, t }) => {
   )
 }
 
-export default withRouter(withNamespaces('user')(SignupForm))
+export default withRouter(withNamespaces("user")(SignupForm))
 
 @withRouter
-@withNamespaces('user')
-@reduxForm({ form: 'signupForm', validate: validatePasswordRepeat })
+@withNamespaces("user")
+@reduxForm({ form: "signupForm", validate: validatePasswordRepeat })
 @connect(
   ({ CurrentUser: { data }, UserPreferences: { locale } }) => ({ CurrentUser: data, locale }),
-  { register, requestInvitation, errorToFlash }
+  { register, requestInvitation, errorToFlash },
 )
 class RealSignupForm extends React.PureComponent {
   componentWillReceiveProps(props) {
@@ -62,27 +56,25 @@ class RealSignupForm extends React.PureComponent {
 
   submit({ invitation_token, ...user }) {
     const registerParams = { invitation_token, user: { ...user, locale: this.props.locale } }
-    return this.props.register(registerParams)
-      .then(handleFormEffectResponse({
-        onError: msg => (typeof (msg) === 'string' ? this.props.errorToFlash(msg) : null)
-      }))
+    return this.props.register(registerParams).then(
+      handleFormEffectResponse({
+        onError: (msg) => (typeof msg === "string" ? this.props.errorToFlash(msg) : null),
+      }),
+    )
   }
 
   render() {
     const { valid, error, t } = this.props
 
     return (
-      <form
-        className="form user-form"
-        onSubmit={this.props.handleSubmit(this.submit.bind(this))}
-      >
+      <form className="form user-form" onSubmit={this.props.handleSubmit(this.submit.bind(this))}>
         {error && <Notification type="danger">{error}</Notification>}
         <strong>
-          {t('alreadyHaveAccountQuestion')} <Link to="login">{t('login')}</Link>
+          {t("alreadyHaveAccountQuestion")} <Link to="login">{t("login")}</Link>
         </strong>
         <hr />
         {renderAllUserFields(valid, t)}
-        {submitButton(t('signup'), valid)}
+        {submitButton(t("signup"), valid)}
         <ThirdPartyAuthList />
       </form>
     )

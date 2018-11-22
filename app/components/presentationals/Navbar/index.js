@@ -78,7 +78,7 @@ const Navbar = (props) => {
   return <nav className={'flex w-8/12 ml-auto items-center justify-between'}>
     <ul className={`flex list-reset flex-grow items-evenly`}>
       {pages.map(page => <li key={page.path}>
-        <Link staticStyles='font-700' component={RouterLink} key={page.path} path={page.path}>
+        <Link staticStyles='font-700' activeClassName="opacity-45" component={RouterLink} key={page.path} path={page.path}>
           {t(`${page.name}`)} <small className={`text-sm ${page.name.length > 8 ? 'block' : ''}`}>{page.subname}</small>
         </Link>
       </li>)}

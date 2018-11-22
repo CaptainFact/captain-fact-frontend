@@ -1,20 +1,22 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from "react"
+import { connect } from "react-redux"
 
-import { withNamespaces } from 'react-i18next'
-import { LoadingFrame } from '../Utils/LoadingFrame'
-import { ErrorView } from '../Utils/ErrorView'
-import { login } from '../../state/users/current_user/effects'
-import { isAuthenticated } from '../../state/users/current_user/selectors'
+import { withNamespaces } from "react-i18next"
+import { LoadingFrame } from "../Utils/LoadingFrame"
+import { ErrorView } from "../Utils/ErrorView"
+import { login } from "../../state/users/current_user/effects"
+import { isAuthenticated } from "../../state/users/current_user/selectors"
 
-
-@connect(state => ({
-  user: state.CurrentUser.data,
-  isLoading: state.CurrentUser.isLoading || state.CurrentUser.isPosting,
-  error: state.CurrentUser.error,
-  isAuthenticated: isAuthenticated(state)
-}), { login })
-@withNamespaces('user')
+@connect(
+  (state) => ({
+    user: state.CurrentUser.data,
+    isLoading: state.CurrentUser.isLoading || state.CurrentUser.isPosting,
+    error: state.CurrentUser.error,
+    isAuthenticated: isAuthenticated(state),
+  }),
+  { login },
+)
+@withNamespaces("user")
 export default class ThirdPartyCallback extends React.PureComponent {
   componentDidMount() {
     if (!this.props.location.query.error) {
@@ -22,8 +24,8 @@ export default class ThirdPartyCallback extends React.PureComponent {
         provider: this.props.params.provider,
         params: {
           code: this.props.location.query.code,
-          invitation_token: this.props.location.query.state
-        }
+          invitation_token: this.props.location.query.state,
+        },
       })
     }
   }
@@ -34,10 +36,8 @@ export default class ThirdPartyCallback extends React.PureComponent {
   }
 
   render() {
-    if (this.props.isLoading)
-      return <LoadingFrame title="Authenticating" />
-    if (this.props.error)
-      return <ErrorView error={this.props.error} i18nNS="user:errors.error" />
+    if (this.props.isLoading) return <LoadingFrame title="Authenticating" />
+    if (this.props.error) return <ErrorView error={this.props.error} i18nNS="user:errors.error" />
     if (this.props.location.query.error)
       return <ErrorView error={this.props.location.query.error} i18nNS="user:errors.thirdParty" />
     return <LoadingFrame title="Authenticating" />

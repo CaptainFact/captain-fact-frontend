@@ -1,35 +1,33 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-import { withNamespaces } from 'react-i18next'
-import isPromise from 'is-promise'
+import React from "react"
+import { connect } from "react-redux"
+import PropTypes from "prop-types"
+import { withNamespaces } from "react-i18next"
+import isPromise from "is-promise"
 
-import { isAuthenticated } from '../../state/users/current_user/selectors'
-import { unlockPublicAchievement } from '../../state/users/current_user/effects'
-import { flashSuccessMsg } from '../../state/flashes/reducer'
-
+import { isAuthenticated } from "../../state/users/current_user/selectors"
+import { unlockPublicAchievement } from "../../state/users/current_user/effects"
+import { flashSuccessMsg } from "../../state/flashes/reducer"
 
 /**
  * Check if user has given achievement. If not, calls `meetConditions` and trigger effect if the result is true.
  * If no meetConditions is passed, component will just unlock achievement on mount / update.
  */
 @connect(
-  state => ({
+  (state) => ({
     isAuthenticated: isAuthenticated(state),
     achievements: state.CurrentUser.data.achievements,
-    user: state.CurrentUser.data
+    user: state.CurrentUser.data,
   }),
-  { unlockPublicAchievement, flashSuccessMsg }
+  { unlockPublicAchievement, flashSuccessMsg },
 )
-@withNamespaces('achievements')
+@withNamespaces("achievements")
 class PublicAchievementUnlocker extends React.PureComponent {
   componentDidMount() {
     this.unlockIfNecessary()
   }
 
   componentDidUpdate(oldProps) {
-    if (this.props.achievements !== oldProps.achievements)
-      this.unlockIfNecessary()
+    if (this.props.achievements !== oldProps.achievements) this.unlockIfNecessary()
   }
 
   render() {
@@ -37,19 +35,15 @@ class PublicAchievementUnlocker extends React.PureComponent {
   }
 
   unlockIfNecessary = () => {
-    if (!this.props.isAuthenticated || this.hasAchievement())
-      return false
+    if (!this.props.isAuthenticated || this.hasAchievement()) return false
 
-    if (!this.props.meetConditionsFunc)
-      this.doUnlockAchievement()
+    if (!this.props.meetConditionsFunc) this.doUnlockAchievement()
     else {
       const funcResult = this.props.meetConditionsFunc()
-      if (funcResult === true)
-        this.doUnlockAchievement()
+      if (funcResult === true) this.doUnlockAchievement()
       else if (isPromise(funcResult))
         funcResult.then((result) => {
-          if (result === true)
-            this.doUnlockAchievement()
+          if (result === true) this.doUnlockAchievement()
         })
     }
     return true
@@ -60,10 +54,10 @@ class PublicAchievementUnlocker extends React.PureComponent {
   doUnlockAchievement = () => {
     this.props.unlockPublicAchievement(this.props.achievementId).then(() => {
       const achievementTitle = this.props.t(`${this.props.achievementId}.title`)
-      this.props.flashSuccessMsg('achievements:unlocked', {
+      this.props.flashSuccessMsg("achievements:unlocked", {
         i18nParams: { achievement: achievementTitle },
         infoUrl: `/u/${this.props.user.username}`,
-        iconName: 'trophy'
+        iconName: "trophy",
       })
     })
   }
@@ -74,7 +68,7 @@ PublicAchievementUnlocker.propTypes = {
   /**
    * A function like () => bool or () => Promise (that should resolve with a bool)
    */
-  meetConditionsFunc: PropTypes.func
+  meetConditionsFunc: PropTypes.func,
 }
 
 export default PublicAchievementUnlocker

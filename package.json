@@ -40,6 +40,7 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx}": [
+      "npx prettier --parser=babylon --write \"app/**/*.js\"",
       "npx eslint --fix \"app/**/*.js\""
     ]
   },

@@ -1,15 +1,14 @@
-import React from 'react'
-import { Link } from 'react-router'
-import { withNamespaces } from 'react-i18next'
+import React from "react"
+import { Link } from "react-router"
+import { withNamespaces } from "react-i18next"
 
-import { Icon, TimeSince } from '../Utils'
-import iterateWithSeparators from '../../lib/iterate_with_separators'
-import CardLayout from '../Utils/CardLayout'
-import RawIcon from '../Utils/RawIcon'
-import { videoURL } from '../../lib/cf_routes'
+import { Icon, TimeSince } from "../Utils"
+import iterateWithSeparators from "../../lib/iterate_with_separators"
+import CardLayout from "../Utils/CardLayout"
+import RawIcon from "../Utils/RawIcon"
+import { videoURL } from "../../lib/cf_routes"
 
-
-@withNamespaces('videoDebate')
+@withNamespaces("videoDebate")
 export class VideoCard extends React.PureComponent {
   render() {
     const { t, video } = this.props
@@ -20,7 +19,7 @@ export class VideoCard extends React.PureComponent {
       <div className="column is-one-quarter">
         <CardLayout
           className="video-card"
-          image={(
+          image={
             <Link to={linkTarget}>
               <div className="play-overlay">
                 <RawIcon name="play-circle" />
@@ -29,14 +28,12 @@ export class VideoCard extends React.PureComponent {
                 <img alt="" src={VideoCard.videoThumb(provider, provider_id)} />
               </figure>
             </Link>
-          )}
-          content={(
+          }
+          content={
             <Link to={linkTarget}>
-              <h4 className="title is-5">
-                {title}
-              </h4>
+              <h4 className="title is-5">{title}</h4>
             </Link>
-          )}
+          }
           footer={this.renderVideoMetadata(video, t)}
         />
       </div>
@@ -60,12 +57,12 @@ export class VideoCard extends React.PureComponent {
     return isPartner ? (
       <span className="added-by">
         <Icon name="star" />
-        <strong>{t('video.addedBy', { userType: '$t(video.partner)' })}</strong>
+        <strong>{t("video.addedBy", { userType: "$t(video.partner)" })}</strong>
       </span>
     ) : (
       <span className="added-by">
         <Icon name="user" />
-        <span>{t('video.addedBy', { userType: '$t(video.user)' })}</span>
+        <span>{t("video.addedBy", { userType: "$t(video.user)" })}</span>
       </span>
     )
   }
@@ -78,14 +75,14 @@ export class VideoCard extends React.PureComponent {
         <span key={speaker.id}>
           <strong>{this.renderSpeakerName(speaker)}</strong>
           {separator}
-        </span>
+        </span>,
       )
     }
 
     return (
       <div className="speakers-list">
         <Icon name="users" />
-        {t('main:misc.staring')}
+        {t("main:misc.staring")}
         &nbsp;
         {speakerComponentsList}
       </div>
@@ -93,17 +90,13 @@ export class VideoCard extends React.PureComponent {
   }
 
   renderSpeakerName(speaker) {
-    return (
-      <Link to={`/s/${speaker.slug || speaker.id}`}>
-        {speaker.full_name}
-      </Link>
-    )
+    return <Link to={`/s/${speaker.slug || speaker.id}`}>{speaker.full_name}</Link>
   }
 
   static videoThumb(provider, provider_id) {
-    if (provider === 'youtube') {
+    if (provider === "youtube") {
       return `https://img.youtube.com/vi/${provider_id}/mqdefault.jpg`
     }
-    return ''
+    return ""
   }
 }
