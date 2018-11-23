@@ -4,7 +4,8 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
 // Import Views
 import App from './components/App'
-import Home from './components/Home/Home'
+// import Home from './components/Home/Home'
+import NewHome from './components/Home/NewHome'
 import { NotFound, BrowserExtensionsPage } from './components/Pages'
 import { AddVideoForm } from './components/Videos'
 import VideosIndexPage from './components/Videos/VideosIndexPage'
@@ -23,12 +24,13 @@ import Moderation from './components/Moderation/Moderation'
 import { SpeakerPage } from './components/Speakers/SpeakerPage'
 import NewsletterSubscription from './components/Users/NewsletterSubscription'
 import ActivityLog from './components/Users/ActivityLog'
+import Search from './components/Search/Search'
 
 
 const CFRouter = () => (
   <Router history={browserHistory}>
     <Route path="/" component={App}>
-      <IndexRoute component={Home} />
+      <IndexRoute component={NewHome} />
       <Route path="/signup" component={SignupForm} />
       <Route path="/signup/callback/:provider" component={ThirdPartyCallback} />
       <Route path="/login" component={LoginForm} />
@@ -52,6 +54,7 @@ const CFRouter = () => (
       <Route path="/help/*" component={Help} />
       <Route path="/extension" component={BrowserExtensionsPage} />
       <Route path="/moderation" component={Moderation} />
+      <Route path="/search" component={Search} />
       <Route path="*" component={NotFound} />
     </Route>
   </Router>
