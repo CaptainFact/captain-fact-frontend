@@ -55,6 +55,7 @@ const myDesignSystem = {
     md: pxTo(5, pxFontSize.base, "rem"),
     lg: pxTo(20, pxFontSize.base, "rem"),
     xl: pxTo(35, pxFontSize.base, "rem"),
+    xxl: pxTo(9999, pxFontSize.base, "rem"),
   },
 }
 

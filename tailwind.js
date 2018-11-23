@@ -221,6 +221,7 @@ module.exports = {
     30: pxTo(30, baseFontSize, 'rem'),
     35: pxTo(35, baseFontSize, 'rem'),
     50: pxTo(50, baseFontSize, 'rem'),
+    60: pxTo(50, baseFontSize, 'rem'),
     75: pxTo(75, baseFontSize, 'rem'),
     screen: '100vw',
     full: '100%',

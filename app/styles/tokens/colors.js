@@ -10,6 +10,7 @@ module.exports = {
     cyanRegular: '#77FFEF',
     cyanMedium: '#72B3AB',
     cyanDark: '#188779',
+    cyanDarkest: '#4BD0C0',
     purpleLight: '#C7B3FF',
     purpleRegular: '#7F65E6',
     purpleMedium: '##7F65E7',

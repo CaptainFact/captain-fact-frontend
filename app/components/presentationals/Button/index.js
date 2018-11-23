@@ -1,26 +1,48 @@
 import React from 'react'
 import { css } from 'emotion'
 import { pxTo } from 'design-system-utils'
-import PropTypes from 'prop-types'
-import { ds } from "./../../../styles/tokens"
+import { withTheme } from './../../smart/ThemeProvider'
+import { ds } from './../../../styles/tokens'
 
-console.log(ds.get('colors.cyanRegular'))
-
-const backgrounds = {
-  primary: 'bg-cyanRegular',
-  secondary: 'bg-purpleLight',
-  tertiary: 'bg-orangeLight',
-  quaternary: 'bg-midnightRegular',
+const baseFontSize = ds.get("type.sizes.baseFontSize")
+const buttonTheme = {
+  outline: {
+    colors: {
+      tutorial: {
+        light: ds.get('colors.midnightLightest'),
+        dark: ds.get('colors.orangeRegular'),
+      }
+    },
+  },
+  colors: {
+    tutorial: {
+      light: ds.get('colors.midnightLightest'),
+      dark: ds.get('colors.orangeMedium'),
+    }
+  },
+  backgrounds: {
+    tutorial: {
+      dark: `linear-gradient(90deg, ${ds.get('colors.orangeRegular')} 0%, ${ds.get('colors.orangeLight')} 100%)`,
+      light: `linear-gradient(90deg, ${ds.get('colors.cyanRegular')} 0%, ${ds.get('colors.lavenderRegular')} 100%)`,
+    }
+  },
 }
-const Button = ({theme, ...props}) => {
 
-  return <button className={`${backgrounds[theme]}`} {...props}>
-    { props.children }
+const Button = (props) => {
+  const { theme, size, additionalStyles, themeName, onClick, outline, radius, children } = props
+  return <button onClick={onClick} className={css({
+    background: outline === true ? 'transparent' : buttonTheme.backgrounds[themeName][theme],
+    border: outline === true ? `solid ${pxTo(1, baseFontSize, "rem")} currentColor !important` : `0 !important`,
+    color: outline === true ? buttonTheme.outline.colors[themeName][theme] : buttonTheme.colors[themeName][theme],
+    borderRadius: ds.get(`radius.${radius}`),
+    fontSize:  pxTo(ds.get(`type.sizes.${size}`), baseFontSize, "rem"),
+  }).concat(' ', additionalStyles ? additionalStyles : '')}>
+    {children}
   </button>
 }
 
-Button.defaultProps = {
-  theme: 'primary',
-}
 
-export default Button
+Button.defaultProps = {
+  radius: 'default'
+}
+export default withTheme(Button)
