@@ -8,10 +8,10 @@ export default class Timeline extends React.PureComponent {
   }
 
   selectQuote(index) {
+    this.props.goTo(this.props.quotes[index].time)
     this.setState({
       currentQuote: this.props.quotes[index]
     })
-    this.props.goTo(this.state.currentQuote.time)
   }
 
   render() {
