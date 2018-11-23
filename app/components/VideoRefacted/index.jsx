@@ -233,7 +233,7 @@ class VideoRefacted extends PureComponent {
               <Timeline facts={ data.facts } currentTime={ state.position } totalTime={ state.duration } />
             </Block>
 
-            <Block className="col-12 sub-container o-hidden">
+            <Block className="col-12 sub-container o-hidden quotes-scroll-auto">
               <div className="wrapper-tabs mb-5">
                 <ul className="ml-auto tabs">
                   <li className="mr-2 tab" onClick={ () => this.setTab('speakers') }>
