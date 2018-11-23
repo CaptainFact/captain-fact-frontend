@@ -1,5 +1,5 @@
 import React from 'react'
-import Crown from '../../../assets/V2/crown.png'
+import Crown from '../../../../assets/V2/crown.png'
 
 export default class XPBar extends React.PureComponent {
   state = {

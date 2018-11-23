@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet'
 
 import i18n from '../../i18n/i18n'
 import { fetchCurrentUser } from '../../state/users/current_user/effects'
-import Sidebar from './Sidebar'
+import Sidebar from './Components/Sidebar'
 import '../../styles/V2/main.scss'
 
 

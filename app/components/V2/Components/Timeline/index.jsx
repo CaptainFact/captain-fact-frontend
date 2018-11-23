@@ -1,6 +1,6 @@
 import React from 'react'
 import UserQuoteIcon from './UserQuoteIcon'
-import quote from '../../../assets/V2/quote.png'
+import quote from '../../../../assets/V2/quote.png'
 
 export default class Timeline extends React.PureComponent {
   state = {

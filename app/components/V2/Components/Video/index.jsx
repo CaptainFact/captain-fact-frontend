@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router'
-import quote from '../../../assets/V2/quote.png'
-import star from '../../../assets/V2/star.png'
-import verified from '../../../assets/V2/verified.png'
+import quote from '../../../../assets/V2/quote.png'
+import star from '../../../../assets/V2/star.png'
+import verified from '../../../../assets/V2/verified.png'
 
 const SingleVideo = ({ video }) => (
   <div className="single-video">

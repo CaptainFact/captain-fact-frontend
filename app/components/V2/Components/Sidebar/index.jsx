@@ -5,8 +5,8 @@ import { withNamespaces } from 'react-i18next'
 import XPBar from './XPBar'
 import V2Notifications from './V2Notifications'
 
-import Logo from '../../../assets/logo.svg'
-import User from '../../../assets/V2/user.svg'
+import Logo from '../../../../assets/logo.svg'
+import User from '../../../../assets/V2/user.svg'
 
 @withNamespaces('main')
 export default class Sidebar extends React.PureComponent {

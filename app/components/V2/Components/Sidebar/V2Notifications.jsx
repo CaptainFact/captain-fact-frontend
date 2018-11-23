@@ -1,6 +1,6 @@
 import React from 'react'
 
-import NotificationImg from '../../../assets/V2/notification.png'
+import NotificationImg from '../../../../assets/V2/notification.png'
 
 export default class V2Notifications extends React.PureComponent {
   render() {

@@ -3,8 +3,9 @@ import ReactPlayer from 'react-player'
 
 import fakeVideos from '../Data/fakevideos'
 import fakeQuotes from '../Data/fakeQuotes'
-import TimeLine from '../Timeline'
-import Comments from '../Comments'
+import TimeLine from '../Components/Timeline'
+import Comment from '../Components/Comment'
+import AddComment from '../Components/Comment/AddComment'
 
 export default class SingleVideo extends React.PureComponent {
   state = {
@@ -50,9 +51,7 @@ export default class SingleVideo extends React.PureComponent {
     return (
       <div className="page-video-container">
         <h1>{video.title}</h1>
-        <button className="add-video">
-          Ajouter une vidéo
-        </button>
+        <button className="add-video">Ajouter une vidéo</button>
         <TimeLine
           quotes={quotes}
           setCurrentQuote={this.setCurrentQuote}
@@ -75,8 +74,9 @@ export default class SingleVideo extends React.PureComponent {
 
         <div className="col-right">
           {quotes[this.state.currentQuote].comments.map((comment, index) => {
-            return <Comments key={`comment-${index}`} comment={comment} />
+            return <Comment key={`comment-${index}`} comment={comment} />
           })}
+          <AddComment />
         </div>
       </div>
     )
