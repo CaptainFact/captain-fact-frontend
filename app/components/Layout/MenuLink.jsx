@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-import { withNamespaces } from 'react-i18next'
+import React from 'react'
 import Icon from '../Icons/Icon';
 import { Link } from 'react-router'
 import PropTypes from 'prop-types';
