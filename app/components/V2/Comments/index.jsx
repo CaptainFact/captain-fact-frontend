@@ -6,14 +6,14 @@ export default class Comments extends React.PureComponent {
     downvote: this.props.comment.downvote
   }
 
-  upvote() {
+  upvote = () => {
     const newvote = this.state.upvote + 1
     this.setState({
       upvote: newvote
     })
   }
 
-  downvote() {
+  downvote = () => {
     const newvote = this.state.downvote + 1
     this.setState({
       downvote: newvote
@@ -44,10 +44,10 @@ export default class Comments extends React.PureComponent {
               </span>
             )}
           </div>
-          <span className="up vote" onClick={this.upvote.bind(this)}>
+          <span className="up vote" onClick={this.upvote}>
             <i className="fas fa-arrow-up" /> {this.state.upvote}
           </span>
-          <span className="down vote" onClick={this.downvote.bind(this)}>
+          <span className="down vote" onClick={this.downvote}>
             <i className="fas fa-arrow-down" /> -{this.state.downvote}
           </span>
         </div>

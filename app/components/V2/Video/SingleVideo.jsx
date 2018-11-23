@@ -33,7 +33,7 @@ export default class SingleVideo extends React.PureComponent {
     })
   }
 
-  goTo(time) {
+  goTo = (time) => {
     this.refs.videoPlayer.seekTo(time)
   }
 
@@ -50,7 +50,7 @@ export default class SingleVideo extends React.PureComponent {
           quotes={quotes}
           videoLength={this.state.videoInfo}
           videoDuration={this.state.videoDuration}
-          goTo={this.goTo.bind(this)}
+          goTo={this.goTo}
         />
         <div className="col-left">
           <ReactPlayer

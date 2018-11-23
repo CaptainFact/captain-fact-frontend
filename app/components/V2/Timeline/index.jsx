@@ -7,7 +7,7 @@ export default class Timeline extends React.PureComponent {
     currentQuote: this.props.quotes[0]
   }
 
-  selectQuote(index) {
+  selectQuote = (index) => {
     this.props.goTo(this.props.quotes[index].time)
     this.setState({
       currentQuote: this.props.quotes[index]
@@ -37,7 +37,7 @@ export default class Timeline extends React.PureComponent {
           return (
             <UserQuoteIcon
               key={`quote-${index}`}
-              selectQuote={this.selectQuote.bind(this)}
+              selectQuote={this.selectQuote}
               index={index}
               disabled={this.props.quotes[index] === this.state.currentQuote}
               videoLength={videoLength}
