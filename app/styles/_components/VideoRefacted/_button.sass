@@ -1,0 +1,15 @@
+.btn
+  border-radius: 20px
+  height: 38px
+  padding-top: 9px
+  text-align: center
+  &.btn-primary
+    border: 1px solid $green-new
+    background: $green-new
+    color: $secondary-bg
+    -webkit-transition: background .15s linear, color .15s linear
+    -moz-transition: background .15s linear, color .15s linear
+    transition: background .15s linear, color .15s linear
+    &:active, &:focus, &:hover
+      background: $secondary-bg
+      color: $green-new

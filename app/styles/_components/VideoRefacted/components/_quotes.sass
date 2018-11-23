@@ -1,0 +1,52 @@
+.wrapper-quotes
+  max-height: 133px
+  overflow-y: auto
+  overflow-x: hidden
+  scroll-behavior: smooth
+
+  .quote
+    background: $green-new
+    color: $secondary-bg
+    margin: 10px 0
+    padding: 5px
+    text-align: center
+
+    > *
+      display: inline-block
+
+    img
+      height: 30px
+      width: 30px
+
+    p
+      font-size: 18px
+
+    & ~ .row
+      .comments
+
+        .vote, .user-comment-name
+          display: inline-block
+
+        .user-comment-name
+          img
+            border-radius: 100%
+            height: 30px
+            width: 30px
+
+      .wrapper-confirm
+        span.vote
+          background: green
+          border-radius: 25px
+          color: $secondary-bg
+          padding: 4px
+
+      .wrapper-refute
+
+        span.vote
+          background: red
+          border-radius: 25px
+          color: $secondary-bg
+          padding: 4px
+
+      .comments
+        @include box-shadow

@@ -1,0 +1,57 @@
+.wrapper-timeline
+  h3
+    font-size: 18px
+    font-weight: bold
+
+  .time
+    display: flex
+    flex-direction: row
+
+  .timeline
+    background: $grey-timeline
+    border-radius: 25px
+    height: 15px
+    margin-left: auto
+    margin-right: auto
+    position: relative
+    width: 100%
+
+    &.played
+      background: $green-new
+
+    .icon-quote
+      background: $secondary-bg
+      border: 1px solid $green-new
+      border-radius: 100%
+      cursor: pointer
+      height: 38px
+      left: 0
+      padding: 3px
+      position: absolute
+      text-align: center
+      top: -11px
+      width: 38px
+      -webkit-transition: left .5s ease-out
+      -moz-transition: left .5s ease-out
+      transition: left .5s ease-out
+
+      &.active
+        border: 3px solid $green-new
+        padding: 1px
+
+        img
+          border: 0
+
+      img
+        border: 1px solid $secondary-bg
+        border-radius: 100%
+        height: 30px
+        width: 30px
+
+    .timeline-played
+      background: $green-new
+      border-radius: 25px
+      height: 15px
+      left: 0
+      position: absolute
+      top: 0

@@ -1,0 +1,90 @@
+@import "mixins/grid"
+@import "mixins/spacing"
+@import "mixins/others"
+@import "button"
+@import "components/container"
+@import "components/icon-link"
+@import "components/nav"
+@import "components/quotes"
+@import "components/speakers"
+@import "components/tabs"
+@import "components/timeline"
+@import "components/video"
+
+::-webkit-scrollbar
+  width: 8px
+
+::-webkit-scrollbar-track
+  border: 0 solid $green-new
+
+  &:horizontal
+    border-bottom-width: 1px
+
+  &:vertical
+    border-right-width: 1px
+
+::-webkit-scrollbar-thumb
+  border: 0 solid $green-new
+
+  &:horizontal
+    border-bottom-width: 4px
+
+    &:hover
+      border-bottom-width: 8px
+
+  &:vertical
+    border-right-width: 4px
+
+    &:hover
+      border-right-width: 8px
+
+body
+  color: $black-text
+
+.align-middle
+  vertical-align: middle
+
+.d-inline
+  display: inline
+
+.d-inline-block
+  display: inline-block
+
+.d-table
+  display: table
+
+.d-table-cell
+  display: table-cell
+
+.logo-svg-20
+  height: 20px
+  width: 20px
+
+.logo-svg-24
+  height: 24px
+  width: 24px
+
+.logo-svg-30
+  height: 30px
+  width: 30px
+
+.logo-svg-50
+  height: 50px
+  width: 50px
+
+.o-hidden
+  overflow: hidden
+  
+.text-center
+  text-align: center
+
+#VideoRefacted
+  background: $primary-bg
+  font-size: 13px
+  height: 100vh
+  overflow: hidden
+  width: 100vw
+
+  .content-container
+    height: calc(100vh - 70px)
+    overflow-y: auto

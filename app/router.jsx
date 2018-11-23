@@ -23,11 +23,12 @@ import Moderation from './components/Moderation/Moderation'
 import { SpeakerPage } from './components/Speakers/SpeakerPage'
 import NewsletterSubscription from './components/Users/NewsletterSubscription'
 import ActivityLog from './components/Users/ActivityLog'
+import VideoRefacted from './components/VideoRefacted';
 
 
 const CFRouter = () => (
   <Router history={browserHistory}>
-    <Route path="/" component={App}>
+    <Route path="/all" component={App}>
       <IndexRoute component={Home} />
       <Route path="/signup" component={SignupForm} />
       <Route path="/signup/callback/:provider" component={ThirdPartyCallback} />
@@ -54,6 +55,7 @@ const CFRouter = () => (
       <Route path="/moderation" component={Moderation} />
       <Route path="*" component={NotFound} />
     </Route>
+    <Route path={'/video-refacted'} component={VideoRefacted} />
   </Router>
 )
 
