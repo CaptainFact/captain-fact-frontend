@@ -24,6 +24,7 @@ export class TimeSince extends React.PureComponent {
   }
 
   render() {
+    console.log(locale)
     const { time, locale, dispatch, addSuffix = true, isDateTime = true, ...props } = this.props
     const localeObj = locales[locale]
     const dateFormat = isDateTime ? localeObj.defaultDateTimeFormat : localeObj.defaultDateFormat

@@ -3,7 +3,7 @@ describe('Sidebar without a logged in user', () => {
     cy.visit('/')
   })
 
-  it('has a login button', () => {
+  it('has a login buttons', () => {
     cy.get('#sidebar a[href="/login"]').should('exist')
   })
 })

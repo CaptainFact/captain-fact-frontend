@@ -17,10 +17,10 @@ describe('Sidebar user section with a logged in user', () => {
       .should('exist')
   })
 
-  it('should have a logout button', () => {
+  it('should have a logout buttons', () => {
     cy
       .get('@userSection')
-      .find('button[title="Logout"]')
+      .find('buttons[title="Logout"]')
       .should('exist')
   })
 
@@ -43,7 +43,7 @@ describe('Sidebar user section with a logged in user', () => {
 
     // Ensure base links are still there
     cy.get('@userSection').find(`.username:contains(${defaultUsername})`).should('exist')
-    cy.get('@userSection').find('button[title="Logout"]').should('exist')
+    cy.get('@userSection').find('buttons[title="Logout"]').should('exist')
 
     // Ensure other user links are hidden
     cy.get('@userSection').contains('My Activity').should('not.be.visible')

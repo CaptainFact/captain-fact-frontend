@@ -1,7 +1,6 @@
 $statement-max-width: 1000px
 $statement-focus-size: 20px
 $statement-focus-size-mobile: 5px
-
 $statement-text-background: #31455d
 $statement-text-color: #e0e7f1
 
@@ -26,7 +25,7 @@ $statement-text-color: #e0e7f1
   max-width: $statement-max-width - $statement-focus-size
   transition: box-shadow 0.5s, max-width 0.5s
   box-shadow: rgba(10, 10, 10, 0.15) 0px 6px 14px -5px
-  border: 1px solid lightgrey
+
   .card-header
     .speaker-mini
       height: 25px
@@ -34,12 +33,38 @@ $statement-text-color: #e0e7f1
       border-radius: 15px
     .card-header-icon
       font-size: .9em
+      div, a
+        margin: 0 5px
   .time-display
+    padding: 2px 5px
+    background-color: $blue
     min-width: 60px
-    color: grey
+    color: $white
     margin-right: 15px
-    padding-right: 10px
+    position: relative
     border-right: 1px solid #e8e8e8
+    border-radius: 5px
+    z-index: 9999999
+
+    &::before
+      content: ''
+      border-top: 4px solid transparent
+      border-bottom: 4px solid transparent
+      border-right: 7px solid #376582
+      position: absolute
+      left: -7px
+      top: 9px
+
+    &::after
+      content: ''
+      width: 10px
+      height: 10px
+      border-radius: 50%
+      background-color: $blue
+      position: absolute
+      left: -27px
+      top: 8px
+
   &> *:not(:last-child)
     border-bottom: 1px solid #dbdbdb
     border-top: none
@@ -56,11 +81,9 @@ $statement-text-color: #e0e7f1
     margin: 0
 
   .sourcesType
-    background: #f1f1f1
     color: $grey-dark
     padding: 0.25em
     text-align: center
-    border-bottom: 1px solid $border
 
   .self-comments
     $col-border-style: 3px solid $border
@@ -92,6 +115,7 @@ $statement-text-color: #e0e7f1
   &.card
     @include animate(fadeInDown, 0.3s)
   .card-header-title
+    padding: 0
     .button
       margin-right: 10px
     .speaker-select
@@ -111,12 +135,10 @@ $statement-text-color: #e0e7f1
       color: $grey
   .card-content
     @extend .statement-text-container
-    border-bottom: 1px solid #dbdbdb
+    background-color: transparent
 
 .statement-text-container
-  background: $statement-text-background
-  color: $statement-text-color
-  box-shadow: 0 0 10px 0 rgb(50, 50, 50) inset
+  color: $grey-dark
   padding: 1.5em
   &:before
     content: "\201C"
@@ -128,6 +150,7 @@ $statement-text-color: #e0e7f1
     position: absolute
   .statement-text
     padding: 1em 1em 1em 2em
+    text-shadow: none
   +mobile
     padding: 0em 0.75em
     &:before

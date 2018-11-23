@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import { connect } from 'react-redux'
 import { Trans, withNamespaces } from 'react-i18next'
 import { isLoadingVideoDebate } from '../../state/video_debate/selectors'
@@ -10,6 +10,10 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
 import { hasStatementForm } from '../../state/video_debate/statements/selectors'
 import { Icon } from '../Utils/Icon'
 import { isAuthenticated } from '../../state/users/current_user/selectors'
+import classNames from "classnames"
+import {Link} from "react-router"
+import {videoHistoryURL, videoURL} from "../../lib/cf_routes"
+import ExternalLinkNewTab from "../Utils/ExternalLinkNewTab"
 
 
 @connect(state => ({
@@ -26,7 +30,8 @@ export class ColumnDebate extends React.PureComponent {
   }
 
   renderContent() {
-    const { isLoading, view, videoId, hasStatements } = this.props
+    const { video, isLoading, view, videoId, hasStatements, t } = this.props
+    const isDebate = view === 'debate'
 
     if (view === 'history')
       return <VideoDebateHistory videoId={videoId} />
@@ -34,10 +39,28 @@ export class ColumnDebate extends React.PureComponent {
       if (isLoading)
         return <LoadingFrame title={this.props.t('loading.statements')} />
       return (
-        <div className="statements-list-container">
-          {!hasStatements && !this.props.hasStatementForm ? this.renderHelp() : <StatementsList />}
-          <ActionBubbleMenu />
-        </div>
+        <Fragment>
+          <div className="tabs debate-menu is-toggle is-fullwidth">
+            <ul>
+              <li className={classNames({ 'is-active': isDebate })}>
+                <Link to={videoURL(videoId)}>
+                  <Icon size="small" name="check-circle" />
+                  <span>{t('debate')}</span>
+                </Link>
+              </li>
+              <li className={classNames({ 'is-active': !isDebate })}>
+                <Link to={videoHistoryURL(videoId)}>
+                  <Icon size="small" name="history" />
+                  <span>{t('history')}</span>
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div className="statements-list-container">
+            {!hasStatements && !this.props.hasStatementForm ? this.renderHelp() : <StatementsList />}
+            <ActionBubbleMenu />
+          </div>
+        </Fragment>
       )
     }
   }

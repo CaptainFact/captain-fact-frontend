@@ -3,7 +3,7 @@ services:
   # Pre-seeded postgres Database
   database:
     image: "captainfact/dev-db:latest"
-    ports: ["5432:5432"]
+    ports: ["5432"]
 
   # Main API - REST + Websockets
   api:

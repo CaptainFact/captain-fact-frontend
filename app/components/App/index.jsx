@@ -12,14 +12,13 @@ import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
 import { isAuthenticated } from '../../state/users/current_user/selectors'
 import BackgroundNotifier from './BackgroundNotifier'
 
-@connect(
-  state => ({
-    locale: state.UserPreferences.locale,
-    sidebarExpended: state.UserPreferences.sidebarExpended,
-    isAuthenticated: isAuthenticated(state)
-  }),
-  { fetchCurrentUser }
-)
+import Menu from '../menu/Menu'
+
+@connect(state => ({
+  locale: state.UserPreferences.locale,
+  sidebarExpended: state.UserPreferences.sidebarExpended,
+  isAuthenticated: isAuthenticated(state)
+}), { fetchCurrentUser })
 export default class App extends React.PureComponent {
   componentDidMount() {
     if (!this.props.isAuthenticated) {
@@ -39,8 +38,8 @@ export default class App extends React.PureComponent {
           </Helmet>
           <MainModalContainer />
           <FlashMessages />
-          <Sidebar />
-          <div id="main-container" className={mainContainerClass}>
+          <Menu />
+          <div className="cf-container">
             {children}
           </div>
           <BackgroundNotifier />

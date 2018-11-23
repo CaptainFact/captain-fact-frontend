@@ -11,6 +11,7 @@ import { joinVideoDebateChannel, leaveVideoDebateChannel } from '../../state/vid
 import { resetVideoDebate } from '../../state/video_debate/actions'
 import { ColumnVideo } from './ColumnVideo'
 import { ColumnDebate } from './ColumnDebate'
+import { TimeLine } from './TimeLine'
 
 
 @connect(state => ({

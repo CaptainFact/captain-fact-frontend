@@ -17,7 +17,7 @@ describe('User login', () => {
   it('works with default dev account when using email', () => {
     cy.get('input[name=email]').type(defaultEmail)
     cy.get('input[name=password]').type(defaultPassword)
-    cy.get('.user-form .button:contains("Login")').click()
+    cy.get('.user-form .buttons:contains("Login")').click()
     cy.url().should('be', '/videos').then(() => {
       cy.wait(1500).then(() => {
         expect(localStorage.getItem('token')).to.exist
@@ -28,7 +28,7 @@ describe('User login', () => {
   it('works with default dev account when using username', () => {
     cy.get('input[name=email]').type(defaultUsername)
     cy.get('input[name=password]').type(defaultPassword)
-    cy.get('.user-form .button:contains("Login")').click()
+    cy.get('.user-form .buttons:contains("Login")').click()
     cy.url().should('be', '/videos').then(() => {
       cy.wait(1500).then(() => {
         expect(localStorage.getItem('token')).to.exist

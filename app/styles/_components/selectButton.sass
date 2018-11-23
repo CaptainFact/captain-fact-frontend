@@ -1,0 +1,33 @@
+.select-button
+  position: relative
+
+  select
+    border: 1px solid rgba(0, 0, 0, .2)
+    border-radius: 5px
+    padding: 10px 20px 10px 10px
+    transition: .1s
+    background-color: $white
+    font-size: 14px
+    color: rgba(0, 0, 0, .5)
+    position: relative
+    -webkit-appearance: none
+    -moz-appearance: none
+    appearance: none
+    cursor: pointer
+    height: 40px
+
+    &:hover
+      border: 1px solid rgba(0, 0, 0, 1)
+      color: $black
+      transition: .2s
+
+.select-button::after
+  content: ''
+  position: absolute
+  top: 15px
+  right: 10px
+  height: 0
+  width: 0
+  border-top: 9px solid $black
+  border-right: 5px solid transparent
+  border-left: 5px solid transparent
