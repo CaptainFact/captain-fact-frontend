@@ -25,9 +25,9 @@ import NewsletterSubscription from './components/Users/NewsletterSubscription'
 import ActivityLog from './components/Users/ActivityLog'
 
 import Layout from './components/V2'
-import Video from './components/V2/Video'
+import Video from './components/V2/views/Home'
 
-import SingleVideo from './components/V2/Video/SingleVideo'
+import SingleVideo from './components/V2/views/SingleVideo'
 const CFRouter = () => (
   <Router history={browserHistory}>
     <Route path="/old" component={App}>
