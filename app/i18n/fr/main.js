@@ -16,6 +16,7 @@ export default {
     myActivity: 'Mon $t(menu.activity)',
     content: 'Contenu',
     language: 'Langue',
+    trends: 'Tendances',
     other: 'Autre',
     donation: 'Nous soutenir',
     extension: 'Extension pour navigateur',

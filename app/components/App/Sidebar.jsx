@@ -13,24 +13,24 @@ import {
 } from '../../constants'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import RawIcon from '../Utils/RawIcon'
+import LogoIcon from '../Utils/LogoIcon'
 import ReputationGuard from '../Utils/ReputationGuard'
 import LanguageSelector from './LanguageSelector'
 import ScoreTag from '../Users/ScoreTag'
 import { logout } from '../../state/users/current_user/effects'
-import { closeSidebar, toggleSidebar } from '../../state/user_preferences/reducer'
+import { closeSidebar, openSidebar } from '../../state/user_preferences/reducer'
 import UserPicture from '../Users/UserPicture'
 import i18n from '../../i18n/i18n'
 import Logo from './Logo'
 import Button from '../Utils/Button'
+import { VideosTrend } from '../Videos/VideosTrend'
 
-@connect(
-  state => ({
-    CurrentUser: state.CurrentUser.data,
-    isLoadingUser: state.CurrentUser.isLoading,
-    sidebarExpended: state.UserPreferences.sidebarExpended
-  }),
-  { logout, toggleSidebar, closeSidebar }
-)
+@connect(state => ({
+  CurrentUser: state.CurrentUser.data,
+  isLoadingUser: state.CurrentUser.isLoading,
+  sidebarExpended: state.UserPreferences.sidebarExpended
+}), {logout, openSidebar, closeSidebar})
+
 @withNamespaces('main')
 export default class Sidebar extends React.PureComponent {
   constructor(props) {
@@ -146,17 +146,16 @@ export default class Sidebar extends React.PureComponent {
     return (
       <aside
         id="sidebar"
-        className={classNames('menu', className, { expended: sidebarExpended })}
+        className={classNames('menu', className, {expended: sidebarExpended})}
+        onMouseOver={() => this.props.openSidebar()}
+        onMouseOut={() => this.props.closeSidebar()}
       >
         <div className="logo-banner">
-          <div
-            className="menu-collapse-button"
-            onClick={() => this.props.toggleSidebar()}
-          >
-            <RawIcon name="bars" />
-          </div>
           <Link to="/">
-            <Logo borderless />
+            <div className="menu-collapse-button visible-when-collapsed">
+              <LogoIcon />
+            </div>
+            <Logo borderless/>
           </Link>
         </div>
 
@@ -196,6 +195,17 @@ export default class Sidebar extends React.PureComponent {
               {t('menu.help')}
             </this.MenuListLink>
           </ul>
+          <p className="menu-label hide-when-collapsed">{ t('menu.language') }</p>
+          <LanguageSelector
+          className="hide-when-collapsed"
+          handleChange={v => i18n.changeLanguage(v)}
+          value={i18n.language}
+          size="small"
+          withIcon
+          />
+          <p className="menu-label hide-when-collapsed">{ t('menu.trends') }</p>
+          <VideosTrend className="hide-when-collapsed" />
+          { this.renderUserSection() }
         </div>
       </aside>
     )
