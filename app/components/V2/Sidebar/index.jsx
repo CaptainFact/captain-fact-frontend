@@ -23,7 +23,7 @@ export default class Sidebar extends React.PureComponent {
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-end">
             <div className="navbar-item">
-              <Link to="videos">VIDEOS</Link>
+              <Link to="/">VIDEOS</Link>
               <Link to="/">NOUS SUPPORTER</Link>
               <Link to="/">EXTENSION NAV</Link>
               <XPBar value="200" />

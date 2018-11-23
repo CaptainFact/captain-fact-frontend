@@ -129,17 +129,17 @@
         }
         .vote {
           display: flex;
+          align-items: center;
           & > div {
-            padding: 6px 10px 0 10px;
-            height: 40px;
+            padding: 5px 15px;
             color: $darkblue;
             background: $white;
             border-radius: 3px;
             margin: 0 5px;
-            font-size: 20px;
+            font-size: 15px;
             i {
               margin-right: 5px;
-              font-size: 25px;
+              font-size: 15px;
             }
           }
         }
