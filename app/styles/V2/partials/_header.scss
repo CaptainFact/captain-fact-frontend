@@ -55,7 +55,17 @@
   }
   .xp-total {
     width: 150px;
+    overflow: hidden;
     position: relative;
+    img {
+      position: absolute;
+      right: 0;
+      width: 15px;
+      height: 15px;
+      top: 2px;
+      right: 4px;
+
+    }
     .xp-current {
       background-color: #fff;
       position: absolute;

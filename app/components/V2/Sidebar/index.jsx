@@ -26,7 +26,7 @@ export default class Sidebar extends React.PureComponent {
               <Link to="videos">VIDEOS</Link>
               <Link to="/">NOUS SUPPORTER</Link>
               <Link to="/">EXTENSION NAV</Link>
-              <XPBar value="220" />
+              <XPBar value="200" />
               <V2Notifications count="2" />
               <Link to="/">
                 <img src={User} className="user" alt="" />

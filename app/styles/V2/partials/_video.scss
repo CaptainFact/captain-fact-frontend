@@ -1,109 +1,98 @@
-.video-container {
+.page-video-container {
+  position: relative;
+  margin-top: 30px;
   display: flex;
-  justify-content: space-around;
   flex-wrap: wrap;
-  align-items: stretch;
-  .single-video {
-    padding: 10px;
-    border-radius: 5px;
-    background-color: $lightblue;
-    box-shadow: 0px 2px 12px 1px transparentize($color: #000000, $amount: 0.8);
-    margin: 10px;
-    max-width: 425px;
-    flex: 15%;
-    .video-prev {
-      overflow: hidden;
-      height: 250px;
+  h1 {
+    font-size: 20px;
+    flex: 100%;
+  }
+  .add-video {
+    background-color: $white;
+    border: none;
+    padding: 7px;
+    position: absolute;
+    right: 0;
+    top: 0%;
+    color: $darkblue;
+    cursor: pointer;
+    border-radius: 3px;
+    &::after {
+      content: '>';
+      margin-left: 5px;
+    }
+  }
+  .timeline {
+    flex: 100%;
+    margin-top: 25px;
+    .timeline-bar {
+      position: relative;
+      height: 15px;
       width: 100%;
-      img {
-        min-height: 100%;
-        min-width: 100%;
-        max-width: none;
-        max-height: none;
+      border: 2px solid transparentize(#fff, 0.8);
+      border-radius: 3px;
+      .progress {
+        position: absolute;
+        top: -1px;
+        bottom: -1px;
+        left: -1px;
+        border-radius: 3px;
+        background-color: white;
+        right: 50%;
       }
     }
-    .details {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
-      .left-col {
-        .title {
-          color: white;
-          font-weight: normal;
-          font-size: 1.6rem;
-          text-align: center;
-          padding: 0 20px;
+  }
+  .col-left,
+  .col-right {
+    margin-top: 30px;
+    width: 50%;
+    position: relative;
+    padding-right: 20px;
+  }
+  .col-left {
+    & > div {
+      margin-top: 200px;
+    }
+    &::after {
+      content: '';
+      width: 2px;
+      height: 100%;
+      background: transparentize($white, 0.8);
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+  .col-right {
+    .comment {
+      padding: 30px;
+      margin: 20px;
+      background-color: $lightblue;
+      border-radius: 3px;
+      border: 2px solid transparentize($white, 0.8);
+      position: relative;
+      &:nth-of-type(2n) {
+        background-color: $darkblue;
+      }
+      .date {
+        position: absolute;
+        top: 5px;
+        left: 10px;
+      }
+      .vote {
+        background-color: $white;
+        padding: 5px 10px;
+        border-radius: 3px;
+        margin: 5px;
+        &.up {
+          color: green;
         }
-        .quote-container {
-          padding: 0 30px;
-          .quote {
-            font-size: 1.3rem;
-            text-align: center;
-            font-style: italic;
-            position: relative;
-            .quote-img {
-              position: absolute;
-              left: -20px;
-              top: 0;
-              width: 20px;
-              height: 15px;
-              &.right {
-                left: auto;
-                right: -20px;
-                transform: rotateY(180deg);
-              }
-            }
-          }
-        }
-        .quote-author {
-          padding: 0 20px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-weight: bolder;
-          flex: 1;
-          flex-wrap: wrap;
-          margin-top: 10px;
-          img {
-            border-radius: 100%;
-            margin-right: 15px;
-            box-shadow: 0 1px 5px 1px
-              transparentize($color: #000000, $amount: 0.7);
-          }
+        &.down {
+          color: red;
         }
       }
-      .featuring {
-        display: flex;
-        justify-content: center;
-        div {
-          margin: 5px 5px 0 5px;
-          font-style: italic;
-          &::after {
-            content: ','
-          }
-          &:first-of-type, &:last-of-type {
-            &::after {
-              content: none;
-            }
-          }
-        }
-      }
-      .right-col {
-        padding: 0 10px 0 10px;
-        text-align: center;
-        .icon {
-          &.commentsnb {
-            background-color: #fff;
-            width: 30px;
-            height: 30px;
-            border-radius: 50px;
-            color: $lightblue;
-            font-size: 1.2rem;
-            vertical-align: middle;
-            font-weight: bold;
-            text-align: center;
-          }
-        }
+      .reaction {
+
       }
     }
   }

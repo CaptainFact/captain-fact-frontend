@@ -1,6 +1,6 @@
 import React from 'react'
 import { withNamespaces } from 'react-i18next'
-import fakeVideos from './fakevideos'
+import fakeVideos from '../Data/fakevideos'
 import SingleVideoCard from './SingleVideoCard'
 
 @withNamespaces('videoDebate')

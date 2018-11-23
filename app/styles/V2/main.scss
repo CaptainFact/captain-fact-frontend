@@ -1,7 +1,8 @@
-@import "./partials/variables";
-@import "./partials/header";
-@import "./partials/video";
-@import "./partials/body";
+@import './partials/variables';
+@import './partials/header';
+@import './partials/video_card';
+@import './partials/video';
+@import './partials/body';
 
 body {
   background: linear-gradient(to bottom, $darkblue, $lightblue);
@@ -10,4 +11,54 @@ body {
   font-family: Roboto Condensed, serif !important;
   font-size: 1rem;
   color: $white !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+button {
+  font-family: Roboto Condensed, serif !important;
+}
+
+// Global tooltip
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+  &:hover .tooltiptext {
+    visibility: visible;
+    box-shadow: 0 2px 5px -1px lighten(black, 10);
+    opacity: 1;
+  }
+  .tooltiptext {
+    font-weight: normal;
+    visibility: hidden;
+    width: 120px;
+    background-color: $lightblue;
+    color: $white;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    font-size: 15px;
+    position: absolute;
+    z-index: 1;
+    top: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: rotateZ(180deg);
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #fff transparent transparent transparent;
+    }
+  }
 }
