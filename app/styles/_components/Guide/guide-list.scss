@@ -1,0 +1,70 @@
+.guide-list{
+  padding: 20px 20px;
+  position: fixed;
+  left: 105px;
+  top: 130px;
+  width: calc(33% - 75px);
+  background-color: $white;
+  border-radius: 3px;
+  p {
+    color: #B2AEAE;
+    font-size: 1.2rem;
+    margin: 1em 0;
+  }
+  h2{
+    font-size: 2.4rem;
+    font-weight: 500;
+  }
+  .wrapper-checkbox{
+    font-size: 1.2rem;
+    font-weight: normal;
+  }
+  &-inner{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 165px;
+    margin: 20px 0;
+    overflow: hidden;
+    border: 2px solid #E3E3E3;
+    border-radius: 3px;
+    background-color: #FCFCFC;
+    .shadow{
+      flex: 1 1 auto;
+      background: linear-gradient(0deg, rgba(255,255,255,0) 60%, rgba(120,120,120,0.06) 100%);
+    }
+    &:before{
+      content: 'Votre liste est vide';
+      display: block;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 15px;
+      text-align: center;
+      font-size: 1.3rem;
+      color: #717171;
+    }
+    > li {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 55px;
+      padding: 0 15px;
+      font-size: 1.4rem;
+      border-bottom: 1px solid #ecebeb;
+      background-color: $white;
+      z-index: 2;
+      span{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .btn{
+        flex-shrink: 0;
+        margin-left: 5px;
+      }
+      
+    }
+  }
+}

@@ -1,0 +1,314 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 75px;
+  padding: 25px 0 0;
+  box-shadow: -3px 0 34px 0 rgba(0, 0, 0, 0.07);
+  background-color: $white;
+  transition: width 0.1s ease-in;
+  z-index: 10;
+  .hidden{
+    top: 0;
+    left: 0;
+    // opacity: 0;
+    transition: position 0s 0.5s, opacity 0.2s;
+  }
+  .visible{
+    position: static;
+    opacity: 1;
+    transition: position 0s 0s, opacity 0.2s 0s;
+  }
+  .to-show{
+    display: none;
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  &.opened{
+    width: 300px;
+    transition: width 0.2s ease-in-out;
+    .sidebar-nav{
+      .i{
+        transform: scale(0.7);
+        margin-right: 10px;
+        color: #E8E8E8;
+      }
+      &-item{
+        > a{
+          padding: 22px 20px 10px;
+          &.active{
+            background-color: transparent;
+            &::before{
+              content: none;
+            }
+          }
+        }
+      }
+    }
+    .sidebar-reputation-score{
+      flex-direction: row;
+      width: 75px;
+      height: 30px;
+      font-size: 1.3rem;
+      .current{
+        display: flex;
+        align-items: center;
+        font-size: 1.6rem;
+        margin-bottom: 0;
+        margin-top: 2px;
+        &:after{
+          width: 1px;
+          height: 16px;
+          margin: -2px 4px 0;
+        }
+      }
+    }
+    .sidebar-bottom{
+      &:after{
+        width: 30px;
+        height: 3px;
+        transition: 0.3s ease-in-out 0.2s;
+      }
+      &-btn{
+        transform: translateX(-2px) rotate(-45deg);
+        height: 3px;
+        width: 15px;
+        transition: 0.2s ease-in-out 0.4s;
+      }
+      &:before{
+        transform: translateX(9px) rotate(45deg);
+        height: 3px;
+        width: 15px;
+        transition: 0.2s ease-in-out 0.4s;
+      }
+    }
+  }
+  &-pp{
+    width: 35px;
+    height: 35px;
+    background-size: cover;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  &-profile{
+    position: relative;
+    display: flex;
+    width: 100%;
+    padding: 0 20px;
+    &-infos{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      left: 55px;
+      margin-left: 18px;
+      font-size: 1.4rem;
+      font-weight: 500;
+       > a{
+         margin: 4px 0 0;
+         font-size: 1.2rem;
+         color: $n-llg;
+       }
+    }
+  }
+  &-reputation{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 35px 0;
+    padding: 0 20px;
+    color: $n-dg;
+    font-weight: bold;
+    &-score{
+      display: flex;
+      margin-left: auto;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 41px;
+      width: 35px;
+      font-size: 1.1rem;
+      font-weight: normal;
+      color: $white;
+      border-radius: 3px;
+      background: rgb(56,239,125);
+      background: linear-gradient(161deg, rgba(56,239,125,1) 0%, rgba(34,191,116,1) 100%);
+      > .current{
+        font-weight: bold;
+        font-size: 1.4rem;
+        margin-bottom: 2px;
+        &:after{
+          content: '';
+          display: block;
+          width: 25px;
+          height: 1px;
+          margin-top: 1px;
+          background-color: $white;
+        }
+      }
+    }
+  }
+  &-nav{
+    width: 100%;
+    &-items{
+      width: 100%;
+    }
+    &-item{
+      width: 100%;
+      &-guide{
+        padding: 0 20px;
+        margin-bottom: 15px;
+        &.limitations{
+          > .line, > .line:first-child{
+            color: #A3A3A3 ;
+          }
+        }
+        > .line{
+          display: flex;
+          justify-content: space-between;
+          padding: 0 5px 8px 0;
+          margin-bottom: 8px;
+          border-bottom: 1px solid #F7F7F7;
+          font-weight: normal;
+          font-size: 1.4rem;
+          color: #CBCBCB;
+          &:first-child{
+            color: #4D4C4C;
+            .rep{
+              opacity: 1;
+            }
+          }
+          .limit{
+            font-weight: 500;
+          }
+          .rep{
+            display: flex;
+            align-items: center;
+            color: #35DF78;
+            opacity: 0.5;
+
+            &:after{
+              content: '';
+              display: block;
+              width: 11px;
+              height: 11px;
+              margin-left: 8px;
+              margin-top: -2px;
+              border-radius: 50%;
+              background: linear-gradient(161deg, rgba(56,239,125,1) 0%, rgba(34,191,116,1) 100%);
+            }
+          }
+        }
+      }
+      
+      > a{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        padding: 22px 20px;
+        span{
+          margin-top: 3px;
+          font-size: 1.6rem;
+          font-weight: bold;
+          text-transform: capitalize;
+          color: $n-dg;
+        }
+        &.active{
+          position: relative;
+          background-color: #F0F8FC;
+          &:before{
+            content: '';
+            display: block;
+            position: absolute;
+            width: 5px;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            background: $gradient;
+          }
+          .i{
+            fill: url('#lgrad');
+          }
+        }
+      }
+      
+    }
+    .i{
+      transition: transform 0.1s ease-in-out;
+      margin: auto;
+      color: $n-lg;
+      .opened &{
+        margin: 0;
+      }
+      &.icon-settings{
+        width: 25px;
+        height: 25px;
+      }
+      &.icon-limitations{
+        width: 18px;
+        height: 33px;
+      }
+      &.icon-help{
+        width: 26px;
+        height: 26px;
+      }
+      &.icon-videos{
+        width: 25px;
+        height: 16px;
+      }
+      &.icon-guide{
+        width: 29px;
+        height: 20px;
+      }
+    }
+  }
+  &-bottom {
+    position: relative;
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;  
+    align-items: center;
+    padding: 0 20px;
+    height: 75px;
+    width: 100%;
+    background-color: $white;
+    cursor: pointer;
+    &-btn, &:after, &:before{
+      display: block;
+      width: 5px;
+      height: 5px;
+      border-radius: 3px;
+      background-color: $n-lg;
+    }
+    &-btn{
+      position: absolute;
+      right: 30px;
+      margin: 0 5px;
+      transform-origin: 0% 50%;
+    }
+    &:after{
+      right: 19px;
+      margin-right: 5px;
+      transform-origin: 100% 50%;
+    }
+    &:before{
+      right: 46px;
+      margin-left: 5px;
+      transform-origin: 0% 50%;
+    }
+    &:after, &:before{
+      position: absolute;
+      content: '';
+    }
+  }
+}
+
+#main-wrapper{
+  position: relative;
+  margin-left: 75px;
+  width: calc(100% - 75px);
+}

@@ -1,0 +1,106 @@
+.searchbar{
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 45px 55px 32px 30px;
+  z-index: 1;
+  right: 0;
+  left: 75px;
+  background-color: #F5F6FA;
+  > div{
+    display: flex;
+    align-items: center;
+  }
+  input[type='text']{
+    width: 100%;
+    max-width: 280px;
+    padding: 15px 17px;
+    border: none;
+    border-radius: 2px;
+    font-family: $maison;
+    font-size: 1.4rem;
+    outline: none;
+    box-shadow: 0 8px 13px 0 rgba(#263CAB, 0.07);
+    transition: box-shadow 0.2s ease-in-out;
+    &::placeholder{
+      color: $n-dg;
+      opacity: 0.8;
+    }
+    &:focus{
+      box-shadow: 0 3px 8px 0 rgba(#263CAB, 0.07);
+    }
+  }
+  .wrapper-select{
+    position: relative;
+    width: 160px;
+    margin-right: 45px;
+    border: none;
+    border-radius: 2px;
+    outline: none;
+    box-shadow: 0 8px 13px 0 rgba(#263CAB, 0.07);
+    &:after, &:before{
+      content: '';
+      right: 20px;
+      top: 50%;
+      margin-top: -3px;
+      transform: translateY(-50%) rotate(-45deg);
+      transform-origin: 100% 50%;
+      display: block;
+      position: absolute;
+      width: 10px;
+      height: 1px;
+      background-color: $n-dg;
+      border-radius: 2px;
+      z-index: 1;
+    }
+    &:after{
+      transform: translateY(-50%) rotate(45deg);
+      transform-origin: 0% 50%;
+      right: 24px;
+    }
+    select{
+      width: 100%;
+      padding: 15px 30px 15px 17px;
+      border: none;
+      background-color: $white;
+      font-family: $maison;
+      font-size: 1.4rem;
+      -webkit-appearance: none;
+      outline: none;
+    }
+  }
+}
+.wrapper-checkbox{
+  position: relative;
+  display: flex;
+  align-items: center;
+  .check{
+    position: relative;
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
+    margin-right: 15px;
+    border: 1px solid #E3E3E3;
+    background-color: $white;
+    &:after{
+      content: '';
+      display: none;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      right: 2px;
+      bottom: 2px;
+      border-radius: 1px;
+      background-color: $n-blue;
+    }
+  }
+  input{
+    position: absolute;
+    visibility: hidden;
+    pointer-events: none;
+    &:checked + .check:after{
+      display: block;
+    }
+  }
+}

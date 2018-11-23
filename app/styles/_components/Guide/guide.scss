@@ -1,0 +1,10 @@
+@import './guide-subject.scss';
+@import './guide-list.scss';
+
+.guide-page{
+  min-height: 100vh;
+  background-color: #F5F6FA;
+  padding: 130px 30px 0;
+  display: flex;
+}
+
