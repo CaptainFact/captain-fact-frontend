@@ -4,22 +4,65 @@ $videos-list-max-width: 1300px
   text-align: center
   margin: 0 auto
   padding: 5vh 0.5em
+  display: flex
+  justify-content: space-around
+  margin-top: 70px
+  height: calc(100vh - 70px)
 
-  .header
-    min-height: 100px
-    margin-bottom: 20px
-  .videos-filter
-    max-width: 450px
-    margin: 0 auto 30px
-    border: 1px solid $grey-lighter
-    padding: 0.5em 1em
-    border-radius: 10px
-    justify-content: space-around
-    box-shadow: 0px 3px 5px #f1f1f1
-    .field
-      justify-content: center
-    .field, .control
-      margin: 0
+  .video-filter-container
+    height: calc(100vh - 180px)
+    display: flex
+    position: relative
+
+    .video-filter-fixed-bloc
+      margin: auto
+      width: 400px
+      height: 200px
+      position: relative
+
+      .video-filter-fixed-content
+        position: fixed
+        width: 400px
+        height: 200px
+
+        .header
+          min-height: 100px
+          margin-bottom: 20px
+
+        .videos-filter
+          max-width: 250px
+          margin: 0 auto 30px
+          border: px solid $grey-lighter
+          padding: 0.5em 1em
+          border-radius: 10px
+          display: block
+          justify-content: space-between
+
+          div:first-child
+            margin-bottom: 30px
+
+          > div
+            height: 40px
+            display: flex
+            justify-content: center
+            width: 100%
+
+            button
+              background-color: $white
+              height: 100%
+              width: 100px
+              margin: 0
+              border-top-right-radius: 0
+              border-bottom-right-radius: 0
+
+            > div > div > select
+              border-left: 0
+              border-top-left-radius: 0
+              border-bottom-left-radius: 0
+
+          .field, .control
+            margin: auto 0
+
 
 .videos-list
   margin: 0 auto
@@ -32,3 +75,23 @@ $videos-list-max-width: 1300px
   .column
     min-width: 300px
     max-width: 654px
+
+.debate-menu
+  margin: 20px 50px
+
+  ul
+    margin: 0 25px
+
+  ul li a
+    padding: 10px
+    border-radius: 6px!important
+
+  ul li:first-child a
+    margin-right: 40px
+
+  ul li:last-child a
+    margin-left: 40px
+
+  ul .is-active
+    a
+      background-color: $blue!important

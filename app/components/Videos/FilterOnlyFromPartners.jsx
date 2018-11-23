@@ -3,8 +3,9 @@ import { withNamespaces } from 'react-i18next'
 import { ALL_VIDEOS, ONLY_PARTNERS, ONLY_COMMUNITY } from '../../constants'
 
 const FilterOnlyFromPartners = ({ value, onChange, t }) => (
-  <div className="select">
+  <div className="select-button">
     <select
+      className="upper"
       value={value}
       onChange={e => onChange(e.target.value)}
     >

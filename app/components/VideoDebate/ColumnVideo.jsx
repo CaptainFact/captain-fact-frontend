@@ -39,28 +39,6 @@ export class ColumnVideo extends React.PureComponent {
           <h2 className="title is-4 has-text-weight-light">{title}</h2>
           <Presence nbUsers={this.props.nbUsers} nbViewers={this.props.nbViewers} />
         </div>
-        <div className="tabs is-toggle is-fullwidth">
-          <ul>
-            <li className={classNames({ 'is-active': isDebate })}>
-              <Link to={videoURL(video.hash_id)}>
-                <Icon size="small" name="check-circle" />
-                <span>{t('debate')}</span>
-              </Link>
-            </li>
-            <li className={classNames({ 'is-active': !isDebate })}>
-              <Link to={videoHistoryURL(video.hash_id)}>
-                <Icon size="small" name="history" />
-                <span>{t('history')}</span>
-              </Link>
-            </li>
-            <li>
-              <ExternalLinkNewTab href="https://discord.gg/yqFpjgG">
-                <Icon size="small" name="comments-o" />
-                <span>Chat</span>
-              </ExternalLinkNewTab>
-            </li>
-          </ul>
-        </div>
         {isDebate && (
           <div>
             <div className="actions">

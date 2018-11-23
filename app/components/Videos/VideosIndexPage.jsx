@@ -24,13 +24,6 @@ export default class VideosIndexPage extends React.PureComponent {
 
     return (
       <div className="videos-page">
-        <section className="header">
-          <h2 className="title is-2">
-            <Icon name="television" />
-            <span> {capitalize(t('entities.video_plural'))}</span>
-          </h2>
-          <AddVideoBtn />
-        </section>
         <VideosFilterBar
           onLanguageChange={v => this.onVideosFilterChange(v)}
           onSourceChange={v => setVideosOnlyFromPartners(v)}

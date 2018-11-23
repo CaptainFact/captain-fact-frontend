@@ -1,8 +1,11 @@
 .video-card
-  text-align: center
+  box-shadow: none
+  border-bottom: 1px solid $grey
+  padding-bottom: 15px
+  margin: 40px 10px
+
   .card-image
-    img
-      border-radius: 0 0 5px 5px
+
     .play-overlay
       display: none
       position: absolute
@@ -22,32 +25,44 @@
         display: flex
 
   .card-content
-    padding: 0.75rem
+    padding: 0.75rem 0
     .title
       color: darken($primary-neutral, 45)
       font-weight: 400
+      text-align: left
       &:hover
         text-decoration: underline
         color: transparentize(darken($primary-neutral, 45), 0.3)
 
-  .video-metadata
-    color: #bdbdbd
-    width: 100%
-    &>div:first-child
-      padding: 5px
-    .icon
-      margin-right: 5px
-    .added-by .icon-star
-      color: $secondary
-      
-  .speakers-list
-    text-align: left
-    padding: 0.75rem 1rem
-    color: $grey
-    border-top: 1px solid $border-color
-    strong
+  .card-footer
+    border: 0
+
+    .video-metadata
+      margin-top: 20px
+      font-size: 12px
+      text-align: left
       color: $grey-dark
-    .icon
-      color: $grey-light
-    a:hover
-      text-decoration: underline
+      width: 100%
+      & > div:first-child
+
+      a
+        color: $blue-dark
+
+      .icon
+        margin-right: 5px
+        color: $black
+      .added-by .icon-star
+        color: $grey-dark
+
+    .speakers-list
+      text-align: left
+      padding: 0.75rem 0
+      color: $grey-dark
+
+      strong
+        color: $grey-dark
+      .icon
+        color: $black
+        margin-left: 0
+      a:hover
+        text-decoration: underline

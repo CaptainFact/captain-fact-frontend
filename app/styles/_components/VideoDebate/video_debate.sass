@@ -21,6 +21,7 @@
       flex-shrink: 10000
 
   &> .tabs
+    margin-top: 20px
     margin-bottom: 0
     a
       border-radius: 0
@@ -47,6 +48,8 @@
       display: block
 
 #video-show
+  margin-top: 70px
+
   @media screen and (max-width: $widescreen)
     display: block
     &> .column
@@ -75,3 +78,16 @@
       padding-top: 1px
     .video-debate-help
       padding: 3rem
+
+.statements-list-container
+  position: relative
+  display: block
+
+  &::before
+    content: ''
+    width: 2px
+    height: 100vh
+    background-color: $blue
+    position: absolute
+    top: 0
+    left: 31px
