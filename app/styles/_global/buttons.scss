@@ -1,6 +1,10 @@
-.btn{
+button.btn{
   border: none;
   cursor: pointer;
+  outline: none;
+  &.red{
+    color: #FF0055;
+  }
 }
 
 .btn-link{

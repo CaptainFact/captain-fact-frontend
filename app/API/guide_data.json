@@ -8,7 +8,7 @@
                     "title": "Changer de mot de passe",
                     "points": 0,
                     "points_given": false,
-                    "in_list": false,
+                    "in_list": true,
                     "pos_in_list": false
                 },
                 {
@@ -44,7 +44,7 @@
                     "pos_in_list": false
                 },
                 {
-                  "id": 1,
+                  "id": 6,
                   "title": "Changer de mot de passe",
                   "points": 0,
                   "points_given": false,
@@ -52,7 +52,7 @@
                   "pos_in_list": false
               },
               {
-                  "id": 2,
+                  "id": 7,
                   "title": "Lier mon compte facebook",
                   "points": 5,
                   "points_given": false,
@@ -60,7 +60,7 @@
                   "pos_in_list": false
               },
               {
-                  "id": 3,
+                  "id": 8,
                   "title": "Vérifier son adresse mail",
                   "points": 15,
                   "points_given": false,
@@ -68,7 +68,7 @@
                   "pos_in_list": false
               },
               {
-                  "id": 4,
+                  "id": 9,
                   "title": "Se désinscrire",
                   "points": 0,
                   "points_given": false,
@@ -76,7 +76,7 @@
                   "pos_in_list": false
               },
               {
-                  "id": 5,
+                  "id": 10,
                   "title": "Devenir utilisateur confirmé-e",
                   "points": 0,
                   "points_given": false,
@@ -89,7 +89,7 @@
             "title": "Factchecking",
             "items" : [
                 {
-                    "id": 1,
+                    "id": 11,
                     "title": "Ajouter une vidéo",
                     "points": 15,
                     "points_given": false,
@@ -97,7 +97,7 @@
                     "pos_in_list": false
                 },
                 {
-                    "id": 2,
+                    "id": 12,
                     "title": "Ajouter plusieurs source sur un factcheck",
                     "points": 0,
                     "points_given": false,
@@ -105,15 +105,15 @@
                     "pos_in_list": false
                 },
                 {
-                    "id": 3,
+                    "id": 13,
                     "title": "Signaler une citation falacieuse",
                     "points": 5,
                     "points_given": false,
-                    "in_list": false,
+                    "in_list": true,
                     "pos_in_list": false
                 },
                 {
-                    "id": 4,
+                    "id": 14,
                     "title": "Sourcer une citation",
                     "points": 10,
                     "points_given": false,
@@ -121,7 +121,7 @@
                     "pos_in_list": false
                 },
                 {
-                    "id": 5,
+                    "id": 15,
                     "title": "Modifier une citation",
                     "points": 0,
                     "points_given": false,
@@ -129,7 +129,7 @@
                     "pos_in_list": false
                 },
                 {
-                    "id": 3,
+                    "id": 16,
                     "title": "Signaler une citation falacieuse",
                     "points": 5,
                     "points_given": false,
@@ -137,7 +137,7 @@
                     "pos_in_list": false
                 },
                 {
-                    "id": 4,
+                    "id": 17,
                     "title": "Sourcer une citation",
                     "points": 10,
                     "points_given": false,
@@ -145,7 +145,7 @@
                     "pos_in_list": false
                 },
                 {
-                    "id": 5,
+                    "id": 18,
                     "title": "Modifier une citation",
                     "points": 0,
                     "points_given": false,

@@ -3,8 +3,11 @@
   top: 0;
   display: flex;
   justify-content: space-between;
-  padding: 45px 0 32px;
+  padding: 45px 55px 32px 30px;
   z-index: 1;
+  right: 0;
+  left: 75px;
+  background-color: #F5F6FA;
   > div{
     display: flex;
     align-items: center;
@@ -27,10 +30,6 @@
     &:focus{
       box-shadow: 0 3px 8px 0 rgba(#263CAB, 0.07);
     }
-  }
-  &.guide-searchbar{
-    left: 104px;
-    right: 55px;
   }
   .wrapper-select{
     position: relative;
@@ -71,37 +70,37 @@
       outline: none;
     }
   }
-  .wrapper-checkbox{
+}
+.wrapper-checkbox{
+  position: relative;
+  display: flex;
+  align-items: center;
+  .check{
     position: relative;
-    display: flex;
-    align-items: center;
-    .check{
-      position: relative;
-      width: 14px;
-      height: 14px;
-      border-radius: 2px;
-      margin-right: 15px;
-      border: 1px solid #E3E3E3;
-      background-color: $white;
-      &:after{
-        content: '';
-        display: none;
-        position: absolute;
-        top: 2px;
-        left: 2px;
-        right: 2px;
-        bottom: 2px;
-        border-radius: 1px;
-        background-color: $n-blue;
-      }
-    }
-    input{
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
+    margin-right: 15px;
+    border: 1px solid #E3E3E3;
+    background-color: $white;
+    &:after{
+      content: '';
+      display: none;
       position: absolute;
-      visibility: hidden;
-      pointer-events: none;
-      &:checked + .check:after{
-        display: block;
-      }
+      top: 2px;
+      left: 2px;
+      right: 2px;
+      bottom: 2px;
+      border-radius: 1px;
+      background-color: $n-blue;
+    }
+  }
+  input{
+    position: absolute;
+    visibility: hidden;
+    pointer-events: none;
+    &:checked + .check:after{
+      display: block;
     }
   }
 }

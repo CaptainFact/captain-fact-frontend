@@ -6,6 +6,7 @@ import { withNamespaces, Trans } from 'react-i18next'
 @withNamespaces('guide')
 export default class GuideItem extends Component {
   render() {
+
     return (
       <li className="guide-item">
         <div className='guide-item-texts'>
@@ -13,7 +14,7 @@ export default class GuideItem extends Component {
           <span className='cat'>{this.props.cat}</span>
         </div>
         <div className='guide-item-actions'>
-          <button className='btn btn-link'>Ajouter à la liste</button>
+          <button className='btn btn-link' onClick={() => this.props.onAdd(this.props.item, true)}>Ajouter à la liste</button>
           <button className='btn btn-outline'>Suivre</button>          
         </div>
         <div className='guide-item-rep'>

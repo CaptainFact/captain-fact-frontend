@@ -8,11 +8,12 @@ const GuideSearchBar = ({data}) => {
       <div>
         <div className='wrapper-select'>
           <select name="" id="">
-          {data.subjects.map((subject, index) => {
-            return (
-              <option key={index} value={subject.title}>{subject.title}</option>
-            )
-          })}
+            <option value="all">Catégories</option>
+            {data.subjects.map((subject, index) => {
+              return (
+                <option key={index} value={subject.title}>{subject.title}</option>
+              )
+            })}
           </select>
         </div>
         <label className='wrapper-checkbox'>

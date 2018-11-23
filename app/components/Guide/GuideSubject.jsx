@@ -6,14 +6,14 @@ import GuideItem from './GuideItem';
 
 @withNamespaces('guide')
 export default class GuideSubject extends Component {
-  render() {
-    
+  
+  render() {    
     return (
       <li className="guide-subject">
         <h3>{this.props.subject.title}</h3>
         <ul>
           {this.props.subject.items.map((item, index) => {
-            return <GuideItem key={index} item={item} cat={this.props.subject.title}/>
+            return <GuideItem key={index} item={item} cat={this.props.subject.title} onAdd={this.props.onAdd}/>
           })}
         </ul>
       </li>
