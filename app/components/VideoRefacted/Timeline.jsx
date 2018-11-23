@@ -10,13 +10,19 @@ class Timeline extends PureComponent {
 
   componentDidUpdate() {
     const iconsQuotes = document.querySelectorAll('.icon-quote');
+    const currentQuote = document.querySelector(`#time-${ parseInt(this.props.currentTime) }`);
 
     for (let i = 0; i < iconsQuotes.length; i++) {
-      console.log();
+      if (parseInt(iconsQuotes[i].getAttribute('data-time')) < this.props.currentTime) {
+        iconsQuotes[i].classList.add('active');
+      }
       iconsQuotes[i].style.left = `${document.querySelector('.timeline').offsetWidth / this.props.totalTime * parseInt(iconsQuotes[i].getAttribute('data-time'))}px`;
       iconsQuotes[i].style.zIndex = i + 1;
     }
 
+    if (currentQuote) {
+      document.querySelector('.wrapper-quotes').scrollTo(0, currentQuote.offsetTop);
+    }
     document.querySelector('.timeline-played').style.width = `${document.querySelector('.timeline').offsetWidth / this.props.totalTime * this.props.currentTime}px`;
   }
 
