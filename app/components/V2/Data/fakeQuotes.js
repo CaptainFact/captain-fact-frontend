@@ -26,8 +26,8 @@ export default [
       {
         date: 'Il y a 4 jours',
         approves: true,
-        upvote: 12,
-        downvote: 3,
+        upvote: 2,
+        downvote: 2,
         text:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porttitor eu arcu posuere faucibus. Ut mollis lobortis sagittis. Pellentesque nibh lorem, sagittis laoreet feugiat vitae, vulputate id dui. Ut eleifend orci malesuada ante fringilla fermentum. In hac habitasse platea dictumst.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porttitor eu arcu posuere faucibus. Ut mollis lobortis sagittis. Pellentesque nibh lorem, sagittis laoreet feugiat vitae, vulputate id dui. Ut eleifend orci malesuada ante fringilla fermentum. In hac habitasse platea dictumst.',
         button_text: 'Wikipedia: Lorem ipsum ...',
@@ -74,91 +74,33 @@ export default [
     comments: [
       {
         date: 'Il y a 5 jours',
-        approves: true,
-        upvote: 12,
-        downvote: 3,
+        approves: false,
+        upvote: 2,
+        downvote: 4,
         text:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porttitor eu arcu posuere faucibus. Ut mollis lobortis sagittis. Pellentesque nibh lorem, sagittis laoreet feugiat vitae, vulputate id dui. Ut eleifend orci malesuada ante fringilla fermentum. In hac habitasse platea dictumst.',
+          ' Praesent porttitor eu arcu posuere faucibus. Ut mollis lob, vulputate id dui. Ut eleifend orci malesuada ante fringilla fermentum. In hac habitasse platea dictumst.',
         button_text: 'Wikipedia: Lorem ipsum ...',
         author_avatar_url:
-          'https://randomuser.me/api/portraits/thumb/men/54.jpg',
+          'https://randomuser.me/api/portraits/thumb/men/24.jpg',
         badges: [
           { name: 'Sciences', icon: 'fa-atom' },
-          { name: 'Politique', icon: 'fa-landmark' }
+          { name: 'Nature', icon: 'fa-leaf' }
         ],
-        falacious: 4,
-        comments: [
-          {
-            date: 'Il y a 4 jours',
-            approves: true,
-            upvote: 12,
-            downvote: 3,
-            text:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porttitor eu arcu posuere faucibus. Ut mollis lobortis sagittis. Pellentesque nibh lorem, sagittis laoreet feugiat vitae, vulputate id dui. Ut eleifend orci malesuada ante fringilla fermentum. In hac habitasse platea dictumst.',
-            button_text: 'Wikipedia: Lorem ipsum ...',
-            author_avatar_url:
-              'https://randomuser.me/api/portraits/thumb/men/54.jpg',
-            badges: [
-              { name: 'Sciences', icon: 'fa-atom' },
-              { name: 'Politique', icon: 'fa-landmark' }
-            ],
-            verified: true
-          },
-          {
-            date: 'Il y a 4 jours',
-            approves: true,
-            upvote: 12,
-            downvote: 3,
-            text:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porttitor eu arcu posuere faucibus. Ut mollis lobortis sagittis. Pellentesque nibh lorem, sagittis laoreet feugiat vitae, vulputate id dui. Ut eleifend orci malesuada ante fringilla fermentum. In hac habitasse platea dictumst.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porttitor eu arcu posuere faucibus. Ut mollis lobortis sagittis. Pellentesque nibh lorem, sagittis laoreet feugiat vitae, vulputate id dui. Ut eleifend orci malesuada ante fringilla fermentum. In hac habitasse platea dictumst.',
-            button_text: 'Wikipedia: Lorem ipsum ...',
-            author_avatar_url:
-              'https://randomuser.me/api/portraits/thumb/men/57.jpg',
-            badges: [
-              { name: 'Nature', icon: 'fa-leaf' },
-              { name: 'Politique', icon: 'fa-landmark' }
-            ]
-          },
-          {
-            date: 'Il y a 5 jours',
-            approves: true,
-            upvote: 2,
-            downvote: 0,
-            text:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porttitor eu arcu posuere faucibus. Ut mollis lobortis sagittis. Pellentesque nibh lorem, sagittis laoreet feugiat vitae, vulputate id dui',
-            button_text: 'Wikipedia: Lorem ipsum ...',
-            author_avatar_url:
-              'https://randomuser.me/api/portraits/thumb/men/58.jpg',
-            badges: [],
-            verified: true
-          },
-          {
-            date: 'Il y a 7 jours',
-            approves: false,
-            upvote: 2,
-            downvote: 5,
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            button_text: 'Wikipedia: Lorem ipsum ...',
-            author_avatar_url:
-              'https://randomuser.me/api/portraits/thumb/men/59.jpg',
-            badges: []
-          }
-        ],
+        falacious: 2,
         verified: true
       },
       {
-        date: 'Il y a 4 jours',
-        approves: true,
-        upvote: 12,
+        date: 'Il y a 7 jours',
+        approves: false,
+        upvote: 9,
         downvote: 3,
         text:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porttitor eu arcu posuere faucibus. Ut mollis lobortis sagittis. Pellentesque nibh lorem, sagittis laoreet feugiat vitae, vulputate id dui. Ut eleifend orci malesuada ante fringilla fermentum. In hac habitasse platea dictumst.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porttitor eu arcu posuere faucibus. Ut mollis lobortis sagittis. Pellentesque nibh lorem, sagittis laoreet feugiat vitae, vulputate id dui. Ut eleifend orci malesuada ante fringilla fermentum. In hac habitasse platea dictumst.',
+          'Lorem ip amet, consectetur adipiscing elit. Praesent porttitor eu arcu posuere faucibus. Ut mollis lobortis sagittis. Pellentesque nibh lorem, sagittis laoreet feugiat vitae, vulputate id dui. Ut eleifend orci malesuada ante fringilla fermentum. In hac habitasse platea dictumst.',
         button_text: 'Wikipedia: Lorem ipsum ...',
         author_avatar_url:
-          'https://randomuser.me/api/portraits/thumb/men/57.jpg',
+          'https://randomuser.me/api/portraits/thumb/men/87.jpg',
         badges: [
           { name: 'Nature', icon: 'fa-leaf' },
-          { name: 'Politique', icon: 'fa-landmark' }
         ]
       },
       {
@@ -222,34 +164,33 @@ export default [
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porttitor eu arcu posuere faucibus. Ut mollis lobortis sagittis. Pellentesque nibh lorem, sagittis laoreet feugiat vitae, vulputate id dui. Ut eleifend orci malesuada ante fringilla fermentum. In hac habitasse platea dictumst.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porttitor eu arcu posuere faucibus. Ut mollis lobortis sagittis. Pellentesque nibh lorem, sagittis laoreet feugiat vitae, vulputate id dui. Ut eleifend orci malesuada ante fringilla fermentum. In hac habitasse platea dictumst.',
         button_text: 'Wikipedia: Lorem ipsum ...',
         author_avatar_url:
-          'https://randomuser.me/api/portraits/thumb/men/57.jpg',
+          'https://randomuser.me/api/portraits/thumb/men/59.jpg',
         badges: [
-          { name: 'Nature', icon: 'fa-leaf' },
           { name: 'Politique', icon: 'fa-landmark' }
         ]
       },
       {
         date: 'Il y a 5 jours',
         approves: true,
-        upvote: 2,
-        downvote: 0,
+        upvote: 0,
+        downvote: 4,
         text:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porttitor eu arcu posuere faucibus. Ut mollis lobortis sagittis. Pellentesque nibh lorem, sagittis laoreet feugiat vitae, vulputate id dui',
+          'Lorem ipsum dolor sit amet, consectetur adi lobortis sagittis. Pellentesque nibh lorem, sagittis laoreet feugiat vitae, vulputate id dui',
         button_text: 'Wikipedia: Lorem ipsum ...',
         author_avatar_url:
-          'https://randomuser.me/api/portraits/thumb/men/58.jpg',
+          'https://randomuser.me/api/portraits/thumb/men/72.jpg',
         badges: [],
         verified: true
       },
       {
-        date: 'Il y a 7 jours',
-        approves: false,
-        upvote: 2,
+        date: 'Il y a 6 jours',
+        approves: true,
+        upvote: 22,
         downvote: 5,
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         button_text: 'Wikipedia: Lorem ipsum ...',
         author_avatar_url:
-          'https://randomuser.me/api/portraits/thumb/men/59.jpg',
+          'https://randomuser.me/api/portraits/thumb/men/69.jpg',
         badges: []
       }
     ]

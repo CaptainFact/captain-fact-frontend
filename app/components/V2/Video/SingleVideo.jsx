@@ -37,7 +37,14 @@ export default class SingleVideo extends React.PureComponent {
     this.refs.videoPlayer.seekTo(time)
   }
 
+  setCurrentQuote = (index) => {
+    this.setState({
+      currentQuote: index
+    })
+  }
+
   render() {
+    console.log(this.state.currentQuote)
     const video = this.getVideo()
     const quotes = this.getVideoQuotes()
     return (
@@ -48,6 +55,7 @@ export default class SingleVideo extends React.PureComponent {
         </button>
         <TimeLine
           quotes={quotes}
+          setCurrentQuote={this.setCurrentQuote}
           videoLength={this.state.videoInfo}
           videoDuration={this.state.videoDuration}
           goTo={this.goTo}

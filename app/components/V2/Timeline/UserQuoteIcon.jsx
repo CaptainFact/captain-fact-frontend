@@ -12,9 +12,6 @@ export default class UserQuoteIcon extends React.PureComponent {
         onClick={() => selectQuote(index)}
       >
         <img src={quote.author_avatar_url} alt="" />
-        <svg height="30" width="30" fill="white" viewBox="0 0 30 30">
-          <polygon points="0,0 15,15 0,30" />
-        </svg>
       </div>
     )
   }
