@@ -5,7 +5,6 @@ import fakeVideos from '../Data/fakevideos'
 import fakeQuotes from '../Data/fakeQuotes'
 import TimeLine from '../Components/Timeline'
 import Comment from '../Components/Comment'
-import AddComment from '../Components/Comment/AddComment'
 
 export default class SingleVideo extends React.PureComponent {
   state = {
