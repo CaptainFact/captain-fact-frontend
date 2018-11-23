@@ -9,15 +9,16 @@ import Comments from '../Comments'
 export default class SingleVideo extends React.PureComponent {
   state = {
     videoDuration: null,
-    videoInfo: null
+    videoInfo: null,
+    currentQuote: 0
   }
 
   getVideo() {
-    return fakeVideos[this.props.routeParams.videoId - 1]
+    return fakeVideos[0]
   }
 
   getVideoQuotes() {
-    return fakeQuotes[this.props.routeParams.videoId - 1]
+    return fakeQuotes
   }
 
   getTime(time) {
@@ -32,33 +33,40 @@ export default class SingleVideo extends React.PureComponent {
     })
   }
 
+  goTo(time) {
+    this.refs.videoPlayer.seekTo(time)
+  }
+
   render() {
     const video = this.getVideo()
     const quotes = this.getVideoQuotes()
     return (
       <div className="page-video-container">
         <h1>{video.title}</h1>
-        <button onClick={this.addVideo} className="add-video">
+        <button className="add-video">
           Ajouter une vidéo
         </button>
         <TimeLine
           quotes={quotes}
           videoLength={this.state.videoInfo}
           videoDuration={this.state.videoDuration}
+          goTo={this.goTo.bind(this)}
         />
         <div className="col-left">
           <ReactPlayer
-            url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
+            ref="videoPlayer"
+            url="https://www.youtube.com/watch?v=82cgWGlrAyE"
             playing
             width="100%"
             height="500px"
+            controls
             onDuration={(time) => this.setTime(time)}
             onProgress={(videoInfo) => this.getTime(videoInfo)}
           />
         </div>
 
         <div className="col-right">
-          {quotes.comments.map((comment, index) => {
+          {quotes[this.state.currentQuote].comments.map((comment, index) => {
             return <Comments key={`comment-${index}`} comment={comment} />
           })}
         </div>

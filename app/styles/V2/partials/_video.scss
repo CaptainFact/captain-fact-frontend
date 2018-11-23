@@ -25,6 +25,7 @@
   .timeline {
     flex: 100%;
     margin-top: 25px;
+    position: relative;
     .timeline-bar {
       position: relative;
       height: 15px;
@@ -38,7 +39,81 @@
         left: -1px;
         border-radius: 3px;
         background-color: white;
-        right: 50%;
+        right: 0;
+      }
+    }
+    .timeline-elem {
+      cursor: pointer;
+      position: absolute;
+      bottom: 0;
+      transform: translateY(45%);
+      left: 0;
+      z-index: 99;
+      &.disabled {
+        svg {
+          display: none;
+        }
+      }
+      img {
+        border-radius: 50%;
+      }
+      svg {
+        transform: rotateZ(-90deg) translateY(28%);
+        left: 0;
+        bottom: -7px;
+        position: absolute;
+      }
+    }
+    .timeline-info {
+      background-color: $lightblue;
+      border: 2px solid transparentize($white, 0.5);
+      border-radius: 3px;
+      width: 48.9%;
+      position: absolute;
+      top: 45px;
+      z-index: 99;
+      .title {
+        position: relative;
+        h2 {
+          color: $white;
+          padding: 20px 40px;
+          text-align: center;
+        }
+        img {
+          position: absolute;
+          top: 15px;
+          left: 15px;
+          width: 20px;
+          height: 15px;
+          &:last-of-type {
+            bottom: 15px;
+            right: 35px;
+            top: auto;
+            left: auto;
+            transform: rotateY(180deg);
+          }
+        }
+      }
+      .legend {
+        background-color: $darkblue;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        .author {
+          display: flex;
+          align-items: center;
+
+          img {
+            border-radius: 50%;
+          }
+          span {
+            margin-left: 10px;
+            font-size: 20px;
+          }
+          i {
+            margin-left: 15px;
+          }
+        }
       }
     }
   }
@@ -71,8 +146,27 @@
       border-radius: 3px;
       border: 2px solid transparentize($white, 0.8);
       position: relative;
+      display: flex;
+      &:first-of-type {
+        margin-top: 0;
+      }
       &:nth-of-type(2n) {
         background-color: $darkblue;
+        .reaction .approves span i {
+          background: $lightblue;
+          width: 28px;
+          text-align: center;
+        }
+        .badges {
+          & > span {
+            background-color: $lightblue !important;
+          }
+        }
+        .options {
+          span {
+            background-color: $lightblue;
+          }
+        }
       }
       .date {
         position: absolute;
@@ -84,6 +178,7 @@
         padding: 5px 10px;
         border-radius: 3px;
         margin: 5px;
+        cursor: pointer;
         &.up {
           color: green;
         }
@@ -92,8 +187,73 @@
         }
       }
       .reaction {
-
+        margin-right: 10px;
+        flex-shrink: 0;
+        .approves {
+          margin-bottom: 20px;
+          span {
+            cursor: pointer;
+            i {
+              background: $darkblue;
+              padding: 5px;
+              border-radius: 20px;
+              font-size: 17px;
+              margin-right: 10px;
+            }
+          }
+        }
       }
+      .text {
+        flex-shrink: 3;
+        flex-grow: 1;
+        .button {
+          display: table;
+          margin-top: 10px;
+          &::after {
+            content: '>';
+            margin-left: 5px;
+          }
+        }
+      }
+      .date {
+        opacity: 0.5;
+      }
+      .user {
+        flex-shrink: 0;
+        align-items: center;
+        text-align: center;
+        margin-left: 7px;
+        & > img {
+          border-radius: 100%;
+        }
+        .badges {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          & > span {
+            cursor: pointer;
+            margin: 2px;
+            background-color: $darkblue;
+            padding: 3px 8px;
+            border-radius: 50px;
+          }
+        }
+      }
+    }
+  }
+  .options {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    span {
+      margin: 1px 0;
+      border-radius: 15px;
+      width: 7px;
+      height: 7px;
+      background-color: $darkblue;
     }
   }
 }
