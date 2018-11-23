@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { Link as RouterLink } from 'react-router'
 import { ds } from "./../../styles/tokens"
 import { pxTo } from 'design-system-utils'
@@ -10,7 +10,9 @@ import Col from './../../components/presentationals/Col'
 import ObjectiveBlob from './../../components/presentationals/ObjectiveBlob'
 import ObjectiveList from './../../components/presentationals/ObjectiveList'
 import ObjectiveTasks from './../../components/presentationals/ObjectiveTasks'
-
+import Button from './../../components/presentationals/Button'
+import Tutorial from './../../components/presentationals/Tutorial'
+import { ACTIONS, EVENTS } from 'react-joyride/es/constants'
 import { withTheme } from './../../components/smart/ThemeProvider'
 import { withNamespaces } from 'react-i18next'
 import { cell, cityDarkDarkest, cityDarkBrightest, cityLight, cityDark } from './images'
@@ -66,12 +68,65 @@ const mapObjectivesPosition = {
   })
 }
 
-const Page = ({reputation, theme, city, objectives, entities, ...props}) => {
-  let image
-  let userEntities ={
-    ...entities,
-    reputation,
+class Page extends PureComponent {
+    state = {
+    run: false,
+    showHelp: false,
+    steps: [
+      {
+        target: '[dataTour="city"]',
+        title: 'Bienvenue dans votre ville',
+        content: "And Joseph [is] upon Joseph's hand; I [am] the things put frankincense thereon. Saying to pass, that only vessels of three tabernacles.",
+        disableBeacon: true
+      },
+      {
+        target: '[dataTour="city"]',
+        content: " And when the law, but willingly; not of the children shall come up for they came from the land of him, from off the riders on the congregation, and given unto the earth mourn, and gave thee go, except he cometh unto them, and the sea to thee; or peril, or famine, or sit here John the truth, as dead. It was an high priest shall have in thy seed exceedingly, and I heard his mouth, thou do hurt.",
+        disableBeacon: true
+      },
+      {
+        target: '[dataTour="objective-0-blob"]',
+        content: 'Objectif principal',
+        placement: 'auto',
+        content: " And when the law, but willingly; not of the children shall come up for they came from the land of him, from off the riders on the congregation, and given unto the earth mourn, and gave thee go, except he cometh unto them, and the sea to thee; or peril, or famine, or sit here John the truth, as dead. It was an high priest shall have in thy seed exceedingly, and I heard his mouth, thou do hurt.",
+      },
+      {
+        target: '[dataTour="objective-0-list"]',
+        content: 'Sous-objectif',
+        placement: 'top',
+        content: "For though I will cut it before the carrying away even among the household be afraid to drink, and preaching of whom ye should hold the head toward the three nights in Christ is able even as it hath concluded them away.",
+      },
+      {
+        title: 'Tutoriel terminé !',
+        target: '[dataTour="city"]',
+        content: "Tyre and came to meet thine only that there arose and southward, and the morning were troubled me not; neither [is there] that stood afar off, as ye know nothing [that came] upon his cause the seven thin ears devoured with thirst?",
+        disableBeacon: true,
+      },
+    ]
   }
+  toggleHelpAndTutorials = () => {
+    this.setState({showHelp: !this.state.showHelp })
+  }
+
+  launchPageRide = () => {
+    this.setState({ run: true, showHelp: false  })
+  }
+
+  callback = (data) => {
+    const { action, index, type } = data
+    if (type === EVENTS.TOUR_END) {
+      this.setState({ run: false })
+    }
+  }
+
+  render() {
+    const {reputation, theme, city, objectives, entities, ...props} = this.props
+    const { steps, run } = this.state
+    let image
+    let userEntities ={
+      ...entities,
+      reputation,
+    }
 
   switch(true) {
     case reputation < 150:
@@ -124,6 +179,41 @@ const Page = ({reputation, theme, city, objectives, entities, ...props}) => {
   ]
 
   return <Layout>
+    {this.state.showHelp && this.state.run === false && <div className={`fixed`.concat(' ', css({
+      right: pxTo(40, baseFontSize, 'rem'),
+      bottom: pxTo(80, baseFontSize, 'rem'),
+    }))}>
+      <Button additionalStyles={`focus:outline-none text-left`.concat(' ', css({
+        padding: `${pxTo(10, baseFontSize, 'rem')} ${pxTo(20, baseFontSize, 'rem')}`,
+      }))}
+        radius="xl" size="regular" outline={false} themeName='tutorial' onClick={this.launchPageRide}
+      >
+        <b>Lancer le tutoriel </b><span> pour cette page</span>
+        <div>
+          <small className='text-sm'>{this.state.steps.length} étapes</small>
+        </div>
+      </Button>
+    </div> }
+    {this.state.run === false && <div className={`fixed`.concat(' ', css({
+      right: pxTo(40, baseFontSize, 'rem'),
+      bottom: pxTo(40, baseFontSize, 'rem'),
+    }))}>
+      <Button additionalStyles={css({
+        width: pxTo(40, baseFontSize, 'rem'),
+        height: pxTo(40, baseFontSize, 'rem'),
+      }).concat(' ', 'focus:outline-none')}
+        radius="xxl" size="md" outline={true} themeName='tutorial' onClick={this.toggleHelpAndTutorials}
+      >?</Button>
+    </div>}
+
+
+      <Tutorial
+        steps={steps}
+        run={run}
+        callback={this.callback}
+        showProgress={true}
+        showSkipButton={true}
+      />
     <Grid staticStyles='mb-auto'>
       <Col baseWidth={4}>
         <ul className='font-700 uppercase mb-100'>
@@ -181,7 +271,7 @@ const Page = ({reputation, theme, city, objectives, entities, ...props}) => {
 
       </Col>
       <Col baseWidth={8} staticStyles='relative'>
-        {objectives.map(objective => {
+        {objectives.map((objective, index) => {
           const done = objective.tasks.filter(task => parseInt(task.goal) < parseInt(userEntities[task.entity]))
           const wip = objective.tasks.filter(task => parseInt(task.goal) >= parseInt(userEntities[task.entity]))
 
@@ -196,10 +286,10 @@ const Page = ({reputation, theme, city, objectives, entities, ...props}) => {
       }
       },
     }))}>
-          <button className='bg-transparent border-transparent focus:outline-none'>
+            <button dataTour={`objective-${index}-blob`} className='bg-transparent border-transparent focus:outline-none'>
               <ObjectiveBlob done={done.length === objective.tasks.length}/>
           </button>
-          <div className={`opacity-0 z-n`.concat(' ', css({
+            <div dataTour={`objective-${index}-list`} className={`opacity-0 z-n`.concat(' ', css({
             transition: 'all 250ms ease-in-out',
             transform: 'translate(0, 0)',
             maxWidth: pxTo(300, baseFontSize, "rem"),
@@ -212,12 +302,15 @@ const Page = ({reputation, theme, city, objectives, entities, ...props}) => {
           </div>
         </div>}
       )}
-
-        {image}
+        <div dataTour='city'>
+          {image}
+        </div>
       </Col>
     </Grid>
   </Layout>
+  }
 }
+
 
 /// export default withNamespaces('city')(withTheme(Page)) // for some reasons, i18n doesn't work
 export default withTheme(Page)
