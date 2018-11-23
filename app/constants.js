@@ -9,6 +9,7 @@ export const COMMENTS_CHANNEL = 'comments'
 
 // Misc
 export const NO_INTERNET_ERROR = 'errors:server.noInternet'
+export const SUPPORTED_LOCALES = ['en', 'fr']
 
 // Actions
 export const ACTION_CREATE = 'create'
@@ -55,6 +56,7 @@ export const MIN_REPUTATION_MODERATION = 125
 /* ------ UI, animations ------ */
 
 export const MOBILE_WIDTH_THRESHOLD = 768 // pixels
+export const FULLHD_WIDTH_THRESHOLD = 1408 // pixels
 
 export const USER_PICTURE_SMALL = 24
 export const USER_PICTURE_LARGE = 48

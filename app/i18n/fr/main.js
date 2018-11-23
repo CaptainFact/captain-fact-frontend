@@ -27,7 +27,7 @@ export default {
     save: 'Sauvegarder',
     cancel: 'Annuler',
     send: 'Envoyer',
-    moreInfo: 'Plus d\'informations',
+    moreInfo: "Plus d'informations",
     goBack: 'Revenir en arrière',
     reload: 'Actualiser',
     flag: 'Signaler',
@@ -51,7 +51,7 @@ export default {
     fieldMaxLength: 'Doit faire moins de {{max}} caractères',
     and: 'et',
     clipboardSuccess: 'Adresse copiée dans le presse-papier',
-    clipboardFail: 'Impossible d\'enregistrer l\'adresse dans le presse-papier',
+    clipboardFail: "Impossible d'enregistrer l'adresse dans le presse-papier",
     all: 'Tous',
     unknown: 'Inconnu',
     languageFilter: 'Langue',
@@ -70,6 +70,5 @@ export default {
   },
   all: 'Toutes',
   partners: 'Partenaires',
-  users: 'Utilisateurs',
-  anonymous: 'Utilisateur anonyme'
+  users: 'Utilisateurs'
 }

@@ -22,6 +22,7 @@ Immutable.Record {
       "requestId": null,
       "time": 0,
     },
+    "isPlaying": false,
   },
 }
 `;
@@ -58,6 +59,7 @@ Immutable.Record {
       "requestId": null,
       "time": 0,
     },
+    "isPlaying": false,
   },
 }
 `;
@@ -84,6 +86,7 @@ Immutable.Record {
       "requestId": null,
       "time": 0,
     },
+    "isPlaying": false,
   },
 }
 `;
@@ -129,6 +132,7 @@ Immutable.Record {
       "requestId": null,
       "time": 0,
     },
+    "isPlaying": false,
   },
 }
 `;
@@ -155,6 +159,7 @@ Immutable.Record {
       "requestId": null,
       "time": 0,
     },
+    "isPlaying": false,
   },
 }
 `;
@@ -193,6 +198,7 @@ Immutable.Record {
         "position": 4,
       },
     },
+    "isPlaying": false,
   },
 }
 `;
@@ -219,6 +225,7 @@ Immutable.Record {
       "requestId": null,
       "time": 0,
     },
+    "isPlaying": false,
   },
 }
 `;
@@ -245,6 +252,7 @@ Immutable.Record {
       "requestId": null,
       "time": 0,
     },
+    "isPlaying": false,
   },
 }
 `;
@@ -271,6 +279,7 @@ Immutable.Record {
       "requestId": null,
       "time": 0,
     },
+    "isPlaying": false,
   },
 }
 `;
@@ -297,6 +306,7 @@ Immutable.Record {
       "requestId": null,
       "time": 0,
     },
+    "isPlaying": false,
   },
 }
 `;
@@ -323,6 +333,7 @@ Immutable.Record {
       "requestId": null,
       "time": 0,
     },
+    "isPlaying": false,
   },
 }
 `;
@@ -349,6 +360,7 @@ Immutable.Record {
       "requestId": null,
       "time": 0,
     },
+    "isPlaying": false,
   },
 }
 `;
@@ -375,6 +387,7 @@ Immutable.Record {
       "requestId": null,
       "time": 0,
     },
+    "isPlaying": false,
   },
 }
 `;
@@ -401,6 +414,7 @@ Immutable.Record {
       "requestId": null,
       "time": 0,
     },
+    "isPlaying": false,
   },
 }
 `;
@@ -427,6 +441,7 @@ Immutable.Record {
       "requestId": null,
       "time": 0,
     },
+    "isPlaying": false,
   },
 }
 `;
@@ -453,6 +468,7 @@ Immutable.Record {
       "requestId": null,
       "time": 0,
     },
+    "isPlaying": false,
   },
 }
 `;
