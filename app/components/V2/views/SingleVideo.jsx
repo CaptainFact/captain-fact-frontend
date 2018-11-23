@@ -75,7 +75,6 @@ export default class SingleVideo extends React.PureComponent {
           {quotes[this.state.currentQuote].comments.map((comment, index) => {
             return <Comment key={`comment-${index}`} comment={comment} />
           })}
-          <AddComment />
         </div>
       </div>
     )
