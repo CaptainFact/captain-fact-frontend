@@ -14,6 +14,17 @@ export default class Timeline extends React.PureComponent {
     })
   }
 
+  getApprovesNumber() {
+    return this.state.currentQuote.comments.filter((el) => el.approves === true)
+      .length
+  }
+
+  getDisaprovedNumber() {
+    return this.state.currentQuote.comments.filter(
+      (el) => el.approves === false
+    ).length
+  }
+
   render() {
     const { quotes, videoDuration, videoLength } = this.props
 
@@ -51,10 +62,26 @@ export default class Timeline extends React.PureComponent {
           </div>
           <div className="legend">
             <div className="vote">
-              {this.state.currentQuote.votes.approves}
-              {this.state.currentQuote.votes.disapproves}
-              {this.state.currentQuote.votes.comments}
-              {this.state.currentQuote.votes.falacious}
+              <div className="vote-icon approves tooltip">
+                <i className="fas fa-thumbs-up " />
+                <span>{this.getApprovesNumber()}</span>
+                <div className="tooltiptext">Approuve</div>
+              </div>
+              <div className="vote-icon disapproves tooltip">
+                <i className="fas fa-thumbs-down" />
+                <span>{this.getDisaprovedNumber()}</span>
+                <div className="tooltiptext">Réfute</div>
+              </div>
+              <div className="vote-icon comments tooltip">
+                <i className="fas fa-comment" />
+                <span>{this.state.currentQuote.comments.length}</span>
+                <div className="tooltiptext">Nombre de commentaires</div>
+              </div>
+              <div className="vote-icon falacious tooltip">
+                <i className="fas fa-meh" />
+                <span>{this.state.currentQuote.falacious}</span>
+                <div className="tooltiptext">Commentaires falacieux</div>
+              </div>
             </div>
             <div className="author">
               <img src={this.state.currentQuote.author_avatar_url} alt="" />

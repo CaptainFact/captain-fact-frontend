@@ -114,6 +114,21 @@
             margin-left: 15px;
           }
         }
+        .vote {
+          display: flex;
+          & > div {
+            padding: 10px;
+            color: $darkblue;
+            background: $white;
+            border-radius: 3px;
+            margin: 0 5px;
+            font-size: 20px;
+            i {
+              margin-right: 5px;
+              font-size: 25px;
+            }
+          }
+        }
       }
     }
   }

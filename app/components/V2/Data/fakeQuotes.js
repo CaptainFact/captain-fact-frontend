@@ -63,12 +63,7 @@ export default [
         badges: []
       }
     ],
-    votes: {
-      approves: 12,
-      disapproves: 3,
-      comments: 10,
-      falacious: 2
-    }
+    falacious: 2
   },
   {
     time: 2150,
@@ -87,7 +82,7 @@ export default [
     time: 2820,
     quote:
       "L'armée Française est en guerre aujourd'hui avec 30.000 marins, soldats et aviateurs en positions opérationnelles.",
-    author: 'Kémi Séba',
+    author: 'Kémi Séba sabatier',
     author_avatar_url: 'https://randomuser.me/api/portraits/thumb/men/25.jpg',
     author_role: 'Ingénieur Agronome',
     votes: {
