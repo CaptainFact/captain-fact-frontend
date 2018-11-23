@@ -4,6 +4,7 @@ import Icon from '../Icons/Icon';
 import { Link } from 'react-router'
 
 import {TweenMax} from 'gsap/all';
+import MenuLink from './MenuLink';
 
 export default class Menu extends Component {
   state = {
@@ -58,10 +59,7 @@ export default class Menu extends Component {
         <nav className='sidebar-nav' role='navigation'>
           <ul className='sidebar-nav-items' >
             <li className='sidebar-nav-item'>
-              <Link to={'/new/guide'} activeClassName="active">
-                <Icon name='guide'/>
-                <span className='to-show'>Guide</span>
-              </Link>
+              <MenuLink name='guide'/>
               <div className='sidebar-nav-item-guide to-show'>
                 <span className='line'>
                   <span>Modifier votre profil</span>
@@ -79,16 +77,10 @@ export default class Menu extends Component {
               </div>
             </li>
             <li className='sidebar-nav-item'>
-              <Link to={'/new'} onlyActiveOnIndex activeClassName="active">
-                <Icon name='videos'/>
-                <span className='to-show'>Vidéos</span>
-              </Link>
+              <MenuLink name='videos'/>
             </li>
             <li className='sidebar-nav-item'>
-              <Link to={'/new/limitations'} activeClassName="active">
-                <Icon name='limitations'/>  
-                <span className='to-show'>Limitations</span>
-              </Link>
+              <MenuLink name='limitations'/>
               <div className='sidebar-nav-item-guide limitations to-show'>
                 <span className='line'>
                   <span>Commenter</span>
@@ -106,16 +98,10 @@ export default class Menu extends Component {
               </div>
             </li>
             <li className='sidebar-nav-item'>
-              <Link to={'/new/help'} activeClassName="active">
-                <Icon name='help'/>
-                <span className='to-show'>Aide</span>
-              </Link>
+              <MenuLink name='help'/>
             </li>
             <li className='sidebar-nav-item'>
-              <Link to={'/new/settings'} activeClassName="active">
-                <Icon name='settings'/>
-                <span className='to-show'>Paramètres</span>
-              </Link>
+              <MenuLink name='settings'/>
             </li>
           </ul>
         </nav>
