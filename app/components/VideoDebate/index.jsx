@@ -52,7 +52,6 @@ export class VideoDebate extends React.PureComponent {
           {!this.props.isLoading && <title>{this.props.videoTitle}</title>}
         </Helmet>
         <ColumnVideo view={this.props.route.view} />
-        <TimeLine/>
         <ColumnDebate view={this.props.route.view} videoId={this.props.params.videoId} />
       </div>
     )

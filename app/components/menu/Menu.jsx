@@ -39,7 +39,7 @@ class Menu extends Component {
               value={i18n.language}
             />
           </li>
-          <li className="flex flex-center" onClick={this.openMobileMenu}><ClassicButton link="/videos" text="Vidéos"/></li>
+          <li className="flex flex-center"><ClassicButton link="/videos" text="Vidéos"/></li>
           <li className="flex flex-center" onClick={this.openMobileMenu}><ClassicButton href="https://discord.gg/2Qd7hMz" text="Rejoignez le Discord" icon={DiscordIcon}/></li>
           <li className="flex flex-center" onClick={this.openMobileMenu}><ClassicButton link="/videos" icon={this.state.mobileMenuActive ? false : ExitIcon} text={this.state.mobileMenuActive ? 'Déconnection' : false}/></li>
         </ul>
