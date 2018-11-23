@@ -1,0 +1,110 @@
+export const videos = [
+    {
+        hash_id: 1,
+        id: 1,
+        url: 'https://www.youtube.com/watch?v=82cgWGlrAyE',
+        image_url: 'https://picsum.photos/500/300/',
+        title: 'Est-ce une bonne chose de rendre les transports en gratuits ?',
+        description: 'Une grande réforme fiscale à été adoptée aux États-Unis l\'année dernière',
+        date: 'Il y a 8 heures',
+        duration: '1:01:43',
+        views_number: 212,
+        sponsorized: false
+    },
+    {
+        hash_id: 2,
+        id: 2,
+        url: 'https://www.youtube.com/watch?v=xYCG22TieB4',
+        image_url: 'https://picsum.photos/500/300/',
+        title: 'Ne pensez vous pas qu\'il y ait de bonnes ou de mauvaises situations ?',
+        description: 'Une grande réforme fiscale à été adoptée aux États-Unis l\'année dernière',
+        date: 'Il y a 2 semaines',
+        duration: '1:46:56',
+        views_number: 385,
+        sponsorized: true
+    },
+    {
+        hash_id: 3,
+        id: 3,
+        url: 'https://www.youtube.com/watch?v=82cgWGlrAyE',
+        image_url: 'https://picsum.photos/500/300/',
+        title: 'J\'aime quand on m\'enduit d\'huile',
+        description: 'Il est bizarre ce sol, il est pas palpable. C\'est par ou ?',
+        date: 'Il y a 1 mois',
+        duration: '1:12:35',
+        views_number: 117,
+        sponsorized: false
+    },
+    {
+        hash_id: 41,
+        id: 41,
+        url: 'https://www.youtube.com/watch?v=82cgWGlrAyE',
+        image_url: 'https://picsum.photos/500/300/',
+        title: 'Est-ce une bonne chose de rendre les transports en gratuits ?',
+        description: 'Une grande réforme fiscale à été adoptée aux États-Unis l\'année dernière',
+        date: 'Il y a 8 heures',
+        duration: '1:01:43',
+        views_number: 212,
+        sponsorized: false
+    },
+    {
+        hash_id: 21,
+        id: 21,
+        url: 'https://www.youtube.com/watch?v=xYCG22TieB4',
+        image_url: 'https://picsum.photos/500/300/',
+        title: 'Ne pensez vous pas qu\'il y ait de bonnes ou de mauvaises situations ?',
+        description: 'Une grande réforme fiscale à été adoptée aux États-Unis l\'année dernière',
+        date: 'Il y a 2 semaines',
+        duration: '1:46:56',
+        views_number: 385,
+        sponsorized: true
+    },
+    {
+        hash_id: 31,
+        id: 31,
+        url: 'https://www.youtube.com/watch?v=82cgWGlrAyE',
+        image_url: 'https://picsum.photos/500/300/',
+        title: 'J\'aime quand on m\'enduit d\'huile',
+        description: 'Il est bizarre ce sol, il est pas palpable. C\'est par ou ?',
+        date: 'Il y a 1 mois',
+        duration: '1:12:35',
+        views_number: 117,
+        sponsorized: false
+    },
+    {
+        hash_id: 11,
+        id: 11,
+        url: 'https://www.youtube.com/watch?v=82cgWGlrAyE',
+        image_url: 'https://picsum.photos/500/300/',
+        title: 'Est-ce une bonne chose de rendre les transports en gratuits ?',
+        description: 'Une grande réforme fiscale à été adoptée aux États-Unis l\'année dernière',
+        date: 'Il y a 8 heures',
+        duration: '1:01:43',
+        views_number: 212,
+        sponsorized: false
+    },
+    {
+        hash_id: 12,
+        id: 12,
+        url: 'https://www.youtube.com/watch?v=xYCG22TieB4',
+        image_url: 'https://picsum.photos/500/300/',
+        title: 'Ne pensez vous pas qu\'il y ait de bonnes ou de mauvaises situations ?',
+        description: 'Une grande réforme fiscale à été adoptée aux États-Unis l\'année dernière',
+        date: 'Il y a 2 semaines',
+        duration: '1:46:56',
+        views_number: 385,
+        sponsorized: true
+    },
+    {
+        hash_id: 13,
+        id: 13,
+        url: 'https://www.youtube.com/watch?v=82cgWGlrAyE',
+        image_url: 'https://picsum.photos/500/300/',
+        title: 'J\'aime quand on m\'enduit d\'huile',
+        description: 'Il est bizarre ce sol, il est pas palpable. C\'est par ou ?',
+        date: 'Il y a 1 mois',
+        duration: '1:12:35',
+        views_number: 117,
+        sponsorized: false
+    }
+];

@@ -7,6 +7,7 @@ import i18n from '../../i18n/i18n'
 import { FlashMessages } from '../Utils'
 import { fetchCurrentUser } from '../../state/users/current_user/effects'
 import Sidebar from './Sidebar'
+import Navbar from './Navbar';
 import { MainModalContainer } from '../Modal/MainModalContainer'
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
 import { isAuthenticated } from '../../state/users/current_user/selectors'
@@ -34,12 +35,13 @@ export default class App extends React.PureComponent {
     return (
       <I18nextProvider i18n={i18n}>
         <div lang={locale}>
+          <Navbar/>
           <Helmet>
             <title>CaptainFact</title>
           </Helmet>
           <MainModalContainer />
           <FlashMessages />
-          <Sidebar />
+          
           <div id="main-container" className={mainContainerClass}>
             {children}
           </div>
