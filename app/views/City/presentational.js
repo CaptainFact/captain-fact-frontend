@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { Link as RouterLink } from 'react-router'
 import { ds } from "./../../styles/tokens"
 import { pxTo } from 'design-system-utils'
+import { keyframes } from 'react-emotion'
 import { css } from 'emotion'
 import Layout from './../Layout'
 import Grid from './../../components/presentationals/Grid'
@@ -18,6 +19,16 @@ import { withNamespaces } from 'react-i18next'
 import { cell, cityDarkDarkest, cityDarkBrightest, cityLight, cityDark } from './images'
 
 const baseFontSize = ds.get("type.sizes.baseFontSize")
+const appearFromBottom = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+   opacity: 1;
+   transform: translateY(0);
+  }
+`
 
 // Theme
 const cityTheme = {
@@ -50,6 +61,10 @@ const cityTheme = {
           light: ds.get('colors.orangeLightest'),
         }
       }
+    },
+    launchTutorialButtonShadow: {
+      dark: "shadow-mediumDark",
+      light: "shadow-mediumLight"
     }
   }
 
@@ -180,10 +195,11 @@ class Page extends PureComponent {
 
   return <Layout>
     {this.state.showHelp && this.state.run === false && <div className={`fixed`.concat(' ', css({
-      right: pxTo(40, baseFontSize, 'rem'),
-      bottom: pxTo(80, baseFontSize, 'rem'),
+      right: pxTo(30, baseFontSize, 'rem'),
+      bottom: pxTo(90, baseFontSize, 'rem'),
     }))}>
-      <Button additionalStyles={`focus:outline-none text-left`.concat(' ', css({
+      <Button additionalStyles={`focus:outline-none text-left ${cityTheme.launchTutorialButtonShadow[theme]}`.concat(' ', css({
+        animation: `${appearFromBottom} 350ms ease-in-out`,
         padding: `${pxTo(10, baseFontSize, 'rem')} ${pxTo(20, baseFontSize, 'rem')}`,
       }))}
         radius="xl" size="regular" outline={false} themeName='tutorial' onClick={this.launchPageRide}

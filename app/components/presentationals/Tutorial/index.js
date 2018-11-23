@@ -49,7 +49,7 @@ const Tutorial = (props) => {
         }
       }
     }}
-    locale={{ back: 'Précédent', close: 'Fermer', last: 'Dernière étape', next: 'Suivant', skip: 'Passer' }}
+    locale={{ back: 'Précédent', close: 'Suivant', last: 'Dernière étape', next: 'Suivant', skip: 'Passer' }}
   />
 }
 

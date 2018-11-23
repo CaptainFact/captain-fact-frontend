@@ -6,6 +6,7 @@ import { css, injectGlobal } from 'emotion'
 import Container from './../../components/presentationals/Container'
 import Navbar from './../../components/presentationals/Navbar'
 import { withTheme } from './../../components/smart/ThemeProvider'
+import logo from './../../assets/logo.svg'
 
 // Dynamic styles values (theme)
 const backgrounds = {
@@ -37,7 +38,8 @@ class Layout extends PureComponent {
           }))
         }>
         <Container contained staticStyles='flex flex-col justify-center'>
-            <header className='pt-5 mb-auto'>
+            <header className='pt-5 mb-auto flex items-center'>
+            <div className='w-60' dangerouslySetInnerHTML={{ __html: logo }} />
               <Navbar reputation={reputation} avatarSrc={avatarSrc}/>
             </header>
             {children}
