@@ -9,21 +9,23 @@ import { Icon } from '../Utils'
 import { MOBILE_WIDTH_THRESHOLD, USER_PICTURE_SMALL, MIN_REPUTATION_MODERATION } from '../../constants'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import RawIcon from '../Utils/RawIcon'
+import LogoIcon from '../Utils/LogoIcon'
 import ReputationGuard from '../Utils/ReputationGuard'
 import LanguageSelector from './LanguageSelector'
 import ScoreTag from '../Users/ScoreTag'
 import { logout } from '../../state/users/current_user/effects'
-import { closeSidebar, toggleSidebar } from '../../state/user_preferences/reducer'
+import { closeSidebar, openSidebar } from '../../state/user_preferences/reducer'
 import UserPicture from '../Users/UserPicture'
 import i18n from '../../i18n/i18n'
 import Logo from './Logo'
 import Button from '../Utils/Button'
+import { VideosTrend } from '../Videos/VideosTrend'
 
 @connect(state => ({
   CurrentUser: state.CurrentUser.data,
   isLoadingUser: state.CurrentUser.isLoading,
   sidebarExpended: state.UserPreferences.sidebarExpended
-}), {logout, toggleSidebar, closeSidebar})
+}), {logout, openSidebar, closeSidebar})
 @withNamespaces('main')
 export default class Sidebar extends React.PureComponent {
   constructor(props) {
@@ -114,48 +116,36 @@ export default class Sidebar extends React.PureComponent {
       <aside
         id="sidebar"
         className={classNames('menu', className, {expended: sidebarExpended})}
+        onMouseOver={() => this.props.openSidebar()}
+        onMouseOut={() => this.props.closeSidebar()}
       >
         <div className="logo-banner">
-          <div className="menu-collapse-button" onClick={() => this.props.toggleSidebar()}>
-            <RawIcon name="bars"/>
-          </div>
           <Link to="/">
+            <div className="menu-collapse-button visible-when-collapsed">
+              <LogoIcon />
+            </div>
             <Logo borderless/>
           </Link>
         </div>
 
         <div className="menu-content">
-          { this.renderUserSection() }
-          <p className="menu-label hide-when-collapsed">{ t('menu.language') }</p>
-          <LanguageSelector
-            className="hide-when-collapsed"
-            handleChange={v => i18n.changeLanguage(v)}
-            value={i18n.language}
-            size="small"
-            withIcon
-          />
-          <p className="menu-label">{ t('menu.content') }</p>
           {this.renderMenuContent()}
-          <p className="menu-label">{ t('menu.other') }</p>
           <ul className="menu-list">
-            <li>
-              <a
-                href="https://opencollective.com/captainfact_io"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hide-when-collapsed link-with-icon"
-              >
-                <RawIcon name="heart"/>
-                { t('menu.donation') }
-              </a>
-            </li>
-            <this.MenuListLink to="/extension" iconName="puzzle-piece" className="hide-when-collapsed">
-              { t('menu.extension') }
-            </this.MenuListLink>
             <this.MenuListLink to="/help" iconName="question-circle">
               { t('menu.help') }
             </this.MenuListLink>
           </ul>
+          <p className="menu-label hide-when-collapsed">{ t('menu.language') }</p>
+          <LanguageSelector
+          className="hide-when-collapsed"
+          handleChange={v => i18n.changeLanguage(v)}
+          value={i18n.language}
+          size="small"
+          withIcon
+          />
+          <p className="menu-label hide-when-collapsed">{ t('menu.trends') }</p>
+          <VideosTrend className="hide-when-collapsed" />
+          { this.renderUserSection() }
         </div>
       </aside>
     )

@@ -4,6 +4,7 @@ import { ALL_VIDEOS, MOBILE_WIDTH_THRESHOLD } from '../../constants'
 import browserLocale from '../../i18n/browser_locale'
 
 
+export const openSidebar = createAction('USER_PREFERENCES/OPEN_SIDEBAR')
 export const toggleSidebar = createAction('USER_PREFERENCES/TOGGLE_SIDEBAR')
 export const closeSidebar = createAction('USER_PREFERENCES/CLOSE_SIDEBAR')
 export const changeLocale = createAction('USER_PREFERENCES/CHANGE_LOCALE')
@@ -41,6 +42,7 @@ const updateState = (state, key, value) => {
 }
 
 const UserPreferencesReducer = handleActions({
+  [openSidebar]: state => updateState(state, 'sidebarExpended', true),
   [toggleSidebar]: state => updateState(state, 'sidebarExpended', !state.sidebarExpended),
   [closeSidebar]: state => updateState(state, 'sidebarExpended', false),
   [changeLocale]: (state, { payload }) => updateState(state, 'locale', payload),
