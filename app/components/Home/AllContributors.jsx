@@ -2,21 +2,23 @@ import React from 'react'
 import { withNamespaces } from 'react-i18next'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
-
 const ROLE_AMBASSADOR = 'ambassador'
 const ROLE_AMBASSADOR_PADAWAN = 'ambassadorPadawan'
 const ROLE_DEVELOPER = 'developer'
 const ROLE_DONATOR = 'donator'
 const ROLE_PARTNER = 'partner'
 
+// prettier-ignore
 const CONTRIBUTORS = [
   { role: ROLE_AMBASSADOR, name: 'Frédéric Bouffetier', picture: 'frederic' },
   { role: ROLE_AMBASSADOR, name: 'Timothée Roland', picture: 'timothee' },
-  { role: ROLE_AMBASSADOR_PADAWAN, name: 'Dorian Cazottes', picture: 'dorian' },
+  { role: ROLE_AMBASSADOR, name: 'Dorian Cazottes', picture: 'dorian' },
   { role: ROLE_PARTNER, name: 'ThinkerView', picture: 'thinkerview', url: 'https://thinkerview.com' },
   { role: ROLE_PARTNER, name: 'Heu?reka', picture: 'heureka', url: 'https://www.youtube.com/channel/UC7sXGI8p8PvKosLWagkK9wQ' },
   { role: ROLE_PARTNER, name: 'La Tronche en Biais', picture: 'troncheenbiais', url: 'https://www.youtube.com/user/TroncheEnBiais' },
-  { role: ROLE_PARTNER, name: 'IMAGO', picture: 'imago', url: 'http://imagotv.fr/pdf/imago_presentation.pdf' },
+  { role: ROLE_PARTNER, name: 'Système D', picture: 'systemed', url: 'https://www.systeme-d.co/' },
+  { role: ROLE_PARTNER, name: 'Démocratie Ouverte', picture: 'democratie-ouverte', url: 'https://democratieouverte.org' },
+  { role: ROLE_PARTNER, name: 'IMAGO', picture: 'imago', url: 'http://imagotv.fr' },
   { role: ROLE_PARTNER, name: 'TedX Nouméa', picture: 'tedxnoumea', url: 'https://tedxnoumea.com' },
   { role: ROLE_PARTNER, name: 'YesWeHack', picture: 'yeswehack', url: 'https://yeswehack.com' },
   { role: ROLE_PARTNER, name: 'Maia Mater', picture: 'maiamater', url: 'https://www.maiamater.camp' },
@@ -52,11 +54,11 @@ const AllContributors = ({ t }) => (
           </figure>
         </div>
         <div className="card-content">
-          <p className="title is-4">
-            {contributorName(contributor)}
-          </p>
+          <p className="title is-4">{contributorName(contributor)}</p>
           <p className="subtitle is-6">
-            {t(`roles.${contributor.role}`, { context: contributor.i18nContext })}
+            {t(`roles.${contributor.role}`, {
+              context: contributor.i18nContext
+            })}
           </p>
         </div>
       </div>
@@ -65,15 +67,19 @@ const AllContributors = ({ t }) => (
 )
 
 function contributorName({ url, name }) {
-  return url
-    ? <ExternalLinkNewTab href={url}>{name}</ExternalLinkNewTab>
-    : name
+  return url ? <ExternalLinkNewTab href={url}>{name}</ExternalLinkNewTab> : name
 }
 
 function contributorPicture({ picture }) {
-  return picture
-    ? <img src={`/assets/img/contributors/${picture}.jpg`} alt="" />
-    : <img src="/assets/img/contributors/no-picture.svg" className="no-picture" alt="" />
+  return picture ? (
+    <img src={`/assets/img/contributors/${picture}.jpg`} alt="" />
+  ) : (
+    <img
+      src="/assets/img/contributors/no-picture.svg"
+      className="no-picture"
+      alt=""
+    />
+  )
 }
 
 export default withNamespaces('home')(AllContributors)
