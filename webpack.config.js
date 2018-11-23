@@ -18,7 +18,7 @@ module.exports = {
   mode: 'development',
   entry: {
     app: [
-      'babel-polyfill',
+      '@babel/polyfill',
       './app/index.jsx'
     ]
   },
@@ -34,7 +34,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     modules: [
-      path.join(__dirname, 'src'),
+      path.resolve('./app'),
       path.join(__dirname, 'node_modules'), // the old 'fallback' option (needed for npm link-ed packages)
     ],
     alias: {

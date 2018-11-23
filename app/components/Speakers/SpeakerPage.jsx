@@ -1,35 +1,41 @@
-import React from 'react'
-import { withRouter } from 'react-router'
-import { connect } from 'react-redux'
-import Helmet from 'react-helmet'
+import React from "react"
+import { withRouter } from "react-router"
+import { connect } from "react-redux"
+import Helmet from "react-helmet"
 
-import { SpeakerPreview } from './SpeakerPreview'
-import { fetchSpeaker, fetchWikiDataInfo } from '../../state/speakers/effects'
-import { ErrorView } from '../Utils/ErrorView'
-import { Icon } from '../Utils/Icon'
-import { LoadingFrame } from '../Utils/LoadingFrame'
-import { reset } from '../../state/speakers/reducer'
-import { reset as resetVideos } from '../../state/videos/reducer'
-import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
-import PaginatedVideosContainer from '../Videos/PaginatedVideosContainer'
-
+import { SpeakerPreview } from "./SpeakerPreview"
+import { fetchSpeaker, fetchWikiDataInfo } from "../../state/speakers/effects"
+import { ErrorView } from "../Utils/ErrorView"
+import { Icon } from "../Utils/Icon"
+import { LoadingFrame } from "../Utils/LoadingFrame"
+import { reset } from "../../state/speakers/reducer"
+import { reset as resetVideos } from "../../state/videos/reducer"
+import ExternalLinkNewTab from "../Utils/ExternalLinkNewTab"
+import PaginatedVideosContainer from "../Videos/PaginatedVideosContainer"
 
 @withRouter
-@connect(state => ({
-  speaker: state.Speakers.currentSpeaker,
-  links: state.Speakers.currentSpeakerLinks,
-  speakerLoading: state.Speakers.isLoading,
-  wikiLoading: state.Speakers.isLoadingWiki,
-  error: state.Speakers.error,
-  userLocale: state.UserPreferences.locale
-}), { fetchSpeaker, fetchWikiDataInfo, reset, resetVideos })
+@connect(
+  (state) => ({
+    speaker: state.Speakers.currentSpeaker,
+    links: state.Speakers.currentSpeakerLinks,
+    speakerLoading: state.Speakers.isLoading,
+    wikiLoading: state.Speakers.isLoadingWiki,
+    error: state.Speakers.error,
+    userLocale: state.UserPreferences.locale,
+  }),
+  { fetchSpeaker, fetchWikiDataInfo, reset, resetVideos },
+)
 export class SpeakerPage extends React.PureComponent {
   componentDidMount() {
     this.props.fetchSpeaker(this.props.params.slug_or_id)
   }
 
   componentDidUpdate(oldProps) {
-    const { speakerLoading, speaker: { wikidata_item_id, slug }, userLocale } = this.props
+    const {
+      speakerLoading,
+      speaker: { wikidata_item_id, slug },
+      userLocale,
+    } = this.props
 
     // Target speaker changed
     if (this.props.params.slug_or_id !== oldProps.params.slug_or_id) {
@@ -50,10 +56,7 @@ export class SpeakerPage extends React.PureComponent {
   }
 
   shouldFetchWikidata(oldProps, newWikidataID, newLocale) {
-    return newWikidataID && (
-      oldProps.speaker.wikidata_item_id !== newWikidataID
-      || oldProps.userLocale !== newLocale
-    )
+    return newWikidataID && (oldProps.speaker.wikidata_item_id !== newWikidataID || oldProps.userLocale !== newLocale)
   }
 
   componentWillUnmount() {
@@ -61,8 +64,7 @@ export class SpeakerPage extends React.PureComponent {
   }
 
   render() {
-    if (this.props.error)
-      return <ErrorView error={this.props.error} />
+    if (this.props.error) return <ErrorView error={this.props.error} />
     return (
       <div className="speaker-page">
         <Helmet>
@@ -81,14 +83,12 @@ export class SpeakerPage extends React.PureComponent {
   }
 
   renderWikidata() {
-    if (this.props.wikiLoading)
-      return '...'
-    return this.renderLink(this.props.links.wikipedia, 'Wikipedia')
+    if (this.props.wikiLoading) return "..."
+    return this.renderLink(this.props.links.wikipedia, "Wikipedia")
   }
 
   renderVideos() {
-    if (this.props.videosLoading || !this.props.speaker)
-      return <LoadingFrame />
+    if (this.props.videosLoading || !this.props.speaker) return <LoadingFrame />
 
     const currentPage = parseInt(this.props.location.query.page) || 1
     return (
@@ -101,8 +101,7 @@ export class SpeakerPage extends React.PureComponent {
   }
 
   renderLink(url, siteName) {
-    if (!url)
-      return null
+    if (!url) return null
     return (
       <ExternalLinkNewTab href={url} className="link-with-icon">
         <Icon name="external-link" /> <span>{siteName}</span>

@@ -8,11 +8,8 @@ export default function* iterateWithSeparators(iterator, size, t) {
   let entryNum = -1
   for (const value of iterator) {
     entryNum += 1
-    if (entryNum + 3 <= size)
-      yield [value, ', ']
-    else if (entryNum + 2 === size)
-      yield [value, ` ${t('main:misc.and')} `]
-    else
-      yield [value, '']
+    if (entryNum + 3 <= size) yield [value, ", "]
+    else if (entryNum + 2 === size) yield [value, ` ${t("main:misc.and")} `]
+    else yield [value, ""]
   }
 }

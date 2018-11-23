@@ -1,8 +1,8 @@
-export const videoURL = videoHashID => {
+export const videoURL = (videoHashID) => {
   return `/videos/${videoHashID}`
 }
 
-export const videoHistoryURL = videoHashID => {
+export const videoHistoryURL = (videoHashID) => {
   return `${videoURL(videoHashID)}/history`
 }
 
@@ -14,4 +14,4 @@ export const commentURL = (videoHashID, statementID, commentID) => {
   return `${statementURL(videoHashID, statementID)}&comment=${commentID}`
 }
 
-export const speakerURL = speakerIDOrSlug => `/s/${speakerIDOrSlug}`
+export const speakerURL = (speakerIDOrSlug) => `/s/${speakerIDOrSlug}`

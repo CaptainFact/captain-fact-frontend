@@ -1,9 +1,9 @@
-import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import React from "react"
+import { withNamespaces } from "react-i18next"
 
-import OwnCommentActions from './OwnCommentActions'
-import OtherCommentActions from './OtherCommentActions'
-import CommentAction from './CommentAction'
+import OwnCommentActions from "./OwnCommentActions"
+import OtherCommentActions from "./OtherCommentActions"
+import CommentAction from "./CommentAction"
 
 const CommentActions = ({
   t,
@@ -14,34 +14,25 @@ const CommentActions = ({
   handleReply,
   handleDelete,
   handleFlag,
-  handleToggleShowReplies
+  handleToggleShowReplies,
 }) => (
   <nav className="comment-actions">
-    { isOwnComment
-      ? (
-        <OwnCommentActions
-          handleAddToThread={handleReply}
-          handleDelete={handleDelete}
-        />
-      ) : (
-        <OtherCommentActions
-          handleReply={handleReply}
-          handleFlag={handleFlag}
-          isFlagged={isFlagged}
-        />
-      )
-    }
+    {isOwnComment ? (
+      <OwnCommentActions handleAddToThread={handleReply} handleDelete={handleDelete} />
+    ) : (
+      <OtherCommentActions handleReply={handleReply} handleFlag={handleFlag} isFlagged={isFlagged} />
+    )}
     {nbReplies !== 0 && (
       <CommentAction
-        title={t('comment.replies', {
-          context: repliesCollapsed ? 'show' : 'hide',
-          count: nbReplies
+        title={t("comment.replies", {
+          context: repliesCollapsed ? "show" : "hide",
+          count: nbReplies,
         })}
-        iconName={repliesCollapsed ? 'eye' : 'eye-slash'}
+        iconName={repliesCollapsed ? "eye" : "eye-slash"}
         onClick={handleToggleShowReplies}
       />
     )}
   </nav>
 )
 
-export default withNamespaces('videoDebate')(CommentActions)
+export default withNamespaces("videoDebate")(CommentActions)

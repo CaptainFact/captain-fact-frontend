@@ -1,8 +1,8 @@
-import React from 'react'
-import Message from './Message'
+import React from "react"
+import Message from "./Message"
 
 export default (props) => (
   <div className="message-view">
-    <Message {...props}/>
+    <Message {...props} />
   </div>
 )

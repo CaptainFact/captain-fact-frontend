@@ -1,14 +1,13 @@
-import React from 'react'
-
+import React from "react"
 
 /**
  * Empty divs are used by CSS to draw lines
  */
-const CommentsListHeader = ({header}) => (
+const CommentsListHeader = ({ header }) => (
   <div className="comments-list-header">
-    <div/>
+    <div />
     <span>{header}</span>
-    <div/>
+    <div />
   </div>
 )
 

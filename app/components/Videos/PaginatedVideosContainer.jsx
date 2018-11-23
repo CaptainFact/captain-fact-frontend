@@ -1,13 +1,13 @@
-import React from 'react'
-import { Query } from 'react-apollo'
-import { Link } from 'react-router'
-import gql from 'graphql-tag'
-import { withNamespaces } from 'react-i18next'
-import { LoadingFrame } from '../Utils/LoadingFrame'
-import { ErrorView } from '../Utils/ErrorView'
-import { VideosGrid } from './VideosGrid'
-import PaginationMenu from '../Utils/PaginationMenu'
-import { ALL_VIDEOS, ONLY_PARTNERS } from '../../constants'
+import React from "react"
+import { Query } from "react-apollo"
+import { Link } from "react-router"
+import gql from "graphql-tag"
+import { withNamespaces } from "react-i18next"
+import { LoadingFrame } from "../Utils/LoadingFrame"
+import { ErrorView } from "../Utils/ErrorView"
+import { VideosGrid } from "./VideosGrid"
+import PaginationMenu from "../Utils/PaginationMenu"
+import { ALL_VIDEOS, ONLY_PARTNERS } from "../../constants"
 
 const QUERY = gql`
   query VideosIndex($offset: Int!, $limit: Int!, $filters: VideoFilter) {
@@ -45,16 +45,11 @@ const buildFiltersFromProps = ({ language, source, speakerID }) => {
 const PaginatedVideosContainer = ({ t, currentPage = 1, baseURL, ...props }) => {
   const filters = buildFiltersFromProps(props)
   return (
-    <Query
-      query={QUERY}
-      variables={{ offset: currentPage, limit: 16, filters }}
-      fetchPolicy="network-only"
-    >
+    <Query query={QUERY} variables={{ offset: currentPage, limit: 16, filters }} fetchPolicy="network-only">
       {({ loading, error, data }) => {
         const videos = (data && data.videos) || INITIAL_VIDEOS
         if (error) return <ErrorView error={error} />
-        if (!loading && videos.entries.length === 0)
-          return <h2>{t('errors:client.noVideoAvailable')}</h2>
+        if (!loading && videos.entries.length === 0) return <h2>{t("errors:client.noVideoAvailable")}</h2>
 
         const paginationMenu = (
           <PaginationMenu
@@ -63,11 +58,9 @@ const PaginatedVideosContainer = ({ t, currentPage = 1, baseURL, ...props }) => 
             total={videos.totalPages}
             isRounded
             onPageChange={() => window.scrollTo({ top: 0 })}
-            LinkBuilder={({ 'data-page': page, ...props }) => {
-              const urlParams = page > 1 ? `?page=${page}` : ''
-              return (
-                <Link to={`${baseURL}${urlParams}`} className="button" {...props} />
-              )
+            LinkBuilder={({ "data-page": page, ...props }) => {
+              const urlParams = page > 1 ? `?page=${page}` : ""
+              return <Link to={`${baseURL}${urlParams}`} className="button" {...props} />
             }}
           />
         )
@@ -84,4 +77,4 @@ const PaginatedVideosContainer = ({ t, currentPage = 1, baseURL, ...props }) => 
   )
 }
 
-export default withNamespaces('main')(PaginatedVideosContainer)
+export default withNamespaces("main")(PaginatedVideosContainer)

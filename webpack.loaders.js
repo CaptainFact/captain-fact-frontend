@@ -1,6 +1,9 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
+const exludedFolders = [path.join(__dirname, 'node_modules')]
+
+
 // noinspection WebpackConfigHighlighting
 module.exports = isProd => [
   // =========
@@ -12,18 +15,6 @@ module.exports = isProd => [
     test: /\.jsx?$/,
     include: path.resolve(__dirname, 'app'),
     loader: 'babel-loader',
-    options: {
-      // This is a feature of `babel-loader` for Webpack (not Babel itself).
-      // It enables caching results in ./node_modules/.cache/babel-loader/
-      // directory for faster rebuilds.
-      cacheDirectory: true,
-      presets: [['es2015', { loose: true, modules: 'umd' }], 'react'],
-      plugins: [
-        'transform-class-properties',
-        'transform-decorators-legacy',
-        'transform-runtime'
-      ]
-    }
   },
   // =======================
   // = Fix for node stable =
@@ -82,18 +73,9 @@ module.exports = isProd => [
   // = Images =
   // ==========
   {
-    test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+    test: /\.svg$/,
     exclude: path.resolve(__dirname, 'node_modules'),
-    use: [
-      {
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          mimetype: 'image/svg+xml',
-          name: 'res/[name].[hash].svg'
-        }
-      }
-    ]
+    loader: 'svg-inline-loader'
   },
   {
     test: /\.gif/,
@@ -163,20 +145,27 @@ module.exports = isProd => [
   // ==========
   // = Styles =
   // ==========
-  // Global CSS (from node_modules)
-  // ==============================
   {
-    test: /\.css/,
-    include: path.resolve(__dirname, 'node_modules'),
+    test: /\.css$/,
+    exclude: exludedFolders,
     use: [
       {
-        loader: !isProd ? 'style-loader' : MiniCssExtractPlugin.loader
+        loader: !isProd ? 'style-loader' : MiniCssExtractPlugin.loader,
       },
       {
-        loader: 'css-loader'
-      }
-    ]
+        loader: 'css-loader',
+        options: {
+          minimize: false,
+          modules: false,
+          importLoaders: 1,
+        },
+      },
+      'postcss-loader',
+      ],
   },
+  // ==========
+  // = Styles =
+  // ==========
   {
     test: /\.(sass|scss)$/,
     include: [
