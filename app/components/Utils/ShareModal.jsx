@@ -52,10 +52,6 @@ export default class ShareModal extends React.PureComponent {
     return `https://www.facebook.com/dialog/share?app_id=${FB_APP_ID}&display=popup&href=${url}`
   }
 
-  googlePlusLink(url) {
-    return `https://plus.google.com/share?url=${url}`
-  }
-
   mailLink(url) {
     return `mailto:?subject=CaptainFact.io - Fact checking&body=${url}`
   }

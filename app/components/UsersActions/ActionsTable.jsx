@@ -139,9 +139,7 @@ class ActionsTable extends React.PureComponent {
     )
   }
 
-  renderUser = user => (user
-    ? <UserAppellation user={user} compact />
-    : <span className="has-text-grey-lighter is-italic">{this.props.t('deletedUser')}</span>)
+  renderUser = user => <UserAppellation user={user} compact />
 
   renderDiffLine = action => (
     <tr key={`${action.id}-diff`}>

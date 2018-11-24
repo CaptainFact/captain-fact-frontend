@@ -1,24 +1,35 @@
 import React from 'react'
 import { Link } from 'react-router'
+import { withNamespaces } from 'react-i18next'
+import classNames from 'classnames'
 
-
-const UserAppellation = ({user: {username, name}, withoutActions = false, compact = false}) => {
-  const prettyUsername = `@${username}`
-  const Component = withoutActions ? 'div' : Link
-  const componentProps = withoutActions ? {} : {to: `/u/${username}`}
+const UserAppellation = ({
+  t,
+  user,
+  withoutActions = false,
+  compact = false,
+  defaultComponent = 'div'
+}) => {
+  const prettyUsername = user ? `@${user.username}` : t('deletedAccount')
+  const hasLink = user && !withoutActions
+  const Component = hasLink ? Link : defaultComponent
+  const componentProps = hasLink ? { to: `/u/${user.username}` } : {}
+  const className = classNames('user-appellation', { deleted: !user })
 
   if (compact)
     return (
-      <Component {...componentProps} className="user-appellation" title={name}>
+      <Component {...componentProps} className={className} title={name}>
         {prettyUsername}
       </Component>
     )
   return (
-    <Component {...componentProps} className="user-appellation">
-      <strong className="main-appelation">{ name || prettyUsername }</strong>
-      {name && <small className="secondary-appelation"> {prettyUsername}</small>}
+    <Component {...componentProps} className={className}>
+      <strong className="main-appelation">{name || prettyUsername}</strong>
+      {name && (
+        <small className="secondary-appelation"> {prettyUsername}</small>
+      )}
     </Component>
   )
 }
 
-export default UserAppellation
+export default withNamespaces('user')(UserAppellation)
