@@ -11,17 +11,19 @@ import { fetchHelpPage } from '../../state/help/effects'
 import { reset } from '../../state/help/reducer'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
-
-@connect(state => ({
-  markdownContent: state.Help.markdownContent,
-  isLoading: state.Help.isLoading,
-  error: state.Help.error,
-  locale: state.UserPreferences.locale
-}), {fetchHelpPage, reset})
+@connect(
+  state => ({
+    markdownContent: state.Help.markdownContent,
+    isLoading: state.Help.isLoading,
+    error: state.Help.error,
+    locale: state.UserPreferences.locale
+  }),
+  { fetchHelpPage, reset }
+)
 class HelpPageContent extends PureComponent {
   constructor(props) {
     super(props)
-    this.renderers = {link: this.renderLink.bind(this)}
+    this.renderers = { link: this.renderLink.bind(this) }
   }
 
   componentDidMount() {
@@ -29,7 +31,10 @@ class HelpPageContent extends PureComponent {
   }
 
   componentDidUpdate(oldProps) {
-    if (this.props.locale !== oldProps.locale || this.props.page !== oldProps.page)
+    if (
+      this.props.locale !== oldProps.locale ||
+      this.props.page !== oldProps.page
+    )
       this.props.fetchHelpPage(this.props.page)
   }
 
@@ -38,17 +43,26 @@ class HelpPageContent extends PureComponent {
   }
 
   render() {
-    if (this.props.isLoading)
-      return <LoadingFrame/>
+    if (this.props.isLoading) return <LoadingFrame />
     if (this.props.error)
-      return <ErrorView canGoBack={false} error={this.props.error}/>
-    return <Markdown className="content" source={this.props.markdownContent} renderers={this.renderers}/>
+      return <ErrorView canGoBack={false} error={this.props.error} />
+    return (
+      <Markdown
+        className="content"
+        source={this.props.markdownContent}
+        renderers={this.renderers}
+      />
+    )
   }
 
-  renderLink({href, children}) {
+  renderLink({ href, children }) {
     if (isExternal(window.location.href, href))
       return <ExternalLinkNewTab href={href}>{children}</ExternalLinkNewTab>
-    return <Link to={href} onClick={this.props.onLinkClick}>{children}</Link>
+    return (
+      <Link to={href} onClick={this.props.onLinkClick}>
+        {children}
+      </Link>
+    )
   }
 }
 

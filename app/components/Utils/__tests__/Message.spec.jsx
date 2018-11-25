@@ -13,5 +13,5 @@ test('can set header', () => {
 })
 
 test('without body', () => {
-  snapshotComponent(<Message/>)
+  snapshotComponent(<Message />)
 })

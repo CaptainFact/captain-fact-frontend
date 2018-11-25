@@ -1,8 +1,7 @@
 import React from 'react'
 import Select from 'react-select'
 
-
-const SpeakersSelect = ({input, speakers, placeholder}) => {
+const SpeakersSelect = ({ input, speakers, placeholder }) => {
   return (
     <Select
       className="speaker-select"

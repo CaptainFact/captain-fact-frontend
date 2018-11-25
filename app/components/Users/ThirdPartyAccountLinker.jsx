@@ -5,7 +5,6 @@ import { withNamespaces } from 'react-i18next'
 import { unlinkProvider } from '../../state/users/current_user/effects'
 import Button from '../Utils/Button'
 
-
 const mapDispatchToProps = { unlinkProvider }
 
 const ThirdPartyAccountLinker = ({
@@ -18,9 +17,7 @@ const ThirdPartyAccountLinker = ({
 }) => (
   <div className="field has-addons" style={{ width: 200, margin: 'auto' }}>
     <div className="control">
-      <div className="linked-account-title">
-        {title}
-      </div>
+      <div className="linked-account-title">{title}</div>
     </div>
     <div className="control">
       {isLinked ? (
@@ -35,12 +32,14 @@ const ThirdPartyAccountLinker = ({
         <a type="submit" className="button" href={authURL}>
           {t('linkAccount')}
         </a>
-      )
-      }
+      )}
     </div>
   </div>
 )
 
 export default withNamespaces('user')(
-  connect(null, mapDispatchToProps)(ThirdPartyAccountLinker)
+  connect(
+    null,
+    mapDispatchToProps
+  )(ThirdPartyAccountLinker)
 )

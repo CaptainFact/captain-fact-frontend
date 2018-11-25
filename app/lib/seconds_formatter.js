@@ -1,9 +1,7 @@
 import padLeft from 'voca/pad_left'
 
-
 export default function formatSeconds(totalSeconds) {
-  if (!totalSeconds)
-    return '0:00:00'
+  if (!totalSeconds) return '0:00:00'
 
   const sign = totalSeconds < 0 ? '-' : ''
   const absSeconds = Math.abs(totalSeconds)

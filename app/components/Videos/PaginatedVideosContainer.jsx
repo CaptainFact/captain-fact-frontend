@@ -42,7 +42,12 @@ const buildFiltersFromProps = ({ language, source, speakerID }) => {
   return filters
 }
 
-const PaginatedVideosContainer = ({ t, currentPage = 1, baseURL, ...props }) => {
+const PaginatedVideosContainer = ({
+  t,
+  currentPage = 1,
+  baseURL,
+  ...props
+}) => {
   const filters = buildFiltersFromProps(props)
   return (
     <Query
@@ -66,7 +71,11 @@ const PaginatedVideosContainer = ({ t, currentPage = 1, baseURL, ...props }) => 
             LinkBuilder={({ 'data-page': page, ...props }) => {
               const urlParams = page > 1 ? `?page=${page}` : ''
               return (
-                <Link to={`${baseURL}${urlParams}`} className="button" {...props} />
+                <Link
+                  to={`${baseURL}${urlParams}`}
+                  className="button"
+                  {...props}
+                />
               )
             }}
           />
@@ -75,7 +84,11 @@ const PaginatedVideosContainer = ({ t, currentPage = 1, baseURL, ...props }) => 
         return (
           <div>
             {paginationMenu}
-            {loading ? <LoadingFrame /> : <VideosGrid videos={videos.entries} />}
+            {loading ? (
+              <LoadingFrame />
+            ) : (
+              <VideosGrid videos={videos.entries} />
+            )}
             {paginationMenu}
           </div>
         )

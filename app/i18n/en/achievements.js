@@ -4,11 +4,12 @@ export default {
   unlocked: 'You just unlocked the "{{achievement}}" achievement',
   1: {
     title: 'Welcome',
-    description: 'You\'ve successfully created an account on CaptainFact'
+    description: "You've successfully created an account on CaptainFact"
   },
   2: {
     title: 'Not a robot',
-    description: 'With such a pretty email address, there\'s no doubt you\'re a human'
+    description:
+      "With such a pretty email address, there's no doubt you're a human"
   },
   3: {
     title: 'Everybody hurts',
@@ -16,15 +17,17 @@ export default {
   },
   4: {
     title: 'Bulletproof',
-    description: 'With the browser extension activated, no one will fool you anymore'
+    description:
+      'With the browser extension activated, no one will fool you anymore'
   },
   5: {
-    title: 'You\'re fake news!',
-    description: 'Well, seems you\'ve destroyed this source'
+    title: "You're fake news!",
+    description: "Well, seems you've destroyed this source"
   },
   6: {
     title: 'Social Addict',
-    description: 'You love having these US companies spying on your data, don\'t you?'
+    description:
+      "You love having these US companies spying on your data, don't you?"
   },
   7: {
     title: 'Ambassador',
@@ -35,7 +38,7 @@ export default {
     description: 'Thanks for reporting that bug!'
   },
   9: {
-    title: 'Fact Check Me, I\'m Famous',
+    title: "Fact Check Me, I'm Famous",
     description: 'You made your way up to the leaderboard, congrats Captain!'
   },
   10: {
@@ -44,6 +47,7 @@ export default {
   },
   11: {
     title: 'Good Vibes',
-    description: 'You made some suggestions for improvements or new features, and we find them interesting!'
+    description:
+      'You made some suggestions for improvements or new features, and we find them interesting!'
   }
 }

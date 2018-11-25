@@ -5,7 +5,6 @@ import { withNamespaces } from 'react-i18next'
 import ClickableIcon from '../Utils/ClickableIcon'
 import IconModerationPending from './IconModerationPending'
 
-
 const Score = ({ isVoting, isReported, score }) => {
   if (isVoting) {
     return <span className="round-spinner" />

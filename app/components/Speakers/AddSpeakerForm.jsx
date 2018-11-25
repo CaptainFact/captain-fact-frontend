@@ -13,15 +13,20 @@ import { addSpeaker } from '../../state/video_debate/effects'
 import capitalizeName from '../../lib/name_formatter'
 import { cleanStr } from '../../lib/clean_str'
 
-
-const searchSpeakerRequest = debounce((query) => (
-  // TODO This request has nothing to do here !
-  SocketApi.push('video_debate', 'search_speaker', { query })
-    .then(({ speakers }) => ({ options: speakers }))
-), 250)
+const searchSpeakerRequest = debounce(
+  query =>
+    // TODO This request has nothing to do here !
+    SocketApi.push('video_debate', 'search_speaker', { query }).then(
+      ({ speakers }) => ({ options: speakers })
+    ),
+  250
+)
 
 @reduxForm({ form: 'addSpeaker' })
-@connect(null, { addSpeaker, reset })
+@connect(
+  null,
+  { addSpeaker, reset }
+)
 @withNamespaces('videoDebate')
 export default class AddSpeakerForm extends React.PureComponent {
   render() {
@@ -58,24 +63,22 @@ export default class AddSpeakerForm extends React.PureComponent {
   }
 
   filterOption({ full_name }, filter) {
-    return latinise(full_name).toLowerCase().includes(latinise(filter))
+    return latinise(full_name)
+      .toLowerCase()
+      .includes(latinise(filter))
   }
 
   loadOptions(query, callback) {
-    if (!query || query.length < 3)
-      callback(null, [])
-    else
-      searchSpeakerRequest(query).then(speakers => callback(null, speakers))
+    if (!query || query.length < 3) callback(null, [])
+    else searchSpeakerRequest(query).then(speakers => callback(null, speakers))
   }
 
   onChange(e) {
     const { addSpeaker, reset } = this.props
 
-    if (!e)
-      return
+    if (!e) return
     const speaker = { full_name: capitalizeName(cleanStr(e.full_name)) }
-    if (e.id !== e.full_name)
-      speaker.id = e.id
+    if (e.id !== e.full_name) speaker.id = e.id
     if (checkLength(e.full_name, SPEAKER_NAME_LENGTH))
       addSpeaker(speaker).then(() => reset('add_speaker'))
   }

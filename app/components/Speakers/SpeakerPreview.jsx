@@ -5,7 +5,8 @@ import { withNamespaces } from 'react-i18next'
 import classNames from 'classnames'
 import {
   MIN_REPUTATION_ADD_STATEMENT,
-  MIN_REPUTATION_REMOVE_SPEAKER, MIN_REPUTATION_UPDATE_SPEAKER
+  MIN_REPUTATION_REMOVE_SPEAKER,
+  MIN_REPUTATION_UPDATE_SPEAKER
 } from '../../constants'
 
 import { isAuthenticated } from '../../state/users/current_user/selectors'
@@ -19,29 +20,33 @@ import { addModal } from '../../state/modals/reducer'
 import { removeSpeaker, updateSpeaker } from '../../state/video_debate/effects'
 import { changeStatementFormSpeaker } from '../../state/video_debate/statements/reducer'
 import MediaLayout from '../Utils/MediaLayout'
-import {getFocusedStatementSpeakerId} from '../../state/video_debate/statements/selectors'
-
+import { getFocusedStatementSpeakerId } from '../../state/video_debate/statements/selectors'
 
 @withRouter
 @withNamespaces('videoDebate')
-@connect((state, props) => (
-  {isAuthenticated: isAuthenticated(state), isFocused: getFocusedStatementSpeakerId(state) === props.speaker.id}),
-{addModal, changeStatementFormSpeaker, removeSpeaker, updateSpeaker}
+@connect(
+  (state, props) => ({
+    isAuthenticated: isAuthenticated(state),
+    isFocused: getFocusedStatementSpeakerId(state) === props.speaker.id
+  }),
+  { addModal, changeStatementFormSpeaker, removeSpeaker, updateSpeaker }
 )
 export class SpeakerPreview extends React.PureComponent {
   render() {
-    const {speaker, isAuthenticated, withoutActions, className} = this.props
+    const { speaker, isAuthenticated, withoutActions, className } = this.props
 
     return (
       <MediaLayout
-        className={classNames('speaker-preview', className, {isActive: this.props.isFocused})}
+        className={classNames('speaker-preview', className, {
+          isActive: this.props.isFocused
+        })}
         left={this.renderSpeakerThumb(speaker)}
-        content={(
+        content={
           <React.Fragment>
             {this.renderName(speaker)}
             <p className="subtitle">{this.getTitle()}</p>
           </React.Fragment>
-        )}
+        }
         right={isAuthenticated && !withoutActions && this.renderActions()}
       />
     )
@@ -49,8 +54,15 @@ export class SpeakerPreview extends React.PureComponent {
 
   renderSpeakerThumb(speaker) {
     if (speaker.picture)
-      return <img className="speaker-picture" src={speaker.picture}/>
-    return <Icon className="speaker-picture" name="user" size="large" style={{color: 'grey'}}/>
+      return <img className="speaker-picture" src={speaker.picture} />
+    return (
+      <Icon
+        className="speaker-picture"
+        name="user"
+        size="large"
+        style={{ color: 'grey' }}
+      />
+    )
   }
 
   renderActions() {
@@ -86,7 +98,11 @@ export class SpeakerPreview extends React.PureComponent {
 
   renderName(speaker) {
     return (
-      <Link to={`/s/${speaker.slug || speaker.id}`} className="speaker-name" target="_blank">
+      <Link
+        to={`/s/${speaker.slug || speaker.id}`}
+        className="speaker-name"
+        target="_blank"
+      >
         {speaker.full_name}
       </Link>
     )
@@ -95,18 +111,17 @@ export class SpeakerPreview extends React.PureComponent {
   getTitle() {
     const { title, country } = this.props.speaker
     // Only translate if title exists and is not user defined
-    if (!title)
-      return '...'
+    if (!title) return '...'
 
     let i18nTitle = ''
-    if (this.props.i18n.language === 'en') // No need to translate title for english
+    if (this.props.i18n.language === 'en')
+      // No need to translate title for english
       i18nTitle = title
     else {
       // If unknown title, return raw title
       const i18nTitleKey = `speaker.titles.${title}`
       i18nTitle = this.props.t(i18nTitleKey)
-      if (i18nTitle === i18nTitleKey)
-        return title
+      if (i18nTitle === i18nTitleKey) return title
     }
     // Try to return title + nationality, otherwise fallback on translated title
     return this.props.t('speaker.titleFormat', {
@@ -135,8 +150,8 @@ export class SpeakerPreview extends React.PureComponent {
       props: {
         title: titleModal,
         FormComponent: EditSpeakerForm,
-        handleConfirm: (s) => this.props.updateSpeaker(s),
-        formProps: {initialValues: this.props.speaker.toJS()}
+        handleConfirm: s => this.props.updateSpeaker(s),
+        formProps: { initialValues: this.props.speaker.toJS() }
       }
     })
   }
@@ -146,6 +161,6 @@ export class SpeakerPreview extends React.PureComponent {
     const currentPath = this.props.location.pathname
     if (currentPath.match(historyRegex))
       this.props.router.push(currentPath.replace(historyRegex, ''))
-    this.props.changeStatementFormSpeaker({id: this.props.speaker.id})
+    this.props.changeStatementFormSpeaker({ id: this.props.speaker.id })
   }
 }

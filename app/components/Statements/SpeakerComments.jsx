@@ -5,7 +5,6 @@ import VerificationsOriginHeader from './VerificationsOriginHeader'
 import { SpeakerPreview } from '../Speakers/SpeakerPreview'
 import { CommentsList } from '../Comments/CommentsList'
 
-
 export default withNamespaces('videoDebate')(({ t, speaker, comments }) => {
   return comments.size === 0 ? null : (
     <div className="self-comments columns is-gapless">

@@ -3,10 +3,10 @@ import { WS_API_URL } from '../config'
 import parseServerError from './server_error'
 import noInternetError from './no_internet_error'
 
-
 class CaptainFactSocketApi {
   constructor(url) {
-    const token = typeof localStorage === 'undefined' ? null : localStorage.token
+    const token =
+      typeof localStorage === 'undefined' ? null : localStorage.token
     this.socketUrl = url
     this.channels = {}
     this.createSocket(token)
@@ -21,18 +21,18 @@ class CaptainFactSocketApi {
   }
 
   createSocket(token) {
-    this.socket = new Socket(this.socketUrl, {params: {token}})
+    this.socket = new Socket(this.socketUrl, { params: { token } })
     this.socket.onError(noInternetError)
     this.socket.onClose(noInternetError)
   }
 
   /**
-  * Joins a channel. Automatically open the socket if its closed
-  * @param {String} identifier
-  * @param {String} channelAddress
-  * @param {{}} mapEventsToFuncs - functions to call when events are triggered
-  * @return {Promise} promise
-  */
+   * Joins a channel. Automatically open the socket if its closed
+   * @param {String} identifier
+   * @param {String} channelAddress
+   * @param {{}} mapEventsToFuncs - functions to call when events are triggered
+   * @return {Promise} promise
+   */
   joinChannel(identifier, channelAddress, mapEventsToFuncs = {}) {
     return new Promise((fulfill, reject) => {
       if (['closed', 'closing'].includes(this.socket.connectionState())) {
@@ -42,7 +42,8 @@ class CaptainFactSocketApi {
       this.channels[identifier] = channel
       for (const [event, func] of Object.entries(mapEventsToFuncs))
         channel.on(event, func)
-      channel.join()
+      channel
+        .join()
         .receive('ok', fulfill)
         .receive('error', () => reject('noInternet'))
         .receive('timeout', () => reject('noInternet'))
@@ -50,37 +51,40 @@ class CaptainFactSocketApi {
   }
 
   /**
-  * Leaves a channel. Automatically close the socket if there's no more channel
-  * @param {String} identifier
-  * @return {Phoenix.Channel} channel
-  */
+   * Leaves a channel. Automatically close the socket if there's no more channel
+   * @param {String} identifier
+   * @return {Phoenix.Channel} channel
+   */
   leaveChannel(identifier) {
     const socketState = this.socket.connectionState()
     // Leave channel gracefully
     if (this.channels[identifier]) {
       this.channels[identifier].leave()
-      delete (this.channels[identifier])
+      delete this.channels[identifier]
     }
     // If no more channels, close the socket
-    if (!Object.keys(this.channels).length && ['connecting', 'open'].includes(socketState))
+    if (
+      !Object.keys(this.channels).length &&
+      ['connecting', 'open'].includes(socketState)
+    )
       this.socket.disconnect()
   }
 
   /**
-  * Push given message on the channel
-  * @param {String} channelIdentifier
-  * @param {String} message
-  * @param {Object} params
-  * @return {Promise} channel
-  */
+   * Push given message on the channel
+   * @param {String} channelIdentifier
+   * @param {String} message
+   * @param {Object} params
+   * @return {Promise} channel
+   */
   push(channelIdentifier, message, params = {}) {
     return new Promise((fulfill, reject) => {
-      return this.channels[channelIdentifier].push(message, params)
-        .receive('ok', (data) => fulfill(data))
-        .receive('error', (err) => reject(parseServerError(err)))
+      return this.channels[channelIdentifier]
+        .push(message, params)
+        .receive('ok', data => fulfill(data))
+        .receive('error', err => reject(parseServerError(err)))
     })
   }
 }
-
 
 export default new CaptainFactSocketApi(WS_API_URL)

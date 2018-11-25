@@ -2,7 +2,6 @@ import React from 'react'
 import { withNamespaces } from 'react-i18next'
 import { Field } from 'redux-form'
 
-
 const VALID_REASONS = ['1', '2', '3', '4']
 
 const FlagReason = ({ value, label }) => (
@@ -16,8 +15,9 @@ const FlagReasonSelect = ({ t }) => {
   return (
     <div className="flag-reason-select field">
       <p className="control">
-        {VALID_REASONS.map(key => <FlagReason key={key} value={key} label={labels[key]} />
-        )}
+        {VALID_REASONS.map(key => (
+          <FlagReason key={key} value={key} label={labels[key]} />
+        ))}
       </p>
     </div>
   )

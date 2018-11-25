@@ -5,10 +5,14 @@ import { change } from 'redux-form'
 import classNames from 'classnames'
 
 import { addModal } from '../../state/modals/reducer'
-import { commentVote, deleteComment, flagComment } from '../../state/video_debate/comments/effects'
+import {
+  commentVote,
+  deleteComment,
+  flagComment
+} from '../../state/video_debate/comments/effects'
 import { isAuthenticated } from '../../state/users/current_user/selectors'
 import { isOwnComment } from '../../state/video_debate/comments/selectors'
-import {flashErrorUnauthenticated} from '../../state/flashes/reducer'
+import { flashErrorUnauthenticated } from '../../state/flashes/reducer'
 import MediaLayout from '../Utils/MediaLayout'
 import Vote from './Vote'
 import CommentActions from './CommentActions'
@@ -19,15 +23,24 @@ import ModalFlag from './ModalFlag'
 import ModalDeleteComment from './ModalDeleteComment'
 import { CommentsList } from './CommentsList'
 
-
-@connect((state, {comment}) => ({
-  isOwnComment: isOwnComment(state, comment),
-  isAuthenticated: isAuthenticated(state),
-  myVote: state.VideoDebate.comments.voted.get(comment.id, 0),
-  isVoting: state.VideoDebate.comments.voting.has(comment.id),
-  replies: state.VideoDebate.comments.replies.get(comment.id),
-  isFlagged: state.VideoDebate.comments.myFlags.has(comment.id)
-}), {addModal, deleteComment, flagComment, commentVote, change, flashErrorUnauthenticated})
+@connect(
+  (state, { comment }) => ({
+    isOwnComment: isOwnComment(state, comment),
+    isAuthenticated: isAuthenticated(state),
+    myVote: state.VideoDebate.comments.voted.get(comment.id, 0),
+    isVoting: state.VideoDebate.comments.voting.has(comment.id),
+    replies: state.VideoDebate.comments.replies.get(comment.id),
+    isFlagged: state.VideoDebate.comments.myFlags.has(comment.id)
+  }),
+  {
+    addModal,
+    deleteComment,
+    flagComment,
+    commentVote,
+    change,
+    flashErrorUnauthenticated
+  }
+)
 @withNamespaces('main')
 export class CommentDisplay extends React.PureComponent {
   constructor(props) {
@@ -39,12 +52,18 @@ export class CommentDisplay extends React.PureComponent {
   }
 
   render() {
-    const { comment, withoutActions, className, replies, hideThread } = this.props
+    const {
+      comment,
+      withoutActions,
+      className,
+      replies,
+      hideThread
+    } = this.props
     const { isBlurred, repliesCollapsed } = this.state
     const approveClass = this.getApproveClass(comment.approve)
     const allClassNames = classNames('comment', className, approveClass, {
       isBlurred,
-      hasSource: !!comment.source,
+      hasSource: !!comment.source
     })
 
     return (
@@ -82,12 +101,12 @@ export class CommentDisplay extends React.PureComponent {
 
   renderCommentContent() {
     const { repliesCollapsed } = this.state
-    const { comment, withoutActions, replies, richMedias = true} = this.props
+    const { comment, withoutActions, replies, richMedias = true } = this.props
 
     return (
       <React.Fragment>
         {!this.props.withoutHeader && (
-          <CommentHeader comment={comment} withoutActions={withoutActions}/>
+          <CommentHeader comment={comment} withoutActions={withoutActions} />
         )}
         <CommentContent
           comment={comment}
@@ -104,7 +123,9 @@ export class CommentDisplay extends React.PureComponent {
             handleReply={() => this.handleReply()}
             handleDelete={() => this.handleDelete()}
             handleFlag={() => this.handleFlag()}
-            handleToggleShowReplies={() => this.toggleShowReplies(repliesCollapsed)}
+            handleToggleShowReplies={() =>
+              this.toggleShowReplies(repliesCollapsed)
+            }
           />
         )}
       </React.Fragment>
@@ -118,11 +139,11 @@ export class CommentDisplay extends React.PureComponent {
   // ---- State modifiers ----
 
   setIsBlurred(isBlurred) {
-    this.setState({isBlurred})
+    this.setState({ isBlurred })
   }
 
   toggleShowReplies(currentState) {
-    this.setState({repliesCollapsed: !currentState})
+    this.setState({ repliesCollapsed: !currentState })
   }
 
   // ---- Authenticated actions ----
@@ -149,27 +170,24 @@ export class CommentDisplay extends React.PureComponent {
   }
 
   handleVote(value) {
-    if (!this.ensureAuthenticated())
-      return false
-    return this.props.commentVote({comment: this.props.comment, value})
+    if (!this.ensureAuthenticated()) return false
+    return this.props.commentVote({ comment: this.props.comment, value })
   }
 
   handleReply() {
-    if (!this.ensureAuthenticated())
-      return null
+    if (!this.ensureAuthenticated()) return null
     const formName = `formAddComment-${this.props.comment.statement_id}`
     return this.props.change(formName, 'reply_to', this.props.comment)
   }
 
   handleFlag(initialReason) {
-    if (!this.ensureAuthenticated())
-      return
+    if (!this.ensureAuthenticated()) return
     this.setIsBlurred(true)
     this.props.addModal({
       Modal: ModalFlag,
       props: {
         handleAbort: () => this.setIsBlurred(false),
-        handleConfirm: ({reason}) => {
+        handleConfirm: ({ reason }) => {
           this.setIsBlurred(false)
           return this.props.flagComment({
             id: this.props.comment.id,

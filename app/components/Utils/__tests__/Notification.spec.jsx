@@ -13,5 +13,5 @@ test('pass props', () => {
 })
 
 test('without body', () => {
-  snapshotComponent(<Notification/>)
+  snapshotComponent(<Notification />)
 })

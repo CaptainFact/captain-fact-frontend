@@ -1,7 +1,4 @@
-import reducer, {
-  setSubmitting,
-  reset,
-} from '../reducer'
+import reducer, { setSubmitting, reset } from '../reducer'
 
 const DEFAULT_STATE = reducer(undefined, {})
 
@@ -10,7 +7,9 @@ test('has correct defaults', () => {
 })
 
 test('setSubmitting', () => {
-  snapshotReducer(reducer, DEFAULT_STATE,
+  snapshotReducer(
+    reducer,
+    DEFAULT_STATE,
     setSubmitting(true),
     setSubmitting(false)
   )

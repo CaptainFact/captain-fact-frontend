@@ -7,22 +7,20 @@ import { forcePosition } from '../../state/video_debate/video/reducer'
 import { ENTITY_SPEAKER, ENTITY_STATEMENT } from '../../constants'
 import { SpeakerPreview } from '../Speakers/SpeakerPreview'
 
-
 /**
  * Display a list of `UserAction` as an history
  */
-@connect((state, props) => ({
-  reference: state.UsersActions.referenceEntities.get(props.entityKey),
-  speakers: state.VideoDebate.video.data.speakers
-}), {forcePosition})
+@connect(
+  (state, props) => ({
+    reference: state.UsersActions.referenceEntities.get(props.entityKey),
+    speakers: state.VideoDebate.video.data.speakers
+  }),
+  { forcePosition }
+)
 @withNamespaces('main')
 export default class Entity extends React.PureComponent {
   render() {
-    return (
-      <div className="entity">
-        { this.getEntityPreview() }
-      </div>
-    )
+    return <div className="entity">{this.getEntityPreview()}</div>
   }
 
   getEntityPreview() {
@@ -33,18 +31,18 @@ export default class Entity extends React.PureComponent {
       const text = reference.get('text')
       return (
         <h4 className="title is-4">
-          { speaker && <strong>{speaker.full_name} </strong> }
+          {speaker && <strong>{speaker.full_name} </strong>}
           <TimeDisplay
             time={reference.time}
             capitalize={!speaker}
             handleClick={p => this.props.forcePosition(p)}
           />
-          <hr/>
+          <hr />
           <div className="statement-text">{text}</div>
         </h4>
       )
     }
     if (entity === ENTITY_SPEAKER)
-      return <SpeakerPreview speaker={reference} withoutActions/>
+      return <SpeakerPreview speaker={reference} withoutActions />
   }
 }

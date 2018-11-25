@@ -3,7 +3,9 @@ export const getVideoDebateSpeakers = state => {
 }
 
 export const isLoadingVideoDebate = state => {
-  return state.VideoDebate.video.isLoading
-    || state.VideoDebate.statements.isLoading
-    || state.VideoDebate.comments.isLoading
+  return (
+    state.VideoDebate.video.isLoading ||
+    state.VideoDebate.statements.isLoading ||
+    state.VideoDebate.comments.isLoading
+  )
 }

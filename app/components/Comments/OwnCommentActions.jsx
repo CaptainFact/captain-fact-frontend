@@ -3,7 +3,6 @@ import { withNamespaces } from 'react-i18next'
 
 import CommentAction from './CommentAction'
 
-
 const OwnCommentActions = ({ t, handleAddToThread, handleDelete }) => (
   <React.Fragment>
     <CommentAction

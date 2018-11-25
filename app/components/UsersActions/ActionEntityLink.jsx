@@ -9,16 +9,21 @@ import {
   ENTITY_COMMENT,
   ENTITY_SOURCED_COMMENT
 } from '../../constants'
-import { speakerURL, statementURL, videoURL, commentURL } from '../../lib/cf_routes'
+import {
+  speakerURL,
+  statementURL,
+  videoURL,
+  commentURL
+} from '../../lib/cf_routes'
 
 const comment_mapper = ({ videoHashId, statementId, commentId }) => {
   return [commentId, commentURL(videoHashId, statementId, commentId)]
 }
 
 /*
-** An object of key: functions mapping entities types to URL generators.
-** Functions signature must be (entityId, context) => [entityId, URL]
-*/
+ ** An object of key: functions mapping entities types to URL generators.
+ ** Functions signature must be (entityId, context) => [entityId, URL]
+ */
 const ENTITY_DISPLAY_MAPPER = {
   [ENTITY_VIDEO]: ({ videoHashId }) => [videoHashId, videoURL(videoHashId)],
   [ENTITY_SPEAKER]: ({ speakerId }) => [speakerId, speakerURL(speakerId)],

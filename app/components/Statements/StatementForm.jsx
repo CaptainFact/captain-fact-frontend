@@ -10,29 +10,39 @@ import TimeDisplay from '../Utils/TimeDisplay'
 import { validateFieldLength } from '../../lib/form_validators'
 import { STATEMENT_LENGTH } from '../../constants'
 import { forcePosition } from '../../state/video_debate/video/reducer'
-import { decrementFormCount, incrementFormCount, setScrollTo, STATEMENT_FORM_NAME } from '../../state/video_debate/statements/reducer'
+import {
+  decrementFormCount,
+  incrementFormCount,
+  setScrollTo,
+  STATEMENT_FORM_NAME
+} from '../../state/video_debate/statements/reducer'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 import ControlTextarea from '../FormUtils/ControlTextarea'
 import { cleanStrMultiline } from '../../lib/clean_str'
 
-
-@connect(({VideoDebate: {video, statements}}) => ({
-  position: video.playback.position,
-  speakers: video.data.speakers,
-  submitting: statements.isSubmitting
-}), {forcePosition, setScrollTo, incrementFormCount, decrementFormCount})
-@reduxForm({form: STATEMENT_FORM_NAME})
+@connect(
+  ({ VideoDebate: { video, statements } }) => ({
+    position: video.playback.position,
+    speakers: video.data.speakers,
+    submitting: statements.isSubmitting
+  }),
+  { forcePosition, setScrollTo, incrementFormCount, decrementFormCount }
+)
+@reduxForm({ form: STATEMENT_FORM_NAME })
 @withNamespaces('videoDebate')
 export class StatementForm extends React.PureComponent {
   constructor(props) {
     super(props)
-    const lockedTime = props.initialValues.time === undefined ? props.position : props.initialValues.time
-    this.state = {lockedTime}
+    const lockedTime =
+      props.initialValues.time === undefined
+        ? props.position
+        : props.initialValues.time
+    this.state = { lockedTime }
   }
 
   componentDidMount() {
     this.props.incrementFormCount()
-    this.refs.container.scrollIntoView({behavior: 'smooth'})
+    this.refs.container.scrollIntoView({ behavior: 'smooth' })
   }
 
   componentWillUnmount() {
@@ -41,56 +51,93 @@ export class StatementForm extends React.PureComponent {
 
   toggleLock() {
     if (this.state.lockedTime === false)
-      this.setState({lockedTime: this.props.position || 0})
-    else
-      this.setState({lockedTime: false})
+      this.setState({ lockedTime: this.props.position || 0 })
+    else this.setState({ lockedTime: false })
   }
 
   moveTimeMarker(position) {
     this.props.forcePosition(position)
-    if (this.state.lockedTime !== false)
-      this.setState({lockedTime: position})
+    if (this.state.lockedTime !== false) this.setState({ lockedTime: position })
   }
 
   handleSubmit(statement) {
-    const currentTime = this.state.lockedTime === false ? this.props.position : this.state.lockedTime
+    const currentTime =
+      this.state.lockedTime === false
+        ? this.props.position
+        : this.state.lockedTime
     if (currentTime !== 0 && !currentTime)
       statement.time = this.props.initialValues.time || 0
-    else
-      statement.time = currentTime || 0
-    if (!statement.speaker_id)
-      statement.speaker_id = null
-    this.props.handleConfirm(statement).then(handleFormEffectResponse({
-      onSuccess: ({id}) => this.props.setScrollTo({id, __forceAutoScroll: true})
-    }))
+    else statement.time = currentTime || 0
+    if (!statement.speaker_id) statement.speaker_id = null
+    this.props.handleConfirm(statement).then(
+      handleFormEffectResponse({
+        onSuccess: ({ id }) =>
+          this.props.setScrollTo({ id, __forceAutoScroll: true })
+      })
+    )
   }
 
   render() {
-    const { position, handleSubmit, valid, speakers, initialValues, handleAbort, t } = this.props
-    const currentTime = this.state.lockedTime === false ? position : this.state.lockedTime
-    const speaker = initialValues.speaker_id ? speakers.find(s => s.id === initialValues.speaker_id) : null
-    const toggleTimeLockAction = this.state.lockedTime === false ? 'unlock' : 'lock'
+    const {
+      position,
+      handleSubmit,
+      valid,
+      speakers,
+      initialValues,
+      handleAbort,
+      t
+    } = this.props
+    const currentTime =
+      this.state.lockedTime === false ? position : this.state.lockedTime
+    const speaker = initialValues.speaker_id
+      ? speakers.find(s => s.id === initialValues.speaker_id)
+      : null
+    const toggleTimeLockAction =
+      this.state.lockedTime === false ? 'unlock' : 'lock'
 
     return (
-      <form className={classNames('statement-form', {'card statement': !this.props.isBundled})} ref="container">
+      <form
+        className={classNames('statement-form', {
+          'card statement': !this.props.isBundled
+        })}
+        ref="container"
+      >
         <header className="card-header">
           <div className="card-header-title">
-            <a className="button" onClick={() => this.moveTimeMarker(currentTime - 1)}>
-              <Icon name="caret-left"/>
+            <a
+              className="button"
+              onClick={() => this.moveTimeMarker(currentTime - 1)}
+            >
+              <Icon name="caret-left" />
             </a>
-            <TimeDisplay time={currentTime} handleClick={() => this.props.forcePosition(currentTime)}/>
-            <a className="button" onClick={() => this.moveTimeMarker(currentTime + 1)}>
-              <Icon name="caret-right"/>
+            <TimeDisplay
+              time={currentTime}
+              handleClick={() => this.props.forcePosition(currentTime)}
+            />
+            <a
+              className="button"
+              onClick={() => this.moveTimeMarker(currentTime + 1)}
+            >
+              <Icon name="caret-right" />
             </a>
             <a
               className="button"
-              title={t('statement.reverseTimeLock', {context: toggleTimeLockAction})}
+              title={t('statement.reverseTimeLock', {
+                context: toggleTimeLockAction
+              })}
               onClick={this.toggleLock.bind(this)}
             >
-              <Icon size="small" name={toggleTimeLockAction}/>
+              <Icon size="small" name={toggleTimeLockAction} />
             </a>
-            {speaker && speaker.picture && <img className="speaker-mini" src={speaker.picture}/>}
-            <Field name="speaker_id" component={SpeakersSelect} speakers={speakers} placeholder={t('speaker.add')}/>
+            {speaker && speaker.picture && (
+              <img className="speaker-mini" src={speaker.picture} />
+            )}
+            <Field
+              name="speaker_id"
+              component={SpeakersSelect}
+              speakers={speakers}
+              placeholder={t('speaker.add')}
+            />
           </div>
         </header>
         <div className="card-content">
@@ -100,8 +147,14 @@ export class StatementForm extends React.PureComponent {
               component={ControlTextarea}
               normalize={cleanStrMultiline}
               maxLength={STATEMENT_LENGTH[1]}
-              validate={value => validateFieldLength(t, value, STATEMENT_LENGTH)}
-              placeholder={speaker ? t('statement.textPlaceholder') : t('statement.noSpeakerTextPlaceholder')}
+              validate={value =>
+                validateFieldLength(t, value, STATEMENT_LENGTH)
+              }
+              placeholder={
+                speaker
+                  ? t('statement.textPlaceholder')
+                  : t('statement.noSpeakerTextPlaceholder')
+              }
               hideErrorIfEmpty
               autoFocus
               autosize

@@ -9,7 +9,11 @@ const AddVideoBtn = ({ t }) => {
   return (
     <ReputationGuardTooltip requiredRep={MIN_REPUTATION_ADD_VIDEO}>
       {({ hasReputation }) => (
-        <Link to="/videos/add" className="button is-primary" disabled={!hasReputation}>
+        <Link
+          to="/videos/add"
+          className="button is-primary"
+          disabled={!hasReputation}
+        >
           <Icon name="plus-circle" />
           <span>{t('videos.add')}</span>
         </Link>

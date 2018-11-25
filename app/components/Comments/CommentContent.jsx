@@ -5,7 +5,7 @@ import { Source } from './Source'
 const COLLAPSE_CONTENT_ABOVE_NESTING = 6
 
 const CommentContent = ({
-  comment: {source, text},
+  comment: { source, text },
   nesting,
   replyingTo,
   richMedias
@@ -18,12 +18,12 @@ const CommentContent = ({
       {shouldRenderTextBlock && (
         <div className="comment-text">
           {isCollapsed && (
-            <Tag style={{marginRight: 5}}>@{replyingTo.username}</Tag>
+            <Tag style={{ marginRight: 5 }}>@{replyingTo.username}</Tag>
           )}
-          { text }
+          {text}
         </div>
       )}
-      {source && <Source withoutPlayer={!richMedias} source={source}/>}
+      {source && <Source withoutPlayer={!richMedias} source={source} />}
     </div>
   )
 }

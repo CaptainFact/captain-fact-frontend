@@ -35,15 +35,18 @@ const INITIAL_STATE = new Record({
 const CommentsReducer = handleActions(
   {
     // Flags
-    [addFlag]: (state, { payload }) => state.update('myFlags', f => f.add(payload)),
+    [addFlag]: (state, { payload }) =>
+      state.update('myFlags', f => f.add(payload)),
     // Votes
     [addMyVote]: (state, { payload: { comment, value } }) => {
       return state
         .setIn(['voted', comment.id], value)
         .update('voting', s => s.delete(comment.id))
     },
-    [setVoting]: (state, { payload }) => state.update('voting', s => s.add(payload)),
-    [endVoting]: (state, { payload }) => state.update('voting', s => s.remove(payload)),
+    [setVoting]: (state, { payload }) =>
+      state.update('voting', s => s.add(payload)),
+    [endVoting]: (state, { payload }) =>
+      state.update('voting', s => s.remove(payload)),
     // Comments
     [setLoading]: (state, { payload }) => state.set('isLoading', payload),
     [fetchAll]: {
@@ -63,12 +66,15 @@ const CommentsReducer = handleActions(
           voted: !my_votes
             ? new Map()
             : new Map().withMutations(map => {
-              return my_votes.forEach(vote => map.set(vote.comment_id, vote.value))
-            }),
+                return my_votes.forEach(vote =>
+                  map.set(vote.comment_id, vote.value)
+                )
+              }),
           myFlags: new Set(my_flags)
         })
       },
-      throw: (state, { payload }) => state.merge({ errors: payload, isLoading: false })
+      throw: (state, { payload }) =>
+        state.merge({ errors: payload, isLoading: false })
     },
     [add]: (state, { payload }) => {
       const comment = prepareComment(payload)
@@ -104,14 +110,16 @@ const CommentsReducer = handleActions(
       if (comments) {
         const groupedComments = comments.groupBy(c => c.statement_id).entries()
         for (const [statementId, newComments] of groupedComments)
-          state = state.updateIn(['comments', statementId], oldList => mergeCommentsList(oldList, newComments)
+          state = state.updateIn(['comments', statementId], oldList =>
+            mergeCommentsList(oldList, newComments)
           )
       }
       // Update replies
       if (replies) {
         const groupedReplies = replies.groupBy(r => r.reply_to_id).entries()
         for (const [commentId, newComments] of groupedReplies)
-          state = state.updateIn(['replies', commentId], oldList => mergeCommentsList(oldList, newComments)
+          state = state.updateIn(['replies', commentId], oldList =>
+            mergeCommentsList(oldList, newComments)
           )
       }
       return state
@@ -134,7 +142,8 @@ const CommentsReducer = handleActions(
 
 // Sort comments by score. More recents come firsts if same score
 function commentsComparator(c1, c2) {
-  if (c1.score === c2.score) return isAfter(c1.inserted_at, c2.inserted_at) ? -1 : 1
+  if (c1.score === c2.score)
+    return isAfter(c1.inserted_at, c2.inserted_at) ? -1 : 1
   return c1.score > c2.score ? -1 : 1
 }
 

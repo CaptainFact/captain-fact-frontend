@@ -15,17 +15,16 @@ const VideosFilterBar = ({
   return (
     <nav className="level videos-filter">
       <FieldWithLabelAddon label={t('misc.source')}>
-        <FilterOnlyFromPartners
-          value={source}
-          onChange={onSourceChange}
-        />
+        <FilterOnlyFromPartners value={source} onChange={onSourceChange} />
       </FieldWithLabelAddon>
       <FieldWithLabelAddon label={t('misc.languageFilter')}>
         <LanguageSelector
-          additionalOptions={new Map({
-            all: t('misc.all'),
-            unknown: t('misc.unknown')
-          })}
+          additionalOptions={
+            new Map({
+              all: t('misc.all'),
+              unknown: t('misc.unknown')
+            })
+          }
           handleChange={onLanguageChange}
           value={language || 'all'}
         />
