@@ -1,7 +1,8 @@
 import { t } from 'react-i18next'
 import { ReputationGuardTooltip } from '../ReputationGuardTooltip'
 
-const DEFAULT_CHILDREN = ({hasReputation}) => `Has reputation: ${hasReputation}`
+const DEFAULT_CHILDREN = ({ hasReputation }) =>
+  `Has reputation: ${hasReputation}`
 
 test("user doesn't have required reputation", () => {
   snapshotComponent(

@@ -1,6 +1,5 @@
 import { Record } from 'immutable'
 
-
 const Statement = new Record({
   id: 0,
   text: '',

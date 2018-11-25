@@ -10,8 +10,10 @@ import { Icon } from './Icon'
 import { flashErrorMsg, flashSuccessMsg } from '../../state/flashes/reducer'
 import ThirdPartyServiceButton from '../Users/ThirdPartyServiceButton'
 
-
-@connect(null, { popModal, flashErrorMsg, flashSuccessMsg })
+@connect(
+  null,
+  { popModal, flashErrorMsg, flashSuccessMsg }
+)
 @withNamespaces('main')
 export default class ShareModal extends React.PureComponent {
   render() {
@@ -21,7 +23,11 @@ export default class ShareModal extends React.PureComponent {
       <Modal
         handleCloseClick={this.props.popModal}
         className="modal-share"
-        title={<span><Icon name="share-alt" /> {this.props.t('actions.share')}</span>}
+        title={
+          <span>
+            <Icon name="share-alt" /> {this.props.t('actions.share')}
+          </span>
+        }
       >
         <FieldWithButton
           className="is-medium share-link-field"
@@ -33,10 +39,25 @@ export default class ShareModal extends React.PureComponent {
         />
         <hr />
         <div style={{ textAlign: 'center' }}>
-          <ThirdPartyServiceButton icon="twitter" name="Twitter" url={this.twitterLink(encodedUrl)} newTab />
-          <ThirdPartyServiceButton icon="facebook" name="Facebook" url={this.facebookLink(encodedUrl)} newTab />
+          <ThirdPartyServiceButton
+            icon="twitter"
+            name="Twitter"
+            url={this.twitterLink(encodedUrl)}
+            newTab
+          />
+          <ThirdPartyServiceButton
+            icon="facebook"
+            name="Facebook"
+            url={this.facebookLink(encodedUrl)}
+            newTab
+          />
           <span style={{ marginLeft: 5 }}>
-            <ThirdPartyServiceButton icon="envelope" name="Mail" url={this.mailLink(encodedUrl)} newTab />
+            <ThirdPartyServiceButton
+              icon="envelope"
+              name="Mail"
+              url={this.mailLink(encodedUrl)}
+              newTab
+            />
           </span>
         </div>
       </Modal>
@@ -64,9 +85,7 @@ export default class ShareModal extends React.PureComponent {
     } catch (err) {
       console.warn(`Copy failed: ${err}`)
     }
-    if (success)
-      this.props.flashSuccessMsg('misc.clipboardSuccess')
-    else
-      this.props.flashErrorMsg('misc.clipboardFail')
+    if (success) this.props.flashSuccessMsg('misc.clipboardSuccess')
+    else this.props.flashErrorMsg('misc.clipboardFail')
   }
 }

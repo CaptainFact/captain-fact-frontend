@@ -4,7 +4,10 @@ import { withNamespaces } from 'react-i18next'
 import { Link } from 'react-router'
 
 import { MIN_REPUTATION_MODERATION } from '../../constants'
-import { fetchRandomModeration, postModerationFeedback } from '../../state/moderation/effects'
+import {
+  fetchRandomModeration,
+  postModerationFeedback
+} from '../../state/moderation/effects'
 
 import UserAppellation from '../Users/UserAppellation'
 import UserAction from '../UsersActions/UserAction'
@@ -14,12 +17,14 @@ import Message from '../Utils/Message'
 import { withReputationGuard } from '../Utils/ReputationGuard'
 import { ModerationForm } from './ModerationForm'
 
-
-@connect(state => ({
-  isLoading: state.Moderation.isLoading,
-  error: state.Moderation.error,
-  entry: state.Moderation.entry,
-}), { fetchRandomModeration, postModerationFeedback })
+@connect(
+  state => ({
+    isLoading: state.Moderation.isLoading,
+    error: state.Moderation.error,
+    entry: state.Moderation.entry
+  }),
+  { fetchRandomModeration, postModerationFeedback }
+)
 @withNamespaces('moderation')
 @withReputationGuard(MIN_REPUTATION_MODERATION)
 export default class Moderation extends React.PureComponent {
@@ -30,28 +35,30 @@ export default class Moderation extends React.PureComponent {
   render() {
     const { entry, t } = this.props
 
-    if (this.props.isLoading)
-      return <LoadingFrame />
+    if (this.props.isLoading) return <LoadingFrame />
 
     return (
       <div className="section">
         <h1 className="title is-1 has-text-centered">
           <Icon name="flag" /> {t('title')}
         </h1>
-        {!entry && <Message className="has-text-centered">{t('emptyModeration')}</Message>}
-        {entry
-          && (
-            <div>
-              {this.renderAction(entry.action)}
-              <hr />
-              {entry.flags.map(({ source_user, reason }) => (
-                <div key={source_user.id} className="has-text-centered">
-                  <UserAppellation user={source_user} /> {t('flaggedFor', { reason })}
-                </div>
-              ))}
-            </div>
-          )
-        }
+        {!entry && (
+          <Message className="has-text-centered">
+            {t('emptyModeration')}
+          </Message>
+        )}
+        {entry && (
+          <div>
+            {this.renderAction(entry.action)}
+            <hr />
+            {entry.flags.map(({ source_user, reason }) => (
+              <div key={source_user.id} className="has-text-centered">
+                <UserAppellation user={source_user} />{' '}
+                {t('flaggedFor', { reason })}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     )
   }
@@ -65,7 +72,10 @@ export default class Moderation extends React.PureComponent {
         <UserAction action={action} />
         <br />
         <h4 className="box has-text-centered">
-          <Link target="_blank" to={`/videos/${videoId}?statement=${statementId}`}>
+          <Link
+            target="_blank"
+            to={`/videos/${videoId}?statement=${statementId}`}
+          >
             <strong>{this.props.t('seeContext')}</strong>
           </Link>
         </h4>
@@ -73,8 +83,10 @@ export default class Moderation extends React.PureComponent {
         <ModerationForm
           action={action}
           initialValues={{ action_id: action.id }}
-          onSubmit={values => this.props.postModerationFeedback(values)
-            .then(() => this.props.fetchRandomModeration())
+          onSubmit={values =>
+            this.props
+              .postModerationFeedback(values)
+              .then(() => this.props.fetchRandomModeration())
           }
         />
       </div>

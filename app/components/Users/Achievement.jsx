@@ -23,7 +23,6 @@ import videoAmbassador from '../../assets/achievements/ambassador.mp4'
 import videoBug from '../../assets/achievements/bug.mp4'
 import videoFamous from '../../assets/achievements/famous.mp4'
 
-
 const KNOWN_ACHIEVEMENTS = {
   1: { img: imgWelcome, video: videoWelcome },
   2: { img: imgRobot, video: videoRobot },
@@ -40,11 +39,12 @@ const KNOWN_ACHIEVEMENTS = {
 
 const UNKNOWN_ACHIEVEMENT = { img: imgDefault }
 
-const renderVisual = ({ img, video }) => (
-  video
-    ? (<video src={video} poster={img} autoPlay loop controls={false} />)
-    : (<img src={img} alt="" />)
-)
+const renderVisual = ({ img, video }) =>
+  video ? (
+    <video src={video} poster={img} autoPlay loop controls={false} />
+  ) : (
+    <img src={img} alt="" />
+  )
 
 const Achievement = ({ t, id }) => {
   const { title, description } = t(id, { returnObjects: true })
@@ -53,9 +53,7 @@ const Achievement = ({ t, id }) => {
   return (
     <div className="achievement">
       <div className="card has-text-centered">
-        <div className="card-image">
-          {renderVisual(achievement)}
-        </div>
+        <div className="card-image">{renderVisual(achievement)}</div>
         <div className="card-content">
           <div className="content">
             <h3 className="title is-3">{title}</h3>

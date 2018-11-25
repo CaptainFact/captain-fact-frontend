@@ -6,7 +6,6 @@ import { CommentDisplay } from './CommentDisplay'
 import CommentsListHeader from './CommentsListHeader'
 import CommentsListExpender from './CommentsListExpender'
 
-
 export class CommentsList extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -16,12 +15,12 @@ export class CommentsList extends React.PureComponent {
   }
 
   render() {
-    const {comments, className, header, replyingTo, nesting = 1} = this.props
+    const { comments, className, header, replyingTo, nesting = 1 } = this.props
     const displayedComments = this.getDisplayedComments()
 
     return (
       <div className={classNames('comments-list', className)}>
-        {header && <CommentsListHeader header={header}/>}
+        {header && <CommentsListHeader header={header} />}
         <FlipMove enterAnimation="fade" leaveAnimation={false}>
           {displayedComments.map(comment => (
             <CommentDisplay
@@ -46,17 +45,18 @@ export class CommentsList extends React.PureComponent {
     const [lowLimit, highLimit] = this.state.nbComments
     let numComment = 0
     return this.props.comments.takeWhile(c => {
-      return ++numComment <= lowLimit || (numComment <= highLimit && c.score > -1)
+      return (
+        ++numComment <= lowLimit || (numComment <= highLimit && c.score > -1)
+      )
     })
   }
 
   handleExpendList([lowLimit, highLimit]) {
-    this.setState({nbComments: [lowLimit + 5, highLimit + 7]})
+    this.setState({ nbComments: [lowLimit + 5, highLimit + 7] })
   }
 
   getNbDisplayedRange(nesting) {
-    if (nesting > 3)
-      return [3, 5]
+    if (nesting > 3) return [3, 5]
     return [4 - nesting, 6 - nesting]
   }
 }

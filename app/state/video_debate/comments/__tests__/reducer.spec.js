@@ -1,11 +1,7 @@
-import reducer, {
-  addFlag,
-  fetchAll
-} from '../reducer'
+import reducer, { addFlag, fetchAll } from '../reducer'
 import fetchAllSuccess from './__fixtures__/fetch_all_success'
 
 const INITIAL_STATE = reducer(undefined, {})
-
 
 test('has correct defaults', () => {
   snapshot(INITIAL_STATE)

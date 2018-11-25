@@ -81,10 +81,11 @@ const VideoReducer = handleActions(
       return state.setIn(['playback', 'position'], Math.trunc(payload))
     },
     [forcePosition]: (state, { payload }) => {
-      return state.update('playback', p => p.mergeDeep({
-        position: payload,
-        forcedPosition: { time: payload, requestId: uuidv1() }
-      })
+      return state.update('playback', p =>
+        p.mergeDeep({
+          position: payload,
+          forcedPosition: { time: payload, requestId: uuidv1() }
+        })
       )
     },
     [setPlaying]: (state, { payload }) => {

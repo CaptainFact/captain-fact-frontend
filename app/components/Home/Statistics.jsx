@@ -5,19 +5,21 @@ import { withNamespaces } from 'react-i18next'
 import { Icon } from '../Utils/Icon'
 
 const QUERY = gql`
-{
-  allStatistics {
-    totals {
-      users
-      statements
-      sources
-      comments
+  {
+    allStatistics {
+      totals {
+        users
+        statements
+        sources
+        comments
+      }
     }
   }
-}
 `
 
-const DEFAULT_STATS = { allStatistics: { totals: { users: 2000, statements: 900 } } }
+const DEFAULT_STATS = {
+  allStatistics: { totals: { users: 2000, statements: 900 } }
+}
 
 const Statistics = ({ t }) => (
   <Query query={QUERY}>

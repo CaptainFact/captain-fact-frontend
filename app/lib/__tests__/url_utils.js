@@ -1,10 +1,11 @@
 import { youtubeRegex, optionsToQueryString, isExternal } from '../url_utils'
 
-
 describe('Youtube regex', () => {
   it('should accept regular urls', () => {
     // Normal form
-    expect(youtubeRegex.test('https://www.youtube.com/watch?v=dQw4w9WgXcQ')).toBe(true)
+    expect(
+      youtubeRegex.test('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+    ).toBe(true)
     // Without https://
     expect(youtubeRegex.test('www.youtube.com/watch?v=dQw4w9WgXcQ')).toBe(true)
     // Short form
@@ -12,18 +13,30 @@ describe('Youtube regex', () => {
     // Short form with get params
     expect(youtubeRegex.test('https://youtu.be/dQw4w9WgXcQ?t=42s')).toBe(true)
     // Embedded form
-    expect(youtubeRegex.test('https://www.youtube.com/embed/LMRdn_MQWXM')).toBe(true)
+    expect(youtubeRegex.test('https://www.youtube.com/embed/LMRdn_MQWXM')).toBe(
+      true
+    )
   })
 
   it('should reject invalid urls', () => {
     // Mising id
     expect(youtubeRegex.test('https://youtu.be')).toBe(false)
     // Channel
-    expect(youtubeRegex.test('https://www.youtube.com/channel/UCQgWpmt02UtJkyO32HGUASQ')).toBe(false)
+    expect(
+      youtubeRegex.test(
+        'https://www.youtube.com/channel/UCQgWpmt02UtJkyO32HGUASQ'
+      )
+    ).toBe(false)
     // Empty string
     expect(youtubeRegex.test('')).toBe(false)
     // Random string
-    expect(youtubeRegex.test(Math.random().toString(36).substring(7))).toBe(false)
+    expect(
+      youtubeRegex.test(
+        Math.random()
+          .toString(36)
+          .substring(7)
+      )
+    ).toBe(false)
   })
 })
 
@@ -33,7 +46,9 @@ describe('optionsToQueryString', () => {
   })
 
   it('should map values', () => {
-    expect(optionsToQueryString({hello: 'world', value: 42})).toBe('?hello=world&value=42')
+    expect(optionsToQueryString({ hello: 'world', value: 42 })).toBe(
+      '?hello=world&value=42'
+    )
   })
 })
 
@@ -50,7 +65,9 @@ describe('is external', () => {
   })
   it('should detect internal links', () => {
     expect(isExternal(MOCK_URL, MOCK_URL)).toBe(false)
-    expect(isExternal(MOCK_URL, MOCK_URL.replace('https://', 'HTTPS://'))).toBe(false)
+    expect(isExternal(MOCK_URL, MOCK_URL.replace('https://', 'HTTPS://'))).toBe(
+      false
+    )
     expect(isExternal(MOCK_URL, '/about')).toBe(false)
     expect(isExternal(MOCK_URL, 'image.jpg')).toBe(false)
     expect(isExternal(MOCK_URL, '#anchor')).toBe(false)

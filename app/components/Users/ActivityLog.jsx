@@ -10,7 +10,6 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
 import MessageView from '../Utils/MessageView'
 import { ErrorView } from '../Utils/ErrorView'
 
-
 const QUERY = gql`
   query UserActivityLog($username: String!, $offset: Int!, $limit: Int!) {
     user(username: $username) {
@@ -43,10 +42,12 @@ const renderPaginationMenu = (loading, user, fetchMore) => (
       disabled={loading}
       currentPage={user ? user.actions.pageNumber : 1}
       total={user ? user.actions.totalPages : 1}
-      onPageChange={selectedPage => fetchMore({
-        variables: { offset: selectedPage },
-        updateQuery: (_, { fetchMoreResult }) => fetchMoreResult
-      })}
+      onPageChange={selectedPage =>
+        fetchMore({
+          variables: { offset: selectedPage },
+          updateQuery: (_, { fetchMoreResult }) => fetchMoreResult
+        })
+      }
     />
   </div>
 )
@@ -59,27 +60,30 @@ const ActivityLog = ({ params: { username }, t }) => (
   >
     {({ loading, data, fetchMore, error }) => {
       if (error) {
-        return (<ErrorView error={error} />)
+        return <ErrorView error={error} />
       }
 
       if (!loading && data.user.actions.entries.length === 0) {
-        return (<MessageView>{t('noActivity')}</MessageView>)
+        return <MessageView>{t('noActivity')}</MessageView>
       }
 
       const paginationMenu = renderPaginationMenu(loading, data.user, fetchMore)
       return (
         <div className="activity-log container">
           {paginationMenu}
-          {loading
-            ? <div className="panel-block"><LoadingFrame /></div>
-            : data.user.actions.entries.map(a => (
+          {loading ? (
+            <div className="panel-block">
+              <LoadingFrame />
+            </div>
+          ) : (
+            data.user.actions.entries.map(a => (
               <UserAction
                 key={a.id}
                 action={{ ...a, changes: new Map(JSON.parse(a.changes)) }}
                 withoutUser
               />
             ))
-          }
+          )}
           {paginationMenu}
         </div>
       )

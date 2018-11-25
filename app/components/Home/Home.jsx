@@ -13,7 +13,6 @@ import AllContributors from './AllContributors'
 import Statistics from './Statistics'
 import landingIllustration from '../../assets/landing-illustration.jpg'
 
-
 @connect(state => ({ authenticated: isAuthenticated(state) }))
 @withNamespaces('home')
 export default class Home extends React.PureComponent {
@@ -36,7 +35,8 @@ export default class Home extends React.PureComponent {
           <div className="has-text-weight-light is-size-3">
             <p>
               {t('presentation1')}
-              <br /><br />
+              <br />
+              <br />
               <strong>CaptainFact</strong> {t('presentation2')}
             </p>
             <br />
@@ -44,13 +44,19 @@ export default class Home extends React.PureComponent {
         </section>
         <section className="section has-text-centered actions">
           <Link className="button is-large" to="/help">
-            <Icon name="question-circle" />&nbsp;&nbsp; {t('main:menu.help')}
+            <Icon name="question-circle" />
+            &nbsp;&nbsp; {t('main:menu.help')}
           </Link>
           <Link className="button is-large" to="/videos">
-            <Icon name="tv" />&nbsp;&nbsp; {t('seeVideos')}
+            <Icon name="tv" />
+            &nbsp;&nbsp; {t('seeVideos')}
           </Link>
-          <ExternalLinkNewTab className="button is-large" href="https://opencollective.com/captainfact_io">
-            <Icon name="heart" />&nbsp;&nbsp; {t('main:menu.donation')}
+          <ExternalLinkNewTab
+            className="button is-large"
+            href="https://opencollective.com/captainfact_io"
+          >
+            <Icon name="heart" />
+            &nbsp;&nbsp; {t('main:menu.donation')}
           </ExternalLinkNewTab>
         </section>
         <section className="section has-text-centered illustration">
@@ -63,7 +69,10 @@ export default class Home extends React.PureComponent {
         <section className="section has-text-centered contributors content">
           <h2 className="title is-2">{t('contributors')}</h2>
           <AllContributors />
-          <ExternalLinkNewTab className="button is-large" href="https://opencollective.com/captainfact_io">
+          <ExternalLinkNewTab
+            className="button is-large"
+            href="https://opencollective.com/captainfact_io"
+          >
             <Icon name="external-link" />
             <span>{t('seeAllContributors')}</span>
           </ExternalLinkNewTab>
@@ -74,7 +83,9 @@ export default class Home extends React.PureComponent {
               <Icon name="envelope-o" />
               <span>
                 &nbsp;&nbsp;
-                {this.props.t(this.props.authenticated ? 'inviteFriend' : 'invitation')}
+                {this.props.t(
+                  this.props.authenticated ? 'inviteFriend' : 'invitation'
+                )}
               </span>
             </h4>
             <InvitationRequestForm />

@@ -6,20 +6,31 @@ import capitalize from 'voca/capitalize'
 
 import { ALL_VIDEOS, ONLY_PARTNERS, ONLY_COMMUNITY } from '../../constants'
 import { Icon } from '../Utils'
-import { changeVideosLanguageFilter, setVideosOnlyFromPartners } from '../../state/user_preferences/reducer'
+import {
+  changeVideosLanguageFilter,
+  setVideosOnlyFromPartners
+} from '../../state/user_preferences/reducer'
 import VideosFilterBar from './VideosFilterBar'
 import AddVideoBtn from './AddVideoBtn'
 import PaginatedVideosContainer from './PaginatedVideosContainer'
 
-
-@connect(state => ({
-  languageFilter: state.UserPreferences.videosLanguageFilter,
-  onlyFromPartners: state.UserPreferences.videosOnlyFromPartners,
-}), { changeVideosLanguageFilter, setVideosOnlyFromPartners })
+@connect(
+  state => ({
+    languageFilter: state.UserPreferences.videosLanguageFilter,
+    onlyFromPartners: state.UserPreferences.videosOnlyFromPartners
+  }),
+  { changeVideosLanguageFilter, setVideosOnlyFromPartners }
+)
 @withNamespaces('main')
 export default class VideosIndexPage extends React.PureComponent {
   render() {
-    const { t, languageFilter, onlyFromPartners, setVideosOnlyFromPartners, location } = this.props
+    const {
+      t,
+      languageFilter,
+      onlyFromPartners,
+      setVideosOnlyFromPartners,
+      location
+    } = this.props
     const currentPage = parseInt(location.query.page) || 1
 
     return (
@@ -61,7 +72,9 @@ export default class VideosIndexPage extends React.PureComponent {
       [ONLY_COMMUNITY]: { is_partner: false }
     }[onlyFromPartners]
 
-    const languageVideosFilter = languageFilter ? { language: languageFilter } : {}
+    const languageVideosFilter = languageFilter
+      ? { language: languageFilter }
+      : {}
 
     return merge({}, partnerFilter, languageVideosFilter)
   }

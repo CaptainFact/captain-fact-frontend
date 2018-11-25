@@ -1,6 +1,5 @@
 import { Record } from 'immutable'
 
-
 const Source = new Record({
   url: '',
   title: '',

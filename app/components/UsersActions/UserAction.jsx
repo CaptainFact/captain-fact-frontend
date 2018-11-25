@@ -10,7 +10,6 @@ import ActionIcon from './ActionIcon'
 import { Icon } from '../Utils/Icon'
 import ActionEntityLink from './ActionEntityLink'
 
-
 const UserAction = ({ action, className, t, withoutUser }) => {
   const { user, type, time, targetUser } = action
 
@@ -27,16 +26,16 @@ const UserAction = ({ action, className, t, withoutUser }) => {
         </Tag>
         {!withoutUser && <UserAppellation user={user} />}
         <span className="action-name">
-          <strong>
-            {t('madeAction', { action: `$t(action.${type})` })}
-          </strong>
+          <strong>{t('madeAction', { action: `$t(action.${type})` })}</strong>
         </span>
         <span className="entity-type">
           <ActionEntityLink action={action} />
         </span>
-        {targetUser
-          && <span>de <UserAppellation user={targetUser} /></span>
-        }
+        {targetUser && (
+          <span>
+            de <UserAppellation user={targetUser} />
+          </span>
+        )}
       </div>
       <ActionDiff action={action} />
     </div>

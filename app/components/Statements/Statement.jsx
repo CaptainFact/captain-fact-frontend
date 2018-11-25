@@ -10,12 +10,14 @@ import { ENTITY_STATEMENT } from '../../constants'
 import { setScrollTo } from '../../state/video_debate/statements/reducer'
 import StatementHeader from './StatementHeader'
 
-
-@connect(null, {addModal, forcePosition, setScrollTo})
+@connect(
+  null,
+  { addModal, forcePosition, setScrollTo }
+)
 @withNamespaces('videoDebate')
 export default class Statement extends React.PureComponent {
   render() {
-    const {statement, speaker, handleEdit, handleDelete} = this.props
+    const { statement, speaker, handleEdit, handleDelete } = this.props
 
     return (
       <div>
@@ -37,13 +39,18 @@ export default class Statement extends React.PureComponent {
 
   handleTimeClick(time) {
     this.props.forcePosition(time)
-    this.props.setScrollTo({id: this.props.statement.id, __forceAutoScroll: true})
+    this.props.setScrollTo({
+      id: this.props.statement.id,
+      __forceAutoScroll: true
+    })
   }
 
   shareModal() {
     this.props.addModal({
       Modal: ShareModal,
-      props: {path: `${location.pathname}?statement=${this.props.statement.id}`}
+      props: {
+        path: `${location.pathname}?statement=${this.props.statement.id}`
+      }
     })
   }
 

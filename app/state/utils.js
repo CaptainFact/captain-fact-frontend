@@ -1,6 +1,5 @@
 import isPromise from 'is-promise'
 
-
 /**
  * A helper to create effects that can be dispatched with dispatch() using promises.
  *
@@ -71,10 +70,8 @@ export function returnSuccess(returnValue) {
  * @returns {*}
  */
 export function cleverDispatch(dispatch, getState, toDispatch, params = null) {
-  if (typeof (toDispatch) === 'function')
-    return dispatch(toDispatch(params))
-  if (isAction(toDispatch))
-    return dispatch(toDispatch)
+  if (typeof toDispatch === 'function') return dispatch(toDispatch(params))
+  if (isAction(toDispatch)) return dispatch(toDispatch)
   if (isIterable(toDispatch)) {
     let lastValue = null
     toDispatch.forEach(a => {
@@ -118,9 +115,9 @@ export function generateFSASuccess(payload) {
  * @returns {boolean}
  */
 export function isAction(obj) {
-  return obj !== null && typeof (obj) === 'object' && typeof (obj.type) === 'string'
+  return obj !== null && typeof obj === 'object' && typeof obj.type === 'string'
 }
 
 function isIterable(obj) {
-  return obj !== null && typeof (obj[Symbol.iterator]) === 'function'
+  return obj !== null && typeof obj[Symbol.iterator] === 'function'
 }

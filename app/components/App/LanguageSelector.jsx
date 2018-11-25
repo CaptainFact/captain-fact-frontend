@@ -5,7 +5,6 @@ import { withNamespaces } from 'react-i18next'
 
 import { Icon } from '../Utils/Icon'
 
-
 const defaultLocales = new Map({
   en: 'English',
   fr: 'Français'

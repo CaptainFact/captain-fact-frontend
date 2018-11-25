@@ -80,10 +80,11 @@ export default class UserSettings extends React.PureComponent {
           <h3 className="title is-3">{t('dangerZone')}</h3>
           <Button
             className="is-danger"
-            onClick={() => addModal({
-              Modal: DeleteUserModal,
-              props: { handleConfirm: () => deleteAccount() }
-            })
+            onClick={() =>
+              addModal({
+                Modal: DeleteUserModal,
+                props: { handleConfirm: () => deleteAccount() }
+              })
             }
           >
             {t('deleteAccount')}

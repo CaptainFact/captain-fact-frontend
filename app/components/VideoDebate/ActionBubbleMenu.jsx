@@ -80,10 +80,11 @@ export default class ActionBubbleMenu extends React.PureComponent {
         <ActionBubble
           iconName="share-alt"
           label={t('main:actions.share')}
-          onClick={() => this.props.addModal({
-            Modal: ShareModal,
-            props: { path: location.pathname }
-          })
+          onClick={() =>
+            this.props.addModal({
+              Modal: ShareModal,
+              props: { path: location.pathname }
+            })
           }
         />
         <ReputationGuard requiredRep={MIN_REPUTATION_UPDATE_VIDEO}>

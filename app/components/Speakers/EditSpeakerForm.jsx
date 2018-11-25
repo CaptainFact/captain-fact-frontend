@@ -8,7 +8,6 @@ import capitalizeName from '../../lib/name_formatter'
 import ControlInputWithLabel from '../FormUtils/ControlInputWithLabel'
 import { cleanStr } from '../../lib/clean_str'
 
-
 const validate = ({ full_name, title }) => {
   const errors = {}
   validateLength(errors, 'full_name', full_name, SPEAKER_NAME_LENGTH)

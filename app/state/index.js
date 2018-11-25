@@ -35,7 +35,6 @@ const reducers = combineReducers({
   form: formReducer
 })
 
-
 // Declare middlewares
 const middlewares = [thunk, promiseMiddleware]
 
@@ -50,6 +49,9 @@ const getComposer = () => {
 }
 
 // Build store
-const store = createStore(reducers, getComposer()(applyMiddleware(...middlewares)))
+const store = createStore(
+  reducers,
+  getComposer()(applyMiddleware(...middlewares))
+)
 
 export default store

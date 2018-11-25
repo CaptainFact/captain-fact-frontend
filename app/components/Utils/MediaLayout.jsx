@@ -1,7 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
 
-
 const MediaLayout = ({
   left = null,
   content = null,

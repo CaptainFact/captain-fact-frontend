@@ -1,6 +1,5 @@
 import formatter from '../seconds_formatter'
 
-
 it('should correctly convert seconds', () => {
   expect(formatter(0)).toBe('0:00:00')
   expect(formatter(4)).toBe('0:00:04')
