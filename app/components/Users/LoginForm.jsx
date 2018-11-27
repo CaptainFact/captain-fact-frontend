@@ -5,11 +5,7 @@ import { Link, withRouter } from 'react-router'
 import { withNamespaces } from 'react-i18next'
 
 import ThirdPartyAuthList from './ThirdPartyAuthList'
-import {
-  emailOrUsernameField,
-  passwordField,
-  submitButton
-} from './UserFormFields'
+import { emailOrUsernameField, passwordField, submitButton } from './UserFormFields'
 import { login } from '../../state/users/current_user/effects'
 import Notification from '../Utils/Notification'
 import { tError } from '../../lib/errors'

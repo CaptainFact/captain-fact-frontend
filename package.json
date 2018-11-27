@@ -19,7 +19,8 @@
     "lint": "npx eslint app",
     "lint_all": "npx eslint app/**/*.jsx",
     "lint_fix": "npx eslint app --fix",
-    "precommit": "npx lint-staged"
+    "precommit": "npx lint-staged",
+    "prettify": "npx prettier --write app/**/*.{js,jsx} && npx prettier --write cypress/**/*.js"
   },
   "jest": {
     "setupFiles": [

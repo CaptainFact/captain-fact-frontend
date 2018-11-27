@@ -6,8 +6,7 @@ export const popModal = createAction('POP_MODAL')
 
 const ModalsReducer = handleActions(
   {
-    [addModal]: (state, { payload: { Modal, props } }) =>
-      state.push({ Modal, props }),
+    [addModal]: (state, { payload: { Modal, props } }) => state.push({ Modal, props }),
     [popModal]: state => state.pop()
   },
   new Stack()

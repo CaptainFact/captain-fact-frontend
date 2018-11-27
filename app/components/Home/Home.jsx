@@ -83,9 +83,7 @@ export default class Home extends React.PureComponent {
               <Icon name="envelope-o" />
               <span>
                 &nbsp;&nbsp;
-                {this.props.t(
-                  this.props.authenticated ? 'inviteFriend' : 'invitation'
-                )}
+                {this.props.t(this.props.authenticated ? 'inviteFriend' : 'invitation')}
               </span>
             </h4>
             <InvitationRequestForm />

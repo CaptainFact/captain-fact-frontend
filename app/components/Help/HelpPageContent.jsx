@@ -31,10 +31,7 @@ class HelpPageContent extends PureComponent {
   }
 
   componentDidUpdate(oldProps) {
-    if (
-      this.props.locale !== oldProps.locale ||
-      this.props.page !== oldProps.page
-    )
+    if (this.props.locale !== oldProps.locale || this.props.page !== oldProps.page)
       this.props.fetchHelpPage(this.props.page)
   }
 
@@ -44,8 +41,7 @@ class HelpPageContent extends PureComponent {
 
   render() {
     if (this.props.isLoading) return <LoadingFrame />
-    if (this.props.error)
-      return <ErrorView canGoBack={false} error={this.props.error} />
+    if (this.props.error) return <ErrorView canGoBack={false} error={this.props.error} />
     return (
       <Markdown
         className="content"

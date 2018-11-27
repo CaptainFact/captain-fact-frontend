@@ -6,13 +6,7 @@ import formatSeconds from '../../lib/seconds_formatter'
 
 const i18nAtKey = 'misc.timeAt'
 
-const TimeDisplay = ({
-  time,
-  handleClick,
-  t,
-  textBefore = true,
-  capitalize = true
-}) => {
+const TimeDisplay = ({ time, handleClick, t, textBefore = true, capitalize = true }) => {
   const formattedTime = formatSeconds(time)
   const content = handleClick ? (
     <a onClick={() => handleClick(time)}>{formattedTime}</a>

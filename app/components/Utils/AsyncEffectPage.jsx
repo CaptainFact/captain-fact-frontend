@@ -38,12 +38,7 @@ export default class AsyncEffectPage extends React.PureComponent {
         />
       )
     if (this.state.step === 'error')
-      return (
-        <ErrorView
-          error={this.state.payload}
-          i18nNS={this.props.errorNamespace}
-        />
-      )
+      return <ErrorView error={this.state.payload} i18nNS={this.props.errorNamespace} />
     if (this.state.step === 'success' && typeof this.state.payload === 'string')
       return (
         <div className="message-view">

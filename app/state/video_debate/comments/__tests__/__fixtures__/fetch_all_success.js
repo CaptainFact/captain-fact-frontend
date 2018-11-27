@@ -46,8 +46,7 @@ export default {
         speaker_id: null,
         reputation: 689,
         registered_at: '2018-01-01T00:00:00.000000',
-        picture_url:
-          'http://localhost:4000/resources/users/1_thumb.jpg?v=63690733313',
+        picture_url: 'http://localhost:4000/resources/users/1_thumb.jpg?v=63690733313',
         name: 'José',
         mini_picture_url:
           'http://localhost:4000/resources/users/1_mini_thumb.jpg?v=63690733313',
@@ -71,8 +70,7 @@ export default {
         speaker_id: null,
         reputation: 689,
         registered_at: '2018-01-01T00:00:00.000000',
-        picture_url:
-          'http://localhost:4000/resources/users/1_thumb.jpg?v=63690733313',
+        picture_url: 'http://localhost:4000/resources/users/1_thumb.jpg?v=63690733313',
         name: 'José',
         mini_picture_url:
           'http://localhost:4000/resources/users/1_mini_thumb.jpg?v=63690733313',
@@ -96,8 +94,7 @@ export default {
         speaker_id: null,
         reputation: 689,
         registered_at: '2018-01-01T00:00:00.000000',
-        picture_url:
-          'http://localhost:4000/resources/users/1_thumb.jpg?v=63690733313',
+        picture_url: 'http://localhost:4000/resources/users/1_thumb.jpg?v=63690733313',
         name: 'José',
         mini_picture_url:
           'http://localhost:4000/resources/users/1_mini_thumb.jpg?v=63690733313',
@@ -151,8 +148,7 @@ export default {
         speaker_id: null,
         reputation: 689,
         registered_at: '2018-01-01T00:00:00.000000',
-        picture_url:
-          'http://localhost:4000/resources/users/1_thumb.jpg?v=63690733313',
+        picture_url: 'http://localhost:4000/resources/users/1_thumb.jpg?v=63690733313',
         name: 'José',
         mini_picture_url:
           'http://localhost:4000/resources/users/1_mini_thumb.jpg?v=63690733313',
@@ -205,8 +201,7 @@ export default {
         speaker_id: null,
         reputation: 689,
         registered_at: '2018-01-01T00:00:00.000000',
-        picture_url:
-          'http://localhost:4000/resources/users/1_thumb.jpg?v=63690733313',
+        picture_url: 'http://localhost:4000/resources/users/1_thumb.jpg?v=63690733313',
         name: 'José',
         mini_picture_url:
           'http://localhost:4000/resources/users/1_mini_thumb.jpg?v=63690733313',

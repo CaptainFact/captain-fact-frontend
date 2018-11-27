@@ -16,10 +16,7 @@ class HelpModal extends PureComponent {
   render() {
     return (
       <Modal title={this.props.t('pages.achievements')}>
-        <HelpPageContent
-          page={this.props.page}
-          onLinkClick={this.props.popModal}
-        />
+        <HelpPageContent page={this.props.page} onLinkClick={this.props.popModal} />
       </Modal>
     )
   }

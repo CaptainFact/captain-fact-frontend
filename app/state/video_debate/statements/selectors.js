@@ -5,8 +5,7 @@ import { formValueSelector } from 'redux-form'
 import { getVideoDebateSpeakers } from '../selectors'
 import { STATEMENT_FOCUS_TIME } from '../../../constants'
 
-export const getStatementSpeakerId = (state, props) =>
-  props.statement.speaker_id
+export const getStatementSpeakerId = (state, props) => props.statement.speaker_id
 
 export const getStatementSpeaker = createCachedSelector(
   getStatementSpeakerId,

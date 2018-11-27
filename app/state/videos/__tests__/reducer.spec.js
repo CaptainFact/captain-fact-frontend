@@ -7,12 +7,7 @@ test('has correct defaults', () => {
 })
 
 test('setSubmitting', () => {
-  snapshotReducer(
-    reducer,
-    DEFAULT_STATE,
-    setSubmitting(true),
-    setSubmitting(false)
-  )
+  snapshotReducer(reducer, DEFAULT_STATE, setSubmitting(true), setSubmitting(false))
 })
 
 test('reset', () => {

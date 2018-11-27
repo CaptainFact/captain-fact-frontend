@@ -29,12 +29,8 @@ class ActionDiff extends PureComponent {
       <div className="action-diff">
         {diff.entrySeq().map(([key, changes]) => (
           <div key={key} className="diff-entry">
-            <div className="diff-key">
-              {titleCase(this.formatChangeKey(key))}&nbsp;
-            </div>
-            <span className="diff-view">
-              {this.renderKeyDiff(key, changes)}
-            </span>
+            <div className="diff-key">{titleCase(this.formatChangeKey(key))}&nbsp;</div>
+            <span className="diff-view">{this.renderKeyDiff(key, changes)}</span>
           </div>
         ))}
       </div>
@@ -71,8 +67,7 @@ class ActionDiff extends PureComponent {
   }
 
   formatChangeValue(value, key) {
-    if (key === 'speaker_id' && value)
-      return <Link to={speakerURL(value)}>#{value}</Link>
+    if (key === 'speaker_id' && value) return <Link to={speakerURL(value)}>#{value}</Link>
     return value
   }
 
@@ -93,10 +88,7 @@ class ActionDiff extends PureComponent {
 
     // Build changes object like key: [diffs]
     return new Map().withMutations(diff => {
-      for (const [key, newValue] of this.getActionChanges(
-        action,
-        prevState
-      ).entrySeq()) {
+      for (const [key, newValue] of this.getActionChanges(action, prevState).entrySeq()) {
         const valueDiff = this.diffEntry(key, prevState.get(key), newValue)
         diff.set(key, new List(valueDiff))
       }
@@ -129,10 +121,8 @@ class ActionDiff extends PureComponent {
 
   buildReferenceEntity(actions, base = null) {
     const entity = actions.first().entity
-    if (entity === ENTITY_STATEMENT)
-      return this.buildReferenceStatement(actions, base)
-    if (entity === ENTITY_SPEAKER)
-      return this.buildReferenceSpeaker(actions, base)
+    if (entity === ENTITY_STATEMENT) return this.buildReferenceStatement(actions, base)
+    if (entity === ENTITY_SPEAKER) return this.buildReferenceSpeaker(actions, base)
     return new Map()
   }
 
@@ -157,10 +147,7 @@ class ActionDiff extends PureComponent {
 
       // Generate diff
       if (prevValue)
-        return [
-          { removed: true, value: prevValue },
-          { added: true, value: newValue }
-        ]
+        return [{ removed: true, value: prevValue }, { added: true, value: newValue }]
       return [{ added: true, value: newValue }]
     }
     // Do a string diff

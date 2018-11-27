@@ -24,8 +24,7 @@ export const classifyComments = createCachedSelector(
 
     for (const comment of comments) {
       if (isSelfComment(comment, speakerId)) selfComments.push(comment)
-      else if (!comment.source || comment.approve === null)
-        regularComments.push(comment)
+      else if (!comment.source || comment.approve === null) regularComments.push(comment)
       else if (comment.approve) approvingFacts.push(comment)
       else refutingFacts.push(comment)
     }

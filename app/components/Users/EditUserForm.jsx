@@ -28,8 +28,7 @@ import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 export default class EditUserForm extends React.PureComponent {
   componentDidUpdate() {
     // Redirect to user profile when logged in
-    if (!this.props.isLoading && !this.props.user.id)
-      this.props.router.push('/')
+    if (!this.props.isLoading && !this.props.user.id) this.props.router.push('/')
   }
 
   submit(user) {

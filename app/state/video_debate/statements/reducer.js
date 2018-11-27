@@ -13,10 +13,7 @@ export const update = createAction('STATEMENTS/UPDATE')
 export const updateAll = createAction('STATEMENTS/UPDATE_ALL')
 export const remove = createAction('STATEMENTS/REMOVE')
 export const setScrollTo = createAction('STATEMENTS/SET_SCROLL_TO')
-export const incrementFormCount = createAction(
-  'STATEMENTS/INCREMENT_FORM_COUNT',
-  () => 1
-)
+export const incrementFormCount = createAction('STATEMENTS/INCREMENT_FORM_COUNT', () => 1)
 export const decrementFormCount = createAction(
   'STATEMENTS/DECREMENT_FORM_COUNT',
   () => -1
@@ -42,13 +39,10 @@ const StatementsReducer = handleActions(
     [fetchStatements]: {
       next: (state, { payload }) =>
         state.merge({
-          data: new List(payload.map(s => new Statement(s))).sortBy(
-            st => st.time
-          ),
+          data: new List(payload.map(s => new Statement(s))).sortBy(st => st.time),
           isLoading: false
         }),
-      throw: (state, { payload }) =>
-        state.merge({ isLoading: false, errors: payload })
+      throw: (state, { payload }) => state.merge({ isLoading: false, errors: payload })
     },
     [setLoading]: (state, isLoading) => state.set('isLoading', isLoading),
     [setSubmitting]: (state, { payload }) => state.set('isSubmitting', payload),
@@ -74,9 +68,7 @@ const StatementsReducer = handleActions(
         data.withMutations(statements => {
           // Update all statements
           for (const newStatement of payload) {
-            const statementIdx = statements.findIndex(
-              s => s.id === newStatement.id
-            )
+            const statementIdx = statements.findIndex(s => s.id === newStatement.id)
             if (statementIdx !== -1) {
               statements.update(statementIdx, oldStatement => {
                 return oldStatement.merge(newStatement)
@@ -95,10 +87,8 @@ const StatementsReducer = handleActions(
       return state
     },
     [setScrollTo]: (state, { payload }) => state.set('scrollTo', payload),
-    [combineActions(incrementFormCount, decrementFormCount)]: (
-      state,
-      { payload }
-    ) => state.set('formsCount', state.formsCount + payload),
+    [combineActions(incrementFormCount, decrementFormCount)]: (state, { payload }) =>
+      state.set('formsCount', state.formsCount + payload),
     [resetVideoDebate]: () => INITIAL_STATE()
   },
   INITIAL_STATE()

@@ -19,10 +19,7 @@ export default ({
       focus={isReply}
       autoFocus={autoFocus}
     />
-    <TextareaLengthCounter
-      length={input.value.length}
-      maxLength={COMMENT_LENGTH[1]}
-    />
+    <TextareaLengthCounter length={input.value.length} maxLength={COMMENT_LENGTH[1]} />
     {error && (
       <span className="help is-danger">
         {typeof error === 'string' ? error : error[0]}

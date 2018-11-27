@@ -40,8 +40,7 @@ const middlewares = [thunk, promiseMiddleware]
 
 // If running in dev and browser has redux devtools extension activated, use it
 const getComposer = () => {
-  if (JS_ENV === 'prod' || !window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
-    return compose
+  if (JS_ENV === 'prod' || !window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) return compose
   return window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
     serialize: { immutable: Immutable },
     shouldCatchErrors: true
@@ -49,9 +48,6 @@ const getComposer = () => {
 }
 
 // Build store
-const store = createStore(
-  reducers,
-  getComposer()(applyMiddleware(...middlewares))
-)
+const store = createStore(reducers, getComposer()(applyMiddleware(...middlewares)))
 
 export default store

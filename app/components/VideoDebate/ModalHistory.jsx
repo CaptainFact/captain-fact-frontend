@@ -29,8 +29,7 @@ export class ModalHistory extends React.PureComponent {
   }
 
   componentWillUnmount() {
-    if (this.props.entity === ENTITY_STATEMENT)
-      this.props.leaveStatementHistoryChannel()
+    if (this.props.entity === ENTITY_STATEMENT) this.props.leaveStatementHistoryChannel()
     this.props.reset()
   }
 

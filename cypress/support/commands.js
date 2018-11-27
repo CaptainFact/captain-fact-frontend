@@ -1,9 +1,9 @@
 /* ***********************************************
-** For more comprehensive examples of custom
-** commands please read more here:
-** https://on.cypress.io/custom-commands
-** *********************************************
-*/
+ ** For more comprehensive examples of custom
+ ** commands please read more here:
+ ** https://on.cypress.io/custom-commands
+ ** *********************************************
+ */
 
 import { defaultApiUrl, defaultEmail, defaultPassword } from './helpers'
 

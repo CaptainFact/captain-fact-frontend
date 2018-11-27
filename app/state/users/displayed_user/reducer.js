@@ -28,8 +28,7 @@ const DisplayedUserReducer = handleActions(
           errors: null
         })
       },
-      throw: (state, { payload }) =>
-        state.merge({ errors: payload, isLoading: false })
+      throw: (state, { payload }) => state.merge({ errors: payload, isLoading: false })
     },
     [setError]: (state, { payload }) =>
       state.merge({ errors: payload, isLoading: false }),

@@ -63,8 +63,7 @@ export const unlinkProvider = provider =>
   createEffect(HttpApi.delete(`auth/${provider}/link`), {
     before: setPosting(true),
     then: user => (dispatch, getState) => {
-      if (getState().DisplayedUser.data.id === user.id)
-        dispatch(setDisplayedUser(user))
+      if (getState().DisplayedUser.data.id === user.id) dispatch(setDisplayedUser(user))
       return user
     },
     after: userLogin
@@ -84,9 +83,7 @@ export const resetPasswordVerify = token =>
   createEffect(HttpApi.get(`users/reset_password/verify/${token}`))
 
 export const resetPasswordConfirm = ({ password, token }) =>
-  createEffect(
-    HttpApi.post('users/reset_password/confirm', { password, token })
-  )
+  createEffect(HttpApi.post('users/reset_password/confirm', { password, token }))
 
 // Logout / delete
 
@@ -96,17 +93,13 @@ export const deleteAccount = () => resetUser(HttpApi.delete('users/me'))
 
 // Achievements
 export const unlockPublicAchievement = achievementId =>
-  createEffect(
-    HttpApi.put(`users/me/achievements/${achievementId}`, achievementId),
-    {
-      then: user => (dispatch, getState) => {
-        if (getState().DisplayedUser.data.id === user.id)
-          dispatch(setDisplayedUser(user))
-        dispatch(setCurrentUser(user))
-        return user
-      }
+  createEffect(HttpApi.put(`users/me/achievements/${achievementId}`, achievementId), {
+    then: user => (dispatch, getState) => {
+      if (getState().DisplayedUser.data.id === user.id) dispatch(setDisplayedUser(user))
+      dispatch(setCurrentUser(user))
+      return user
     }
-  )
+  })
 
 // ---- Private functions ----
 

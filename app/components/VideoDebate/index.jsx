@@ -58,18 +58,12 @@ export class VideoDebate extends React.PureComponent {
   }
 
   render() {
-    if (this.props.videoErrors)
-      return <ErrorView error={this.props.videoErrors} />
+    if (this.props.videoErrors) return <ErrorView error={this.props.videoErrors} />
     return (
       <div id="video-show" className="columns is-gapless">
-        <Helmet>
-          {!this.props.isLoading && <title>{this.props.videoTitle}</title>}
-        </Helmet>
+        <Helmet>{!this.props.isLoading && <title>{this.props.videoTitle}</title>}</Helmet>
         <ColumnVideo view={this.props.route.view} />
-        <ColumnDebate
-          view={this.props.route.view}
-          videoId={this.props.params.videoId}
-        />
+        <ColumnDebate view={this.props.route.view} videoId={this.props.params.videoId} />
       </div>
     )
   }

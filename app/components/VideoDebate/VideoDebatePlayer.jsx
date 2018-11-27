@@ -18,10 +18,7 @@ import { setPosition, setPlaying } from '../../state/video_debate/video/reducer'
 )
 export default class VideoDebatePlayer extends React.Component {
   shouldComponentUpdate(newProps) {
-    return (
-      this.props.url !== newProps.url ||
-      this.props.isPlaying !== newProps.isPlaying
-    )
+    return this.props.url !== newProps.url || this.props.isPlaying !== newProps.isPlaying
   }
 
   componentWillReceiveProps(newProps) {

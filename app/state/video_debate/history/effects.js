@@ -32,8 +32,7 @@ export const leaveStatementHistoryChannel = () => () =>
 
 export const revertVideoDebateUserAction = action => dispatch => {
   if (action.type !== ACTION_DELETE && action.type !== ACTION_REMOVE) return
-  const msg =
-    action.entity === ENTITY_SPEAKER ? 'restore_speaker' : 'restore_statement'
+  const msg = action.entity === ENTITY_SPEAKER ? 'restore_speaker' : 'restore_statement'
   return SocketApi.push(VIDEO_DEBATE_HISTORY_CHANNEL, msg, {
     id: getEntityIDFromAction(action)
   }).catch(e => dispatch(errorToFlash(e)))

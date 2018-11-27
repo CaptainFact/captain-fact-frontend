@@ -42,8 +42,7 @@ export default class ResetPasswordConfirmForm extends React.PureComponent {
     this.props.resetPasswordVerify(this.props.params.token).then(
       handleEffectResponse({
         onSuccess: user => this.setState({ status: 'confirm', payload: user }),
-        onError: () =>
-          this.setState({ status: 'error', payload: 'invalid_token' })
+        onError: () => this.setState({ status: 'error', payload: 'invalid_token' })
       })
     )
   }
@@ -63,8 +62,7 @@ export default class ResetPasswordConfirmForm extends React.PureComponent {
             })
             this.setState({ status: 'confirm_success' })
           },
-          onError: () =>
-            this.setState({ status: 'error', payload: 'reset_failed' })
+          onError: () => this.setState({ status: 'error', payload: 'reset_failed' })
         })
       )
   }

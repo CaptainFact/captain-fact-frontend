@@ -3,12 +3,7 @@ import classNames from 'classnames'
 
 const Tag = ({ type, size = 'small', className, children, ...props }) => (
   <div
-    className={classNames(
-      'tag',
-      `is-${size}`,
-      type ? `is-${type}` : null,
-      className
-    )}
+    className={classNames('tag', `is-${size}`, type ? `is-${type}` : null, className)}
     {...props}
   >
     {children}

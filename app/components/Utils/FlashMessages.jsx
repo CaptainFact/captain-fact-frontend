@@ -28,8 +28,7 @@ export class FlashMessages extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    if (this.props.flashes.size === 0 || this.props.isPaused)
-      this.clearUpdateInterval()
+    if (this.props.flashes.size === 0 || this.props.isPaused) this.clearUpdateInterval()
     else this.setUpdateInterval()
   }
 
@@ -104,9 +103,7 @@ class FlashContent extends React.Component {
         )}
         <div className="column">
           <div>
-            {isError
-              ? tError(this.props.t, message)
-              : this.props.t(message, i18nParams)}
+            {isError ? tError(this.props.t, message) : this.props.t(message, i18nParams)}
           </div>
           {this.renderInfoLink()}
         </div>

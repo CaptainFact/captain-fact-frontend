@@ -54,10 +54,7 @@ export class TimeSince extends React.PureComponent {
     // Configure next timeout
     // Under 1h, update when next minute begin
     if (minutesSince < 60)
-      this.timeout = setTimeout(
-        this.timeoutUpdate,
-        (60 - (secondsSince % 60)) * 1000
-      )
+      this.timeout = setTimeout(this.timeoutUpdate, (60 - (secondsSince % 60)) * 1000)
     // Otherwise update when next hour begin
     else
       this.timeout = setTimeout(

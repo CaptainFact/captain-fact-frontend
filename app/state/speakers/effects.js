@@ -20,9 +20,7 @@ export const fetchWikiDataInfo = (wikidataId, locale = 'en') => dispatch => {
     r.text().then(xml => {
       const parser = new DOMParser()
       const res = parser.parseFromString(xml, 'text/xml')
-      const links = Array.from(res.getElementsByTagName('uri')).map(
-        e => e.textContent
-      )
+      const links = Array.from(res.getElementsByTagName('uri')).map(e => e.textContent)
       return dispatch(actionFetchSpeakerWikiLinks(links))
     })
   )

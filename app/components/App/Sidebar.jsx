@@ -17,10 +17,7 @@ import ReputationGuard from '../Utils/ReputationGuard'
 import LanguageSelector from './LanguageSelector'
 import ScoreTag from '../Users/ScoreTag'
 import { logout } from '../../state/users/current_user/effects'
-import {
-  closeSidebar,
-  toggleSidebar
-} from '../../state/user_preferences/reducer'
+import { closeSidebar, toggleSidebar } from '../../state/user_preferences/reducer'
 import UserPicture from '../Users/UserPicture'
 import i18n from '../../i18n/i18n'
 import Logo from './Logo'
@@ -76,20 +73,10 @@ export default class Sidebar extends React.PureComponent {
       <div className="user-section">
         <nav className="level user-quicklinks is-mobile">
           <div className="level-left menu-list">
-            <this.MenuLink
-              to={baseLink}
-              className="my-profile-link"
-              onlyActiveOnIndex
-            >
+            <this.MenuLink to={baseLink} className="my-profile-link" onlyActiveOnIndex>
               <div className="current-user-link">
-                <UserPicture
-                  size={USER_PICTURE_SMALL}
-                  user={this.props.CurrentUser}
-                />
-                <span
-                  className="username"
-                  style={{ fontSize: this.usernameFontSize() }}
-                >
+                <UserPicture size={USER_PICTURE_SMALL} user={this.props.CurrentUser} />
+                <span className="username" style={{ fontSize: this.usernameFontSize() }}>
                   {username}
                 </span>
                 <ScoreTag reputation={reputation} />

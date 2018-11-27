@@ -33,8 +33,7 @@ export class ColumnDebate extends React.PureComponent {
 
     if (view === 'history') return <VideoDebateHistory videoId={videoId} />
     if (view === 'debate') {
-      if (isLoading)
-        return <LoadingFrame title={this.props.t('loading.statements')} />
+      if (isLoading) return <LoadingFrame title={this.props.t('loading.statements')} />
       return (
         <div className="statements-list-container">
           {!hasStatements && !this.props.hasStatementForm ? (

@@ -18,10 +18,7 @@ const CommentActions = ({
 }) => (
   <nav className="comment-actions">
     {isOwnComment ? (
-      <OwnCommentActions
-        handleAddToThread={handleReply}
-        handleDelete={handleDelete}
-      />
+      <OwnCommentActions handleAddToThread={handleReply} handleDelete={handleDelete} />
     ) : (
       <OtherCommentActions
         handleReply={handleReply}

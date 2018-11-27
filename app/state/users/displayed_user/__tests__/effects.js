@@ -22,9 +22,7 @@ test('fetch other user', () => {
     expect(dispatchMock.mock.calls[0][0]).toEqual(setLoading(true))
 
     // Set displayed user
-    expect(dispatchMock.mock.calls[1][0]).toEqual(
-      setDisplayedUser(other.toJS())
-    )
+    expect(dispatchMock.mock.calls[1][0]).toEqual(setDisplayedUser(other.toJS()))
 
     // There are no other dispatch
     expect(dispatchMock.mock.calls.length).toEqual(2)
@@ -44,9 +42,7 @@ test('fetch self', () => {
       expect(dispatchMock.mock.calls[0][0]).toEqual(setLoading(true))
 
       // Set displayed user
-      expect(dispatchMock.mock.calls[1][0]).toEqual(
-        setDisplayedUser(self.toJS())
-      )
+      expect(dispatchMock.mock.calls[1][0]).toEqual(setDisplayedUser(self.toJS()))
 
       // Update self
       expect(dispatchMock.mock.calls[2][0]).toEqual(setCurrentUser(self.toJS()))

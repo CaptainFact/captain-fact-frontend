@@ -14,10 +14,6 @@ export class MainModalContainer extends React.PureComponent {
   }
 
   render() {
-    return (
-      <div id="main-modal-container">
-        {this.props.modal && this.renderModal()}
-      </div>
-    )
+    return <div id="main-modal-container">{this.props.modal && this.renderModal()}</div>
   }
 }

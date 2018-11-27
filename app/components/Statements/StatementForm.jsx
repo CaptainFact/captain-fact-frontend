@@ -34,9 +34,7 @@ export class StatementForm extends React.PureComponent {
   constructor(props) {
     super(props)
     const lockedTime =
-      props.initialValues.time === undefined
-        ? props.position
-        : props.initialValues.time
+      props.initialValues.time === undefined ? props.position : props.initialValues.time
     this.state = { lockedTime }
   }
 
@@ -62,17 +60,14 @@ export class StatementForm extends React.PureComponent {
 
   handleSubmit(statement) {
     const currentTime =
-      this.state.lockedTime === false
-        ? this.props.position
-        : this.state.lockedTime
+      this.state.lockedTime === false ? this.props.position : this.state.lockedTime
     if (currentTime !== 0 && !currentTime)
       statement.time = this.props.initialValues.time || 0
     else statement.time = currentTime || 0
     if (!statement.speaker_id) statement.speaker_id = null
     this.props.handleConfirm(statement).then(
       handleFormEffectResponse({
-        onSuccess: ({ id }) =>
-          this.props.setScrollTo({ id, __forceAutoScroll: true })
+        onSuccess: ({ id }) => this.props.setScrollTo({ id, __forceAutoScroll: true })
       })
     )
   }
@@ -87,13 +82,11 @@ export class StatementForm extends React.PureComponent {
       handleAbort,
       t
     } = this.props
-    const currentTime =
-      this.state.lockedTime === false ? position : this.state.lockedTime
+    const currentTime = this.state.lockedTime === false ? position : this.state.lockedTime
     const speaker = initialValues.speaker_id
       ? speakers.find(s => s.id === initialValues.speaker_id)
       : null
-    const toggleTimeLockAction =
-      this.state.lockedTime === false ? 'unlock' : 'lock'
+    const toggleTimeLockAction = this.state.lockedTime === false ? 'unlock' : 'lock'
 
     return (
       <form
@@ -104,20 +97,14 @@ export class StatementForm extends React.PureComponent {
       >
         <header className="card-header">
           <div className="card-header-title">
-            <a
-              className="button"
-              onClick={() => this.moveTimeMarker(currentTime - 1)}
-            >
+            <a className="button" onClick={() => this.moveTimeMarker(currentTime - 1)}>
               <Icon name="caret-left" />
             </a>
             <TimeDisplay
               time={currentTime}
               handleClick={() => this.props.forcePosition(currentTime)}
             />
-            <a
-              className="button"
-              onClick={() => this.moveTimeMarker(currentTime + 1)}
-            >
+            <a className="button" onClick={() => this.moveTimeMarker(currentTime + 1)}>
               <Icon name="caret-right" />
             </a>
             <a
@@ -147,9 +134,7 @@ export class StatementForm extends React.PureComponent {
               component={ControlTextarea}
               normalize={cleanStrMultiline}
               maxLength={STATEMENT_LENGTH[1]}
-              validate={value =>
-                validateFieldLength(t, value, STATEMENT_LENGTH)
-              }
+              validate={value => validateFieldLength(t, value, STATEMENT_LENGTH)}
               placeholder={
                 speaker
                   ? t('statement.textPlaceholder')

@@ -52,9 +52,7 @@ export default class EditVideoModal extends React.PureComponent {
 
   shiftSubmit = ({ offset }) => {
     if (offset) {
-      return this.props
-        .shiftStatements(offset)
-        .then(() => this.props.popModal())
+      return this.props.shiftStatements(offset).then(() => this.props.popModal())
     }
   }
 }

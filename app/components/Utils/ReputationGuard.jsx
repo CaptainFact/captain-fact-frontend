@@ -16,8 +16,7 @@ export const DumbReputationGuard = ({
   verifyFunc = null
 }) => {
   if (showLoading && isLoading) return <LoadingFrame />
-  if (verifyFunc ? verifyFunc(user, hasReputation) : hasReputation)
-    return children
+  if (verifyFunc ? verifyFunc(user, hasReputation) : hasReputation) return children
   return showNotEnough ? <ErrorView error="notEnoughReputation" /> : null
 }
 

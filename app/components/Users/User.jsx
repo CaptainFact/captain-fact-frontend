@@ -49,9 +49,7 @@ export default class User extends React.PureComponent {
   }
 
   getActiveTab(section, iconName, menuTKey, isDisabled = false) {
-    const linkTo = `/u/${this.props.user.username}${
-      section ? `/${section}` : ''
-    }`
+    const linkTo = `/u/${this.props.user.username}${section ? `/${section}` : ''}`
     const isActive = this.props.location.pathname === linkTo
     if (this.props.isLoading) isDisabled = true
 
@@ -66,8 +64,7 @@ export default class User extends React.PureComponent {
   }
 
   render() {
-    if (this.props.errors)
-      return <ErrorView error={this.props.errors} canReload />
+    if (this.props.errors) return <ErrorView error={this.props.errors} canReload />
     if (this.props.isLoading) return <LoadingFrame />
 
     const user = this.props.user
@@ -99,9 +96,7 @@ export default class User extends React.PureComponent {
                   </div>
                 </div>
               }
-              right={
-                <ScoreTag reputation={user.reputation} size="large" withIcon />
-              }
+              right={<ScoreTag reputation={user.reputation} size="large" withIcon />}
             />
           )}
         </section>
