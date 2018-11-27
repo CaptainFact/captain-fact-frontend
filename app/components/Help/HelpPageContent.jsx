@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Markdown from 'react-markdown'
 import { Link } from 'react-router'
 
-import { isExternal } from '../../lib/url_utils'
+import { isExternal, isDownloadableFile } from '../../lib/url_utils'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { ErrorView } from '../Utils/ErrorView'
 import { fetchHelpPage } from '../../state/help/effects'
@@ -56,7 +56,7 @@ class HelpPageContent extends PureComponent {
   }
 
   renderLink({ href, children }) {
-    if (isExternal(window.location.href, href))
+    if (isExternal(window.location.href, href) || isDownloadableFile(href))
       return <ExternalLinkNewTab href={href}>{children}</ExternalLinkNewTab>
     return (
       <Link to={href} onClick={this.props.onLinkClick}>
