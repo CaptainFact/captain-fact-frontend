@@ -8,7 +8,6 @@ import { isAuthenticated } from '../../state/users/current_user/selectors'
 import { unlockPublicAchievement } from '../../state/users/current_user/effects'
 import { flashSuccessMsg } from '../../state/flashes/reducer'
 
-
 /**
  * Check if user has given achievement. If not, calls `meetConditions` and trigger effect if the result is true.
  * If no meetConditions is passed, component will just unlock achievement on mount / update.
@@ -28,8 +27,7 @@ class PublicAchievementUnlocker extends React.PureComponent {
   }
 
   componentDidUpdate(oldProps) {
-    if (this.props.achievements !== oldProps.achievements)
-      this.unlockIfNecessary()
+    if (this.props.achievements !== oldProps.achievements) this.unlockIfNecessary()
   }
 
   render() {
@@ -37,19 +35,15 @@ class PublicAchievementUnlocker extends React.PureComponent {
   }
 
   unlockIfNecessary = () => {
-    if (!this.props.isAuthenticated || this.hasAchievement())
-      return false
+    if (!this.props.isAuthenticated || this.hasAchievement()) return false
 
-    if (!this.props.meetConditionsFunc)
-      this.doUnlockAchievement()
+    if (!this.props.meetConditionsFunc) this.doUnlockAchievement()
     else {
       const funcResult = this.props.meetConditionsFunc()
-      if (funcResult === true)
-        this.doUnlockAchievement()
+      if (funcResult === true) this.doUnlockAchievement()
       else if (isPromise(funcResult))
-        funcResult.then((result) => {
-          if (result === true)
-            this.doUnlockAchievement()
+        funcResult.then(result => {
+          if (result === true) this.doUnlockAchievement()
         })
     }
     return true

@@ -5,7 +5,10 @@ import { withNamespaces } from 'react-i18next'
 import { Link } from 'react-router'
 
 import { MIN_REPUTATION_ADD_SPEAKER } from '../../constants'
-import { videoDebateOnlineUsersCount, videoDebateOnlineViewersCount } from '../../state/video_debate/presence/selectors'
+import {
+  videoDebateOnlineUsersCount,
+  videoDebateOnlineViewersCount
+} from '../../state/video_debate/presence/selectors'
 import AddSpeakerForm from '../Speakers/AddSpeakerForm'
 import { SpeakerPreview } from '../Speakers/SpeakerPreview'
 import { LoadingFrame, Icon } from '../Utils'
@@ -15,12 +18,11 @@ import Presence from './Presence'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import { videoURL, videoHistoryURL } from '../../lib/cf_routes'
 
-
 @connect(state => ({
   video: state.VideoDebate.video.data,
   isLoading: state.VideoDebate.video.isLoading,
   nbUsers: videoDebateOnlineUsersCount(state),
-  nbViewers: videoDebateOnlineViewersCount(state),
+  nbViewers: videoDebateOnlineViewersCount(state)
 }))
 @withNamespaces('videoDebate')
 export class ColumnVideo extends React.PureComponent {
@@ -64,10 +66,11 @@ export class ColumnVideo extends React.PureComponent {
         {isDebate && (
           <div>
             <div className="actions">
-              <ReputationGuardTooltip requiredRep={MIN_REPUTATION_ADD_SPEAKER} tooltipPosition="top center">
-                {({ hasReputation }) => (
-                  <AddSpeakerForm disabled={!hasReputation} />
-                )}
+              <ReputationGuardTooltip
+                requiredRep={MIN_REPUTATION_ADD_SPEAKER}
+                tooltipPosition="top center"
+              >
+                {({ hasReputation }) => <AddSpeakerForm disabled={!hasReputation} />}
               </ReputationGuardTooltip>
             </div>
             <div className="speakers-list">

@@ -1,6 +1,5 @@
 import { Record } from 'immutable'
 
-
 const User = new Record({
   id: 0,
   email: '',

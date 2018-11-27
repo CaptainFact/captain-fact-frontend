@@ -60,8 +60,7 @@ export default {
     abortAdd: 'Close Statement Form',
     autoscroll_enable: 'Enable Autoscroll',
     autoscroll_disable: 'Disable Autoscroll',
-    soundOnBackgroundFocus_enable:
-      'Play a sound when the focus change in background',
+    soundOnBackgroundFocus_enable: 'Play a sound when the focus change in background',
     soundOnBackgroundFocus_disable:
       "Don't play a sound when the focus change in background",
     reverseTimeLock_lock: 'Unlock time marker',

@@ -17,20 +17,15 @@ const CommentActions = ({
   handleToggleShowReplies
 }) => (
   <nav className="comment-actions">
-    { isOwnComment
-      ? (
-        <OwnCommentActions
-          handleAddToThread={handleReply}
-          handleDelete={handleDelete}
-        />
-      ) : (
-        <OtherCommentActions
-          handleReply={handleReply}
-          handleFlag={handleFlag}
-          isFlagged={isFlagged}
-        />
-      )
-    }
+    {isOwnComment ? (
+      <OwnCommentActions handleAddToThread={handleReply} handleDelete={handleDelete} />
+    ) : (
+      <OtherCommentActions
+        handleReply={handleReply}
+        handleFlag={handleFlag}
+        isFlagged={isFlagged}
+      />
+    )}
     {nbReplies !== 0 && (
       <CommentAction
         title={t('comment.replies', {

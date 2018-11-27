@@ -9,7 +9,6 @@ import Tag from '../Utils/Tag'
 import VerificationsOriginHeader from './VerificationsOriginHeader'
 import SpeakerComments from './SpeakerComments'
 
-
 @withNamespaces('videoDebate')
 @connect((state, props) => {
   const classifiedComments = classifyComments(state, props)
@@ -17,22 +16,22 @@ import SpeakerComments from './SpeakerComments'
     comments: classifiedComments.regularComments,
     speakerComments: classifiedComments.selfComments,
     approvingFacts: classifiedComments.approvingFacts,
-    refutingFacts: classifiedComments.refutingFacts,
+    refutingFacts: classifiedComments.refutingFacts
   }
 })
 export default class StatementComments extends React.PureComponent {
   render() {
-    const {speaker, speakerComments} = this.props
+    const { speaker, speakerComments } = this.props
     return (
       <React.Fragment>
-        <SpeakerComments speaker={speaker} comments={speakerComments}/>
+        <SpeakerComments speaker={speaker} comments={speakerComments} />
         {this.renderCommunityComments()}
       </React.Fragment>
     )
   }
 
   renderCommunityComments() {
-    const {t, approvingFacts, refutingFacts, comments} = this.props
+    const { t, approvingFacts, refutingFacts, comments } = this.props
     const hasSourcedComments = approvingFacts.size > 0 || refutingFacts.size > 0
     const hasRegularComments = comments.size > 0
     const hasCommunityComments = hasSourcedComments || hasRegularComments
@@ -47,7 +46,7 @@ export default class StatementComments extends React.PureComponent {
   }
 
   renderSourcedComments() {
-    const {approvingFacts, refutingFacts} = this.props
+    const { approvingFacts, refutingFacts } = this.props
 
     return (
       <div className="card-footer sourced-comments">
@@ -55,14 +54,22 @@ export default class StatementComments extends React.PureComponent {
           <CommentsList
             className="card-footer-item refute"
             comments={refutingFacts}
-            header={this.renderCommentsListHeader('refute', 'danger', this.calculateScore(refutingFacts))}
+            header={this.renderCommentsListHeader(
+              'refute',
+              'danger',
+              this.calculateScore(refutingFacts)
+            )}
           />
         )}
         {approvingFacts.size > 0 && (
           <CommentsList
             className="card-footer-item approve"
             comments={approvingFacts}
-            header={this.renderCommentsListHeader('approve', 'success', this.calculateScore(approvingFacts))}
+            header={this.renderCommentsListHeader(
+              'approve',
+              'success',
+              this.calculateScore(approvingFacts)
+            )}
           />
         )}
       </div>
@@ -86,7 +93,7 @@ export default class StatementComments extends React.PureComponent {
     return (
       <div className="comments-container-header">
         <span>{this.props.t(label)} </span>
-        {score !== null && <Tag type={tagType}>{ score }</Tag>}
+        {score !== null && <Tag type={tagType}>{score}</Tag>}
       </div>
     )
   }

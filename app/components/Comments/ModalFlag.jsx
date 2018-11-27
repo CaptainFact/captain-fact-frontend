@@ -7,24 +7,31 @@ import FlagForm from './FlagForm'
 import { ModalFormContainer } from '../Modal/ModalFormContainer'
 import HttpApi from '../../API/http_api'
 
-
 const flagFormValueSelector = formValueSelector('flagForm')
 
-@connect(state => ({selectedReason: flagFormValueSelector(state, 'reason')}))
+@connect(state => ({ selectedReason: flagFormValueSelector(state, 'reason') }))
 @withNamespaces('videoDebate')
 export default class ModalFlag extends React.PureComponent {
-  state = {isLoading: true, flagsAvailable: 0, error: null}
+  state = { isLoading: true, flagsAvailable: 0, error: null }
 
   componentDidMount() {
     HttpApi.get('users/me/available_flags')
-      .then(({flags_available}) => this.setState({isLoading: false, flagsAvailable: flags_available})
+      .then(({ flags_available }) =>
+        this.setState({ isLoading: false, flagsAvailable: flags_available })
       )
-      .catch(e => this.setState({isLoading: false, error: e}))
+      .catch(e => this.setState({ isLoading: false, error: e }))
   }
 
   render() {
     const { isLoading, flagsAvailable } = this.state
-    const { t, handleAbort, selectedReason, comment, initialReason, ...otherProps } = this.props
+    const {
+      t,
+      handleAbort,
+      selectedReason,
+      comment,
+      initialReason,
+      ...otherProps
+    } = this.props
     return (
       <ModalFormContainer
         handleAbort={handleAbort}
@@ -36,7 +43,7 @@ export default class ModalFlag extends React.PureComponent {
         confirmText={this.renderConfirmText(t, flagsAvailable)}
         confirmIcon="flag"
         FormComponent={FlagForm}
-        formProps={{comment, initialValues: {reason: initialReason}}}
+        formProps={{ comment, initialValues: { reason: initialReason } }}
         helpLink="/help/moderation"
         {...otherProps}
       />
@@ -46,8 +53,9 @@ export default class ModalFlag extends React.PureComponent {
   renderConfirmText(t, flagsAvailable) {
     return (
       <span>
-        {t('main:actions.flag')} {flagsAvailable === -1 ? null : (
-          <small>({t('flagForm.xAvailable', {count: flagsAvailable})})</small>
+        {t('main:actions.flag')}{' '}
+        {flagsAvailable === -1 ? null : (
+          <small>({t('flagForm.xAvailable', { count: flagsAvailable })})</small>
         )}
       </span>
     )

@@ -73,20 +73,10 @@ export default class Sidebar extends React.PureComponent {
       <div className="user-section">
         <nav className="level user-quicklinks is-mobile">
           <div className="level-left menu-list">
-            <this.MenuLink
-              to={baseLink}
-              className="my-profile-link"
-              onlyActiveOnIndex
-            >
+            <this.MenuLink to={baseLink} className="my-profile-link" onlyActiveOnIndex>
               <div className="current-user-link">
-                <UserPicture
-                  size={USER_PICTURE_SMALL}
-                  user={this.props.CurrentUser}
-                />
-                <span
-                  className="username"
-                  style={{ fontSize: this.usernameFontSize() }}
-                >
+                <UserPicture size={USER_PICTURE_SMALL} user={this.props.CurrentUser} />
+                <span className="username" style={{ fontSize: this.usernameFontSize() }}>
                   {username}
                 </span>
                 <ScoreTag reputation={reputation} />

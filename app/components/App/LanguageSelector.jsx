@@ -5,7 +5,6 @@ import { withNamespaces } from 'react-i18next'
 
 import { Icon } from '../Utils/Icon'
 
-
 const defaultLocales = new Map({
   en: 'English',
   fr: 'Français'
@@ -18,9 +17,7 @@ export default class LanguageSelector extends React.PureComponent {
     return (
       <div className={classNames('language-selector', this.props.className)}>
         {this.props.withIcon && <Icon name="language" size={this.props.size} />}
-        <span className={classNames('select', sizeClass)}>
-          {this.renderSelect()}
-        </span>
+        <span className={classNames('select', sizeClass)}>{this.renderSelect()}</span>
       </div>
     )
   }

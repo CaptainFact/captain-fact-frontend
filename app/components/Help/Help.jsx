@@ -7,12 +7,14 @@ import HelpPageContent from './HelpPageContent'
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
 import Message from '../Utils/Message'
 
-
 @withNamespaces('help')
 @withRouter
 export default class Help extends React.PureComponent {
   render() {
-    const { t, routeParams: {splat} } = this.props
+    const {
+      t,
+      routeParams: { splat }
+    } = this.props
 
     let header = ''
     let content = ''
@@ -20,24 +22,19 @@ export default class Help extends React.PureComponent {
     if (!splat) {
       header = <h1 className="title is-1">{t('title')}</h1>
       content = this.renderIndexContent()
-    }
-    else {
+    } else {
       header = this.renderPageHeader()
-      content = <HelpPageContent page={this.props.routeParams.splat}/>
+      content = <HelpPageContent page={this.props.routeParams.splat} />
     }
     return (
       <div className="help-page">
         <section className="hero is-primary is-bold">
           <div className="hero-body">
-            <div className="section">
-              { header }
-            </div>
+            <div className="section">{header}</div>
           </div>
         </section>
-        <section className="section">
-          { content }
-        </section>
-        <PublicAchievementUnlocker achievementId={3}/>
+        <section className="section">{content}</section>
+        <PublicAchievementUnlocker achievementId={3} />
       </div>
     )
   }
@@ -83,31 +80,26 @@ export default class Help extends React.PureComponent {
   }
 
   renderPageMenuEntry(splat) {
-    const label = this.props.t(`pages.${splat}`, {defaultValue: splat})
-    return (
-      <div className="panel-block">
-        {this.renderPageLink(splat, label)}
-      </div>
-    )
+    const label = this.props.t(`pages.${splat}`, { defaultValue: splat })
+    return <div className="panel-block">{this.renderPageLink(splat, label)}</div>
   }
 
   renderPageLink(splat, label) {
-    return (
-      <Link to={`/help/${splat}`}>
-        {label || splat}
-      </Link>
-    )
+    return <Link to={`/help/${splat}`}>{label || splat}</Link>
   }
 
   renderPageHeader() {
-    const { t, routeParams: { splat } } = this.props
+    const {
+      t,
+      routeParams: { splat }
+    } = this.props
     return (
       <div>
         <h1 className="title is-1">
-          {t('title')}: {t(`help:pages.${splat}`, {defaultValue: 'I am lost 😟'})}
+          {t('title')}: {t(`help:pages.${splat}`, { defaultValue: 'I am lost 😟' })}
         </h1>
         <Link className="subtitle" to="/help">
-          <Icon name="arrow-left"/>
+          <Icon name="arrow-left" />
           <span> {t('goBack')}</span>
         </Link>
       </div>

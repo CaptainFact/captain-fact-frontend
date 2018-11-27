@@ -6,9 +6,7 @@ import { LinkWithIcon } from '.'
 import Message from './Message'
 import { getErrorInfo, tError } from '../../lib/errors'
 
-
 const refreshableErrors = ['join_crashed']
-
 
 @withRouter
 @withNamespaces('errors')
@@ -20,13 +18,19 @@ export class ErrorView extends React.PureComponent {
       <div className="message-view">
         <Message
           type="danger"
-          header={<p><strong>{t('title')}</strong></p>}
+          header={
+            <p>
+              <strong>{t('title')}</strong>
+            </p>
+          }
         >
           <div>
-            <p>{tError(t, error)}{this.getMoreInfo()}</p>
-            {(canGoBack || canReload) && <br/>}
-            {canGoBack
-            && (
+            <p>
+              {tError(t, error)}
+              {this.getMoreInfo()}
+            </p>
+            {(canGoBack || canReload) && <br />}
+            {canGoBack && (
               <LinkWithIcon
                 iconName="arrow-left"
                 onClick={() => this.props.router.goBack()}
@@ -34,12 +38,11 @@ export class ErrorView extends React.PureComponent {
                 {t('main:actions.goBack')}
               </LinkWithIcon>
             )}
-            {canReload
-            && (
+            {canReload && (
               <LinkWithIcon
                 iconName="refresh"
                 onClick={() => location.reload()}
-                style={{float: 'right'}}
+                style={{ float: 'right' }}
               >
                 {t('main:actions.reload')}
               </LinkWithIcon>
@@ -52,10 +55,10 @@ export class ErrorView extends React.PureComponent {
 
   getMoreInfo() {
     const errorInfo = getErrorInfo(this.props.error)
-    if (!errorInfo)
-      return null
+    if (!errorInfo) return null
     return (
-      <span>&nbsp;-&nbsp;
+      <span>
+        &nbsp;-&nbsp;
         <Link to={errorInfo.url}>
           {this.props.t(errorInfo.i18nKey || 'main:actions.moreInfo')}
         </Link>

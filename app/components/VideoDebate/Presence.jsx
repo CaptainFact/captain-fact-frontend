@@ -5,7 +5,6 @@ import { withNamespaces } from 'react-i18next'
 import { Icon } from '../Utils'
 import Tag from '../Utils/Tag'
 
-
 const Presence = ({ t, nbUsers, nbViewers }) => (
   <div className="presence">
     <Tag type="primary">
@@ -21,7 +20,7 @@ const Presence = ({ t, nbUsers, nbViewers }) => (
 
 Presence.propTypes = {
   nbUsers: PropTypes.number.isRequired,
-  nbViewers: PropTypes.number.isRequired,
+  nbViewers: PropTypes.number.isRequired
 }
 
 export default withNamespaces('videoDebate')(Presence)

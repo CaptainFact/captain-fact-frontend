@@ -24,7 +24,6 @@ import { SpeakerPage } from './components/Speakers/SpeakerPage'
 import NewsletterSubscription from './components/Users/NewsletterSubscription'
 import ActivityLog from './components/Users/ActivityLog'
 
-
 const CFRouter = () => (
   <Router history={browserHistory}>
     <Route path="/" component={App}>

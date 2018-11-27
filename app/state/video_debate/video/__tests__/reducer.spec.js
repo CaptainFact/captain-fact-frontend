@@ -6,7 +6,6 @@ import reducer, {
   updateSpeaker,
   setPosition,
   forcePosition
-
 } from '../reducer'
 import fetchAllSuccess from './__fixtures__/fetch_all_success'
 
@@ -25,13 +24,15 @@ test('set Loading', () => {
 })
 
 test('add speaker', () => {
-  snapshotReducer(reducer, INITIAL_STATE, addSpeaker(
-    {
+  snapshotReducer(
+    reducer,
+    INITIAL_STATE,
+    addSpeaker({
       id: 3,
       title: 'Title 3',
       full_name: 'Max Fray'
-    }
-  ))
+    })
+  )
 })
 
 test('remove speaker', () => {
@@ -39,13 +40,15 @@ test('remove speaker', () => {
 })
 
 test('update speaker', () => {
-  snapshotReducer(reducer, INITIAL_STATE, updateSpeaker(
-    {
+  snapshotReducer(
+    reducer,
+    INITIAL_STATE,
+    updateSpeaker({
       id: 3,
       title: 'Title 3 Update',
       full_name: 'Max Fray Update'
-    }
-  ))
+    })
+  )
 })
 
 test('set Position', () => {
@@ -53,13 +56,15 @@ test('set Position', () => {
 })
 
 test('force Position', () => {
-  snapshotReducer(reducer, INITIAL_STATE, forcePosition(
-    {
+  snapshotReducer(
+    reducer,
+    INITIAL_STATE,
+    forcePosition({
       position: 4,
       forcedPosition: {
         requestId: 1,
-        time: 0,
+        time: 0
       }
-    }
-  ))
+    })
+  )
 })

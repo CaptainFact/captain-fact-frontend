@@ -5,7 +5,6 @@ import { withNamespaces } from 'react-i18next'
 
 import UserAction from './UserAction'
 
-
 /**
  * Display a list of `UserAction` record as an history
  */
@@ -20,8 +19,7 @@ export class History extends React.PureComponent {
     const { actions } = this.props
     const { isExpended } = this.state
 
-    if (actions.size === 0)
-      return <div />
+    if (actions.size === 0) return <div />
 
     const latestAction = actions.first()
     const oldActions = actions.rest()
@@ -31,28 +29,24 @@ export class History extends React.PureComponent {
         <div className="latest-action">
           <UserAction key={latestAction.id} action={latestAction} isLatest />
         </div>
-        {actions.size > 1
-          && (
-            <a
-              className="expend-old-actions"
-              onClick={() => this.setState({ isExpended: !isExpended })}
-            >
-              {isExpended ? 'Hide' : `Show full history (${actions.size - 1} elements)`}
-            </a>
-          )
-        }
-        {isExpended
-          && (
-            <div className="old-actions">
-              {oldActions.map(action => (
-                <div key={action.id}>
-                  <div className="separator" />
-                  <UserAction action={action} isLatest={false} />
-                </div>
-              ))}
-            </div>
-          )
-        }
+        {actions.size > 1 && (
+          <a
+            className="expend-old-actions"
+            onClick={() => this.setState({ isExpended: !isExpended })}
+          >
+            {isExpended ? 'Hide' : `Show full history (${actions.size - 1} elements)`}
+          </a>
+        )}
+        {isExpended && (
+          <div className="old-actions">
+            {oldActions.map(action => (
+              <div key={action.id}>
+                <div className="separator" />
+                <UserAction action={action} isLatest={false} />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     )
   }

@@ -6,7 +6,8 @@ import { withNamespaces } from 'react-i18next'
 
 import { register, requestInvitation } from '../../state/users/current_user/effects'
 import {
-  renderAllUserFields, submitButton,
+  renderAllUserFields,
+  submitButton,
   validatePasswordRepeat
 } from './UserFormFields'
 import ThirdPartyAuthList from './ThirdPartyAuthList'
@@ -17,22 +18,19 @@ import { errorToFlash } from '../../state/flashes/reducer'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 import { INVITATION_SYSTEM } from '../../config'
 
-
 const SignupForm = ({ location, t }) => {
   if (!INVITATION_SYSTEM || location.query.invitation_token) {
     return (
-      <RealSignupForm initialValues={{
-        invitation_token: location.query.invitation_token
-      }}
+      <RealSignupForm
+        initialValues={{
+          invitation_token: location.query.invitation_token
+        }}
       />
     )
   }
   return (
     <div className="user-form">
-      <Message
-        type="warning"
-        header={t('invitationOnlyTitle')}
-      >
+      <Message type="warning" header={t('invitationOnlyTitle')}>
         <div>
           {t('invitationOnlyBody')}
           <hr />
@@ -49,7 +47,10 @@ export default withRouter(withNamespaces('user')(SignupForm))
 @withNamespaces('user')
 @reduxForm({ form: 'signupForm', validate: validatePasswordRepeat })
 @connect(
-  ({ CurrentUser: { data }, UserPreferences: { locale } }) => ({ CurrentUser: data, locale }),
+  ({ CurrentUser: { data }, UserPreferences: { locale } }) => ({
+    CurrentUser: data,
+    locale
+  }),
   { register, requestInvitation, errorToFlash }
 )
 class RealSignupForm extends React.PureComponent {
@@ -61,11 +62,15 @@ class RealSignupForm extends React.PureComponent {
   }
 
   submit({ invitation_token, ...user }) {
-    const registerParams = { invitation_token, user: { ...user, locale: this.props.locale } }
-    return this.props.register(registerParams)
-      .then(handleFormEffectResponse({
-        onError: msg => (typeof (msg) === 'string' ? this.props.errorToFlash(msg) : null)
-      }))
+    const registerParams = {
+      invitation_token,
+      user: { ...user, locale: this.props.locale }
+    }
+    return this.props.register(registerParams).then(
+      handleFormEffectResponse({
+        onError: msg => (typeof msg === 'string' ? this.props.errorToFlash(msg) : null)
+      })
+    )
   }
 
   render() {

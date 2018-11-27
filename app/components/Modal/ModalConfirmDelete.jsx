@@ -3,7 +3,6 @@ import React from 'react'
 import { withNamespaces } from 'react-i18next'
 import { ModalConfirm } from './ModalConfirm'
 
-
 const ModalConfirmDelete = ({ t, isRemove = false, ...props }) => (
   <ModalConfirm
     confirmIcon={isRemove ? 'trash-o' : 'times'}

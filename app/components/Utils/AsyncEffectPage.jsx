@@ -5,7 +5,6 @@ import { ErrorView } from './ErrorView'
 import Notification from './Notification'
 import { Icon } from './Icon'
 
-
 @withNamespaces('main')
 export default class AsyncEffectPage extends React.PureComponent {
   constructor(props) {
@@ -16,8 +15,7 @@ export default class AsyncEffectPage extends React.PureComponent {
   onSuccess(payload) {
     if (this.props.onSuccess) {
       payload = this.props.onSuccess(payload)
-      if (!payload)
-        return
+      if (!payload) return
     }
     this.setState({ step: 'success', payload })
   }
@@ -25,8 +23,7 @@ export default class AsyncEffectPage extends React.PureComponent {
   onError(payload) {
     if (this.props.onError) {
       payload = this.props.onError(payload)
-      if (!payload)
-        return
+      if (!payload) return
     }
     this.setState({ step: 'error', payload })
   }
@@ -41,17 +38,12 @@ export default class AsyncEffectPage extends React.PureComponent {
         />
       )
     if (this.state.step === 'error')
-      return (
-        <ErrorView
-          error={this.state.payload}
-          i18nNS={this.props.errorNamespace}
-        />
-      )
-    if (this.state.step === 'success' && typeof (this.state.payload) === 'string')
+      return <ErrorView error={this.state.payload} i18nNS={this.props.errorNamespace} />
+    if (this.state.step === 'success' && typeof this.state.payload === 'string')
       return (
         <div className="message-view">
           <Notification type="success">
-            <Icon name="check"/> {this.props.t(this.state.payload)}
+            <Icon name="check" /> {this.props.t(this.state.payload)}
           </Notification>
         </div>
       )

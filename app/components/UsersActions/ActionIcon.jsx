@@ -19,8 +19,6 @@ const ACTIONS_ICONS = {
 
 const getIconName = type => ACTIONS_ICONS[type] || 'question'
 
-const ActionIcon = ({ type }) => (
-  <Icon name={getIconName(type)} size="mini" />
-)
+const ActionIcon = ({ type }) => <Icon name={getIconName(type)} size="mini" />
 
 export default ActionIcon

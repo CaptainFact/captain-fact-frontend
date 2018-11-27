@@ -3,21 +3,14 @@ import classNames from 'classnames'
 
 import RawIcon from '../Utils/RawIcon'
 
-
-const ThirdPartyServiceButton = ({
-  url,
-  icon,
-  className,
-  newTab = false,
-  ...props
-}) => (
+const ThirdPartyServiceButton = ({ url, icon, className, newTab = false, ...props }) => (
   <a
     href={url}
     target={newTab ? '_BLANK' : ''}
     className={classNames('icon is-large third-party-service-button', className)}
     {...props}
   >
-    <RawIcon name={icon}/>
+    <RawIcon name={icon} />
   </a>
 )
 

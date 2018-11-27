@@ -8,7 +8,6 @@ import chromeLogo from '../../assets/browsers/chrome.png'
 import firefoxLogo from '../../assets/browsers/firefox.png'
 import ieLogo from '../../assets/browsers/internet_explorer.png'
 
-
 export const BrowserExtensionsPage = withNamespaces('extension')(({ t }) => (
   <div className="browser-extension-page">
     <section className="section">
@@ -38,24 +37,31 @@ export const BrowserExtensionsPage = withNamespaces('extension')(({ t }) => (
     <section className="section content has-text-centered box">
       <h2>
         {t('description')}
-        <br /><br />
+        <br />
+        <br />
         <Trans i18nKey="moreInfo">
-          [Is]<ExternalLinkNewTab href="https://github.com/CaptainFact/captain-fact-extension">open-source</ExternalLinkNewTab>
+          [Is]
+          <ExternalLinkNewTab href="https://github.com/CaptainFact/captain-fact-extension">
+            open-source
+          </ExternalLinkNewTab>
           [Respect]<Link to="/help/extension">[Privacy]</Link>.
         </Trans>
       </h2>
     </section>
     <section className="has-text-centered section">
-      <ReactPlayer
-        controls
-        className="video"
-        url="https://youtu.be/4-_nnwgqw9c"
-      />
+      <ReactPlayer controls className="video" url="https://youtu.be/4-_nnwgqw9c" />
     </section>
   </div>
 ))
 
-const BrowserExtension = ({ browser, image, buttonLabel, url, onClick, disabled = false }) => (
+const BrowserExtension = ({
+  browser,
+  image,
+  buttonLabel,
+  url,
+  onClick,
+  disabled = false
+}) => (
   <div className="column">
     <ExternalLinkNewTab href={url} onClick={onClick} disabled={disabled}>
       <figure className="image is-128x128">
@@ -72,7 +78,9 @@ const BrowserExtension = ({ browser, image, buttonLabel, url, onClick, disabled 
 function chromeInstall(e) {
   if (typeof chrome !== 'undefined') {
     // eslint-disable-next-line no-undef
-    chrome.webstore.install('https://chrome.google.com/webstore/detail/fnnhlmbnlbgomamcolcpgncflofhjckm')
+    chrome.webstore.install(
+      'https://chrome.google.com/webstore/detail/fnnhlmbnlbgomamcolcpgncflofhjckm'
+    )
     e.preventDefault()
     return false
   }

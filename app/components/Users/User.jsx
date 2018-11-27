@@ -15,13 +15,15 @@ import { USER_PICTURE_XLARGE } from '../../constants'
 import { fetchUser } from '../../state/users/displayed_user/effects'
 import { resetUser } from '../../state/users/displayed_user/reducer'
 
-
-@connect(({ CurrentUser, DisplayedUser: { isLoading, errors, data } }) => ({
-  isSelf: CurrentUser.data.id === data.id,
-  isLoading,
-  errors,
-  user: data
-}), { fetchUser, resetUser })
+@connect(
+  ({ CurrentUser, DisplayedUser: { isLoading, errors, data } }) => ({
+    isSelf: CurrentUser.data.id === data.id,
+    isLoading,
+    errors,
+    user: data
+  }),
+  { fetchUser, resetUser }
+)
 @withNamespaces('main')
 export default class User extends React.PureComponent {
   componentDidMount() {
@@ -30,12 +32,13 @@ export default class User extends React.PureComponent {
 
   componentDidUpdate(oldProps) {
     // If user's username was updated
-    if (this.props.user.id === oldProps.user.id
-      && this.props.user.username !== oldProps.user.username)
+    if (
+      this.props.user.id === oldProps.user.id &&
+      this.props.user.username !== oldProps.user.username
+    )
       // TODO Remove old user profile from history
       // Redirect
       this.props.router.replace(`/u/${this.props.user.username}`)
-
     // Showing another user
     else if (this.props.params.username !== oldProps.params.username)
       this.props.fetchUser(this.props.params.username)
@@ -48,8 +51,7 @@ export default class User extends React.PureComponent {
   getActiveTab(section, iconName, menuTKey, isDisabled = false) {
     const linkTo = `/u/${this.props.user.username}${section ? `/${section}` : ''}`
     const isActive = this.props.location.pathname === linkTo
-    if (this.props.isLoading)
-      isDisabled = true
+    if (this.props.isLoading) isDisabled = true
 
     return (
       <li className={isActive ? 'is-active' : ''}>
@@ -62,10 +64,8 @@ export default class User extends React.PureComponent {
   }
 
   render() {
-    if (this.props.errors)
-      return <ErrorView error={this.props.errors} canReload />
-    if (this.props.isLoading)
-      return <LoadingFrame />
+    if (this.props.errors) return <ErrorView error={this.props.errors} canReload />
+    if (this.props.isLoading) return <LoadingFrame />
 
     const user = this.props.user
     const prettyUsername = `@${user.username}`
@@ -78,14 +78,13 @@ export default class User extends React.PureComponent {
         <section className="hero is-light is-bold is-medium user-header">
           {user.id !== 0 && (
             <MediaLayout
-              left={
-                <UserPicture user={user} size={USER_PICTURE_XLARGE} />
-              }
-              content={(
+              left={<UserPicture user={user} size={USER_PICTURE_XLARGE} />}
+              content={
                 <div>
                   <UserAppellation user={user} withoutActions />
                   <div className="registered-since">
-                    <Icon name="clock-o" />&nbsp;
+                    <Icon name="clock-o" />
+                    &nbsp;
                     <Trans i18nKey="user:registeredSince">
                       Registered for
                       <TimeSince
@@ -96,7 +95,7 @@ export default class User extends React.PureComponent {
                     </Trans>
                   </div>
                 </div>
-              )}
+              }
               right={<ScoreTag reputation={user.reputation} size="large" withIcon />}
             />
           )}
@@ -109,6 +108,7 @@ export default class User extends React.PureComponent {
           </ul>
         </div>
         {this.props.children}
-      </div>)
+      </div>
+    )
   }
 }

@@ -23,30 +23,29 @@ import { cleanStrMultiline } from '../../lib/clean_str'
 import CommentField from './CommentField'
 import Button from '../Utils/Button'
 
-
 const validate = ({ source, text }) => {
   const errors = {}
   const url = source ? source.url : null
-  const hasValidUrl = url && isURL(url, {protocols: ['http', 'https']})
-  if (url && !hasValidUrl)
-    errors.source = {url: 'Invalid URL'}
-  if (!hasValidUrl && !text)
-    errors.text = true
-  else if (text)
-    validateLength(errors, 'text', text, COMMENT_LENGTH, 'Comment')
+  const hasValidUrl = url && isURL(url, { protocols: ['http', 'https'] })
+  if (url && !hasValidUrl) errors.source = { url: 'Invalid URL' }
+  if (!hasValidUrl && !text) errors.text = true
+  else if (text) validateLength(errors, 'text', text, COMMENT_LENGTH, 'Comment')
   return errors
 }
 
-@connect((state, props) => {
-  const formValues = getFormValues(props.form)(state)
-  return {
-    sourceUrl: formValues && formValues.source ? formValues.source.url : null,
-    replyTo: formValues && formValues.reply_to,
-    currentUser: state.CurrentUser.data,
-    isAuthenticated: isAuthenticated(state)
-  }
-}, {postComment, flashErrorUnauthenticated})
-@reduxForm({form: 'commentForm', validate})
+@connect(
+  (state, props) => {
+    const formValues = getFormValues(props.form)(state)
+    return {
+      sourceUrl: formValues && formValues.source ? formValues.source.url : null,
+      replyTo: formValues && formValues.reply_to,
+      currentUser: state.CurrentUser.data,
+      isAuthenticated: isAuthenticated(state)
+    }
+  },
+  { postComment, flashErrorUnauthenticated }
+)
+@reduxForm({ form: 'commentForm', validate })
 @withNamespaces('videoDebate')
 @withRouter
 export class CommentForm extends React.Component {
@@ -55,11 +54,11 @@ export class CommentForm extends React.Component {
   render() {
     const { valid, currentUser, sourceUrl, replyTo, t } = this.props
 
-    if (!this.props.currentUser.id || this.state.isCollapsed && !replyTo)
+    if (!this.props.currentUser.id || (this.state.isCollapsed && !replyTo))
       return (
         <div className="comment-form collapsed">
           <Button className="is-inverted is-primary" onClick={() => this.expandForm()}>
-            <Icon name="plus" size="medium"/>
+            <Icon name="plus" size="medium" />
             <span>{t('comment.revealForm')}</span>
           </Button>
         </div>
@@ -68,19 +67,20 @@ export class CommentForm extends React.Component {
     return (
       <MediaLayout
         ContainerType="form"
-        containerProps={{onSubmit: this.postAndReset(c => this.props.postComment(c))}}
+        containerProps={{
+          onSubmit: this.postAndReset(c => this.props.postComment(c))
+        }}
         className="comment-form"
-        left={<UserPicture user={currentUser} size={USER_PICTURE_LARGE}/>}
-        content={(
+        left={<UserPicture user={currentUser} size={USER_PICTURE_LARGE} />}
+        content={
           <div>
             {replyTo && (
               <div>
                 <Tag size="medium" className="replyTo">
-                  <CloseButton onClick={() => this.props.change('reply_to', null)}/>
+                  <CloseButton onClick={() => this.props.change('reply_to', null)} />
                   <span className="replyToLabel">
-                    {t('comment.replyingTo')}
-                    {' '}
-                    <UserAppellation defaultComponent="span" user={replyTo.user}/>
+                    {t('comment.replyingTo')}{' '}
+                    <UserAppellation defaultComponent="span" user={replyTo.user} />
                   </span>
                 </Tag>
                 <CommentDisplay
@@ -92,8 +92,7 @@ export class CommentForm extends React.Component {
                   hideThread
                 />
               </div>
-            )
-            }
+            )}
             <Field
               component={CommentField}
               className="textarea"
@@ -111,23 +110,24 @@ export class CommentForm extends React.Component {
                 normalize={s => s.trim()}
               />
               <div className="submit-btns">
-                { this.renderSubmit(valid, sourceUrl, replyTo) }
+                {this.renderSubmit(valid, sourceUrl, replyTo)}
               </div>
             </div>
           </div>
-        )}
+        }
       />
     )
   }
 
   renderSubmit(valid, sourceUrl, isReply) {
     const disabled = !valid
-    const i18nParams = isReply ? {context: 'reply'} : null
-    if (!sourceUrl) return (
-      <button type="submit" className="button" disabled={disabled}>
-        {this.props.t('comment.post', i18nParams)}
-      </button>
-    )
+    const i18nParams = isReply ? { context: 'reply' } : null
+    if (!sourceUrl)
+      return (
+        <button type="submit" className="button" disabled={disabled}>
+          {this.props.t('comment.post', i18nParams)}
+        </button>
+      )
     return (
       <React.Fragment>
         <Button type="submit" disabled={disabled}>
@@ -137,7 +137,9 @@ export class CommentForm extends React.Component {
           type="submit"
           className="is-danger"
           disabled={disabled}
-          onClick={this.postAndReset(values => this.props.postComment({...values, approve: false}))}
+          onClick={this.postAndReset(values =>
+            this.props.postComment({ ...values, approve: false })
+          )}
         >
           {this.props.t('comment.refute', i18nParams)}
         </Button>
@@ -145,7 +147,9 @@ export class CommentForm extends React.Component {
           type="submit"
           className="is-success"
           disabled={disabled}
-          onClick={this.postAndReset(values => this.props.postComment({...values, approve: true}))}
+          onClick={this.postAndReset(values =>
+            this.props.postComment({ ...values, approve: true })
+          )}
         >
           {this.props.t('comment.approve', i18nParams)}
         </Button>
@@ -154,21 +158,21 @@ export class CommentForm extends React.Component {
   }
 
   expandForm() {
-    if (this.props.isAuthenticated)
-      this.setState({isCollapsed: false})
-    else
-      this.props.flashErrorUnauthenticated()
+    if (this.props.isAuthenticated) this.setState({ isCollapsed: false })
+    else this.props.flashErrorUnauthenticated()
   }
 
   postAndReset(postFunc) {
     return this.props.handleSubmit(comment => {
       if (comment.reply_to) {
         comment.reply_to_id = comment.reply_to.id
-        delete (comment.reply_to)
+        delete comment.reply_to
       }
-      return postFunc(comment).then(handleFormEffectResponse({
-        onSuccess: () => this.props.reset()
-      }))
+      return postFunc(comment).then(
+        handleFormEffectResponse({
+          onSuccess: () => this.props.reset()
+        })
+      )
     })
   }
 }

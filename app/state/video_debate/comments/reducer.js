@@ -63,8 +63,8 @@ const CommentsReducer = handleActions(
           voted: !my_votes
             ? new Map()
             : new Map().withMutations(map => {
-              return my_votes.forEach(vote => map.set(vote.comment_id, vote.value))
-            }),
+                return my_votes.forEach(vote => map.set(vote.comment_id, vote.value))
+              }),
           myFlags: new Set(my_flags)
         })
       },
@@ -74,9 +74,7 @@ const CommentsReducer = handleActions(
       const comment = prepareComment(payload)
       const commentPath = getCommentPath(comment)
       const commentsList = state.getIn(commentPath, new List())
-      const insertIdx = commentsList.findIndex(
-        c => commentsComparator(comment, c) < 0
-      )
+      const insertIdx = commentsList.findIndex(c => commentsComparator(comment, c) < 0)
       const newCommentsList = commentsList.insert(
         insertIdx !== -1 ? insertIdx : commentsList.size,
         comment
@@ -104,14 +102,16 @@ const CommentsReducer = handleActions(
       if (comments) {
         const groupedComments = comments.groupBy(c => c.statement_id).entries()
         for (const [statementId, newComments] of groupedComments)
-          state = state.updateIn(['comments', statementId], oldList => mergeCommentsList(oldList, newComments)
+          state = state.updateIn(['comments', statementId], oldList =>
+            mergeCommentsList(oldList, newComments)
           )
       }
       // Update replies
       if (replies) {
         const groupedReplies = replies.groupBy(r => r.reply_to_id).entries()
         for (const [commentId, newComments] of groupedReplies)
-          state = state.updateIn(['replies', commentId], oldList => mergeCommentsList(oldList, newComments)
+          state = state.updateIn(['replies', commentId], oldList =>
+            mergeCommentsList(oldList, newComments)
           )
       }
       return state

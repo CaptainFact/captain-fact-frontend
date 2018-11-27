@@ -18,39 +18,39 @@ const INITIAL_STATE = new Record({
   errors: null
 })
 
-const UsersActionsReducer = handleActions({
-  [setLoading]: (state, {payload}) => state.set('isLoading', payload),
-  [fetchAll]: {
-    next: (state, {payload: {actions}}) => {
-      const preparedActions = new List(actions.map(prepareAction))
-      const sortedActions = preparedActions.sortBy(a => -a.time)
+const UsersActionsReducer = handleActions(
+  {
+    [setLoading]: (state, { payload }) => state.set('isLoading', payload),
+    [fetchAll]: {
+      next: (state, { payload: { actions } }) => {
+        const preparedActions = new List(actions.map(prepareAction))
+        const sortedActions = preparedActions.sortBy(a => -a.time)
 
-      return state.merge({
-        actions: sortedActions,
-        lastActionsIds: getLastActions(sortedActions),
-        isLoading: false,
-        errors: null
-      })
+        return state.merge({
+          actions: sortedActions,
+          lastActionsIds: getLastActions(sortedActions),
+          isLoading: false,
+          errors: null
+        })
+      },
+      throw: (state, { payload }) => state.merge({ isLoading: false, errors: payload })
     },
-    throw: (state, {payload}) => state.merge({isLoading: false, errors: payload})
+    [addAction]: (state, { payload }) => {
+      const action = prepareAction(payload)
+      const actions = state.actions.insert(0, action).sortBy(a => -a.time)
+      return state.set('actions', actions).set('lastActionsIds', getLastActions(actions))
+    },
+    [combineActions(reset, resetVideoDebate)]: () => INITIAL_STATE()
   },
-  [addAction]: (state, {payload}) => {
-    const action = prepareAction(payload)
-    const actions = state.actions.insert(0, action).sortBy(a => -a.time)
-    return state
-      .set('actions', actions)
-      .set('lastActionsIds', getLastActions(actions))
-  },
-  [combineActions(reset, resetVideoDebate)]: () => INITIAL_STATE()
-}, INITIAL_STATE())
+  INITIAL_STATE()
+)
 export default UsersActionsReducer
 
 function getLastActions(actions) {
   const lastActionsMap = {}
   actions.forEach(action => {
     const entityKey = `${action.entity}:${getEntityIDFromAction(action)}`
-    if (!lastActionsMap[entityKey])
-      lastActionsMap[entityKey] = action.id
+    if (!lastActionsMap[entityKey]) lastActionsMap[entityKey] = action.id
   })
   return List(Object.values(lastActionsMap))
 }

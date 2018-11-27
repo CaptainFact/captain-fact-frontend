@@ -12,28 +12,30 @@ import { Icon } from '../Utils/Icon'
 import { handleEffectResponse } from '../../lib/handle_effect_response'
 import FieldWithButton from '../FormUtils/FieldWithButton'
 
-
-const validate = ({email}) => {
-  if (!email || !isEmail(email))
-    return {email: 'Email is not valid'}
+const validate = ({ email }) => {
+  if (!email || !isEmail(email)) return { email: 'Email is not valid' }
   return {}
 }
 
-@reduxForm({form: 'newsletterSubscribeForm', validate})
+@reduxForm({ form: 'newsletterSubscribeForm', validate })
 @withNamespaces('home')
-@connect(null, {addFlash, errorToFlash, requestInvitation})
+@connect(
+  null,
+  { addFlash, errorToFlash, requestInvitation }
+)
 export default class InvitationRequestForm extends React.PureComponent {
   state = { confirmed: false }
 
   submit(user) {
-    return this.props.requestInvitation({...user, locale: browserLocale()})
-      .then(handleEffectResponse({
-        onSuccess: () => this.setState({confirmed: true}),
+    return this.props.requestInvitation({ ...user, locale: browserLocale() }).then(
+      handleEffectResponse({
+        onSuccess: () => this.setState({ confirmed: true }),
         onError: msg => {
           this.props.errorToFlash(msg)
-          throw new SubmissionError({email: 'invalid_email'})
+          throw new SubmissionError({ email: 'invalid_email' })
         }
-      }))
+      })
+    )
   }
 
   getContent() {
@@ -50,7 +52,7 @@ export default class InvitationRequestForm extends React.PureComponent {
       )
     return (
       <Notification type="success">
-        <Icon name="check"/> {this.props.t('home:inviteSuccess')}
+        <Icon name="check" /> {this.props.t('home:inviteSuccess')}
       </Notification>
     )
   }

@@ -5,10 +5,15 @@ import { withNamespaces } from 'react-i18next'
 import FlipMove from 'react-flip-move'
 import { Link } from 'react-router'
 import { Icon } from './Icon'
-import { addFlash, pause, removeFlash, unPause, update } from '../../state/flashes/reducer'
+import {
+  addFlash,
+  pause,
+  removeFlash,
+  unPause,
+  update
+} from '../../state/flashes/reducer'
 import { tError } from '../../lib/errors'
 import { popModal } from '../../state/modals/reducer'
-
 
 const UPDATE_INTERVAL = 1000
 
@@ -23,15 +28,16 @@ export class FlashMessages extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    if (this.props.flashes.size === 0 || this.props.isPaused)
-      this.clearUpdateInterval()
-    else
-      this.setUpdateInterval()
+    if (this.props.flashes.size === 0 || this.props.isPaused) this.clearUpdateInterval()
+    else this.setUpdateInterval()
   }
 
   setUpdateInterval() {
     if (this.interval === null) {
-      this.interval = setInterval(() => this.props.update(UPDATE_INTERVAL), UPDATE_INTERVAL)
+      this.interval = setInterval(
+        () => this.props.update(UPDATE_INTERVAL),
+        UPDATE_INTERVAL
+      )
     }
   }
 
@@ -43,8 +49,7 @@ export class FlashMessages extends React.PureComponent {
   }
 
   render() {
-    if (this.props.flashes.size === 0)
-      return null
+    if (this.props.flashes.size === 0) return null
 
     return (
       <div
@@ -66,34 +71,36 @@ export class FlashMessages extends React.PureComponent {
               />
               <FlashContent flash={flash} />
             </div>
-          )
-          )}
+          ))}
         </FlipMove>
       </div>
     )
   }
 }
 
-
 @withNamespaces('main')
-@connect(null, { popModal, removeFlash })
+@connect(
+  null,
+  { popModal, removeFlash }
+)
 class FlashContent extends React.Component {
   shouldComponentUpdate(nextProps) {
     // To avoid re-rendering every second, we only compare flash id
-    return this.props.flash.id !== nextProps.flash.id || this.props.i18nLoadedAt !== nextProps.i18nLoadedAt
+    return (
+      this.props.flash.id !== nextProps.flash.id ||
+      this.props.i18nLoadedAt !== nextProps.i18nLoadedAt
+    )
   }
 
   render() {
     const { iconName, message, isError, i18nParams = {} } = this.props.flash
     return (
       <div className="columns">
-        {iconName
-          && (
-            <div className="column is-narrow">
-              <Icon size="medium" name={iconName} />
-            </div>
-          )
-        }
+        {iconName && (
+          <div className="column is-narrow">
+            <Icon size="medium" name={iconName} />
+          </div>
+        )}
         <div className="column">
           <div>
             {isError ? tError(this.props.t, message) : this.props.t(message, i18nParams)}
@@ -111,8 +118,7 @@ class FlashContent extends React.Component {
       this.props.removeFlash(this.props.flash)
     }
 
-    if (!infoUrl && !infoText)
-      return null
+    if (!infoUrl && !infoText) return null
 
     // Special case for reload
     if (infoText === 'actions.reload') {

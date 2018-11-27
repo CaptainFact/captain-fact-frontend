@@ -49,9 +49,7 @@ const AllContributors = ({ t }) => (
     {CONTRIBUTORS.map(contributor => (
       <div className="column is-3 card" key={contributor.name}>
         <div className="card-image">
-          <figure className="image is-96x96">
-            {contributorPicture(contributor)}
-          </figure>
+          <figure className="image is-96x96">{contributorPicture(contributor)}</figure>
         </div>
         <div className="card-content">
           <p className="title is-4">{contributorName(contributor)}</p>
@@ -74,11 +72,7 @@ function contributorPicture({ picture }) {
   return picture ? (
     <img src={`/assets/img/contributors/${picture}.jpg`} alt="" />
   ) : (
-    <img
-      src="/assets/img/contributors/no-picture.svg"
-      className="no-picture"
-      alt=""
-    />
+    <img src="/assets/img/contributors/no-picture.svg" className="no-picture" alt="" />
   )
 }
 

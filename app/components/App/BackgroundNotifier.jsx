@@ -31,8 +31,7 @@ class BackgroundNotifier extends React.PureComponent {
   hasNewStatementFocus(prevProps) {
     const { focusedStatementId } = this.props
     return (
-      focusedStatementId !== -1
-      && focusedStatementId !== prevProps.focusedStatementId
+      focusedStatementId !== -1 && focusedStatementId !== prevProps.focusedStatementId
     )
   }
 

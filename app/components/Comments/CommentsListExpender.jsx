@@ -3,7 +3,6 @@ import { withNamespaces } from 'react-i18next'
 
 import Button from '../Utils/Button'
 
-
 const CommentsListExpender = ({ t, onClick, nesting, count }) => (
   <div className="comments-expender">
     <Button onClick={onClick}>

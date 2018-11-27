@@ -6,7 +6,6 @@ import { Field, formValueSelector, reduxForm } from 'redux-form'
 import { ModalFormContainer } from '../Modal/ModalFormContainer'
 import { Icon } from '../Utils/Icon'
 
-
 const DELETE_FORM = 'deleteAccount'
 
 @reduxForm({ form: DELETE_FORM })
@@ -36,7 +35,6 @@ class DeleteForm extends React.PureComponent {
 }
 
 const valueSelector = formValueSelector(DELETE_FORM)
-
 
 @connect(state => ({
   isValid: valueSelector(state, 'usernameConfirm') === state.CurrentUser.data.username

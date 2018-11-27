@@ -5,9 +5,11 @@ import { withNamespaces } from 'react-i18next'
 import AsyncEffectPage from '../Utils/AsyncEffectPage'
 import { confirmEmail } from '../../state/users/current_user/effects'
 
-
 @withRouter
-@connect(null, { confirmEmail })
+@connect(
+  null,
+  { confirmEmail }
+)
 @withNamespaces('user')
 export default class ConfirmEmail extends React.PureComponent {
   render() {

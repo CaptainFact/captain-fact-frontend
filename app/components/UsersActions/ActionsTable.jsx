@@ -13,10 +13,13 @@ import { Icon } from '../Utils/Icon'
 import ActionDiff from './ActionDiff'
 import ActionIcon from './ActionIcon'
 import ActionEntityLink from './ActionEntityLink'
-import { ACTION_DELETE, ACTION_REMOVE, MIN_REPUTATION_RESTORE_ENTITY } from '../../constants'
+import {
+  ACTION_DELETE,
+  ACTION_REMOVE,
+  MIN_REPUTATION_RESTORE_ENTITY
+} from '../../constants'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import Button from '../Utils/Button'
-
 
 @withNamespaces('history')
 @connect(
@@ -62,11 +65,15 @@ class ActionsTable extends React.PureComponent {
 
   renderCompareAllButton = isMostlyComparing => {
     return (
-      <Button onClick={
-        isMostlyComparing
-          ? () => this.collapseDiffs()
-          : () => this.setState({ expendedDiffs: this.props.actions.map(a => a.id) })
-      }
+      <Button
+        onClick={
+          isMostlyComparing
+            ? () => this.collapseDiffs()
+            : () =>
+                this.setState({
+                  expendedDiffs: this.props.actions.map(a => a.id)
+                })
+        }
       >
         {this.props.t(isMostlyComparing ? 'hideAll' : 'compareAll')}
       </Button>
@@ -74,20 +81,26 @@ class ActionsTable extends React.PureComponent {
   }
 
   collapseDiffs() {
-    this.setState(prevState => (
-      { expendedDiffs: prevState.expendedDiffs.clear() }
-    ))
+    this.setState(prevState => ({
+      expendedDiffs: prevState.expendedDiffs.clear()
+    }))
   }
 
   // ---- Table body ----
 
   renderBody = () => {
     if (this.props.isLoading)
-      return <tr style={{ background: 'none' }}><td colSpan={this.getNbCols()}><LoadingFrame /></td></tr>
+      return (
+        <tr style={{ background: 'none' }}>
+          <td colSpan={this.getNbCols()}>
+            <LoadingFrame />
+          </td>
+        </tr>
+      )
     return this.props.actions.map(a => this.renderAction(a))
   }
 
-  renderAction = (action) => {
+  renderAction = action => {
     if (this.state.expendedDiffs.includes(action.id))
       return [this.renderActionLine(action, true), this.renderDiffLine(action)]
     return this.renderActionLine(action)
@@ -95,14 +108,21 @@ class ActionsTable extends React.PureComponent {
 
   renderActionLine(action, isDiffing = false) {
     const { canRestore, showEntity, t } = this.props
-    const reversible = canRestore && this.props.lastActionsIds.includes(action.id)
-      && ([ACTION_DELETE, ACTION_REMOVE].includes(action.type))
+    const reversible =
+      canRestore &&
+      this.props.lastActionsIds.includes(action.id) &&
+      [ACTION_DELETE, ACTION_REMOVE].includes(action.type)
 
     return (
       <tr key={action.id}>
-        <td><TimeSince time={action.time} /></td>
+        <td>
+          <TimeSince time={action.time} />
+        </td>
         <td>{this.renderUser(action.user)}</td>
-        <td><ActionIcon type={action.type} /><strong> {t(`action.${action.type}`)}</strong></td>
+        <td>
+          <ActionIcon type={action.type} />
+          <strong> {t(`action.${action.type}`)}</strong>
+        </td>
         {showEntity && (
           <td>
             <ActionEntityLink action={action} />
@@ -123,8 +143,7 @@ class ActionsTable extends React.PureComponent {
               </Button>
             )}
           </td>
-        )
-        }
+        )}
         {/* <td> */}
         {/* <a className="button" disabled> */}
         {/* <Icon size="small" name="check"/> */}
@@ -152,14 +171,13 @@ class ActionsTable extends React.PureComponent {
   toggleDiff = (action, isDiffing) => {
     if (isDiffing) {
       const actionIdx = this.state.expendedDiffs.findIndex(id => id === action.id)
-      this.setState(prevState => (
-        { expendedDiffs: prevState.expendedDiffs.delete(actionIdx) }
-      ))
-    }
-    else
-      this.setState(prevState => (
-        { expendedDiffs: prevState.expendedDiffs.push(action.id) }
-      ))
+      this.setState(prevState => ({
+        expendedDiffs: prevState.expendedDiffs.delete(actionIdx)
+      }))
+    } else
+      this.setState(prevState => ({
+        expendedDiffs: prevState.expendedDiffs.push(action.id)
+      }))
   }
 
   getNbCols = () => 7 - !this.props.canRestore - !this.props.showEntity

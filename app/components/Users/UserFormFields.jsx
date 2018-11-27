@@ -8,12 +8,10 @@ import Button from '../Utils/Button'
 import ControlInput from '../FormUtils/ControlInput'
 import { cleanStr } from '../../lib/clean_str'
 
-
 // Common validators for Signup / Login
 
 export const validatePasswordRepeat = ({ password, passwordRepeat }) => {
-  if (passwordRepeat !== password)
-    return { passwordRepeat: "Passwords doesn't match" }
+  if (passwordRepeat !== password) return { passwordRepeat: "Passwords doesn't match" }
   return {}
 }
 
@@ -61,7 +59,7 @@ export const passwordField = (t, isOptional = false) => (
   />
 )
 
-export const passwordRepeatField = (t) => (
+export const passwordRepeatField = t => (
   <Field
     name="passwordRepeat"
     placeholder={t('repeatPassword')}
@@ -71,7 +69,7 @@ export const passwordRepeatField = (t) => (
   />
 )
 
-export const usernameField = (t) => (
+export const usernameField = t => (
   <Field
     name="username"
     placeholder={t('username')}
@@ -82,7 +80,7 @@ export const usernameField = (t) => (
   />
 )
 
-export const nameField = (t) => (
+export const nameField = t => (
   <Field
     name="name"
     placeholder={`${t('realName')} (${t('optional')})`}

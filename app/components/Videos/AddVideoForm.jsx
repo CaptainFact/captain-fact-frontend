@@ -12,21 +12,23 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
 import { postVideo, searchVideo } from '../../state/videos/effects'
 import { isAuthenticated } from '../../state/users/current_user/selectors'
 
-
 const validate = ({ url }) => {
   if (!youtubeRegex.test(url))
-    return {url: 'Invalid URL. Only youtube videos are currently supported'}
+    return { url: 'Invalid URL. Only youtube videos are currently supported' }
   return {}
 }
 
 @withRouter
 @withNamespaces('main')
-@connect((state, props) => ({
-  initialValues: {url: props.params.videoUrl || props.location.query.url},
-  isSubmitting: state.Videos.isSubmitting,
-  isAuthenticated: isAuthenticated(state)
-}), {postVideo, searchVideo})
-@reduxForm({form: 'AddVideo', validate})
+@connect(
+  (state, props) => ({
+    initialValues: { url: props.params.videoUrl || props.location.query.url },
+    isSubmitting: state.Videos.isSubmitting,
+    isAuthenticated: isAuthenticated(state)
+  }),
+  { postVideo, searchVideo }
+)
+@reduxForm({ form: 'AddVideo', validate })
 export class AddVideoForm extends React.PureComponent {
   componentDidMount() {
     const videoUrl = this.props.params.videoUrl || this.props.location.query.url
@@ -57,28 +59,31 @@ export class AddVideoForm extends React.PureComponent {
           />
         </form>
         <div id="col-debate" className="column">
-          {this.props.isSubmitting && <LoadingFrame title={this.props.t('videos.analysing')}/>}
+          {this.props.isSubmitting && (
+            <LoadingFrame title={this.props.t('videos.analysing')} />
+          )}
         </div>
       </div>
     )
   }
 
-  renderVideoField = (field) => {
-    const { meta: {error}, input: {value} } = field
+  renderVideoField = field => {
+    const {
+      meta: { error },
+      input: { value }
+    } = field
     const urlInput = FieldWithButton(field)
 
     return (
       <div>
         {!error && (
-          <ReactPlayer
-            className="video"
-            url={value}
-            controls
-            width=""
-            height=""
-          />
+          <ReactPlayer className="video" url={value} controls width="" height="" />
         )}
-        {error && <div className="video"><div/></div>}
+        {error && (
+          <div className="video">
+            <div />
+          </div>
+        )}
         {urlInput}
       </div>
     )
@@ -87,8 +92,7 @@ export class AddVideoForm extends React.PureComponent {
   handleSubmit(video) {
     const promise = this.props.postVideo(video)
     return promise.then(action => {
-      if (!action.error)
-        this.props.router.push(`/videos/${action.payload.hash_id}`)
+      if (!action.error) this.props.router.push(`/videos/${action.payload.hash_id}`)
       else if (action.payload === 'unauthorized' && !this.props.isAuthenticated)
         this.props.router.push('/login')
     })

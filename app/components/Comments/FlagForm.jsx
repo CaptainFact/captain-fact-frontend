@@ -4,17 +4,17 @@ import FlagReasonSelect from '../Moderation/FlagReasonSelect'
 
 import { CommentDisplay } from './CommentDisplay'
 
-
-@reduxForm({form: 'flagForm'})
+@reduxForm({ form: 'flagForm' })
 export default class FlagForm extends React.PureComponent {
   render() {
     const { handleSubmit } = this.props
 
     return (
       <form className="form flag-form" onSubmit={handleSubmit}>
-        <CommentDisplay comment={this.props.comment} withoutActions hideThread/>
-        <hr/>
-        <FlagReasonSelect/>
+        <CommentDisplay comment={this.props.comment} withoutActions hideThread />
+        <hr />
+        <FlagReasonSelect />
       </form>
-    )}
+    )
+  }
 }

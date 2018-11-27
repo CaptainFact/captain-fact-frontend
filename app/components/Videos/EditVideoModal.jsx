@@ -10,9 +10,11 @@ import { flashErrorMsg, flashSuccessMsg } from '../../state/flashes/reducer'
 import FieldWithButton from '../FormUtils/FieldWithButton'
 import { shiftStatements } from '../../state/video_debate/statements/effects'
 
-
-const TimeShiftForm = reduxForm({ form: 'shiftStatements', initialValues: { offset: 0 } })(withNamespaces('main')(
-  ({ handleSubmit, t }) => (
+const TimeShiftForm = reduxForm({
+  form: 'shiftStatements',
+  initialValues: { offset: 0 }
+})(
+  withNamespaces('main')(({ handleSubmit, t }) => (
     <form onSubmit={handleSubmit}>
       <Field
         component={FieldWithButton}
@@ -23,16 +25,24 @@ const TimeShiftForm = reduxForm({ form: 'shiftStatements', initialValues: { offs
         validate={offset => !offset}
       />
     </form>
-  )))
+  ))
+)
 
-@connect(null, { popModal, flashErrorMsg, flashSuccessMsg, shiftStatements })
+@connect(
+  null,
+  { popModal, flashErrorMsg, flashSuccessMsg, shiftStatements }
+)
 @withNamespaces('videoDebate')
 export default class EditVideoModal extends React.PureComponent {
   render() {
     return (
       <Modal
         handleCloseClick={this.props.popModal}
-        title={<span><Icon name="pencil" /> {this.props.t('video.edit')}</span>}
+        title={
+          <span>
+            <Icon name="pencil" /> {this.props.t('video.edit')}
+          </span>
+        }
       >
         <h4 className="title is-4">{this.props.t('video.shiftStatements')}</h4>
         <TimeShiftForm onSubmit={this.shiftSubmit} />
