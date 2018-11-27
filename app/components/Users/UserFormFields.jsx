@@ -11,8 +11,7 @@ import { cleanStr } from '../../lib/clean_str'
 // Common validators for Signup / Login
 
 export const validatePasswordRepeat = ({ password, passwordRepeat }) => {
-  if (passwordRepeat !== password)
-    return { passwordRepeat: "Passwords doesn't match" }
+  if (passwordRepeat !== password) return { passwordRepeat: "Passwords doesn't match" }
   return {}
 }
 

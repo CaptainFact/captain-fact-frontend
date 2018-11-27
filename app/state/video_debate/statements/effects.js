@@ -26,8 +26,7 @@ export const joinStatementsChannel = videoId => dispatch => {
           statement_removed: s => dispatch(remove(s)),
           statement_added: s => dispatch(add(s)),
           statement_updated: s => dispatch(update(s)),
-          statements_updated: ({ statements }) =>
-            dispatch(updateAll(statements))
+          statements_updated: ({ statements }) => dispatch(updateAll(statements))
         }
       )
     )
@@ -46,16 +45,14 @@ export const postStatement = statement =>
   })
 
 export const updateStatement = statement =>
-  createEffect(
-    SocketApi.push(STATEMENTS_CHANNEL, 'update_statement', statement),
-    { catch: errorToFlash }
-  )
+  createEffect(SocketApi.push(STATEMENTS_CHANNEL, 'update_statement', statement), {
+    catch: errorToFlash
+  })
 
 export const deleteStatement = statement =>
-  createEffect(
-    SocketApi.push(STATEMENTS_CHANNEL, 'remove_statement', statement),
-    { catch: errorToFlash }
-  )
+  createEffect(SocketApi.push(STATEMENTS_CHANNEL, 'remove_statement', statement), {
+    catch: errorToFlash
+  })
 
 export const shiftStatements = offset =>
   createEffect(SocketApi.push(STATEMENTS_CHANNEL, 'shift_all', offset), {

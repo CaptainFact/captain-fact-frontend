@@ -29,8 +29,7 @@ const CurrentUserReducer = handleActions(
           isLoading: false
         })
       },
-      throw: (state, { payload }) =>
-        state.merge({ error: payload, isLoading: false })
+      throw: (state, { payload }) => state.merge({ error: payload, isLoading: false })
     },
     [userLogin]: {
       next: (state, { payload }) => {

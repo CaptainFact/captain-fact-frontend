@@ -11,11 +11,7 @@ export default class FlagForm extends React.PureComponent {
 
     return (
       <form className="form flag-form" onSubmit={handleSubmit}>
-        <CommentDisplay
-          comment={this.props.comment}
-          withoutActions
-          hideThread
-        />
+        <CommentDisplay comment={this.props.comment} withoutActions hideThread />
         <hr />
         <FlagReasonSelect />
       </form>

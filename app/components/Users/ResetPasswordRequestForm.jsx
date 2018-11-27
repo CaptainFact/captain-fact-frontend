@@ -37,8 +37,7 @@ export default class ResetPasswordRequestForm extends React.PureComponent {
     this.props.resetPasswordRequest(e).then(
       handleEffectResponse({
         onSuccess: () => this.setState({ status: 'done' }),
-        onError: () =>
-          this.setState({ status: 'error', payload: 'reset_failed' })
+        onError: () => this.setState({ status: 'error', payload: 'reset_failed' })
       })
     )
   }
@@ -62,11 +61,7 @@ export default class ResetPasswordRequestForm extends React.PureComponent {
         </div>
       )
     if (this.state.status === 'done')
-      return (
-        <Notification>
-          {this.props.t('resetPasswordRequestSuccess')}
-        </Notification>
-      )
+      return <Notification>{this.props.t('resetPasswordRequestSuccess')}</Notification>
   }
 
   render() {

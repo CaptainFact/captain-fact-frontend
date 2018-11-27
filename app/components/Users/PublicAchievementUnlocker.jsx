@@ -27,8 +27,7 @@ class PublicAchievementUnlocker extends React.PureComponent {
   }
 
   componentDidUpdate(oldProps) {
-    if (this.props.achievements !== oldProps.achievements)
-      this.unlockIfNecessary()
+    if (this.props.achievements !== oldProps.achievements) this.unlockIfNecessary()
   }
 
   render() {
@@ -50,8 +49,7 @@ class PublicAchievementUnlocker extends React.PureComponent {
     return true
   }
 
-  hasAchievement = () =>
-    this.props.achievements.includes(this.props.achievementId)
+  hasAchievement = () => this.props.achievements.includes(this.props.achievementId)
 
   doUnlockAchievement = () => {
     this.props.unlockPublicAchievement(this.props.achievementId).then(() => {

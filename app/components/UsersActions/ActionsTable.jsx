@@ -25,8 +25,7 @@ import Button from '../Utils/Button'
 @connect(
   (state, props) => ({
     lastActionsIds: state.UsersActions.lastActionsIds,
-    canRestore:
-      props.showRestore && hasReputation(state, MIN_REPUTATION_RESTORE_ENTITY)
+    canRestore: props.showRestore && hasReputation(state, MIN_REPUTATION_RESTORE_ENTITY)
   }),
   { revertVideoDebateUserAction, flashErrorUnauthenticated }
 )
@@ -49,8 +48,7 @@ class ActionsTable extends React.PureComponent {
 
   renderHeader = () => {
     const { t, actions, canRestore, showEntity } = this.props
-    const isMostlyComparing =
-      this.state.expendedDiffs.count() / actions.count() > 0.5
+    const isMostlyComparing = this.state.expendedDiffs.count() / actions.count() > 0.5
 
     return (
       <tr>
@@ -139,9 +137,7 @@ class ActionsTable extends React.PureComponent {
         {canRestore && (
           <td>
             {reversible && (
-              <Button
-                onClick={() => this.props.revertVideoDebateUserAction(action)}
-              >
+              <Button onClick={() => this.props.revertVideoDebateUserAction(action)}>
                 <Icon size="small" name="undo" />
                 <span>{t('revert')}</span>
               </Button>
@@ -174,9 +170,7 @@ class ActionsTable extends React.PureComponent {
 
   toggleDiff = (action, isDiffing) => {
     if (isDiffing) {
-      const actionIdx = this.state.expendedDiffs.findIndex(
-        id => id === action.id
-      )
+      const actionIdx = this.state.expendedDiffs.findIndex(id => id === action.id)
       this.setState(prevState => ({
         expendedDiffs: prevState.expendedDiffs.delete(actionIdx)
       }))

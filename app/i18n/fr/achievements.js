@@ -8,8 +8,7 @@ export default {
   },
   2: {
     title: 'Pas un robot',
-    description:
-      'Avec une si belle adresse e-mail, vous ne pouvez pas être un robot'
+    description: 'Avec une si belle adresse e-mail, vous ne pouvez pas être un robot'
   },
   3: {
     title: 'Everybody hurts',
@@ -40,8 +39,7 @@ export default {
   },
   9: {
     title: "Fact Check Me, I'm Famous",
-    description:
-      'Vous êtes arrivé en haut du classement ce mois-ci, bravo Capitaine !'
+    description: 'Vous êtes arrivé en haut du classement ce mois-ci, bravo Capitaine !'
   },
   10: {
     title: 'Artiste',

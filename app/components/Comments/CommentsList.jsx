@@ -45,9 +45,7 @@ export class CommentsList extends React.PureComponent {
     const [lowLimit, highLimit] = this.state.nbComments
     let numComment = 0
     return this.props.comments.takeWhile(c => {
-      return (
-        ++numComment <= lowLimit || (numComment <= highLimit && c.score > -1)
-      )
+      return ++numComment <= lowLimit || (numComment <= highLimit && c.score > -1)
     })
   }
 

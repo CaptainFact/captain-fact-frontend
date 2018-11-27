@@ -34,9 +34,7 @@ export class History extends React.PureComponent {
             className="expend-old-actions"
             onClick={() => this.setState({ isExpended: !isExpended })}
           >
-            {isExpended
-              ? 'Hide'
-              : `Show full history (${actions.size - 1} elements)`}
+            {isExpended ? 'Hide' : `Show full history (${actions.size - 1} elements)`}
           </a>
         )}
         {isExpended && (

@@ -57,10 +57,7 @@ export class CommentForm extends React.Component {
     if (!this.props.currentUser.id || (this.state.isCollapsed && !replyTo))
       return (
         <div className="comment-form collapsed">
-          <Button
-            className="is-inverted is-primary"
-            onClick={() => this.expandForm()}
-          >
+          <Button className="is-inverted is-primary" onClick={() => this.expandForm()}>
             <Icon name="plus" size="medium" />
             <span>{t('comment.revealForm')}</span>
           </Button>
@@ -80,15 +77,10 @@ export class CommentForm extends React.Component {
             {replyTo && (
               <div>
                 <Tag size="medium" className="replyTo">
-                  <CloseButton
-                    onClick={() => this.props.change('reply_to', null)}
-                  />
+                  <CloseButton onClick={() => this.props.change('reply_to', null)} />
                   <span className="replyToLabel">
                     {t('comment.replyingTo')}{' '}
-                    <UserAppellation
-                      defaultComponent="span"
-                      user={replyTo.user}
-                    />
+                    <UserAppellation defaultComponent="span" user={replyTo.user} />
                   </span>
                 </Tag>
                 <CommentDisplay

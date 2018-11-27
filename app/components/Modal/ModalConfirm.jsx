@@ -45,11 +45,7 @@ export class ModalConfirm extends React.PureComponent {
           {this.props.confirmIcon && <Icon name={this.props.confirmIcon} />}
           <span>{this.props.confirmText}</span>
         </a>
-        <a
-          className="button"
-          disabled={this.state.isSubmitting}
-          onClick={this.close}
-        >
+        <a className="button" disabled={this.state.isSubmitting} onClick={this.close}>
           {this.props.abortIcon && <Icon name={this.props.abortIcon} />}
           <span>{this.props.abortText}</span>
         </a>

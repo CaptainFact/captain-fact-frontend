@@ -49,11 +49,7 @@ export const BrowserExtensionsPage = withNamespaces('extension')(({ t }) => (
       </h2>
     </section>
     <section className="has-text-centered section">
-      <ReactPlayer
-        controls
-        className="video"
-        url="https://youtu.be/4-_nnwgqw9c"
-      />
+      <ReactPlayer controls className="video" url="https://youtu.be/4-_nnwgqw9c" />
     </section>
   </div>
 ))

@@ -1,10 +1,6 @@
 import { Record } from 'immutable'
 import { createAction, handleActions } from 'redux-actions'
-import {
-  ALL_VIDEOS,
-  MOBILE_WIDTH_THRESHOLD,
-  SUPPORTED_LOCALES
-} from '../../constants'
+import { ALL_VIDEOS, MOBILE_WIDTH_THRESHOLD, SUPPORTED_LOCALES } from '../../constants'
 import browserLocale from '../../i18n/browser_locale'
 
 export const toggleSidebar = createAction('USER_PREFERENCES/TOGGLE_SIDEBAR')
@@ -17,9 +13,7 @@ export const setVideosOnlyFromPartners = createAction(
   'USER_PREFERENCES/VIDEOS_ONLY_FROM_PATNERS'
 )
 export const toggleAutoscroll = createAction('STATEMENTS/TOGGLE_AUTOSCROLL')
-export const toggleBackgroundSound = createAction(
-  'STATEMENTS/TOGGLE_BACKGROUND_SOUND'
-)
+export const toggleBackgroundSound = createAction('STATEMENTS/TOGGLE_BACKGROUND_SOUND')
 
 const isMobile = window.innerWidth <= MOBILE_WIDTH_THRESHOLD
 
@@ -62,8 +56,7 @@ const UserPreferencesReducer = handleActions(
     [toggleSidebar]: state =>
       updateState(state, 'sidebarExpended', !state.sidebarExpended),
     [closeSidebar]: state => updateState(state, 'sidebarExpended', false),
-    [changeLocale]: (state, { payload }) =>
-      updateState(state, 'locale', payload),
+    [changeLocale]: (state, { payload }) => updateState(state, 'locale', payload),
     [changeVideosLanguageFilter]: (state, { payload }) =>
       updateState(state, 'videosLanguageFilter', payload),
     [setVideosOnlyFromPartners]: (state, { payload }) =>

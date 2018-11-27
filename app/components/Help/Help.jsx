@@ -53,9 +53,7 @@ export default class Help extends React.PureComponent {
         </Message>
         <div className="columns">
           <div className="column panel">
-            <p className="panel-heading">
-              {this.props.t('categories.siteUsage')}
-            </p>
+            <p className="panel-heading">{this.props.t('categories.siteUsage')}</p>
             {this.renderPageMenuEntry('contributionGuidelines')}
             {this.renderPageMenuEntry('privileges')}
             {this.renderPageMenuEntry('reputation')}
@@ -64,9 +62,7 @@ export default class Help extends React.PureComponent {
             {this.renderPageMenuEntry('extension')}
           </div>
           <div className="column panel">
-            <p className="panel-heading">
-              {this.props.t('categories.contribute')}
-            </p>
+            <p className="panel-heading">{this.props.t('categories.contribute')}</p>
             {this.renderPageMenuEntry('ambassadors')}
             {this.renderPageMenuEntry('contribute/tasks')}
             {this.renderPageMenuEntry('bug_report')}
@@ -85,9 +81,7 @@ export default class Help extends React.PureComponent {
 
   renderPageMenuEntry(splat) {
     const label = this.props.t(`pages.${splat}`, { defaultValue: splat })
-    return (
-      <div className="panel-block">{this.renderPageLink(splat, label)}</div>
-    )
+    return <div className="panel-block">{this.renderPageLink(splat, label)}</div>
   }
 
   renderPageLink(splat, label) {
@@ -102,8 +96,7 @@ export default class Help extends React.PureComponent {
     return (
       <div>
         <h1 className="title is-1">
-          {t('title')}:{' '}
-          {t(`help:pages.${splat}`, { defaultValue: 'I am lost 😟' })}
+          {t('title')}: {t(`help:pages.${splat}`, { defaultValue: 'I am lost 😟' })}
         </h1>
         <Link className="subtitle" to="/help">
           <Icon name="arrow-left" />

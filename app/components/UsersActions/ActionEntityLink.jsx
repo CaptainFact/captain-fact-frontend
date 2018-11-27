@@ -9,12 +9,7 @@ import {
   ENTITY_COMMENT,
   ENTITY_SOURCED_COMMENT
 } from '../../constants'
-import {
-  speakerURL,
-  statementURL,
-  videoURL,
-  commentURL
-} from '../../lib/cf_routes'
+import { speakerURL, statementURL, videoURL, commentURL } from '../../lib/cf_routes'
 
 const comment_mapper = ({ videoHashId, statementId, commentId }) => {
   return [commentId, commentURL(videoHashId, statementId, commentId)]

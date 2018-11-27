@@ -77,13 +77,7 @@ export class AddVideoForm extends React.PureComponent {
     return (
       <div>
         {!error && (
-          <ReactPlayer
-            className="video"
-            url={value}
-            controls
-            width=""
-            height=""
-          />
+          <ReactPlayer className="video" url={value} controls width="" height="" />
         )}
         {error && (
           <div className="video">
@@ -98,8 +92,7 @@ export class AddVideoForm extends React.PureComponent {
   handleSubmit(video) {
     const promise = this.props.postVideo(video)
     return promise.then(action => {
-      if (!action.error)
-        this.props.router.push(`/videos/${action.payload.hash_id}`)
+      if (!action.error) this.props.router.push(`/videos/${action.payload.hash_id}`)
       else if (action.payload === 'unauthorized' && !this.props.isAuthenticated)
         this.props.router.push('/login')
     })

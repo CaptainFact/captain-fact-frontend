@@ -10,17 +10,13 @@ export const joinVideoDebateChannel = videoId => dispatch => {
   dispatch(videoReducer.setLoading(true))
   dispatch(
     videoReducer.fetchAll(
-      SocketApi.joinChannel(
-        VIDEO_DEBATE_CHANNEL,
-        `${VIDEO_DEBATE_CHANNEL}:${videoId}`,
-        {
-          speaker_added: s => dispatch(videoReducer.addSpeaker(s)),
-          speaker_removed: s => dispatch(videoReducer.removeSpeaker(s)),
-          speaker_updated: s => dispatch(videoReducer.updateSpeaker(s)),
-          presence_state: s => dispatch(setPresence(s)),
-          presence_diff: s => dispatch(presenceDiff(s))
-        }
-      )
+      SocketApi.joinChannel(VIDEO_DEBATE_CHANNEL, `${VIDEO_DEBATE_CHANNEL}:${videoId}`, {
+        speaker_added: s => dispatch(videoReducer.addSpeaker(s)),
+        speaker_removed: s => dispatch(videoReducer.removeSpeaker(s)),
+        speaker_updated: s => dispatch(videoReducer.updateSpeaker(s)),
+        presence_state: s => dispatch(setPresence(s)),
+        presence_diff: s => dispatch(presenceDiff(s))
+      })
     )
   )
 }
@@ -35,13 +31,11 @@ export const addSpeaker = speaker =>
   })
 
 export const removeSpeaker = speaker =>
-  createEffect(
-    SocketApi.push(VIDEO_DEBATE_CHANNEL, 'remove_speaker', speaker),
-    { catch: errorToFlash }
-  )
+  createEffect(SocketApi.push(VIDEO_DEBATE_CHANNEL, 'remove_speaker', speaker), {
+    catch: errorToFlash
+  })
 
 export const updateSpeaker = speaker =>
-  createEffect(
-    SocketApi.push(VIDEO_DEBATE_CHANNEL, 'update_speaker', speaker),
-    { catch: [errorMsgToFlash, generateFSAError] }
-  )
+  createEffect(SocketApi.push(VIDEO_DEBATE_CHANNEL, 'update_speaker', speaker), {
+    catch: [errorMsgToFlash, generateFSAError]
+  })

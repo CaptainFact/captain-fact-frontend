@@ -27,9 +27,7 @@ class DeleteForm extends React.PureComponent {
           <li>Anonymize your actions history</li>
         </ul>
         <hr />
-        <p className="is-size-5">
-          Type your username below to confirm the deletion :
-        </p>
+        <p className="is-size-5">Type your username below to confirm the deletion :</p>
         <Field component="input" className="input" name="usernameConfirm" />
       </div>
     )
@@ -39,8 +37,7 @@ class DeleteForm extends React.PureComponent {
 const valueSelector = formValueSelector(DELETE_FORM)
 
 @connect(state => ({
-  isValid:
-    valueSelector(state, 'usernameConfirm') === state.CurrentUser.data.username
+  isValid: valueSelector(state, 'usernameConfirm') === state.CurrentUser.data.username
 }))
 @withNamespaces('main')
 export default class DeleteUserModal extends React.PureComponent {

@@ -39,10 +39,7 @@ export class ColumnVideo extends React.PureComponent {
         <VideoDebatePlayer url={url} />
         <div className="videoInfo">
           <h2 className="title is-4 has-text-weight-light">{title}</h2>
-          <Presence
-            nbUsers={this.props.nbUsers}
-            nbViewers={this.props.nbViewers}
-          />
+          <Presence nbUsers={this.props.nbUsers} nbViewers={this.props.nbViewers} />
         </div>
         <div className="tabs is-toggle is-fullwidth">
           <ul>
@@ -73,9 +70,7 @@ export class ColumnVideo extends React.PureComponent {
                 requiredRep={MIN_REPUTATION_ADD_SPEAKER}
                 tooltipPosition="top center"
               >
-                {({ hasReputation }) => (
-                  <AddSpeakerForm disabled={!hasReputation} />
-                )}
+                {({ hasReputation }) => <AddSpeakerForm disabled={!hasReputation} />}
               </ReputationGuardTooltip>
             </div>
             <div className="speakers-list">

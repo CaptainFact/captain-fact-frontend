@@ -26,8 +26,7 @@ export const joinCommentsChannel = videoId => dispatch => {
         comment_added: c => dispatch(add(c)),
         comment_score_diff: p => dispatch(scoreDiff(p)),
         comment_updated: c => dispatch(update(c)),
-        comments_scores_updated: ({ comments }) =>
-          dispatch(updateScores(comments))
+        comments_scores_updated: ({ comments }) => dispatch(updateScores(comments))
       })
     )
   )
@@ -61,10 +60,7 @@ export const commentVote = params =>
   )
 
 export const flagComment = ({ id, reason }) =>
-  createEffect(
-    SocketApi.push(COMMENTS_CHANNEL, 'flag_comment', { id, reason }),
-    {
-      then: addFlag(id),
-      catch: errorToFlash
-    }
-  )
+  createEffect(SocketApi.push(COMMENTS_CHANNEL, 'flag_comment', { id, reason }), {
+    then: addFlag(id),
+    catch: errorToFlash
+  })

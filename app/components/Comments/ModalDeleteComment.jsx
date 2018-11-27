@@ -5,13 +5,7 @@ import { withNamespaces } from 'react-i18next'
 import { CommentDisplay } from './CommentDisplay'
 import ModalConfirmDelete from '../Modal/ModalConfirmDelete'
 
-const ModalDeleteComment = ({
-  handleAbort,
-  comment,
-  replies,
-  t,
-  ...otherProps
-}) => (
+const ModalDeleteComment = ({ handleAbort, comment, replies, t, ...otherProps }) => (
   <ModalConfirmDelete
     handleAbort={handleAbort}
     title={t('comment.deleteThread', { count: replies && replies.size + 1 })}

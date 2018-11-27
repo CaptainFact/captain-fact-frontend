@@ -10,11 +10,7 @@ const OwnCommentActions = ({ t, handleAddToThread, handleDelete }) => (
       iconName="plus"
       onClick={handleAddToThread}
     />
-    <CommentAction
-      title={t('actions.delete')}
-      iconName="times"
-      onClick={handleDelete}
-    />
+    <CommentAction title={t('actions.delete')} iconName="times" onClick={handleDelete} />
   </React.Fragment>
 )
 

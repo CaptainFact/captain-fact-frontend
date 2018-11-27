@@ -62,9 +62,7 @@ export default class StatementContainer extends React.PureComponent {
               isRemove
               message={t('statement.confirmRemove')}
               handleAbort={() => this.setState({ isDeleting: false })}
-              handleConfirm={() =>
-                this.props.deleteStatement({ id: statement.id })
-              }
+              handleConfirm={() => this.props.deleteStatement({ id: statement.id })}
             />
           )}
         </div>

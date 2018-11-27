@@ -5,9 +5,7 @@ import { getErrorInfo } from '../../lib/errors'
 import { NO_INTERNET_ERROR } from '../../constants'
 
 // Actions
-export const addFlash = createAction('FLASHES/ADD', options =>
-  buildFlash(options)
-)
+export const addFlash = createAction('FLASHES/ADD', options => buildFlash(options))
 export const removeFlash = createAction('FLASHES/REMOVE')
 export const pause = createAction('FLASHES/PAUSE', () => true)
 export const unPause = createAction('FLASHES/UNPAUSE', () => false)
@@ -75,8 +73,7 @@ const FlashesReducer = handleActions(
     },
     [removeFlash]: (state, { payload: { id } }) => {
       const flashIdx = state.flashes.findIndex(msg => msg.id === id)
-      if (flashIdx !== -1)
-        return state.update('flashes', l => l.delete(flashIdx))
+      if (flashIdx !== -1) return state.update('flashes', l => l.delete(flashIdx))
       return state
     },
     [combineActions(pause, unPause)]: (state, { payload }) =>

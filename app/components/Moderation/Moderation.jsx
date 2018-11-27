@@ -43,9 +43,7 @@ export default class Moderation extends React.PureComponent {
           <Icon name="flag" /> {t('title')}
         </h1>
         {!entry && (
-          <Message className="has-text-centered">
-            {t('emptyModeration')}
-          </Message>
+          <Message className="has-text-centered">{t('emptyModeration')}</Message>
         )}
         {entry && (
           <div>
@@ -53,8 +51,7 @@ export default class Moderation extends React.PureComponent {
             <hr />
             {entry.flags.map(({ source_user, reason }) => (
               <div key={source_user.id} className="has-text-centered">
-                <UserAppellation user={source_user} />{' '}
-                {t('flaggedFor', { reason })}
+                <UserAppellation user={source_user} /> {t('flaggedFor', { reason })}
               </div>
             ))}
           </div>
@@ -72,10 +69,7 @@ export default class Moderation extends React.PureComponent {
         <UserAction action={action} />
         <br />
         <h4 className="box has-text-centered">
-          <Link
-            target="_blank"
-            to={`/videos/${videoId}?statement=${statementId}`}
-          >
+          <Link target="_blank" to={`/videos/${videoId}?statement=${statementId}`}>
             <strong>{this.props.t('seeContext')}</strong>
           </Link>
         </h4>

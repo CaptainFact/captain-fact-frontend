@@ -51,9 +51,7 @@ export class ModalFormContainer extends React.PureComponent {
         <a
           type="submit"
           disabled={
-            isSubmitting ||
-            this.props.confirmLoading ||
-            this.props.confirmDisabled
+            isSubmitting || this.props.confirmLoading || this.props.confirmDisabled
           }
           className={classNames('button', confirmType, {
             'is-loading': isSubmitting || this.props.confirmLoading

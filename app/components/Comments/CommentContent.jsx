@@ -17,9 +17,7 @@ const CommentContent = ({
     <div>
       {shouldRenderTextBlock && (
         <div className="comment-text">
-          {isCollapsed && (
-            <Tag style={{ marginRight: 5 }}>@{replyingTo.username}</Tag>
-          )}
+          {isCollapsed && <Tag style={{ marginRight: 5 }}>@{replyingTo.username}</Tag>}
           {text}
         </div>
       )}

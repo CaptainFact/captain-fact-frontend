@@ -3,9 +3,7 @@ import { youtubeRegex, optionsToQueryString, isExternal } from '../url_utils'
 describe('Youtube regex', () => {
   it('should accept regular urls', () => {
     // Normal form
-    expect(
-      youtubeRegex.test('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
-    ).toBe(true)
+    expect(youtubeRegex.test('https://www.youtube.com/watch?v=dQw4w9WgXcQ')).toBe(true)
     // Without https://
     expect(youtubeRegex.test('www.youtube.com/watch?v=dQw4w9WgXcQ')).toBe(true)
     // Short form
@@ -13,9 +11,7 @@ describe('Youtube regex', () => {
     // Short form with get params
     expect(youtubeRegex.test('https://youtu.be/dQw4w9WgXcQ?t=42s')).toBe(true)
     // Embedded form
-    expect(youtubeRegex.test('https://www.youtube.com/embed/LMRdn_MQWXM')).toBe(
-      true
-    )
+    expect(youtubeRegex.test('https://www.youtube.com/embed/LMRdn_MQWXM')).toBe(true)
   })
 
   it('should reject invalid urls', () => {
@@ -23,9 +19,7 @@ describe('Youtube regex', () => {
     expect(youtubeRegex.test('https://youtu.be')).toBe(false)
     // Channel
     expect(
-      youtubeRegex.test(
-        'https://www.youtube.com/channel/UCQgWpmt02UtJkyO32HGUASQ'
-      )
+      youtubeRegex.test('https://www.youtube.com/channel/UCQgWpmt02UtJkyO32HGUASQ')
     ).toBe(false)
     // Empty string
     expect(youtubeRegex.test('')).toBe(false)
@@ -65,9 +59,7 @@ describe('is external', () => {
   })
   it('should detect internal links', () => {
     expect(isExternal(MOCK_URL, MOCK_URL)).toBe(false)
-    expect(isExternal(MOCK_URL, MOCK_URL.replace('https://', 'HTTPS://'))).toBe(
-      false
-    )
+    expect(isExternal(MOCK_URL, MOCK_URL.replace('https://', 'HTTPS://'))).toBe(false)
     expect(isExternal(MOCK_URL, '/about')).toBe(false)
     expect(isExternal(MOCK_URL, 'image.jpg')).toBe(false)
     expect(isExternal(MOCK_URL, '#anchor')).toBe(false)

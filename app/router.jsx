@@ -34,14 +34,8 @@ const CFRouter = () => (
       <Route path="/login/callback/:provider" component={ThirdPartyCallback} />
       <Route path="/confirm_email/:token" component={ConfirmEmail} />
       <Route path="/reset_password" component={ResetPasswordRequestForm} />
-      <Route
-        path="/reset_password/confirm/:token"
-        component={ResetPasswordConfirmForm}
-      />
-      <Route
-        path="/newsletter/unsubscribe/:token"
-        component={NewsletterSubscription}
-      />
+      <Route path="/reset_password/confirm/:token" component={ResetPasswordConfirmForm} />
+      <Route path="/newsletter/unsubscribe/:token" component={NewsletterSubscription} />
       <Route path="/u/:username" component={User}>
         <IndexRoute component={UserProfile} />
         <Route path="/u/:username/activity" component={ActivityLog} />
@@ -51,11 +45,7 @@ const CFRouter = () => (
       <Route path="/videos/add" component={AddVideoForm} />
       <Route path="/videos/add/:videoUrl" component={AddVideoForm} />
       <Route path="/videos/:videoId" component={VideoDebate} view="debate" />
-      <Route
-        path="/videos/:videoId/history"
-        component={VideoDebate}
-        view="history"
-      />
+      <Route path="/videos/:videoId/history" component={VideoDebate} view="history" />
       <Route path="/s/:slug_or_id" component={SpeakerPage} />
       <Route path="/help" component={Help} />
       <Route path="/help/*" component={Help} />

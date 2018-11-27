@@ -4,10 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router'
 import { withNamespaces } from 'react-i18next'
 
-import {
-  register,
-  requestInvitation
-} from '../../state/users/current_user/effects'
+import { register, requestInvitation } from '../../state/users/current_user/effects'
 import {
   renderAllUserFields,
   submitButton,
@@ -71,8 +68,7 @@ class RealSignupForm extends React.PureComponent {
     }
     return this.props.register(registerParams).then(
       handleFormEffectResponse({
-        onError: msg =>
-          typeof msg === 'string' ? this.props.errorToFlash(msg) : null
+        onError: msg => (typeof msg === 'string' ? this.props.errorToFlash(msg) : null)
       })
     )
   }

@@ -52,13 +52,7 @@ export class CommentDisplay extends React.PureComponent {
   }
 
   render() {
-    const {
-      comment,
-      withoutActions,
-      className,
-      replies,
-      hideThread
-    } = this.props
+    const { comment, withoutActions, className, replies, hideThread } = this.props
     const { isBlurred, repliesCollapsed } = this.state
     const approveClass = this.getApproveClass(comment.approve)
     const allClassNames = classNames('comment', className, approveClass, {
@@ -123,9 +117,7 @@ export class CommentDisplay extends React.PureComponent {
             handleReply={() => this.handleReply()}
             handleDelete={() => this.handleDelete()}
             handleFlag={() => this.handleFlag()}
-            handleToggleShowReplies={() =>
-              this.toggleShowReplies(repliesCollapsed)
-            }
+            handleToggleShowReplies={() => this.toggleShowReplies(repliesCollapsed)}
           />
         )}
       </React.Fragment>

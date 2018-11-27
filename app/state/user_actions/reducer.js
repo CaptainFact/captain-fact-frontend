@@ -33,15 +33,12 @@ const UsersActionsReducer = handleActions(
           errors: null
         })
       },
-      throw: (state, { payload }) =>
-        state.merge({ isLoading: false, errors: payload })
+      throw: (state, { payload }) => state.merge({ isLoading: false, errors: payload })
     },
     [addAction]: (state, { payload }) => {
       const action = prepareAction(payload)
       const actions = state.actions.insert(0, action).sortBy(a => -a.time)
-      return state
-        .set('actions', actions)
-        .set('lastActionsIds', getLastActions(actions))
+      return state.set('actions', actions).set('lastActionsIds', getLastActions(actions))
     },
     [combineActions(reset, resetVideoDebate)]: () => INITIAL_STATE()
   },

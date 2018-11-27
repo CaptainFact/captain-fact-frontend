@@ -16,8 +16,7 @@ export default params => {
     meta: { touched, error, submitting },
     ...props
   } = params
-  const hasError =
-    (!hideErrorIfEmpty || input.value.length > 0) && touched && error
+  const hasError = (!hideErrorIfEmpty || input.value.length > 0) && touched && error
   const inputProps = {
     ...input,
     ...props,
@@ -35,10 +34,7 @@ export default params => {
   return (
     <p className={classNames('control', { 'has-icon': !!icon })}>
       {textarea}
-      <TextareaLengthCounter
-        length={input.value.length}
-        maxLength={maxLength}
-      />
+      <TextareaLengthCounter length={input.value.length} maxLength={maxLength} />
       {hasError && <span className="help is-danger">{error}</span>}
     </p>
   )

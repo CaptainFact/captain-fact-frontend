@@ -72,9 +72,7 @@ export default class VideosIndexPage extends React.PureComponent {
       [ONLY_COMMUNITY]: { is_partner: false }
     }[onlyFromPartners]
 
-    const languageVideosFilter = languageFilter
-      ? { language: languageFilter }
-      : {}
+    const languageVideosFilter = languageFilter ? { language: languageFilter } : {}
 
     return merge({}, partnerFilter, languageVideosFilter)
   }

@@ -31,10 +31,7 @@ const isPlayer = url => {
 
 const PLAYER_CONFIG = { youtube: { playerVars: { showinfo: 1 } } }
 
-export const Source = ({
-  source: { url, title, site_name },
-  withoutPlayer
-}) => {
+export const Source = ({ source: { url, title, site_name }, withoutPlayer }) => {
   if (!withoutPlayer && isPlayer(url)) {
     return (
       <ReactPlayer

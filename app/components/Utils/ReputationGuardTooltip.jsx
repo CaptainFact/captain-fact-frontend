@@ -36,18 +36,14 @@ export const ReputationGuardTooltip = ({
       contentStyle={POPUP_STYLE}
       arrowStyle={ARROW_STYLE}
       on="hover"
-      trigger={
-        <div className="help-tooltip-trigger">{children(childProps)}</div>
-      }
+      trigger={<div className="help-tooltip-trigger">{children(childProps)}</div>}
     >
       <Message type="primary">
         <Icon name="info-circle" />
         &nbsp;
         <Trans i18nKey="errors:client.needReputation" requiredRep={requiredRep}>
           You need at least {{ requiredRep }}
-          <Link to="/help/reputation">
-            {t('pages.reputation').toLowerCase()}
-          </Link>
+          <Link to="/help/reputation">{t('pages.reputation').toLowerCase()}</Link>
           points to do that
         </Trans>
       </Message>
@@ -55,6 +51,4 @@ export const ReputationGuardTooltip = ({
   )
 }
 
-export default connect(mapStateToProps)(
-  withNamespaces('help')(ReputationGuardTooltip)
-)
+export default connect(mapStateToProps)(withNamespaces('help')(ReputationGuardTooltip))

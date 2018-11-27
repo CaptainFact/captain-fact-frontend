@@ -27,17 +27,15 @@ export default class InvitationRequestForm extends React.PureComponent {
   state = { confirmed: false }
 
   submit(user) {
-    return this.props
-      .requestInvitation({ ...user, locale: browserLocale() })
-      .then(
-        handleEffectResponse({
-          onSuccess: () => this.setState({ confirmed: true }),
-          onError: msg => {
-            this.props.errorToFlash(msg)
-            throw new SubmissionError({ email: 'invalid_email' })
-          }
-        })
-      )
+    return this.props.requestInvitation({ ...user, locale: browserLocale() }).then(
+      handleEffectResponse({
+        onSuccess: () => this.setState({ confirmed: true }),
+        onError: msg => {
+          this.props.errorToFlash(msg)
+          throw new SubmissionError({ email: 'invalid_email' })
+        }
+      })
+    )
   }
 
   getContent() {

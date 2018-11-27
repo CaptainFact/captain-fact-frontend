@@ -5,8 +5,7 @@ import noInternetError from './no_internet_error'
 
 class CaptainFactSocketApi {
   constructor(url) {
-    const token =
-      typeof localStorage === 'undefined' ? null : localStorage.token
+    const token = typeof localStorage === 'undefined' ? null : localStorage.token
     this.socketUrl = url
     this.channels = {}
     this.createSocket(token)

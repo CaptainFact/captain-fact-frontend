@@ -6,9 +6,7 @@ export const setLoading = createAction('SPEAKERS/SET_LOADING')
 export const setLoadingWiki = createAction('SPEAKERS/SET_LOADING_WIKI')
 export const reset = createAction('SPEAKERS/RESET')
 export const actionFetchSpeaker = createAction('SPEAKERS/FETCH_ONE')
-export const actionFetchSpeakerWikiLinks = createAction(
-  'SPEAKERS/FETCH_WIKI_DATA'
-)
+export const actionFetchSpeakerWikiLinks = createAction('SPEAKERS/FETCH_WIKI_DATA')
 
 const supportedSites = ['wikimedia', 'wikipedia', 'wikiquote', 'wikinews']
 
@@ -32,8 +30,7 @@ const SpeakersReducer = handleActions(
       next: (state, { payload }) => {
         return state.mergeDeep({ isLoading: false, currentSpeaker: payload })
       },
-      throw: (state, { payload }) =>
-        state.merge({ isLoading: false, error: payload })
+      throw: (state, { payload }) => state.merge({ isLoading: false, error: payload })
     },
     [actionFetchSpeakerWikiLinks]: {
       next: (state, { payload }) => {
@@ -50,8 +47,7 @@ const SpeakersReducer = handleActions(
       throw: state => state.merge({ isLoadingWiki: false })
     },
     [setLoading]: (state, { payload }) => state.set('isLoading', payload),
-    [setLoadingWiki]: (state, { payload }) =>
-      state.set('isLoadingWiki', payload),
+    [setLoadingWiki]: (state, { payload }) => state.set('isLoadingWiki', payload),
     [reset]: () => INITIAL_STATE()
   },
   INITIAL_STATE()

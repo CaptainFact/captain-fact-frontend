@@ -62,8 +62,7 @@ export default class App extends React.PureComponent {
   checkExtensionInstall() {
     return new Promise(fulfill => {
       setTimeout(
-        () =>
-          fulfill(!!document.getElementById('captainfact-extension-installed')),
+        () => fulfill(!!document.getElementById('captainfact-extension-installed')),
         5000
       )
     })
