@@ -9,9 +9,16 @@ export const optionsToQueryString = options => {
 
 export const youtubeRegex = /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/ ]{11})/i
 
-export const isExternal = (currentHref, url) =>
-  (url.indexOf(':') > -1 || url.indexOf('//') > -1) &&
-  checkDomain(currentHref) !== checkDomain(url)
+export const isExternal = (currentHref, url) => (url.indexOf(':') > -1 || url.indexOf('//') > -1)
+  && checkDomain(currentHref) !== checkDomain(url)
+
+/**
+ * Define is URL points to a downloadable file. We only support downloading
+ * PDF files for now.
+ */
+export const isDownloadableFile = url => {
+  return url.endsWith('.pdf')
+}
 
 // ---- Private ----
 
