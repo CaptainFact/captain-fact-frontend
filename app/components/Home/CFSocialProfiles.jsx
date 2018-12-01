@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Flex, Box } from '@rebass/grid'
+import { Flex } from '@rebass/grid'
 import styled from 'styled-components'
 
 import { Discord } from 'styled-icons/fa-brands/Discord'

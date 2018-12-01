@@ -33,7 +33,11 @@ h1
 .is-gradient-primary-light
   background: linear-gradient(15deg, lighten($primary, 5), darken($primary, 5) 70%)
   background-color: $primary
-  color: $white
+  color: $white-bis
+  border: none
+  &:hover, &:active, &:focus
+    color: $white-bis
+    border-color: $grey-light
 
 .is-gradient-info
   background: linear-gradient(45deg, $info, darken($info, 30) 65%)

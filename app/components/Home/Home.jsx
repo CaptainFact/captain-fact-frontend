@@ -7,12 +7,13 @@ import { Icon } from '../Utils'
 import InvitationRequestForm from '../Users/InvitationRequestForm'
 import { isAuthenticated } from '../../state/users/current_user/selectors'
 import { INVITATION_SYSTEM } from '../../config'
-import landingIllustration from '../../assets/landing-illustration.jpg'
 import AllPartners from './AllPartners'
 import OpenCollectiveContributors from './OpenCollectiveContributors'
 import AllAmbassadors from './AllAmbassadors'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import CFSocialProfiles from './CFSocialProfiles'
+import LastVideos from './LastVideos'
+import Message from '../Utils/Message'
 
 @connect(state => ({ authenticated: isAuthenticated(state) }))
 @withNamespaces('home')
@@ -31,13 +32,16 @@ export default class Home extends React.PureComponent {
   renderButtons() {
     return (
       <div className="buttons-container">
-        <Link className="button is-medium is-gradient-primary-light" to="/videos">
-          {this.props.t('seeVideos')}
-        </Link>
-        <Link className="button is-medium is-gradient-primary-light" to="/signup">
+        <Link
+          className="button animated-hover is-medium is-gradient-primary-light"
+          to="/signup"
+        >
           {this.props.t('registerAndFactCheck')}
         </Link>
-        <Link className="button is-medium is-gradient-primary-light" to="/extension">
+        <Link
+          className="button animated-hover is-medium is-gradient-primary-light"
+          to="/extension"
+        >
           {this.props.t('installExtension')}
         </Link>
         <div className="button-label">
@@ -77,10 +81,18 @@ export default class Home extends React.PureComponent {
             <h1 className="title is-3">{t('partners')}</h1>
             <AllPartners />
             <br />
-            <h1 className="title is-3">{t('contributors')}</h1>
-            <OpenCollectiveContributors tier="donateur" showBtn={false} />
+            <h1 className="title is-3">{t('backers')}</h1>
+            <OpenCollectiveContributors tier="soutien-régulier" button={false} />
+            <OpenCollectiveContributors tier="donateur" button />
             <br />
             <h1 className="title is-3">{t('ambassadors')}</h1>
+            <Message>
+              Les ambassadeurs sont chargés de veiller sur la communauté. Ils ont aussi
+              pour objectif de faire remonter les attentes des utilisateurs et de
+              participer à la gouvernance du projet a travers des droits de véto et une
+              consultation obligatoire de l'équipe technique sur cetaines décisions.{' '}
+              <Link to="/help/ambassadors">En savoir plus.</Link>
+            </Message>
             <AllAmbassadors />
             <br />
             <br />
@@ -90,12 +102,23 @@ export default class Home extends React.PureComponent {
         <section className="section">
           <CFSocialProfiles size="3em" />
         </section>
-        <section className="section has-text-centered illustration">
-          <h1 className="title is-3">Quelques vidéos au hasard</h1>
+        <section className="section last-videos">
           <br />
           <br />
+          <div className="has-text-centered">
+            <h1 className="title is-3">Les dernières vidéos ajoutées</h1>
+            <Link
+              className="button animated-hover is-medium is-gradient-primary-light"
+              to="/videos"
+            >
+              {this.props.t('seeVideos')}
+            </Link>
+          </div>
           <br />
-          <img src={landingIllustration} alt="" />
+          <br />
+          <div className="last-videos-cards">
+            <LastVideos />
+          </div>
         </section>
         {INVITATION_SYSTEM && (
           <section className="section request-invitation">

@@ -8,12 +8,12 @@ import { optionsToQueryString } from '../../lib/url_utils'
 const OpenCollectiveContributors = ({
   tier,
   avatarHeight = 72,
-  showBtn = true,
+  button = true,
   width = 325
 }) => {
   const queryParams = optionsToQueryString({
     avatarHeight,
-    showBtn,
+    button,
     width
   })
 
@@ -31,7 +31,7 @@ OpenCollectiveContributors.propTypes = {
   tier: PropTypes.oneOf(['soutien-régulier', 'donateur']).isRequired,
   avatarHeight: PropTypes.number,
   width: PropTypes.number,
-  showBtn: PropTypes.bool
+  button: PropTypes.bool
 }
 
 export default OpenCollectiveContributors

@@ -27,13 +27,7 @@
         flex-basis: 240px
         padding: 1.2em 1em
         font-size: 1.4em
-        box-shadow: -1px 2px 8px #457480
-        transition: box-shadow 0.2s, transform 0.2s
-        transform: translateY(0) scale(1)
-        border-color: darken($white, 10)
-        &:hover
-          box-shadow: -1px 7px 14px #476f79
-          transform: translateY(-0.15em) scale(1.025)
+        border: 1px solid darken($white, 10)
         &:last-of-type
           margin-bottom: 0.25em
       .button-label
@@ -59,6 +53,10 @@
       .logo-container
         text-align: center
         margin-bottom: 3em
+
+  .last-videos-cards
+    margin: 0 auto
+    max-width: $maxHomeSectionWidth
 
   .presentation
     font-size: $size-5
@@ -92,28 +90,27 @@
       max-width: $maxHomeSectionWidth
       margin: 0 auto
       padding: 4em 3em
-      .column
-        flex-basis: 125px
+      +mobile
+        padding: 2em 1em
       .image
         @include animate(fadeIn, 1s)
         margin-left: 0
         margin-right: 1.3em
     .opencollective-contributors
-      .opencollective-svg
-        width: 10px
-
-  .ambassadors
-    img
-      border-radius: 1em
+      max-width: 100%
+      display: block
+      +mobile
+        margin: 0 auto
 
   .actions
     display: flex
     flex-wrap: wrap
     justify-content: center
 
-  .illustration
+  .last-videos
     background: $white
     min-height: 15vh
+    padding: 1em
 
   .community
     background: #5abda8
