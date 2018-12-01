@@ -22,6 +22,9 @@ const PARTNERS = [
   { name: 'YesWeHack', img: imgYesWeHack, url: 'https://yeswehack.com' },
 ]
 
+/**
+ * Render all CaptainFact partners
+ */
 const AllPartners = () => (
   <div className="columns is-multiline is-mobile">
     {PARTNERS.map(partner => (

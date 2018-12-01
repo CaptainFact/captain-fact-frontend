@@ -12,6 +12,9 @@ const AMBASSADORS = [
   { name: 'Basile Asti', img: imgBasile }
 ]
 
+/**
+ * Render all CaptainFact ambassadors
+ */
 const AllAmbassadors = () => (
   <div className="columns is-multiline is-mobile ambassadors">
     {AMBASSADORS.map(ambassador => (
