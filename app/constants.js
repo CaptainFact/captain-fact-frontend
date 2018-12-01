@@ -55,8 +55,8 @@ export const MIN_REPUTATION_MODERATION = 125
 
 /* ------ UI, animations ------ */
 
-export const MOBILE_WIDTH_THRESHOLD = 768 // pixels
-export const FULLHD_WIDTH_THRESHOLD = 1408 // pixels
+export const MOBILE_WIDTH_THRESHOLD = 768 // TODO Use syled-components theme
+export const FULLHD_WIDTH_THRESHOLD = 1408 // TODO Use syled-components theme
 
 export const USER_PICTURE_SMALL = 24
 export const USER_PICTURE_LARGE = 48

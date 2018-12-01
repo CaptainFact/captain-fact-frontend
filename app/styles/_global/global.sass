@@ -24,3 +24,27 @@ a[disabled]
 
 h1
   font-family: $family-serif
+
+.is-gradient-primary
+  background: linear-gradient(45deg, #78b4b4, #5c8686 70%, #3c5a73)
+  background-color: #5c8686
+  color: $white-bis
+
+.is-gradient-primary-light
+  background: linear-gradient(15deg, lighten($primary, 5), darken($primary, 5) 70%)
+  background-color: $primary
+  color: $white-bis
+  border: none
+  &:hover, &:active, &:focus
+    color: $white-bis
+    border-color: $grey-light
+
+.is-gradient-info
+  background: linear-gradient(45deg, $info, darken($info, 30) 65%)
+  background-color: $info
+  color: $white-bis
+
+.button.is-gradient-info
+  border-color: darken($white, 15)
+  &:hover
+    color: darken($white, 10)

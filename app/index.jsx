@@ -6,6 +6,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { ApolloProvider } from 'react-apollo'
+import { ThemeProvider } from 'styled-components'
 
 // Load store
 import store from './state'
@@ -17,6 +18,7 @@ import GraphQLClient from './API/graphql_api'
 import CFRouter from './router'
 // Import styles
 import './styles/application.sass'
+import theme from './styles/theme'
 
 // Activate polyfills
 smoothSrollPolyfill()
@@ -25,7 +27,9 @@ smoothSrollPolyfill()
 ReactDOM.render(
   <Provider store={store}>
     <ApolloProvider client={GraphQLClient}>
-      <CFRouter />
+      <ThemeProvider theme={theme}>
+        <CFRouter />
+      </ThemeProvider>
     </ApolloProvider>
   </Provider>,
   document.getElementById('app')

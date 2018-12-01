@@ -1,85 +1,116 @@
 .home-page
+  $maxHomeSectionWidth: 1160px
   min-height: 100vh
   display: flex
   flex-direction: column
-  background: linear-gradient(45deg, #78b4b4, #5c8686 70%, #3c5a73) fixed
-  background-color: #5c8686
+  background-attachment: fixed
+
+  +mobile
+    .title
+      text-align: center
+    .columns.is-multiline
+      justify-content: center
 
   .hero
     min-height: 25vh
+    .title, p, strong
+      color: $white
+    .buttons-container
+      .button, .button-label
+        @include ProgressiveAnimationDelay(0.1s, 0.3s, 3)
+        animation-name: fadeInUp
+        animation-duration: 0.8s
+        animation-fill-mode: backwards
+      .button
+        width: 100%
+        margin-bottom: 1em
+        flex-basis: 240px
+        padding: 1.2em 1em
+        font-size: 1.4em
+        border: 1px solid darken($white, 10)
+        &:last-of-type
+          margin-bottom: 0.25em
+      .button-label
+        text-align: center
+        color: $white-bis
+        a
+          color: $info
+          &:hover
+            text-decoration: underline
     +mobile
       min-height: 20vh
     .hero-body
-      padding: 5rem
+      padding: 6em 4em
+      margin: 0 auto
+      max-width: $maxHomeSectionWidth
       +mobile
         padding: 3rem 1rem
         font-size: 12px
-      .site-logo
-        @include animate(bounceInDown, 0.7s)
-        .logo-captain
-          color: $logo-inside-color
-        .logo-fact
-          color: lighten($logo-inside-color, 10)
-      .subtitle
-        @include animate(fadeIn, 1s)
-        animation-delay: 0.7s
-      .title
-        text-shadow: 1px 1px 1px rgba(74, 74, 74, 0.34)
-        color: #3c4852
-        font-size: 3em
-        margin: 0
-        img
-          width: 80px
-      .subtitle
-        font-style: italic
-        color: #f3f3f3
-        margin-top: 10px
+      +tablet
+        padding: 3em 2em
+      +desktop
+        padding: 6em 4em
+      .logo-container
+        text-align: center
+        margin-bottom: 3em
+
+  .last-videos-cards
+    margin: 0 auto
+    max-width: $maxHomeSectionWidth
+
+  .presentation
+    font-size: $size-5
 
   .section
     margin: 0
     h2
       margin-bottom: 1em
 
-  .presentation
-    @include animate(fadeIn, 1s)
-    padding: 4rem 4rem 2rem
-    min-height: 45vh
-    flex-grow: 1
-    display: flex
-    flex-direction: column
-    justify-content: center
-    background: $white
+  .separator
+    height: 12em
+    width: 100%
+    margin-top: -6em;
+    background-color: $white
+    clip-path: ellipse(55% 40% at 50% 100%)
     +mobile
-      padding: 3rem
-      min-height: 65vh
-    &> div
-      max-width: 1000px
+      clip-path: ellipse(60% 25% at 50% 100%)
+
+  .section:not(.hero)
+    .title
+      color: $primary
+    +mobile 
+      .title.is-3
+        margin-bottom: 1em
+
+  .partners
+    background: $white
+    padding: 0
+
+    .content
+      max-width: $maxHomeSectionWidth
       margin: 0 auto
+      padding: 4em 3em
+      +mobile
+        padding: 2em 1em
+      .image
+        @include animate(fadeIn, 1s)
+        margin-left: 0
+        margin-right: 1.3em
+    .opencollective-contributors
+      max-width: 100%
+      display: block
+      +mobile
+        margin: 0 auto
 
   .actions
     display: flex
     flex-wrap: wrap
     justify-content: center
-    .button
-      flex-basis: 240px
-      animation-name: fadeInUp
-      animation-duration: 1s
-      animation-fill-mode: backwards
-      @include ProgressiveAnimationDelay(0.1s, 0.3s, 3)
-      margin: 0.3em 0.25em
-      padding: 1.3em 1em
-      font-size: 1.6em
-      box-shadow: -1px 2px 8px #457480
-      transition: box-shadow 0.2s, transform 0.2s
-      transform: translateY(0) scale(1)
-      border: 1px solid $grey
-      &:hover
-        box-shadow: -1px 7px 14px #476f79
-        transform: translateY(-0.15em) scale(1.025)
 
-  .illustration
+  .last-videos
     background: $white
     min-height: 15vh
+    padding: 1em
 
   .community
     background: #5abda8
@@ -125,6 +156,7 @@
     padding: 1.5rem 1.5rem
     justify-content: flex-end
     border-top: 1px solid lighten($border, 5)
+    color: $dark
     .icon-heart
       color: $red
 
