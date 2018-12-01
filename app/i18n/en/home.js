@@ -15,11 +15,9 @@ export default {
   verifiedStatements: 'verified quotes',
   contributors: 'Contributors',
   seeAllContributors: 'See all contributors on OpenCollective',
-  roles: {
-    ambassador: 'Ambassador',
-    ambassadorPadawan: 'Padawan Ambassador',
-    developer: 'Developer',
-    donator: 'Donator',
-    partner: 'Partner'
-  }
+  registerAndFactCheck: 'Signup and fact-check',
+  installExtension: 'Install Extension',
+  partners: 'Our partners',
+  ambassadors: 'Ambassadors',
+  start: "Let's go!"
 }
