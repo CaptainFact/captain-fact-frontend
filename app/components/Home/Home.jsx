@@ -12,6 +12,7 @@ import AllPartners from './AllPartners'
 import OpenCollectiveContributors from './OpenCollectiveContributors'
 import AllAmbassadors from './AllAmbassadors'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
+import CFSocialProfiles from './CFSocialProfiles'
 
 @connect(state => ({ authenticated: isAuthenticated(state) }))
 @withNamespaces('home')
@@ -86,8 +87,8 @@ export default class Home extends React.PureComponent {
             <br />
           </div>
         </section>
-        <section className="section has-text-centered">
-          <h1>Add social networks here</h1>
+        <section className="section">
+          <CFSocialProfiles size="3em" />
         </section>
         <section className="section has-text-centered illustration">
           <h1 className="title is-3">Quelques vidéos au hasard</h1>

@@ -2,6 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { optionsToQueryString } from '../../lib/url_utils'
 
+/**
+ * Embed https://opencollective.com contributors.
+ */
 const OpenCollectiveContributors = ({
   tier,
   avatarHeight = 72,
