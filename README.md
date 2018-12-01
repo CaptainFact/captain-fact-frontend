@@ -59,6 +59,18 @@ app
 └── router.jsx => Application router and main entry point
 ```
 
+#### Styling
+
+Styling is based on [Bulma](https://bulma.io/documentation/) and was initially
+customized with SASS. However we now include [styled-components](https://github.com/emotion-js/emotion), [styled-system](https://github.com/jxnblk/styled-system) and [@rebass/grid](https://github.com/rebassjs/grid)
+. This has become the prefered way to build new components.
+
+#### Icons
+
+We bundle a custom font icon built with icomoon. You can find scripts and config
+for this in `dev/` but the preferred (and easiest) way to add new icons today
+is to use `https://styled-icons.js.org/`.
+
 ## Main Libraries / Frameworks
 
 - ES6 with Babel
