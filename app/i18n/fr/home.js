@@ -14,5 +14,8 @@ export default {
   partners: 'Les partenaires',
   ambassadors: 'Ambassadeurs',
   start: 'Commencer',
-  backers: 'Soutiens'
+  backers: 'Soutiens',
+  learnMore: 'En savoir plus',
+  aboutAmbassadors:
+    'Les ambassadeurs sont chargés de veiller sur la communauté. Ils ont aussi pour objectif de faire remonter les attentes des utilisateurs et de participer à la gouvernance du projet.'
 }

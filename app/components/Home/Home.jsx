@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { withNamespaces, Trans } from 'react-i18next'
+import { Flex, Box } from '@rebass/grid'
+import * as Matomo from '../../API/matomo'
 
 import { Icon } from '../Utils'
 import InvitationRequestForm from '../Users/InvitationRequestForm'
@@ -33,12 +35,14 @@ export default class Home extends React.PureComponent {
     return (
       <div className="buttons-container">
         <Link
+          onClick={() => Matomo.registerClick('Home', 'Button', 'SignUp')}
           className="button animated-hover is-medium is-gradient-primary-light"
           to="/signup"
         >
           {this.props.t('registerAndFactCheck')}
         </Link>
         <Link
+          onClick={() => Matomo.registerClick('Home', 'Button', 'ExtensionPage')}
           className="button animated-hover is-medium is-gradient-primary-light"
           to="/extension"
         >
@@ -79,23 +83,26 @@ export default class Home extends React.PureComponent {
         <section className="section partners">
           <div className="content">
             <h1 className="title is-3">{t('partners')}</h1>
+            <br />
             <AllPartners />
             <br />
-            <h1 className="title is-3">{t('backers')}</h1>
-            <OpenCollectiveContributors tier="soutien-régulier" button={false} />
-            <OpenCollectiveContributors tier="donateur" button />
-            <br />
-            <h1 className="title is-3">{t('ambassadors')}</h1>
-            <Message>
-              Les ambassadeurs sont chargés de veiller sur la communauté. Ils ont aussi
-              pour objectif de faire remonter les attentes des utilisateurs et de
-              participer à la gouvernance du projet a travers des droits de véto et une
-              consultation obligatoire de l'équipe technique sur cetaines décisions.{' '}
-              <Link to="/help/ambassadors">En savoir plus.</Link>
-            </Message>
-            <AllAmbassadors />
             <br />
             <br />
+            <Flex flexWrap="wrap">
+              <Box width={[1, 1, 0.5, 0.5, 1 / 3]} mb="2em">
+                <h1 className="title is-3">{t('backers')}</h1>
+                <OpenCollectiveContributors tier="soutien-régulier" button={false} />
+                <OpenCollectiveContributors tier="donateur" button={false} />
+              </Box>
+              <Box width={[1, 1, 0.5, 0.5, 2 / 3]}>
+                <h1 className="title is-3">{t('ambassadors')}</h1>
+                <Message>
+                  {t('aboutAmbassadors')}{' '}
+                  <Link to="/help/ambassadors">{t('learnMore')}</Link>
+                </Message>
+                <AllAmbassadors />
+              </Box>
+            </Flex>
             <br />
           </div>
         </section>
@@ -108,6 +115,7 @@ export default class Home extends React.PureComponent {
           <div className="has-text-centered">
             <h1 className="title is-3">Les dernières vidéos ajoutées</h1>
             <Link
+              onClick={() => Matomo.registerClick('Home', 'Button', 'SeeAllVideos')}
               className="button animated-hover is-medium is-gradient-primary-light"
               to="/videos"
             >

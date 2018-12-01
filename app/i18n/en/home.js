@@ -14,5 +14,8 @@ export default {
   partners: 'Our partners',
   ambassadors: 'Ambassadors',
   start: "Let's go!",
-  backers: 'Backers'
+  backers: 'Backers',
+  learnMore: 'Learn more',
+  aboutAmbassadors:
+    "Ambassadors are special members in charge of looking after the community. They also aim to report users' expectations to the technical team and participate in the governance of the project."
 }
