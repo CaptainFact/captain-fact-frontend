@@ -11,21 +11,25 @@ import { IS_DEV } from '../config'
  * @param {number} (optional) numeric value
  */
 export const pushEvent = (context, action, name, value) => {
-  // Generate the event
-  let event = null
-  if (name && value) {
-    event = ['trackEvent', context, action, name, value]
-  } else if (name) {
-    event = ['trackEvent', context, action, name]
-  } else {
-    event = ['trackEvent', context, action]
-  }
+  try {
+    // Generate the event
+    let event = null
+    if (name && value) {
+      event = ['trackEvent', context, action, name, value]
+    } else if (name) {
+      event = ['trackEvent', context, action, name]
+    } else {
+      event = ['trackEvent', context, action]
+    }
 
-  // Push the event
-  if ((window._paq === undefined || !window._paq) && IS_DEV) {
-    console.debug('[Matomo] Push event', event)
-  } else {
-    window._paq.push(event)
+    // Push the event
+    if ((window._paq === undefined || !window._paq) && IS_DEV) {
+      console.debug('[Matomo] Push event', event)
+    } else {
+      window._paq.push(event)
+    }
+  } catch (e) {
+    // Ignore errors
   }
 }
 
