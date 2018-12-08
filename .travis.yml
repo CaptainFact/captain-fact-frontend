@@ -1,5 +1,6 @@
 stages:
   - name: Unit-Testing
+    if: branch != master OR type = pull_request
   - name: E2E-Testing
     if: branch =~ /cypress/ OR (type = pull_request AND branch = master)
   - name: deploy
@@ -10,7 +11,7 @@ jobs:
     - stage: Unit-Testing
       language: node_js
       node_js: [node]
-      cache: { directories: [node_modules, "~/.npm", "~/.cache"] }
+      cache: { directories: [node_modules, '~/.npm', '~/.cache'] }
       script:
         - npm run coverage && cat ./coverage/lcov.info | coveralls
 
@@ -19,7 +20,7 @@ jobs:
       node_js: [node]
       sudo: required
       services: [docker]
-      cache: { directories: [node_modules, "~/.npm", "~/.cache"] }
+      cache: { directories: [node_modules, '~/.npm', '~/.cache'] }
       script:
         # Shutdown postgres instances - see https://github.com/travis-ci/travis-ci/issues/4842#issuecomment-311527059
         - sudo service postgresql stop
