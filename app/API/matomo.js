@@ -31,6 +31,7 @@ export const pushEvent = (context, action, name, value) => {
   } catch (e) {
     // Ignore errors
   }
+  return true
 }
 
 /**
@@ -41,5 +42,5 @@ export const pushEvent = (context, action, name, value) => {
  * @param {string} name The name of the link / button (eg. signin, register...)
  */
 export const registerClick = (context, type, name) => {
-  pushEvent(context, 'Click', `${type}-${name}`)
+  return pushEvent(context, 'Click', `${type}-${name}`)
 }
