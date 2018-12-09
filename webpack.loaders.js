@@ -16,13 +16,7 @@ module.exports = isProd => [
       // This is a feature of `babel-loader` for Webpack (not Babel itself).
       // It enables caching results in ./node_modules/.cache/babel-loader/
       // directory for faster rebuilds.
-      cacheDirectory: true,
-      presets: [['es2015', { loose: true, modules: 'umd' }], 'react'],
-      plugins: [
-        'transform-class-properties',
-        'transform-decorators-legacy',
-        'transform-runtime'
-      ]
+      cacheDirectory: true
     }
   },
   // =======================
@@ -196,10 +190,7 @@ module.exports = isProd => [
           includePaths: [
             path.resolve(__dirname, 'node_modules'),
             path.resolve(__dirname, 'app/styles'),
-            path.resolve(
-              __dirname,
-              'node_modules/animate.scss/vendor/assets/stylesheets'
-            )
+            path.resolve(__dirname, 'node_modules/animate.scss/vendor/assets/stylesheets')
           ]
         }
       }
