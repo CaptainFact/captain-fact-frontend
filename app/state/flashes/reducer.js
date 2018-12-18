@@ -12,27 +12,33 @@ export const unPause = createAction('FLASHES/UNPAUSE', () => false)
 export const update = createAction('FLASHES/UPDATE')
 
 // Actions helpers (use them like regular actions)
-export const flashError = options =>
-  addFlash({
+export const flashError = options => {
+  return addFlash({
     flashType: 'danger',
     iconName: 'exclamation-circle',
     ...options
   })
+}
+
 export const flashErrorMsg = message => flashError({ message })
-export const flashErrorUnauthenticated = () =>
-  flashError({
+
+export const flashErrorUnauthenticated = () => {
+  return flashError({
     message: 'errors:server.unauthenticated',
     infoText: 'main:menu.loginSignup',
     infoUrl: '/login'
   })
+}
 
-export const flashSuccessMsg = (message, params = {}) =>
-  addFlash({
+export const flashSuccessMsg = (message, params = {}) => {
+  return addFlash({
     flashType: 'success',
     iconName: 'check-circle',
     message,
     ...params
   })
+}
+
 export function errorToFlash(msg) {
   const errorInfo = getErrorInfo(msg)
   let action = null
@@ -47,6 +53,7 @@ export function errorToFlash(msg) {
   action.error = true
   return action
 }
+
 // Same as errorToFlash but doesn't show anything if payload is
 // not a string (useful for forms)
 export function errorMsgToFlash(msg) {
@@ -65,8 +72,8 @@ const FlashesReducer = handleActions(
     [addFlash]: (state, { payload }) => {
       // Only display one error for connections problems (instead of one per request)
       if (
-        payload.message === NO_INTERNET_ERROR &&
-        state.flashes.find(f => f.message === NO_INTERNET_ERROR)
+        payload.message === NO_INTERNET_ERROR
+        && state.flashes.find(f => f.message === NO_INTERNET_ERROR)
       )
         return state
       return state.update('flashes', l => l.push(payload))
@@ -76,14 +83,12 @@ const FlashesReducer = handleActions(
       if (flashIdx !== -1) return state.update('flashes', l => l.delete(flashIdx))
       return state
     },
-    [combineActions(pause, unPause)]: (state, { payload }) =>
-      state.set('isPaused', payload),
+    [combineActions(pause, unPause)]: (state, { payload }) => state.set('isPaused', payload),
     [update]: (state, { payload }) => {
       if (!state.isPaused)
-        return state.update('flashes', flashes =>
-          flashes
-            .map(f => f.set('timeLeft', f.timeLeft - payload))
-            .filter(msg => msg.timeLeft > 0)
+        return state.update('flashes', flashes => flashes
+          .map(f => f.set('timeLeft', f.timeLeft - payload))
+          .filter(msg => msg.timeLeft > 0)
         )
       return state
     }

@@ -15,7 +15,8 @@ export default {
     action_already_done: 'This action has already been done',
     unauthenticated: 'You need an account to do that',
     unauthorized: 'Please (re)connect to continue',
-    noInternet: 'Server connection failed, try refreshing the page'
+    noInternet: 'Server connection failed, try refreshing the page',
+    remote_video_404: "Remote video doesn't seems to exist"
   },
   client: {
     joinCrashed: 'Server connection failed',
