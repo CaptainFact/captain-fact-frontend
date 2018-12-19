@@ -16,9 +16,10 @@ export const getStatementSpeaker = createCachedSelector(
 export const getFocusedStatementId = createSelector(
   state => state.VideoDebate.statements.data,
   state => state.VideoDebate.video.playback.position,
-  (statements, position) => {
+  state => state.VideoDebate.video.offset,
+  (statements, position, offset) => {
     if (!position) return -1
-    const statement = statements.findLast(st => position >= st.time)
+    const statement = statements.findLast(st => position >= st.time + offset)
     return statement && position <= statement.time + STATEMENT_FOCUS_TIME
       ? statement.id
       : -1
@@ -43,5 +44,6 @@ export const isStatementFocused = createSelector(
 
 export const statementFormValueSelector = formValueSelector('StatementForm')
 
-export const hasStatementForm = state =>
-  statementFormValueSelector(state, 'speaker_id') !== undefined
+export const hasStatementForm = state => {
+  return statementFormValueSelector(state, 'speaker_id') !== undefined
+}

@@ -17,12 +17,12 @@ import StatementHeader from './StatementHeader'
 @withNamespaces('videoDebate')
 export default class Statement extends React.PureComponent {
   render() {
-    const { statement, speaker, handleEdit, handleDelete } = this.props
+    const { statement, speaker, handleEdit, handleDelete, offset = 0 } = this.props
 
     return (
       <div>
         <StatementHeader
-          statement={statement}
+          statementTime={statement.time + offset}
           speaker={speaker}
           handleEdit={handleEdit}
           handleDelete={handleDelete}

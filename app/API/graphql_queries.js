@@ -7,8 +7,7 @@ export const VideosQuery = gql`
       totalPages
       entries {
         hash_id: hashId
-        provider_id: providerId
-        provider
+        youtube_id: youtubeId
         title
         insertedAt
         isPartner

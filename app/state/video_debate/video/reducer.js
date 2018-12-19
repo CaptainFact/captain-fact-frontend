@@ -2,6 +2,8 @@ import { handleActions, createAction } from 'redux-actions'
 import { Record, List } from 'immutable'
 import uuidv1 from 'uuid/v1'
 
+import { VIDEO_PLAYER_YOUTUBE } from '../../../constants'
+import { getTimecodesOffset } from '../../../lib/video_utils'
 import Video from '../../videos/record'
 import Speaker from '../../speakers/record'
 import { resetVideoDebate } from '../actions'
@@ -13,6 +15,7 @@ export const setLoading = createAction('VIDEO/SET_LOADING')
 export const addSpeaker = createAction('VIDEO/ADD_SPEAKER')
 export const removeSpeaker = createAction('VIDEO/REMOVE_SPEAKER')
 export const updateSpeaker = createAction('VIDEO/UPDATE_SPEAKER')
+export const updateVideo = createAction('VIDEO/UPDATE_VIDEO')
 
 export const setPosition = createAction('PLAYBACK/SET_POSITION')
 export const forcePosition = createAction('PLAYBACK/FORCE_POSITION')
@@ -26,6 +29,11 @@ const INITIAL_STATE = new Record({
   data: new Video(),
   errors: null,
   isLoading: false,
+  /** The player type currently displayed */
+  player: VIDEO_PLAYER_YOUTUBE,
+  /** An offset used to shift all video's timecodes */
+  offset: 0,
+  /** Information about the current playback status */
   playback: new Record({
     position: null,
     forcedPosition: FORCED_POSITION_RECORD(),
@@ -43,13 +51,20 @@ function sortSpeakers(speakers) {
 
 const VideoReducer = handleActions(
   {
+    [updateVideo]: (state, { payload }) => {
+      return state.merge({
+        data: payload,
+        offset: getTimecodesOffset(payload, state.player)
+      })
+    },
     [fetchAll]: {
       next: (state, { payload: { speakers, ...data } }) => {
         speakers = sortSpeakers(new List(speakers.map(s => new Speaker(s))))
         return state.mergeDeep({
           isLoading: false,
           errors: null,
-          data: new Video(data).set('speakers', speakers)
+          data: new Video(data).set('speakers', speakers),
+          offset: getTimecodesOffset(data, state.player)
         })
       },
       throw: (state, { payload }) => {
@@ -81,11 +96,10 @@ const VideoReducer = handleActions(
       return state.setIn(['playback', 'position'], Math.trunc(payload))
     },
     [forcePosition]: (state, { payload }) => {
-      return state.update('playback', p =>
-        p.mergeDeep({
-          position: payload,
-          forcedPosition: { time: payload, requestId: uuidv1() }
-        })
+      return state.update('playback', p => p.mergeDeep({
+        position: payload,
+        forcedPosition: { time: payload, requestId: uuidv1() }
+      })
       )
     },
     [setPlaying]: (state, { payload }) => {
