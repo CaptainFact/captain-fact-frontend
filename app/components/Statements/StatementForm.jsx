@@ -34,7 +34,10 @@ export class StatementForm extends React.PureComponent {
   constructor(props) {
     super(props)
     const lockedTime =
-      props.initialValues.time === undefined ? props.position : props.initialValues.time
+      props.initialValues.time === undefined
+        ? props.position
+        : props.initialValues.time + props.offset
+
     this.state = { lockedTime }
   }
 
@@ -48,9 +51,11 @@ export class StatementForm extends React.PureComponent {
   }
 
   toggleLock() {
-    if (this.state.lockedTime === false)
+    if (this.state.lockedTime === false) {
       this.setState({ lockedTime: this.props.position || 0 })
-    else this.setState({ lockedTime: false })
+    } else {
+      this.setState({ lockedTime: false })
+    }
   }
 
   moveTimeMarker(position) {
@@ -59,12 +64,23 @@ export class StatementForm extends React.PureComponent {
   }
 
   handleSubmit(statement) {
-    const currentTime =
-      this.state.lockedTime === false ? this.props.position : this.state.lockedTime
-    if (currentTime !== 0 && !currentTime)
-      statement.time = this.props.initialValues.time || 0
-    else statement.time = currentTime || 0
-    if (!statement.speaker_id) statement.speaker_id = null
+    const { position, initialValues, offset } = this.props
+    const { lockedTime } = this.state
+
+    // Get the best value for statement time and apply the reverse offset
+    // to use absolute timecode.
+    if (lockedTime !== false) {
+      statement.time = lockedTime - offset
+    } else if (position) {
+      statement.time = position - offset
+    } else {
+      statement.time = -offset
+    }
+
+    if (!statement.speaker_id) {
+      statement.speaker_id = null
+    }
+
     this.props.handleConfirm(statement).then(
       handleFormEffectResponse({
         onSuccess: ({ id }) => this.props.setScrollTo({ id, __forceAutoScroll: true })
@@ -75,6 +91,7 @@ export class StatementForm extends React.PureComponent {
   render() {
     const {
       position,
+      offset = 0,
       handleSubmit,
       valid,
       speakers,
