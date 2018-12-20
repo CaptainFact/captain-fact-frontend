@@ -1,6 +1,6 @@
 {
   "name": "captain-fact-frontend",
-  "version": "0.9.1",
+  "version": "0.9.3",
   "private": true,
   "scripts": {
     "build": "npx webpack-cli --config webpack.production.config.js",
