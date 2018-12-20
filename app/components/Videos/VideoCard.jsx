@@ -12,7 +12,7 @@ import { videoURL } from '../../lib/cf_routes'
 export class VideoCard extends React.PureComponent {
   render() {
     const { t, video } = this.props
-    const { hash_id, title, provider, provider_id } = video
+    const { hash_id, title } = video
     const linkTarget = videoURL(hash_id)
 
     return (
@@ -25,7 +25,7 @@ export class VideoCard extends React.PureComponent {
                 <RawIcon name="play-circle" />
               </div>
               <figure className="image is-16by9">
-                <img alt="" src={VideoCard.videoThumb(provider, provider_id)} />
+                <img alt="" src={VideoCard.videoThumb(video)} />
               </figure>
             </Link>
           }
@@ -93,9 +93,9 @@ export class VideoCard extends React.PureComponent {
     return <Link to={`/s/${speaker.slug || speaker.id}`}>{speaker.full_name}</Link>
   }
 
-  static videoThumb(provider, provider_id) {
-    if (provider === 'youtube') {
-      return `https://img.youtube.com/vi/${provider_id}/mqdefault.jpg`
+  static videoThumb({youtube_id}) {
+    if (youtube_id) {
+      return `https://img.youtube.com/vi/${youtube_id}/mqdefault.jpg`
     }
     return ''
   }

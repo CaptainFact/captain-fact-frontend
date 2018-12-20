@@ -11,7 +11,7 @@ import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
 export default withNamespaces('videoDebate')(
   ({
     t,
-    statement,
+    statementTime,
     speaker,
     handleTimeClick,
     handleShowHistory,
@@ -21,7 +21,7 @@ export default withNamespaces('videoDebate')(
   }) => (
     <header className="card-header">
       <p className="card-header-title">
-        <TimeDisplay time={statement.time} handleClick={handleTimeClick} />
+        <TimeDisplay time={statementTime} handleClick={handleTimeClick} />
         {speaker && speaker.picture && (
           <img className="speaker-mini" src={speaker.picture} alt="" />
         )}

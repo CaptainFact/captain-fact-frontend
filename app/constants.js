@@ -92,3 +92,6 @@ export const STATEMENT_LENGTH = [10, 255]
 export const ALL_VIDEOS = 'ALL_VIDEOS'
 export const ONLY_PARTNERS = 'ONLY_PARTNERS'
 export const ONLY_COMMUNITY = 'ONLY_COMMUNITY'
+
+/* ------ Third party providers ------ */
+export const VIDEO_PLAYER_YOUTUBE = 'youtube'

@@ -44,7 +44,7 @@ export class SpeakerPreview extends React.PureComponent {
         content={
           <React.Fragment>
             {this.renderName(speaker)}
-            <p className="subtitle">{this.getTitle()}</p>
+            <p className="subtitle">{speaker.title || '...'}</p>
           </React.Fragment>
         }
         right={isAuthenticated && !withoutActions && this.renderActions()}
@@ -105,28 +105,6 @@ export class SpeakerPreview extends React.PureComponent {
         {speaker.full_name}
       </Link>
     )
-  }
-
-  getTitle() {
-    const { title, country } = this.props.speaker
-    // Only translate if title exists and is not user defined
-    if (!title) return '...'
-
-    let i18nTitle = ''
-    if (this.props.i18n.language === 'en')
-      // No need to translate title for english
-      i18nTitle = title
-    else {
-      // If unknown title, return raw title
-      const i18nTitleKey = `speaker.titles.${title}`
-      i18nTitle = this.props.t(i18nTitleKey)
-      if (i18nTitle === i18nTitleKey) return title
-    }
-    // Try to return title + nationality, otherwise fallback on translated title
-    return this.props.t('speaker.titleFormat', {
-      title: i18nTitle,
-      context: country
-    })
   }
 
   handleRemove() {

@@ -15,7 +15,8 @@ export default {
     action_already_done: 'Cette action a déjà été effectuée',
     unauthenticated: 'Vous devez vous connecter pour effectuer cette action',
     unauthorized: 'Merci de vous (re)connecter pour continuer',
-    noInternet: 'La connexion au serveur a échoué, essayez de rafraichir la page'
+    noInternet: 'La connexion au serveur a échoué, essayez de rafraichir la page',
+    remote_video_404: "Il semble que cette vidéo n'existe pas"
   },
   client: {
     joinCrashed: 'La cconnexion au serveur a échoué',
