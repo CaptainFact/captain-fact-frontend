@@ -55,7 +55,7 @@
     ]
   },
   "dependencies": {
-    "@babel/polyfill": "~7.0.0",
+    "@babel/polyfill": "~7.2.3",
     "@rebass/grid": "~6.0.0-5",
     "animate.scss": "0.0.6",
     "apollo-boost": "~0.1.12",
