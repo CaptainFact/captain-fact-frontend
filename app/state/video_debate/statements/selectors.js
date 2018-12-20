@@ -19,8 +19,9 @@ export const getFocusedStatementId = createSelector(
   state => state.VideoDebate.video.offset,
   (statements, position, offset) => {
     if (!position) return -1
-    const statement = statements.findLast(st => position >= st.time + offset)
-    return statement && position <= statement.time + STATEMENT_FOCUS_TIME
+    const adjustedPosition = position - offset
+    const statement = statements.findLast(st => adjustedPosition >= st.time)
+    return statement && adjustedPosition <= statement.time + STATEMENT_FOCUS_TIME
       ? statement.id
       : -1
   }
