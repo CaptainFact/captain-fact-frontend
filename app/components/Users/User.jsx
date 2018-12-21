@@ -4,9 +4,16 @@ import { Link } from 'react-router'
 import { Trans, withNamespaces } from 'react-i18next'
 import { Helmet } from 'react-helmet'
 
+import { UserCircle } from 'styled-icons/fa-regular/UserCircle'
+import { Activity } from 'styled-icons/feather/Activity'
+import { Settings } from 'styled-icons/feather/Settings'
+import { Bell } from 'styled-icons/fa-solid/Bell'
+import { Clock } from 'styled-icons/fa-regular/Clock'
+import { Videos } from 'styled-icons/boxicons-regular/Videos'
+
 import UserAppellation from './UserAppellation'
 import UserPicture from './UserPicture'
-import { Icon, ErrorView } from '../Utils'
+import { ErrorView } from '../Utils'
 import ScoreTag from './ScoreTag'
 import MediaLayout from '../Utils/MediaLayout'
 import { LoadingFrame } from '../Utils/LoadingFrame'
@@ -14,7 +21,7 @@ import { TimeSince } from '../Utils/TimeSince'
 import { USER_PICTURE_XLARGE } from '../../constants'
 import { fetchUser } from '../../state/users/displayed_user/effects'
 import { resetUser } from '../../state/users/displayed_user/reducer'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider';
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 
 @connect(
   ({ DisplayedUser: { isLoading, errors, data } }) => ({
@@ -34,8 +41,8 @@ export default class User extends React.PureComponent {
   componentDidUpdate(oldProps) {
     // If user's username was updated
     if (
-      this.props.user.id === oldProps.user.id &&
-      this.props.user.username !== oldProps.user.username
+      this.props.user.id === oldProps.user.id
+      && this.props.user.username !== oldProps.user.username
     )
       // TODO Remove old user profile from history
       // Redirect
@@ -49,15 +56,16 @@ export default class User extends React.PureComponent {
     this.props.resetUser()
   }
 
-  getActiveTab(section, iconName, menuTKey, isDisabled = false) {
-    const linkTo = `/u/${this.props.user.username}${section ? `/${section}` : ''}`
+  getActiveTab(subRoute, IconComponent, menuTKey, isDisabled = false) {
+    const linkTo = `/u/${this.props.user.username}${subRoute}`
     const isActive = this.props.location.pathname === linkTo
     if (this.props.isLoading) isDisabled = true
 
     return (
       <li className={isActive ? 'is-active' : ''}>
         <Link to={linkTo} disabled={isDisabled}>
-          <Icon name={iconName} />
+          <IconComponent size="1em" />
+          &nbsp;
           <span>{this.props.t(menuTKey)}</span>
         </Link>
       </li>
@@ -84,11 +92,11 @@ export default class User extends React.PureComponent {
           {user.id !== 0 && (
             <MediaLayout
               left={<UserPicture user={user} size={USER_PICTURE_XLARGE} />}
-              content={
+              content={(
                 <div>
                   <UserAppellation user={user} withoutActions />
                   <div className="registered-since">
-                    <Icon name="clock-o" />
+                    <Clock size="1em" />
                     &nbsp;
                     <Trans i18nKey="user:registeredSince">
                       Registered for
@@ -100,17 +108,22 @@ export default class User extends React.PureComponent {
                     </Trans>
                   </div>
                 </div>
-              }
+              )}
               right={<ScoreTag reputation={user.reputation} size="large" withIcon />}
             />
           )}
         </section>
         <div className="tabs is-centered">
           <ul>
-            {this.getActiveTab('', 'user-circle', 'menu.profile')}
-            {this.getActiveTab('videos', 'television', 'menu.addedVideos')}
-            {this.getActiveTab('activity', 'tasks', 'menu.activity')}
-            {this.isSelf() && this.getActiveTab('settings', 'cog', 'menu.settings')}
+            {this.getActiveTab('', UserCircle, 'menu.profile')}
+            {this.getActiveTab('/videos', Videos, 'menu.addedVideos')}
+            {this.getActiveTab('/activity', Activity, 'menu.activity')}
+            {this.isSelf() && (
+              <React.Fragment>
+                {this.getActiveTab('/notifications', Bell, 'menu.notifications')}
+                {this.getActiveTab('/settings', Settings, 'menu.settings')}
+              </React.Fragment>
+            )}
           </ul>
         </div>
         {this.props.children}

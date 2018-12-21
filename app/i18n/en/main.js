@@ -21,8 +21,8 @@ export default {
     extension: 'Browser extension',
     help: 'Learn more',
     moderation: 'Moderation',
-    edit: 'Edit',
-    addedVideos: 'Added videos'
+    addedVideos: 'Added videos',
+    notifications: 'Notifications'
   },
   actions: {
     save: 'Save',
