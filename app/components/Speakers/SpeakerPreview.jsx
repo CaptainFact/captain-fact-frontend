@@ -9,7 +9,6 @@ import {
   MIN_REPUTATION_UPDATE_SPEAKER
 } from '../../constants'
 
-import { isAuthenticated } from '../../state/users/current_user/selectors'
 import { ModalFormContainer } from '../Modal'
 import Icon from '../Utils/Icon'
 import ClickableIcon from '../Utils/ClickableIcon'
@@ -21,16 +20,17 @@ import { removeSpeaker, updateSpeaker } from '../../state/video_debate/effects'
 import { changeStatementFormSpeaker } from '../../state/video_debate/statements/reducer'
 import MediaLayout from '../Utils/MediaLayout'
 import { getFocusedStatementSpeakerId } from '../../state/video_debate/statements/selectors'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider';
 
 @withRouter
 @withNamespaces('videoDebate')
 @connect(
   (state, props) => ({
-    isAuthenticated: isAuthenticated(state),
     isFocused: getFocusedStatementSpeakerId(state) === props.speaker.id
   }),
   { addModal, changeStatementFormSpeaker, removeSpeaker, updateSpeaker }
 )
+@withLoggedInUser
 export class SpeakerPreview extends React.PureComponent {
   render() {
     const { speaker, isAuthenticated, withoutActions, className } = this.props

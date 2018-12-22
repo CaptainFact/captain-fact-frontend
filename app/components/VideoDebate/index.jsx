@@ -4,7 +4,6 @@ import { withNamespaces } from 'react-i18next'
 import { Helmet } from 'react-helmet'
 
 import { ErrorView } from '../Utils'
-import { isAuthenticated } from '../../state/users/current_user/selectors'
 import {
   joinCommentsChannel,
   leaveCommentsChannel
@@ -25,8 +24,7 @@ import { ColumnDebate } from './ColumnDebate'
   state => ({
     videoErrors: state.VideoDebate.video.errors,
     isLoading: state.VideoDebate.video.isLoading,
-    videoTitle: state.VideoDebate.video.data.title,
-    authenticated: isAuthenticated(state)
+    videoTitle: state.VideoDebate.video.data.title
   }),
   {
     joinVideoDebateChannel,

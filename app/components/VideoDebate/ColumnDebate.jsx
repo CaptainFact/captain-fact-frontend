@@ -9,16 +9,16 @@ import StatementsList from '../Statements/StatementsList'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { hasStatementForm } from '../../state/video_debate/statements/selectors'
 import { Icon } from '../Utils/Icon'
-import { isAuthenticated } from '../../state/users/current_user/selectors'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 
 @connect(state => ({
   isLoading: isLoadingVideoDebate(state),
   hasStatements: state.VideoDebate.statements.data.size !== 0,
   hasSpeakers: state.VideoDebate.video.data.speakers.size !== 0,
-  hasStatementForm: hasStatementForm(state),
-  authenticated: isAuthenticated(state)
+  hasStatementForm: hasStatementForm(state)
 }))
 @withNamespaces('videoDebate')
+@withLoggedInUser
 export class ColumnDebate extends React.PureComponent {
   render() {
     return (
@@ -48,17 +48,20 @@ export class ColumnDebate extends React.PureComponent {
   }
 
   renderHelp() {
-    const { hasSpeakers, authenticated, t } = this.props
+    const { hasSpeakers, isAuthenticated, t } = this.props
     let helpMessage = ''
-    if (!authenticated) helpMessage = t('tips.noContentUnauthenticated')
-    else if (!hasSpeakers) helpMessage = t('tips.firstSpeaker')
-    else
+    if (!isAuthenticated) {
+      helpMessage = t('tips.noContentUnauthenticated')
+    } else if (!hasSpeakers) {
+      helpMessage = t('tips.firstSpeaker')
+    } else {
       helpMessage = (
         <Trans i18nKey="tips.firstStatement" parent="span">
           [Now] <strong>[add]</strong> [click] <Icon name="commenting-o" />
           &nbsp;[icon]
         </Trans>
       )
+    }
 
     return (
       <div className="video-debate-help">

@@ -1,10 +1,9 @@
 import React from 'react'
-import { reduxForm } from 'redux-form'
+import { reduxForm, SubmissionError } from 'redux-form'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router'
 import { withNamespaces } from 'react-i18next'
 
-import { register, requestInvitation } from '../../state/users/current_user/effects'
 import {
   renderAllUserFields,
   submitButton,
@@ -15,8 +14,9 @@ import Notification from '../Utils/Notification'
 import Message from '../Utils/Message'
 import InvitationRequestForm from './InvitationRequestForm'
 import { errorToFlash } from '../../state/flashes/reducer'
-import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 import { INVITATION_SYSTEM } from '../../config'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import { signUp } from '../../API/http_api/current_user'
 
 const SignupForm = ({ location, t }) => {
   if (!INVITATION_SYSTEM || location.query.invitation_token) {
@@ -47,30 +47,30 @@ export default withRouter(withNamespaces('user')(SignupForm))
 @withNamespaces('user')
 @reduxForm({ form: 'signupForm', validate: validatePasswordRepeat })
 @connect(
-  ({ CurrentUser: { data }, UserPreferences: { locale } }) => ({
-    CurrentUser: data,
-    locale
-  }),
-  { register, requestInvitation, errorToFlash }
+  state => ({ locale: state.UserPreferences.locale }),
+  { errorToFlash }
 )
+@withLoggedInUser
 class RealSignupForm extends React.PureComponent {
   componentWillReceiveProps(props) {
     // Redirect to user profile when logged in
-    if (props.CurrentUser.id) {
-      this.props.router.push(`/u/${props.CurrentUser.username}`)
+    if (props.isAuthenticated) {
+      props.router.push(`/u/${props.loggedInUser.username}`)
     }
   }
 
   submit({ invitation_token, ...user }) {
-    const registerParams = {
-      invitation_token,
-      user: { ...user, locale: this.props.locale }
-    }
-    return this.props.register(registerParams).then(
-      handleFormEffectResponse({
-        onError: msg => (typeof msg === 'string' ? this.props.errorToFlash(msg) : null)
+    return signUp({ ...user, locale: this.props.locale }, invitation_token)
+      .then(({ user, token }) => {
+        this.props.updateLoggedInUser(user, token)
       })
-    )
+      .catch(e => {
+        if (typeof e === 'string') {
+          this.props.errorToFlash(e)
+        } else {
+          throw new SubmissionError(e)
+        }
+      })
   }
 
   render() {

@@ -7,7 +7,6 @@ import { MIN_REPUTATION_UPDATE_VIDEO } from '../../constants'
 
 import { changeStatementFormSpeaker } from '../../state/video_debate/statements/reducer'
 import { addModal } from '../../state/modals/reducer'
-import { isAuthenticated } from '../../state/users/current_user/selectors'
 import { Icon } from '../Utils/Icon'
 import ReputationGuard from '../Utils/ReputationGuard'
 import ShareModal from '../Utils/ShareModal'
@@ -18,12 +17,12 @@ import {
   toggleAutoscroll,
   toggleBackgroundSound
 } from '../../state/user_preferences/reducer'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 
 @connect(
   state => ({
     hasAutoscroll: state.UserPreferences.enableAutoscroll,
     soundOnBackgroundFocus: state.UserPreferences.enableSoundOnBackgroundFocus,
-    isAuthenticated: isAuthenticated(state),
     hasStatementForm: hasStatementForm(state)
   }),
   {
@@ -36,6 +35,7 @@ import {
 )
 @withNamespaces('videoDebate')
 @withRouter
+@withLoggedInUser
 export default class ActionBubbleMenu extends React.PureComponent {
   render() {
     const { t, hasStatementForm, soundOnBackgroundFocus } = this.props
@@ -80,11 +80,10 @@ export default class ActionBubbleMenu extends React.PureComponent {
         <ActionBubble
           iconName="share-alt"
           label={t('main:actions.share')}
-          onClick={() =>
-            this.props.addModal({
-              Modal: ShareModal,
-              props: { path: location.pathname }
-            })
+          onClick={() => this.props.addModal({
+            Modal: ShareModal,
+            props: { path: location.pathname }
+          })
           }
         />
         <ReputationGuard requiredRep={MIN_REPUTATION_UPDATE_VIDEO}>

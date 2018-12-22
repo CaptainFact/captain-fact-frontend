@@ -24,8 +24,8 @@ const UserAppellation = ({
     )
   return (
     <Component {...componentProps} className={className}>
-      <strong className="main-appelation">{name || prettyUsername}</strong>
-      {name && <small className="secondary-appelation"> {prettyUsername}</small>}
+      <strong className="main-appelation">{user.name || prettyUsername}</strong>
+      {user.name && <small className="secondary-appelation"> {prettyUsername}</small>}
     </Component>
   )
 }

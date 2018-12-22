@@ -1,43 +1,39 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 import { withNamespaces } from 'react-i18next'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { ErrorView } from '../Utils/ErrorView'
-import { login } from '../../state/users/current_user/effects'
-import { isAuthenticated } from '../../state/users/current_user/selectors'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import { signIn } from '../../API/http_api/current_user'
 
-@connect(
-  state => ({
-    user: state.CurrentUser.data,
-    isLoading: state.CurrentUser.isLoading || state.CurrentUser.isPosting,
-    error: state.CurrentUser.error,
-    isAuthenticated: isAuthenticated(state)
-  }),
-  { login }
-)
 @withNamespaces('user')
+@withLoggedInUser
 export default class ThirdPartyCallback extends React.PureComponent {
+  state = { error: null }
+
   componentDidMount() {
     if (!this.props.location.query.error) {
-      this.props.login({
-        provider: this.props.params.provider,
-        params: {
-          code: this.props.location.query.code,
-          invitation_token: this.props.location.query.state
-        }
+      signIn(this.props.params.provider, {
+        code: this.props.location.query.code,
+        invitation_token: this.props.location.query.state
       })
+        .then(({ user, token }) => {
+          this.props.updateLoggedInUser(user, token)
+        })
+        .catch(e => {
+          this.setState({ error: e })
+        })
     }
   }
 
   componentDidUpdate() {
-    if (this.props.isAuthenticated && this.props.user.username)
-      this.props.router.push(`/u/${this.props.user.username}/settings`)
+    if (this.props.isAuthenticated && this.props.loggedInUser.username) {
+      this.props.router.push(`/u/${this.props.loggedInUser.username}/settings`)
+    }
   }
 
   render() {
-    if (this.props.isLoading) return <LoadingFrame title="Authenticating" />
-    if (this.props.error)
+    if (this.state.error)
       return <ErrorView error={this.props.error} i18nNS="user:errors.error" />
     if (this.props.location.query.error)
       return (

@@ -4,6 +4,7 @@ import React from 'react'
 import 'isomorphic-fetch'
 import 'fetch-mock'
 
+import User from '../app/state/users/record'
 
 global.React = React
 
@@ -28,14 +29,14 @@ global.snapshotComponent = component => snapshot(shallow(component))
 /**
  * Apply all actions to given reducer and make a snapshot at each step.
  */
-global.snapshotReducer = ((reducer, initialState, ...actions) => {
+global.snapshotReducer = (reducer, initialState, ...actions) => {
   snapshot(initialState)
   return actions.reduce((state, action) => {
     const newState = reducer(state, action)
     snapshot(newState)
     return newState
   }, initialState)
-})
+}
 
 const mockWithNamespaces = () => Component => {
   Component.defaultProps = {
@@ -50,12 +51,8 @@ const mockWithNamespaces = () => Component => {
  * receive the t function as a prop
  */
 jest.mock('react-i18next', () => ({
-  Interpolate: ({ i18nKey, ...props }) => (
-    `Interpolated[${i18nKey}] with props ${JSON.stringify(props)}`
-  ),
-  Trans: ({ i18nKey, ...props }) => (
-    `Trans[${i18nKey}] with props ${JSON.stringify(props)}`
-  ),
+  Interpolate: ({ i18nKey, ...props }) => `Interpolated[${i18nKey}] with props ${JSON.stringify(props)}`,
+  Trans: ({ i18nKey, ...props }) => `Trans[${i18nKey}] with props ${JSON.stringify(props)}`,
   translate: mockWithNamespaces,
   withNamespaces: mockWithNamespaces,
   t: str => `Translated[${str}]`

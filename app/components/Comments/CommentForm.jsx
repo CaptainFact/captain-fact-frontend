@@ -16,12 +16,12 @@ import UserPicture from '../Users/UserPicture'
 import MediaLayout from '../Utils/MediaLayout'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 import { CommentDisplay } from './CommentDisplay'
-import { isAuthenticated } from '../../state/users/current_user/selectors'
 import { flashErrorUnauthenticated } from '../../state/flashes/reducer'
 import ControlInput from '../FormUtils/ControlInput'
 import { cleanStrMultiline } from '../../lib/clean_str'
 import CommentField from './CommentField'
 import Button from '../Utils/Button'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider';
 
 const validate = ({ source, text }) => {
   const errors = {}
@@ -38,9 +38,7 @@ const validate = ({ source, text }) => {
     const formValues = getFormValues(props.form)(state)
     return {
       sourceUrl: formValues && formValues.source ? formValues.source.url : null,
-      replyTo: formValues && formValues.reply_to,
-      currentUser: state.CurrentUser.data,
-      isAuthenticated: isAuthenticated(state)
+      replyTo: formValues && formValues.reply_to
     }
   },
   { postComment, flashErrorUnauthenticated }
@@ -48,13 +46,14 @@ const validate = ({ source, text }) => {
 @reduxForm({ form: 'commentForm', validate })
 @withNamespaces('videoDebate')
 @withRouter
+@withLoggedInUser
 export class CommentForm extends React.Component {
   state = { isCollapsed: true }
 
   render() {
-    const { valid, currentUser, sourceUrl, replyTo, t } = this.props
+    const { valid, loggedInUser, sourceUrl, replyTo, t } = this.props
 
-    if (!this.props.currentUser.id || (this.state.isCollapsed && !replyTo))
+    if (!this.props.loggedInUser.id || (this.state.isCollapsed && !replyTo))
       return (
         <div className="comment-form collapsed">
           <Button className="is-inverted is-primary" onClick={() => this.expandForm()}>
@@ -71,7 +70,7 @@ export class CommentForm extends React.Component {
           onSubmit: this.postAndReset(c => this.props.postComment(c))
         }}
         className="comment-form"
-        left={<UserPicture user={currentUser} size={USER_PICTURE_LARGE} />}
+        left={<UserPicture user={loggedInUser} size={USER_PICTURE_LARGE} />}
         content={
           <div>
             {replyTo && (

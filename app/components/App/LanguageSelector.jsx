@@ -2,8 +2,8 @@ import React from 'react'
 import { Map } from 'immutable'
 import classNames from 'classnames'
 import { withNamespaces } from 'react-i18next'
-
-import { Icon } from '../Utils/Icon'
+import { Flex, Box } from '@rebass/grid'
+import { Globe } from 'styled-icons/fa-solid/Globe'
 
 const defaultLocales = new Map({
   en: 'English',
@@ -12,16 +12,6 @@ const defaultLocales = new Map({
 
 @withNamespaces() // Force waiting for translations to be loaded
 export default class LanguageSelector extends React.PureComponent {
-  render() {
-    const sizeClass = this.props.size ? `is-${this.props.size}` : null
-    return (
-      <div className={classNames('language-selector', this.props.className)}>
-        {this.props.withIcon && <Icon name="language" size={this.props.size} />}
-        <span className={classNames('select', sizeClass)}>{this.renderSelect()}</span>
-      </div>
-    )
-  }
-
   renderSelect() {
     const options = defaultLocales
       .merge(this.props.additionalOptions || {})
@@ -43,5 +33,29 @@ export default class LanguageSelector extends React.PureComponent {
         {value}
       </option>
     ))
+  }
+
+  renderIcon() {
+    const { value, size } = this.props
+    if (value === 'fr') {
+      return '🇫🇷'
+    }
+    if (value === 'en') {
+      return '🇬🇧'
+    }
+    return <Globe size={!size ? '2em' : '1em'} />
+  }
+
+  render() {
+    const sizeClass = this.props.size ? `is-${this.props.size}` : null
+    return (
+      <Flex
+        className={classNames('language-selector', this.props.className)}
+        alignItems="center"
+      >
+        {this.props.withIcon && <Box mr="0.5em">{this.renderIcon()}</Box>}
+        <span className={classNames('select', sizeClass)}>{this.renderSelect()}</span>
+      </Flex>
+    )
   }
 }

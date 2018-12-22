@@ -1,35 +1,28 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
+import { Flex } from '@rebass/grid'
 
 import { facebookAuthUrl } from '../../lib/third_party_auth'
-import { deleteAccount } from '../../state/users/current_user/effects'
-import { addModal } from '../../state/modals/reducer'
+import { addModal, popModal } from '../../state/modals/reducer'
 import DeleteUserModal from './DeleteUserModal'
 import EditUserForm from './EditUserForm'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import Button from '../Utils/Button'
 import ThirdPartyAccountLinker from './ThirdPartyAccountLinker'
-import LanguageSelector from '../App/LanguageSelector'
-import i18n from '../../i18n/i18n'
-
-const mapStateToProps = state => ({
-  user: state.CurrentUser.data,
-  isLoading: state.CurrentUser.isLoading || state.CurrentUser.isPosting,
-  locale: state.UserPreferences.locale
-})
-
-const mapDispatchToProps = { deleteAccount, addModal }
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import UserLanguageSelector from '../LoggedInUser/UserLanguageSelector'
+import { deleteUserAccount } from '../../API/http_api/current_user'
 
 @connect(
-  mapStateToProps,
-  mapDispatchToProps
+  state => ({ locale: state.UserPreferences.locale }),
+  { addModal, popModal }
 )
 @withNamespaces('user')
+@withLoggedInUser
 export default class UserSettings extends React.PureComponent {
   render() {
-    const { t, deleteAccount, addModal, user, locale } = this.props
-
+    const { t, addModal, loggedInUser, locale, logout } = this.props
     return this.props.isLoading ? (
       <LoadingFrame />
     ) : (
@@ -42,13 +35,9 @@ export default class UserSettings extends React.PureComponent {
         <hr />
         <div className="has-text-centered">
           <h3 className="title is-3">{t('main:menu.language')}</h3>
-          <LanguageSelector
-            className="hide-when-collapsed"
-            handleChange={v => i18n.changeLanguage(v)}
-            value={i18n.language}
-            size="medium"
-            withIcon
-          />
+          <Flex justifyContent="center">
+            <UserLanguageSelector />
+          </Flex>
         </div>
         <br />
         <hr />
@@ -58,7 +47,7 @@ export default class UserSettings extends React.PureComponent {
           <ThirdPartyAccountLinker
             provider="facebook"
             title="Facebook"
-            isLinked={!!user.fb_user_id}
+            isLinked={!!loggedInUser.fb_user_id}
             authURL={facebookAuthUrl()}
           />
         </div>
@@ -80,11 +69,17 @@ export default class UserSettings extends React.PureComponent {
           <h3 className="title is-3">{t('dangerZone')}</h3>
           <Button
             className="is-danger"
-            onClick={() =>
-              addModal({
-                Modal: DeleteUserModal,
-                props: { handleConfirm: () => deleteAccount() }
-              })
+            onClick={() => addModal({
+              Modal: DeleteUserModal,
+              props: {
+                handleConfirm: () => {
+                  return deleteUserAccount().then(() => {
+                    logout()
+                    this.props.popModal()
+                  })
+                }
+              }
+            })
             }
           >
             {t('deleteAccount')}
