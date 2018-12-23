@@ -7,7 +7,6 @@ import * as Matomo from '../../API/matomo'
 
 import { Icon } from '../Utils'
 import InvitationRequestForm from '../Users/InvitationRequestForm'
-import { isAuthenticated } from '../../state/users/current_user/selectors'
 import { INVITATION_SYSTEM } from '../../config'
 import AllPartners from './AllPartners'
 import OpenCollectiveContributors from './OpenCollectiveContributors'
@@ -16,9 +15,10 @@ import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import CFSocialProfiles from './CFSocialProfiles'
 import LastVideos from './LastVideos'
 import Message from '../Utils/Message'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 
-@connect(state => ({ authenticated: isAuthenticated(state) }))
 @withNamespaces('home')
+@withLoggedInUser
 export default class Home extends React.PureComponent {
   renderPresentation() {
     return (
@@ -109,7 +109,7 @@ export default class Home extends React.PureComponent {
         <section className="section">
           <CFSocialProfiles size="3em" />
         </section>
-        <section className="section last-videos">
+        <section className="section last-videos" style={{ paddingBottom: '3em' }}>
           <br />
           <br />
           <div className="has-text-centered">
@@ -130,11 +130,11 @@ export default class Home extends React.PureComponent {
         </section>
         {INVITATION_SYSTEM && (
           <section className="section request-invitation">
-            <h4 className="title is-4">
+            <h4 className="title is-4" style={{ color: 'white' }}>
               <Icon name="envelope-o" />
               <span>
                 &nbsp;&nbsp;
-                {this.props.t(this.props.authenticated ? 'inviteFriend' : 'invitation')}
+                {this.props.t(this.props.isAuthenticated ? 'inviteFriend' : 'invitation')}
               </span>
             </h4>
             <InvitationRequestForm />

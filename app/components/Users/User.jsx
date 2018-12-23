@@ -14,10 +14,10 @@ import { TimeSince } from '../Utils/TimeSince'
 import { USER_PICTURE_XLARGE } from '../../constants'
 import { fetchUser } from '../../state/users/displayed_user/effects'
 import { resetUser } from '../../state/users/displayed_user/reducer'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider';
 
 @connect(
-  ({ CurrentUser, DisplayedUser: { isLoading, errors, data } }) => ({
-    isSelf: CurrentUser.data.id === data.id,
+  ({ DisplayedUser: { isLoading, errors, data } }) => ({
     isLoading,
     errors,
     user: data
@@ -25,6 +25,7 @@ import { resetUser } from '../../state/users/displayed_user/reducer'
   { fetchUser, resetUser }
 )
 @withNamespaces('main')
+@withLoggedInUser
 export default class User extends React.PureComponent {
   componentDidMount() {
     this.props.fetchUser(this.props.params.username)
@@ -63,13 +64,17 @@ export default class User extends React.PureComponent {
     )
   }
 
+  isSelf() {
+    return this.props.isAuthenticated && this.props.loggedInUser.id === this.props.user.id
+  }
+
   render() {
     if (this.props.errors) return <ErrorView error={this.props.errors} canReload />
     if (this.props.isLoading) return <LoadingFrame />
 
     const user = this.props.user
     const prettyUsername = `@${user.username}`
-    const isSelf = this.props.isSelf
+
     return (
       <div className="user-page">
         <Helmet>
@@ -104,7 +109,7 @@ export default class User extends React.PureComponent {
           <ul>
             {this.getActiveTab('', 'user-circle', 'menu.profile')}
             {this.getActiveTab('activity', 'tasks', 'menu.activity')}
-            {isSelf && this.getActiveTab('settings', 'cog', 'menu.settings')}
+            {this.isSelf() && this.getActiveTab('settings', 'cog', 'menu.settings')}
           </ul>
         </div>
         {this.props.children}

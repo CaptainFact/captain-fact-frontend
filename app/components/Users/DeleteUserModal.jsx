@@ -5,6 +5,7 @@ import { Field, formValueSelector, reduxForm } from 'redux-form'
 
 import { ModalFormContainer } from '../Modal/ModalFormContainer'
 import { Icon } from '../Utils/Icon'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 
 const DELETE_FORM = 'deleteAccount'
 
@@ -36,13 +37,13 @@ class DeleteForm extends React.PureComponent {
 
 const valueSelector = formValueSelector(DELETE_FORM)
 
-@connect(state => ({
-  isValid: valueSelector(state, 'usernameConfirm') === state.CurrentUser.data.username
-}))
+@connect(state => ({ usernameConfirm: valueSelector(state, 'usernameConfirm') }))
 @withNamespaces('main')
+@withLoggedInUser
 export default class DeleteUserModal extends React.PureComponent {
   render() {
-    const { t, isValid, ...otherProps } = this.props
+    const { t, ...otherProps } = this.props
+    const isValid = this.props.usernameConfirm === this.props.loggedInUser.username
     return (
       <ModalFormContainer
         title={t('user:deleteAccount')}

@@ -1,16 +1,10 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
 import { withNamespaces } from 'react-i18next'
-import { connect } from 'react-redux'
 import { emailField } from './UserFormFields'
-import {
-  resetPasswordRequest,
-  resetPasswordVerify,
-  resetPasswordConfirm
-} from '../../state/users/current_user/effects'
 import { ErrorView } from '../Utils/ErrorView'
 import Notification from '../Utils/Notification'
-import { handleEffectResponse } from '../../lib/handle_effect_response'
+import { resetPasswordRequest } from '../../API/http_api/current_user'
 
 // Fields are auto-validated, only validate password and repeat are the same
 const validate = params => {
@@ -23,10 +17,6 @@ const validate = params => {
 
 @reduxForm({ form: 'resetPassword', validate })
 @withNamespaces('user')
-@connect(
-  null,
-  { resetPasswordRequest, resetPasswordVerify, resetPasswordConfirm }
-)
 export default class ResetPasswordRequestForm extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -34,11 +24,9 @@ export default class ResetPasswordRequestForm extends React.PureComponent {
   }
 
   submitForm(e) {
-    this.props.resetPasswordRequest(e).then(
-      handleEffectResponse({
-        onSuccess: () => this.setState({ status: 'done' }),
-        onError: () => this.setState({ status: 'error', payload: 'reset_failed' })
-      })
+    resetPasswordRequest(e.email).then(
+      () => this.setState({ status: 'done' }),
+      () => this.setState({ status: 'error', payload: 'reset_failed' })
     )
   }
 

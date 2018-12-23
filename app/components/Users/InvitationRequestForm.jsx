@@ -5,11 +5,10 @@ import isEmail from 'validator/lib/isEmail'
 import { withNamespaces } from 'react-i18next'
 
 import browserLocale from '../../i18n/browser_locale'
-import { requestInvitation } from '../../state/users/current_user/effects'
+import { requestInvitation } from '../../API/http_api/current_user'
 import { errorToFlash, addFlash } from '../../state/flashes/reducer'
 import Notification from '../Utils/Notification'
 import { Icon } from '../Utils/Icon'
-import { handleEffectResponse } from '../../lib/handle_effect_response'
 import FieldWithButton from '../FormUtils/FieldWithButton'
 
 const validate = ({ email }) => {
@@ -21,20 +20,18 @@ const validate = ({ email }) => {
 @withNamespaces('home')
 @connect(
   null,
-  { addFlash, errorToFlash, requestInvitation }
+  { addFlash, errorToFlash }
 )
 export default class InvitationRequestForm extends React.PureComponent {
   state = { confirmed: false }
 
-  submit(user) {
-    return this.props.requestInvitation({ ...user, locale: browserLocale() }).then(
-      handleEffectResponse({
-        onSuccess: () => this.setState({ confirmed: true }),
-        onError: msg => {
-          this.props.errorToFlash(msg)
-          throw new SubmissionError({ email: 'invalid_email' })
-        }
-      })
+  submit(formValues) {
+    return requestInvitation(formValues.email, browserLocale()).then(
+      () => this.setState({ confirmed: true }),
+      msg => {
+        this.props.errorToFlash(msg)
+        throw new SubmissionError({ email: 'invalid_email' })
+      }
     )
   }
 

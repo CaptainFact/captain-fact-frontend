@@ -1,42 +1,30 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { withNamespaces, Trans } from 'react-i18next'
 import { Link } from 'react-router'
 import Popup from 'reactjs-popup'
 
-import { hasReputation } from '../../state/users/current_user/selectors'
 import { Icon } from './Icon'
 import Message from './Message'
-
-const mapStateToProps = (state, { requiredRep }) => ({
-  hasReputation: hasReputation(state, requiredRep)
-})
-
-const POPUP_STYLE = {
-  zIndex: 999
-}
-
-const ARROW_STYLE = {
-  background: '#f9fbfb'
-}
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 
 export const ReputationGuardTooltip = ({
   t,
-  hasReputation,
+  checkReputation,
   requiredRep,
   children,
   tooltipPosition = 'bottom center'
 }) => {
-  const childProps = { hasReputation }
-  return hasReputation ? (
-    children(childProps)
+  return checkReputation(requiredRep) ? (
+    children({ hasReputation: true })
   ) : (
     <Popup
       position={tooltipPosition}
-      contentStyle={POPUP_STYLE}
-      arrowStyle={ARROW_STYLE}
+      contentStyle={{ zIndex: 999 }}
+      arrowStyle={{ background: '#f9fbfb' }}
       on="hover"
-      trigger={<div className="help-tooltip-trigger">{children(childProps)}</div>}
+      trigger={
+        <div className="help-tooltip-trigger">{children({ hasReputation: false })}</div>
+      }
     >
       <Message type="primary">
         <Icon name="info-circle" />
@@ -51,4 +39,4 @@ export const ReputationGuardTooltip = ({
   )
 }
 
-export default connect(mapStateToProps)(withNamespaces('help')(ReputationGuardTooltip))
+export default withNamespaces('help')(withLoggedInUser(ReputationGuardTooltip))

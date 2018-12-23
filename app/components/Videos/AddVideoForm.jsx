@@ -10,7 +10,7 @@ import { youtubeRegex } from '../../lib/url_utils'
 import FieldWithButton from '../FormUtils/FieldWithButton'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { postVideo, searchVideo } from '../../state/videos/effects'
-import { isAuthenticated } from '../../state/users/current_user/selectors'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 
 const validate = ({ url }) => {
   if (!youtubeRegex.test(url))
@@ -23,12 +23,12 @@ const validate = ({ url }) => {
 @connect(
   (state, props) => ({
     initialValues: { url: props.params.videoUrl || props.location.query.url },
-    isSubmitting: state.Videos.isSubmitting,
-    isAuthenticated: isAuthenticated(state)
+    isSubmitting: state.Videos.isSubmitting
   }),
   { postVideo, searchVideo }
 )
 @reduxForm({ form: 'AddVideo', validate })
+@withLoggedInUser
 export class AddVideoForm extends React.PureComponent {
   componentDidMount() {
     const videoUrl = this.props.params.videoUrl || this.props.location.query.url

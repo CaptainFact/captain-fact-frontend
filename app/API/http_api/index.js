@@ -1,11 +1,10 @@
 import 'isomorphic-fetch'
 import trimRight from 'voca/trim_right'
 
-import SocketApi from './socket_api'
-import { HTTP_API_URL } from '../config'
-import parseServerError from './server_error'
-import flashNoInternetError from './no_internet_error'
-import { optionsToQueryString } from '../lib/url_utils'
+import { HTTP_API_URL } from '../../config'
+import parseServerError from '../server_error'
+import flashNoInternetError from '../no_internet_error'
+import { optionsToQueryString } from '../../lib/url_utils'
 
 class CaptainFactHttpApi {
   constructor(baseUrl, token) {
@@ -16,17 +15,15 @@ class CaptainFactHttpApi {
   }
 
   setAuthorizationToken(token) {
-    this.hasToken = true
-    localStorage.token = token
-    if (token) this.headers.authorization = `Bearer ${token}`
-    SocketApi.setAuthorizationToken(token)
+    if (token) {
+      this.hasToken = true
+      this.headers.authorization = `Bearer ${token}`
+    }
   }
 
   resetToken() {
     this.hasToken = false
     delete this.headers.authorization
-    localStorage.removeItem('token')
-    SocketApi.resetToken()
   }
 
   prepareResponse(promise) {

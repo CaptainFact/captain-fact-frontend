@@ -1,21 +1,15 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
 import { withNamespaces } from 'react-i18next'
-import { connect } from 'react-redux'
 import { passwordField, passwordRepeatField } from './UserFormFields'
-import {
-  resetPasswordRequest,
-  resetPasswordVerify,
-  resetPasswordConfirm,
-  login
-} from '../../state/users/current_user/effects'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { ErrorView } from '../Utils/ErrorView'
 import UserPicture from './UserPicture'
 import { USER_PICTURE_XLARGE } from '../../constants'
 import UserAppellation from './UserAppellation'
 import Notification from '../Utils/Notification'
-import { handleEffectResponse } from '../../lib/handle_effect_response'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import * as userAPI from '../../API/http_api/current_user'
 
 // Fields are auto-validated, only validate password and repeat are the same
 const validate = params => {
@@ -28,57 +22,53 @@ const validate = params => {
 
 @reduxForm({ form: 'resetPassword', validate })
 @withNamespaces('user')
-@connect(
-  null,
-  { resetPasswordRequest, resetPasswordVerify, resetPasswordConfirm, login }
-)
+@withLoggedInUser
 export default class ResetPasswordConfirmForm extends React.PureComponent {
   constructor(props) {
     super(props)
-    this.state = { status: 'waiting_verification', payload: null }
+    this.state = { status: 'waiting_verification', user: null }
   }
 
   componentDidMount() {
-    this.props.resetPasswordVerify(this.props.params.token).then(
-      handleEffectResponse({
-        onSuccess: user => this.setState({ status: 'confirm', payload: user }),
-        onError: () => this.setState({ status: 'error', payload: 'invalid_token' })
+    userAPI
+      .resetPasswordVerify(this.props.params.token)
+      .then(user => {
+        this.setState({ status: 'confirm', user })
       })
-    )
+      .catch(() => {
+        this.setState({ status: 'error', user: 'invalid_token' })
+      })
   }
 
   submitForm(e) {
-    this.props
-      .resetPasswordConfirm({
-        password: e.password,
-        token: this.props.params.token
+    userAPI
+      .resetPasswordConfirm(this.props.params.token, e.password)
+      .then(user => {
+        userAPI
+          .signIn('identity', { ...user, password: e.password })
+          .then(({ user, token }) => {
+            this.props.updateLoggedInUser(user, token)
+          })
+        this.setState({ status: 'confirm_success' })
       })
-      .then(
-        handleEffectResponse({
-          onSuccess: () => {
-            this.props.login({
-              provider: 'identity',
-              params: { email: this.state.payload.email, password: e.password }
-            })
-            this.setState({ status: 'confirm_success' })
-          },
-          onError: () => this.setState({ status: 'error', payload: 'reset_failed' })
-        })
-      )
+      .catch(e => {
+        this.setState({ status: 'error', user: 'reset_failed' })
+      })
   }
 
   renderContent() {
-    if (this.state.status === 'error')
+    if (this.state.status === 'error') {
       return (
-        <ErrorView
-          error={this.state.payload}
-          i18nNS="user:errors.error"
-          canGoBack={false}
-        />
+        <ErrorView error={this.state.user} i18nNS="user:errors.error" canGoBack={false} />
       )
-    if (this.state.status === 'verify') return <LoadingFrame />
+    }
+
+    if (this.state.status === 'verify') {
+      return <LoadingFrame />
+    }
+
     if (this.state.status === 'confirm') {
-      const user = this.state.payload
+      const user = this.state.user
       return (
         <div>
           <div className="user-box">
@@ -93,8 +83,9 @@ export default class ResetPasswordConfirmForm extends React.PureComponent {
         </div>
       )
     }
-    if (this.state.status === 'confirm_success')
+    if (this.state.status === 'confirm_success') {
       return <Notification>{this.props.t('resetPasswordSuccess')}</Notification>
+    }
   }
 
   render() {
