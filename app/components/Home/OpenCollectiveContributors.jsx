@@ -9,12 +9,14 @@ const OpenCollectiveContributors = ({
   tier,
   avatarHeight = 72,
   button = true,
-  width = 325
+  width = 325,
+  limit = 50
 }) => {
   const queryParams = optionsToQueryString({
     avatarHeight,
     button,
-    width
+    width,
+    limit
   })
 
   return (
