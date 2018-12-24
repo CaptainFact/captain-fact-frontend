@@ -1,75 +1,60 @@
-Les ambassadeurs sont des représentants de la communauté qui ont pour mission
-de faire remonter les attentes des utilisateurs, de donner leur avis sur les
-futures évolutions et d'être un contre-pouvoir si l'équipe venait à prendre
-des décisions allant a l'encontre de l'intérêt général.
+> Les ambassadeurs sont chargés de veiller sur la communauté. Ils ont aussi
+> pour objectif de faire remonter les attentes des utilisateurs et de
+> participer à la gouvernance du projet a travers des droits de véto et une
+> consultation obligatoire de l'équipe technique sur certaines décisions.
 
-La plateforme étant toujours en Beta, nous nous reservons la possibilité
-de modifier les différents aspects présentés ici jusqu'à ce qu'un équilibre
-soit trouvé.
+# Nomination des ambassadeurs
 
-### Nomination des ambassadeurs
+### Conditions préalables
 
-Les ambassadeurs sont reconnaissables sur [Discord](https://discord.gg/2Qd7hMz)
-par leur appartenance au groupe éponyme. Les deux premiers ambassadeurs,
-[@DocFred](/u/docfred) et [@Troplent](/u/Troplent) ont été nommés suite à leurs
-contributions importantes sur la plateforme en termes de qualité et
-d'implication.
+- Vous devez avoir au moins `300` points de réputation sur le site
+- Vous devez vous être présenté sur [Discord](https://discord.gg/2Qd7hMz),
+  et vous être engagé dans les discussions.
+- Montrer une attitude ouverte, accepter la critique constructive quand nécessaire.
+- Vous devez utiliser votre vrai nom sur CaptainFact et sur Discord
 
-C'est eux qui ont la responsabilité de nommer les futurs ambassadeurs.
+Cette liste peut ne pas être à jour. Les ambassadeurs vous donnerons plus
+d'indications sur le processus en début de candidature.
+
+### Pour candidater
+
 Pour candidater, rendez-vous sur le [Discord spécifique aux ambassadeurs](https://discord.gg/gXhwS4m).
+
+---
 
 # Charte des ambassadeurs
 
+#### ⛵ Vous êtes des barreurs
 
-### 🖐‍ Vous êtes des **barreurs** !
+En discutant avec l'équipe et en faisant le lien avec la communauté, vous nous
+aidez à garantir une cohérence et une certaine vision à long terme du projet
 
-En discutant avec l'équipe, en influençant certaines 
-actions de la communauté, vous nous aidez à garantir une cohérence et une 
-certaine vision à long terme du projet ! Vous êtes notre **gage d'indépendance**.
+#### 🗳️ Vous faites partie de la gouvernance
 
+À travers des droits de véto et une consultation obligatoire avant de prendre des
+décisions importantes, vous participez à co-construire le projet en s'assurant
+qu'il ne renie pas ses valeurs.
 
-### 😠‍ Vous êtes notre **contre-prouvoir** !
-Si nous ne sommes pas en adéquation avec nos valeurs ou si nous
-appliquons des actions incohérentes,
-vous êtes là pour nous rappeler à l'ordre.
+#### 👥 Vous êtes membres de la communauté
 
-
-### 📝‍  Vous êtes **membres de la communauté** ! 
-Que ça soit sur la plateforme ou 
-le [Discord](https://discord.gg/2Qd7hMz), vous pouvez prendre la
-température des utilisateurs, modérer les échanges et garantir 
+Que ça soit sur le site ou le [Discord](https://discord.gg/2Qd7hMz), vous
+pouvez prendre la température des utilisateurs, modérer les échanges et garantir
 une utilisation saine de la plateforme.
 
+#### 🔁 Vous êtes en auto-gestion
 
-### 👁‍ Vous êtes en **auto-gestion** ! 
-Que ça soit dans le recrutement d'ambassadeurs
-ou l'organisation, nous ne serons pas interventionnistes, 
-nous souhaitons construire une relation de confiance avec vous.
+Vous êtes en charge du recrutement des nouveaux ambassadeurs et êtes responsables
+de votre fonctionnement interne.
 
-### ⏲‍ Vous êtes **mandatés** ! 
-Afin de garantir un minimum d'investissement et 
-un renouvellement régulier des ambassadeurs, votre mandat est de 6 mois 
-et il est renouvelable.
+#### ⏲‍ Vous êtes mandatés
 
-### 😃‍ Vous êtes **réels** ! 
-Nous allons travailler avec vous pour définir votre 
-statut juridique au sein de notre structure pour garantir votre indépendance.
+Afin de garantir un minimum d'investissement et un renouvellement régulier des
+ambassadeurs, votre mandat est de 6 mois (renouvelable).
 
+#### 🆓‍ Vous êtes libres
 
-### 🔗‍ Vous êtes **un lien** ! 
-Nous souhaitons casser la dimension virtuelle de 
-notre communauté et vous avez un rôle à jouer, que ca soit à travers la 
-promotion ou l'organisation d'événements nous serons là pour vous soutenir.
-
-
-### 👷‍  Vous êtes **des conseillés** ! 
-Tous les points mentionnés dans 
-cette charte sont sujets à discussion et nous comptons sur vous pour nous faire 
-des retours pour préciser / modifier / supprimer / ajouter
-des règles qui vous sembleraient importantes.
-
-### 🆓‍ Vous êtes **libres** !
 De quitter vos fonctions d'ambassadeur à tout moment.
 
-### 😃‍ Vous êtes **géniaux** ! 
+#### 😃‍ Vous êtes géniaux
+
 Merci pour votre implication et votre travail.

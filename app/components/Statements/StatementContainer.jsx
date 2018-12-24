@@ -15,9 +15,11 @@ import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 import StatementComments from './StatementComments'
 import { CommentForm } from '../Comments/CommentForm'
 import Statement from './Statement'
+import { getTimecodesOffset } from '../../lib/video_utils'
 
 @connect(
   (state, props) => ({
+    offset: state.VideoDebate.video.offset,
     speaker: statementSelectors.getStatementSpeaker(state, props),
     isFocused: statementSelectors.isStatementFocused(state, props),
     scrollTo: state.VideoDebate.statements.scrollTo,
@@ -42,9 +44,7 @@ export default class StatementContainer extends React.PureComponent {
 
     return (
       <div
-        className={classNames('statement-container', {
-          'is-focused': isFocused
-        })}
+        className={classNames('statement-container', { 'is-focused': isFocused })}
         ref="container"
       >
         <div className="card statement">
@@ -75,6 +75,7 @@ export default class StatementContainer extends React.PureComponent {
       <StatementForm
         form={`StatementForm-${statement.id}`}
         initialValues={statement.toJS()}
+        offset={this.props.offset}
         isBundled
         handleAbort={() => this.setState({ isEditing: false })}
         handleConfirm={s =>
@@ -94,6 +95,7 @@ export default class StatementContainer extends React.PureComponent {
         speaker={speaker}
         handleEdit={() => this.setState({ isEditing: true })}
         handleDelete={() => this.setState({ isDeleting: true })}
+        offset={this.props.offset}
       />
     )
   }

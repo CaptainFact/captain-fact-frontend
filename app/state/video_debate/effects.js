@@ -15,7 +15,8 @@ export const joinVideoDebateChannel = videoId => dispatch => {
         speaker_removed: s => dispatch(videoReducer.removeSpeaker(s)),
         speaker_updated: s => dispatch(videoReducer.updateSpeaker(s)),
         presence_state: s => dispatch(setPresence(s)),
-        presence_diff: s => dispatch(presenceDiff(s))
+        presence_diff: s => dispatch(presenceDiff(s)),
+        video_updated: ({ video }) => dispatch(videoReducer.updateVideo(video))
       })
     )
   )
@@ -25,17 +26,34 @@ export const leaveVideoDebateChannel = () => () => {
   return SocketApi.leaveChannel(VIDEO_DEBATE_CHANNEL)
 }
 
-export const addSpeaker = speaker =>
-  createEffect(SocketApi.push(VIDEO_DEBATE_CHANNEL, 'new_speaker', speaker), {
+export const addSpeaker = speaker => {
+  return createEffect(SocketApi.push(VIDEO_DEBATE_CHANNEL, 'new_speaker', speaker), {
     catch: errorToFlash
   })
+}
 
-export const removeSpeaker = speaker =>
-  createEffect(SocketApi.push(VIDEO_DEBATE_CHANNEL, 'remove_speaker', speaker), {
+export const removeSpeaker = speaker => {
+  return createEffect(SocketApi.push(VIDEO_DEBATE_CHANNEL, 'remove_speaker', speaker), {
     catch: errorToFlash
   })
+}
 
-export const updateSpeaker = speaker =>
-  createEffect(SocketApi.push(VIDEO_DEBATE_CHANNEL, 'update_speaker', speaker), {
+export const updateSpeaker = speaker => {
+  return createEffect(SocketApi.push(VIDEO_DEBATE_CHANNEL, 'update_speaker', speaker), {
     catch: [errorMsgToFlash, generateFSAError]
   })
+}
+
+/**
+ * Shift all video's statements
+ *
+ * @param {object} offsets a map of offsets
+ *
+ * ## Examples
+ * > shiftStatements({youtube_offset: 42})
+ */
+export const shiftStatements = offsets => {
+  return createEffect(SocketApi.push(VIDEO_DEBATE_CHANNEL, 'shift_statements', offsets), {
+    catch: errorToFlash
+  })
+}
