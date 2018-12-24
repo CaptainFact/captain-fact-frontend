@@ -3,12 +3,15 @@ import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router'
 import { withNamespaces } from 'react-i18next'
 import classNames from 'classnames'
+import { Flex, Box } from '@rebass/grid'
+
+import { MicrophoneAlt } from 'styled-icons/boxicons-regular/MicrophoneAlt'
+
 import {
   MIN_REPUTATION_ADD_STATEMENT,
   MIN_REPUTATION_REMOVE_SPEAKER,
   MIN_REPUTATION_UPDATE_SPEAKER
 } from '../../constants'
-
 import { ModalFormContainer } from '../Modal'
 import Icon from '../Utils/Icon'
 import ClickableIcon from '../Utils/ClickableIcon'
@@ -33,34 +36,34 @@ import { withLoggedInUser } from '../LoggedInUser/UserProvider';
 @withLoggedInUser
 export class SpeakerPreview extends React.PureComponent {
   render() {
-    const { speaker, isAuthenticated, withoutActions, className } = this.props
+    const { speaker, isAuthenticated, withoutActions, className, isFocused } = this.props
+    const classes = classNames('speaker-preview', className, { isActive: isFocused })
 
     return (
-      <MediaLayout
-        className={classNames('speaker-preview', className, {
-          isActive: this.props.isFocused
-        })}
-        left={this.renderSpeakerThumb(speaker)}
-        content={
-          <React.Fragment>
-            {this.renderName(speaker)}
-            <p className="subtitle">{speaker.title || '...'}</p>
-          </React.Fragment>
-        }
-        right={isAuthenticated && !withoutActions && this.renderActions()}
-      />
+      <Flex className={classes} alignItems="center">
+        <Flex
+          className="speaker-picture"
+          flex="0 0 50px"
+          justifyContent="center"
+          alignItems="center"
+          mr="1rem"
+        >
+          {this.renderSpeakerThumb(speaker)}
+        </Flex>
+        <Flex flex="1 1 auto" flexDirection="column">
+          {this.renderName(speaker)}
+          <p className="subtitle">{speaker.title || '...'}</p>
+        </Flex>
+        <Flex>{isAuthenticated && !withoutActions && this.renderActions()}</Flex>
+      </Flex>
     )
   }
 
   renderSpeakerThumb(speaker) {
-    if (speaker.picture) return <img className="speaker-picture" src={speaker.picture} />
-    return (
-      <Icon
-        className="speaker-picture"
-        name="user"
-        size="large"
-        style={{ color: 'grey' }}
-      />
+    return speaker.picture ? (
+      <img alt="" className="speaker-picture" src={speaker.picture} />
+    ) : (
+      <MicrophoneAlt size="2.75em" />
     )
   }
 
