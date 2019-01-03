@@ -99,7 +99,7 @@
     "smoothscroll-polyfill": "~0.4.0",
     "styled-components": "~4.1.2",
     "styled-icons": "~5.5.0",
-    "styled-system": "~3.1.11",
+    "styled-system": "~3.2.0",
     "tinycon": "~0.6.8",
     "uuid": "~3.3.2",
     "validator": "10.8.0",
