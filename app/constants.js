@@ -25,6 +25,10 @@ export const ACTION_SELF_VOTE = 'self_vote'
 export const ACTION_REVERT_VOTE_UP = 'revert_vote_up'
 export const ACTION_REVERT_VOTE_DOWN = 'revert_vote_down'
 export const ACTION_REVERT_SELF_VOTE = 'revert_self_vote'
+export const ACTION_BANNED_BAD_LANGUAGE = 'action_banned_bad_language'
+export const ACTION_BANNED_BAD_SPAM = 'action_banned_spam'
+export const ACTION_BANNED_BAD_IRRELEVANT = 'action_banned_irrelevant'
+export const ACTION_BANNED_BAD_NOT_CONSTRUCTIVE = 'action_banned_not_constructive'
 
 // Moderation actions
 export const MODERATION_ACTION_CONFIRM = 1
