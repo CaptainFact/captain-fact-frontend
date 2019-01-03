@@ -9,7 +9,7 @@ export default {
     authentication_failed: "L'authentification a échoué",
     invalid_email_password: 'Adresse e-mail ou mot de passe invalide',
     not_enough_reputation: "Vous n'avez pas assez de réputation pour faire ça",
-    limit_reached: 'Vous avez atteint votre limite quotidienne pour cette action',
+    limit_reached: 'Vous avez atteint votre limite pour cette action, réessayez dans quelques minutes',
     not_found:
       'Cet élement semble ne pas exister, essayez de rafraichir la page si le problème persiste',
     action_already_done: 'Cette action a déjà été effectuée',
