@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
 import { Link } from 'react-router'
 
+import { Report } from 'styled-icons/octicons/Report'
+
 import { MIN_REPUTATION_MODERATION } from '../../constants'
 import {
   fetchRandomModeration,
@@ -12,10 +14,10 @@ import {
 import UserAppellation from '../Users/UserAppellation'
 import UserAction from '../UsersActions/UserAction'
 import { LoadingFrame } from '../Utils'
-import Icon from '../Utils/Icon'
 import Message from '../Utils/Message'
 import { withReputationGuard } from '../Utils/ReputationGuard'
 import { ModerationForm } from './ModerationForm'
+import { commentURL } from '../../lib/cf_routes'
 
 @connect(
   state => ({
@@ -32,6 +34,12 @@ export default class Moderation extends React.PureComponent {
     this.props.fetchRandomModeration()
   }
 
+  postFeedback(values) {
+    this.props
+      .postModerationFeedback(values)
+      .then(() => this.props.fetchRandomModeration())
+  }
+
   render() {
     const { entry, t } = this.props
 
@@ -40,7 +48,7 @@ export default class Moderation extends React.PureComponent {
     return (
       <div className="section">
         <h1 className="title is-1 has-text-centered">
-          <Icon name="flag" /> {t('title')}
+          {t('title')} <Report size="1em" />
         </h1>
         {!entry && (
           <Message className="has-text-centered">{t('emptyModeration')}</Message>
@@ -61,15 +69,15 @@ export default class Moderation extends React.PureComponent {
   }
 
   renderAction(action) {
-    const videoId = action.context.hash_id
-    const statementId = action.changes.get('statement_id')
-
     return (
       <div className="box moderation-entry">
         <UserAction action={action} />
         <br />
         <h4 className="box has-text-centered">
-          <Link target="_blank" to={`/videos/${videoId}?statement=${statementId}`}>
+          <Link
+            target="_blank"
+            to={commentURL(action.videoHashId, action.statementId, action.commentId)}
+          >
             <strong>{this.props.t('seeContext')}</strong>
           </Link>
         </h4>
@@ -77,11 +85,7 @@ export default class Moderation extends React.PureComponent {
         <ModerationForm
           action={action}
           initialValues={{ action_id: action.id }}
-          onSubmit={values =>
-            this.props
-              .postModerationFeedback(values)
-              .then(() => this.props.fetchRandomModeration())
-          }
+          onSubmit={values => this.postFeedback(values)}
         />
       </div>
     )
