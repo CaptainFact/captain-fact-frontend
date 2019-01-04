@@ -62,8 +62,15 @@ export default {
   },
   videos: {
     add: 'Add Video',
+    addThis: 'Add this video',
     placeholder: 'Video URL',
-    analysing: 'Analysing video'
+    analysing: 'Analysing video',
+    public: 'Public video',
+    unlisted: 'Unlisted',
+    publicDescription:
+      'Public videos are listed on videos page and in browser extension.',
+    unlistedDescription:
+      "Unlisted videos will not be listed on videos page nor in browsert extension. Use them to work on a content that you don't want to bring forward on the platform."
   },
   pagination: {
     prev: 'Previous page',

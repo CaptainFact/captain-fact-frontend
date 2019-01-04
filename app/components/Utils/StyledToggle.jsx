@@ -52,7 +52,7 @@ const Container = styled.button`
 
   ${props => props.active
     && css`
-      background: ${transparentize(0.4, getBgColor(props))};
+      background: ${transparentize(0.5, getBgColor(props))};
     `}
 `
 
@@ -80,16 +80,19 @@ const LabelSpan = styled.span`
   cursor: pointer;
 `
 
-const StyledToggle = ({ label, color, size, ...props }) => (
-  <Toggle>
+const StyledToggle = ({ name, label, color, size, checked, onChange, ...props }) => (
+  <Toggle on={checked}>
     {({ on, toggle, getTogglerProps }) => (
       <Flex as="label" alignItems="center" fontSize={size} {...props}>
         <Container
-          onClick={toggle}
+          {...getTogglerProps()}
           active={on}
           bg={on ? color : 'black.300'}
           mr="0.5em"
-          {...getTogglerProps()}
+          onClick={() => {
+            toggle()
+            onChange({ target: { name, type: 'checkbox', checked: !on } })
+          }}
         >
           <ToggleBtn bg={on ? color : 'white'} active={on} />
         </Container>
@@ -110,7 +113,11 @@ StyledToggle.propTypes = {
     PropTypes.number,
     PropTypes.array,
     PropTypes.object
-  ])
+  ]),
+  /** Wether the control should be checked. Set the input as controlled */
+  checked: PropTypes.bool,
+  /** Function called when state changes */
+  onChange: PropTypes.func
 }
 
 StyledToggle.defaultProps = {
