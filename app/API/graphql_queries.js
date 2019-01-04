@@ -20,3 +20,26 @@ export const VideosQuery = gql`
     }
   }
 `
+
+export const VideosAddedByUserQuery = gql`
+  query UserAddedVideosIndex($offset: Int! = 1, $limit: Int! = 16, $username: String!) {
+    user(username: $username) {
+      videosAdded(limit: $limit, offset: $offset) {
+        pageNumber
+        totalPages
+        entries {
+          hash_id: hashId
+          youtube_id: youtubeId
+          title
+          insertedAt
+          isPartner
+          speakers {
+            full_name: fullName
+            id
+            slug
+          }
+        }
+      }
+    }
+  }
+`

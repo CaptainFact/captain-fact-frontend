@@ -20,7 +20,8 @@ export default {
     donation: 'Nous soutenir',
     extension: 'Extension pour navigateur',
     moderation: 'Modération',
-    help: 'En apprendre +'
+    help: 'En apprendre +',
+    addedVideos: 'Vidéos ajoutées'
   },
   actions: {
     save: 'Sauvegarder',
