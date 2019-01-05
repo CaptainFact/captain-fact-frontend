@@ -91,7 +91,11 @@ export default class Home extends React.PureComponent {
             <Flex flexWrap="wrap">
               <Box width={[1, 1, 0.5, 0.5, 1 / 3]} mb="2em">
                 <h1 className="title is-3">{t('backers')}</h1>
-                <OpenCollectiveContributors tier="soutien-régulier" button={false} />
+                <OpenCollectiveContributors
+                  tier="soutien-régulier"
+                  button={false}
+                  limit={10}
+                />
                 <OpenCollectiveContributors tier="donateur" button={false} />
               </Box>
               <Box width={[1, 1, 0.5, 0.5, 2 / 3]}>
