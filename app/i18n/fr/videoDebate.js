@@ -88,5 +88,7 @@ export default {
     viewer_plural: '{{count}} spectateurs',
     user: '{{count}} fact-checker',
     user_plural: '{{count}} fact-checkers'
-  }
+  },
+  warningUnlisted:
+    "Cette vidéo n'est pas listée publiquement. Elle n'a peut-être pas reçu la visibilité nécessaire pour que les sources et citations soient correctement discutées."
 }

@@ -7,7 +7,14 @@ const theme = {
     red: '#e0454e',
     blue: '#75caff',
     primary: '#6ba3a7',
-    info: '#75caff'
+    info: '#75caff',
+    black: {
+      50: '#f5f7fa',
+      100: '#e7e7e7',
+      200: '#dadada',
+      300: '#cecece',
+      400: '#4a4a4a'
+    }
   }
 }
 
