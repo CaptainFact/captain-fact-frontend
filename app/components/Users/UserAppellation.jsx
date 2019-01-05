@@ -10,6 +10,7 @@ const UserAppellation = ({
   compact = false,
   defaultComponent = 'div'
 }) => {
+  const name = user && user.name
   const prettyUsername = user ? `@${user.username}` : t('deletedAccount')
   const hasLink = user && !withoutActions
   const Component = hasLink ? Link : defaultComponent
@@ -24,8 +25,8 @@ const UserAppellation = ({
     )
   return (
     <Component {...componentProps} className={className}>
-      <strong className="main-appelation">{user.name || prettyUsername}</strong>
-      {user.name && <small className="secondary-appelation"> {prettyUsername}</small>}
+      <strong className="main-appelation">{name || prettyUsername}</strong>
+      {name && <small className="secondary-appelation"> {prettyUsername}</small>}
     </Component>
   )
 }
