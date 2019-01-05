@@ -6,7 +6,7 @@ import datelocaleEN from 'date-fns/locale/en'
 import fr from './fr'
 import en from './en'
 import store from '../state/index'
-import { fetchLocale } from '../state/user_preferences/effects'
+import { changeLocale } from '../state/user_preferences/reducer'
 import { JS_ENV } from '../config'
 
 // Add default formats for dates
@@ -41,6 +41,6 @@ i18n.init({
   }
 })
 
-i18n.on('languageChanged', language => store.dispatch(fetchLocale(language)))
+i18n.on('languageChanged', language => store.dispatch(changeLocale(language)))
 
 export default i18n

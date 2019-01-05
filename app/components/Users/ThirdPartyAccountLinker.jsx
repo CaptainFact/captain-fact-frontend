@@ -1,16 +1,14 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
 
-import { unlinkProvider } from '../../state/users/current_user/effects'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import { unlinkProvider } from '../../API/http_api/current_user'
 import Button from '../Utils/Button'
-
-const mapDispatchToProps = { unlinkProvider }
 
 const ThirdPartyAccountLinker = ({
   t,
-  unlinkProvider,
   title,
+  updateLoggedInUser,
   provider,
   isLinked,
   authURL
@@ -24,7 +22,11 @@ const ThirdPartyAccountLinker = ({
         <Button
           type="submit"
           className="is-danger"
-          onClick={() => unlinkProvider(provider)}
+          onClick={() => {
+            return unlinkProvider(provider).then(user => {
+              updateLoggedInUser(user)
+            })
+          }}
         >
           {t('unlinkAccount')}
         </Button>
@@ -37,9 +39,4 @@ const ThirdPartyAccountLinker = ({
   </div>
 )
 
-export default withNamespaces('user')(
-  connect(
-    null,
-    mapDispatchToProps
-  )(ThirdPartyAccountLinker)
-)
+export default withNamespaces('user')(withLoggedInUser(ThirdPartyAccountLinker))

@@ -10,8 +10,6 @@ import {
   deleteComment,
   flagComment
 } from '../../state/video_debate/comments/effects'
-import { isAuthenticated } from '../../state/users/current_user/selectors'
-import { isOwnComment } from '../../state/video_debate/comments/selectors'
 import { flashErrorUnauthenticated } from '../../state/flashes/reducer'
 import MediaLayout from '../Utils/MediaLayout'
 import Vote from './Vote'
@@ -22,11 +20,10 @@ import { COLLAPSE_REPLIES_AT_NESTING } from '../../constants'
 import ModalFlag from './ModalFlag'
 import ModalDeleteComment from './ModalDeleteComment'
 import { CommentsList } from './CommentsList'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 
 @connect(
   (state, { comment }) => ({
-    isOwnComment: isOwnComment(state, comment),
-    isAuthenticated: isAuthenticated(state),
     myVote: state.VideoDebate.comments.voted.get(comment.id, 0),
     isVoting: state.VideoDebate.comments.voting.has(comment.id),
     replies: state.VideoDebate.comments.replies.get(comment.id),
@@ -42,6 +39,7 @@ import { CommentsList } from './CommentsList'
   }
 )
 @withNamespaces('main')
+@withLoggedInUser
 export class CommentDisplay extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -96,6 +94,7 @@ export class CommentDisplay extends React.PureComponent {
   renderCommentContent() {
     const { repliesCollapsed } = this.state
     const { comment, withoutActions, replies, richMedias = true } = this.props
+    const isOwnComment = comment.user && this.props.loggedInUser.id === comment.user.id
 
     return (
       <React.Fragment>
@@ -110,7 +109,7 @@ export class CommentDisplay extends React.PureComponent {
         />
         {!withoutActions && (
           <CommentActions
-            isOwnComment={this.props.isOwnComment}
+            isOwnComment={isOwnComment}
             isFlagged={this.props.isFlagged}
             nbReplies={replies ? replies.size : 0}
             repliesCollapsed={repliesCollapsed}

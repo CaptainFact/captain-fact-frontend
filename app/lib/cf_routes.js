@@ -11,7 +11,7 @@ export const statementURL = (videoHashID, statementID) => {
 }
 
 export const commentURL = (videoHashID, statementID, commentID) => {
-  return `${statementURL(videoHashID, statementID)}&comment=${commentID}`
+  return `${statementURL(videoHashID, statementID)}&c=${commentID}`
 }
 
 export const speakerURL = speakerIDOrSlug => `/s/${speakerIDOrSlug}`

@@ -1,25 +1,4 @@
-import {
-  ENTITY_VIDEO,
-  ENTITY_SPEAKER,
-  ENTITY_STATEMENT,
-  ENTITY_SOURCED_COMMENT,
-  ENTITY_COMMENT,
-  ENTITY_USER_ACTION,
-  ENTITY_USER,
-  ACTION_CREATE,
-  ACTION_REMOVE,
-  ACTION_UPDATE,
-  ACTION_DELETE,
-  ACTION_ADD,
-  ACTION_RESTORE,
-  ACTION_REVERT_SELF_VOTE,
-  ACTION_REVERT_VOTE_DOWN,
-  ACTION_REVERT_VOTE_UP,
-  ACTION_SELF_VOTE,
-  ACTION_VOTE_DOWN,
-  ACTION_VOTE_UP,
-  ACTION_FLAG
-} from '../../constants'
+import * as defs from '../../constants'
 
 export default {
   compare_show: 'Comparer',
@@ -35,27 +14,31 @@ export default {
   deletedUser: 'Compte supprimé',
   madeAction: '{{action}}\u00A0:',
   action: {
-    [ACTION_CREATE]: 'Créé',
-    [ACTION_REMOVE]: 'Retiré',
-    [ACTION_UPDATE]: 'Mis à jour',
-    [ACTION_DELETE]: 'Supprimé',
-    [ACTION_ADD]: 'Ajouté',
-    [ACTION_RESTORE]: 'Restauré',
-    [ACTION_FLAG]: 'Signalé',
-    [ACTION_VOTE_UP]: 'Voté positivement',
-    [ACTION_VOTE_DOWN]: 'Voté négativement',
-    [ACTION_SELF_VOTE]: 'Voté pour lui-même',
-    [ACTION_REVERT_VOTE_UP]: 'Annulé son vote positif',
-    [ACTION_REVERT_VOTE_DOWN]: 'Annulé son vote négatif',
-    [ACTION_REVERT_SELF_VOTE]: 'Annulé son vote pour lui-même'
+    [defs.ACTION_CREATE]: 'Créé',
+    [defs.ACTION_REMOVE]: 'Retiré',
+    [defs.ACTION_UPDATE]: 'Mis à jour',
+    [defs.ACTION_DELETE]: 'Supprimé',
+    [defs.ACTION_ADD]: 'Ajouté',
+    [defs.ACTION_RESTORE]: 'Restauré',
+    [defs.ACTION_FLAG]: 'Signalé',
+    [defs.ACTION_VOTE_UP]: 'Voté positivement',
+    [defs.ACTION_VOTE_DOWN]: 'Voté négativement',
+    [defs.ACTION_SELF_VOTE]: 'Voté pour lui-même',
+    [defs.ACTION_REVERT_VOTE_UP]: 'Annulé son vote positif',
+    [defs.ACTION_REVERT_VOTE_DOWN]: 'Annulé son vote négatif',
+    [defs.ACTION_REVERT_SELF_VOTE]: 'Annulé son vote pour lui-même',
+    [defs.ACTION_BANNED_BAD_LANGUAGE]: 'Modéré ($t(moderation:reason.1))',
+    [defs.ACTION_BANNED_BAD_SPAM]: 'Modéré ($t(moderation:reason.2))',
+    [defs.ACTION_BANNED_BAD_IRRELEVANT]: 'Modéré ($t(moderation:reason.3))',
+    [defs.ACTION_BANNED_BAD_NOT_CONSTRUCTIVE]: 'Modéré ($t(moderation:reason.4))'
   },
   entities: {
-    [ENTITY_VIDEO]: 'vidéo',
-    [ENTITY_SPEAKER]: 'intervenant',
-    [ENTITY_STATEMENT]: 'citation',
-    [ENTITY_COMMENT]: 'commentaire',
-    [ENTITY_SOURCED_COMMENT]: 'commentaire sourcé',
-    [ENTITY_USER_ACTION]: 'action',
-    [ENTITY_USER]: 'utilisateur'
+    [defs.ENTITY_VIDEO]: 'vidéo',
+    [defs.ENTITY_SPEAKER]: 'intervenant',
+    [defs.ENTITY_STATEMENT]: 'citation',
+    [defs.ENTITY_COMMENT]: 'commentaire',
+    [defs.ENTITY_SOURCED_COMMENT]: 'commentaire sourcé',
+    [defs.ENTITY_USER_ACTION]: 'action',
+    [defs.ENTITY_USER]: 'utilisateur'
   }
 }

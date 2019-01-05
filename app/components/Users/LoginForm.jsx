@@ -1,39 +1,50 @@
 import React from 'react'
-import { reduxForm } from 'redux-form'
-import { connect } from 'react-redux'
+import { reduxForm, SubmissionError } from 'redux-form'
 import { Link, withRouter } from 'react-router'
 import { withNamespaces } from 'react-i18next'
 
 import ThirdPartyAuthList from './ThirdPartyAuthList'
 import { emailOrUsernameField, passwordField, submitButton } from './UserFormFields'
-import { login } from '../../state/users/current_user/effects'
 import Notification from '../Utils/Notification'
 import { tError } from '../../lib/errors'
+import { signIn } from '../../API/http_api/current_user'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 
 @reduxForm({ form: 'loginForm' })
-@connect(
-  ({ CurrentUser: { data, error } }) => ({ CurrentUser: data, error }),
-  { login }
-)
 @withRouter
 @withNamespaces('user')
+@withLoggedInUser
 export default class LoginForm extends React.PureComponent {
+  state = {
+    error: null
+  }
+
   componentWillReceiveProps(props) {
     // Redirect when already logged in
-    if (props.CurrentUser.id) {
-      this.props.router.push('/videos')
+    if (props.isAuthenticated) {
+      props.router.push('/videos')
     }
   }
 
   render() {
-    const { handleSubmit, valid, error, t } = this.props
+    const { handleSubmit, updateLoggedInUser, valid, t } = this.props
+    const { error } = this.state
 
     return (
       <form
         className="form user-form"
-        onSubmit={handleSubmit(user =>
-          this.props.login({ provider: 'identity', params: user })
-        )}
+        onSubmit={handleSubmit(user => {
+          return signIn('identity', user)
+            .then(({ user, token }) => {
+              updateLoggedInUser(user, token)
+            })
+            .catch(e => {
+              if (typeof e === 'string') {
+                this.setState({ error: e })
+              }
+              throw new SubmissionError(e)
+            })
+        })}
       >
         {error && <Notification type="danger">{tError(t, error)}</Notification>}
         <div>

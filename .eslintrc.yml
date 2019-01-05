@@ -10,6 +10,7 @@ parserOptions:
   ecmaFeatures:
     experimentalObjectRestSpread: true
     jsx: true
+    legacyDecorators: true
   sourceType: module
 plugins:
   - react
@@ -29,6 +30,7 @@ rules:
   quotes: ['warn', 'single', { avoidEscape: true }]
   semi: ['error', 'never']
   import/first: ['warn']
+  no-else-return: off
   no-trailing-spaces: ['warn']
   no-continue: off
   no-plusplus: off

@@ -2,6 +2,8 @@ import React from 'react'
 import { Query } from 'react-apollo'
 import { Link } from 'react-router'
 import { withNamespaces } from 'react-i18next'
+import { get } from 'lodash'
+
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { ErrorView } from '../Utils/ErrorView'
 import { VideosGrid } from './VideosGrid'
@@ -23,6 +25,9 @@ const buildFiltersFromProps = ({ language, source, speakerID }) => {
 const PaginatedVideosContainer = ({
   t,
   baseURL,
+  query = VideosQuery,
+  queryArgs = {},
+  videosPath = 'videos',
   showPagination = true,
   currentPage = 1,
   limit = 16,
@@ -31,12 +36,12 @@ const PaginatedVideosContainer = ({
   const filters = buildFiltersFromProps(props)
   return (
     <Query
-      query={VideosQuery}
-      variables={{ offset: currentPage, limit, filters }}
+      query={query}
+      variables={{ offset: currentPage, limit, filters, ...queryArgs }}
       fetchPolicy="network-only"
     >
       {({ loading, error, data }) => {
-        const videos = (data && data.videos) || INITIAL_VIDEOS
+        const videos = get(data, videosPath, INITIAL_VIDEOS)
         if (error) return <ErrorView error={error} />
         if (!loading && videos.entries.length === 0)
           return <h2>{t('errors:client.noVideoAvailable')}</h2>

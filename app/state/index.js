@@ -9,7 +9,6 @@ import { JS_ENV } from '../config'
 // Reducers
 import FlashesReducer from './flashes/reducer'
 import VideoDebateReducer from './video_debate/reducer'
-import CurrentUserReducer from './users/current_user/reducer'
 import UserPreferencesReducer from './user_preferences/reducer'
 import DisplayedUserReducer from './users/displayed_user/reducer'
 import ModalsReducer from './modals/reducer'
@@ -21,7 +20,6 @@ import VideosReducer from './videos/reducer'
 
 // Declare reducers
 const reducers = combineReducers({
-  CurrentUser: CurrentUserReducer,
   DisplayedUser: DisplayedUserReducer,
   UserPreferences: UserPreferencesReducer,
   Flashes: FlashesReducer,

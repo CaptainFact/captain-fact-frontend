@@ -10,6 +10,7 @@ const UserAppellation = ({
   compact = false,
   defaultComponent = 'div'
 }) => {
+  const name = user && user.name
   const prettyUsername = user ? `@${user.username}` : t('deletedAccount')
   const hasLink = user && !withoutActions
   const Component = hasLink ? Link : defaultComponent

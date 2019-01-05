@@ -9,10 +9,6 @@ export const getStatementAllComments = (state, props) => {
   return getAllComments(state).get(props.statement.id, EMPTY_COMMENTS_LIST)
 }
 
-export const isOwnComment = ({ CurrentUser }, comment) => {
-  return comment.user && comment.user.id === CurrentUser.data.id
-}
-
 export const classifyComments = createCachedSelector(
   getStatementAllComments,
   (state, props) => props.statement.speaker_id,

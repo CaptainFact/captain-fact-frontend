@@ -23,6 +23,7 @@ import Moderation from './components/Moderation/Moderation'
 import { SpeakerPage } from './components/Speakers/SpeakerPage'
 import NewsletterSubscription from './components/Users/NewsletterSubscription'
 import ActivityLog from './components/Users/ActivityLog'
+import UserAddedVideos from './components/Videos/UserAddedVideos'
 
 const CFRouter = () => (
   <Router history={browserHistory}>
@@ -40,6 +41,7 @@ const CFRouter = () => (
         <IndexRoute component={UserProfile} />
         <Route path="/u/:username/activity" component={ActivityLog} />
         <Route path="/u/:username/settings" component={UserSettings} />
+        <Route path="/u/:username/videos" component={UserAddedVideos} />
       </Route>
       <Route path="/videos" component={VideosIndexPage} />
       <Route path="/videos/add" component={AddVideoForm} />

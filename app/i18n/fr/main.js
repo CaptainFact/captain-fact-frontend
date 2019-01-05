@@ -20,7 +20,8 @@ export default {
     donation: 'Nous soutenir',
     extension: 'Extension pour navigateur',
     moderation: 'Modération',
-    help: 'En apprendre +'
+    help: 'En apprendre +',
+    addedVideos: 'Vidéos ajoutées'
   },
   actions: {
     save: 'Sauvegarder',
@@ -60,8 +61,15 @@ export default {
   },
   videos: {
     add: 'Ajouter une vidéo',
+    addThis: 'Ajouter cette vidéo',
     placeholder: 'Adresse de la vidéo',
-    analysing: 'Analyse en cours de la vidéo'
+    analysing: 'Analyse en cours de la vidéo',
+    public: 'Vidéo publique',
+    unlisted: 'Non listée',
+    publicDescription:
+      "Les vidéos publiques sont listées sur la page des vidéos et apparaissent dans l'extension pour navigateur.",
+    unlistedDescription:
+      "Les vidéos non listées n'apparaitront ni dans la liste des vidéos ni dans l'extension. Elles vous permettent de travailler sur un contenu sans que celui-ci ne soit mis en avant par la plateforme."
   },
   pagination: {
     prev: 'Page précédente',

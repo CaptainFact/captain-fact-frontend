@@ -9,7 +9,7 @@ export default {
     authentication_failed: 'Authentication failed',
     invalid_email_password: 'Invalid email / password combination',
     not_enough_reputation: "You don't have enough reputation to do that",
-    limit_reached: 'You reached your daily limit for this action',
+    limit_reached: 'You reached your limit for this action, try again in a few minutes',
     not_found:
       "It looks like this doesn't exist, try to refresh the page if the problem persists",
     action_already_done: 'This action has already been done',

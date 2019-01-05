@@ -14,24 +14,20 @@ import {
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import RawIcon from '../Utils/RawIcon'
 import ReputationGuard from '../Utils/ReputationGuard'
-import LanguageSelector from './LanguageSelector'
 import ScoreTag from '../Users/ScoreTag'
-import { logout } from '../../state/users/current_user/effects'
 import { closeSidebar, toggleSidebar } from '../../state/user_preferences/reducer'
 import UserPicture from '../Users/UserPicture'
-import i18n from '../../i18n/i18n'
 import Logo from './Logo'
 import Button from '../Utils/Button'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import UserLanguageSelector from '../LoggedInUser/UserLanguageSelector'
 
 @connect(
-  state => ({
-    CurrentUser: state.CurrentUser.data,
-    isLoadingUser: state.CurrentUser.isLoading,
-    sidebarExpended: state.UserPreferences.sidebarExpended
-  }),
-  { logout, toggleSidebar, closeSidebar }
+  state => ({ sidebarExpended: state.UserPreferences.sidebarExpended }),
+  { toggleSidebar, closeSidebar }
 )
 @withNamespaces('main')
+@withLoggedInUser
 export default class Sidebar extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -65,7 +61,7 @@ export default class Sidebar extends React.PureComponent {
 
   renderUserLinks() {
     const {
-      CurrentUser: { username, reputation },
+      loggedInUser: { username, reputation },
       t
     } = this.props
     const baseLink = `/u/${username}`
@@ -75,7 +71,7 @@ export default class Sidebar extends React.PureComponent {
           <div className="level-left menu-list">
             <this.MenuLink to={baseLink} className="my-profile-link" onlyActiveOnIndex>
               <div className="current-user-link">
-                <UserPicture size={USER_PICTURE_SMALL} user={this.props.CurrentUser} />
+                <UserPicture size={USER_PICTURE_SMALL} user={this.props.loggedInUser} />
                 <span className="username" style={{ fontSize: this.usernameFontSize() }}>
                   {username}
                 </span>
@@ -121,14 +117,15 @@ export default class Sidebar extends React.PureComponent {
   }
 
   renderUserSection() {
-    if (this.props.isLoadingUser)
+    if (this.props.loggedInUserLoading) {
       return (
         <div className="user-section">
           <LoadingFrame size="mini" />
         </div>
       )
-    if (this.props.CurrentUser.id !== 0) return this.renderUserLinks()
-    return this.renderConnectLinks()
+    }
+
+    return this.props.isAuthenticated ? this.renderUserLinks() : this.renderConnectLinks()
   }
 
   render() {
@@ -153,13 +150,7 @@ export default class Sidebar extends React.PureComponent {
         <div className="menu-content">
           {this.renderUserSection()}
           <p className="menu-label hide-when-collapsed">{t('menu.language')}</p>
-          <LanguageSelector
-            className="hide-when-collapsed"
-            handleChange={v => i18n.changeLanguage(v)}
-            value={i18n.language}
-            size="small"
-            withIcon
-          />
+          <UserLanguageSelector className="hide-when-collapsed" size="small" />
           <p className="menu-label">{t('menu.content')}</p>
           {this.renderMenuContent()}
           <p className="menu-label">{t('menu.other')}</p>
@@ -212,6 +203,6 @@ export default class Sidebar extends React.PureComponent {
   }
 
   usernameFontSize() {
-    return `${1.4 - this.props.CurrentUser.username.length / 30}em`
+    return `${1.4 - this.props.loggedInUser.username.length / 30}em`
   }
 }

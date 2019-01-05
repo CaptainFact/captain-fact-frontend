@@ -1,24 +1,32 @@
 import React from 'react'
 import { withRouter } from 'react-router'
-import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
-import AsyncEffectPage from '../Utils/AsyncEffectPage'
-import { confirmEmail } from '../../state/users/current_user/effects'
+import { LoadingFrame } from '../Utils/LoadingFrame'
+import { confirmEmail } from '../../API/http_api/current_user'
+import { ErrorView } from '../Utils/ErrorView'
+import MessageView from '../Utils/MessageView'
 
 @withRouter
-@connect(
-  null,
-  { confirmEmail }
-)
 @withNamespaces('user')
 export default class ConfirmEmail extends React.PureComponent {
-  render() {
-    return (
-      <AsyncEffectPage
-        effect={() => this.props.confirmEmail(this.props.params.token)}
-        onSuccess={() => 'user:emailConfirmed'}
-        errorNamespace="user:errors.error"
-      />
+  state = { loading: true, error: null }
+
+  componentDidMount() {
+    confirmEmail(this.props.params.token).then(
+      () => this.setState({ loading: false }),
+      e => this.setState({ loading: false, error: e })
     )
+  }
+
+  render() {
+    if (this.state.loading) {
+      return <LoadingFrame />
+    } else if (this.state.error) {
+      return <ErrorView canGoBack={false} error={this.state.error} />
+    } else {
+      return (
+        <MessageView type="success">{this.props.t('user:emailConfirmed')}</MessageView>
+      )
+    }
   }
 }
