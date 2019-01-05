@@ -74,12 +74,15 @@ export class ColumnDebate extends React.PureComponent {
       }
 
       const hasStatementsComponents = hasStatements || this.props.hasStatementForm
+      const hasMessages = this.props.unlisted || !hasStatementsComponents
       return (
         <div className="statements-list-container">
-          <div className="video-debate-help">
-            {this.props.unlisted && this.renderWarning(this.props.t('warningUnlisted'))}
-            {!hasStatementsComponents && this.renderHelp()}
-          </div>
+          {hasMessages && (
+            <div className="video-debate-help">
+              {this.props.unlisted && this.renderWarning(this.props.t('warningUnlisted'))}
+              {!hasStatementsComponents && this.renderHelp()}
+            </div>
+          )}
           {hasStatementsComponents && <StatementsList />}
           <ActionBubbleMenu />
         </div>
