@@ -42,7 +42,6 @@ export class AddVideoForm extends React.PureComponent {
   }
 
   renderVideo = (value, error) => {
-    console.log(value, error)
     return error || !value ? (
       <div className="video">
         <div />

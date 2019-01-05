@@ -1,8 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Trans, withNamespaces } from 'react-i18next'
-import { isLoadingVideoDebate } from '../../state/video_debate/selectors'
 
+import { InfoCircle } from 'styled-icons/fa-solid/InfoCircle'
+import { ExclamationCircle } from 'styled-icons/fa-solid/ExclamationCircle'
+
+import { isLoadingVideoDebate } from '../../state/video_debate/selectors'
 import VideoDebateHistory from './VideoDebateHistory'
 import ActionBubbleMenu from './ActionBubbleMenu'
 import StatementsList from '../Statements/StatementsList'
@@ -10,41 +13,34 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
 import { hasStatementForm } from '../../state/video_debate/statements/selectors'
 import { Icon } from '../Utils/Icon'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import Message from '../Utils/Message'
 
 @connect(state => ({
   isLoading: isLoadingVideoDebate(state),
   hasStatements: state.VideoDebate.statements.data.size !== 0,
   hasSpeakers: state.VideoDebate.video.data.speakers.size !== 0,
-  hasStatementForm: hasStatementForm(state)
+  hasStatementForm: hasStatementForm(state),
+  unlisted: state.VideoDebate.video.data.unlisted
 }))
 @withNamespaces('videoDebate')
 @withLoggedInUser
 export class ColumnDebate extends React.PureComponent {
-  render() {
+  renderInfo(message) {
     return (
-      <div id="col-debate" className="column">
-        {this.renderContent()}
-      </div>
+      <Message>
+        <InfoCircle size="1em" />
+        &nbsp;&nbsp;{message}
+      </Message>
     )
   }
 
-  renderContent() {
-    const { isLoading, view, videoId, hasStatements } = this.props
-
-    if (view === 'history') return <VideoDebateHistory videoId={videoId} />
-    if (view === 'debate') {
-      if (isLoading) return <LoadingFrame title={this.props.t('loading.statements')} />
-      return (
-        <div className="statements-list-container">
-          {!hasStatements && !this.props.hasStatementForm ? (
-            this.renderHelp()
-          ) : (
-            <StatementsList />
-          )}
-          <ActionBubbleMenu />
-        </div>
-      )
-    }
+  renderWarning(message) {
+    return (
+      <Message type="warning">
+        <ExclamationCircle size="1em" />
+        &nbsp;&nbsp;{message}
+      </Message>
+    )
   }
 
   renderHelp() {
@@ -63,14 +59,38 @@ export class ColumnDebate extends React.PureComponent {
       )
     }
 
-    return (
-      <div className="video-debate-help">
-        <article className="message is-info">
-          <div className="message-body">
-            <Icon name="info-circle" />
-            &nbsp;{helpMessage}
+    return this.renderInfo(helpMessage)
+  }
+
+  renderContent() {
+    const { isLoading, view, videoId, hasStatements } = this.props
+
+    if (view === 'history') {
+      return <VideoDebateHistory videoId={videoId} />
+    }
+    if (view === 'debate') {
+      if (isLoading) {
+        return <LoadingFrame title={this.props.t('loading.statements')} />
+      }
+
+      const hasStatementsComponents = hasStatements || this.props.hasStatementForm
+      return (
+        <div className="statements-list-container">
+          <div className="video-debate-help">
+            {this.props.unlisted && this.renderWarning(this.props.t('warningUnlisted'))}
+            {!hasStatementsComponents && this.renderHelp()}
           </div>
-        </article>
+          {hasStatementsComponents && <StatementsList />}
+          <ActionBubbleMenu />
+        </div>
+      )
+    }
+  }
+
+  render() {
+    return (
+      <div id="col-debate" className="column">
+        {this.renderContent()}
       </div>
     )
   }
