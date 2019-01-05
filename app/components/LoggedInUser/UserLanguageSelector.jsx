@@ -23,7 +23,7 @@ const UserLanguageSelector = ({
       handleChange={locale => {
         i18n.changeLanguage(locale)
         if (isAuthenticated) {
-          updateUserInfo.then(user => {
+          return updateUserInfo({ locale }).then(user => {
             updateLoggedInUser(user)
           })
         }
