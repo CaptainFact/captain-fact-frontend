@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { withNamespaces } from 'react-i18next'
 import { Link } from 'react-router'
-import { Box, Flex } from '@rebass/grid'
+import { Flex } from '@rebass/grid'
 
 import { MIN_REPUTATION_ADD_SPEAKER } from '../../constants'
 import {

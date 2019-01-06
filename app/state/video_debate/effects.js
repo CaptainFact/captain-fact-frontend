@@ -60,9 +60,10 @@ export const shiftStatements = offsets => {
 
 /** Subscribe or unsubscribe a user from given video */
 export const changeSubscription = newValue => {
-  return SocketApi.push(VIDEO_DEBATE_CHANNEL, 'change_subscription', newValue)
+  return SocketApi.push(VIDEO_DEBATE_CHANNEL, 'change_subscription', {
+    subscribed: newValue
+  })
     .then(() => {
-      console.log('???')
       return videoReducer.setSubscription(newValue)
     })
     .catch(e => {
