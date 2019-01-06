@@ -22,7 +22,8 @@ export default {
     help: 'Learn more',
     moderation: 'Moderation',
     addedVideos: 'Added videos',
-    notifications: 'Notifications'
+    notifications: 'Notifications',
+    subscriptions: 'Subscriptions'
   },
   actions: {
     save: 'Save',

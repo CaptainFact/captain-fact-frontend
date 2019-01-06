@@ -8,6 +8,7 @@ import { UserCircle } from 'styled-icons/fa-regular/UserCircle'
 import { Activity } from 'styled-icons/feather/Activity'
 import { Settings } from 'styled-icons/feather/Settings'
 import { Bell } from 'styled-icons/fa-solid/Bell'
+import { Rss } from 'styled-icons/feather/Rss'
 import { Clock } from 'styled-icons/fa-regular/Clock'
 import { Videos } from 'styled-icons/boxicons-regular/Videos'
 
@@ -120,6 +121,7 @@ export default class User extends React.PureComponent {
             {this.getActiveTab('/activity', Activity, 'menu.activity')}
             {this.isSelf() && (
               <React.Fragment>
+                {this.getActiveTab('/subscriptions', Rss, 'menu.subscriptions')}
                 {this.getActiveTab('/notifications', Bell, 'menu.notifications')}
                 {this.getActiveTab('/settings', Settings, 'menu.settings')}
               </React.Fragment>

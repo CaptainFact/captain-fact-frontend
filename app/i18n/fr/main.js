@@ -21,7 +21,8 @@ export default {
     extension: 'Extension pour navigateur',
     moderation: 'Modération',
     addedVideos: 'Vidéos ajoutées',
-    notifications: 'Notifications'
+    notifications: 'Notifications',
+    subscriptions: 'Abonnements'
   },
   actions: {
     save: 'Sauvegarder',

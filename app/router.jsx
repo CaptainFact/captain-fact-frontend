@@ -25,6 +25,7 @@ import NewsletterSubscription from './components/Users/NewsletterSubscription'
 import ActivityLog from './components/Users/ActivityLog'
 import UserAddedVideos from './components/Videos/UserAddedVideos'
 import NotificationsPage from './components/LoggedInUser/NotificationsPage'
+import SubscriptionsPage from './components/LoggedInUser/SubscriptionsPage'
 
 const CFRouter = () => (
   <Router history={browserHistory}>
@@ -43,6 +44,7 @@ const CFRouter = () => (
         <Route path="/u/:username/activity" component={ActivityLog} />
         <Route path="/u/:username/settings" component={UserSettings} />
         <Route path="/u/:username/videos" component={UserAddedVideos} />
+        <Route path="/u/:username/subscriptions" component={SubscriptionsPage} />
         <Route path="/u/:username/notifications" component={NotificationsPage} />
       </Route>
       <Route path="/videos" component={VideosIndexPage} />

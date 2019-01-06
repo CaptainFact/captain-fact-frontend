@@ -62,7 +62,7 @@ rules:
   react/self-closing-comp: ['warn']
   react/jsx-indent: ['warn']
   react/no-array-index-key: ['warn']
-  react/prefer-stateless-function: ['warn']
+  react/prefer-stateless-function: off
   # JSX
   jsx-a11y/anchor-is-valid:
     - warn

@@ -43,3 +43,18 @@ export const VideosAddedByUserQuery = gql`
     }
   }
 `
+
+export const loggedInUserSubscriptionsQuery = gql`
+  query LoggedInUserSubscriptions {
+    loggedInUser {
+      subscriptions(scopes: ["video"]) {
+        id
+        scope
+        video {
+          hashId
+          title
+        }
+      }
+    }
+  }
+`
