@@ -22,7 +22,7 @@ export default class LoginForm extends React.PureComponent {
   componentWillReceiveProps(props) {
     // Redirect when already logged in
     if (props.isAuthenticated) {
-      props.router.push('/videos')
+      props.router.goBack();
     }
   }
 
