@@ -39,14 +39,14 @@ class UserProvider extends React.Component {
     this.setState({ loggedInUserLoading: true })
     try {
       const loggedInUser = await HttpApi.get('users/me')
-      if (!loggedInUser) {
+      this.updateLoggedInUser(loggedInUser)
+    } catch (error) {
+      if (error === 'unauthorized') {
         // Token expired
         this.logout()
       } else {
-        this.updateLoggedInUser(loggedInUser)
+        this.setState({ loggedInUserLoading: false })
       }
-    } catch (error) {
-      this.setState({ loggedInUserLoading: false })
     }
     return true
   }
