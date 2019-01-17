@@ -70,7 +70,7 @@
     "faker": "~4.1.0",
     "formik": "^1.4.1",
     "graphql": "~14.0.2",
-    "graphql-tag": "~2.9.2",
+    "graphql-tag": "~2.10.1",
     "i18next": "~13.1.0",
     "immutable": "~4.0.0-rc.9",
     "is-promise": "~2.1.0",
