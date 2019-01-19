@@ -3,7 +3,6 @@ $border-color: lightgrey
 #sidebar
   position: fixed
   height: 100%
-  top: 0
   left: 0
   width: $sidebar_width
   background: $white-bis
@@ -19,30 +18,6 @@ $border-color: lightgrey
   @media screen and (max-height: 600px)
     .user-links
       display: none
-
-  .logo-banner
-    line-height: 0
-    padding: 1rem
-    width: $sidebar_width
-    text-align: left
-    .site-logo
-      font-size: 22px
-    &> *
-      display: inline-block
-      vertical-align: middle
-
-    .menu-collapse-button
-      cursor: pointer
-      height: 40px
-      width: 1em
-      margin-right: 6px
-      font-size: 38px
-      user-select: none
-      &:not(:hover)
-        color: grey
-
-    @media screen and (max-width: $sidebar_full_collapse_under)
-      width: 100%
 
   .connect-register-buttons .button
     @extend .is-fullwidth
@@ -68,7 +43,6 @@ $border-color: lightgrey
 
   .menu-content
     padding: 9px
-    border-top: 1px solid $border-color
 
   .language-selector
     padding-left: 10px
@@ -90,14 +64,13 @@ $border-color: lightgrey
     z-index: 9999
     height: inherit
     background: transparentize($white, 0.1)
-    border-bottom: 1px solid $border-color
     .logo-banner
       height: $sidebar_full_collapse_banner_height
     .menu-content
       display: none
 
   .link-with-icon i
-    font-size: 30px
+    font-size: 25px
     margin: 0
 
   .user-quicklinks

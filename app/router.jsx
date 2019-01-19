@@ -3,7 +3,7 @@ import React from 'react'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
 // Import Views
-import App from './components/App'
+import Layout from './components/App/Layout'
 import Home from './components/Home/Home'
 import { NotFound, BrowserExtensionsPage } from './components/Pages'
 import { AddVideoForm } from './components/Videos'
@@ -26,11 +26,14 @@ import ActivityLog from './components/Users/ActivityLog'
 import UserAddedVideos from './components/Videos/UserAddedVideos'
 import NotificationsPage from './components/LoggedInUser/NotificationsPage'
 import SubscriptionsPage from './components/LoggedInUser/SubscriptionsPage'
+import SimpleLayout from './components/App/SimpleLayout'
 
 const CFRouter = () => (
   <Router history={browserHistory}>
-    <Route path="/" component={App}>
-      <IndexRoute component={Home} />
+    <Route component={SimpleLayout}>
+      <Route path="/" component={Home} />
+    </Route>
+    <Route component={Layout}>
       <Route path="/signup" component={SignupForm} />
       <Route path="/signup/callback/:provider" component={ThirdPartyCallback} />
       <Route path="/login" component={LoginForm} />

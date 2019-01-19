@@ -1,7 +1,6 @@
 #main-container
   width: calc(100% - #{$sidebar_width})
   margin-left: $sidebar_width
-  margin-top: $sidebar_full_collapse_banner_height
   +tablet
     transition: width $sidebar_collapse_transition_duration, margin $sidebar_collapse_transition_duration
   +mobile
@@ -9,7 +8,6 @@
     margin-left: 0
 
   +from($sidebar_full_collapse_under + 1)
-    margin-top: 0
     &.expended
       width: calc(100% - #{$sidebar_collapsed_width})
       margin-left: $sidebar_collapsed_width

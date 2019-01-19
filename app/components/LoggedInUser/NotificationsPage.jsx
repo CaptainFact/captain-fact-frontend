@@ -12,58 +12,24 @@ import Message from '../Utils/Message'
 import StyledCard from '../Utils/StyledCard'
 import NotificationDetails from '../Notifications/NotificationDetails'
 import { TimeSince } from '../Utils/TimeSince'
-
-export const loggedInUserNotificationsQuery = gql`
-  query LoggedInUserNotifications($page: Int! = 1, $pageSize: Int! = 30) {
-    loggedInUser {
-      notifications(page: $page, pageSize: $pageSize) {
-        pageNumber
-        pageSize
-        totalEntries
-        totalPages
-        entries {
-          id
-          seenAt
-          insertedAt
-          type
-          action {
-            user {
-              name
-              username
-            }
-            video {
-              hashId
-              title
-            }
-          }
-        }
-      }
-    }
-  }
-`
+import Notifications from './Notifications'
 
 @withRouter
 export default class NotificationsPage extends Component {
   render() {
     return (
-      <Query query={loggedInUserNotificationsQuery}>
-        {({ loading, error, data }) => {
+      <Notifications>
+        {({ loading, error, notifications, pageNumber, totalPages }) => {
           if (loading) {
             return <LoadingFrame />
           } else if (error) {
             return <ErrorView error={error} />
           }
 
-          const paginatedNotifications = get(data, 'loggedInUser.notifications', {
-            pageNumber: 1,
-            totalPages: 1,
-            entries: []
-          })
-
           return (
             <Flex flexDirection="column" alignItems="center">
               <Box mb={3} p={[2, 4]}>
-                {paginatedNotifications.entries.length === 0 ? (
+                {notifications.length === 0 ? (
                   <Message>
                     There's no notification in here yet. They'll start appearing once
                     someone reply to one of your comments or if an action is made on a
@@ -71,7 +37,7 @@ export default class NotificationsPage extends Component {
                   </Message>
                 ) : (
                   <Flex flexDirection="column">
-                    {paginatedNotifications.entries.map(n => (
+                    {notifications.map(n => (
                       <NotificationDetails key={n.id} notification={n}>
                         {({ message, seenAt, insertedAt }) => (
                           <StyledCard px={[3, 4]} py={[2, 3]}>
@@ -94,8 +60,8 @@ export default class NotificationsPage extends Component {
               </Box>
               <PaginationMenu
                 className="videos-pagination"
-                currentPage={paginatedNotifications.pageNumber}
-                total={paginatedNotifications.totalPages}
+                currentPage={pageNumber}
+                total={totalPages}
                 isRounded
                 onPageChange={() => window.scrollTo({ top: 0 })}
                 LinkBuilder={({ 'data-page': page, ...props }) => {
@@ -105,7 +71,7 @@ export default class NotificationsPage extends Component {
             </Flex>
           )
         }}
-      </Query>
+      </Notifications>
     )
   }
 }

@@ -25,8 +25,8 @@ export const flashErrorMsg = message => flashError({ message })
 export const flashErrorUnauthenticated = () => {
   return flashError({
     message: 'errors:server.unauthenticated',
-    infoText: 'main:menu.loginSignup',
-    infoUrl: '/login'
+    infoText: 'main:menu.signup',
+    infoUrl: '/signup'
   })
 }
 

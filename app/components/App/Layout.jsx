@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
 import { Helmet } from 'react-helmet'
 
 import { FlashMessages } from '../Utils'
+import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 import { MainModalContainer } from '../Modal/MainModalContainer'
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
@@ -13,7 +13,7 @@ import BackgroundNotifier from './BackgroundNotifier'
   locale: state.UserPreferences.locale,
   sidebarExpended: state.UserPreferences.sidebarExpended
 }))
-export default class App extends React.PureComponent {
+export default class Layout extends React.PureComponent {
   render() {
     const { locale, sidebarExpended, children } = this.props
     const mainContainerClass = sidebarExpended ? undefined : 'expended'
@@ -25,6 +25,7 @@ export default class App extends React.PureComponent {
         </Helmet>
         <MainModalContainer />
         <FlashMessages />
+        <Navbar />
         <Sidebar />
         <div id="main-container" className={mainContainerClass}>
           {children}

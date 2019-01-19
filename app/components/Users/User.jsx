@@ -12,6 +12,7 @@ import { Rss } from 'styled-icons/feather/Rss'
 import { Clock } from 'styled-icons/fa-regular/Clock'
 import { Videos } from 'styled-icons/boxicons-regular/Videos'
 
+import { Flex } from '@rebass/grid'
 import UserAppellation from './UserAppellation'
 import UserPicture from './UserPicture'
 import { ErrorView } from '../Utils'
@@ -23,6 +24,7 @@ import { USER_PICTURE_XLARGE } from '../../constants'
 import { fetchUser } from '../../state/users/displayed_user/effects'
 import { resetUser } from '../../state/users/displayed_user/reducer'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import UserMenu from './UserMenu'
 
 @connect(
   ({ DisplayedUser: { isLoading, errors, data } }) => ({
@@ -57,22 +59,6 @@ export default class User extends React.PureComponent {
     this.props.resetUser()
   }
 
-  getActiveTab(subRoute, IconComponent, menuTKey, isDisabled = false) {
-    const linkTo = `/u/${this.props.user.username}${subRoute}`
-    const isActive = this.props.location.pathname === linkTo
-    if (this.props.isLoading) isDisabled = true
-
-    return (
-      <li className={isActive ? 'is-active' : ''}>
-        <Link to={linkTo} disabled={isDisabled}>
-          <IconComponent size="1em" />
-          &nbsp;
-          <span>{this.props.t(menuTKey)}</span>
-        </Link>
-      </li>
-    )
-  }
-
   isSelf() {
     return this.props.isAuthenticated && this.props.loggedInUser.id === this.props.user.id
   }
@@ -81,7 +67,7 @@ export default class User extends React.PureComponent {
     if (this.props.errors) return <ErrorView error={this.props.errors} canReload />
     if (this.props.isLoading) return <LoadingFrame />
 
-    const user = this.props.user
+    const user = this.props.user || {}
     const prettyUsername = `@${user.username}`
 
     return (
@@ -115,18 +101,19 @@ export default class User extends React.PureComponent {
           )}
         </section>
         <div className="tabs is-centered">
-          <ul>
-            {this.getActiveTab('', UserCircle, 'menu.profile')}
-            {this.getActiveTab('/videos', Videos, 'menu.addedVideos')}
-            {this.getActiveTab('/activity', Activity, 'menu.activity')}
-            {this.isSelf() && (
-              <React.Fragment>
-                {this.getActiveTab('/subscriptions', Rss, 'menu.subscriptions')}
-                {this.getActiveTab('/notifications', Bell, 'menu.notifications')}
-                {this.getActiveTab('/settings', Settings, 'menu.settings')}
-              </React.Fragment>
-            )}
-          </ul>
+          <Flex as="ul" flexWrap="wrap">
+            <UserMenu user={user} isSelf={this.isSelf()}>
+              {({ Icon, key, route, title, isActive }) => (
+                <li key={key} className={isActive ? 'is-active' : ''}>
+                  <Link to={route}>
+                    <Icon size="1em" />
+                    &nbsp;
+                    {title}
+                  </Link>
+                </li>
+              )}
+            </UserMenu>
+          </Flex>
         </div>
         {this.props.children}
       </div>

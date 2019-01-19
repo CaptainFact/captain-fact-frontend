@@ -4,23 +4,17 @@ import { Link } from 'react-router'
 import { withNamespaces } from 'react-i18next'
 import classNames from 'classnames'
 import capitalize from 'voca/capitalize'
+import { Flex } from '@rebass/grid'
 
-import { Icon } from '../Utils'
-import {
-  MOBILE_WIDTH_THRESHOLD,
-  USER_PICTURE_SMALL,
-  MIN_REPUTATION_MODERATION
-} from '../../constants'
-import { LoadingFrame } from '../Utils/LoadingFrame'
+import { LinkExternal } from 'styled-icons/octicons/LinkExternal'
+
+import { MOBILE_WIDTH_THRESHOLD, MIN_REPUTATION_MODERATION } from '../../constants'
 import RawIcon from '../Utils/RawIcon'
 import ReputationGuard from '../Utils/ReputationGuard'
-import ScoreTag from '../Users/ScoreTag'
 import { closeSidebar, toggleSidebar } from '../../state/user_preferences/reducer'
-import UserPicture from '../Users/UserPicture'
-import Logo from './Logo'
-import Button from '../Utils/Button'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import UserLanguageSelector from '../LoggedInUser/UserLanguageSelector'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
 @connect(
   state => ({ sidebarExpended: state.UserPreferences.sidebarExpended }),
@@ -47,6 +41,7 @@ export default class Sidebar extends React.PureComponent {
         className={classes}
         activeClassName="is-active"
         onClick={this.closeSideBarIfMobile}
+        title={children}
         {...props}
       >
         {iconName && <RawIcon name={iconName} />}
@@ -59,113 +54,24 @@ export default class Sidebar extends React.PureComponent {
     return <li>{this.MenuLink(props)}</li>
   }
 
-  renderUserLinks() {
-    const {
-      loggedInUser: { username, reputation },
-      t
-    } = this.props
-    const baseLink = `/u/${username}`
-    return (
-      <div className="user-section">
-        <nav className="level user-quicklinks is-mobile">
-          <div className="level-left menu-list">
-            <this.MenuLink to={baseLink} className="my-profile-link" onlyActiveOnIndex>
-              <div className="current-user-link">
-                <UserPicture size={USER_PICTURE_SMALL} user={this.props.loggedInUser} />
-                <span className="username" style={{ fontSize: this.usernameFontSize() }}>
-                  {username}
-                </span>
-                <ScoreTag reputation={reputation} />
-              </div>
-            </this.MenuLink>
-          </div>
-          <div className="level-right">
-            <Button
-              title={this.props.t('menu.logout')}
-              onClick={() => this.props.logout()}
-            >
-              <Icon name="sign-out" />
-            </Button>
-          </div>
-        </nav>
-        <ul className="menu-list user-links">
-          <this.MenuListLink to={`${baseLink}/activity`} iconName="tasks">
-            {t('menu.myActivity')}
-          </this.MenuListLink>
-          <this.MenuListLink to={`${baseLink}/settings`} iconName="cog">
-            {t('menu.settings')}
-          </this.MenuListLink>
-        </ul>
-      </div>
-    )
-  }
-
-  renderConnectLinks() {
-    return (
-      <div className="connect-register-buttons">
-        <Link
-          to="/login"
-          className="button"
-          title="Login / Singup"
-          onClick={this.closeSideBarIfMobile}
-        >
-          <Icon size="small" name="sign-in" />
-          <span>{this.props.t('menu.loginSignup')}</span>
-        </Link>
-      </div>
-    )
-  }
-
-  renderUserSection() {
-    if (this.props.loggedInUserLoading) {
-      return (
-        <div className="user-section">
-          <LoadingFrame size="mini" />
-        </div>
-      )
-    }
-
-    return this.props.isAuthenticated ? this.renderUserLinks() : this.renderConnectLinks()
-  }
-
   render() {
     const { sidebarExpended, className, t } = this.props
     return (
-      <aside
+      <Flex
+        as="aside"
         id="sidebar"
         className={classNames('menu', className, { expended: sidebarExpended })}
+        flexDirection="column"
+        justifyContent="space-between"
       >
-        <div className="logo-banner">
-          <div
-            className="menu-collapse-button"
-            onClick={() => this.props.toggleSidebar()}
-          >
-            <RawIcon name="bars" />
-          </div>
-          <Link to="/">
-            <Logo borderless />
-          </Link>
-        </div>
-
         <div className="menu-content">
-          {this.renderUserSection()}
           <p className="menu-label hide-when-collapsed">{t('menu.language')}</p>
           <UserLanguageSelector className="hide-when-collapsed" size="small" />
           <p className="menu-label">{t('menu.content')}</p>
           {this.renderMenuContent()}
           <p className="menu-label">{t('menu.other')}</p>
           <ul className="menu-list">
-            <li>
-              <a
-                href="https://opencollective.com/captainfact_io"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hide-when-collapsed link-with-icon"
-              >
-                <RawIcon name="heart" />
-                {t('menu.donation')}
-              </a>
-            </li>
+            <li />
             <this.MenuListLink
               to="/extension"
               iconName="puzzle-piece"
@@ -173,12 +79,20 @@ export default class Sidebar extends React.PureComponent {
             >
               {t('menu.extension')}
             </this.MenuListLink>
+            <ExternalLinkNewTab
+              href="https://opencollective.com/captainfact_io"
+              className="hide-when-collapsed link-with-icon"
+            >
+              <RawIcon name="heart" />
+              {t('menu.donation')}&nbsp;
+              <LinkExternal size="1em" />
+            </ExternalLinkNewTab>
             <this.MenuListLink to="/help" iconName="question-circle">
               {t('menu.help')}
             </this.MenuListLink>
           </ul>
         </div>
-      </aside>
+      </Flex>
     )
   }
 
@@ -190,19 +104,11 @@ export default class Sidebar extends React.PureComponent {
           {capitalize(t('entities.video_plural'))}
         </this.MenuListLink>
         <ReputationGuard requiredRep={MIN_REPUTATION_MODERATION}>
-          <this.MenuListLink
-            to="/moderation"
-            iconName="flag"
-            className="hide-when-collapsed"
-          >
+          <this.MenuListLink to="/moderation" iconName="flag">
             {t('menu.moderation')}
           </this.MenuListLink>
         </ReputationGuard>
       </ul>
     )
-  }
-
-  usernameFontSize() {
-    return `${1.4 - this.props.loggedInUser.username.length / 30}em`
   }
 }

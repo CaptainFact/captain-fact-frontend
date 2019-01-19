@@ -2,6 +2,10 @@ const theme = {
   breakpoints: ['768px', '1024px', '1216px', '1408px'],
   space: ['0px', '4px', '8px', '16px', '32px', '64px', '128px', '256px', '512px'],
   fontSizes: ['3rem', '2.5rem', '1.8rem', '1.5rem', '1.25rem', '1rem', '0.75rem'],
+  navbarHeight: 60,
+  fontFamily: {
+    serif: 'Merriweather,serif'
+  },
   colors: {
     green: '#39b714',
     red: '#e0454e',
@@ -15,7 +19,8 @@ const theme = {
       100: '#e7e7e7',
       200: '#dadada',
       300: '#cecece',
-      400: '#4a4a4a'
+      400: '#4a4a4a',
+      500: '#252525'
     }
   }
 }

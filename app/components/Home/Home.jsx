@@ -1,10 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { withNamespaces, Trans } from 'react-i18next'
 import { Flex, Box } from '@rebass/grid'
-import * as Matomo from '../../API/matomo'
 
+import * as Matomo from '../../API/matomo'
 import { Icon } from '../Utils'
 import InvitationRequestForm from '../Users/InvitationRequestForm'
 import { INVITATION_SYSTEM } from '../../config'
@@ -94,9 +93,9 @@ export default class Home extends React.PureComponent {
                 <OpenCollectiveContributors
                   tier="soutien-régulier"
                   button={false}
-                  limit={10}
+                  limit={8}
                 />
-                <OpenCollectiveContributors tier="donateur" button={false} />
+                <OpenCollectiveContributors tier="donateur" button={false} limit={8} />
               </Box>
               <Box width={[1, 1, 0.5, 0.5, 2 / 3]}>
                 <h1 className="title is-3">{t('ambassadors')}</h1>
@@ -111,7 +110,7 @@ export default class Home extends React.PureComponent {
           </div>
         </section>
         <section className="section">
-          <CFSocialProfiles size="3em" />
+          <CFSocialProfiles size="3em" color="white" />
         </section>
         <section className="section last-videos" style={{ paddingBottom: '3em' }}>
           <br />

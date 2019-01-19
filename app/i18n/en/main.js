@@ -8,7 +8,8 @@ export default {
     statement_plural: 'statements'
   },
   menu: {
-    loginSignup: 'Login / Sign up',
+    login: 'Login',
+    signup: 'Sign up',
     logout: 'Logout',
     settings: 'Settings',
     profile: 'Profile',
@@ -18,7 +19,7 @@ export default {
     language: 'Language',
     other: 'Other',
     donation: 'Support us',
-    extension: 'Browser extension',
+    extension: 'Download extension',
     help: 'Learn more',
     moderation: 'Moderation',
     addedVideos: 'Added videos',

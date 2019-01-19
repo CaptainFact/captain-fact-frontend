@@ -8,7 +8,8 @@ export default {
     statement_plural: 'déclarations'
   },
   menu: {
-    loginSignup: 'Connexion',
+    login: 'Se connecter',
+    signup: "S'inscrire",
     logout: 'Se déconnecter',
     settings: 'Paramètres',
     profile: 'Profil',
@@ -18,7 +19,8 @@ export default {
     language: 'Langue',
     other: 'Autre',
     donation: 'Nous soutenir',
-    extension: 'Extension pour navigateur',
+    extension: "Télécharger l'extension",
+    help: 'Aide',
     moderation: 'Modération',
     addedVideos: 'Vidéos ajoutées',
     notifications: 'Notifications',

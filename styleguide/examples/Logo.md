@@ -1,0 +1,5 @@
+### Default logo
+
+```js
+<Logo />
+```

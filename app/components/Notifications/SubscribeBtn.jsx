@@ -66,7 +66,7 @@ SubscribeBtn.propTypes = {
   /** A function called with new subscription state when button is clicked */
   onChange: PropTypes.func,
   /** Icon size */
-  size: PropTypes.oneOf([PropTypes.integer, PropTypes.string]),
+  size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /** Any props from `Box` */
   ...Box.propTypes
 }
