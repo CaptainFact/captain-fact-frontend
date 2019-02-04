@@ -4,11 +4,11 @@ $border-color: lightgrey
   position: fixed
   height: 100%
   left: 0
-  width: $sidebar_width
+  min-width: $sidebar_width
   background: $white-bis
   overflow-y: auto
   overflow-x: hidden
-  z-index: 999
+  z-index: 9999999
   box-shadow: -15px 0px 40px -14px rgba(173, 173, 173, .3) inset
   border-right: 1px solid #e8e8e8
   +tablet
@@ -51,11 +51,9 @@ $border-color: lightgrey
 
   .link-with-icon > i
     width: 20px
-    +desktop
-      transition: font-size $sidebar_collapse_transition_duration
 
 #sidebar:not(.expended)
-  width: $sidebar_collapsed_width
+  min-width: $sidebar_collapsed_width
   text-align: center
 
   @media screen and (max-width: $sidebar_full_collapse_under)
@@ -64,14 +62,15 @@ $border-color: lightgrey
     z-index: 9999
     height: inherit
     background: transparentize($white, 0.1)
-    .logo-banner
-      height: $sidebar_full_collapse_banner_height
     .menu-content
       display: none
 
   .link-with-icon i
     font-size: 25px
     margin: 0
+
+  .logo
+    display: none
 
   .user-quicklinks
     a
@@ -84,11 +83,6 @@ $border-color: lightgrey
       display: none
     .link-with-icon
       padding: 5px
-
-  +from($sidebar_full_collapse_under + 1)
-    .logo-banner
-      .title, .logo
-        display: none
 
   .username
     display: none

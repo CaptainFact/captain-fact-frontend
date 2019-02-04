@@ -4,9 +4,12 @@ import { Link } from 'react-router'
 import { withNamespaces } from 'react-i18next'
 import classNames from 'classnames'
 import capitalize from 'voca/capitalize'
+import styled, { withTheme } from 'styled-components'
+import { themeGet } from 'styled-system'
 import { Flex } from '@rebass/grid'
 
 import { LinkExternal } from 'styled-icons/octicons/LinkExternal'
+import { Menu } from 'styled-icons/boxicons-regular/Menu'
 
 import { MOBILE_WIDTH_THRESHOLD, MIN_REPUTATION_MODERATION } from '../../constants'
 import RawIcon from '../Utils/RawIcon'
@@ -15,6 +18,9 @@ import { closeSidebar, toggleSidebar } from '../../state/user_preferences/reduce
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import UserLanguageSelector from '../LoggedInUser/UserLanguageSelector'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
+import StyledLink from '../StyledUtils/StyledLink'
+import Logo from './Logo'
+import Container from '../StyledUtils/Container'
 
 @connect(
   state => ({ sidebarExpended: state.UserPreferences.sidebarExpended }),
@@ -22,6 +28,7 @@ import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 )
 @withNamespaces('main')
 @withLoggedInUser
+@withTheme
 export default class Sidebar extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -55,14 +62,13 @@ export default class Sidebar extends React.PureComponent {
   }
 
   render() {
-    const { sidebarExpended, className, t } = this.props
+    const { sidebarExpended, className, t, theme } = this.props
     return (
       <Flex
         as="aside"
         id="sidebar"
         className={classNames('menu', className, { expended: sidebarExpended })}
         flexDirection="column"
-        justifyContent="space-between"
       >
         <div className="menu-content">
           <p className="menu-label hide-when-collapsed">{t('menu.language')}</p>

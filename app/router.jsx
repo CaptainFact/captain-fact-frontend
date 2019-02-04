@@ -26,14 +26,11 @@ import ActivityLog from './components/Users/ActivityLog'
 import UserAddedVideos from './components/Videos/UserAddedVideos'
 import NotificationsPage from './components/LoggedInUser/NotificationsPage'
 import SubscriptionsPage from './components/LoggedInUser/SubscriptionsPage'
-import SimpleLayout from './components/App/SimpleLayout'
 
 const CFRouter = () => (
   <Router history={browserHistory}>
-    <Route component={SimpleLayout}>
-      <Route path="/" component={Home} />
-    </Route>
     <Route component={Layout}>
+      <Route path="/" component={Home} />
       <Route path="/signup" component={SignupForm} />
       <Route path="/signup/callback/:provider" component={ThirdPartyCallback} />
       <Route path="/login" component={LoginForm} />

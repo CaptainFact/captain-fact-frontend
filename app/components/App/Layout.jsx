@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
 
+import { Flex } from '@rebass/grid'
 import { FlashMessages } from '../Utils'
 import Navbar from './Navbar'
 import Sidebar from './Sidebar'

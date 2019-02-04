@@ -27,11 +27,11 @@ import { ErrorView } from '../Utils/ErrorView'
 import Message from '../Utils/Message'
 import NotificationDetails from '../Notifications/NotificationDetails'
 import { TimeSince } from '../Utils/TimeSince'
-import Container from '../StyledUtils/Container';
+import Container from '../StyledUtils/Container'
 
 const NavbarContainer = styled(Flex)`
   position: fixed;
-  z-index: 9999;
+  z-index: 999999;
   top: 0;
   width: 100%;
   justify-content: space-between;
@@ -42,23 +42,6 @@ const NavbarContainer = styled(Flex)`
   box-shadow: 0px 0px 20px 5px rgba(125, 125, 125, 0.3);
   transition: top 0.3s;
   animation: ${fadeIn} 0.3s;
-
-  .site-logo {
-    font-size: 24px;
-    margin: 0;
-  }
-`
-
-const MenuToggleSwitch = styled(Menu)`
-  height: 100%;
-  width: 45px;
-  margin-right: ${themeGet('space.1')};
-  cursor: pointer;
-  user-select: none;
-
-  &:hover {
-    color: ${themeGet('colors.black.500')};
-  }
 `
 
 const UserMenuTrigger = styled(Flex)`
@@ -106,6 +89,17 @@ const UserLoading = styled(UserCircle)`
   margin-right: ${themeGet('space.2')};
 `
 
+const MenuToggleSwitch = styled(Menu)`
+  height: 100%;
+  width: 45px;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    color: ${themeGet('colors.black.500')};
+  }
+`
+
 const Navbar = ({
   t,
   theme,
@@ -113,7 +107,6 @@ const Navbar = ({
   loggedInUser,
   isAuthenticated,
   loggedInUserLoading,
-  hasMenuToggle
 }) => {
   return (
     <Box>
@@ -121,10 +114,16 @@ const Navbar = ({
       <NavbarContainer px={2}>
         {/* Left */}
         <Flex alignItems="center">
-          {hasMenuToggle && <MenuToggleSwitch onClick={() => toggleSidebar()} />}
-          <StyledLink to="/" ml={1}>
-            <Logo height={theme.navbarHeight - 25} borderless />
-          </StyledLink>
+          <Container
+            display="flex"
+            alignItems="center"
+            height={theme.navbarHeight - 1}
+          >
+            <MenuToggleSwitch onClick={() => toggleSidebar()} />
+            <StyledLink className="logo" to="/" ml={1}>
+              <Logo height={theme.navbarHeight - 24} borderless />
+            </StyledLink>
+          </Container>
         </Flex>
         {/* Center - will hold the search bar in the future */}
         {/* Right */}
@@ -219,7 +218,12 @@ const Navbar = ({
                 <StyledLink to="/login" className="button is-primary is-outlined" mr={2}>
                   <span>{t('menu.login')}</span>
                 </StyledLink>
-                <StyledLink display={["none !important", 'inline-flex !important']} to="/extension" className="button is-primary" mr={2} >
+                <StyledLink
+                  display={['none !important', 'inline-flex !important']}
+                  to="/extension"
+                  className="button is-primary"
+                  mr={2}
+                >
                   <span>{t('menu.extension')}</span>
                 </StyledLink>
                 <Link to="/signup" className="button is-primary">
@@ -232,10 +236,6 @@ const Navbar = ({
       </NavbarContainer>
     </Box>
   )
-}
-
-Navbar.defaultProps = {
-  hasMenuToggle: true
 }
 
 export default withTheme(
