@@ -45,11 +45,13 @@ export const VideosAddedByUserQuery = gql`
 `
 
 export const loggedInUserSubscriptionsQuery = gql`
-  query LoggedInUserSubscriptions {
+  query LoggedInUserSubscriptions($scopes: [String]) {
     loggedInUser {
-      subscriptions(scopes: ["video"]) {
+      subscriptions(scopes: $scopes) {
         id
         scope
+        videoId
+        isSubscribed
         video {
           hashId
           title

@@ -24,14 +24,12 @@ import UserMenu from '../Users/UserMenu'
 import StyledLink from '../StyledUtils/StyledLink'
 import Notifications from '../LoggedInUser/Notifications'
 import { ErrorView } from '../Utils/ErrorView'
-import Message from '../Utils/Message'
-import NotificationDetails from '../Notifications/NotificationDetails'
-import { TimeSince } from '../Utils/TimeSince'
 import Container from '../StyledUtils/Container'
+import NotificationsPopupContent from '../Notifications/NotificationsPopupContent'
 
 const NavbarContainer = styled(Flex)`
   position: fixed;
-  z-index: 999999;
+  z-index: 9999;
   top: 0;
   width: 100%;
   justify-content: space-between;
@@ -106,7 +104,7 @@ const Navbar = ({
   toggleSidebar,
   loggedInUser,
   isAuthenticated,
-  loggedInUserLoading,
+  loggedInUserLoading
 }) => {
   return (
     <Box>
@@ -114,13 +112,9 @@ const Navbar = ({
       <NavbarContainer px={2}>
         {/* Left */}
         <Flex alignItems="center">
-          <Container
-            display="flex"
-            alignItems="center"
-            height={theme.navbarHeight - 1}
-          >
+          <Container display="flex" alignItems="center" height={theme.navbarHeight - 1}>
             <MenuToggleSwitch onClick={() => toggleSidebar()} />
-            <StyledLink className="logo" to="/" ml={1}>
+            <StyledLink className="logo" to={isAuthenticated ? '/videos' : '/'} ml={1}>
               <Logo height={theme.navbarHeight - 24} borderless />
             </StyledLink>
           </Container>
@@ -136,6 +130,11 @@ const Navbar = ({
                 <Popup
                   position="bottom right"
                   offsetX={-12}
+                  contentStyle={{
+                    minWidth: 400,
+                    boxShadow: 'rgba(150, 150, 150, 0.2) 5px 10px 15px -6px',
+                    filter: 'none'
+                  }}
                   trigger={(
                     <UnstyledButton mr={[3, 4]}>
                       <Bell size={24} />
@@ -143,43 +142,19 @@ const Navbar = ({
                   )}
                 >
                   <Notifications>
-                    {({ loading, error, notifications }) => {
+                    {({ loading, error, notifications, markAsSeen }) => {
                       if (loading) {
-                        return <LoadingFrame />
+                        return <LoadingFrame size="small" />
                       } else if (error) {
                         return <ErrorView error={error} />
                       }
 
                       return (
-                        <Flex flexDirection="column" alignItems="center">
-                          <Box mb={3} p={[2, 4]}>
-                            {notifications.length === 0 ? (
-                              <Message>
-                                There's no notification in here yet. They'll start
-                                appearing once someone reply to one of your comments or if
-                                an action is made on a video you follow.
-                              </Message>
-                            ) : (
-                              <Flex flexDirection="column">
-                                {notifications.map(n => (
-                                  <NotificationDetails key={n.id} notification={n}>
-                                    {({ message, seenAt, insertedAt }) => (
-                                      <Flex>
-                                        <Box>{message}</Box>
-                                        <Box mx={2}>|</Box>
-                                        <Box>{seenAt ? 'Seen' : 'Not seen'}</Box>
-                                        <Box mx={2}>|</Box>
-                                        <Box>
-                                          <TimeSince time={insertedAt} />
-                                        </Box>
-                                      </Flex>
-                                    )}
-                                  </NotificationDetails>
-                                ))}
-                              </Flex>
-                            )}
-                          </Box>
-                        </Flex>
+                        <NotificationsPopupContent
+                          notifications={notifications}
+                          user={loggedInUser}
+                          markAsSeen={markAsSeen}
+                        />
                       )
                     }}
                   </Notifications>

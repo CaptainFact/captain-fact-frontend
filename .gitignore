@@ -18,6 +18,7 @@
 .tmproj
 nbproject
 Thumbs.db
+.history
 
 # NPM packages folder.
 node_modules/
@@ -30,6 +31,9 @@ coverage
 
 # Ignore cypress videos and screenshots
 cypress/videos
+
+# Ignore styleguide build
+styleguide
 
 # API dev image resources
 dev/dev_docker_api_resources/*

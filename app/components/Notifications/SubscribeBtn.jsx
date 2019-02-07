@@ -6,6 +6,8 @@ import { Box } from '@rebass/grid'
 
 import { BellSlash } from 'styled-icons/fa-solid/BellSlash'
 import { Bell } from 'styled-icons/fa-solid/Bell'
+import gql from 'graphql-tag'
+import { Mutation } from 'react-apollo'
 
 const SubscribeIconContainer = styled(Box)`
   width: 1em;
@@ -48,23 +50,55 @@ const IconUnsubscribed = styled(BellSlash)`
   }
 `
 
-const SubscribeBtn = ({ size, isSubscribed, onChange, ...props }) => (
-  <Box fontSize={size} {...props}>
-    <SubscribeIconContainer
-      isSubscribed={isSubscribed}
-      onClick={onChange && (() => onChange(!isSubscribed))}
-    >
-      <IconSubscribed />
-      <IconUnsubscribed />
-    </SubscribeIconContainer>
-  </Box>
+const updateSubscriptionQuery = gql`
+  mutation UpdateSubscription($entityId: Int!, $scope: String!, $isSubscribed: Boolean!) {
+    updateSubscription(entityId: $entityId, scope: $scope, isSubscribed: $isSubscribed) {
+      id
+      isSubscribed
+      reason
+    }
+  }
+`
+
+const SubscribeBtn = ({
+  size,
+  isSubscribed,
+  onChange,
+  entityId,
+  scope,
+  onClick,
+  deprecatedOverrideClick,
+  ...props
+}) => (
+  <Mutation mutation={updateSubscriptionQuery} variables={{ entityId, scope }}>
+    {updateSubscription => (
+      <Box fontSize={size} {...props}>
+        <SubscribeIconContainer
+          isSubscribed={isSubscribed}
+          onClick={() => (deprecatedOverrideClick
+            ? deprecatedOverrideClick(!isSubscribed)
+            : updateSubscription({
+              variables: { isSubscribed: !isSubscribed }
+            }))
+          }
+        >
+          <IconSubscribed />
+          <IconUnsubscribed />
+        </SubscribeIconContainer>
+      </Box>
+    )}
+  </Mutation>
 )
 
 SubscribeBtn.propTypes = {
+  /** Entity ID */
+  entityId: PropTypes.number.isRequired,
+  /** Entity type */
+  scope: PropTypes.oneOf(['comment', 'statement', 'video']),
   /** Current state (subscribed or unsubscribed) */
   isSubscribed: PropTypes.bool.isRequired,
-  /** A function called with new subscription state when button is clicked */
-  onChange: PropTypes.func,
+  /** DEPRECATED: Override the graphql mutation */
+  deprecatedOverrideClick: PropTypes.func,
   /** Icon size */
   size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /** Any props from `Box` */

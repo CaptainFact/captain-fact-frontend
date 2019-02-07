@@ -21,7 +21,8 @@
     "lint_fix": "npx eslint app --fix",
     "precommit": "npx lint-staged",
     "prettify": "npx prettier --write app/**/*.{js,jsx} && npx prettier --write cypress/**/*.js",
-    "styleguide:dev": "npx styleguidist server"
+    "styleguide:dev": "npx styleguidist server",
+    "styleguide:build": "npx styleguidist build"
   },
   "jest": {
     "setupFiles": [
@@ -125,6 +126,7 @@
     "babel-jest": "^23.4.2",
     "babel-loader": "^8.0.0",
     "babel-plugin-styled-components": "^1.9.2",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "babel-plugin-webpack-alias": "^2.1.2",
     "browserslist": "^4.2.1",
     "clean-webpack-plugin": "^1.0.0",

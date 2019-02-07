@@ -1,25 +1,32 @@
 import React, { Component } from 'react'
-import gql from 'graphql-tag'
-import { Query } from 'react-apollo'
-import { get } from 'lodash'
 import { withRouter, Link } from 'react-router'
+import { Flex } from '@rebass/grid'
+import { translate } from 'react-i18next'
 
-import { Flex, Box } from '@rebass/grid'
+import { Clock } from 'styled-icons/fa-regular/Clock'
+import { Check } from 'styled-icons/fa-solid/Check'
+import { PrimitiveDot } from 'styled-icons/octicons/PrimitiveDot'
+
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { ErrorView } from '../Utils/ErrorView'
 import PaginationMenu from '../Utils/PaginationMenu'
 import Message from '../Utils/Message'
-import StyledCard from '../Utils/StyledCard'
 import NotificationDetails from '../Notifications/NotificationDetails'
 import { TimeSince } from '../Utils/TimeSince'
 import Notifications from './Notifications'
+import { Span } from '../StyledUtils/Text'
+import StyledLink from '../StyledUtils/StyledLink'
+import Container from '../StyledUtils/Container'
+import Button from '../Utils/Button'
 
 @withRouter
+@translate('notifications')
 export default class NotificationsPage extends Component {
   render() {
+    const { t } = this.props
     return (
       <Notifications>
-        {({ loading, error, notifications, pageNumber, totalPages }) => {
+        {({ loading, error, notifications, pageNumber, totalPages, markAsSeen }) => {
           if (loading) {
             return <LoadingFrame />
           } else if (error) {
@@ -28,7 +35,7 @@ export default class NotificationsPage extends Component {
 
           return (
             <Flex flexDirection="column" alignItems="center">
-              <Box mb={3} p={[2, 4]}>
+              <Container mb={3} p={[2, 4]} width={1} maxWidth={1200}>
                 {notifications.length === 0 ? (
                   <Message>
                     There's no notification in here yet. They'll start appearing once
@@ -37,37 +44,80 @@ export default class NotificationsPage extends Component {
                   </Message>
                 ) : (
                   <Flex flexDirection="column">
+                    <Flex justifyContent="center" mb={4}>
+                      <Button
+                        onClick={() => markAsSeen(notifications.map(n => n.id), true)}
+                      >
+                        {t('markAllAsRead')}
+                      </Button>
+                    </Flex>
                     {notifications.map(n => (
                       <NotificationDetails key={n.id} notification={n}>
-                        {({ message, seenAt, insertedAt }) => (
-                          <StyledCard px={[3, 4]} py={[2, 3]}>
-                            <Flex>
-                              {' '}
-                              <Box>{message}</Box>
-                              <Box mx={2}>|</Box>
-                              <Box>{seenAt ? 'Seen' : 'Not seen'}</Box>
-                              <Box mx={2}>|</Box>
-                              <Box>
+                        {({ message, seenAt, link, insertedAt }) => (
+                          <Container
+                            display="flex"
+                            alignItems="center"
+                            mb={3}
+                            p={3}
+                            borderRadius={4}
+                            background={seenAt ? 'white' : 'rgba(107,163,167,0.05)'}
+                          >
+                            <Container
+                              display="flex"
+                              flexDirection="column"
+                              borderRight={1}
+                              pr={3}
+                              borderColor="black.100"
+                              width={0.85}
+                            >
+                              <StyledLink
+                                to={link}
+                                onClick={() => markAsSeen(n.id, true)}
+                                color="black.400"
+                                mb={1}
+                              >
+                                {message}
+                              </StyledLink>
+                              <Span color="black.300">
+                                <Clock size="1em" />
+                                &nbsp;
                                 <TimeSince time={insertedAt} />
-                              </Box>
+                              </Span>
+                            </Container>
+                            <Flex ml={3} width={0.15} justifyContent="center">
+                              {seenAt ? (
+                                <PrimitiveDot
+                                  cursor="pointer"
+                                  size={24}
+                                  onClick={() => markAsSeen(n.id, false)}
+                                />
+                              ) : (
+                                <Check
+                                  cursor="pointer"
+                                  size={24}
+                                  onClick={() => markAsSeen(n.id, true)}
+                                />
+                              )}
                             </Flex>
-                          </StyledCard>
+                          </Container>
                         )}
                       </NotificationDetails>
                     ))}
                   </Flex>
                 )}
-              </Box>
-              <PaginationMenu
-                className="videos-pagination"
-                currentPage={pageNumber}
-                total={totalPages}
-                isRounded
-                onPageChange={() => window.scrollTo({ top: 0 })}
-                LinkBuilder={({ 'data-page': page, ...props }) => {
-                  return <Link className="button" {...props} />
-                }}
-              />
+              </Container>
+              {totalPages > 1 && (
+                <PaginationMenu
+                  className="videos-pagination"
+                  currentPage={pageNumber}
+                  total={totalPages}
+                  isRounded
+                  onPageChange={() => window.scrollTo({ top: 0 })}
+                  LinkBuilder={({ 'data-page': page, ...props }) => {
+                    return <Link className="button" {...props} />
+                  }}
+                />
+              )}
             </Flex>
           )
         }}

@@ -1,6 +1,6 @@
 import React from 'react'
 import gql from 'graphql-tag'
-import { Query } from 'react-apollo'
+import { Query, Mutation } from 'react-apollo'
 import { get } from 'lodash'
 import { withRouter } from 'react-router'
 
@@ -21,6 +21,11 @@ export const loggedInUserNotificationsQuery = gql`
           insertedAt
           type
           action {
+            entity
+            type
+            speakerId
+            statementId
+            commentId
             user {
               name
               username
@@ -29,9 +34,24 @@ export const loggedInUserNotificationsQuery = gql`
               hashId
               title
             }
+            speaker {
+              fullName
+            }
+            comment {
+              text
+            }
           }
         }
       }
+    }
+  }
+`
+
+const markAsSeenMutation = gql`
+  mutation UpdateNotification($ids: [Int!], $seen: Boolean!) {
+    updateNotifications(ids: $ids, seen: $seen) {
+      id
+      seenAt
     }
   }
 `
@@ -55,13 +75,23 @@ const Notifications = ({ children, pageSize }) => {
           entries: []
         })
 
-        return children({
-          notifications: paginatedNotifications.entries,
-          loading,
-          error,
-          pageNumber: paginatedNotifications.pageNumber,
-          totalPages: paginatedNotifications.totalPages
-        })
+        return (
+          <Mutation mutation={markAsSeenMutation}>
+            {markAsSeen => children({
+              notifications: paginatedNotifications.entries,
+              loading,
+              error,
+              pageNumber: paginatedNotifications.pageNumber,
+              totalPages: paginatedNotifications.totalPages,
+              markAsSeen: (ids, seen) => {
+                return markAsSeen({
+                  variables: Array.isArray(ids) ? { ids, seen } : { ids: [ids], seen }
+                })
+              }
+            })
+            }
+          </Mutation>
+        )
       }}
     </Query>
   )

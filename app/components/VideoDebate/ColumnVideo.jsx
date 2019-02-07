@@ -36,17 +36,14 @@ import SubscribeBtn from '../Notifications/SubscribeBtn'
 @withLoggedInUser
 export class ColumnVideo extends React.PureComponent {
   renderNotificationBell() {
-    const { isSubscribed, loggedInUser, changeSubscription } = this.props
-
-    // Currently in beta, for experienced users only
-    if (loggedInUser.reputation < 300) return null
-
-    return (
+    return !this.props.isAuthenticated ? null : (
       <SubscribeBtn
         size="40px"
         mr={[2, 3]}
-        isSubscribed={isSubscribed}
-        onChange={changeSubscription}
+        scope="video"
+        entityId={this.props.video.id}
+        isSubscribed={this.props.isSubscribed}
+        deprecatedOverrideClick={this.props.changeSubscription}
       />
     )
   }
