@@ -81,7 +81,7 @@
     "prop-types": "~15.6.2",
     "re-reselect": "~2.1.0",
     "react": "~16.7.0",
-    "react-apollo": "~2.3.3",
+    "react-apollo": "~2.5.0",
     "react-dom": "~16.7.0",
     "react-flip-move": "~3.0.2",
     "react-helmet": "~5.2.0",
