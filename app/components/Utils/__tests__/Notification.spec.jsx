@@ -1,17 +1,17 @@
-import Notification from '../Notification'
+import Alert from '../Alert'
 
 test('render message', () => {
-  snapshotComponent(<Notification>Hello</Notification>)
+  snapshotComponent(<Alert>Hello</Alert>)
 })
 
 test('can set type', () => {
-  snapshotComponent(<Notification type="warning">Alert !</Notification>)
+  snapshotComponent(<Alert type="warning">Alert !</Alert>)
 })
 
 test('pass props', () => {
-  snapshotComponent(<Notification title="my title">Hellooow</Notification>)
+  snapshotComponent(<Alert title="my title">Hellooow</Alert>)
 })
 
 test('without body', () => {
-  snapshotComponent(<Notification />)
+  snapshotComponent(<Alert />)
 })

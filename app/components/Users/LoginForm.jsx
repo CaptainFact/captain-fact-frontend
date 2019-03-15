@@ -5,7 +5,7 @@ import { withNamespaces } from 'react-i18next'
 
 import ThirdPartyAuthList from './ThirdPartyAuthList'
 import { emailOrUsernameField, passwordField, submitButton } from './UserFormFields'
-import Notification from '../Utils/Notification'
+import Alert from '../Utils/Alert'
 import { tError } from '../../lib/errors'
 import { signIn } from '../../API/http_api/current_user'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
@@ -22,7 +22,7 @@ export default class LoginForm extends React.PureComponent {
   componentWillReceiveProps(props) {
     // Redirect when already logged in
     if (props.isAuthenticated) {
-      props.router.goBack();
+      props.router.goBack()
     }
   }
 
@@ -46,7 +46,7 @@ export default class LoginForm extends React.PureComponent {
             })
         })}
       >
-        {error && <Notification type="danger">{tError(t, error)}</Notification>}
+        {error && <Alert type="danger">{tError(t, error)}</Alert>}
         <div>
           <strong>
             {t('needAnAccountQuestion')} <Link to="/signup">{t('signup')}</Link>{' '}

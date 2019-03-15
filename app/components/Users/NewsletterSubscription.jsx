@@ -1,7 +1,7 @@
 import React from 'react'
 import { withNamespaces } from 'react-i18next'
 
-import Notification from '../Utils/Notification'
+import Alert from '../Utils/Alert'
 import { HttpApi } from '../../API'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 
@@ -24,11 +24,11 @@ export default class NewsletterSubscription extends React.PureComponent {
     const cssType = this.state.status === 'success' ? this.state.status : 'danger'
     return (
       <div className="section">
-        <Notification type={cssType} style={{ maxWidth: 400, margin: '3em auto' }}>
+        <Alert type={cssType} style={{ maxWidth: 400, margin: '3em auto' }}>
           {this.props.t('newsletter.unsubscribe', {
             context: this.state.status
           })}
-        </Notification>
+        </Alert>
       </div>
     )
   }

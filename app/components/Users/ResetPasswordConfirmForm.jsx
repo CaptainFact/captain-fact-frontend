@@ -7,7 +7,7 @@ import { ErrorView } from '../Utils/ErrorView'
 import UserPicture from './UserPicture'
 import { USER_PICTURE_XLARGE } from '../../constants'
 import UserAppellation from './UserAppellation'
-import Notification from '../Utils/Notification'
+import Alert from '../Utils/Alert'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import * as userAPI from '../../API/http_api/current_user'
 
@@ -84,7 +84,7 @@ export default class ResetPasswordConfirmForm extends React.PureComponent {
       )
     }
     if (this.state.status === 'confirm_success') {
-      return <Notification>{this.props.t('resetPasswordSuccess')}</Notification>
+      return <Alert>{this.props.t('resetPasswordSuccess')}</Alert>
     }
   }
 

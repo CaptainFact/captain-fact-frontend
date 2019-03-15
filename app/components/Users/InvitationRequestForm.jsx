@@ -7,7 +7,7 @@ import { withNamespaces } from 'react-i18next'
 import browserLocale from '../../i18n/browser_locale'
 import { requestInvitation } from '../../API/http_api/current_user'
 import { errorToFlash, addFlash } from '../../state/flashes/reducer'
-import Notification from '../Utils/Notification'
+import Alert from '../Utils/Alert'
 import { Icon } from '../Utils/Icon'
 import FieldWithButton from '../FormUtils/FieldWithButton'
 
@@ -48,9 +48,9 @@ export default class InvitationRequestForm extends React.PureComponent {
         />
       )
     return (
-      <Notification type="success">
+      <Alert type="success">
         <Icon name="check" /> {this.props.t('home:inviteSuccess')}
-      </Notification>
+      </Alert>
     )
   }
 
