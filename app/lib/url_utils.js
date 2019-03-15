@@ -1,17 +1,35 @@
-import 'core-js/es7/object'
+import { toPairs, pickBy, isEmpty } from 'lodash'
 
+/**
+ * Transorm an object into a query string. Strips undefined values.
+ *
+ * ## Example
+ *
+ *    > objectToQueryString({a: 42, b: "hello", c: undefined})
+ *    "?a=42&b=hello"
+ */
 export const optionsToQueryString = options => {
-  if (!options || Object.keys(options).length === 0) return ''
-  return `?${Object.entries(options)
-    .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+  const definedOptions = pickBy(options, value => value !== undefined)
+  if (isEmpty(definedOptions)) {
+    return ''
+  }
+
+  const encodeValue = value => {
+    if (Array.isArray(value)) {
+      return value.concat.map(encodeURIComponent).join(',')
+    }
+    return encodeURIComponent(value)
+  }
+
+  return `?${toPairs(definedOptions)
+    .map(([key, value]) => `${key}=${encodeValue(value)}`)
     .join('&')}`
 }
 
 export const youtubeRegex = /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/ ]{11})/i
 
-export const isExternal = (currentHref, url) =>
-  (url.indexOf(':') > -1 || url.indexOf('//') > -1) &&
-  checkDomain(currentHref) !== checkDomain(url)
+export const isExternal = (currentHref, url) => (url.indexOf(':') > -1 || url.indexOf('//') > -1)
+  && checkDomain(currentHref) !== checkDomain(url)
 
 /**
  * Define is URL points to a downloadable file. We only support downloading

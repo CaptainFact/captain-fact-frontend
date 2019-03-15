@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import gql from 'graphql-tag'
 import { Query, Mutation } from 'react-apollo'
 import { get } from 'lodash'
@@ -8,9 +9,13 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
 import { ErrorView } from '../Utils/ErrorView'
 
 export const loggedInUserNotificationsQuery = gql`
-  query LoggedInUserNotifications($page: Int! = 1, $pageSize: Int! = 30) {
+  query LoggedInUserNotifications(
+    $page: Int! = 1
+    $pageSize: Int! = 30
+    $filter: String = ALL
+  ) {
     loggedInUser {
-      notifications(page: $page, pageSize: $pageSize) {
+      notifications(page: $page, pageSize: $pageSize, filter: $filter) {
         pageNumber
         pageSize
         totalEntries
@@ -59,16 +64,15 @@ const markAsSeenMutation = gql`
 /**
  * A connector to get a user's notifications
  */
-const Notifications = ({ children, pageSize }) => {
+const Notifications = ({ children, pageSize, pageNumber, pollInterval, filter }) => {
   return (
-    <Query query={loggedInUserNotificationsQuery} variables={{ pageSize }}>
+    <Query
+      query={loggedInUserNotificationsQuery}
+      variables={{ filter, pageSize, page: pageNumber }}
+      pollInterval={pollInterval}
+      fetchPolicy="network-only"
+    >
       {({ loading, error, data }) => {
-        if (loading) {
-          return <LoadingFrame />
-        } else if (error) {
-          return <ErrorView error={error} />
-        }
-
         const paginatedNotifications = get(data, 'loggedInUser.notifications', {
           pageNumber: 1,
           totalPages: 1,
@@ -95,6 +99,20 @@ const Notifications = ({ children, pageSize }) => {
       }}
     </Query>
   )
+}
+
+Notifications.propTypes = {
+  children: PropTypes.func.isRequired,
+  pageSize: PropTypes.number,
+  pageNumber: PropTypes.number,
+  filter: PropTypes.oneOf(['ALL', 'SEEN', 'UNSEEN']),
+  pollInterval: PropTypes.number
+}
+
+Notifications.defaultProps = {
+  /** Default refresh interval in ms. Default = 15s. Set to 0 to disable. */
+  pollInterval: 15000,
+  filter: 'ALL'
 }
 
 export default withRouter(Notifications)

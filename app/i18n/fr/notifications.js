@@ -2,6 +2,12 @@ export default {
   empty: "Vous n'avez aucune notification",
   seeAll: 'Voir tout',
   markAllAsRead: 'Tout marquer comme lu',
+  markAllAsUnseen: 'Tout marquer comme non lu',
+  filters: {
+    ALL: 'Toutes',
+    SEEN: 'Vues',
+    UNSEEN: 'Non vues'
+  },
   message: {
     newComment:
       'Nouveau commentaire de <1>@{{username}}</1> sur <4>{{videoTitle}}</4> : « {{text}} »',
