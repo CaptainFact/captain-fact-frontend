@@ -7,6 +7,7 @@ import iterateWithSeparators from '../../lib/iterate_with_separators'
 import CardLayout from '../Utils/CardLayout'
 import RawIcon from '../Utils/RawIcon'
 import { videoURL } from '../../lib/cf_routes'
+import { MAX_VIDEO_CARD_SPEAKERS } from '../../constants'
 
 @withNamespaces('videoDebate')
 export class VideoCard extends React.PureComponent {
@@ -68,13 +69,26 @@ export class VideoCard extends React.PureComponent {
   }
 
   renderSpeakersList(speakers, t) {
+    const nbOthers = speakers.length - MAX_VIDEO_CARD_SPEAKERS
     const speakerComponentsList = []
-    const speakerIterator = iterateWithSeparators(speakers, speakers.length, t)
+    const speakerIterator = iterateWithSeparators(speakers, MAX_VIDEO_CARD_SPEAKERS, t, false)
     for (const [speaker, separator] of speakerIterator) {
       speakerComponentsList.push(
         <span key={speaker.id}>
           <strong>{this.renderSpeakerName(speaker)}</strong>
           {separator}
+        </span>
+      )
+    }
+    if (nbOthers > 0) {
+      speakerComponentsList.push(
+        <span>
+          &nbsp;
+          {t('main:misc.and')}
+          &nbsp;
+          <span key="others">
+            <strong>{t('main:misc.other', { count: nbOthers })}</strong>
+          </span>
         </span>
       )
     }
