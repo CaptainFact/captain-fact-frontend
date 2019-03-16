@@ -38,7 +38,8 @@
     },
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "/__fixtures__/"
+      "/__fixtures__/",
+      ".history"
     ]
   },
   "lint-staged": {
