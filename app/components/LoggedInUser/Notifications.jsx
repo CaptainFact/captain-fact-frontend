@@ -5,9 +5,6 @@ import { Query, Mutation } from 'react-apollo'
 import { get } from 'lodash'
 import { withRouter } from 'react-router'
 
-import { LoadingFrame } from '../Utils/LoadingFrame'
-import { ErrorView } from '../Utils/ErrorView'
-
 export const loggedInUserNotificationsQuery = gql`
   query LoggedInUserNotifications(
     $page: Int! = 1
@@ -40,11 +37,14 @@ export const loggedInUserNotificationsQuery = gql`
               title
             }
             speaker {
+              id
+              slug
               fullName
             }
             comment {
               text
             }
+            changes
           }
         }
       }

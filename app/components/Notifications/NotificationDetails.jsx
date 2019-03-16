@@ -5,6 +5,15 @@ import { truncate } from 'lodash'
 
 import { userActionURL } from '../../lib/cf_routes'
 
+const getTruncatedChange = (changes, key, maxLength) => {
+  try {
+    const parsedChanges = JSON.parse(changes)
+    return truncate(parsedChanges[key], maxLength) || ''
+  } catch {
+    return ''
+  }
+}
+
 const messageRenderers = {
   new_comment: ({ action: { video, user, comment } }) => {
     return user ? (
@@ -34,28 +43,30 @@ const messageRenderers = {
       <strong>{{ videoTitle: video.title }}</strong>
     </Trans>
   ),
-  new_statement: ({ action: { user, video } }) => (
-    <Trans i18nKey="message.newSpeaker">
+  new_statement: ({ action: { user, video, changes } }) => (
+    <Trans i18nKey="message.newStatement">
       <strong>@{{ username: user.username }}</strong> added a statement on{' '}
-      <strong>{{ videoTitle: video.title }}</strong>
+      <strong>{{ videoTitle: video.title }}</strong>: "
+      {{ text: getTruncatedChange(changes, 'text', 40) }}"
     </Trans>
   ),
-  updated_statement: ({ action: { user, video } }) => (
-    <Trans i18nKey="message.newSpeaker">
+  updated_statement: ({ action: { user, video, changes } }) => (
+    <Trans i18nKey="message.updatedStatement">
       <strong>@{{ username: user.username }}</strong> updated a statement on{' '}
-      <strong>{{ videoTitle: video.title }}</strong>
+      <strong>{{ videoTitle: video.title }}</strong>: "
+      {{ text: getTruncatedChange(changes, 'text', 40) }}"
     </Trans>
   ),
   updated_video: ({ action: { user, video } }) => (
-    <Trans i18nKey="message.newSpeaker">
+    <Trans i18nKey="message.updatedVideo">
       <strong>@{{ username: user.username }}</strong> updated video's details:{' '}
       <strong>{{ videoTitle: video.title }}</strong>
     </Trans>
   ),
   updated_speaker: ({ action: { user, speaker } }) => (
-    <Trans i18nKey="message.newSpeaker">
+    <Trans i18nKey="message.updatedSpeaker">
       <strong>@{{ username: user.username }}</strong> updated{' '}
-      {{ speakerName: speaker.fullName }}'s' details
+      {{ speakerName: speaker.fullName }}'s details
     </Trans>
   ),
   removed_speaker: ({ action: { user, video, speaker } }) => (
