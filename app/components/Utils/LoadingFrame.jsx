@@ -18,5 +18,6 @@ export class LoadingFrame extends React.PureComponent {
 }
 
 LoadingFrame.propTypes = {
-  size: PropTypes.oneOf(['small', 'medium', 'large'])
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  title: PropTypes.string
 }

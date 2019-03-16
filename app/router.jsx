@@ -26,6 +26,7 @@ import ActivityLog from './components/Users/ActivityLog'
 import UserAddedVideos from './components/Videos/UserAddedVideos'
 import NotificationsPage from './components/LoggedInUser/NotificationsPage'
 import SubscriptionsPage from './components/LoggedInUser/SubscriptionsPage'
+import LogoutPage from './components/LoggedInUser/LogoutPage'
 
 const CFRouter = () => (
   <Router history={browserHistory}>
@@ -34,6 +35,7 @@ const CFRouter = () => (
       <Route path="/signup" component={SignupForm} />
       <Route path="/signup/callback/:provider" component={ThirdPartyCallback} />
       <Route path="/login" component={LoginForm} />
+      <Route path="/logout" component={LogoutPage} />
       <Route path="/login/callback/:provider" component={ThirdPartyCallback} />
       <Route path="/confirm_email/:token" component={ConfirmEmail} />
       <Route path="/reset_password" component={ResetPasswordRequestForm} />

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
+import { Link, withRouter } from 'react-router'
 import styled, { withTheme, css } from 'styled-components'
 import { Flex, Box } from '@rebass/grid'
 import { themeGet } from 'styled-system'
@@ -104,8 +104,13 @@ const Navbar = ({
   toggleSidebar,
   loggedInUser,
   isAuthenticated,
-  loggedInUserLoading
+  loggedInUserLoading,
+  location
 }) => {
+  const loginRedirect =    !location.pathname.startsWith('/login') && !location.pathname.startsWith('/signup')
+    ? location.pathname
+    : '/videos'
+
   return (
     <Box>
       <Container height={theme.navbarHeight} width={1} />
@@ -114,7 +119,7 @@ const Navbar = ({
         <Flex alignItems="center">
           <Container display="flex" alignItems="center" height={theme.navbarHeight - 1}>
             <MenuToggleSwitch onClick={() => toggleSidebar()} />
-            <StyledLink className="logo" to={isAuthenticated ? '/videos' : '/'} ml={1}>
+            <StyledLink className="logo" to="/" ml={1}>
               <Logo height={theme.navbarHeight - 24} borderless />
             </StyledLink>
           </Container>
@@ -169,13 +174,14 @@ const Navbar = ({
                     </UserMenuTrigger>
                   )}
                 >
-                  <UserMenu user={loggedInUser} isSelf>
-                    {({ Icon, key, route, title, index, isActive }) => key !== '/notifications' && (
+                  <UserMenu user={loggedInUser} hasLogout isSelf>
+                    {({ Icon, key, route, title, index, isActive, onClick }) => key !== '/notifications' && (
                       <UserMenuEntry
                         key={key}
                         to={route}
                         index={index}
                         isActive={isActive}
+                        onClick={onClick}
                       >
                         <Box>
                           <Icon size="1em" />
@@ -190,7 +196,11 @@ const Navbar = ({
               </React.Fragment>
             ) : (
               <React.Fragment>
-                <StyledLink to="/login" className="button is-primary is-outlined" mr={2}>
+                <StyledLink
+                  to={{ pathname: '/login', state: { redirect: loginRedirect } }}
+                  className="button is-primary is-outlined"
+                  mr={2}
+                >
                   <span>{t('menu.login')}</span>
                 </StyledLink>
                 <StyledLink
@@ -201,7 +211,10 @@ const Navbar = ({
                 >
                   <span>{t('menu.extension')}</span>
                 </StyledLink>
-                <Link to="/signup" className="button is-primary">
+                <Link
+                  to={{ pathname: '/signup', state: { redirect: loginRedirect } }}
+                  className="button is-primary"
+                >
                   <span>{t('menu.signup')}</span>
                 </Link>
               </React.Fragment>
@@ -217,5 +230,5 @@ export default withTheme(
   connect(
     null,
     { toggleSidebar }
-  )(withLoggedInUser(withNamespaces('main')(Navbar)))
+  )(withLoggedInUser(withNamespaces('main')(withRouter(Navbar))))
 )
