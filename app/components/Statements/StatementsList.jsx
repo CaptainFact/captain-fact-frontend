@@ -16,6 +16,7 @@ import { FULLHD_WIDTH_THRESHOLD } from '../../constants'
 
 @connect(
   state => ({
+    speakers: state.VideoDebate.video.data.speakers,
     statements: state.VideoDebate.statements.data,
     statementFormSpeakerId: statementFormValueSelector(state, 'speaker_id'),
     offset: state.VideoDebate.video.offset
@@ -35,13 +36,17 @@ export default class StatementsList extends React.PureComponent {
   }
 
   render() {
-    const { statementFormSpeakerId, statements, offset } = this.props
+    const { speakers, statementFormSpeakerId, statements, offset } = this.props
+    const speaker_id =
+      speakers.size === 1 && !statementFormSpeakerId
+        ? speakers.get(0).id
+        : statementFormSpeakerId
     return (
       <div className="statements-list">
         {statementFormSpeakerId !== undefined && (
           <StatementForm
             offset={offset}
-            initialValues={{ speaker_id: statementFormSpeakerId }}
+            initialValues={{ speaker_id }}
             enableReinitialize
             keepDirtyOnReinitialize
             handleAbort={() => this.props.closeStatementForm()}
