@@ -37,7 +37,7 @@ export default class StatementsList extends React.PureComponent {
 
   render() {
     const { speakers, statementFormSpeakerId, statements, offset } = this.props
-    const speaker_id =
+    const speakerId =
       speakers.size === 1 && !statementFormSpeakerId
         ? speakers.get(0).id
         : statementFormSpeakerId
@@ -46,7 +46,7 @@ export default class StatementsList extends React.PureComponent {
         {statementFormSpeakerId !== undefined && (
           <StatementForm
             offset={offset}
-            initialValues={{ speaker_id }}
+            initialValues={{ speaker_id: speakerId }}
             enableReinitialize
             keepDirtyOnReinitialize
             handleAbort={() => this.props.closeStatementForm()}
