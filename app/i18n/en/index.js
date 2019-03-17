@@ -5,6 +5,7 @@ import help from './help'
 import history from './history'
 import home from './home'
 import main from './main'
+import notifications from './notifications'
 import user from './user'
 import videoDebate from './videoDebate'
 import moderation from './moderation'
@@ -17,6 +18,7 @@ export default {
   history,
   home,
   main,
+  notifications,
   user,
   videoDebate,
   moderation

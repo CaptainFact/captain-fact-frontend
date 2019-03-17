@@ -10,7 +10,7 @@ import {
   validatePasswordRepeat
 } from './UserFormFields'
 import ThirdPartyAuthList from './ThirdPartyAuthList'
-import Notification from '../Utils/Notification'
+import Alert from '../Utils/Alert'
 import Message from '../Utils/Message'
 import InvitationRequestForm from './InvitationRequestForm'
 import { errorToFlash } from '../../state/flashes/reducer'
@@ -81,7 +81,7 @@ class RealSignupForm extends React.PureComponent {
         className="form user-form"
         onSubmit={this.props.handleSubmit(this.submit.bind(this))}
       >
-        {error && <Notification type="danger">{error}</Notification>}
+        {error && <Alert type="danger">{error}</Alert>}
         <strong>
           {t('alreadyHaveAccountQuestion')} <Link to="login">{t('login')}</Link>
         </strong>

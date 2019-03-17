@@ -31,6 +31,7 @@ exports[`user doesn't have required reputation 1`] = `
   open={false}
   overlayStyle={Object {}}
   position="bottom center"
+  repositionOnResize={true}
   trigger={
     <div
       className="help-tooltip-trigger"

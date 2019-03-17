@@ -57,3 +57,16 @@ export const shiftStatements = offsets => {
     catch: errorToFlash
   })
 }
+
+/** Subscribe or unsubscribe a user from given video */
+export const changeSubscription = newValue => {
+  return SocketApi.push(VIDEO_DEBATE_CHANNEL, 'change_subscription', {
+    subscribed: newValue
+  })
+    .then(() => {
+      return videoReducer.setSubscription(newValue)
+    })
+    .catch(e => {
+      console.log(e)
+    })
+}

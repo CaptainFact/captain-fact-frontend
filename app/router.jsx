@@ -3,7 +3,7 @@ import React from 'react'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
 // Import Views
-import App from './components/App'
+import Layout from './components/App/Layout'
 import Home from './components/Home/Home'
 import { NotFound, BrowserExtensionsPage } from './components/Pages'
 import { AddVideoForm } from './components/Videos'
@@ -24,14 +24,18 @@ import { SpeakerPage } from './components/Speakers/SpeakerPage'
 import NewsletterSubscription from './components/Users/NewsletterSubscription'
 import ActivityLog from './components/Users/ActivityLog'
 import UserAddedVideos from './components/Videos/UserAddedVideos'
+import NotificationsPage from './components/LoggedInUser/NotificationsPage'
+import SubscriptionsPage from './components/LoggedInUser/SubscriptionsPage'
+import LogoutPage from './components/LoggedInUser/LogoutPage'
 
 const CFRouter = () => (
   <Router history={browserHistory}>
-    <Route path="/" component={App}>
-      <IndexRoute component={Home} />
+    <Route component={Layout}>
+      <Route path="/" component={Home} />
       <Route path="/signup" component={SignupForm} />
       <Route path="/signup/callback/:provider" component={ThirdPartyCallback} />
       <Route path="/login" component={LoginForm} />
+      <Route path="/logout" component={LogoutPage} />
       <Route path="/login/callback/:provider" component={ThirdPartyCallback} />
       <Route path="/confirm_email/:token" component={ConfirmEmail} />
       <Route path="/reset_password" component={ResetPasswordRequestForm} />
@@ -42,6 +46,8 @@ const CFRouter = () => (
         <Route path="/u/:username/activity" component={ActivityLog} />
         <Route path="/u/:username/settings" component={UserSettings} />
         <Route path="/u/:username/videos" component={UserAddedVideos} />
+        <Route path="/u/:username/subscriptions" component={SubscriptionsPage} />
+        <Route path="/u/:username/notifications" component={NotificationsPage} />
       </Route>
       <Route path="/videos" component={VideosIndexPage} />
       <Route path="/videos/add" component={AddVideoForm} />
