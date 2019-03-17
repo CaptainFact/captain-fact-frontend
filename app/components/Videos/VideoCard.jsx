@@ -71,7 +71,12 @@ export class VideoCard extends React.PureComponent {
   renderSpeakersList(speakers, t) {
     const nbOthers = speakers.length - MAX_VIDEO_CARD_SPEAKERS
     const speakerComponentsList = []
-    const speakerIterator = iterateWithSeparators(speakers, MAX_VIDEO_CARD_SPEAKERS, t, false)
+    const speakerIterator = iterateWithSeparators(
+      speakers,
+      MAX_VIDEO_CARD_SPEAKERS,
+      t,
+      false
+    )
     for (const [speaker, separator] of speakerIterator) {
       speakerComponentsList.push(
         <span key={speaker.id}>
@@ -81,12 +86,13 @@ export class VideoCard extends React.PureComponent {
       )
     }
     if (nbOthers > 0) {
+      const title = speakers.slice(MAX_VIDEO_CARD_SPEAKERS).map(s => s.full_name).join(', ')
       speakerComponentsList.push(
-        <span>
+        <span key="others">
           &nbsp;
           {t('main:misc.and')}
           &nbsp;
-          <span key="others">
+          <span title={title}>
             <strong>{t('main:misc.other', { count: nbOthers })}</strong>
           </span>
         </span>
