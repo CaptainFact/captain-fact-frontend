@@ -73,9 +73,9 @@ export class VideoCard extends React.PureComponent {
     const speakerComponentsList = []
     const speakerIterator = iterateWithSeparators(
       speakers,
-      MAX_VIDEO_CARD_SPEAKERS,
+      Math.min(speakers.length, MAX_VIDEO_CARD_SPEAKERS),
       t,
-      false
+      nbOthers < 1
     )
     for (const [speaker, separator] of speakerIterator) {
       speakerComponentsList.push(
