@@ -62,7 +62,7 @@ rules:
   react/self-closing-comp: ['warn']
   react/jsx-indent: ['warn']
   react/no-array-index-key: ['warn']
-  react/prefer-stateless-function: ['warn']
+  react/prefer-stateless-function: off
   # JSX
   jsx-a11y/anchor-is-valid:
     - warn
@@ -77,6 +77,7 @@ rules:
   jsx-a11y/click-events-have-key-events: ['warn']
   jsx-a11y/no-static-element-interactions: ['warn']
   jsx-a11y/media-has-caption: ['warn']
+  jsx-a11y/accessible-emoji: ['warn']
   jsx-a11y/anchor-has-content: off
 
   # Following rule haves been disabled for compatibility with

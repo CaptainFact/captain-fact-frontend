@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withNamespaces } from 'react-i18next'
 import classNames from 'classnames'
 
@@ -14,4 +15,9 @@ export class LoadingFrame extends React.PureComponent {
       </div>
     )
   }
+}
+
+LoadingFrame.propTypes = {
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  title: PropTypes.string
 }

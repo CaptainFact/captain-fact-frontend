@@ -10,7 +10,7 @@ module.exports = isProd => [
   // 'import' instead of 'require' and es6 syntax
   {
     test: /\.jsx?$/,
-    include: path.resolve(__dirname, 'app'),
+    include: [path.resolve(__dirname, 'app'), path.resolve(__dirname, 'styleguide')],
     loader: 'babel-loader',
     options: {
       // This is a feature of `babel-loader` for Webpack (not Babel itself).

@@ -2,10 +2,11 @@ import React from 'react'
 import { reduxForm, SubmissionError } from 'redux-form'
 import { Link, withRouter } from 'react-router'
 import { withNamespaces } from 'react-i18next'
+import { get } from 'lodash'
 
 import ThirdPartyAuthList from './ThirdPartyAuthList'
 import { emailOrUsernameField, passwordField, submitButton } from './UserFormFields'
-import Notification from '../Utils/Notification'
+import Alert from '../Utils/Alert'
 import { tError } from '../../lib/errors'
 import { signIn } from '../../API/http_api/current_user'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
@@ -19,10 +20,21 @@ export default class LoginForm extends React.PureComponent {
     error: null
   }
 
-  componentWillReceiveProps(props) {
-    // Redirect when already logged in
-    if (props.isAuthenticated) {
-      props.router.goBack();
+  redirect() {
+    const pathName = get(this.props.router, 'location.state.redirect', '/videos')
+    this.props.router.replace(pathName)
+  }
+
+  componentDidMount() {
+    if (this.props.isAuthenticated) {
+      this.redirect()
+    }
+  }
+
+  componentDidUpdate() {
+    // Redirect when logged in
+    if (this.props.isAuthenticated) {
+      this.redirect()
     }
   }
 
@@ -46,7 +58,7 @@ export default class LoginForm extends React.PureComponent {
             })
         })}
       >
-        {error && <Notification type="danger">{tError(t, error)}</Notification>}
+        {error && <Alert type="danger">{tError(t, error)}</Alert>}
         <div>
           <strong>
             {t('needAnAccountQuestion')} <Link to="/signup">{t('signup')}</Link>{' '}

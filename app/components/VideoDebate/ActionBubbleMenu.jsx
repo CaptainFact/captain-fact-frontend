@@ -49,8 +49,8 @@ export default class ActionBubbleMenu extends React.PureComponent {
         {!this.props.isAuthenticated && (
           <ActionBubble
             iconName="sign-in"
-            label={t('main:menu.loginSignup')}
-            onClick={() => this.props.router.push('/login')}
+            label={t('main:menu.signup')}
+            onClick={() => this.props.router.push('/signup')}
           />
         )}
         {this.props.isAuthenticated && (

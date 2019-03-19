@@ -3,7 +3,7 @@ import { reduxForm } from 'redux-form'
 import { withNamespaces } from 'react-i18next'
 import { emailField } from './UserFormFields'
 import { ErrorView } from '../Utils/ErrorView'
-import Notification from '../Utils/Notification'
+import Alert from '../Utils/Alert'
 import { resetPasswordRequest } from '../../API/http_api/current_user'
 
 // Fields are auto-validated, only validate password and repeat are the same
@@ -49,7 +49,7 @@ export default class ResetPasswordRequestForm extends React.PureComponent {
         </div>
       )
     if (this.state.status === 'done')
-      return <Notification>{this.props.t('resetPasswordRequestSuccess')}</Notification>
+      return <Alert>{this.props.t('resetPasswordRequestSuccess')}</Alert>
   }
 
   render() {

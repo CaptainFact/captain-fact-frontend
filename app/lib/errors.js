@@ -1,7 +1,7 @@
 const errorsInfos = {
   not_enough_reputation: { url: '/help/privileges' },
   limit_reached: { url: '/help/privileges' },
-  unauthenticated: { url: '/login', i18nKey: 'menu.loginSignup' },
+  unauthenticated: { url: '/signup', i18nKey: 'menu.signup' },
   invalid_invitation_token: {
     url: '/signup',
     i18nKey: 'user:invitationOnlyTitle'

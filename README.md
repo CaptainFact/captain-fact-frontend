@@ -33,6 +33,8 @@ should be enough. Otherwise follow the procedure below:
   - `npm start` - Start the frontend
   - `npm run test` - run all unit tests
 
+Frontend is started on http://localhost:3333
+
 A default account should have been created for you with
 email=`admin@captainfact.io` and password=`password`.
 

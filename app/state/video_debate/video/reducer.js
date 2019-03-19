@@ -16,6 +16,7 @@ export const addSpeaker = createAction('VIDEO/ADD_SPEAKER')
 export const removeSpeaker = createAction('VIDEO/REMOVE_SPEAKER')
 export const updateSpeaker = createAction('VIDEO/UPDATE_SPEAKER')
 export const updateVideo = createAction('VIDEO/UPDATE_VIDEO')
+export const setSubscription = createAction('VIDEO/SET_SUBSCRIPTION')
 
 export const setPosition = createAction('PLAYBACK/SET_POSITION')
 export const forcePosition = createAction('PLAYBACK/FORCE_POSITION')
@@ -29,6 +30,8 @@ const INITIAL_STATE = new Record({
   data: new Video(),
   errors: null,
   isLoading: false,
+  /** Wether the currently logged in user is subscribed to this video's changes */
+  isSubscribed: false,
   /** The player type currently displayed */
   player: VIDEO_PLAYER_YOUTUBE,
   /** An offset used to shift all video's timecodes */
@@ -58,10 +61,11 @@ const VideoReducer = handleActions(
       })
     },
     [fetchAll]: {
-      next: (state, { payload: { speakers, ...data } }) => {
+      next: (state, { payload: { speakers, is_subscribed, ...data } }) => {
         speakers = sortSpeakers(new List(speakers.map(s => new Speaker(s))))
         return state.mergeDeep({
           isLoading: false,
+          isSubscribed: is_subscribed,
           errors: null,
           data: new Video(data).set('speakers', speakers),
           offset: getTimecodesOffset(data, state.player)
@@ -104,6 +108,9 @@ const VideoReducer = handleActions(
     },
     [setPlaying]: (state, { payload }) => {
       return state.setIn(['playback', 'isPlaying'], payload)
+    },
+    [setSubscription]: (state, { payload }) => {
+      return state.set('isSubscribed', payload)
     },
     [resetVideoDebate]: () => INITIAL_STATE()
   },
