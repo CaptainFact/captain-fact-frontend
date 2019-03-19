@@ -23,7 +23,7 @@ export default class NotificationsPage extends Component {
 
   render() {
     return (
-      <Query query={loggedInUserSubscriptionsQuery} variables={{ scopes: ['video'] }}>
+      <Query query={loggedInUserSubscriptionsQuery} variables={{ scopes: ['video'] }} fetchPolicy="network-only">
         {({ data, loading, error }) => {
           if (loading) {
             return <LoadingFrame />
