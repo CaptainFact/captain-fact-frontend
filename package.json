@@ -92,7 +92,7 @@
     "react-i18next": "~9.0.1",
     "react-markdown": "~4.0.3",
     "react-player": "~1.8.0",
-    "react-redux": "~5.0.7",
+    "react-redux": "~5.1.1",
     "react-resize-detector": "~4.0.5",
     "react-router": "~3.0.1",
     "react-select": "~1.2.1",
