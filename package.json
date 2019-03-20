@@ -80,7 +80,7 @@
     "is-promise": "~2.1.0",
     "isomorphic-fetch": "~2.2.1",
     "lodash": "^4.17.11",
-    "phoenix": "~1.4.1",
+    "phoenix": "~1.4.2",
     "polished": "^3.0.3",
     "prop-types": "~15.7.2",
     "re-reselect": "~2.1.0",
