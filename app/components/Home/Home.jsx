@@ -22,10 +22,16 @@ export default class Home extends React.PureComponent {
   renderPresentation() {
     return (
       <p className="presentation">
-        {this.props.t('presentation1')}
-        <br />
-        <br />
-        <strong>CaptainFact</strong> {this.props.t('presentation2')}
+        <Trans i18nKey="presentation">
+          <strong>CaptainFact</strong> est un outil collaboratif de vérification des
+          vidéos YouTube.
+          <br />
+          Inscrivez-vous pour commencer à démentir, à confirmer ou à approfondir les
+          faits.
+          <br />
+          Installez notre extension pour bénéficier des données de CaptainFact directement
+          depuis votre lecteur YouTube.
+        </Trans>
       </p>
     )
   }
@@ -67,14 +73,11 @@ export default class Home extends React.PureComponent {
           <div className="hero-body">
             <div className="columns">
               <div className="column is-6">
-                <h1 className="title is-3">Let's check the Internet</h1>
+                <h1 className="title is-3">{t('presentationTitle')}</h1>
                 {this.renderPresentation()}
               </div>
               <div className="column is-1" />
-              <div className="column">
-                <h1 className="title is-3">{t('start')}</h1>
-                {this.renderButtons()}
-              </div>
+              <div className="column">{this.renderButtons()}</div>
             </div>
           </div>
         </section>
