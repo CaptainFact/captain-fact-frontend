@@ -53,6 +53,8 @@ export default {
     fieldMinLength: 'Doit faire au moins {{min}} caractères',
     fieldMaxLength: 'Doit faire moins de {{max}} caractères',
     and: 'et',
+    other: '{{count}} autre',
+    other_plural: '{{count}} autres',
     clipboardSuccess: 'Adresse copiée dans le presse-papier',
     clipboardFail: "Impossible d'enregistrer l'adresse dans le presse-papier",
     all: 'Tous',

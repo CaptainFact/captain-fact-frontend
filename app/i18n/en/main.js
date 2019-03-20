@@ -53,6 +53,8 @@ export default {
     fieldMinLength: 'Must be at least {{min}} characters',
     fieldMaxLength: 'Must be less than {{max}} characters',
     and: 'and',
+    other: '{{count}} other',
+    other_plural: '{{count}} others',
     clipboardSuccess: 'URL copied to clipboard',
     clipboardFail: 'Cannot copy to clipboard',
     all: 'All',
