@@ -59,7 +59,7 @@
     "algoliasearch": "4.8.6",
     "animate.scss": "0.0.6",
     "apollo-boost": "~0.1.12",
-    "bulma": "~0.7.2",
+    "bulma": "~0.7.4",
     "classnames": "~2.2.6",
     "clean-tag": "^2.0.2",
     "core-js": "~2.6.1",
