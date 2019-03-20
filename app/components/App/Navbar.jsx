@@ -4,6 +4,7 @@ import { Link, withRouter } from 'react-router'
 import styled, { withTheme, css } from 'styled-components'
 import { Flex, Box } from '@rebass/grid'
 import { themeGet } from 'styled-system'
+import { withResizeDetector } from 'react-resize-detector'
 
 import { Menu } from 'styled-icons/boxicons-regular/Menu'
 import { Bell } from 'styled-icons/fa-solid/Bell'
@@ -98,6 +99,15 @@ const MenuToggleSwitch = styled(Menu)`
   }
 `
 
+const basePopupStyle = {
+  boxShadow: 'rgba(150, 150, 150, 0.2) 5px 10px 15px -6px',
+  filter: 'none'
+}
+
+const desktopPopupStyle = { ...basePopupStyle, minWidth: 400 }
+
+const mobilePopupStyle = { ...basePopupStyle, width: '95%' }
+
 const Navbar = ({
   t,
   theme,
@@ -105,8 +115,10 @@ const Navbar = ({
   loggedInUser,
   isAuthenticated,
   loggedInUserLoading,
-  location
+  location,
+  width
 }) => {
+  const isMobile = width < 600
   const loginRedirect =    !location.pathname.startsWith('/login') && !location.pathname.startsWith('/signup')
     ? location.pathname
     : '/videos'
@@ -119,9 +131,11 @@ const Navbar = ({
         <Flex alignItems="center">
           <Container display="flex" alignItems="center" height={theme.navbarHeight - 1}>
             <MenuToggleSwitch onClick={() => toggleSidebar()} />
-            <StyledLink className="logo" to="/" ml={1}>
-              <Logo height={theme.navbarHeight - 24} borderless />
-            </StyledLink>
+            {width >= 350 && (
+              <StyledLink className="logo" to="/" ml={1}>
+                <Logo height={theme.navbarHeight - 24} borderless />
+              </StyledLink>
+            )}
           </Container>
         </Flex>
         {/* Center - will hold the search bar in the future */}
@@ -134,12 +148,8 @@ const Navbar = ({
               <React.Fragment>
                 <Popup
                   position="bottom right"
-                  offsetX={-12}
-                  contentStyle={{
-                    minWidth: 400,
-                    boxShadow: 'rgba(150, 150, 150, 0.2) 5px 10px 15px -6px',
-                    filter: 'none'
-                  }}
+                  offsetX={isMobile ? 75 : -12}
+                  contentStyle={isMobile ? mobilePopupStyle : desktopPopupStyle}
                   trigger={(
                     <UnstyledButton mr={[3, 4]}>
                       <Bell size={24} />
@@ -230,5 +240,5 @@ export default withTheme(
   connect(
     null,
     { toggleSidebar }
-  )(withLoggedInUser(withNamespaces('main')(withRouter(Navbar))))
+  )(withLoggedInUser(withNamespaces('main')(withRouter(withResizeDetector(Navbar)))))
 )
