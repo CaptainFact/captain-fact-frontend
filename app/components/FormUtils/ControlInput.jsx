@@ -11,7 +11,7 @@ const ControlInput = (props) => {
   } = props
 
   return (
-    <p className={classNames('control', { 'has-icon': icon })}>
+    <p className={classNames('control', { 'has-icons-left': icon })}>
       <Input {...props} />
       {icon && <Icon size="small" name={icon} />}
       {touched && error && <span className="help is-danger">{error}</span>}

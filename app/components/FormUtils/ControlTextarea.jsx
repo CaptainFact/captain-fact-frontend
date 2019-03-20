@@ -28,7 +28,7 @@ const ControlTextarea = (params) => {
   const textarea = autosize ? <TextareaAutosize {...inputProps} /> : <textarea {...inputProps} />
 
   return (
-    <p className={classNames('control', { 'has-icon': !!icon })}>
+    <p className={classNames('control', { 'has-icons-left': !!icon })}>
       {textarea}
       <TextareaLengthCounter length={input.value.length} maxLength={maxLength} />
       {hasError && <span className="help is-danger">{error}</span>}
