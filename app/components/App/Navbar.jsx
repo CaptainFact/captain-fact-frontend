@@ -99,6 +99,15 @@ const MenuToggleSwitch = styled(Menu)`
   }
 `
 
+const basePopupStyle = {
+  boxShadow: 'rgba(150, 150, 150, 0.2) 5px 10px 15px -6px',
+  filter: 'none'
+}
+
+const desktopPopupStyle = { ...basePopupStyle, minWidth: 400 }
+
+const mobilePopupStyle = { ...basePopupStyle, width: '95%' }
+
 const Navbar = ({
   t,
   theme,
@@ -109,6 +118,7 @@ const Navbar = ({
   location,
   width
 }) => {
+  const isMobile = width < 600
   const loginRedirect =    !location.pathname.startsWith('/login') && !location.pathname.startsWith('/signup')
     ? location.pathname
     : '/videos'
@@ -138,12 +148,8 @@ const Navbar = ({
               <React.Fragment>
                 <Popup
                   position="bottom right"
-                  offsetX={-12}
-                  contentStyle={{
-                    minWidth: 400,
-                    boxShadow: 'rgba(150, 150, 150, 0.2) 5px 10px 15px -6px',
-                    filter: 'none'
-                  }}
+                  offsetX={isMobile ? 75 : -12}
+                  contentStyle={isMobile ? mobilePopupStyle : desktopPopupStyle}
                   trigger={(
                     <UnstyledButton mr={[3, 4]}>
                       <Bell size={24} />
