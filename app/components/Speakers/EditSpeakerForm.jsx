@@ -19,6 +19,14 @@ const validate = ({ full_name, title }) => {
 @withNamespaces('videoDebate')
 export default class EditSpeakerForm extends React.PureComponent {
   render() {
+    const maxTitleLen = SPEAKER_TITLE_LENGTH[1]
+    const titleLabel =
+      this.props.t('speaker.title') +
+      ' (\u2264 ' +
+      maxTitleLen +
+      ' ' +
+      this.props.t('main:misc.character', { count: maxTitleLen }) +
+      ')'
     return (
       <div className="form">
         <div className="form-fields">
@@ -36,7 +44,7 @@ export default class EditSpeakerForm extends React.PureComponent {
             name="title"
             type="text"
             component={ControlInputWithLabel}
-            label={this.props.t('speaker.title')}
+            label={titleLabel}
             normalize={cleanStr}
             placeholder={this.props.t('speaker.titlePlaceholder')}
           />
