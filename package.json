@@ -45,8 +45,8 @@
   "lint-staged": {
     "app/**/*.{js,jsx}": [
       "npx prettier --write app/**/*.{js,jsx}",
-      "npx eslint --fix \"app/**/*.js\"",
-      "git add"
+      "git add",
+      "npx eslint --fix \"app/**/*.js\""
     ]
   },
   "browserslist": {
