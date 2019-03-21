@@ -55,6 +55,8 @@ export default {
     and: 'et',
     other: '{{count}} autre',
     other_plural: '{{count}} autres',
+    character: 'caractère',
+    character_plural: 'caractères',
     clipboardSuccess: 'Adresse copiée dans le presse-papier',
     clipboardFail: "Impossible d'enregistrer l'adresse dans le presse-papier",
     all: 'Tous',

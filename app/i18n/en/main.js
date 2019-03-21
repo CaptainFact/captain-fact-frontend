@@ -55,6 +55,8 @@ export default {
     and: 'and',
     other: '{{count}} other',
     other_plural: '{{count}} others',
+    character: 'character',
+    character_plural: 'characters',
     clipboardSuccess: 'URL copied to clipboard',
     clipboardFail: 'Cannot copy to clipboard',
     all: 'All',
