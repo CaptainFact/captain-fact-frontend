@@ -43,8 +43,10 @@
     ]
   },
   "lint-staged": {
-    "src/**/*.{js,jsx}": [
-      "npx eslint --fix \"app/**/*.js\""
+    "app/**/*.{js,jsx}": [
+      "npx prettier --write app/**/*.{js,jsx}",
+      "npx eslint --fix \"app/**/*.js\"",
+      "git add"
     ]
   },
   "browserslist": {
