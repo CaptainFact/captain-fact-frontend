@@ -2,10 +2,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Tinycon from 'tinycon'
 
-import notificationSoundFileURL from '../../assets/sounds/background_statement_focus.mp3'
-import { getFocusedStatementId } from '../../state/video_debate/statements/selectors'
+import confirmSoundFileURL from '../../assets/sounds/background_statement_confirm.mp3'
+import refuteSoundFileURL from '../../assets/sounds/background_statement_refute.mp3'
+import neutralSoundFileURL from '../../assets/sounds/background_statement_neutral.mp3'
+import { getFocusedStatementId, isStatementConfirmed } from '../../state/video_debate/statements/selectors'
 
-const notificationAudioFile = new Audio(notificationSoundFileURL)
+const confirmAudioFile = new Audio(confirmSoundFileURL)
+const refuteAudioFile = new Audio(refuteSoundFileURL)
+const neutralAudioFile = new Audio(neutralSoundFileURL)
 
 /**
  * This component watches for various events then triggers sounds or change
@@ -56,7 +60,7 @@ class BackgroundNotifier extends React.PureComponent {
   componentDidUpdate(prevProps) {
     // Play a sound when enabling setting
     if (!prevProps.soundEnabled && this.props.soundEnabled) {
-      notificationAudioFile.play()
+      neutralAudioFile.play()
       return
     }
 
@@ -74,7 +78,10 @@ class BackgroundNotifier extends React.PureComponent {
 
       // Play a sound
       if (this.props.soundEnabled) {
-        notificationAudioFile.play()
+        const confirmed = isStatementConfirmed(this.props.focusedStatementId)
+        if (confirmed === null) neutralAudioFile.play()
+        else if (confirmed) confirmAudioFile.play()
+        else refuteAudioFile.play()
       }
     }
   }

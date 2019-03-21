@@ -27,6 +27,10 @@ export const getFocusedStatementId = createSelector(
   }
 )
 
+export const isStatementConfirmed = stmtId => {
+  return false // TODO
+}
+
 export const getFocusedStatementSpeakerId = createSelector(
   state => state.VideoDebate.statements.data,
   getFocusedStatementId,
