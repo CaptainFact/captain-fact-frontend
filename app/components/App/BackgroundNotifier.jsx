@@ -5,11 +5,33 @@ import Tinycon from 'tinycon'
 import confirmSoundFileURL from '../../assets/sounds/background_statement_confirm.mp3'
 import refuteSoundFileURL from '../../assets/sounds/background_statement_refute.mp3'
 import neutralSoundFileURL from '../../assets/sounds/background_statement_neutral.mp3'
-import { getFocusedStatementId, isStatementConfirmed } from '../../state/video_debate/statements/selectors'
+import { getFocusedStatementId } from '../../state/video_debate/statements/selectors'
+import { getAllComments } from '../../state/video_debate/comments/selectors'
+import { CONFIRMED_STATEMENT_MIN_VOTES } from '../../constants'
 
 const confirmAudioFile = new Audio(confirmSoundFileURL)
 const refuteAudioFile = new Audio(refuteSoundFileURL)
 const neutralAudioFile = new Audio(neutralSoundFileURL)
+
+const isStatementConfirmed = comments => {
+  const globalStatementScore = comments.reduce((score, comment) => {
+    if (comment.approve === true) {
+      // Comments with negative score are ignored to avoid trolls
+      return score + Math.max(comment.score, 0)
+    }
+    if (comment.approve === false) {
+      return score - Math.max(comment.score, 0)
+    }
+
+    // `comment.approve` is null if comment is not confirming/refuting
+    return score
+  }, 0)
+
+  if (!globalStatementScore) return null
+  else if (globalStatementScore >= CONFIRMED_STATEMENT_MIN_VOTES) return true
+  else if (globalStatementScore <= -CONFIRMED_STATEMENT_MIN_VOTES) return false
+  return null
+}
 
 /**
  * This component watches for various events then triggers sounds or change
@@ -78,7 +100,7 @@ class BackgroundNotifier extends React.PureComponent {
 
       // Play a sound
       if (this.props.soundEnabled) {
-        const confirmed = isStatementConfirmed(this.props.focusedStatementId)
+        const confirmed = isStatementConfirmed(this.props.comments)
         if (confirmed === null) neutralAudioFile.play()
         else if (confirmed) confirmAudioFile.play()
         else refuteAudioFile.play()
@@ -91,7 +113,12 @@ class BackgroundNotifier extends React.PureComponent {
   }
 }
 
-export default connect(state => ({
-  soundEnabled: state.UserPreferences.enableSoundOnBackgroundFocus,
-  focusedStatementId: getFocusedStatementId(state)
-}))(BackgroundNotifier)
+export default connect(state => {
+  const focusedStatementId = getFocusedStatementId(state)
+  const comments = getAllComments(state).get(focusedStatementId, [])
+  return {
+    soundEnabled: state.UserPreferences.enableSoundOnBackgroundFocus,
+    focusedStatementId,
+    comments
+  }
+})(BackgroundNotifier)
