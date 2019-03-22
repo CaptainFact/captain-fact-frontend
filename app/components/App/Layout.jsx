@@ -2,19 +2,26 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
 
-import { Flex } from '@rebass/grid'
 import { FlashMessages } from '../Utils'
 import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 import { MainModalContainer } from '../Modal/MainModalContainer'
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
 import BackgroundNotifier from './BackgroundNotifier'
+import CrashReportPage from './CrashReportPage'
 
 @connect(state => ({
   locale: state.UserPreferences.locale,
   sidebarExpended: state.UserPreferences.sidebarExpended
 }))
 export default class Layout extends React.PureComponent {
+  state = { error: null }
+
+  /** Called when app crashes */
+  static getDerivedStateFromError(error) {
+    return { error }
+  }
+
   render() {
     const { locale, sidebarExpended, children } = this.props
     const mainContainerClass = sidebarExpended ? undefined : 'expended'
@@ -29,7 +36,7 @@ export default class Layout extends React.PureComponent {
         <Navbar />
         <Sidebar />
         <div id="main-container" className={mainContainerClass}>
-          {children}
+          {!this.state.error ? children : <CrashReportPage error={this.state.error} />}
         </div>
         <BackgroundNotifier />
         <PublicAchievementUnlocker

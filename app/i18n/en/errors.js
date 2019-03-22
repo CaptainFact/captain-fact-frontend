@@ -1,5 +1,10 @@
 export default {
   title: 'Error',
+  crash: "😥 Nooooooo! The site just crashed. It's not you, you did nothing wrong.",
+  contactSupport: 'Contact support',
+  addIssue: 'Add an issue on Github',
+  reload: 'Reload the page',
+  errorDetails: 'Technical details',
   server: {
     unknown: "Something didn't work on our side, we'll check it out!",
     invalid_email: 'Invalid email address',
