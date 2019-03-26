@@ -7,31 +7,11 @@ import refuteSoundFileURL from '../../assets/sounds/background_statement_refute.
 import neutralSoundFileURL from '../../assets/sounds/background_statement_neutral.mp3'
 import { getFocusedStatementId } from '../../state/video_debate/statements/selectors'
 import { getAllComments } from '../../state/video_debate/comments/selectors'
-import { CONFIRMED_STATEMENT_MIN_VOTES } from '../../constants'
+import { isStatementConfirmed } from '../../lib/statements_utils'
 
 const confirmAudioFile = new Audio(confirmSoundFileURL)
 const refuteAudioFile = new Audio(refuteSoundFileURL)
 const neutralAudioFile = new Audio(neutralSoundFileURL)
-
-const isStatementConfirmed = comments => {
-  const globalStatementScore = comments.reduce((score, comment) => {
-    if (comment.approve === true) {
-      // Comments with negative score are ignored to avoid trolls
-      return score + Math.max(comment.score, 0)
-    }
-    if (comment.approve === false) {
-      return score - Math.max(comment.score, 0)
-    }
-
-    // `comment.approve` is null if comment is not confirming/refuting
-    return score
-  }, 0)
-
-  if (!globalStatementScore) return null
-  else if (globalStatementScore >= CONFIRMED_STATEMENT_MIN_VOTES) return true
-  else if (globalStatementScore <= -CONFIRMED_STATEMENT_MIN_VOTES) return false
-  return null
-}
 
 /**
  * This component watches for various events then triggers sounds or change
