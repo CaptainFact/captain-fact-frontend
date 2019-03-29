@@ -63,6 +63,7 @@ rules:
   react/jsx-indent: ['warn']
   react/no-array-index-key: ['warn']
   react/prefer-stateless-function: off
+  react/forbid-prop-types: off
   # JSX
   jsx-a11y/anchor-is-valid:
     - warn
