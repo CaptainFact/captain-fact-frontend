@@ -87,8 +87,8 @@ class FlashContent extends React.Component {
   shouldComponentUpdate(nextProps) {
     // To avoid re-rendering every second, we only compare flash id
     return (
-      this.props.flash.id !== nextProps.flash.id ||
-      this.props.i18nLoadedAt !== nextProps.i18nLoadedAt
+      this.props.flash.id !== nextProps.flash.id
+      || this.props.i18nLoadedAt !== nextProps.i18nLoadedAt
     )
   }
 

@@ -21,10 +21,14 @@ import SpeakerComments from './SpeakerComments'
 })
 export default class StatementComments extends React.PureComponent {
   render() {
-    const { speaker, speakerComments } = this.props
+    const { speaker, speakerComments, setReplyToComment } = this.props
     return (
       <React.Fragment>
-        <SpeakerComments speaker={speaker} comments={speakerComments} />
+        <SpeakerComments
+          setReplyToComment={setReplyToComment}
+          speaker={speaker}
+          comments={speakerComments}
+        />
         {this.renderCommunityComments()}
       </React.Fragment>
     )
@@ -46,7 +50,7 @@ export default class StatementComments extends React.PureComponent {
   }
 
   renderSourcedComments() {
-    const { approvingFacts, refutingFacts } = this.props
+    const { approvingFacts, refutingFacts, setReplyToComment } = this.props
 
     return (
       <div className="card-footer sourced-comments">
@@ -54,6 +58,7 @@ export default class StatementComments extends React.PureComponent {
           <CommentsList
             className="card-footer-item refute"
             comments={refutingFacts}
+            setReplyToComment={setReplyToComment}
             header={this.renderCommentsListHeader(
               'refute',
               'danger',
@@ -65,6 +70,7 @@ export default class StatementComments extends React.PureComponent {
           <CommentsList
             className="card-footer-item approve"
             comments={approvingFacts}
+            setReplyToComment={setReplyToComment}
             header={this.renderCommentsListHeader(
               'approve',
               'success',
@@ -77,12 +83,13 @@ export default class StatementComments extends React.PureComponent {
   }
 
   renderRegularComments() {
-    const { comments } = this.props
+    const { comments, setReplyToComment } = this.props
 
     return (
       <div className="card-footer comments">
         <CommentsList
           comments={comments}
+          setReplyToComment={setReplyToComment}
           header={this.renderCommentsListHeader('comments')}
         />
       </div>

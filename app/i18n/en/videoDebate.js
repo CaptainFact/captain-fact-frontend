@@ -12,7 +12,7 @@ export default {
   },
   comment: {
     writeComment: 'Write a comment...',
-    addSource: 'Add a source to turn this comment into a fact',
+    addSource: 'Add a source',
     post: 'Post Comment',
     post_reply: 'Post reply',
     deleteThread: 'Delete comment',
@@ -22,11 +22,13 @@ export default {
     loadMore_replies: 'Load more replies ({{count}})',
     loadMore_comments: 'Load more comments ({{count}})',
     replyingTo: 'Replying to',
+    replyingToSelf: 'Add to thread',
     approve: 'Approve',
     approve_reply: 'Approve this comment',
     refute: 'Refute',
     refute_reply: 'Refute this comment',
-    revealForm: 'Add a source or comment'
+    revealForm: 'Add a source or comment',
+    invalidURL: 'Invalid source URL'
   },
   video: {
     addedBy: 'Added by a {{userType}}',
