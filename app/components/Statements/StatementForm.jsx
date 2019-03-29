@@ -43,7 +43,7 @@ export class StatementForm extends React.PureComponent {
 
   componentDidMount() {
     this.props.incrementFormCount()
-    this.refs.container.scrollIntoView({ behavior: 'smooth' })
+    this.refs.container.scrollIntoView({ behavior: 'smooth', block: 'center' })
   }
 
   componentWillUnmount() {

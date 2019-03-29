@@ -150,6 +150,9 @@ export default class StatementContainer extends React.PureComponent {
   isTarget = props => this.isScrollToTarget(props) || props.isFocused
 
   smoothScrollTo = () => {
-    return this.refs.container.scrollIntoView({ behavior: 'smooth' })
+    return this.refs.container.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center'
+    })
   }
 }
