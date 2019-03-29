@@ -10,7 +10,11 @@
     "@babel/plugin-transform-runtime",
     "@babel/plugin-proposal-class-properties",
     "@babel/plugin-proposal-object-rest-spread",
-    "babel-plugin-styled-components",
-    "transform-react-remove-prop-types"
-  ]
+    "babel-plugin-styled-components"
+  ],
+  "env": {
+    "production": {
+      "plugins": ["transform-react-remove-prop-types"]
+    }
+  }
 }
