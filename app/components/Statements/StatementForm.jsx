@@ -64,17 +64,17 @@ export class StatementForm extends React.PureComponent {
   }
 
   handleSubmit(statement) {
-    const { position, initialValues, offset } = this.props
+    const { position, offset } = this.props
     const { lockedTime } = this.state
 
     // Get the best value for statement time and apply the reverse offset
     // to use absolute timecode.
     if (lockedTime !== false) {
-      statement.time = lockedTime - offset
-    } else if (position) {
+      statement.time = lockedTime > offset ? lockedTime - offset : 0
+    } else if (position && position > offset) {
       statement.time = position - offset
     } else {
-      statement.time = -offset
+      statement.time = 0
     }
 
     if (!statement.speaker_id) {
