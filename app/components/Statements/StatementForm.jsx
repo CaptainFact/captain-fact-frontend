@@ -1,11 +1,17 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { withNamespaces } from 'react-i18next'
+import Select from 'react-select'
 
-import SpeakersSelect from '../Speakers/SpeakersSelect'
-import { Icon, LinkWithIcon } from '../Utils'
+import { CaretLeft } from 'styled-icons/fa-solid/CaretLeft'
+import { CaretRight } from 'styled-icons/fa-solid/CaretRight'
+import { Save } from 'styled-icons/boxicons-regular/Save'
+import { Ban } from 'styled-icons/fa-solid/Ban'
+
+import { Formik } from 'formik'
+import { Box } from '@rebass/grid'
+import { Icon } from '../Utils'
 import TimeDisplay from '../Utils/TimeDisplay'
 import { validateFieldLength } from '../../lib/form_validators'
 import { STATEMENT_LENGTH } from '../../constants'
@@ -13,12 +19,17 @@ import { forcePosition } from '../../state/video_debate/video/reducer'
 import {
   decrementFormCount,
   incrementFormCount,
-  setScrollTo,
-  STATEMENT_FORM_NAME
+  setScrollTo
 } from '../../state/video_debate/statements/reducer'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
-import ControlTextarea from '../FormUtils/ControlTextarea'
 import { cleanStrMultiline } from '../../lib/clean_str'
+import Button from '../Utils/Button'
+import TextareaAutosize from '../FormUtils/TextareaAutosize'
+import TextareaLengthCounter from '../FormUtils/TextareaLengthCounter'
+import Container from '../StyledUtils/Container'
+import StyledLink from '../StyledUtils/StyledLink'
+import { Span } from '../StyledUtils/Text'
+import { logError } from '../../logger'
 
 @connect(
   ({ VideoDebate: { video, statements } }) => ({
@@ -28,29 +39,30 @@ import { cleanStrMultiline } from '../../lib/clean_str'
   }),
   { forcePosition, setScrollTo, incrementFormCount, decrementFormCount }
 )
-@reduxForm({ form: STATEMENT_FORM_NAME })
 @withNamespaces('videoDebate')
 export class StatementForm extends React.PureComponent {
   constructor(props) {
     super(props)
-    const lockedTime =
-      props.initialValues.time === undefined
-        ? props.position
-        : props.initialValues.time + props.offset
 
-    this.state = { lockedTime }
+    this.container = React.createRef()
+    this.state = {
+      lockedTime:
+        props.initialValues.time === undefined
+          ? props.position
+          : props.initialValues.time + props.offset
+    }
   }
 
   componentDidMount() {
     this.props.incrementFormCount()
-    this.refs.container.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    this.container.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
   }
 
   componentWillUnmount() {
     this.props.decrementFormCount()
   }
 
-  toggleLock() {
+  toggleLock = () => {
     if (this.state.lockedTime === false) {
       this.setState({ lockedTime: this.props.position || 0 })
     } else {
@@ -61,6 +73,36 @@ export class StatementForm extends React.PureComponent {
   moveTimeMarker(position) {
     this.props.forcePosition(position)
     if (this.state.lockedTime !== false) this.setState({ lockedTime: position })
+  }
+
+  onSubmit = (values, actions) => {
+    const { position, offset } = this.props
+    const { lockedTime } = this.state
+    const statement = values
+
+    // Get the best value for statement time and apply the reverse offset
+    // to use absolute timecode.
+    if (lockedTime !== false) {
+      statement.time = lockedTime > offset ? lockedTime - offset : 0
+    } else if (position && position > offset) {
+      statement.time = position - offset
+    } else {
+      statement.time = 0
+    }
+
+    return this.props
+      .handleConfirm(statement)
+      .then(a => {
+        if (a.error) {
+          actions.setErrors(a.payload)
+        } else {
+          this.props.setScrollTo({ id: a.id, __forceAutoScroll: true })
+        }
+      })
+      .catch(e => {
+        logError(e)
+        this.props.errorToFlash(e)
+      })
   }
 
   handleSubmit(statement) {
@@ -88,102 +130,115 @@ export class StatementForm extends React.PureComponent {
     )
   }
 
-  render() {
-    const {
-      position,
-      offset = 0,
-      handleSubmit,
-      valid,
-      speakers,
-      initialValues,
-      handleAbort,
-      t
-    } = this.props
-    const currentTime = this.state.lockedTime === false ? position : this.state.lockedTime
-    const speaker = initialValues.speaker_id
-      ? speakers.find(s => s.id === initialValues.speaker_id)
-      : null
-    const toggleTimeLockAction = this.state.lockedTime === false ? 'unlock' : 'lock'
+  renderForm = ({
+    handleSubmit,
+    values,
+    setFieldValue,
+    isValid,
+    submitForm,
+    isSubmitting
+  }) => {
+    const { t } = this.props
+    const { lockedTime } = this.state
+    const currentTime = lockedTime === false ? values.position : lockedTime
+    const toggleTimeLockAction = lockedTime === false ? 'unlock' : 'lock'
 
     return (
-      <form
+      <Box
+        ref={this.container}
+        as="form"
+        onSubmit={handleSubmit}
         className={classNames('statement-form', {
           'card statement': !this.props.isBundled
         })}
-        ref="container"
       >
         <header className="card-header">
           <div className="card-header-title">
-            <a className="button" onClick={() => this.moveTimeMarker(currentTime - 1)}>
-              <Icon name="caret-left" />
-            </a>
+            <Button onClick={() => this.moveTimeMarker(currentTime - 1)}>
+              <CaretLeft size="1.25em" />
+            </Button>
             <TimeDisplay
               time={currentTime}
               handleClick={() => this.props.forcePosition(currentTime)}
             />
-            <a className="button" onClick={() => this.moveTimeMarker(currentTime + 1)}>
-              <Icon name="caret-right" />
-            </a>
-            <a
-              className="button"
+            <Button onClick={() => this.moveTimeMarker(currentTime + 1)}>
+              <CaretRight size="1.25em" />
+            </Button>
+            <Button
               title={t('statement.reverseTimeLock', {
                 context: toggleTimeLockAction
               })}
-              onClick={this.toggleLock.bind(this)}
+              onClick={this.toggleLock}
             >
               <Icon size="small" name={toggleTimeLockAction} />
-            </a>
-            {speaker && speaker.picture && (
-              <img className="speaker-mini" src={speaker.picture} />
+            </Button>
+            {values.speaker && values.speaker.picture && (
+              <img className="speaker-mini" src={values.speaker.picture} alt="" />
             )}
-            <Field
-              name="speaker_id"
-              component={SpeakersSelect}
-              speakers={speakers}
+
+            <Select
+              name="speaker"
+              className="speaker-select"
+              onChange={null}
+              onBlur={null}
+              value={values.speaker}
               placeholder={t('speaker.add')}
+              labelKey="full_name"
+              valueKey="id"
+              ignoreAccents
+              options={this.props.speakers.toJS()}
             />
           </div>
         </header>
         <div className="card-content">
-          <h3 className="statement-text">
-            <Field
+          <Container className="statement-text" position="relative">
+            <TextareaAutosize
               name="text"
-              component={ControlTextarea}
-              normalize={cleanStrMultiline}
+              value={values.text}
+              onChange={e => setFieldValue('text', cleanStrMultiline(e.target.value))}
               maxLength={STATEMENT_LENGTH[1]}
-              validate={value => validateFieldLength(t, value, STATEMENT_LENGTH)}
-              placeholder={
-                speaker
-                  ? t('statement.textPlaceholder')
-                  : t('statement.noSpeakerTextPlaceholder')
-              }
-              hideErrorIfEmpty
               autoFocus
-              autosize
             />
-          </h3>
+            <Box mt={3}>
+              <TextareaLengthCounter
+                length={values.text.length}
+                maxLength={STATEMENT_LENGTH[1]}
+              />
+            </Box>
+          </Container>
         </div>
         <footer className="card-footer">
-          <LinkWithIcon
-            iconName="floppy-o"
-            className={classNames('card-footer-item', 'submit-button', {
-              'is-loading': this.props.submitting
-            })}
-            disabled={!valid || this.props.submitting}
-            onClick={handleSubmit(this.handleSubmit.bind(this))}
+          <StyledLink
+            color="black.400"
+            className={classNames('card-footer-item', { 'is-loading': isSubmitting })}
+            disabled={!isValid || isSubmitting}
+            onClick={submitForm}
           >
-            {t('main:actions.save')}
-          </LinkWithIcon>
-          <LinkWithIcon
-            iconName="ban"
+            <Save size="1.25em" />
+            <Span ml={1}>{t('main:actions.save')}</Span>
+          </StyledLink>
+          <StyledLink
+            color="black.400"
             className="card-footer-item"
-            disabled={this.props.submitting}
-            onClick={handleAbort}
+            disabled={isSubmitting}
+            onClick={this.props.handleAbort}
           >
-            {t('main:actions.cancel')}
-          </LinkWithIcon>
+            <Ban size="1em" />
+            <Span ml={1}>{t('main:actions.cancel')}</Span>
+          </StyledLink>
         </footer>
-      </form>
+      </Box>
+    )
+  }
+
+  render() {
+    const { speakers, position } = this.props
+    const speaker = speakers.size === 1 ? speakers.get(0) : null
+
+    return (
+      <Formik initialValues={{ position, speaker, text: '' }} onSubmit={this.onSubmit}>
+        {this.renderForm}
+      </Formik>
     )
   }
 }
