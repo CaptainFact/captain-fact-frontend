@@ -2,21 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import classNames from 'classnames'
-import styled from 'styled-components'
-
-import { TimesCircle } from 'styled-icons/fa-regular/TimesCircle.cjs'
 
 import { popModal } from '../../state/modals/reducer'
 import { Icon } from '../Utils/Icon'
-
-const CloseIcon = styled(TimesCircle)`
-  height: 1.5em;
-  width: 1.5em;
-  cursor: pointer;
-  &:hover {
-    opacity: 0.75;
-  }
-`
+import CloseButton from '../Utils/CloseButton'
 
 const Modal = ({
   helpLink,
@@ -46,7 +35,11 @@ const Modal = ({
               <Icon name="question-circle" size="medium" />
             </Link>
           )}
-          <CloseIcon title="Close" onClick={handleCloseClick || popModal} />
+          <CloseButton
+            size="1.5em"
+            title="Close"
+            onClick={handleCloseClick || popModal}
+          />
         </header>
       )}
       {overrideContentStructure ? (

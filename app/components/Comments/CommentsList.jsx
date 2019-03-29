@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import FlipMove from 'react-flip-move'
 import classNames from 'classnames'
 
@@ -7,6 +8,10 @@ import CommentsListHeader from './CommentsListHeader'
 import CommentsListExpender from './CommentsListExpender'
 
 export class CommentsList extends React.PureComponent {
+  static propTypes = {
+    setReplyToComment: PropTypes.func
+  }
+
   constructor(props) {
     super(props)
     this.state = {
@@ -28,6 +33,7 @@ export class CommentsList extends React.PureComponent {
               comment={comment}
               nesting={nesting}
               replyingTo={replyingTo}
+              setReplyToComment={this.props.setReplyToComment}
             />
           ))}
         </FlipMove>

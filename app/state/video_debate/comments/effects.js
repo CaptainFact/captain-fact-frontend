@@ -14,7 +14,7 @@ import {
   scoreDiff
 } from './reducer'
 import { createEffect, generateFSAError } from '../../utils'
-import { errorMsgToFlash, errorToFlash } from '../../flashes/reducer'
+import { errorToFlash } from '../../flashes/reducer'
 
 export const joinCommentsChannel = videoId => dispatch => {
   // Connect to channel
@@ -36,31 +36,33 @@ export const leaveCommentsChannel = () => () => {
   return SocketApi.leaveChannel(COMMENTS_CHANNEL)
 }
 
-export const postComment = comment =>
-  createEffect(SocketApi.push(COMMENTS_CHANNEL, 'new_comment', comment), {
-    catch: [errorMsgToFlash, generateFSAError]
+export const postComment = comment => {
+  return createEffect(SocketApi.push(COMMENTS_CHANNEL, 'new_comment', comment), {
+    catch: generateFSAError
   })
+}
 
-export const deleteComment = ({ id }) =>
-  createEffect(SocketApi.push(COMMENTS_CHANNEL, 'delete_comment', { id }), {
+export const deleteComment = ({ id }) => {
+  return createEffect(SocketApi.push(COMMENTS_CHANNEL, 'delete_comment', { id }), {
     catch: errorToFlash
   })
+}
 
-export const commentVote = params =>
-  createEffect(
-    SocketApi.push(COMMENTS_CHANNEL, 'vote', {
-      comment_id: params.comment.id,
-      value: params.value
-    }),
-    {
-      before: setVoting(params.comment.id),
-      then: addMyVote(params),
-      catch: [endVoting(params.comment.id), errorToFlash]
-    }
-  )
+export const commentVote = params => createEffect(
+  SocketApi.push(COMMENTS_CHANNEL, 'vote', {
+    comment_id: params.comment.id,
+    value: params.value
+  }),
+  {
+    before: setVoting(params.comment.id),
+    then: addMyVote(params),
+    catch: [endVoting(params.comment.id), errorToFlash]
+  }
+)
 
-export const flagComment = ({ id, reason }) =>
-  createEffect(SocketApi.push(COMMENTS_CHANNEL, 'flag_comment', { id, reason }), {
+export const flagComment = ({ id, reason }) => {
+  return createEffect(SocketApi.push(COMMENTS_CHANNEL, 'flag_comment', { id, reason }), {
     then: addFlag(id),
     catch: errorToFlash
   })
+}

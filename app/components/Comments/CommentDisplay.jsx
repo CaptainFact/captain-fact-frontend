@@ -166,9 +166,11 @@ export class CommentDisplay extends React.PureComponent {
   }
 
   handleReply() {
-    if (!this.ensureAuthenticated()) return null
-    const formName = `formAddComment-${this.props.comment.statement_id}`
-    return this.props.change(formName, 'reply_to', this.props.comment)
+    if (!this.props.setReplyToComment || !this.ensureAuthenticated()) {
+      return null
+    }
+
+    return this.props.setReplyToComment(this.props.comment)
   }
 
   handleFlag(initialReason) {

@@ -1,177 +1,240 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Field, reduxForm, getFormValues } from 'redux-form'
 import { withNamespaces } from 'react-i18next'
 import isURL from 'validator/lib/isURL'
 import { withRouter } from 'react-router'
+import { get } from 'lodash'
+import { Formik } from 'formik'
+import styled from 'styled-components'
+import { Flex, Box } from '@rebass/grid'
 
-import { validateLength } from '../../lib/form_validators'
+import { Plus } from 'styled-icons/boxicons-regular/Plus'
+
+import { logError } from '../../logger'
+import { validateLengthI18n } from '../../lib/form_validators'
 import { COMMENT_LENGTH, USER_PICTURE_LARGE } from '../../constants'
 import CloseButton from '../Utils/CloseButton'
-import Icon from '../Utils/Icon'
-import Tag from '../Utils/Tag'
 import UserAppellation from '../Users/UserAppellation'
 import { postComment } from '../../state/video_debate/comments/effects'
 import UserPicture from '../Users/UserPicture'
-import MediaLayout from '../Utils/MediaLayout'
-import { handleFormEffectResponse } from '../../lib/handle_effect_response'
-import { CommentDisplay } from './CommentDisplay'
-import { flashErrorUnauthenticated } from '../../state/flashes/reducer'
-import ControlInput from '../FormUtils/ControlInput'
+import { flashErrorUnauthenticated, errorToFlash } from '../../state/flashes/reducer'
 import { cleanStrMultiline } from '../../lib/clean_str'
-import CommentField from './CommentField'
 import Button from '../Utils/Button'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider';
+import StyledInput from '../StyledUtils/StyledInput'
+import TextareaLengthCounter from '../FormUtils/TextareaLengthCounter'
+import TextareaAutosize from '../FormUtils/TextareaAutosize'
+import { Span } from '../StyledUtils/Text'
+import { CommentDisplay } from './CommentDisplay'
+import Container from '../StyledUtils/Container'
 
-const validate = ({ source, text }) => {
-  const errors = {}
-  const url = source ? source.url : null
-  const hasValidUrl = url && isURL(url, { protocols: ['http', 'https'] })
-  if (url && !hasValidUrl) errors.source = { url: 'Invalid URL' }
-  if (!hasValidUrl && !text) errors.text = true
-  else if (text) validateLength(errors, 'text', text, COMMENT_LENGTH, 'Comment')
-  return errors
-}
+const SubmitButton = styled(props => (
+  <Button type="submit" my={1} flex="1 1 100px" {...props} />
+))``
 
 @connect(
-  (state, props) => {
-    const formValues = getFormValues(props.form)(state)
-    return {
-      sourceUrl: formValues && formValues.source ? formValues.source.url : null,
-      replyTo: formValues && formValues.reply_to
-    }
-  },
-  { postComment, flashErrorUnauthenticated }
+  null,
+  { postComment, flashErrorUnauthenticated, errorToFlash }
 )
-@reduxForm({ form: 'commentForm', validate })
 @withNamespaces('videoDebate')
 @withRouter
-@withLoggedInUser
-export class CommentForm extends React.Component {
+class CommentForm extends React.Component {
+  static propTypes = {
+    /** Statement ID */
+    statementID: PropTypes.number.isRequired,
+    /** Callback to set the reply */
+    setReplyToComment: PropTypes.func.isRequired,
+    /** The comment we want to reply to */
+    replyTo: PropTypes.shape({ id: PropTypes.number }),
+    /** The commenting user, or null if none is logged in */
+    user: PropTypes.object,
+    /** @ignore *from withNamespaces* */
+    t: PropTypes.func.isRequired
+  }
+
   state = { isCollapsed: true }
 
-  render() {
-    const { valid, loggedInUser, sourceUrl, replyTo, t } = this.props
-
-    if (!this.props.loggedInUser.id || (this.state.isCollapsed && !replyTo))
-      return (
-        <div className="comment-form collapsed">
-          <Button className="is-inverted is-primary" onClick={() => this.expandForm()}>
-            <Icon name="plus" size="medium" />
-            <span>{t('comment.revealForm')}</span>
-          </Button>
-        </div>
-      )
-
-    return (
-      <MediaLayout
-        ContainerType="form"
-        containerProps={{
-          onSubmit: this.postAndReset(c => this.props.postComment(c))
-        }}
-        className="comment-form"
-        left={<UserPicture user={loggedInUser} size={USER_PICTURE_LARGE} />}
-        content={
-          <div>
-            {replyTo && (
-              <div>
-                <Tag size="medium" className="replyTo">
-                  <CloseButton onClick={() => this.props.change('reply_to', null)} />
-                  <span className="replyToLabel">
-                    {t('comment.replyingTo')}{' '}
-                    <UserAppellation defaultComponent="span" user={replyTo.user} />
-                  </span>
-                </Tag>
-                <CommentDisplay
-                  className="quoted"
-                  richMedias={false}
-                  comment={replyTo}
-                  withoutActions
-                  withoutHeader
-                  hideThread
-                />
-              </div>
-            )}
-            <Field
-              component={CommentField}
-              className="textarea"
-              name="text"
-              isReply={!!replyTo}
-              normalize={cleanStrMultiline}
-              placeholder={t('comment.writeComment')}
-              autoFocus
-            />
-            <div className="level">
-              <Field
-                component={ControlInput}
-                name="source.url"
-                label={t('comment.addSource')}
-                normalize={s => s.trim()}
-              />
-              <div className="submit-btns">
-                {this.renderSubmit(valid, sourceUrl, replyTo)}
-              </div>
-            </div>
-          </div>
-        }
-      />
-    )
-  }
-
-  renderSubmit(valid, sourceUrl, isReply) {
-    const disabled = !valid
-    const i18nParams = isReply ? { context: 'reply' } : null
-    if (!sourceUrl)
-      return (
-        <button type="submit" className="button" disabled={disabled}>
-          {this.props.t('comment.post', i18nParams)}
-        </button>
-      )
-    return (
-      <React.Fragment>
-        <Button type="submit" disabled={disabled}>
-          {this.props.t('comment.post', i18nParams)}
-        </Button>
-        <Button
-          type="submit"
-          className="is-danger"
-          disabled={disabled}
-          onClick={this.postAndReset(values =>
-            this.props.postComment({ ...values, approve: false })
-          )}
-        >
-          {this.props.t('comment.refute', i18nParams)}
-        </Button>
-        <Button
-          type="submit"
-          className="is-success"
-          disabled={disabled}
-          onClick={this.postAndReset(values =>
-            this.props.postComment({ ...values, approve: true })
-          )}
-        >
-          {this.props.t('comment.approve', i18nParams)}
-        </Button>
-      </React.Fragment>
-    )
-  }
-
   expandForm() {
-    if (this.props.isAuthenticated) this.setState({ isCollapsed: false })
-    else this.props.flashErrorUnauthenticated()
+    if (this.props.user) {
+      this.setState({ isCollapsed: false })
+    } else {
+      this.props.flashErrorUnauthenticated()
+    }
   }
 
-  postAndReset(postFunc) {
-    return this.props.handleSubmit(comment => {
-      if (comment.reply_to) {
-        comment.reply_to_id = comment.reply_to.id
-        delete comment.reply_to
-      }
-      return postFunc(comment).then(
-        handleFormEffectResponse({
-          onSuccess: () => this.props.reset()
-        })
-      )
-    })
+  onSubmit = ({ text, source, approve }, { resetForm, setErrors }) => {
+    return this.props
+      .postComment({
+        statement_id: this.props.statementID,
+        text: text.length ? text : null,
+        source: source ? { url: source } : null,
+        reply_to_id: get(this.props, 'replyTo.id', null),
+        approve
+      })
+      .then(e => {
+        if (e.error) {
+          setErrors(e.payload)
+        } else {
+          resetForm()
+        }
+      })
+      .catch(e => {
+        logError(e)
+        this.props.errorToFlash(e)
+      })
+  }
+
+  validate = ({ source, text }) => {
+    const { t } = this.props
+    const errors = {}
+
+    if (source && !isURL(source, { protocols: ['http', 'https'] })) {
+      errors.source = t('comment.invalidURL')
+    }
+
+    if (text) {
+      validateLengthI18n(t, errors, 'text', text, COMMENT_LENGTH, 'Comment')
+    }
+
+    return errors
+  }
+
+  renderForm() {
+    const { replyTo, t } = this.props
+    const initialValues = { text: '', source: '', approve: null }
+    const i18nParams = replyTo ? { context: 'reply' } : null
+
+    return (
+      <Formik
+        initialValues={initialValues}
+        validate={this.validate}
+        onSubmit={this.onSubmit}
+      >
+        {({ handleBlur, handleSubmit, values, setFieldValue, isValid, errors }) => (
+          <Box flex="1 1" as="form" onSubmit={handleSubmit}>
+            <Flex flexDirection="column">
+              <Container mb={2} position="relative">
+                <TextareaAutosize
+                  name="text"
+                  value={values.text}
+                  onChange={e => setFieldValue('text', cleanStrMultiline(e.target.value))}
+                  onBlur={handleBlur}
+                  autoFocus
+                  placeholder={t('comment.writeComment')}
+                  disabled={false}
+                  minHeight={80}
+                  maxHeight={180}
+                  focus
+                />
+                <TextareaLengthCounter
+                  length={values.text.length}
+                  maxLength={COMMENT_LENGTH[1]}
+                />
+                {errors.text && (
+                  <Span color="red" fontSize={6}>
+                    {errors.text}
+                  </Span>
+                )}
+              </Container>
+
+              <Flex flexWrap="wrap">
+                <Flex flexDirection="column" flex="3 1 330px" mr={2} my={1}>
+                  <StyledInput
+                    name="source"
+                    value={values.source}
+                    onChange={e => setFieldValue('source', e.target.value.trim())}
+                    onBlur={handleBlur}
+                    placeholder={t('comment.addSource')}
+                    autoComplete="off"
+                  />
+                  {errors.source && (
+                    <Span color="red" fontSize={6} mt={1}>
+                      {errors.source}
+                    </Span>
+                  )}
+                </Flex>
+                {!values.source ? (
+                  <SubmitButton my={1} disabled={!isValid}>
+                    {this.props.t('comment.post', i18nParams)}
+                  </SubmitButton>
+                ) : (
+                  <Flex flex="1 1 460px" flexWrap="wrap">
+                    <SubmitButton my={1} mr={1} disabled={!isValid} flex="1 1 130px">
+                      {this.props.t('comment.post', i18nParams)}
+                    </SubmitButton>
+                    <Flex flex="3 1">
+                      <SubmitButton
+                        my={1}
+                        mr={1}
+                        className="is-success"
+                        disabled={!isValid}
+                        onClick={() => setFieldValue('approve', true)}
+                      >
+                        {this.props.t('comment.approve', i18nParams)}
+                      </SubmitButton>
+                      <SubmitButton
+                        my={1}
+                        className="is-danger"
+                        disabled={!isValid}
+                        onClick={() => setFieldValue('approve', false)}
+                      >
+                        {this.props.t('comment.refute', i18nParams)}
+                      </SubmitButton>
+                    </Flex>
+                  </Flex>
+                )}
+              </Flex>
+            </Flex>
+          </Box>
+        )}
+      </Formik>
+    )
+  }
+
+  render() {
+    const { user, replyTo, t } = this.props
+    const isSelfReply = get(user, 'id') === get(replyTo, 'user.id')
+
+    return !user || (this.state.isCollapsed && !replyTo) ? (
+      <Flex className="comment-form" p={2} justifyContent="center">
+        <Button className="is-inverted is-primary" onClick={() => this.expandForm()}>
+          <Plus size="1.2em" style={{ marginRight: 5 }} />
+          <span>{t('comment.revealForm')}</span>
+        </Button>
+      </Flex>
+    ) : (
+      <Flex className="comment-form" flexDirection="column" p={3}>
+        {replyTo && (
+          <Box>
+            <Flex alignItems="center" mb={2}>
+              <CloseButton
+                size="1.5em"
+                onClick={() => this.props.setReplyToComment(null)}
+              />
+              <Span ml={2}>
+                {t(isSelfReply ? 'comment.replyingToSelf' : 'comment.replyingTo')}{' '}
+                <UserAppellation defaultComponent="span" user={replyTo.user} />
+              </Span>
+            </Flex>
+            <CommentDisplay
+              className="quoted"
+              richMedias={false}
+              comment={replyTo}
+              withoutActions
+              withoutHeader
+              hideThread
+            />
+          </Box>
+        )}
+        <Flex>
+          <Box mr={2}>
+            <UserPicture user={user} size={USER_PICTURE_LARGE} />
+          </Box>
+          {this.renderForm()}
+        </Flex>
+      </Flex>
+    )
   }
 }
+
+export default CommentForm

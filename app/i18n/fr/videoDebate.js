@@ -22,11 +22,13 @@ export default {
     loadMore_replies: 'Charger plus de réponses ({{count}})',
     loadMore_comments: 'Charger plus de commentaires ({{count}})',
     replyingTo: 'En réponse à',
+    replyingToSelf: 'À la suite de',
     approve: "J'approuve",
     approve_reply: "J'approuve ce commentaire",
     refute: 'Je réfute',
     refute_reply: 'Je réfute ce commentaire',
-    revealForm: 'Ajouter une source ou un commentaire'
+    revealForm: 'Ajouter une source ou un commentaire',
+    invalidURL: "Le lien vers la source n'est pas valide"
   },
   video: {
     addedBy: 'Ajoutée par un {{userType}}',

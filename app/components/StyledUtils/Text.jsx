@@ -15,3 +15,11 @@ export const Small = styled.small`
   ${space}
   ${display}
 `
+
+export const P = styled.p`
+  ${color}
+  ${fontSize}
+  ${fontWeight}
+  ${space}
+  ${display}
+`
