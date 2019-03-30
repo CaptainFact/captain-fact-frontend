@@ -48,12 +48,7 @@ export default {
     search: 'Tapez au moins 3 lettres pour lancer la recherche',
     fullName: 'Nom complet',
     title: 'Titre',
-    titlePlaceholder: 'Politicien, docteur, journaliste...',
-    titleFormat: '{{title}}',
-    titles: {
-      Politician: 'Personnalité politique',
-      Journalist: 'Journaliste'
-    }
+    titlePlaceholder: 'Politicien, docteur, journaliste...'
   },
   statement: {
     remove: 'Retirer la citation',
@@ -92,5 +87,11 @@ export default {
     user_plural: '{{count}} fact-checkers'
   },
   warningUnlisted:
-    "Cette vidéo n'est pas listée publiquement. Elle n'a peut-être pas reçu la visibilité nécessaire pour que les sources et citations soient correctement discutées."
+    "Cette vidéo n'est pas listée publiquement. Elle n'a peut-être pas reçu la visibilité nécessaire pour que les sources et citations soient correctement discutées.",
+  wikidata: {
+    id: 'Numéro unique Wikidata (QID)',
+    search: 'Tapez un nom pour lancer la recherche sur Wikipédia',
+    autofill: 'Récupérer automatiquement depuis Wikipédia',
+    using: 'Données extraites de <2>{{qid}}</2> (<5>éditer</5>)'
+  }
 }

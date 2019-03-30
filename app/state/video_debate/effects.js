@@ -40,7 +40,7 @@ export const removeSpeaker = speaker => {
 
 export const updateSpeaker = speaker => {
   return createEffect(SocketApi.push(VIDEO_DEBATE_CHANNEL, 'update_speaker', speaker), {
-    catch: [errorMsgToFlash, generateFSAError]
+    catch: generateFSAError
   })
 }
 
