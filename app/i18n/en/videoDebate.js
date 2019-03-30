@@ -45,7 +45,7 @@ export default {
     add: 'Add Speaker',
     create: 'Create speaker "{{name}}"',
     edit: 'Edit "{{name}}" information',
-    search: 'Type a name to search',
+    search: 'Type at least 3 characters to start searching',
     fullName: 'Full name',
     title: 'Title',
     titlePlaceholder: 'Politician, doctor, journalist...',

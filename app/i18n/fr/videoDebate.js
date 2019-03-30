@@ -45,7 +45,7 @@ export default {
     add: 'Ajouter un·e intervenant·e',
     create: 'Créer l\'intervenant·e "{{name}}"',
     edit: 'Modifier les informations de "{{name}}"',
-    search: 'Tapez un nom pour lancer la recherche',
+    search: 'Tapez au moins 3 lettres pour lancer la recherche',
     fullName: 'Nom complet',
     title: 'Titre',
     titlePlaceholder: 'Politicien, docteur, journaliste...',
