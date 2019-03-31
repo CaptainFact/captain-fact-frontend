@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router'
 import { withNamespaces } from 'react-i18next'
 import classNames from 'classnames'
-import { Flex, Box } from '@rebass/grid'
+import { Flex } from '@rebass/grid'
 
 import { MicrophoneAlt } from 'styled-icons/boxicons-regular/MicrophoneAlt'
 
@@ -12,18 +12,15 @@ import {
   MIN_REPUTATION_REMOVE_SPEAKER,
   MIN_REPUTATION_UPDATE_SPEAKER
 } from '../../constants'
-import { ModalFormContainer } from '../Modal'
-import Icon from '../Utils/Icon'
 import ClickableIcon from '../Utils/ClickableIcon'
 import ReputationGuard from '../Utils/ReputationGuard'
-import EditSpeakerForm from './EditSpeakerForm'
+import EditSpeakerFormModal from './EditSpeakerFormModal'
 import ModalRemoveSpeaker from './ModalRemoveSpeaker'
 import { addModal } from '../../state/modals/reducer'
-import { removeSpeaker, updateSpeaker } from '../../state/video_debate/effects'
+import { removeSpeaker } from '../../state/video_debate/effects'
 import { changeStatementFormSpeaker } from '../../state/video_debate/statements/reducer'
-import MediaLayout from '../Utils/MediaLayout'
 import { getFocusedStatementSpeakerId } from '../../state/video_debate/statements/selectors'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider';
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 
 @withRouter
 @withNamespaces('videoDebate')
@@ -31,7 +28,7 @@ import { withLoggedInUser } from '../LoggedInUser/UserProvider';
   (state, props) => ({
     isFocused: getFocusedStatementSpeakerId(state) === props.speaker.id
   }),
-  { addModal, changeStatementFormSpeaker, removeSpeaker, updateSpeaker }
+  { addModal, changeStatementFormSpeaker, removeSpeaker }
 )
 @withLoggedInUser
 export class SpeakerPreview extends React.PureComponent {
@@ -121,18 +118,9 @@ export class SpeakerPreview extends React.PureComponent {
   }
 
   handleEdit() {
-    const titleModal = this.props.t('speaker.edit', {
-      name: this.props.speaker.full_name
-    })
-
     this.props.addModal({
-      Modal: ModalFormContainer,
-      props: {
-        title: titleModal,
-        FormComponent: EditSpeakerForm,
-        handleConfirm: s => this.props.updateSpeaker(s),
-        formProps: { initialValues: this.props.speaker.toJS() }
-      }
+      Modal: EditSpeakerFormModal,
+      props: { speaker: this.props.speaker.toJS() }
     })
   }
 

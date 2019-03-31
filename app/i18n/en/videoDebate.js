@@ -45,12 +45,10 @@ export default {
     add: 'Add Speaker',
     create: 'Create speaker "{{name}}"',
     edit: 'Edit "{{name}}" information',
-    search: 'Type a name to search',
+    search: 'Type at least 3 characters to start searching',
     fullName: 'Full name',
     title: 'Title',
-    titlePlaceholder: 'Politician, doctor, journalist...',
-    titleFormat: '{{title}}',
-    titleFormat_FR: 'French {{title}}'
+    titlePlaceholder: 'Politician, doctor, journalist...'
   },
   statement: {
     remove: 'Remove statement',
@@ -86,5 +84,10 @@ export default {
     user_plural: '{{count}} fact-checkers'
   },
   warningUnlisted:
-    "This video is not listed publicly. It may not have received the visibility required for statements and sources to be challenged. Be careful with the information you'll find here."
+    "This video is not listed publicly. It may not have received the visibility required for statements and sources to be challenged. Be careful with the information you'll find here.",
+  wikidata: {
+    id: 'Wikidata QID',
+    search: 'Type a name to search it on Wikipedia',
+    autofill: 'Autofill from Wikipedia'
+  }
 }
