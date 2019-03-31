@@ -16,10 +16,10 @@ renforcer leur signification.
 | 0          | Ajouter des citations                                       |
 | 0          | Voter positivement                                          |
 | 15         | Voter négativement                                          |
-| 15         | Mettre à jour une citation                                  |
-| 15         | Mettre à jour un intervenant                                |
+| 15         | Éditer une citation                                         |
 | 15         | Signaler un contenu inapproprié                             |
 | 30         | Ajouter ou créer des intervenants                           |
+| 75         | Éditer un intervenant                                       |
 | 75         | Ajouter une vidéo                                           |
 | 75         | Supprimer / restaurer une citation                          |
 | 75         | Déplacer toutes les citations d'une vidéo (time shift)      |
