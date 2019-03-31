@@ -124,7 +124,7 @@ const Navbar = ({
     : '/videos'
 
   return (
-    <Box>
+    <Box data-cy="Navbar">
       <Container height={theme.navbarHeight} width={1} />
       <NavbarContainer px={2}>
         {/* Left */}

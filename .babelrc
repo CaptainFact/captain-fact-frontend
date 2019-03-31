@@ -14,7 +14,10 @@
   ],
   "env": {
     "production": {
-      "plugins": ["transform-react-remove-prop-types"]
+      "plugins": [
+        "transform-react-remove-prop-types",
+        ["react-remove-properties", { "properties": ["data-cy"] }]
+      ]
     }
   }
 }
