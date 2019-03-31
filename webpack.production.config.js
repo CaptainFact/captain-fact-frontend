@@ -8,7 +8,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 const loadersConf = require('./webpack.loaders')
@@ -16,10 +16,7 @@ const loadersConf = require('./webpack.loaders')
 module.exports = {
   mode: 'production',
   entry: {
-    app: [
-      'babel-polyfill',
-      './app/index.jsx'
-    ]
+    app: ['babel-polyfill', './app/index.jsx']
   },
   output: {
     publicPath: '/',
@@ -47,7 +44,7 @@ module.exports = {
       }
     },
     minimizer: [
-      new UglifyJsPlugin({
+      new TerserPlugin({
         cache: true,
         parallel: true,
         sourceMap: true
