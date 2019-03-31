@@ -86,8 +86,8 @@ export const NAME_LENGTH = [2, 20]
 export const COMMENT_LENGTH = [0, 512]
 
 // Speakers
-export const SPEAKER_NAME_LENGTH = [3, 60]
-export const SPEAKER_TITLE_LENGTH = [3, 60]
+export const SPEAKER_NAME_LENGTH = [3, 120]
+export const SPEAKER_TITLE_LENGTH = [3, 240]
 export const MAX_VIDEO_CARD_SPEAKERS = 5
 
 // Statement

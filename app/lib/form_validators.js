@@ -6,17 +6,6 @@ export const checkLength = (value, range) => {
   )
 }
 
-// TODO Migrate to validateLengthI18n
-export const validateLength = (errors, fieldName, value, range, label = null) => {
-  if (checkLength(value, range)) return true
-  const fieldLabel = label || capitalize(fieldName.replace('_', ' '))
-  if (!value || value.length < range[0])
-    errors[fieldName] = `${fieldLabel} must be at least ${range[0]} characters`
-  else if (range[1] !== -1 && value.length > range[1])
-    errors[fieldName] = `${fieldLabel} must be at most ${range[1]} characters`
-  return false
-}
-
 export const validateLengthI18n = (t, errors, fieldName, value, range) => {
   if (checkLength(value, range)) return true
   if (!value || value.length < range[0])
