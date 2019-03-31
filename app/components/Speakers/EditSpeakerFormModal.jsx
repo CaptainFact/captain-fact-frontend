@@ -8,6 +8,7 @@ import { pick, truncate, capitalize } from 'lodash'
 import AsyncSelect from 'react-select/lib/Async'
 import wikidata from 'wikidata-sdk'
 import debounce from 'debounce-promise'
+import { Formik } from 'formik'
 
 import { Save } from 'styled-icons/boxicons-regular/Save'
 import { Ban } from 'styled-icons/fa-solid/Ban'
@@ -19,7 +20,6 @@ import { validateLengthI18n } from '../../lib/form_validators'
 import { SPEAKER_NAME_LENGTH, SPEAKER_TITLE_LENGTH } from '../../constants'
 import capitalizeName from '../../lib/name_formatter'
 import { cleanStr } from '../../lib/clean_str'
-import { Formik } from 'formik'
 import StyledInput from '../StyledUtils/StyledInput'
 import Modal from '../Modal/Modal'
 import { Span } from '../StyledUtils/Text'
@@ -122,7 +122,7 @@ class EditSpeakerFormModal extends React.PureComponent {
           <Modal
             title={t('speaker.edit', { name: this.props.speaker.full_name })}
             className="modal-form"
-            footer={
+            footer={(
               <div className="form-buttons">
                 <Button
                   onClick={submitForm}
@@ -141,7 +141,7 @@ class EditSpeakerFormModal extends React.PureComponent {
                   <Span ml={1}>{t('main:actions.cancel')}</Span>
                 </Button>
               </div>
-            }
+            )}
           >
             <form className="form" onSubmit={handleSubmit}>
               <div className="form-fields">
@@ -170,7 +170,10 @@ class EditSpeakerFormModal extends React.PureComponent {
                       loadOptions={this.loadOptions}
                       styles={ReactSelectStyles}
                       theme={ReactSelectTheme}
-                      noOptionsMessage={() => t('speaker.search')}
+                      noOptionsMessage={({ inputValue }) => (inputValue.length < 3
+                        ? t('speaker.search')
+                        : t('speaker.noneFound'))
+                      }
                       onChange={({ value }) => {
                         setValues({
                           ...values,
@@ -192,8 +195,7 @@ class EditSpeakerFormModal extends React.PureComponent {
                     name="full_name"
                     placeholder="Barack Obama, Dark Vador..."
                     value={values.full_name}
-                    onChange={e =>
-                      setFieldValue('full_name', capitalizeName(cleanStr(e.target.value)))
+                    onChange={e => setFieldValue('full_name', capitalizeName(cleanStr(e.target.value)))
                     }
                   />
                   {errors.full_name && (
@@ -227,10 +229,9 @@ class EditSpeakerFormModal extends React.PureComponent {
                     name="wikidata_item_id"
                     placeholder="QXXXXXXXX"
                     value={values.wikidata_item_id || ''}
-                    onChange={e =>
-                      e.target.value.length > 1
-                        ? setFieldValue('wikidata_item_id', cleanStr(e.target.value))
-                        : setFieldValue('wikidata_item_id', null)
+                    onChange={e => (e.target.value.length > 1
+                      ? setFieldValue('wikidata_item_id', cleanStr(e.target.value))
+                      : setFieldValue('wikidata_item_id', null))
                     }
                     autoComplete="off"
                   />

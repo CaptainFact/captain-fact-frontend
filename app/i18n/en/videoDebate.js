@@ -48,7 +48,8 @@ export default {
     search: 'Type at least 3 characters to start searching',
     fullName: 'Full name',
     title: 'Title',
-    titlePlaceholder: 'Politician, doctor, journalist...'
+    titlePlaceholder: 'Politician, doctor, journalist...',
+    noneFound: 'No speaker found for this name'
   },
   statement: {
     remove: 'Remove statement',
