@@ -1,21 +1,17 @@
-stages:
-  - name: Unit-Testing
-    if: branch != master OR type = pull_request
-  - name: E2E-Testing
-    if: branch =~ /cypress/ OR (type = pull_request AND branch = master)
-  - name: deploy
-    if: type IN (push, api) AND (branch IN (master, staging) OR tag =~ ^v\d+)
-
 jobs:
   include:
-    - stage: Unit-Testing
+    - stage: Test
+      if: branch != master OR type = pull_request
+      name: 'Unit tests'
       language: node_js
       node_js: [node]
       cache: { directories: [node_modules, '~/.npm', '~/.cache'] }
       script:
         - npm run coverage && cat ./coverage/lcov.info | coveralls
 
-    - stage: E2E-Testing
+    - stage: Test
+      if: branch =~ /cypress/ OR (type = pull_request AND branch IN (staging, master))
+      name: 'Integration tests'
       language: node_js
       node_js: [node]
       sudo: required
@@ -28,22 +24,15 @@ jobs:
         # Start API
         - docker-compose up -d || exit 1
         # Build and start Frontend
-        - docker build --build-arg BUILD_ENV=dev -t cf-frontend-e2e-testing . || exit 1
-        - docker run  --rm -d -p 3333:80
-          -v ${TRAVIS_BUILD_DIR}/rel/dev_localhost_keys:/run/secrets
-          -v ${TRAVIS_BUILD_DIR}/node_modules:/opt/app/node_modules
-          cf-frontend-e2e-testing serve
-        # Install cypress
-        - npm install -g cypress
+        - npm start &
         # Run Cypress
         - npm run cypress -- --record --key ${CYPRESS_RECORD_KEY}
         # Shutdown Frontend and API
         - kill $(jobs -p) || true
         - docker-compose down
-        - docker rmi -f cf-frontend-e2e-testing
 
     - stage: deploy
-      if: branch IN (master, staging)
+      if: type IN (push, api) AND (branch IN (master, staging) OR tag =~ ^v\d+)
       language: generic
       sudo: required
       services: [docker]
