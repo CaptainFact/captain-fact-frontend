@@ -128,7 +128,7 @@
     "@babel/register": "^7.4.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
-    "babel-jest": "^23.4.2",
+    "babel-jest": "^24.5.0",
     "babel-loader": "^8.0.0",
     "babel-plugin-react-remove-properties": "^0.3.0",
     "babel-plugin-styled-components": "^1.9.2",
