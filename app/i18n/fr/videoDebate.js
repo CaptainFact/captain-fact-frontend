@@ -48,7 +48,8 @@ export default {
     search: 'Tapez au moins 3 lettres pour lancer la recherche',
     fullName: 'Nom complet',
     title: 'Titre',
-    titlePlaceholder: 'Politicien, docteur, journaliste...'
+    titlePlaceholder: 'Politicien, docteur, journaliste...',
+    noneFound: 'Aucun intervenant trouvé pour ce nom'
   },
   statement: {
     remove: 'Retirer la citation',

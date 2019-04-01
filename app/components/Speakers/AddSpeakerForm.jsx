@@ -24,10 +24,10 @@ export default class AddSpeakerForm extends React.PureComponent {
     return query.length < 3
       ? []
       : SocketApi.push('video_debate', 'search_speaker', { query }).then(
-          ({ speakers }) => {
-            return speakers.map(s => ({ label: s.full_name, value: s }))
-          }
-        )
+        ({ speakers }) => {
+          return speakers.map(s => ({ label: s.full_name, value: s }))
+        }
+      )
   }, 250)
 
   promptTextCreator = speakerName => {
@@ -59,15 +59,11 @@ export default class AddSpeakerForm extends React.PureComponent {
         loadOptions={this.searchSpeakerRequest}
         onChange={this.onChange}
         value=""
+        noOptionsMessage={() => t('speaker.search')}
         components={{
           LoadingMessage: () => (
             <Container display="flex" p={3} color="black.400" justifyContent="center">
               {t('main:actions.loading')}...
-            </Container>
-          ),
-          NoOptionsMessage: () => (
-            <Container display="flex" p={3} color="black.400" justifyContent="center">
-              {t('speaker.search')}
             </Container>
           )
         }}
