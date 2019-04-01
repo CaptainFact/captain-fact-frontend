@@ -92,6 +92,9 @@ export const MAX_VIDEO_CARD_SPEAKERS = 5
 
 // Statement
 export const STATEMENT_LENGTH = [10, 255]
+// The minimum number of positive votes summed over all the comments for a
+// statement to be considered confirmed
+export const CONFIRMED_STATEMENT_MIN_VOTES = 0
 
 // Videos
 export const ALL_VIDEOS = 'ALL_VIDEOS'
