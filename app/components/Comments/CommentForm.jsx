@@ -75,6 +75,7 @@ class CommentForm extends React.Component {
         if (e.error) {
           setErrors(e.payload)
         } else {
+          this.props.setReplyToComment(null)
           resetForm()
         }
       })
