@@ -5,20 +5,19 @@ import styled, { withTheme, css } from 'styled-components'
 import { Flex, Box } from '@rebass/grid'
 import { themeGet } from 'styled-system'
 import { withResizeDetector } from 'react-resize-detector'
+import Popup from 'reactjs-popup'
+import { withNamespaces } from 'react-i18next'
 
 import { Menu } from 'styled-icons/boxicons-regular/Menu'
-import { Bell } from 'styled-icons/fa-solid/Bell'
+
 import { CaretDown } from 'styled-icons/fa-solid/CaretDown'
 import { UserCircle } from 'styled-icons/fa-regular/UserCircle'
 
-import { withNamespaces } from 'react-i18next'
-import Popup from 'reactjs-popup'
 import Logo from './Logo'
 import { toggleSidebar } from '../../state/user_preferences/reducer'
 import UserPicture from '../Users/UserPicture'
 import { USER_PICTURE_LARGE } from '../../constants'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
-import UnstyledButton from '../StyledUtils/UnstyledButton'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { fadeIn } from '../StyledUtils/Keyframes'
 import UserMenu from '../Users/UserMenu'
@@ -27,6 +26,7 @@ import Notifications from '../LoggedInUser/Notifications'
 import { ErrorView } from '../Utils/ErrorView'
 import Container from '../StyledUtils/Container'
 import NotificationsPopupContent from '../Notifications/NotificationsPopupContent'
+import NotificationBell from '../LoggedInUser/NotificationBell'
 
 const NavbarContainer = styled(Flex)`
   position: fixed;
@@ -67,13 +67,15 @@ const UserMenuEntry = styled(({ isActive, ...props }) => <StyledLink {...props} 
     background: ${themeGet('colors.black.50')};
   }
 
-  ${props => props.index > 0
-    && css`
+  ${props =>
+    props.index > 0 &&
+    css`
       border-top: 1px solid ${themeGet('colors.black.100')};
     `}
 
-  ${props => props.isActive
-    && css`
+  ${props =>
+    props.isActive &&
+    css`
       border-left: 2px solid ${themeGet('colors.primary')};
     `}
 `
@@ -119,9 +121,10 @@ const Navbar = ({
   width
 }) => {
   const isMobile = width < 600
-  const loginRedirect =    !location.pathname.startsWith('/login') && !location.pathname.startsWith('/signup')
-    ? location.pathname
-    : '/videos'
+  const loginRedirect =
+    !location.pathname.startsWith('/login') && !location.pathname.startsWith('/signup')
+      ? location.pathname
+      : '/videos'
 
   return (
     <Box data-cy="Navbar">
@@ -150,11 +153,7 @@ const Navbar = ({
                   position="bottom right"
                   offsetX={isMobile ? 75 : -12}
                   contentStyle={isMobile ? mobilePopupStyle : desktopPopupStyle}
-                  trigger={(
-                    <UnstyledButton mr={[3, 4]}>
-                      <Bell size={24} />
-                    </UnstyledButton>
-                  )}
+                  trigger={<NotificationBell mr={[3, 4]} />}
                 >
                   <Notifications>
                     {({ loading, error, notifications, markAsSeen }) => {
@@ -177,29 +176,30 @@ const Navbar = ({
                 <Popup
                   position="bottom right"
                   offsetX={-12}
-                  trigger={(
+                  trigger={
                     <UserMenuTrigger>
                       <UserPicture size={USER_PICTURE_LARGE} user={loggedInUser} />
                       <CaretDown size={24} />
                     </UserMenuTrigger>
-                  )}
+                  }
                 >
                   <UserMenu user={loggedInUser} hasLogout isSelf>
-                    {({ Icon, key, route, title, index, isActive, onClick }) => key !== '/notifications' && (
-                      <UserMenuEntry
-                        key={key}
-                        to={route}
-                        index={index}
-                        isActive={isActive}
-                        onClick={onClick}
-                      >
-                        <Box>
-                          <Icon size="1em" />
+                    {({ Icon, key, route, title, index, isActive, onClick }) =>
+                      key !== '/notifications' && (
+                        <UserMenuEntry
+                          key={key}
+                          to={route}
+                          index={index}
+                          isActive={isActive}
+                          onClick={onClick}
+                        >
+                          <Box>
+                            <Icon size="1em" />
                             &nbsp;
-                          {title}
-                        </Box>
-                      </UserMenuEntry>
-                    )
+                            {title}
+                          </Box>
+                        </UserMenuEntry>
+                      )
                     }
                   </UserMenu>
                 </Popup>
