@@ -71,6 +71,7 @@ export class CommentDisplay extends React.PureComponent {
             comments={this.props.replies}
             nesting={this.props.nesting + 1}
             replyingTo={this.props.comment.user}
+            setReplyToComment={this.props.setReplyToComment}
           />
         )}
       </div>
@@ -85,7 +86,7 @@ export class CommentDisplay extends React.PureComponent {
         isVoting={isVoting}
         score={comment.score}
         myVote={myVote}
-        onVote={value => this.handleVote(value)}
+        onVote={this.handleVote}
         isReported={comment.is_reported}
       />
     )
@@ -113,9 +114,9 @@ export class CommentDisplay extends React.PureComponent {
             isFlagged={this.props.isFlagged}
             nbReplies={replies ? replies.size : 0}
             repliesCollapsed={repliesCollapsed}
-            handleReply={() => this.handleReply()}
-            handleDelete={() => this.handleDelete()}
-            handleFlag={() => this.handleFlag()}
+            handleReply={this.handleReply}
+            handleDelete={this.handleDelete}
+            handleFlag={this.handleFlag}
             handleToggleShowReplies={() => this.toggleShowReplies(repliesCollapsed)}
           />
         )}
@@ -148,7 +149,7 @@ export class CommentDisplay extends React.PureComponent {
     return false
   }
 
-  handleDelete() {
+  handleDelete = () => {
     this.setIsBlurred(true)
     this.props.addModal({
       Modal: ModalDeleteComment,
@@ -160,12 +161,12 @@ export class CommentDisplay extends React.PureComponent {
     })
   }
 
-  handleVote(value) {
+  handleVote = value => {
     if (!this.ensureAuthenticated()) return false
     return this.props.commentVote({ comment: this.props.comment, value })
   }
 
-  handleReply() {
+  handleReply = () => {
     if (!this.props.setReplyToComment || !this.ensureAuthenticated()) {
       return null
     }
@@ -173,7 +174,7 @@ export class CommentDisplay extends React.PureComponent {
     return this.props.setReplyToComment(this.props.comment)
   }
 
-  handleFlag(initialReason) {
+  handleFlag = initialReason => {
     if (!this.ensureAuthenticated()) return
     this.setIsBlurred(true)
     this.props.addModal({
