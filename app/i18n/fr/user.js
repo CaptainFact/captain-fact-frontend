@@ -35,5 +35,6 @@ export default {
       'Erreur lors de la desinscription, le code est probablement invalide. Si le problème persiste, contactez-nous'
   },
   noActivity: "Aucune action n'a été effectuée pour le moment",
-  browsingAnalyzer: 'Analyse de la navigation'
+  browsingAnalyzer: 'Analyse de la navigation',
+  reputation: 'Réputation'
 }

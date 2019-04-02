@@ -34,5 +34,6 @@ export default {
     unsubscribe_error: 'Given token seems invalid. If the problem persist, contact us'
   },
   noActivity: 'No action recorded yet.',
-  browsingAnalyzer: 'Browsing analyzer'
+  browsingAnalyzer: 'Browsing analyzer',
+  reputation: 'Reputation'
 }
