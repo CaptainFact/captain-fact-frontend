@@ -1,8 +1,16 @@
 export default {
-  presentation1:
-    "Internet est rempli de données riches et diverses. L'information voyage vite et nous n'avons pas le temps de vérifier si tout ce que nous entendons et voyons est correct.",
-  presentation2:
-    'nous permet de débattre et de nous entraider pour vérifier ces données en les sourçant, en votant et en discutant autour de faits.',
+  presentationTitle:
+    "Contribuez à développer l'esprit critique et à vérifier les informations.",
+  presentation: `
+    <0>CaptainFact</0> est un outil collaboratif de vérification des
+    vidéos YouTube.
+    <2></2>
+    Inscrivez-vous pour commencer à démentir, à confirmer ou à approfondir les
+    faits.
+    <4></4>
+    Installez notre extension pour bénéficier des données de CaptainFact directement
+    depuis votre lecteur YouTube.
+  `,
   seeVideos: 'Voir toutes les vidéos',
   invitation: 'Demander une invitation',
   inviteFriend: 'Inviter un ami',
@@ -13,7 +21,6 @@ export default {
   installExtension: "Installer l'extension",
   partners: 'Les partenaires',
   ambassadors: 'Ambassadeurs',
-  start: 'Commencer',
   backers: 'Soutiens',
   learnMore: 'En savoir plus',
   aboutAmbassadors:

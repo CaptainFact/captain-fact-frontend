@@ -28,6 +28,9 @@
           speakerId: null,
           entity: 'comment',
           commentId: 1956,
+          comment: {
+            text: 'Hello World!'
+          },
           __typename: 'UserAction'
         },
         __typename: 'Notification'

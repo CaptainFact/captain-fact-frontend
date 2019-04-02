@@ -28,8 +28,9 @@ export const optionsToQueryString = options => {
 
 export const youtubeRegex = /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/ ]{11})/i
 
-export const isExternal = (currentHref, url) => (url.indexOf(':') > -1 || url.indexOf('//') > -1)
-  && checkDomain(currentHref) !== checkDomain(url)
+export const isExternal = (currentHref, url) =>
+  (url.indexOf(':') > -1 || url.indexOf('//') > -1) &&
+  checkDomain(currentHref) !== checkDomain(url)
 
 /**
  * Define is URL points to a downloadable file. We only support downloading
@@ -37,6 +38,10 @@ export const isExternal = (currentHref, url) => (url.indexOf(':') > -1 || url.in
  */
 export const isDownloadableFile = url => {
   return url.endsWith('.pdf')
+}
+
+export const wikidataURL = wikidataQID => {
+  return `https://www.wikidata.org/wiki/${wikidataQID}`
 }
 
 // ---- Private ----

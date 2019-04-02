@@ -48,7 +48,7 @@ export const ENTITY_USER_ACTION = 'user_action'
 export const MIN_REPUTATION_ADD_STATEMENT = -5
 export const MIN_REPUTATION_UPDATE_STATEMENT = 15
 export const MIN_REPUTATION_FLAG = 15
-export const MIN_REPUTATION_UPDATE_SPEAKER = 15
+export const MIN_REPUTATION_UPDATE_SPEAKER = 75
 export const MIN_REPUTATION_ADD_SPEAKER = 30
 export const MIN_REPUTATION_REMOVE_STATEMENT = 75
 export const MIN_REPUTATION_RESTORE_ENTITY = 75
@@ -86,11 +86,15 @@ export const NAME_LENGTH = [2, 20]
 export const COMMENT_LENGTH = [0, 512]
 
 // Speakers
-export const SPEAKER_NAME_LENGTH = [3, 60]
-export const SPEAKER_TITLE_LENGTH = [3, 60]
+export const SPEAKER_NAME_LENGTH = [3, 120]
+export const SPEAKER_TITLE_LENGTH = [3, 240]
+export const MAX_VIDEO_CARD_SPEAKERS = 5
 
 // Statement
 export const STATEMENT_LENGTH = [10, 255]
+// The minimum number of positive votes summed over all the comments for a
+// statement to be considered confirmed
+export const CONFIRMED_STATEMENT_MIN_VOTES = 0
 
 // Videos
 export const ALL_VIDEOS = 'ALL_VIDEOS'

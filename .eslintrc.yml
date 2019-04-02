@@ -4,7 +4,9 @@ env:
   jest: true
   node: true
   cypress/globals: true
-extends: 'airbnb'
+extends:
+  - 'eslint:recommended'
+  - 'plugin:react/recommended'
 parser: babel-eslint
 parserOptions:
   ecmaFeatures:
@@ -48,7 +50,7 @@ rules:
   react/destructuring-assignment: off
   react/no-multi-comp: ['warn']
   react/jsx-no-bind: ['warn']
-  react/jsx-indent-props: ['warn']
+  react/jsx-indent-props: ['warn', 2]
   react/jsx-first-prop-new-line: ['warn']
   react/jsx-closing-bracket-location: ['warn']
   react/jsx-curly-spacing: ['warn']
@@ -60,9 +62,10 @@ rules:
   react/no-unescaped-entities: ['warn']
   react/no-unused-prop-types: ['warn']
   react/self-closing-comp: ['warn']
-  react/jsx-indent: ['warn']
+  react/jsx-indent: ['warn', 2]
   react/no-array-index-key: ['warn']
   react/prefer-stateless-function: off
+  react/forbid-prop-types: off
   # JSX
   jsx-a11y/anchor-is-valid:
     - warn

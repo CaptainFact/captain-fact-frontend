@@ -5,7 +5,7 @@
  ** *********************************************
  */
 
-import { defaultApiUrl, defaultEmail, defaultPassword } from './helpers'
+import { defaultApiUrl, defaultEmail, defaultPassword, randomYoutubeURL } from './helpers'
 
 Cypress.Commands.add('login', () => {
   cy.request({
@@ -19,5 +19,12 @@ Cypress.Commands.add('login', () => {
     const { user, token } = resp.body
     window.localStorage.setItem('token', token)
     // TODO store user in store
+    return user
   })
+})
+
+Cypress.Commands.add('visitNewRandomVideo', () => {
+  cy.visit('/videos/add')
+  cy.get('input[name=url]').type(randomYoutubeURL())
+  cy.contains('button[type=submit]', 'Add this video').click()
 })

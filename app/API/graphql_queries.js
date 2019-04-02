@@ -60,3 +60,13 @@ export const loggedInUserSubscriptionsQuery = gql`
     }
   }
 `
+
+export const loggedInUserUnreadNotificationsCount = gql`
+  query LoggedInUserUnreadNotificationsCount {
+    loggedInUser {
+      notifications(filter: UNSEEN) {
+        totalEntries
+      }
+    }
+  }
+`

@@ -1,10 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
-import { Field, reduxForm, reset } from 'redux-form'
-import { AsyncCreatable } from 'react-select'
+import AsyncCreatable from 'react-select/lib/AsyncCreatable'
 import debounce from 'debounce-promise'
-import latinise from 'voca/latinise'
+import theme from '../../styles/theme'
 
 import { checkLength } from '../../lib/form_validators'
 import { SocketApi } from '../../API'
@@ -12,80 +11,65 @@ import { SPEAKER_NAME_LENGTH } from '../../constants'
 import { addSpeaker } from '../../state/video_debate/effects'
 import capitalizeName from '../../lib/name_formatter'
 import { cleanStr } from '../../lib/clean_str'
+import Container from '../StyledUtils/Container'
+import { ReactSelectStyles, ReactSelectTheme } from '../../lib/react_select_theme'
 
-const searchSpeakerRequest = debounce(
-  query =>
-    // TODO This request has nothing to do here !
-    SocketApi.push('video_debate', 'search_speaker', { query }).then(({ speakers }) => ({
-      options: speakers
-    })),
-  250
-)
-
-@reduxForm({ form: 'addSpeaker' })
 @connect(
   null,
-  { addSpeaker, reset }
+  { addSpeaker }
 )
 @withNamespaces('videoDebate')
 export default class AddSpeakerForm extends React.PureComponent {
-  render() {
-    return (
-      <form className="form">
-        <Field
-          name="speaker"
-          component={props => this.renderSpeakerField(props)}
-          disabled={this.props.disabled}
-        />
-      </form>
-    )
-  }
+  searchSpeakerRequest = debounce(query => {
+    return query.length < 3
+      ? []
+      : SocketApi.push('video_debate', 'search_speaker', { query }).then(
+        ({ speakers }) => {
+          return speakers.map(s => ({ label: s.full_name, value: s }))
+        }
+      )
+  }, 250)
 
-  renderSpeakerField({ input, disabled }) {
-    return (
-      <AsyncCreatable
-        disabled={disabled}
-        name={input.name}
-        value={input.value}
-        onChange={e => this.onChange(e)}
-        promptTextCreator={name => this.promptTextCreator(name)}
-        loadOptions={this.loadOptions}
-        filterOption={this.filterOption}
-        placeholder={`${this.props.t('speaker.add')}...`}
-        searchPromptText={this.props.t('speaker.search')}
-        tabSelectsValue={false}
-        cache={false}
-        labelKey="full_name"
-        valueKey="id"
-        ignoreAccents={false}
-      />
-    )
-  }
-
-  filterOption({ full_name }, filter) {
-    return latinise(full_name)
-      .toLowerCase()
-      .includes(latinise(filter))
-  }
-
-  loadOptions(query, callback) {
-    if (!query || query.length < 3) callback(null, [])
-    else searchSpeakerRequest(query).then(speakers => callback(null, speakers))
-  }
-
-  onChange(e) {
-    const { addSpeaker, reset } = this.props
-
-    if (!e) return
-    const speaker = { full_name: capitalizeName(cleanStr(e.full_name)) }
-    if (e.id !== e.full_name) speaker.id = e.id
-    if (checkLength(e.full_name, SPEAKER_NAME_LENGTH))
-      addSpeaker(speaker).then(() => reset('add_speaker'))
-  }
-
-  promptTextCreator(speakerName) {
+  promptTextCreator = speakerName => {
     return checkLength(speakerName, SPEAKER_NAME_LENGTH)
       ? this.props.t('speaker.create', { name: capitalizeName(speakerName) })
       : '...'
+  }
+
+  onChange = ({ value }, { action }) => {
+    const { addSpeaker, reset } = this.props
+
+    if (action === 'select-option' && value && value.id) {
+      addSpeaker(value)
+    } else if (action === 'create-option' && checkLength(value, SPEAKER_NAME_LENGTH)) {
+      addSpeaker({ full_name: capitalizeName(cleanStr(value)) })
+    }
+  }
+
+  render() {
+    const { disabled, t } = this.props
+    return (
+      <AsyncCreatable
+        allowCreateWhileLoading
+        isDisabled={disabled}
+        isValidNewOption={value => value.length >= 3}
+        formatCreateLabel={this.promptTextCreator}
+        tabSelectsValue={false}
+        placeholder={`${t('speaker.add')}...`}
+        loadOptions={this.searchSpeakerRequest}
+        onChange={this.onChange}
+        value=""
+        noOptionsMessage={() => t('speaker.search')}
+        components={{
+          LoadingMessage: () => (
+            <Container display="flex" p={3} color="black.400" justifyContent="center">
+              {t('main:actions.loading')}...
+            </Container>
+          )
+        }}
+        styles={ReactSelectStyles}
+        theme={ReactSelectTheme}
+      />
+    )
   }
 }

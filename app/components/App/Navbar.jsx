@@ -4,20 +4,21 @@ import { Link, withRouter } from 'react-router'
 import styled, { withTheme, css } from 'styled-components'
 import { Flex, Box } from '@rebass/grid'
 import { themeGet } from 'styled-system'
+import { withResizeDetector } from 'react-resize-detector'
+import Popup from 'reactjs-popup'
+import { withNamespaces } from 'react-i18next'
+import { omit } from 'lodash'
 
 import { Menu } from 'styled-icons/boxicons-regular/Menu'
-import { Bell } from 'styled-icons/fa-solid/Bell'
+
 import { CaretDown } from 'styled-icons/fa-solid/CaretDown'
 import { UserCircle } from 'styled-icons/fa-regular/UserCircle'
 
-import { withNamespaces } from 'react-i18next'
-import Popup from 'reactjs-popup'
 import Logo from './Logo'
 import { toggleSidebar } from '../../state/user_preferences/reducer'
 import UserPicture from '../Users/UserPicture'
 import { USER_PICTURE_LARGE } from '../../constants'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
-import UnstyledButton from '../StyledUtils/UnstyledButton'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { fadeIn } from '../StyledUtils/Keyframes'
 import UserMenu from '../Users/UserMenu'
@@ -26,6 +27,8 @@ import Notifications from '../LoggedInUser/Notifications'
 import { ErrorView } from '../Utils/ErrorView'
 import Container from '../StyledUtils/Container'
 import NotificationsPopupContent from '../Notifications/NotificationsPopupContent'
+import NotificationBell from '../LoggedInUser/NotificationBell'
+import ScoreTag from '../Users/ScoreTag'
 
 const NavbarContainer = styled(Flex)`
   position: fixed;
@@ -57,7 +60,7 @@ const UserMenuTrigger = styled(Flex)`
   }
 `
 
-const UserMenuEntry = styled(({ isActive, ...props }) => <StyledLink {...props} />)`
+const UserMenuEntry = styled(props => <StyledLink {...omit(props, 'isActive')} />)`
   display: block;
   border-left: 2px solid white;
   background: white;
@@ -66,13 +69,15 @@ const UserMenuEntry = styled(({ isActive, ...props }) => <StyledLink {...props} 
     background: ${themeGet('colors.black.50')};
   }
 
-  ${props => props.index > 0
-    && css`
+  ${props =>
+    props.index > 0 &&
+    css`
       border-top: 1px solid ${themeGet('colors.black.100')};
     `}
 
-  ${props => props.isActive
-    && css`
+  ${props =>
+    props.isActive &&
+    css`
       border-left: 2px solid ${themeGet('colors.primary')};
     `}
 `
@@ -98,6 +103,15 @@ const MenuToggleSwitch = styled(Menu)`
   }
 `
 
+const basePopupStyle = {
+  boxShadow: 'rgba(150, 150, 150, 0.2) 5px 10px 15px -6px',
+  filter: 'none'
+}
+
+const desktopPopupStyle = { ...basePopupStyle, minWidth: 400 }
+
+const mobilePopupStyle = { ...basePopupStyle, width: '95%' }
+
 const Navbar = ({
   t,
   theme,
@@ -105,23 +119,29 @@ const Navbar = ({
   loggedInUser,
   isAuthenticated,
   loggedInUserLoading,
-  location
+  location,
+  width
 }) => {
-  const loginRedirect =    !location.pathname.startsWith('/login') && !location.pathname.startsWith('/signup')
-    ? location.pathname
-    : '/videos'
+  const isMobile = width < 600
+  const hideLogoUnder = isAuthenticated ? 425 : 350
+  const loginRedirect =
+    !location.pathname.startsWith('/login') && !location.pathname.startsWith('/signup')
+      ? location.pathname
+      : '/videos'
 
   return (
-    <Box>
+    <Box data-cy="Navbar">
       <Container height={theme.navbarHeight} width={1} />
       <NavbarContainer px={2}>
         {/* Left */}
         <Flex alignItems="center">
           <Container display="flex" alignItems="center" height={theme.navbarHeight - 1}>
             <MenuToggleSwitch onClick={() => toggleSidebar()} />
-            <StyledLink className="logo" to="/" ml={1}>
-              <Logo height={theme.navbarHeight - 24} borderless />
-            </StyledLink>
+            {width >= hideLogoUnder && (
+              <StyledLink className="logo" to="/" ml={1}>
+                <Logo height={theme.navbarHeight - 24} borderless />
+              </StyledLink>
+            )}
           </Container>
         </Flex>
         {/* Center - will hold the search bar in the future */}
@@ -131,20 +151,15 @@ const Navbar = ({
         ) : (
           <Flex alignItems="center">
             {isAuthenticated ? (
-              <React.Fragment>
+              <Flex>
+                <Box mr={[3, 4]}>
+                  <ScoreTag reputation={loggedInUser.reputation} size="large" withIcon />
+                </Box>
                 <Popup
                   position="bottom right"
-                  offsetX={-12}
-                  contentStyle={{
-                    minWidth: 400,
-                    boxShadow: 'rgba(150, 150, 150, 0.2) 5px 10px 15px -6px',
-                    filter: 'none'
-                  }}
-                  trigger={(
-                    <UnstyledButton mr={[3, 4]}>
-                      <Bell size={24} />
-                    </UnstyledButton>
-                  )}
+                  offsetX={isMobile ? 75 : -12}
+                  contentStyle={isMobile ? mobilePopupStyle : desktopPopupStyle}
+                  trigger={<NotificationBell mr={[3, 4]} />}
                 >
                   <Notifications>
                     {({ loading, error, notifications, markAsSeen }) => {
@@ -167,33 +182,34 @@ const Navbar = ({
                 <Popup
                   position="bottom right"
                   offsetX={-12}
-                  trigger={(
+                  trigger={
                     <UserMenuTrigger>
                       <UserPicture size={USER_PICTURE_LARGE} user={loggedInUser} />
                       <CaretDown size={24} />
                     </UserMenuTrigger>
-                  )}
+                  }
                 >
                   <UserMenu user={loggedInUser} hasLogout isSelf>
-                    {({ Icon, key, route, title, index, isActive, onClick }) => key !== '/notifications' && (
-                      <UserMenuEntry
-                        key={key}
-                        to={route}
-                        index={index}
-                        isActive={isActive}
-                        onClick={onClick}
-                      >
-                        <Box>
-                          <Icon size="1em" />
+                    {({ Icon, key, route, title, index, isActive, onClick }) =>
+                      key !== '/notifications' && (
+                        <UserMenuEntry
+                          key={key}
+                          to={route}
+                          index={index}
+                          isActive={isActive}
+                          onClick={onClick}
+                        >
+                          <Box>
+                            <Icon size="1em" />
                             &nbsp;
-                          {title}
-                        </Box>
-                      </UserMenuEntry>
-                    )
+                            {title}
+                          </Box>
+                        </UserMenuEntry>
+                      )
                     }
                   </UserMenu>
                 </Popup>
-              </React.Fragment>
+              </Flex>
             ) : (
               <React.Fragment>
                 <StyledLink
@@ -230,5 +246,5 @@ export default withTheme(
   connect(
     null,
     { toggleSidebar }
-  )(withLoggedInUser(withNamespaces('main')(withRouter(Navbar))))
+  )(withLoggedInUser(withNamespaces('main')(withRouter(withResizeDetector(Navbar)))))
 )

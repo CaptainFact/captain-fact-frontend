@@ -22,11 +22,13 @@ export default {
     loadMore_replies: 'Charger plus de réponses ({{count}})',
     loadMore_comments: 'Charger plus de commentaires ({{count}})',
     replyingTo: 'En réponse à',
+    replyingToSelf: 'À la suite de',
     approve: "J'approuve",
     approve_reply: "J'approuve ce commentaire",
     refute: 'Je réfute',
     refute_reply: 'Je réfute ce commentaire',
-    revealForm: 'Ajouter une source ou un commentaire'
+    revealForm: 'Ajouter une source ou un commentaire',
+    invalidURL: "Le lien vers la source n'est pas valide"
   },
   video: {
     addedBy: 'Ajoutée par un {{userType}}',
@@ -43,15 +45,11 @@ export default {
     add: 'Ajouter un·e intervenant·e',
     create: 'Créer l\'intervenant·e "{{name}}"',
     edit: 'Modifier les informations de "{{name}}"',
-    search: 'Tapez un nom pour lancer la recherche',
+    search: 'Tapez au moins 3 lettres pour lancer la recherche',
     fullName: 'Nom complet',
     title: 'Titre',
     titlePlaceholder: 'Politicien, docteur, journaliste...',
-    titleFormat: '{{title}}',
-    titles: {
-      Politician: 'Personnalité politique',
-      Journalist: 'Journaliste'
-    }
+    noneFound: 'Aucun intervenant trouvé pour ce nom'
   },
   statement: {
     remove: 'Retirer la citation',
@@ -90,5 +88,11 @@ export default {
     user_plural: '{{count}} fact-checkers'
   },
   warningUnlisted:
-    "Cette vidéo n'est pas listée publiquement. Elle n'a peut-être pas reçu la visibilité nécessaire pour que les sources et citations soient correctement discutées."
+    "Cette vidéo n'est pas listée publiquement. Elle n'a peut-être pas reçu la visibilité nécessaire pour que les sources et citations soient correctement discutées.",
+  wikidata: {
+    id: 'Numéro unique Wikidata (QID)',
+    search: 'Tapez un nom pour lancer la recherche sur Wikipédia',
+    autofill: 'Récupérer automatiquement depuis Wikipédia',
+    using: 'Données extraites de <2>{{qid}}</2> (<5>éditer</5>)'
+  }
 }

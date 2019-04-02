@@ -1,19 +1,26 @@
 import React from 'react'
 import Select from 'react-select'
+import { ReactSelectStyles, ReactSelectTheme } from '../../lib/react_select_theme'
 
 const SpeakersSelect = ({ input, speakers, placeholder }) => {
+  const selectedSpeakerId = input.value
+  const speaker = selectedSpeakerId && speakers.find(s => s.id === selectedSpeakerId)
+  const getOption = speaker => ({ value: speaker, label: speaker.full_name })
+
   return (
     <Select
       className="speaker-select"
-      onChange={s => (s && s.id ? input.onChange(s.id) : input.onChange(null))}
-      onBlur={() => input.onBlur(input.value.id)}
-      value={input.value}
-      name={input.name}
       placeholder={placeholder}
-      labelKey="full_name"
-      valueKey="id"
+      options={[...speakers.toJS().map(getOption)]}
+      value={speaker ? getOption(speaker) : null}
+      name={input.name}
       ignoreAccents
-      options={speakers.toJS()}
+      onBlur={() => input.onBlur(input.value.id)}
+      styles={ReactSelectStyles}
+      theme={ReactSelectTheme}
+      onChange={({ value }) => {
+        return value && value.id ? input.onChange(value.id) : input.onChange(null)
+      }}
     />
   )
 }

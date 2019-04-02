@@ -13,9 +13,9 @@ import {
 } from '../../state/video_debate/statements/effects'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 import StatementComments from './StatementComments'
-import { CommentForm } from '../Comments/CommentForm'
+import CommentForm from '../Comments/CommentForm'
 import Statement from './Statement'
-import { getTimecodesOffset } from '../../lib/video_utils'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 
 @connect(
   (state, props) => ({
@@ -28,9 +28,10 @@ import { getTimecodesOffset } from '../../lib/video_utils'
   }),
   { updateStatement, deleteStatement }
 )
+@withLoggedInUser
 @withNamespaces('videoDebate')
 export default class StatementContainer extends React.PureComponent {
-  state = { isDeleting: false, isEditing: false }
+  state = { isDeleting: false, isEditing: false, replyTo: null }
 
   componentDidUpdate(prevProps) {
     if (this.shouldScroll(this.props, prevProps)) {
@@ -38,9 +39,13 @@ export default class StatementContainer extends React.PureComponent {
     }
   }
 
+  setReplyToComment = replyTo => {
+    this.setState({ replyTo })
+  }
+
   render() {
-    const { isDeleting } = this.state
-    const { statement, isFocused, speaker, t } = this.props
+    const { isDeleting, replyTo } = this.state
+    const { statement, isFocused, speaker, isAuthenticated, loggedInUser, t } = this.props
 
     return (
       <div
@@ -49,10 +54,16 @@ export default class StatementContainer extends React.PureComponent {
       >
         <div className="card statement">
           {this.renderStatementOrEditForm(speaker, statement)}
-          <StatementComments statement={statement} speaker={speaker} />
+          <StatementComments
+            statement={statement}
+            speaker={speaker}
+            setReplyToComment={this.setReplyToComment}
+          />
           <CommentForm
-            form={`formAddComment-${statement.id}`}
-            initialValues={{ statement_id: statement.id }}
+            statementID={statement.id}
+            replyTo={replyTo}
+            setReplyToComment={this.setReplyToComment}
+            user={isAuthenticated ? loggedInUser : null}
           />
           {isDeleting && (
             <ModalConfirmDelete
@@ -78,15 +89,14 @@ export default class StatementContainer extends React.PureComponent {
         offset={this.props.offset}
         isBundled
         handleAbort={() => this.setState({ isEditing: false })}
-        handleConfirm={s =>
-          this.props.updateStatement(s).then(
-            handleFormEffectResponse({
-              onSuccess: response => {
-                this.setState({ isEditing: false })
-                return response
-              }
-            })
-          )
+        handleConfirm={s => this.props.updateStatement(s).then(
+          handleFormEffectResponse({
+            onSuccess: response => {
+              this.setState({ isEditing: false })
+              return response
+            }
+          })
+        )
         }
       />
     ) : (
@@ -118,9 +128,9 @@ export default class StatementContainer extends React.PureComponent {
 
     // Only override autoscrollEnabled when we're forced by a scrollTo
     if (
-      !props.autoscrollEnabled &&
-      (!wasActive || !wasForced) &&
-      this.isAutoScrollForced(props)
+      !props.autoscrollEnabled
+      && (!wasActive || !wasForced)
+      && this.isAutoScrollForced(props)
     )
       return true
 
@@ -140,6 +150,9 @@ export default class StatementContainer extends React.PureComponent {
   isTarget = props => this.isScrollToTarget(props) || props.isFocused
 
   smoothScrollTo = () => {
-    return this.refs.container.scrollIntoView({ behavior: 'smooth' })
+    return this.refs.container.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center'
+    })
   }
 }

@@ -42,14 +42,19 @@ export const flashSuccessMsg = (message, params = {}) => {
 export function errorToFlash(msg) {
   const errorInfo = getErrorInfo(msg)
   let action = null
-  if (!errorInfo) action = flashError({ message: msg, isError: true })
-  else
+  if (errorInfo) {
     action = flashError({
       message: msg,
       infoUrl: errorInfo.url,
       infoText: errorInfo.i18nKey,
       isError: true
     })
+  } else if (typeof msg === 'string') {
+    action = flashError({ message: msg, isError: true })
+  } else {
+    action = flashError({ message: 'unknown', isError: true })
+  }
+
   action.error = true
   return action
 }

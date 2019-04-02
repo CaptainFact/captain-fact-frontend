@@ -12,7 +12,7 @@ export default {
   },
   comment: {
     writeComment: 'Write a comment...',
-    addSource: 'Add a source to turn this comment into a fact',
+    addSource: 'Add a source',
     post: 'Post Comment',
     post_reply: 'Post reply',
     deleteThread: 'Delete comment',
@@ -22,11 +22,13 @@ export default {
     loadMore_replies: 'Load more replies ({{count}})',
     loadMore_comments: 'Load more comments ({{count}})',
     replyingTo: 'Replying to',
+    replyingToSelf: 'Add to thread',
     approve: 'Approve',
     approve_reply: 'Approve this comment',
     refute: 'Refute',
     refute_reply: 'Refute this comment',
-    revealForm: 'Add a source or comment'
+    revealForm: 'Add a source or comment',
+    invalidURL: 'Invalid source URL'
   },
   video: {
     addedBy: 'Added by a {{userType}}',
@@ -43,12 +45,11 @@ export default {
     add: 'Add Speaker',
     create: 'Create speaker "{{name}}"',
     edit: 'Edit "{{name}}" information',
-    search: 'Type a name to search',
+    search: 'Type at least 3 characters to start searching',
     fullName: 'Full name',
     title: 'Title',
     titlePlaceholder: 'Politician, doctor, journalist...',
-    titleFormat: '{{title}}',
-    titleFormat_FR: 'French {{title}}'
+    noneFound: 'No speaker found for this name'
   },
   statement: {
     remove: 'Remove statement',
@@ -84,5 +85,10 @@ export default {
     user_plural: '{{count}} fact-checkers'
   },
   warningUnlisted:
-    "This video is not listed publicly. It may not have received the visibility required for statements and sources to be challenged. Be careful with the information you'll find here."
+    "This video is not listed publicly. It may not have received the visibility required for statements and sources to be challenged. Be careful with the information you'll find here.",
+  wikidata: {
+    id: 'Wikidata QID',
+    search: 'Type a name to search it on Wikipedia',
+    autofill: 'Autofill from Wikipedia'
+  }
 }
