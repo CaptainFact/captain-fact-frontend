@@ -80,19 +80,23 @@ const Notifications = ({ children, pageSize, pageNumber, pollInterval, filter })
         })
 
         return (
-          <Mutation mutation={markAsSeenMutation}>
-            {markAsSeen => children({
-              notifications: paginatedNotifications.entries,
-              loading,
-              error,
-              pageNumber: paginatedNotifications.pageNumber,
-              totalPages: paginatedNotifications.totalPages,
-              markAsSeen: (ids, seen) => {
-                return markAsSeen({
-                  variables: Array.isArray(ids) ? { ids, seen } : { ids: [ids], seen }
-                })
-              }
-            })
+          <Mutation
+            mutation={markAsSeenMutation}
+            refetchQueries={() => ['LoggedInUserUnreadNotificationsCount']}
+          >
+            {markAsSeen =>
+              children({
+                notifications: paginatedNotifications.entries,
+                loading,
+                error,
+                pageNumber: paginatedNotifications.pageNumber,
+                totalPages: paginatedNotifications.totalPages,
+                markAsSeen: (ids, seen) => {
+                  return markAsSeen({
+                    variables: Array.isArray(ids) ? { ids, seen } : { ids: [ids], seen }
+                  })
+                }
+              })
             }
           </Mutation>
         )
