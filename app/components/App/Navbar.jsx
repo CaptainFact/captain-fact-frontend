@@ -7,6 +7,7 @@ import { themeGet } from 'styled-system'
 import { withResizeDetector } from 'react-resize-detector'
 import Popup from 'reactjs-popup'
 import { withNamespaces } from 'react-i18next'
+import { omit } from 'lodash'
 
 import { Menu } from 'styled-icons/boxicons-regular/Menu'
 
@@ -27,6 +28,7 @@ import { ErrorView } from '../Utils/ErrorView'
 import Container from '../StyledUtils/Container'
 import NotificationsPopupContent from '../Notifications/NotificationsPopupContent'
 import NotificationBell from '../LoggedInUser/NotificationBell'
+import ScoreTag from '../Users/ScoreTag'
 
 const NavbarContainer = styled(Flex)`
   position: fixed;
@@ -58,7 +60,7 @@ const UserMenuTrigger = styled(Flex)`
   }
 `
 
-const UserMenuEntry = styled(({ isActive, ...props }) => <StyledLink {...props} />)`
+const UserMenuEntry = styled(props => <StyledLink {...omit(props, 'isActive')} />)`
   display: block;
   border-left: 2px solid white;
   background: white;
@@ -121,6 +123,7 @@ const Navbar = ({
   width
 }) => {
   const isMobile = width < 600
+  const hideLogoUnder = isAuthenticated ? 425 : 350
   const loginRedirect =
     !location.pathname.startsWith('/login') && !location.pathname.startsWith('/signup')
       ? location.pathname
@@ -134,7 +137,7 @@ const Navbar = ({
         <Flex alignItems="center">
           <Container display="flex" alignItems="center" height={theme.navbarHeight - 1}>
             <MenuToggleSwitch onClick={() => toggleSidebar()} />
-            {width >= 350 && (
+            {width >= hideLogoUnder && (
               <StyledLink className="logo" to="/" ml={1}>
                 <Logo height={theme.navbarHeight - 24} borderless />
               </StyledLink>
@@ -148,7 +151,10 @@ const Navbar = ({
         ) : (
           <Flex alignItems="center">
             {isAuthenticated ? (
-              <React.Fragment>
+              <Flex>
+                <Box mr={[3, 4]}>
+                  <ScoreTag reputation={loggedInUser.reputation} size="large" withIcon />
+                </Box>
                 <Popup
                   position="bottom right"
                   offsetX={isMobile ? 75 : -12}
@@ -203,7 +209,7 @@ const Navbar = ({
                     }
                   </UserMenu>
                 </Popup>
-              </React.Fragment>
+              </Flex>
             ) : (
               <React.Fragment>
                 <StyledLink
