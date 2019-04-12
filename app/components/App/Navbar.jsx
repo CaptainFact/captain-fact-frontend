@@ -190,23 +190,21 @@ const Navbar = ({
                   }
                 >
                   <UserMenu user={loggedInUser} hasLogout isSelf>
-                    {({ Icon, key, route, title, index, isActive, onClick }) =>
-                      key !== '/notifications' && (
-                        <UserMenuEntry
-                          key={key}
-                          to={route}
-                          index={index}
-                          isActive={isActive}
-                          onClick={onClick}
-                        >
-                          <Box>
-                            <Icon size="1em" />
-                            &nbsp;
-                            {title}
-                          </Box>
-                        </UserMenuEntry>
-                      )
-                    }
+                    {({ Icon, key, route, title, index, isActive, onClick }) => (
+                      <UserMenuEntry
+                        key={key}
+                        to={route}
+                        index={index}
+                        isActive={isActive}
+                        onClick={onClick}
+                      >
+                        <Box>
+                          <Icon size="1em" />
+                          &nbsp;
+                          {title}
+                        </Box>
+                      </UserMenuEntry>
+                    )}
                   </UserMenu>
                 </Popup>
               </Flex>
