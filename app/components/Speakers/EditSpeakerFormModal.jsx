@@ -6,12 +6,12 @@ import { Box } from '@rebass/grid'
 import classNames from 'classnames'
 import { pick, truncate, capitalize } from 'lodash'
 import AsyncSelect from 'react-select/lib/Async'
-import wikidata from 'wikidata-sdk'
 import debounce from 'debounce-promise'
 import { Formik } from 'formik'
 
 import { Save } from 'styled-icons/boxicons-regular/Save'
 import { Ban } from 'styled-icons/fa-solid/Ban'
+import { LinkExternal } from 'styled-icons/octicons/LinkExternal'
 
 import { updateSpeaker } from '../../state/video_debate/effects'
 import { popModal } from '../../state/modals/reducer'
@@ -24,11 +24,12 @@ import StyledInput from '../StyledUtils/StyledInput'
 import Modal from '../Modal/Modal'
 import { Span } from '../StyledUtils/Text'
 import Button from '../Utils/Button'
-import { logWarn } from '../../logger'
 import { ReactSelectStyles, ReactSelectTheme } from '../../lib/react_select_theme'
 import StyledLink from '../StyledUtils/StyledLink'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import { wikidataURL } from '../../lib/url_utils'
+import { searchOnWikidata } from '../../API/wikidata'
+import { P } from '../StyledUtils/Text'
 
 class EditSpeakerFormModal extends React.PureComponent {
   static propTypes = {
@@ -39,7 +40,21 @@ class EditSpeakerFormModal extends React.PureComponent {
 
   constructor(props) {
     super(props)
-    this.state = { hasWikidataSearchBar: !props.speaker.wikidata_item_id }
+    this.state = {
+      hasWikidataSearchBar: !props.speaker.wikidata_item_id,
+      initialSuggestions: null
+    }
+  }
+
+  async componentDidMount() {
+    const { full_name, wikidata_item_id } = this.props.speaker
+
+    if (full_name && !wikidata_item_id) {
+      const searchResults = await searchOnWikidata(full_name, this.props.locale)
+      if (searchResults.length > 0) {
+        this.setState({ initialSuggestions: searchResults })
+      }
+    }
   }
 
   onSubmit = (values, actions) => {
@@ -69,26 +84,14 @@ class EditSpeakerFormModal extends React.PureComponent {
   }
 
   loadOptions = debounce(async search => {
-    if (!search || search.length < 3) {
-      return []
-    }
-
-    try {
-      const language = this.props.locale || 'en'
-      const url = wikidata.searchEntities({ search, language, format: 'json', limit: 10 })
-      const response = await fetch(url)
-      const body = await response.json()
-      return body.search.map(searchEntry => {
-        const description = truncate(capitalize(searchEntry.description), { length: 60 })
-        return {
-          value: searchEntry,
-          label: `${searchEntry.label}${description ? ` - ${description}` : ''}`
-        }
-      })
-    } catch (e) {
-      logWarn(`Wikidata query failed: ${e}`)
-      return []
-    }
+    const searchResults = await searchOnWikidata(search, this.props.locale)
+    return searchResults.map(searchEntry => {
+      const description = truncate(capitalize(searchEntry.description), { length: 60 })
+      return {
+        value: searchEntry,
+        label: `${searchEntry.label}${description ? ` - ${description}` : ''}`
+      }
+    })
   }, 250)
 
   getLabel(label, maxLength) {
@@ -98,6 +101,8 @@ class EditSpeakerFormModal extends React.PureComponent {
 
   render() {
     const { t } = this.props
+    const { initialSuggestions, hasWikidataSearchBar } = this.state
+
     return (
       <Formik
         initialValues={pick(this.props.speaker, [
@@ -122,7 +127,7 @@ class EditSpeakerFormModal extends React.PureComponent {
           <Modal
             title={t('speaker.edit', { name: this.props.speaker.full_name })}
             className="modal-form"
-            footer={(
+            footer={
               <div className="form-buttons">
                 <Button
                   onClick={submitForm}
@@ -141,13 +146,13 @@ class EditSpeakerFormModal extends React.PureComponent {
                   <Span ml={1}>{t('main:actions.cancel')}</Span>
                 </Button>
               </div>
-            )}
+            }
           >
             <form className="form" onSubmit={handleSubmit}>
               <div className="form-fields">
                 <Box mb={2}>
                   <label className="label">{t('wikidata.autofill')}</label>
-                  {values.wikidata_item_id && !this.state.hasWikidataSearchBar ? (
+                  {values.wikidata_item_id && !hasWikidataSearchBar ? (
                     <Box>
                       <Trans i18nKey="wikidata.using">
                         Using data from{' '}
@@ -170,9 +175,10 @@ class EditSpeakerFormModal extends React.PureComponent {
                       loadOptions={this.loadOptions}
                       styles={ReactSelectStyles}
                       theme={ReactSelectTheme}
-                      noOptionsMessage={({ inputValue }) => (inputValue.length < 3
-                        ? t('speaker.search')
-                        : t('speaker.noneFound'))
+                      noOptionsMessage={({ inputValue }) =>
+                        inputValue.length < 3
+                          ? t('speaker.search')
+                          : t('speaker.noneFound')
                       }
                       onChange={({ value }) => {
                         setValues({
@@ -181,11 +187,47 @@ class EditSpeakerFormModal extends React.PureComponent {
                           full_name: value.label,
                           title: capitalize(value.description)
                         })
-                        this.setState({ hasWikidataSearchBar: false })
+                        this.setState({
+                          hasWikidataSearchBar: false
+                        })
                       }}
                     />
                   )}
                 </Box>
+                {hasWikidataSearchBar && initialSuggestions && (
+                  <div className="content">
+                    <P fontWeight="bold" mt={3}>
+                      {t('wikidata.suggestions')}
+                    </P>
+                    <ul>
+                      {initialSuggestions.map(({ id, label, description, url }) => (
+                        <li key={id}>
+                          <StyledLink
+                            onClick={() => {
+                              setValues({
+                                ...values,
+                                wikidata_item_id: id,
+                                full_name: label,
+                                title: capitalize(description)
+                              })
+                              this.setState({
+                                hasWikidataSearchBar: false
+                              })
+                            }}
+                          >
+                            {truncate(label, { length: 60 })}
+                          </StyledLink>
+                          {description ? ` - ${description}` : ''} (
+                          <ExternalLinkNewTab href={url}>
+                            <Span mr={1}>Wikidata</Span>
+                            <LinkExternal size="1em" />
+                          </ExternalLinkNewTab>
+                          )
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
                 <hr />
                 <Box mb={3}>
                   <label className="label">
@@ -195,8 +237,12 @@ class EditSpeakerFormModal extends React.PureComponent {
                     name="full_name"
                     placeholder="Barack Obama, Dark Vador..."
                     value={values.full_name}
-                    onChange={e => setFieldValue('full_name', capitalizeName(cleanStr(e.target.value)))
-                    }
+                    onChange={e => {
+                      return setFieldValue(
+                        'full_name',
+                        capitalizeName(cleanStr(e.target.value))
+                      )
+                    }}
                   />
                   {errors.full_name && (
                     <Span color="red" fontSize={6}>
@@ -212,7 +258,7 @@ class EditSpeakerFormModal extends React.PureComponent {
                   <StyledInput
                     name="title"
                     placeholder={this.props.t('speaker.titlePlaceholder')}
-                    value={values.title}
+                    value={values.title || ''}
                     onChange={e => setFieldValue('title', cleanStr(e.target.value))}
                     autoComplete="off"
                   />
@@ -229,9 +275,10 @@ class EditSpeakerFormModal extends React.PureComponent {
                     name="wikidata_item_id"
                     placeholder="QXXXXXXXX"
                     value={values.wikidata_item_id || ''}
-                    onChange={e => (e.target.value.length > 1
-                      ? setFieldValue('wikidata_item_id', cleanStr(e.target.value))
-                      : setFieldValue('wikidata_item_id', null))
+                    onChange={e =>
+                      e.target.value.length > 1
+                        ? setFieldValue('wikidata_item_id', cleanStr(e.target.value))
+                        : setFieldValue('wikidata_item_id', null)
                     }
                     autoComplete="off"
                   />

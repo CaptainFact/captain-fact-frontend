@@ -89,6 +89,7 @@ export default {
   wikidata: {
     id: 'Wikidata QID',
     search: 'Type a name to search it on Wikipedia',
-    autofill: 'Autofill from Wikipedia'
+    autofill: 'Autofill from Wikipedia',
+    suggestions: 'Suggested Wikidata entries:'
   }
 }
