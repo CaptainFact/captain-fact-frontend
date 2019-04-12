@@ -66,7 +66,7 @@ export default class NotificationsPage extends Component {
                 mb={3}
                 p={3}
                 borderRadius={4}
-                background={seenAt ? 'white' : 'rgba(107,163,167,0.05)'}
+                background={seenAt ? 'white' : 'rgba(117,202,255,0.15)'}
               >
                 <Container
                   display="flex"

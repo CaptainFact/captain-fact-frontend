@@ -6,8 +6,11 @@ import { themeGet } from 'styled-system'
 import { Flex, Box } from '@rebass/grid'
 import { translate } from 'react-i18next'
 import { transparentize } from 'polished'
+import { omit } from 'lodash'
 
 import { Clock } from 'styled-icons/fa-regular/Clock'
+import { Check } from 'styled-icons/fa-solid/Check'
+import { PrimitiveDot } from 'styled-icons/octicons/PrimitiveDot'
 
 import StyledLink from '../StyledUtils/StyledLink'
 import { TimeSince } from '../Utils/TimeSince'
@@ -16,18 +19,20 @@ import { Span } from '../StyledUtils/Text'
 import NotificationDetails from './NotificationDetails'
 import { userNotificationsURL } from '../../lib/cf_routes'
 
-const NotificationContainer = styled(({ hasBeenSeen, ...props }) => <Link {...props} />)`
+const NotificationContainer = styled(props => <Flex {...omit(props, ['hasBeenSeen'])} />)`
   display: flex;
   padding: ${themeGet('space.2')};
   font-size: ${themeGet('fontSizes.6')};
+  border-bottom: 1px solid ${themeGet('colors.black.100')};
 
-  ${props => !props.hasBeenSeen
-    && css`
-      background: ${transparentize(0.95, themeGet('colors.primary')(props))};
+  ${props =>
+    !props.hasBeenSeen &&
+    css`
+      background: ${transparentize(0.85, themeGet('colors.info')(props))};
     `}
 
   &:hover {
-    background: ${themeGet('colors.black.50')};
+    background: rgba(178, 225, 255, 0.2);
   }
 `
 
@@ -63,21 +68,29 @@ const NotificationsPopupContent = ({ user, notifications, markAsSeen, t }) => {
             {notifications.map(n => (
               <NotificationDetails key={n.id} notification={n}>
                 {({ message, seenAt, insertedAt, link }) => (
-                  <NotificationContainer
-                    to={link}
-                    onClick={() => markAsSeen(n.id, true)}
-                    hasBeenSeen={Boolean(seenAt)}
-                  >
-                    <Flex flexDirection="column">
-                      <Span color="black.400" mb={1}>
-                        {message}
-                      </Span>
-                      <Span color="black.300">
-                        <Clock size="1em" />
-                        &nbsp;
-                        <TimeSince time={insertedAt} />
-                      </Span>
-                    </Flex>
+                  <NotificationContainer hasBeenSeen={Boolean(seenAt)}>
+                    <Link to={link} onClick={() => markAsSeen(n.id, true)}>
+                      <Flex flexDirection="column">
+                        <Span color="black.400" mb={1}>
+                          {message}
+                        </Span>
+                        <Span color="black.300">
+                          <Clock size="1em" />
+                          &nbsp;
+                          <TimeSince time={insertedAt} />
+                        </Span>
+                      </Flex>
+                    </Link>
+                    <Container
+                      cursor="pointer"
+                      display="flex"
+                      alignItems="center"
+                      borderLeft="1px solid #e7e7e7"
+                      pl={2}
+                      onClick={() => markAsSeen(n.id, !seenAt)}
+                    >
+                      {seenAt ? <PrimitiveDot size={12} /> : <Check size={12} />}
+                    </Container>
                   </NotificationContainer>
                 )}
               </NotificationDetails>
