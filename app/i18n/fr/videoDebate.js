@@ -93,6 +93,7 @@ export default {
     id: 'Numéro unique Wikidata (QID)',
     search: 'Tapez un nom pour lancer la recherche sur Wikipédia',
     autofill: 'Récupérer automatiquement depuis Wikipédia',
-    using: 'Données extraites de <2>{{qid}}</2> (<5>éditer</5>)'
+    using: 'Données extraites de <2>{{qid}}</2> (<5>éditer</5>)',
+    suggestions: 'Suggestions Wikidata :'
   }
 }

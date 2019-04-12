@@ -49,7 +49,6 @@ rules:
   # React
   react/destructuring-assignment: off
   react/no-multi-comp: ['warn']
-  react/jsx-no-bind: ['warn']
   react/jsx-indent-props: ['warn', 2]
   react/jsx-first-prop-new-line: ['warn']
   react/jsx-closing-bracket-location: ['warn']
@@ -117,6 +116,7 @@ rules:
   react/sort-comp: off
   react/require-default-props: off
   react/jsx-one-expression-per-line: off
+  react/jsx-no-bind: off
 
 globals:
   # For tests
