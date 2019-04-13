@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import tag from 'clean-tag'
 import * as styledSystem from 'styled-system'
+import * as styledCustom from '../../lib/styled_components_custom'
 
 const Container = styled(tag)`
   ${styledSystem.alignItems}
@@ -37,6 +38,8 @@ const Container = styled(tag)`
   ${styledSystem.textAlign}
   ${styledSystem.width}
   ${styledSystem.zIndex}
+
+  ${styledCustom.cursor}
 `
 
 export default Container
