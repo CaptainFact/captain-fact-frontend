@@ -9,7 +9,7 @@ module.exports = isProd => [
   // Load jsx extensions with babel so we can use
   // 'import' instead of 'require' and es6 syntax
   {
-    test: /\.jsx?$/,
+    test: /\.(js|jsx)?$/,
     include: [path.resolve(__dirname, 'app'), path.resolve(__dirname, 'styleguide')],
     loader: 'babel-loader',
     options: {
