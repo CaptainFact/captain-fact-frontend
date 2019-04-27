@@ -1,0 +1,42 @@
+{
+  "compare_show": "Compare",
+  "compare_hide": "Hide",
+  "compareAll": "Compare all",
+  "hideAll": "Hide all",
+  "when": "When",
+  "who": "Who",
+  "changes": "Changes",
+  "revert": "Revert",
+  "entity": "Entity",
+  "moderation": "Moderation",
+  "deletedUser": "Deleted user",
+  "madeAction": "{{action}}",
+  "action": {
+    "create": "Created",
+    "remove": "Removed",
+    "update": "Updated",
+    "delete": "Deleted",
+    "add": "Added",
+    "restore": "Restored",
+    "flag": "Flagged",
+    "vote_up": "Voted up",
+    "vote_down": "Voted down",
+    "self_vote": "Self voted",
+    "revert_vote_up": "Reverted upvote",
+    "revert_vote_down": "Reverted downvote",
+    "revert_self_vote": "Reverted self vote",
+    "action_banned_bad_language": "Moderated ($t(moderation:reason.1))",
+    "action_banned_spam": "Moderated ($t(moderation:reason.2))",
+    "action_banned_irrelevant": "Moderated ($t(moderation:reason.3))",
+    "action_banned_not_constructive": "Moderated ($t(moderation:reason.4))"
+  },
+  "entities": {
+    "video": "video",
+    "speaker": "speaker",
+    "statement": "statement",
+    "comment": "comment",
+    "fact": "sourced comment",
+    "user_action": "action",
+    "user": "user"
+  }
+}
