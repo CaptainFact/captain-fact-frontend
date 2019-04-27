@@ -2,6 +2,10 @@
   "presets": ["@babel/preset-env", "@babel/preset-react"],
   "plugins": [
     [
+      "babel-plugin-wildcard",
+      { "exts": ["json"], "nostrip": true, "noModifyCase": true }
+    ],
+    [
       "@babel/plugin-proposal-decorators",
       {
         "legacy": true
