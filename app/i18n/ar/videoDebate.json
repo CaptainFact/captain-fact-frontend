@@ -1,1 +1,68 @@
-{}
+{
+    "debate": "التحقُّق",
+    "history": "التأريخ",
+    "approve": "تأكيد",
+    "refute": "رفض",
+    "comments": "التعليقات",
+    "community": "المحتمَع",
+    "flagForm": {
+        "title": "لما تريد الإبلاغ عن هذا التعليق؟",
+        "xAvailable": "{{count}} متوفر",
+        "xAvailable_plural": "{{count}} متوفرة"
+    },
+    "comment": {
+        "writeComment": "اكتب تعليقًا…",
+        "addSource": "إضافة مصدر",
+        "post": "أنشر التعليق",
+        "post_reply": "أنشر ردا",
+        "deleteThread": "احذف التعليق",
+        "deleteThread_plural": "احذف المحادثة",
+        "replies_hide": "إخفاء الردود",
+        "replies_show": "اعرض الردود ({{count}})",
+        "loadMore_replies": "عرض المزيد مِن الردود ({{count}})",
+        "loadMore_comments": "عرض المزيد مِن التعليقات ({{count}})",
+        "replyingTo": "ردا على",
+        "approve": "موافقة",
+        "approve_reply": "الموافقة على هذا التعليق",
+        "refute": "تفنيد",
+        "refute_reply": "ارفض هذا التعليق",
+        "revealForm": "إضافة مصدر أو تعليق",
+        "invalidURL": "رابط المصدر غير صالح"
+    },
+    "video": {
+        "addedBy": "تمت الإضافة من طرف {{userType}}",
+        "partner": "الشريك",
+        "user": "المستخدِم",
+        "edit": "تعديل الفيديو"
+    },
+    "speaker": {
+        "one": "المتحدِّث",
+        "remove": "إزالة المتحدِّث",
+        "add": "إضافة متحدِّث",
+        "edit": "تعديل معلومات \"{{name}}\"",
+        "search": "يجب إدخال 3 أحرف على الأقل قصد إطلاق البحث",
+        "fullName": "الاسم الكامل",
+        "title": "الصفة",
+        "titlePlaceholder": "سياسي، دكتور، صحفي…"
+    },
+    "statement": {
+        "remove": "إزالة الاقتباس",
+        "confirmRemove": "هل تريد حقا إزالته؟",
+        "text": "النص",
+        "add": "إضافة اقتباس",
+        "abortAdd": "إلغاء إضافة الاقتباس"
+    },
+    "loading": {
+        "statements": "تحميل النصوص",
+        "video": "تحميل الفيديو"
+    },
+    "presence": {
+        "viewer": "{{count}} مشاهد",
+        "viewer_plural": "{{count}} مشاهدين"
+    },
+    "wikidata": {
+        "search": "ادخل اسما للبحث عنه في ويكيبيديا",
+        "autofill": "الجلب تلقائيا مِن ويكيبيديا",
+        "suggestions": "اقتراحات ويكي داتا:"
+    }
+}
