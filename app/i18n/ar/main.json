@@ -1,1 +1,73 @@
-{}
+{
+    "entities": {
+        "video": "فيديو",
+        "video_plural": "فيديوهات",
+        "speaker": "المتحدِّث",
+        "speaker_plural": "المتحدثين",
+        "statement": "التصريح"
+    },
+    "menu": {
+        "login": "تسجيل الدخول",
+        "signup": "إنشاء حساب",
+        "logout": "الخروج",
+        "settings": "الإعدادات",
+        "profile": "الملف الشخصي",
+        "activity": "النشاط",
+        "content": "المحتوى",
+        "language": "اللغة",
+        "other": "أخرى",
+        "donation": "ساندنا",
+        "extension": "تنزيل الإضافة",
+        "help": "تعلم المزيد",
+        "moderation": "الإشراف",
+        "addedVideos": "الفيديوهات المضافة",
+        "notifications": "الإشعارات",
+        "subscriptions": "الاشتراكات"
+    },
+    "actions": {
+        "save": "حفظ",
+        "cancel": "إلغاء",
+        "send": "إرسال",
+        "moreInfo": "تفاصيل أكثر",
+        "goBack": "العودة",
+        "reload": "إعادة التحميل",
+        "remove": "إزالة",
+        "delete": "حذف",
+        "reply": "رد",
+        "approve": "الموافقة",
+        "refute": "رفض",
+        "edit": "تعديل",
+        "loading": "جارٍ التحميل",
+        "share": "شارِك"
+    },
+    "misc": {
+        "timeAt": "على",
+        "by": "مِن طرف",
+        "and": "و",
+        "other_plural": "{{count}} آخرون",
+        "character": "حرف",
+        "character_plural": "أحرف",
+        "clipboardSuccess": "تم نسخ الرابط إلى الحافظة",
+        "clipboardFail": "تعذر النسخ إلى الحافظة",
+        "all": "الكل",
+        "unknown": "مجهول",
+        "languageFilter": "اللغة",
+        "source": "المصدر",
+        "colon": ":"
+    },
+    "videos": {
+        "add": "إضافة فيديو",
+        "addThis": "إضافة هذه الفيديو",
+        "placeholder": "رابط الفيديو",
+        "analysing": "جارٍ فحص الفيديو",
+        "public": "فيديو للعامة",
+        "unlisted": "غير مدرج"
+    },
+    "pagination": {
+        "prev": "الصفحة السابقة",
+        "next": "الصفحة التالية"
+    },
+    "all": "الكل",
+    "partners": "الشُركاء",
+    "users": "المستخدمون"
+}
