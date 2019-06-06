@@ -1,1 +1,21 @@
-{}
+{
+    "categories": {
+        "contribute": "ساهموا",
+        "others": "أخرى"
+    },
+    "pages": {
+        "about": "عن",
+        "contributionGuidelines": "دليل المساهمة",
+        "credits": "الشكر",
+        "jobs": "انضم إلينا!",
+        "moderation": "الإشراف",
+        "privileges": "الصلاحيات",
+        "extension": "الإضافة",
+        "privacy": "الخصوصية",
+        "contact": "للاتصال",
+        "censorship_requests": "طلبات الحجب"
+    },
+    "title": "المساعدة",
+    "goBack": "العودة إلى فهرس المساعدة",
+    "aboutTitle": "عن صفحات المساعدة"
+}
