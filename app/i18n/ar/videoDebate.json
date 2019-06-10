@@ -43,14 +43,20 @@
         "search": "يجب إدخال 3 أحرف على الأقل قصد إطلاق البحث",
         "fullName": "الاسم الكامل",
         "title": "الصفة",
-        "titlePlaceholder": "سياسي، دكتور، صحفي…"
+        "titlePlaceholder": "سياسي، دكتور، صحفي…",
+        "noneFound": "لم يتم العثور على أي متحدّث يحمل هذا الاسم"
     },
     "statement": {
         "remove": "إزالة الاقتباس",
         "confirmRemove": "هل تريد حقا إزالته؟",
         "text": "النص",
         "add": "إضافة اقتباس",
-        "abortAdd": "إلغاء إضافة الاقتباس"
+        "abortAdd": "إلغاء إضافة الاقتباس",
+        "noSpeakerTextPlaceholder": "صف ما تراه أو اختر متحدّثا",
+        "autoscroll_enable": "تمكين التمرير التلقائي",
+        "autoscroll_disable": "تعطيل التمرير التلقائي",
+        "reverseTimeLock_lock": "افتح علامة الوقت",
+        "reverseTimeLock_unlock": "اقفل علامة الوقت"
     },
     "loading": {
         "statements": "تحميل النصوص",
@@ -58,11 +64,16 @@
     },
     "presence": {
         "viewer": "{{count}} مشاهد",
-        "viewer_plural": "{{count}} مشاهدين"
+        "viewer_plural": "{{count}} مشاهدين",
+        "user": "{{count}} مدقق حقائق",
+        "user_plural": "{{count}} مدققي الحقائق"
     },
     "wikidata": {
         "search": "ادخل اسما للبحث عنه في ويكيبيديا",
         "autofill": "الجلب تلقائيا مِن ويكيبيديا",
         "suggestions": "اقتراحات ويكي داتا:"
+    },
+    "tips": {
+        "firstSpeaker": "ابدأ بإضافة متحدّث مستخدماً العمود الأيسر"
     }
 }
