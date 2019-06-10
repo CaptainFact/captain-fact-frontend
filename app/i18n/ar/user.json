@@ -11,7 +11,7 @@
     "signup": "إنشاء حساب",
     "needAnAccountQuestion": "بحاجة إلى حساب؟",
     "alreadyHaveAccountQuestion": "عندك حساب؟",
-    "actionWithThirdParty": "أو اتصل عبر…",
+    "actionWithThirdParty": "أو لِج باستخدام خدمة طرف ثالث:",
     "deleteAccount": "احذف الحساب",
     "deletedAccount": "الحساب محذوف",
     "dangerZone": "منطقة الخطر",
@@ -26,5 +26,12 @@
     "unlinkAccount": "فك ربط الحساب",
     "accountSettings": "إعدادات الحساب",
     "noActivity": "لم يُسجَّل هناك أي إجراء بعد.",
-    "reputation": "السُّمعة"
+    "reputation": "السُّمعة",
+    "resetPasswordRequestSuccess": "إذا كان هناك حساب مرتبط بهذا العنوان ، فلقد تم إرسال رسالة بريد الكتروني إليه تحتوي على رابط لإعادة تعيين كلمتكم السرية",
+    "invitationOnlyBody": "يجب أن تكون بحوزتك دعوة قصد إنشاء حساب. لطلب دعوة ، يرجى إدخال عنوان بريد الكتروني أدناه.",
+    "newsletter": {
+        "unsubscribe_success": "لقد تم إلغاء اشتراكك في نشرتنا الاخبارية",
+        "unsubscribe_error": "الرمز المميز المقدّم يبدو غير صالح. إذا استمرت المشكلة ، اتصل بنا"
+    },
+    "browsingAnalyzer": "تحليل التصفح"
 }
