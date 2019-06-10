@@ -4,7 +4,8 @@
         "video_plural": "فيديوهات",
         "speaker": "المتحدِّث",
         "speaker_plural": "المتحدثين",
-        "statement": "التصريح"
+        "statement": "التصريح",
+        "statement_plural": "تصريحات"
     },
     "menu": {
         "login": "تسجيل الدخول",
@@ -58,7 +59,8 @@
         "colon": ":",
         "fieldMinLength": "يُنصح باستخدام {{min}} أحرف على الأقل",
         "fieldMaxLength": "يجب أن تكون أقل من {{max}} حرف",
-        "other": "{{count}} أخرى"
+        "other": "{{count}} أخرى",
+        "staring": "مع"
     },
     "videos": {
         "add": "إضافة فيديو",
