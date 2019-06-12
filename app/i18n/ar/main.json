@@ -60,7 +60,8 @@
         "fieldMinLength": "يُنصح باستخدام {{min}} أحرف على الأقل",
         "fieldMaxLength": "يجب أن تكون أقل من {{max}} حرف",
         "other": "{{count}} أخرى",
-        "staring": "مع"
+        "staring": "مع",
+        "flags": "علامات"
     },
     "videos": {
         "add": "إضافة فيديو",
