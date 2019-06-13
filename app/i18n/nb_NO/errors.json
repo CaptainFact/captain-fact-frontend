@@ -1,1 +1,15 @@
-{}
+{
+    "title": "Feil",
+    "crash": "😥 Neeeeeeei! Siden kræsjet akkurat. Det er ikke deg, du gjorde ikke noe galt.",
+    "contactSupport": "Kontakt brukerstøtte",
+    "errorDetails": "Tekniske detaljer",
+    "server": {
+        "invalid_email": "Ugyldig e-postadresse",
+        "invalid_token": "Bekreftelseskoden er enten ugyldig eller utløpt",
+        "invalid_invitation_token": "Invitasjonskoden er enten ugyldig eller utløpt",
+        "unauthenticated": "Du trenger en konto for å gjøre dette"
+    },
+    "client": {
+        "noVideoAvailable": "Ingen video tilgjengelig"
+    }
+}
