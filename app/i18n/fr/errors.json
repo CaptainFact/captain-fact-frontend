@@ -2,7 +2,7 @@
     "title": "Erreur",
     "crash": "😥 Nooooooon! Le site a planté. Ce n'est pas votre faute, vous n'avez rien fait de mal.",
     "contactSupport": "Contacter le support",
-    "addIssue": "Ajouter un ticket sur Github",
+    "addIssue": "Ajouter un ticket sur GitHub",
     "reload": "Recharger la page",
     "errorDetails": "Details techniques",
     "server": {
