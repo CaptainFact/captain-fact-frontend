@@ -75,7 +75,7 @@ is to use `https://styled-icons.js.org/`.
 ## Main Libraries / Frameworks
 
 - [ES6](http://es6-features.org) with [Babel](https://babeljs.io/)
-- [React](https://reactjs.org/): [Vue.js](https://vuejs.org/) layer
+- [React](https://reactjs.org/): View layer
 - [Redux](https://redux.js.org/): State management
 - [React Router](https://github.com/ReactTraining/react-router): Routing
 - [Phoenix](https://phoenixframework.org/): Interaction with [https://hexdocs.pm/phoenix/Phoenix.Socket.html]Phoenix.Socket)
