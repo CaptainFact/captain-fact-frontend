@@ -1,0 +1,22 @@
+// Based on https://meta.wikimedia.org/wiki/Template:List_of_language_names_ordered_by_code
+$rtl_languages: "ar", "arc", "dv", "fa", "ha", "he", "khw", "ks", "ku", "ps", "ur", "yi"
+
+/** Main layout */  
+.rtl-layout
+  #sidebar, .link-with-icon, .home-page, .browser-extension-page, .help-page
+    direction: rtl
+  .link-with-icon .fa
+    margin-left: 5px
+    margin-right: 0
+  
+/** Video adapters */  
+.rtl-video
+  .statement-text, .actions, .speakers-list
+    direction: rtl
+
+/** Plugs the RTL style on all items with RTL language */
+@each $language in $rtl_languages
+  #main-layout[lang="#{$language}"]
+    @extend .rtl-layout
+  #video-show[data-video-language="#{$language}"]
+    @extend .rtl-video

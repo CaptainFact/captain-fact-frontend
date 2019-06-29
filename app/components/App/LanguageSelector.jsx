@@ -55,7 +55,7 @@ export default class LanguageSelector extends React.PureComponent {
         className={classNames('language-selector', this.props.className)}
         alignItems="center"
       >
-        {this.props.withIcon && <Box mr="0.5em">{this.renderIcon()}</Box>}
+        {this.props.withIcon && <Box mx="0.5em">{this.renderIcon()}</Box>}
         <span className={classNames('select', sizeClass)}>{this.renderSelect()}</span>
       </Flex>
     )

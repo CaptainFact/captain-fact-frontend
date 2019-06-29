@@ -42,7 +42,7 @@ const Presentation = ({ t }) => (
 
 const BrowserExtensionInstall = ({ label, img, url, name, disabled = false }) => (
   <Flex mb="0.75em" flexWrap="wrap" justifyContent={['center', 'flex-start']}>
-    <Box width="50px" flexBasis="50px" mr={['1em', '1.5em']}>
+    <Box width="50px" flexBasis="50px" mx={['1em', '1.5em']}>
       <img src={img} alt={name} />
     </Box>
     <Box>
