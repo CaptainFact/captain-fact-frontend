@@ -24,18 +24,18 @@ should be enough. Otherwise follow the procedure below:
   - [Docker](https://docs.docker.com/install/)
     and [docker-compose](https://docs.docker.com/compose/install/)
     (to start the API easily)
-  - NodeJS, ideally using [asdf](https://github.com/asdf-vm/asdf) with `NODEJS_CHECK_SIGNATURES=no asdf install`
+  - NodeJS, ideally using [asdf-vm](https://github.com/asdf-vm/asdf) with `NODEJS_CHECK_SIGNATURES=no asdf install`
   - App dependencies: `npm install`
 
 - Run:
   - `docker-compose up` - Start the API
-  - `npm start` - Start the frontend
-  - `npm run test` - run all unit tests
+  - `npm start` - Start the front-end
+  - `npm run test` - Runs all unit tests
 
-Frontend is started on http://localhost:3333
+Front-end is started on http://localhost:3333
 
 A default account should have been created for you with
-email=`admin@captainfact.io` and password=`password`.
+e-mail=`admin@captainfact.io` and password=`password`.
 
 ## Conventions
 
@@ -43,8 +43,8 @@ email=`admin@captainfact.io` and password=`password`.
 
 ```
 app
-├── API => Api libraries for both REST API and websockets
-├── assets => assets imported from JS
+├── API => API libraries for both REST API and websockets
+├── assets => Assets imported from JS
 ├── components => All react components
 ├── i18n => Translations
 ├── lib => Misc utilities
@@ -53,33 +53,33 @@ app
 │   │   ├── effects.js => Async actions creators, always return a promise
 │   │   ├── record.js => The object representing a single comment
 │   │   ├── reducer.js => Reducer + actions creators, always return an action object
-│   │   └── selectors.js => re-select selectors to select data in state
+│   │   └── selectors.js => Re-select selectors to select data in state
 │   └── ...
-├── static => static assets, directly copied to the public directory
-├── styles => stylesheets in .sass format, all included from application.sass
+├── static => Static assets, directly copied to the public directory
+├── styles => Stylesheets in .sass format, all included from application.sass
 └── router.jsx => Application router and main entry point
 ```
 
 #### Styling
 
 Styling is based on [Bulma](https://bulma.io/documentation/) and was initially
-customized with SASS. However we now include [styled-components](https://github.com/emotion-js/emotion), [styled-system](https://github.com/jxnblk/styled-system) and [@rebass/grid](https://github.com/rebassjs/grid)
-. This has become the prefered way to build new components.
+customized with SASS. However we now include [styled-components](https://github.com/emotion-js/emotion), [styled-system](https://github.com/jxnblk/styled-system) and [@rebass/grid](https://github.com/rebassjs/grid).
+This has become the prefered way to build new components.
 
 #### Icons
 
-We bundle a custom font icon built with icomoon. You can find scripts and config
+We bundle a custom font icon built with [IcoMoon](https://icomoon.io/). You can find scripts and config
 for this in `dev/` but the preferred (and easiest) way to add new icons today
 is to use `https://styled-icons.js.org/`.
 
 ## Main Libraries / Frameworks
 
-- ES6 with Babel
-- ReactJS: vue layer
-- Redux: state management
-- ReactRouter: routing
-- phoenix: interaction with phoenix socket
-- Bulma: base styles
+- [ES6](http://es6-features.org) with [Babel](https://babeljs.io/)
+- [React](https://reactjs.org/): View layer
+- [Redux](https://redux.js.org/): State management
+- [React Router](https://github.com/ReactTraining/react-router): Routing
+- [Phoenix](https://phoenixframework.org/): Interaction with [https://hexdocs.pm/phoenix/Phoenix.Socket.html]Phoenix.Socket)
+- [Bulma](https://bulma.io/): Base styles
 
 ## Linked projects
 

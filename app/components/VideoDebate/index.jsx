@@ -24,7 +24,8 @@ import { ColumnDebate } from './ColumnDebate'
   state => ({
     videoErrors: state.VideoDebate.video.errors,
     isLoading: state.VideoDebate.video.isLoading,
-    videoTitle: state.VideoDebate.video.data.title
+    videoTitle: state.VideoDebate.video.data.title,
+    videoLanguage: state.VideoDebate.video.data.language
   }),
   {
     joinVideoDebateChannel,
@@ -56,12 +57,21 @@ export class VideoDebate extends React.PureComponent {
   }
 
   render() {
-    if (this.props.videoErrors) return <ErrorView error={this.props.videoErrors} />
+    const { videoErrors, isLoading, videoTitle, videoLanguage, route } = this.props
+
+    if (videoErrors) {
+      return <ErrorView error={videoErrors} />
+    }
+
     return (
-      <div id="video-show" className="columns is-gapless">
-        <Helmet>{!this.props.isLoading && <title>{this.props.videoTitle}</title>}</Helmet>
-        <ColumnVideo view={this.props.route.view} />
-        <ColumnDebate view={this.props.route.view} videoId={this.props.params.videoId} />
+      <div
+        id="video-show"
+        className="columns is-gapless"
+        data-video-language={videoLanguage}
+      >
+        <Helmet>{!isLoading && <title>{videoTitle}</title>}</Helmet>
+        <ColumnVideo view={route.view} />
+        <ColumnDebate view={route.view} videoId={this.props.params.videoId} />
       </div>
     )
   }

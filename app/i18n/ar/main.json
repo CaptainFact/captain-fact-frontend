@@ -1,0 +1,83 @@
+{
+    "entities": {
+        "video": "فيديو",
+        "video_plural": "فيديوهات",
+        "speaker": "المتحدِّث",
+        "speaker_plural": "المتحدثين",
+        "statement": "التصريح",
+        "statement_plural": "تصريحات"
+    },
+    "menu": {
+        "login": "تسجيل الدخول",
+        "signup": "إنشاء حساب",
+        "logout": "الخروج",
+        "settings": "الإعدادات",
+        "profile": "الملف الشخصي",
+        "activity": "النشاط",
+        "content": "المحتوى",
+        "language": "اللغة",
+        "other": "أخرى",
+        "donation": "ساندنا",
+        "extension": "تنزيل الإضافة",
+        "help": "تعلم المزيد",
+        "moderation": "الإشراف",
+        "addedVideos": "الفيديوهات المضافة",
+        "notifications": "الإشعارات",
+        "subscriptions": "الاشتراكات"
+    },
+    "actions": {
+        "save": "حفظ",
+        "cancel": "إلغاء",
+        "send": "إرسال",
+        "moreInfo": "تفاصيل أكثر",
+        "goBack": "العودة",
+        "reload": "إعادة التحميل",
+        "remove": "إزالة",
+        "delete": "حذف",
+        "reply": "رد",
+        "approve": "الموافقة",
+        "refute": "رفض",
+        "edit": "تعديل",
+        "loading": "جارٍ التحميل",
+        "share": "شارِك",
+        "addToThread": "أضفه إلى الموضوع",
+        "apply": "طبّق"
+    },
+    "misc": {
+        "timeAt": "على",
+        "by": "مِن طرف",
+        "and": "و",
+        "other_plural": "{{count}} آخرون",
+        "character": "حرف",
+        "character_plural": "أحرف",
+        "clipboardSuccess": "تم نسخ الرابط إلى الحافظة",
+        "clipboardFail": "تعذر النسخ إلى الحافظة",
+        "all": "الكل",
+        "unknown": "مجهول",
+        "languageFilter": "اللغة",
+        "source": "المصدر",
+        "colon": ":",
+        "fieldMinLength": "يُنصح باستخدام {{min}} أحرف على الأقل",
+        "fieldMaxLength": "يجب أن تكون أقل من {{max}} حرف",
+        "other": "{{count}} أخرى",
+        "staring": "مع",
+        "flags": "علامات"
+    },
+    "videos": {
+        "add": "إضافة فيديو",
+        "addThis": "إضافة هذه الفيديو",
+        "placeholder": "رابط الفيديو",
+        "analysing": "جارٍ فحص الفيديو",
+        "public": "فيديو للعامة",
+        "unlisted": "غير مدرج",
+        "publicDescription": "يتم سرد أشرطة الفيديو العامة على صفحة الفيديوهات وكذا في إضافة المتصفح.",
+        "unlistedDescription": "لن يتم إدراج مقاطع الفيديو غير المدرجة في صفحة الفيديوهات ولا في إضافة المتصفح. فهي تمكّنكم من العمل على محتواها من دون تسليط الضوء عليها والإشهار بها على المنصة."
+    },
+    "pagination": {
+        "prev": "الصفحة السابقة",
+        "next": "الصفحة التالية"
+    },
+    "all": "الكل",
+    "partners": "الشُركاء",
+    "users": "المستخدمون"
+}

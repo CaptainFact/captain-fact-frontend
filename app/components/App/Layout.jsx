@@ -27,7 +27,7 @@ export default class Layout extends React.PureComponent {
     const mainContainerClass = sidebarExpended ? undefined : 'expended'
 
     return (
-      <div lang={locale}>
+      <div id="main-layout" lang={locale}>
         <Helmet>
           <title>CaptainFact</title>
         </Helmet>

@@ -1,0 +1,33 @@
+{
+    "title": "Feil",
+    "crash": "😥 Neeeeeeei! Siden kræsjet akkurat. Det er ikke deg, du gjorde ikke noe galt.",
+    "contactSupport": "Kontakt brukerstøtte",
+    "errorDetails": "Tekniske detaljer",
+    "server": {
+        "invalid_email": "Ugyldig e-postadresse",
+        "invalid_token": "Bekreftelseskoden er enten ugyldig eller utløpt",
+        "invalid_invitation_token": "Invitasjonskoden er enten ugyldig eller utløpt",
+        "unauthenticated": "Du trenger en konto for å gjøre dette",
+        "unknown": "Noe gikk galt på vår side, og vi skal ta fatt i det.",
+        "reset_failed": "Tilbakestilling av passord mislyktes",
+        "authentication_failed": "Identitetsbekreftelse mislyktes",
+        "invalid_email_password": "Ugyldig kombinasjon av e-postadresse/passord",
+        "not_enough_reputation": "Du har ikke nok ryktepoeng til å gjøre dette",
+        "limit_reached": "Du har nådd din grense for denne handlingen, prøv igjen om noen minutter",
+        "not_found": "Det later til at dette ikke finnes, oppdater siden hvis problemet vedvarer",
+        "action_already_done": "Denne handlingen har allerede blitt utført",
+        "unauthorized": "Forsikre deg om at du er tilkoblet for å fortsette",
+        "noInternet": "Tjenertilkobling mislyktes, prøv å oppdatere siden",
+        "remote_video_404": "Videoen annensteds hen ser ikke ut til å eksistere"
+    },
+    "client": {
+        "noVideoAvailable": "Ingen video tilgjengelig",
+        "joinCrashed": "Tjenertilkoblingen gikk ned",
+        "thirdParty": "Tredjepartsidentitetsbekreftelse mislyktes",
+        "submissionError": "En feil inntraff under forsendelse av dataen",
+        "notEnoughReputation": "Denne funksjonen krever flere ryktepoeng",
+        "needReputation": "Du trenger minst {{requiredRep}} <2>ryktepoeng</2> for å gjøre dette"
+    },
+    "addIssue": "Send inn en feilrapport på GitHub",
+    "reload": "Oppdater siden"
+}

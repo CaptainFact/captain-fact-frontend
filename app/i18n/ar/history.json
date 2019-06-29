@@ -1,0 +1,36 @@
+{
+    "compare_show": "قارن",
+    "compare_hide": "إخف",
+    "compareAll": "مقارنة الكل",
+    "hideAll": "إخفاء الكل",
+    "when": "متى",
+    "who": "مَن",
+    "changes": "التغييرات",
+    "revert": "استعادة",
+    "moderation": "الإشراف",
+    "deletedUser": "حساب محذوف",
+    "madeAction": "{{action}}",
+    "action": {
+        "create": "أنشئ",
+        "remove": "تمت إزالته",
+        "update": "تم تحديثه",
+        "delete": "تم حذفه",
+        "add": "تمت إضافته",
+        "restore": "تم استرجاعه",
+        "flag": "أبلِغ عنه",
+        "vote_up": "صوَّت إيجابيا",
+        "vote_down": "صوَّت سلبيا",
+        "self_vote": "صوَّت لنفسه بنفسه",
+        "revert_vote_up": "ألغى تصويته الإيجابي",
+        "revert_vote_down": "ألغى تصويته السلبي"
+    },
+    "entities": {
+        "video": "فيديو",
+        "speaker": "المتحدِّث",
+        "statement": "التصريح",
+        "comment": "تعليق",
+        "fact": "تعليق يستند إلى مصدر",
+        "user_action": "إجراء",
+        "user": "مستخدِم"
+    }
+}

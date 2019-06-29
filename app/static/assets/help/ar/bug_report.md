@@ -1,0 +1,74 @@
+# I found a bug !
+
+Please [contact us](mailto:bug-report@captainfact.io) with as much details as
+you can. A detailed report can save us a lot of time and will make the resolution
+of the issue a lot easier. 
+Also join your CaptainFact username, you may get a
+rare [achievement](/help/achievements)!
+
+If you're comfortable with Git, you can also check if the issue doesn't already
+exists [here](https://github.com/CaptainFact/captain-fact-frontend/issues)
+for the website and [here](https://github.com/CaptainFact/captain-fact-extension/issues)
+for the extension.
+
+# Or worst, a security breach ?
+
+We believe in responsive disclosure and encourage it.
+
+If your report concerns a critical security issue, you can encrypt your message
+with the following PGP key:
+
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v1
+
+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
+WfEstI5xkkqQDP+lI43K
+=qB43
+-----END PGP PUBLIC KEY BLOCK-----
+```

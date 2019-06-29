@@ -63,7 +63,7 @@ module.exports = {
       fetch: 'exports-loader?self.fetch!whatwg-fetch/dist/fetch.umd'
     }),
     // cleans output folder
-    new CleanWebpackPlugin(['public']),
+    new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: ['public'] }),
     // minimizing is done by webpack as we are in prod mode
     new webpack.optimize.OccurrenceOrderPlugin(),
     // regroup styles in app.css bundle

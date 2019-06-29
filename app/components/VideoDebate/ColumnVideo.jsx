@@ -84,7 +84,7 @@ export class ColumnVideo extends React.PureComponent {
             <li>
               <ExternalLinkNewTab href="https://discord.gg/yqFpjgG">
                 <Icon size="small" name="comments-o" />
-                <span>Chat</span>
+                <span>{t('chat')}</span>
               </ExternalLinkNewTab>
             </li>
           </ul>
