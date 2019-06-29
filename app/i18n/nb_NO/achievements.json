@@ -1,0 +1,49 @@
+{
+    "10": {
+        "title": "Artist",
+        "description": "Ett av dine bidrag er integrert i prosjektet"
+    },
+    "about": "Om",
+    "8": {
+        "title": "Keiserklærsavkleder",
+        "description": "Takk for at du rapporterer denne feilen."
+    },
+    "11": {
+        "description": "Du har ytret noen forslag til forbedringer som vi synes er interessante.",
+        "title": "Gode vibber"
+    },
+    "9": {
+        "title": "Gå meg etter i sømmene, jeg er kjendis",
+        "description": "Du har klatret på poengtavlen, gratulerer kaptein."
+    },
+    "3": {
+        "title": "Alle lider",
+        "description": "Å se etter hjelp i hjeledelen var riktig foretagende"
+    },
+    "4": {
+        "description": "Med nettlesertillegget påslått, vil ingen lure deg lenger",
+        "title": "Bombesikkert"
+    },
+    "1": {
+        "description": "Du har opprettet en konto på CaptainFact",
+        "title": "Velkommen"
+    },
+    "unlocked": "Du har akkurat låst opp \"{{achievement}}\"-prestasjonen",
+    "6": {
+        "title": "Sosialavhengig",
+        "description": "Du elsker at disse amerikanske selskapene spionerer på deg, gjør du ikke?"
+    },
+    "2": {
+        "title": "Ikke en robot",
+        "description": "Med en slik fin e-postadresse, finnes det ikke tvil om at du er et menneske"
+    },
+    "5": {
+        "description": "Det later til at du har ødelagt denne kilden",
+        "title": "Du er falske nyheter!"
+    },
+    "7": {
+        "title": "Ambassadør",
+        "description": "Du er en ambassadør i gemenskapen"
+    },
+    "title": "Prestasjoner"
+}
