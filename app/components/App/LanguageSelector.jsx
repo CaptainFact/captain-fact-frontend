@@ -7,7 +7,8 @@ import { Globe } from 'styled-icons/fa-solid/Globe'
 
 const defaultLocales = new Map({
   en: 'English',
-  fr: 'Français'
+  fr: 'Français',
+  ar: 'العربية'
 })
 
 @withNamespaces() // Force waiting for translations to be loaded
@@ -39,9 +40,10 @@ export default class LanguageSelector extends React.PureComponent {
     const { value, size } = this.props
     if (value === 'fr') {
       return '🇫🇷'
-    }
-    if (value === 'en') {
+    } else if (value === 'en') {
       return '🇬🇧'
+    } else if (value === 'ar') {
+      return '🇩🇿'
     }
     return <Globe size={!size ? '2em' : '1em'} />
   }
@@ -53,7 +55,7 @@ export default class LanguageSelector extends React.PureComponent {
         className={classNames('language-selector', this.props.className)}
         alignItems="center"
       >
-        {this.props.withIcon && <Box mr="0.5em">{this.renderIcon()}</Box>}
+        {this.props.withIcon && <Box mx="0.5em">{this.renderIcon()}</Box>}
         <span className={classNames('select', sizeClass)}>{this.renderSelect()}</span>
       </Flex>
     )

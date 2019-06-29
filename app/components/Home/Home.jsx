@@ -54,11 +54,13 @@ export default class Home extends React.PureComponent {
           {this.props.t('installExtension')}
         </Link>
         <div className="button-label">
-          100%{' '}
-          <ExternalLinkNewTab href="https://github.com/CaptainFact">
-            open-source
-          </ExternalLinkNewTab>
-          , respecte votre vie privée
+          <Trans i18nKey="openSource">
+            100%{' '}
+            <ExternalLinkNewTab href="https://github.com/CaptainFact">
+              open-source
+            </ExternalLinkNewTab>
+            , respects your privacy.
+          </Trans>
         </div>
       </div>
     )
@@ -119,13 +121,13 @@ export default class Home extends React.PureComponent {
           <br />
           <br />
           <div className="has-text-centered">
-            <h1 className="title is-3">Les dernières vidéos ajoutées</h1>
+            <h1 className="title is-3">{t('latest')}</h1>
             <Link
               onClick={() => Matomo.registerClick('Home', 'Button', 'SeeAllVideos')}
               className="button animated-hover is-medium is-gradient-primary-light"
               to="/videos"
             >
-              {this.props.t('seeVideos')}
+              {t('seeVideos')}
             </Link>
           </div>
           <br />
@@ -140,7 +142,7 @@ export default class Home extends React.PureComponent {
               <Icon name="envelope-o" />
               <span>
                 &nbsp;&nbsp;
-                {this.props.t(this.props.isAuthenticated ? 'inviteFriend' : 'invitation')}
+                {t(this.props.isAuthenticated ? 'inviteFriend' : 'invitation')}
               </span>
             </h4>
             <InvitationRequestForm />
@@ -156,7 +158,7 @@ export default class Home extends React.PureComponent {
             <ExternalLinkNewTab href="https://phoenixframework.org">
               Phoenix
             </ExternalLinkNewTab>
-            &nbsp;{this.props.t('main:misc.and')}&nbsp;
+            &nbsp;{t('main:misc.and')}&nbsp;
             <ExternalLinkNewTab href="https://reactjs.org/">React</ExternalLinkNewTab>
           </div>
         </footer>

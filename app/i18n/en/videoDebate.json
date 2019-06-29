@@ -5,6 +5,7 @@
   "refute": "Refute",
   "comments": "Comments",
   "community": "Community",
+  "chat": "Chat",
   "flagForm": {
     "title": "Why do you want to flag this comment?",
     "xAvailable": "{{count}} available",
