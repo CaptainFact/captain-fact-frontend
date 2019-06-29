@@ -123,7 +123,6 @@ const Navbar = ({
   width
 }) => {
   const isMobile = width < 600
-  const hideLogoUnder = isAuthenticated ? 425 : 350
   const loginRedirect =
     !location.pathname.startsWith('/login') && !location.pathname.startsWith('/signup')
       ? location.pathname
@@ -137,7 +136,7 @@ const Navbar = ({
         <Flex alignItems="center">
           <Container display="flex" alignItems="center" height={theme.navbarHeight - 1}>
             <MenuToggleSwitch onClick={() => toggleSidebar()} />
-            {width >= hideLogoUnder && (
+            {width >= 425 && (
               <StyledLink className="logo" to="/" ml={1}>
                 <Logo height={theme.navbarHeight - 24} borderless />
               </StyledLink>
