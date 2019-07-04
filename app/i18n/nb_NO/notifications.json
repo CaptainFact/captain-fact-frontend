@@ -1,1 +1,11 @@
-{}
+{
+    "seeAll": "Vis alle",
+    "filters": {
+        "SEEN": "Sett",
+        "UNSEEN": "Usette",
+        "ALL": "Alle"
+    },
+    "markAllAsRead": "Marker alle som sett",
+    "markAllAsUnseen": "Mark alle som usette",
+    "empty": "Din merknadsboks er tom"
+}
