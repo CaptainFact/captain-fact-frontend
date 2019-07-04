@@ -1,1 +1,42 @@
-{}
+{
+    "when": "Når",
+    "action": {
+        "vote_up": "Stemt opp",
+        "revert_vote_down": "Tilbakestilt nedoverstemme",
+        "action_banned_bad_language": "Moderert ($t(moderation:reason.1))",
+        "flag": "Flagget",
+        "action_banned_irrelevant": "Moderert ($t(moderation:reason.3))",
+        "vote_down": "Stemt ned",
+        "action_banned_spam": "Moderert ($t(moderation:reason.2))",
+        "action_banned_not_constructive": "Moderert ($t(moderation:reason.4))",
+        "restore": "Gjenopprettet",
+        "delete": "Slettet",
+        "remove": "Fjernet",
+        "self_vote": "Egen stemme avgitt",
+        "create": "Opprettet",
+        "revert_self_vote": "Tilbakestilt egen stemmeavgivning",
+        "update": "Oppdatert",
+        "add": "Lagt til",
+        "revert_vote_up": "Tilbakestilt oppoverstemme"
+    },
+    "entities": {
+        "user_action": "handling",
+        "fact": "kommentar med kilde",
+        "statement": "påstand",
+        "user": "bruker",
+        "video": "video",
+        "comment": "kommentar",
+        "speaker": "høyttaler"
+    },
+    "changes": "Endringer",
+    "who": "Hvem",
+    "revert": "Tilbakestill",
+    "deletedUser": "Slettet bruker",
+    "moderation": "Moderasjon",
+    "entity": "Enhet",
+    "madeAction": "{{handling}}",
+    "hideAll": "Skjul alle",
+    "compare_hide": "Skjul",
+    "compare_show": "Sammenlign",
+    "compareAll": "Sammenlign alle"
+}
