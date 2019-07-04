@@ -1,1 +1,30 @@
-{}
+{
+    "about": "En hjelpende hånd til å komme i gang med plattformen. Kort sterkt anbefalt lesning før faktasjekking.",
+    "pages": {
+        "contributionGuidelines": "Bidragsretningslinjer",
+        "contribute/tasks": "Frittstående oppgaver",
+        "extension": "Utvidelse",
+        "moderation": "Moderasjon",
+        "jobs": "Ta del.",
+        "achievements": "Prestasjoner",
+        "ambassadors": "Bli en ambassadør",
+        "contribute/code": "Programmerere",
+        "about": "Om",
+        "contact": "Kontakt",
+        "censorship_requests": "Sensurforespørsler",
+        "reputation": "Rykte",
+        "credits": "Bidragsytere",
+        "privileges": "Privilegier",
+        "privacy": "Personvern",
+        "bug_report": "Feilrapport"
+    },
+    "categories": {
+        "contribute": "Bidra",
+        "siteUsage": "Sidebruk",
+        "others": "Andre"
+    },
+    "aboutTitle": "Hjelpen du trenger",
+    "goBack": "Gå tilbake til hjelpeindeksen",
+    "title": "Hjelp",
+    "toStart": "Start med <1>bidragsretningslinjene</1>, <2>privilegier</2> og <3>ryktesystemet</3>."
+}
