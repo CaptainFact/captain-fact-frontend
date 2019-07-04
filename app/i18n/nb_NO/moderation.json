@@ -17,5 +17,6 @@
     "whyReport": "Hvorfor tror du denne kommentaren ble innrapportert",
     "title": "Moderering",
     "emptyModeration": "Det er ingenting å moderer her. For trollene og kom tilbake senere!",
-    "pending": "Avventer moderering"
+    "pending": "Avventer moderering",
+    "flaggedFor": "flagget dette for \"$t(reason.{{reason}})\""
 }
