@@ -1,1 +1,39 @@
-{}
+{
+    "debate": "Faktasjekking",
+    "history": "Historikk",
+    "approve": "Bekreft",
+    "refute": "Bestrid",
+    "comments": "Kommentarer",
+    "community": "Gemenskap",
+    "chat": "Sludre",
+    "flagForm": {
+        "title": "Hvorfor ønsker du å flagge denne kommentaren?"
+    },
+    "comment": {
+        "writeComment": "Skriv en kommentar…",
+        "addSource": "Legg til en kilde",
+        "deleteThread": "Slett kommentar",
+        "deleteThread_plural": "Slett tråd",
+        "replies_hide": "Skjul svar",
+        "refute": "Bestrid",
+        "refute_reply": "Bestrid denne kommentaren",
+        "revealForm": "Legg til kilde eller kommentar",
+        "invalidURL": "Ugyldig kildenettadresse"
+    },
+    "video": {
+        "partner": "partner",
+        "user": "bruker",
+        "edit": "Rediger video"
+    },
+    "speaker": {
+        "title": "Tittel"
+    },
+    "statement": {
+        "text": "Tekst"
+    },
+    "wikidata": {
+        "search": "Skriv et navn for å søke etter det på Wikipedia",
+        "autofill": "Fyll inn automatisk fra Wikipedia",
+        "suggestions": "Anbefalte Wikidata-oppføringer:"
+    }
+}
