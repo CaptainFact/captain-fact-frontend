@@ -2,9 +2,10 @@
     "entities": {
         "video": "video",
         "video_plural": "videoer",
-        "speaker": "høyttaler",
-        "speaker_plural": "høyttalere",
-        "statement": "påstand"
+        "speaker": "taler",
+        "speaker_plural": "talere",
+        "statement": "påstand",
+        "statement_plural": "påstander"
     },
     "menu": {
         "signup": "Registrer deg",
@@ -22,7 +23,8 @@
         "moderation": "Moderasjon",
         "addedVideos": "Tillagte videoer",
         "notifications": "Merknader",
-        "subscriptions": "Abonnement"
+        "subscriptions": "Abonnement",
+        "login": "Logg inn"
     },
     "actions": {
         "save": "Lagre",
@@ -59,7 +61,10 @@
         "languageFilter": "Språk",
         "source": "Kilde",
         "colon": ":",
-        "flags": "Flagg"
+        "flags": "Flagg",
+        "staring": "Stjernemerking",
+        "fieldMinLength": "Må være minst {{min}} tegn",
+        "other": "{{count}} andre"
     },
     "videos": {
         "add": "Legg til video",
