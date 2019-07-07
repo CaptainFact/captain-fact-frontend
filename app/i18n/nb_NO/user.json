@@ -25,5 +25,13 @@
     "linkAccount": "Lenk konto",
     "unlinkAccount": "Opphev lenking av konto",
     "accountSettings": "Kontoinnstillinger",
-    "reputation": "Rykte"
+    "reputation": "Rykte",
+    "resetPasswordRequestSuccess": "Hvis kontoen er tilknyttet denne adressen, vil en e-post med en lenke for tilbakestilling av passordet ditt bli sendt",
+    "invitationOnlyBody": "Du må ha en invitasjon for å opprette en konto. For å forespørre det, skriv inn e-postadressen din nedenfor.",
+    "newsletter": {
+        "unsubscribe_success": "Du har blitt avmeldt fra vårt nyhetsbrev",
+        "unsubscribe_error": "Angitt symbol er ugyldig. Hvis problemet vedvarer, kontakt oss."
+    },
+    "noActivity": "Ingen handling tatt opp enda.",
+    "browsingAnalyzer": "Surfingsanalysator"
 }
