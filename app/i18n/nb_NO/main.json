@@ -74,7 +74,7 @@
         "public": "Offentlig video",
         "unlisted": "Ulistet",
         "publicDescription": "Offentlige videoer listes på videosiden og i nettleserutvidelsen.",
-        "unlistedDescription": "Ulistede videoer vil ikke bli opplistet på videosiden, ei heller i nettleserutvidelsen. Bruk dem for å arbeide med innhold du ikke ønsker å viderebringe på plattformen."
+        "unlistedDescription": "Ulistede videoer vil ikke bli opplistet på \"videoer\"-siden, ei heller i nettleserutvidelsen. Bruk dem for å arbeide med innhold du ikke ønsker å viderebringe på plattformen."
     },
     "pagination": {
         "prev": "Forrige side",
