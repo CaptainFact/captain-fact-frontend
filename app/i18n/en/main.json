@@ -10,7 +10,7 @@
     "menu": {
         "login": "Log in",
         "signup": "Sign up",
-        "logout": "Logout",
+        "logout": "Log out",
         "settings": "Settings",
         "profile": "Profile",
         "activity": "Activity",
