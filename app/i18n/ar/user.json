@@ -7,7 +7,7 @@
     "email": "البريد الإلكتروني",
     "emailOrUsername": "البريد الإلكتروني أو اسم المستخدم",
     "optional": "اختياري",
-    "login": "تسجيل الدخول",
+    "login": "لِج",
     "signup": "إنشاء حساب",
     "needAnAccountQuestion": "بحاجة إلى حساب؟",
     "alreadyHaveAccountQuestion": "عندك حساب؟",
@@ -18,7 +18,7 @@
     "registeredSince": "مُسجَّل منذ <1/>",
     "forgottenPassword": "نسيت الكلمة السرية",
     "resetPassword": "إعادة تعيين الكلمة السرية",
-    "resetPasswordSuccess": "تم تغيير الكلمة السرية بنجاح",
+    "resetPasswordSuccess": "تم تغيير الكلمة السرية",
     "invitationOnlyTitle": "أطلب دعوة",
     "emailConfirmed": "تم تأكيد عنوان بريدك الإلكتروني",
     "linkedAccounts": "الحسابات المُرتبِطة",
@@ -28,7 +28,7 @@
     "noActivity": "لم يُسجَّل هناك أي إجراء بعد.",
     "reputation": "السُّمعة",
     "resetPasswordRequestSuccess": "إذا كان هناك حساب مرتبط بهذا العنوان ، فلقد تم إرسال رسالة بريد الكتروني إليه تحتوي على رابط لإعادة تعيين كلمتكم السرية",
-    "invitationOnlyBody": "يجب أن تكون بحوزتك دعوة قصد إنشاء حساب. لطلب دعوة ، يرجى إدخال عنوان بريد الكتروني أدناه.",
+    "invitationOnlyBody": "يجب أن تكون بحوزتك دعوة قصد إنشاء حساب. لطلب دعوة ، يرجى إدخال عنوان بريدك الإلكتروني أدناه.",
     "newsletter": {
         "unsubscribe_success": "لقد تم إلغاء اشتراكك في نشرتنا الاخبارية",
         "unsubscribe_error": "الرمز المميز المقدّم يبدو غير صالح. إذا استمرت المشكلة ، اتصل بنا"
