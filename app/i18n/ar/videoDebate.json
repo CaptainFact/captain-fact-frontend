@@ -27,7 +27,8 @@
         "refute": "تفنيد",
         "refute_reply": "ارفض هذا التعليق",
         "revealForm": "إضافة مصدر أو تعليق",
-        "invalidURL": "رابط المصدر غير صالح"
+        "invalidURL": "رابط المصدر غير صالح",
+        "replyingToSelf": "أضفه إلى الموضوع"
     },
     "video": {
         "addedBy": "تمت الإضافة من طرف {{userType}}",
@@ -57,7 +58,9 @@
         "autoscroll_enable": "تمكين التمرير التلقائي",
         "autoscroll_disable": "تعطيل التمرير التلقائي",
         "reverseTimeLock_lock": "افتح علامة الوقت",
-        "reverseTimeLock_unlock": "اقفل علامة الوقت"
+        "reverseTimeLock_unlock": "اقفل علامة الوقت",
+        "soundOnBackgroundFocus_enable": "شغّل صوتًا عند تغيير التركيز في الخلفية",
+        "soundOnBackgroundFocus_disable": "لا تشغّل صوتًا عند تغيير التركيز في الخلفية"
     },
     "loading": {
         "statements": "تحميل النصوص",
@@ -72,11 +75,13 @@
     "wikidata": {
         "search": "ادخل اسما للبحث عنه في ويكيبيديا",
         "autofill": "الجلب تلقائيا مِن ويكيبيديا",
-        "suggestions": "اقتراحات ويكي داتا:"
+        "suggestions": "اقتراحات ويكي داتا:",
+        "id": "بيانات QID في ويكي داتا"
     },
     "tips": {
         "firstSpeaker": "ابدأ بإضافة متحدّث مستخدماً العمود الأيسر",
-        "noContentUnauthenticated": "لم يتم التحقق من صحة هذا الفيديو بعد. لِج أو انشئ حسابا للمساهمة!"
+        "noContentUnauthenticated": "لم يتم التحقق من صحة هذا الفيديو بعد. لِج أو انشئ حسابا للمساهمة!",
+        "firstStatement": "يمكنك <1>إضافة أول تصريح</1> بالنقر فوق الأيقونة <3></3> بجوار اسم المتحدّث"
     },
     "chat": "المحادثة"
 }
