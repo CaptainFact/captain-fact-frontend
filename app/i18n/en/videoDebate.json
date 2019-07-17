@@ -1,91 +1,91 @@
 {
-  "debate": "Fact-checking",
-  "history": "History",
-  "approve": "Confirm",
-  "refute": "Refute",
-  "comments": "Comments",
-  "community": "Community",
-  "chat": "Chat",
-  "flagForm": {
-    "title": "Why do you want to flag this comment?",
-    "xAvailable": "{{count}} available",
-    "xAvailable_plural": "{{count}} available"
-  },
-  "comment": {
-    "writeComment": "Write a comment...",
-    "addSource": "Add a source",
-    "post": "Post Comment",
-    "post_reply": "Post reply",
-    "deleteThread": "Delete comment",
-    "deleteThread_plural": "Delete thread",
-    "replies_hide": "Hide replies",
-    "replies_show": "Show replies ({{count}})",
-    "loadMore_replies": "Load more replies ({{count}})",
-    "loadMore_comments": "Load more comments ({{count}})",
-    "replyingTo": "Replying to",
-    "replyingToSelf": "Add to thread",
-    "approve": "Approve",
-    "approve_reply": "Approve this comment",
+    "debate": "Fact-checking",
+    "history": "History",
+    "approve": "Confirm",
     "refute": "Refute",
-    "refute_reply": "Refute this comment",
-    "revealForm": "Add a source or comment",
-    "invalidURL": "Invalid source URL"
-  },
-  "video": {
-    "addedBy": "Added by a {{userType}}",
-    "partner": "partner",
-    "user": "user",
-    "edit": "Edit Video",
-    "shiftStatements": "Shift all statements (in seconds)"
-  },
-  "speaker": {
-    "one": "Speaker",
-    "remove": "Remove speaker",
-    "confirmRemove": "All statements made by {{speaker.full_name}} on this video will become orphans",
-    "add": "Add Speaker",
-    "create": "Create speaker \"{{name}}\"",
-    "edit": "Edit \"{{name}}\" information",
-    "search": "Type at least 3 characters to start searching",
-    "fullName": "Full name",
-    "title": "Title",
-    "titlePlaceholder": "Politician, doctor, journalist...",
-    "noneFound": "No speaker found for this name"
-  },
-  "statement": {
-    "remove": "Remove statement",
-    "confirmRemove": "Do you really want to remove this statement?",
-    "textPlaceholder": "Type a raw transcript of what the speaker says",
-    "noSpeakerTextPlaceholder": "Describe what you see or select a speaker",
-    "text": "Text",
-    "add": "Add a Statement",
-    "abortAdd": "Close Statement Form",
-    "autoscroll_enable": "Enable Autoscroll",
-    "autoscroll_disable": "Disable Autoscroll",
-    "soundOnBackgroundFocus_enable": "Play a sound when the focus change in background",
-    "soundOnBackgroundFocus_disable": "Don't play a sound when the focus change in background",
-    "reverseTimeLock_lock": "Unlock time marker",
-    "reverseTimeLock_unlock": "Lock time marker"
-  },
-  "loading": {
-    "statements": "Loading Statements",
-    "video": "Loading Video"
-  },
-  "tips": {
-    "firstStatement": "You can <1>add a first statement</1> by clicking on the <3></3> icon next to the speaker's name",
-    "firstSpeaker": "Start by adding a speaker using left column",
-    "noContentUnauthenticated": "This video hasn't been verified yet. Login / Sign up to contribute!"
-  },
-  "presence": {
-    "viewer": "{{count}} viewer",
-    "viewer_plural": "{{count}} viewers",
-    "user": "{{count}} fact-checker",
-    "user_plural": "{{count}} fact-checkers"
-  },
-  "warningUnlisted": "This video is not listed publicly. It may not have received the visibility required for statements and sources to be challenged. Be careful with the information you'll find here.",
-  "wikidata": {
-    "id": "Wikidata QID",
-    "search": "Type a name to search it on Wikipedia",
-    "autofill": "Autofill from Wikipedia",
-    "suggestions": "Suggested Wikidata entries:"
-  }
+    "comments": "Comments",
+    "community": "Community",
+    "chat": "Chat",
+    "flagForm": {
+        "title": "Why do you want to flag this comment?",
+        "xAvailable": "{{count}} available",
+        "xAvailable_plural": "{{count}} available"
+    },
+    "comment": {
+        "writeComment": "Write a comment…",
+        "addSource": "Add a source",
+        "post": "Post comment",
+        "post_reply": "Post reply",
+        "deleteThread": "Delete comment",
+        "deleteThread_plural": "Delete thread",
+        "replies_hide": "Hide replies",
+        "replies_show": "Show replies ({{count}})",
+        "loadMore_replies": "Load more replies ({{count}})",
+        "loadMore_comments": "Load more comments ({{count}})",
+        "replyingTo": "Replying to",
+        "replyingToSelf": "Add to thread",
+        "approve": "Approve",
+        "approve_reply": "Approve this comment",
+        "refute": "Refute",
+        "refute_reply": "Refute this comment",
+        "revealForm": "Add a source or comment",
+        "invalidURL": "Invalid source URL"
+    },
+    "video": {
+        "addedBy": "Added by a {{userType}}",
+        "partner": "partner",
+        "user": "user",
+        "edit": "Edit Video",
+        "shiftStatements": "Shift all statements (in seconds)"
+    },
+    "speaker": {
+        "one": "Speaker",
+        "remove": "Remove speaker",
+        "confirmRemove": "All statements made by {{speaker.full_name}} on this video will become orphans",
+        "add": "Add Speaker",
+        "create": "Create speaker \"{{name}}\"",
+        "edit": "Edit \"{{name}}\" information",
+        "search": "Type at least 3 characters to start searching",
+        "fullName": "Full name",
+        "title": "Title",
+        "titlePlaceholder": "Politician, doctor, journalist…",
+        "noneFound": "No speaker found for this name"
+    },
+    "statement": {
+        "remove": "Remove statement",
+        "confirmRemove": "Do you really want to remove this statement?",
+        "textPlaceholder": "Type a raw transcript of what the speaker says",
+        "noSpeakerTextPlaceholder": "Describe what you see or select a speaker",
+        "text": "Text",
+        "add": "Add a Statement",
+        "abortAdd": "Close Statement Form",
+        "autoscroll_enable": "Enable Autoscroll",
+        "autoscroll_disable": "Disable Autoscroll",
+        "soundOnBackgroundFocus_enable": "Play a sound when the focus change in background",
+        "soundOnBackgroundFocus_disable": "Don't play a sound when the focus change in background",
+        "reverseTimeLock_lock": "Unlock time marker",
+        "reverseTimeLock_unlock": "Lock time marker"
+    },
+    "loading": {
+        "statements": "Loading Statements",
+        "video": "Loading Video"
+    },
+    "tips": {
+        "firstStatement": "You can <1>add a first statement</1> by clicking on the <3></3> icon next to the speaker's name",
+        "firstSpeaker": "Start by adding a speaker using left column",
+        "noContentUnauthenticated": "This video hasn't been verified yet. Login / Sign up to contribute!"
+    },
+    "presence": {
+        "viewer": "{{count}} viewer",
+        "viewer_plural": "{{count}} viewers",
+        "user": "{{count}} fact-checker",
+        "user_plural": "{{count}} fact-checkers"
+    },
+    "warningUnlisted": "This video is not listed publicly. It may not have received the visibility required for statements and sources to be challenged. Be careful with the information you'll find here.",
+    "wikidata": {
+        "id": "Wikidata QID",
+        "search": "Type a name to search it on Wikipedia",
+        "autofill": "Autofill from Wikipedia",
+        "suggestions": "Suggested Wikidata entries:"
+    }
 }
