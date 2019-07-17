@@ -11,7 +11,7 @@ RUN npm install
 
 # Build project
 COPY . .
-ARG BUILD_ENV
+ARG BUILD_ENV=prod
 RUN /opt/app/rel/run.sh build $BUILD_ENV
 
 EXPOSE 80
