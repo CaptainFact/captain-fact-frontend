@@ -1,0 +1,91 @@
+{
+    "debate": "Faktasjekking",
+    "history": "Historikk",
+    "approve": "Bekreft",
+    "refute": "Bestrid",
+    "comments": "Kommentarer",
+    "community": "Gemenskap",
+    "chat": "Sludre",
+    "flagForm": {
+        "title": "Hvorfor ønsker du å flagge denne kommentaren?",
+        "xAvailable": "{{count}} tilgjengelig",
+        "xAvailable_plural": "{{count}} tilgjengelig"
+    },
+    "comment": {
+        "writeComment": "Skriv en kommentar…",
+        "addSource": "Legg til en kilde",
+        "deleteThread": "Slett kommentar",
+        "deleteThread_plural": "Slett tråd",
+        "replies_hide": "Skjul svar",
+        "refute": "Bestrid",
+        "refute_reply": "Bestrid denne kommentaren",
+        "revealForm": "Legg til kilde eller kommentar",
+        "invalidURL": "Ugyldig kildenettadresse",
+        "post": "Post kommentar",
+        "post_reply": "Post svar",
+        "replies_show": "Vis svar ({{count}})",
+        "loadMore_replies": "Last inn flere svar ({{count}})",
+        "loadMore_comments": "Last inn flere kommentarer ({{count}})",
+        "replyingTo": "Svarer",
+        "replyingToSelf": "Legg til i tråd",
+        "approve": "Godkjenn",
+        "approve_reply": "Godkjenn denne kommentaren"
+    },
+    "video": {
+        "partner": "partner",
+        "user": "bruker",
+        "edit": "Rediger video",
+        "addedBy": "Lagt til av en {{userType}}",
+        "shiftStatements": "Forskyv alle påstander (i sekunder)"
+    },
+    "speaker": {
+        "title": "Tittel",
+        "one": "Taler",
+        "remove": "Fjern taler",
+        "confirmRemove": "Alle påstander av {{speaker.full_name}} på denne videoen vil bli foreldreløse",
+        "add": "Legg til taler",
+        "create": "Legg til taler \"{{name}}\"",
+        "edit": "Rediger \"{{name}}\"-info",
+        "search": "Skriv inn minst tre tegn for å starte søk",
+        "fullName": "Fullt navn",
+        "titlePlaceholder": "Politiker, doktor, journalist…",
+        "noneFound": "Ingen taler funnet med dette navnet"
+    },
+    "statement": {
+        "text": "Tekst",
+        "remove": "Fjern påstand",
+        "confirmRemove": "Ønsker du virkelig å fjerne denne påstanden?",
+        "textPlaceholder": "Skriv inn råtekst for det taleren sier",
+        "noSpeakerTextPlaceholder": "Beskriv hva du ser eller velg en taler",
+        "add": "Legg til påstand",
+        "abortAdd": "Lukk påstandsskjema",
+        "autoscroll_enable": "Skru på automatisk rulling",
+        "autoscroll_disable": "Skru av automatisk rulling",
+        "soundOnBackgroundFocus_enable": "Spill av en lyd når fokus endres i bakgrunnen",
+        "soundOnBackgroundFocus_disable": "Ikke spill av en lyd når fokus endres i bakgrunnen",
+        "reverseTimeLock_lock": "Lås opp tidsmarkøren",
+        "reverseTimeLock_unlock": "Lås tidsmarkøren"
+    },
+    "wikidata": {
+        "search": "Skriv et navn for å søke etter det på Wikipedia",
+        "autofill": "Fyll inn automatisk fra Wikipedia",
+        "suggestions": "Anbefalte Wikidata-oppføringer:",
+        "id": "Wikidata-QID"
+    },
+    "loading": {
+        "statements": "Last inn påstander",
+        "video": "Laster inn video…"
+    },
+    "tips": {
+        "firstStatement": "Du kan <1>legge inn en første påstand</1> ved å klikke på <3></3> ikonet ved siden av talerens navn",
+        "firstSpeaker": "Start ved å legge til en taler ved bruk av venstre kolonne",
+        "noContentUnauthenticated": "Denne videoen har ikke blitt bekreftet enda. Logg inn / registrer deg for å bidra."
+    },
+    "presence": {
+        "viewer": "{{count}} seer",
+        "viewer_plural": "{{count}} seere",
+        "user": "{{count}} faktasjekker",
+        "user_plural": "{{count}} faktasjekkere"
+    },
+    "warningUnlisted": "Denne vidoen er ikke offentlig listet. Den kan mangle synligheten som kreves for at påstander og kilder kan utfordres. Vær forsiktig med informasjon du finner her."
+}
