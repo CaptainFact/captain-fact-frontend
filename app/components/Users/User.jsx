@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
+import Link from 'next/link'
 import { Trans, withNamespaces } from 'react-i18next'
 import { Helmet } from 'react-helmet'
 
@@ -10,7 +10,7 @@ import { Settings } from 'styled-icons/feather/Settings'
 import { Bell } from 'styled-icons/fa-solid/Bell'
 import { Rss } from 'styled-icons/feather/Rss'
 import { Clock } from 'styled-icons/fa-regular/Clock'
-import { Videos } from 'styled-icons/boxicons-regular/Videos'
+import { Videos } from 'styled-icons/boxicons-solid/Videos'
 
 import { Flex } from '@rebass/grid'
 import UserAppellation from './UserAppellation'
@@ -44,8 +44,8 @@ export default class User extends React.PureComponent {
   componentDidUpdate(oldProps) {
     // If user's username was updated
     if (
-      this.props.user.id === oldProps.user.id
-      && this.props.user.username !== oldProps.user.username
+      this.props.user.id === oldProps.user.id &&
+      this.props.user.username !== oldProps.user.username
     )
       // TODO Remove old user profile from history
       // Redirect
@@ -79,7 +79,7 @@ export default class User extends React.PureComponent {
           {user.id !== 0 && (
             <MediaLayout
               left={<UserPicture user={user} size={USER_PICTURE_XLARGE} />}
-              content={(
+              content={
                 <div>
                   <UserAppellation user={user} withoutActions />
                   <div className="registered-since">
@@ -95,7 +95,7 @@ export default class User extends React.PureComponent {
                     </Trans>
                   </div>
                 </div>
-              )}
+              }
               right={<ScoreTag reputation={user.reputation} size="large" withIcon />}
             />
           )}

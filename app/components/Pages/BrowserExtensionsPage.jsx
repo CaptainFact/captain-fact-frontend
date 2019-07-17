@@ -1,6 +1,6 @@
 import React from 'react'
 import { withNamespaces, Trans } from 'react-i18next'
-import { Link } from 'react-router'
+import Link from 'next/link'
 import ReactPlayer from 'react-player'
 import styled from 'styled-components'
 import { Flex, Box } from '@rebass/grid'

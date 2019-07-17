@@ -23,7 +23,9 @@ export const pushEvent = (context, action, name, value) => {
     }
 
     // Push the event
-    if ((window._paq === undefined || !window._paq) && IS_DEV) {
+    if (typeof window === 'undefined') {
+      // Everything's fine, this is SSR
+    } else if ((window._paq === undefined || !window._paq) && IS_DEV) {
       console.debug('[Matomo] Push event', event)
     } else {
       window._paq.push(event)

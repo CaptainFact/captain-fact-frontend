@@ -15,13 +15,10 @@ export const setVideosOnlyFromPartners = createAction(
 export const toggleAutoscroll = createAction('STATEMENTS/TOGGLE_AUTOSCROLL')
 export const toggleBackgroundSound = createAction('STATEMENTS/TOGGLE_BACKGROUND_SOUND')
 
-const isMobile = window.innerWidth <= MOBILE_WIDTH_THRESHOLD
-
 const Preferences = new Record({
-  // Disable autoscroll and sidebar expended by default on mobile
-  sidebarExpended: !isMobile,
+  sidebarExpended: false,
   locale: 'en',
-  enableAutoscroll: !isMobile,
+  enableAutoscroll: true,
   enableSoundOnBackgroundFocus: true,
   videosLanguageFilter: null,
   videosOnlyFromPartners: ALL_VIDEOS
@@ -34,11 +31,25 @@ const loadState = () => {
     localStoragePrefs = JSON.parse(localStorage.preferences)
   } catch (e) {
     // Or from default if it fails
-    localStorage.preferences = JSON.stringify(Preferences())
+    if (typeof localStorage !== 'undefined') {
+      localStorage.preferences = JSON.stringify(Preferences())
+    }
     localStoragePrefs = { locale: browserLocale() }
   }
+
+  // Disable autoscroll and sidebar expended by default on mobile
+  const defaults = {}
+  if (typeof window !== 'undefined') {
+    const isMobile = window.innerWidth <= MOBILE_WIDTH_THRESHOLD
+    defaults.sidebarExpended = !isMobile
+    defaults.enableAutoscroll = !isMobile
+  }
+
+  const preferences = Preferences()
+    .merge(defaults)
+    .merge(localStoragePrefs)
+
   // Ensure the locale is valid, use the default otherwise
-  const preferences = Preferences().merge(localStoragePrefs)
   if (!SUPPORTED_LOCALES.includes(preferences.locale)) {
     return preferences.set('locale', browserLocale())
   }
@@ -47,7 +58,9 @@ const loadState = () => {
 
 const updateState = (state, key, value) => {
   state = state.set(key, value)
-  localStorage.preferences = JSON.stringify(state.toJSON())
+  if (typeof localStorage !== 'undefined') {
+    localStorage.preferences = JSON.stringify(state.toJSON())
+  }
   return state
 }
 

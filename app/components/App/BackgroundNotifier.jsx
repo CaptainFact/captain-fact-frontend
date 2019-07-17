@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Tinycon from 'tinycon'
+// import Tinycon from 'tinycon'
 
 import confirmSoundFileURL from '../../assets/sounds/background_statement_confirm.mp3'
 import refuteSoundFileURL from '../../assets/sounds/background_statement_refute.mp3'
@@ -8,10 +8,6 @@ import neutralSoundFileURL from '../../assets/sounds/background_statement_neutra
 import { getFocusedStatementId } from '../../state/video_debate/statements/selectors'
 import { getAllComments } from '../../state/video_debate/comments/selectors'
 import { isStatementConfirmed } from '../../lib/statements_utils'
-
-const confirmAudioFile = new Audio(confirmSoundFileURL)
-const refuteAudioFile = new Audio(refuteSoundFileURL)
-const neutralAudioFile = new Audio(neutralSoundFileURL)
 
 /**
  * This component watches for various events then triggers sounds or change
@@ -24,10 +20,10 @@ class BackgroundNotifier extends React.PureComponent {
     this.focusEventListener = null
     this.onFocus = this.onFocus.bind(this)
 
-    Tinycon.setOptions({
-      background: 'transparent',
-      fallback: false
-    })
+    // Tinycon.setOptions({
+    //   background: 'transparent',
+    //   fallback: false
+    // })
   }
 
   onFocus() {
@@ -44,12 +40,15 @@ class BackgroundNotifier extends React.PureComponent {
   setFavicon(value) {
     // Reset favicon URL each time we interact with it to fix ugly background
     // See https://github.com/tommoor/tinycon/issues/85#issuecomment-244999536
-    Tinycon.setImage('/favicons/favicon-32x32.png')
-    Tinycon.setBubble(value)
+    // Tinycon.setImage('/favicons/favicon-32x32.png')
+    // Tinycon.setBubble(value)
   }
 
   componentDidMount() {
     this.focusEventListener = window.addEventListener('focus', this.onFocus)
+    this.confirmAudioFile = new Audio(confirmSoundFileURL)
+    this.refuteAudioFile = new Audio(refuteSoundFileURL)
+    this.neutralAudioFile = new Audio(neutralSoundFileURL)
   }
 
   componentWillUnmount() {
@@ -62,7 +61,7 @@ class BackgroundNotifier extends React.PureComponent {
   componentDidUpdate(prevProps) {
     // Play a sound when enabling setting
     if (!prevProps.soundEnabled && this.props.soundEnabled) {
-      neutralAudioFile.play()
+      this.neutralAudioFile.play()
       return
     }
 
@@ -75,15 +74,15 @@ class BackgroundNotifier extends React.PureComponent {
     // If new focus and backgrounded
     if (this.hasNewStatementFocus(prevProps)) {
       // Show a bell on favicon
-      Tinycon.setImage('/favicons/favicon-32x32.png')
+      // Tinycon.setImage('/favicons/favicon-32x32.png')
       this.setFavicon('🔔')
 
       // Play a sound
       if (this.props.soundEnabled) {
         const confirmed = isStatementConfirmed(this.props.comments)
-        if (confirmed === null) neutralAudioFile.play()
-        else if (confirmed) confirmAudioFile.play()
-        else refuteAudioFile.play()
+        if (confirmed === null) this.neutralAudioFile.play()
+        else if (confirmed) this.confirmAudioFile.play()
+        else this.refuteAudioFile.play()
       }
     }
   }

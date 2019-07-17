@@ -1,6 +1,6 @@
 import React from 'react'
 import { withNamespaces } from 'react-i18next'
-import { Link } from 'react-router'
+import Link from 'next/link'
 
 import {
   ENTITY_SPEAKER,

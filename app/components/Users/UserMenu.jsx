@@ -8,7 +8,7 @@ import { Activity } from 'styled-icons/feather/Activity'
 import { Settings } from 'styled-icons/feather/Settings'
 import { Bell } from 'styled-icons/fa-solid/Bell'
 import { Rss } from 'styled-icons/feather/Rss'
-import { Videos } from 'styled-icons/boxicons-regular/Videos'
+import { Videos } from 'styled-icons/boxicons-solid/Videos'
 import { LogOut } from 'styled-icons/feather/LogOut'
 
 const BASE_LINKS = [

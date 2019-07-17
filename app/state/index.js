@@ -38,7 +38,14 @@ const middlewares = [thunk, promiseMiddleware]
 
 // If running in dev and browser has redux devtools extension activated, use it
 const getComposer = () => {
-  if (JS_ENV === 'prod' || !window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) return compose
+  if (
+    JS_ENV === 'prod' ||
+    typeof window === 'undefined' ||
+    !window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  ) {
+    return compose
+  }
+
   return window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
     serialize: { immutable: Immutable },
     shouldCatchErrors: true

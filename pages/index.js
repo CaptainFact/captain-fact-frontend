@@ -1,42 +1,37 @@
 import React from 'react'
 import Link from 'next/link'
-import { withNamespaces, Trans } from 'react-i18next'
 import { Flex, Box } from '@rebass/grid'
 
-import * as Matomo from '../../API/matomo'
-import { Icon } from '../Utils'
-import InvitationRequestForm from '../Users/InvitationRequestForm'
-import { INVITATION_SYSTEM } from '../../config'
-import AllPartners from './AllPartners'
-import OpenCollectiveContributors from './OpenCollectiveContributors'
-import AllAmbassadors from './AllAmbassadors'
-import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
-import CFSocialProfiles from './CFSocialProfiles'
-import LastVideos from './LastVideos'
-import Message from '../Utils/Message'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import * as Matomo from '../app/API/matomo'
+import { INVITATION_SYSTEM } from '../app/config'
+import { Icon } from '../app/components/Utils'
+import InvitationRequestForm from '../app/components/Users/InvitationRequestForm'
+import ExternalLinkNewTab from '../app/components/Utils/ExternalLinkNewTab'
+import { withLoggedInUser } from '../app/components/LoggedInUser/UserProvider'
+import Message from '../app/components/Utils/Message'
+import OpenCollectiveContributors from '../app/components/Home/OpenCollectiveContributors'
+import AllAmbassadors from '../app/components/Home/AllAmbassadors'
+import CFSocialProfiles from '../app/components/Home/CFSocialProfiles'
+import LastVideos from '../app/components/Home/LastVideos'
+import AllPartners from '../app/components/Home/AllPartners'
 
-@withNamespaces('home')
-@withLoggedInUser
-export default class Home extends React.PureComponent {
+class Home extends React.PureComponent {
   renderPresentation() {
     return (
       <p className="presentation">
-        <Trans i18nKey="presentation">
-          <strong>CaptainFact</strong> est un outil collaboratif de vérification des
-          vidéos YouTube.
-          <br />
-          Inscrivez-vous pour commencer à démentir, à confirmer ou à approfondir les
-          faits.
-          <br />
-          Installez notre extension pour bénéficier des données de CaptainFact directement
-          depuis votre lecteur YouTube.
-        </Trans>
+        <strong>CaptainFact</strong> est un outil collaboratif de vérification des vidéos
+        YouTube.
+        <br />
+        Inscrivez-vous pour commencer à démentir, à confirmer ou à approfondir les faits.
+        <br />
+        Installez notre extension pour bénéficier des données de CaptainFact directement
+        depuis votre lecteur YouTube.
       </p>
     )
   }
 
   renderButtons() {
+    const t = s => s
     return (
       <div className="buttons-container">
         <Link
@@ -44,30 +39,28 @@ export default class Home extends React.PureComponent {
           className="button animated-hover is-medium is-gradient-primary-light"
           to="/signup"
         >
-          {this.props.t('registerAndFactCheck')}
+          {t('registerAndFactCheck')}
         </Link>
         <Link
           onClick={() => Matomo.registerClick('Home', 'Button', 'ExtensionPage')}
           className="button animated-hover is-medium is-gradient-primary-light"
           to="/extension"
         >
-          {this.props.t('installExtension')}
+          {t('installExtension')}
         </Link>
         <div className="button-label">
-          <Trans i18nKey="openSource">
-            100%{' '}
-            <ExternalLinkNewTab href="https://github.com/CaptainFact">
-              open-source
-            </ExternalLinkNewTab>
-            , respects your privacy.
-          </Trans>
+          100%{' '}
+          <ExternalLinkNewTab href="https://github.com/CaptainFact">
+            open-source
+          </ExternalLinkNewTab>
+          , respects your privacy.
         </div>
       </div>
     )
   }
 
   render() {
-    const { t } = this.props
+    const t = s => s
 
     return (
       <div className="home-page is-gradient-primary">
@@ -150,9 +143,7 @@ export default class Home extends React.PureComponent {
         )}
         <footer className="footer">
           <div className="has-text-centered">
-            <Trans i18nKey="footer">
-              Created with <Icon name="heart" /> using
-            </Trans>
+            Created with <Icon name="heart" /> using
             <ExternalLinkNewTab href="https://elixir-lang.org">Elixir</ExternalLinkNewTab>
             ,&nbsp;
             <ExternalLinkNewTab href="https://phoenixframework.org">
@@ -166,3 +157,5 @@ export default class Home extends React.PureComponent {
     )
   }
 }
+
+export default withLoggedInUser(Home)

@@ -20,7 +20,8 @@ class CaptainFactSocketApi {
   }
 
   createSocket(token) {
-    this.socket = new Socket(this.socketUrl, { params: { token } })
+    const transport = typeof window !== 'undefined' ? 'WebSocket' : 'Phoenix.LongPoll'
+    this.socket = new Socket(this.socketUrl, { params: { token }, transport })
     this.socket.onError(noInternetError)
     this.socket.onClose(noInternetError)
   }

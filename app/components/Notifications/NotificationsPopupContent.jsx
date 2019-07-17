@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { Link } from 'react-router'
+import Link from 'next/link'
 import { themeGet } from 'styled-system'
 import { Flex, Box } from '@rebass/grid'
 import { translate } from 'react-i18next'

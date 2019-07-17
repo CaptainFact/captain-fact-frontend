@@ -1,12 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link, withRouter } from 'react-router'
+import Link from 'next/link'
 import styled, { withTheme, css } from 'styled-components'
 import { Flex, Box } from '@rebass/grid'
 import { themeGet } from 'styled-system'
 import { withResizeDetector } from 'react-resize-detector'
 import Popup from 'reactjs-popup'
-import { withNamespaces } from 'react-i18next'
 import { omit } from 'lodash'
 
 import { Menu } from 'styled-icons/boxicons-regular/Menu'
@@ -113,20 +112,20 @@ const desktopPopupStyle = { ...basePopupStyle, minWidth: 400 }
 const mobilePopupStyle = { ...basePopupStyle, width: '95%' }
 
 const Navbar = ({
-  t,
   theme,
   toggleSidebar,
   loggedInUser,
   isAuthenticated,
   loggedInUserLoading,
-  location,
   width
 }) => {
   const isMobile = width < 600
-  const loginRedirect =
-    !location.pathname.startsWith('/login') && !location.pathname.startsWith('/signup')
-      ? location.pathname
-      : '/videos'
+  // const loginRedirect =
+  //   !location.pathname.startsWith('/login') && !location.pathname.startsWith('/signup')
+  //     ? location.pathname
+  //     : '/videos'
+  const loginRedirect = '/videos'
+  const t = s => s
 
   return (
     <Box data-cy="Navbar">
@@ -243,5 +242,5 @@ export default withTheme(
   connect(
     null,
     { toggleSidebar }
-  )(withLoggedInUser(withNamespaces('main')(withRouter(withResizeDetector(Navbar)))))
+  )(withLoggedInUser(withResizeDetector(Navbar)))
 )

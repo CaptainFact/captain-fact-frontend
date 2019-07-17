@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router'
+import Link from 'next/link'
 import { withNamespaces } from 'react-i18next'
 
 import { Icon, TimeSince } from '../Utils'

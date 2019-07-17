@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Query } from 'react-apollo'
 import { get } from 'lodash'
 import { Flex, Box } from '@rebass/grid'
-import { Link } from 'react-router'
+import Link from 'next/link'
 
-import { Videos } from 'styled-icons/boxicons-regular/Videos'
+import { Videos } from 'styled-icons/boxicons-solid/Videos'
 
 import { translate } from 'react-i18next'
 import { loggedInUserSubscriptionsQuery } from '../../API/graphql_queries'
@@ -23,7 +23,11 @@ export default class NotificationsPage extends Component {
 
   render() {
     return (
-      <Query query={loggedInUserSubscriptionsQuery} variables={{ scopes: ['video'] }} fetchPolicy="network-only">
+      <Query
+        query={loggedInUserSubscriptionsQuery}
+        variables={{ scopes: ['video'] }}
+        fetchPolicy="network-only"
+      >
         {({ data, loading, error }) => {
           if (loading) {
             return <LoadingFrame />
