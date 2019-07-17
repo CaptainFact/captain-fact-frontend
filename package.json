@@ -108,7 +108,7 @@
     "reselect": "~4.0.0",
     "smoothscroll-polyfill": "~0.4.0",
     "styled-components": "~4.1.2",
-    "styled-icons": "~5.5.0",
+    "styled-icons": "~8.1.0",
     "styled-system": "~3.2.0",
     "tinycon": "~0.6.8",
     "uuid": "~3.3.2",
