@@ -9,6 +9,7 @@ import {
   color,
   display,
   height,
+  position,
   maxHeight,
   maxWidth,
   minHeight,
@@ -32,6 +33,7 @@ const StyledCard = styled(Box)`
   ${maxWidth}
   ${minHeight}
   ${minWidth}
+  ${position}
 `
 
 StyledCard.propTypes = {

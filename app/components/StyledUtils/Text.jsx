@@ -1,5 +1,13 @@
 import styled from 'styled-components'
-import { fontSize, fontStyle, fontWeight, space, color, display } from 'styled-system'
+import {
+  fontSize,
+  fontStyle,
+  fontWeight,
+  space,
+  color,
+  display,
+  width
+} from 'styled-system'
 
 export const Span = styled.span`
   ${color}
@@ -7,6 +15,7 @@ export const Span = styled.span`
   ${fontStyle}
   ${fontWeight}
   ${space}
+  ${width}
 `
 
 export const Small = styled.small`
@@ -14,6 +23,7 @@ export const Small = styled.small`
   ${fontSize}
   ${fontWeight}
   ${space}
+  ${width}
   ${display}
 `
 
@@ -22,5 +32,6 @@ export const P = styled.p`
   ${fontSize}
   ${fontWeight}
   ${space}
+  ${width}
   ${display}
 `

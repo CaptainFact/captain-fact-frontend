@@ -48,7 +48,7 @@ rules:
   chai-friendly/no-unused-expressions: 2
   # React
   react/destructuring-assignment: off
-  react/no-multi-comp: ['warn']
+  react/no-multi-comp: ['off']
   react/jsx-indent-props: ['warn', 2]
   react/jsx-first-prop-new-line: ['warn']
   react/jsx-closing-bracket-location: ['warn']

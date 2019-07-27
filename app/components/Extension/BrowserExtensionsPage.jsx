@@ -4,16 +4,16 @@ import { Link } from 'react-router'
 import ReactPlayer from 'react-player'
 import styled from 'styled-components'
 import { Flex, Box } from '@rebass/grid'
-import { PlusCircle } from 'styled-icons/boxicons-solid/PlusCircle'
 
-import { registerClick } from '../../API/matomo'
-import Button from '../Utils/Button'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
 import chromeLogo from '../../assets/browsers/chrome.png'
 import firefoxLogo from '../../assets/browsers/firefox.png'
 import ieLogo from '../../assets/browsers/internet_explorer.png'
 import demoExtensionVideo from '../../assets/demos/demo-extension.mp4'
+import { ChromeExtensionBtn } from './InstallButtons'
+import { FirefoxExtensionBtn } from './InstallButtons'
+import { IEExtensionBtn } from './InstallButtons'
 
 const PresentationBox = styled(Box)`
   background: white;
@@ -40,26 +40,7 @@ const Presentation = ({ t }) => (
   </p>
 )
 
-const BrowserExtensionInstall = ({ label, img, url, name, disabled = false }) => (
-  <Flex mb="0.75em" flexWrap="wrap" justifyContent={['center', 'flex-start']}>
-    <Box width="50px" flexBasis="50px" mx={['1em', '1.5em']}>
-      <img src={img} alt={name} />
-    </Box>
-    <Box>
-      <ExternalLinkNewTab
-        href={url}
-        onClick={() => registerClick('ExtensionPage', 'Button', `Install-${name}`)}
-      >
-        <Button style={{ width: '235px' }} className="is-large" disabled={disabled}>
-          <PlusCircle size="1em" />
-          &nbsp;&nbsp;{label}
-        </Button>
-      </ExternalLinkNewTab>
-    </Box>
-  </Flex>
-)
-
-export const BrowserExtensionsPage = withNamespaces('extension')(({ t }) => (
+const BrowserExtensionsPage = ({ t }) => (
   <div className="browser-extension-page">
     <section className="hero is-gradient-primary is-medium is-bold">
       <section className="hero-body">
@@ -80,19 +61,30 @@ export const BrowserExtensionsPage = withNamespaces('extension')(({ t }) => (
       <PresentationBox width={[1, 1, 0.4]} mr={['0em', '5em']} mb="2em" fontSize={4}>
         <Presentation t={t} />
         <br />
-        <BrowserExtensionInstall
-          img={chromeLogo}
-          label={`${t('addTo')} Chrome`}
-          url="https://chrome.google.com/webstore/detail/fnnhlmbnlbgomamcolcpgncflofhjckm"
-          name="Chrome"
-        />
-        <BrowserExtensionInstall
-          img={firefoxLogo}
-          url="https://addons.mozilla.org/addon/captainfact/"
-          label={`${t('addTo')} Firefox`}
-          name="Firefox"
-        />
-        <BrowserExtensionInstall img={ieLogo} label="Just kidding" name="IE" disabled />
+        <Flex mb="0.75em" flexWrap="wrap" justifyContent={['center', 'flex-start']}>
+          <Box width="50px" flexBasis="50px" mx={['1em', '1.5em']}>
+            <img src={chromeLogo} alt="Chrome" />
+          </Box>
+          <Box>
+            <ChromeExtensionBtn context="ExtensionPage" />
+          </Box>
+        </Flex>
+        <Flex mb="0.75em" flexWrap="wrap" justifyContent={['center', 'flex-start']}>
+          <Box width="50px" flexBasis="50px" mx={['1em', '1.5em']}>
+            <img src={firefoxLogo} alt="Firefox" />
+          </Box>
+          <Box>
+            <FirefoxExtensionBtn context="ExtensionPage" />
+          </Box>
+        </Flex>
+        <Flex mb="0.75em" flexWrap="wrap" justifyContent={['center', 'flex-start']}>
+          <Box width="50px" flexBasis="50px" mx={['1em', '1.5em']}>
+            <img src={ieLogo} alt={name} />
+          </Box>
+          <Box>
+            <IEExtensionBtn />
+          </Box>
+        </Flex>
       </PresentationBox>
       <Box width={[1, 1, 0.4]} style={{ flexGrow: 1 }}>
         <ReactPlayer
@@ -108,4 +100,6 @@ export const BrowserExtensionsPage = withNamespaces('extension')(({ t }) => (
       </Box>
     </MainContainer>
   </div>
-))
+)
+
+export default withNamespaces('extension')(BrowserExtensionsPage)

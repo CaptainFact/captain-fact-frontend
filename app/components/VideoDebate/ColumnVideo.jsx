@@ -21,6 +21,7 @@ import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import { videoURL, videoHistoryURL } from '../../lib/cf_routes'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import SubscribeBtn from '../Notifications/SubscribeBtn'
+import Container from '../StyledUtils/Container'
 
 @connect(
   state => ({
@@ -90,7 +91,7 @@ export class ColumnVideo extends React.PureComponent {
           </ul>
         </div>
         {isDebate && (
-          <div>
+          <Container position="relative">
             <div className="actions">
               <ReputationGuardTooltip
                 requiredRep={MIN_REPUTATION_ADD_SPEAKER}
@@ -104,7 +105,7 @@ export class ColumnVideo extends React.PureComponent {
                 <SpeakerPreview key={speaker.id} speaker={speaker} />
               ))}
             </div>
-          </div>
+          </Container>
         )}
       </div>
     )

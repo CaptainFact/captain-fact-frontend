@@ -19,6 +19,7 @@ import {
 import { resetVideoDebate } from '../../state/video_debate/actions'
 import { ColumnVideo } from './ColumnVideo'
 import { ColumnDebate } from './ColumnDebate'
+import ExtensionAd from '../Extension/ExtensionAd'
 
 @connect(
   state => ({
@@ -72,6 +73,7 @@ export class VideoDebate extends React.PureComponent {
         <Helmet>{!isLoading && <title>{videoTitle}</title>}</Helmet>
         <ColumnVideo view={route.view} />
         <ColumnDebate view={route.view} videoId={this.props.params.videoId} />
+        <ExtensionAd />
       </div>
     )
   }
