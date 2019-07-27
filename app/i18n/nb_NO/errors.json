@@ -25,7 +25,7 @@
         "joinCrashed": "Tjenertilkoblingen gikk ned",
         "thirdParty": "Tredjepartsidentitetsbekreftelse mislyktes",
         "submissionError": "En feil inntraff under forsendelse av dataen",
-        "notEnoughReputation": "Denne funksjonen krever flere ryktepoeng",
+        "notEnoughReputation": "Opparbeid deg flere ryktepoeng for å bruke denne funksjonen",
         "needReputation": "Du trenger minst {{requiredRep}} <2>ryktepoeng</2> for å gjøre dette"
     },
     "addIssue": "Send inn en feilrapport på GitHub",
