@@ -1,0 +1,22 @@
+{
+    "header": {
+        "date": "Dato"
+    },
+    "actions": {
+        "flag_abusive": "Bestrid flagging",
+        "unsure": "Usikker",
+        "confirm": "Bekreft flagg"
+    },
+    "reason": {
+        "1": "Personangrep eller uhensiktsmessig språk",
+        "2": "Uønsket kommersielt innhold eller søppel",
+        "3": "Irrelevant",
+        "4": "Ikke konstruktivt"
+    },
+    "seeContext": "Se i kontekst",
+    "whyReport": "Hvorfor tror du denne kommentaren ble innrapportert",
+    "title": "Moderering",
+    "emptyModeration": "Det er ingenting å moderer her. For trollene og kom tilbake senere!",
+    "pending": "Avventer moderering",
+    "flaggedFor": "flagget dette for \"$t(reason.{{reason}})\""
+}

@@ -27,7 +27,7 @@
         "thirdParty": "Third party authentication failed",
         "submissionError": "An error occurred while sending the data",
         "noVideoAvailable": "No video available",
-        "notEnoughReputation": "Not enough reputation to access this feature",
+        "notEnoughReputation": "Gain more reputation points to access this feature",
         "needReputation": "You need at least {{requiredRep}} <2>reputation</2> points to do that"
     }
 }
