@@ -1,1 +1,33 @@
-{}
+{
+    "crash": "😥 Nãooooooo! O site acabou de crachar. Não é você, não fez nada de errado.",
+    "client": {
+        "notEnoughReputation": "Ganhe mais reputação para aceder a esta funcionalidade",
+        "needReputation": "Precisa de pelo menos {{requiredRep}} pontos  <2>reputation</2> para fazer isso",
+        "thirdParty": "A autenticação de terceiros falhou",
+        "submissionError": "Ocorreu um erro enquanto enviava os dados",
+        "noVideoAvailable": "Nenhum vídeo disponível",
+        "joinCrashed": "A ligação ao servidor falhou"
+    },
+    "server": {
+        "action_already_done": "Esta ação já foi realizada",
+        "invalid_token": "O código de verificação é inválido ou expirou",
+        "authentication_failed": "A autenticação falhou",
+        "invalid_invitation_token": "O código de convite é inválido ou expirou",
+        "remote_video_404": "O vídeo remoto parece que não existe",
+        "reset_failed": "A redefinição da palavra-passe falhou",
+        "unauthorized": "Por favor, (re)ligar para continuar",
+        "not_found": "Parece que isto não existe, tente atualizar a página se o problema persistir",
+        "invalid_email_password": "A combinação do e-mail / palavra-passe é inválida",
+        "unauthenticated": "Precisa de uma conta para fazer isso",
+        "not_enough_reputation": "Não tem reputação suficiente para fazer isso",
+        "limit_reached": "Atingiu o limite para esta ação, tente novamente dentro de alguns minutos",
+        "unknown": "Algo não funcionou do nosso lado, nós iremos verificar!",
+        "invalid_email": "Endereço de e-mail inválido",
+        "noInternet": "A ligação ao servidor falhou, tente atualizar a página"
+    },
+    "addIssue": "Crie um problema no GitHub",
+    "title": "Erro",
+    "contactSupport": "Contactar apoio",
+    "errorDetails": "Detalhes técnicos",
+    "reload": "Recarregar a página"
+}
