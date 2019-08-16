@@ -1,1 +1,19 @@
-{}
+{
+    "presentationTitle": "Vamos verificar a Internet",
+    "learnMore": "Saber mais",
+    "footer": "Criado com <1/> utilizando ",
+    "inviteSuccess": "Convite solicitado!",
+    "aboutAmbassadors": "Os embaixadores são membros especiais encarregados de cuidar da comunidade. Eles também têm como objetivo reportar as expetativas dos utilizadores para a equipa técnica e participar da administração do projeto.",
+    "emailPlaceholder": "Endereço de e-mail",
+    "backers": "Apoiantes",
+    "openSource": "100% <2>software livre</2>, respeita a sua privacidade.",
+    "ambassadors": "Embaixadores",
+    "registerAndFactCheck": "Registe-se e verifique os factos",
+    "partners": "Os nossos parceiros",
+    "latest": "Vídeos mais recentes",
+    "invitation": "Solicite um convite",
+    "inviteFriend": "Convide um amigo",
+    "presentation": "\n    A Internet está cheia de dados abundantes e ricos. A informação viaja rápido e nós\n    não temos tempo para verificar se tudo o que nós vimos e ouvimos está correto.\n    <2></2>\n    <4></4>\n    <0>CaptainFact</0> É tudo sobre pessoas a debater e a ajudarem-se uns aos outros\n    para verificar esses dados, deliberando e votando neles, e conversando sobre os factos.  \n  ",
+    "installExtension": "Instalar Extensão",
+    "seeVideos": "Ver todos os vídeos"
+}
