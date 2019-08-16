@@ -1,1 +1,37 @@
-{}
+{
+    "deletedAccount": "Conta eliminada",
+    "forgottenPassword": "Palavra-passe esquecida",
+    "emailConfirmed": "E-mail confirmado",
+    "invitationOnlyTitle": "Solicitar um convite",
+    "browsingAnalyzer": "Analisador da navegação",
+    "linkedAccounts": "Contas associadas",
+    "linkAccount": "Associar conta",
+    "resetPassword": "Redefinir palavra-passe",
+    "optional": "Opcional",
+    "invitationOnlyBody": "É necessário um convite, solicite um inserindo o seu endereço de e-mail em baixo.",
+    "dangerZone": "Zona Perigosa",
+    "noActivity": "Ainda não foi registada nenhuma ação.",
+    "signup": "Registar",
+    "username": "Nome do utilizador",
+    "actionWithThirdParty": "Ou inicie a sessão utilizando um serviço de terceiros",
+    "registeredSince": "Registado para <1/>",
+    "reputation": "Reputação",
+    "realName": "Nome real",
+    "email": "E-mail",
+    "resetPasswordRequestSuccess": "Se uma conta está associada com este endereço, procure por um e-mail para redefinir a sua palavra-passe.",
+    "accountSettings": "Definições da Conta",
+    "resetPasswordSuccess": "Palavra-passe alterada",
+    "emailOrUsername": "Endereço de e-mail ou nome de utilizador",
+    "deleteAccount": "Eliminar Conta",
+    "passwordOptional": "Palavra-passe - deixar em branco para a manter inalterada",
+    "unlinkAccount": "Desassociar conta",
+    "login": "Iniciar sessão",
+    "needAnAccountQuestion": "Precisa de uma conta?",
+    "newsletter": {
+        "unsubscribe_success": "A sua subscrição do nosso boletim informativo foi cancelada",
+        "unsubscribe_error": "Código indicado parece inválido. Se o problema persistir, contacte-nos"
+    },
+    "password": "Palavra-passe",
+    "repeatPassword": "Repetir palavra-passe",
+    "alreadyHaveAccountQuestion": "Já tem uma conta?"
+}
