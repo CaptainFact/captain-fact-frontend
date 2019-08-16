@@ -1,1 +1,11 @@
-{}
+{
+    "seeAll": "Ver tudo",
+    "filters": {
+        "SEEN": "Visto",
+        "UNSEEN": "Não visto",
+        "ALL": "Tudo"
+    },
+    "markAllAsRead": "marcar tudo como visto",
+    "markAllAsUnseen": "Marcar tudo como não visto",
+    "empty": "A caixa das suas notificações está vazia"
+}
