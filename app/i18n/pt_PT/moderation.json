@@ -1,1 +1,22 @@
-{}
+{
+    "reason": {
+        "2": "Conteúdo comercial indesejado ou spam",
+        "1": "Ataque pessoal ou linguagem inapropriada",
+        "4": "Não construtivo",
+        "3": "Irrelevante"
+    },
+    "pending": "Moderação pendente",
+    "whyReport": "Porque é que acha que este comentário foi denunciado?",
+    "actions": {
+        "unsure": "Não tenho certeza",
+        "confirm": "Confirmar sinalização",
+        "flag_abusive": "Refutar sinalização"
+    },
+    "seeContext": "Ver no contexto",
+    "emptyModeration": "Não há nada para moderar aqui. Vá alimentar alguns \"trolls\" e volte mais tarde!",
+    "title": "Moderação",
+    "header": {
+        "date": "Data"
+    },
+    "flaggedFor": "sinalizou isto por \"$t(reason.{{reason}})\""
+}
