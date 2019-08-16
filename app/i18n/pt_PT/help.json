@@ -1,1 +1,30 @@
-{}
+{
+    "about": "Uma mão amiga para começar a utilizar a plataforma. Deliberadamente curto, e uma leitura fortemente encorajada antes da verificarem os factos.",
+    "pages": {
+        "contributionGuidelines": "Linhas diretrizes de contribuição",
+        "contribute/tasks": "Tarefas independentes",
+        "extension": "Extensão",
+        "moderation": "Moderação",
+        "jobs": "Junte-se a nós!",
+        "achievements": "Conquistas",
+        "ambassadors": "Quer ser um embaixador",
+        "contribute/code": "Programadores",
+        "about": "Sobre",
+        "contact": "Contactar",
+        "censorship_requests": "Pedidos de Censura",
+        "reputation": "Reputação",
+        "credits": "Créditos",
+        "privileges": "Privilégios",
+        "privacy": "Privacidade",
+        "bug_report": "Relatório de Erros"
+    },
+    "categories": {
+        "contribute": "Contribuir",
+        "siteUsage": "Utilização do Site",
+        "others": "Outros"
+    },
+    "aboutTitle": "A ajuda que precisa",
+    "goBack": "Voltar ao índice da ajuda",
+    "title": "Ajuda",
+    "toStart": "Comece com as <1>linhas diretrizes de contribuição</1>, <2>privileges</2> e <3>reputation system</3>."
+}
