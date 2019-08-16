@@ -81,5 +81,8 @@
         "user": "{{count}} verificador-facto",
         "user_plural": "{{count}} verificadores-facto"
     },
-    "warningUnlisted": "Este vídeo não está listado publicamente. Este poderá não ter recebido a visibilidade necessária para que as declarações e as fontes sejam contestadas. Tenha cuidado com a informação que irá encontrar aqui."
+    "warningUnlisted": "Este vídeo não está listado publicamente. Este poderá não ter recebido a visibilidade necessária para que as declarações e as fontes sejam contestadas. Tenha cuidado com a informação que irá encontrar aqui.",
+    "wikidata": {
+        "id": "Wikidata QID"
+    }
 }
