@@ -1,1 +1,7 @@
-{}
+{
+    "description": "A extensão da  Web injeta os dados de CapitainFact diretamente no conteúdo que está a ver.",
+    "subtitle": "Para verificar facto no Youtube",
+    "title": "A extensão de navegador",
+    "moreInfo": "É 100% de <1>código aberto</1> e <3>respeita a sua privacidade</3>.",
+    "addTo": "Adicionar a"
+}
