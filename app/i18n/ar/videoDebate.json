@@ -60,7 +60,8 @@
         "reverseTimeLock_lock": "افتح علامة الوقت",
         "reverseTimeLock_unlock": "اقفل علامة الوقت",
         "soundOnBackgroundFocus_enable": "شغّل صوتًا عند تغيير التركيز في الخلفية",
-        "soundOnBackgroundFocus_disable": "لا تشغّل صوتًا عند تغيير التركيز في الخلفية"
+        "soundOnBackgroundFocus_disable": "لا تشغّل صوتًا عند تغيير التركيز في الخلفية",
+        "textPlaceholder": "اكتب نسخة خامة أولية عمّا يقوله المتحدث"
     },
     "loading": {
         "statements": "تحميل النصوص",
