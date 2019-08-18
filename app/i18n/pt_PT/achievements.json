@@ -1,0 +1,49 @@
+{
+    "10": {
+        "title": "Artista",
+        "description": "Uma das suas criações está integrada no projeto"
+    },
+    "about": "Sobre",
+    "8": {
+        "title": "Caçador de fantasmas",
+        "description": "Obrigado por reportar isto."
+    },
+    "11": {
+        "description": "Esta melhoria ou a nova funcionalidade será analisada.",
+        "title": "Boas Vibrações"
+    },
+    "9": {
+        "title": "Verifique-me de facto, eu sou famoso",
+        "description": "Você conseguiu o seu caminho até a tabela de classificação, parabéns Capitão!"
+    },
+    "3": {
+        "title": "Toda a gente magoa",
+        "description": "Procurar ajuda na secção de ajuda foi uma coisa boa a fazer"
+    },
+    "4": {
+        "description": "Com a extensão do navegador ativada, ninguém o vai voltar a enganar",
+        "title": "Prova de bala"
+    },
+    "1": {
+        "description": "Criou com sucesso uma conta no CaptainFact",
+        "title": "Bem-vindo"
+    },
+    "unlocked": "Acabou de desbloquear a conquista de \"{{achievement}}\"",
+    "6": {
+        "title": "Viciado Social",
+        "description": "Adora ter essas empresas americanas a espionar os seus dados, não é?"
+    },
+    "2": {
+        "title": "Não é um robô",
+        "description": "Com um endereço de e-mail tão bonito, não há dúvida de que é um humano"
+    },
+    "5": {
+        "description": "Bem, parece que destruiu esta fonte",
+        "title": "Você é notícias falsas!"
+    },
+    "7": {
+        "title": "Embaixador",
+        "description": "É um embaixador da comunidade"
+    },
+    "title": "Conquistas"
+}

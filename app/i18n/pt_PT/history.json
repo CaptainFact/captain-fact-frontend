@@ -1,0 +1,42 @@
+{
+    "when": "Quando",
+    "action": {
+        "vote_up": "Voto +",
+        "revert_vote_down": "Voto - revertido",
+        "action_banned_bad_language": "($t(moderation:reason.1)) moderou",
+        "flag": "Sinalizado",
+        "action_banned_irrelevant": "($t(moderation:reason.3)) Moderou",
+        "vote_down": "Voto -",
+        "action_banned_spam": "($t(moderation:reason.2)) moderou",
+        "action_banned_not_constructive": "($t(moderation:reason.4)) Moderou",
+        "restore": "Restaurado",
+        "delete": "Eliminado",
+        "remove": "Removido",
+        "self_vote": "Voto próprio",
+        "create": "Criado",
+        "revert_self_vote": "Voto próprio revertido",
+        "update": "Atualziado",
+        "add": "Adicionado",
+        "revert_vote_up": "Voto + revertido"
+    },
+    "entities": {
+        "user_action": "ação",
+        "fact": "comentário de fonte",
+        "statement": "declaração",
+        "user": "utilizador",
+        "video": "vídeo",
+        "comment": "comentário",
+        "speaker": "orador"
+    },
+    "changes": "Alterações",
+    "who": "Quem",
+    "revert": "Reverter",
+    "deletedUser": "Utilizador eliminado",
+    "moderation": "Moderação",
+    "entity": "Entidade",
+    "madeAction": "{{action}}",
+    "hideAll": "Ocultar tudo",
+    "compare_hide": "Ocultar",
+    "compare_show": "Comparar",
+    "compareAll": "Comparar tudo"
+}
