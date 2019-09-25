@@ -8,7 +8,7 @@
         "statement_plural": "statements"
     },
     "menu": {
-        "login": "Log in",
+        "login": ".תפריט.התחברות",
         "signup": "Sign up",
         "logout": "Log out",
         "settings": "Settings",
