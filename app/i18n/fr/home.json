@@ -1,6 +1,12 @@
 {
-  "presentationTitle": "Contribuez à développer l'esprit critique et à vérifier les informations.",
-  "presentation": "\n    <0>CaptainFact</0> est un outil collaboratif de vérification des\n    vidéos YouTube.\n    <2></2>\n    Inscrivez-vous pour commencer à démentir, à confirmer ou à approfondir les\n    faits.\n    <4></4>\n    Installez notre extension pour bénéficier des données de CaptainFact directement\n    depuis votre lecteur YouTube.\n  ",
+  "titleCF": "CaptainFact - Plateforme de factchecking collaboratif / de vérification des informations",
+  "presentationTitle": "Plus de 50 % des Français ne font pas confiance aux médias.*\n    Que faites-vous contre les fake news et la désinformation\u00a0?",
+  "source": "*source : Baromètre 2019 de la confiance des Français dans les media",
+  "presentation": "CaptainFact vous propose d’être alerté lorsque vous voyez une fausse information sur internet, grâce à une extension navigateur. Vérifiez les informations des médias en devenant membre de la communauté CaptainFact.\n    ",
+  "howTitle": "Comment fonctionne CaptainFact ?",
+  "how": "CaptainFact est un outil collaboratif de vérification des vidéos YouTube. La communauté du site s’entraide pour vérifier un maximum d’informations diffusées de la façon suivante :\n    1- La vidéo est ajoutée sur le site.\n    2- Les informations à vérifier sont extraites de la vidéo.\n    3- La communauté confirme ou réfute les citations avec des sources.\n    Ensuite, les vérifications apparaissent à l’écran de tous les utilisateurs de l’extension CaptainFact lorsqu’ils regardent une vidéo YouTube et bientôt pour tous les autres médias web.",
+  "whoTitle": "Qui sont les vérificateurs (fact checkeurs) ?",
+  "who": "Les vérifications sont collaboratives. Participent toutes personnes qui souhaitent partager leurs connaissances et qui veulent agir contre :\n    - les imprécisions, inexactitudes et omissions (involontaires) ;\n    - les déformations de l'information (volontaires ou non) ;\n    - les informations vraies, mais présentées hors de leur contexte ;\n    - les reprises d'informations fausses (fake news) ;\n    - ou les pseudos sciences, les arguments fallacieux, la malhonnêteté intellectuelle, la démagogie, les contres vérités, ou autre.\n    Voir la définition de la vérification des faits (fact checking) sur Wikipédia.\n    Inscrivez-vous pour participer !",
   "seeVideos": "Voir toutes les vidéos",
   "invitation": "Demander une invitation",
   "inviteFriend": "Inviter un ami",
@@ -9,11 +15,12 @@
   "inviteSuccess": "Demande d'invitation enregistrée !",
   "registerAndFactCheck": "S'inscrire et vérifier",
   "installExtension": "Installer l'extension",
-  "partners": "Les partenaires",
+  "partners": "En partenariat avec...",
   "ambassadors": "Ambassadeurs",
   "backers": "Soutiens",
   "learnMore": "En savoir plus",
   "aboutAmbassadors": "Les ambassadeurs sont chargés de veiller sur la communauté. Ils ont aussi pour objectif de faire remonter les attentes des utilisateurs et de participer à la gouvernance du projet.",
-  "openSource": "100% <2>open-source</2>, respecte votre vie privée.",
-  "latest": "Les dernières vidéos"
+  "openSource": "100 % <2>open-source</2> - respecte votre vie privée.\n    L'extension fonctionne sur Youtube et bientôt pour toutes les pages du web.",
+  "latest": "Les dernières vidéos",
+  "discord": "Rejoignez-nous sur Discord"
 }

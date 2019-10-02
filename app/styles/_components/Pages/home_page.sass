@@ -2,18 +2,26 @@
   $maxHomeSectionWidth: 1160px
   display: flex
   flex-direction: column
-  background-attachment: fixed
-
-  +mobile
-    .title
-      text-align: center
-    .columns.is-multiline
-      justify-content: center
+  background-attachment: fixed 
 
   .hero
+    background: #EDEDED
     min-height: 25vh
+    .title1
+      margin-top: 2em
+      font-size: 1.2rem
+      color: $black
+    .title
+      font-family: Merriweather, serif
+      color: $black
+      line-height: 140%
+      margin-top: 1em
+      margin-bottom: 0em 
+      font-size: 1.7rem
     .title, p, strong
-      color: $white
+      color: $black
+      line-height: 140%
+      margin-top: 1em
     .buttons-container
       .button, .button-label
         @include ProgressiveAnimationDelay(0.1s, 0.3s, 3)
@@ -22,7 +30,7 @@
         animation-fill-mode: backwards
       .button
         width: 100%
-        margin-bottom: 1em
+        margin-top: 1em
         flex-basis: 240px
         padding: 1.2em 1em
         font-size: 1.4em
@@ -30,8 +38,9 @@
         &:last-of-type
           margin-bottom: 0.25em
       .button-label
+        margin: 1em
         text-align: center
-        color: $white-bis
+        color: $black
         a
           color: $info
           &:hover
@@ -39,16 +48,16 @@
     +mobile
       min-height: 20vh
     .hero-body
-      padding: 6em 4em
+      padding: 0em 4em
       margin: 0 auto
       max-width: $maxHomeSectionWidth
       +mobile
-        padding: 3rem 1rem
+        padding: 0rem 1rem
         font-size: 12px
       +tablet
-        padding: 3em 2em
+        padding: 0em 2em
       +desktop
-        padding: 6em 4em
+        padding: 0em 4em
       .logo-container
         text-align: center
         margin-bottom: 3em
@@ -77,7 +86,7 @@
   .section:not(.hero)
     .title
       color: $primary
-    +mobile 
+    +mobile
       .title.is-3
         margin-bottom: 1em
 
