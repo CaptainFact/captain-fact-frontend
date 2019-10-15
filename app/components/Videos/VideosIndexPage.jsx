@@ -3,6 +3,7 @@ import { merge } from 'immutable'
 import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
 import capitalize from 'voca/capitalize'
+import { Helmet } from 'react-helmet'
 
 import { ALL_VIDEOS, ONLY_PARTNERS, ONLY_COMMUNITY } from '../../constants'
 import { Icon } from '../Utils'
@@ -35,6 +36,17 @@ export default class VideosIndexPage extends React.PureComponent {
 
     return (
       <div className="videos-page">
+        <Helmet>
+          <meta name="og:url" content="/videos" />
+          <meta
+            name="og:title"
+            content="Les vidéos sourcées et vérifiées sur CaptainFact"
+          />
+          <meta
+            name="og:description"
+            content="Découvrez diverses vidéos sourcées et vérifiées par la communauté CaptainFact"
+          />
+        </Helmet>
         <section className="header">
           <h2 className="title is-2">
             <Icon name="television" />

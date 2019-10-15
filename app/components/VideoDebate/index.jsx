@@ -19,13 +19,14 @@ import {
 import { resetVideoDebate } from '../../state/video_debate/actions'
 import { ColumnVideo } from './ColumnVideo'
 import { ColumnDebate } from './ColumnDebate'
+import { videoURL } from '../../lib/cf_routes'
+import { getVideoThumbnail } from '../../lib/video_utils'
 
 @connect(
   state => ({
     videoErrors: state.VideoDebate.video.errors,
     isLoading: state.VideoDebate.video.isLoading,
-    videoTitle: state.VideoDebate.video.data.title,
-    videoLanguage: state.VideoDebate.video.data.language
+    video: state.VideoDebate.video.data
   }),
   {
     joinVideoDebateChannel,
@@ -56,8 +57,23 @@ export class VideoDebate extends React.PureComponent {
     this.props.resetVideoDebate()
   }
 
+  renderMeta(video) {
+    const title = `Vérification complète de : ${video.title}`
+    const image = getVideoThumbnail(video.provider, video.provider_id)
+    const description = `${video.title} vérifiée citation par citation par la communauté CaptainFact`
+    return (
+      <Helmet>
+        <title>{title}</title>
+        <meta name="og:title" content={title} />
+        <meta name="og:description" content={description} />
+        <meta name="og:url" content={videoURL(video.hash_id)} />
+        {image && <meta property="og:image" content={image} />}
+      </Helmet>
+    )
+  }
+
   render() {
-    const { videoErrors, isLoading, videoTitle, videoLanguage, route } = this.props
+    const { videoErrors, isLoading, video, route } = this.props
 
     if (videoErrors) {
       return <ErrorView error={videoErrors} />
@@ -67,9 +83,9 @@ export class VideoDebate extends React.PureComponent {
       <div
         id="video-show"
         className="columns is-gapless"
-        data-video-language={videoLanguage}
+        data-video-language={video.language}
       >
-        <Helmet>{!isLoading && <title>{videoTitle}</title>}</Helmet>
+        {!isLoading && this.renderMeta(video)}
         <ColumnVideo view={route.view} />
         <ColumnDebate view={route.view} videoId={this.props.params.videoId} />
       </div>

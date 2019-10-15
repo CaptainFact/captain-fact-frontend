@@ -18,3 +18,12 @@ export const getTimecodesOffset = (video, videoPlayer) => {
 export const getTimecode = (videoPlayer, video, baseTimecode) => {
   return getTimecodesOffset(video, videoPlayer) + baseTimecode
 }
+
+/** Get thumbnail image for video provider/id */
+export const getVideoThumbnail = (provider, providerId) => {
+  if (provider === 'youtube') {
+    return `https://img.youtube.com/vi/${providerId}/mqdefault.jpg`
+  } else {
+    return ''
+  }
+}
