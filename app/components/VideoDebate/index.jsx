@@ -19,7 +19,7 @@ import {
 import { resetVideoDebate } from '../../state/video_debate/actions'
 import { ColumnVideo } from './ColumnVideo'
 import { ColumnDebate } from './ColumnDebate'
-import { videoURL } from '../../lib/cf_routes'
+import { videoURL, toAbsoluteURL } from '../../lib/cf_routes'
 import { getVideoThumbnail } from '../../lib/video_utils'
 
 @connect(
@@ -64,9 +64,9 @@ export class VideoDebate extends React.PureComponent {
     return (
       <Helmet>
         <title>{title}</title>
-        <meta name="og:title" content={title} />
-        <meta name="og:description" content={description} />
-        <meta name="og:url" content={videoURL(video.hash_id)} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={toAbsoluteURL(videoURL(video.hash_id))} />
         {image && <meta property="og:image" content={image} />}
       </Helmet>
     )

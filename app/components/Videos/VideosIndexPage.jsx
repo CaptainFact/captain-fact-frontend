@@ -5,6 +5,7 @@ import { withNamespaces } from 'react-i18next'
 import capitalize from 'voca/capitalize'
 import { Helmet } from 'react-helmet'
 
+import { toAbsoluteURL } from '../../lib/cf_routes'
 import { ALL_VIDEOS, ONLY_PARTNERS, ONLY_COMMUNITY } from '../../constants'
 import { Icon } from '../Utils'
 import {
@@ -37,13 +38,13 @@ export default class VideosIndexPage extends React.PureComponent {
     return (
       <div className="videos-page">
         <Helmet>
-          <meta name="og:url" content="/videos" />
+          <meta property="og:url" content={toAbsoluteURL('/videos')} />
           <meta
-            name="og:title"
+            property="og:title"
             content="Les vidéos sourcées et vérifiées sur CaptainFact"
           />
           <meta
-            name="og:description"
+            property="og:description"
             content="Découvrez diverses vidéos sourcées et vérifiées par la communauté CaptainFact"
           />
         </Helmet>
