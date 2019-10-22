@@ -1,0 +1,92 @@
+{
+  "debate": "Verificación",
+  "history": "Historia del evento",
+  "approve": "Confirma",
+  "refute": "Refuta",
+  "comments": "Comentarios",
+  "community": "Comunidad",
+  "chat": "Conversaciones",
+  "flagForm": {
+    "title": "¿Por qué informar de este comentario?",
+    "xAvailable": "{{count}} disponible",
+    "xAvailable_plural": "{{count}} disponibles"
+  },
+  "comment": {
+    "writeComment": "Escribe un comentario...",
+    "addSource": "Añadir una fuente",
+    "post": "Añadir en comentario",
+    "post_reply": "Añadir en respuesta",
+    "deleteThread": "Suprimir el comentario",
+    "deleteThread_plural": "Suprimir el asunto",
+    "replies_hide": "Ocultar las respuestas",
+    "replies_show": "Mostrar las respuestas ({{count}})",
+    "loadMore_replies": "Cargar más respuestas ({{count}})",
+    "loadMore_comments": "Cargar más comentarios ({{count}})",
+    "replyingTo": "En respuesta a",
+    "replyingToSelf": "Como resultado de",
+    "approve": "Apruebo",
+    "approve_reply": "Apruebo este comentario",
+    "refute": "Refuto",
+    "refute_reply": "Refuto este comentario",
+    "revealForm": "Añadir una fuente o comentario",
+    "invalidURL": "El enlace a la fuente no es válido"
+  },
+  "video": {
+    "addedBy": "Añadido por un {{userType}}",
+    "partner": "socio",
+    "user": "usuario",
+    "edit": "Editar el vídeo",
+    "shiftStatements": "Desplazar todas las sentencias (en segundos)"
+  },
+  "speaker": {
+    "one": "Locutor·a",
+    "remove": "Quitar el·la locutor·a",
+    "confirmRemove": "Todas las declaraciones de {{speaker.full_name}} en este video se van a convertir en huérfanos",
+    "add": "Añadir un·a locutor·a",
+    "create": "Crear el locutor \"{{name}}\"",
+    "edit": "Modificar la información de \"{{name}}\"",
+    "search": "Escriba al menos 3 letras para iniciar la búsqueda",
+    "fullName": "Nombre completo",
+    "title": "Título",
+    "titlePlaceholder": "Político, médico, periodista...",
+    "noneFound": "No se han encontrado locutores para este nombre"
+  },
+  "statement": {
+    "remove": "Quitar la cita",
+    "confirmRemove": "¿Estás seguro?",
+    "textPlaceholder": "Escriba aquí lo que dijo el·la locutor·a",
+    "noSpeakerTextPlaceholder": "Describa lo que aparece en la imagen o añada un·a locutor·a",
+    "text": "El texto",
+    "add": "Añadir una cita",
+    "abortAdd": "Cancelar la adición de una cita",
+    "autoscroll_enable": "Activar el desplazamiento automático",
+    "autoscroll_disable": "Desactivar el desplazamiento automático",
+    "soundOnBackgroundFocus_enable": "Reproducir un sonido cuando la cita cambia en segundo plano",
+    "soundOnBackgroundFocus_disable": "No reproducir sonido cuando la cita cambia en el fondo",
+    "reverseTimeLock_lock": "Desbloquear la posición",
+    "reverseTimeLock_unlock": "Bloquear la posición"
+  },
+  "loading": {
+    "statements": "Carga de los textos",
+    "video": "Carga del vídeo"
+  },
+  "tips": {
+    "firstStatement": "Puede <1>añadir una cita</1> haciendo clic en el icono <3></3> junto al nombre del locutor",
+    "firstSpeaker": "Empieza por añadir un locutor usando la columna de la izquierda",
+    "noContentUnauthenticated": "Este video aún no ha sido verificado. Inicie sesión para contribuir!"
+  },
+  "presence": {
+    "viewer": "{{count}} espectador",
+    "viewer_plural": "{{count}} espectadores",
+    "user": "{{count}} verificador·a",
+    "user_plural": "{{count}} verificadores·as"
+  },
+  "warningUnlisted": "Este video no está en la lista pública. Puede no haber recibido la visibilidad necesaria para que las fuentes y las citas se discutan adecuadamente.",
+  "wikidata": {
+    "id": "Número único de Wikidata (QID)",
+    "search": "Escriba un nombre para iniciar la búsqueda en Wikipedia",
+    "autofill": "Recuperar automáticamente de Wikipedia",
+    "using": "Datos extraídos de <2>{{qid}}</2> (<5>edición</5>)",
+    "suggestions": "Sugerencias Wikidata :"
+  }
+}

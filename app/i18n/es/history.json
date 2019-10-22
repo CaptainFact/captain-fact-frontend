@@ -1,0 +1,42 @@
+{
+  "compare_show": "Comparar",
+  "compare_hide": "Ocultar",
+  "compareAll": "Comparar todos",
+  "hideAll": "Ocultar todo",
+  "when": "Cuando",
+  "who": "Quién",
+  "changes": "Cambios",
+  "revert": "Restaurar",
+  "entity": "Entidad",
+  "moderation": "Moderación",
+  "deletedUser": "Cuenta suprimida",
+  "madeAction": "{{action}} :",
+  "action": {
+    "create": "Creado",
+    "remove": "Retirada",
+    "update": "Actualizado",
+    "delete": "Suprimido",
+    "add": "Añadido",
+    "restore": "Restaurado",
+    "flag": "Reportado",
+    "vote_up": "Votar a favor",
+    "vote_down": "Votado en contra",
+    "self_vote": "Votado por uno mismo",
+    "revert_vote_up": "Canceló su voto a favor",
+    "revert_vote_down": "Canceló su voto en contra",
+    "revert_self_vote": "Canceló su voto por uno mismo",
+    "action_banned_bad_language": "Moderado ($t(moderation:reason.1))",
+    "action_banned_spam": "Moderado ($t(moderation:reason.2))",
+    "action_banned_irrelevant": "Moderado ($t(moderation:reason.3))",
+    "action_banned_not_constructive": "Moderado ($t(moderation:reason.4))"
+  },
+  "entities": {
+    "video": "vídeo",
+    "speaker": "coadyuvante",
+    "statement": "cita",
+    "comment": "comentario",
+    "fact": "comentario fuente",
+    "user_action": "acción",
+    "user": "usuario"
+  }
+}

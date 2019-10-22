@@ -1,0 +1,19 @@
+{
+  "presentationTitle": "Comprobemos el Internet.",
+  "presentation": "\n    <0>CaptainFact</0> es una herramienta colaborativa para revisar\n    videos de YouTube.\n    <2></2>\n    nscríbase para empezar a negar, confirmar o profundizar en los\n    hechos.\n    <4></4>\n    nstale nuestra extensión para beneficiarse de los datos de CaptainFact directamente\n    desde su reproductor de YouTube.\n  ",
+  "seeVideos": "Ver todos los videos",
+  "invitation": "Solicitar una invitación",
+  "inviteFriend": "Invitar a un amigo",
+  "footer": "Creado con <1/> usando",
+  "emailPlaceholder": "Dirección de correo-e",
+  "inviteSuccess": "Solicitud de invitación registrada!",
+  "registerAndFactCheck": "Registrarse y comprobar",
+  "installExtension": "Instalar la extensión",
+  "partners": "Los socios",
+  "ambassadors": "Embajadores",
+  "backers": "Aficionados",
+  "learnMore": "Saber más",
+  "aboutAmbassadors": "Los embajadores son responsables de cuidar de la comunidad. También tienen como objetivo aumentar las expectativas de los usuarios y participar en la gobernanza del proyecto.",
+  "openSource": "100% <2>open-source</2>, respeta su privacidad.",
+  "latest": "Los últimos vídeos"
+}

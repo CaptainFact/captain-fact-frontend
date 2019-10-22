@@ -1,0 +1,49 @@
+{
+  "1": {
+    "title": "Welcome",
+    "description": "Bienvenidos a la aventura!"
+  },
+  "2": {
+    "title": "No es un robot",
+    "description": "Con una dirección de correo-e tan bonita, no puedes ser un robot."
+  },
+  "3": {
+    "title": "Everybody hurts",
+    "description": "Buscar ayuda en la sección «Ayuda» fue lo correcto."
+  },
+  "4": {
+    "title": "A prueba de balas",
+    "description": "Con la extensión del navegador activada, nadie te engañará más"
+  },
+  "5": {
+    "title": "You're fake news !",
+    "description": "Bueno, parece que has destruido esta fuente."
+  },
+  "6": {
+    "title": "Adicto a las redes sociales",
+    "description": "Te encanta tener a estas empresas estadounidenses espiando tus datos, ¿verdad?"
+  },
+  "7": {
+    "title": "Embajador",
+    "description": "Usted es un embajador de la comunidad."
+  },
+  "8": {
+    "title": "Chasseur de fantômes",
+    "description": "Gracias por informarnos de este bug!"
+  },
+  "9": {
+    "title": "Fact Check Me, I'm Famous",
+    "description": "Ha llegado a lo más alto de la clasificación este mes, ¡felicitaciones Capitán!"
+  },
+  "10": {
+    "title": "Artista",
+    "description": "Una de sus creaciones se integra al proyecto."
+  },
+  "11": {
+    "title": "Buenas ondas",
+    "description": "Se estudiará esta mejora o nueva característica."
+  },
+  "title": "Medallas",
+  "about": "Acerca de",
+  "unlocked": "Acabas de desbloquear el éxito « {{achievement}} »"
+}

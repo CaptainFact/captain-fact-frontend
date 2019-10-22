@@ -1,0 +1,30 @@
+{
+  "categories": {
+    "siteUsage": "Uso del sitio",
+    "contribute": "Contribuir",
+    "others": "Otros"
+  },
+  "pages": {
+    "about": "Acerca de",
+    "achievements": "Medallas",
+    "ambassadors": "Convertirse en embajador",
+    "credits": "Agradecimientos",
+    "contributionGuidelines": "Guía de contribuciones",
+    "jobs": "Estamos reclutando!",
+    "moderation": "Moderación",
+    "privileges": "Privilegios",
+    "reputation": "Reputación",
+    "bug_report": "Informe de errores",
+    "extension": "Extensión",
+    "privacy": "Política de privacidad",
+    "contact": "Información de contacto",
+    "censorship_requests": "Solicitudes de censura",
+    "contribute/code": "Desarrolladores",
+    "contribute/tasks": "Tareas independientes"
+  },
+  "title": "Ayuda",
+  "goBack": "Volver al menú principal de ayuda",
+  "aboutTitle": "Acerca de las páginas de ayuda",
+  "about": "Las páginas de ayuda están ahí para facilitar la puesta en marcha de la plataforma. Son deliberadamente cortos y se recomienda encarecidamente su lectura antes de participar en el trabajo de verificación.",
+  "toStart": "Para empezar, eche un vistazo a la <1>guía de contribuciones </1> así como a las explicaciones de los <2>privilegios </2> y del <3>sistema de reputación </3>."
+}

@@ -4,9 +4,11 @@ import titleCase from 'voca/title_case'
 import dateLocaleFR from 'date-fns/locale/fr'
 import datelocaleEN from 'date-fns/locale/en'
 import datelocaleAR from 'date-fns/locale/ar'
+import datelocaleES from 'date-fns/locale/es'
 import * as fr from './fr'
 import * as en from './en'
 import * as ar from './ar'
+import * as es from './es'
 import store from '../state/index'
 import { changeLocale } from '../state/user_preferences/reducer'
 import { JS_ENV } from '../config'
@@ -16,13 +18,20 @@ dateLocaleFR.defaultDateTimeFormat = '[Le] D MMM YYYY [à] H:mm'
 dateLocaleFR.defaultDateFormat = '[Le] D MMM YYYY'
 datelocaleEN.defaultDateTimeFormat = 'D MMM YYYY [at] H:mm'
 datelocaleEN.defaultDateFormat = 'D MMM YYYY'
+datelocaleES.defaultDateTimeFormat = '[El] D MMM YYYY [a las] H:mm'
+datelocaleES.defaultDateFormat = '[El] D MMM YYYY'
 
-export const locales = { fr: dateLocaleFR, en: datelocaleEN, ar: datelocaleAR }
+export const locales = {
+  fr: dateLocaleFR,
+  en: datelocaleEN,
+  ar: datelocaleAR,
+  es: datelocaleES
+}
 
 // Configure I18N
 i18n.init({
   fallbackLng: 'en',
-  resources: { fr, en, ar },
+  resources: { fr, en, ar, es },
   lng: store.getState().UserPreferences.locale,
   defaultNS: 'main',
   joinArrays: '\n',
