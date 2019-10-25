@@ -114,6 +114,10 @@ export default class Home extends React.PureComponent {
                 <br />
                 <h2 className="title is-3">{t('howTitle')}</h2>
                 <p className="presentation">{t('how')}</p>
+                <p className="presentation">{t('how1')}</p>
+                <p className="presentation">{t('how2')}</p>
+                <p className="presentation">{t('how3')}</p>
+                <p className="presentation">{t('how4')}</p>
                 <br />
                 <Link
                   onClick={() => Matomo.registerClick('Home', 'Button', 'ExtensionPage')}
@@ -122,13 +126,15 @@ export default class Home extends React.PureComponent {
                 >
                   {t('installExtension')}
                 </Link>
-                <br />
-                <br />
               </div>
               <div className="column is-6">
                 <br />
                 <br />
                 <img src={imgExample1} alt="exemple video captainfact" />
+                <br />
+                <ExternalLinkNewTab href="https://www.youtube.com/watch?v=LsRkg2hRTiI">
+                  {t('demo')} <ExternalLinkAlt size="1em" />
+                </ExternalLinkNewTab>
                 <br />
                 <br />
               </div>

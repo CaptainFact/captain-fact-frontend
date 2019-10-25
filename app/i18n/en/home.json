@@ -11,6 +11,7 @@
   "registerAndFactCheck": "Sign up and fact-check",
   "installExtension": "Install Extension",
   "partners": "Our partners",
+  "partners-info":"More information about partnership (fr)",
   "ambassadors": "Ambassadors",
   "backers": "Backers",
   "learnMore": "Learn more",
@@ -20,7 +21,12 @@
   "discord": "Join us on Discord",
   "source": "*source: 2019 Barometer of French confidence in the media",
   "howTitle": "How does it work?",
-  "how": "CaptainFact is a collaborative fact-checking tool for YouTube videos. People help each others to verify as many informations as possible in the following way:\n    1- Video is added on the website.\n    2- Statements are extracted from the video.\n    3- Fact-checkers confirm or refute the statements.\n Facts are then pushed to all CaptainFact's extension users when they watch a YouTube video and soon to all other web medias.",
+  "how": "CaptainFact is a collaborative fact-checking tool for YouTube videos. People help each others to verify informations in this way:",
+  "how1": "1- Video is added on the website.",
+  "how2": "2- Statements are extracted from the video.",
+  "how3": "3- Fact-checkers confirm or refute the statements.",
+  "how4": "All CaptainFact's extension users will see our verifications directly on YouTube video.",
+  "demo": "See the video demonstration",
   "whoTitle": "Who are the fact-checkers?",
-  "who": "The fact-checking is done collaboratively. Everyone can share their knowledge to fight against:\n    - inaccuracies and omissions ;\n    - distortions of information (voluntary or not) ;\n    - information put out of context ;\n    - fake news ;\n    - pseudo-sciences, rhetological fallacies, intellectual dishonesty, demagogy, untruths, or other.\n    See the definition of fact checking on Wikipedia. \n    Sign up to participate!"
+  "who": "The fact-checking is done collaboratively. Everyone can share their knowledge to fight against: inaccuracies and omissions ; distortions of information (voluntary or not) ; information put out of context ; fake news ; pseudo-sciences, rhetological fallacies, intellectual dishonesty, demagogy, untruths, or other. Sign up now to participate!"
 }
