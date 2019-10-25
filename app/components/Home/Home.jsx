@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import { withNamespaces, Trans } from 'react-i18next'
 import { Flex, Box } from '@rebass/grid'
 import { Discord } from 'styled-icons/fa-brands/Discord'
+import { ExternalLinkAlt } from 'styled-icons/fa-solid/ExternalLinkAlt'
 
 import * as Matomo from '../../API/matomo'
 import { Icon } from '../Utils'
@@ -97,6 +98,10 @@ export default class Home extends React.PureComponent {
             <h2 className="title is-3">{t('partners')}</h2>
             <br />
             <AllPartners />
+            <br />
+            <ExternalLinkNewTab href="https://github.com/CaptainFact/captain-fact/wiki/Les-partenariats-entre-les-chaînes-Youtube-et-CaptainFact.io">
+              {t('partners-info')} <ExternalLinkAlt size="1em" />
+            </ExternalLinkNewTab>
             <br />
           </div>
         </section>
