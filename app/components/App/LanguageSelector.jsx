@@ -8,7 +8,8 @@ import { Globe } from 'styled-icons/fa-solid/Globe'
 const defaultLocales = new Map({
   en: 'English',
   fr: 'Français',
-  ar: 'العربية'
+  ar: 'العربية',
+  es: 'Español'
 })
 
 @withNamespaces() // Force waiting for translations to be loaded

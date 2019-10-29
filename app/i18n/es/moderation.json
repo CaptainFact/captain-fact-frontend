@@ -1,0 +1,22 @@
+{
+  "header": {
+    "date": "Fecha"
+  },
+  "actions": {
+    "flag_abusive": "Negar este informe",
+    "unsure": "No seguro",
+    "confirm": "Confirmar el informe"
+  },
+  "reason": {
+    "1": "Ataque personal o lenguaje inapropiado",
+    "2": "Spam o publicidad no deseada",
+    "3": "Fuera de tema",
+    "4": "No constructivo"
+  },
+  "seeContext": "Ver en contexto",
+  "whyReport": "En su opinión, ¿por qué se informó de este comentario?",
+  "flaggedFor": "reportó esto para \"$t(reason.{{reason}})\"",
+  "title": "Moderación",
+  "emptyModeration": "No hay nada que moderar aquí. Ve a alimentar a algunos trolls y vuelve más tarde.",
+  "pending": "A la espera de la moderación"
+}
