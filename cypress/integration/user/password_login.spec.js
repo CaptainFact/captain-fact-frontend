@@ -17,23 +17,27 @@ describe('User login', () => {
   it('works with default dev account when using email', () => {
     cy.get('input[name=email]').type(defaultEmail)
     cy.get('input[name=password]').type(defaultPassword)
-    cy.get('.user-form .button:contains("Login")').click()
-    cy.url().should('be', '/videos').then(() => {
-      cy.wait(1500).then(() => {
-        expect(localStorage.getItem('token')).to.exist
+    cy.get('.user-form .button:contains("Log in")').click()
+    cy.url()
+      .should('be', '/videos')
+      .then(() => {
+        cy.wait(1500).then(() => {
+          expect(localStorage.getItem('token')).to.exist
+        })
       })
-    })
   })
 
   it('works with default dev account when using username', () => {
     cy.get('input[name=email]').type(defaultUsername)
     cy.get('input[name=password]').type(defaultPassword)
-    cy.get('.user-form .button:contains("Login")').click()
-    cy.url().should('be', '/videos').then(() => {
-      cy.wait(1500).then(() => {
-        expect(localStorage.getItem('token')).to.exist
+    cy.get('.user-form .button:contains("Log in")').click()
+    cy.url()
+      .should('be', '/videos')
+      .then(() => {
+        cy.wait(1500).then(() => {
+          expect(localStorage.getItem('token')).to.exist
+        })
       })
-    })
   })
 
   it('validates form when pressing Enter', () => {

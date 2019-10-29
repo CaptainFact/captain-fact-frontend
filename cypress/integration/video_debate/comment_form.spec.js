@@ -12,7 +12,7 @@ describe('Can comment on statements', () => {
       cy.get('.comment-form textarea[name=text]').should(
         'have.attr',
         'placeholder',
-        'Write a comment...'
+        'Write a comment…'
       )
 
       cy.get('.comment-form input[name=source]').should(
@@ -21,7 +21,7 @@ describe('Can comment on statements', () => {
         'Add a source'
       )
 
-      cy.contains('button[type=submit]', 'Post Comment').should('be.disabled')
+      cy.contains('button[type=submit]', 'Post comment').should('be.disabled')
 
       // Regular comment without source
       const commentText = 'Just a regular comment without source.'
@@ -30,8 +30,8 @@ describe('Can comment on statements', () => {
         '.comment-form .textarea-length-counter',
         new RegExp(`${commentText.length}\\s/\\s512`)
       )
-      cy.contains('button[type=submit]', 'Post Comment').should('not.be.disabled')
-      cy.contains('button[type=submit]', 'Post Comment').click()
+      cy.contains('button[type=submit]', 'Post comment').should('not.be.disabled')
+      cy.contains('button[type=submit]', 'Post comment').click()
       cy.contains('.comments', commentText)
 
       // Regular comment with source
@@ -39,8 +39,8 @@ describe('Can comment on statements', () => {
       const regularSourceUrl = 'https://en.wikipedia.org/wiki/Frank_Zappa'
       cy.get('.comment-form textarea[name=text]').type(commentWithSourceText)
       cy.get('.comment-form input[name=source]').type(regularSourceUrl)
-      cy.contains('button[type=submit]', 'Post Comment').should('not.be.disabled')
-      cy.contains('button[type=submit]', 'Post Comment').click()
+      cy.contains('button[type=submit]', 'Post comment').should('not.be.disabled')
+      cy.contains('button[type=submit]', 'Post comment').click()
       cy.contains('.comments', commentWithSourceText)
       cy.contains('.comments', 'EN.WIKIPEDIA.ORG')
       cy.contains('.comments', 'Frank Zappa - Wikipedia')

@@ -25,6 +25,12 @@ jobs:
         - docker-compose up -d || exit 1
         # Build and start Frontend
         - npm start &
+        # Give some time for Frontend and API to start
+        - echo "Waiting for Frontend to be ready"
+        - until curl -s localhost:3333 > /dev/null; do sleep 1; done
+        - echo "Waiting for API to be ready"
+        - until curl localhost:4000; do sleep 1; done
+        - echo "Starting Cypress now..."
         # Run Cypress
         - npm run cypress -- --record --key ${CYPRESS_RECORD_KEY}
         # Shutdown Frontend and API

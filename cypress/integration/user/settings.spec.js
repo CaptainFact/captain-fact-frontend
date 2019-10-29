@@ -1,10 +1,9 @@
 import faker from 'faker'
-import { defaultUsername } from '../../support/helpers'
 
 describe('Settings', () => {
   beforeEach(() => {
-    cy.login().then(() => {
-      cy.visit(`/u/${defaultUsername}/settings`)
+    cy.login().then(user => {
+      cy.visit(`/u/${user.username}/settings`)
     })
   })
 
