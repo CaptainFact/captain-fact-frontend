@@ -109,15 +109,20 @@ export default class Home extends React.PureComponent {
         <section className="hero is-medium is-bold">
           <div className="hero-body">
             <div className="columns">
-              <div className="column is-6">
+              <div className="column is-6 presentation content">
                 <br />
                 <br />
                 <h2 className="title is-3">{t('howTitle')}</h2>
-                <p className="presentation">{t('how')}</p>
-                <p className="presentation">{t('how1')}</p>
-                <p className="presentation">{t('how2')}</p>
-                <p className="presentation">{t('how3')}</p>
-                <p className="presentation">{t('how4')}</p>
+                <p>
+                  {t('how')}
+                  <br />
+                  <ol>
+                    <li>{t('how1')}</li>
+                    <li>{t('how2')}</li>
+                    <li>{t('how3')}</li>
+                  </ol>
+                </p>
+                <p>{t('how4')}</p>
                 <br />
                 <Link
                   onClick={() => Matomo.registerClick('Home', 'Button', 'ExtensionPage')}
