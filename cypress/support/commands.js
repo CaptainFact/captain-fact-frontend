@@ -8,19 +8,20 @@
 import { defaultApiUrl, defaultEmail, defaultPassword, randomYoutubeURL } from './helpers'
 
 Cypress.Commands.add('login', () => {
-  cy.request({
-    method: 'POST',
-    url: `${defaultApiUrl}/auth/identity/callback`,
-    body: {
-      email: defaultEmail,
-      password: defaultPassword
-    }
-  }).then(resp => {
-    const { user, token } = resp.body
-    window.localStorage.setItem('token', token)
-    // TODO store user in store
-    return user
-  })
+  return cy
+    .request({
+      method: 'POST',
+      url: `${defaultApiUrl}/auth/identity/callback`,
+      body: {
+        email: defaultEmail,
+        password: defaultPassword
+      }
+    })
+    .then(resp => {
+      const { user, token } = resp.body
+      window.localStorage.setItem('token', token)
+      return user
+    })
 })
 
 Cypress.Commands.add('visitNewRandomVideo', () => {
