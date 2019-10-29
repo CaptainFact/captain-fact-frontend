@@ -9,6 +9,7 @@ import {
   ENTITY_SPEAKER,
   ACTION_ADD
 } from '../constants'
+import { FRONTEND_URL } from '../config'
 
 export const videoURL = videoHashID => {
   return `/videos/${videoHashID}`
@@ -51,3 +52,8 @@ export const userActionURL = action => {
 export const userProfileURL = user => `/u/${user.username}`
 
 export const userNotificationsURL = user => `${userProfileURL(user)}/notifications`
+
+/** A helper to convert the URLs in this file to their absolute counterpart */
+export const toAbsoluteURL = subPath => {
+  return FRONTEND_URL + subPath
+}

@@ -22,15 +22,46 @@ export default class Layout extends React.PureComponent {
     return { error }
   }
 
+  renderMetadata() {
+    return (
+      <Helmet>
+        <title>CaptainFact</title>
+        <meta property="og:title" content="CaptainFact.io" />
+        <meta
+          property="og:description"
+          content="Collaborative, real-time fact checking. Free and open source."
+        />
+        <meta
+          property="og:image"
+          content="https://captainfact.io/assets/img/banner.jpg"
+        />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta
+          property="og:image"
+          content="https://captainfact.io/assets/img/CaptainFact.png"
+        />
+        <meta property="og:image:width" content="100" />
+        <meta property="og:image:height" content="100" />
+        <meta property="og:type" content="website" />
+        <meta property="fb:app_id" content="1502183533135523" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@CaptainFact_io" />
+        <meta
+          name="twitter:image"
+          content="https://captainfact.io/assets/img/banner_twitter.png"
+        />
+      </Helmet>
+    )
+  }
+
   render() {
     const { locale, sidebarExpended, children } = this.props
     const mainContainerClass = sidebarExpended ? undefined : 'expended'
 
     return (
       <div id="main-layout" lang={locale}>
-        <Helmet>
-          <title>CaptainFact</title>
-        </Helmet>
+        {this.renderMetadata()}
         <MainModalContainer />
         <FlashMessages />
         <Navbar />
