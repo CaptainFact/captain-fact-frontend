@@ -1,1 +1,86 @@
-{}
+{
+    "entities": {
+        "video": "video",
+        "video_plural": "video",
+        "speaker": "altoparlante",
+        "speaker_plural": "altoparlanti",
+        "statement": "dichiarazione",
+        "statement_plural": "dichiarazioni"
+    },
+    "menu": {
+        "login": "Accedi",
+        "signup": "Registrati",
+        "logout": "Esci",
+        "settings": "Impostazioni",
+        "profile": "Profilo",
+        "activity": "Attività",
+        "myActivity": "La mia $t(menu.activity)",
+        "content": "Contenuto",
+        "language": "Lingua",
+        "other": "Altro",
+        "donation": "Sostienici",
+        "extension": "Scarica l'estensione",
+        "help": "Per saperne di più",
+        "moderation": "Moderazione",
+        "addedVideos": "Video aggiunti",
+        "notifications": "Notifiche",
+        "subscriptions": "Iscrizioni"
+    },
+    "actions": {
+        "save": "Salva",
+        "cancel": "Annulla",
+        "send": "Invia",
+        "moreInfo": "Ulteriori informazioni",
+        "goBack": "Torna indietro",
+        "reload": "Ricarica",
+        "flag": "Flag",
+        "flagged": "Contrassegnato",
+        "remove": "Rimuovi",
+        "delete": "Elimina",
+        "reply": "Rispondi",
+        "addToThread": "Aggiungi al thread",
+        "approve": "Approva",
+        "refute": "Confutare",
+        "edit": "Modifica",
+        "loading": "Caricamento",
+        "share": "Condividi",
+        "apply": "Applica"
+    },
+    "misc": {
+        "timeAt": "a",
+        "staring": "Fissando",
+        "by": "Da",
+        "fieldMinLength": "Deve essere di almeno {{min}} caratteri",
+        "fieldMaxLength": "Deve essere inferiore a {{max}} caratteri",
+        "and": "e",
+        "other": "{{count}} altro",
+        "other_plural": "{{count}} altri",
+        "character": "carattere",
+        "character_plural": "caratteri",
+        "clipboardSuccess": "URL copiato negli Appunti",
+        "clipboardFail": "Impossibile copiare negli Appunti",
+        "all": "Tutti",
+        "unknown": "Sconosciuto",
+        "languageFilter": "Lingua",
+        "source": "Fonte",
+        "colon": ":",
+        "flags": "Bandiere"
+    },
+    "videos": {
+        "add": "Aggiungi video",
+        "addThis": "Aggiungi questo video",
+        "placeholder": "URL del video",
+        "analysing": "Analisi del video",
+        "public": "Video pubblico",
+        "unlisted": "Non elencato",
+        "publicDescription": "I video pubblici sono elencati nella pagina dei video e nell'estensione del browser.",
+        "unlistedDescription": "I video non elencati non saranno elencati nella pagina \"video\", né nell'estensione del browser. Utilizzateli per lavorare su un contenuto che non volete portare avanti sulla piattaforma."
+    },
+    "pagination": {
+        "prev": "Pagina precedente",
+        "next": "Pagina successiva"
+    },
+    "all": "Tutti",
+    "partners": "Partner",
+    "users": "Utenti"
+}
