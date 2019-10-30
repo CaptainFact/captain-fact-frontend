@@ -1,5 +1,22 @@
-# Netlify configuration. We use Netlify for pull requests previews. |
-# ------------------------------------------------------------------/
+# Netlify configuration  |
+# -----------------------/
+
+# For staging and pre-deploys
+[context.deploy-preview.environment]
+  FB_APP_ID = "1923415864574767"
+  GRAPHQL_API_URL = "https://graphql.staging.captainfact.io"
+  HTTP_API_URL = "https://api.staging.captainfact.io"
+  WS_API_URL = "wss://api.staging.captainfact.io/socket"
+  JS_ENV = "staging"
+  FRONTEND_URL = "https://staging.captainfact.io"
+
+[context.branch-deploy.environment]
+  FB_APP_ID = "1923415864574767"
+  GRAPHQL_API_URL = "https://graphql.staging.captainfact.io"
+  HTTP_API_URL = "https://api.staging.captainfact.io"
+  WS_API_URL = "wss://api.staging.captainfact.io/socket"
+  JS_ENV = "staging"
+  FRONTEND_URL = "https://staging.captainfact.io"
 
 [[redirects]]
   from = "/*"

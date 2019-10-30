@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router'
 import { withNamespaces, Trans } from 'react-i18next'
 import { Flex, Box } from '@rebass/grid'
+import { Discord } from 'styled-icons/fa-brands/Discord'
+import { ExternalLinkAlt } from 'styled-icons/fa-solid/ExternalLinkAlt'
 
 import * as Matomo from '../../API/matomo'
 import { Icon } from '../Utils'
@@ -15,6 +17,9 @@ import CFSocialProfiles from './CFSocialProfiles'
 import LastVideos from './LastVideos'
 import Message from '../Utils/Message'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import imgMedia from '../../assets/media.jpg'
+import imgExample1 from '../../assets/example1.jpg'
+import imgIllutration from '../../assets/landing-illustration.png'
 
 @withNamespaces('home')
 @withLoggedInUser
@@ -75,26 +80,110 @@ export default class Home extends React.PureComponent {
           <div className="hero-body">
             <div className="columns">
               <div className="column is-6">
-                <h1 className="title is-3">{t('presentationTitle')}</h1>
+                <h1 className="title1">{t('titleCF')}</h1>
+                <h2 className="title">{t('presentationTitle')}</h2>
+                <ExternalLinkNewTab href="https://fr.kantar.com/médias/digital/2019/barometre-2019-de-la-confiance-des-francais-dans-les-media/">
+                  {t('source')}
+                </ExternalLinkNewTab>
                 {this.renderPresentation()}
+                {this.renderButtons()}
               </div>
-              <div className="column is-1" />
-              <div className="column">{this.renderButtons()}</div>
+              <img src={imgMedia} alt="media effects" />
             </div>
           </div>
         </section>
-        <section className="separator" />
+
         <section className="section partners">
           <div className="content">
-            <h1 className="title is-3">{t('partners')}</h1>
+            <h2 className="title is-3">{t('partners')}</h2>
             <br />
             <AllPartners />
             <br />
+            <ExternalLinkNewTab href="https://github.com/CaptainFact/captain-fact/wiki/Les-partenariats-entre-les-chaînes-Youtube-et-CaptainFact.io">
+              {t('partners-info')} <ExternalLinkAlt size="1em" />
+            </ExternalLinkNewTab>
             <br />
-            <br />
+          </div>
+        </section>
+
+        <section className="hero is-medium is-bold">
+          <div className="hero-body">
+            <div className="columns">
+              <div className="column is-6 presentation content">
+                <br />
+                <br />
+                <h2 className="title is-3">{t('howTitle')}</h2>
+                <p>
+                  {t('how')}
+                  <br />
+                  <ol>
+                    <li>{t('how1')}</li>
+                    <li>{t('how2')}</li>
+                    <li>{t('how3')}</li>
+                  </ol>
+                </p>
+                <p>{t('how4')}</p>
+                <br />
+                <Link
+                  onClick={() => Matomo.registerClick('Home', 'Button', 'ExtensionPage')}
+                  className="button animated-hover is-medium is-gradient-primary-light"
+                  to="/extension"
+                >
+                  {t('installExtension')}
+                </Link>
+              </div>
+              <div className="column is-6">
+                <br />
+                <br />
+                <img src={imgExample1} alt="exemple video captainfact" />
+                <br />
+                <ExternalLinkNewTab href="https://www.youtube.com/watch?v=LsRkg2hRTiI">
+                  {t('demo')} <ExternalLinkAlt size="1em" />
+                </ExternalLinkNewTab>
+                <br />
+                <br />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="hero is-medium is-bold">
+          <div className="hero-body">
+            <div className="columns">
+              <div className="column is-6">
+                <br />
+                <br />
+                <img src={imgIllutration} alt="community" />
+              </div>
+              <div className="column is-6">
+                <h2 className="title is-3">{t('whoTitle')}</h2>
+                <p className="presentation">{t('who')}</p>
+                <br />
+                <Link
+                  onClick={() => Matomo.registerClick('Home', 'Button', 'SignUp')}
+                  className="button animated-hover is-medium is-gradient-primary-light"
+                  to="/signup"
+                >
+                  {t('registerAndFactCheck')}
+                </Link>
+                <br />
+                <br />
+                <ExternalLinkNewTab href="https://github.com/CaptainFact">
+                  <Discord size="1.5em" /> {t('discord')}
+                </ExternalLinkNewTab>
+
+                <br />
+                <br />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section partners">
+          <div className="content">
             <Flex flexWrap="wrap">
               <Box width={[1, 1, 0.5, 0.5, 1 / 3]} mb="2em">
-                <h1 className="title is-3">{t('backers')}</h1>
+                <h2 className="title is-3">{t('backers')}</h2>
                 <OpenCollectiveContributors
                   tier="soutien-régulier"
                   button={false}
@@ -103,7 +192,7 @@ export default class Home extends React.PureComponent {
                 <OpenCollectiveContributors tier="donateur" button={false} limit={8} />
               </Box>
               <Box width={[1, 1, 0.5, 0.5, 2 / 3]}>
-                <h1 className="title is-3">{t('ambassadors')}</h1>
+                <h2 className="title is-3">{t('ambassadors')}</h2>
                 <Message>
                   {t('aboutAmbassadors')}{' '}
                   <Link to="/help/ambassadors">{t('learnMore')}</Link>
@@ -114,6 +203,7 @@ export default class Home extends React.PureComponent {
             <br />
           </div>
         </section>
+
         <section className="section">
           <CFSocialProfiles size="3em" color="white" />
         </section>
@@ -121,7 +211,7 @@ export default class Home extends React.PureComponent {
           <br />
           <br />
           <div className="has-text-centered">
-            <h1 className="title is-3">{t('latest')}</h1>
+            <h2 className="title is-3">{t('latest')}</h2>
             <Link
               onClick={() => Matomo.registerClick('Home', 'Button', 'SeeAllVideos')}
               className="button animated-hover is-medium is-gradient-primary-light"

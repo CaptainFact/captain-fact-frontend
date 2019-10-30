@@ -1,0 +1,33 @@
+{
+    "title": "Error",
+    "crash": "😥 Nooooooo! El sitio se estrelló. No es su culpa, no hizo nada malo.",
+    "contactSupport": "Contacte con el equipo de soporte",
+    "addIssue": "Añadir un ticket a GitHub",
+    "reload": "Recargar la página",
+    "errorDetails": "Detalles técnicos",
+    "server": {
+        "unknown": "Algo salió mal de nuestro lado, ¡lo estamos viendo!",
+        "invalid_email": "Dirección de correo-e inválida",
+        "invalid_token": "El código de verificación no es válido o ha caducado",
+        "invalid_invitation_token": "Su código de invitación no es válido o ha caducado",
+        "reset_failed": "El reinicio falló",
+        "authentication_failed": "Falló la autenticación",
+        "invalid_email_password": "Dirección de correo-e o contraseña inválida",
+        "not_enough_reputation": "No tienen suficiente reputación para hacer eso",
+        "limit_reached": "Usted ha alcanzado el límite para esta acción, inténtelo de nuevo en unos minutos",
+        "not_found": "Este elemento no parece existir, intente refrescar la página si el problema persiste",
+        "action_already_done": "Esta acción ya se ha llevado a cabo",
+        "unauthenticated": "Debe iniciar sesión para realizar esta acción",
+        "unauthorized": "Por favor (re)conéctese para continuar",
+        "noInternet": "La conexión con el servidor ha fallado, intente actualizar la página",
+        "remote_video_404": "Parece que este video no existe"
+    },
+    "client": {
+        "joinCrashed": "La conexión con el servidor ha fallado",
+        "thirdParty": "Falló la autenticación de terceros",
+        "submissionError": "Se ha producido un error al enviar los datos",
+        "noVideoAvailable": "No hay video disponible",
+        "notEnoughReputation": "No hay suficiente reputación para acceder a esta función",
+        "needReputation": "Necesitas al menos {{requiredRep}} puntos de <2>reputación</2> para hacer esto"
+    }
+}

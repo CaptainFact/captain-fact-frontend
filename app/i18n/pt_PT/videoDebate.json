@@ -1,0 +1,88 @@
+{
+    "debate": "Verificação-facto",
+    "history": "Histórico",
+    "approve": "Confirmar",
+    "refute": "Refutar",
+    "comments": "Comentários",
+    "community": "Comunidade",
+    "chat": "Conversação",
+    "flagForm": {
+        "title": "Porque é que quer sinalizar este comentário?",
+        "xAvailable": "{{count}} disponível",
+        "xAvailable_plural": "{{count}} disponíveis"
+    },
+    "comment": {
+        "writeComment": "Escreva um comentário…",
+        "addSource": "Adicione uma fonte",
+        "post": "Publicar comentário",
+        "post_reply": "Publicar resposta",
+        "deleteThread": "Eliminar comentário",
+        "deleteThread_plural": "Eliminar tópico",
+        "replies_hide": "Ocultar respostas",
+        "replies_show": "Mostrar ({{count}}) respostas",
+        "loadMore_replies": "Carregar mais ({{count}}) respostas",
+        "loadMore_comments": "Carregar mais ({{count}}) comentários",
+        "replyingTo": "A responder a",
+        "replyingToSelf": "Adicionar ao tópico",
+        "approve": "Aprovar",
+        "approve_reply": "Aprovar este comentário",
+        "refute": "Refutar",
+        "refute_reply": "Refutar este comentário",
+        "revealForm": "Adicionar uma fonte ou comentário",
+        "invalidURL": "URL fonte inválido"
+    },
+    "video": {
+        "addedBy": "Adicionado por um {{userType}}",
+        "partner": "parceiro",
+        "user": "utilizador",
+        "edit": "Editar Vídeo",
+        "shiftStatements": "Deslocar todas as declarações (em segundos)"
+    },
+    "speaker": {
+        "one": "Orador",
+        "remove": "Remover orador",
+        "confirmRemove": "Todas as declarações efetuadas por {{speaker.full_name}} neste vídeo irão passar a órfãs",
+        "add": "Adicionar Orador",
+        "create": "Criar orador \"{{name}}\"",
+        "edit": "Editar informação de \"{{name}}\"",
+        "search": "Digite pelo menos 3 carateres para começar a procurar",
+        "fullName": "Nome completo",
+        "title": "Título",
+        "titlePlaceholder": "Político, doutor, jornalista…",
+        "noneFound": "Não foi encontrado nenhum orador para este nome"
+    },
+    "statement": {
+        "remove": "Remover declaração",
+        "confirmRemove": "Deseja remover esta declaração?",
+        "textPlaceholder": "Digite um transcrição do que o orador diz",
+        "noSpeakerTextPlaceholder": "Descreva o que vê ou selecione um orador",
+        "text": "Texto",
+        "add": "Adicionar uma Declaração",
+        "abortAdd": "Fechar Formulário da Declaração",
+        "autoscroll_enable": "Ativar Deslocamento",
+        "autoscroll_disable": "Desativar Deslocamento",
+        "soundOnBackgroundFocus_enable": "Reproduzir um som quando o foco muda em segundo plano",
+        "soundOnBackgroundFocus_disable": "Não reproduzir um som quando o foco muda em segundo plano",
+        "reverseTimeLock_lock": "Desbloquear marcador de tempo",
+        "reverseTimeLock_unlock": "Bloquear marcador de tempo"
+    },
+    "loading": {
+        "statements": "Carregar Declarações",
+        "video": "Carregar Vídeo"
+    },
+    "tips": {
+        "firstStatement": "Pode <1>adicionar uma primeira declaração,</1> clicando no <3></3> ícone ao lado do nome do orador",
+        "firstSpeaker": "Comece a adicionar um orador, utilizando a coluna da esquerda",
+        "noContentUnauthenticated": "Este vídeo ainda não foi verificado. Iniciar Sessão / Registar para contribuir!"
+    },
+    "presence": {
+        "viewer": "{{count}} visualizador",
+        "viewer_plural": "{{count}} visualizadores",
+        "user": "{{count}} verificador-facto",
+        "user_plural": "{{count}} verificadores-facto"
+    },
+    "warningUnlisted": "Este vídeo não está listado publicamente. Este poderá não ter recebido a visibilidade necessária para que as declarações e as fontes sejam contestadas. Tenha cuidado com a informação que irá encontrar aqui.",
+    "wikidata": {
+        "id": "Wikidata QID"
+    }
+}
