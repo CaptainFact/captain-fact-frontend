@@ -1,4 +1,12 @@
 {
+    "introTitle": "Collaborative fact-checking of the video",
+    "intro": "Here, CaptainFact's members can quote video's moments that should be verified. Quotes have to be confirm or refute with sources. All verifications are displayed directly on video, on screen of all CaptainFact extension's users.",
+    "extensionDL": "Learn more about extension",
+    "intro1": "- Quote a video's statement with (+) button.",
+    "intro2": "- Add sources or comments behind the statements.",
+    "intro3": "- Rate sources quality with up votes or down votes.",
+    "intro4": "- Get reputation for each up votes on your job and ",
+    "intro5": "unlock new privileges on CaptainFact",
     "debate": "Fact-checking",
     "history": "History",
     "approve": "Confirm",

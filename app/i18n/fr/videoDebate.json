@@ -1,4 +1,12 @@
 {
+  "introTitle": "Vérification collaborative de la vidéo",
+  "intro": "Ci-dessous, les membres de CaptainFact peuvent citer les passages de la vidéo à vérifier. Les citations sont confirmées ou réfutées avec des sources. Les vérifications s'affichent ensuite directement dans la vidéo, à l'écran de tous les utilisateurs de l'extension CaptainFact.",
+  "extensionDL": "Découvrir l'extension navigateur",
+  "intro1": "- Citez un passage de vidéo à l'aide du bouton (+) en bas à droite.",
+  "intro2": "- Ajoutez une source ou un commentaire en dessous des citations.",
+  "intro3": "- Évaluez la pertinence des sources et commentaires avec les flèches ^ et v.",
+  "intro4": "- Recevez de la réputation à chaque évaluation positive et ",
+  "intro5": "débloquez de nouveaux droits sur le site",
   "debate": "Vérification",
   "history": "Historique",
   "approve": "Confirme",

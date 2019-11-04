@@ -14,6 +14,7 @@ import { hasStatementForm } from '../../state/video_debate/statements/selectors'
 import { Icon } from '../Utils/Icon'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import Message from '../Utils/Message'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
 @connect(state => ({
   isLoading: isLoadingVideoDebate(state),
@@ -91,8 +92,36 @@ export class ColumnDebate extends React.PureComponent {
   }
 
   render() {
+    const { t } = this.props
+
     return (
       <div id="col-debate" className="column">
+        <div className="introduction">
+          <h2>
+            <strong>{t('introTitle')}</strong>
+          </h2>
+          <p>
+            <br />
+            {t('intro')}
+          </p>
+          <ExternalLinkNewTab href="/extension">{t('extensionDL')}</ExternalLinkNewTab>
+
+          <p>
+            <br />
+            <strong>{t('intro1')}</strong>
+          </p>
+          <p>
+            <strong>{t('intro2')}</strong>
+          </p>
+          <p>
+            <strong>{t('intro3')}</strong>
+          </p>
+          <p>
+            <strong>{t('intro4')}</strong>
+            <ExternalLinkNewTab href="/help/privileges">{t('intro5')}</ExternalLinkNewTab>
+            .
+          </p>
+        </div>
         {this.renderContent()}
       </div>
     )
