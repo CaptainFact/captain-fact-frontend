@@ -132,7 +132,7 @@
     "babel-jest": "^24.7.1",
     "babel-loader": "^8.0.6",
     "babel-plugin-react-remove-properties": "^0.3.0",
-    "babel-plugin-styled-components": "^1.9.2",
+    "babel-plugin-styled-components": "^1.10.6",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "babel-plugin-webpack-alias": "^2.1.2",
     "babel-plugin-wildcard": "^5.0.0",
@@ -176,6 +176,6 @@
     "webpack": "^4.27.1",
     "webpack-bundle-analyzer": "^3.5.2",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.2.1"
+    "webpack-dev-server": "^3.9.0"
   }
 }
