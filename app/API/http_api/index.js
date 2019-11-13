@@ -5,6 +5,7 @@ import { HTTP_API_URL } from '../../config'
 import parseServerError from '../server_error'
 import flashNoInternetError from '../no_internet_error'
 import { optionsToQueryString } from '../../lib/url_utils'
+import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
 
 class CaptainFactHttpApi {
   constructor(baseUrl, token) {
@@ -82,7 +83,7 @@ class CaptainFactHttpApi {
 }
 
 // Configure HttpApi
-const token = typeof localStorage === 'undefined' ? null : localStorage.token
+const token = getFromLocalStorage(LOCAL_STORAGE_KEYS.TOKEN)
 const HttpApi = new CaptainFactHttpApi(HTTP_API_URL, token)
 
 export default HttpApi

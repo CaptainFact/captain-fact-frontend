@@ -2,10 +2,11 @@ import { Socket } from 'phoenix'
 import { WS_API_URL } from '../config'
 import parseServerError from './server_error'
 import noInternetError from './no_internet_error'
+import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../lib/local_storage'
 
 class CaptainFactSocketApi {
   constructor(url) {
-    const token = typeof localStorage === 'undefined' ? null : localStorage.token
+    const token = getFromLocalStorage(LOCAL_STORAGE_KEYS.TOKEN)
     this.socketUrl = url
     this.channels = {}
     this.createSocket(token)
