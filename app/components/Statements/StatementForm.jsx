@@ -19,6 +19,7 @@ import {
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 import ControlTextarea from '../FormUtils/ControlTextarea'
 import { cleanStrMultiline } from '../../lib/clean_str'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
 @connect(
   ({ VideoDebate: { video, statements } }) => ({
@@ -91,7 +92,7 @@ export class StatementForm extends React.PureComponent {
   render() {
     const {
       position,
-      offset = 0,
+
       handleSubmit,
       valid,
       speakers,
@@ -183,6 +184,32 @@ export class StatementForm extends React.PureComponent {
             {t('main:actions.cancel')}
           </LinkWithIcon>
         </footer>
+        <div className="helpStatement">
+          <p>
+            <strong>{t('statement.help1')}</strong>
+          </p>
+          <p>{t('statement.help2')}</p>
+          <p>{t('statement.help3')}</p>
+          <p>{t('statement.help4')}</p>
+          <p>{t('statement.help5')}</p>
+          <p>
+            <i>{t('statement.help11')}</i>
+          </p>
+          <p>
+            <br />
+            <strong>{t('statement.help6')}</strong>
+          </p>
+          <p>{t('statement.help7')}</p>
+          <p>{t('statement.help8')}</p>
+          <p>{t('statement.help9')}</p>
+          <p>{t('statement.help10')}</p>
+          <p>
+            <br />
+            <ExternalLinkNewTab href="/help/contributionGuidelines">
+              {t('statement.helpLink')}
+            </ExternalLinkNewTab>
+          </p>
+        </div>
       </form>
     )
   }

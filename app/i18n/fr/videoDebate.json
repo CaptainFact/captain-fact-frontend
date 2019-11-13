@@ -72,7 +72,19 @@
     "soundOnBackgroundFocus_enable": "Jouer un son quand la citation change en arriere plan",
     "soundOnBackgroundFocus_disable": "Ne pas jouer de son quand la citation change en arriere plan",
     "reverseTimeLock_lock": "Déverrouiller la position",
-    "reverseTimeLock_unlock": "Verrouiller la position"
+    "reverseTimeLock_unlock": "Verrouiller la position",
+    "help1": "Pour avoir sa place sur CaptainFact, une citation doit remplir au moins un des critères suivants :",
+    "help2": "- être vérifiable grâce à l’exposition de faits ;",
+    "help3": "- faire mention d'une source ou d'un contenu que l’on peut vérifier ;",
+    "help4": "- présenter des éléments incomplets ou approximatifs ;",
+    "help5": "- présenter un argument fallacieux, trompeur ou mensonger ;",
+    "help11": "- sinon mériter une note / référence pour en améliorer la compréhension.",
+    "help6": "Ne méritent pas travail de vérification :",
+    "help7": "- les évidences comme « Le ciel est bleu ! » ;",
+    "help8": "- les figures de style et l’humour ;",
+    "help9": "- les erreurs mineures ;",
+    "help10": "- les opinions personnelles.",
+    "helpLink": "Voir le guide de contribution complet"
   },
   "loading": {
     "statements": "Chargement des textes",

@@ -72,7 +72,19 @@
         "soundOnBackgroundFocus_enable": "Play a sound when the focus change in background",
         "soundOnBackgroundFocus_disable": "Don't play a sound when the focus change in background",
         "reverseTimeLock_lock": "Unlock time marker",
-        "reverseTimeLock_unlock": "Lock time marker"
+        "reverseTimeLock_unlock": "Lock time marker",
+        "help1": "To have its place on CaptainFact, a quote must fill out at least one of the following criteria:",
+        "help2": "- be verifiable",
+        "help3": "- mention a source or a content on which a comment could make the link",
+        "help4": "- present incomplete or approximate elements",
+        "help5": "- making a false, misleading or deceptive argument",
+        "help11": "- or deserve references that can improve understanding.",
+        "help6": "It is also recommended to ask the following questions before adding a quotation:",
+        "help7": "-Could a typical person, upon hearing the statement, ask himself if it's true? For example, the statement ``The sky is blue`` is verifiable but doesn't really need to be sourced.",
+        "help8": "- Is the statement likely to be repeated and shared?",
+        "help9": "- Is this a minor error or an acceptable hyperbole - often used in politics?",
+        "help10": "- Is this a personal opinion?",
+        "helpLink": "Read the contribution guidelines"
     },
     "loading": {
         "statements": "Loading Statements",
