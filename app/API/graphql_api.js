@@ -1,8 +1,9 @@
 import ApolloClient from 'apollo-boost'
 import { GRAPHQL_API_URL } from '../config'
+import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../lib/local_storage'
 
 const authMiddleware = operation => {
-  const token = localStorage.getItem('token')
+  const token = getFromLocalStorage(LOCAL_STORAGE_KEYS.TOKEN)
 
   if (token) {
     operation.setContext({

@@ -2,6 +2,11 @@ import { Record } from 'immutable'
 import { createAction, handleActions } from 'redux-actions'
 import { ALL_VIDEOS, MOBILE_WIDTH_THRESHOLD, SUPPORTED_LOCALES } from '../../constants'
 import browserLocale from '../../i18n/browser_locale'
+import {
+  setLocalStorage,
+  LOCAL_STORAGE_KEYS,
+  getFromLocalStorage
+} from '../../lib/local_storage'
 
 export const toggleSidebar = createAction('USER_PREFERENCES/TOGGLE_SIDEBAR')
 export const closeSidebar = createAction('USER_PREFERENCES/CLOSE_SIDEBAR')
@@ -31,10 +36,10 @@ const loadState = () => {
   let localStoragePrefs = {}
   try {
     // Load preferences from localStorage
-    localStoragePrefs = JSON.parse(localStorage.preferences)
+    localStoragePrefs = JSON.parse(getFromLocalStorage(LOCAL_STORAGE_KEYS.PREFERENCES))
   } catch (e) {
     // Or from default if it fails
-    localStorage.preferences = JSON.stringify(Preferences())
+    setLocalStorage(LOCAL_STORAGE_KEYS.PREFERENCES, JSON.stringify(Preferences()))
     localStoragePrefs = { locale: browserLocale() }
   }
   // Ensure the locale is valid, use the default otherwise
@@ -47,7 +52,7 @@ const loadState = () => {
 
 const updateState = (state, key, value) => {
   state = state.set(key, value)
-  localStorage.preferences = JSON.stringify(state.toJSON())
+  setLocalStorage(LOCAL_STORAGE_KEYS.PREFERENCES, JSON.stringify(state.toJSON()))
   return state
 }
 

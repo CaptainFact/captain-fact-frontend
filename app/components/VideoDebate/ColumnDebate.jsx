@@ -14,6 +14,12 @@ import { hasStatementForm } from '../../state/video_debate/statements/selectors'
 import { Icon } from '../Utils/Icon'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import Message from '../Utils/Message'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
+import {
+  getFromLocalStorage,
+  LOCAL_STORAGE_KEYS,
+  setLocalStorage
+} from '../../lib/local_storage'
 
 @connect(state => ({
   isLoading: isLoadingVideoDebate(state),
@@ -25,6 +31,15 @@ import Message from '../Utils/Message'
 @withNamespaces('videoDebate')
 @withLoggedInUser
 export class ColumnDebate extends React.PureComponent {
+  constructor(props) {
+    super(props)
+    this.state = {
+      showIntroduction: !getFromLocalStorage(
+        LOCAL_STORAGE_KEYS.DISMISS_VIDEO_INTRODUCTION
+      )
+    }
+  }
+
   renderInfo(message) {
     return (
       <Message>
@@ -90,9 +105,44 @@ export class ColumnDebate extends React.PureComponent {
     }
   }
 
+  dismissHelp = () => {
+    setLocalStorage(LOCAL_STORAGE_KEYS.DISMISS_VIDEO_INTRODUCTION, true)
+    this.setState({ showIntroduction: false })
+  }
+
+  renderIntroduction() {
+    const { t } = this.props
+    return (
+      <Message
+        className="introduction"
+        header={t('introTitle')}
+        onClose={this.dismissHelp}
+      >
+        <p>{t('intro')}</p>
+        <ExternalLinkNewTab href="/extension">{t('extensionDL')}</ExternalLinkNewTab>
+
+        <p>
+          <br />
+          <strong>{t('intro1')}</strong>
+        </p>
+        <p>
+          <strong>{t('intro2')}</strong>
+        </p>
+        <p>
+          <strong>{t('intro3')}</strong>
+        </p>
+        <p>
+          <strong>{t('intro4')}</strong>
+          <ExternalLinkNewTab href="/help/privileges">{t('intro5')}</ExternalLinkNewTab>.
+        </p>
+      </Message>
+    )
+  }
+
   render() {
     return (
       <div id="col-debate" className="column">
+        {this.state.showIntroduction && this.renderIntroduction()}
         {this.renderContent()}
       </div>
     )
