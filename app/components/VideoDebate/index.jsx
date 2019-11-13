@@ -59,7 +59,7 @@ export class VideoDebate extends React.PureComponent {
 
   renderMeta(video) {
     const title = `Vérification complète de : ${video.title}`
-    const image = getVideoThumbnail(video.provider, video.provider_id)
+    const image = getVideoThumbnail('youtube', video.youtube_id)
     const description = `${video.title} vérifiée citation par citation par la communauté CaptainFact`
     return (
       <Helmet>
