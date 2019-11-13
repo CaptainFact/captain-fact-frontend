@@ -92,7 +92,6 @@ export class StatementForm extends React.PureComponent {
   render() {
     const {
       position,
-
       handleSubmit,
       valid,
       speakers,
