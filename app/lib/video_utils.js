@@ -19,10 +19,20 @@ export const getTimecode = (videoPlayer, video, baseTimecode) => {
   return getTimecodesOffset(video, videoPlayer) + baseTimecode
 }
 
+export const THUMBNAILS_SIZES = {
+  MEDIUM: 'MEDIUM',
+  LARGE: 'LARGE'
+}
+
 /** Get thumbnail image for video provider/id */
-export const getVideoThumbnail = (provider, providerId) => {
+export const getVideoThumbnail = (
+  provider,
+  providerId,
+  size = THUMBNAILS_SIZES.MEDIUM
+) => {
   if (provider === 'youtube') {
-    return `https://img.youtube.com/vi/${providerId}/mqdefault.jpg`
+    const img = size === THUMBNAILS_SIZES.MEDIUM ? 'mqdefault' : 'hqdefault'
+    return `https://img.youtube.com/vi/${providerId}/${img}.jpg`
   } else {
     return ''
   }
