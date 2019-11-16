@@ -38,7 +38,7 @@ are not at risk of being compromised.
 #### 👥 You are members of our community
 
 May it be on the site or the [Discord](https://discord.gg/2Qd7hMz), you
-can gauge the community's grievances, redact the chat and help maintain
+can gauge the community's grievances, moderate the chat and help maintain
 a safe and healthy atmosphere on the platform.
 
 #### 🔁 You are managing yourself
