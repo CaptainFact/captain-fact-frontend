@@ -168,7 +168,7 @@ export default class Home extends React.PureComponent {
                 </Link>
                 <br />
                 <br />
-                <ExternalLinkNewTab href="https://github.com/CaptainFact">
+                <ExternalLinkNewTab href="https://discord.gg/Z22Vhda">
                   <Discord size="1.5em" /> {t('discord')}
                 </ExternalLinkNewTab>
 
