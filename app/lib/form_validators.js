@@ -1,5 +1,3 @@
-import capitalize from 'voca/capitalize'
-
 export const checkLength = (value, range) => {
   return (
     value && value.length >= range[0] && (range[1] === -1 || value.length <= range[1])

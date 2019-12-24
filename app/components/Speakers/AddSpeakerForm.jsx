@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
 import AsyncCreatable from 'react-select/lib/AsyncCreatable'
 import debounce from 'debounce-promise'
-import theme from '../../styles/theme'
 
 import { checkLength } from '../../lib/form_validators'
 import { SocketApi } from '../../API'
@@ -14,20 +13,17 @@ import { cleanStr } from '../../lib/clean_str'
 import Container from '../StyledUtils/Container'
 import { ReactSelectStyles, ReactSelectTheme } from '../../lib/react_select_theme'
 
-@connect(
-  null,
-  { addSpeaker }
-)
+@connect(null, { addSpeaker })
 @withNamespaces('videoDebate')
 export default class AddSpeakerForm extends React.PureComponent {
   searchSpeakerRequest = debounce(query => {
     return query.length < 3
       ? []
       : SocketApi.push('video_debate', 'search_speaker', { query }).then(
-        ({ speakers }) => {
-          return speakers.map(s => ({ label: s.full_name, value: s }))
-        }
-      )
+          ({ speakers }) => {
+            return speakers.map(s => ({ label: s.full_name, value: s }))
+          }
+        )
   }, 250)
 
   promptTextCreator = speakerName => {
@@ -37,7 +33,7 @@ export default class AddSpeakerForm extends React.PureComponent {
   }
 
   onChange = ({ value }, { action }) => {
-    const { addSpeaker, reset } = this.props
+    const { addSpeaker } = this.props
 
     if (action === 'select-option' && value && value.id) {
       addSpeaker(value)
