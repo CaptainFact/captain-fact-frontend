@@ -115,7 +115,7 @@
     "validator": "10.8.0",
     "voca": "~1.4.0",
     "whatwg-fetch": "~3.0.0",
-    "wikidata-sdk": "^6.1.0"
+    "wikidata-sdk": "^7.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
