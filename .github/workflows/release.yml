@@ -7,7 +7,6 @@ on:
       - staging
 
 env:
-  CF_FRONTEND_IMAGE: captainfact/frontend:${{ GITHUB_REF }}
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
@@ -16,6 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - run: docker build --build-arg BUILD_ENV=${{ GITHUB_REF }} -t $CF_FRONTEND_IMAGE .
+      - run: docker build --build-arg BUILD_ENV=${GITHUB_REF##*/} -t captainfact/frontend:${GITHUB_REF##*/} .
       - run: docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-      - run: docker push $CF_FRONTEND_IMAGE
+      - run: docker push captainfact/frontend:${GITHUB_REF##*/}
