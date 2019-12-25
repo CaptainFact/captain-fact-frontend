@@ -71,7 +71,7 @@
     "graphql": "~14.0.2",
     "graphql-tag": "~2.10.1",
     "i18next": "~19.0.2",
-    "immutable": "~4.0.0-rc.9",
+    "immutable": "~4.0.0-rc.12",
     "is-promise": "~2.1.0",
     "isomorphic-fetch": "~2.2.1",
     "lodash": "^4.17.13",
