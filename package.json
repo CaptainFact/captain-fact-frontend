@@ -42,13 +42,6 @@
       "cypress"
     ]
   },
-  "lint-staged": {
-    "app/**/*.{js,jsx}": [
-      "npx prettier --write",
-      "git add",
-      "npx eslint --fix"
-    ]
-  },
   "browserslist": {
     "production": [
       "> 2%",

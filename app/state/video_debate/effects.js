@@ -2,7 +2,7 @@ import { SocketApi } from '../../API'
 import { VIDEO_DEBATE_CHANNEL } from '../../constants'
 import { presenceDiff, setPresence } from './presence/reducer'
 import * as videoReducer from './video/reducer'
-import { errorToFlash, errorMsgToFlash } from '../flashes/reducer'
+import { errorToFlash } from '../flashes/reducer'
 import { createEffect, generateFSAError } from '../utils'
 
 export const joinVideoDebateChannel = videoId => dispatch => {
