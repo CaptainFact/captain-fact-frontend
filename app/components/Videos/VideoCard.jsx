@@ -8,6 +8,7 @@ import CardLayout from '../Utils/CardLayout'
 import RawIcon from '../Utils/RawIcon'
 import { videoURL } from '../../lib/cf_routes'
 import { MAX_VIDEO_CARD_SPEAKERS } from '../../constants'
+import { getVideoThumbnail } from '../../lib/video_utils'
 
 @withNamespaces('videoDebate')
 export class VideoCard extends React.PureComponent {
@@ -26,7 +27,7 @@ export class VideoCard extends React.PureComponent {
                 <RawIcon name="play-circle" />
               </div>
               <figure className="image is-16by9">
-                <img alt="" src={VideoCard.videoThumb(video)} />
+                <img alt="" src={getVideoThumbnail('youtube', video.youtube_id)} />
               </figure>
             </Link>
           }
@@ -86,7 +87,10 @@ export class VideoCard extends React.PureComponent {
       )
     }
     if (nbOthers > 0) {
-      const title = speakers.slice(MAX_VIDEO_CARD_SPEAKERS).map(s => s.full_name).join(', ')
+      const title = speakers
+        .slice(MAX_VIDEO_CARD_SPEAKERS)
+        .map(s => s.full_name)
+        .join(', ')
       speakerComponentsList.push(
         <span key="others">
           &nbsp;
@@ -111,12 +115,5 @@ export class VideoCard extends React.PureComponent {
 
   renderSpeakerName(speaker) {
     return <Link to={`/s/${speaker.slug || speaker.id}`}>{speaker.full_name}</Link>
-  }
-
-  static videoThumb({youtube_id}) {
-    if (youtube_id) {
-      return `https://img.youtube.com/vi/${youtube_id}/mqdefault.jpg`
-    }
-    return ''
   }
 }

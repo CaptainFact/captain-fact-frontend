@@ -1,6 +1,12 @@
 import React from 'react'
 import User from '../../state/users/record'
 import { HttpApi, SocketApi } from '../../API'
+import {
+  getFromLocalStorage,
+  LOCAL_STORAGE_KEYS,
+  removeFromLocalStorage,
+  setLocalStorage
+} from '../../lib/local_storage'
 
 /**
  * A context that stores all the info about currently logged in user as long
@@ -21,7 +27,9 @@ export const UserContext = React.createContext({
  */
 class UserProvider extends React.Component {
   state = {
-    loggedInUser: new User(JSON.parse(window.localStorage.getItem('loggedInUser'))),
+    loggedInUser: new User(
+      JSON.parse(getFromLocalStorage(LOCAL_STORAGE_KEYS.LOGGED_IN_USER))
+    ),
     loggedInUserLoading: false,
     isAuthenticated: false
   }
@@ -33,7 +41,7 @@ class UserProvider extends React.Component {
    * use the localStorage token to fetch the last info from API.
    */
   login = async () => {
-    if (!window.localStorage.getItem('token')) {
+    if (!getFromLocalStorage(LOCAL_STORAGE_KEYS.TOKEN)) {
       return false
     }
     this.setState({ loggedInUserLoading: true })
@@ -56,7 +64,7 @@ class UserProvider extends React.Component {
    */
   logout = async () => {
     this.updateToken(null)
-    window.localStorage.removeItem('loggedInUser')
+    removeFromLocalStorage(LOCAL_STORAGE_KEYS.LOGGED_IN_USER)
     this.setState({
       loggedInUser: new User(),
       isAuthenticated: false,
@@ -71,8 +79,8 @@ class UserProvider extends React.Component {
   checkReputation = reputation => {
     const { isAuthenticated, loggedInUser } = this.state
     return (
-      isAuthenticated
-      && (loggedInUser.is_publisher || loggedInUser.reputation >= reputation)
+      isAuthenticated &&
+      (loggedInUser.is_publisher || loggedInUser.reputation >= reputation)
     )
   }
 
@@ -87,7 +95,7 @@ class UserProvider extends React.Component {
 
     this.setState(state => {
       const user = state.loggedInUser.merge(loggedInUser)
-      window.localStorage.setItem('loggedInUser', JSON.stringify(user.toJSON()))
+      setLocalStorage(LOCAL_STORAGE_KEYS.LOGGED_IN_USER, JSON.stringify(user.toJSON()))
       return {
         loggedInUser: user,
         loggedInUserLoading: false,
@@ -112,11 +120,11 @@ class UserProvider extends React.Component {
     if (token) {
       HttpApi.setAuthorizationToken(token)
       SocketApi.setAuthorizationToken(token)
-      window.localStorage.setItem('token', token)
+      setLocalStorage(LOCAL_STORAGE_KEYS.TOKEN, token)
     } else {
       HttpApi.resetToken()
       SocketApi.resetToken()
-      window.localStorage.removeItem('token')
+      removeFromLocalStorage(LOCAL_STORAGE_KEYS.TOKEN)
     }
   }
 
@@ -134,7 +142,7 @@ class UserProvider extends React.Component {
       // Has logged in from another tab
       if (!event.oldValue && event.newValue) {
         const value = JSON.parse(event.newValue)
-        const token = window.localStorage.getItem('token')
+        const token = getFromLocalStorage(LOCAL_STORAGE_KEYS.TOKEN)
         this.updateToken(token)
         return this.setState({ loggedInUser: new User(value), isAuthenticated: true })
       }

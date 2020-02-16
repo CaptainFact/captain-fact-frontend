@@ -1,4 +1,12 @@
 {
+  "introTitle": "Vérification collaborative de la vidéo",
+  "intro": "Ci-dessous, les membres de CaptainFact peuvent citer les passages de la vidéo à vérifier. Les citations sont confirmées ou réfutées avec des sources. Les vérifications s'affichent ensuite directement dans la vidéo, à l'écran de tous les utilisateurs de l'extension CaptainFact.",
+  "extensionDL": "Découvrir l'extension navigateur",
+  "intro1": "- Citez un passage de vidéo à l'aide du bouton (+) en bas à droite.",
+  "intro2": "- Ajoutez une source ou un commentaire en dessous des citations.",
+  "intro3": "- Évaluez la pertinence des sources et commentaires avec les flèches ^ et v.",
+  "intro4": "- Recevez de la réputation à chaque évaluation positive et ",
+  "intro5": "débloquez de nouveaux droits sur le site",
   "debate": "Vérification",
   "history": "Historique",
   "approve": "Confirme",
@@ -64,7 +72,19 @@
     "soundOnBackgroundFocus_enable": "Jouer un son quand la citation change en arriere plan",
     "soundOnBackgroundFocus_disable": "Ne pas jouer de son quand la citation change en arriere plan",
     "reverseTimeLock_lock": "Déverrouiller la position",
-    "reverseTimeLock_unlock": "Verrouiller la position"
+    "reverseTimeLock_unlock": "Verrouiller la position",
+    "help1": "Pour avoir sa place sur CaptainFact, une citation doit remplir au moins un des critères suivants :",
+    "help2": "- être vérifiable grâce à l’exposition de faits ;",
+    "help3": "- faire mention d'une source ou d'un contenu que l’on peut vérifier ;",
+    "help4": "- présenter des éléments incomplets ou approximatifs ;",
+    "help5": "- présenter un argument fallacieux, trompeur ou mensonger ;",
+    "help11": "- sinon mériter une note / référence pour en améliorer la compréhension.",
+    "help6": "Ne méritent pas travail de vérification :",
+    "help7": "- les évidences comme « Le ciel est bleu ! » ;",
+    "help8": "- les figures de style et l’humour ;",
+    "help9": "- les erreurs mineures ;",
+    "help10": "- les opinions personnelles.",
+    "helpLink": "Voir le guide de contribution complet"
   },
   "loading": {
     "statements": "Chargement des textes",
