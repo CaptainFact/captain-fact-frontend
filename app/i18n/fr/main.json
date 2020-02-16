@@ -67,6 +67,11 @@
     "flags": "Signalements"
   },
   "videos": {
+    "introTitle":"Ajouter une vidéo à vérifier sur CaptainFact",
+    "intro":"CaptainFact est une plateforme de vérification collaborative des vidéos, permettant d’ajouter des sources et des références qui améliorent la qualité des informations. Les vérifications s'affichent ensuite dans la vidéo Youtube grâce à l'extension navigateur.",
+    "seeExtension":"Découvrir l'extension navigateur",
+    "intro2":"Vous pouvez ajouter une nouvelle vidéo à vérifier (si vous êtes un membre avec au moins 75 pts de réputation) ou demander à la communauté de le faire :",
+    "contact":"Demander l'ajout de la vidéo",
     "add": "Ajouter une vidéo",
     "addThis": "Ajouter cette vidéo",
     "placeholder": "Adresse de la vidéo",
