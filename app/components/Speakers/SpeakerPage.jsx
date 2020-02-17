@@ -1,5 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router'
+import { withNamespaces } from 'react-i18next'
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
 
@@ -14,6 +15,7 @@ import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import PaginatedVideosContainer from '../Videos/PaginatedVideosContainer'
 
 @withRouter
+@withNamespaces('main')
 @connect(
   state => ({
     speaker: state.Speakers.currentSpeaker,
@@ -68,6 +70,7 @@ export class SpeakerPage extends React.PureComponent {
   }
 
   render() {
+    const { t } = this.props
     if (this.props.error) return <ErrorView error={this.props.error} />
     return (
       <div className="speaker-page">
@@ -76,10 +79,22 @@ export class SpeakerPage extends React.PureComponent {
         </Helmet>
         <div className="hero is-light is-bold is-primary">
           <div className="hero-body">
-            <SpeakerPreview withoutActions speaker={this.props.speaker} />
+            <h1 className="title">
+              {t('speakerpage.title1')}{' '}
+              <SpeakerPreview withoutActions speaker={this.props.speaker} />
+            </h1>
             <hr />
             <div className="subtitle">{this.renderWikidata()}</div>
           </div>
+        </div>
+        <div className="pagination is-centered videos-pagination">
+          <p className="title is-5">{t('speakerpage.info1')}</p>
+        </div>
+        <div className="pagination is-centered videos-pagination">
+          <p>
+            {t('speakerpage.info2')}{' '}
+            <ExternalLinkNewTab href="/">{t('speakerpage.more')}</ExternalLinkNewTab>
+          </p>
         </div>
         {this.renderVideos()}
       </div>
