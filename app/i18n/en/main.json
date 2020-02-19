@@ -67,6 +67,11 @@
         "flags": "Flags"
     },
     "videos": {
+        "introTitle":"Add and fact check a new video",
+        "intro":"CaptainFact is a collaborative fact-checking tool for YouTube videos. People help each others to verify information in this way: video is added on the website and statements are extracted from the video, then fact-checkers confirm or refute these statements. All CaptainFact's extension users will see the fact-checks directly on YouTube.",
+        "seeExtension":"Learn more about extension",
+        "intro2":"You can add a new video (if you are a member with at least 75 reputation pts) or you can contact us:",
+        "contact":"Request a video verification",
         "add": "Add Video",
         "addThis": "Add this video",
         "placeholder": "Video URL",

@@ -16,6 +16,7 @@ import { postVideo, searchVideo } from '../../state/videos/effects'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import StyledToggle from '../Utils/StyledToggle'
 import Message from '../Utils/Message'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
 const validate = ({ url }) => {
   if (!youtubeRegex.test(url))
@@ -25,10 +26,7 @@ const validate = ({ url }) => {
 
 @withRouter
 @withNamespaces('main')
-@connect(
-  null,
-  { postVideo, searchVideo }
-)
+@connect(null, { postVideo, searchVideo })
 @withLoggedInUser
 export class AddVideoForm extends React.PureComponent {
   componentDidMount() {
@@ -73,7 +71,24 @@ export class AddVideoForm extends React.PureComponent {
         {({ handleSubmit, handleChange, handleBlur, values, errors, isSubmitting }) => (
           <div id="video-show" className="columns is-gapless">
             <form id="col-video" className="column is-4 form" onSubmit={handleSubmit}>
-              {this.renderVideo(values.url, errors.url)}
+              <Message className="introduction" header={t('videos.introTitle')}>
+                <p>{t('videos.intro')}</p>
+                <p>
+                  <ExternalLinkNewTab href="/extension">
+                    {t('videos.seeExtension')}
+                  </ExternalLinkNewTab>
+                </p>
+                <br />
+                <p>
+                  <b>{t('videos.intro2')}</b>
+                </p>
+                <p>
+                  <ExternalLinkNewTab href="/help/contact">
+                    {t('videos.contact')}
+                  </ExternalLinkNewTab>
+                </p>
+              </Message>
+
               <FieldWithButton
                 input={{
                   onChange: handleChange,
@@ -114,6 +129,7 @@ export class AddVideoForm extends React.PureComponent {
                   </Message>
                 </Box>
               </Flex>
+              {this.renderVideo(values.url, errors.url)}
             </form>
 
             <div id="col-debate" className="column">
