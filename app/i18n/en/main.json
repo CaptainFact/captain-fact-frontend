@@ -24,7 +24,9 @@
         "moderation": "Moderation",
         "addedVideos": "Added videos",
         "notifications": "Notifications",
-        "subscriptions": "Subscriptions"
+        "subscriptions": "Subscriptions",
+        "followus": "Follow us",
+        "forum": "Forum"
     },
     "actions": {
         "save": "Save",
