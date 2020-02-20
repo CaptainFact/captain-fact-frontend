@@ -5,7 +5,8 @@ export const LOCAL_STORAGE_KEYS = {
   TOKEN: 'token',
   LOGGED_IN_USER: 'loggedInUser',
   PREFERENCES: 'preferences',
-  DISMISS_VIDEO_INTRODUCTION: 'dismissVideoHelp'
+  DISMISS_VIDEO_INTRODUCTION: 'dismissVideoHelp',
+  DISMISS_SPEAKER_INTRODUCTION: 'dismissSpeakerIntroduction'
 }
 
 /**

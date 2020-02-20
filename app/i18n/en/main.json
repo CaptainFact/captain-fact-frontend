@@ -87,6 +87,12 @@
         "prev": "Previous page",
         "next": "Next page"
     },
+    "speakerpage": {
+      "title1": "Fact checking of ",
+      "info1":"CaptainFact are a fact-checking platform for YouTube video",
+      "info2":"Speaker's statements can be confirm or refute by CaptainFact's members. All verifications are displayed during the video, if you have installed our browser extension.",
+      "more":"See more information"
+    },
     "all": "All",
     "partners": "Partners",
     "users": "Users"
