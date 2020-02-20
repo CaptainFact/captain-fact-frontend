@@ -15,11 +15,8 @@ import { Icon } from '../Utils/Icon'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import Message from '../Utils/Message'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
-import {
-  getFromLocalStorage,
-  LOCAL_STORAGE_KEYS,
-  setLocalStorage
-} from '../../lib/local_storage'
+import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
+import DismissableMessage from '../Utils/DismissableMessage'
 
 @connect(state => ({
   isLoading: isLoadingVideoDebate(state),
@@ -105,18 +102,13 @@ export class ColumnDebate extends React.PureComponent {
     }
   }
 
-  dismissHelp = () => {
-    setLocalStorage(LOCAL_STORAGE_KEYS.DISMISS_VIDEO_INTRODUCTION, true)
-    this.setState({ showIntroduction: false })
-  }
-
   renderIntroduction() {
     const { t } = this.props
     return (
-      <Message
+      <DismissableMessage
+        localStorageDismissKey={LOCAL_STORAGE_KEYS.DISMISS_VIDEO_INTRODUCTION}
         className="introduction"
         header={t('introTitle')}
-        onClose={this.dismissHelp}
       >
         <p>{t('intro')}</p>
         <ExternalLinkNewTab href="/extension">{t('extensionDL')}</ExternalLinkNewTab>
@@ -135,7 +127,7 @@ export class ColumnDebate extends React.PureComponent {
           <strong>{t('intro4')}</strong>
           <ExternalLinkNewTab href="/help/privileges">{t('intro5')}</ExternalLinkNewTab>.
         </p>
-      </Message>
+      </DismissableMessage>
     )
   }
 

@@ -6,6 +6,11 @@ import classNames from 'classnames'
 import capitalize from 'voca/capitalize'
 import { Flex } from '@rebass/grid'
 
+import { Github } from 'styled-icons/fa-brands/Github'
+import { Discord } from 'styled-icons/fa-brands/Discord'
+import { Twitter } from 'styled-icons/fa-brands/Twitter'
+import { Facebook } from 'styled-icons/fa-brands/Facebook'
+
 import { LinkExternal } from 'styled-icons/octicons/LinkExternal'
 
 import { MOBILE_WIDTH_THRESHOLD, MIN_REPUTATION_MODERATION } from '../../constants'
@@ -15,10 +20,10 @@ import { closeSidebar, toggleSidebar } from '../../state/user_preferences/reduce
 import UserLanguageSelector from '../LoggedInUser/UserLanguageSelector'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
-@connect(
-  state => ({ sidebarExpended: state.UserPreferences.sidebarExpended }),
-  { toggleSidebar, closeSidebar }
-)
+@connect(state => ({ sidebarExpended: state.UserPreferences.sidebarExpended }), {
+  toggleSidebar,
+  closeSidebar
+})
 @withNamespaces('main')
 export default class Sidebar extends React.PureComponent {
   constructor(props) {
@@ -69,13 +74,17 @@ export default class Sidebar extends React.PureComponent {
           <p className="menu-label">{t('menu.other')}</p>
           <ul className="menu-list">
             <li />
-            <this.MenuListLink
-              to="/extension"
-              iconName="puzzle-piece"
-              className="hide-when-collapsed"
-            >
+            <this.MenuListLink to="/extension" iconName="puzzle-piece">
               {t('menu.extension')}
             </this.MenuListLink>
+            <ExternalLinkNewTab
+              href="https://forum.captainfact.io"
+              className="hide-when-collapsed link-with-icon"
+            >
+              <RawIcon name="users" />
+              {t('menu.forum')}&nbsp;
+              <LinkExternal size="1em" />
+            </ExternalLinkNewTab>
             <ExternalLinkNewTab
               href="https://opencollective.com/captainfact_io"
               className="hide-when-collapsed link-with-icon"
@@ -88,6 +97,23 @@ export default class Sidebar extends React.PureComponent {
               {t('menu.help')}
             </this.MenuListLink>
           </ul>
+          <p className="menu-label">{t('menu.followus')}</p>
+          <div className="hide-when-collapsed social-networks">
+            {' '}
+            &nbsp; &nbsp;
+            <ExternalLinkNewTab href="https://github.com/CaptainFact">
+              <Github size="1.5em" /> &nbsp;&nbsp;&nbsp;
+            </ExternalLinkNewTab>
+            <ExternalLinkNewTab href="https://discord.gg/Z22Vhda">
+              <Discord size="1.5em" /> &nbsp;&nbsp;&nbsp;
+            </ExternalLinkNewTab>
+            <ExternalLinkNewTab href="https://twitter.com/CaptainFact_io">
+              <Twitter size="1.5em" /> &nbsp;&nbsp;&nbsp;
+            </ExternalLinkNewTab>
+            <ExternalLinkNewTab href="https://www.facebook.com/CaptainFact.io">
+              <Facebook size="1.5em" /> &nbsp;&nbsp;&nbsp;
+            </ExternalLinkNewTab>
+          </div>
         </div>
       </Flex>
     )

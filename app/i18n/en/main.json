@@ -24,7 +24,9 @@
         "moderation": "Moderation",
         "addedVideos": "Added videos",
         "notifications": "Notifications",
-        "subscriptions": "Subscriptions"
+        "subscriptions": "Subscriptions",
+        "followus": "Follow us",
+        "forum": "Forum"
     },
     "actions": {
         "save": "Save",
@@ -67,6 +69,11 @@
         "flags": "Flags"
     },
     "videos": {
+        "introTitle":"Add and fact check a new video",
+        "intro":"CaptainFact is a collaborative fact-checking tool for YouTube videos. People help each others to verify informations in this way: video is added on the websitec statements are extracted from the video, then fact-checkers confirm or refute the statements. All CaptainFact's extension users will see our verifications directly on YouTube videos.",
+        "seeExtension":"Learn more about extension",
+        "intro2":"You can add a new video (if you are a member with at least 75 reputation pts) or you can contact us:",
+        "contact":"Request a video verification",
         "add": "Add Video",
         "addThis": "Add this video",
         "placeholder": "Video URL",
@@ -79,6 +86,12 @@
     "pagination": {
         "prev": "Previous page",
         "next": "Next page"
+    },
+    "speakerpage": {
+      "title1": "Fact checking of ",
+      "info1":"CaptainFact are a fact-checking platform for YouTube video",
+      "info2":"Speaker's statements can be confirm or refute by CaptainFact's members. All verifications are displayed during the video, if you have installed our browser extension.",
+      "more":"See more information"
     },
     "all": "All",
     "partners": "Partners",

@@ -1,19 +1,25 @@
 import React from 'react'
 import { withRouter } from 'react-router'
+import { withNamespaces } from 'react-i18next'
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
 
 import { SpeakerPreview } from './SpeakerPreview'
 import { fetchSpeaker, fetchWikiDataInfo } from '../../state/speakers/effects'
 import { ErrorView } from '../Utils/ErrorView'
+import DismissableMessage from '../Utils/DismissableMessage'
 import { Icon } from '../Utils/Icon'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { reset } from '../../state/speakers/reducer'
 import { reset as resetVideos } from '../../state/videos/reducer'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import PaginatedVideosContainer from '../Videos/PaginatedVideosContainer'
+import { Span } from '../StyledUtils/Text'
+import { Box } from '@rebass/grid'
+import { LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
 
 @withRouter
+@withNamespaces('main')
 @connect(
   state => ({
     speaker: state.Speakers.currentSpeaker,
@@ -68,6 +74,7 @@ export class SpeakerPage extends React.PureComponent {
   }
 
   render() {
+    const { t } = this.props
     if (this.props.error) return <ErrorView error={this.props.error} />
     return (
       <div className="speaker-page">
@@ -76,11 +83,28 @@ export class SpeakerPage extends React.PureComponent {
         </Helmet>
         <div className="hero is-light is-bold is-primary">
           <div className="hero-body">
-            <SpeakerPreview withoutActions speaker={this.props.speaker} />
+            <h1 className="title">
+              <Span fontSize={3}>{t('speakerpage.title1')}</Span>{' '}
+              <Box mt={3}>
+                <SpeakerPreview withoutActions speaker={this.props.speaker} />
+              </Box>
+            </h1>
             <hr />
             <div className="subtitle">{this.renderWikidata()}</div>
           </div>
         </div>
+        <div className="pagination is-centered videos-pagination">
+          <DismissableMessage
+            localStorageDismissKey={LOCAL_STORAGE_KEYS.DISMISS_SPEAKER_INTRODUCTION}
+          >
+            <strong>{t('speakerpage.info1')}</strong>
+            <br />
+            <br />
+            {t('speakerpage.info2')}{' '}
+            <ExternalLinkNewTab href="/">{t('speakerpage.more')}</ExternalLinkNewTab>
+          </DismissableMessage>
+        </div>
+        <br />
         {this.renderVideos()}
       </div>
     )
