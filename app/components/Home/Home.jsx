@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import { withNamespaces, Trans } from 'react-i18next'
 import { Flex, Box } from '@rebass/grid'
-import { Discord } from 'styled-icons/fa-brands/Discord'
+import { Discourse } from 'styled-icons/fa-brands/Discourse'
 import { ExternalLinkAlt } from 'styled-icons/fa-solid/ExternalLinkAlt'
 
 import * as Matomo from '../../API/matomo'
@@ -169,7 +169,7 @@ export default class Home extends React.PureComponent {
                 <br />
                 <br />
                 <ExternalLinkNewTab href="https://discord.gg/Z22Vhda">
-                  <Discord size="1.5em" /> {t('discord')}
+                  <Discourse size="1.5em" /> {t('forum')}
                 </ExternalLinkNewTab>
 
                 <br />
@@ -201,6 +201,9 @@ export default class Home extends React.PureComponent {
               </Box>
             </Flex>
             <br />
+          </div>
+          <div className="has-text-centered">
+            <h2 className="title is-3">{t('followus')}</h2>
           </div>
         </section>
 
