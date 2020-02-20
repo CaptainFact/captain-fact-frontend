@@ -7,12 +7,16 @@ import Helmet from 'react-helmet'
 import { SpeakerPreview } from './SpeakerPreview'
 import { fetchSpeaker, fetchWikiDataInfo } from '../../state/speakers/effects'
 import { ErrorView } from '../Utils/ErrorView'
+import DismissableMessage from '../Utils/DismissableMessage'
 import { Icon } from '../Utils/Icon'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { reset } from '../../state/speakers/reducer'
 import { reset as resetVideos } from '../../state/videos/reducer'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import PaginatedVideosContainer from '../Videos/PaginatedVideosContainer'
+import { Span } from '../StyledUtils/Text'
+import { Box } from '@rebass/grid'
+import { LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
 
 @withRouter
 @withNamespaces('main')
@@ -80,22 +84,27 @@ export class SpeakerPage extends React.PureComponent {
         <div className="hero is-light is-bold is-primary">
           <div className="hero-body">
             <h1 className="title">
-              {t('speakerpage.title1')}{' '}
-              <SpeakerPreview withoutActions speaker={this.props.speaker} />
+              <Span fontSize={3}>{t('speakerpage.title1')}</Span>{' '}
+              <Box mt={3}>
+                <SpeakerPreview withoutActions speaker={this.props.speaker} />
+              </Box>
             </h1>
             <hr />
             <div className="subtitle">{this.renderWikidata()}</div>
           </div>
         </div>
         <div className="pagination is-centered videos-pagination">
-          <p className="title is-5">{t('speakerpage.info1')}</p>
-        </div>
-        <div className="pagination is-centered videos-pagination">
-          <p>
+          <DismissableMessage
+            localStorageDismissKey={LOCAL_STORAGE_KEYS.DISMISS_SPEAKER_INTRODUCTION}
+          >
+            <strong>{t('speakerpage.info1')}</strong>
+            <br />
+            <br />
             {t('speakerpage.info2')}{' '}
             <ExternalLinkNewTab href="/">{t('speakerpage.more')}</ExternalLinkNewTab>
-          </p>
+          </DismissableMessage>
         </div>
+        <br />
         {this.renderVideos()}
       </div>
     )
