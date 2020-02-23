@@ -20,8 +20,8 @@ const UnreadNotificationsBadge = styled.div`
   right: -5px;
 `
 
-const NotificationBell = props => (
-  <UnstyledButton {...props}>
+const NotificationBell = (props, ref) => (
+  <UnstyledButton {...props} ref={ref}>
     <Query
       fetchPolicy="network-only"
       pollInterval={15000}
@@ -42,4 +42,4 @@ const NotificationBell = props => (
   </UnstyledButton>
 )
 
-export default NotificationBell
+export default React.forwardRef(NotificationBell)
