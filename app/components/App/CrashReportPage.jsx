@@ -36,9 +36,10 @@ ${stacktrace}
 \`\`\`
 `
 
-  return `https://github.com/opencollective/opencollective/issues/new${optionsToQueryString(
-    { title, body }
-  )}`
+  return `https://github.com/CaptainFact/captain-fact/issues/new${optionsToQueryString({
+    title,
+    body
+  })}`
 }
 
 const CrashReportPage = ({ t, error }) => {
