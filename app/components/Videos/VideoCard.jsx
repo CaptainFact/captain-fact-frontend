@@ -8,7 +8,6 @@ import CardLayout from '../Utils/CardLayout'
 import RawIcon from '../Utils/RawIcon'
 import { videoURL } from '../../lib/cf_routes'
 import { MAX_VIDEO_CARD_SPEAKERS } from '../../constants'
-import { getVideoThumbnail } from '../../lib/video_utils'
 
 @withNamespaces('videoDebate')
 export class VideoCard extends React.PureComponent {
@@ -27,7 +26,7 @@ export class VideoCard extends React.PureComponent {
                 <RawIcon name="play-circle" />
               </div>
               <figure className="image is-16by9">
-                <img alt="" src={getVideoThumbnail('youtube', video.youtube_id)} />
+                <img alt="" src={video.thumbnail} />
               </figure>
             </Link>
           }

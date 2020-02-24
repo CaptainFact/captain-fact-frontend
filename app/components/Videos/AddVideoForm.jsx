@@ -9,7 +9,7 @@ import { Formik } from 'formik'
 import { Eye } from 'styled-icons/fa-regular/Eye'
 import { EyeSlash } from 'styled-icons/fa-regular/EyeSlash'
 
-import { youtubeRegex } from '../../lib/url_utils'
+import { youtubeRegex, facebookVideoRegex } from '../../lib/url_utils'
 import FieldWithButton from '../FormUtils/FieldWithButton'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { postVideo, searchVideo } from '../../state/videos/effects'
@@ -17,10 +17,14 @@ import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import StyledToggle from '../Utils/StyledToggle'
 import Message from '../Utils/Message'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
+import { LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
+import DismissableMessage from '../Utils/DismissableMessage'
 
 const validate = ({ url }) => {
-  if (!youtubeRegex.test(url))
-    return { url: 'Invalid URL. Only youtube videos are currently supported' }
+  if (!youtubeRegex.test(url) && !facebookVideoRegex.test(url))
+    return {
+      url: 'Invalid URL. Only YouTube and Facebook videos are currently supported'
+    }
   return {}
 }
 
@@ -71,39 +75,50 @@ export class AddVideoForm extends React.PureComponent {
         {({ handleSubmit, handleChange, handleBlur, values, errors, isSubmitting }) => (
           <div id="video-show" className="columns is-gapless">
             <form id="col-video" className="column is-4 form" onSubmit={handleSubmit}>
-              <Message className="introduction" header={t('videos.introTitle')}>
-                <p>{t('videos.intro')}</p>
-                <p>
-                  <ExternalLinkNewTab href="/extension">
-                    {t('videos.seeExtension')}
-                  </ExternalLinkNewTab>
-                </p>
-                <br />
-                <p>
-                  <b>{t('videos.intro2')}</b>
-                </p>
-                <p>
-                  <ExternalLinkNewTab href="/help/contact">
-                    {t('videos.contact')}
-                  </ExternalLinkNewTab>
-                </p>
-              </Message>
+              {this.renderVideo(values.url, errors.url)}
+              <Box p={2}>
+                <DismissableMessage
+                  className="introduction"
+                  header={t('videos.introTitle')}
+                  localStorageDismissKey={
+                    LOCAL_STORAGE_KEYS.DISMISS_ADD_VIDEO_INTRODUCTION
+                  }
+                >
+                  <p>{t('videos.intro')}</p>
+                  <p>
+                    <ExternalLinkNewTab href="/extension">
+                      {t('videos.seeExtension')}
+                    </ExternalLinkNewTab>
+                  </p>
+                  <br />
+                  <p>
+                    <b>{t('videos.intro2')}</b>
+                  </p>
+                  <p>
+                    <ExternalLinkNewTab href="/help/contact">
+                      {t('videos.contact')}
+                    </ExternalLinkNewTab>
+                  </p>
+                  <br />
+                  <p>{t('videos.supportedPlatforms')}</p>
+                </DismissableMessage>
+                <FieldWithButton
+                  input={{
+                    onChange: handleChange,
+                    onBlur: handleBlur,
+                    name: 'url',
+                    value: values.url
+                  }}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  buttonLabel={this.props.t('videos.addThis')}
+                  placeholder={this.props.t('videos.placeholder')}
+                  buttonClassName="is-primary"
+                  meta={{ invalid: errors.url, submitting: isSubmitting }}
+                  expandInput
+                />
+              </Box>
 
-              <FieldWithButton
-                input={{
-                  onChange: handleChange,
-                  onBlur: handleBlur,
-                  name: 'url',
-                  value: values.url
-                }}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                buttonLabel={this.props.t('videos.addThis')}
-                placeholder={this.props.t('videos.placeholder')}
-                buttonClassName="is-primary"
-                meta={{ invalid: errors.url, submitting: isSubmitting }}
-                expandInput
-              />
               <Flex
                 flexDirection="column"
                 justifyContent="center"
@@ -129,7 +144,6 @@ export class AddVideoForm extends React.PureComponent {
                   </Message>
                 </Box>
               </Flex>
-              {this.renderVideo(values.url, errors.url)}
             </form>
 
             <div id="col-debate" className="column">
