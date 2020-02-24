@@ -11,6 +11,7 @@ export const VideosQuery = gql`
         title
         insertedAt
         isPartner
+        thumbnail
         speakers {
           full_name: fullName
           id
@@ -33,6 +34,7 @@ export const VideosAddedByUserQuery = gql`
           title
           insertedAt
           isPartner
+          thumbnail
           speakers {
             full_name: fullName
             id
