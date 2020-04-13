@@ -7,6 +7,6 @@ Immutable.Record {
   "enableAutoscroll": true,
   "enableSoundOnBackgroundFocus": true,
   "videosLanguageFilter": null,
-  "videosOnlyFromPartners": "ALL_VIDEOS",
+  "videosFilter": "ONLY_FEATURED",
 }
 `;
