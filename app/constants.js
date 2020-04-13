@@ -100,6 +100,7 @@ export const CONFIRMED_STATEMENT_MIN_VOTES = 0
 export const ALL_VIDEOS = 'ALL_VIDEOS'
 export const ONLY_PARTNERS = 'ONLY_PARTNERS'
 export const ONLY_COMMUNITY = 'ONLY_COMMUNITY'
+export const ONLY_FEATURED = 'ONLY_FEATURED'
 
 /* ------ Third party providers ------ */
 export const VIDEO_PLAYER_YOUTUBE = 'youtube'

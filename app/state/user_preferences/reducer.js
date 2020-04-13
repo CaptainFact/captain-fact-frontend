@@ -1,11 +1,11 @@
 import { Record } from 'immutable'
 import { createAction, handleActions } from 'redux-actions'
-import { ALL_VIDEOS, MOBILE_WIDTH_THRESHOLD, SUPPORTED_LOCALES } from '../../constants'
+import { MOBILE_WIDTH_THRESHOLD, SUPPORTED_LOCALES, ONLY_FEATURED } from '../../constants'
 import browserLocale from '../../i18n/browser_locale'
 import {
   setLocalStorage,
   LOCAL_STORAGE_KEYS,
-  getFromLocalStorage
+  getFromLocalStorage,
 } from '../../lib/local_storage'
 
 export const toggleSidebar = createAction('USER_PREFERENCES/TOGGLE_SIDEBAR')
@@ -14,9 +14,7 @@ export const changeLocale = createAction('USER_PREFERENCES/CHANGE_LOCALE')
 export const changeVideosLanguageFilter = createAction(
   'USER_PREFERENCES/CHANGE_VIDEOS_LANGUAGE_FILTER'
 )
-export const setVideosOnlyFromPartners = createAction(
-  'USER_PREFERENCES/VIDEOS_ONLY_FROM_PATNERS'
-)
+export const setVideosFilter = createAction('USER_PREFERENCES/SET_VIDEOS_FILTER')
 export const toggleAutoscroll = createAction('STATEMENTS/TOGGLE_AUTOSCROLL')
 export const toggleBackgroundSound = createAction('STATEMENTS/TOGGLE_BACKGROUND_SOUND')
 
@@ -29,7 +27,7 @@ const Preferences = new Record({
   enableAutoscroll: !isMobile,
   enableSoundOnBackgroundFocus: true,
   videosLanguageFilter: null,
-  videosOnlyFromPartners: ALL_VIDEOS
+  videosFilter: ONLY_FEATURED,
 })
 
 const loadState = () => {
@@ -58,23 +56,23 @@ const updateState = (state, key, value) => {
 
 const UserPreferencesReducer = handleActions(
   {
-    [toggleSidebar]: state =>
+    [toggleSidebar]: (state) =>
       updateState(state, 'sidebarExpended', !state.sidebarExpended),
-    [closeSidebar]: state => updateState(state, 'sidebarExpended', false),
+    [closeSidebar]: (state) => updateState(state, 'sidebarExpended', false),
     [changeLocale]: (state, { payload }) => updateState(state, 'locale', payload),
     [changeVideosLanguageFilter]: (state, { payload }) =>
       updateState(state, 'videosLanguageFilter', payload),
-    [setVideosOnlyFromPartners]: (state, { payload }) =>
-      updateState(state, 'videosOnlyFromPartners', payload),
-    [toggleAutoscroll]: state =>
+    [setVideosFilter]: (state, { payload }) =>
+      updateState(state, 'videosFilter', payload),
+    [toggleAutoscroll]: (state) =>
       updateState(state, 'enableAutoscroll', !state.enableAutoscroll),
-    [toggleBackgroundSound]: state => {
+    [toggleBackgroundSound]: (state) => {
       return updateState(
         state,
         'enableSoundOnBackgroundFocus',
         !state.enableSoundOnBackgroundFocus
       )
-    }
+    },
   },
   loadState()
 )
