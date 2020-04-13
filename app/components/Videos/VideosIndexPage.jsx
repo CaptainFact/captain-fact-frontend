@@ -6,33 +6,27 @@ import capitalize from 'voca/capitalize'
 import { Helmet } from 'react-helmet'
 
 import { toAbsoluteURL } from '../../lib/cf_routes'
-import { ALL_VIDEOS, ONLY_PARTNERS, ONLY_COMMUNITY } from '../../constants'
+import { ALL_VIDEOS, ONLY_PARTNERS, ONLY_COMMUNITY, ONLY_FEATURED } from '../../constants'
 import { Icon } from '../Utils'
 import {
   changeVideosLanguageFilter,
-  setVideosOnlyFromPartners
+  setVideosFilter,
 } from '../../state/user_preferences/reducer'
 import VideosFilterBar from './VideosFilterBar'
 import AddVideoBtn from './AddVideoBtn'
 import PaginatedVideosContainer from './PaginatedVideosContainer'
 
 @connect(
-  state => ({
+  (state) => ({
     languageFilter: state.UserPreferences.videosLanguageFilter,
-    onlyFromPartners: state.UserPreferences.videosOnlyFromPartners
+    videosFilter: state.UserPreferences.videosFilter,
   }),
-  { changeVideosLanguageFilter, setVideosOnlyFromPartners }
+  { changeVideosLanguageFilter, setVideosFilter }
 )
 @withNamespaces('main')
 export default class VideosIndexPage extends React.PureComponent {
   render() {
-    const {
-      t,
-      languageFilter,
-      onlyFromPartners,
-      setVideosOnlyFromPartners,
-      location
-    } = this.props
+    const { t, languageFilter, videosFilter, setVideosFilter, location } = this.props
     const currentPage = parseInt(location.query.page) || 1
 
     return (
@@ -56,22 +50,22 @@ export default class VideosIndexPage extends React.PureComponent {
           <AddVideoBtn />
         </section>
         <VideosFilterBar
-          onLanguageChange={v => this.onVideosFilterChange(v)}
-          onSourceChange={v => setVideosOnlyFromPartners(v)}
+          onLanguageChange={(v) => this.onVideosLanguageChange(v)}
+          onSourceChange={(v) => setVideosFilter(v)}
           language={languageFilter}
-          source={onlyFromPartners}
+          source={videosFilter}
         />
         <PaginatedVideosContainer
           baseURL={this.props.location.pathname}
           currentPage={currentPage}
           language={languageFilter}
-          source={onlyFromPartners}
+          source={videosFilter}
         />
       </div>
     )
   }
 
-  onVideosFilterChange(value) {
+  onVideosLanguageChange(value) {
     const language = value === 'all' ? null : value
     this.props.changeVideosLanguageFilter(language)
   }
@@ -82,7 +76,8 @@ export default class VideosIndexPage extends React.PureComponent {
     const partnerFilter = {
       [ALL_VIDEOS]: {},
       [ONLY_PARTNERS]: { is_partner: true },
-      [ONLY_COMMUNITY]: { is_partner: false }
+      [ONLY_COMMUNITY]: { is_partner: false },
+      [ONLY_FEATURED]: { is_featured: true },
     }[onlyFromPartners]
 
     const languageVideosFilter = languageFilter ? { language: languageFilter } : {}

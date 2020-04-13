@@ -6,7 +6,7 @@ CaptainFact permet de vérifier efficacement - ensemble - ce qui se dit en vidé
 
 **Ce guide permet de comprendre rapidement comment contribuer.**
 
-**Parce que la vérité compte.**
+**La vérité compte.**
 
 ## Quoi vérifier ? Quelles affirmations citer sur CaptainFact ?
 
@@ -47,7 +47,7 @@ Nous proposons ci-dessous une typologie non-exhaustive des sources qu’il est p
 
 ### Les organisations Internationales
 
-Elle possède bien souvent un service de presse et un service statistique, sources d’informations primaires de grande valeur pour le fact-checker.
+Elles possèdent bien souvent un service de presse et un service statistique, sources d’informations primaires de grande valeur pour le fact-checker.
 
 *Ex : [Organisation Mondiale du Commerce](https://www.wto.org/indexfr.htm), [l’Organisation des Nations Unies](http://www.un.org/fr/index.html), …*
 

@@ -8,17 +8,28 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
 import { ErrorView } from '../Utils/ErrorView'
 import { VideosGrid } from './VideosGrid'
 import PaginationMenu from '../Utils/PaginationMenu'
-import { ALL_VIDEOS, ONLY_PARTNERS } from '../../constants'
+import { ONLY_PARTNERS, ONLY_FEATURED } from '../../constants'
 import { VideosQuery } from '../../API/graphql_queries'
 
 const INITIAL_VIDEOS = { pageNumber: 1, totalPages: 1, entries: [] }
 
 const buildFiltersFromProps = ({ language, source, speakerID }) => {
   const filters = {}
-  const onlyPartnersFilter = source && source !== ALL_VIDEOS
-  if (language) filters.language = language
-  if (onlyPartnersFilter) filters.is_partner = source === ONLY_PARTNERS
-  if (speakerID) filters.speaker_id = speakerID
+
+  if (language) {
+    filters.language = language
+  }
+
+  if (speakerID) {
+    filters.speaker_id = speakerID
+  }
+
+  if (source === ONLY_FEATURED) {
+    filters.is_featured = true
+  } else if (source === ONLY_PARTNERS) {
+    filters.is_partner = true
+  }
+
   return filters
 }
 
