@@ -104,7 +104,7 @@
     "styled-icons": "~5.5.0",
     "styled-system": "~3.2.0",
     "tinycon": "~0.6.8",
-    "uuid": "~3.3.3",
+    "uuid": "~7.0.3",
     "validator": "12.2.0",
     "voca": "~1.4.0",
     "whatwg-fetch": "~3.0.0",
