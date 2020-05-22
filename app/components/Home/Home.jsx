@@ -93,19 +93,6 @@ export default class Home extends React.PureComponent {
           </div>
         </section>
 
-        <section className="section partners">
-          <div className="content">
-            <h2 className="title is-3">{t('partners')}</h2>
-            <br />
-            <AllPartners />
-            <br />
-            <ExternalLinkNewTab href="https://github.com/CaptainFact/captain-fact/wiki/Les-partenariats-entre-les-chaînes-Youtube-et-CaptainFact.io">
-              {t('partners-info')} <ExternalLinkAlt size="1em" />
-            </ExternalLinkNewTab>
-            <br />
-          </div>
-        </section>
-
         <section className="hero is-medium is-bold">
           <div className="hero-body">
             <div className="columns">
@@ -179,6 +166,43 @@ export default class Home extends React.PureComponent {
           </div>
         </section>
 
+        <section className="section">
+          <CFSocialProfiles size="3em" color="white" />
+        </section>
+
+        <section className="section partners">
+          <div className="content">
+            <h2 className="title is-3">{t('partners')}</h2>
+            <br />
+            <AllPartners />
+            <br />
+            <ExternalLinkNewTab href="https://github.com/CaptainFact/captain-fact/wiki/Les-partenariats-entre-les-chaînes-Youtube-et-CaptainFact.io">
+              {t('partners-info')} <ExternalLinkAlt size="1em" />
+            </ExternalLinkNewTab>
+            <br />
+          </div>
+        </section>
+
+        <section className="section last-videos" style={{ paddingBottom: '3em' }}>
+          <br />
+          <br />
+          <div className="has-text-centered">
+            <h2 className="title is-3">{t('latest')}</h2>
+            <Link
+              onClick={() => Matomo.registerClick('Home', 'Button', 'SeeAllVideos')}
+              className="button animated-hover is-medium is-gradient-primary-light"
+              to="/videos"
+            >
+              {t('seeVideos')}
+            </Link>
+          </div>
+          <br />
+          <br />
+          <div className="last-videos-cards">
+            <LastVideos />
+          </div>
+        </section>
+
         <section className="section partners">
           <div className="content">
             <Flex flexWrap="wrap">
@@ -200,35 +224,9 @@ export default class Home extends React.PureComponent {
                 <AllAmbassadors />
               </Box>
             </Flex>
-            <br />
-          </div>
-          <div className="has-text-centered">
-            <h2 className="title is-3">{t('followus')}</h2>
           </div>
         </section>
 
-        <section className="section">
-          <CFSocialProfiles size="3em" color="white" />
-        </section>
-        <section className="section last-videos" style={{ paddingBottom: '3em' }}>
-          <br />
-          <br />
-          <div className="has-text-centered">
-            <h2 className="title is-3">{t('latest')}</h2>
-            <Link
-              onClick={() => Matomo.registerClick('Home', 'Button', 'SeeAllVideos')}
-              className="button animated-hover is-medium is-gradient-primary-light"
-              to="/videos"
-            >
-              {t('seeVideos')}
-            </Link>
-          </div>
-          <br />
-          <br />
-          <div className="last-videos-cards">
-            <LastVideos />
-          </div>
-        </section>
         {INVITATION_SYSTEM && (
           <section className="section request-invitation">
             <h4 className="title is-4" style={{ color: 'white' }}>
@@ -241,20 +239,6 @@ export default class Home extends React.PureComponent {
             <InvitationRequestForm />
           </section>
         )}
-        <footer className="footer">
-          <div className="has-text-centered">
-            <Trans i18nKey="footer">
-              Created with <Icon name="heart" /> using
-            </Trans>
-            <ExternalLinkNewTab href="https://elixir-lang.org">Elixir</ExternalLinkNewTab>
-            ,&nbsp;
-            <ExternalLinkNewTab href="https://phoenixframework.org">
-              Phoenix
-            </ExternalLinkNewTab>
-            &nbsp;{t('main:misc.and')}&nbsp;
-            <ExternalLinkNewTab href="https://reactjs.org/">React</ExternalLinkNewTab>
-          </div>
-        </footer>
       </div>
     )
   }
