@@ -19,94 +19,191 @@ import Message from '../Utils/Message'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import imgMedia from '../../assets/media.jpg'
 import imgExample1 from '../../assets/example1.jpg'
+import examplesImg1 from '../../assets/examples/image-1.jpg'
+import examplesImg2 from '../../assets/examples/image-2.jpg'
+import examplesImg3 from '../../assets/examples/image-3.jpg'
 import imgIllutration from '../../assets/landing-illustration.png'
 
 @withNamespaces('home')
 @withLoggedInUser
 export default class Home extends React.PureComponent {
-  renderPresentation() {
-    return (
-      <p className="presentation">
-        <Trans i18nKey="presentation">
-          <strong>CaptainFact</strong> est un outil collaboratif de vérification des
-          vidéos YouTube.
-          <br />
-          Inscrivez-vous pour commencer à démentir, à confirmer ou à approfondir les
-          faits.
-          <br />
-          Installez notre extension pour bénéficier des données de CaptainFact directement
-          depuis votre lecteur YouTube.
-        </Trans>
-      </p>
-    )
-  }
-
-  renderButtons() {
-    return (
-      <div className="buttons-container">
-        <Link
-          onClick={() => Matomo.registerClick('Home', 'Button', 'SignUp')}
-          className="button animated-hover is-medium is-gradient-primary-light"
-          to="/signup"
-        >
-          {this.props.t('registerAndFactCheck')}
-        </Link>
-        <Link
-          onClick={() => Matomo.registerClick('Home', 'Button', 'ExtensionPage')}
-          className="button animated-hover is-medium is-gradient-primary-light"
-          to="/extension"
-        >
-          {this.props.t('installExtension')}
-        </Link>
-        <div className="button-label">
-          <Trans i18nKey="openSource">
-            100%{' '}
-            <ExternalLinkNewTab href="https://github.com/CaptainFact">
-              open-source
-            </ExternalLinkNewTab>
-            , respects your privacy.
-          </Trans>
-        </div>
-      </div>
-    )
-  }
 
   render() {
     const { t } = this.props
 
     return (
       <div className="home-page is-gradient-primary">
-        <section className="hero is-medium is-bold">
+        <section className="hero">
           <div className="hero-body">
             <div className="columns">
-              <div className="column is-6">
-                <h1 className="title1">{t('titleCF')}</h1>
-                <h2 className="title">{t('presentationTitle')}</h2>
-                <ExternalLinkNewTab href="https://fr.kantar.com/médias/digital/2019/barometre-2019-de-la-confiance-des-francais-dans-les-media/">
-                  {t('source')}
-                </ExternalLinkNewTab>
-                {this.renderPresentation()}
-                {this.renderButtons()}
+              <div className="column is-11 is-10-tablet is-12-mobile">
+                <h1 className="title1">Captain<strong><u>Fact</u>.</strong></h1>
+                <br />
+                <h2 className="title">{t('titleCF')}</h2>
+                <h2 className="title light-title">
+                  <Trans i18nKey="presentationTitle">To train a critical mind, improve the quality of information and decision-making.
+                    <br />
+                    Against fake news, fraud and disinformation
+                  </Trans>
+                </h2>
+                <p className="presentation is-bold">
+                  {t('presentation')}
+                </p>
+                <div className="columns">
+                  <div className="column is-5">
+                    <p className="presentation">{t('presentationTextButton1')}</p>
+                    <p>
+                    <Link
+                        onClick={() => Matomo.registerClick('Home', 'Button', 'ExtensionPage')}
+                        className="button is-primary is-medium"
+                        to="/extension"
+                    >
+                      {this.props.t('installExtension')}
+                    </Link>
+                    </p>
+                  </div>
+                  <div className="column is-5">
+                    <p className="presentation">{t('presentationTextButton2')}</p>
+                    <p>
+                    <Link
+                        onClick={() => Matomo.registerClick('Home', 'Button', 'SignUp')}
+                        className="button is-primary is-medium"
+                        to="/signup"
+                    >
+                      {this.props.t('registerAndFactCheck')}
+                    </Link>
+                    </p>
+                  </div>
+                </div>
               </div>
-              <img src={imgMedia} alt="media effects" />
+                <img src={imgMedia} alt="media effects" className="header-img" />
             </div>
           </div>
         </section>
 
-        <section className="section partners">
-          <div className="content">
-            <h2 className="title is-3">{t('partners')}</h2>
+        <section className="section section-alt-bg has-text-centered">
+          <h2 className="title-alt">
+            <strong>{t('headerPunchline')}</strong>
             <br />
-            <AllPartners />
-            <br />
-            <ExternalLinkNewTab href="https://github.com/CaptainFact/captain-fact/wiki/Les-partenariats-entre-les-chaînes-Youtube-et-CaptainFact.io">
-              {t('partners-info')} <ExternalLinkAlt size="1em" />
-            </ExternalLinkNewTab>
-            <br />
+            {t('headerPunchline2')}
+          </h2>
+        </section>
+
+        <section className="section hero has-background-white">
+          <div className="hero-body">
+            <div className="columns">
+              <div className="column is-6">
+                <br />
+                <br />
+                <img src={examplesImg1} alt="exemple image captainfact" />
+                <br />
+                <br />
+              </div>
+              <div className="column is-6 presentation content">
+                <br />
+                <br />
+                <h2 className="title-alt">{t('example1Title1')}</h2>
+                <h2 className="title light-title is-3">{t('example1Title2')}</h2>
+                <p>
+                  {t('example1Text')}
+                  <br />
+                </p>
+                <Link
+                    onClick={() => Matomo.registerClick('Home', 'Button', 'ExtensionPage')}
+                    className="button is-primary is-medium"
+                    to="/extension"
+                >
+                  {t('installExtension')}
+                </Link>
+              </div>
+
+            </div>
+            <div className="columns">
+              <div className="column is-6 presentation content">
+                <br />
+                <br />
+                <h2 className="title-alt">{t('example2Title1')}</h2>
+                <h2 className="title light-title is-3">{t('example2Title2')}</h2>
+                <p>
+                  {t('example2Text')}
+                  <br />
+                </p>
+                <Link
+                    onClick={() => Matomo.registerClick('Home', 'Button', 'SignUp')}
+                    className="button is-primary is-medium"
+                    to="/signup"
+                >
+                  {t('registerAndFactCheck')}
+                </Link>
+              </div>
+              <div className="column is-6 ">
+                <br />
+                <br />
+                <img src={examplesImg2} alt="exemple image captainfact" />
+                <br />
+                <br />
+              </div>
+
+            </div>
+            <div className="columns">
+              <div className="column is-6">
+                <br />
+                <br />
+                <img src={examplesImg3} alt="exemple image captainfact" />
+                <br />
+                <br />
+              </div>
+              <div className="column is-6 presentation content">
+                <br />
+                <br />
+                <h2 className="title-alt">{t('example3Title1')}</h2>
+                <h2 className="title light-title is-3">{t('example3Title2')}</h2>
+                <p>
+                  {t('example3Text')}
+                  <br />
+                </p>
+                <ExternalLinkNewTab
+                    className="button is-primary is-medium"
+                    href="https://github.com/CaptainFact/captain-fact/wiki/Les-partenariats-entre-les-chaînes-Youtube-et-CaptainFact.io"
+                >
+                  {t('learnMore')} (fr)
+                </ExternalLinkNewTab>
+              </div>
+
+            </div>
           </div>
         </section>
 
-        <section className="hero is-medium is-bold">
+        <section className="section hero section-alt-bg">
+          <div className="hero-body">
+          <div className="columns">
+            <div className="column is-6">
+              <h2 className="title-alt is-bold">{t('forWho1Title1')}</h2>
+              <h2 className="title light-title is-3">{t('forWho1Title2')}</h2>
+              <p className="presentation">
+                {t('forWho1Text')}
+              </p>
+
+            </div>
+            <div className="column is-6">
+              <h2 className="title-alt is-bold">{t('forWho2Title1')}</h2>
+              <h2 className="title light-title is-3">{t('forWho2Title2')}</h2>
+              <p className="presentation">
+                {t('forWho2Text')}
+              </p>
+            </div>
+          </div>
+          <Link
+              onClick={() => Matomo.registerClick('Home', 'Button', 'ContactUs')}
+              className="button is-primary is-medium"
+              to="/help/contact"
+          >
+            {t('contactus')}
+          </Link>
+          </div>
+        </section>
+
+        <section className="hero is-medium">
           <div className="hero-body">
             <div className="columns">
               <div className="column is-6 presentation content">
@@ -147,7 +244,7 @@ export default class Home extends React.PureComponent {
           </div>
         </section>
 
-        <section className="hero is-medium is-bold">
+        <section className="hero is-medium">
           <div className="hero-body">
             <div className="columns">
               <div className="column is-6">
@@ -179,40 +276,105 @@ export default class Home extends React.PureComponent {
           </div>
         </section>
 
-        <section className="section partners">
-          <div className="content">
-            <Flex flexWrap="wrap">
-              <Box width={[1, 1, 0.5, 0.5, 1 / 3]} mb="2em">
-                <h2 className="title is-3">{t('backers')}</h2>
-                <OpenCollectiveContributors
-                  tier="soutien-régulier"
-                  button={false}
-                  limit={8}
-                />
-                <OpenCollectiveContributors tier="donateur" button={false} limit={8} />
-              </Box>
-              <Box width={[1, 1, 0.5, 0.5, 2 / 3]}>
-                <h2 className="title is-3">{t('ambassadors')}</h2>
-                <Message>
-                  {t('aboutAmbassadors')}{' '}
-                  <Link to="/help/ambassadors">{t('learnMore')}</Link>
-                </Message>
-                <AllAmbassadors />
-              </Box>
-            </Flex>
+        <section className="section section-alt-bg has-text-centered">
+          <h2 className="title-alt">
+            <strong>{t('helpCaptain1')}</strong>
             <br />
-          </div>
-          <div className="has-text-centered">
-            <h2 className="title is-3">{t('followus')}</h2>
-          </div>
+            {t('helpCaptain2')}
+          </h2>
         </section>
 
+        <section className="section hero has-background-white">
+          <div className="hero-body">
+            <div className="columns">
+              <div className="column is-6">
+                <h2 className="title-alt is-bold">{t('backendDevelopers')}</h2>
+                <p className="presentation">
+                  {t('backendDevelopersText')}
+                </p>
+                <ExternalLinkNewTab
+                    href="https://github.com/CaptainFact/captain-fact-frontend/issues"
+                >
+                  {t('backendDevelopersLink')}
+                </ExternalLinkNewTab>
+                <br /><br />
+                <h2 className="title-alt is-bold">{t('frontendDevelopers')}</h2>
+                <p className="presentation">
+                  {t('frontendDevelopersText')}
+                </p>
+                <ExternalLinkNewTab
+                    href="https://github.com/CaptainFact/captain-fact-frontend/issues"
+                >
+                  {t('frontendDevelopersLink')}
+                </ExternalLinkNewTab>
+                <br /><br />
+                <h2 className="title-alt is-bold">{t('designer')}</h2>
+                <p className="presentation">
+                  {t('designerText')}
+                </p>
+                <br /><br />
+                <h2 className="title-alt is-bold">{t('graphicDesigners')}</h2>
+                <p className="presentation">
+                  {t('graphicDesignersText')}
+                </p>
+              </div>
+              <div className="column is-6">
+                <h2 className="title-alt is-bold">{t('animator')}</h2>
+                <p className="presentation">
+                  {t('animatorText')}
+                </p>
+                <br /><br />
+                <h2 className="title-alt is-bold">{t('communicationsSpecialists')}</h2>
+                <p className="presentation">
+                  {t('communicationsSpecialistsText')}
+                </p>
+                <br /><br />
+                <h2 className="title-alt is-bold">{t('translator')}</h2>
+                <p className="presentation">
+                  {t('translatorText')}
+                </p>
+              </div>
+            </div>
+            <div className="has-text-centered presentation">
+              <br />
+              <br />
+              <Link
+                  onClick={() => Matomo.registerClick('Home', 'Button', 'ContactUs')}
+                  className="button is-primary is-medium"
+                  to="/help/contact"
+              >
+                {t('contactus')}
+              </Link>
+              <br />
+              <br />
+              <p>
+                {t('fundUsText')} <ExternalLinkNewTab href="https://opencollective.com/captainfact_io">{t('fundUsLink')}</ExternalLinkNewTab>
+              </p>
+                <br />
+                <br />
+            </div>
+          </div>
+          <div className="has-text-centered">
+            <h2 className="title-alt is-3 is-bold">{t('followus')}</h2>
+          </div>
+        </section>
+        
         <section className="section">
           <CFSocialProfiles size="3em" color="white" />
         </section>
+
+        <section className="section partners">
+          <div className="content">
+            <h2 className="title is-3 has-text-centered" >{t('partners')}</h2>
+            <ExternalLinkNewTab href="https://github.com/CaptainFact/captain-fact/wiki/Les-partenariats-entre-les-chaînes-Youtube-et-CaptainFact.io" className="is-block has-text-centered">
+              {t('partners-info')} <ExternalLinkAlt size="1em" />
+            </ExternalLinkNewTab>
+            <br />
+            <AllPartners />
+          </div>
+        </section>
+
         <section className="section last-videos" style={{ paddingBottom: '3em' }}>
-          <br />
-          <br />
           <div className="has-text-centered">
             <h2 className="title is-3">{t('latest')}</h2>
             <Link
@@ -229,6 +391,32 @@ export default class Home extends React.PureComponent {
             <LastVideos />
           </div>
         </section>
+
+        <section className="section partners">
+          <div className="content">
+            <Flex flexWrap="wrap">
+              <Box width={[1, 1, 0.5, 0.5, 1 / 3]} mb="2em">
+                <h2 className="title is-3">{t('backers')}</h2>
+                <OpenCollectiveContributors
+                    tier="soutien-régulier"
+                    button={false}
+                    limit={8}
+                />
+                <OpenCollectiveContributors tier="donateur" button={false} limit={8} />
+              </Box>
+              <Box width={[1, 1, 0.5, 0.5, 2 / 3]}>
+                <h2 className="title is-3">{t('ambassadors')}</h2>
+                <Message>
+                  {t('aboutAmbassadors')}{' '}
+                  <Link to="/help/ambassadors">{t('learnMore')}</Link>
+                </Message>
+                <AllAmbassadors />
+              </Box>
+            </Flex>
+            <br />
+          </div>
+        </section>
+
         {INVITATION_SYSTEM && (
           <section className="section request-invitation">
             <h4 className="title is-4" style={{ color: 'white' }}>

@@ -4,24 +4,39 @@
   flex-direction: column
   background-attachment: fixed 
 
+  .header-img
+    margin: auto
+    display: block
   .hero
     background: #EDEDED
     min-height: 25vh
     .title1
-      margin-top: 2em
-      font-size: 1.2rem
+      margin-top: 5rem
+      font-size: 6rem
       color: $black
+      +mobile
+        font-size: 4rem
     .title
       font-family: Merriweather, serif
       color: $black
       line-height: 140%
-      margin-top: 1em
-      margin-bottom: 0em 
+      margin-top: initial
+      margin-bottom: initial
       font-size: 1.7rem
+    .light-title
+      font-weight: normal
+    .title-alt
+      font-family: inherit
+      color: $primary
+      margin-bottom: 0.4em
+      margin-top: 0
     .title, p, strong
       color: $black
       line-height: 140%
+    p
       margin-top: 1em
+    .is-bold
+      font-weight: 600
     .buttons-container
       .button, .button-label
         @include ProgressiveAnimationDelay(0.1s, 0.3s, 3)
@@ -61,6 +76,9 @@
       .logo-container
         text-align: center
         margin-bottom: 3em
+  .hero:first-child
+    .hero-body
+      margin: 0
 
   .last-videos-cards
     margin: 0 auto
@@ -74,10 +92,21 @@
     h2
       margin-bottom: 1em
 
+  .section-alt-bg
+    background-color: #F3FAFB
+
+  .title-alt
+    font-family: Merriweather, serif
+    color: $black
+    line-height: 200%
+    margin-top: 1em
+    margin-bottom: 1em
+    font-size: 1.7rem
+
   .separator
     height: 12em
     width: 100%
-    margin-top: -6em;
+    margin-top: -6em
     background-color: $white
     clip-path: ellipse(55% 40% at 50% 100%)
     +mobile
