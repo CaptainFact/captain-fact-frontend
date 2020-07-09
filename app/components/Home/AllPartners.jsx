@@ -11,6 +11,8 @@ import imgTedxNoumea from '../../assets/partners/tedxnoumea.jpg'
 import imgThinkerView from '../../assets/partners/thinkerview.jpg'
 import imgTroncheEnBiais from '../../assets/partners/troncheenbiais.jpg'
 import imgYesWeHack from '../../assets/partners/yeswehack.jpg'
+import imgLeCanardRefractaire from '../../assets/partners/lecanardrefractaire.jpg'
+import imgLarchipelle from '../../assets/partners/larchipelle.jpg'
 
 // prettier-ignore
 const PARTNERS = [
@@ -22,6 +24,8 @@ const PARTNERS = [
   { name: 'IMAGO', img: imgImago, url: 'https://imagotv.fr' },
   { name: 'TedX Nouméa', img: imgTedxNoumea, url: 'https://tedxnoumea.com' },
   { name: 'YesWeHack', img: imgYesWeHack, url: 'https://yeswehack.com' },
+  { name: 'Le Canard Réfractaire', img: imgLeCanardRefractaire, url: 'https://www.youtube.com/user/lostgame35/' },
+  { name: 'L\'Archi\'Pelle', img: imgLarchipelle, url: 'https://www.youtube.com/channel/UCOc43VE8KbZbwMX7fikucyw/featured' },
 ]
 
 /**

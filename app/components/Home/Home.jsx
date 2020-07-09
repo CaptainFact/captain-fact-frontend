@@ -76,7 +76,9 @@ export default class Home extends React.PureComponent {
                   </div>
                 </div>
               </div>
+              <div className="column is-11 is-10-tablet is-12-mobile">
                 <img src={imgMedia} alt="media effects" className="header-img" />
+              </div>
             </div>
           </div>
         </section>
