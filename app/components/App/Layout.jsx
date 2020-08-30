@@ -9,10 +9,11 @@ import { MainModalContainer } from '../Modal/MainModalContainer'
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
 import BackgroundNotifier from './BackgroundNotifier'
 import CrashReportPage from './CrashReportPage'
+import { Flex } from '@rebass/grid'
 
-@connect(state => ({
+@connect((state) => ({
   locale: state.UserPreferences.locale,
-  sidebarExpended: state.UserPreferences.sidebarExpended
+  sidebarExpended: state.UserPreferences.sidebarExpended,
 }))
 export default class Layout extends React.PureComponent {
   state = { error: null }
@@ -55,9 +56,29 @@ export default class Layout extends React.PureComponent {
     )
   }
 
+  renderMaintenancePage() {
+    return (
+      <Flex
+        justifyContent="center"
+        alignItems="center"
+        flexDirection="column"
+        css={{ minHeight: 600 }}
+      >
+        <img src="/assets/img/logo.png" className="rotating" />
+        <hr />
+        <p>Le site est en maintenance, merci de réessayer dans quelques minutes.</p>
+        <p>Site under maintenance, please try again in a few minutes.</p>
+      </Flex>
+    )
+  }
+
   render() {
     const { locale, sidebarExpended, children } = this.props
     const mainContainerClass = sidebarExpended ? undefined : 'expended'
+
+    if (!window.location.search.includes('skip-maintenance')) {
+      return this.renderMaintenancePage()
+    }
 
     return (
       <div id="main-layout" lang={locale}>
@@ -85,7 +106,7 @@ export default class Layout extends React.PureComponent {
    * @returns {Promise}
    */
   checkExtensionInstall() {
-    return new Promise(fulfill => {
+    return new Promise((fulfill) => {
       setTimeout(
         () => fulfill(!!document.getElementById('captainfact-extension-installed')),
         5000
