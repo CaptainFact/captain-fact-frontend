@@ -19,7 +19,7 @@ describe('User login', () => {
     cy.get('input[name=password]').type(defaultPassword)
     cy.get('.user-form .button:contains("Log in")').click()
     cy.url()
-      .should('be', '/videos')
+      .should('include', '/videos')
       .then(() => {
         cy.wait(1500).then(() => {
           expect(localStorage.getItem('token')).to.exist
@@ -32,7 +32,7 @@ describe('User login', () => {
     cy.get('input[name=password]').type(defaultPassword)
     cy.get('.user-form .button:contains("Log in")').click()
     cy.url()
-      .should('be', '/videos')
+      .should('include', '/videos')
       .then(() => {
         cy.wait(1500).then(() => {
           expect(localStorage.getItem('token')).to.exist
@@ -43,6 +43,6 @@ describe('User login', () => {
   it('validates form when pressing Enter', () => {
     cy.get('input[name=email]').type(defaultEmail)
     cy.get('input[name=password]').type(`${defaultPassword}{enter}`)
-    cy.url().should('be', '/videos')
+    cy.url().should('include', '/videos')
   })
 })
