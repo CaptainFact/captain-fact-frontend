@@ -5,11 +5,7 @@ import { change } from 'redux-form'
 import classNames from 'classnames'
 
 import { addModal } from '../../state/modals/reducer'
-import {
-  commentVote,
-  deleteComment,
-  flagComment
-} from '../../state/video_debate/comments/effects'
+import { commentVote, deleteComment, flagComment } from '../../state/video_debate/comments/effects'
 import { flashErrorUnauthenticated } from '../../state/flashes/reducer'
 import MediaLayout from '../Utils/MediaLayout'
 import Vote from './Vote'
@@ -27,7 +23,7 @@ import { withLoggedInUser } from '../LoggedInUser/UserProvider'
     myVote: state.VideoDebate.comments.voted.get(comment.id, 0),
     isVoting: state.VideoDebate.comments.voting.has(comment.id),
     replies: state.VideoDebate.comments.replies.get(comment.id),
-    isFlagged: state.VideoDebate.comments.myFlags.has(comment.id)
+    isFlagged: state.VideoDebate.comments.myFlags.has(comment.id),
   }),
   {
     addModal,
@@ -35,7 +31,7 @@ import { withLoggedInUser } from '../LoggedInUser/UserProvider'
     flagComment,
     commentVote,
     change,
-    flashErrorUnauthenticated
+    flashErrorUnauthenticated,
   }
 )
 @withNamespaces('main')
@@ -45,7 +41,7 @@ export class CommentDisplay extends React.PureComponent {
     super(props)
     this.state = {
       isBlurred: false,
-      repliesCollapsed: props.nesting === COLLAPSE_REPLIES_AT_NESTING
+      repliesCollapsed: props.nesting === COLLAPSE_REPLIES_AT_NESTING,
     }
   }
 
@@ -55,7 +51,7 @@ export class CommentDisplay extends React.PureComponent {
     const approveClass = this.getApproveClass(comment.approve)
     const allClassNames = classNames('comment', className, approveClass, {
       isBlurred,
-      hasSource: !!comment.source
+      hasSource: !!comment.source,
     })
 
     return (
@@ -156,13 +152,15 @@ export class CommentDisplay extends React.PureComponent {
       props: {
         handleAbort: () => this.setIsBlurred(false),
         handleConfirm: () => this.props.deleteComment(this.props.comment),
-        comment: this.props.comment
-      }
+        comment: this.props.comment,
+      },
     })
   }
 
-  handleVote = value => {
-    if (!this.ensureAuthenticated()) return false
+  handleVote = (value) => {
+    if (!this.ensureAuthenticated()) {
+      return false
+    }
     return this.props.commentVote({ comment: this.props.comment, value })
   }
 
@@ -174,8 +172,10 @@ export class CommentDisplay extends React.PureComponent {
     return this.props.setReplyToComment(this.props.comment)
   }
 
-  handleFlag = initialReason => {
-    if (!this.ensureAuthenticated()) return
+  handleFlag = (initialReason) => {
+    if (!this.ensureAuthenticated()) {
+      return
+    }
     this.setIsBlurred(true)
     this.props.addModal({
       Modal: ModalFlag,
@@ -185,12 +185,12 @@ export class CommentDisplay extends React.PureComponent {
           this.setIsBlurred(false)
           return this.props.flagComment({
             id: this.props.comment.id,
-            reason: parseInt(reason)
+            reason: parseInt(reason),
           })
         },
         comment: this.props.comment,
-        initialReason
-      }
+        initialReason,
+      },
     })
   }
 }

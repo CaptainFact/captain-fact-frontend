@@ -9,7 +9,7 @@ const CardLayout = ({
   footer = null,
   className = null,
   ContainerType = 'div',
-  containerProps = {}
+  containerProps = {},
 }) => (
   <ContainerType className={classNames('card', className)} {...containerProps}>
     {(headerTitle || headerIcon) && (

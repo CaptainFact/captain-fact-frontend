@@ -13,7 +13,7 @@ export default class Help extends React.PureComponent {
   render() {
     const {
       t,
-      routeParams: { splat }
+      routeParams: { splat },
     } = this.props
 
     let header = ''
@@ -91,7 +91,7 @@ export default class Help extends React.PureComponent {
   renderPageHeader() {
     const {
       t,
-      routeParams: { splat }
+      routeParams: { splat },
     } = this.props
     return (
       <div>

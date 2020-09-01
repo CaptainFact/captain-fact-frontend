@@ -4,13 +4,7 @@ import { Link } from 'react-router'
 import { Trans, withNamespaces } from 'react-i18next'
 import { Helmet } from 'react-helmet'
 
-import { UserCircle } from 'styled-icons/fa-regular/UserCircle'
-import { Activity } from 'styled-icons/feather/Activity'
-import { Settings } from 'styled-icons/feather/Settings'
-import { Bell } from 'styled-icons/fa-solid/Bell'
-import { Rss } from 'styled-icons/feather/Rss'
 import { Clock } from 'styled-icons/fa-regular/Clock'
-import { Videos } from 'styled-icons/boxicons-regular/Videos'
 
 import { Flex } from '@rebass/grid'
 import UserAppellation from './UserAppellation'
@@ -30,7 +24,7 @@ import UserMenu from './UserMenu'
   ({ DisplayedUser: { isLoading, errors, data } }) => ({
     isLoading,
     errors,
-    user: data
+    user: data,
   }),
   { fetchUser, resetUser }
 )
@@ -44,15 +38,17 @@ export default class User extends React.PureComponent {
   componentDidUpdate(oldProps) {
     // If user's username was updated
     if (
-      this.props.user.id === oldProps.user.id
-      && this.props.user.username !== oldProps.user.username
-    )
+      this.props.user.id === oldProps.user.id &&
+      this.props.user.username !== oldProps.user.username
+    ) {
       // TODO Remove old user profile from history
       // Redirect
       this.props.router.replace(`/u/${this.props.user.username}`)
+    }
     // Showing another user
-    else if (this.props.params.username !== oldProps.params.username)
+    else if (this.props.params.username !== oldProps.params.username) {
       this.props.fetchUser(this.props.params.username)
+    }
   }
 
   componentWillUnmount() {
@@ -64,8 +60,12 @@ export default class User extends React.PureComponent {
   }
 
   render() {
-    if (this.props.errors) return <ErrorView error={this.props.errors} canReload />
-    if (this.props.isLoading) return <LoadingFrame />
+    if (this.props.errors) {
+      return <ErrorView error={this.props.errors} canReload />
+    }
+    if (this.props.isLoading) {
+      return <LoadingFrame />
+    }
 
     const user = this.props.user || {}
     const prettyUsername = `@${user.username}`
@@ -79,7 +79,7 @@ export default class User extends React.PureComponent {
           {user.id !== 0 && (
             <MediaLayout
               left={<UserPicture user={user} size={USER_PICTURE_XLARGE} />}
-              content={(
+              content={
                 <div>
                   <UserAppellation user={user} withoutActions />
                   <div className="registered-since">
@@ -87,15 +87,11 @@ export default class User extends React.PureComponent {
                     &nbsp;
                     <Trans i18nKey="user:registeredSince">
                       Registered for
-                      <TimeSince
-                        time={user.registered_at}
-                        addSuffix={false}
-                        isDateTime={false}
-                      />
+                      <TimeSince time={user.registered_at} addSuffix={false} isDateTime={false} />
                     </Trans>
                   </div>
                 </div>
-              )}
+              }
               right={<ScoreTag reputation={user.reputation} size="large" withIcon />}
             />
           )}

@@ -7,6 +7,6 @@ const Speaker = new Record({
   title: '',
   picture: '',
   country: null,
-  wikidata_item_id: null
+  wikidata_item_id: null,
 })
 export default Speaker

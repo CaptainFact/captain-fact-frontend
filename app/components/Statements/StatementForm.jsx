@@ -14,7 +14,7 @@ import {
   decrementFormCount,
   incrementFormCount,
   setScrollTo,
-  STATEMENT_FORM_NAME
+  STATEMENT_FORM_NAME,
 } from '../../state/video_debate/statements/reducer'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 import ControlTextarea from '../FormUtils/ControlTextarea'
@@ -25,7 +25,7 @@ import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
   ({ VideoDebate: { video, statements } }) => ({
     position: video.playback.position,
     speakers: video.data.speakers,
-    submitting: statements.isSubmitting
+    submitting: statements.isSubmitting,
   }),
   { forcePosition, setScrollTo, incrementFormCount, decrementFormCount }
 )
@@ -61,7 +61,9 @@ export class StatementForm extends React.PureComponent {
 
   moveTimeMarker(position) {
     this.props.forcePosition(position)
-    if (this.state.lockedTime !== false) this.setState({ lockedTime: position })
+    if (this.state.lockedTime !== false) {
+      this.setState({ lockedTime: position })
+    }
   }
 
   handleSubmit(statement) {
@@ -84,31 +86,23 @@ export class StatementForm extends React.PureComponent {
 
     this.props.handleConfirm(statement).then(
       handleFormEffectResponse({
-        onSuccess: ({ id }) => this.props.setScrollTo({ id, __forceAutoScroll: true })
+        onSuccess: ({ id }) => this.props.setScrollTo({ id, __forceAutoScroll: true }),
       })
     )
   }
 
   render() {
-    const {
-      position,
-      handleSubmit,
-      valid,
-      speakers,
-      initialValues,
-      handleAbort,
-      t
-    } = this.props
+    const { position, handleSubmit, valid, speakers, initialValues, handleAbort, t } = this.props
     const currentTime = this.state.lockedTime === false ? position : this.state.lockedTime
     const speaker = initialValues.speaker_id
-      ? speakers.find(s => s.id === initialValues.speaker_id)
+      ? speakers.find((s) => s.id === initialValues.speaker_id)
       : null
     const toggleTimeLockAction = this.state.lockedTime === false ? 'unlock' : 'lock'
 
     return (
       <form
         className={classNames('statement-form', {
-          'card statement': !this.props.isBundled
+          'card statement': !this.props.isBundled,
         })}
         ref="container"
       >
@@ -127,15 +121,13 @@ export class StatementForm extends React.PureComponent {
             <a
               className="button"
               title={t('statement.reverseTimeLock', {
-                context: toggleTimeLockAction
+                context: toggleTimeLockAction,
               })}
               onClick={this.toggleLock.bind(this)}
             >
               <Icon size="small" name={toggleTimeLockAction} />
             </a>
-            {speaker && speaker.picture && (
-              <img className="speaker-mini" src={speaker.picture} />
-            )}
+            {speaker && speaker.picture && <img className="speaker-mini" src={speaker.picture} />}
             <Field
               name="speaker_id"
               component={SpeakersSelect}
@@ -151,11 +143,9 @@ export class StatementForm extends React.PureComponent {
               component={ControlTextarea}
               normalize={cleanStrMultiline}
               maxLength={STATEMENT_LENGTH[1]}
-              validate={value => validateFieldLength(t, value, STATEMENT_LENGTH)}
+              validate={(value) => validateFieldLength(t, value, STATEMENT_LENGTH)}
               placeholder={
-                speaker
-                  ? t('statement.textPlaceholder')
-                  : t('statement.noSpeakerTextPlaceholder')
+                speaker ? t('statement.textPlaceholder') : t('statement.noSpeakerTextPlaceholder')
               }
               hideErrorIfEmpty
               autoFocus
@@ -167,7 +157,7 @@ export class StatementForm extends React.PureComponent {
           <LinkWithIcon
             iconName="floppy-o"
             className={classNames('card-footer-item', 'submit-button', {
-              'is-loading': this.props.submitting
+              'is-loading': this.props.submitting,
             })}
             disabled={!valid || this.props.submitting}
             onClick={handleSubmit(this.handleSubmit.bind(this))}

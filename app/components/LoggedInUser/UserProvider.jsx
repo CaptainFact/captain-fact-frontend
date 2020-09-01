@@ -5,7 +5,7 @@ import {
   getFromLocalStorage,
   LOCAL_STORAGE_KEYS,
   removeFromLocalStorage,
-  setLocalStorage
+  setLocalStorage,
 } from '../../lib/local_storage'
 
 /**
@@ -19,7 +19,7 @@ export const UserContext = React.createContext({
   login() {},
   logout() {},
   checkReputation() {},
-  updateLoggedInUser() {}
+  updateLoggedInUser() {},
 })
 
 /**
@@ -27,11 +27,9 @@ export const UserContext = React.createContext({
  */
 class UserProvider extends React.Component {
   state = {
-    loggedInUser: new User(
-      JSON.parse(getFromLocalStorage(LOCAL_STORAGE_KEYS.LOGGED_IN_USER))
-    ),
+    loggedInUser: new User(JSON.parse(getFromLocalStorage(LOCAL_STORAGE_KEYS.LOGGED_IN_USER))),
     loggedInUserLoading: false,
-    isAuthenticated: false
+    isAuthenticated: false,
   }
 
   // ---- Public API ----
@@ -68,7 +66,7 @@ class UserProvider extends React.Component {
     this.setState({
       loggedInUser: new User(),
       isAuthenticated: false,
-      loggedInUserLoading: false
+      loggedInUserLoading: false,
     })
   }
 
@@ -76,12 +74,9 @@ class UserProvider extends React.Component {
    * Check if user has the necessary `reputation`. Will always returns true
    * for publishers as they have no limitations.
    */
-  checkReputation = reputation => {
+  checkReputation = (reputation) => {
     const { isAuthenticated, loggedInUser } = this.state
-    return (
-      isAuthenticated &&
-      (loggedInUser.is_publisher || loggedInUser.reputation >= reputation)
-    )
+    return isAuthenticated && (loggedInUser.is_publisher || loggedInUser.reputation >= reputation)
   }
 
   /**
@@ -93,13 +88,13 @@ class UserProvider extends React.Component {
       this.updateToken(token)
     }
 
-    this.setState(state => {
+    this.setState((state) => {
       const user = state.loggedInUser.merge(loggedInUser)
       setLocalStorage(LOCAL_STORAGE_KEYS.LOGGED_IN_USER, JSON.stringify(user.toJSON()))
       return {
         loggedInUser: user,
         loggedInUserLoading: false,
-        isAuthenticated: true
+        isAuthenticated: true,
       }
     })
   }
@@ -116,7 +111,7 @@ class UserProvider extends React.Component {
   }
 
   // Update token in localStorage and for all APIs
-  updateToken = token => {
+  updateToken = (token) => {
     if (token) {
       HttpApi.setAuthorizationToken(token)
       SocketApi.setAuthorizationToken(token)
@@ -132,7 +127,7 @@ class UserProvider extends React.Component {
    * Check if loggedInUser was updated in localStorage. This automatically
    * change the connected user if logging in/out from another tab.
    */
-  onLocalStorageUpdate = event => {
+  onLocalStorageUpdate = (event) => {
     if (event.key === 'loggedInUser') {
       // Has logged out from another tab
       if (event.oldValue && !event.newValue) {
@@ -165,7 +160,7 @@ class UserProvider extends React.Component {
           login: this.login,
           logout: this.logout,
           checkReputation: this.checkReputation,
-          updateLoggedInUser: this.updateLoggedInUser
+          updateLoggedInUser: this.updateLoggedInUser,
         }}
       >
         {this.props.children}
@@ -177,10 +172,8 @@ class UserProvider extends React.Component {
 /**
  * A high order component (HOC) that binds `UserContext` to the given `Component`.
  */
-export const withLoggedInUser = Component => props => (
-  <UserContext.Consumer>
-    {store => <Component {...props} {...store} />}
-  </UserContext.Consumer>
+export const withLoggedInUser = (Component) => (props) => (
+  <UserContext.Consumer>{(store) => <Component {...props} {...store} />}</UserContext.Consumer>
 )
 
 export default UserProvider

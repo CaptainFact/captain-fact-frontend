@@ -12,7 +12,9 @@ class CaptainFactHttpApi {
     this.baseUrl = `${trimRight(baseUrl, '/')}/`
     this.hasToken = !!token
     this.headers = { 'Content-Type': 'application/json' }
-    if (token) this.headers.authorization = `Bearer ${token}`
+    if (token) {
+      this.headers.authorization = `Bearer ${token}`
+    }
   }
 
   setAuthorizationToken(token) {
@@ -30,14 +32,17 @@ class CaptainFactHttpApi {
   prepareResponse(promise) {
     return new Promise((fulfill, reject) => {
       return promise
-        .then(response => {
-          return response.text().then(body => {
+        .then((response) => {
+          return response.text().then((body) => {
             const parsedBody = body ? JSON.parse(body) : null
-            if (!response.ok) reject(parseServerError(parsedBody))
-            else fulfill(parsedBody)
+            if (!response.ok) {
+              reject(parseServerError(parsedBody))
+            } else {
+              fulfill(parsedBody)
+            }
           })
         })
-        .catch(e => {
+        .catch((e) => {
           console.error(e)
           // Special case when no internet connection
           reject('noInternet')
@@ -50,7 +55,7 @@ class CaptainFactHttpApi {
     const response = fetch(this.baseUrl + resourceUrl, {
       method: requestType,
       body: data ? JSON.stringify(data) : '',
-      headers: this.headers
+      headers: this.headers,
     })
     return this.prepareResponse(response)
   }

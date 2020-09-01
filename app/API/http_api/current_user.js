@@ -1,12 +1,12 @@
 import HttpApi from '.'
 
 /** Update user with given changes. Returns the updated user */
-export const updateUserInfo = userParams => {
+export const updateUserInfo = (userParams) => {
   return HttpApi.put('users/me', userParams)
 }
 
 /** Unlocks an achievement that is not protected */
-export const unlockPublicAchievement = achievementId => {
+export const unlockPublicAchievement = (achievementId) => {
   return HttpApi.put(`users/me/achievements/${achievementId}`, achievementId)
 }
 
@@ -21,17 +21,17 @@ export const signUp = (userParams, invitationToken) => {
 }
 
 /** Unlink a third-party account. */
-export const unlinkProvider = provider => {
+export const unlinkProvider = (provider) => {
   return HttpApi.delete(`auth/${provider}/link`)
 }
 
 /** Request a password reset for given email */
-export const resetPasswordRequest = email => {
+export const resetPasswordRequest = (email) => {
   return HttpApi.post('users/reset_password/request', { email })
 }
 
 /** Check a forgotten password token, returns the user if the token is valid */
-export const resetPasswordVerify = confirmToken => {
+export const resetPasswordVerify = (confirmToken) => {
   return HttpApi.get(`users/reset_password/verify/${confirmToken}`)
 }
 
@@ -39,12 +39,12 @@ export const resetPasswordVerify = confirmToken => {
 export const resetPasswordConfirm = (confirmToken, newPassword) => {
   return HttpApi.post('users/reset_password/confirm', {
     token: confirmToken,
-    password: newPassword
+    password: newPassword,
   })
 }
 
 /** Confirm user email */
-export const confirmEmail = token => {
+export const confirmEmail = (token) => {
   return HttpApi.put(`users/me/confirm_email/${token}`)
 }
 

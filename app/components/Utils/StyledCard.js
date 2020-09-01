@@ -12,7 +12,7 @@ import {
   maxHeight,
   maxWidth,
   minHeight,
-  minWidth
+  minWidth,
 } from 'styled-system'
 import { Box } from '@rebass/grid'
 
@@ -42,11 +42,7 @@ StyledCard.propTypes = {
   /** styled-system prop: accepts any css 'border' value */
   borders: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
   /** styled-system prop: accepts any css 'border-radius' value */
-  borderRadius: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  borderRadius: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
   /** styled-system prop: accepts any css 'box-shadow' value */
   boxShadow: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
   /** styled-system prop: accepts any css 'color' value */
@@ -69,7 +65,7 @@ StyledCard.propTypes = {
    * styled-system prop: adds margin & padding props
    * see: https://github.com/jxnblk/styled-system/blob/master/docs/api.md#space
    */
-  space: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array])
+  space: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
 }
 
 StyledCard.defaultProps = {
@@ -77,7 +73,7 @@ StyledCard.defaultProps = {
   border: '1px solid',
   borderColor: 'black.300',
   borderRadius: '8px',
-  boxShadow: 'rgba(144, 144, 144, 0.25) 4px 4px 16px'
+  boxShadow: 'rgba(144, 144, 144, 0.25) 4px 4px 16px',
 }
 
 /** @component */

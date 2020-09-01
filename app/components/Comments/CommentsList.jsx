@@ -9,13 +9,13 @@ import CommentsListExpender from './CommentsListExpender'
 
 export class CommentsList extends React.PureComponent {
   static propTypes = {
-    setReplyToComment: PropTypes.func
+    setReplyToComment: PropTypes.func,
   }
 
   constructor(props) {
     super(props)
     this.state = {
-      nbComments: this.getNbDisplayedRange(props.nesting || 1)
+      nbComments: this.getNbDisplayedRange(props.nesting || 1),
     }
   }
 
@@ -27,7 +27,7 @@ export class CommentsList extends React.PureComponent {
       <div className={classNames('comments-list', className)}>
         {header && <CommentsListHeader header={header} />}
         <FlipMove enterAnimation="fade" leaveAnimation={false}>
-          {displayedComments.map(comment => (
+          {displayedComments.map((comment) => (
             <CommentDisplay
               key={comment.id}
               comment={comment}
@@ -50,7 +50,7 @@ export class CommentsList extends React.PureComponent {
   getDisplayedComments() {
     const [lowLimit, highLimit] = this.state.nbComments
     let numComment = 0
-    return this.props.comments.takeWhile(c => {
+    return this.props.comments.takeWhile((c) => {
       return ++numComment <= lowLimit || (numComment <= highLimit && c.score > -1)
     })
   }
@@ -60,12 +60,14 @@ export class CommentsList extends React.PureComponent {
   }
 
   getNbDisplayedRange(nesting) {
-    if (nesting > 3) return [3, 5]
+    if (nesting > 3) {
+      return [3, 5]
+    }
     return [4 - nesting, 6 - nesting]
   }
 }
 
 CommentsList.defaultProps = {
   comments: [],
-  displayLimit: 5
+  displayLimit: 5,
 }

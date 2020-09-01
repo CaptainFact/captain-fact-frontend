@@ -32,9 +32,7 @@ const Presentation = ({ t }) => (
     {t('description')}{' '}
     <Trans i18nKey="moreInfo">
       [Is]
-      <ExternalLinkNewTab href="https://github.com/CaptainFact">
-        open-source
-      </ExternalLinkNewTab>
+      <ExternalLinkNewTab href="https://github.com/CaptainFact">open-source</ExternalLinkNewTab>
       [Respect]<Link to="/help/extension">[Privacy]</Link>.
     </Trans>
   </p>

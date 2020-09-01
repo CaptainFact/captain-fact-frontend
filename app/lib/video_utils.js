@@ -21,5 +21,5 @@ export const getTimecode = (videoPlayer, video, baseTimecode) => {
 
 export const THUMBNAILS_SIZES = {
   MEDIUM: 'MEDIUM',
-  LARGE: 'LARGE'
+  LARGE: 'LARGE',
 }

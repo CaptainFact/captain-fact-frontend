@@ -32,9 +32,7 @@ const NotificationBell = (props, ref) => (
         return (
           <Container position="relative">
             <Bell size={24} />
-            {unreadCount > 0 && (
-              <UnreadNotificationsBadge>{unreadCount}</UnreadNotificationsBadge>
-            )}
+            {unreadCount > 0 && <UnreadNotificationsBadge>{unreadCount}</UnreadNotificationsBadge>}
           </Container>
         )
       }}

@@ -60,7 +60,7 @@ const UserMenuTrigger = styled(Flex)`
   }
 `
 
-const UserMenuEntry = styled(props => <StyledLink {...omit(props, 'isActive')} />)`
+const UserMenuEntry = styled((props) => <StyledLink {...omit(props, 'isActive')} />)`
   display: block;
   border-left: 2px solid white;
   background: white;
@@ -69,13 +69,13 @@ const UserMenuEntry = styled(props => <StyledLink {...omit(props, 'isActive')} /
     background: ${themeGet('colors.black.50')};
   }
 
-  ${props =>
+  ${(props) =>
     props.index > 0 &&
     css`
       border-top: 1px solid ${themeGet('colors.black.100')};
     `}
 
-  ${props =>
+  ${(props) =>
     props.isActive &&
     css`
       border-left: 2px solid ${themeGet('colors.primary')};
@@ -84,7 +84,7 @@ const UserMenuEntry = styled(props => <StyledLink {...omit(props, 'isActive')} /
 
 UserMenuEntry.defaultProps = {
   px: 2,
-  py: 1
+  py: 1,
 }
 
 const UserLoading = styled(UserCircle)`
@@ -105,7 +105,7 @@ const MenuToggleSwitch = styled(Menu)`
 
 const basePopupStyle = {
   boxShadow: 'rgba(150, 150, 150, 0.2) 5px 10px 15px -6px',
-  filter: 'none'
+  filter: 'none',
 }
 
 const desktopPopupStyle = { ...basePopupStyle, minWidth: 400 }
@@ -120,7 +120,7 @@ const Navbar = ({
   isAuthenticated,
   loggedInUserLoading,
   location,
-  width
+  width,
 }) => {
   const isMobile = width < 600
   const loginRedirect =
@@ -240,8 +240,7 @@ const Navbar = ({
 }
 
 export default withTheme(
-  connect(
-    null,
-    { toggleSidebar }
-  )(withLoggedInUser(withNamespaces('main')(withRouter(withResizeDetector(Navbar)))))
+  connect(null, { toggleSidebar })(
+    withLoggedInUser(withNamespaces('main')(withRouter(withResizeDetector(Navbar))))
+  )
 )

@@ -12,7 +12,7 @@ const AMBASSADORS = [
   { name: 'Frédéric Bouffetier', username: 'DocFred', img: imgFrederic },
   { name: 'Timothée Rolland', username: 'Troplent', img: imgThimothee },
   { name: 'Dorian Cazottes', username: 'DodoLaSoudure', img: imgDorian },
-  { name: 'Basile Asti', username: 'Basile', img: imgBasile }
+  { name: 'Basile Asti', username: 'Basile', img: imgBasile },
 ]
 
 const AmbassadorPicture = styled.img`

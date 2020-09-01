@@ -10,13 +10,7 @@ const PaginationEllipsis = () => (
   </li>
 )
 
-const makeLink = (
-  LinkBuilder,
-  page,
-  disabled,
-  onPageChange = null,
-  isCurrent = false
-) => (
+const makeLink = (LinkBuilder, page, disabled, onPageChange = null, isCurrent = false) => (
   <li key={page}>
     <LinkBuilder
       className={classNames('pagination-link', { 'is-current': isCurrent })}
@@ -81,11 +75,11 @@ const PaginationMenu = ({
   total = 1,
   isRounded,
   onPageChange,
-  LinkBuilder = props => <Button {...props} />,
-  t
+  LinkBuilder = (props) => <Button {...props} />,
+  t,
 }) => {
   const allClasses = classNames('pagination is-centered', className, {
-    'is-rounded': isRounded
+    'is-rounded': isRounded,
   })
 
   return (
@@ -107,14 +101,7 @@ const PaginationMenu = ({
         {t('pagination.next')}
       </LinkBuilder>
       <ul className="pagination-list">
-        {pageSelectButtonsList(
-          LinkBuilder,
-          1,
-          currentPage,
-          total,
-          disabled,
-          onPageChange
-        )}
+        {pageSelectButtonsList(LinkBuilder, 1, currentPage, total, disabled, onPageChange)}
       </ul>
     </nav>
   )

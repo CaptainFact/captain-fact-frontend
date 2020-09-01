@@ -20,9 +20,9 @@ import { closeSidebar, toggleSidebar } from '../../state/user_preferences/reduce
 import UserLanguageSelector from '../LoggedInUser/UserLanguageSelector'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
-@connect(state => ({ sidebarExpended: state.UserPreferences.sidebarExpended }), {
+@connect((state) => ({ sidebarExpended: state.UserPreferences.sidebarExpended }), {
   toggleSidebar,
-  closeSidebar
+  closeSidebar,
 })
 @withNamespaces('main')
 export default class Sidebar extends React.PureComponent {
@@ -34,7 +34,9 @@ export default class Sidebar extends React.PureComponent {
   }
 
   closeSideBarIfMobile() {
-    if (window.innerWidth <= MOBILE_WIDTH_THRESHOLD) this.props.closeSidebar()
+    if (window.innerWidth <= MOBILE_WIDTH_THRESHOLD) {
+      this.props.closeSidebar()
+    }
   }
 
   MenuLink({ iconName, className, children, ...props }) {

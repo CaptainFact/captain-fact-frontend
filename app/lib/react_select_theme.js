@@ -6,19 +6,19 @@ export const ReactSelectStyles = {
     cursor: 'text',
     ...(isFocused && {
       'border-color': '#6ba3a7',
-      'box-shadow': '0 0 0 0.125em rgba(107, 163, 167, 0.25)'
-    })
+      'box-shadow': '0 0 0 0.125em rgba(107, 163, 167, 0.25)',
+    }),
   }),
-  option: base => ({
+  option: (base) => ({
     ...base,
-    cursor: 'pointer'
-  })
+    cursor: 'pointer',
+  }),
 }
 
-export const ReactSelectTheme = reactSelectTheme => ({
+export const ReactSelectTheme = (reactSelectTheme) => ({
   ...reactSelectTheme,
   colors: {
     ...reactSelectTheme.colors,
-    primary: CFTheme.colors.primary
-  }
+    primary: CFTheme.colors.primary,
+  },
 })

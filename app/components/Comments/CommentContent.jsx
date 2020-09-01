@@ -4,12 +4,7 @@ import { Source } from './Source'
 
 const COLLAPSE_CONTENT_ABOVE_NESTING = 6
 
-const CommentContent = ({
-  comment: { source, text },
-  nesting,
-  replyingTo,
-  richMedias
-}) => {
+const CommentContent = ({ comment: { source, text }, nesting, replyingTo, richMedias }) => {
   const isCollapsed = replyingTo && nesting > COLLAPSE_CONTENT_ABOVE_NESTING
   const shouldRenderTextBlock = text || isCollapsed
 

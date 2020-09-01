@@ -4,8 +4,8 @@ const errorsInfos = {
   unauthenticated: { url: '/signup', i18nKey: 'menu.signup' },
   invalid_invitation_token: {
     url: '/signup',
-    i18nKey: 'user:invitationOnlyTitle'
-  }
+    i18nKey: 'user:invitationOnlyTitle',
+  },
 }
 
 export function getErrorInfo(message) {

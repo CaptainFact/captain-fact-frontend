@@ -6,9 +6,9 @@ import { space, color, themeGet } from 'styled-system'
 import { Flex, Box } from '@rebass/grid'
 import { transparentize } from 'polished'
 
-const getBgColor = props => themeGet(`colors.${props.bg}`, props.bg)(props)
+const getBgColor = (props) => themeGet(`colors.${props.bg}`, props.bg)(props)
 
-const focusAnimation = color => keyframes`
+const focusAnimation = (color) => keyframes`
   0% {
     box-shadow: 0 0 0 0.25em ${transparentize(0.5, color)};
   }
@@ -44,20 +44,21 @@ const Container = styled.button`
   }
 
   &:focus > * {
-    animation: ${props => focusAnimation(getBgColor(props))} 0.75s ease-out;
+    animation: ${(props) => focusAnimation(getBgColor(props))} 0.75s ease-out;
   }
 
   ${color}
   ${space}
 
-  ${props => props.active
-    && css`
+  ${(props) =>
+    props.active &&
+    css`
       background: ${transparentize(0.5, getBgColor(props))};
     `}
 `
 
 Container.defaultProps = {
-  type: 'button'
+  type: 'button',
 }
 
 const ToggleBtn = styled(Box)`
@@ -70,8 +71,9 @@ const ToggleBtn = styled(Box)`
   transition: left 0.2s;
   box-shadow: -0.075em 0.025em 0.25em rgba(0, 0, 0, 0.3);
 
-  ${props => props.active
-    && css`
+  ${(props) =>
+    props.active &&
+    css`
       left: 50%;
     `}
 `
@@ -112,17 +114,17 @@ StyledToggle.propTypes = {
     PropTypes.string,
     PropTypes.number,
     PropTypes.array,
-    PropTypes.object
+    PropTypes.object,
   ]),
   /** Wether the control should be checked. Set the input as controlled */
   checked: PropTypes.bool,
   /** Function called when state changes */
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 }
 
 StyledToggle.defaultProps = {
   color: 'primary',
-  size: '1em'
+  size: '1em',
 }
 
 export default StyledToggle

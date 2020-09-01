@@ -3,7 +3,7 @@ import {
   ENTITY_SPEAKER,
   ENTITY_STATEMENT,
   ENTITY_COMMENT,
-  ENTITY_SOURCED_COMMENT
+  ENTITY_SOURCED_COMMENT,
 } from '../constants'
 
 export function getEntityIDFromAction(action) {

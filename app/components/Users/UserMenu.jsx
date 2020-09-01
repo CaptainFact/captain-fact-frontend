@@ -1,4 +1,4 @@
-import React from 'react'
+import 'react'
 import PropTypes from 'prop-types'
 import { withNamespaces } from 'react-i18next'
 import { withRouter } from 'react-router'
@@ -14,13 +14,13 @@ import { LogOut } from 'styled-icons/feather/LogOut'
 const BASE_LINKS = [
   { path: '', i18nKey: 'menu.profile', Icon: UserCircle },
   { path: '/videos', i18nKey: 'menu.addedVideos', Icon: Videos },
-  { path: '/activity', i18nKey: 'menu.activity', Icon: Activity }
+  { path: '/activity', i18nKey: 'menu.activity', Icon: Activity },
 ]
 
 const AUTHENTICATED_LINKS = [
   { path: '/subscriptions', i18nKey: 'menu.subscriptions', Icon: Rss },
   { path: '/notifications', i18nKey: 'menu.notifications', Icon: Bell },
-  { path: '/settings', i18nKey: 'menu.settings', Icon: Settings }
+  { path: '/settings', i18nKey: 'menu.settings', Icon: Settings },
 ]
 
 /**
@@ -34,7 +34,7 @@ const UserMenu = ({ t, isSelf, user, children, location, hasLogout }) => {
       path: '/logout',
       isRootPath: true,
       i18nKey: 'menu.logout',
-      Icon: LogOut
+      Icon: LogOut,
     })
   }
 
@@ -47,7 +47,7 @@ const UserMenu = ({ t, isSelf, user, children, location, hasLogout }) => {
       title: t(entry.i18nKey),
       route,
       isActive,
-      index
+      index,
     })
   })
 }
@@ -71,11 +71,11 @@ UserMenu.propTypes = {
   /** Wether we're displaying the menu for currently logged in user */
   isSelf: PropTypes.bool,
   /** Logout */
-  hasLogout: PropTypes.bool
+  hasLogout: PropTypes.bool,
 }
 
 UserMenu.defaultProps = {
-  isSelf: false
+  isSelf: false,
 }
 
 export default withNamespaces('main')(withRouter(UserMenu))

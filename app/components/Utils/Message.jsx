@@ -20,11 +20,11 @@ const Message = ({ type, header, className, children, onClose }) => (
 Message.propTypes = {
   type: PropTypes.oneOf(['info', 'danger', 'warning', 'primary', 'link', 'dark']),
   onClose: PropTypes.func,
-  header: PropTypes.node
+  header: PropTypes.node,
 }
 
 Message.defaultProps = {
-  type: 'info'
+  type: 'info',
 }
 
 export default Message

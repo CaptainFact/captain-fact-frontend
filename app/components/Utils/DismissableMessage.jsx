@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Message from './Message'
 import { getFromLocalStorage, setLocalStorage } from '../../lib/local_storage'
 
-const getDefaultOpen = localStorageDismissKey => {
+const getDefaultOpen = (localStorageDismissKey) => {
   if (!localStorageDismissKey) {
     return true
   } else {
@@ -15,9 +15,7 @@ const getDefaultOpen = localStorageDismissKey => {
  * A message that can be dismissed
  */
 const DismissableMessage = ({ children, header, localStorageDismissKey, ...props }) => {
-  const [isDisplayed, setDisplayed] = React.useState(
-    getDefaultOpen(localStorageDismissKey)
-  )
+  const [isDisplayed, setDisplayed] = React.useState(getDefaultOpen(localStorageDismissKey))
 
   if (!isDisplayed) {
     return null
@@ -42,7 +40,7 @@ const DismissableMessage = ({ children, header, localStorageDismissKey, ...props
 DismissableMessage.propTypes = {
   localStorageDismissKey: PropTypes.string,
   children: PropTypes.node,
-  header: PropTypes.node
+  header: PropTypes.node,
 }
 
 export default DismissableMessage

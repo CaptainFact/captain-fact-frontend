@@ -2,16 +2,16 @@ import HttpApi from '../../../API/http_api'
 import {
   setLoading,
   setUser as setDisplayedUser,
-  setError as setDisplayedUserError
+  setError as setDisplayedUserError,
 } from './reducer'
 
-export const fetchUser = username => dispatch => {
+export const fetchUser = (username) => (dispatch) => {
   dispatch(setLoading(true))
   return HttpApi.get(`users/username/${username}`)
-    .then(user => {
+    .then((user) => {
       dispatch(setDisplayedUser(user))
     })
-    .catch(error => {
+    .catch((error) => {
       dispatch(setDisplayedUserError(error))
     })
 }

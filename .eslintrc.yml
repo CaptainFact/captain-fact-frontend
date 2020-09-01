@@ -23,11 +23,10 @@ plugins:
 rules:
   max-len:
     - warn
-    - code: 90
+    - code: 100
       ignoreStrings: true
       ignoreTemplateLiterals: true
       ignoreRegExpLiterals: true
-  indent: ['warn', 2]
   linebreak-style: ['error', 'unix']
   quotes: ['warn', 'single', { avoidEscape: true }]
   semi: ['error', 'never']
@@ -47,8 +46,8 @@ rules:
   no-unused-expressions: 0
   chai-friendly/no-unused-expressions: 2
   # React
+  react/display-name: ['warn']
   react/destructuring-assignment: off
-  react/no-multi-comp: ['warn']
   react/jsx-indent-props: ['warn', 2]
   react/jsx-first-prop-new-line: ['warn']
   react/jsx-closing-bracket-location: ['warn']
@@ -94,7 +93,7 @@ rules:
   function-paren-newline: off
   arrow-parens: off
   arrow-body-style: off
-  curly: off
+  curly: ['error']
   no-use-before-define: off
   no-param-reassign: off
   camelcase: off

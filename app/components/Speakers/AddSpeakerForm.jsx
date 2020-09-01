@@ -16,17 +16,15 @@ import { ReactSelectStyles, ReactSelectTheme } from '../../lib/react_select_them
 @connect(null, { addSpeaker })
 @withNamespaces('videoDebate')
 export default class AddSpeakerForm extends React.PureComponent {
-  searchSpeakerRequest = debounce(query => {
+  searchSpeakerRequest = debounce((query) => {
     return query.length < 3
       ? []
-      : SocketApi.push('video_debate', 'search_speaker', { query }).then(
-          ({ speakers }) => {
-            return speakers.map(s => ({ label: s.full_name, value: s }))
-          }
-        )
+      : SocketApi.push('video_debate', 'search_speaker', { query }).then(({ speakers }) => {
+          return speakers.map((s) => ({ label: s.full_name, value: s }))
+        })
   }, 250)
 
-  promptTextCreator = speakerName => {
+  promptTextCreator = (speakerName) => {
     return checkLength(speakerName, SPEAKER_NAME_LENGTH)
       ? this.props.t('speaker.create', { name: capitalizeName(speakerName) })
       : '...'
@@ -48,7 +46,7 @@ export default class AddSpeakerForm extends React.PureComponent {
       <AsyncCreatable
         allowCreateWhileLoading
         isDisabled={disabled}
-        isValidNewOption={value => value.length >= 3}
+        isValidNewOption={(value) => value.length >= 3}
         formatCreateLabel={this.promptTextCreator}
         tabSelectsValue={false}
         placeholder={`${t('speaker.add')}...`}
@@ -61,7 +59,7 @@ export default class AddSpeakerForm extends React.PureComponent {
             <Container display="flex" p={3} color="black.400" justifyContent="center">
               {t('main:actions.loading')}...
             </Container>
-          )
+          ),
         }}
         styles={ReactSelectStyles}
         theme={ReactSelectTheme}

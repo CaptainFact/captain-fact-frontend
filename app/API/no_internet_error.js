@@ -8,7 +8,7 @@ export default function noInternetError() {
     flashError({
       message: NO_INTERNET_ERROR,
       timeLeft: 999999999999,
-      infoText: 'actions.reload'
+      infoText: 'actions.reload',
     })
   )
 }

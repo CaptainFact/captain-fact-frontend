@@ -12,11 +12,11 @@ import { reset } from '../../state/help/reducer'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
 @connect(
-  state => ({
+  (state) => ({
     markdownContent: state.Help.markdownContent,
     isLoading: state.Help.isLoading,
     error: state.Help.error,
-    locale: state.UserPreferences.locale
+    locale: state.UserPreferences.locale,
   }),
   { fetchHelpPage, reset }
 )
@@ -31,8 +31,9 @@ class HelpPageContent extends PureComponent {
   }
 
   componentDidUpdate(oldProps) {
-    if (this.props.locale !== oldProps.locale || this.props.page !== oldProps.page)
+    if (this.props.locale !== oldProps.locale || this.props.page !== oldProps.page) {
       this.props.fetchHelpPage(this.props.page)
+    }
   }
 
   componentWillUnmount() {
@@ -40,8 +41,12 @@ class HelpPageContent extends PureComponent {
   }
 
   render() {
-    if (this.props.isLoading) return <LoadingFrame />
-    if (this.props.error) return <ErrorView canGoBack={false} error={this.props.error} />
+    if (this.props.isLoading) {
+      return <LoadingFrame />
+    }
+    if (this.props.error) {
+      return <ErrorView canGoBack={false} error={this.props.error} />
+    }
     return (
       <Markdown
         className="content"
@@ -52,8 +57,9 @@ class HelpPageContent extends PureComponent {
   }
 
   renderLink({ href, children }) {
-    if (isExternal(window.location.href, href) || isDownloadableFile(href))
+    if (isExternal(window.location.href, href) || isDownloadableFile(href)) {
       return <ExternalLinkNewTab href={href}>{children}</ExternalLinkNewTab>
+    }
     return (
       <Link to={href} onClick={this.props.onLinkClick}>
         {children}
@@ -64,7 +70,7 @@ class HelpPageContent extends PureComponent {
 
 HelpPageContent.propTypes = {
   page: PropTypes.string.isRequired,
-  onLinkClick: PropTypes.func
+  onLinkClick: PropTypes.func,
 }
 
 export default HelpPageContent

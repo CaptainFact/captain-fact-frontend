@@ -9,6 +9,6 @@ const VideoDebateReducer = combineReducers({
   presence: PresenceReducer,
   video: VideoReducer,
   statements: StatementsReducer,
-  comments: CommentsReducer
+  comments: CommentsReducer,
 })
 export default VideoDebateReducer

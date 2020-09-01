@@ -6,10 +6,7 @@ import { Link } from 'react-router'
 import { Report } from 'styled-icons/octicons/Report'
 
 import { MIN_REPUTATION_MODERATION } from '../../constants'
-import {
-  fetchRandomModeration,
-  postModerationFeedback
-} from '../../state/moderation/effects'
+import { fetchRandomModeration, postModerationFeedback } from '../../state/moderation/effects'
 
 import UserAppellation from '../Users/UserAppellation'
 import UserAction from '../UsersActions/UserAction'
@@ -20,10 +17,10 @@ import { ModerationForm } from './ModerationForm'
 import { commentURL } from '../../lib/cf_routes'
 
 @connect(
-  state => ({
+  (state) => ({
     isLoading: state.Moderation.isLoading,
     error: state.Moderation.error,
-    entry: state.Moderation.entry
+    entry: state.Moderation.entry,
   }),
   { fetchRandomModeration, postModerationFeedback }
 )
@@ -35,24 +32,22 @@ export default class Moderation extends React.PureComponent {
   }
 
   postFeedback(values) {
-    this.props
-      .postModerationFeedback(values)
-      .then(() => this.props.fetchRandomModeration())
+    this.props.postModerationFeedback(values).then(() => this.props.fetchRandomModeration())
   }
 
   render() {
     const { entry, t } = this.props
 
-    if (this.props.isLoading) return <LoadingFrame />
+    if (this.props.isLoading) {
+      return <LoadingFrame />
+    }
 
     return (
       <div className="section">
         <h1 className="title is-1 has-text-centered">
           {t('title')} <Report size="1em" />
         </h1>
-        {!entry && (
-          <Message className="has-text-centered">{t('emptyModeration')}</Message>
-        )}
+        {!entry && <Message className="has-text-centered">{t('emptyModeration')}</Message>}
         {entry && (
           <div>
             {this.renderAction(entry.action)}
@@ -85,7 +80,7 @@ export default class Moderation extends React.PureComponent {
         <ModerationForm
           action={action}
           initialValues={{ action_id: action.id }}
-          onSubmit={values => this.postFeedback(values)}
+          onSubmit={(values) => this.postFeedback(values)}
         />
       </div>
     )

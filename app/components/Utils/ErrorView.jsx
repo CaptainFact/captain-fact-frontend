@@ -31,10 +31,7 @@ export class ErrorView extends React.PureComponent {
             </p>
             {(canGoBack || canReload) && <br />}
             {canGoBack && (
-              <LinkWithIcon
-                iconName="arrow-left"
-                onClick={() => this.props.router.goBack()}
-              >
+              <LinkWithIcon iconName="arrow-left" onClick={() => this.props.router.goBack()}>
                 {t('main:actions.goBack')}
               </LinkWithIcon>
             )}
@@ -55,13 +52,13 @@ export class ErrorView extends React.PureComponent {
 
   getMoreInfo() {
     const errorInfo = getErrorInfo(this.props.error)
-    if (!errorInfo) return null
+    if (!errorInfo) {
+      return null
+    }
     return (
       <span>
         &nbsp;-&nbsp;
-        <Link to={errorInfo.url}>
-          {this.props.t(errorInfo.i18nKey || 'main:actions.moreInfo')}
-        </Link>
+        <Link to={errorInfo.url}>{this.props.t(errorInfo.i18nKey || 'main:actions.moreInfo')}</Link>
       </span>
     )
   }

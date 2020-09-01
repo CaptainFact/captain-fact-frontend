@@ -12,7 +12,7 @@ import { Mutation } from 'react-apollo'
 const SubscribeIconContainer = styled(Box)`
   width: 1em;
   height: 1em;
-  transform: rotateY(${props => (props.isSubscribed ? 180 : 0)}deg);
+  transform: rotateY(${(props) => (props.isSubscribed ? 180 : 0)}deg);
   transition: transform 0.3s;
   transform-style: preserve-3d;
   svg {
@@ -25,8 +25,9 @@ const SubscribeIconContainer = styled(Box)`
     backface-visibility: hidden;
   }
 
-  ${props => props.onClick
-    && css`
+  ${(props) =>
+    props.onClick &&
+    css`
       cursor: pointer;
     `}
 `
@@ -63,23 +64,22 @@ const updateSubscriptionQuery = gql`
 const SubscribeBtn = ({
   size,
   isSubscribed,
-  onChange,
   entityId,
   scope,
-  onClick,
   deprecatedOverrideClick,
   ...props
 }) => (
   <Mutation mutation={updateSubscriptionQuery} variables={{ entityId, scope }}>
-    {updateSubscription => (
+    {(updateSubscription) => (
       <Box fontSize={size} {...props}>
         <SubscribeIconContainer
           isSubscribed={isSubscribed}
-          onClick={() => (deprecatedOverrideClick
-            ? deprecatedOverrideClick(!isSubscribed)
-            : updateSubscription({
-              variables: { isSubscribed: !isSubscribed }
-            }))
+          onClick={() =>
+            deprecatedOverrideClick
+              ? deprecatedOverrideClick(!isSubscribed)
+              : updateSubscription({
+                  variables: { isSubscribed: !isSubscribed },
+                })
           }
         >
           <IconSubscribed />
@@ -102,11 +102,11 @@ SubscribeBtn.propTypes = {
   /** Icon size */
   size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /** Any props from `Box` */
-  ...Box.propTypes
+  ...Box.propTypes,
 }
 
 SubscribeBtn.defaultProps = {
-  size: '1em'
+  size: '1em',
 }
 
 export default SubscribeBtn

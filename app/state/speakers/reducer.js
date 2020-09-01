@@ -17,11 +17,11 @@ const INITIAL_STATE = new Record({
     wikimedia: null,
     wikipedia: null,
     wikiquote: null,
-    wikinews: null
+    wikinews: null,
   })(),
   isLoading: false,
   isLoadingWiki: false,
-  error: null
+  error: null,
 })
 
 const SpeakersReducer = handleActions(
@@ -30,32 +30,36 @@ const SpeakersReducer = handleActions(
       next: (state, { payload }) => {
         return state.mergeDeep({ isLoading: false, currentSpeaker: payload })
       },
-      throw: (state, { payload }) => state.merge({ isLoading: false, error: payload })
+      throw: (state, { payload }) => state.merge({ isLoading: false, error: payload }),
     },
     [actionFetchSpeakerWikiLinks]: {
       next: (state, { payload }) => {
         const allLinks = {}
         for (const link of payload) {
           const siteName = checkLink(link)
-          if (siteName) allLinks[siteName] = link
+          if (siteName) {
+            allLinks[siteName] = link
+          }
         }
         return state.mergeDeep({
           isLoadingWiki: false,
-          currentSpeakerLinks: allLinks
+          currentSpeakerLinks: allLinks,
         })
       },
-      throw: state => state.merge({ isLoadingWiki: false })
+      throw: (state) => state.merge({ isLoadingWiki: false }),
     },
     [setLoading]: (state, { payload }) => state.set('isLoading', payload),
     [setLoadingWiki]: (state, { payload }) => state.set('isLoadingWiki', payload),
-    [reset]: () => INITIAL_STATE()
+    [reset]: () => INITIAL_STATE(),
   },
   INITIAL_STATE()
 )
 
 function checkLink(url) {
   for (const siteName of supportedSites) {
-    if (url.includes(siteName)) return siteName
+    if (url.includes(siteName)) {
+      return siteName
+    }
   }
   return null
 }

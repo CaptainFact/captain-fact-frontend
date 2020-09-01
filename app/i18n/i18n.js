@@ -25,7 +25,7 @@ export const locales = {
   fr: dateLocaleFR,
   en: datelocaleEN,
   ar: datelocaleAR,
-  es: datelocaleES
+  es: datelocaleES,
 }
 
 // Configure I18N
@@ -37,21 +37,29 @@ i18n.init({
   joinArrays: '\n',
   debug: JS_ENV === 'dev',
   react: {
-    wait: true
+    wait: true,
   },
   interpolation: {
     escapeValue: false, // Not needed for react
     formatSeparator: ',',
     format(value, format) {
-      if (format === 'lowerCase') return value.toLowerCase()
-      if (format === 'upperCase') return value.toUpperCase()
-      if (format === 'titleCase') return titleCase(value)
-      if (format === 'unSnake') return value.replace('_', ' ')
+      if (format === 'lowerCase') {
+        return value.toLowerCase()
+      }
+      if (format === 'upperCase') {
+        return value.toUpperCase()
+      }
+      if (format === 'titleCase') {
+        return titleCase(value)
+      }
+      if (format === 'unSnake') {
+        return value.replace('_', ' ')
+      }
       return value
-    }
-  }
+    },
+  },
 })
 
-i18n.on('languageChanged', language => store.dispatch(changeLocale(language)))
+i18n.on('languageChanged', (language) => store.dispatch(changeLocale(language)))
 
 export default i18n

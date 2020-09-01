@@ -3,18 +3,18 @@ import { setSubmitting } from './reducer'
 import { createEffect, returnSuccess, generateFSAError } from '../utils'
 import { errorToFlash } from '../flashes/reducer'
 
-export const searchVideo = videoUrl => {
+export const searchVideo = (videoUrl) => {
   return createEffect(HttpApi.post('search/video', { url: videoUrl }), {
     before: setSubmitting(true),
     then: [setSubmitting(false), returnSuccess],
-    catch: [setSubmitting(false), generateFSAError]
+    catch: [setSubmitting(false), generateFSAError],
   })
 }
 
-export const postVideo = video => {
+export const postVideo = (video) => {
   return createEffect(HttpApi.post('videos', video), {
     before: setSubmitting(true),
     then: [setSubmitting(false), returnSuccess],
-    catch: [setSubmitting(false), errorToFlash, generateFSAError]
+    catch: [setSubmitting(false), errorToFlash, generateFSAError],
   })
 }

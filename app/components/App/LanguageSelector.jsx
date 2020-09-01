@@ -9,21 +9,16 @@ const defaultLocales = new Map({
   en: 'English',
   fr: 'Français',
   ar: 'العربية',
-  es: 'Español'
+  es: 'Español',
 })
 
 @withNamespaces() // Force waiting for translations to be loaded
 export default class LanguageSelector extends React.PureComponent {
   renderSelect() {
-    const options = defaultLocales
-      .merge(this.props.additionalOptions || {})
-      .sortBy((v, k) => k)
+    const options = defaultLocales.merge(this.props.additionalOptions || {}).sortBy((v, k) => k)
 
     return (
-      <select
-        onChange={e => this.props.handleChange(e.target.value)}
-        value={this.props.value}
-      >
+      <select onChange={(e) => this.props.handleChange(e.target.value)} value={this.props.value}>
         {this.renderLocalesMap(options)}
       </select>
     )
@@ -52,10 +47,7 @@ export default class LanguageSelector extends React.PureComponent {
   render() {
     const sizeClass = this.props.size ? `is-${this.props.size}` : null
     return (
-      <Flex
-        className={classNames('language-selector', this.props.className)}
-        alignItems="center"
-      >
+      <Flex className={classNames('language-selector', this.props.className)} alignItems="center">
         {this.props.withIcon && <Box mx="0.5em">{this.renderIcon()}</Box>}
         <span className={classNames('select', sizeClass)}>{this.renderSelect()}</span>
       </Flex>

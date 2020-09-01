@@ -19,13 +19,13 @@ import { Span } from '../StyledUtils/Text'
 import NotificationDetails from './NotificationDetails'
 import { userNotificationsURL } from '../../lib/cf_routes'
 
-const NotificationContainer = styled(props => <Flex {...omit(props, ['hasBeenSeen'])} />)`
+const NotificationContainer = styled((props) => <Flex {...omit(props, ['hasBeenSeen'])} />)`
   display: flex;
   padding: ${themeGet('space.2')};
   font-size: ${themeGet('fontSizes.6')};
   border-bottom: 1px solid ${themeGet('colors.black.100')};
 
-  ${props =>
+  ${(props) =>
     !props.hasBeenSeen &&
     css`
       background: ${transparentize(0.85, themeGet('colors.info')(props))};
@@ -41,7 +41,7 @@ const NotificationContainer = styled(props => <Flex {...omit(props, ['hasBeenSee
  * bell in navbar.
  */
 const NotificationsPopupContent = ({ user, notifications, markAsSeen, t }) => {
-  const hasUnseen = notifications.find(n => !n.seenAt)
+  const hasUnseen = notifications.find((n) => !n.seenAt)
   return (
     <Flex flexDirection="column" alignItems="center">
       <Container
@@ -55,7 +55,12 @@ const NotificationsPopupContent = ({ user, notifications, markAsSeen, t }) => {
         <Span fontWeight="bold">Notifications</Span>
         <StyledLink
           disabled={!hasUnseen}
-          onClick={() => markAsSeen(notifications.map(n => n.id), true)}
+          onClick={() =>
+            markAsSeen(
+              notifications.map((n) => n.id),
+              true
+            )
+          }
         >
           {t('markAllAsRead')}
         </StyledLink>
@@ -65,7 +70,7 @@ const NotificationsPopupContent = ({ user, notifications, markAsSeen, t }) => {
       ) : (
         <React.Fragment>
           <Container maxHeight={450} style={{ overflowY: 'auto' }}>
-            {notifications.map(n => (
+            {notifications.map((n) => (
               <NotificationDetails key={n.id} notification={n}>
                 {({ message, seenAt, insertedAt, link }) => (
                   <NotificationContainer hasBeenSeen={Boolean(seenAt)}>
@@ -114,7 +119,7 @@ const NotificationsPopupContent = ({ user, notifications, markAsSeen, t }) => {
 NotificationsPopupContent.propTypes = {
   notifications: PropTypes.arrayOf(PropTypes.object),
   user: PropTypes.shape({ username: PropTypes.string.isRequired }).isRequired,
-  markAsSeen: PropTypes.func.isRequired
+  markAsSeen: PropTypes.func.isRequired,
 }
 
 export default translate('notifications')(NotificationsPopupContent)

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { fontSize, space, themeGet, style } from 'styled-system'
 
 export const textTransform = style({
-  prop: 'textTransform'
+  prop: 'textTransform',
 })
 
 export const StyledH1 = styled.h1`

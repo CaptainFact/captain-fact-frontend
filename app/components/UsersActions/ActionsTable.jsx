@@ -18,8 +18,8 @@ import Button from '../Utils/Button'
 
 @withNamespaces('history')
 @connect(
-  state => ({
-    lastActionsIds: state.UsersActions.lastActionsIds
+  (state) => ({
+    lastActionsIds: state.UsersActions.lastActionsIds,
   }),
   { revertVideoDebateUserAction, flashErrorUnauthenticated }
 )
@@ -56,15 +56,16 @@ class ActionsTable extends React.PureComponent {
     )
   }
 
-  renderCompareAllButton = isMostlyComparing => {
+  renderCompareAllButton = (isMostlyComparing) => {
     return (
       <Button
         onClick={
           isMostlyComparing
             ? () => this.collapseDiffs()
-            : () => this.setState({
-              expendedDiffs: this.props.actions.map(a => a.id)
-            })
+            : () =>
+                this.setState({
+                  expendedDiffs: this.props.actions.map((a) => a.id),
+                })
         }
       >
         {this.props.t(isMostlyComparing ? 'hideAll' : 'compareAll')}
@@ -73,15 +74,15 @@ class ActionsTable extends React.PureComponent {
   }
 
   collapseDiffs() {
-    this.setState(prevState => ({
-      expendedDiffs: prevState.expendedDiffs.clear()
+    this.setState((prevState) => ({
+      expendedDiffs: prevState.expendedDiffs.clear(),
     }))
   }
 
   // ---- Table body ----
 
   renderBody = () => {
-    if (this.props.isLoading)
+    if (this.props.isLoading) {
       return (
         <tr style={{ background: 'none' }}>
           <td colSpan={this.getNbCols()}>
@@ -89,12 +90,14 @@ class ActionsTable extends React.PureComponent {
           </td>
         </tr>
       )
-    return this.props.actions.map(a => this.renderAction(a))
+    }
+    return this.props.actions.map((a) => this.renderAction(a))
   }
 
-  renderAction = action => {
-    if (this.state.expendedDiffs.includes(action.id))
+  renderAction = (action) => {
+    if (this.state.expendedDiffs.includes(action.id)) {
       return [this.renderActionLine(action, true), this.renderDiffLine(action)]
+    }
     return this.renderActionLine(action)
   }
 
@@ -137,9 +140,9 @@ class ActionsTable extends React.PureComponent {
     )
   }
 
-  renderUser = user => <UserAppellation user={user} compact />
+  renderUser = (user) => <UserAppellation user={user} compact />
 
-  renderDiffLine = action => (
+  renderDiffLine = (action) => (
     <tr key={`${action.id}-diff`}>
       <td colSpan={this.getNbCols()} style={{ padding: 0 }}>
         <ActionDiff action={action} allActions={this.props.actions} />
@@ -149,14 +152,15 @@ class ActionsTable extends React.PureComponent {
 
   toggleDiff = (action, isDiffing) => {
     if (isDiffing) {
-      const actionIdx = this.state.expendedDiffs.findIndex(id => id === action.id)
-      this.setState(prevState => ({
-        expendedDiffs: prevState.expendedDiffs.delete(actionIdx)
+      const actionIdx = this.state.expendedDiffs.findIndex((id) => id === action.id)
+      this.setState((prevState) => ({
+        expendedDiffs: prevState.expendedDiffs.delete(actionIdx),
       }))
-    } else
-      this.setState(prevState => ({
-        expendedDiffs: prevState.expendedDiffs.push(action.id)
+    } else {
+      this.setState((prevState) => ({
+        expendedDiffs: prevState.expendedDiffs.push(action.id),
       }))
+    }
   }
 
   getNbCols = () => 7 - !this.props.showEntity
@@ -165,14 +169,14 @@ class ActionsTable extends React.PureComponent {
 ActionsTable.defaultProps = {
   isLoading: false,
   showRestore: true,
-  showEntity: true
+  showEntity: true,
 }
 
 ActionsTable.propTypes = {
   actions: PropTypes.instanceOf(Immutable.List).isRequired,
   isLoading: PropTypes.bool,
   showRestore: PropTypes.bool,
-  showEntity: PropTypes.bool
+  showEntity: PropTypes.bool,
 }
 
 export default ActionsTable

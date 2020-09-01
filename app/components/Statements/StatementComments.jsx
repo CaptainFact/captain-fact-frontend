@@ -16,7 +16,7 @@ import SpeakerComments from './SpeakerComments'
     comments: classifiedComments.regularComments,
     speakerComments: classifiedComments.selfComments,
     approvingFacts: classifiedComments.approvingFacts,
-    refutingFacts: classifiedComments.refutingFacts
+    refutingFacts: classifiedComments.refutingFacts,
   }
 })
 export default class StatementComments extends React.PureComponent {

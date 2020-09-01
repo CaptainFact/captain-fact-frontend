@@ -10,10 +10,7 @@ import { ENTITY_STATEMENT } from '../../constants'
 import { setScrollTo } from '../../state/video_debate/statements/reducer'
 import StatementHeader from './StatementHeader'
 
-@connect(
-  null,
-  { addModal, forcePosition, setScrollTo }
-)
+@connect(null, { addModal, forcePosition, setScrollTo })
 @withNamespaces('videoDebate')
 export default class Statement extends React.PureComponent {
   render() {
@@ -27,7 +24,7 @@ export default class Statement extends React.PureComponent {
           handleEdit={handleEdit}
           handleDelete={handleDelete}
           handleShowHistory={() => this.showHistory()}
-          handleTimeClick={time => this.handleTimeClick(time)}
+          handleTimeClick={(time) => this.handleTimeClick(time)}
           handleShare={() => this.shareModal()}
         />
         <div className="card-content statement-text-container">
@@ -41,7 +38,7 @@ export default class Statement extends React.PureComponent {
     this.props.forcePosition(time)
     this.props.setScrollTo({
       id: this.props.statement.id,
-      __forceAutoScroll: true
+      __forceAutoScroll: true,
     })
   }
 
@@ -49,8 +46,8 @@ export default class Statement extends React.PureComponent {
     this.props.addModal({
       Modal: ShareModal,
       props: {
-        path: `${location.pathname}?statement=${this.props.statement.id}`
-      }
+        path: `${location.pathname}?statement=${this.props.statement.id}`,
+      },
     })
   }
 
@@ -59,8 +56,8 @@ export default class Statement extends React.PureComponent {
       Modal: ModalHistory,
       props: {
         entity: ENTITY_STATEMENT,
-        entityId: this.props.statement.id
-      }
+        entityId: this.props.statement.id,
+      },
     })
   }
 }
