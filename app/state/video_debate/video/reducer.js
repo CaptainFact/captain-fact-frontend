@@ -1,6 +1,6 @@
 import { handleActions, createAction } from 'redux-actions'
 import { Record, List } from 'immutable'
-import uuidv1 from 'uuid/v1'
+import { v4 as uuidv4 } from 'uuid'
 
 import { VIDEO_PLAYER_YOUTUBE } from '../../../constants'
 import { getTimecodesOffset } from '../../../lib/video_utils'
@@ -104,7 +104,7 @@ const VideoReducer = handleActions(
       return state.update('playback', (p) =>
         p.mergeDeep({
           position: payload,
-          forcedPosition: { time: payload, requestId: uuidv1() },
+          forcedPosition: { time: payload, requestId: uuidv4() },
         })
       )
     },
