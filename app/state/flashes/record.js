@@ -1,5 +1,5 @@
 import { Record } from 'immutable'
-import uuidv1 from 'uuid/v1'
+import { v4 as uuidv4 } from 'uuid'
 import { DEFAULT_FLASH_DURATION } from '../../constants'
 
 const Flash = Record({
@@ -16,7 +16,7 @@ const Flash = Record({
 })
 
 export const buildFlash = (params) => {
-  return Flash({ id: uuidv1() }).merge(params)
+  return Flash({ id: uuidv4() }).merge(params)
 }
 
 export default Flash
