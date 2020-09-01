@@ -15,7 +15,7 @@ export const defaultPassword = Cypress.env('CYPRESS_PASSWORD')
 export const defaultUser = {
   email: defaultEmail,
   username: defaultUsername,
-  password: defaultPassword
+  password: defaultPassword,
 }
 
 export const randomYoutubeId = () => {

@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import * as styledSystem from 'styled-system'
+import { omit } from 'lodash'
 
 const TextArea = styled.textarea`
   resize: none !important;
@@ -28,9 +29,11 @@ export default class TextareaAutosize extends React.PureComponent {
     }
   }
 
-  _handleChange = e => {
+  _handleChange = (e) => {
     const { onChange } = this.props
-    if (onChange) onChange(e)
+    if (onChange) {
+      onChange(e)
+    }
     this._adjustHeight(e.target)
   }
 
@@ -42,14 +45,13 @@ export default class TextareaAutosize extends React.PureComponent {
   }
 
   render() {
-    const { onChange, focus, ...props } = this.props
     return (
       <TextArea
         className="textarea"
         ref={this.textarea}
         onChange={this._handleChange}
         resize
-        {...props}
+        {...omit(this.props, ['onChange', 'focus'])}
       />
     )
   }

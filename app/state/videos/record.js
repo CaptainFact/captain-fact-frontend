@@ -11,7 +11,7 @@ const Video = new Record({
   speakers: new List(),
   language: null,
   is_partner: null,
-  unlisted: false
+  unlisted: false,
 })
 
 export default Video

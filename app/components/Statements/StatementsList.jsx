@@ -5,21 +5,18 @@ import { withRouter } from 'react-router'
 import FlipMove from 'react-flip-move'
 
 import { StatementForm } from './StatementForm'
-import {
-  closeStatementForm,
-  setScrollTo
-} from '../../state/video_debate/statements/reducer'
+import { closeStatementForm, setScrollTo } from '../../state/video_debate/statements/reducer'
 import { postStatement } from '../../state/video_debate/statements/effects'
 import { statementFormValueSelector } from '../../state/video_debate/statements/selectors'
 import StatementContainer from './StatementContainer'
 import { FULLHD_WIDTH_THRESHOLD } from '../../constants'
 
 @connect(
-  state => ({
+  (state) => ({
     speakers: state.VideoDebate.video.data.speakers,
     statements: state.VideoDebate.statements.data,
     statementFormSpeakerId: statementFormValueSelector(state, 'speaker_id'),
-    offset: state.VideoDebate.video.offset
+    offset: state.VideoDebate.video.offset,
   }),
   { closeStatementForm, postStatement, setScrollTo }
 )
@@ -30,7 +27,7 @@ export default class StatementsList extends React.PureComponent {
     if (this.props.location.query.statement) {
       this.props.setScrollTo({
         id: parseInt(this.props.location.query.statement),
-        __forceAutoScroll: true
+        __forceAutoScroll: true,
       })
     }
   }
@@ -38,9 +35,7 @@ export default class StatementsList extends React.PureComponent {
   render() {
     const { speakers, statementFormSpeakerId, statements, offset } = this.props
     const speakerId =
-      speakers.size === 1 && !statementFormSpeakerId
-        ? speakers.get(0).id
-        : statementFormSpeakerId
+      speakers.size === 1 && !statementFormSpeakerId ? speakers.get(0).id : statementFormSpeakerId
     return (
       <div className="statements-list">
         {statementFormSpeakerId !== undefined && (
@@ -50,9 +45,11 @@ export default class StatementsList extends React.PureComponent {
             enableReinitialize
             keepDirtyOnReinitialize
             handleAbort={() => this.props.closeStatementForm()}
-            handleConfirm={s =>
-              this.props.postStatement(s).then(e => {
-                if (!e.error) this.props.closeStatementForm()
+            handleConfirm={(s) =>
+              this.props.postStatement(s).then((e) => {
+                if (!e.error) {
+                  this.props.closeStatementForm()
+                }
                 return e
               })
             }
@@ -62,7 +59,7 @@ export default class StatementsList extends React.PureComponent {
           enterAnimation="fade"
           disableAllAnimations={window.innerWidth < FULLHD_WIDTH_THRESHOLD}
         >
-          {statements.map(statement => (
+          {statements.map((statement) => (
             <StatementContainer key={statement.id} statement={statement} />
           ))}
         </FlipMove>

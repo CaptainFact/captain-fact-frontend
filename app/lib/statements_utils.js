@@ -1,6 +1,6 @@
 import { CONFIRMED_STATEMENT_MIN_VOTES } from '../constants'
 
-export const isStatementConfirmed = comments => {
+export const isStatementConfirmed = (comments) => {
   const globalStatementScore = comments.reduce((score, comment) => {
     if (comment.approve === true) {
       // Comments with negative score are ignored to avoid trolls
@@ -14,8 +14,12 @@ export const isStatementConfirmed = comments => {
     return score
   }, 0)
 
-  if (!globalStatementScore) return null
-  else if (globalStatementScore >= CONFIRMED_STATEMENT_MIN_VOTES) return true
-  else if (globalStatementScore <= -CONFIRMED_STATEMENT_MIN_VOTES) return false
+  if (!globalStatementScore) {
+    return null
+  } else if (globalStatementScore >= CONFIRMED_STATEMENT_MIN_VOTES) {
+    return true
+  } else if (globalStatementScore <= -CONFIRMED_STATEMENT_MIN_VOTES) {
+    return false
+  }
   return null
 }

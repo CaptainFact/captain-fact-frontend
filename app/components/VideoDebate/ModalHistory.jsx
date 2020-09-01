@@ -7,7 +7,7 @@ import Modal from '../Modal/Modal'
 import { Icon } from '../Utils/Icon'
 import {
   joinStatementHistoryChannel,
-  leaveStatementHistoryChannel
+  leaveStatementHistoryChannel,
 } from '../../state/video_debate/history/effects'
 import { popModal } from '../../state/modals/reducer'
 import { ENTITY_STATEMENT } from '../../constants'
@@ -15,21 +15,24 @@ import ActionsTable from '../UsersActions/ActionsTable'
 import { reset } from '../../state/user_actions/reducer'
 
 @connect(
-  state => ({
+  (state) => ({
     actions: state.UsersActions.actions,
-    isLoading: state.UsersActions.isLoading
+    isLoading: state.UsersActions.isLoading,
   }),
   { joinStatementHistoryChannel, leaveStatementHistoryChannel, popModal, reset }
 )
 @withNamespaces('history')
 export class ModalHistory extends React.PureComponent {
   componentDidMount() {
-    if (this.props.entity === ENTITY_STATEMENT)
+    if (this.props.entity === ENTITY_STATEMENT) {
       this.props.joinStatementHistoryChannel(this.props.entityId)
+    }
   }
 
   componentWillUnmount() {
-    if (this.props.entity === ENTITY_STATEMENT) this.props.leaveStatementHistoryChannel()
+    if (this.props.entity === ENTITY_STATEMENT) {
+      this.props.leaveStatementHistoryChannel()
+    }
     this.props.reset()
   }
 

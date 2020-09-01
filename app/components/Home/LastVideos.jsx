@@ -22,9 +22,7 @@ const LastVideos = () => {
       <Query query={VideosQuery} variables={{ limit: 4 }}>
         {({ data }) => {
           return data && data.videos && data.videos.entries.length > 0
-            ? data.videos.entries.map(video => (
-              <VideoCard key={video.hash_id} video={video} />
-            ))
+            ? data.videos.entries.map((video) => <VideoCard key={video.hash_id} video={video} />)
             : null
         }}
       </Query>

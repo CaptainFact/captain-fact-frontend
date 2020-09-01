@@ -1,6 +1,6 @@
 import trimLeft from 'voca/trim_left'
 
-export const cleanStr = str => trimLeft(str.replace(/\s{2,}/g, ' '))
+export const cleanStr = (str) => trimLeft(str.replace(/\s{2,}/g, ' '))
 
 /**
  * Same as cleanStr but preserve multiple lines. Only trim the end of input
@@ -9,7 +9,7 @@ export const cleanStr = str => trimLeft(str.replace(/\s{2,}/g, ' '))
  * @param {String} str
  * @return {String} clean string
  */
-export const cleanStrMultiline = str =>
+export const cleanStrMultiline = (str) =>
   trimLeft(
     str
       .replace(/(\s(?!\n)){2,}$/g, ' ') // Trim spaces / tabs

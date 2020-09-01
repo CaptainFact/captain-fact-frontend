@@ -14,10 +14,10 @@ const ACTIONS_ICONS = {
   self_vote: 'chevron-up',
   revert_vote_up: 'chevron-down',
   revert_vote_down: 'chevron-up',
-  revert_self_vote: 'chevron-down'
+  revert_self_vote: 'chevron-down',
 }
 
-const getIconName = type => ACTIONS_ICONS[type] || 'question'
+const getIconName = (type) => ACTIONS_ICONS[type] || 'question'
 
 const ActionIcon = ({ type }) => <Icon name={getIconName(type)} size="mini" />
 

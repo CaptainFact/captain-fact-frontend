@@ -3,16 +3,16 @@ import { connect } from 'react-redux'
 
 import {
   joinVideoDebateHistoryChannel,
-  leaveVideoDebateHistoryChannel
+  leaveVideoDebateHistoryChannel,
 } from '../../state/video_debate/history/effects'
 import { reset } from '../../state/user_actions/reducer'
 import ActionsTable from '../UsersActions/ActionsTable'
 
 @connect(
-  state => ({
+  (state) => ({
     isLoading: state.UsersActions.isLoading,
     error: state.UsersActions.error,
-    actions: state.UsersActions.actions
+    actions: state.UsersActions.actions,
   }),
   { joinVideoDebateHistoryChannel, leaveVideoDebateHistoryChannel, reset }
 )

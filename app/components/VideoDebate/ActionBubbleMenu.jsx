@@ -13,24 +13,21 @@ import ShareModal from '../Utils/ShareModal'
 import EditVideoModal from '../Videos/EditVideoModal'
 import { hasStatementForm } from '../../state/video_debate/statements/selectors'
 import { destroyStatementForm } from '../../state/video_debate/statements/effects'
-import {
-  toggleAutoscroll,
-  toggleBackgroundSound
-} from '../../state/user_preferences/reducer'
+import { toggleAutoscroll, toggleBackgroundSound } from '../../state/user_preferences/reducer'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 
 @connect(
-  state => ({
+  (state) => ({
     hasAutoscroll: state.UserPreferences.enableAutoscroll,
     soundOnBackgroundFocus: state.UserPreferences.enableSoundOnBackgroundFocus,
-    hasStatementForm: hasStatementForm(state)
+    hasStatementForm: hasStatementForm(state),
   }),
   {
     changeStatementFormSpeaker,
     toggleAutoscroll,
     toggleBackgroundSound,
     addModal,
-    destroyStatementForm
+    destroyStatementForm,
   }
 )
 @withNamespaces('videoDebate')
@@ -43,7 +40,7 @@ export default class ActionBubbleMenu extends React.PureComponent {
     return (
       <div
         className={classNames('action-bubble-container', {
-          hasForm: hasStatementForm
+          hasForm: hasStatementForm,
         })}
       >
         {!this.props.isAuthenticated && (
@@ -64,7 +61,7 @@ export default class ActionBubbleMenu extends React.PureComponent {
         <ActionBubble
           iconName="arrows-v"
           label={t('statement.autoscroll', {
-            context: this.props.hasAutoscroll ? 'disable' : 'enable'
+            context: this.props.hasAutoscroll ? 'disable' : 'enable',
           })}
           activated={this.props.hasAutoscroll}
           onClick={() => this.props.toggleAutoscroll()}
@@ -72,7 +69,7 @@ export default class ActionBubbleMenu extends React.PureComponent {
         <ActionBubble
           iconName={soundOnBackgroundFocus ? 'sound' : 'sound-mute'}
           label={t('statement.soundOnBackgroundFocus', {
-            context: soundOnBackgroundFocus ? 'disable' : 'enable'
+            context: soundOnBackgroundFocus ? 'disable' : 'enable',
           })}
           activated={soundOnBackgroundFocus}
           onClick={() => this.props.toggleBackgroundSound()}
@@ -80,10 +77,11 @@ export default class ActionBubbleMenu extends React.PureComponent {
         <ActionBubble
           iconName="share-alt"
           label={t('main:actions.share')}
-          onClick={() => this.props.addModal({
-            Modal: ShareModal,
-            props: { path: location.pathname }
-          })
+          onClick={() =>
+            this.props.addModal({
+              Modal: ShareModal,
+              props: { path: location.pathname },
+            })
           }
         />
         <ReputationGuard requiredRep={MIN_REPUTATION_UPDATE_VIDEO}>

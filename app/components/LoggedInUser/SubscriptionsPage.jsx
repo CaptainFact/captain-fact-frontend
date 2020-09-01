@@ -23,7 +23,11 @@ export default class NotificationsPage extends Component {
 
   render() {
     return (
-      <Query query={loggedInUserSubscriptionsQuery} variables={{ scopes: ['video'] }} fetchPolicy="network-only">
+      <Query
+        query={loggedInUserSubscriptionsQuery}
+        variables={{ scopes: ['video'] }}
+        fetchPolicy="network-only"
+      >
         {({ data, loading, error }) => {
           if (loading) {
             return <LoadingFrame />
@@ -41,7 +45,7 @@ export default class NotificationsPage extends Component {
                 {subscriptions.length === 0 ? (
                   <Message>No subscriptions</Message>
                 ) : (
-                  subscriptions.map(subscription => (
+                  subscriptions.map((subscription) => (
                     <Flex key={subscription.id} mb={3} alignItems="center">
                       <SubscribeBtn
                         size="1.75em"

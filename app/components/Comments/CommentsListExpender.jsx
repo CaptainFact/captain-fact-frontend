@@ -8,7 +8,7 @@ const CommentsListExpender = ({ t, onClick, nesting, count }) => (
     <Button onClick={onClick}>
       {t('comment.loadMore', {
         context: nesting === 1 ? 'comments' : 'replies',
-        count
+        count,
       })}
     </Button>
   </div>

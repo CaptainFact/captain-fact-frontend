@@ -6,11 +6,7 @@ import { get } from 'lodash'
 import { withRouter } from 'react-router'
 
 export const loggedInUserNotificationsQuery = gql`
-  query LoggedInUserNotifications(
-    $page: Int! = 1
-    $pageSize: Int! = 30
-    $filter: String = ALL
-  ) {
+  query LoggedInUserNotifications($page: Int! = 1, $pageSize: Int! = 30, $filter: String = ALL) {
     loggedInUser {
       notifications(page: $page, pageSize: $pageSize, filter: $filter) {
         pageNumber
@@ -76,7 +72,7 @@ const Notifications = ({ children, pageSize, pageNumber, pollInterval, filter })
         const paginatedNotifications = get(data, 'loggedInUser.notifications', {
           pageNumber: 1,
           totalPages: 1,
-          entries: []
+          entries: [],
         })
 
         return (
@@ -84,7 +80,7 @@ const Notifications = ({ children, pageSize, pageNumber, pollInterval, filter })
             mutation={markAsSeenMutation}
             refetchQueries={() => ['LoggedInUserUnreadNotificationsCount']}
           >
-            {markAsSeen =>
+            {(markAsSeen) =>
               children({
                 notifications: paginatedNotifications.entries,
                 loading,
@@ -93,9 +89,9 @@ const Notifications = ({ children, pageSize, pageNumber, pollInterval, filter })
                 totalPages: paginatedNotifications.totalPages,
                 markAsSeen: (ids, seen) => {
                   return markAsSeen({
-                    variables: Array.isArray(ids) ? { ids, seen } : { ids: [ids], seen }
+                    variables: Array.isArray(ids) ? { ids, seen } : { ids: [ids], seen },
                   })
-                }
+                },
               })
             }
           </Mutation>
@@ -110,13 +106,13 @@ Notifications.propTypes = {
   pageSize: PropTypes.number,
   pageNumber: PropTypes.number,
   filter: PropTypes.oneOf(['ALL', 'SEEN', 'UNSEEN']),
-  pollInterval: PropTypes.number
+  pollInterval: PropTypes.number,
 }
 
 Notifications.defaultProps = {
   /** Default refresh interval in ms. Default = 15s. Set to 0 to disable. */
   pollInterval: 15000,
-  filter: 'ALL'
+  filter: 'ALL',
 }
 
 export default withRouter(Notifications)

@@ -14,10 +14,10 @@ Cypress.Commands.add('login', () => {
       url: `${defaultApiUrl}/auth/identity/callback`,
       body: {
         email: defaultEmail,
-        password: defaultPassword
-      }
+        password: defaultPassword,
+      },
     })
-    .then(resp => {
+    .then((resp) => {
       const { user, token } = resp.body
       window.localStorage.setItem('token', token)
       return user

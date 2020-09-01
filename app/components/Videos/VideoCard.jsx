@@ -88,7 +88,7 @@ export class VideoCard extends React.PureComponent {
     if (nbOthers > 0) {
       const title = speakers
         .slice(MAX_VIDEO_CARD_SPEAKERS)
-        .map(s => s.full_name)
+        .map((s) => s.full_name)
         .join(', ')
       speakerComponentsList.push(
         <span key="others">

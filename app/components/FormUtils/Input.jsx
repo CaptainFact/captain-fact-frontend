@@ -6,7 +6,7 @@ export default ({ input, label, placeholder, type, className, meta }) => {
   return (
     <input
       className={classNames('input', className, {
-        'is-danger': touched && error
+        'is-danger': touched && error,
       })}
       placeholder={placeholder || label}
       type={type}

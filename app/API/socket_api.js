@@ -40,8 +40,9 @@ class CaptainFactSocketApi {
       }
       const channel = this.socket.channel(channelAddress)
       this.channels[identifier] = channel
-      for (const [event, func] of Object.entries(mapEventsToFuncs))
+      for (const [event, func] of Object.entries(mapEventsToFuncs)) {
         channel.on(event, func)
+      }
       channel
         .join()
         .receive('ok', fulfill)
@@ -63,11 +64,9 @@ class CaptainFactSocketApi {
       delete this.channels[identifier]
     }
     // If no more channels, close the socket
-    if (
-      !Object.keys(this.channels).length &&
-      ['connecting', 'open'].includes(socketState)
-    )
+    if (!Object.keys(this.channels).length && ['connecting', 'open'].includes(socketState)) {
       this.socket.disconnect()
+    }
   }
 
   /**
@@ -81,8 +80,8 @@ class CaptainFactSocketApi {
     return new Promise((fulfill, reject) => {
       return this.channels[channelIdentifier]
         .push(message, params)
-        .receive('ok', data => fulfill(data))
-        .receive('error', err => reject(parseServerError(err)))
+        .receive('ok', (data) => fulfill(data))
+        .receive('error', (err) => reject(parseServerError(err)))
     })
   }
 }

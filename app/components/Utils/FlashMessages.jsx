@@ -5,22 +5,19 @@ import { withNamespaces } from 'react-i18next'
 import FlipMove from 'react-flip-move'
 import { Link } from 'react-router'
 import { Icon } from './Icon'
-import {
-  addFlash,
-  pause,
-  removeFlash,
-  unPause,
-  update
-} from '../../state/flashes/reducer'
+import { addFlash, pause, removeFlash, unPause, update } from '../../state/flashes/reducer'
 import { tError } from '../../lib/errors'
 import { popModal } from '../../state/modals/reducer'
 
 const UPDATE_INTERVAL = 1000
 
-@connect(
-  ({ Flashes: { flashes, isPaused } }) => ({ flashes, isPaused }),
-  { addFlash, removeFlash, pause, unPause, update }
-)
+@connect(({ Flashes: { flashes, isPaused } }) => ({ flashes, isPaused }), {
+  addFlash,
+  removeFlash,
+  pause,
+  unPause,
+  update,
+})
 export class FlashMessages extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -28,16 +25,16 @@ export class FlashMessages extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    if (this.props.flashes.size === 0 || this.props.isPaused) this.clearUpdateInterval()
-    else this.setUpdateInterval()
+    if (this.props.flashes.size === 0 || this.props.isPaused) {
+      this.clearUpdateInterval()
+    } else {
+      this.setUpdateInterval()
+    }
   }
 
   setUpdateInterval() {
     if (this.interval === null) {
-      this.interval = setInterval(
-        () => this.props.update(UPDATE_INTERVAL),
-        UPDATE_INTERVAL
-      )
+      this.interval = setInterval(() => this.props.update(UPDATE_INTERVAL), UPDATE_INTERVAL)
     }
   }
 
@@ -49,7 +46,9 @@ export class FlashMessages extends React.PureComponent {
   }
 
   render() {
-    if (this.props.flashes.size === 0) return null
+    if (this.props.flashes.size === 0) {
+      return null
+    }
 
     return (
       <div
@@ -58,7 +57,7 @@ export class FlashMessages extends React.PureComponent {
         onMouseLeave={() => this.props.unPause()}
       >
         <FlipMove enterAnimation="fade">
-          {this.props.flashes.map(flash => (
+          {this.props.flashes.map((flash) => (
             <div
               key={flash.id}
               className={`flash-message is-${flash.flashType}`}
@@ -79,16 +78,13 @@ export class FlashMessages extends React.PureComponent {
 }
 
 @withNamespaces('main')
-@connect(
-  null,
-  { popModal, removeFlash }
-)
+@connect(null, { popModal, removeFlash })
 class FlashContent extends React.Component {
   shouldComponentUpdate(nextProps) {
     // To avoid re-rendering every second, we only compare flash id
     return (
-      this.props.flash.id !== nextProps.flash.id
-      || this.props.i18nLoadedAt !== nextProps.i18nLoadedAt
+      this.props.flash.id !== nextProps.flash.id ||
+      this.props.i18nLoadedAt !== nextProps.i18nLoadedAt
     )
   }
 
@@ -102,9 +98,7 @@ class FlashContent extends React.Component {
           </div>
         )}
         <div className="column">
-          <div>
-            {isError ? tError(this.props.t, message) : this.props.t(message, i18nParams)}
-          </div>
+          <div>{isError ? tError(this.props.t, message) : this.props.t(message, i18nParams)}</div>
           {this.renderInfoLink()}
         </div>
       </div>
@@ -118,7 +112,9 @@ class FlashContent extends React.Component {
       this.props.removeFlash(this.props.flash)
     }
 
-    if (!infoUrl && !infoText) return null
+    if (!infoUrl && !infoText) {
+      return null
+    }
 
     // Special case for reload
     if (infoText === 'actions.reload') {

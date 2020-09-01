@@ -12,10 +12,10 @@ const Flash = Record({
   i18nParams: null,
   isError: false,
   infoUrl: null,
-  infoText: null
+  infoText: null,
 })
 
-export const buildFlash = params => {
+export const buildFlash = (params) => {
   return Flash({ id: uuidv1() }).merge(params)
 }
 

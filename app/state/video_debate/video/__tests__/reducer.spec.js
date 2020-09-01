@@ -5,7 +5,7 @@ import reducer, {
   removeSpeaker,
   updateSpeaker,
   setPosition,
-  forcePosition
+  forcePosition,
 } from '../reducer'
 import fetchAllSuccess from './__fixtures__/fetch_all_success'
 
@@ -30,7 +30,7 @@ test('add speaker', () => {
     addSpeaker({
       id: 3,
       title: 'Title 3',
-      full_name: 'Max Fray'
+      full_name: 'Max Fray',
     })
   )
 })
@@ -46,7 +46,7 @@ test('update speaker', () => {
     updateSpeaker({
       id: 3,
       title: 'Title 3 Update',
-      full_name: 'Max Fray Update'
+      full_name: 'Max Fray Update',
     })
   )
 })
@@ -63,8 +63,8 @@ test('force Position', () => {
       position: 4,
       forcedPosition: {
         requestId: 1,
-        time: 0
-      }
+        time: 0,
+      },
     })
   )
 })

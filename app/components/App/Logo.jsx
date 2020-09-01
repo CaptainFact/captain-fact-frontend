@@ -14,7 +14,7 @@ const LogoContainer = styled(Flex)`
   font-family: ${themeGet('fontFamily.serif')};
   color: ${themeGet('colors.black.500')};
 
-  ${props => css`
+  ${(props) => css`
     font-size: ${props.size / 2}px;
     height: ${props.size}px;
   `}
@@ -22,7 +22,7 @@ const LogoContainer = styled(Flex)`
 
 const Image = styled.img`
   height: 100%;
-  width: ${props => props.size}px;
+  width: ${(props) => props.size}px;
 `
 
 /**
@@ -45,12 +45,12 @@ Logo.propTypes = {
   /** If true, a version of the logo without border will be used */
   borderless: PropTypes.bool,
   /** Base height of the component in pixels */
-  height: PropTypes.number
+  height: PropTypes.number,
 }
 
 Logo.defaultProps = {
   borderless: false,
-  height: 30
+  height: 30,
 }
 
 export default Logo

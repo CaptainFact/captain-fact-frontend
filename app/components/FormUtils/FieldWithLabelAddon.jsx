@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '../Utils/Button'
 
-export default ({ label, children }) => {
+const FieldWithLabelAddon = ({ label, children }) => {
   return (
     <div className="field has-addons">
       <p className="control">
@@ -11,3 +11,5 @@ export default ({ label, children }) => {
     </div>
   )
 }
+
+export default FieldWithLabelAddon

@@ -9,10 +9,10 @@ import { setPosition, setPlaying } from '../../state/video_debate/video/reducer'
  * and seekTo position when requested in state.
  */
 @connect(
-  state => ({
+  (state) => ({
     position: state.VideoDebate.video.playback.position,
     forcedPosition: state.VideoDebate.video.playback.forcedPosition,
-    isPlaying: state.VideoDebate.video.playback.isPlaying
+    isPlaying: state.VideoDebate.video.playback.isPlaying,
   }),
   { setPosition, setPlaying }
 )
@@ -21,7 +21,7 @@ export default class VideoDebatePlayer extends React.Component {
     return this.props.url !== newProps.url || this.props.isPlaying !== newProps.isPlaying
   }
 
-  componentWillReceiveProps(newProps) {
+  UNSAFE_componentWillReceiveProps(newProps) {
     const { forcedPosition } = newProps
     if (
       forcedPosition.requestId !== null &&

@@ -14,10 +14,7 @@ import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import UserLanguageSelector from '../LoggedInUser/UserLanguageSelector'
 import { deleteUserAccount } from '../../API/http_api/current_user'
 
-@connect(
-  state => ({ locale: state.UserPreferences.locale }),
-  { addModal, popModal }
-)
+@connect((state) => ({ locale: state.UserPreferences.locale }), { addModal, popModal })
 @withNamespaces('user')
 @withLoggedInUser
 export default class UserSettings extends React.PureComponent {
@@ -69,17 +66,18 @@ export default class UserSettings extends React.PureComponent {
           <h3 className="title is-3">{t('dangerZone')}</h3>
           <Button
             className="is-danger"
-            onClick={() => addModal({
-              Modal: DeleteUserModal,
-              props: {
-                handleConfirm: () => {
-                  return deleteUserAccount().then(() => {
-                    logout()
-                    this.props.popModal()
-                  })
-                }
-              }
-            })
+            onClick={() =>
+              addModal({
+                Modal: DeleteUserModal,
+                props: {
+                  handleConfirm: () => {
+                    return deleteUserAccount().then(() => {
+                      logout()
+                      this.props.popModal()
+                    })
+                  },
+                },
+              })
             }
           >
             {t('deleteAccount')}

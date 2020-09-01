@@ -9,7 +9,7 @@ import HttpApi from '../../API/http_api'
 
 const flagFormValueSelector = formValueSelector('flagForm')
 
-@connect(state => ({ selectedReason: flagFormValueSelector(state, 'reason') }))
+@connect((state) => ({ selectedReason: flagFormValueSelector(state, 'reason') }))
 @withNamespaces('videoDebate')
 export default class ModalFlag extends React.PureComponent {
   state = { isLoading: true, flagsAvailable: 0, error: null }
@@ -19,19 +19,12 @@ export default class ModalFlag extends React.PureComponent {
       .then(({ flags_available }) =>
         this.setState({ isLoading: false, flagsAvailable: flags_available })
       )
-      .catch(e => this.setState({ isLoading: false, error: e }))
+      .catch((e) => this.setState({ isLoading: false, error: e }))
   }
 
   render() {
     const { isLoading, flagsAvailable } = this.state
-    const {
-      t,
-      handleAbort,
-      selectedReason,
-      comment,
-      initialReason,
-      ...otherProps
-    } = this.props
+    const { t, handleAbort, selectedReason, comment, initialReason, ...otherProps } = this.props
     return (
       <ModalFormContainer
         handleAbort={handleAbort}

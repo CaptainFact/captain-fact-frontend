@@ -4,11 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router'
 import { withNamespaces } from 'react-i18next'
 
-import {
-  renderAllUserFields,
-  submitButton,
-  validatePasswordRepeat
-} from './UserFormFields'
+import { renderAllUserFields, submitButton, validatePasswordRepeat } from './UserFormFields'
 import ThirdPartyAuthList from './ThirdPartyAuthList'
 import Alert from '../Utils/Alert'
 import Message from '../Utils/Message'
@@ -23,7 +19,7 @@ const SignupForm = ({ location, t }) => {
     return (
       <RealSignupForm
         initialValues={{
-          invitation_token: location.query.invitation_token
+          invitation_token: location.query.invitation_token,
         }}
       />
     )
@@ -46,13 +42,10 @@ export default withRouter(withNamespaces('user')(SignupForm))
 @withRouter
 @withNamespaces('user')
 @reduxForm({ form: 'signupForm', validate: validatePasswordRepeat })
-@connect(
-  state => ({ locale: state.UserPreferences.locale }),
-  { errorToFlash }
-)
+@connect((state) => ({ locale: state.UserPreferences.locale }), { errorToFlash })
 @withLoggedInUser
 class RealSignupForm extends React.PureComponent {
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     // Redirect to user profile when logged in
     if (props.isAuthenticated) {
       props.router.push(`/u/${props.loggedInUser.username}`)
@@ -64,7 +57,7 @@ class RealSignupForm extends React.PureComponent {
       .then(({ user, token }) => {
         this.props.updateLoggedInUser(user, token)
       })
-      .catch(e => {
+      .catch((e) => {
         if (typeof e === 'string') {
           this.props.errorToFlash(e)
         } else {
@@ -77,10 +70,7 @@ class RealSignupForm extends React.PureComponent {
     const { valid, error, t } = this.props
 
     return (
-      <form
-        className="form user-form"
-        onSubmit={this.props.handleSubmit(this.submit.bind(this))}
-      >
+      <form className="form user-form" onSubmit={this.props.handleSubmit(this.submit.bind(this))}>
         {error && <Alert type="danger">{error}</Alert>}
         <strong>
           {t('alreadyHaveAccountQuestion')} <Link to="login">{t('login')}</Link>

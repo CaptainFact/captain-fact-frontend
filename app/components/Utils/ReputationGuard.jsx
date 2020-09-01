@@ -13,7 +13,7 @@ export const DumbReputationGuard = ({
   showLoading,
   showNotEnough,
   children,
-  verifyFunc = null
+  verifyFunc = null,
 }) => {
   if (showLoading && loggedInUserLoading) {
     return <LoadingFrame />
@@ -33,7 +33,7 @@ ReputationGuard.propTypes = {
   requiredRep: PropTypes.number.isRequired,
   showLoading: PropTypes.bool,
   showNotEnough: PropTypes.bool,
-  verifyFunc: PropTypes.func
+  verifyFunc: PropTypes.func,
 }
 
 export const withReputationGuard = (
@@ -41,7 +41,7 @@ export const withReputationGuard = (
   showLoading = true,
   showNotEnough = true,
   props = {}
-) => WrappedComponent => wrappedComponentProps => (
+) => (WrappedComponent) => (wrappedComponentProps) => (
   <ReputationGuard
     requiredRep={requiredRep}
     showLoading={showLoading}

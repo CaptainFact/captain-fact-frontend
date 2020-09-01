@@ -19,7 +19,9 @@ export class History extends React.PureComponent {
     const { actions } = this.props
     const { isExpended } = this.state
 
-    if (actions.size === 0) return <div />
+    if (actions.size === 0) {
+      return <div />
+    }
 
     const latestAction = actions.first()
     const oldActions = actions.rest()
@@ -39,7 +41,7 @@ export class History extends React.PureComponent {
         )}
         {isExpended && (
           <div className="old-actions">
-            {oldActions.map(action => (
+            {oldActions.map((action) => (
               <div key={action.id}>
                 <div className="separator" />
                 <UserAction action={action} isLatest={false} />
@@ -60,5 +62,5 @@ History.propTypes = {
   /**
    * Define is history get expended or collapsed on first render (default: false)
    */
-  defaultExpended: PropTypes.bool
+  defaultExpended: PropTypes.bool,
 }

@@ -12,7 +12,7 @@ export const ReputationGuardTooltip = ({
   checkReputation,
   requiredRep,
   children,
-  tooltipPosition = 'bottom center'
+  tooltipPosition = 'bottom center',
 }) => {
   return checkReputation(requiredRep) ? (
     children({ hasReputation: true })
@@ -22,9 +22,7 @@ export const ReputationGuardTooltip = ({
       contentStyle={{ zIndex: 999 }}
       arrowStyle={{ background: '#f9fbfb' }}
       on="hover"
-      trigger={
-        <div className="help-tooltip-trigger">{children({ hasReputation: false })}</div>
-      }
+      trigger={<div className="help-tooltip-trigger">{children({ hasReputation: false })}</div>}
     >
       <Message type="primary">
         <Icon name="info-circle" />

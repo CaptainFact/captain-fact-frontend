@@ -10,7 +10,7 @@ import { MicrophoneAlt } from 'styled-icons/boxicons-regular/MicrophoneAlt'
 import {
   MIN_REPUTATION_ADD_STATEMENT,
   MIN_REPUTATION_REMOVE_SPEAKER,
-  MIN_REPUTATION_UPDATE_SPEAKER
+  MIN_REPUTATION_UPDATE_SPEAKER,
 } from '../../constants'
 import ClickableIcon from '../Utils/ClickableIcon'
 import ReputationGuard from '../Utils/ReputationGuard'
@@ -26,7 +26,7 @@ import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 @withNamespaces('videoDebate')
 @connect(
   (state, props) => ({
-    isFocused: getFocusedStatementSpeakerId(state) === props.speaker.id
+    isFocused: getFocusedStatementSpeakerId(state) === props.speaker.id,
   }),
   { addModal, changeStatementFormSpeaker, removeSpeaker }
 )
@@ -97,11 +97,7 @@ export class SpeakerPreview extends React.PureComponent {
 
   renderName(speaker) {
     return (
-      <Link
-        to={`/s/${speaker.slug || speaker.id}`}
-        className="speaker-name"
-        target="_blank"
-      >
+      <Link to={`/s/${speaker.slug || speaker.id}`} className="speaker-name" target="_blank">
         {speaker.full_name}
       </Link>
     )
@@ -112,23 +108,24 @@ export class SpeakerPreview extends React.PureComponent {
       Modal: ModalRemoveSpeaker,
       props: {
         speaker: this.props.speaker,
-        handleConfirm: () => this.props.removeSpeaker(this.props.speaker)
-      }
+        handleConfirm: () => this.props.removeSpeaker(this.props.speaker),
+      },
     })
   }
 
   handleEdit() {
     this.props.addModal({
       Modal: EditSpeakerFormModal,
-      props: { speaker: this.props.speaker.toJS() }
+      props: { speaker: this.props.speaker.toJS() },
     })
   }
 
   handleAddStatement() {
     const historyRegex = new RegExp('/history/?$')
     const currentPath = this.props.location.pathname
-    if (currentPath.match(historyRegex))
+    if (currentPath.match(historyRegex)) {
       this.props.router.push(currentPath.replace(historyRegex, ''))
+    }
     this.props.changeStatementFormSpeaker({ id: this.props.speaker.id })
   }
 }

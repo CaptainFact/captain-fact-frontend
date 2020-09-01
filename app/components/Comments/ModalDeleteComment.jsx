@@ -15,5 +15,5 @@ const ModalDeleteComment = ({ handleAbort, comment, replies, t, ...otherProps })
 )
 
 export default connect((state, props) => ({
-  replies: state.VideoDebate.comments.replies.get(props.comment.id)
+  replies: state.VideoDebate.comments.replies.get(props.comment.id),
 }))(withNamespaces('videoDebate')(ModalDeleteComment))

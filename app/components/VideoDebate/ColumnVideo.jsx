@@ -8,7 +8,7 @@ import { Flex } from '@rebass/grid'
 import { MIN_REPUTATION_ADD_SPEAKER } from '../../constants'
 import {
   videoDebateOnlineUsersCount,
-  videoDebateOnlineViewersCount
+  videoDebateOnlineViewersCount,
 } from '../../state/video_debate/presence/selectors'
 import { changeSubscription } from '../../state/video_debate/effects'
 import AddSpeakerForm from '../Speakers/AddSpeakerForm'
@@ -23,12 +23,12 @@ import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import SubscribeBtn from '../Notifications/SubscribeBtn'
 
 @connect(
-  state => ({
+  (state) => ({
     video: state.VideoDebate.video.data,
     isLoading: state.VideoDebate.video.isLoading,
     isSubscribed: state.VideoDebate.video.isSubscribed,
     nbUsers: videoDebateOnlineUsersCount(state),
-    nbViewers: videoDebateOnlineViewersCount(state)
+    nbViewers: videoDebateOnlineViewersCount(state),
   }),
   { changeSubscription }
 )
@@ -100,7 +100,7 @@ export class ColumnVideo extends React.PureComponent {
               </ReputationGuardTooltip>
             </div>
             <div className="speakers-list">
-              {speakers.map(speaker => (
+              {speakers.map((speaker) => (
                 <SpeakerPreview key={speaker.id} speaker={speaker} />
               ))}
             </div>

@@ -7,11 +7,9 @@ import Modal from './Modal'
 import { Icon } from '../Utils/Icon'
 import { popModal } from '../../state/modals/reducer'
 import { handleEffectResponse } from '../../lib/handle_effect_response'
+import { omit } from 'lodash'
 
-@connect(
-  null,
-  { popModal }
-)
+@connect(null, { popModal })
 export class ModalConfirm extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -26,7 +24,7 @@ export class ModalConfirm extends React.PureComponent {
       return promise.then(
         handleEffectResponse({
           onSuccess: () => this.props.popModal(),
-          onError: () => this.setState({ isSubmitting: false })
+          onError: () => this.setState({ isSubmitting: false }),
         })
       )
     }
@@ -37,7 +35,7 @@ export class ModalConfirm extends React.PureComponent {
       <div className="form-buttons">
         <a
           className={classNames('button', 'is-danger', {
-            'is-loading': this.state.isSubmitting
+            'is-loading': this.state.isSubmitting,
           })}
           disabled={this.state.isSubmitting || this.props.confirmDisabled}
           onClick={this.handleSubmit.bind(this)}
@@ -54,18 +52,20 @@ export class ModalConfirm extends React.PureComponent {
   }
 
   close() {
-    if (this.props.handleAbort) this.props.handleAbort()
+    if (this.props.handleAbort) {
+      this.props.handleAbort()
+    }
     this.props.popModal()
   }
 
   render() {
-    const { handleConfirm, className, content, message, ...props } = this.props
+    const { className, content, message, ...props } = this.props
     return (
       <Modal
         className={classNames('modal-confirm', className)}
         handleCloseClick={this.close}
         footer={this.renderFormButtons()}
-        {...props}
+        {...omit(props, ['handleConfirm'])}
       >
         {content && (
           <div>

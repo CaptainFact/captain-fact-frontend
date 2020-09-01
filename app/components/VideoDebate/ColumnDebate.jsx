@@ -18,12 +18,12 @@ import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
 import DismissableMessage from '../Utils/DismissableMessage'
 
-@connect(state => ({
+@connect((state) => ({
   isLoading: isLoadingVideoDebate(state),
   hasStatements: state.VideoDebate.statements.data.size !== 0,
   hasSpeakers: state.VideoDebate.video.data.speakers.size !== 0,
   hasStatementForm: hasStatementForm(state),
-  unlisted: state.VideoDebate.video.data.unlisted
+  unlisted: state.VideoDebate.video.data.unlisted,
 }))
 @withNamespaces('videoDebate')
 @withLoggedInUser
@@ -31,9 +31,7 @@ export class ColumnDebate extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      showIntroduction: !getFromLocalStorage(
-        LOCAL_STORAGE_KEYS.DISMISS_VIDEO_INTRODUCTION
-      )
+      showIntroduction: !getFromLocalStorage(LOCAL_STORAGE_KEYS.DISMISS_VIDEO_INTRODUCTION),
     }
   }
 

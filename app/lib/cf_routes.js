@@ -7,15 +7,15 @@ import {
   ENTITY_VIDEO,
   ACTION_UPDATE,
   ENTITY_SPEAKER,
-  ACTION_ADD
+  ACTION_ADD,
 } from '../constants'
 import { FRONTEND_URL } from '../config'
 
-export const videoURL = videoHashID => {
+export const videoURL = (videoHashID) => {
   return `/videos/${videoHashID}`
 }
 
-export const videoHistoryURL = videoHashID => {
+export const videoHistoryURL = (videoHashID) => {
   return `${videoURL(videoHashID)}/history`
 }
 
@@ -27,10 +27,10 @@ export const commentURL = (videoHashID, statementID, commentID) => {
   return `${statementURL(videoHashID, statementID)}&c=${commentID}`
 }
 
-export const speakerURL = speakerIDOrSlug => `/s/${speakerIDOrSlug}`
+export const speakerURL = (speakerIDOrSlug) => `/s/${speakerIDOrSlug}`
 
 /** Returns a frontend URL linking to the entity for a UserAction */
-export const userActionURL = action => {
+export const userActionURL = (action) => {
   const videoHashId = action.videoHashId || action.video.hashId
   if (action.type === ACTION_REMOVE) {
     return videoHistoryURL(videoHashId)
@@ -49,11 +49,11 @@ export const userActionURL = action => {
   }
 }
 
-export const userProfileURL = user => `/u/${user.username}`
+export const userProfileURL = (user) => `/u/${user.username}`
 
-export const userNotificationsURL = user => `${userProfileURL(user)}/notifications`
+export const userNotificationsURL = (user) => `${userProfileURL(user)}/notifications`
 
 /** A helper to convert the URLs in this file to their absolute counterpart */
-export const toAbsoluteURL = subPath => {
+export const toAbsoluteURL = (subPath) => {
   return FRONTEND_URL + subPath
 }

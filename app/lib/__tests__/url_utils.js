@@ -18,19 +18,13 @@ describe('Youtube regex', () => {
     // Mising id
     expect(youtubeRegex.test('https://youtu.be')).toBe(false)
     // Channel
-    expect(
-      youtubeRegex.test('https://www.youtube.com/channel/UCQgWpmt02UtJkyO32HGUASQ')
-    ).toBe(false)
+    expect(youtubeRegex.test('https://www.youtube.com/channel/UCQgWpmt02UtJkyO32HGUASQ')).toBe(
+      false
+    )
     // Empty string
     expect(youtubeRegex.test('')).toBe(false)
     // Random string
-    expect(
-      youtubeRegex.test(
-        Math.random()
-          .toString(36)
-          .substring(7)
-      )
-    ).toBe(false)
+    expect(youtubeRegex.test(Math.random().toString(36).substring(7))).toBe(false)
   })
 })
 
@@ -40,9 +34,7 @@ describe('optionsToQueryString', () => {
   })
 
   it('should map values', () => {
-    expect(optionsToQueryString({ hello: 'world', value: 42 })).toBe(
-      '?hello=world&value=42'
-    )
+    expect(optionsToQueryString({ hello: 'world', value: 42 })).toBe('?hello=world&value=42')
   })
 })
 

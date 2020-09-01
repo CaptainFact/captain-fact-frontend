@@ -34,7 +34,7 @@ const KNOWN_ACHIEVEMENTS = {
   8: { img: imgBug, video: videoBug },
   9: { img: imgFamous, video: videoFamous },
   10: { img: imgArtist },
-  11: { img: imgGoodVibes }
+  11: { img: imgGoodVibes },
 }
 
 const UNKNOWN_ACHIEVEMENT = { img: imgDefault }

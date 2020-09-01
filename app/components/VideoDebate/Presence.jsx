@@ -20,7 +20,7 @@ const Presence = ({ t, nbUsers, nbViewers }) => (
 
 Presence.propTypes = {
   nbUsers: PropTypes.number.isRequired,
-  nbViewers: PropTypes.number.isRequired
+  nbViewers: PropTypes.number.isRequired,
 }
 
 export default withNamespaces('videoDebate')(Presence)

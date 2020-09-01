@@ -7,7 +7,7 @@ import {
   ENTITY_VIDEO,
   ENTITY_STATEMENT,
   ENTITY_COMMENT,
-  ENTITY_SOURCED_COMMENT
+  ENTITY_SOURCED_COMMENT,
 } from '../../constants'
 import { speakerURL, statementURL, videoURL, commentURL } from '../../lib/cf_routes'
 
@@ -26,13 +26,15 @@ const ENTITY_DISPLAY_MAPPER = {
     return [statementId, statementURL(videoHashId, statementId)]
   },
   [ENTITY_COMMENT]: comment_mapper,
-  [ENTITY_SOURCED_COMMENT]: comment_mapper
+  [ENTITY_SOURCED_COMMENT]: comment_mapper,
 }
 
 const ActionEntityLink = ({ t, action }) => {
   const label = t(`entities.${action.entity}`)
   const entityLinker = ENTITY_DISPLAY_MAPPER[action.entity]
-  if (!entityLinker) return label
+  if (!entityLinker) {
+    return label
+  }
 
   const [entityId, url] = entityLinker(action)
   const full_label = entityId ? `${label} #${entityId}` : label
