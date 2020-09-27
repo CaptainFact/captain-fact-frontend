@@ -288,7 +288,7 @@ export default class Home extends React.PureComponent {
               <div className="column is-6">
                 <h2 className="title-alt is-bold">{t('backendDevelopers')}</h2>
                 <p className="presentation">{t('backendDevelopersText')}</p>
-                <ExternalLinkNewTab href="https://github.com/CaptainFact/captain-fact-frontend/issues">
+                <ExternalLinkNewTab href="https://github.com/CaptainFact/captain-fact/labels/backend">
                   {t('backendDevelopersLink')}
                 </ExternalLinkNewTab>
                 <br />
