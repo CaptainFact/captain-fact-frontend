@@ -54,7 +54,7 @@ export const MIN_REPUTATION_REMOVE_STATEMENT = 75
 export const MIN_REPUTATION_RESTORE_ENTITY = 75
 export const MIN_REPUTATION_REMOVE_SPEAKER = 75
 export const MIN_REPUTATION_UPDATE_VIDEO = 75
-export const MIN_REPUTATION_ADD_VIDEO = 35
+export const MIN_REPUTATION_ADD_VIDEO = 15
 export const MIN_REPUTATION_MODERATION = 125
 
 /* ------ UI, animations ------ */
