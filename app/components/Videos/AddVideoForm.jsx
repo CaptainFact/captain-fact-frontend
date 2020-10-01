@@ -93,7 +93,7 @@ export class AddVideoForm extends React.PureComponent {
                   </p>
                   <br />
                   <p>
-                    <b>{t('videos.intro2', {"requiredPoints": MIN_REPUTATION_ADD_VIDEO})}</b>
+                    <b>{t('videos.intro2', { requiredPoints: MIN_REPUTATION_ADD_VIDEO })}</b>
                   </p>
                   <p>
                     <ExternalLinkNewTab href="/help/contact">
