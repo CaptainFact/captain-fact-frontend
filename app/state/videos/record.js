@@ -8,6 +8,7 @@ const Video = new Record({
   youtube_offset: 0,
   url: '',
   title: '',
+  thumbnail: null,
   speakers: new List(),
   language: null,
   is_partner: null,

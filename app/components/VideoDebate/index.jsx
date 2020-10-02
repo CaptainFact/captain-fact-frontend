@@ -64,6 +64,7 @@ export class VideoDebate extends React.PureComponent {
         <meta property="og:description" content={description} />
         <meta property="og:url" content={toAbsoluteURL(videoURL(video.hash_id))} />
         {image && <meta property="og:image" content={image} />}
+        {image && <meta name="twitter:image" content={image} />}
       </Helmet>
     )
   }
