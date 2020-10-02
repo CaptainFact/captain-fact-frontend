@@ -19,7 +19,7 @@ const isMobile = window.innerWidth <= MOBILE_WIDTH_THRESHOLD
 const Preferences = new Record({
   // Disable autoscroll and sidebar expended by default on mobile
   sidebarExpended: !isMobile,
-  locale: 'en',
+  locale: browserLocale(),
   enableAutoscroll: !isMobile,
   enableSoundOnBackgroundFocus: true,
   videosLanguageFilter: null,
