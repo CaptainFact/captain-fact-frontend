@@ -17,6 +17,7 @@ import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import StyledToggle from '../Utils/StyledToggle'
 import Message from '../Utils/Message'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
+import { MIN_REPUTATION_ADD_VIDEO } from '../../constants'
 import { LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
 import DismissableMessage from '../Utils/DismissableMessage'
 
@@ -92,7 +93,7 @@ export class AddVideoForm extends React.PureComponent {
                   </p>
                   <br />
                   <p>
-                    <b>{t('videos.intro2')}</b>
+                    <b>{t('videos.intro2', { requiredPoints: MIN_REPUTATION_ADD_VIDEO })}</b>
                   </p>
                   <p>
                     <ExternalLinkNewTab href="/help/contact">
