@@ -12,7 +12,7 @@ export const resetUser = createAction('DISPLAYED_USER/RESET')
 const INITIAL_STATE = new Record({
   isLoading: false,
   errors: null,
-  data: new User()
+  data: new User(),
 })
 
 const DisplayedUserReducer = handleActions(
@@ -22,18 +22,17 @@ const DisplayedUserReducer = handleActions(
         return state.merge({
           data: new User({
             ...payload,
-            registered_at: parseDateTime(payload.registered_at)
+            registered_at: parseDateTime(payload.registered_at),
           }),
           isLoading: false,
-          errors: null
+          errors: null,
         })
       },
-      throw: (state, { payload }) => state.merge({ errors: payload, isLoading: false })
+      throw: (state, { payload }) => state.merge({ errors: payload, isLoading: false }),
     },
-    [setError]: (state, { payload }) =>
-      state.merge({ errors: payload, isLoading: false }),
+    [setError]: (state, { payload }) => state.merge({ errors: payload, isLoading: false }),
     [setLoading]: (state, { payload }) => state.set('isLoading', payload),
-    [resetUser]: () => INITIAL_STATE()
+    [resetUser]: () => INITIAL_STATE(),
   },
   INITIAL_STATE()
 )

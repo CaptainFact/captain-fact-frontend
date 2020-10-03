@@ -53,9 +53,12 @@ const PaginatedVideosContainer = ({
     >
       {({ loading, error, data }) => {
         const videos = get(data, videosPath, INITIAL_VIDEOS)
-        if (error) return <ErrorView error={error} />
-        if (!loading && videos.entries.length === 0)
+        if (error) {
+          return <ErrorView error={error} />
+        }
+        if (!loading && videos.entries.length === 0) {
           return <h2>{t('errors:client.noVideoAvailable')}</h2>
+        }
 
         const paginationMenu = !showPagination ? null : (
           <PaginationMenu

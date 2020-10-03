@@ -10,13 +10,13 @@ const OpenCollectiveContributors = ({
   avatarHeight = 72,
   button = true,
   width = 325,
-  limit = 50
+  limit = 50,
 }) => {
   const queryParams = optionsToQueryString({
     avatarHeight,
     button,
     width,
-    limit
+    limit,
   })
 
   return (
@@ -33,7 +33,7 @@ OpenCollectiveContributors.propTypes = {
   tier: PropTypes.oneOf(['soutien-régulier', 'donateur']).isRequired,
   avatarHeight: PropTypes.number,
   width: PropTypes.number,
-  button: PropTypes.bool
+  button: PropTypes.bool,
 }
 
 export default OpenCollectiveContributors

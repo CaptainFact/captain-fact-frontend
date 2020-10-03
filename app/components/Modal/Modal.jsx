@@ -17,12 +17,12 @@ const Modal = ({
   className = null,
   isAbsolute = false,
   overrideContentStructure = false,
-  handleCloseClick = null
+  handleCloseClick = null,
 }) => (
   <div
     className={classNames('modal', className, {
       'is-active': isActive,
-      'is-absolute': isAbsolute
+      'is-absolute': isAbsolute,
     })}
   >
     <div className="modal-background" onClick={handleCloseClick || popModal} />
@@ -35,11 +35,7 @@ const Modal = ({
               <Icon name="question-circle" size="medium" />
             </Link>
           )}
-          <CloseButton
-            size="1.5em"
-            title="Close"
-            onClick={handleCloseClick || popModal}
-          />
+          <CloseButton size="1.5em" title="Close" onClick={handleCloseClick || popModal} />
         </header>
       )}
       {overrideContentStructure ? (
@@ -52,7 +48,4 @@ const Modal = ({
   </div>
 )
 
-export default connect(
-  null,
-  { popModal }
-)(Modal)
+export default connect(null, { popModal })(Modal)

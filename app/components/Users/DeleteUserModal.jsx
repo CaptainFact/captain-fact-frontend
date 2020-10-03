@@ -37,7 +37,7 @@ class DeleteForm extends React.PureComponent {
 
 const valueSelector = formValueSelector(DELETE_FORM)
 
-@connect(state => ({ usernameConfirm: valueSelector(state, 'usernameConfirm') }))
+@connect((state) => ({ usernameConfirm: valueSelector(state, 'usernameConfirm') }))
 @withNamespaces('main')
 @withLoggedInUser
 export default class DeleteUserModal extends React.PureComponent {

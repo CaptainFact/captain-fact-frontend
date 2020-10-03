@@ -12,7 +12,7 @@ const Comment = new Record({
   text: '',
   approve: false,
   inserted_at: new Date(),
-  score: 0
+  score: 0,
 })
 
 export default Comment

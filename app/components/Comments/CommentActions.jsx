@@ -14,7 +14,7 @@ const CommentActions = ({
   handleReply,
   handleDelete,
   handleFlag,
-  handleToggleShowReplies
+  handleToggleShowReplies,
 }) => (
   <nav className="comment-actions">
     {isOwnComment ? (
@@ -30,7 +30,7 @@ const CommentActions = ({
       <CommentAction
         title={t('comment.replies', {
           context: repliesCollapsed ? 'show' : 'hide',
-          count: nbReplies
+          count: nbReplies,
         })}
         iconName={repliesCollapsed ? 'eye' : 'eye-slash'}
         onClick={handleToggleShowReplies}

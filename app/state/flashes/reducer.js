@@ -5,28 +5,28 @@ import { getErrorInfo } from '../../lib/errors'
 import { NO_INTERNET_ERROR } from '../../constants'
 
 // Actions
-export const addFlash = createAction('FLASHES/ADD', options => buildFlash(options))
+export const addFlash = createAction('FLASHES/ADD', (options) => buildFlash(options))
 export const removeFlash = createAction('FLASHES/REMOVE')
 export const pause = createAction('FLASHES/PAUSE', () => true)
 export const unPause = createAction('FLASHES/UNPAUSE', () => false)
 export const update = createAction('FLASHES/UPDATE')
 
 // Actions helpers (use them like regular actions)
-export const flashError = options => {
+export const flashError = (options) => {
   return addFlash({
     flashType: 'danger',
     iconName: 'exclamation-circle',
-    ...options
+    ...options,
   })
 }
 
-export const flashErrorMsg = message => flashError({ message })
+export const flashErrorMsg = (message) => flashError({ message })
 
 export const flashErrorUnauthenticated = () => {
   return flashError({
     message: 'errors:server.unauthenticated',
     infoText: 'main:menu.signup',
-    infoUrl: '/signup'
+    infoUrl: '/signup',
   })
 }
 
@@ -35,7 +35,7 @@ export const flashSuccessMsg = (message, params = {}) => {
     flashType: 'success',
     iconName: 'check-circle',
     message,
-    ...params
+    ...params,
   })
 }
 
@@ -47,7 +47,7 @@ export function errorToFlash(msg) {
       message: msg,
       infoUrl: errorInfo.url,
       infoText: errorInfo.i18nKey,
-      isError: true
+      isError: true,
     })
   } else if (typeof msg === 'string') {
     action = flashError({ message: msg, isError: true })
@@ -62,14 +62,16 @@ export function errorToFlash(msg) {
 // Same as errorToFlash but doesn't show anything if payload is
 // not a string (useful for forms)
 export function errorMsgToFlash(msg) {
-  if (typeof msg === 'string') return errorToFlash(msg)
+  if (typeof msg === 'string') {
+    return errorToFlash(msg)
+  }
   return () => () => null
 }
 
 // Reducer
 const INITIAL_STATE = Record({
   flashes: new List(),
-  isPaused: false
+  isPaused: false,
 })
 
 const FlashesReducer = handleActions(
@@ -77,26 +79,31 @@ const FlashesReducer = handleActions(
     [addFlash]: (state, { payload }) => {
       // Only display one error for connections problems (instead of one per request)
       if (
-        payload.message === NO_INTERNET_ERROR
-        && state.flashes.find(f => f.message === NO_INTERNET_ERROR)
-      )
+        payload.message === NO_INTERNET_ERROR &&
+        state.flashes.find((f) => f.message === NO_INTERNET_ERROR)
+      ) {
         return state
-      return state.update('flashes', l => l.push(payload))
+      }
+      return state.update('flashes', (l) => l.push(payload))
     },
     [removeFlash]: (state, { payload: { id } }) => {
-      const flashIdx = state.flashes.findIndex(msg => msg.id === id)
-      if (flashIdx !== -1) return state.update('flashes', l => l.delete(flashIdx))
+      const flashIdx = state.flashes.findIndex((msg) => msg.id === id)
+      if (flashIdx !== -1) {
+        return state.update('flashes', (l) => l.delete(flashIdx))
+      }
       return state
     },
     [combineActions(pause, unPause)]: (state, { payload }) => state.set('isPaused', payload),
     [update]: (state, { payload }) => {
-      if (!state.isPaused)
-        return state.update('flashes', flashes => flashes
-          .map(f => f.set('timeLeft', f.timeLeft - payload))
-          .filter(msg => msg.timeLeft > 0)
+      if (!state.isPaused) {
+        return state.update('flashes', (flashes) =>
+          flashes
+            .map((f) => f.set('timeLeft', f.timeLeft - payload))
+            .filter((msg) => msg.timeLeft > 0)
         )
+      }
       return state
-    }
+    },
   },
   INITIAL_STATE()
 )

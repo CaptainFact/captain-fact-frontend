@@ -10,7 +10,7 @@ const supportedPlayerUrls = [youtubeRegex]
  * Returns displayable, uppercase host name
  * ex: https://www.toto.fr/titi/page.lol => TOTO.FR
  */
-const getDisplayableHostname = url =>
+const getDisplayableHostname = (url) =>
   upperCase(
     url
       .replace(/^https?:\/\//i, '')
@@ -22,9 +22,11 @@ const getDisplayableHostname = url =>
  * Check if we want to render medias from that website into players
  * using `supportedPlayerUrls`.
  */
-const isPlayer = url => {
+const isPlayer = (url) => {
   for (const playerRegex of supportedPlayerUrls) {
-    if (playerRegex.test(url)) return true
+    if (playerRegex.test(url)) {
+      return true
+    }
   }
   return false
 }
@@ -47,9 +49,7 @@ export const Source = ({ source: { url, title, site_name }, withoutPlayer }) => 
   return (
     <div className="source-container">
       <ExternalLinkNewTab href={url} className="source">
-        <span className="site-name">
-          {upperCase(site_name) || getDisplayableHostname(url)}
-        </span>
+        <span className="site-name">{upperCase(site_name) || getDisplayableHostname(url)}</span>
         <span className="article-title">{title}</span>
       </ExternalLinkNewTab>
     </div>

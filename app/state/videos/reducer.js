@@ -5,13 +5,13 @@ export const setSubmitting = createAction('VIDEOS/SET_SUBMITTING')
 export const reset = createAction('VIDEOS/RESET')
 
 const INITIAL_STATE = new Record({
-  isSubmitting: false
+  isSubmitting: false,
 })
 
 const VideosReducer = handleActions(
   {
     [setSubmitting]: (state, { payload }) => state.set('isSubmitting', payload),
-    [reset]: () => INITIAL_STATE()
+    [reset]: () => INITIAL_STATE(),
   },
   INITIAL_STATE()
 )

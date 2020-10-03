@@ -71,12 +71,12 @@ CFSocialProfiles.propTypes = {
   /** Icons size. Default to 2em */
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /** Passed to Flex */
-  justifyContent: PropTypes.string
+  justifyContent: PropTypes.string,
 }
 
 CFSocialProfiles.defaultProps = {
   size: '2em',
-  justifyContent: 'center'
+  justifyContent: 'center',
 }
 
 export default withTheme(CFSocialProfiles)

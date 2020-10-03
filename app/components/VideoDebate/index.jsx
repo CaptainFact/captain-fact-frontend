@@ -6,26 +6,23 @@ import { Helmet } from 'react-helmet'
 import { ErrorView } from '../Utils'
 import {
   joinCommentsChannel,
-  leaveCommentsChannel
+  leaveCommentsChannel,
 } from '../../state/video_debate/comments/effects'
 import {
   joinStatementsChannel,
-  leaveStatementsChannel
+  leaveStatementsChannel,
 } from '../../state/video_debate/statements/effects'
-import {
-  joinVideoDebateChannel,
-  leaveVideoDebateChannel
-} from '../../state/video_debate/effects'
+import { joinVideoDebateChannel, leaveVideoDebateChannel } from '../../state/video_debate/effects'
 import { resetVideoDebate } from '../../state/video_debate/actions'
 import { ColumnVideo } from './ColumnVideo'
 import { ColumnDebate } from './ColumnDebate'
 import { videoURL, toAbsoluteURL } from '../../lib/cf_routes'
 
 @connect(
-  state => ({
+  (state) => ({
     videoErrors: state.VideoDebate.video.errors,
     isLoading: state.VideoDebate.video.isLoading,
-    video: state.VideoDebate.video.data
+    video: state.VideoDebate.video.data,
   }),
   {
     joinVideoDebateChannel,
@@ -34,7 +31,7 @@ import { videoURL, toAbsoluteURL } from '../../lib/cf_routes'
     leaveCommentsChannel,
     leaveStatementsChannel,
     leaveVideoDebateChannel,
-    resetVideoDebate
+    resetVideoDebate,
   }
 )
 @withNamespaces('videoDebate')
@@ -67,6 +64,7 @@ export class VideoDebate extends React.PureComponent {
         <meta property="og:description" content={description} />
         <meta property="og:url" content={toAbsoluteURL(videoURL(video.hash_id))} />
         {image && <meta property="og:image" content={image} />}
+        {image && <meta name="twitter:image" content={image} />}
       </Helmet>
     )
   }
@@ -79,11 +77,7 @@ export class VideoDebate extends React.PureComponent {
     }
 
     return (
-      <div
-        id="video-show"
-        className="columns is-gapless"
-        data-video-language={video.language}
-      >
+      <div id="video-show" className="columns is-gapless" data-video-language={video.language}>
         {!isLoading && this.renderMeta(video)}
         <ColumnVideo view={route.view} />
         <ColumnDebate view={route.view} videoId={this.props.params.videoId} />

@@ -5,14 +5,7 @@ import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import { unlinkProvider } from '../../API/http_api/current_user'
 import Button from '../Utils/Button'
 
-const ThirdPartyAccountLinker = ({
-  t,
-  title,
-  updateLoggedInUser,
-  provider,
-  isLinked,
-  authURL
-}) => (
+const ThirdPartyAccountLinker = ({ t, title, updateLoggedInUser, provider, isLinked, authURL }) => (
   <div className="field has-addons" style={{ width: 200, margin: 'auto' }}>
     <div className="control">
       <div className="linked-account-title">{title}</div>
@@ -23,7 +16,7 @@ const ThirdPartyAccountLinker = ({
           type="submit"
           className="is-danger"
           onClick={() => {
-            return unlinkProvider(provider).then(user => {
+            return unlinkProvider(provider).then((user) => {
               updateLoggedInUser(user)
             })
           }}

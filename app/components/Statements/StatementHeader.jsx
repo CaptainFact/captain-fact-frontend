@@ -2,10 +2,7 @@ import React from 'react'
 import { withNamespaces } from 'react-i18next'
 import TimeDisplay from '../Utils/TimeDisplay'
 import ClickableIcon from '../Utils/ClickableIcon'
-import {
-  MIN_REPUTATION_UPDATE_STATEMENT,
-  MIN_REPUTATION_REMOVE_STATEMENT
-} from '../../constants'
+import { MIN_REPUTATION_UPDATE_STATEMENT, MIN_REPUTATION_REMOVE_STATEMENT } from '../../constants'
 import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
 
 export default withNamespaces('videoDebate')(
@@ -17,7 +14,7 @@ export default withNamespaces('videoDebate')(
     handleShowHistory,
     handleEdit,
     handleShare,
-    handleDelete
+    handleDelete,
   }) => (
     <header className="card-header">
       <p className="card-header-title">

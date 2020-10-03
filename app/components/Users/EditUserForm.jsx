@@ -4,11 +4,7 @@ import { withRouter } from 'react-router'
 import { withNamespaces } from 'react-i18next'
 import { connect } from 'react-redux'
 
-import {
-  renderAllUserFields,
-  submitButton,
-  validatePasswordRepeat
-} from './UserFormFields'
+import { renderAllUserFields, submitButton, validatePasswordRepeat } from './UserFormFields'
 import { Icon } from '../Utils/Icon'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import { setUser as setDisplayedUser } from '../../state/users/displayed_user/reducer'
@@ -17,7 +13,7 @@ import { updateUserInfo } from '../../API/http_api/current_user'
 // A dirty trick to make the migration of user from redux to context easier.
 // As we plan to replace ReduxForm by Formik, there is no need in spending
 // time making a proper adaptation.
-const dirtyLoggedInUserToReduxForm = Component => props => {
+const dirtyLoggedInUserToReduxForm = (Component) => (props) => {
   const { loggedInUser, ...otherProps } = props
 
   return (
@@ -34,10 +30,7 @@ const dirtyLoggedInUserToReduxForm = Component => props => {
 @reduxForm({ form: 'editUserForm', validate: validatePasswordRepeat })
 @withRouter
 @withNamespaces('user')
-@connect(
-  null,
-  { setDisplayedUser }
-)
+@connect(null, { setDisplayedUser })
 export default class EditUserForm extends React.PureComponent {
   componentDidUpdate() {
     // Redirect to user profile when logged in
@@ -48,11 +41,11 @@ export default class EditUserForm extends React.PureComponent {
 
   submit(user) {
     return updateUserInfo(user)
-      .then(user => {
+      .then((user) => {
         this.props.updateLoggedInUser(user)
         this.props.setDisplayedUser(user)
       })
-      .catch(e => {
+      .catch((e) => {
         throw new SubmissionError(e)
       })
   }
@@ -60,10 +53,7 @@ export default class EditUserForm extends React.PureComponent {
   render() {
     const { handleSubmit, valid, t } = this.props
     return (
-      <form
-        className="edit-user-form form"
-        onSubmit={handleSubmit(user => this.submit(user))}
-      >
+      <form className="edit-user-form form" onSubmit={handleSubmit((user) => this.submit(user))}>
         {renderAllUserFields(valid, t, true)}
         {submitButton(
           <div>

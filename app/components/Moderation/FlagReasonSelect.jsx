@@ -15,7 +15,7 @@ const FlagReasonSelect = ({ t }) => {
   return (
     <div className="flag-reason-select field">
       <p className="control">
-        {VALID_REASONS.map(key => (
+        {VALID_REASONS.map((key) => (
           <FlagReason key={key} value={key} label={labels[key]} />
         ))}
       </p>

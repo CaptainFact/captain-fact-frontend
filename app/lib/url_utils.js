@@ -8,13 +8,13 @@ import { toPairs, pickBy, isEmpty } from 'lodash'
  *    > objectToQueryString({a: 42, b: "hello", c: undefined})
  *    "?a=42&b=hello"
  */
-export const optionsToQueryString = options => {
-  const definedOptions = pickBy(options, value => value !== undefined)
+export const optionsToQueryString = (options) => {
+  const definedOptions = pickBy(options, (value) => value !== undefined)
   if (isEmpty(definedOptions)) {
     return ''
   }
 
-  const encodeValue = value => {
+  const encodeValue = (value) => {
     if (Array.isArray(value)) {
       return value.concat.map(encodeURIComponent).join(',')
     }
@@ -30,18 +30,17 @@ export const youtubeRegex = /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|
 export const facebookVideoRegex = /http(?:s)?:\/\/(?:www\.)?facebook.(?:[a-z]+)\/(?!(?:video\.php\?v=\d+|usernameFB\/videos\/\d+)).*/
 
 export const isExternal = (currentHref, url) =>
-  (url.indexOf(':') > -1 || url.indexOf('//') > -1) &&
-  checkDomain(currentHref) !== checkDomain(url)
+  (url.indexOf(':') > -1 || url.indexOf('//') > -1) && checkDomain(currentHref) !== checkDomain(url)
 
 /**
  * Define is URL points to a downloadable file. We only support downloading
  * PDF files for now.
  */
-export const isDownloadableFile = url => {
+export const isDownloadableFile = (url) => {
   return url.endsWith('.pdf')
 }
 
-export const wikidataURL = wikidataQID => {
+export const wikidataURL = (wikidataQID) => {
   return `https://www.wikidata.org/wiki/${wikidataQID}`
 }
 

@@ -8,7 +8,7 @@ export const setContent = createAction('HELP/SET_HELP_PAGE')
 const INITIAL_STATE = new Record({
   markdownContent: '',
   isLoading: false,
-  error: null
+  error: null,
 })
 
 const HelpReducer = handleActions(
@@ -17,12 +17,12 @@ const HelpReducer = handleActions(
       next: (state, { payload }) =>
         state.merge({
           markdownContent: payload,
-          isLoading: false
+          isLoading: false,
         }),
-      throw: (state, { payload }) => state.merge({ error: payload, isLoading: false })
+      throw: (state, { payload }) => state.merge({ error: payload, isLoading: false }),
     },
     [setLoading]: (state, { payload }) => state.set('isLoading', payload),
-    [reset]: () => INITIAL_STATE()
+    [reset]: () => INITIAL_STATE(),
   },
   INITIAL_STATE()
 )

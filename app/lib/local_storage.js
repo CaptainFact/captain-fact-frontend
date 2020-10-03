@@ -7,7 +7,7 @@ export const LOCAL_STORAGE_KEYS = {
   PREFERENCES: 'preferences',
   DISMISS_ADD_VIDEO_INTRODUCTION: 'dismissAddVideoIntroduction',
   DISMISS_VIDEO_INTRODUCTION: 'dismissVideoHelp',
-  DISMISS_SPEAKER_INTRODUCTION: 'dismissSpeakerIntroduction'
+  DISMISS_SPEAKER_INTRODUCTION: 'dismissSpeakerIntroduction',
 }
 
 /**
@@ -39,7 +39,7 @@ export const setLocalStorage = (key, value) => {
  * A helper to remove an entry in localStorage.
  * Ignores errors about full, disallowed or unsupported storage.
  */
-export const removeFromLocalStorage = key => {
+export const removeFromLocalStorage = (key) => {
   try {
     window.localStorage.removeItem(key)
   } catch (e) {

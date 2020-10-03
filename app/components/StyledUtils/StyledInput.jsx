@@ -22,7 +22,7 @@ const StyledInput = styled(tag.input)`
 
 StyledInput.defaultProps = {
   // Wee still rely on bulma styles
-  className: 'input'
+  className: 'input',
 }
 
 export default StyledInput

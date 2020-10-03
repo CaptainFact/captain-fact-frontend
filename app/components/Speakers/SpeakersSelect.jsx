@@ -4,8 +4,8 @@ import { ReactSelectStyles, ReactSelectTheme } from '../../lib/react_select_them
 
 const SpeakersSelect = ({ input, speakers, placeholder }) => {
   const selectedSpeakerId = input.value
-  const speaker = selectedSpeakerId && speakers.find(s => s.id === selectedSpeakerId)
-  const getOption = speaker => ({ value: speaker, label: speaker.full_name })
+  const speaker = selectedSpeakerId && speakers.find((s) => s.id === selectedSpeakerId)
+  const getOption = (speaker) => ({ value: speaker, label: speaker.full_name })
 
   return (
     <Select

@@ -18,7 +18,7 @@ const QUERY = gql`
 `
 
 const DEFAULT_STATS = {
-  allStatistics: { totals: { users: 2000, statements: 900 } }
+  allStatistics: { totals: { users: 2000, statements: 900 } },
 }
 
 const Statistics = ({ t }) => (

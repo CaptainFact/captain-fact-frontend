@@ -31,7 +31,7 @@ export default class NotificationsPage extends Component {
   buildLink(page, filter) {
     return `/u/${this.props.loggedInUser.username}/notifications${optionsToQueryString({
       page: page === 1 ? undefined : page,
-      filter: filter === 'ALL' ? undefined : filter
+      filter: filter === 'ALL' ? undefined : filter,
     })}`
   }
 
@@ -40,7 +40,7 @@ export default class NotificationsPage extends Component {
   }
 
   renderFilters(selected) {
-    return FILTERS.map(filter => (
+    return FILTERS.map((filter) => (
       <StyledLink
         key={filter}
         mx={3}
@@ -57,7 +57,7 @@ export default class NotificationsPage extends Component {
       <Message>{this.props.t('empty')}</Message>
     ) : (
       <FlipMove>
-        {notifications.map(n => (
+        {notifications.map((n) => (
           <NotificationDetails key={n.id} notification={n}>
             {({ message, seenAt, link, insertedAt }) => (
               <Container
@@ -98,11 +98,7 @@ export default class NotificationsPage extends Component {
                       onClick={() => markAsSeen(n.id, false)}
                     />
                   ) : (
-                    <Check
-                      cursor="pointer"
-                      size={24}
-                      onClick={() => markAsSeen(n.id, true)}
-                    />
+                    <Check cursor="pointer" size={24} onClick={() => markAsSeen(n.id, true)} />
                   )}
                 </Flex>
               </Container>
@@ -126,8 +122,8 @@ export default class NotificationsPage extends Component {
             return <ErrorView error={error} />
           }
 
-          const hasSeen = notifications && notifications.find(n => n.seenAt)
-          const hasUnseen = notifications && notifications.find(n => !n.seenAt)
+          const hasSeen = notifications && notifications.find((n) => n.seenAt)
+          const hasUnseen = notifications && notifications.find((n) => !n.seenAt)
           return (
             <Flex flexDirection="column" alignItems="center">
               <Container mb={3} p={[2, 4]} width={1} maxWidth={1200}>
@@ -137,14 +133,24 @@ export default class NotificationsPage extends Component {
                     <Flex flexWrap="wrap">
                       <Box mr={2}>
                         <Button
-                          onClick={() => markAsSeen(notifications.map(n => n.id), false)}
+                          onClick={() =>
+                            markAsSeen(
+                              notifications.map((n) => n.id),
+                              false
+                            )
+                          }
                           disabled={!hasSeen}
                         >
                           {t('markAllAsUnseen')}
                         </Button>
                       </Box>
                       <Button
-                        onClick={() => markAsSeen(notifications.map(n => n.id), true)}
+                        onClick={() =>
+                          markAsSeen(
+                            notifications.map((n) => n.id),
+                            true
+                          )
+                        }
                         disabled={!hasUnseen}
                       >
                         {t('markAllAsRead')}
@@ -152,11 +158,7 @@ export default class NotificationsPage extends Component {
                     </Flex>
                   </Flex>
 
-                  {loading ? (
-                    <LoadingFrame />
-                  ) : (
-                    this.renderNotifications(notifications, markAsSeen)
-                  )}
+                  {loading ? <LoadingFrame /> : this.renderNotifications(notifications, markAsSeen)}
                 </Flex>
               </Container>
               {totalPages > 1 && (
@@ -168,13 +170,7 @@ export default class NotificationsPage extends Component {
                   onPageChange={() => window.scrollTo({ top: 0 })}
                   pollInterval={pollInterval}
                   LinkBuilder={({ 'data-page': page, ...props }) => {
-                    return (
-                      <Link
-                        to={this.buildLink(page, filter)}
-                        className="button"
-                        {...props}
-                      />
-                    )
+                    return <Link to={this.buildLink(page, filter)} className="button" {...props} />
                   }}
                 />
               )}

@@ -7,11 +7,10 @@ import Alert from '../Utils/Alert'
 import { resetPasswordRequest } from '../../API/http_api/current_user'
 
 // Fields are auto-validated, only validate password and repeat are the same
-const validate = params => {
-  if (params.password)
-    return params.password === params.passwordRepeat
-      ? {}
-      : { passwordRepeat: "Doesn't match" }
+const validate = (params) => {
+  if (params.password) {
+    return params.password === params.passwordRepeat ? {} : { passwordRepeat: "Doesn't match" }
+  }
   return {}
 }
 
@@ -31,15 +30,10 @@ export default class ResetPasswordRequestForm extends React.PureComponent {
   }
 
   renderContent() {
-    if (this.state.status === 'error')
-      return (
-        <ErrorView
-          error={this.state.payload}
-          i18nNS="user:errors.error"
-          canGoBack={false}
-        />
-      )
-    if (this.state.status === 'ready')
+    if (this.state.status === 'error') {
+      return <ErrorView error={this.state.payload} i18nNS="user:errors.error" canGoBack={false} />
+    }
+    if (this.state.status === 'ready') {
       return (
         <div>
           {emailField(this.props.t)}
@@ -48,8 +42,10 @@ export default class ResetPasswordRequestForm extends React.PureComponent {
           </button>
         </div>
       )
-    if (this.state.status === 'done')
+    }
+    if (this.state.status === 'done') {
       return <Alert>{this.props.t('resetPasswordRequestSuccess')}</Alert>
+    }
   }
 
   render() {

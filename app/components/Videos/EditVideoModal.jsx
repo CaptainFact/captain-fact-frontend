@@ -52,7 +52,7 @@ class EditVideoModal extends React.PureComponent {
                       name: 'youtube_offset',
                       max: '10000000',
                       value: values.youtube_offset,
-                      onChange: handleChange
+                      onChange: handleChange,
                     }}
                     meta={{ submitting: isSubmitting }}
                     placeholder="+0s"
@@ -73,12 +73,9 @@ const mapDispatchToProps = {
   popModal,
   flashErrorMsg,
   flashSuccessMsg,
-  shiftStatements
+  shiftStatements,
 }
 
 export default withNamespaces(['videoDebate', 'main'])(
-  connect(
-    state => ({ video: state.VideoDebate.video.data }),
-    mapDispatchToProps
-  )(EditVideoModal)
+  connect((state) => ({ video: state.VideoDebate.video.data }), mapDispatchToProps)(EditVideoModal)
 )

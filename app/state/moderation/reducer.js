@@ -11,7 +11,7 @@ export const removeModerationEntry = createAction('MODERATION/REMOVE_ITEM')
 const INITIAL_STATE = new Record({
   isLoading: false,
   error: null,
-  entry: null
+  entry: null,
 })
 
 const ModerationReducer = handleActions(
@@ -21,22 +21,23 @@ const ModerationReducer = handleActions(
         return !payload
           ? state.set('isLoading', false)
           : state.merge({
-            entry: prepareEntry(payload),
-            isLoading: false
-          })
+              entry: prepareEntry(payload),
+              isLoading: false,
+            })
       },
-      throw: (state, action) => state.merge({
-        isLoading: false,
-        error: action.payload
-      })
+      throw: (state, action) =>
+        state.merge({
+          isLoading: false,
+          error: action.payload,
+        }),
     },
     [setLoading]: (state, { payload }) => state.set('isLoading', payload),
-    [removeModerationEntry]: state => state.set('entry', null)
+    [removeModerationEntry]: (state) => state.set('entry', null),
   },
   INITIAL_STATE()
 )
 
-const prepareEntry = entry => {
+const prepareEntry = (entry) => {
   entry.action.time = parseDateTime(entry.action.time)
   entry.action.changes = new Map(entry.action.changes)
   return ModerationEntry(entry)

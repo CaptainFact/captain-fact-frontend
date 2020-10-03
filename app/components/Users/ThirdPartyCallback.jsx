@@ -15,12 +15,12 @@ export default class ThirdPartyCallback extends React.PureComponent {
     if (!this.props.location.query.error) {
       signIn(this.props.params.provider, {
         code: this.props.location.query.code,
-        invitation_token: this.props.location.query.state
+        invitation_token: this.props.location.query.state,
       })
         .then(({ user, token }) => {
           this.props.updateLoggedInUser(user, token)
         })
-        .catch(e => {
+        .catch((e) => {
           this.setState({ error: e })
         })
     }
@@ -33,15 +33,12 @@ export default class ThirdPartyCallback extends React.PureComponent {
   }
 
   render() {
-    if (this.state.error)
+    if (this.state.error) {
       return <ErrorView error={this.props.error} i18nNS="user:errors.error" />
-    if (this.props.location.query.error)
-      return (
-        <ErrorView
-          error={this.props.location.query.error}
-          i18nNS="user:errors.thirdParty"
-        />
-      )
+    }
+    if (this.props.location.query.error) {
+      return <ErrorView error={this.props.location.query.error} i18nNS="user:errors.thirdParty" />
+    }
     return <LoadingFrame title="Authenticating" />
   }
 }

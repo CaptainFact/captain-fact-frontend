@@ -17,14 +17,16 @@ import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import StyledToggle from '../Utils/StyledToggle'
 import Message from '../Utils/Message'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
+import { MIN_REPUTATION_ADD_VIDEO } from '../../constants'
 import { LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
 import DismissableMessage from '../Utils/DismissableMessage'
 
 const validate = ({ url }) => {
-  if (!youtubeRegex.test(url) && !facebookVideoRegex.test(url))
+  if (!youtubeRegex.test(url) && !facebookVideoRegex.test(url)) {
     return {
-      url: 'Invalid URL. Only YouTube and Facebook videos are currently supported'
+      url: 'Invalid URL. Only YouTube and Facebook videos are currently supported',
     }
+  }
   return {}
 }
 
@@ -36,9 +38,10 @@ export class AddVideoForm extends React.PureComponent {
   componentDidMount() {
     const videoUrl = this.props.params.videoUrl || this.props.location.query.url
     if (videoUrl) {
-      this.props.searchVideo(decodeURI(videoUrl)).then(action => {
-        if (!action.error && action.payload !== null)
+      this.props.searchVideo(decodeURI(videoUrl)).then((action) => {
+        if (!action.error && action.payload !== null) {
           this.props.router.push(`/videos/${action.payload.hash_id}`)
+        }
       })
     }
   }
@@ -62,7 +65,7 @@ export class AddVideoForm extends React.PureComponent {
         validate={validate}
         onSubmit={({ url, isPublicVideo }, { setSubmitting }) => {
           setSubmitting(true)
-          this.props.postVideo({ url, unlisted: !isPublicVideo }).then(action => {
+          this.props.postVideo({ url, unlisted: !isPublicVideo }).then((action) => {
             setSubmitting(false)
             if (!action.error) {
               router.push(`/videos/${action.payload.hash_id}`)
@@ -80,9 +83,7 @@ export class AddVideoForm extends React.PureComponent {
                 <DismissableMessage
                   className="introduction"
                   header={t('videos.introTitle')}
-                  localStorageDismissKey={
-                    LOCAL_STORAGE_KEYS.DISMISS_ADD_VIDEO_INTRODUCTION
-                  }
+                  localStorageDismissKey={LOCAL_STORAGE_KEYS.DISMISS_ADD_VIDEO_INTRODUCTION}
                 >
                   <p>{t('videos.intro')}</p>
                   <p>
@@ -92,7 +93,7 @@ export class AddVideoForm extends React.PureComponent {
                   </p>
                   <br />
                   <p>
-                    <b>{t('videos.intro2')}</b>
+                    <b>{t('videos.intro2', { requiredPoints: MIN_REPUTATION_ADD_VIDEO })}</b>
                   </p>
                   <p>
                     <ExternalLinkNewTab href="/help/contact">
@@ -107,7 +108,7 @@ export class AddVideoForm extends React.PureComponent {
                     onChange: handleChange,
                     onBlur: handleBlur,
                     name: 'url',
-                    value: values.url
+                    value: values.url,
                   }}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -119,12 +120,7 @@ export class AddVideoForm extends React.PureComponent {
                 />
               </Box>
 
-              <Flex
-                flexDirection="column"
-                justifyContent="center"
-                alignItems="center"
-                py={4}
-              >
+              <Flex flexDirection="column" justifyContent="center" alignItems="center" py={4}>
                 <StyledToggle
                   name="isPublicVideo"
                   onChange={handleChange}

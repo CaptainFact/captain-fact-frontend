@@ -21,13 +21,13 @@ import { LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
 @withRouter
 @withNamespaces('main')
 @connect(
-  state => ({
+  (state) => ({
     speaker: state.Speakers.currentSpeaker,
     links: state.Speakers.currentSpeakerLinks,
     speakerLoading: state.Speakers.isLoading,
     wikiLoading: state.Speakers.isLoadingWiki,
     error: state.Speakers.error,
-    userLocale: state.UserPreferences.locale
+    userLocale: state.UserPreferences.locale,
   }),
   { fetchSpeaker, fetchWikiDataInfo, reset, resetVideos }
 )
@@ -40,7 +40,7 @@ export class SpeakerPage extends React.PureComponent {
     const {
       speakerLoading,
       speaker: { wikidata_item_id, slug },
-      userLocale
+      userLocale,
     } = this.props
 
     // Target speaker changed
@@ -64,8 +64,7 @@ export class SpeakerPage extends React.PureComponent {
   shouldFetchWikidata(oldProps, newWikidataID, newLocale) {
     return (
       newWikidataID &&
-      (oldProps.speaker.wikidata_item_id !== newWikidataID ||
-        oldProps.userLocale !== newLocale)
+      (oldProps.speaker.wikidata_item_id !== newWikidataID || oldProps.userLocale !== newLocale)
     )
   }
 
@@ -75,7 +74,9 @@ export class SpeakerPage extends React.PureComponent {
 
   render() {
     const { t } = this.props
-    if (this.props.error) return <ErrorView error={this.props.error} />
+    if (this.props.error) {
+      return <ErrorView error={this.props.error} />
+    }
     return (
       <div className="speaker-page">
         <Helmet>
@@ -111,12 +112,16 @@ export class SpeakerPage extends React.PureComponent {
   }
 
   renderWikidata() {
-    if (this.props.wikiLoading) return '...'
+    if (this.props.wikiLoading) {
+      return '...'
+    }
     return this.renderLink(this.props.links.wikipedia, 'Wikipedia')
   }
 
   renderVideos() {
-    if (this.props.videosLoading || !this.props.speaker) return <LoadingFrame />
+    if (this.props.videosLoading || !this.props.speaker) {
+      return <LoadingFrame />
+    }
 
     const currentPage = parseInt(this.props.location.query.page) || 1
     return (
@@ -129,7 +134,9 @@ export class SpeakerPage extends React.PureComponent {
   }
 
   renderLink(url, siteName) {
-    if (!url) return null
+    if (!url) {
+      return null
+    }
     return (
       <ExternalLinkNewTab href={url} className="link-with-icon">
         <Icon name="external-link" /> <span>{siteName}</span>

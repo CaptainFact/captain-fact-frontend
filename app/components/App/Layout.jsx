@@ -10,9 +10,9 @@ import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
 import BackgroundNotifier from './BackgroundNotifier'
 import CrashReportPage from './CrashReportPage'
 
-@connect(state => ({
+@connect((state) => ({
   locale: state.UserPreferences.locale,
-  sidebarExpended: state.UserPreferences.sidebarExpended
+  sidebarExpended: state.UserPreferences.sidebarExpended,
 }))
 export default class Layout extends React.PureComponent {
   state = { error: null }
@@ -31,26 +31,17 @@ export default class Layout extends React.PureComponent {
           property="og:description"
           content="Collaborative, real-time fact checking. Free and open source."
         />
-        <meta
-          property="og:image"
-          content="https://captainfact.io/assets/img/banner.jpg"
-        />
+        <meta property="og:image" content="https://captainfact.io/assets/img/banner.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta
-          property="og:image"
-          content="https://captainfact.io/assets/img/CaptainFact.png"
-        />
+        <meta property="og:image" content="https://captainfact.io/assets/img/CaptainFact.png" />
         <meta property="og:image:width" content="100" />
         <meta property="og:image:height" content="100" />
         <meta property="og:type" content="website" />
         <meta property="fb:app_id" content="1502183533135523" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@CaptainFact_io" />
-        <meta
-          name="twitter:image"
-          content="https://captainfact.io/assets/img/banner_twitter.png"
-        />
+        <meta name="twitter:image" content="https://captainfact.io/assets/img/banner_twitter.png" />
       </Helmet>
     )
   }
@@ -85,11 +76,8 @@ export default class Layout extends React.PureComponent {
    * @returns {Promise}
    */
   checkExtensionInstall() {
-    return new Promise(fulfill => {
-      setTimeout(
-        () => fulfill(!!document.getElementById('captainfact-extension-installed')),
-        5000
-      )
+    return new Promise((fulfill) => {
+      setTimeout(() => fulfill(!!document.getElementById('captainfact-extension-installed')), 5000)
     })
   }
 }

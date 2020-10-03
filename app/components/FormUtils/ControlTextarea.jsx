@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import TextareaAutosize from './TextareaAutosize'
 import TextareaLengthCounter from './TextareaLengthCounter'
 
-export default params => {
+const ControlTextarea = (params) => {
   const {
     input,
     label,
@@ -23,13 +23,9 @@ export default params => {
     className: classNames('textarea', { 'is-danger': hasError }),
     placeholder: placeholder || label,
     disabled: submitting,
-    type
+    type,
   }
-  const textarea = autosize ? (
-    <TextareaAutosize {...inputProps} />
-  ) : (
-    <textarea {...inputProps} />
-  )
+  const textarea = autosize ? <TextareaAutosize {...inputProps} /> : <textarea {...inputProps} />
 
   return (
     <p className={classNames('control', { 'has-icon': !!icon })}>
@@ -39,3 +35,5 @@ export default params => {
     </p>
   )
 }
+
+export default ControlTextarea

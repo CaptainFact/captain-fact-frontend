@@ -13,7 +13,7 @@ const User = new Record({
   registered_at: null,
   achievements: [],
   is_publisher: false,
-  speaker_id: null
+  speaker_id: null,
 })
 
 export default User

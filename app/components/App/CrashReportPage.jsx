@@ -13,7 +13,7 @@ import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import { optionsToQueryString } from '../../lib/url_utils'
 import Container from '../StyledUtils/Container'
 
-const getGithubIssueURL = stacktrace => {
+const getGithubIssueURL = (stacktrace) => {
   const navigatorInfo = typeof navigator === 'undefined' ? {} : navigator
   const title = 'Unexpected error when ___________'
   const body = `
@@ -38,7 +38,7 @@ ${stacktrace}
 
   return `https://github.com/CaptainFact/captain-fact/issues/new${optionsToQueryString({
     title,
-    body
+    body,
   })}`
 }
 
@@ -71,9 +71,7 @@ const CrashReportPage = ({ t, error }) => {
       {stackTrace && (
         <Container mt={5} maxWidth={1200}>
           <details>
-            <summary style={{ textAlign: 'center', marginBottom: 12 }}>
-              {t('errorDetails')}
-            </summary>
+            <summary style={{ textAlign: 'center', marginBottom: 12 }}>{t('errorDetails')}</summary>
             <Container p={3}>
               <pre style={{ whiteSpace: 'pre-wrap' }}>{stackTrace}</pre>
             </Container>

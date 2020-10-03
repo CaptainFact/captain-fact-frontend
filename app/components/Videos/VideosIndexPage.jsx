@@ -8,10 +8,7 @@ import { Helmet } from 'react-helmet'
 import { toAbsoluteURL } from '../../lib/cf_routes'
 import { ALL_VIDEOS, ONLY_PARTNERS, ONLY_COMMUNITY, ONLY_FEATURED } from '../../constants'
 import { Icon } from '../Utils'
-import {
-  changeVideosLanguageFilter,
-  setVideosFilter,
-} from '../../state/user_preferences/reducer'
+import { changeVideosLanguageFilter, setVideosFilter } from '../../state/user_preferences/reducer'
 import VideosFilterBar from './VideosFilterBar'
 import AddVideoBtn from './AddVideoBtn'
 import PaginatedVideosContainer from './PaginatedVideosContainer'
@@ -33,10 +30,7 @@ export default class VideosIndexPage extends React.PureComponent {
       <div className="videos-page">
         <Helmet>
           <meta property="og:url" content={toAbsoluteURL('/videos')} />
-          <meta
-            property="og:title"
-            content="Les vidéos sourcées et vérifiées sur CaptainFact"
-          />
+          <meta property="og:title" content="Les vidéos sourcées et vérifiées sur CaptainFact" />
           <meta
             property="og:description"
             content="Découvrez diverses vidéos sourcées et vérifiées par la communauté CaptainFact"

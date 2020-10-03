@@ -3,12 +3,12 @@ import Modal from '../../../components/Modal/Modal'
 
 const INITIAL_STATE = reducer(undefined, {})
 
-const createTestModal = id => ({
+const createTestModal = (id) => ({
   Modal,
   props: {
     id,
-    hello: 'world'
-  }
+    hello: 'world',
+  },
 })
 
 it('should return the initial state', () => {

@@ -3,7 +3,7 @@ import createCachedSelector from 're-reselect'
 
 const EMPTY_COMMENTS_LIST = new List()
 
-export const getAllComments = state => state.VideoDebate.comments.comments
+export const getAllComments = (state) => state.VideoDebate.comments.comments
 
 export const getStatementAllComments = (state, props) => {
   return getAllComments(state).get(props.statement.id, EMPTY_COMMENTS_LIST)
@@ -19,16 +19,21 @@ export const classifyComments = createCachedSelector(
     const regularComments = []
 
     for (const comment of comments) {
-      if (isSelfComment(comment, speakerId)) selfComments.push(comment)
-      else if (!comment.source || comment.approve === null) regularComments.push(comment)
-      else if (comment.approve) approvingFacts.push(comment)
-      else refutingFacts.push(comment)
+      if (isSelfComment(comment, speakerId)) {
+        selfComments.push(comment)
+      } else if (!comment.source || comment.approve === null) {
+        regularComments.push(comment)
+      } else if (comment.approve) {
+        approvingFacts.push(comment)
+      } else {
+        refutingFacts.push(comment)
+      }
     }
     return {
       regularComments: new List(regularComments),
       selfComments: new List(selfComments),
       approvingFacts: new List(approvingFacts),
-      refutingFacts: new List(refutingFacts)
+      refutingFacts: new List(refutingFacts),
     }
   }
 )((state, props) => props.statement.id)

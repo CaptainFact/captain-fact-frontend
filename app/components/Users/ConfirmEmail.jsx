@@ -14,7 +14,7 @@ export default class ConfirmEmail extends React.PureComponent {
   componentDidMount() {
     confirmEmail(this.props.params.token).then(
       () => this.setState({ loading: false }),
-      e => this.setState({ loading: false, error: e })
+      (e) => this.setState({ loading: false, error: e })
     )
   }
 
@@ -24,9 +24,7 @@ export default class ConfirmEmail extends React.PureComponent {
     } else if (this.state.error) {
       return <ErrorView canGoBack={false} error={this.state.error} />
     } else {
-      return (
-        <MessageView type="success">{this.props.t('user:emailConfirmed')}</MessageView>
-      )
+      return <MessageView type="success">{this.props.t('user:emailConfirmed')}</MessageView>
     }
   }
 }

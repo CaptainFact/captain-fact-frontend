@@ -5,7 +5,7 @@ import { withNamespaces } from 'react-i18next'
 import {
   MODERATION_ACTION_ABUSIVE,
   MODERATION_ACTION_CONFIRM,
-  MODERATION_ACTION_NOTSURE
+  MODERATION_ACTION_NOTSURE,
 } from '../../constants'
 import FlagReasonSelect from './FlagReasonSelect'
 
@@ -15,7 +15,7 @@ const valueSelector = formValueSelector(FORM_NAME)
 
 @withNamespaces('moderation')
 @reduxForm({ form: FORM_NAME })
-@connect(state => ({ flagReason: valueSelector(state, 'reason') }))
+@connect((state) => ({ flagReason: valueSelector(state, 'reason') }))
 export class ModerationForm extends React.PureComponent {
   render() {
     const { t, flagReason } = this.props

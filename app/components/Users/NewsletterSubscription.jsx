@@ -20,13 +20,15 @@ export default class NewsletterSubscription extends React.PureComponent {
   }
 
   render() {
-    if (this.state.status === 'loading') return <LoadingFrame />
+    if (this.state.status === 'loading') {
+      return <LoadingFrame />
+    }
     const cssType = this.state.status === 'success' ? this.state.status : 'danger'
     return (
       <div className="section">
         <Alert type={cssType} style={{ maxWidth: 400, margin: '3em auto' }}>
           {this.props.t('newsletter.unsubscribe', {
-            context: this.state.status
+            context: this.state.status,
           })}
         </Alert>
       </div>

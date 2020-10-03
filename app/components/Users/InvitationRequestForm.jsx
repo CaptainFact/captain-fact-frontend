@@ -12,23 +12,22 @@ import { Icon } from '../Utils/Icon'
 import FieldWithButton from '../FormUtils/FieldWithButton'
 
 const validate = ({ email }) => {
-  if (!email || !isEmail(email)) return { email: 'Email is not valid' }
+  if (!email || !isEmail(email)) {
+    return { email: 'Email is not valid' }
+  }
   return {}
 }
 
 @reduxForm({ form: 'newsletterSubscribeForm', validate })
 @withNamespaces('home')
-@connect(
-  null,
-  { addFlash, errorToFlash }
-)
+@connect(null, { addFlash, errorToFlash })
 export default class InvitationRequestForm extends React.PureComponent {
   state = { confirmed: false }
 
   submit(formValues) {
     return requestInvitation(formValues.email, browserLocale()).then(
       () => this.setState({ confirmed: true }),
-      msg => {
+      (msg) => {
         this.props.errorToFlash(msg)
         throw new SubmissionError({ email: 'invalid_email' })
       }
@@ -36,7 +35,7 @@ export default class InvitationRequestForm extends React.PureComponent {
   }
 
   getContent() {
-    if (!this.state.confirmed)
+    if (!this.state.confirmed) {
       return (
         <Field
           component={FieldWithButton}
@@ -47,6 +46,7 @@ export default class InvitationRequestForm extends React.PureComponent {
           buttonLabel={this.props.t('main:actions.send')}
         />
       )
+    }
     return (
       <Alert type="success">
         <Icon name="check" /> {this.props.t('home:inviteSuccess')}

@@ -24,12 +24,12 @@ export function createEffect(promise, opts = null) {
         cleverDispatch(dispatch, getState, opts.before)
       }
       if (promise && opts.then) {
-        promise = promise.then(x => {
+        promise = promise.then((x) => {
           return cleverDispatch(dispatch, getState, opts.then, x)
         })
       }
       if (promise && opts.catch) {
-        promise = promise.catch(x => {
+        promise = promise.catch((x) => {
           return cleverDispatch(dispatch, getState, opts.catch, x)
         })
       }
@@ -41,8 +41,8 @@ export function createEffect(promise, opts = null) {
     // we manually generate SUCCESS / ERROR actions based on then() / catch()
     if (promise && isPromise(promise)) {
       return promise
-        .then(value => (isAction(value) ? value : generateFSASuccess(value)))
-        .catch(value => (isAction(value) ? value : generateFSAError(value)))
+        .then((value) => (isAction(value) ? value : generateFSASuccess(value)))
+        .catch((value) => (isAction(value) ? value : generateFSAError(value)))
     }
     return promise
   }
@@ -70,11 +70,15 @@ export function returnSuccess(returnValue) {
  * @returns {*}
  */
 export function cleverDispatch(dispatch, getState, toDispatch, params = null) {
-  if (typeof toDispatch === 'function') return dispatch(toDispatch(params))
-  if (isAction(toDispatch)) return dispatch(toDispatch)
+  if (typeof toDispatch === 'function') {
+    return dispatch(toDispatch(params))
+  }
+  if (isAction(toDispatch)) {
+    return dispatch(toDispatch)
+  }
   if (isIterable(toDispatch)) {
     let lastValue = null
-    toDispatch.forEach(a => {
+    toDispatch.forEach((a) => {
       lastValue = cleverDispatch(dispatch, getState, a, params)
     })
     return lastValue
@@ -92,7 +96,7 @@ export function generateFSAError(payload) {
   return {
     type: 'ERROR',
     error: true,
-    payload
+    payload,
   }
 }
 
@@ -105,7 +109,7 @@ export function generateFSASuccess(payload) {
   return {
     type: 'SUCCESS',
     error: false,
-    payload
+    payload,
   }
 }
 

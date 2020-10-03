@@ -7,41 +7,41 @@
 import { style } from 'styled-system'
 
 export const textDecoration = style({
-  prop: 'textDecoration'
+  prop: 'textDecoration',
 })
 
 export const textTransform = style({
-  prop: 'textTransform'
+  prop: 'textTransform',
 })
 
 export const whiteSpace = style({
-  prop: 'whiteSpace'
+  prop: 'whiteSpace',
 })
 
 export const cursor = style({
-  prop: 'cursor'
+  prop: 'cursor',
 })
 
 export const overflow = style({
-  prop: 'overflow'
+  prop: 'overflow',
 })
 
 export const pointerEvents = style({
-  prop: 'pointerEvents'
+  prop: 'pointerEvents',
 })
 
 export const float = style({
-  prop: 'float'
+  prop: 'float',
 })
 
 export const clear = style({
-  prop: 'clear'
+  prop: 'clear',
 })
 
 export const borderStyle = style({
-  prop: 'borderStyle'
+  prop: 'borderStyle',
 })
 
 export const listStyle = style({
-  prop: 'listStyle'
+  prop: 'listStyle',
 })

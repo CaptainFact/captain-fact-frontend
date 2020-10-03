@@ -4,8 +4,6 @@ import React from 'react'
 import 'isomorphic-fetch'
 import 'fetch-mock'
 
-import User from '../app/state/users/record'
-
 global.React = React
 
 // React 16 Enzyme adapter
@@ -21,10 +19,10 @@ global.render = render
 global.mount = mount
 
 // Add a helper to register snapshot
-global.snapshot = element => expect(element).toMatchSnapshot()
+global.snapshot = (element) => expect(element).toMatchSnapshot()
 
 // Shallow then snapshot component
-global.snapshotComponent = component => snapshot(shallow(component))
+global.snapshotComponent = (component) => snapshot(shallow(component))
 
 /**
  * Apply all actions to given reducer and make a snapshot at each step.
@@ -38,10 +36,10 @@ global.snapshotReducer = (reducer, initialState, ...actions) => {
   }, initialState)
 }
 
-const mockWithNamespaces = () => Component => {
+const mockWithNamespaces = () => (Component) => {
   Component.defaultProps = {
     ...Component.defaultProps,
-    t: str => `Translated[${str}]`
+    t: (str) => `Translated[${str}]`,
   }
   return Component
 }
@@ -51,14 +49,17 @@ const mockWithNamespaces = () => Component => {
  * receive the t function as a prop
  */
 jest.mock('react-i18next', () => ({
-  Interpolate: ({ i18nKey, ...props }) => `Interpolated[${i18nKey}] with props ${JSON.stringify(props)}`,
+  Interpolate: ({ i18nKey, ...props }) =>
+    `Interpolated[${i18nKey}] with props ${JSON.stringify(props)}`,
   Trans: ({ i18nKey, ...props }) => `Trans[${i18nKey}] with props ${JSON.stringify(props)}`,
   translate: mockWithNamespaces,
   withNamespaces: mockWithNamespaces,
-  t: str => `Translated[${str}]`
+  t: (str) => `Translated[${str}]`,
 }))
 
 /**
  * Mock the uuid module
  */
-jest.mock('uuid/v1', () => jest.fn(() => 'A-UNIQUE-UUID'))
+jest.mock('uuid', () => ({
+  v4: jest.fn(() => 'A-UNIQUE-UUID'),
+}))

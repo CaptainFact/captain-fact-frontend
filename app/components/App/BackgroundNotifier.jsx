@@ -26,7 +26,7 @@ class BackgroundNotifier extends React.PureComponent {
 
     Tinycon.setOptions({
       background: 'transparent',
-      fallback: false
+      fallback: false,
     })
   }
 
@@ -36,9 +36,7 @@ class BackgroundNotifier extends React.PureComponent {
 
   hasNewStatementFocus(prevProps) {
     const { focusedStatementId } = this.props
-    return (
-      focusedStatementId !== -1 && focusedStatementId !== prevProps.focusedStatementId
-    )
+    return focusedStatementId !== -1 && focusedStatementId !== prevProps.focusedStatementId
   }
 
   setFavicon(value) {
@@ -81,9 +79,13 @@ class BackgroundNotifier extends React.PureComponent {
       // Play a sound
       if (this.props.soundEnabled) {
         const confirmed = isStatementConfirmed(this.props.comments)
-        if (confirmed === null) neutralAudioFile.play()
-        else if (confirmed) confirmAudioFile.play()
-        else refuteAudioFile.play()
+        if (confirmed === null) {
+          neutralAudioFile.play()
+        } else if (confirmed) {
+          confirmAudioFile.play()
+        } else {
+          refuteAudioFile.play()
+        }
       }
     }
   }
@@ -93,12 +95,12 @@ class BackgroundNotifier extends React.PureComponent {
   }
 }
 
-export default connect(state => {
+export default connect((state) => {
   const focusedStatementId = getFocusedStatementId(state)
   const comments = getAllComments(state).get(focusedStatementId, [])
   return {
     soundEnabled: state.UserPreferences.enableSoundOnBackgroundFocus,
     focusedStatementId,
-    comments
+    comments,
   }
 })(BackgroundNotifier)

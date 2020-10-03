@@ -12,6 +12,6 @@ const UserAction = new Record({
   statementId: null,
   commentId: null,
   changes: new Map(),
-  time: new Date()
+  time: new Date(),
 })
 export default UserAction

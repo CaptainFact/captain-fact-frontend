@@ -10,10 +10,7 @@ import { Icon } from './Icon'
 import { flashErrorMsg, flashSuccessMsg } from '../../state/flashes/reducer'
 import ThirdPartyServiceButton from '../Users/ThirdPartyServiceButton'
 
-@connect(
-  null,
-  { popModal, flashErrorMsg, flashSuccessMsg }
-)
+@connect(null, { popModal, flashErrorMsg, flashSuccessMsg })
 @withNamespaces('main')
 export default class ShareModal extends React.PureComponent {
   render() {
@@ -85,7 +82,10 @@ export default class ShareModal extends React.PureComponent {
     } catch (err) {
       console.warn(`Copy failed: ${err}`)
     }
-    if (success) this.props.flashSuccessMsg('misc.clipboardSuccess')
-    else this.props.flashErrorMsg('misc.clipboardFail')
+    if (success) {
+      this.props.flashSuccessMsg('misc.clipboardSuccess')
+    } else {
+      this.props.flashErrorMsg('misc.clipboardFail')
+    }
   }
 }

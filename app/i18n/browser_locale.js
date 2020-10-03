@@ -10,9 +10,7 @@ const navigatorLocale = () => {
  * supported (see `SUPPORTED_LOCALES`) or the default locale, which is 'en'.
  */
 const browserLocale = () => {
-  const browserLocale = navigatorLocale()
-    .split('-')[0]
-    .toLowerCase()
+  const browserLocale = navigatorLocale().split('-')[0].toLowerCase()
 
   return SUPPORTED_LOCALES.includes(browserLocale) ? browserLocale : 'en'
 }

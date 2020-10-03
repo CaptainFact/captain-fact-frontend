@@ -6,7 +6,7 @@ import UserPicture from '../Users/UserPicture'
 import UserAppellation from '../Users/UserAppellation'
 import { TimeSince } from '../Utils/TimeSince'
 
-const CommentHeader = ({ t, comment: { user, inserted_at }, withoutActions }) => (
+const CommentHeader = ({ comment: { user, inserted_at }, withoutActions }) => (
   <div className="comment-header">
     {user ? (
       <span>

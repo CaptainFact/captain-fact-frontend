@@ -12,11 +12,10 @@ import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import * as userAPI from '../../API/http_api/current_user'
 
 // Fields are auto-validated, only validate password and repeat are the same
-const validate = params => {
-  if (params.password)
-    return params.password === params.passwordRepeat
-      ? {}
-      : { passwordRepeat: "Doesn't match" }
+const validate = (params) => {
+  if (params.password) {
+    return params.password === params.passwordRepeat ? {} : { passwordRepeat: "Doesn't match" }
+  }
   return {}
 }
 
@@ -32,7 +31,7 @@ export default class ResetPasswordConfirmForm extends React.PureComponent {
   componentDidMount() {
     userAPI
       .resetPasswordVerify(this.props.params.token)
-      .then(user => {
+      .then((user) => {
         this.setState({ status: 'confirm', user })
       })
       .catch(() => {
@@ -43,24 +42,20 @@ export default class ResetPasswordConfirmForm extends React.PureComponent {
   submitForm(e) {
     userAPI
       .resetPasswordConfirm(this.props.params.token, e.password)
-      .then(user => {
-        userAPI
-          .signIn('identity', { ...user, password: e.password })
-          .then(({ user, token }) => {
-            this.props.updateLoggedInUser(user, token)
-          })
+      .then((user) => {
+        userAPI.signIn('identity', { ...user, password: e.password }).then(({ user, token }) => {
+          this.props.updateLoggedInUser(user, token)
+        })
         this.setState({ status: 'confirm_success' })
       })
-      .catch(e => {
+      .catch(() => {
         this.setState({ status: 'error', user: 'reset_failed' })
       })
   }
 
   renderContent() {
     if (this.state.status === 'error') {
-      return (
-        <ErrorView error={this.state.user} i18nNS="user:errors.error" canGoBack={false} />
-      )
+      return <ErrorView error={this.state.user} i18nNS="user:errors.error" canGoBack={false} />
     }
 
     if (this.state.status === 'verify') {

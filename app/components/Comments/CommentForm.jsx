@@ -28,14 +28,11 @@ import { Span } from '../StyledUtils/Text'
 import { CommentDisplay } from './CommentDisplay'
 import Container from '../StyledUtils/Container'
 
-const SubmitButton = styled(props => (
+const SubmitButton = styled((props) => (
   <Button type="submit" my={1} flex="1 1 100px" {...props} />
 ))``
 
-@connect(
-  null,
-  { postComment, flashErrorUnauthenticated, errorToFlash }
-)
+@connect(null, { postComment, flashErrorUnauthenticated, errorToFlash })
 @withNamespaces('videoDebate')
 @withRouter
 class CommentForm extends React.Component {
@@ -49,7 +46,7 @@ class CommentForm extends React.Component {
     /** The commenting user, or null if none is logged in */
     user: PropTypes.object,
     /** @ignore *from withNamespaces* */
-    t: PropTypes.func.isRequired
+    t: PropTypes.func.isRequired,
   }
 
   state = { isCollapsed: true }
@@ -69,9 +66,9 @@ class CommentForm extends React.Component {
         text: text.length ? text : null,
         source: source ? { url: source } : null,
         reply_to_id: get(this.props, 'replyTo.id', null),
-        approve
+        approve,
       })
-      .then(e => {
+      .then((e) => {
         if (e.error) {
           setErrors(e.payload)
         } else {
@@ -79,7 +76,7 @@ class CommentForm extends React.Component {
           resetForm()
         }
       })
-      .catch(e => {
+      .catch((e) => {
         logError(e)
         this.props.errorToFlash(e)
       })
@@ -106,11 +103,7 @@ class CommentForm extends React.Component {
     const i18nParams = replyTo ? { context: 'reply' } : null
 
     return (
-      <Formik
-        initialValues={initialValues}
-        validate={this.validate}
-        onSubmit={this.onSubmit}
-      >
+      <Formik initialValues={initialValues} validate={this.validate} onSubmit={this.onSubmit}>
         {({ handleBlur, handleSubmit, values, setFieldValue, isValid, errors }) => (
           <Box flex="1 1" as="form" onSubmit={handleSubmit}>
             <Flex flexDirection="column">
@@ -118,7 +111,7 @@ class CommentForm extends React.Component {
                 <TextareaAutosize
                   name="text"
                   value={values.text}
-                  onChange={e => setFieldValue('text', cleanStrMultiline(e.target.value))}
+                  onChange={(e) => setFieldValue('text', cleanStrMultiline(e.target.value))}
                   onBlur={handleBlur}
                   autoFocus
                   placeholder={t('comment.writeComment')}
@@ -127,10 +120,7 @@ class CommentForm extends React.Component {
                   maxHeight={180}
                   focus
                 />
-                <TextareaLengthCounter
-                  length={values.text.length}
-                  maxLength={COMMENT_LENGTH[1]}
-                />
+                <TextareaLengthCounter length={values.text.length} maxLength={COMMENT_LENGTH[1]} />
                 {errors.text && (
                   <Span color="red" fontSize={6}>
                     {errors.text}
@@ -143,7 +133,7 @@ class CommentForm extends React.Component {
                   <StyledInput
                     name="source"
                     value={values.source}
-                    onChange={e => setFieldValue('source', e.target.value.trim())}
+                    onChange={(e) => setFieldValue('source', e.target.value.trim())}
                     onBlur={handleBlur}
                     placeholder={t('comment.addSource')}
                     autoComplete="off"
@@ -208,10 +198,7 @@ class CommentForm extends React.Component {
         {replyTo && (
           <Box>
             <Flex alignItems="center" mb={2}>
-              <CloseButton
-                size="1.5em"
-                onClick={() => this.props.setReplyToComment(null)}
-              />
+              <CloseButton size="1.5em" onClick={() => this.props.setReplyToComment(null)} />
               <Span ml={2}>
                 {t(isSelfReply ? 'comment.replyingToSelf' : 'comment.replyingTo')}{' '}
                 <UserAppellation defaultComponent="span" user={replyTo.user} />

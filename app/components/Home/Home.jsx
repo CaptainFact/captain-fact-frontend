@@ -27,7 +27,6 @@ import imgIllutration from '../../assets/landing-illustration.png'
 @withNamespaces('home')
 @withLoggedInUser
 export default class Home extends React.PureComponent {
-
   render() {
     const { t } = this.props
 
@@ -37,41 +36,46 @@ export default class Home extends React.PureComponent {
           <div className="hero-body">
             <div className="columns">
               <div className="column is-11 is-10-tablet is-12-mobile">
-                <h1 className="title1">Captain<strong><u>Fact</u>.</strong></h1>
+                <h1 className="title1">
+                  Captain
+                  <strong>
+                    <u>Fact</u>.
+                  </strong>
+                </h1>
                 <br />
                 <h2 className="title">{t('titleCF')}</h2>
                 <h2 className="title light-title">
-                  <Trans i18nKey="presentationTitle">To train a critical mind, improve the quality of information and decision-making.
+                  <Trans i18nKey="presentationTitle">
+                    To train a critical mind, improve the quality of information and
+                    decision-making.
                     <br />
                     Against fake news, fraud and disinformation
                   </Trans>
                 </h2>
-                <p className="presentation is-bold">
-                  {t('presentation')}
-                </p>
+                <p className="presentation is-bold">{t('presentation')}</p>
                 <div className="columns">
                   <div className="column is-5">
                     <p className="presentation">{t('presentationTextButton1')}</p>
                     <p>
-                    <Link
+                      <Link
                         onClick={() => Matomo.registerClick('Home', 'Button', 'ExtensionPage')}
                         className="button is-primary is-medium"
                         to="/extension"
-                    >
-                      {this.props.t('installExtension')}
-                    </Link>
+                      >
+                        {this.props.t('installExtension')}
+                      </Link>
                     </p>
                   </div>
                   <div className="column is-5">
                     <p className="presentation">{t('presentationTextButton2')}</p>
                     <p>
-                    <Link
+                      <Link
                         onClick={() => Matomo.registerClick('Home', 'Button', 'SignUp')}
                         className="button is-primary is-medium"
                         to="/signup"
-                    >
-                      {this.props.t('registerAndFactCheck')}
-                    </Link>
+                      >
+                        {this.props.t('registerAndFactCheck')}
+                      </Link>
                     </p>
                   </div>
                 </div>
@@ -111,14 +115,13 @@ export default class Home extends React.PureComponent {
                   <br />
                 </p>
                 <Link
-                    onClick={() => Matomo.registerClick('Home', 'Button', 'ExtensionPage')}
-                    className="button is-primary is-medium"
-                    to="/extension"
+                  onClick={() => Matomo.registerClick('Home', 'Button', 'ExtensionPage')}
+                  className="button is-primary is-medium"
+                  to="/extension"
                 >
                   {t('installExtension')}
                 </Link>
               </div>
-
             </div>
             <div className="columns">
               <div className="column is-6 presentation content">
@@ -131,9 +134,9 @@ export default class Home extends React.PureComponent {
                   <br />
                 </p>
                 <Link
-                    onClick={() => Matomo.registerClick('Home', 'Button', 'SignUp')}
-                    className="button is-primary is-medium"
-                    to="/signup"
+                  onClick={() => Matomo.registerClick('Home', 'Button', 'SignUp')}
+                  className="button is-primary is-medium"
+                  to="/signup"
                 >
                   {t('registerAndFactCheck')}
                 </Link>
@@ -145,7 +148,6 @@ export default class Home extends React.PureComponent {
                 <br />
                 <br />
               </div>
-
             </div>
             <div className="columns">
               <div className="column is-6">
@@ -165,43 +167,37 @@ export default class Home extends React.PureComponent {
                   <br />
                 </p>
                 <ExternalLinkNewTab
-                    className="button is-primary is-medium"
-                    href="https://github.com/CaptainFact/captain-fact/wiki/Les-partenariats-entre-les-chaînes-Youtube-et-CaptainFact.io"
+                  className="button is-primary is-medium"
+                  href="https://github.com/CaptainFact/captain-fact/wiki/Les-partenariats-entre-les-chaînes-Youtube-et-CaptainFact.io"
                 >
                   {t('learnMore')} (fr)
                 </ExternalLinkNewTab>
               </div>
-
             </div>
           </div>
         </section>
 
         <section className="section hero section-alt-bg">
           <div className="hero-body">
-          <div className="columns">
-            <div className="column is-6">
-              <h2 className="title-alt is-bold">{t('forWho1Title1')}</h2>
-              <h2 className="title light-title is-3">{t('forWho1Title2')}</h2>
-              <p className="presentation">
-                {t('forWho1Text')}
-              </p>
-
+            <div className="columns">
+              <div className="column is-6">
+                <h2 className="title-alt is-bold">{t('forWho1Title1')}</h2>
+                <h2 className="title light-title is-3">{t('forWho1Title2')}</h2>
+                <p className="presentation">{t('forWho1Text')}</p>
+              </div>
+              <div className="column is-6">
+                <h2 className="title-alt is-bold">{t('forWho2Title1')}</h2>
+                <h2 className="title light-title is-3">{t('forWho2Title2')}</h2>
+                <p className="presentation">{t('forWho2Text')}</p>
+              </div>
             </div>
-            <div className="column is-6">
-              <h2 className="title-alt is-bold">{t('forWho2Title1')}</h2>
-              <h2 className="title light-title is-3">{t('forWho2Title2')}</h2>
-              <p className="presentation">
-                {t('forWho2Text')}
-              </p>
-            </div>
-          </div>
-          <Link
+            <Link
               onClick={() => Matomo.registerClick('Home', 'Button', 'ContactUs')}
               className="button is-primary is-medium"
               to="/help/contact"
-          >
-            {t('contactus')}
-          </Link>
+            >
+              {t('contactus')}
+            </Link>
           </div>
         </section>
 
@@ -291,84 +287,77 @@ export default class Home extends React.PureComponent {
             <div className="columns">
               <div className="column is-6">
                 <h2 className="title-alt is-bold">{t('backendDevelopers')}</h2>
-                <p className="presentation">
-                  {t('backendDevelopersText')}
-                </p>
-                <ExternalLinkNewTab
-                    href="https://github.com/CaptainFact/captain-fact-frontend/issues"
-                >
+                <p className="presentation">{t('backendDevelopersText')}</p>
+                <ExternalLinkNewTab href="https://github.com/CaptainFact/captain-fact/labels/backend">
                   {t('backendDevelopersLink')}
                 </ExternalLinkNewTab>
-                <br /><br />
+                <br />
+                <br />
                 <h2 className="title-alt is-bold">{t('frontendDevelopers')}</h2>
-                <p className="presentation">
-                  {t('frontendDevelopersText')}
-                </p>
-                <ExternalLinkNewTab
-                    href="https://github.com/CaptainFact/captain-fact-frontend/issues"
-                >
+                <p className="presentation">{t('frontendDevelopersText')}</p>
+                <ExternalLinkNewTab href="https://github.com/CaptainFact/captain-fact-frontend/issues">
                   {t('frontendDevelopersLink')}
                 </ExternalLinkNewTab>
-                <br /><br />
+                <br />
+                <br />
                 <h2 className="title-alt is-bold">{t('designer')}</h2>
-                <p className="presentation">
-                  {t('designerText')}
-                </p>
-                <br /><br />
+                <p className="presentation">{t('designerText')}</p>
+                <br />
+                <br />
                 <h2 className="title-alt is-bold">{t('graphicDesigners')}</h2>
-                <p className="presentation">
-                  {t('graphicDesignersText')}
-                </p>
+                <p className="presentation">{t('graphicDesignersText')}</p>
               </div>
               <div className="column is-6">
                 <h2 className="title-alt is-bold">{t('animator')}</h2>
-                <p className="presentation">
-                  {t('animatorText')}
-                </p>
-                <br /><br />
+                <p className="presentation">{t('animatorText')}</p>
+                <br />
+                <br />
                 <h2 className="title-alt is-bold">{t('communicationsSpecialists')}</h2>
-                <p className="presentation">
-                  {t('communicationsSpecialistsText')}
-                </p>
-                <br /><br />
+                <p className="presentation">{t('communicationsSpecialistsText')}</p>
+                <br />
+                <br />
                 <h2 className="title-alt is-bold">{t('translator')}</h2>
-                <p className="presentation">
-                  {t('translatorText')}
-                </p>
+                <p className="presentation">{t('translatorText')}</p>
               </div>
             </div>
             <div className="has-text-centered presentation">
               <br />
               <br />
               <Link
-                  onClick={() => Matomo.registerClick('Home', 'Button', 'ContactUs')}
-                  className="button is-primary is-medium"
-                  to="/help/contact"
+                onClick={() => Matomo.registerClick('Home', 'Button', 'ContactUs')}
+                className="button is-primary is-medium"
+                to="/help/contact"
               >
                 {t('contactus')}
               </Link>
               <br />
               <br />
               <p>
-                {t('fundUsText')} <ExternalLinkNewTab href="https://opencollective.com/captainfact_io">{t('fundUsLink')}</ExternalLinkNewTab>
+                {t('fundUsText')}{' '}
+                <ExternalLinkNewTab href="https://opencollective.com/captainfact_io">
+                  {t('fundUsLink')}
+                </ExternalLinkNewTab>
               </p>
-                <br />
-                <br />
+              <br />
+              <br />
             </div>
           </div>
           <div className="has-text-centered">
             <h2 className="title-alt is-3 is-bold">{t('followus')}</h2>
           </div>
         </section>
-        
+
         <section className="section">
           <CFSocialProfiles size="3em" color="white" />
         </section>
 
         <section className="section partners">
           <div className="content">
-            <h2 className="title is-3 has-text-centered" >{t('partners')}</h2>
-            <ExternalLinkNewTab href="https://github.com/CaptainFact/captain-fact/wiki/Les-partenariats-entre-les-chaînes-Youtube-et-CaptainFact.io" className="is-block has-text-centered">
+            <h2 className="title is-3 has-text-centered">{t('partners')}</h2>
+            <ExternalLinkNewTab
+              href="https://github.com/CaptainFact/captain-fact/wiki/Les-partenariats-entre-les-chaînes-Youtube-et-CaptainFact.io"
+              className="is-block has-text-centered"
+            >
               {t('partners-info')} <ExternalLinkAlt size="1em" />
             </ExternalLinkNewTab>
             <br />
@@ -399,18 +388,13 @@ export default class Home extends React.PureComponent {
             <Flex flexWrap="wrap">
               <Box width={[1, 1, 0.5, 0.5, 1 / 3]} mb="2em">
                 <h2 className="title is-3">{t('backers')}</h2>
-                <OpenCollectiveContributors
-                    tier="soutien-régulier"
-                    button={false}
-                    limit={8}
-                />
+                <OpenCollectiveContributors tier="soutien-régulier" button={false} limit={8} />
                 <OpenCollectiveContributors tier="donateur" button={false} limit={8} />
               </Box>
               <Box width={[1, 1, 0.5, 0.5, 2 / 3]}>
                 <h2 className="title is-3">{t('ambassadors')}</h2>
                 <Message>
-                  {t('aboutAmbassadors')}{' '}
-                  <Link to="/help/ambassadors">{t('learnMore')}</Link>
+                  {t('aboutAmbassadors')} <Link to="/help/ambassadors">{t('learnMore')}</Link>
                 </Message>
                 <AllAmbassadors />
               </Box>
@@ -438,9 +422,7 @@ export default class Home extends React.PureComponent {
             </Trans>
             <ExternalLinkNewTab href="https://elixir-lang.org">Elixir</ExternalLinkNewTab>
             ,&nbsp;
-            <ExternalLinkNewTab href="https://phoenixframework.org">
-              Phoenix
-            </ExternalLinkNewTab>
+            <ExternalLinkNewTab href="https://phoenixframework.org">Phoenix</ExternalLinkNewTab>
             &nbsp;{t('main:misc.and')}&nbsp;
             <ExternalLinkNewTab href="https://reactjs.org/">React</ExternalLinkNewTab>
           </div>

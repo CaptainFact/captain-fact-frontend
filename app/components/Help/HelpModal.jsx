@@ -8,10 +8,7 @@ import HelpPageContent from './HelpPageContent'
 import { popModal } from '../../state/modals/reducer'
 
 @withNamespaces('help')
-@connect(
-  null,
-  { popModal }
-)
+@connect(null, { popModal })
 class HelpModal extends PureComponent {
   render() {
     return (
@@ -23,7 +20,7 @@ class HelpModal extends PureComponent {
 }
 
 HelpModal.propTypes = {
-  page: PropTypes.string.isRequired
+  page: PropTypes.string.isRequired,
 }
 
 export default HelpModal

@@ -11,11 +11,13 @@ import { cleanStr } from '../../lib/clean_str'
 // Common validators for Signup / Login
 
 export const validatePasswordRepeat = ({ password, passwordRepeat }) => {
-  if (passwordRepeat !== password) return { passwordRepeat: "Passwords doesn't match" }
+  if (passwordRepeat !== password) {
+    return { passwordRepeat: "Passwords doesn't match" }
+  }
   return {}
 }
 
-const validateEmail = t => email => {
+const validateEmail = (t) => (email) => {
   return (!email || !isEmail(email)) && t('errors:server.invalid_email')
 }
 
@@ -25,26 +27,26 @@ const validatePassword = (t, password) => {
 
 // Common fields
 
-export const emailField = t => (
+export const emailField = (t) => (
   <Field
     name="email"
     type="email"
     placeholder={t('email')}
     component={ControlInput}
     icon="envelope"
-    normalize={s => s.trim()}
+    normalize={(s) => s.trim()}
     validate={validateEmail(t)}
   />
 )
 
-export const emailOrUsernameField = t => (
+export const emailOrUsernameField = (t) => (
   <Field
     name="email"
     type="text"
     placeholder={t('emailOrUsername')}
     component={ControlInput}
     icon="user"
-    normalize={s => s.trim()}
+    normalize={(s) => s.trim()}
   />
 )
 
@@ -54,12 +56,12 @@ export const passwordField = (t, isOptional = false) => (
     placeholder={t(isOptional ? 'passwordOptional' : 'password')}
     type="password"
     component={ControlInput}
-    validate={v => (!v && isOptional ? null : validatePassword(t, v))}
+    validate={(v) => (!v && isOptional ? null : validatePassword(t, v))}
     icon="lock"
   />
 )
 
-export const passwordRepeatField = t => (
+export const passwordRepeatField = (t) => (
   <Field
     name="passwordRepeat"
     placeholder={t('repeatPassword')}
@@ -69,25 +71,25 @@ export const passwordRepeatField = t => (
   />
 )
 
-export const usernameField = t => (
+export const usernameField = (t) => (
   <Field
     name="username"
     placeholder={t('username')}
     component={ControlInput}
-    normalize={s => s.trim()}
+    normalize={(s) => s.trim()}
     icon="at"
-    validate={v => validateFieldLength(t, v, USERNAME_LENGTH)}
+    validate={(v) => validateFieldLength(t, v, USERNAME_LENGTH)}
   />
 )
 
-export const nameField = t => (
+export const nameField = (t) => (
   <Field
     name="name"
     placeholder={`${t('realName')} (${t('optional')})`}
     component={ControlInput}
     normalize={cleanStr}
     icon="identity"
-    validate={v => v && validateFieldLength(t, v, NAME_LENGTH)}
+    validate={(v) => v && validateFieldLength(t, v, NAME_LENGTH)}
   />
 )
 

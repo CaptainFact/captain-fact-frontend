@@ -17,7 +17,7 @@ import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 @withLoggedInUser
 export default class LoginForm extends React.PureComponent {
   state = {
-    error: null
+    error: null,
   }
 
   redirect() {
@@ -45,12 +45,12 @@ export default class LoginForm extends React.PureComponent {
     return (
       <form
         className="form user-form"
-        onSubmit={handleSubmit(user => {
+        onSubmit={handleSubmit((user) => {
           return signIn('identity', user)
             .then(({ user, token }) => {
               updateLoggedInUser(user, token)
             })
-            .catch(e => {
+            .catch((e) => {
               if (typeof e === 'string') {
                 this.setState({ error: e })
               }

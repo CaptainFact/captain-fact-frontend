@@ -4,7 +4,7 @@ const theme = {
   fontSizes: ['3rem', '2.5rem', '1.8rem', '1.5rem', '1.25rem', '1rem', '0.9rem'],
   navbarHeight: 60,
   fontFamily: {
-    serif: 'Merriweather,serif'
+    serif: 'Merriweather,serif',
   },
   colors: {
     green: '#39b714',
@@ -20,9 +20,9 @@ const theme = {
       200: '#dadada',
       300: '#c2c2c2',
       400: '#4a4a4a',
-      500: '#252525'
-    }
-  }
+      500: '#252525',
+    },
+  },
 }
 
 export default theme

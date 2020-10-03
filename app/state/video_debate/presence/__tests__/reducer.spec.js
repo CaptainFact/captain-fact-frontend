@@ -2,20 +2,15 @@ import reducer, { setPresence, presenceDiff } from '../reducer'
 
 const INITIAL_STATE = reducer(undefined, {})
 
-const mockPresenceEvent = ({
-  userJoin = 0,
-  viewerJoin = 0,
-  userLeave = 0,
-  viewerLeave = 0
-}) => ({
+const mockPresenceEvent = ({ userJoin = 0, viewerJoin = 0, userLeave = 0, viewerLeave = 0 }) => ({
   joins: {
     viewers: { count: viewerJoin },
-    users: { count: userJoin }
+    users: { count: userJoin },
   },
   leaves: {
     viewers: { count: viewerLeave },
-    users: { count: userLeave }
-  }
+    users: { count: userLeave },
+  },
 })
 
 test('start at 0', () => snapshot(INITIAL_STATE))
