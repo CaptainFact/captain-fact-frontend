@@ -52,9 +52,7 @@ export default class Sidebar extends React.PureComponent {
         {...props}
       >
         {iconName && <RawIcon name={iconName} />}
-        {customLink
-          ? <React.Fragment>{children}</React.Fragment>
-          : <span>{children}</span>}
+        {customLink ? <React.Fragment>{children}</React.Fragment> : <span>{children}</span>}
       </Link>
     )
   }
@@ -106,9 +104,9 @@ export default class Sidebar extends React.PureComponent {
               to="/help/contact"
               title={t('menu.contact')}
               customLink
-              class="link-with-icon"
+              className="link-with-icon"
             >
-              <i class="styled-icon">
+              <i className="styled-icon">
                 <EnvelopeFill size="1.2em" />
               </i>
               <span>{t('menu.contact')}</span>
