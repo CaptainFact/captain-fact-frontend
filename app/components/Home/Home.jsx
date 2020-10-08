@@ -29,8 +29,6 @@ import imgIllutration from '../../assets/landing-illustration.png'
 export default class Home extends React.PureComponent {
   render() {
     const { t } = this.props
-
-    console.log(this.props)
     
     let videoDemo;
     if(this.props.lng === 'fr') {
