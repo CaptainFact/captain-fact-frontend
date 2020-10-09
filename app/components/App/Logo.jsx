@@ -35,9 +35,6 @@ const Logo = ({ borderless, height }) => (
     <Span fontWeight="bold" mr={1}>
       Fact
     </Span>
-    <Small display={['none', 'block']} color="black.300" fontSize="0.6em" pb="0.2em">
-      (Beta)
-    </Small>
   </LogoContainer>
 )
 
