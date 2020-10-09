@@ -127,7 +127,7 @@
     "babel-plugin-styled-components": "^1.10.6",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "babel-plugin-webpack-alias": "^2.1.2",
-    "babel-plugin-wildcard": "^5.0.0",
+    "babel-plugin-wildcard": "^6.0.0",
     "browserslist": "^4.2.1",
     "clean-webpack-plugin": "^2.0.2",
     "compression-webpack-plugin": "^2.0.0",
