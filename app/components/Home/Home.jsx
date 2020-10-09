@@ -29,20 +29,6 @@ import imgIllutration from '../../assets/landing-illustration.png'
 export default class Home extends React.PureComponent {
   render() {
     const { t } = this.props
-    
-    let videoDemo;
-    if(this.props.lng === 'fr') {
-      videoDemo = 
-        <section className="section has-background-white has-text-centered">
-          <div className="hero-body">
-          <div style={{position: 'relative',height:0,paddingBottom:'56.25%'}}>
-            <iframe
-              style={{position: 'absolute',top: '0.75rem',left: '0.75rem',width: '100%',height: '100%'}}
-              width="100%" height="100%" src="https://www.youtube.com/embed/Hox_CHmC-so" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          </div>
-        </section>;
-    }
 
     return (
       <div className="home-page is-gradient-primary">
@@ -101,7 +87,17 @@ export default class Home extends React.PureComponent {
           </div>
         </section>
 
-        {videoDemo}
+        {this.props.lng === 'fr' && (
+          <section className="section has-background-white has-text-centered">
+            <div className="hero-body" style={{maxWidth: 1080, margin: '0 auto'}}>
+              <div style={{position: 'relative',height:0,paddingBottom:'56.25%'}}>
+                <iframe
+                  style={{position: 'absolute',top: '0.75rem',left: '0.75rem',width: '100%',height: '100%'}}
+                  width="100%" height="100%" src="https://www.youtube.com/embed/Hox_CHmC-so" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </div>
+          </section>
+        )}
 
         <section className="section section-alt-bg has-text-centered">
           <h2 className="title-alt">
