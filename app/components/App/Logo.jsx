@@ -6,7 +6,7 @@ import { themeGet } from 'styled-system'
 import { Flex } from '@rebass/grid'
 import logo from '../../assets/logo.svg'
 import borderlessLogo from '../../assets/logo-borderless.svg'
-import { Span, Small } from '../StyledUtils/Text'
+import { Span } from '../StyledUtils/Text'
 
 const LogoContainer = styled(Flex)`
   max-height: 100%;
