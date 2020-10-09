@@ -89,7 +89,7 @@ export default class Home extends React.PureComponent {
 
         {this.props.lng === 'fr' && (
           <section className="section has-background-white has-text-centered">
-            <div className="hero-body" style={{maxWidth: 1080, margin: '0 auto'}}>
+            <div className="hero-body" style={{maxWidth: 720, margin: '0 auto'}}>
               <div style={{position: 'relative',height:0,paddingBottom:'56.25%'}}>
                 <iframe
                   style={{position: 'absolute',top: '0.75rem',left: '0.75rem',width: '100%',height: '100%'}}
