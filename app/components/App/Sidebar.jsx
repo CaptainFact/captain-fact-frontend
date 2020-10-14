@@ -52,7 +52,7 @@ export default class Sidebar extends React.PureComponent {
         {...props}
       >
         {iconName && <RawIcon name={iconName} />}
-        {customLink ? <React.Fragment>{children}</React.Fragment> : <span>{children}</span>}
+        {customLink ? children : <span>{children}</span>}
       </Link>
     )
   }
