@@ -93,7 +93,7 @@ export default class Home extends React.PureComponent {
               <div style={{position: 'relative',height:0,paddingBottom:'56.25%'}}>
                 <iframe
                   style={{position: 'absolute',top: '0.75rem',left: '0.75rem',width: '100%',height: '100%'}}
-                  width="100%" height="100%" src="https://www.youtube.com/embed/Hox_CHmC-so" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  width="100%" height="100%" src="https://www.youtube.com/embed/Hox_CHmC-so" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
               </div>
             </div>
           </section>
