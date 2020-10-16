@@ -80,8 +80,7 @@ class RealSignupForm extends React.PureComponent {
         {renderAllUserFields(valid, t)}
         <P mb="15px" color="#666" fontSize="12px">
           {t('iAgreeAndAcceptedPrivacy')}
-          <Link to="/help/privacy">{t('privacyLinkLabel')}</Link>
-          .
+          <Link to="/help/privacy">{t('privacyLinkLabel')}</Link>.
         </P>
         {submitButton(t('signup'), valid)}
         <ThirdPartyAuthList />
