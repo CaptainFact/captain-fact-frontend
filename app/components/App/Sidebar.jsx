@@ -1,8 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import { Query } from 'react-apollo'
 import { withNamespaces } from 'react-i18next'
 import classNames from 'classnames'
+import { get } from 'lodash'
 import capitalize from 'voca/capitalize'
 import { Flex } from '@rebass/grid'
 
@@ -15,12 +17,14 @@ import { Facebook } from 'styled-icons/fa-brands/Facebook'
 
 import { LinkExternal } from 'styled-icons/octicons/LinkExternal'
 
+import { loggedInUserPendingModerationCount } from '../../API/graphql_queries'
 import { MOBILE_WIDTH_THRESHOLD, MIN_REPUTATION_MODERATION } from '../../constants'
 import RawIcon from '../Utils/RawIcon'
 import ReputationGuard from '../Utils/ReputationGuard'
 import { closeSidebar, toggleSidebar } from '../../state/user_preferences/reducer'
 import UserLanguageSelector from '../LoggedInUser/UserLanguageSelector'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
+import Tag from '../Utils/Tag'
 
 @connect((state) => ({ sidebarExpended: state.UserPreferences.sidebarExpended }), {
   toggleSidebar,
@@ -142,9 +146,21 @@ export default class Sidebar extends React.PureComponent {
           {capitalize(t('entities.video_plural'))}
         </this.MenuListLink>
         <ReputationGuard requiredRep={MIN_REPUTATION_MODERATION}>
-          <this.MenuListLink to="/moderation" iconName="flag">
-            {t('menu.moderation')}
-          </this.MenuListLink>
+        <Query
+          fetchPolicy="network-only"
+          pollInterval={25000}
+          query={loggedInUserPendingModerationCount}
+        >
+          {({ data }) => {
+            const pendingCount = get(data, 'loggedInUser.actions_pending_moderation', 0)
+            return (
+              <this.MenuListLink to="/moderation" iconName="flag">
+                {t('menu.moderation')}
+                <Tag type="danger">{pendingCount}</Tag>
+              </this.MenuListLink>
+            )
+          }}
+        </Query>
         </ReputationGuard>
       </ul>
     )

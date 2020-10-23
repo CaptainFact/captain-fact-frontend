@@ -72,3 +72,11 @@ export const loggedInUserUnreadNotificationsCount = gql`
     }
   }
 `
+
+export const loggedInUserPendingModerationCount = gql`
+  query LoggedInUserUnreadNotificationsCount {
+    loggedInUser {
+      actions_pending_moderation
+    }
+  }
+`
