@@ -148,7 +148,7 @@ export default class Sidebar extends React.PureComponent {
         <ReputationGuard requiredRep={MIN_REPUTATION_MODERATION}>
           <Query
             fetchPolicy="network-only"
-            pollInterval={15000}
+            pollInterval={25000}
             query={loggedInUserPendingModerationCount}
           >
             {({ data }) => {
