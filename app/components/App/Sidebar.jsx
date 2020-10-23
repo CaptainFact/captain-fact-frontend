@@ -146,21 +146,21 @@ export default class Sidebar extends React.PureComponent {
           {capitalize(t('entities.video_plural'))}
         </this.MenuListLink>
         <ReputationGuard requiredRep={MIN_REPUTATION_MODERATION}>
-        <Query
-          fetchPolicy="network-only"
-          pollInterval={25000}
-          query={loggedInUserPendingModerationCount}
-        >
-          {({ data }) => {
-            const pendingCount = get(data, 'loggedInUser.actions_pending_moderation', 0)
-            return (
-              <this.MenuListLink to="/moderation" iconName="flag">
-                {t('menu.moderation')}
-                <Tag type="danger">{pendingCount}</Tag>
-              </this.MenuListLink>
-            )
-          }}
-        </Query>
+          <Query
+            fetchPolicy="network-only"
+            pollInterval={15000}
+            query={loggedInUserPendingModerationCount}
+          >
+            {({ data }) => {
+              const pendingCount = get(data, 'loggedInUser.actions_pending_moderation', 0)
+              return (
+                <this.MenuListLink to="/moderation" iconName="flag">
+                  {t('menu.moderation')}
+                  <Tag type="danger">{pendingCount}</Tag>
+                </this.MenuListLink>
+              )
+            }}
+          </Query>
         </ReputationGuard>
       </ul>
     )
