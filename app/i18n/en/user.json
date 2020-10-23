@@ -33,5 +33,7 @@
     },
     "noActivity": "No action recorded yet.",
     "browsingAnalyzer": "Browsing analyzer",
-    "reputation": "Reputation"
+    "reputation": "Reputation",
+    "iAgreeAndAcceptedPrivacy": "By clicking \"Sign up\", I agree that I have read and accepted ",
+    "privacyLinkLabel": "CaptainFact Privacy Policy"
 }
