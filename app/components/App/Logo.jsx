@@ -6,7 +6,7 @@ import { themeGet } from 'styled-system'
 import { Flex } from '@rebass/grid'
 import logo from '../../assets/logo.svg'
 import borderlessLogo from '../../assets/logo-borderless.svg'
-import { Span, Small } from '../StyledUtils/Text'
+import { Span } from '../StyledUtils/Text'
 
 const LogoContainer = styled(Flex)`
   max-height: 100%;
@@ -35,9 +35,6 @@ const Logo = ({ borderless, height }) => (
     <Span fontWeight="bold" mr={1}>
       Fact
     </Span>
-    <Small display={['none', 'block']} color="black.300" fontSize="0.6em" pb="0.2em">
-      (Beta)
-    </Small>
   </LogoContainer>
 )
 

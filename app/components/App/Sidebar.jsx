@@ -6,6 +6,8 @@ import classNames from 'classnames'
 import capitalize from 'voca/capitalize'
 import { Flex } from '@rebass/grid'
 
+import { EnvelopeFill } from '@styled-icons/bootstrap/EnvelopeFill'
+
 import { Github } from 'styled-icons/fa-brands/Github'
 import { Discord } from 'styled-icons/fa-brands/Discord'
 import { Twitter } from 'styled-icons/fa-brands/Twitter'
@@ -39,18 +41,18 @@ export default class Sidebar extends React.PureComponent {
     }
   }
 
-  MenuLink({ iconName, className, children, ...props }) {
+  MenuLink({ title, iconName, customLink, className, children, ...props }) {
     const classes = classNames(className, { 'link-with-icon': !!iconName })
     return (
       <Link
         className={classes}
         activeClassName="is-active"
         onClick={this.closeSideBarIfMobile}
-        title={children}
+        title={title ? title : children}
         {...props}
       >
         {iconName && <RawIcon name={iconName} />}
-        <span>{children}</span>
+        {customLink ? children : <span>{children}</span>}
       </Link>
     )
   }
@@ -97,6 +99,17 @@ export default class Sidebar extends React.PureComponent {
             </ExternalLinkNewTab>
             <this.MenuListLink to="/help" iconName="question-circle">
               {t('menu.help')}
+            </this.MenuListLink>
+            <this.MenuListLink
+              to="/help/contact"
+              title={t('menu.contact')}
+              customLink
+              className="link-with-icon"
+            >
+              <i className="styled-icon">
+                <EnvelopeFill size="1.2em" />
+              </i>
+              <span>{t('menu.contact')}</span>
             </this.MenuListLink>
           </ul>
           <p className="menu-label">{t('menu.followus')}</p>

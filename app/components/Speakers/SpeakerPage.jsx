@@ -77,10 +77,15 @@ export class SpeakerPage extends React.PureComponent {
     if (this.props.error) {
       return <ErrorView error={this.props.error} />
     }
+    const speaker = this.props.speaker
+    const title = `${t('speakerpage.title1')} ${speaker.full_name}`
     return (
       <div className="speaker-page">
         <Helmet>
-          <title>{this.props.speaker.full_name}</title>
+          <title>{title}</title>
+          <meta property="og:title" content={title} />
+          <meta property="og:description" content={speaker.title} />
+          <meta name="twitter:card" content="summary" />
         </Helmet>
         <div className="hero is-light is-bold is-primary">
           <div className="hero-body">

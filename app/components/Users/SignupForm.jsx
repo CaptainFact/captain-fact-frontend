@@ -13,6 +13,7 @@ import { errorToFlash } from '../../state/flashes/reducer'
 import { INVITATION_SYSTEM } from '../../config'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import { signUp } from '../../API/http_api/current_user'
+import { P } from '../StyledUtils/Text'
 
 const SignupForm = ({ location, t }) => {
   if (!INVITATION_SYSTEM || location.query.invitation_token) {
@@ -77,6 +78,10 @@ class RealSignupForm extends React.PureComponent {
         </strong>
         <hr />
         {renderAllUserFields(valid, t)}
+        <P mb="15px" color="#666" fontSize="12px">
+          {t('iAgreeAndAcceptedPrivacy')}
+          <Link to="/help/privacy">{t('privacyLinkLabel')}</Link>.
+        </P>
         {submitButton(t('signup'), valid)}
         <ThirdPartyAuthList />
       </form>

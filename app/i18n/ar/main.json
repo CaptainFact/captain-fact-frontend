@@ -23,7 +23,8 @@
         "moderation": "الإشراف",
         "addedVideos": "الفيديوهات المضافة",
         "notifications": "الإشعارات",
-        "subscriptions": "الاشتراكات"
+        "subscriptions": "الاشتراكات",
+        "contact": "للاتصال"
     },
     "actions": {
         "save": "حفظ",
