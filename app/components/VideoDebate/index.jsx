@@ -17,6 +17,7 @@ import { resetVideoDebate } from '../../state/video_debate/actions'
 import { ColumnVideo } from './ColumnVideo'
 import { ColumnDebate } from './ColumnDebate'
 import { videoURL, toAbsoluteURL } from '../../lib/cf_routes'
+import { getHDThumbnailUrl } from '../../lib/video_utils'
 
 @connect(
   (state) => ({
@@ -55,7 +56,7 @@ export class VideoDebate extends React.PureComponent {
 
   renderMeta(video) {
     const title = `Vérification complète de : ${video.title}`
-    const image = video.thumbnail
+    const image = getHDThumbnailUrl(video)
     const description = `${video.title} vérifiée citation par citation par la communauté CaptainFact`
     return (
       <Helmet>
