@@ -8,6 +8,7 @@ import { withRouter } from 'react-router'
 export const loggedInUserNotificationsQuery = gql`
   query LoggedInUserNotifications($page: Int! = 1, $pageSize: Int! = 30, $filter: String = ALL) {
     loggedInUser {
+      id
       notifications(page: $page, pageSize: $pageSize, filter: $filter) {
         pageNumber
         pageSize

@@ -165,6 +165,7 @@ const Navbar = ({
                       if (loading) {
                         return <LoadingFrame size="small" />
                       } else if (error) {
+                        console.error(error)
                         return <ErrorView error={error} />
                       }
 
