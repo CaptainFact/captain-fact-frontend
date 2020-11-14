@@ -156,7 +156,7 @@ export default class Sidebar extends React.PureComponent {
               return (
                 <this.MenuListLink to="/moderation" iconName="flag">
                   {t('menu.moderation')}
-                  <Tag type="danger">{pendingCount}</Tag>
+                  {Boolean(pendingCount) && <Tag type="danger">{pendingCount}</Tag>}
                 </this.MenuListLink>
               )
             }}
