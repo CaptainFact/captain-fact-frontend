@@ -6,6 +6,7 @@ export const VideosQuery = gql`
       pageNumber
       totalPages
       entries {
+        id
         hash_id: hashId
         youtube_id: youtubeId
         title
@@ -25,10 +26,12 @@ export const VideosQuery = gql`
 export const VideosAddedByUserQuery = gql`
   query UserAddedVideosIndex($offset: Int! = 1, $limit: Int! = 16, $username: String!) {
     user(username: $username) {
+      id
       videosAdded(limit: $limit, offset: $offset) {
         pageNumber
         totalPages
         entries {
+          id
           hash_id: hashId
           youtube_id: youtubeId
           title
@@ -49,6 +52,7 @@ export const VideosAddedByUserQuery = gql`
 export const loggedInUserSubscriptionsQuery = gql`
   query LoggedInUserSubscriptions($scopes: [String]) {
     loggedInUser {
+      id
       subscriptions(scopes: $scopes) {
         id
         scope
@@ -66,6 +70,7 @@ export const loggedInUserSubscriptionsQuery = gql`
 export const loggedInUserUnreadNotificationsCount = gql`
   query LoggedInUserUnreadNotificationsCount {
     loggedInUser {
+      id
       notifications(filter: UNSEEN) {
         totalEntries
       }

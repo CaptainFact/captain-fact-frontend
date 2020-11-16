@@ -13,6 +13,7 @@ import { ErrorView } from '../Utils/ErrorView'
 const QUERY = gql`
   query UserActivityLog($username: String!, $offset: Int!, $limit: Int!) {
     user(username: $username) {
+      id
       actions(limit: $limit, offset: $offset) {
         pageNumber
         totalPages
@@ -27,6 +28,7 @@ const QUERY = gql`
           commentId
           speakerId
           targetUser {
+            id
             username
             name
           }
