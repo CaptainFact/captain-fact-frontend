@@ -87,7 +87,7 @@ class CommentForm extends React.Component {
     const errors = {}
 
     if (source && !isURL(source, { protocols: ['http', 'https'] })) {
-      errors.source = t('comment.invalidURL')
+      errors.source = { url: t('comment.invalidURL') }
     }
 
     if (text) {
@@ -140,7 +140,7 @@ class CommentForm extends React.Component {
                   />
                   {errors.source && (
                     <Span color="red" fontSize={6} mt={1}>
-                      {errors.source}
+                      {errors.source.url}
                     </Span>
                   )}
                 </Flex>
