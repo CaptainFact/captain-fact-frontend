@@ -4,6 +4,7 @@ import { withNamespaces, Trans } from 'react-i18next'
 import { truncate } from 'lodash'
 
 import { userActionURL } from '../../lib/cf_routes'
+import UserAppellation from '../Users/UserAppellation'
 
 const getTruncatedChange = (changes, key, maxLength) => {
   try {
@@ -14,68 +15,96 @@ const getTruncatedChange = (changes, key, maxLength) => {
   }
 }
 
+const NotifUserAppelation = ({ user }) => (
+  <UserAppellation defaultComponent="span" withoutActions user={user} />
+)
+
+const Quote = ({ children }) => (
+  <i>
+    <q>{children}</q>
+  </i>
+)
+
 const messageRenderers = {
   new_comment: ({ action: { video, user, comment } }) => {
-    return user ? (
+    return (
       <Trans i18nKey="message.newComment">
-        New comment from <strong>@{{ username: user.username }}</strong> on{' '}
-        <strong>{{ videoTitle: video.title }}</strong>: {{ text: truncate(comment.text, 40) }}
-      </Trans>
-    ) : (
-      <Trans i18nKey="message.newCommentAnonymous">
-        New comment from deleted account on <strong>{{ videoTitle: video.title }}</strong>:{' '}
-        {{ text: truncate(comment.text, 40) }}
+        New comment from{' '}
+        <strong>
+          <NotifUserAppelation user={user} />
+        </strong>{' '}
+        on <strong>{{ videoTitle: video.title }}</strong>:{' '}
+        <Quote>{{ text: truncate(comment.text, 40) }}</Quote>
       </Trans>
     )
   },
   reply_to_comment: ({ action: { user, video, comment } }) => (
     <Trans i18nKey="message.replyToComment">
-      <strong>@{{ username: user.username }}</strong> replied to your comment on{' '}
-      <strong>{{ videoTitle: video.title }}</strong>: {{ text: truncate(comment.text, 40) }}
+      <strong>
+        <NotifUserAppelation user={user} />
+      </strong>{' '}
+      replied to your comment on <strong>{{ videoTitle: video.title }}</strong>:{' '}
+      <Quote>{{ text: truncate(comment.text, 40) }}</Quote>
     </Trans>
   ),
   new_speaker: ({ action: { user, speaker, video } }) => (
     <Trans i18nKey="message.newSpeaker">
-      <strong>@{{ username: user.username }}</strong> added {{ speakerName: speaker.fullName }} to
-      the speakers on <strong>{{ videoTitle: video.title }}</strong>
+      <strong>
+        <NotifUserAppelation user={user} />
+      </strong>{' '}
+      added {{ speakerName: speaker.fullName }} to the speakers on{' '}
+      <strong>{{ videoTitle: video.title }}</strong>
     </Trans>
   ),
   new_statement: ({ action: { user, video, changes } }) => (
     <Trans i18nKey="message.newStatement">
-      <strong>@{{ username: user.username }}</strong> added a statement on{' '}
-      <strong>{{ videoTitle: video.title }}</strong>: "
-      {{ text: getTruncatedChange(changes, 'text', 40) }}"
+      <strong>
+        <NotifUserAppelation user={user} />
+      </strong>{' '}
+      added a statement on <strong>{{ videoTitle: video.title }}</strong>:{' '}
+      <Quote>{{ text: getTruncatedChange(changes, 'text', 40) }}</Quote>
     </Trans>
   ),
   updated_statement: ({ action: { user, video, changes } }) => (
     <Trans i18nKey="message.updatedStatement">
-      <strong>@{{ username: user.username }}</strong> updated a statement on{' '}
-      <strong>{{ videoTitle: video.title }}</strong>: "
-      {{ text: getTruncatedChange(changes, 'text', 40) }}"
+      <strong>
+        <NotifUserAppelation user={user} />
+      </strong>{' '}
+      updated a statement on <strong>{{ videoTitle: video.title }}</strong>:{' '}
+      <Quote>{{ text: getTruncatedChange(changes, 'text', 40) }}"</Quote>
     </Trans>
   ),
   updated_video: ({ action: { user, video } }) => (
     <Trans i18nKey="message.updatedVideo">
-      <strong>@{{ username: user.username }}</strong> updated video's details:{' '}
-      <strong>{{ videoTitle: video.title }}</strong>
+      <strong>
+        <NotifUserAppelation user={user} />
+      </strong>{' '}
+      updated video's details: <strong>{{ videoTitle: video.title }}</strong>
     </Trans>
   ),
   updated_speaker: ({ action: { user, speaker } }) => (
     <Trans i18nKey="message.updatedSpeaker">
-      <strong>@{{ username: user.username }}</strong> updated {{ speakerName: speaker.fullName }}'s
-      details
+      <strong>
+        <NotifUserAppelation user={user} />
+      </strong>{' '}
+      updated {{ speakerName: speaker.fullName }}'s details
     </Trans>
   ),
   removed_speaker: ({ action: { user, video, speaker } }) => (
     <Trans i18nKey="message.removedSpeaker">
-      <strong>@{{ username: user.username }}</strong> removed {{ speakerName: speaker.fullName }}{' '}
-      from <strong>{{ videoTitle: video.title }}</strong>
+      <strong>
+        <NotifUserAppelation user={user} />
+      </strong>{' '}
+      removed {{ speakerName: speaker.fullName }} from{' '}
+      <strong>{{ videoTitle: video.title }}</strong>
     </Trans>
   ),
   removed_statement: ({ action: { user, video } }) => (
     <Trans i18nKey="message.removedStatement">
-      <strong>@{{ username: user.username }}</strong> removed a statement on{' '}
-      <strong>{{ videoTitle: video.title }}</strong>
+      <strong>
+        <NotifUserAppelation user={user} />
+      </strong>{' '}
+      removed a statement on <strong>{{ videoTitle: video.title }}</strong>
     </Trans>
   ),
   email_confirmed: () => (
