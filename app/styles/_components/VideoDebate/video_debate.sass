@@ -45,7 +45,7 @@
 
 #video-show
   height: 100%
-  @media screen and (max-width: $widescreen)
+  @media screen and (max-width: $widescreen - 1)
     display: block
     &> .column
       width: 100%
@@ -54,6 +54,9 @@
       border-bottom: 1px solid $grey-lighter
     #col-debate.column > .statements-list-container
       height: auto
+    #col-video .speakers-list
+      max-height: 25vh
+      overflow-y: auto
   +widescreen
     &> .column
       max-height: 100%
