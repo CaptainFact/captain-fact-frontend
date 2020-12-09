@@ -29,82 +29,60 @@ const messageRenderers = {
   new_comment: ({ action: { video, user, comment } }) => {
     return (
       <Trans i18nKey="message.newComment">
-        New comment from{' '}
-        <strong>
-          <NotifUserAppelation user={user} />
-        </strong>{' '}
-        on <strong>{{ videoTitle: video.title }}</strong>:{' '}
+        New comment from <NotifUserAppelation user={user} /> on{' '}
+        <strong>{{ videoTitle: video.title }}</strong>:{' '}
         <Quote>{{ text: truncate(comment.text, 40) }}</Quote>
       </Trans>
     )
   },
   reply_to_comment: ({ action: { user, video, comment } }) => (
     <Trans i18nKey="message.replyToComment">
-      <strong>
-        <NotifUserAppelation user={user} />
-      </strong>{' '}
-      replied to your comment on <strong>{{ videoTitle: video.title }}</strong>:{' '}
+      <NotifUserAppelation user={user} /> replied to your comment on{' '}
+      <strong>{{ videoTitle: video.title }}</strong>:{' '}
       <Quote>{{ text: truncate(comment.text, 40) }}</Quote>
     </Trans>
   ),
   new_speaker: ({ action: { user, speaker, video } }) => (
     <Trans i18nKey="message.newSpeaker">
-      <strong>
-        <NotifUserAppelation user={user} />
-      </strong>{' '}
-      added {{ speakerName: speaker.fullName }} to the speakers on{' '}
-      <strong>{{ videoTitle: video.title }}</strong>
+      <NotifUserAppelation user={user} /> added {{ speakerName: speaker.fullName }} to the speakers
+      on <strong>{{ videoTitle: video.title }}</strong>
     </Trans>
   ),
   new_statement: ({ action: { user, video, changes } }) => (
     <Trans i18nKey="message.newStatement">
-      <strong>
-        <NotifUserAppelation user={user} />
-      </strong>{' '}
-      added a statement on <strong>{{ videoTitle: video.title }}</strong>:{' '}
+      <NotifUserAppelation user={user} /> added a statement on{' '}
+      <strong>{{ videoTitle: video.title }}</strong>:{' '}
       <Quote>{{ text: getTruncatedChange(changes, 'text', 40) }}</Quote>
     </Trans>
   ),
   updated_statement: ({ action: { user, video, changes } }) => (
     <Trans i18nKey="message.updatedStatement">
-      <strong>
-        <NotifUserAppelation user={user} />
-      </strong>{' '}
-      updated a statement on <strong>{{ videoTitle: video.title }}</strong>:{' '}
+      <NotifUserAppelation user={user} /> updated a statement on{' '}
+      <strong>{{ videoTitle: video.title }}</strong>:{' '}
       <Quote>{{ text: getTruncatedChange(changes, 'text', 40) }}"</Quote>
     </Trans>
   ),
   updated_video: ({ action: { user, video } }) => (
     <Trans i18nKey="message.updatedVideo">
-      <strong>
-        <NotifUserAppelation user={user} />
-      </strong>{' '}
-      updated video's details: <strong>{{ videoTitle: video.title }}</strong>
+      <NotifUserAppelation user={user} /> updated video's details:{' '}
+      <strong>{{ videoTitle: video.title }}</strong>
     </Trans>
   ),
   updated_speaker: ({ action: { user, speaker } }) => (
     <Trans i18nKey="message.updatedSpeaker">
-      <strong>
-        <NotifUserAppelation user={user} />
-      </strong>{' '}
-      updated {{ speakerName: speaker.fullName }}'s details
+      <NotifUserAppelation user={user} /> updated {{ speakerName: speaker.fullName }}'s details
     </Trans>
   ),
   removed_speaker: ({ action: { user, video, speaker } }) => (
     <Trans i18nKey="message.removedSpeaker">
-      <strong>
-        <NotifUserAppelation user={user} />
-      </strong>{' '}
-      removed {{ speakerName: speaker.fullName }} from{' '}
+      <NotifUserAppelation user={user} /> removed {{ speakerName: speaker.fullName }} from{' '}
       <strong>{{ videoTitle: video.title }}</strong>
     </Trans>
   ),
   removed_statement: ({ action: { user, video } }) => (
     <Trans i18nKey="message.removedStatement">
-      <strong>
-        <NotifUserAppelation user={user} />
-      </strong>{' '}
-      removed a statement on <strong>{{ videoTitle: video.title }}</strong>
+      <NotifUserAppelation user={user} /> removed a statement on{' '}
+      <strong>{{ videoTitle: video.title }}</strong>
     </Trans>
   ),
   email_confirmed: () => (
