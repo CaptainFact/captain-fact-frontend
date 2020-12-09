@@ -7,7 +7,7 @@
     "prod:build": "npx webpack-cli --config webpack.production.config.js",
     "cypress": "npx cypress run",
     "cypress:open": "LANG=\"en_EN.UTF-8\" npx cypress open .",
-    "dev": "npx webpack-dev-server",
+    "dev": "webpack-dev-server",
     "dev:build": "npx webpack-cli",
     "dev:network": "npm run dev -- --host 0.0.0.0 --disable-host-check",
     "start": "npm run dev",
