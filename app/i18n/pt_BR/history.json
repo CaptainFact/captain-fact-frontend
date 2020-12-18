@@ -1,0 +1,42 @@
+{
+  "compare_show": "Comparar",
+  "compare_hide": "Esconder",
+  "compareAll": "Comparar tudo",
+  "hideAll": "Esconder tudo",
+  "when": "Quando",
+  "who": "Quem",
+  "changes": "Mudanças",
+  "revert": "Reverter",
+  "entity": "Entidade",
+  "moderation": "Moderação",
+  "deletedUser": "Conta deletada",
+  "madeAction": "{{action}}:",
+  "action": {
+    "create": "Criar",
+    "remove": "Remover",
+    "update": "Atualizar",
+    "delete": "Deletar",
+    "add": "Adicionar",
+    "restore": "Restaurar",
+    "flag": "Reportado",
+    "vote_up": "Votado positivamente",
+    "vote_down": "Votado negativamente",
+    "self_vote": "Voto para si mesmo",
+    "revert_vote_up": "Voto positivo anulado",
+    "revert_vote_down": "Voto negativo anulado",
+    "revert_self_vote": "Voto por si mesmo anulado",
+    "action_banned_bad_language": "Moderado ($t(moderation:reason.1))",
+    "action_banned_spam": "Moderado ($t(moderation:reason.2))",
+    "action_banned_irrelevant": "Moderado ($t(moderation:reason.3))",
+    "action_banned_not_constructive": "Moderado ($t(moderation:reason.4))"
+  },
+  "entities": {
+    "video": "vídeo",
+    "speaker": "locutor",
+    "statement": "citação",
+    "comment": "comentário",
+    "fact": "comentário com fonte",
+    "user_action": "ação",
+    "user": "usuária(o)"
+  }
+}
