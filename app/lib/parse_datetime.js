@@ -1,5 +1,3 @@
-import parse from 'date-fns/parse'
-
 export const parseUTC = (date) =>
   new Date(
     Date.UTC(
@@ -13,6 +11,6 @@ export const parseUTC = (date) =>
     )
   )
 
-const parseDateTime = (dateStr) => parseUTC(parse(dateStr))
+const parseDateTime = (dateStr) => parseUTC(new Date(dateStr))
 
 export default parseDateTime

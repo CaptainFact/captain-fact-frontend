@@ -1,6 +1,6 @@
 import { Record, Map, List, Set } from 'immutable'
 import { createAction, handleActions } from 'redux-actions'
-import isAfter from 'date-fns/is_after'
+import isAfter from 'date-fns/isAfter'
 
 import Comment from './record'
 import parseDateTime from '../../../lib/parse_datetime'
