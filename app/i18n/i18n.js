@@ -16,14 +16,14 @@ import { changeLocale } from '../state/user_preferences/reducer'
 import { JS_ENV } from '../config'
 
 // Add default formats for dates
-dateLocaleFR.defaultDateTimeFormat = '[Le] d MMM yyyy [à] H:mm'
-dateLocaleFR.defaultDateFormat = '[Le] d MMM yyyy'
-datelocaleEN.defaultDateTimeFormat = 'd MMM yyyy [at] H:mm'
+dateLocaleFR.defaultDateTimeFormat = "'Le' d MMM yyyy 'à' H:mm"
+dateLocaleFR.defaultDateFormat = "'Le' d MMM yyyy"
+datelocaleEN.defaultDateTimeFormat = "d MMM yyyy 'at' H:mm"
 datelocaleEN.defaultDateFormat = 'd MMM yyyy'
-datelocaleES.defaultDateTimeFormat = '[El] d MMM yyyy [a las] H:mm'
-datelocaleES.defaultDateFormat = '[El] d MMM yyyy'
+datelocaleES.defaultDateTimeFormat = "'El' d MMM yyyy 'a las' H:mm"
+datelocaleES.defaultDateFormat = "'El' d MMM yyyy"
 datelocalePTBR.defaultDateFormat = 'd MMM yyyy'
-datelocalePTBR.defaultDateTimeFormat = 'd MMM yyyy [às] H:mm'
+datelocalePTBR.defaultDateTimeFormat = "d MMM yyyy 'às' H:mm"
 
 export const locales = {
   fr: dateLocaleFR,
