@@ -14,6 +14,7 @@ import { Github } from 'styled-icons/fa-brands/Github'
 import { Discord } from 'styled-icons/fa-brands/Discord'
 import { Twitter } from 'styled-icons/fa-brands/Twitter'
 import { Facebook } from 'styled-icons/fa-brands/Facebook'
+import { Mastodon } from 'styled-icons/fa-brands/Mastodon'
 
 import { LinkExternal } from 'styled-icons/octicons/LinkExternal'
 
@@ -131,6 +132,9 @@ export default class Sidebar extends React.PureComponent {
             </ExternalLinkNewTab>
             <ExternalLinkNewTab href="https://www.facebook.com/CaptainFact.io">
               <Facebook size="1.5em" /> &nbsp;&nbsp;&nbsp;
+            </ExternalLinkNewTab>
+            <ExternalLinkNewTab href="https://mamot.fr/@CaptainFact">
+              <Mastodon size="1.5em" /> &nbsp;&nbsp;&nbsp;
             </ExternalLinkNewTab>
           </div>
         </div>
