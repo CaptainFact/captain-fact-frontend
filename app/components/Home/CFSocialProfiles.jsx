@@ -8,6 +8,7 @@ import { Discord } from 'styled-icons/fa-brands/Discord'
 import { Facebook } from 'styled-icons/fa-brands/Facebook'
 import { Twitter } from 'styled-icons/fa-brands/Twitter'
 import { Github } from 'styled-icons/fa-brands/Github'
+import { Mastodon } from 'styled-icons/fa-brands/Mastodon'
 
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
@@ -61,6 +62,13 @@ const CFSocialProfiles = ({ size, color, justifyContent, theme }) => {
         Icon={Facebook}
         size={size}
         url="https://www.facebook.com/CaptainFact.io"
+        color={themeColor}
+      />
+      <SocialIconLink
+        name="Mastodon"
+        Icon={Mastodon}
+        size={size}
+        url="https://mamot.fr/@CaptainFact"
         color={themeColor}
       />
     </Flex>
