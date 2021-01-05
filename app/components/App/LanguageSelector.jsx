@@ -42,7 +42,7 @@ export default class LanguageSelector extends React.PureComponent {
     } else if (value === 'ar') {
       return '🇩🇿'
     } else if (value === 'pt_BR') {
-      return '🇧🇷';
+      return '🇧🇷'
     }
     return <Globe size={!size ? '2em' : '1em'} />
   }

@@ -22,6 +22,8 @@ datelocaleEN.defaultDateTimeFormat = "d MMM yyyy 'at' H:mm"
 datelocaleEN.defaultDateFormat = 'd MMM yyyy'
 datelocaleES.defaultDateTimeFormat = "'El' d MMM yyyy 'a las' H:mm"
 datelocaleES.defaultDateFormat = "'El' d MMM yyyy"
+datelocaleAR.defaultDateTimeFormat = 'P'
+datelocaleAR.defaultDateFormat = 'Pp'
 datelocalePTBR.defaultDateFormat = 'd MMM yyyy'
 datelocalePTBR.defaultDateTimeFormat = "d MMM yyyy 'às' H:mm"
 
