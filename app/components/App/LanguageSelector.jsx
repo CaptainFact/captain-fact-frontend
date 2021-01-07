@@ -10,7 +10,7 @@ const defaultLocales = new Map({
   fr: 'Français',
   ar: 'العربية',
   es: 'Español',
-  pt_BR: 'Português (Brasil)'
+  pt_BR: 'Português (Brasil)',
 })
 
 @withNamespaces() // Force waiting for translations to be loaded
