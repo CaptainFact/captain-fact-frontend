@@ -19,12 +19,16 @@ import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
 import DismissableMessage from '../Utils/DismissableMessage'
 
+const TitleContainer = styled.div`
+  margin: 1.5rem 1.5rem 0 1.5rem;
+`
 const TitleH1 = styled.h1`
   color: #0a0a0a;
   line-height: 140%;
   font-family: Merriweather, serif;
   font-size: 1.7rem;
-  margin: 1.5rem;
+  margin: 0 auto;
+  max-width: 980px;
 `
 
 @connect((state) => ({
@@ -142,7 +146,11 @@ export class ColumnDebate extends React.PureComponent {
   renderTitle() {
     const { t, videoTitle } = this.props
 
-    return <TitleH1>{`${t('pageTitle')} ${videoTitle}`}</TitleH1>
+    return (
+      <TitleContainer>
+        <TitleH1>{`${t('pageTitle')} ${videoTitle}`}</TitleH1>
+      </TitleContainer>
+    )
   }
 
   render() {
