@@ -5,7 +5,8 @@
     "speaker": "speaker",
     "speaker_plural": "speakers",
     "statement": "statement",
-    "statement_plural": "statements"
+    "statement_plural": "statements",
+    "videoFactChecking": "Video fact-checking"
   },
   "menu": {
     "login": "Log in",
@@ -16,6 +17,7 @@
     "activity": "Activity",
     "myActivity": "My $t(menu.activity)",
     "content": "Content",
+    "factChecking": "Fact-checking",
     "language": "Language",
     "other": "Other",
     "donation": "Support us",

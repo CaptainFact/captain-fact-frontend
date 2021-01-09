@@ -78,7 +78,7 @@ export default class Sidebar extends React.PureComponent {
         <div className="menu-content">
           <p className="menu-label hide-when-collapsed">{t('menu.language')}</p>
           <UserLanguageSelector className="hide-when-collapsed" size="small" />
-          <p className="menu-label">{t('menu.content')}</p>
+          <p className="menu-label">{t('menu.factChecking')}</p>
           {this.renderMenuContent()}
           <p className="menu-label">{t('menu.other')}</p>
           <ul className="menu-list">
@@ -147,7 +147,7 @@ export default class Sidebar extends React.PureComponent {
     return (
       <ul className="menu-list">
         <this.MenuListLink to="/videos" iconName="television" onlyActiveOnIndex>
-          {capitalize(t('entities.video_plural'))}
+          {capitalize(t('entities.videoFactChecking'))}
         </this.MenuListLink>
         <ReputationGuard requiredRep={MIN_REPUTATION_MODERATION}>
           <Query
