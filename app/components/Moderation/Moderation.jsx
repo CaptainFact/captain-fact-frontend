@@ -47,6 +47,13 @@ export default class Moderation extends React.PureComponent {
         <h1 className="title is-1 has-text-centered">
           {t('title')} <Report size="1em" />
         </h1>
+        <div className="has-text-centered">
+          <p>{t('helpText1')}</p>
+          <p>{t('helpText2')}</p>
+          <Link className="has-text-weight-bold" to="/help/moderation">
+            {t('learnMore')}
+          </Link>
+        </div>
         {!entry && <Message className="has-text-centered">{t('emptyModeration')}</Message>}
         {entry && (
           <div>
