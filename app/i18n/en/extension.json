@@ -3,5 +3,14 @@
   "subtitle": "To fact-check YouTube",
   "description": "The web extension injects CaptainFact's data directly on the content you're watching.",
   "moreInfo": "It is 100% <1>open-source</1> and <3>respects your privacy</3>.",
-  "addTo": "Add to"
+  "addTo": "Add to",
+  "disMoi": {
+    "new": "NEW (FR)",
+    "title": "DisMoi web extension",
+    "subtitle": "To check the pages you visit",
+    "description": "DisMoi allows CaptainFact to post fact-checking notifications directly on any page you browse. When you visit a web page CaptainFact verified, you are notified by DisMoi.",
+    "psText": "Ad-free, no collection of personal data, open source and free.",
+    "follow": "Follow CaptainFact on DisMoi",
+    "learnMore": "Learn more about DisMoi"
+  }
 }
