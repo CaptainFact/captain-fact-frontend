@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Trans, withNamespaces } from 'react-i18next'
+import styled from 'styled-components'
 
 import { InfoCircle } from 'styled-icons/fa-solid/InfoCircle'
 import { ExclamationCircle } from 'styled-icons/fa-solid/ExclamationCircle'
@@ -18,12 +19,25 @@ import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
 import DismissableMessage from '../Utils/DismissableMessage'
 
+const TitleContainer = styled.div`
+  margin: 1.5rem 1.5rem 0 1.5rem;
+`
+const TitleH1 = styled.h1`
+  color: #0a0a0a;
+  line-height: 140%;
+  font-family: Merriweather, serif;
+  font-size: 1.7rem;
+  margin: 0 auto;
+  max-width: 980px;
+`
+
 @connect((state) => ({
   isLoading: isLoadingVideoDebate(state),
   hasStatements: state.VideoDebate.statements.data.size !== 0,
   hasSpeakers: state.VideoDebate.video.data.speakers.size !== 0,
   hasStatementForm: hasStatementForm(state),
   unlisted: state.VideoDebate.video.data.unlisted,
+  videoTitle: state.VideoDebate.video.data.title,
 }))
 @withNamespaces('videoDebate')
 @withLoggedInUser
@@ -129,10 +143,21 @@ export class ColumnDebate extends React.PureComponent {
     )
   }
 
+  renderTitle() {
+    const { t, videoTitle } = this.props
+
+    return (
+      <TitleContainer>
+        <TitleH1>{`${t('pageTitle')} ${videoTitle}`}</TitleH1>
+      </TitleContainer>
+    )
+  }
+
   render() {
     return (
       <div id="col-debate" className="column">
         {this.state.showIntroduction && this.renderIntroduction()}
+        {this.renderTitle()}
         {this.renderContent()}
       </div>
     )

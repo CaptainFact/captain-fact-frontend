@@ -39,7 +39,7 @@ export default class VideosIndexPage extends React.PureComponent {
         <section className="header">
           <h2 className="title is-2">
             <Icon name="television" />
-            <span> {capitalize(t('entities.video_plural'))}</span>
+            <span> {capitalize(t('entities.videoFactChecking'))}</span>
           </h2>
           <AddVideoBtn />
         </section>
