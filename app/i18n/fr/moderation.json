@@ -18,5 +18,8 @@
   "flaggedFor": "a signalé ça pour \"$t(reason.{{reason}})\"",
   "title": "Modération",
   "emptyModeration": "Il n'y a rien à modérer ici. Allez nourrir quelques trolls et revenez plus tard.",
-  "pending": "En attente de moderation"
+  "pending": "En attente de moderation",
+  "helpText1": "Dès 125 points de réputation, vous pouvez contribuer à la modération de contenus signalés par les membres de CaptainFact.",
+  "helpText2": "Vous pouvez confirmer, vous abstenir ou réfuter le signalement, ce qui a des conséquences sur la réputation de l’utilisateur.",
+  "learnMore": "En savoir plus sur la modération"
 }
