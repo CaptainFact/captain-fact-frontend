@@ -4,13 +4,13 @@ import styled from 'styled-components'
 import { Flex, Box } from '@rebass/grid'
 import { withNamespaces } from 'react-i18next'
 import { fontWeight } from 'styled-system'
-import imgBenjamin from '../../assets/ambassadors/benjamin.png'
-import imgFlorence from '../../assets/ambassadors/florence.jpg'
-import imgFrederic from '../../assets/ambassadors/frederic.jpg'
-import imgBasile from '../../assets/ambassadors/basile.jpg'
-import imgMathieu from '../../assets/ambassadors/mathieu.jpg'
+import imgBenjamin from '../../assets/team/benjamin.png'
+import imgFlorence from '../../assets/team/florence.jpg'
+import imgFrederic from '../../assets/team/frederic.jpg'
+import imgBasile from '../../assets/team/basile.jpg'
+import imgMathieu from '../../assets/team/mathieu.jpg'
 
-const AMBASSADORS = [
+const TEAM = [
   {
     firstName: 'Benjamin',
     lastName: 'Piouffle',
@@ -40,59 +40,59 @@ const AMBASSADORS = [
     lastName: 'Asti',
     username: 'Basile',
     img: imgBasile,
-    title1: 'basileAstiTitle1',
-    title2: 'basileAstiTitle2',
+    title1: 'teamAmbassadorTitle',
+    title2: 'teamBODtitle',
   },
   {
     firstName: 'Mathieu',
     lastName: 'Cerf',
     username: 'Nevjoia',
     img: imgMathieu,
-    title1: 'basileAstiTitle1',
-    title2: 'basileAstiTitle2',
+    title1: 'teamAmbassadorTitle',
+    title2: 'teamBODtitle',
   },
 ]
 
-const AmbassadorPicture = styled.img`
+const TeamPicture = styled.img`
   border-radius: 4em;
   margin: 0 1em;
   height: 100px;
 `
 
-const AmbassadorTextBox = styled(Box)`
+const TeamTextBox = styled(Box)`
   color: #0a0a0a;
   text-align: center;
   line-height: 1;
   ${fontWeight}
 `
 
-const AmbassadorText = styled.span`
+const TeamText = styled.span`
   display: block;
 `
 
 /**
- * Render all CaptainFact ambassadors
+ * Render all CaptainFact team
  */
-const AllAmbassadors = ({ t }) => {
+const AllTeam = ({ t }) => {
   return (
     <Flex flexWrap="wrap" justifyContent={['center', 'left']}>
-      {AMBASSADORS.map(({ firstName, lastName, title1, title2, username, img }) => (
+      {TEAM.map(({ firstName, lastName, title1, title2, username, img }) => (
         <Box key={firstName} mx={2}>
           <Flex flexDirection="column">
             <Link to={`/u/${username}`}>
-              <AmbassadorPicture
+              <TeamPicture
                 title={`${firstName} ${lastName}`}
                 src={img}
                 alt={`${firstName} ${lastName}`}
               />
-              <AmbassadorTextBox mt={3} mb={2} fontWeight="bold">
-                <AmbassadorText>{firstName}</AmbassadorText>
-                <AmbassadorText>{lastName}</AmbassadorText>
-              </AmbassadorTextBox>
-              <AmbassadorTextBox mb={4}>
-                <AmbassadorText>{t(`${title1}`)}</AmbassadorText>
-                <AmbassadorText>{t(`${title2}`)}</AmbassadorText>
-              </AmbassadorTextBox>
+              <TeamTextBox mt={3} mb={2} fontWeight="bold">
+                <TeamText>{firstName}</TeamText>
+                <TeamText>{lastName}</TeamText>
+              </TeamTextBox>
+              <TeamTextBox mb={4}>
+                <TeamText>{t(`${title1}`)}</TeamText>
+                <TeamText>{t(`${title2}`)}</TeamText>
+              </TeamTextBox>
             </Link>
           </Flex>
         </Box>
@@ -101,4 +101,4 @@ const AllAmbassadors = ({ t }) => {
   )
 }
 
-export default withNamespaces('home')(AllAmbassadors)
+export default withNamespaces('home')(AllTeam)

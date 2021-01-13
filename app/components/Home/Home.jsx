@@ -11,7 +11,7 @@ import InvitationRequestForm from '../Users/InvitationRequestForm'
 import { INVITATION_SYSTEM } from '../../config'
 import AllPartners from './AllPartners'
 import OpenCollectiveContributors from './OpenCollectiveContributors'
-import AllAmbassadors from './AllAmbassadors'
+import AllTeam from './AllTeam'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import CFSocialProfiles from './CFSocialProfiles'
 import LastVideos from './LastVideos'
@@ -414,7 +414,7 @@ export default class Home extends React.PureComponent {
                 <p className="presentation">
                   {t('aboutAmbassadors')} <Link to="/help/ambassadors">{t('learnMore')}</Link>
                 </p>
-                <AllAmbassadors />
+                <AllTeam />
               </Box>
               <Box mb="2em">
                 <h2 className="title is-3">{t('financialContributors')}</h2>
