@@ -38,7 +38,15 @@
         "refute": "Refute",
         "refute_reply": "Refute this comment",
         "revealForm": "Add a source or comment",
-        "invalidURL": "Invalid source URL"
+        "invalidURL": "Invalid source URL",
+        "help1": "For CaptainFact browser extension’s users, sources that confirm or refute the statement will be displayed directly on YouTube’s player. Comments are less highlighted within the browser extension, but can add value when the following situations occur:",
+        "boldHelp2": "What if I cannot find sources?",
+        "help2": "Write it in a new comment. Example:",
+        "help2Quote": "« Warning, I can not find sources, it seems unverifiable. »",
+        "boldHelp3": "What about rhetological fallacies?",
+        "help3": "Sometime, stated facts are true, but the rhetoric is fallacious or incoherent. You can alert about and specify the type of rhetological fallacies in a comment using this classification of",
+        "help3Link": "errors and manipulations of rhetoric and logical thinking",
+        "helpButton": "Read the contribution guidelines"
     },
     "video": {
         "addedBy": "Added by a {{userType}}",
