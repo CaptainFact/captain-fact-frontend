@@ -14,6 +14,7 @@ import { Github } from 'styled-icons/fa-brands/Github'
 import { Discord } from 'styled-icons/fa-brands/Discord'
 import { Twitter } from 'styled-icons/fa-brands/Twitter'
 import { Facebook } from 'styled-icons/fa-brands/Facebook'
+import { Mastodon } from 'styled-icons/fa-brands/Mastodon'
 
 import { LinkExternal } from 'styled-icons/octicons/LinkExternal'
 
@@ -77,7 +78,7 @@ export default class Sidebar extends React.PureComponent {
         <div className="menu-content">
           <p className="menu-label hide-when-collapsed">{t('menu.language')}</p>
           <UserLanguageSelector className="hide-when-collapsed" size="small" />
-          <p className="menu-label">{t('menu.content')}</p>
+          <p className="menu-label">{t('menu.factChecking')}</p>
           {this.renderMenuContent()}
           <p className="menu-label">{t('menu.other')}</p>
           <ul className="menu-list">
@@ -132,6 +133,9 @@ export default class Sidebar extends React.PureComponent {
             <ExternalLinkNewTab href="https://www.facebook.com/CaptainFact.io">
               <Facebook size="1.5em" /> &nbsp;&nbsp;&nbsp;
             </ExternalLinkNewTab>
+            <ExternalLinkNewTab href="https://mamot.fr/@CaptainFact">
+              <Mastodon size="1.5em" /> &nbsp;&nbsp;&nbsp;
+            </ExternalLinkNewTab>
           </div>
         </div>
       </Flex>
@@ -143,7 +147,7 @@ export default class Sidebar extends React.PureComponent {
     return (
       <ul className="menu-list">
         <this.MenuListLink to="/videos" iconName="television" onlyActiveOnIndex>
-          {capitalize(t('entities.video_plural'))}
+          {capitalize(t('entities.videoFactChecking'))}
         </this.MenuListLink>
         <ReputationGuard requiredRep={MIN_REPUTATION_MODERATION}>
           <Query

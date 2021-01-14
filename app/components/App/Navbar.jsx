@@ -13,6 +13,7 @@ import { Menu } from 'styled-icons/boxicons-regular/Menu'
 
 import { CaretDown } from 'styled-icons/fa-solid/CaretDown'
 import { UserCircle } from 'styled-icons/fa-regular/UserCircle'
+import { HelpCircle } from 'styled-icons/boxicons-regular/HelpCircle'
 
 import Logo from './Logo'
 import { toggleSidebar } from '../../state/user_preferences/reducer'
@@ -87,6 +88,10 @@ UserMenuEntry.defaultProps = {
   py: 1,
 }
 
+const ScoreHelpButton = styled(HelpCircle)`
+  color: #39b714;
+`
+
 const UserLoading = styled(UserCircle)`
   animation: ${fadeIn} 0.75s infinite linear alternate;
   margin-right: ${themeGet('space.2')};
@@ -148,9 +153,12 @@ const Navbar = ({
         {loggedInUserLoading ? (
           <UserLoading size={38} title="Loading" />
         ) : (
-          <Flex alignItems="center">
+          <Flex>
             {isAuthenticated ? (
-              <Flex>
+              <Flex alignItems="center">
+                <StyledLink to="/help/reputation" mr={1}>
+                  <ScoreHelpButton size={25} title="Reputation Help Button" />
+                </StyledLink>
                 <Box mr={[3, 4]}>
                   <ScoreTag reputation={loggedInUser.reputation} size="large" withIcon />
                 </Box>

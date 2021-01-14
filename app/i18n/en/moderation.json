@@ -18,5 +18,8 @@
   "flaggedFor": "flagged this for \"$t(reason.{{reason}})\"",
   "title": "Moderation",
   "emptyModeration": "There's nothing to moderate here. Go feed some trolls and come back later!",
-  "pending": "Pending moderation"
+  "pending": "Pending moderation",
+  "helpText1": "Once you have reached 125 reputation points, you are allowed to moderate the content flagged by the CaptainFact Community.",
+  "helpText2": "You can confirm, forbear, or refute the flag, which will have an impact on user's reputation.",
+  "learnMore": "More information about moderation"
 }
