@@ -51,33 +51,30 @@ export default class StatementComments extends React.PureComponent {
 
   renderSourcedComments() {
     const { approvingFacts, refutingFacts, setReplyToComment } = this.props
-
     return (
       <div className="card-footer sourced-comments">
-        {refutingFacts.size > 0 && (
-          <CommentsList
-            className="card-footer-item refute"
-            comments={refutingFacts}
-            setReplyToComment={setReplyToComment}
-            header={this.renderCommentsListHeader(
-              'refute',
-              'danger',
-              this.calculateScore(refutingFacts)
-            )}
-          />
-        )}
-        {approvingFacts.size > 0 && (
-          <CommentsList
-            className="card-footer-item approve"
-            comments={approvingFacts}
-            setReplyToComment={setReplyToComment}
-            header={this.renderCommentsListHeader(
-              'approve',
-              'success',
-              this.calculateScore(approvingFacts)
-            )}
-          />
-        )}
+        <CommentsList
+          className="card-footer-item refute"
+          comments={refutingFacts}
+          setReplyToComment={setReplyToComment}
+          header={this.renderCommentsListHeader(
+            'refute',
+            'danger',
+            this.calculateScore(refutingFacts)
+          )}
+          statementID={this.props.statement.id}
+        />
+        <CommentsList
+          className="card-footer-item approve"
+          comments={approvingFacts}
+          setReplyToComment={setReplyToComment}
+          header={this.renderCommentsListHeader(
+            'approve',
+            'success',
+            this.calculateScore(approvingFacts)
+          )}
+          statementID={this.props.statement.id}
+        />
       </div>
     )
   }
