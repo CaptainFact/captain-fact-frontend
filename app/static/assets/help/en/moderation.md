@@ -4,8 +4,6 @@ Confirmed users can flag innapropriate contents:
 
 * Personal attack or inappropriate language
 * Unwanted commercial content or spam
-* Irrelevant
-* Not constructive
 
 After three flags, a warning is displayed on concerned comment indicating that
 there is a pending moderation on it.

@@ -2,7 +2,7 @@ import React from 'react'
 import { withNamespaces } from 'react-i18next'
 import { Field } from 'redux-form'
 
-const VALID_REASONS = ['1', '2', '3', '4']
+const VALID_REASONS = ['1', '2']
 
 const FlagReason = ({ value, label }) => (
   <label className="radio">

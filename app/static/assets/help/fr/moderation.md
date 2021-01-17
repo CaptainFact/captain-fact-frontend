@@ -4,8 +4,6 @@ Les utilisateurs confirmés peuvent signaler des contenus innapropriés :
 
 * Attaque personelle ou langage inapproprié
 * Spam ou publicité non souhaitée
-* Hors-sujet
-* Non constructif
   
 Au bout de trois signalement, une alerte s'affiche sur le commentaire concerné
 indiquant qu'il est en attente de modération.   

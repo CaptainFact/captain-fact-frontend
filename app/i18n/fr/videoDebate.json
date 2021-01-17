@@ -18,7 +18,10 @@
   "flagForm": {
     "title": "Pourquoi signaler ce commentaire ?",
     "xAvailable": "{{count}} disponnible",
-    "xAvailable_plural": "{{count}} disponnibles"
+    "xAvailable_plural": "{{count}} disponnibles",
+    "warningMessage1": "Si un de vos signalements est jugé abusif… vous perdez de la réputation.",
+    "warningMessage2": "Êtes-vous sûr de vouloir pénaliser la réputation de l’auteur de ce contenu ? Est-il vraiment nuisible ?",
+    "warningMessage3": "PS : Le fact-checking sur CaptainFact est un exercice citoyen d’entraide qui nécessite bienveillance et tolérance."
   },
   "comment": {
     "writeComment": "Écrire un commentaire...",
