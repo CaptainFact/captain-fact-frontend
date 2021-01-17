@@ -46,7 +46,10 @@
         "boldHelp3": "What about rhetological fallacies?",
         "help3": "Sometimes, stated facts are true, but the rhetoric is fallacious or incoherent. You can alert about and specify the type of rhetological fallacies in a comment using this classification of",
         "help3Link": "errors and manipulations of rhetoric and logical thinking",
-        "helpButton": "Read the contribution guidelines"
+        "helpButton": "Read the contribution guidelines",
+        "incitateToConfirm": "No source confirming this statement yet",
+        "incitateToRefute": "No source refuting this statement yet",
+        "addYourSource": "Add yours"
     },
     "video": {
         "addedBy": "Added by a {{userType}}",

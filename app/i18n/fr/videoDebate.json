@@ -46,7 +46,10 @@
     "boldHelp3": "Des arguments fallacieux ?",
     "help3": "Parfois, les faits énoncés sont vrais, mais l’argumentation est trompeuse ou incohérente. Vous pouvez le mentionner en commentaire en indiquant le type d’argument fallacieux d’après",
     "help3Link": "la classification des erreurs et manipulations de rhétorique et de logique à ce lien",
-    "helpButton": "Voir le guide de contribution"
+    "helpButton": "Voir le guide de contribution",
+    "incitateToConfirm": "Aucune source ne confirme cette afirmation",
+    "incitateToRefute": "Aucune source ne réfute cette afirmation",
+    "addYourSource": "Ajouter la vôtre"
   },
   "video": {
     "addedBy": "Ajoutée par un {{userType}}",
