@@ -6,10 +6,15 @@ import classNames from 'classnames'
 import { CommentDisplay } from './CommentDisplay'
 import CommentsListHeader from './CommentsListHeader'
 import CommentsListExpender from './CommentsListExpender'
+import CommentForm from './CommentForm'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 
+@withLoggedInUser
 export class CommentsList extends React.PureComponent {
   static propTypes = {
     setReplyToComment: PropTypes.func,
+    // TODO:
+    // statementID ? since I need it everytime ?
   }
 
   constructor(props) {
@@ -20,22 +25,29 @@ export class CommentsList extends React.PureComponent {
   }
 
   render() {
-    const { comments, className, header, replyingTo, nesting = 1 } = this.props
+    const { comments, className, header, statementID, replyingTo, isAuthenticated, loggedInUser, nesting = 1 } = this.props
     const displayedComments = this.getDisplayedComments()
 
     return (
       <div className={classNames('comments-list', className)}>
         {header && <CommentsListHeader header={header} />}
         <FlipMove enterAnimation="fade" leaveAnimation={false}>
-          {displayedComments.map((comment) => (
+          {comments.size > 0 ? displayedComments.map((comment) => (
             <CommentDisplay
               key={comment.id}
               comment={comment}
               nesting={nesting}
               replyingTo={replyingTo}
               setReplyToComment={this.props.setReplyToComment}
+            />)) : (
+            <CommentForm
+              statementID={statementID}
+              replyTo={replyingTo}
+              setReplyToComment={this.props.setReplyToComment}
+              user={isAuthenticated ? loggedInUser : null}
+              inciteToParticipate={this.extractCommentType(className)}
             />
-          ))}
+          )}
         </FlipMove>
         {displayedComments.size < comments.size && (
           <CommentsListExpender
@@ -64,6 +76,23 @@ export class CommentsList extends React.PureComponent {
       return [3, 5]
     }
     return [4 - nesting, 6 - nesting]
+  }
+
+  extractCommentType(className) {
+    const type = []
+    for (const name of className.split(' ')) {
+      console.log(className)
+      if (name == "approve" || name == "refute") {
+        type.push(name)
+      }
+    }
+
+    // Extra check to ensure that we only have type either "approve" || "refute"
+    if (type.size > 1) {
+      // TODO: error
+
+    }
+    return type[0]
   }
 }
 
