@@ -8,8 +8,11 @@ import { get } from 'lodash'
 import { Formik } from 'formik'
 import styled from 'styled-components'
 import { Flex, Box } from '@rebass/grid'
+import { space } from 'styled-system'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
 import { Plus } from 'styled-icons/boxicons-regular/Plus'
+import { HelpCircle } from 'styled-icons/boxicons-solid/HelpCircle'
 
 import { logError } from '../../logger'
 import { validateLengthI18n } from '../../lib/form_validators'
@@ -31,6 +34,10 @@ import Container from '../StyledUtils/Container'
 const SubmitButton = styled((props) => (
   <Button type="submit" my={1} flex="1 1 100px" {...props} />
 ))``
+
+const StyledHelpCircle = styled(HelpCircle)`
+  ${space}
+`
 
 @connect(null, { postComment, flashErrorUnauthenticated, errorToFlash })
 @withNamespaces('videoDebate')
@@ -95,6 +102,37 @@ class CommentForm extends React.Component {
     }
 
     return errors
+  }
+
+  renderHelpMessage() {
+    const { t } = this.props
+
+    return (
+      <Box mt={3}>
+        <Box mb={2}>
+          <p>{t('comment.help1')}</p>
+        </Box>
+        <Box mb={2}>
+          <p>
+            <strong>{t('comment.boldHelp2')}</strong> {t('comment.help2')}{' '}
+            <i>{t('comment.help2Quote')}</i>
+          </p>
+        </Box>
+        <Box mb={3}>
+          <p>
+            <strong>{t('comment.boldHelp3')}</strong> {t('comment.help3')}{' '}
+            <ExternalLinkNewTab href="https://informationisbeautiful.net/visualizations/rhetological-fallacies/">
+              {t('comment.help3Link')}
+            </ExternalLinkNewTab>
+            .
+          </p>
+        </Box>
+        <ExternalLinkNewTab className="button" href="/help/contributionGuidelines">
+          {t('comment.helpButton')}
+          <StyledHelpCircle size={15} ml={1} />
+        </ExternalLinkNewTab>
+      </Box>
+    )
   }
 
   renderForm() {
@@ -175,6 +213,7 @@ class CommentForm extends React.Component {
                   </Flex>
                 )}
               </Flex>
+              {this.renderHelpMessage()}
             </Flex>
           </Box>
         )}

@@ -38,7 +38,15 @@
     "refute": "Je réfute",
     "refute_reply": "Je réfute ce commentaire",
     "revealForm": "Ajouter une source ou un commentaire",
-    "invalidURL": "Le lien vers la source n'est pas valide"
+    "invalidURL": "Le lien vers la source n'est pas valide",
+    "help1": "Différence entre les commentaires et les sources : les sources qui confirment ou réfutent la citation seront affichées à tous les utilisateurs de l’extension navigateur durant la lecture de la vidéo. Les commentaires quant à eux peuvent contextualiser l'information ou concerner :",
+    "boldHelp2": "Des sources introuvables ?",
+    "help2": "Si vous ne trouvez aucune source malgré vos recherches, mentionnez-le en commentaire, par exemple :",
+    "help2Quote": "« Méfiance, je ne trouve aucune source à ce sujet, cette information ne semble pas vérifiable. »",
+    "boldHelp3": "Des arguments fallacieux ?",
+    "help3": "Parfois, les faits énoncés sont vrais, mais l’argumentation est trompeuse ou incohérente. Vous pouvez le mentionner en commentaire en indiquant le type d’argument fallacieux d’après",
+    "help3Link": "la classification des erreurs et manipulations de rhétorique et de logique à ce lien",
+    "helpButton": "Voir le guide de contribution"
   },
   "video": {
     "addedBy": "Ajoutée par un {{userType}}",
