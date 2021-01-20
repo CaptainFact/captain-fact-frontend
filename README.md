@@ -78,7 +78,7 @@ is to use `https://styled-icons.js.org/`.
 - [React](https://reactjs.org/): View layer
 - [Redux](https://redux.js.org/): State management
 - [React Router](https://github.com/ReactTraining/react-router): Routing
-- [Phoenix](https://phoenixframework.org/): Interaction with [https://hexdocs.pm/phoenix/Phoenix.Socket.html]Phoenix.Socket)
+- [Phoenix](https://phoenixframework.org/): Interaction with [https://hexdocs.pm/phoenix/Phoenix.Socket.html](Phoenix.Socket)
 - [Bulma](https://bulma.io/): Base styles
 
 ## Linked projects

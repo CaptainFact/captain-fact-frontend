@@ -1,0 +1,20 @@
+{
+  "empty": "Você não tem nenhuma notificação",
+  "seeAll": "Ver todas",
+  "markAllAsRead": "Marcar todas como lidas",
+  "markAllAsUnseen": "Marcar todas como não lidas",
+  "filters": {
+    "ALL": "Todas",
+    "SEEN": "Vistas",
+    "UNSEEN": "Não vistas"
+  },
+  "message": {
+    "newComment": "Novo comentário de <1>@{{username}}</1> em <4>{{videoTitle}}</4>: \"{{text}}\"",
+    "newSpeaker": "<0>@{{username}}</0> adicionou \"{{speakerName}}\" em <6>{{videoTitle}}</6>",
+    "removedStatement": "<0>@{{username}}</0> deletou sua citação em <3>{{videoTitle}}</3>",
+    "replyToComment": "<0>@{{username}}</0> respondeu seu comentário em <3>{{videoTitle}}</3>: \"{{text}}\"",
+    "updatedVideo": "<0>@{{username}}</0> modificou as informações do vídeo <3>{{videoTitle}}</3>",
+    "updatedStatement": "<0>@{{username}}</0> modificou uma citação <3>{{videoTitle}}</3> : \"{{text}}\"",
+    "newStatement": "<0>@{{username}}</0> adicionou uma citação em <3>{{videoTitle}}</3> : \"{{text}}\""
+  }
+}

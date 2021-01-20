@@ -105,7 +105,7 @@ export default class Home extends React.PureComponent {
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
-                ></iframe>
+                />
               </div>
             </div>
           </section>

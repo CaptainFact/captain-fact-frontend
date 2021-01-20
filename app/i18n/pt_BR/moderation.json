@@ -1,0 +1,22 @@
+{
+  "header": {
+    "date": "Data"
+  },
+  "actions": {
+    "flag_abusive": "Refutar essa denúncia",
+    "unsure": "Não tenho certeza",
+    "confirm": "Confirmar essa denúncia"
+  },
+  "reason": {
+    "1": "Ataque pessoal ou linguagem inapropriada",
+    "2": "Spam ou publicidade indesejada",
+    "3": "Irrelevante para a discussão",
+    "4": "Não construtivo"
+  },
+  "seeContext": "Ver no contexto",
+  "whyReport": "Por que esse comentário deve ser denunciado?",
+  "flaggedFor": "denúnciou isso por \"$t(reason.{{reason}})\"",
+  "title": "Moderação",
+  "emptyModeration": "Não há nada para moderar aqui. Vá alimentar trolls e volte mais tarde.",
+  "pending": "Esperando moderação"
+}

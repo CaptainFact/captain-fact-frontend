@@ -1,0 +1,33 @@
+{
+    "title": "Erro",
+    "crash": "😥 Nãaaaao! O site parou de funcionar. Não é sua culpa, você não fez nada de errado.",
+    "contactSupport": "Contactar o suporte",
+    "addIssue": "Criar uma issue no GitHub",
+    "reload": "Recarregar a página",
+    "errorDetails": "Detalhes técnicos",
+    "server": {
+        "unknown": "Algo de errado aconteceu do nosso lado, vamos verificar!",
+        "invalid_email": "Endereço de e-mail inválido",
+        "invalid_token": "O código de verificação é inválido ou expirou",
+        "invalid_invitation_token": "Seu código de convite é inválido ou expirou",
+        "reset_failed": "O reiniciamento falhou",
+        "authentication_failed": "A autenticação falhou",
+        "invalid_email_password": "Endereço de e-mail ou senha inválidos",
+        "not_enough_reputation": "Você não tem reputação suficiente para fazer isso",
+        "limit_reached": "Você atingiu seu limite para essa ação, tente novamente mais tarde",
+        "not_found": "Esse elemento não parece existir, tente recarregar a página se o problema persistir",
+        "action_already_done": "Essa ação já foi concluída",
+        "unauthenticated": "Você precisa fazer login para fazer essa ação",
+        "unauthorized": "Favor fazer login novamente para continuar",
+        "noInternet": "A conexão ao servidor falhou, tente recarregar a página",
+        "remote_video_404": "Parece que esse vídeo não existe"
+    },
+    "client": {
+        "joinCrashed": "A conexão ao servidor falhou",
+        "thirdParty": "A autenticação falhou",
+        "submissionError": "Houve algum problema ao enviar os dados",
+        "noVideoAvailable": "Nenhum vídeo está disponível",
+        "notEnoughReputation": "Você não tem reputação suficiente para ter acesso a essa funcionalidade",
+        "needReputation": "Você precisa de pelo menos {{requiredRep}} pontos de <2>reputação</2> para fazer isso"
+    }
+}

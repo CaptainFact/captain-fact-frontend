@@ -1,0 +1,49 @@
+{
+  "1": {
+    "title": "Welcome",
+    "description": "Bem vindo à aventura! Você criou uma conta com sucesso."
+  },
+  "2": {
+    "title": "Não é um robô",
+    "description": "Com um email tão bonito, você certamente não é um robô"
+  },
+  "3": {
+    "title": "Everybody hurts",
+    "description": "Procurar ajuda na seção \"Ajuda\" foi a coisa certa a se fazer"
+  },
+  "4": {
+    "title": "À prova de balas",
+    "description": "Com a extensão para navegador instalada, não te enganarão mais"
+  },
+  "5": {
+    "title": "You're fake news !",
+    "description": "Parece que você destruiu essa fonte"
+  },
+  "6": {
+    "title": "Vício em redes sociais",
+    "description": "Você ama se deixar espionar por essas empresas americanas, não é mesmo?"
+  },
+  "7": {
+    "title": "Embaixadora",
+    "description": "Você foi nomeada(o) embaixadora(o) da comunidade"
+  },
+  "8": {
+    "title": "Caçador de fantasmas",
+    "description": "Obrigado por nos avisar desse bug!"
+  },
+  "9": {
+    "title": "Fact Check Me, I'm Famous",
+    "description": "Você ficou no topo do ranking esse mês, parabéns Capitã(o)!"
+  },
+  "10": {
+    "title": "Artista",
+    "description": "Uma ou várias de suas criações foram integradas ao projeto. Tiramos o chapéu!"
+  },
+  "11": {
+    "title": "Good Vibes",
+    "description": "Esta sugestão de melhoria ou nova funcionalidade vai ser avaliada"
+  },
+  "title": "Medalhas",
+  "about": "Sobre",
+  "unlocked": "Você acabou de desbloquear a medalha \"{{achievement}}\""
+}

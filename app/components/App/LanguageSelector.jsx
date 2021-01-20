@@ -10,6 +10,7 @@ const defaultLocales = new Map({
   fr: 'Français',
   ar: 'العربية',
   es: 'Español',
+  pt_BR: 'Português (Brasil)',
 })
 
 @withNamespaces() // Force waiting for translations to be loaded
@@ -40,6 +41,8 @@ export default class LanguageSelector extends React.PureComponent {
       return '🇬🇧'
     } else if (value === 'ar') {
       return '🇩🇿'
+    } else if (value === 'pt_BR') {
+      return '🇧🇷'
     }
     return <Globe size={!size ? '2em' : '1em'} />
   }
