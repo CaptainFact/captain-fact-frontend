@@ -16,6 +16,8 @@
     "profile": "Profil",
     "activity": "Activité",
     "myActivity": "Mon $t(menu.activity)",
+    "yourProfile": "Votre profil",
+    "dailyGain": "Gain journalier",
     "content": "Contenu",
     "language": "Langue",
     "other": "Autre",
