@@ -26,6 +26,7 @@ export class CommentsList extends React.PureComponent {
     const {
       comments,
       className,
+      commentType,
       header,
       statementID,
       replyingTo,
@@ -55,7 +56,7 @@ export class CommentsList extends React.PureComponent {
               replyTo={replyingTo}
               setReplyToComment={this.props.setReplyToComment}
               user={isAuthenticated ? loggedInUser : null}
-              inciteToParticipate={this.extractCommentType(className)}
+              inciteToParticipate={commentType}
             />
           )}
         </FlipMove>
@@ -88,21 +89,6 @@ export class CommentsList extends React.PureComponent {
     return [4 - nesting, 6 - nesting]
   }
 
-  extractCommentType(className) {
-    const type = []
-    for (const name of className.split(' ')) {
-      console.log(className)
-      if (name == 'approve' || name == 'refute') {
-        type.push(name)
-      }
-    }
-
-    // Extra check to ensure that we only have type either "approve" || "refute"
-    if (type.size > 1) {
-      // TODO: error
-    }
-    return type[0]
-  }
 }
 
 CommentsList.defaultProps = {

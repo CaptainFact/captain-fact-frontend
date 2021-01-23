@@ -63,6 +63,7 @@ export default class StatementComments extends React.PureComponent {
             this.calculateScore(refutingFacts)
           )}
           statementID={this.props.statement.id}
+          commentType="refute"
         />
         <CommentsList
           className="card-footer-item approve"
@@ -74,6 +75,7 @@ export default class StatementComments extends React.PureComponent {
             this.calculateScore(approvingFacts)
           )}
           statementID={this.props.statement.id}
+          commentType="approve"
         />
       </div>
     )
