@@ -39,7 +39,8 @@ export class CommentsList extends React.PureComponent {
               nesting={nesting}
               replyingTo={replyingTo}
               setReplyToComment={this.props.setReplyToComment}
-            />)) : (
+            />)
+          ) : (
             <CommentForm
               statementID={statementID}
               replyTo={replyingTo}
@@ -82,7 +83,7 @@ export class CommentsList extends React.PureComponent {
     const type = []
     for (const name of className.split(' ')) {
       console.log(className)
-      if (name == "approve" || name == "refute") {
+      if (name == 'approve' || name == 'refute') {
         type.push(name)
       }
     }

@@ -143,12 +143,12 @@ class CommentForm extends React.Component {
 
     return !values.source ? (
       <SubmitButton my={1} disabled={!isValid}>
-        {this.props.t('comment.post', i18nParams)}
+        {t('comment.post', i18nParams)}
       </SubmitButton>
     ) : (
       <Flex flex="1 1 460px" flexWrap="wrap">
         <SubmitButton my={1} mr={1} disabled={!isValid} flex="1 1 130px">
-          {this.props.t('comment.post', i18nParams)}
+          {t('comment.post', i18nParams)}
         </SubmitButton>
         <Flex flex="3 1">
           <SubmitButton
@@ -158,7 +158,7 @@ class CommentForm extends React.Component {
             disabled={!isValid || !values.source}
             onClick={() => setFieldValue('approve', true)}
           >
-            {this.props.t('comment.approve', i18nParams)}
+            {t('comment.approve', i18nParams)}
           </SubmitButton>
           <SubmitButton
             my={1}
@@ -166,7 +166,7 @@ class CommentForm extends React.Component {
             disabled={!isValid}
             onClick={() => setFieldValue('approve', false)}
           >
-            {this.props.t('comment.refute', i18nParams)}
+            {t('comment.refute', i18nParams)}
           </SubmitButton>
         </Flex>
       </Flex>
@@ -174,11 +174,11 @@ class CommentForm extends React.Component {
   }
 
   renderIncitate(values, setFieldValue, isValid) {
-    const { replyTo, inciteToParticipate, t } = this.props
+    const { replyTo, inciteToParticipate } = this.props
     const i18nParams = replyTo ? { context: 'reply' } : null
-    const name_class = inciteToParticipate == "approve" ? "is-success" : "is-danger"
-    const comment = inciteToParticipate == "approve" ? "comment.approve" : "comment.refute"
-    const approveField = inciteToParticipate == "approve" ? true : false
+    const name_class = inciteToParticipate == 'approve' ? 'is-success' : 'is-danger'
+    const comment = inciteToParticipate == 'approve' ? 'comment.approve' : 'comment.refute'
+    const approveField = inciteToParticipate == 'approve' ? true : false
 
     return (
       <Flex flex="1 1 460px" flexWrap="wrap">
@@ -198,9 +198,8 @@ class CommentForm extends React.Component {
   }
 
   renderForm() {
-    const { replyTo, t, inciteToParticipate } = this.props
+    const { t, inciteToParticipate } = this.props
     const initialValues = { text: '', source: '', approve: null }
-    const i18nParams = replyTo ? { context: 'reply' } : null
 
     return (
       <Formik initialValues={initialValues} validate={this.validate} onSubmit={this.onSubmit}>
@@ -245,7 +244,9 @@ class CommentForm extends React.Component {
                   )}
                 </Flex>
 
-                {inciteToParticipate ? this.renderIncitate(values, setFieldValue, isValid) : this.renderCommentForm(values, setFieldValue, isValid)}
+                {inciteToParticipate
+                  ? this.renderIncitate(values, setFieldValue, isValid)
+                  : this.renderCommentForm(values, setFieldValue, isValid)}
 
               </Flex>
               {this.renderHelpMessage()}
@@ -258,7 +259,7 @@ class CommentForm extends React.Component {
 
   renderCollapsedForm() {
     const { inciteToParticipate, t } = this.props
-    const commentIncitateTo = 'comment.incitateTo' + (inciteToParticipate == "approve" ? "Confirm" : "Refute")
+    const commentIncitateTo = 'comment.incitateTo' + (inciteToParticipate == 'approve' ? 'Confirm' : 'Refute')
 
     return inciteToParticipate ? (
       <Flex className="comment-form incitation-comment">
