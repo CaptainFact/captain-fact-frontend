@@ -13,8 +13,6 @@ import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 export class CommentsList extends React.PureComponent {
   static propTypes = {
     setReplyToComment: PropTypes.func,
-    // TODO:
-    // statementID ? since I need it everytime ?
   }
 
   constructor(props) {
