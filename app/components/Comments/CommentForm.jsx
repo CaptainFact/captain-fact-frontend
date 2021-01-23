@@ -247,7 +247,6 @@ class CommentForm extends React.Component {
                 {inciteToParticipate
                   ? this.renderIncitate(values, setFieldValue, isValid)
                   : this.renderCommentForm(values, setFieldValue, isValid)}
-
               </Flex>
               {this.renderHelpMessage()}
             </Flex>
@@ -259,7 +258,8 @@ class CommentForm extends React.Component {
 
   renderCollapsedForm() {
     const { inciteToParticipate, t } = this.props
-    const commentIncitateTo = 'comment.incitateTo' + (inciteToParticipate == 'approve' ? 'Confirm' : 'Refute')
+    const commentIncitateTo =
+      'comment.incitateTo' + (inciteToParticipate == 'approve' ? 'Confirm' : 'Refute')
 
     return inciteToParticipate ? (
       <Flex className="comment-form incitation-comment">
@@ -282,10 +282,10 @@ class CommentForm extends React.Component {
     const { user, replyTo, t } = this.props
     const isSelfReply = get(user, 'id') === get(replyTo, 'user.id')
 
-    return !user || (this.state.isCollapsed && !replyTo) ?
+    return !user || (this.state.isCollapsed && !replyTo) ? (
       // Just reveal below else statement
       this.renderCollapsedForm()
-    : (
+    ) : (
       <Flex className="comment-form" flexDirection="column" p={3}>
         {replyTo && (
           <Box>

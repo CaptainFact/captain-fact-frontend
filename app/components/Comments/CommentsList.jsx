@@ -25,21 +25,32 @@ export class CommentsList extends React.PureComponent {
   }
 
   render() {
-    const { comments, className, header, statementID, replyingTo, isAuthenticated, loggedInUser, nesting = 1 } = this.props
+    const {
+      comments,
+      className,
+      header,
+      statementID,
+      replyingTo,
+      isAuthenticated,
+      loggedInUser,
+      nesting = 1,
+    } = this.props
     const displayedComments = this.getDisplayedComments()
 
     return (
       <div className={classNames('comments-list', className)}>
         {header && <CommentsListHeader header={header} />}
         <FlipMove enterAnimation="fade" leaveAnimation={false}>
-          {comments.size > 0 ? displayedComments.map((comment) => (
-            <CommentDisplay
-              key={comment.id}
-              comment={comment}
-              nesting={nesting}
-              replyingTo={replyingTo}
-              setReplyToComment={this.props.setReplyToComment}
-            />)
+          {comments.size > 0 ? (
+            displayedComments.map((comment) => (
+              <CommentDisplay
+                key={comment.id}
+                comment={comment}
+                nesting={nesting}
+                replyingTo={replyingTo}
+                setReplyToComment={this.props.setReplyToComment}
+              />
+            ))
           ) : (
             <CommentForm
               statementID={statementID}
@@ -91,7 +102,6 @@ export class CommentsList extends React.PureComponent {
     // Extra check to ensure that we only have type either "approve" || "refute"
     if (type.size > 1) {
       // TODO: error
-
     }
     return type[0]
   }
