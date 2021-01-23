@@ -54,12 +54,8 @@ class CommentForm extends React.Component {
     user: PropTypes.object,
     /** @ignore *from withNamespaces* */
     t: PropTypes.func.isRequired,
-    /** TODO:
-     * better description
-     * add constraint so that value can only be "approve" or "refute"
-     *
-     * Do we incitate to participate */
-    inciteToParticipate: PropTypes.string
+    /** Do we incitate to participate */
+    inciteToParticipate: PropTypes.oneOf(['approve', 'refute'])
   }
 
   state = { isCollapsed: true }
