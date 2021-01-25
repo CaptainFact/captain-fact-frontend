@@ -88,7 +88,6 @@ export class CommentsList extends React.PureComponent {
     }
     return [4 - nesting, 6 - nesting]
   }
-
 }
 
 CommentsList.defaultProps = {

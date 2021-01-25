@@ -55,7 +55,7 @@ class CommentForm extends React.Component {
     /** @ignore *from withNamespaces* */
     t: PropTypes.func.isRequired,
     /** Do we incitate to participate */
-    inciteToParticipate: PropTypes.oneOf(['approve', 'refute'])
+    inciteToParticipate: PropTypes.oneOf(['approve', 'refute']),
   }
 
   state = { isCollapsed: true }
