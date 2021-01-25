@@ -11,11 +11,10 @@ import InvitationRequestForm from '../Users/InvitationRequestForm'
 import { INVITATION_SYSTEM } from '../../config'
 import AllPartners from './AllPartners'
 import OpenCollectiveContributors from './OpenCollectiveContributors'
-import AllAmbassadors from './AllAmbassadors'
+import AllTeam from './AllTeam'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import CFSocialProfiles from './CFSocialProfiles'
 import LastVideos from './LastVideos'
-import Message from '../Utils/Message'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import imgMedia from '../../assets/media.jpg'
 import imgExample1 from '../../assets/example1.jpg'
@@ -409,20 +408,47 @@ export default class Home extends React.PureComponent {
 
         <section className="section partners">
           <div className="content">
-            <Flex flexWrap="wrap">
-              <Box width={[1, 1, 0.5, 0.5, 1 / 3]} mb="2em">
-                <h2 className="title is-3">{t('backers')}</h2>
-                <OpenCollectiveContributors tier="soutien-régulier" button={false} limit={8} />
-                <OpenCollectiveContributors tier="donateur" button={false} limit={8} />
-              </Box>
-              <Box width={[1, 1, 0.5, 0.5, 2 / 3]}>
-                <h2 className="title is-3">{t('ambassadors')}</h2>
-                <Message>
+            <Flex flexDirection="column" flexWrap="wrap">
+              <Box>
+                <h2 className="title is-3">{t('technicalTeamAndAmbassadors')}</h2>
+                <p className="presentation">
                   {t('aboutAmbassadors')} <Link to="/help/ambassadors">{t('learnMore')}</Link>
-                </Message>
-                <AllAmbassadors />
+                </p>
+                <AllTeam />
+              </Box>
+              <Box mb="2em">
+                <h2 className="title is-3">{t('financialContributors')}</h2>
+                <h4 className="has-text-weight-bold">{t('membersOfTheAssociation')}</h4>
+                <OpenCollectiveContributors
+                  tier="adhesion-membre"
+                  width={600}
+                  limit={15}
+                  avatarHeight={36}
+                />
+                <br />
+                <h4 className="has-text-weight-bold">{t('regularFinancialContributors')}</h4>
+                <OpenCollectiveContributors
+                  tier="soutien-regulier"
+                  width={600}
+                  limit={15}
+                  avatarHeight={36}
+                />
+                <br />
+                <h4 className="has-text-weight-bold">{t('donators')}</h4>
+                <OpenCollectiveContributors
+                  tier="donateur"
+                  width={600}
+                  limit={15}
+                  avatarHeight={36}
+                />
               </Box>
             </Flex>
+            <ExternalLinkNewTab
+              href="https://opencollective.com/captainfact_io"
+              className="button is-primary is-medium"
+            >
+              {t('crowdfunding')}
+            </ExternalLinkNewTab>
             <br />
           </div>
         </section>
