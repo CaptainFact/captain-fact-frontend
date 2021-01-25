@@ -6,7 +6,10 @@ import classNames from 'classnames'
 import { CommentDisplay } from './CommentDisplay'
 import CommentsListHeader from './CommentsListHeader'
 import CommentsListExpender from './CommentsListExpender'
+import CommentForm from './CommentForm'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 
+@withLoggedInUser
 export class CommentsList extends React.PureComponent {
   static propTypes = {
     setReplyToComment: PropTypes.func,
@@ -20,22 +23,42 @@ export class CommentsList extends React.PureComponent {
   }
 
   render() {
-    const { comments, className, header, replyingTo, nesting = 1 } = this.props
+    const {
+      comments,
+      className,
+      commentType,
+      header,
+      statementID,
+      replyingTo,
+      isAuthenticated,
+      loggedInUser,
+      nesting = 1,
+    } = this.props
     const displayedComments = this.getDisplayedComments()
 
     return (
       <div className={classNames('comments-list', className)}>
         {header && <CommentsListHeader header={header} />}
         <FlipMove enterAnimation="fade" leaveAnimation={false}>
-          {displayedComments.map((comment) => (
-            <CommentDisplay
-              key={comment.id}
-              comment={comment}
-              nesting={nesting}
-              replyingTo={replyingTo}
+          {comments.size > 0 ? (
+            displayedComments.map((comment) => (
+              <CommentDisplay
+                key={comment.id}
+                comment={comment}
+                nesting={nesting}
+                replyingTo={replyingTo}
+                setReplyToComment={this.props.setReplyToComment}
+              />
+            ))
+          ) : (
+            <CommentForm
+              statementID={statementID}
+              replyTo={replyingTo}
               setReplyToComment={this.props.setReplyToComment}
+              user={isAuthenticated ? loggedInUser : null}
+              inciteToParticipate={commentType}
             />
-          ))}
+          )}
         </FlipMove>
         {displayedComments.size < comments.size && (
           <CommentsListExpender

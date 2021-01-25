@@ -54,6 +54,8 @@ class CommentForm extends React.Component {
     user: PropTypes.object,
     /** @ignore *from withNamespaces* */
     t: PropTypes.func.isRequired,
+    /** Do we incitate to participate */
+    inciteToParticipate: PropTypes.oneOf(['approve', 'refute']),
   }
 
   state = { isCollapsed: true }
@@ -135,10 +137,69 @@ class CommentForm extends React.Component {
     )
   }
 
-  renderForm() {
+  renderCommentForm(values, setFieldValue, isValid) {
     const { replyTo, t } = this.props
-    const initialValues = { text: '', source: '', approve: null }
     const i18nParams = replyTo ? { context: 'reply' } : null
+
+    return !values.source ? (
+      <SubmitButton my={1} disabled={!isValid}>
+        {t('comment.post', i18nParams)}
+      </SubmitButton>
+    ) : (
+      <Flex flex="1 1 460px" flexWrap="wrap">
+        <SubmitButton my={1} mr={1} disabled={!isValid} flex="1 1 130px">
+          {t('comment.post', i18nParams)}
+        </SubmitButton>
+        <Flex flex="3 1">
+          <SubmitButton
+            my={1}
+            mr={1}
+            className="is-success"
+            disabled={!isValid || !values.source}
+            onClick={() => setFieldValue('approve', true)}
+          >
+            {t('comment.approve', i18nParams)}
+          </SubmitButton>
+          <SubmitButton
+            my={1}
+            className="is-danger"
+            disabled={!isValid}
+            onClick={() => setFieldValue('approve', false)}
+          >
+            {t('comment.refute', i18nParams)}
+          </SubmitButton>
+        </Flex>
+      </Flex>
+    )
+  }
+
+  renderIncitate(values, setFieldValue, isValid) {
+    const { replyTo, inciteToParticipate } = this.props
+    const i18nParams = replyTo ? { context: 'reply' } : null
+    const name_class = inciteToParticipate == 'approve' ? 'is-success' : 'is-danger'
+    const comment = inciteToParticipate == 'approve' ? 'comment.approve' : 'comment.refute'
+    const approveField = inciteToParticipate == 'approve' ? true : false
+
+    return (
+      <Flex flex="1 1 460px" flexWrap="wrap">
+        <Flex flex="3 1">
+          <SubmitButton
+            my={1}
+            mr={1}
+            className={name_class}
+            disabled={!isValid || !values.source}
+            onClick={() => setFieldValue('approve', approveField)}
+          >
+            {this.props.t(comment, i18nParams)}
+          </SubmitButton>
+        </Flex>
+      </Flex>
+    )
+  }
+
+  renderForm() {
+    const { t, inciteToParticipate } = this.props
+    const initialValues = { text: '', source: '', approve: null }
 
     return (
       <Formik initialValues={initialValues} validate={this.validate} onSubmit={this.onSubmit}>
@@ -182,36 +243,10 @@ class CommentForm extends React.Component {
                     </Span>
                   )}
                 </Flex>
-                {!values.source ? (
-                  <SubmitButton my={1} disabled={!isValid}>
-                    {this.props.t('comment.post', i18nParams)}
-                  </SubmitButton>
-                ) : (
-                  <Flex flex="1 1 460px" flexWrap="wrap">
-                    <SubmitButton my={1} mr={1} disabled={!isValid} flex="1 1 130px">
-                      {this.props.t('comment.post', i18nParams)}
-                    </SubmitButton>
-                    <Flex flex="3 1">
-                      <SubmitButton
-                        my={1}
-                        mr={1}
-                        className="is-success"
-                        disabled={!isValid}
-                        onClick={() => setFieldValue('approve', true)}
-                      >
-                        {this.props.t('comment.approve', i18nParams)}
-                      </SubmitButton>
-                      <SubmitButton
-                        my={1}
-                        className="is-danger"
-                        disabled={!isValid}
-                        onClick={() => setFieldValue('approve', false)}
-                      >
-                        {this.props.t('comment.refute', i18nParams)}
-                      </SubmitButton>
-                    </Flex>
-                  </Flex>
-                )}
+
+                {inciteToParticipate
+                  ? this.renderIncitate(values, setFieldValue, isValid)
+                  : this.renderCommentForm(values, setFieldValue, isValid)}
               </Flex>
               {this.renderHelpMessage()}
             </Flex>
@@ -221,17 +256,35 @@ class CommentForm extends React.Component {
     )
   }
 
-  render() {
-    const { user, replyTo, t } = this.props
-    const isSelfReply = get(user, 'id') === get(replyTo, 'user.id')
+  renderCollapsedForm() {
+    const { inciteToParticipate, t } = this.props
+    const commentIncitateTo =
+      'comment.incitateTo' + (inciteToParticipate == 'approve' ? 'Confirm' : 'Refute')
 
-    return !user || (this.state.isCollapsed && !replyTo) ? (
+    return inciteToParticipate ? (
+      <Flex className="comment-form incitation-comment">
+        <span>{t(commentIncitateTo)}.</span>
+        <Button className="is-inverted is-primary" onClick={() => this.expandForm()}>
+          <span>&nbsp;{t('comment.addYourSource')}.</span>
+        </Button>
+      </Flex>
+    ) : (
       <Flex className="comment-form" p={2} justifyContent="center">
         <Button className="is-inverted is-primary" onClick={() => this.expandForm()}>
           <Plus size="1.2em" style={{ marginRight: 5 }} />
           <span>{t('comment.revealForm')}</span>
         </Button>
       </Flex>
+    )
+  }
+
+  render() {
+    const { user, replyTo, t } = this.props
+    const isSelfReply = get(user, 'id') === get(replyTo, 'user.id')
+
+    return !user || (this.state.isCollapsed && !replyTo) ? (
+      // Just reveal below else statement
+      this.renderCollapsedForm()
     ) : (
       <Flex className="comment-form" flexDirection="column" p={3}>
         {replyTo && (
