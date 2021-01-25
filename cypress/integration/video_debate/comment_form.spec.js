@@ -1,6 +1,6 @@
 describe('Can comment on statements', () => {
   it('with different types of comment', () => {
-    cy.login().then(user => {
+    cy.login().then((user) => {
       cy.visit('/videos/Jzqg')
 
       // Expand form
@@ -15,11 +15,7 @@ describe('Can comment on statements', () => {
         'Write a comment…'
       )
 
-      cy.get('.comment-form input[name=source]').should(
-        'have.attr',
-        'placeholder',
-        'Add a source'
-      )
+      cy.get('.comment-form input[name=source]').should('have.attr', 'placeholder', 'Add a source')
 
       cy.contains('button[type=submit]', 'Post comment').should('be.disabled')
 

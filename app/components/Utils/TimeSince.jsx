@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import differenceInSeconds from 'date-fns/difference_in_seconds'
-import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
+import differenceInSeconds from 'date-fns/differenceInSeconds'
+import distanceInWordsToNow from 'date-fns/formatDistanceToNow'
 import format from 'date-fns/format'
 import { locales } from '../../i18n/i18n'
 
@@ -27,9 +27,11 @@ export class TimeSince extends React.PureComponent {
     const { time, locale, dispatch, addSuffix = true, isDateTime = true, ...props } = this.props
     const localeObj = locales[locale]
     const dateFormat = isDateTime ? localeObj.defaultDateTimeFormat : localeObj.defaultDateFormat
+    const timeAsDate = new Date(time)
+
     return (
-      <span title={format(time, dateFormat, { locale: localeObj })} {...props}>
-        {distanceInWordsToNow(time, { addSuffix, locale: localeObj })}
+      <span title={format(timeAsDate, dateFormat, { locale: localeObj })} {...props}>
+        {distanceInWordsToNow(timeAsDate, { addSuffix, locale: localeObj })}
       </span>
     )
   }

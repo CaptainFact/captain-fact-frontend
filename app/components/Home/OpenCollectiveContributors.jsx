@@ -30,7 +30,7 @@ const OpenCollectiveContributors = ({
 }
 
 OpenCollectiveContributors.propTypes = {
-  tier: PropTypes.oneOf(['soutien-régulier', 'donateur']).isRequired,
+  tier: PropTypes.oneOf(['soutien-regulier', 'donateur', 'adhesion-membre']).isRequired,
   avatarHeight: PropTypes.number,
   width: PropTypes.number,
   button: PropTypes.bool,

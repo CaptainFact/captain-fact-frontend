@@ -7,7 +7,9 @@ import classNames from 'classnames'
 import { get } from 'lodash'
 import capitalize from 'voca/capitalize'
 import { Flex } from '@rebass/grid'
+import styled from 'styled-components'
 
+import { Star } from 'styled-icons/fa-solid/Star'
 import { EnvelopeFill } from '@styled-icons/bootstrap/EnvelopeFill'
 
 import { Github } from 'styled-icons/fa-brands/Github'
@@ -18,7 +20,11 @@ import { Mastodon } from 'styled-icons/fa-brands/Mastodon'
 
 import { LinkExternal } from 'styled-icons/octicons/LinkExternal'
 
-import { loggedInUserPendingModerationCount } from '../../API/graphql_queries'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import {
+  loggedInUserPendingModerationCount,
+  loggedInUserTodayReputationGain,
+} from '../../API/graphql_queries'
 import { MOBILE_WIDTH_THRESHOLD, MIN_REPUTATION_MODERATION } from '../../constants'
 import RawIcon from '../Utils/RawIcon'
 import ReputationGuard from '../Utils/ReputationGuard'
@@ -26,12 +32,26 @@ import { closeSidebar, toggleSidebar } from '../../state/user_preferences/reduce
 import UserLanguageSelector from '../LoggedInUser/UserLanguageSelector'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import Tag from '../Utils/Tag'
+import ProgressBar from '../Utils/ProgressBar'
+import { MAX_DAILY_REPUTATION_GAIN } from '../../constants'
 
+const WhiteStar = styled(Star)`
+  color: white;
+  background-color: #6ba3a7;
+  padding: 4px;
+  border-radius: 50%;
+  margin-right: -1px;
+  z-index: 1;
+`
+const DailyGainText = styled.p`
+  color: #858585;
+`
 @connect((state) => ({ sidebarExpended: state.UserPreferences.sidebarExpended }), {
   toggleSidebar,
   closeSidebar,
 })
 @withNamespaces('main')
+@withLoggedInUser
 export default class Sidebar extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -67,7 +87,7 @@ export default class Sidebar extends React.PureComponent {
   }
 
   render() {
-    const { sidebarExpended, className, t } = this.props
+    const { sidebarExpended, className, t, isAuthenticated } = this.props
     return (
       <Flex
         as="aside"
@@ -78,6 +98,12 @@ export default class Sidebar extends React.PureComponent {
         <div className="menu-content">
           <p className="menu-label hide-when-collapsed">{t('menu.language')}</p>
           <UserLanguageSelector className="hide-when-collapsed" size="small" />
+          {isAuthenticated ? (
+            <React.Fragment>
+              <p className="menu-label">{t('menu.yourProfile')}</p>
+              {this.renderMenuProfile()}
+            </React.Fragment>
+          ) : null}
           <p className="menu-label">{t('menu.factChecking')}</p>
           {this.renderMenuContent()}
           <p className="menu-label">{t('menu.other')}</p>
@@ -139,6 +165,48 @@ export default class Sidebar extends React.PureComponent {
           </div>
         </div>
       </Flex>
+    )
+  }
+
+  renderDailyGainGauge() {
+    const { t } = this.props
+
+    return (
+      <Query
+        fetchPolicy="network-only"
+        pollInterval={30000}
+        query={loggedInUserTodayReputationGain}
+      >
+        {({ data }) => {
+          const dailyGain = get(data, 'loggedInUser.todayReputationGain', 0)
+
+          return (
+            <Flex flexDirection="column" alignItems="center">
+              <Flex style={{ width: '90%' }} alignItems="center">
+                <WhiteStar size={20} />
+                <ProgressBar
+                  height="7px"
+                  outerBackgroundColor="#c4c4c4"
+                  innerBackgroundColor="#6ba3a7"
+                  max={MAX_DAILY_REPUTATION_GAIN}
+                  value={dailyGain}
+                />
+              </Flex>
+              <DailyGainText>
+                {`${t('menu.dailyGain')} ${dailyGain}/${MAX_DAILY_REPUTATION_GAIN}`}
+              </DailyGainText>
+            </Flex>
+          )
+        }}
+      </Query>
+    )
+  }
+
+  renderMenuProfile() {
+    return (
+      <ul className="menu-list hide-when-collapsed">
+        <li>{this.renderDailyGainGauge()}</li>
+      </ul>
     )
   }
 

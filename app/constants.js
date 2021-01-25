@@ -10,6 +10,7 @@ export const COMMENTS_CHANNEL = 'comments'
 // Misc
 export const NO_INTERNET_ERROR = 'errors:server.noInternet'
 export const SUPPORTED_LOCALES = ['en', 'fr', 'ar']
+export const MAX_DAILY_REPUTATION_GAIN = 25
 
 // Actions
 export const ACTION_CREATE = 'create'

@@ -1,0 +1,112 @@
+{
+  "introTitle": "Verificação colaborativo do vídeo",
+  "intro": "Abaixo, os membros de CaptainFact podem citar as passagens do vídeo a ser verificadas. As citações são confirmadas ou refutadas com fontes. A seguir, as verificações passam a ser exibidas diretamente no vídeo, para quem tiver a extensão para navegador de CaptainFact.",
+  "extensionDL": "Experimentar a extensão para navegador",
+  "intro1": "- Citar uma passagem do vídeo com ajuda do botão (+) no canto inferior direito.",
+  "intro2": "- Adicionar uma fonte ou comentário abaixo das citações.",
+  "intro3": "- Avaliar a pertinência das fontes e comentários com as setas ^ e v.",
+  "intro4": "- Ganhar reputação a cada avaliação positiva e ",
+  "intro5": "desbloquear novos privilégios no site",
+  "debate": "Verificação",
+  "history": "Histórico",
+  "approve": "Confirmar",
+  "refute": "Refutar",
+  "comments": "Comentários",
+  "community": "Comunidade",
+  "chat": "Chat",
+  "flagForm": {
+    "title": "Por que denunciar esse comentário?",
+    "xAvailable": "{{count}} disponível",
+    "xAvailable_plural": "{{count}} disponíveis"
+  },
+  "comment": {
+    "writeComment": "Escrever um comentário...",
+    "addSource": "Adicionar fonte",
+    "post": "Adicionar comentário",
+    "post_reply": "Adicionar resposta",
+    "deleteThread": "Deletar o comentário",
+    "deleteThread_plural": "Deletar a thread",
+    "replies_hide": "Esconder respostas",
+    "replies_show": "Mostrar respostas ({{count}})",
+    "loadMore_replies": "Carregar mais respostas ({{count}})",
+    "loadMore_comments": "Carregar mais comentários ({{count}})",
+    "replyingTo": "Em resposta a",
+    "replyingToSelf": "Adicionar à thread",
+    "approve": "Aprovar",
+    "approve_reply": "Aprovar esse comentário",
+    "refute": "Refutar",
+    "refute_reply": "Refutar esse comentário",
+    "revealForm": "Adicionar fonte ou comentário",
+    "invalidURL": "Esse link de fonte é inválido"
+  },
+  "video": {
+    "addedBy": "Adicionado por um {{userType}}",
+    "partner": "parceiro",
+    "user": "usuário",
+    "edit": "Editar o vídeo",
+    "shiftStatements": "Deslocar todas as afirmações (em segundos)"
+  },
+  "speaker": {
+    "one": "Locutor(a)",
+    "remove": "Remover locutor(a)",
+    "confirmRemove": "Todas as declarações de {{speaker.full_name}} nesse vídeo vão se tornar órfãs",
+    "add": "Adicionar um(a) locutor(a)",
+    "create": "Criar locutor(a) \"{{name}}\"",
+    "edit": "Modificar as informações de \"{{name}}\"",
+    "search": "Digite ao menos 3 caracteres para buscar",
+    "fullName": "Nome completo",
+    "title": "Título",
+    "titlePlaceholder": "Político(a), médico(a), jornalista...",
+    "noneFound": "Nenhum(a) locutor(a) encontrado(a) com esse nome"
+  },
+  "statement": {
+    "remove": "Remover citação",
+    "confirmRemove": "Tem certeza?",
+    "textPlaceholder": "Escreva aqui uma pequena biografia do(a) locutor(a)",
+    "noSpeakerTextPlaceholder": "Descreva aqui quem aparece na imagem ou adicione um(a) locutor(a)",
+    "text": "O texto",
+    "add": "Adicionar uma citação",
+    "abortAdd": "Anular adição de citação",
+    "autoscroll_enable": "Ativar scroll automático",
+    "autoscroll_disable": "Desativar scroll automático",
+    "soundOnBackgroundFocus_enable": "Tocar um som quando a citação for alterada em plano de fundo",
+    "soundOnBackgroundFocus_disable": "Não tocar um som quando a citação for alterada em plano de fundo",
+    "reverseTimeLock_lock": "Travar a posição",
+    "reverseTimeLock_unlock": "Destravar a posição",
+    "help1": "Para poder ser adicionada em CaptainFact, uma citação deve atender ao menos um dos seguintes critérios:",
+    "help2": "- ser verificável, graças à exposição de fatos;",
+    "help3": "- fazer menção a uma fonte ou conteúdo que se possa verificar;",
+    "help4": "- apresentar partes aproximadas ou incompletas;",
+    "help5": "- apresentar um argumento falacioso;",
+    "help11": "- ou se beneficiar de uma nota ou referência para melhorar a compreensão.",
+    "help6": "Não merecem um trabalho de verificação:",
+    "help7": "- frases auto-evidentes, como \"o céu é azul\";",
+    "help8": "- as figuras de linguagem e o humor;",
+    "help9": "- pequenos erros;",
+    "help10": "- opiniões pessoais.",
+    "helpLink": "Ver o guia completo de contribuição"
+  },
+  "loading": {
+    "statements": "Carregamento dos textos",
+    "video": "Carregamento do vídeo"
+  },
+  "tips": {
+    "firstStatement": "Você pode <1>adicionar uma citação</1> clicando no ícone <3></3> ao lado do nome do(a) locutor(a)",
+    "firstSpeaker": "Comece adicionando um(a) locutor(a) utilisando a coluna esquerda",
+    "noContentUnauthenticated": "Esse vídeo ainda não foi verificado. Faça login para verificá-lo!"
+  },
+  "presence": {
+    "viewer": "{{count}} espectador",
+    "viewer_plural": "{{count}} espectadores",
+    "user": "{{count}} fact-checker",
+    "user_plural": "{{count}} fact-checkers"
+  },
+  "warningUnlisted": "Esse vídeo não está listado publicamente. Ele não pode receber a visibilidade necessária para que fontes e citações sejam corretamente discutidas.",
+  "wikidata": {
+    "id": "ID Wikidata (QID)",
+    "search": "Digite um nome para começar uma busca na Wikipédia",
+    "autofill": "Sugerir automaticamente a partir da Wikipédia",
+    "using": "Dados extraídos de <2>{{qid}}</2> (<5>editar</5>)",
+    "suggestions": "Sugestões Wikidata:"
+  }
+}

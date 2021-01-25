@@ -69,5 +69,19 @@
   "who": "The fact-checking is done collaboratively. Everyone can share their knowledge to fight against: inaccuracies and omissions ; distortions of information (voluntary or not) ; information put out of context ; fake news ; pseudo-sciences, rhetological fallacies, intellectual dishonesty, demagogy, untruths, or other. Sign up now to participate!",
   "followus": "Follow us",
   "contactus": "Contact us",
-  "forum": "Join fact checking forum"
+  "forum": "Join fact checking forum",
+  "technicalTeamAndAmbassadors": "Technical team and ambassadors",
+  "benjaminPiouffleTitle1": "Founder and",
+  "benjaminPiouffleTitle2": "lead developer",
+  "florenceChatelotTitle1": "President and",
+  "florenceChatelotTitle2": "project management",
+  "fredericBouffetierTitle1": "Treasurer and",
+  "fredericBouffetierTitle2": "ambassador",
+  "teamAmbassadorTitle": "Ambassador",
+  "teamBODtitle": "BOD",
+  "financialContributors": "Financial contributors",
+  "membersOfTheAssociation": "Members of the association",
+  "regularFinancialContributors": "Regular financial contributors",
+  "donators": "Donators",
+  "crowdfunding": "Crowdfunding"
 }
