@@ -204,7 +204,7 @@ export default class Sidebar extends React.PureComponent {
 
   renderMenuProfile() {
     return (
-      <ul className="menu-list">
+      <ul className="menu-list hide-when-collapsed">
         <li>{this.renderDailyGainGauge()}</li>
       </ul>
     )
