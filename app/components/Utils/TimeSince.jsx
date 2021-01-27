@@ -37,7 +37,10 @@ export class TimeSince extends React.PureComponent {
     const { time, locale, dispatch, addSuffix = true, isDateTime = true, ...props } = this.props
     const localeObj = locales[locale]
     const dateFormat = isDateTime ? localeObj.defaultDateTimeFormat : localeObj.defaultDateFormat
-    const timeAsDate = new Date(time)
+    const timeAsDate = time && parseISO(time)
+    if (!timeAsDate || !isFinite(timeAsDate)) {
+      return null
+    }
 
     return (
       <span title={format(timeAsDate, dateFormat, { locale: localeObj })} {...props}>
