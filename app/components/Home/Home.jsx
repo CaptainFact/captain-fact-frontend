@@ -231,7 +231,7 @@ export default class Home extends React.PureComponent {
                 <br />
                 <br />
                 <h2 className="title is-3">{t('howTitle')}</h2>
-                <p>
+                <div>
                   {t('how')}
                   <br />
                   <ol>
@@ -239,7 +239,7 @@ export default class Home extends React.PureComponent {
                     <li>{t('how2')}</li>
                     <li>{t('how3')}</li>
                   </ol>
-                </p>
+                </div>
                 <p>{t('how4')}</p>
                 <br />
                 <Link
