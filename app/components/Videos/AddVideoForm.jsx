@@ -56,6 +56,28 @@ export class AddVideoForm extends React.PureComponent {
     )
   }
 
+  renderVideoAdvice() {
+    const { t } = this.props
+    return (
+      <Box mb={2}>
+        <Message header={t('videos.adviceTitle')}>
+          <div className="content">
+            <p>{t('videos.advice1')}</p>
+            <ul>
+              <li>{t('videos.adviceBulletPoint1')}</li>
+              <li>{t('videos.adviceBulletPoint2')}</li>
+              <li>{t('videos.adviceBulletPoint3')}</li>
+              <li>{t('videos.adviceBulletPoint4')}</li>
+            </ul>
+            <ExternalLinkNewTab href="/help/contributionGuidelines">
+              {t('videos.adviceReadMoreLink')}
+            </ExternalLinkNewTab>
+          </div>
+        </Message>
+      </Box>
+    )
+  }
+
   render() {
     const { t, params, location, router, isAuthenticated } = this.props
     const initialURL = params.videoUrl || location.query.url
@@ -103,6 +125,7 @@ export class AddVideoForm extends React.PureComponent {
                   <br />
                   <p>{t('videos.supportedPlatforms')}</p>
                 </DismissableMessage>
+                {this.renderVideoAdvice()}
                 <FieldWithButton
                   input={{
                     onChange: handleChange,
