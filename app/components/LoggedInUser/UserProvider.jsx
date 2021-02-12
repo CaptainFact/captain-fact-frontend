@@ -176,4 +176,6 @@ export const withLoggedInUser = (Component) => (props) => (
   <UserContext.Consumer>{(store) => <Component {...props} {...store} />}</UserContext.Consumer>
 )
 
+export const useLoggedInUser = () => React.useContext(UserContext)
+
 export default UserProvider

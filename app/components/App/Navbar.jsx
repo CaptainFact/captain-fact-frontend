@@ -41,7 +41,7 @@ const NavbarContainer = styled(Flex)`
   background: rgba(255, 255, 255, 0.9);
   height: ${themeGet('navbarHeight')}px;
   border-bottom: 1px solid ${themeGet('colors.black.200')};
-  box-shadow: 0px 0px 20px 5px rgba(125, 125, 125, 0.3);
+  box-shadow: 0px 0px 15px rgba(125, 125, 125, 0.25);
   transition: top 0.3s;
   animation: ${fadeIn} 0.3s;
 `
