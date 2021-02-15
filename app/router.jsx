@@ -27,6 +27,7 @@ import UserAddedVideos from './components/Videos/UserAddedVideos'
 import NotificationsPage from './components/LoggedInUser/NotificationsPage'
 import SubscriptionsPage from './components/LoggedInUser/SubscriptionsPage'
 import LogoutPage from './components/LoggedInUser/LogoutPage'
+import SupportUs from './components/SupportUs'
 
 const CFRouter = () => (
   <Router history={browserHistory}>
@@ -59,6 +60,7 @@ const CFRouter = () => (
       <Route path="/help/*" component={Help} />
       <Route path="/extension" component={BrowserExtensionsPage} />
       <Route path="/moderation" component={Moderation} />
+      <Route path="/support-us" component={SupportUs} />
       <Route path="*" component={NotFound} />
     </Route>
   </Router>
