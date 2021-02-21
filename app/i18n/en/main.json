@@ -6,7 +6,8 @@
     "speaker_plural": "speakers",
     "statement": "statement",
     "statement_plural": "statements",
-    "videoFactChecking": "Video fact-checking"
+    "videoFactChecking": "Video fact-checking",
+    "lastStatements": "Last statements"
   },
   "menu": {
     "login": "Log in",
@@ -106,7 +107,9 @@
     "title1": "Fact checking of ",
     "info1": "CaptainFact are a fact-checking platform for YouTube video",
     "info2": "Speaker's statements can be confirm or refute by CaptainFact's members. All verifications are displayed during the video, if you have installed our browser extension.",
-    "more": "See more information"
+    "more": "See more information",
+    "videos": "Videos being fact-checked collaboratively",
+    "statements": "Statements being fact-checked collaboratively"
   },
   "search": {
     "placeholder": "Search",

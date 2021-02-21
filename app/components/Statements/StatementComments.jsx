@@ -11,12 +11,19 @@ import SpeakerComments from './SpeakerComments'
 
 @withNamespaces('videoDebate')
 @connect((state, props) => {
-  const classifiedComments = classifyComments(state, props)
-  return {
-    comments: classifiedComments.regularComments,
-    speakerComments: classifiedComments.selfComments,
-    approvingFacts: classifiedComments.approvingFacts,
-    refutingFacts: classifiedComments.refutingFacts,
+  if (props.comments === undefined
+  || props.speakerComments === undefined
+  || props.approvingFacts === undefined
+  || props.refutingFacts === undefined) {
+    const classifiedComments = classifyComments(state, props)
+    return {
+      comments: classifiedComments.regularComments,
+      speakerComments: classifiedComments.selfComments,
+      approvingFacts: classifiedComments.approvingFacts,
+      refutingFacts: classifiedComments.refutingFacts,
+    }
+  } else {
+    return { }
   }
 })
 export default class StatementComments extends React.PureComponent {

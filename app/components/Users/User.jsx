@@ -21,11 +21,11 @@ import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import UserMenu from './UserMenu'
 
 @connect(
-  ({ DisplayedUser: { isLoading, errors, data } }) => ({
-    isLoading,
-    errors,
-    user: data,
-  }),
+ ({ DisplayedUser: { isLoading, errors, data } }) => ({
+   isLoading,
+   errors,
+   user: data,
+ }),
   { fetchUser, resetUser }
 )
 @withNamespaces('main')
@@ -69,7 +69,6 @@ export default class User extends React.PureComponent {
 
     const user = this.props.user || {}
     const prettyUsername = `@${user.username}`
-
     return (
       <div className="user-page">
         <Helmet>
