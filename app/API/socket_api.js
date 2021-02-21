@@ -46,7 +46,7 @@ class CaptainFactSocketApi {
       channel
         .join()
         .receive('ok', fulfill)
-        .receive('error', () => reject('noInternet'))
+        .receive('error', (e) => reject(e.reason))
         .receive('timeout', () => reject('noInternet'))
     })
   }

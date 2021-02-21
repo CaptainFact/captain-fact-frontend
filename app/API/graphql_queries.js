@@ -94,3 +94,45 @@ export const loggedInUserTodayReputationGain = gql`
     }
   }
 `
+
+export const StatementsQuery = gql`
+  query StatementsIndex($offset: Int! = 1, $limit: Int! = 16, $filters: VideoFilter = {}) {
+    statements(limit: $limit, offset: $offset, filters: $filters) {
+      pageNumber
+      pageSize
+      totalEntries
+      totalPages
+      entries {
+        id
+        text
+        speaker {
+          id
+          slug
+          fullName
+          title
+          picture
+        }
+        video {
+          hashId
+          title
+        }
+        comments {
+          id
+          text
+          approve
+          score
+          user {
+            id
+            name
+            username
+            pictureUrl
+          }
+          source {
+            id
+            url
+          }
+        }
+      }
+    }
+  }
+`

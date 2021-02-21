@@ -6,7 +6,8 @@
     "speaker_plural": "speakers",
     "statement": "statement",
     "statement_plural": "statements",
-    "videoFactChecking": "Video fact-checking"
+    "videoFactChecking": "Video fact-checking",
+    "lastStatements": "Last statements"
   },
   "menu": {
     "login": "Log in",
