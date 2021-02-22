@@ -129,7 +129,9 @@ class CommentForm extends React.Component {
             .
           </p>
           {t('comment.helpFallacy')}{' '}
-          <ExternalLinkNewTab href={`https://yourlogicalfallacyis.com/${t('comment.fallacyFallacyUrl')}`}>
+          <ExternalLinkNewTab
+            href={`https://yourlogicalfallacyis.com/${t('comment.fallacyFallacyUrl')}`}
+          >
             {t('comment.fallacyLink')}
           </ExternalLinkNewTab>
           .
