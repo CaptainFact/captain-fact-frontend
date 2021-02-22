@@ -37,7 +37,8 @@ export class TimeSince extends React.PureComponent {
     const { time, locale, dispatch, addSuffix = true, isDateTime = true, ...props } = this.props
     const localeObj = locales[locale]
     const dateFormat = isDateTime ? localeObj.defaultDateTimeFormat : localeObj.defaultDateFormat
-    const timeAsDate = time && parseISO(time)
+    const timeAsDate = typeof time === 'string' ? parseISO(time) : time
+
     if (!timeAsDate || !isFinite(timeAsDate)) {
       return null
     }
