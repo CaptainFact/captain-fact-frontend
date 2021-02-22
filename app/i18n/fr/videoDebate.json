@@ -47,6 +47,9 @@
     "help3": "Parfois, les faits énoncés sont vrais, mais l’argumentation est trompeuse ou incohérente. Vous pouvez le mentionner en commentaire en indiquant le type d’argument fallacieux d’après",
     "help3Link": "la classification des erreurs et manipulations de rhétorique et de logique à ce lien",
     "helpButton": "Voir le guide de contribution",
+    "helpFallacy": "Attention cependant, un argumentaire fallacieux ne signifie pas que l'affirmation est fausse",
+    "fallacyFallacyUrl": "fr/l-erreur-sur-l-erreur",
+    "fallacyLink": "(voir ici)",
     "incitateToConfirm": "Aucune source ne confirme cette affirmation",
     "incitateToRefute": "Aucune source ne réfute cette affirmation",
     "addYourSource": "Ajouter la vôtre"
