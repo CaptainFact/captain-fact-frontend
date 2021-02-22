@@ -22,6 +22,7 @@ import examplesImg1 from '../../assets/examples/image-1.jpg'
 import examplesImg2 from '../../assets/examples/image-2.jpg'
 import examplesImg3 from '../../assets/examples/image-3.jpg'
 import imgIllutration from '../../assets/landing-illustration.png'
+import Container from '../StyledUtils/Container'
 
 @withNamespaces('home')
 @withLoggedInUser
@@ -231,7 +232,7 @@ export default class Home extends React.PureComponent {
                 <br />
                 <br />
                 <h2 className="title is-3">{t('howTitle')}</h2>
-                <div>
+                <Container color="black.600">
                   {t('how')}
                   <br />
                   <ol>
@@ -239,7 +240,7 @@ export default class Home extends React.PureComponent {
                     <li>{t('how2')}</li>
                     <li>{t('how3')}</li>
                   </ol>
-                </div>
+                </Container>
                 <p>{t('how4')}</p>
                 <br />
                 <Link
