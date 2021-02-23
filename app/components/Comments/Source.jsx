@@ -1,8 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { addModal } from '../../state/modals/reducer'
 import ReactPlayer from 'react-player'
 import upperCase from 'voca/upper_case'
 import { youtubeRegex } from '../../lib/url_utils'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
+import ModalSource from './ModalSource'
 
 const supportedPlayerUrls = [youtubeRegex]
 
@@ -33,7 +36,22 @@ const isPlayer = (url) => {
 
 const PLAYER_CONFIG = { youtube: { playerVars: { showinfo: 1 } } }
 
-export const Source = ({ source: { url, title, site_name }, withoutPlayer }) => {
+const handleSourceClick = (e, addModal, source) => {
+  e.preventDefault()
+  addModal({
+    Modal: ModalSource,
+    props: {
+      source,
+    },
+  })
+}
+
+const Source = ({
+  source: { url, title, site_name },
+  withoutPlayer,
+  withoutModalSource,
+  addModal,
+}) => {
   if (!withoutPlayer && isPlayer(url)) {
     return (
       <ReactPlayer
@@ -46,12 +64,23 @@ export const Source = ({ source: { url, title, site_name }, withoutPlayer }) => 
       />
     )
   }
+
+  const website_name = upperCase(site_name) || getDisplayableHostname(url)
+
   return (
     <div className="source-container">
-      <ExternalLinkNewTab href={url} className="source">
-        <span className="site-name">{upperCase(site_name) || getDisplayableHostname(url)}</span>
+      <ExternalLinkNewTab
+        href={url}
+        className="source"
+        onClick={(e) =>
+          withoutModalSource ? null : handleSourceClick(e, addModal, { url, title, website_name })
+        }
+      >
+        <span className="site-name">{website_name}</span>
         <span className="article-title">{title}</span>
       </ExternalLinkNewTab>
     </div>
   )
 }
+
+export default connect(null, { addModal })(Source)
