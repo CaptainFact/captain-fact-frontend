@@ -75,6 +75,7 @@ class ModalSource extends React.PureComponent {
         <IframeContainer>
           {this.state.isLoading && <LoadingFrame />}
           <iframe
+            sandbox=""
             src={url}
             style={{
               width: '100%',
