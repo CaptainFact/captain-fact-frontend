@@ -14,7 +14,7 @@ import { LinkExternal } from 'styled-icons/octicons/LinkExternal'
 const CloseButton = styled(({ size = '1em', ...props }) => (
   <TimesCircle size={size} cursor="pointer" {...props} />
 ))`
-  color: #d0d0d0;
+  color: black;
   &:hover {
     opacity: 0.75;
   }
@@ -46,15 +46,17 @@ const IframeContainer = styled.div`
 
 class ModalSource extends React.PureComponent {
   state = { isLoading: true }
+
   renderUrlBarHeader = (url, title, website_name) => {
     const { popModal } = this.props
+    const titleToDisplay = title === null ? website_name : title
 
     return (
       <UrlBarHeader justifyContent="space-between">
         <Box>
-          <StyledExternalLinkNewTab href={url}>
+          <StyledExternalLinkNewTab href={url} title={titleToDisplay}>
             <LinkExternal size="1em" />
-            <UrlBarTitle ml="0.2em">{title === null ? website_name : title}</UrlBarTitle>
+            <UrlBarTitle ml="0.2em">{titleToDisplay}</UrlBarTitle>
           </StyledExternalLinkNewTab>
         </Box>
         <CloseButton size="1.5em" title="Close" onClick={popModal} />
@@ -65,6 +67,7 @@ class ModalSource extends React.PureComponent {
   render() {
     const { source, ...otherProps } = this.props
     const { url, title, website_name } = source
+
     return (
       <Modal
         customHeader={this.renderUrlBarHeader(url, title, website_name)}
