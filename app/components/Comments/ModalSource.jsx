@@ -91,6 +91,10 @@ class ModalSource extends React.PureComponent {
       </Modal>
     )
   }
+
+  componentDidMount() {
+    window.location.assign('#source')
+  }
 }
 
 export default connect(null, { popModal })(ModalSource)
