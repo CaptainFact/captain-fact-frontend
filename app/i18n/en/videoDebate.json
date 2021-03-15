@@ -18,7 +18,10 @@
     "flagForm": {
         "title": "Why do you want to flag this comment?",
         "xAvailable": "{{count}} available",
-        "xAvailable_plural": "{{count}} available"
+        "xAvailable_plural": "{{count}} available",
+        "warningMessage1": "If one of your flags is considered abusive, you will lose reputation.",
+        "warningMessage2": "Are you sure the user’s contribution is worth a loss of reputation? Is it truly harmful?",
+        "warningMessage3": "PS: Collaborative fact-checking on CaptainFact requires mutual kindness and indulgence."
     },
     "comment": {
         "writeComment": "Write a comment…",
