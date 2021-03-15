@@ -6,7 +6,7 @@ import { withNamespaces } from 'react-i18next'
 
 import SpeakersSelect from '../Speakers/SpeakersSelect'
 import { Icon, LinkWithIcon } from '../Utils'
-import TimeDisplay from '../Utils/TimeDisplay'
+import TimeEdit from '../Utils/TimeEdit'
 import { validateFieldLength } from '../../lib/form_validators'
 import { STATEMENT_LENGTH } from '../../constants'
 import { forcePosition } from '../../state/video_debate/video/reducer'
@@ -59,7 +59,7 @@ export class StatementForm extends React.PureComponent {
     }
   }
 
-  moveTimeMarker(position) {
+  moveTimeMarker = (position) => {
     this.props.forcePosition(position)
     if (this.state.lockedTime !== false) {
       this.setState({ lockedTime: position })
@@ -111,10 +111,7 @@ export class StatementForm extends React.PureComponent {
             <a className="button" onClick={() => this.moveTimeMarker(currentTime - 1)}>
               <Icon name="caret-left" />
             </a>
-            <TimeDisplay
-              time={currentTime}
-              handleClick={() => this.props.forcePosition(currentTime)}
-            />
+            <TimeEdit time={currentTime} handleChange={this.moveTimeMarker} />
             <a className="button" onClick={() => this.moveTimeMarker(currentTime + 1)}>
               <Icon name="caret-right" />
             </a>
