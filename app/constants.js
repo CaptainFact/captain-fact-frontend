@@ -47,6 +47,7 @@ export const ENTITY_USER_ACTION = 'user_action'
 
 // Required reputations
 export const MIN_REPUTATION_ADD_STATEMENT = -5
+export const MIN_REPUTATION_ADD_UNLISTED_VIDEO = 15
 export const MIN_REPUTATION_UPDATE_STATEMENT = 15
 export const MIN_REPUTATION_FLAG = 15
 export const MIN_REPUTATION_UPDATE_SPEAKER = 75
