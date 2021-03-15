@@ -87,6 +87,7 @@
     "unlisted": "Unlisted",
     "publicDescription": "Public videos are listed on videos page and in browser extension.",
     "unlistedDescription": "Unlisted videos will not be listed on the \"videos\" page, nor in the browser extension. Use them to work on a content that you don't want to bring forward on the platform.",
+    "requiredPoints": "{{requiredPoints}} pts required",
     "supportedPlatforms": "Currently supported platforms are YouTube and Facebook.",
     "adviceTitle": "Which video is worth being added?",
     "advice1": "Preferably, you are encouraged to add videos:",

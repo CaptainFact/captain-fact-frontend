@@ -18,6 +18,7 @@ Judgement actions such as voting and flagging are limited to avoid abusing them 
 | 15         | Vote Down                         |
 | 15         | Update statement                  |
 | 15         | Flag inappropriate content        |
+| 15         | Add unlisted videos               |
 | 30         | Add / create speakers             |
 | 75         | Update speaker                    |
 | 75         | Add videos                        |

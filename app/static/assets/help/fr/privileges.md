@@ -18,6 +18,7 @@ renforcer leur signification.
 | 15         | Voter négativement                                          |
 | 15         | Éditer une citation                                         |
 | 15         | Signaler un contenu inapproprié                             |
+| 15         | Ajouter une vidéo non listée                                |
 | 30         | Ajouter ou créer des intervenants                           |
 | 75         | Éditer un intervenant                                       |
 | 75         | Ajouter une vidéo                                           |

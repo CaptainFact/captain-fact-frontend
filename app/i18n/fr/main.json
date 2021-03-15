@@ -86,6 +86,7 @@
     "unlisted": "Non listée",
     "publicDescription": "Les vidéos publiques sont listées sur la page des vidéos et apparaissent dans l'extension pour navigateur.",
     "unlistedDescription": "Les vidéos non listées n'apparaitront ni dans la liste des vidéos ni dans l'extension. Elles vous permettent de travailler sur un contenu sans que celui-ci ne soit mis en avant par la plateforme.",
+    "requiredPoints": "{{requiredPoints}} pts requis",
     "supportedPlatforms": "Les plateformes actuellement supportées sont YouTube et Facebook.",
     "adviceTitle": "Quelle vidéo ajouter pour vérification sur CaptainFact ?",
     "advice1": "De préférence, merci d’ajouter au site des vidéos :",

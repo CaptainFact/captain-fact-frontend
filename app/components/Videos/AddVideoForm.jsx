@@ -14,10 +14,11 @@ import FieldWithButton from '../FormUtils/FieldWithButton'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { postVideo, searchVideo } from '../../state/videos/effects'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
 import StyledToggle from '../Utils/StyledToggle'
 import Message from '../Utils/Message'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
-import { MIN_REPUTATION_ADD_VIDEO } from '../../constants'
+import { MIN_REPUTATION_ADD_VIDEO, MIN_REPUTATION_ADD_UNLISTED_VIDEO } from '../../constants'
 import { LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
 import DismissableMessage from '../Utils/DismissableMessage'
 
@@ -79,11 +80,15 @@ export class AddVideoForm extends React.PureComponent {
   }
 
   render() {
-    const { t, params, location, router, isAuthenticated } = this.props
+    const { t, params, location, router, isAuthenticated, loggedInUser } = this.props
     const initialURL = params.videoUrl || location.query.url
     return (
       <Formik
-        initialValues={{ url: initialURL, isPublicVideo: true }}
+        initialValues={{
+          url: initialURL,
+          isPublicVideo:
+            loggedInUser.reputation >= MIN_REPUTATION_ADD_UNLISTED_VIDEO ? true : false,
+        }}
         validate={validate}
         onSubmit={({ url, isPublicVideo }, { setSubmitting }) => {
           setSubmitting(true)
@@ -144,22 +149,37 @@ export class AddVideoForm extends React.PureComponent {
               </Box>
 
               <Flex flexDirection="column" justifyContent="center" alignItems="center" py={4}>
-                <StyledToggle
-                  name="isPublicVideo"
-                  onChange={handleChange}
-                  checked={values.isPublicVideo}
-                  size="1.5em"
-                  label={t(values.isPublicVideo ? 'videos.public' : 'videos.unlisted')}
-                  mb={4}
-                />
+                <ReputationGuardTooltip requiredRep={MIN_REPUTATION_ADD_VIDEO}>
+                  {({ hasReputation }) => (
+                    <StyledToggle
+                      name="isPublicVideo"
+                      onChange={hasReputation ? handleChange : () => undefined}
+                      checked={values.isPublicVideo}
+                      size="1.5em"
+                      label={t(values.isPublicVideo ? 'videos.public' : 'videos.unlisted')}
+                      mb={4}
+                    />
+                  )}
+                </ReputationGuardTooltip>
+
                 <Box width={0.8}>
                   <Message>
                     <Eye size="1em" />
-                    &nbsp; {t('videos.publicDescription')}
+                    &nbsp; {t('videos.publicDescription')} (
+                    <ExternalLinkNewTab href="/help/privileges">
+                      {t('videos.requiredPoints', { requiredPoints: MIN_REPUTATION_ADD_VIDEO })}
+                    </ExternalLinkNewTab>
+                    )
                     <br />
                     <br />
                     <EyeSlash size="1em" />
-                    &nbsp; {t('videos.unlistedDescription')}
+                    &nbsp; {t('videos.unlistedDescription')} (
+                    <ExternalLinkNewTab href="/help/privileges">
+                      {t('videos.requiredPoints', {
+                        requiredPoints: MIN_REPUTATION_ADD_UNLISTED_VIDEO,
+                      })}
+                    </ExternalLinkNewTab>
+                    )
                   </Message>
                 </Box>
               </Flex>
