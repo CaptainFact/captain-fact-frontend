@@ -39,7 +39,7 @@ describe('Can comment on statements', () => {
       cy.contains('button[type=submit]', 'Post comment').click()
       cy.contains('.comments', commentWithSourceText)
       cy.contains('.comments', 'EN.WIKIPEDIA.ORG')
-      cy.contains('.comments', 'Frank Zappa - Wikipedia')
+      cy.contains('.comments', 'Frank Zappa')
 
       // Refute with source
       const commentRefuteText = 'This is FAKE NEWS!!!'
@@ -49,14 +49,14 @@ describe('Can comment on statements', () => {
       cy.contains('button[type=submit]', 'Refute').click()
       cy.contains('.comments-list.refute', commentRefuteText)
       cy.contains('.comments-list.refute', 'EN.WIKIPEDIA.ORG')
-      cy.contains('.comments-list.refute', 'Pink-necked green pigeon - Wikipedia')
+      cy.contains('.comments-list.refute', 'Pink-necked green pigeon')
 
       // Confirm with source
       const confirmSource = 'https://en.wikipedia.org/wiki/The_Star_Rover'
       cy.get('.comment-form input[name=source]').type(confirmSource)
       cy.contains('button[type=submit]', 'Approve').click()
       cy.contains('.comments-list.approve', 'EN.WIKIPEDIA.ORG')
-      cy.contains('.comments-list.approve', 'The Star Rover - Wikipedia')
+      cy.contains('.comments-list.approve', 'The Star Rover')
     })
   })
 })
