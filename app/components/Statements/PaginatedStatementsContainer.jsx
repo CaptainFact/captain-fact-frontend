@@ -20,10 +20,16 @@ const StatementPaginationMenu = styled(PaginationMenu)`
   }
 `
 
-const buildFiltersFromProps = ({ commentedStatements }) => {
+const buildFiltersFromProps = ({ commentedStatements, speakerID }) => {
   const filters = {}
 
-  filters.commented = commentedStatements
+  if (commentedStatements) {
+    filters.commented = commentedStatements
+  }
+
+  if (speakerID) {
+    filters.speaker_id = speakerID
+  }
 
   return filters
 }

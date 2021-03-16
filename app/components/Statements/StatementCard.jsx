@@ -16,6 +16,7 @@ const Statement = styled.div`
   border: 1px solid lightgrey;
   transition: box-shadow 0.5s, max-width 0.5s;
   box-shadow: rgba(10,10,10,0.15) 0px 6px 14px -5px;
+  text-align: center;
 `
 
 const StatementColumn = styled.div`

@@ -105,7 +105,10 @@
     "title1": "Fact checking des vidéos youtube de ",
     "info1": "CaptainFact est une plateforme de fact-checking collaboratif permettant de vérifier les informations dans les vidéos YouTube.",
     "info2": "Les propos des intervenants ci-dessous peuvent être sourcés, confirmés ou réfutés par les membres du site. Les vérifications s'affichent dans la vidéo Youtube si vous avez installé notre extension navigateur contre la désinformation.",
-    "more": "En savoir plus"
+    "more": "En savoir plus",
+    "videos": "Videos en cours de fact-checking collaboratif",
+    "statements": "Citations en cours de fact-checking collaboratif"
+
   },
   "all": "Toutes",
   "partners": "Partenaires",

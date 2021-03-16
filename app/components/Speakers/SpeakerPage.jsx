@@ -14,9 +14,24 @@ import { reset } from '../../state/speakers/reducer'
 import { reset as resetVideos } from '../../state/videos/reducer'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import PaginatedVideosContainer from '../Videos/PaginatedVideosContainer'
+import PaginatedStatementsContainer from '../Statements/PaginatedStatementsContainer'
 import { Span } from '../StyledUtils/Text'
 import { Box } from '@rebass/grid'
 import { LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
+import styled from 'styled-components'
+
+const SpeakerPageBody = styled.div`
+  h3 {
+    font-size: 3em;
+    text-align: center;
+    padding-bottom: 20px;
+  }
+`
+
+const StatementSection = styled.section`
+  background-color: #f8f8f8;
+  padding: 20px 0;
+`
 
 @withRouter
 @withNamespaces('main')
@@ -80,7 +95,7 @@ export class SpeakerPage extends React.PureComponent {
     const speaker = this.props.speaker
     const title = `${t('speakerpage.title1')} ${speaker.full_name}`
     return (
-      <div className="speaker-page">
+      <SpeakerPageBody className="speaker-page">
         <Helmet>
           <title>{title}</title>
           <meta property="og:title" content={title} />
@@ -111,8 +126,22 @@ export class SpeakerPage extends React.PureComponent {
           </DismissableMessage>
         </div>
         <br />
-        {this.renderVideos()}
-      </div>
+        <section>
+          <h3>{t('speakerpage.videos')}</h3>
+          <PaginatedVideosContainer
+            speakerID={this.props.speaker.id}
+            limit={4}
+            showPagination={false}
+          />
+        </section>
+        <StatementSection>
+          <h3>{t('speakerpage.statements')}</h3>
+          <PaginatedStatementsContainer
+            speakerID={this.props.speaker.id}
+            showPagination={false}
+          />
+        </StatementSection>
+      </SpeakerPageBody>
     )
   }
 
@@ -121,21 +150,6 @@ export class SpeakerPage extends React.PureComponent {
       return '...'
     }
     return this.renderLink(this.props.links.wikipedia, 'Wikipedia')
-  }
-
-  renderVideos() {
-    if (this.props.videosLoading || !this.props.speaker) {
-      return <LoadingFrame />
-    }
-
-    const currentPage = parseInt(this.props.location.query.page) || 1
-    return (
-      <PaginatedVideosContainer
-        baseURL={this.props.location.pathname}
-        currentPage={currentPage}
-        speakerID={this.props.speaker.id}
-      />
-    )
   }
 
   renderLink(url, siteName) {
