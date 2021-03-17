@@ -27,6 +27,11 @@ import UserProvider from './components/LoggedInUser/UserProvider'
 // Activate polyfills
 smoothSrollPolyfill()
 
+// When a change is detected we tell webpack to accept the updated module
+if (module.hot) {
+  module.hot.accept()
+}
+
 // Inject React app in DOM
 ReactDOM.render(
   <ThemeProvider theme={theme}>
