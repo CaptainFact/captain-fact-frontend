@@ -1,6 +1,7 @@
 {
   "presets": ["@babel/preset-env", "@babel/preset-react"],
   "plugins": [
+    "react-hot-loader/babel",
     [
       "babel-plugin-wildcard",
       { "exts": ["json"], "nostrip": true, "noModifyCase": true }
