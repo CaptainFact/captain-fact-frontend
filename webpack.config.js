@@ -19,6 +19,7 @@ module.exports = {
   entry: {
     app: [
       'babel-polyfill',
+      'react-hot-loader/patch',
       './app/index.jsx'
     ]
   },
@@ -39,6 +40,7 @@ module.exports = {
     ],
     alias: {
       styles: path.resolve(__dirname, 'styles/'),
+      'react-dom': '@hot-loader/react-dom',
     }
   },
   optimization: {
