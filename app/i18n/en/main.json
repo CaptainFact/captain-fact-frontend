@@ -95,7 +95,8 @@
     "adviceBulletPoint2": "that contain facts to check;",
     "adviceBulletPoint3": "that include approximations or incomplete elements;",
     "adviceBulletPoint4": "that comprise fallacious, misleading or wrong arguments.",
-    "adviceReadMoreLink": "Read more here"
+    "adviceReadMoreLink": "Read more here",
+    "see": "See video"
   },
   "pagination": {
     "prev": "Previous page",
@@ -106,6 +107,10 @@
     "info1": "CaptainFact are a fact-checking platform for YouTube video",
     "info2": "Speaker's statements can be confirm or refute by CaptainFact's members. All verifications are displayed during the video, if you have installed our browser extension.",
     "more": "See more information"
+  },
+  "search": {
+    "placeholder": "Search",
+    "loadMore": "Load more"
   },
   "all": "All",
   "partners": "Partners",

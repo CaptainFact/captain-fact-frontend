@@ -20,6 +20,8 @@ export const WS_API_URL = globals['WS_API_URL'] || process.env.WS_API_URL
 export const GRAPHQL_API_URL = globals['GRAPHQL_API_URL'] || process.env.GRAPHQL_API_URL
 export const FRONTEND_URL = globals['FRONTEND_URL'] || process.env.FRONTEND_URL
 export const FB_APP_ID = globals['FB_APP_ID'] || process.env.FB_APP_ID
+export const ALGOLIA_APP_ID = globals['ALGOLIA_APP_ID'] || process.env.FB_APP_ID
+export const ALGOLIA_USAGE_API_KEY = globals['ALGOLIA_USAGE_API_KEY'] || process.env.FB_APP_ID
 export const INVITATION_SYSTEM = boolFromConfig(
   globals['INVITATION_SYSTEM'] || process.env.INVITATION_SYSTEM || 'off'
 )

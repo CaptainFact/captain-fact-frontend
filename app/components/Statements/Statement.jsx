@@ -14,7 +14,7 @@ import StatementHeader from './StatementHeader'
 @withNamespaces('videoDebate')
 export default class Statement extends React.PureComponent {
   render() {
-    const { statement, speaker, handleEdit, handleDelete, offset = 0 } = this.props
+    const { statement, speaker, handleEdit, handleDelete, withoutActions, offset = 0 } = this.props
 
     return (
       <div>
@@ -24,8 +24,9 @@ export default class Statement extends React.PureComponent {
           handleEdit={handleEdit}
           handleDelete={handleDelete}
           handleShowHistory={() => this.showHistory()}
-          handleTimeClick={(time) => this.handleTimeClick(time)}
+          handleTimeClick={withoutActions ? null : this.handleTimeClick}
           handleShare={() => this.shareModal()}
+          withoutActions={withoutActions}
         />
         <div className="card-content statement-text-container">
           <h3 className="statement-text">{statement.text}</h3>
@@ -34,7 +35,7 @@ export default class Statement extends React.PureComponent {
     )
   }
 
-  handleTimeClick(time) {
+  handleTimeClick = (time) => {
     this.props.forcePosition(time)
     this.props.setScrollTo({
       id: this.props.statement.id,
