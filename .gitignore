@@ -14,6 +14,7 @@
 .DS_Store
 .cache
 .project
+.vscode
 .settings
 .tmproj
 nbproject

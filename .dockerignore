@@ -1,6 +1,7 @@
 .git
 .github
 .idea
+.vscode
 .eslintrc.yml
 .gitignore
 .sass-lint.yml
