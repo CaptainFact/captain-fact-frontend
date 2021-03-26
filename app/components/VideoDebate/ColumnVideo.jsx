@@ -4,6 +4,8 @@ import classNames from 'classnames'
 import { withNamespaces } from 'react-i18next'
 import { Link } from 'react-router'
 import { Flex } from '@rebass/grid'
+import { Resizable } from 're-resizable'
+import styled from 'styled-components'
 
 import { MIN_REPUTATION_ADD_SPEAKER } from '../../constants'
 import {
@@ -21,6 +23,14 @@ import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import { videoURL, videoHistoryURL } from '../../lib/cf_routes'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import SubscribeBtn from '../Notifications/SubscribeBtn'
+
+const StyledResizable = styled(Resizable)`
+  /* Overwrite resizable column behaviour on small device */
+  @media screen and (max-width: 1279px) {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+`
 
 @connect(
   (state) => ({
@@ -60,53 +70,69 @@ export class ColumnVideo extends React.PureComponent {
     const isDebate = view === 'debate'
 
     return (
-      <div id="col-video" className="column is-5">
-        <VideoDebatePlayer url={url} />
-        <Flex alignItems="center" px={[2, 3]} py={3} className="videoInfo">
-          {this.renderNotificationBell()}
-          <h2 className="title is-4 has-text-weight-light">{title}</h2>
-          <Presence nbUsers={this.props.nbUsers} nbViewers={this.props.nbViewers} />
-        </Flex>
-        <div className="tabs is-toggle is-fullwidth">
-          <ul>
-            <li className={classNames({ 'is-active': isDebate })}>
-              <Link to={videoURL(video.hash_id)}>
-                <Icon size="small" name="check-circle" />
-                <span>{t('debate')}</span>
-              </Link>
-            </li>
-            <li className={classNames({ 'is-active': !isDebate })}>
-              <Link to={videoHistoryURL(video.hash_id)}>
-                <Icon size="small" name="history" />
-                <span>{t('history')}</span>
-              </Link>
-            </li>
-            <li>
-              <ExternalLinkNewTab href="https://forum.captainfact.io/">
-                <Icon size="small" name="comments-o" />
-                <span>{t('chat')}</span>
-              </ExternalLinkNewTab>
-            </li>
-          </ul>
-        </div>
-        {isDebate && (
-          <div>
-            <div className="actions">
-              <ReputationGuardTooltip
-                requiredRep={MIN_REPUTATION_ADD_SPEAKER}
-                tooltipPosition="top center"
-              >
-                {({ hasReputation }) => <AddSpeakerForm disabled={!hasReputation} />}
-              </ReputationGuardTooltip>
-            </div>
-            <div className="speakers-list">
-              {speakers.map((speaker) => (
-                <SpeakerPreview key={speaker.id} speaker={speaker} />
-              ))}
-            </div>
+      <StyledResizable
+        defaultSize={{ width: '40%' }}
+        maxWidth="70%"
+        minWidth="400px"
+        enable={{
+          top: false,
+          topRight: false,
+          right: true,
+          bottomRight: false,
+          bottom: false,
+          bottomLeft: false,
+          left: false,
+          topLeft: false,
+        }}
+      >
+        <div id="col-video" className="column">
+          <VideoDebatePlayer url={url} />
+          <Flex alignItems="center" px={[2, 3]} py={3} className="videoInfo">
+            {this.renderNotificationBell()}
+            <h2 className="title is-4 has-text-weight-light">{title}</h2>
+            <Presence nbUsers={this.props.nbUsers} nbViewers={this.props.nbViewers} />
+          </Flex>
+          <div className="tabs is-toggle is-fullwidth">
+            <ul>
+              <li className={classNames({ 'is-active': isDebate })}>
+                <Link to={videoURL(video.hash_id)}>
+                  <Icon size="small" name="check-circle" />
+                  <span>{t('debate')}</span>
+                </Link>
+              </li>
+              <li className={classNames({ 'is-active': !isDebate })}>
+                <Link to={videoHistoryURL(video.hash_id)}>
+                  <Icon size="small" name="history" />
+                  <span>{t('history')}</span>
+                </Link>
+              </li>
+              <li>
+                <ExternalLinkNewTab href="https://forum.captainfact.io/">
+                  <Icon size="small" name="comments-o" />
+                  <span>{t('chat')}</span>
+                </ExternalLinkNewTab>
+              </li>
+            </ul>
           </div>
-        )}
-      </div>
+          {isDebate && (
+            <div>
+              <div className="actions">
+                <ReputationGuardTooltip
+                  requiredRep={MIN_REPUTATION_ADD_SPEAKER}
+                  tooltipPosition="top center"
+                >
+                  {({ hasReputation }) => <AddSpeakerForm disabled={!hasReputation} />}
+                </ReputationGuardTooltip>
+              </div>
+              <div className="speakers-list">
+                {speakers.map((speaker) => (
+                  <SpeakerPreview key={speaker.id} speaker={speaker} />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </StyledResizable>
     )
   }
 }
