@@ -89,7 +89,8 @@ const ROUTES_ENTITIES = {
 }
 
 const SearchPage = ({ t, refine, router }) => {
-  const term = decodeURIComponent(router.location.query.term)
+  const rawTerm = router.location.query.term
+  const term = rawTerm ? decodeURIComponent(rawTerm) : ''
 
   React.useEffect(() => {
     if (term) {
