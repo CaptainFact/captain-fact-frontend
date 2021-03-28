@@ -27,6 +27,7 @@ import Container from '../StyledUtils/Container'
 import NotificationsPopupContent from '../Notifications/NotificationsPopupContent'
 import NotificationBell from '../LoggedInUser/NotificationBell'
 import ScoreTag from '../Users/ScoreTag'
+import SearchBox from '../Search/SearchBox'
 
 const NavbarContainer = styled(Flex)`
   position: fixed;
@@ -134,7 +135,19 @@ const Navbar = ({
             )}
           </Container>
         </Flex>
-        {/* Center - will hold the search bar in the future */}
+        {/* Center - holds the search bar (hidden on mobile) */}
+        {/* The search bar is hidden during the beta, we'll remove the check once it goes public */}
+        {location.pathname.startsWith('/search') && (
+          <Container
+            display={['none', 'block']}
+            position="relative"
+            maxWidth="600px"
+            flex="1 1"
+            mx={2}
+          >
+            <SearchBox />
+          </Container>
+        )}
         {/* Right */}
         {loggedInUserLoading ? (
           <UserLoading size={38} title="Loading" />

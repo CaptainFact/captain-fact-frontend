@@ -28,6 +28,7 @@ import NotificationsPage from './components/LoggedInUser/NotificationsPage'
 import SubscriptionsPage from './components/LoggedInUser/SubscriptionsPage'
 import LogoutPage from './components/LoggedInUser/LogoutPage'
 import SupportUs from './components/SupportUs'
+import SearchPage from './components/Search/SearchPage'
 
 const CFRouter = () => (
   <Router history={browserHistory}>
@@ -61,6 +62,8 @@ const CFRouter = () => (
       <Route path="/extension" component={BrowserExtensionsPage} />
       <Route path="/moderation" component={Moderation} />
       <Route path="/support-us" component={SupportUs} />
+      <Route path="/search" component={SearchPage} />
+      <Route path="/search/:entity" component={SearchPage} />
       <Route path="*" component={NotFound} />
     </Route>
   </Router>

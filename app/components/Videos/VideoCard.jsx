@@ -49,7 +49,7 @@ export class VideoCard extends React.PureComponent {
           &nbsp;
           <TimeSince time={insertedAt} />
         </div>
-        {speakers.length > 0 && this.renderSpeakersList(speakers, t)}
+        {speakers && speakers.length > 0 && this.renderSpeakersList(speakers, t)}
       </div>
     )
   }

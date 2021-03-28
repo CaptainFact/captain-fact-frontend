@@ -3,6 +3,8 @@
 
 # For staging and pre-deploys
 [context.deploy-preview.environment]
+  ALGOLIA_APP_ID = "N5GW2EAIFX"
+  ALGOLIA_USAGE_API_KEY = "bde675591087b21d0dbc992981c26c5f"
   FB_APP_ID = "1923415864574767"
   GRAPHQL_API_URL = "https://graphql.staging.captainfact.io"
   HTTP_API_URL = "https://api.staging.captainfact.io"
@@ -11,6 +13,8 @@
   FRONTEND_URL = "https://staging.captainfact.io"
 
 [context.branch-deploy.environment]
+  ALGOLIA_APP_ID = "N5GW2EAIFX"
+  ALGOLIA_USAGE_API_KEY = "bde675591087b21d0dbc992981c26c5f"
   FB_APP_ID = "1923415864574767"
   GRAPHQL_API_URL = "https://graphql.staging.captainfact.io"
   HTTP_API_URL = "https://api.staging.captainfact.io"

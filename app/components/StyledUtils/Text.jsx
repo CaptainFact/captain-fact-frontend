@@ -20,6 +20,7 @@ export const Small = styled.small`
 export const P = styled.p`
   ${color}
   ${fontSize}
+  ${fontStyle}
   ${fontWeight}
   ${space}
   ${display}
