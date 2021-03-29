@@ -19,6 +19,8 @@ import SearchBox from './SearchBox'
 const MainContainer = styled.div`
   background: #f4f5f8;
   min-height: 100%;
+  display: flex;
+  flex-direction: column;
 
   .ais-InfiniteHits {
     display: flex;
@@ -93,29 +95,8 @@ const SearchPage = ({ t, refine, router }) => {
   const term = rawTerm ? decodeURIComponent(rawTerm) : ''
 
   React.useEffect(() => {
-    if (term) {
-      refine(term)
-    }
+    refine(term)
   }, [term])
-
-  if (!term) {
-    return (
-      <Container
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
-        height="100%"
-      >
-        <SearchIcon size={64} />
-        <P mt={4} textAlign="center">
-          <Trans i18nKey="search.noQuery">
-            Type something in the search bar above to start searching
-          </Trans>
-        </P>
-      </Container>
-    )
-  }
 
   const selectedEntity = ROUTES_ENTITIES[router.params.entity]
   return (
@@ -133,7 +114,7 @@ const SearchPage = ({ t, refine, router }) => {
           </Container>
           <P fontSize="18px">
             <Trans i18nKey="search.results" query={term}>
-              Search results for: <strong>{{ query: term }}</strong>
+              Search results for: <strong>{{ query: term || '…' }}</strong>
             </Trans>
           </P>
           <P color="black.300" fontStyle="italic">
@@ -147,22 +128,43 @@ const SearchPage = ({ t, refine, router }) => {
                 <Link to={{ pathname: `/search/${entity}s`, query: { term } }}>
                   <SearchIcon size="1em" />
                   &nbsp; {capitalize(t(`entities.${entity}`, { count: 5 }))}
-                  &nbsp;(
-                  <IndexSearchEntriesCount indexName={ALGOLIA_INDEXES_NAMES[entity]} />)
+                  {term && (
+                    <React.Fragment>
+                      &nbsp;(
+                      <IndexSearchEntriesCount indexName={ALGOLIA_INDEXES_NAMES[entity]} />)
+                    </React.Fragment>
+                  )}
                 </Link>
               </li>
             ))}
           </SearchTabsUl>
         </Container>
       </Container>
-      <Container p={3}>
-        <Index indexName={ALGOLIA_INDEXES_NAMES[selectedEntity]}>
-          <InfiniteHits
-            translations={{ loadMore: t('search.loadMore') }}
-            hitComponent={ENTITIES_COMPONENTS[selectedEntity]}
-          />
-        </Index>
-      </Container>
+      {!term ? (
+        <Container
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+          flex=" 1 1"
+        >
+          <SearchIcon size={64} />
+          <P mt={4} textAlign="center" px={2}>
+            <Trans i18nKey="search.noQuery">
+              Type something in the search bar above to start searching
+            </Trans>
+          </P>
+        </Container>
+      ) : (
+        <Container p={3}>
+          <Index indexName={ALGOLIA_INDEXES_NAMES[selectedEntity]}>
+            <InfiniteHits
+              translations={{ loadMore: t('search.loadMore') }}
+              hitComponent={ENTITIES_COMPONENTS[selectedEntity]}
+            />
+          </Index>
+        </Container>
+      )}
     </MainContainer>
   )
 }

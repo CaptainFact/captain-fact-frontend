@@ -57,6 +57,12 @@ const SearchBox = ({ router, t }) => {
         const route = isSearchPage ? router.location.pathname : '/search'
         router.push({ pathname: route, query: { term } })
       }}
+      onReset={(e) => {
+        e.preventDefault()
+        const isSearchPage = router.location.pathname.startsWith('/search')
+        const route = isSearchPage ? router.location.pathname : '/search'
+        router.push({ pathname: route })
+      }}
     />
   )
 }
