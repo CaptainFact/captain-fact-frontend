@@ -32,3 +32,13 @@
   [headers.values]
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
+    Content-Security-Policy = "
+      default-src 'self';
+      object-src 'self' https://opencollective.com;
+      script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com https://stats.captainfact.io https://cdnjs.cloudflare.com 'sha256-Y0GQ8oBo2E9DpNIINLboEYGSH1dyzdm4iSyTkt/qmBU=' 'sha256-kQJBbA6+P0lReef1s4voWq9FqF74NDZdtVkCAnL7Xoo=';
+      style-src 'self' 'unsafe-inline' data:;
+      connect-src 'self' HTTP_API_BASE_URL WS_API_BASE_URL GRAPHQL_API_BASE_URL https://query.wikidata.org https://www.wikidata.org https://api.rollbar.com https://*.algolianet.com;
+      img-src 'self' STATIC_RESOURCES_URL https://stats.captainfact.io https://api.adorable.io https://gravatar.com https://img.youtube.com data:;
+      frame-src https://www.youtube.com https://stats.captainfact.io https://opencollective.com/;
+      base-uri 'self';
+    "
