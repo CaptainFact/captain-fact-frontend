@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { fontSize, fontStyle, fontWeight, space, color, display } from 'styled-system'
+import { fontSize, fontStyle, fontWeight, space, color, display, textAlign } from 'styled-system'
 
 export const Span = styled.span`
   ${color}
@@ -24,4 +24,5 @@ export const P = styled.p`
   ${fontWeight}
   ${space}
   ${display}
+  ${textAlign}
 `

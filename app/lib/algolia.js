@@ -8,4 +8,13 @@ export const ALGOLIA_INDEXES_NAMES = {
   [ENTITY_STATEMENT]: `${JS_ENV}_statements`,
 }
 
-export const searchClient = Algolia(ALGOLIA_APP_ID, ALGOLIA_USAGE_API_KEY)
+const algoliaClient = Algolia(ALGOLIA_APP_ID, ALGOLIA_USAGE_API_KEY)
+
+export const searchClient = {
+  search(requests) {
+    const filteredRequests = requests.filter((request) => Boolean(request.params.query)) // Remove empty queries
+    if (filteredRequests.length) {
+      return algoliaClient.search(filteredRequests)
+    }
+  },
+}
