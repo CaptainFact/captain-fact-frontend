@@ -137,7 +137,7 @@ const Navbar = ({
         </Flex>
         {/* Center - holds the search bar (hidden on mobile) */}
         {/* The search bar is hidden during the beta, we'll remove the check once it goes public */}
-        {location.pathname.startsWith('/search') && (
+        {(isAuthenticated || location.pathname.startsWith('/search')) && (
           <Container
             display={['none', 'block']}
             position="relative"
