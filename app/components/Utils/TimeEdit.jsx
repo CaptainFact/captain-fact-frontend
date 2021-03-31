@@ -6,8 +6,10 @@ import formatSeconds from '../../lib/seconds_formatter'
 const TimeEditContainer = styled.div`
   &&& {
     margin: 0 10px 0 0;
-    width: 10%;
+    width: 92px;
+
     @media (max-width: 768px) {
+      min-width: 92px;
       width: 30%;
     }
   }
