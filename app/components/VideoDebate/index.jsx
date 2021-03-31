@@ -55,7 +55,7 @@ export class VideoDebate extends React.PureComponent {
   }
 
   renderMeta(video) {
-    const title = `Fact-checking collaboratif de : ${video.title}`
+    const title = `Fact-checking : ${video.title}`
     const image = getHDThumbnailUrl(video)
     const description = `${video.title} vérifiée citation par citation par la communauté CaptainFact`
     return (
