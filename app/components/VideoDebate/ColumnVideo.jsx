@@ -4,8 +4,6 @@ import classNames from 'classnames'
 import { withNamespaces } from 'react-i18next'
 import { Link } from 'react-router'
 import { Flex } from '@rebass/grid'
-import { Resizable } from 're-resizable'
-import styled from 'styled-components'
 
 import { MIN_REPUTATION_ADD_SPEAKER } from '../../constants'
 import {
@@ -19,18 +17,11 @@ import { LoadingFrame, Icon } from '../Utils'
 import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
 import VideoDebatePlayer from './VideoDebatePlayer'
 import Presence from './Presence'
+import ResizableColumn from './ResizableColumn'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import { videoURL, videoHistoryURL } from '../../lib/cf_routes'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import SubscribeBtn from '../Notifications/SubscribeBtn'
-
-const StyledResizable = styled(Resizable)`
-  /* Overwrite resizable column behaviour on small device */
-  @media screen and (max-width: 1279px) {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-`
 
 @connect(
   (state) => ({
@@ -70,21 +61,7 @@ export class ColumnVideo extends React.PureComponent {
     const isDebate = view === 'debate'
 
     return (
-      <StyledResizable
-        defaultSize={{ width: '40%' }}
-        maxWidth="70%"
-        minWidth="400px"
-        enable={{
-          top: false,
-          topRight: false,
-          right: true,
-          bottomRight: false,
-          bottom: false,
-          bottomLeft: false,
-          left: false,
-          topLeft: false,
-        }}
-      >
+      <ResizableColumn>
         <div id="col-video" className="column">
           <VideoDebatePlayer url={url} />
           <Flex alignItems="center" px={[2, 3]} py={3} className="videoInfo">
@@ -132,7 +109,7 @@ export class ColumnVideo extends React.PureComponent {
             </div>
           )}
         </div>
-      </StyledResizable>
+      </ResizableColumn>
     )
   }
 }
