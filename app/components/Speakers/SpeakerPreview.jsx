@@ -5,7 +5,7 @@ import { withNamespaces } from 'react-i18next'
 import classNames from 'classnames'
 import { Flex } from '@rebass/grid'
 
-import { MicrophoneAlt } from 'styled-icons/boxicons-regular/MicrophoneAlt'
+import { MicrophoneAlt } from 'styled-icons/boxicons-solid'
 
 import {
   MIN_REPUTATION_ADD_STATEMENT,

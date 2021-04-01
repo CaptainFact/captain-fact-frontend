@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 import ReactPlayer from 'react-player'
 import styled from 'styled-components'
 import { Flex, Box } from '@rebass/grid'
-import { PlusCircle } from 'styled-icons/boxicons-solid/PlusCircle'
+import { PlusCircle } from 'styled-icons/boxicons-solid'
 
 import { registerClick } from '../../API/matomo'
 import Button from '../Utils/Button'

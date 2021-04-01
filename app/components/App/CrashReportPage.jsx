@@ -2,9 +2,9 @@ import React from 'react'
 import { Flex } from '@rebass/grid'
 import { truncate } from 'lodash'
 
-import { Support } from 'styled-icons/boxicons-regular/Support'
-import { Github } from 'styled-icons/fa-brands/Github'
-import { Redo } from 'styled-icons/fa-solid/Redo'
+import { Support } from 'styled-icons/boxicons-regular'
+import { Github } from 'styled-icons/fa-brands'
+import { Redo } from 'styled-icons/fa-solid'
 
 import { withNamespaces } from 'react-i18next'
 import Message from '../Utils/Message'

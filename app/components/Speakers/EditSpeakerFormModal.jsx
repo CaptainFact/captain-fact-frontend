@@ -9,9 +9,9 @@ import AsyncSelect from 'react-select/lib/Async'
 import debounce from 'debounce-promise'
 import { Formik } from 'formik'
 
-import { Save } from 'styled-icons/boxicons-regular/Save'
-import { Ban } from 'styled-icons/fa-solid/Ban'
-import { LinkExternal } from 'styled-icons/octicons/LinkExternal'
+import { Save } from 'styled-icons/boxicons-regular'
+import { Ban } from 'styled-icons/fa-solid'
+import { LinkExternal } from 'styled-icons/octicons'
 
 import { updateSpeaker } from '../../state/video_debate/effects'
 import { popModal } from '../../state/modals/reducer'

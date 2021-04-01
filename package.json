@@ -55,7 +55,7 @@
   "dependencies": {
     "@babel/polyfill": "~7.11.5",
     "@rebass/grid": "~6.0.0-5",
-    "@styled-icons/bootstrap": "^10.19.0",
+    "@styled-icons/bootstrap": "^10.29.0",
     "algoliasearch": "4.8.6",
     "animate.scss": "0.0.6",
     "apollo-boost": "~0.1.12",
@@ -104,7 +104,7 @@
     "reselect": "~4.0.0",
     "smoothscroll-polyfill": "~0.4.4",
     "styled-components": "~4.1.2",
-    "styled-icons": "~5.5.0",
+    "styled-icons": "~10.31.0",
     "styled-system": "~3.2.0",
     "tinycon": "~0.6.8",
     "uuid": "~8.3.0",
