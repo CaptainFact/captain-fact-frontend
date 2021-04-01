@@ -111,7 +111,11 @@ export class StatementForm extends React.PureComponent {
             <a className="button" onClick={() => this.moveTimeMarker(currentTime - 1)}>
               <Icon name="caret-left" />
             </a>
-            <TimeEdit time={currentTime} handleChange={this.moveTimeMarker} />
+            <TimeEdit
+              time={currentTime}
+              handleChange={this.moveTimeMarker}
+              onTimeIconClick={() => this.moveTimeMarker(currentTime)}
+            />
             <a className="button" onClick={() => this.moveTimeMarker(currentTime + 1)}>
               <Icon name="caret-right" />
             </a>
