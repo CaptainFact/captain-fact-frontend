@@ -4,7 +4,7 @@ import { withNamespaces } from 'react-i18next'
 import { Formik } from 'formik'
 import { Flex } from '@rebass/grid'
 
-import { Edit } from 'styled-icons/fa-regular/Edit'
+import { Edit } from 'styled-icons/fa-regular'
 
 import { shiftStatements } from '../../state/video_debate/effects'
 import Modal from '../Modal/Modal'

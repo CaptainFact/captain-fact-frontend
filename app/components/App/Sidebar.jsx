@@ -9,16 +9,16 @@ import capitalize from 'voca/capitalize'
 import { Flex } from '@rebass/grid'
 import styled from 'styled-components'
 
-import { Star } from 'styled-icons/fa-solid/Star'
-import { EnvelopeFill } from '@styled-icons/bootstrap/EnvelopeFill'
+import { Star } from 'styled-icons/fa-solid'
+import { EnvelopeFill } from 'styled-icons/bootstrap'
 
-import { Github } from 'styled-icons/fa-brands/Github'
-import { Discord } from 'styled-icons/fa-brands/Discord'
-import { Twitter } from 'styled-icons/fa-brands/Twitter'
-import { Facebook } from 'styled-icons/fa-brands/Facebook'
-import { Mastodon } from 'styled-icons/fa-brands/Mastodon'
+import { Github } from 'styled-icons/fa-brands'
+import { Discord } from 'styled-icons/fa-brands'
+import { Twitter } from 'styled-icons/fa-brands'
+import { Facebook } from 'styled-icons/fa-brands'
+import { Mastodon } from 'styled-icons/fa-brands'
 
-import { LinkExternal } from 'styled-icons/octicons/LinkExternal'
+import { LinkExternal } from 'styled-icons/octicons'
 
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import {

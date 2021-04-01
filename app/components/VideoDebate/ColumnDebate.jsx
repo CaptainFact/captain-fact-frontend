@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { Trans, withNamespaces } from 'react-i18next'
 import styled from 'styled-components'
 
-import { InfoCircle } from 'styled-icons/fa-solid/InfoCircle'
-import { ExclamationCircle } from 'styled-icons/fa-solid/ExclamationCircle'
+import { InfoCircle } from 'styled-icons/fa-solid'
+import { ExclamationCircle } from 'styled-icons/fa-solid'
 
 import { isLoadingVideoDebate } from '../../state/video_debate/selectors'
 import VideoDebateHistory from './VideoDebateHistory'

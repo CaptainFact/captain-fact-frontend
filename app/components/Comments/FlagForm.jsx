@@ -6,7 +6,7 @@ import { Flex, Box } from '@rebass/grid'
 import FlagReasonSelect from '../Moderation/FlagReasonSelect'
 import { CommentDisplay } from './CommentDisplay'
 import Message from '../Utils/Message'
-import { Warning } from 'styled-icons/material/Warning'
+import { Warning } from 'styled-icons/material'
 
 const YellowWarning = styled(Warning)`
   color: #ffdd57;

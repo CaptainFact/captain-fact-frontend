@@ -4,11 +4,11 @@ import { Flex } from '@rebass/grid'
 import styled, { withTheme } from 'styled-components'
 import { get } from 'lodash'
 
-import { Discord } from 'styled-icons/fa-brands/Discord'
-import { Facebook } from 'styled-icons/fa-brands/Facebook'
-import { Twitter } from 'styled-icons/fa-brands/Twitter'
-import { Github } from 'styled-icons/fa-brands/Github'
-import { Mastodon } from 'styled-icons/fa-brands/Mastodon'
+import { Discord } from 'styled-icons/fa-brands'
+import { Facebook } from 'styled-icons/fa-brands'
+import { Twitter } from 'styled-icons/fa-brands'
+import { Github } from 'styled-icons/fa-brands'
+import { Mastodon } from 'styled-icons/fa-brands'
 
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 

@@ -4,7 +4,7 @@ import { connectSearchBox, Index, InfiniteHits } from 'react-instantsearch-dom'
 import styled from 'styled-components'
 import { Link } from 'react-router'
 import capitalize from 'voca/capitalize'
-import { Search as SearchIcon } from 'styled-icons/fa-solid/Search'
+import { Search as SearchIcon } from 'styled-icons/fa-solid'
 
 import Container from '../StyledUtils/Container'
 import { P } from '../StyledUtils/Text'

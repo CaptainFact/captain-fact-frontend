@@ -8,9 +8,9 @@ import { translate } from 'react-i18next'
 import { transparentize } from 'polished'
 import { omit } from 'lodash'
 
-import { Clock } from 'styled-icons/fa-regular/Clock'
-import { Check } from 'styled-icons/fa-solid/Check'
-import { PrimitiveDot } from 'styled-icons/octicons/PrimitiveDot'
+import { Clock } from 'styled-icons/fa-regular'
+import { Check } from 'styled-icons/fa-solid'
+import { DotFill } from 'styled-icons/octicons'
 
 import StyledLink from '../StyledUtils/StyledLink'
 import { TimeSince } from '../Utils/TimeSince'
@@ -94,7 +94,7 @@ const NotificationsPopupContent = ({ user, notifications, markAsSeen, t }) => {
                       pl={2}
                       onClick={() => markAsSeen(n.id, !seenAt)}
                     >
-                      {seenAt ? <PrimitiveDot size={12} /> : <Check size={12} />}
+                      {seenAt ? <DotFill size={12} /> : <Check size={12} />}
                     </Container>
                   </NotificationContainer>
                 )}

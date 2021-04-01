@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
 import { Link } from 'react-router'
 
-import { Report } from 'styled-icons/octicons/Report'
+import { Report } from 'styled-icons/octicons'
 
 import { MIN_REPUTATION_MODERATION } from '../../constants'
 import { fetchRandomModeration, postModerationFeedback } from '../../state/moderation/effects'

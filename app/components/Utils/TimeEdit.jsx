@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
-import { Time } from 'styled-icons/boxicons-regular/Time'
+import { Time } from 'styled-icons/boxicons-regular'
 import formatSeconds from '../../lib/seconds_formatter'
 
 const TimeEditContainer = styled.div`

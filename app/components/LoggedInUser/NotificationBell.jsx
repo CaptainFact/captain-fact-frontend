@@ -4,7 +4,7 @@ import { get } from 'lodash'
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
-import { Bell } from 'styled-icons/fa-solid/Bell'
+import { Bell } from 'styled-icons/fa-solid'
 
 import UnstyledButton from '../StyledUtils/UnstyledButton'
 import Container from '../StyledUtils/Container'
