@@ -19,7 +19,7 @@ const StyledResizable = styled(Resizable)`
       content: '';
       position: absolute;
       top: calc(50% - 20px);
-      left: 3px;
+      left: 2px;
       height: 40px;
       width: 3px;
       border-left: 1px solid ${({ resizing }) => themeGet(`colors.black.${resizing ? 300 : 200}`)};
@@ -63,7 +63,7 @@ const ResizableColumn = ({ children }) => {
       }}
       handleStyles={{
         right: {
-          width: '11px',
+          width: '9px',
           right: '-10px',
         },
       }}
