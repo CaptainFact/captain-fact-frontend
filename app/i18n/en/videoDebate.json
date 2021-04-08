@@ -68,7 +68,7 @@
         "one": "Speaker",
         "remove": "Remove speaker",
         "confirmRemove": "All statements made by {{speaker.full_name}} on this video will become orphans",
-        "add": "Add Speaker",
+        "add": "Add speaker",
         "create": "Create speaker \"{{name}}\"",
         "edit": "Edit \"{{name}}\" information",
         "search": "Type at least 3 characters to start searching",
