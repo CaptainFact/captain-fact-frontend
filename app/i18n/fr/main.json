@@ -2,8 +2,8 @@
   "entities": {
     "video": "vidéo",
     "video_plural": "vidéos",
-    "speaker": "intervenant·e",
-    "speaker_plural": "intervenant·e·s",
+    "speaker": "intervenant(e)",
+    "speaker_plural": "intervenant(e)s",
     "statement": "déclaration",
     "statement_plural": "déclarations",
     "videoFactChecking": "Vérification de vidéos"
