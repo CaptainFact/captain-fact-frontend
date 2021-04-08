@@ -3,6 +3,7 @@ import { Query } from 'react-apollo'
 import { get } from 'lodash'
 import { Flex, Box } from '@rebass/grid'
 import { Link } from 'react-router'
+import styled from 'styled-components'
 
 import { Videos } from 'styled-icons/boxicons-solid'
 
@@ -15,6 +16,9 @@ import { ErrorView } from '../Utils/ErrorView'
 import { StyledH2 } from '../StyledUtils/Title'
 import Message from '../Utils/Message'
 
+const SubscribeBtnBox = styled(Box)`
+  display: flex;
+`
 @translate('main')
 export default class NotificationsPage extends Component {
   renderScopeIcon() {
@@ -47,13 +51,14 @@ export default class NotificationsPage extends Component {
                 ) : (
                   subscriptions.map((subscription) => (
                     <Flex key={subscription.id} mb={3} alignItems="center">
-                      <SubscribeBtn
-                        size="1.75em"
-                        mr={2}
-                        scope={subscription.scope}
-                        entityId={subscription.videoId}
-                        isSubscribed={subscription.isSubscribed}
-                      />
+                      <SubscribeBtnBox mr={2}>
+                        <SubscribeBtn
+                          size={24}
+                          scope={subscription.scope}
+                          entityId={subscription.videoId}
+                          isSubscribed={subscription.isSubscribed}
+                        />
+                      </SubscribeBtnBox>
                       <Box mr={1}>{this.renderScopeIcon(subscription.scope)}</Box>
                       <Box>
                         <Link to={videoURL(subscription.video.hashId)}>
