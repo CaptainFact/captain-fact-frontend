@@ -61,25 +61,16 @@ const updateSubscriptionQuery = gql`
   }
 `
 
-const SubscribeBtn = ({
-  size,
-  isSubscribed,
-  entityId,
-  scope,
-  deprecatedOverrideClick,
-  ...props
-}) => (
+const SubscribeBtn = ({ size, isSubscribed, entityId, scope, ...props }) => (
   <Mutation mutation={updateSubscriptionQuery} variables={{ entityId, scope }}>
     {(updateSubscription) => (
       <Box fontSize={size} {...props}>
         <SubscribeIconContainer
           isSubscribed={isSubscribed}
           onClick={() =>
-            deprecatedOverrideClick
-              ? deprecatedOverrideClick(!isSubscribed)
-              : updateSubscription({
-                  variables: { isSubscribed: !isSubscribed },
-                })
+            updateSubscription({
+              variables: { isSubscribed: !isSubscribed },
+            })
           }
         >
           <IconSubscribed />
@@ -97,8 +88,6 @@ SubscribeBtn.propTypes = {
   scope: PropTypes.oneOf(['comment', 'statement', 'video']),
   /** Current state (subscribed or unsubscribed) */
   isSubscribed: PropTypes.bool.isRequired,
-  /** DEPRECATED: Override the graphql mutation */
-  deprecatedOverrideClick: PropTypes.func,
   /** Icon size */
   size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /** Any props from `Box` */
