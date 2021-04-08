@@ -1,6 +1,16 @@
 .popup-content
   border-radius: 5px
   filter: drop-shadow(rgba(0, 0, 0, 0.3) 0 0 3px)
-  padding: 0 !important
-  border: 1px solid lightgrey !important
-  overflow: auto
+
+// Adapted migration code: https://react-popup.elazizi.com/migrate-from-v1-to-v2/
+.popup-arrow
+  color: rgb(255, 255, 255)
+
+[role='tooltip'].popup-content
+  width: 200px
+
+.popup-overlay
+  background: rgba(0, 0, 0, 0.5)
+
+[data-popup='tooltip'].popup-overlay
+  background: transparent
