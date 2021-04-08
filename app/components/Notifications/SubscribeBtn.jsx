@@ -42,8 +42,6 @@ SubscribeBtn.propTypes = {
   scope: PropTypes.oneOf(['comment', 'statement', 'video']).isRequired,
   /** Current state (subscribed or unsubscribed) */
   isSubscribed: PropTypes.bool.isRequired,
-  /** Any props from `Action` */
-  ...Action.propTypes,
 }
 
 export default SubscribeBtn
