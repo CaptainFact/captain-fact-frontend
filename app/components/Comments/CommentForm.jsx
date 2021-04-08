@@ -11,8 +11,8 @@ import { Flex, Box } from '@rebass/grid'
 import { space } from 'styled-system'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
-import { Plus } from 'styled-icons/boxicons-regular/Plus'
-import { HelpCircle } from 'styled-icons/boxicons-solid/HelpCircle'
+import { Plus } from 'styled-icons/boxicons-regular'
+import { HelpCircle } from 'styled-icons/boxicons-solid'
 
 import { logError } from '../../logger'
 import { validateLengthI18n } from '../../lib/form_validators'

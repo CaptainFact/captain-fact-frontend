@@ -4,8 +4,8 @@ import styled, { css } from 'styled-components'
 import { themeGet } from 'styled-system'
 import { Box } from '@rebass/grid'
 
-import { BellSlash } from 'styled-icons/fa-solid/BellSlash'
-import { Bell } from 'styled-icons/fa-solid/Bell'
+import { BellSlash } from 'styled-icons/fa-solid'
+import { Bell } from 'styled-icons/fa-solid'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
 

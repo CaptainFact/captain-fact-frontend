@@ -6,8 +6,8 @@ import ReactPlayer from 'react-player'
 import { Flex, Box } from '@rebass/grid'
 import { Formik } from 'formik'
 
-import { Eye } from 'styled-icons/fa-regular/Eye'
-import { EyeSlash } from 'styled-icons/fa-regular/EyeSlash'
+import { Eye } from 'styled-icons/fa-regular'
+import { EyeSlash } from 'styled-icons/fa-regular'
 
 import { youtubeRegex, facebookVideoRegex } from '../../lib/url_utils'
 import FieldWithButton from '../FormUtils/FieldWithButton'

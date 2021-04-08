@@ -3,7 +3,7 @@ import { Map } from 'immutable'
 import classNames from 'classnames'
 import { withNamespaces } from 'react-i18next'
 import { Flex, Box } from '@rebass/grid'
-import { Globe } from 'styled-icons/fa-solid/Globe'
+import { Globe } from 'styled-icons/fa-solid'
 
 const defaultLocales = new Map({
   en: 'English',

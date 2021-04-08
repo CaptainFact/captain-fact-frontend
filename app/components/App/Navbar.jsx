@@ -8,9 +8,9 @@ import Popup from 'reactjs-popup'
 import { withNamespaces } from 'react-i18next'
 import { omit } from 'lodash'
 
-import { CaretDown } from 'styled-icons/fa-solid/CaretDown'
-import { UserCircle } from 'styled-icons/fa-regular/UserCircle'
-import { HelpCircle } from 'styled-icons/boxicons-regular/HelpCircle'
+import { CaretDown } from 'styled-icons/fa-solid'
+import { UserCircle } from 'styled-icons/fa-regular'
+import { HelpCircle } from 'styled-icons/boxicons-regular'
 
 import Logo from './Logo'
 import MenuToggleSwitch from './MenuToggleSwitch'

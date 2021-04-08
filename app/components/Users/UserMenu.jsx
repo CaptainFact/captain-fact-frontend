@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import { withNamespaces } from 'react-i18next'
 import { withRouter } from 'react-router'
 
-import { UserCircle } from 'styled-icons/fa-regular/UserCircle'
-import { Activity } from 'styled-icons/feather/Activity'
-import { Settings } from 'styled-icons/feather/Settings'
-import { Bell } from 'styled-icons/fa-solid/Bell'
-import { Rss } from 'styled-icons/feather/Rss'
-import { Videos } from 'styled-icons/boxicons-regular/Videos'
-import { LogOut } from 'styled-icons/feather/LogOut'
+import { UserCircle } from 'styled-icons/fa-regular'
+import { Activity } from 'styled-icons/feather'
+import { Settings } from 'styled-icons/feather'
+import { Bell } from 'styled-icons/fa-solid'
+import { Rss } from 'styled-icons/feather'
+import { Videos } from 'styled-icons/boxicons-solid'
+import { LogOut } from 'styled-icons/feather'
 
 const BASE_LINKS = [
   { path: '', i18nKey: 'menu.profile', Icon: UserCircle },

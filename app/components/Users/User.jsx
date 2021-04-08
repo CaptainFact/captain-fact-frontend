@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 import { Trans, withNamespaces } from 'react-i18next'
 import { Helmet } from 'react-helmet'
 
-import { Clock } from 'styled-icons/fa-regular/Clock'
+import { Clock } from 'styled-icons/fa-regular'
 
 import { Flex } from '@rebass/grid'
 import UserAppellation from './UserAppellation'

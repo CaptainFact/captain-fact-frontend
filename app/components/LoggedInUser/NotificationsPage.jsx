@@ -4,9 +4,9 @@ import { Flex, Box } from '@rebass/grid'
 import { translate } from 'react-i18next'
 import FlipMove from 'react-flip-move'
 
-import { Clock } from 'styled-icons/fa-regular/Clock'
-import { Check } from 'styled-icons/fa-solid/Check'
-import { PrimitiveDot } from 'styled-icons/octicons/PrimitiveDot'
+import { Clock } from 'styled-icons/fa-regular'
+import { Check } from 'styled-icons/fa-solid'
+import { DotFill } from 'styled-icons/octicons'
 
 import { optionsToQueryString } from '../../lib/url_utils'
 import { LoadingFrame } from '../Utils/LoadingFrame'
@@ -92,11 +92,7 @@ export default class NotificationsPage extends Component {
                 </Container>
                 <Flex ml={3} width={0.15} justifyContent="center">
                   {seenAt ? (
-                    <PrimitiveDot
-                      cursor="pointer"
-                      size={24}
-                      onClick={() => markAsSeen(n.id, false)}
-                    />
+                    <DotFill cursor="pointer" size={24} onClick={() => markAsSeen(n.id, false)} />
                   ) : (
                     <Check cursor="pointer" size={24} onClick={() => markAsSeen(n.id, true)} />
                   )}

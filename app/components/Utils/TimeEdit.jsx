@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { Time } from 'styled-icons/boxicons-regular/Time'
+import { themeGet } from 'styled-system'
+import { Time } from 'styled-icons/boxicons-regular'
 import formatSeconds from '../../lib/seconds_formatter'
 
 const TimeEditContainer = styled.div`
@@ -15,6 +16,18 @@ const TimeEditContainer = styled.div`
   }
 `
 
+const TimeIconButton = styled.button`
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: none;
+  cursor: pointer;
+
+  &:hover > ${Time} {
+    color: ${themeGet('colors.black.300')};
+  }
+`
+
 const handleTimeEdit = (newTimeCode, setFormattedTime, handleChange) => {
   setFormattedTime(newTimeCode)
   if (/^[0-9]?[0-9]:[0-5][0-9]:[0-5][0-9]$/.test(newTimeCode)) {
@@ -26,7 +39,7 @@ const handleTimeEdit = (newTimeCode, setFormattedTime, handleChange) => {
   }
 }
 
-const TimeEdit = ({ time, handleChange }) => {
+const TimeEdit = ({ time, handleChange, onTimeIconClick }) => {
   const [formattedTime, setFormattedTime] = useState('')
 
   useEffect(() => {
@@ -35,9 +48,14 @@ const TimeEdit = ({ time, handleChange }) => {
 
   return (
     <TimeEditContainer className="control has-icons-left">
-      <span className="icon is-left">
+      <TimeIconButton
+        type="button"
+        className="icon is-left"
+        style={{ pointerEvents: 'auto' }}
+        onClick={onTimeIconClick}
+      >
         <Time size={20} />
-      </span>
+      </TimeIconButton>
       <input
         type="text"
         className="input"

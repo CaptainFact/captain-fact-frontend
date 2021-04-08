@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled, { withTheme } from 'styled-components'
 import { themeGet } from 'styled-system'
-import { Menu as MenuIcon } from 'styled-icons/boxicons-regular/Menu'
-import { X as XIcon } from 'styled-icons/boxicons-regular/X'
+import { Menu as MenuIcon } from 'styled-icons/boxicons-regular'
+import { X as XIcon } from 'styled-icons/boxicons-regular'
 
 import { toggleSidebar } from '../../state/user_preferences/reducer'
 

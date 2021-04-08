@@ -4,7 +4,7 @@ import { get } from 'lodash'
 import { Flex, Box } from '@rebass/grid'
 import { Link } from 'react-router'
 
-import { Videos } from 'styled-icons/boxicons-regular/Videos'
+import { Videos } from 'styled-icons/boxicons-solid'
 
 import { translate } from 'react-i18next'
 import { loggedInUserSubscriptionsQuery } from '../../API/graphql_queries'
