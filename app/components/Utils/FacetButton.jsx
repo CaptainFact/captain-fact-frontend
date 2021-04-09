@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 import Popup from 'reactjs-popup'
+import { fadeIn } from '../StyledUtils/Keyframes'
 
 const StyledPopup = styled(Popup)`
   &-content {
@@ -13,6 +14,7 @@ const StyledPopup = styled(Popup)`
     color: #ffffff;
     background: rgba(54, 54, 54, 0.8);
     box-shadow: none;
+    animation: ${fadeIn} 0.1s;
 
     .popup-arrow {
       color: rgba(54, 54, 54, 0.8);
