@@ -4,6 +4,7 @@ exports[`user doesn't have required reputation 1`] = `
 <ForwardRef
   contentStyle={
     Object {
+      "maxWidth": 250,
       "zIndex": 999,
     }
   }
