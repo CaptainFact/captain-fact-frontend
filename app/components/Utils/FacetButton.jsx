@@ -6,10 +6,8 @@ import Popup from 'reactjs-popup'
 
 const StyledPopup = styled(Popup)`
   &-content {
-    width: auto !important;
     max-width: 200px;
     padding: 3px 8px;
-    border-radius: 0 !important;
     font-size: 14px;
     font-weight: 700;
     color: #ffffff;
@@ -17,7 +15,7 @@ const StyledPopup = styled(Popup)`
     box-shadow: none;
 
     .popup-arrow {
-      color: rgba(54, 54, 54, 0.8) !important;
+      color: rgba(54, 54, 54, 0.8);
     }
   }
 `
