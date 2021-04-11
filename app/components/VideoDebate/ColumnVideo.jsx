@@ -16,6 +16,7 @@ import { LoadingFrame, Icon } from '../Utils'
 import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
 import VideoDebatePlayer from './VideoDebatePlayer'
 import Presence from './Presence'
+import ResizableColumn from './ResizableColumn'
 import Actions from './Actions'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import { videoURL, videoHistoryURL } from '../../lib/cf_routes'
@@ -42,53 +43,55 @@ export class ColumnVideo extends React.PureComponent {
     const isDebate = view === 'debate'
 
     return (
-      <div id="col-video" className="column is-5">
-        <VideoDebatePlayer url={url} />
-        <Flex alignItems="center" px={[2, 3]} py={3} className="videoInfo">
-          <h2 className="title is-4 has-text-weight-light">{title}</h2>
-          <Presence nbUsers={this.props.nbUsers} nbViewers={this.props.nbViewers} />
-        </Flex>
-        <div className="tabs is-toggle is-fullwidth">
-          <ul>
-            <li className={classNames({ 'is-active': isDebate })}>
-              <Link to={videoURL(video.hash_id)}>
-                <Icon size="small" name="check-circle" />
-                <span>{t('debate')}</span>
-              </Link>
-            </li>
-            <li className={classNames({ 'is-active': !isDebate })}>
-              <Link to={videoHistoryURL(video.hash_id)}>
-                <Icon size="small" name="history" />
-                <span>{t('history')}</span>
-              </Link>
-            </li>
-            <li>
-              <ExternalLinkNewTab href="https://forum.captainfact.io/">
-                <Icon size="small" name="comments-o" />
-                <span>{t('chat')}</span>
-              </ExternalLinkNewTab>
-            </li>
-          </ul>
-        </div>
-        {isDebate && (
-          <div>
-            <Actions />
-            <div className="actions">
-              <ReputationGuardTooltip
-                requiredRep={MIN_REPUTATION_ADD_SPEAKER}
-                tooltipPosition="top center"
-              >
-                {({ hasReputation }) => <AddSpeakerForm disabled={!hasReputation} />}
-              </ReputationGuardTooltip>
-            </div>
-            <div className="speakers-list">
-              {speakers.map((speaker) => (
-                <SpeakerPreview key={speaker.id} speaker={speaker} />
-              ))}
-            </div>
+      <ResizableColumn>
+        <div id="col-video" className="column">
+          <VideoDebatePlayer url={url} />
+          <Flex alignItems="center" px={[2, 3]} py={3} className="videoInfo">
+            <h2 className="title is-4 has-text-weight-light">{title}</h2>
+            <Presence nbUsers={this.props.nbUsers} nbViewers={this.props.nbViewers} />
+          </Flex>
+          <div className="tabs is-toggle is-fullwidth">
+            <ul>
+              <li className={classNames({ 'is-active': isDebate })}>
+                <Link to={videoURL(video.hash_id)}>
+                  <Icon size="small" name="check-circle" />
+                  <span>{t('debate')}</span>
+                </Link>
+              </li>
+              <li className={classNames({ 'is-active': !isDebate })}>
+                <Link to={videoHistoryURL(video.hash_id)}>
+                  <Icon size="small" name="history" />
+                  <span>{t('history')}</span>
+                </Link>
+              </li>
+              <li>
+                <ExternalLinkNewTab href="https://forum.captainfact.io/">
+                  <Icon size="small" name="comments-o" />
+                  <span>{t('chat')}</span>
+                </ExternalLinkNewTab>
+              </li>
+            </ul>
           </div>
-        )}
-      </div>
+          {isDebate && (
+            <div>
+              <Actions />
+              <div className="actions">
+                <ReputationGuardTooltip
+                  requiredRep={MIN_REPUTATION_ADD_SPEAKER}
+                  tooltipPosition="top center"
+                >
+                  {({ hasReputation }) => <AddSpeakerForm disabled={!hasReputation} />}
+                </ReputationGuardTooltip>
+              </div>
+              <div className="speakers-list">
+                {speakers.map((speaker) => (
+                  <SpeakerPreview key={speaker.id} speaker={speaker} />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </ResizableColumn>
     )
   }
 }
