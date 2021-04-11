@@ -1,37 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`user doesn't have required reputation 1`] = `
-<Popup
-  arrow={true}
-  arrowStyle={
-    Object {
-      "background": "#f9fbfb",
-    }
-  }
-  className=""
-  closeOnDocumentClick={true}
-  closeOnEscape={true}
+<ForwardRef
   contentStyle={
     Object {
+      "maxWidth": 250,
       "zIndex": 999,
     }
   }
-  defaultOpen={false}
-  disabled={false}
-  keepTooltipInside={false}
-  lockScroll={false}
-  modal={false}
-  mouseEnterDelay={100}
-  mouseLeaveDelay={100}
-  offsetX={0}
-  offsetY={0}
   on="hover"
-  onClose={[Function]}
-  onOpen={[Function]}
-  open={false}
-  overlayStyle={Object {}}
   position="bottom center"
-  repositionOnResize={true}
   trigger={
     <div
       className="help-tooltip-trigger"
@@ -63,7 +41,7 @@ exports[`user doesn't have required reputation 1`] = `
       points to do that
     </Trans>
   </Message>
-</Popup>
+</ForwardRef>
 `;
 
 exports[`user have required reputation 1`] = `"Has reputation: true"`;

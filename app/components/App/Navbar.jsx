@@ -95,14 +95,31 @@ const UserLoading = styled(UserCircle)`
   margin-right: ${themeGet('space.2')};
 `
 
-const basePopupStyle = {
-  boxShadow: 'rgba(150, 150, 150, 0.2) 5px 10px 15px -6px',
-  filter: 'none',
-}
+const StyledPopup = styled(Popup)`
+  &-content {
+    z-index: 9999;
+    overflow: hidden;
+    background-color: ${themeGet('colors.white')};
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    box-shadow: rgba(150, 150, 150, 0.2) 5px 10px 15px -6px;
+  }
+`
 
-const desktopPopupStyle = { ...basePopupStyle, minWidth: 400 }
+const NotificationPopup = styled(StyledPopup)`
+  &-content {
+    width: 95%;
 
-const mobilePopupStyle = { ...basePopupStyle, width: '95%' }
+    @media (min-width: 600px) {
+      width: 400px;
+    }
+  }
+`
+const MenuPopup = styled(StyledPopup)`
+  &-content {
+    width: 200px;
+  }
+`
 
 const Navbar = ({
   t,
@@ -161,10 +178,10 @@ const Navbar = ({
                 <Box mr={[3, 4]}>
                   <ScoreTag reputation={loggedInUser.reputation} size="large" withIcon />
                 </Box>
-                <Popup
+                <NotificationPopup
                   position="bottom right"
-                  offsetX={isMobile ? 75 : -12}
-                  contentStyle={isMobile ? mobilePopupStyle : desktopPopupStyle}
+                  offsetX={isMobile ? 75 : 0}
+                  contentStyle={{ zIndex: 9999 }}
                   trigger={<NotificationBell mr={[3, 4]} />}
                 >
                   <Notifications>
@@ -185,10 +202,10 @@ const Navbar = ({
                       )
                     }}
                   </Notifications>
-                </Popup>
-                <Popup
+                </NotificationPopup>
+                <MenuPopup
                   position="bottom right"
-                  offsetX={-12}
+                  contentStyle={{ zIndex: 9999 }}
                   trigger={
                     <UserMenuTrigger>
                       <UserPicture size={USER_PICTURE_LARGE} user={loggedInUser} />
@@ -213,7 +230,7 @@ const Navbar = ({
                       </UserMenuEntry>
                     )}
                   </UserMenu>
-                </Popup>
+                </MenuPopup>
               </Flex>
             ) : (
               <React.Fragment>

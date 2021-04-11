@@ -10,7 +10,6 @@ import {
   videoDebateOnlineUsersCount,
   videoDebateOnlineViewersCount,
 } from '../../state/video_debate/presence/selectors'
-import { changeSubscription } from '../../state/video_debate/effects'
 import AddSpeakerForm from '../Speakers/AddSpeakerForm'
 import { SpeakerPreview } from '../Speakers/SpeakerPreview'
 import { LoadingFrame, Icon } from '../Utils'
@@ -18,37 +17,20 @@ import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
 import VideoDebatePlayer from './VideoDebatePlayer'
 import Presence from './Presence'
 import ResizableColumn from './ResizableColumn'
+import Actions from './Actions'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import { videoURL, videoHistoryURL } from '../../lib/cf_routes'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
-import SubscribeBtn from '../Notifications/SubscribeBtn'
 
-@connect(
-  (state) => ({
-    video: state.VideoDebate.video.data,
-    isLoading: state.VideoDebate.video.isLoading,
-    isSubscribed: state.VideoDebate.video.isSubscribed,
-    nbUsers: videoDebateOnlineUsersCount(state),
-    nbViewers: videoDebateOnlineViewersCount(state),
-  }),
-  { changeSubscription }
-)
+@connect((state) => ({
+  video: state.VideoDebate.video.data,
+  isLoading: state.VideoDebate.video.isLoading,
+  nbUsers: videoDebateOnlineUsersCount(state),
+  nbViewers: videoDebateOnlineViewersCount(state),
+}))
 @withNamespaces('videoDebate')
 @withLoggedInUser
 export class ColumnVideo extends React.PureComponent {
-  renderNotificationBell() {
-    return !this.props.isAuthenticated ? null : (
-      <SubscribeBtn
-        size="40px"
-        mr={[2, 3]}
-        scope="video"
-        entityId={this.props.video.id}
-        isSubscribed={this.props.isSubscribed}
-        deprecatedOverrideClick={this.props.changeSubscription}
-      />
-    )
-  }
-
   render() {
     const { isLoading } = this.props
 
@@ -65,7 +47,6 @@ export class ColumnVideo extends React.PureComponent {
         <div id="col-video" className="column">
           <VideoDebatePlayer url={url} />
           <Flex alignItems="center" px={[2, 3]} py={3} className="videoInfo">
-            {this.renderNotificationBell()}
             <h2 className="title is-4 has-text-weight-light">{title}</h2>
             <Presence nbUsers={this.props.nbUsers} nbViewers={this.props.nbViewers} />
           </Flex>
@@ -93,6 +74,7 @@ export class ColumnVideo extends React.PureComponent {
           </div>
           {isDebate && (
             <div>
+              <Actions />
               <div className="actions">
                 <ReputationGuardTooltip
                   requiredRep={MIN_REPUTATION_ADD_SPEAKER}
