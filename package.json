@@ -55,7 +55,7 @@
   "dependencies": {
     "@babel/polyfill": "~7.11.5",
     "@rebass/grid": "~6.0.0-5",
-    "@styled-icons/bootstrap": "^10.29.0",
+    "@styled-icons/bootstrap": "^10.33.0",
     "algoliasearch": "4.8.6",
     "animate.scss": "0.0.6",
     "apollo-boost": "~0.1.12",
