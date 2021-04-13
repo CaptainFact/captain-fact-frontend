@@ -37,17 +37,8 @@ const StyledResizable = styled(Resizable)`
 `
 
 const ResizableColumn = ({ children }) => {
-  const [resizing, setResizing] = useState(false)
-
   return (
     <StyledResizable
-      resizing={resizing}
-      onResizeStart={() => {
-        setResizing(true)
-      }}
-      onResizeStop={() => {
-        setResizing(false)
-      }}
       defaultSize={{ width: '40%' }}
       maxWidth="70%"
       minWidth="400px"
