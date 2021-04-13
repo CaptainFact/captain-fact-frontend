@@ -32,6 +32,16 @@ export default class StatementsList extends React.PureComponent {
     }
   }
 
+  componentDidUpdate(oldProps) {
+    const curStatementQuery = this.props.location.query.statement
+    if (curStatementQuery && curStatementQuery !== oldProps.location.query.statement) {
+      this.props.setScrollTo({
+        id: parseInt(curStatementQuery),
+        __forceAutoScroll: true,
+      })
+    }
+  }
+
   render() {
     const { speakers, statementFormSpeakerId, statements, offset } = this.props
     const speakerId =
