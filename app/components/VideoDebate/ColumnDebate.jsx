@@ -20,7 +20,7 @@ import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../../lib/local_storage
 import DismissableMessage from '../Utils/DismissableMessage'
 
 const TitleContainer = styled.div`
-  margin: 1.5rem 1.5rem 0 1.5rem;
+  padding: 1.5rem 1.5rem 0 1.5rem;
 `
 const TitleH1 = styled.h1`
   color: #0a0a0a;

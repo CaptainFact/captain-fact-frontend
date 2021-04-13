@@ -60,11 +60,10 @@ const Wrapper = styled.button`
     /* Deactivated icon */
     &:nth-child(2) {
       color: #9b9b9b;
-      opacity: 0.7;
+      opacity: ${({ activated }) => (activated ? 0 : 0.7)};
 
       &:hover {
         color: #e2b26f;
-        opacity: 0.7;
       }
     }
   }
