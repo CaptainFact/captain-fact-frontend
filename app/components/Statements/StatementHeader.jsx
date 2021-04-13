@@ -19,7 +19,7 @@ export default withNamespaces('videoDebate')(
     withoutActions,
   }) => (
     <header className="card-header">
-      <p className="card-header-title">
+      <div className="card-header-title">
         <Box mr={2}>
           <TimeDisplay time={statementTime} handleClick={handleTimeClick} />
         </Box>
@@ -27,7 +27,7 @@ export default withNamespaces('videoDebate')(
           <img className="speaker-mini" src={speaker.picture} alt="" />
         )}
         <strong>{speaker ? speaker.full_name : ''}</strong>
-      </p>
+      </div>
       {!withoutActions && (
         <div className="card-header-icon">
           <ReputationGuardTooltip
