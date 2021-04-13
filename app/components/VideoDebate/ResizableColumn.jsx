@@ -12,6 +12,10 @@ const StyledResizable = styled(Resizable)`
   }
 
   .right-resizable-handle {
+    @media (max-width: 1279px) {
+      display: none;
+    }
+
     border-left: 1px solid ${themeGet('colors.black.200')};
     border-right: 1px solid ${themeGet('colors.black.200')};
 
