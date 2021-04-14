@@ -58,7 +58,7 @@
     "@styled-icons/bootstrap": "^10.33.0",
     "algoliasearch": "4.8.6",
     "animate.scss": "0.0.6",
-    "apollo-boost": "~0.1.12",
+    "apollo-boost": "~0.4.9",
     "bulma": "~0.7.2",
     "classnames": "~2.3.1",
     "clean-tag": "^2.0.2",
