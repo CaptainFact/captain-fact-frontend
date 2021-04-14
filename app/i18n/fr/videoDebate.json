@@ -126,5 +126,9 @@
     "autofill": "Récupérer automatiquement depuis Wikipédia",
     "using": "Données extraites de <2>{{qid}}</2> (<5>éditer</5>)",
     "suggestions": "Suggestions Wikidata :"
+  },
+  "modalSource": {
+    "close": "Fermer",
+    "errorMessage": "Cette source n'est pas disponible à la prévisualisation, cliquez ici sur le lien ci-dessus <1/> pour l'ouvrir dans un nouvel onglet."
   }
 }

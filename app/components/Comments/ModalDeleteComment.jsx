@@ -9,7 +9,7 @@ const ModalDeleteComment = ({ handleAbort, comment, replies, t, ...otherProps })
   <ModalConfirmDelete
     handleAbort={handleAbort}
     title={t('comment.deleteThread', { count: replies && replies.size + 1 })}
-    content={<CommentDisplay comment={comment} withoutActions />}
+    content={<CommentDisplay comment={comment} withoutActions withoutModalSource />}
     {...otherProps}
   />
 )
