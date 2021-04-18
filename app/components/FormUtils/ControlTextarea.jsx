@@ -14,6 +14,7 @@ const ControlTextarea = (params) => {
     maxLength,
     hideErrorIfEmpty,
     meta: { touched, error, submitting },
+    warningMessage,
     ...props
   } = params
   const hasError = (!hideErrorIfEmpty || input.value.length > 0) && touched && error
@@ -32,6 +33,7 @@ const ControlTextarea = (params) => {
       {textarea}
       <TextareaLengthCounter length={input.value.length} maxLength={maxLength} />
       {hasError && <span className="help is-danger">{error}</span>}
+      {warningMessage && <span className="help is-warning">{warningMessage}</span>}
     </p>
   )
 }

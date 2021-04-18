@@ -2,7 +2,7 @@ import React from 'react'
 import Select from 'react-select'
 import { ReactSelectStyles, ReactSelectTheme } from '../../lib/react_select_theme'
 
-const SpeakersSelect = ({ input, speakers, placeholder }) => {
+const SpeakersSelect = ({ input, speakers, placeholder, styles }) => {
   const selectedSpeakerId = input.value
   const speaker = selectedSpeakerId && speakers.find((s) => s.id === selectedSpeakerId)
   const getOption = (speaker) => ({ value: speaker, label: speaker.full_name })
@@ -16,7 +16,7 @@ const SpeakersSelect = ({ input, speakers, placeholder }) => {
       name={input.name}
       ignoreAccents
       onBlur={() => input.onBlur(input.value.id)}
-      styles={ReactSelectStyles}
+      styles={styles ? styles : ReactSelectStyles}
       theme={ReactSelectTheme}
       onChange={({ value }) => {
         return value && value.id ? input.onChange(value.id) : input.onChange(null)

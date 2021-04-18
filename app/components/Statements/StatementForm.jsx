@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import { withNamespaces } from 'react-i18next'
 
 import SpeakersSelect from '../Speakers/SpeakersSelect'
+import { ReactSelectWarningStyles } from '../../lib/react_select_theme'
 import { Icon, LinkWithIcon } from '../Utils'
 import TimeEdit from '../Utils/TimeEdit'
 import { validateFieldLength } from '../../lib/form_validators'
@@ -39,7 +40,7 @@ export class StatementForm extends React.PureComponent {
         ? props.position
         : props.initialValues.time + props.offset
 
-    this.state = { lockedTime }
+    this.state = { lockedTime, emptySpeakerWarningHadBeenShown: false }
   }
 
   componentDidMount() {
@@ -68,7 +69,7 @@ export class StatementForm extends React.PureComponent {
 
   handleSubmit(statement) {
     const { position, offset } = this.props
-    const { lockedTime } = this.state
+    const { lockedTime, emptySpeakerWarningHadBeenShown } = this.state
 
     // Get the best value for statement time and apply the reverse offset
     // to use absolute timecode.
@@ -80,7 +81,12 @@ export class StatementForm extends React.PureComponent {
       statement.time = 0
     }
 
-    if (!statement.speaker_id) {
+    // When a speaker is not given on the first submission,
+    // a warning message pops up once before submit.
+    if (!statement.speaker_id && !emptySpeakerWarningHadBeenShown) {
+      this.setState({ emptySpeakerWarningHadBeenShown: true })
+      return
+    } else if (!statement.speaker_id) {
       statement.speaker_id = null
     }
 
@@ -134,11 +140,13 @@ export class StatementForm extends React.PureComponent {
               component={SpeakersSelect}
               speakers={speakers}
               placeholder={t('speaker.add')}
+              styles={this.state.emptySpeakerWarningHadBeenShown ? ReactSelectWarningStyles : null}
+              onChange={() => this.setState({ emptySpeakerWarningHadBeenShown: false })}
             />
           </div>
         </header>
         <div className="card-content">
-          <h3 className="statement-text">
+          <div className="statement-text">
             <Field
               name="text"
               component={ControlTextarea}
@@ -151,8 +159,11 @@ export class StatementForm extends React.PureComponent {
               hideErrorIfEmpty
               autoFocus
               autosize
+              warningMessage={
+                this.state.emptySpeakerWarningHadBeenShown ? t('statement.noSpeakerWarning') : null
+              }
             />
-          </h3>
+          </div>
         </div>
         <footer className="card-footer">
           <LinkWithIcon
