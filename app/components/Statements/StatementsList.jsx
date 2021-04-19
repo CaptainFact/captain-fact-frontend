@@ -3,22 +3,43 @@ import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
 import { withRouter } from 'react-router'
 import FlipMove from 'react-flip-move'
+import styled from 'styled-components'
 
 import { StatementForm } from './StatementForm'
 import { closeStatementForm, setScrollTo } from '../../state/video_debate/statements/reducer'
 import { postStatement } from '../../state/video_debate/statements/effects'
+import { toggleAutoscroll } from '../../state/user_preferences/reducer'
 import { statementFormValueSelector } from '../../state/video_debate/statements/selectors'
 import StatementContainer from './StatementContainer'
 import { FULLHD_WIDTH_THRESHOLD } from '../../constants'
 
+const ResumeAutoScrollButton = styled.button`
+  position: fixed;
+  bottom: 40px;
+  left: 65%;
+  background: gray;
+  color: white;
+  border: 0;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 1px 1px 2px #656565;
+
+  @media (max-width: 1279px) {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+`
 @connect(
   (state) => ({
     speakers: state.VideoDebate.video.data.speakers,
     statements: state.VideoDebate.statements.data,
     statementFormSpeakerId: statementFormValueSelector(state, 'speaker_id'),
     offset: state.VideoDebate.video.offset,
+    autoscrollEnabled: state.UserPreferences.enableAutoscroll,
   }),
-  { closeStatementForm, postStatement, setScrollTo }
+  { closeStatementForm, postStatement, setScrollTo, toggleAutoscroll }
 )
 @withNamespaces('videoDebate')
 @withRouter
@@ -43,7 +64,14 @@ export default class StatementsList extends React.PureComponent {
   }
 
   render() {
-    const { speakers, statementFormSpeakerId, statements, offset } = this.props
+    const {
+      speakers,
+      statementFormSpeakerId,
+      statements,
+      offset,
+      autoscrollEnabled,
+      toggleAutoscroll,
+    } = this.props
     const speakerId =
       speakers.size === 1 && !statementFormSpeakerId ? speakers.get(0).id : statementFormSpeakerId
     return (
@@ -73,6 +101,16 @@ export default class StatementsList extends React.PureComponent {
             <StatementContainer key={statement.id} statement={statement} />
           ))}
         </FlipMove>
+        {!autoscrollEnabled && (
+          <ResumeAutoScrollButton
+            type="button"
+            onClick={() => {
+              toggleAutoscroll()
+            }}
+          >
+            Reprendre le défilement automatique
+          </ResumeAutoScrollButton>
+        )}
       </div>
     )
   }

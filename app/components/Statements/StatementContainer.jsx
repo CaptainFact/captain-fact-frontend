@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
 import classNames from 'classnames'
+import IntersectionVisible from 'react-intersection-visible'
 
 import { StatementForm } from './StatementForm'
 import ModalConfirmDelete from '../Modal/ModalConfirmDelete'
@@ -9,6 +10,7 @@ import ModalConfirmDelete from '../Modal/ModalConfirmDelete'
 import * as statementSelectors from '../../state/video_debate/statements/selectors'
 import { deleteStatement, updateStatement } from '../../state/video_debate/statements/effects'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
+import { toggleAutoscroll } from '../../state/user_preferences/reducer'
 import StatementComments from './StatementComments'
 import CommentForm from '../Comments/CommentForm'
 import Statement from './Statement'
@@ -23,7 +25,7 @@ import { withLoggedInUser } from '../LoggedInUser/UserProvider'
     autoscrollEnabled: state.UserPreferences.enableAutoscroll,
     formEnabled: state.VideoDebate.statements.formsCount > 0,
   }),
-  { updateStatement, deleteStatement }
+  { updateStatement, deleteStatement, toggleAutoscroll }
 )
 @withLoggedInUser
 @withNamespaces('videoDebate')
@@ -42,39 +44,67 @@ export default class StatementContainer extends React.PureComponent {
 
   render() {
     const { isDeleting, replyTo } = this.state
-    const { statement, isFocused, speaker, isAuthenticated, loggedInUser, t } = this.props
+    const {
+      statement,
+      isFocused,
+      speaker,
+      isAuthenticated,
+      loggedInUser,
+      t,
+      autoscrollEnabled,
+      toggleAutoscroll,
+    } = this.props
 
     return (
-      <div
-        className={classNames('statement-container', { 'is-focused': isFocused })}
-        ref="container"
+      <IntersectionVisible
+        // onIntersect={(e) => console.log('onIntersect', e)}
+        onShow={(e) => {
+          console.log('onShow', e)
+
+          if (isFocused && !autoscrollEnabled) {
+            toggleAutoscroll()
+          }
+        }}
+        onHide={(e) => {
+          console.log('onHide', e)
+
+          if (isFocused && autoscrollEnabled) {
+            console.log('TOGGLEAUTOSCROLLLLL')
+            toggleAutoscroll()
+          }
+        }}
       >
-        <div className="card statement">
-          {this.renderStatementOrEditForm(speaker, statement)}
-          <StatementComments
-            statement={statement}
-            speaker={speaker}
-            setReplyToComment={this.setReplyToComment}
-          />
-          <CommentForm
-            statementID={statement.id}
-            replyTo={replyTo}
-            setReplyToComment={this.setReplyToComment}
-            user={isAuthenticated ? loggedInUser : null}
-          />
-          {isDeleting && (
-            <ModalConfirmDelete
-              title={t('statement.remove')}
-              className="is-small"
-              isAbsolute
-              isRemove
-              message={t('statement.confirmRemove')}
-              handleAbort={() => this.setState({ isDeleting: false })}
-              handleConfirm={() => this.props.deleteStatement({ id: statement.id })}
+        <div
+          className={classNames('statement-container', { 'is-focused': isFocused })}
+          ref="container"
+        >
+          <div className="card statement">
+            {this.renderStatementOrEditForm(speaker, statement)}
+            <StatementComments
+              statement={statement}
+              speaker={speaker}
+              setReplyToComment={this.setReplyToComment}
             />
-          )}
+            <CommentForm
+              statementID={statement.id}
+              replyTo={replyTo}
+              setReplyToComment={this.setReplyToComment}
+              user={isAuthenticated ? loggedInUser : null}
+            />
+            {isDeleting && (
+              <ModalConfirmDelete
+                title={t('statement.remove')}
+                className="is-small"
+                isAbsolute
+                isRemove
+                message={t('statement.confirmRemove')}
+                handleAbort={() => this.setState({ isDeleting: false })}
+                handleConfirm={() => this.props.deleteStatement({ id: statement.id })}
+              />
+            )}
+          </div>
         </div>
-      </div>
+      </IntersectionVisible>
     )
   }
 
