@@ -57,19 +57,13 @@ export default class StatementContainer extends React.PureComponent {
 
     return (
       <IntersectionVisible
-        // onIntersect={(e) => console.log('onIntersect', e)}
-        onShow={(e) => {
-          console.log('onShow', e)
-
+        onShow={() => {
           if (isFocused && !autoscrollEnabled) {
             toggleAutoscroll()
           }
         }}
-        onHide={(e) => {
-          console.log('onHide', e)
-
+        onHide={() => {
           if (isFocused && autoscrollEnabled) {
-            console.log('TOGGLEAUTOSCROLLLLL')
             toggleAutoscroll()
           }
         }}
