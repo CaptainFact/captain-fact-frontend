@@ -67,6 +67,7 @@ export default class StatementsList extends React.PureComponent {
       offset,
       autoscrollEnabled,
       toggleAutoscroll,
+      t,
     } = this.props
     const speakerId =
       speakers.size === 1 && !statementFormSpeakerId ? speakers.get(0).id : statementFormSpeakerId
@@ -104,7 +105,7 @@ export default class StatementsList extends React.PureComponent {
               toggleAutoscroll()
             }}
           >
-            Reprendre le défilement automatique
+            {t('statement.autoscroll_resume')}
           </ResumeAutoScrollButton>
         )}
       </div>

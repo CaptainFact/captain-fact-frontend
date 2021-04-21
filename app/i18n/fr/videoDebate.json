@@ -87,6 +87,7 @@
     "abortAdd": "Annuler l'ajout de citation",
     "autoscroll_enable": "Activer le défilement automatique",
     "autoscroll_disable": "Désactiver le défilement automatique",
+    "autoscroll_resume": "Reprendre le défilement automatique",
     "soundOnBackgroundFocus_enable": "Jouer un son quand la citation change en arriere plan",
     "soundOnBackgroundFocus_disable": "Ne pas jouer de son quand la citation change en arriere plan",
     "reverseTimeLock_lock": "Déverrouiller la position",
