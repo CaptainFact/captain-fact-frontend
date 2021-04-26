@@ -8,7 +8,6 @@ import styled from 'styled-components'
 import { StatementForm } from './StatementForm'
 import { closeStatementForm, setScrollTo } from '../../state/video_debate/statements/reducer'
 import { postStatement } from '../../state/video_debate/statements/effects'
-import { toggleAutoscroll } from '../../state/user_preferences/reducer'
 import { statementFormValueSelector } from '../../state/video_debate/statements/selectors'
 import StatementContainer from './StatementContainer'
 import { FULLHD_WIDTH_THRESHOLD } from '../../constants'
@@ -33,13 +32,14 @@ const ResumeAutoScrollButton = styled.button`
     statements: state.VideoDebate.statements.data,
     statementFormSpeakerId: statementFormValueSelector(state, 'speaker_id'),
     offset: state.VideoDebate.video.offset,
-    autoscrollEnabled: state.UserPreferences.enableAutoscroll,
   }),
-  { closeStatementForm, postStatement, setScrollTo, toggleAutoscroll }
+  { closeStatementForm, postStatement, setScrollTo }
 )
 @withNamespaces('videoDebate')
 @withRouter
 export default class StatementsList extends React.PureComponent {
+  state = { autoscrollEnabled: true, scrollToFocusedStatement: true }
+
   componentDidMount() {
     if (this.props.location.query.statement) {
       this.props.setScrollTo({
@@ -65,12 +65,15 @@ export default class StatementsList extends React.PureComponent {
       statementFormSpeakerId,
       statements,
       offset,
-      autoscrollEnabled,
-      toggleAutoscroll,
+      postStatement,
+      closeStatementForm,
       t,
     } = this.props
+    const { autoscrollEnabled, scrollToFocusedStatement } = this.state
+
     const speakerId =
       speakers.size === 1 && !statementFormSpeakerId ? speakers.get(0).id : statementFormSpeakerId
+
     return (
       <div className="statements-list">
         {statementFormSpeakerId !== undefined && (
@@ -79,11 +82,11 @@ export default class StatementsList extends React.PureComponent {
             initialValues={{ speaker_id: speakerId }}
             enableReinitialize
             keepDirtyOnReinitialize
-            handleAbort={() => this.props.closeStatementForm()}
+            handleAbort={() => closeStatementForm()}
             handleConfirm={(s) =>
-              this.props.postStatement(s).then((e) => {
+              postStatement(s).then((e) => {
                 if (!e.error) {
-                  this.props.closeStatementForm()
+                  closeStatementForm()
                 }
                 return e
               })
@@ -95,14 +98,25 @@ export default class StatementsList extends React.PureComponent {
           disableAllAnimations={window.innerWidth < FULLHD_WIDTH_THRESHOLD}
         >
           {statements.map((statement) => (
-            <StatementContainer key={statement.id} statement={statement} />
+            <StatementContainer
+              key={statement.id}
+              statement={statement}
+              autoscrollEnabled={autoscrollEnabled}
+              scrollToFocusedStatement={scrollToFocusedStatement}
+              toggleAutoscroll={() => {
+                this.setState({
+                  autoscrollEnabled: !autoscrollEnabled,
+                  scrollToFocusedStatement: false,
+                })
+              }}
+            />
           ))}
         </FlipMove>
         {!autoscrollEnabled && (
           <ResumeAutoScrollButton
             type="button"
             onClick={() => {
-              toggleAutoscroll()
+              this.setState({ autoscrollEnabled: true, scrollToFocusedStatement: true })
             }}
           >
             {t('statement.autoscroll_resume')}
