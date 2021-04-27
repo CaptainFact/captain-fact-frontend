@@ -37,5 +37,3 @@ montée du nombre d'utilisateurs.
 | Un·e de vos commentaires / sources est bannie après plusieurs signalements | ...
 | ... Pour **Attaque personelle ou langage inapproprié**                     | -25pts
 | ... Pour **Spam ou publicité non souhaitée**                               | -30pts
-| ... Pour **Hors-sujet**                                                    | -10pts
-| ... Pour **Commentaire non constructif**                                   | -5pts
