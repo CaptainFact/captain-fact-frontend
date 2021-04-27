@@ -33,5 +33,3 @@ These rules are subject to change, especially as the number of users grows.
 | One of your comment is banned after the collective moderation              | ...
 | ... For **Personal attack or inappropriate language**                     | -25pts
 | ... For **Unwanted commercial content or spam**                           | -30pts
-| ... For **Irrelevant**                                                    | -10pts
-| ... For **Not constructive**                                              | -5pts
