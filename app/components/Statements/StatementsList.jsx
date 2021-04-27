@@ -14,6 +14,7 @@ import { FULLHD_WIDTH_THRESHOLD } from '../../constants'
 
 const ResumeAutoScrollButton = styled.button`
   position: sticky;
+  z-index: 100;
   bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
@@ -25,6 +26,13 @@ const ResumeAutoScrollButton = styled.button`
   font-weight: 600;
   cursor: pointer;
   box-shadow: 1px 1px 2px #656565;
+
+  @media (max-width: 500px) {
+    width: 100%;
+    left: 0;
+    bottom: 5px;
+    transform: translateX(0);
+  }
 `
 @connect(
   (state) => ({
