@@ -18,14 +18,19 @@ const ResumeAutoScrollButton = styled.button`
   bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
-  background: gray;
-  color: white;
+  background-color: #828282;
+  color: #ffffff;
   border: 0;
   padding: 12px 24px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   box-shadow: 1px 1px 2px #656565;
+  transition: background-color 0.1s ease-out;
+
+  &:hover {
+    background-color: #646464;
+  }
 
   @media (max-width: 500px) {
     width: 100%;
