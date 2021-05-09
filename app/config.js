@@ -26,6 +26,9 @@ export const ALGOLIA_USAGE_API_KEY =
 export const INVITATION_SYSTEM = boolFromConfig(
   globals['INVITATION_SYSTEM'] || process.env.INVITATION_SYSTEM || 'off'
 )
+export const ENABLE_PUBLIC_SEARCH = boolFromConfig(
+  globals['ENABLE_PUBLIC_SEARCH'] || process.env.ENABLE_PUBLIC_SEARCH || 'on'
+)
 
 // Some helpers based on env
 export const IS_DEV = JS_ENV === 'dev'
