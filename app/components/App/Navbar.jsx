@@ -28,6 +28,7 @@ import NotificationsPopupContent from '../Notifications/NotificationsPopupConten
 import NotificationBell from '../LoggedInUser/NotificationBell'
 import ScoreTag from '../Users/ScoreTag'
 import SearchBox from '../Search/SearchBox'
+import { ENABLE_PUBLIC_SEARCH } from '../../config'
 
 const NavbarContainer = styled(Flex)`
   position: fixed;
@@ -153,8 +154,7 @@ const Navbar = ({
           </Container>
         </Flex>
         {/* Center - holds the search bar (hidden on mobile) */}
-        {/* The search bar is hidden during the beta, we'll remove the check once it goes public */}
-        {(isAuthenticated || location.pathname.startsWith('/search')) && (
+        {(ENABLE_PUBLIC_SEARCH || location.pathname.startsWith('/search')) && (
           <Container
             display={['none', 'block']}
             position="relative"
