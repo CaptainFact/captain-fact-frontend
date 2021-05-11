@@ -26,8 +26,7 @@ export default {
       text: "C'est effectivement le cas sur ces dernières années.",
       statement_id: 303,
       source: {
-        url:
-          'https://www.planetoscope.com/sols/47-consommation-de-pesticides-phytosanitaires-en-france.html',
+        url: 'https://www.planetoscope.com/sols/47-consommation-de-pesticides-phytosanitaires-en-france.html',
         title: 'Planetoscope - Statistiques : Consommation de pesticides phytosanitaires en France',
         site_name: null,
         language: null,
@@ -51,8 +50,7 @@ export default {
         id: 1,
         achievements: [4, 3, 6, 2, 1],
       },
-      text:
-        '"l\'Inao (Institut national de l\'origine et de la qualité) a considéré que le viticulteur refusait de se soumettre à un contrôle obligatoire et a décidé, en 2015, de lui retirer son AOC."',
+      text: '"l\'Inao (Institut national de l\'origine et de la qualité) a considéré que le viticulteur refusait de se soumettre à un contrôle obligatoire et a décidé, en 2015, de lui retirer son AOC."',
       statement_id: 297,
       source: null,
       score: 2,
@@ -74,8 +72,7 @@ export default {
         id: 1,
         achievements: [4, 3, 6, 2, 1],
       },
-      text:
-        "Si c'est du second degré effectivement mais elle ne clarifie pas son propos par la suite",
+      text: "Si c'est du second degré effectivement mais elle ne clarifie pas son propos par la suite",
       statement_id: 297,
       source: null,
       score: 1,
@@ -97,12 +94,10 @@ export default {
         id: 1,
         achievements: [4, 3, 6, 2, 1],
       },
-      text:
-        "Si l'AOC lui avait bien été retirée (et rendue depuis) la raison invoquée par le Figaro qui cite l'INAO est ailleurs : \"plusieurs rendez-vous manqués, mais pour des raisons justifiées, avec l'Organisme d'inspection des vins du Centre\"",
+      text: "Si l'AOC lui avait bien été retirée (et rendue depuis) la raison invoquée par le Figaro qui cite l'INAO est ailleurs : \"plusieurs rendez-vous manqués, mais pour des raisons justifiées, avec l'Organisme d'inspection des vins du Centre\"",
       statement_id: 297,
       source: {
-        url:
-          'http://www.lefigaro.fr/societes/2017/05/28/20005-20170528ARTFIG00185-la-justice-rend-son-aoc-pouilly-fume-a-un-vigneron-abusivement-sanctionne.php',
+        url: 'http://www.lefigaro.fr/societes/2017/05/28/20005-20170528ARTFIG00185-la-justice-rend-son-aoc-pouilly-fume-a-un-vigneron-abusivement-sanctionne.php',
         title: 'La justice rend son AOC pouilly-fumé à un vigneron abusivement sanctionné',
         site_name: 'FIGARO',
         language: 'fr',
@@ -126,8 +121,7 @@ export default {
         id: 18,
         achievements: [6, 3, 8, 4, 7, 9, 2, 1],
       },
-      text:
-        "Je valide cette source, mais j'aurais plutôt tendance à confirmer la citation. Certes, il ne s'agit pas d'un problème d'hauteur d'herbe, toutefois, la il s'agissait là de signaler un abus de sanction de l'INAO.",
+      text: "Je valide cette source, mais j'aurais plutôt tendance à confirmer la citation. Certes, il ne s'agit pas d'un problème d'hauteur d'herbe, toutefois, la il s'agissait là de signaler un abus de sanction de l'INAO.",
       statement_id: 297,
       source: null,
       score: 1,
@@ -149,12 +143,10 @@ export default {
         id: 1,
         achievements: [4, 3, 6, 2, 1],
       },
-      text:
-        "Le JDC qui cite directement Alexandre Bain va également dans le sens d'un problème de rendez-vous manqué",
+      text: "Le JDC qui cite directement Alexandre Bain va également dans le sens d'un problème de rendez-vous manqué",
       statement_id: 297,
       source: {
-        url:
-          'https://www.lejdc.fr/tracy-sur-loire/economie/viticulture/2017/05/26/alexandre-bain-retrouve-l-appellation-pouilly-fume_12419163.html',
+        url: 'https://www.lejdc.fr/tracy-sur-loire/economie/viticulture/2017/05/26/alexandre-bain-retrouve-l-appellation-pouilly-fume_12419163.html',
         title: "Sur décision de justice - Alexandre Bain retrouve l'appellation pouilly-fumé",
         site_name: 'www.lejdc.fr',
         language: null,

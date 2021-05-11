@@ -172,9 +172,8 @@ class UserProvider extends React.Component {
 /**
  * A high order component (HOC) that binds `UserContext` to the given `Component`.
  */
-export const withLoggedInUser = (Component) => (props) => (
+export const withLoggedInUser = (Component) => (props) =>
   <UserContext.Consumer>{(store) => <Component {...props} {...store} />}</UserContext.Consumer>
-)
 
 export const useLoggedInUser = () => React.useContext(UserContext)
 
