@@ -26,8 +26,10 @@ export const optionsToQueryString = (options) => {
     .join('&')}`
 }
 
-export const youtubeRegex = /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/ ]{11})/i
-export const facebookVideoRegex = /http(?:s)?:\/\/(?:www\.)?facebook.(?:[a-z]+)\/(?!(?:video\.php\?v=\d+|usernameFB\/videos\/\d+)).*/
+export const youtubeRegex =
+  /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/ ]{11})/i
+export const facebookVideoRegex =
+  /http(?:s)?:\/\/(?:www\.)?facebook.(?:[a-z]+)\/(?!(?:video\.php\?v=\d+|usernameFB\/videos\/\d+)).*/
 
 export const isExternal = (currentHref, url) =>
   (url.indexOf(':') > -1 || url.indexOf('//') > -1) && checkDomain(currentHref) !== checkDomain(url)
