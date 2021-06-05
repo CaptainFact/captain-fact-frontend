@@ -82,6 +82,7 @@
     "confirmRemove": "Êtes-vous sûr·e ?",
     "textPlaceholder": "Retranscrivez ici les propos de l'intervenant·e",
     "noSpeakerTextPlaceholder": "Décrivez ce qui apparait à l'image ou ajoutez un intervenant",
+    "noSpeakerWarning": "Un intervenant devrait être renseigné. Pour continuer malgré tout, appuyer sur « Sauvegarder ».",
     "text": "Le texte",
     "add": "Ajouter une citation",
     "abortAdd": "Annuler l'ajout de citation",

@@ -82,6 +82,7 @@
         "confirmRemove": "Do you really want to remove this statement?",
         "textPlaceholder": "Type a raw transcript of what the speaker says",
         "noSpeakerTextPlaceholder": "Describe what you see or select a speaker",
+        "noSpeakerWarning": "A speaker should be added. To continue without one, press \"Save\".",
         "text": "Text",
         "add": "Add a Statement",
         "abortAdd": "Close Statement Form",
