@@ -106,7 +106,7 @@
     "smoothscroll-polyfill": "~0.4.4",
     "styled-components": "~4.1.2",
     "styled-icons": "~10.31.0",
-    "styled-system": "~3.2.0",
+    "styled-system": "~5.1.5",
     "tinycon": "~0.6.8",
     "uuid": "~8.3.2",
     "validator": "13.5.1",
