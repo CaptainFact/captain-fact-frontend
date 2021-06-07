@@ -61,7 +61,7 @@
     "apollo-boost": "~0.1.12",
     "bulma": "~0.7.2",
     "classnames": "~2.3.1",
-    "clean-tag": "^2.0.2",
+    "clean-tag": "^3.1.1",
     "core-js": "~2.6.1",
     "date-fns": "^2.16.1",
     "debounce": "~1.0.2",
