@@ -38,6 +38,11 @@ const ResumeAutoScrollButton = styled.button`
     bottom: 5px;
     transform: translateX(0);
   }
+
+  // Hide button on mobile/tablet devices
+  @media (max-width: 1279px) {
+    display: none;
+  }
 `
 @connect(
   (state) => ({
