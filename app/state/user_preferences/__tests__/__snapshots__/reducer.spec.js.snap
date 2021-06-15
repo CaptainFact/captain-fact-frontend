@@ -4,7 +4,6 @@ exports[`has correct defaults 1`] = `
 Immutable.Record {
   "sidebarExpended": true,
   "locale": "en",
-  "enableAutoscroll": true,
   "enableSoundOnBackgroundFocus": true,
   "videosLanguageFilter": null,
   "videosFilter": "ONLY_FEATURED",

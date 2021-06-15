@@ -8,7 +8,6 @@ import { withRouter } from 'react-router'
 import {
   BellSlash,
   Bell,
-  ArrowsAltV,
   VolumeMute,
   VolumeUp,
   ShareAlt,
@@ -20,7 +19,7 @@ import { hasStatementForm } from '../../../state/video_debate/statements/selecto
 import { destroyStatementForm } from '../../../state/video_debate/statements/effects'
 import { changeSubscription } from '../../../state/video_debate/effects'
 import { changeStatementFormSpeaker } from '../../../state/video_debate/statements/reducer'
-import { toggleAutoscroll, toggleBackgroundSound } from '../../../state/user_preferences/reducer'
+import { toggleBackgroundSound } from '../../../state/user_preferences/reducer'
 import { addModal } from '../../../state/modals/reducer'
 import { MIN_REPUTATION_UPDATE_VIDEO } from '../../../constants'
 import { withLoggedInUser } from '../../LoggedInUser/UserProvider'
@@ -48,10 +47,7 @@ const Actions = ({
   isAuthenticated,
   isSubscribed,
   changeSubscription,
-  hasAutoscroll,
-  toggleAutoscroll,
   soundOnBackgroundFocus,
-  toggleBackgroundSound,
   addModal,
   router,
 }) => (
@@ -65,14 +61,6 @@ const Actions = ({
       />
     )}
 
-    <StyledAction
-      activated={hasAutoscroll}
-      onClick={() => toggleAutoscroll()}
-      activatedIcon={<ArrowsAltV />}
-      label={t('statement.autoscroll', {
-        context: hasAutoscroll ? 'disable' : 'enable',
-      })}
-    />
     <StyledAction
       activated={soundOnBackgroundFocus}
       onClick={() => toggleBackgroundSound()}
@@ -108,7 +96,6 @@ const Actions = ({
 )
 
 const mapStateToProps = (state) => ({
-  hasAutoscroll: state.UserPreferences.enableAutoscroll,
   soundOnBackgroundFocus: state.UserPreferences.enableSoundOnBackgroundFocus,
   isSubscribed: state.VideoDebate.video.isSubscribed,
   hasStatementForm: hasStatementForm(state),
@@ -116,7 +103,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   changeStatementFormSpeaker,
-  toggleAutoscroll,
   toggleBackgroundSound,
   addModal,
   destroyStatementForm,

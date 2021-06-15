@@ -12,8 +12,6 @@ import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 
 @connect(
   (state) => ({
-    hasAutoscroll: state.UserPreferences.enableAutoscroll,
-    soundOnBackgroundFocus: state.UserPreferences.enableSoundOnBackgroundFocus,
     hasStatementForm: hasStatementForm(state),
   }),
   {

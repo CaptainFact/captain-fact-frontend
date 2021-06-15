@@ -11,16 +11,14 @@ export const changeVideosLanguageFilter = createAction(
   'USER_PREFERENCES/CHANGE_VIDEOS_LANGUAGE_FILTER'
 )
 export const setVideosFilter = createAction('USER_PREFERENCES/SET_VIDEOS_FILTER')
-export const toggleAutoscroll = createAction('STATEMENTS/TOGGLE_AUTOSCROLL')
 export const toggleBackgroundSound = createAction('STATEMENTS/TOGGLE_BACKGROUND_SOUND')
 
 const isMobile = window.innerWidth <= MOBILE_WIDTH_THRESHOLD
 
 const Preferences = new Record({
-  // Disable autoscroll and sidebar expended by default on mobile
+  // Disable sidebar expended by default on mobile
   sidebarExpended: !isMobile,
   locale: browserLocale(),
-  enableAutoscroll: !isMobile,
   enableSoundOnBackgroundFocus: true,
   videosLanguageFilter: null,
   videosFilter: ONLY_FEATURED,
@@ -58,7 +56,6 @@ const UserPreferencesReducer = handleActions(
     [changeVideosLanguageFilter]: (state, { payload }) =>
       updateState(state, 'videosLanguageFilter', payload),
     [setVideosFilter]: (state, { payload }) => updateState(state, 'videosFilter', payload),
-    [toggleAutoscroll]: (state) => updateState(state, 'enableAutoscroll', !state.enableAutoscroll),
     [toggleBackgroundSound]: (state) => {
       return updateState(state, 'enableSoundOnBackgroundFocus', !state.enableSoundOnBackgroundFocus)
     },
