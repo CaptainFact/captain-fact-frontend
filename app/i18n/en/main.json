@@ -7,7 +7,7 @@
     "statement": "statement",
     "statement_plural": "statements",
     "videoFactChecking": "Video fact-checking",
-    "lastStatements": "Last statements"
+    "latestStatements": "Latest statements"
   },
   "menu": {
     "login": "Log in",

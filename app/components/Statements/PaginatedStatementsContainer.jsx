@@ -29,7 +29,6 @@ const buildFiltersFromProps = ({ commentedStatements }) => {
 }
 
 const PaginatedStatementsContainer = ({
-  t,
   baseURL,
   query = StatementsQuery,
   queryArgs = {},
@@ -41,19 +40,13 @@ const PaginatedStatementsContainer = ({
 }) => {
   const filters = buildFiltersFromProps(props)
   return (
-    <Query
-      query={query}
-      variables={{ offset: currentPage, limit, filters, ...queryArgs }}
-      fetchPolicy="network-only"
-    >
+    <Query query={query} variables={{ offset: currentPage, limit, filters, ...queryArgs }}>
       {({ loading, error, data }) => {
         const statements = get(data, statementsPath, INITIAL_STATEMENTS)
         if (error) {
           return <ErrorView error={error} />
-        }
-        if (!loading && statements.entries.length === 0) {
-          // TODO: change this error !
-          return <h2>{t('errors:client.noVideoAvailable')}</h2>
+        } else if (!loading && statements.entries.length === 0) {
+          return <h2>No statement yet!</h2>
         }
 
         const paginationMenu = !showPagination ? null : (

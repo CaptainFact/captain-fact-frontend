@@ -1,5 +1,4 @@
 import React from 'react'
-import { merge } from 'immutable'
 import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
 import capitalize from 'voca/capitalize'
@@ -12,8 +11,8 @@ import { commentedStatmentsFilter } from '../../state/user_preferences/reducer'
 import PaginatedStatementsContainer from './PaginatedStatementsContainer'
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
-import { Comments } from 'styled-icons/fa-solid/Comments'
-import { QuestionCircle } from 'styled-icons/fa-solid/QuestionCircle'
+import { Comments } from 'styled-icons/fa-solid'
+import { QuestionCircle } from 'styled-icons/fa-solid'
 
 const StatementPage = styled.div`
   text-align: center;
@@ -42,15 +41,19 @@ const NavBar = styled.nav`
 const StatementsWithCommentsFilterBar = ({ commentedStatmentsFilter, isCommented, t }) => {
   return (
     <NavBar className="level videos-filter">
-      <IsCommentedFilterButton className={`${isCommented() == true ? "set" : ""}`} onClick={() => commentedStatmentsFilter(true)}>
+      <IsCommentedFilterButton
+        className={`${isCommented() == true ? 'set' : ''}`}
+        onClick={() => commentedStatmentsFilter(true)}
+      >
         <Comments size="1em" />
-        &nbsp;
-        commented
+        &nbsp; Commented
       </IsCommentedFilterButton>
-      <IsCommentedFilterButton className={`${isCommented() == false ? "set" : ""}`} onClick={() => commentedStatmentsFilter(false)}>
+      <IsCommentedFilterButton
+        className={`${isCommented() == false ? 'set' : ''}`}
+        onClick={() => commentedStatmentsFilter(false)}
+      >
         <QuestionCircle size="1em" />
-        &nbsp;
-        to verify
+        &nbsp; To verify
       </IsCommentedFilterButton>
     </NavBar>
   )
@@ -81,18 +84,18 @@ export default class StatementsIndexPage extends React.PureComponent {
         <StatementPageHeader>
           <h2 className="title is-2">
             <Icon name="television" />
-            <span> {capitalize(t('entities.lastStatements'))}</span>
+            <span> {capitalize(t('entities.latestStatements'))}</span>
           </h2>
           <StatementsWithCommentsFilterBar
             commentedStatmentsFilter={(v) => commentedStatmentsFilter(v)}
             isCommented={() => this.isCommented()}
           />
         </StatementPageHeader>
-         <PaginatedStatementsContainer
+        <PaginatedStatementsContainer
           baseURL={this.props.location.pathname}
           currentPage={currentPage}
           commentedStatements={commentedStatements}
-         />
+        />
       </StatementPage>
     )
   }

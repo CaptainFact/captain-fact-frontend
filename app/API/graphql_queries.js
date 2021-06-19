@@ -113,6 +113,7 @@ export const StatementsQuery = gql`
           picture
         }
         video {
+          id
           hashId
           title
         }

@@ -57,7 +57,7 @@ const CFRouter = () => (
       <Route path="/videos/add/:videoUrl" component={AddVideoForm} />
       <Route path="/videos/:videoId" component={VideoDebate} view="debate" />
       <Route path="/videos/:videoId/history" component={VideoDebate} view="history" />
-      <Route path="/last_statements" component={StatementsIndexPage} />
+      <Route path="/statements" component={StatementsIndexPage} />
       <Route path="/s/:slug_or_id" component={SpeakerPage} />
       <Route path="/help" component={Help} />
       <Route path="/help/*" component={Help} />
