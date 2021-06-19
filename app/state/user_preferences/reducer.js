@@ -13,6 +13,7 @@ export const changeVideosLanguageFilter = createAction(
 export const setVideosFilter = createAction('USER_PREFERENCES/SET_VIDEOS_FILTER')
 export const toggleAutoscroll = createAction('STATEMENTS/TOGGLE_AUTOSCROLL')
 export const toggleBackgroundSound = createAction('STATEMENTS/TOGGLE_BACKGROUND_SOUND')
+export const commentedStatmentsFilter = createAction('USER_PREFERENCES/COMMENTED_STATEMENTS_FILTER')
 
 const isMobile = window.innerWidth <= MOBILE_WIDTH_THRESHOLD
 
@@ -24,6 +25,7 @@ const Preferences = new Record({
   enableSoundOnBackgroundFocus: true,
   videosLanguageFilter: null,
   videosFilter: ONLY_FEATURED,
+  commentedStatements: true,
 })
 
 const loadState = () => {
@@ -62,6 +64,7 @@ const UserPreferencesReducer = handleActions(
     [toggleBackgroundSound]: (state) => {
       return updateState(state, 'enableSoundOnBackgroundFocus', !state.enableSoundOnBackgroundFocus)
     },
+    [commentedStatmentsFilter]: (state, { payload }) => updateState(state, 'commentedStatements', payload)
   },
   loadState()
 )

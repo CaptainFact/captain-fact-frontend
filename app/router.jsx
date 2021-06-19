@@ -29,6 +29,7 @@ import SubscriptionsPage from './components/LoggedInUser/SubscriptionsPage'
 import LogoutPage from './components/LoggedInUser/LogoutPage'
 import SupportUs from './components/SupportUs'
 import SearchPage from './components/Search/SearchPage'
+import StatementsIndexPage from './components/Statements/StatementsIndexPage'
 
 const CFRouter = () => (
   <Router history={browserHistory}>
@@ -56,6 +57,7 @@ const CFRouter = () => (
       <Route path="/videos/add/:videoUrl" component={AddVideoForm} />
       <Route path="/videos/:videoId" component={VideoDebate} view="debate" />
       <Route path="/videos/:videoId/history" component={VideoDebate} view="history" />
+      <Route path="/statements" component={StatementsIndexPage} />
       <Route path="/s/:slug_or_id" component={SpeakerPage} />
       <Route path="/help" component={Help} />
       <Route path="/help/*" component={Help} />
