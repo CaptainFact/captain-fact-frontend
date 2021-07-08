@@ -2,14 +2,14 @@
   "title": "L'extension navigateur",
   "subtitle": "Pour vérifier les vidéos Youtube",
   "description": "L'extension pour navigateur permet d'incruster les informations fournies sur CaptainFact directement sur le contenu que vous regardez.",
-  "moreInfo": "Elle est 100 % <1>open-source</1> et <3>respecte votre vie privée</3>.",
+  "moreInfo": "Son code source est à 100 % <1>ouvert</1> et elle <3>respecte votre vie privée</3>.",
   "addTo": "Ajouter à",
   "disMoi": {
     "new": "NOUVEAU (FR)",
     "title": "L’extension DisMoi",
     "subtitle": "Pour vérifier toutes les pages du web",
     "description": "DisMoi permet à CaptainFact d'afficher ses fact-checking directement sur les pages web que vous visitez. DisMoi vous affichera des alertes, afin de vous signaler les arnaques, les fake-news ou des contextualisations en rapport.",
-    "psText": "PS : Gratuit, sans publicité, open source et respecte votre vie privée",
+    "psText": "Gratuit, sans publicité, à code source ouvert et respecte votre vie privée.",
     "follow": "Suivre CaptainFact sur DisMoi",
     "learnMore": "Découvrir cette extension"
   }

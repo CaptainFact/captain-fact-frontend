@@ -1,14 +1,14 @@
 {
   "1": {
-    "title": "Welcome",
-    "description": "Bienvenue dans l'aventure !"
+    "title": "Bienvenue",
+    "description": "Vous avez bien créé un compte sur CaptainFact"
   },
   "2": {
     "title": "Pas un robot",
-    "description": "Avec une si belle adresse e-mail, vous ne pouvez pas être un robot"
+    "description": "Avec une si belle adresse courriel, vous ne pouvez pas être un robot"
   },
   "3": {
-    "title": "Everybody hurts",
+    "title": "Tout le monde se trompe",
     "description": "Chercher de l'aide dans la section « Aide » était la bonne chose à faire"
   },
   "4": {
@@ -16,7 +16,7 @@
     "description": "Avec l'extension pour navigateur installée, on ne vous la mettra plus à l'envers"
   },
   "5": {
-    "title": "You're fake news !",
+    "title": "C'est des fausses nouvelles !",
     "description": "On dirait que vous avec détruit cette source"
   },
   "6": {
@@ -25,19 +25,19 @@
   },
   "7": {
     "title": "Ambassadeur",
-    "description": "Vous avez été nommé Ambassadeur de la communauté."
+    "description": "Vous avez été nommé Ambassadeur de la communauté"
   },
   "8": {
     "title": "Chasseur de fantômes",
-    "description": "Merci de nous avoir signalé ce bug !"
+    "description": "Merci de nous avoir signalé ceci."
   },
   "9": {
-    "title": "Fact Check Me, I'm Famous",
+    "title": "Vérifiez-moi, je suis célèbre",
     "description": "Vous êtes arrivé en haut du classement ce mois-ci, bravo Capitaine !"
   },
   "10": {
     "title": "Artiste",
-    "description": "Une ou plusieurs de vos créations sont intégrées dans le projet. Chapeau l'artiste !"
+    "description": "Une de vos créations est intégrée au projet"
   },
   "11": {
     "title": "Ondes Positives",

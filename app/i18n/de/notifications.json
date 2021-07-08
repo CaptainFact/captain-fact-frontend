@@ -1,0 +1,11 @@
+{
+  "filters": {
+    "UNSEEN": "Ungelesene",
+    "SEEN": "Gelesene",
+    "ALL": "Alle"
+  },
+  "markAllAsUnseen": "Alle als ungesehen markieren",
+  "markAllAsRead": "Alle als gesehen markieren",
+  "seeAll": "Alle anzeigen",
+  "empty": "Dein Benachrichtigungsfeld ist leer"
+}

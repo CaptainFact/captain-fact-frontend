@@ -2,8 +2,8 @@
   "entities": {
     "video": "vidéo",
     "video_plural": "vidéos",
-    "speaker": "intervenant(e)",
-    "speaker_plural": "intervenant(e)s",
+    "speaker": "intervenant·e",
+    "speaker_plural": "intervenant·e·s",
     "statement": "déclaration",
     "statement_plural": "déclarations",
     "videoFactChecking": "Vérification de vidéos"
@@ -23,14 +23,15 @@
     "other": "Autre",
     "donation": "Nous soutenir",
     "extension": "Télécharger l'extension",
-    "help": "Aide",
+    "help": "En savoir plus",
     "moderation": "Modération",
     "addedVideos": "Vidéos ajoutées",
     "notifications": "Notifications",
     "subscriptions": "Abonnements",
     "followus": "Nous suivre",
     "forum": "Forum de discussion",
-    "contact": "Contact"
+    "contact": "Contact",
+    "factChecking": "Vérification des faits"
   },
   "actions": {
     "save": "Sauvegarder",
@@ -38,7 +39,7 @@
     "send": "Envoyer",
     "moreInfo": "Plus d'informations",
     "goBack": "Revenir en arrière",
-    "reload": "Actualiser",
+    "reload": "Recharger",
     "flag": "Signaler",
     "flagged": "Signalé",
     "remove": "Retirer",
@@ -47,7 +48,7 @@
     "addToThread": "Ajouter à la suite",
     "approve": "Confirmer",
     "refute": "Réfuter",
-    "edit": "Éditer",
+    "edit": "Modifier",
     "loading": "Chargement",
     "share": "Partager",
     "apply": "Appliquer"
@@ -74,7 +75,7 @@
   },
   "videos": {
     "introTitle": "Ajouter une vidéo à vérifier sur CaptainFact",
-    "intro": "CaptainFact est une plateforme de vérification collaborative des vidéos, permettant d’ajouter des sources et des références qui améliorent la qualité des informations. Les vérifications s'affichent ensuite dans la vidéo Youtube grâce à l'extension navigateur.",
+    "intro": "CaptainFact est une plateforme de vérification collaborative des vidéos, permettant d’ajouter des sources et des références qui améliorent la qualité des informations. Les vérifications s'affichent ensuite dans la vidéo YouTube grâce à l'extension navigateur.",
     "seeExtension": "Découvrir l'extension navigateur",
     "intro2": "Vous pouvez ajouter une nouvelle vidéo à vérifier (si vous êtes un membre avec au moins {{requiredPoints}} pts de réputation) ou demander à la communauté de le faire :",
     "contact": "Demander l'ajout de la vidéo",
@@ -87,7 +88,7 @@
     "publicDescription": "Les vidéos publiques sont listées sur la page des vidéos et apparaissent dans l'extension pour navigateur.",
     "unlistedDescription": "Les vidéos non listées n'apparaitront ni dans la liste des vidéos ni dans l'extension. Elles vous permettent de travailler sur un contenu sans que celui-ci ne soit mis en avant par la plateforme.",
     "requiredPoints": "{{requiredPoints}} pts requis",
-    "supportedPlatforms": "Les plateformes actuellement supportées sont YouTube et Facebook.",
+    "supportedPlatforms": "Les plateformes actuellement prises en charge sont YouTube et Facebook.",
     "adviceTitle": "Quelle vidéo ajouter pour vérification sur CaptainFact ?",
     "advice1": "De préférence, merci d’ajouter au site des vidéos :",
     "adviceBulletPoint1": "pour lesquelles vous allez extraire ou vérifier des citations ;",
@@ -102,13 +103,13 @@
     "next": "Page suivante"
   },
   "speakerpage": {
-    "title1": "Fact checking des vidéos youtube de ",
-    "info1": "CaptainFact est une plateforme de fact-checking collaboratif permettant de vérifier les informations dans les vidéos YouTube.",
+    "title1": "Vérification des faits de ",
+    "info1": "CaptainFact est une plateforme de vérification des faits collaborative permettant de vérifier les informations dans les vidéos YouTube",
     "info2": "Les propos des intervenants ci-dessous peuvent être sourcés, confirmés ou réfutés par les membres du site. Les vérifications s'affichent dans la vidéo Youtube si vous avez installé notre extension navigateur contre la désinformation.",
     "more": "En savoir plus"
   },
   "search": {
-    "placeholder": "Rechercher un sujet, vérification, vidéo, intervenant, utilisateurs...",
+    "placeholder": "Recherche",
     "loadMore": "Voir plus de résultats",
     "results": "Résultats de recherche pour : <1>{{query}}</1>",
     "noQuery": "Tapez quelque chose dans la barre de recherche ci-dessus pour commencer à chercher"

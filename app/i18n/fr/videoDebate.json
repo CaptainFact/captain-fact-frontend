@@ -24,7 +24,7 @@
     "warningMessage3": "PS : Le fact-checking sur CaptainFact est un exercice citoyen d’entraide qui nécessite bienveillance et tolérance."
   },
   "comment": {
-    "writeComment": "Écrire un commentaire...",
+    "writeComment": "Écrire un commentaire…",
     "addSource": "Ajouter une source",
     "post": "Ajouter en commentaire",
     "post_reply": "Ajouter en réponse",
@@ -74,7 +74,7 @@
     "search": "Tapez au moins 3 lettres pour lancer la recherche",
     "fullName": "Nom complet",
     "title": "Titre",
-    "titlePlaceholder": "Politicien, docteur, journaliste...",
+    "titlePlaceholder": "Politicien, docteur, journaliste…",
     "noneFound": "Aucun intervenant trouvé pour ce nom"
   },
   "statement": {
@@ -93,7 +93,7 @@
     "reverseTimeLock_lock": "Déverrouiller la position",
     "reverseTimeLock_unlock": "Verrouiller la position",
     "help1": "Pour avoir sa place sur CaptainFact, une citation doit remplir au moins un des critères suivants :",
-    "help2": "- être vérifiable grâce à l’exposition de faits ;",
+    "help2": "- être vérifiable grâce à l’exposition de faits ;",
     "help3": "- faire mention d'une source ou d'un contenu que l’on peut vérifier ;",
     "help4": "- présenter des éléments incomplets ou approximatifs ;",
     "help5": "- présenter un argument fallacieux, trompeur ou mensonger ;",
@@ -117,8 +117,8 @@
   "presence": {
     "viewer": "{{count}} spectateur",
     "viewer_plural": "{{count}} spectateurs",
-    "user": "{{count}} fact-checker",
-    "user_plural": "{{count}} fact-checkers"
+    "user": "{{count}} enquêteur",
+    "user_plural": "{{count}} enquêteurs"
   },
   "warningUnlisted": "Cette vidéo n'est pas listée publiquement. Elle n'a peut-être pas reçu la visibilité nécessaire pour que les sources et citations soient correctement discutées.",
   "wikidata": {
