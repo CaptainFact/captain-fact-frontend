@@ -1,7 +1,16 @@
 {
-    "description": "A extensão da  Web injeta os dados de CapitainFact diretamente no conteúdo que está a ver.",
-    "subtitle": "Para verificar facto no Youtube",
-    "title": "A extensão de navegador",
-    "moreInfo": "É 100% de <1>código aberto</1> e <3>respeita a sua privacidade</3>.",
-    "addTo": "Adicionar a"
+  "description": "A extensão da Web injeta os dados de CapitainFact diretamente no conteúdo que está vizualizando.",
+  "subtitle": "Para verificar facto no Youtube",
+  "title": "A extensão do navegador",
+  "moreInfo": "É 100% de código aberto e respeita a sua privacidade.",
+  "addTo": "Adicionar a",
+  "disMoi": {
+    "new": "Novo (FR)",
+    "subtitle": "Para checar as páginas que você visita.",
+    "title": "Extensão DisMoi.",
+    "learnMore": "Leia mais sobre DisMoi.",
+    "follow": "Siga CaptainFact no DisMoi.",
+    "psText": "Livre de anúncios, sem coleta de dados pessoais, de código aberto e gratuito.",
+    "description": "DisMoi permite ao CaptainFact postar as notificações da checagem do fato diretamente na página ou no navegador. Quando você visita uma página verificada pelo CaptainFact, você é notificado pelo DisMoi."
+  }
 }

@@ -10,7 +10,7 @@
   "entity": "Entité",
   "moderation": "Modération",
   "deletedUser": "Compte supprimé",
-  "madeAction": "{{action}} :",
+  "madeAction": "{{action}}",
   "action": {
     "create": "Créé",
     "remove": "Retiré",
@@ -32,8 +32,8 @@
   },
   "entities": {
     "video": "vidéo",
-    "speaker": "intervenant",
-    "statement": "citation",
+    "speaker": "intervenant·e",
+    "statement": "déclaration",
     "comment": "commentaire",
     "fact": "commentaire sourcé",
     "user_action": "action",

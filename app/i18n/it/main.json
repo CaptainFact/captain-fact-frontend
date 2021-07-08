@@ -1,1 +1,43 @@
-{}
+{
+  "actions": {
+    "flagged": "Contrassegnato",
+    "reload": "Ricarica",
+    "goBack": "Torna indietro",
+    "moreInfo": "Ulteriori informazioni",
+    "send": "Invia",
+    "cancel": "Annulla",
+    "save": "Salva"
+  },
+  "menu": {
+    "contact": "Contattaci",
+    "subscriptions": "Iscrizioni",
+    "notifications": "Notifiche",
+    "addedVideos": "Video aggiunti",
+    "moderation": "Moderazione",
+    "help": "Per saperne di più",
+    "extension": "Scarica l'estensione",
+    "donation": "Supportaci",
+    "other": "Altro",
+    "language": "Lingua",
+    "factChecking": "Fact-checking",
+    "content": "Contenuto",
+    "dailyGain": "Guadagni giornalieri",
+    "yourProfile": "Il tuo profilo",
+    "myActivity": "La mia $t(menu.activity)",
+    "activity": "Attività",
+    "profile": "Profilo",
+    "settings": "Impostazioni",
+    "logout": "Disconnettiti",
+    "signup": "Registrati",
+    "login": "Log in"
+  },
+  "entities": {
+    "videoFactChecking": "Fact-checking video",
+    "statement_plural": "dichiarazioni",
+    "statement": "dichiarazione",
+    "speaker_plural": "altoparlanti",
+    "speaker": "altoparlante",
+    "video_plural": "Video",
+    "video": "Video"
+  }
+}

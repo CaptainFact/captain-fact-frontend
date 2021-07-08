@@ -1,0 +1,33 @@
+{
+  "client": {
+    "needReputation": "Du benötigst mindestens {{requiredRep}} <2>Ruf</2> Punkte, um das zu tun",
+    "notEnoughReputation": "Verdiene mehr Reputationspunkte, um auf diese Funktion zugreifen zu können",
+    "noVideoAvailable": "Kein Video verfügbar",
+    "submissionError": "Beim Senden der Daten ist ein Fehler aufgetreten",
+    "thirdParty": "Authentifizierung eines Drittanbieters fehlgeschlagen",
+    "joinCrashed": "Server-Verbindung fehlgeschlagen"
+  },
+  "server": {
+    "remote_video_404": "Das entfernte Video scheint nicht zu existieren",
+    "noInternet": "Serververbindung fehlgeschlagen. Aktualisiere die Seite",
+    "unauthorized": "Bitte (erneut) verbinden, um fortzufahren",
+    "unauthenticated": "Du benötigst ein Benutzerkonto, um das zu tun",
+    "action_already_done": "Diese Aktion ist bereits durchgeführt worden",
+    "not_found": "Es sieht so aus, als würde dies nicht existieren. Versuche, die Seite zu aktualisieren, falls das Problem weiterhin besteht",
+    "limit_reached": "Du hast dein Limit für diese Aktion erreicht, versuche es in ein paar Minuten erneut",
+    "not_enough_reputation": "Du hast nicht genug Reputation, um das zu tun",
+    "invalid_email_password": "Ungültige E-Mail-Passwort-Kombination",
+    "authentication_failed": "Authentifizierung fehlgeschlagen",
+    "reset_failed": "Zurücksetzen des Passworts fehlgeschlagen",
+    "invalid_invitation_token": "Einladungscode ist ungültig oder abgelaufen",
+    "invalid_token": "Verifizierungscode ist entweder ungültig oder abgelaufen",
+    "invalid_email": "Ungültige E-Mail-Adresse",
+    "unknown": "Irgendetwas hat auf unserer Seite nicht funktioniert, wir werden es überprüfen!"
+  },
+  "errorDetails": "Technische Details",
+  "reload": "Seite neu laden",
+  "addIssue": "Problem auf GitHub melden",
+  "contactSupport": "Support kontaktieren",
+  "crash": "😥 Neeeeeiiiiin! Die Website ist gerade abgestürzt. Es liegt nicht an dir, du hast nichts falsch gemacht.",
+  "title": "Fehler"
+}
