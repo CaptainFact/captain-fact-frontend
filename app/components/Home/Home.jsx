@@ -55,7 +55,7 @@ export default class Home extends React.PureComponent {
                         className="button is-primary is-medium"
                         to="/extension"
                       >
-                        {this.props.t('installExtension')}
+                        {t('installExtension')}
                       </Link>
                     </p>
                   </div>
@@ -67,7 +67,7 @@ export default class Home extends React.PureComponent {
                         className="button is-secondary is-medium"
                         to="/signup"
                       >
-                        {this.props.t('registerAndFactCheck')}
+                        {t('registerAndFactCheck')}
                       </Link>
                     </p>
                   </div>
@@ -134,7 +134,7 @@ export default class Home extends React.PureComponent {
                 className="button is-primary is-large"
                 href="https://fr.captainfact.io"
               >
-                {this.props.t('openFRSite')}
+                {t('goToFRSite')}
               </ExternalLinkNewTab>
             </p>
           </section>
