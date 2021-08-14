@@ -6,6 +6,7 @@ export const LOCAL_STORAGE_KEYS = {
   LOGGED_IN_USER: 'loggedInUser',
   PREFERENCES: 'preferences',
   DISMISS_ADD_VIDEO_INTRODUCTION: 'dismissAddVideoIntroduction',
+  DISMISS_FRENCH_NEWS_SUBSCRIPTION: 'dismissFrenchNewsSubscription',
   DISMISS_VIDEO_INTRODUCTION: 'dismissVideoHelp',
   DISMISS_SPEAKER_INTRODUCTION: 'dismissSpeakerIntroduction',
 }
