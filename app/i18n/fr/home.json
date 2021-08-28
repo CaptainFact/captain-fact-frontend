@@ -2,8 +2,9 @@
   "titleCF": "Plateforme collaborative de vérification des faits /  fact-checking",
   "presentationTitle": "Pour améliorer l'esprit critique, la qualité des informations et les décisions<1 />Contre les fake news, les arnaques et la désinformation",
   "presentation": "Une plateforme web opensource, participative, citoyenne, transparente, ouverte aux différents points de vue et respectueuse de la vie privée.",
-  "presentationTextButton1": "CaptainFact vous alerte lorsque vous consultez une information fausse ou contestée en vidéo.",
-  "presentationTextButton2": "CaptainFact est participatif : inscrivez-vous pour contribuer aux vérifications des informations.",
+  "presentationTextButton1": "Soyez directement alerté sur YouTube lorsque vous consultez une information fausse ou contestée par la communauté CaptainFact.",
+  "presentationTextButton2": "Rejoignez la communauté, contribuez aux vérifications collaboratives et prenez part à l'un des plus grands combats de notre époque.",
+  "goToFRSite": "Accéder au site FR",
   "headerPunchline": "Les fonctionnalités gratuites pour tous",
   "headerPunchline2": "améliorant l’esprit critique et la qualité des informations",
   "helpCaptain1": "Aider CaptainFact dans la lutte contre la désinformation",
@@ -56,7 +57,7 @@
   "footer": "Créé avec <1/> à l'aide d'",
   "emailPlaceholder": "Adresse e-mail",
   "inviteSuccess": "Demande d'invitation enregistrée !",
-  "registerAndFactCheck": "S'inscrire",
+  "registerAndFactCheck": "Rejoindre la communauté",
   "installExtension": "Découvrir l'extension",
   "partners": "En partenariat avec...",
   "partners-info": ">>> Pour en savoir plus sur les partenariats ou pour devenir partenaire",
@@ -65,7 +66,8 @@
   "learnMore": "En savoir plus",
   "aboutAmbassadors": "Les ambassadeurs sont chargés de veiller sur la communauté. Ils ont aussi pour objectif de faire remonter les attentes des utilisateurs et de participer à la gouvernance du projet.",
   "openSource": "100 % <2>open-source</2> - respecte votre vie privée.\n    L'extension fonctionne sur Youtube et bientôt pour toutes les pages du web.",
-  "latest": "Les dernières vidéos",
+  "latest": "Les dernières vidéos en cours de fact-checking collaboratif par les membres",
+  "subscribeFrenchNews": "S’abonner au Journal du fact-checking collaboratif",
   "discord": "Rejoignez-nous sur Discord",
   "followus": "Pour nous suivre",
   "contactus": "Nous contacter",
@@ -83,5 +85,6 @@
   "membersOfTheAssociation": "Adhérents à l’association",
   "regularFinancialContributors": "Soutien régulier",
   "donators": "Donateurs",
-  "crowdfunding": "Financement participatif"
+  "crowdfunding": "Financement participatif",
+  "knowMoreFR": "Pour en savoir plus sur la communauté francophone de CaptainFact :"
 }

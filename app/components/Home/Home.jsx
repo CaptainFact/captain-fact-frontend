@@ -1,27 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router'
 import { withNamespaces, Trans } from 'react-i18next'
-import { Flex, Box } from '@rebass/grid'
-import { Discourse } from 'styled-icons/fa-brands'
 import { ExternalLinkAlt } from 'styled-icons/fa-solid'
 
 import * as Matomo from '../../API/matomo'
 import { Icon } from '../Utils'
-import InvitationRequestForm from '../Users/InvitationRequestForm'
-import { INVITATION_SYSTEM } from '../../config'
-import AllPartners from './AllPartners'
-import OpenCollectiveContributors from './OpenCollectiveContributors'
-import AllTeam from './AllTeam'
+import { LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
+import DismissableMessage from '../Utils/DismissableMessage'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import CFSocialProfiles from './CFSocialProfiles'
 import LastVideos from './LastVideos'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
-import imgMedia from '../../assets/media.jpg'
 import imgExample1 from '../../assets/example1.jpg'
 import examplesImg1 from '../../assets/examples/image-1.jpg'
 import examplesImg2 from '../../assets/examples/image-2.jpg'
 import examplesImg3 from '../../assets/examples/image-3.jpg'
-import imgIllutration from '../../assets/landing-illustration.png'
 import Container from '../StyledUtils/Container'
 
 @withNamespaces('home')
@@ -34,8 +27,8 @@ export default class Home extends React.PureComponent {
       <div className="home-page is-gradient-primary">
         <section className="hero">
           <div className="hero-body">
-            <div className="columns">
-              <div className="column is-11 is-10-tablet is-12-mobile">
+            <div className="columns is-desktop">
+              <div className="column is-7-desktop">
                 <h1 className="title1">
                   Captain
                   <strong>
@@ -52,62 +45,130 @@ export default class Home extends React.PureComponent {
                     Against fake news, fraud and disinformation
                   </Trans>
                 </h2>
-                <p className="presentation is-bold">{t('presentation')}</p>
+                <p className="presentation is-italic">{t('presentation')}</p>
                 <div className="columns">
                   <div className="column is-5">
-                    <p className="presentation">{t('presentationTextButton1')}</p>
+                    <p className="presentation is-bold">{t('presentationTextButton1')}</p>
                     <p>
                       <Link
                         onClick={() => Matomo.registerClick('Home', 'Button', 'ExtensionPage')}
                         className="button is-primary is-medium"
                         to="/extension"
                       >
-                        {this.props.t('installExtension')}
+                        {t('installExtension')}
                       </Link>
                     </p>
                   </div>
                   <div className="column is-5">
-                    <p className="presentation">{t('presentationTextButton2')}</p>
+                    <p className="presentation is-bold">{t('presentationTextButton2')}</p>
                     <p>
                       <Link
                         onClick={() => Matomo.registerClick('Home', 'Button', 'SignUp')}
-                        className="button is-primary is-medium"
+                        className="button is-secondary is-medium"
                         to="/signup"
                       >
-                        {this.props.t('registerAndFactCheck')}
+                        {t('registerAndFactCheck')}
                       </Link>
                     </p>
                   </div>
                 </div>
               </div>
-              <div className="column is-11 is-10-tablet is-12-mobile">
-                <img src={imgMedia} alt="media effects" className="header-img" />
+              <div className="top-video column is-5-desktop is-flex">
+                <div className="responsive-video-container">
+                  <iframe
+                    className="responsive-youtube-video"
+                    width="100%"
+                    height="auto"
+                    src={
+                      this.props.lng === 'fr'
+                        ? 'https://www.youtube.com/embed/Hox_CHmC-so'
+                        : 'https://www.youtube.com/embed/cZn72yBtIFw'
+                    }
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
               </div>
             </div>
           </div>
         </section>
 
         {this.props.lng === 'fr' && (
-          <section className="section has-background-white has-text-centered">
-            <div className="hero-body" style={{ maxWidth: 720, margin: '0 auto' }}>
-              <div style={{ position: 'relative', height: 0, paddingBottom: '56.25%' }}>
-                <iframe
-                  style={{
-                    position: 'absolute',
-                    top: '0.75rem',
-                    left: '0.75rem',
-                    width: '100%',
-                    height: '100%',
-                  }}
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/Hox_CHmC-so"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            </div>
+          <section className="section know-more-fr has-text-centered">
+            <p className="has-text-weight-semibold">
+              {t('knowMoreFR')}
+              <br />
+              <ExternalLinkNewTab href="https://fr.captainfact.io/#partenariat" rel="nofollow">
+                Partenariats
+              </ExternalLinkNewTab>{' '}
+              –{' '}
+              <ExternalLinkNewTab href="https://fr.captainfact.io/#actions" rel="nofollow">
+                Actions
+              </ExternalLinkNewTab>{' '}
+              –{' '}
+              <ExternalLinkNewTab
+                href="https://fr.captainfact.io/presentation-du-journal-du-fact-checking-collaboratif"
+                rel="nofollow"
+              >
+                Journal
+              </ExternalLinkNewTab>{' '}
+              –{' '}
+              <ExternalLinkNewTab href="https://fr.captainfact.io/forum-captainfact" rel="nofollow">
+                Forum
+              </ExternalLinkNewTab>{' '}
+              –{' '}
+              <ExternalLinkNewTab href="https://fr.captainfact.io/#participer" rel="nofollow">
+                Donateurs
+              </ExternalLinkNewTab>{' '}
+              –{' '}
+              <ExternalLinkNewTab href="https://discord.gg/Z22Vhda" rel="nofollow">
+                Discord
+              </ExternalLinkNewTab>{' '}
+              –{' '}
+              <ExternalLinkNewTab href="https://fr.captainfact.io/equipe" rel="nofollow">
+                Équipe
+              </ExternalLinkNewTab>
+              <br />
+              <ExternalLinkNewTab
+                className="button is-primary is-large"
+                href="https://fr.captainfact.io"
+              >
+                {t('goToFRSite')}
+              </ExternalLinkNewTab>
+            </p>
+          </section>
+        )}
+
+        <section className="section last-videos" style={{ paddingBottom: '3em' }}>
+          <div className="has-text-centered">
+            <h2 className="title is-3">{t('latest')}</h2>
+            <Link
+              onClick={() => Matomo.registerClick('Home', 'Button', 'SeeAllVideos')}
+              className="button animated-hover is-medium is-gradient-primary-light"
+              to="/videos"
+            >
+              {t('seeVideos')}
+            </Link>
+          </div>
+          <br />
+          <br />
+          <div className="last-videos-cards">
+            <LastVideos />
+          </div>
+        </section>
+
+        {this.props.lng === 'fr' && (
+          <section className="subscribe-french-news">
+            <DismissableMessage
+              header={t('subscribeFrenchNews')}
+              localStorageDismissKey={LOCAL_STORAGE_KEYS.DISMISS_FRENCH_NEWS_SUBSCRIPTION}
+            >
+              <iframe
+                className="french-news-iframe"
+                src="https://fr.captainfact.io/iframe-accueil"
+              />
+            </DismissableMessage>
           </section>
         )}
 
@@ -120,7 +181,33 @@ export default class Home extends React.PureComponent {
         </section>
 
         <section className="section hero has-background-white">
-          <div className="hero-body">
+          <div className="hero-body how">
+            <div className="columns">
+              <div className="column is-6 presentation content">
+                <br />
+                <br />
+                <h2 className="title is-3">{t('howTitle')}</h2>
+                <Container color="black.600">
+                  {t('how')}
+                  <br />
+                  <ol>
+                    <li>{t('how1')}</li>
+                    <li>{t('how2')}</li>
+                    <li>{t('how3')}</li>
+                  </ol>
+                </Container>
+                <p>{t('how4')}</p>
+              </div>
+              <div className="column is-6">
+                <br />
+                <br />
+                <img src={imgExample1} alt="exemple video captainfact" />
+                <br />
+                <ExternalLinkNewTab href="https://www.youtube.com/watch?v=LsRkg2hRTiI">
+                  {t('demo')} <ExternalLinkAlt size="1em" />
+                </ExternalLinkNewTab>
+              </div>
+            </div>
             <div className="columns">
               <div className="column is-6">
                 <br />
@@ -225,247 +312,25 @@ export default class Home extends React.PureComponent {
           </div>
         </section>
 
-        <section className="hero is-medium">
-          <div className="hero-body">
-            <div className="columns">
-              <div className="column is-6 presentation content">
-                <br />
-                <br />
-                <h2 className="title is-3">{t('howTitle')}</h2>
-                <Container color="black.600">
-                  {t('how')}
-                  <br />
-                  <ol>
-                    <li>{t('how1')}</li>
-                    <li>{t('how2')}</li>
-                    <li>{t('how3')}</li>
-                  </ol>
-                </Container>
-                <p>{t('how4')}</p>
-                <br />
-                <Link
-                  onClick={() => Matomo.registerClick('Home', 'Button', 'ExtensionPage')}
-                  className="button animated-hover is-medium is-gradient-primary-light"
-                  to="/extension"
-                >
-                  {t('installExtension')}
-                </Link>
-              </div>
-              <div className="column is-6">
-                <br />
-                <br />
-                <img src={imgExample1} alt="exemple video captainfact" />
-                <br />
-                <ExternalLinkNewTab href="https://www.youtube.com/watch?v=LsRkg2hRTiI">
-                  {t('demo')} <ExternalLinkAlt size="1em" />
-                </ExternalLinkNewTab>
-                <br />
-                <br />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="hero is-medium">
-          <div className="hero-body">
-            <div className="columns">
-              <div className="column is-6">
-                <br />
-                <br />
-                <img src={imgIllutration} alt="community" />
-              </div>
-              <div className="column is-6">
-                <h2 className="title is-3">{t('whoTitle')}</h2>
-                <p className="presentation">{t('who')}</p>
-                <br />
-                <Link
-                  onClick={() => Matomo.registerClick('Home', 'Button', 'SignUp')}
-                  className="button animated-hover is-medium is-gradient-primary-light"
-                  to="/signup"
-                >
-                  {t('registerAndFactCheck')}
-                </Link>
-                <br />
-                <br />
-                <ExternalLinkNewTab href="https://forum.captainfact.io/">
-                  <Discourse size="1.5em" /> {t('forum')}
-                </ExternalLinkNewTab>
-
-                <br />
-                <br />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section section-alt-bg has-text-centered">
-          <h2 className="title-alt">
-            <strong>{t('helpCaptain1')}</strong>
-            <br />
-            {t('helpCaptain2')}
-          </h2>
-        </section>
-
-        <section className="section hero has-background-white">
-          <div className="hero-body">
-            <div className="columns">
-              <div className="column is-6">
-                <h2 className="title-alt is-bold">{t('backendDevelopers')}</h2>
-                <p className="presentation">{t('backendDevelopersText')}</p>
-                <ExternalLinkNewTab href="https://github.com/CaptainFact/captain-fact/labels/backend">
-                  {t('backendDevelopersLink')}
-                </ExternalLinkNewTab>
-                <br />
-                <br />
-                <h2 className="title-alt is-bold">{t('frontendDevelopers')}</h2>
-                <p className="presentation">{t('frontendDevelopersText')}</p>
-                <ExternalLinkNewTab href="https://github.com/CaptainFact/captain-fact-frontend/issues">
-                  {t('frontendDevelopersLink')}
-                </ExternalLinkNewTab>
-                <br />
-                <br />
-                <h2 className="title-alt is-bold">{t('designer')}</h2>
-                <p className="presentation">{t('designerText')}</p>
-                <br />
-                <br />
-                <h2 className="title-alt is-bold">{t('graphicDesigners')}</h2>
-                <p className="presentation">{t('graphicDesignersText')}</p>
-              </div>
-              <div className="column is-6">
-                <h2 className="title-alt is-bold">{t('animator')}</h2>
-                <p className="presentation">{t('animatorText')}</p>
-                <br />
-                <br />
-                <h2 className="title-alt is-bold">{t('communicationsSpecialists')}</h2>
-                <p className="presentation">{t('communicationsSpecialistsText')}</p>
-                <br />
-                <br />
-                <h2 className="title-alt is-bold">{t('translator')}</h2>
-                <p className="presentation">{t('translatorText')}</p>
-              </div>
-            </div>
-            <div className="has-text-centered presentation">
+        {this.props.lng === 'fr' && (
+          <section className="section know-more-fr has-text-centered">
+            <p className="has-text-weight-semibold">
+              {t('knowMoreFR')}
               <br />
-              <br />
-              <Link
-                onClick={() => Matomo.registerClick('Home', 'Button', 'ContactUs')}
-                className="button is-primary is-medium"
-                to="/help/contact"
+              <ExternalLinkNewTab
+                className="button is-primary is-large"
+                href="https://fr.captainfact.io"
               >
-                {t('contactus')}
-              </Link>
-              <br />
-              <br />
-              <p>
-                {t('fundUsText')}{' '}
-                <ExternalLinkNewTab href="https://opencollective.com/captainfact_io">
-                  {t('fundUsLink')}
-                </ExternalLinkNewTab>
-              </p>
-              <br />
-              <br />
-            </div>
-          </div>
-          <div className="has-text-centered">
-            <h2 className="title-alt is-3 is-bold">{t('followus')}</h2>
-          </div>
-        </section>
+                {t('goToFRSite')}
+              </ExternalLinkNewTab>
+            </p>
+          </section>
+        )}
 
         <section className="section">
           <CFSocialProfiles size="3em" color="white" />
         </section>
 
-        <section className="section partners">
-          <div className="content">
-            <h2 className="title is-3 has-text-centered">{t('partners')}</h2>
-            <ExternalLinkNewTab
-              href="https://github.com/CaptainFact/captain-fact/wiki/Les-partenariats-entre-les-chaînes-Youtube-et-CaptainFact.io"
-              className="is-block has-text-centered"
-            >
-              {t('partners-info')} <ExternalLinkAlt size="1em" />
-            </ExternalLinkNewTab>
-            <br />
-            <AllPartners />
-          </div>
-        </section>
-
-        <section className="section last-videos" style={{ paddingBottom: '3em' }}>
-          <div className="has-text-centered">
-            <h2 className="title is-3">{t('latest')}</h2>
-            <Link
-              onClick={() => Matomo.registerClick('Home', 'Button', 'SeeAllVideos')}
-              className="button animated-hover is-medium is-gradient-primary-light"
-              to="/videos"
-            >
-              {t('seeVideos')}
-            </Link>
-          </div>
-          <br />
-          <br />
-          <div className="last-videos-cards">
-            <LastVideos />
-          </div>
-        </section>
-
-        <section className="section partners">
-          <div className="content">
-            <Flex flexDirection="column" flexWrap="wrap">
-              <Box>
-                <h2 className="title is-3">{t('technicalTeamAndAmbassadors')}</h2>
-                <p className="presentation">
-                  {t('aboutAmbassadors')} <Link to="/help/ambassadors">{t('learnMore')}</Link>
-                </p>
-                <AllTeam />
-              </Box>
-              <Box mb="2em">
-                <h2 className="title is-3">{t('financialContributors')}</h2>
-                <h4 className="has-text-weight-bold">{t('membersOfTheAssociation')}</h4>
-                <OpenCollectiveContributors
-                  tier="adhesion-membre"
-                  width={600}
-                  limit={15}
-                  avatarHeight={36}
-                />
-                <br />
-                <h4 className="has-text-weight-bold">{t('regularFinancialContributors')}</h4>
-                <OpenCollectiveContributors
-                  tier="soutien-regulier"
-                  width={600}
-                  limit={15}
-                  avatarHeight={36}
-                />
-                <br />
-                <h4 className="has-text-weight-bold">{t('donators')}</h4>
-                <OpenCollectiveContributors
-                  tier="donateur"
-                  width={600}
-                  limit={15}
-                  avatarHeight={36}
-                />
-              </Box>
-            </Flex>
-            <ExternalLinkNewTab
-              href="https://opencollective.com/captainfact_io"
-              className="button is-primary is-medium"
-            >
-              {t('crowdfunding')}
-            </ExternalLinkNewTab>
-            <br />
-          </div>
-        </section>
-
-        {INVITATION_SYSTEM && (
-          <section className="section request-invitation">
-            <h4 className="title is-4" style={{ color: 'white' }}>
-              <Icon name="envelope-o" />
-              <span>
-                &nbsp;&nbsp;
-                {t(this.props.isAuthenticated ? 'inviteFriend' : 'invitation')}
-              </span>
-            </h4>
-            <InvitationRequestForm />
-          </section>
-        )}
         <footer className="footer">
           <div className="has-text-centered">
             <Trans i18nKey="footer">
