@@ -1,5 +1,5 @@
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withNamespaces, Trans } from 'react-i18next'
 import classNames from 'classnames'
 
 import UserAppellation from '../Users/UserAppellation'
@@ -9,9 +9,62 @@ import ActionDiff from './ActionDiff'
 import ActionIcon from './ActionIcon'
 import { Icon } from '../Utils/Icon'
 import ActionEntityLink from './ActionEntityLink'
+import { Box } from '@rebass/grid'
+import ReputationChangeTag from './ReputationChangeTag'
+import Button from '../Utils/Button'
 
-const UserAction = ({ action, className, t, withoutUser }) => {
-  const { user, type, time, targetUser } = action
+const getReputationChange = (viewingFrom, action) => {
+  if (!viewingFrom) {
+    return null
+  } else if (viewingFrom.id === action.userId) {
+    return action.authorReputationChange
+  } else if (viewingFrom.id === action.targetUserId) {
+    return action.targetReputationChange
+  }
+}
+
+const getActionDescription = (t, action, viewingFrom) => {
+  const isSystemAction = !action.userId
+  const isTarget = viewingFrom && viewingFrom.id === action.targetUserId
+  if (isSystemAction) {
+    return t(`action.${action.type}`)
+  } else if (isTarget && viewingFrom.id === action.userId) {
+    const i18nAction = t(`action.${action.type}`) || action.type
+    return (
+      <Trans t={t} i18nKey="ownAction">
+        {{ action: i18nAction }}: <ActionEntityLink action={action} />
+      </Trans>
+    )
+  } else if (isTarget) {
+    const i18nAction = t(`actionTarget.${action.type}`) || action.type
+    return (
+      <Trans t={t} i18nKey="targetedByAction">
+        {{ action: i18nAction }} from <UserAppellation user={action.user} /> on{' '}
+        <ActionEntityLink action={action} />
+      </Trans>
+    )
+  } else if (!action.targetUser) {
+    const i18nAction = t(`action.${action.type}`) || action.type
+    return (
+      <Trans t={t} i18nKey="authoredActionWithoutTarget">
+        {{ action: i18nAction }} <ActionEntityLink action={action} />{' '}
+      </Trans>
+    )
+  } else {
+    const i18nAction = t(`action.${action.type}`) || action.type
+    return (
+      <Trans t={t} i18nKey="authoredActionWithTarget">
+        {{ action: i18nAction }} <ActionEntityLink action={action} /> from{' '}
+        <UserAppellation user={action.targetUser} />
+      </Trans>
+    )
+  }
+}
+
+const UserAction = ({ action, className, t, withoutUser, viewingFrom }) => {
+  const [isExpanded, setExpanded] = React.useState(false)
+  const { user, type, time } = action
+  const reputationChange = getReputationChange(viewingFrom, action)
 
   return (
     <div className={classNames(className, 'user-action', 'card')}>
@@ -24,20 +77,26 @@ const UserAction = ({ action, className, t, withoutUser }) => {
         <Tag className="action-type" type="info">
           <ActionIcon type={type} />
         </Tag>
+        {Boolean(reputationChange) && (
+          <Box css={{ display: 'inline-block' }}>
+            <ReputationChangeTag reputation={reputationChange} withIcon />
+            &nbsp;
+          </Box>
+        )}
         {!withoutUser && <UserAppellation user={user} />}
-        <span className="action-name">
-          <strong>{t('madeAction', { action: `$t(action.${type})` })}</strong>
-        </span>
-        <span className="entity-type">
-          <ActionEntityLink action={action} />
-        </span>
-        {targetUser && (
-          <span>
-            de <UserAppellation user={targetUser} />
-          </span>
+        <span className="action-description">{getActionDescription(t, action, viewingFrom)}</span>
+        {Boolean(action.changes && action.changes.size) && (
+          <Button
+            className="is-small"
+            onClick={() => setExpanded(!isExpanded)}
+            css={{ float: 'right', borderRadius: '100%' }}
+            title="Expand"
+          >
+            +
+          </Button>
         )}
       </div>
-      <ActionDiff action={action} />
+      {isExpanded && <ActionDiff action={action} />}
     </div>
   )
 }

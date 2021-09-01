@@ -34,6 +34,7 @@
   "noActivity": "Aucune action n'a été effectuée pour le moment",
   "browsingAnalyzer": "Analyse de la navigation",
   "reputation": "Réputation",
+  "reputationChange": "Évolution de la réputation",
   "iAgreeAndAcceptedPrivacy": "En cliquant sur « S'enregistrer » j'accepte ",
   "privacyLinkLabel": "la politique de confidentialité de CaptainFact"
 }

@@ -14,7 +14,7 @@ const QUERY = gql`
   query UserActivityLog($username: String!, $offset: Int!, $limit: Int!) {
     user(username: $username) {
       id
-      actions(limit: $limit, offset: $offset) {
+      actions(limit: $limit, offset: $offset, direction: ALL) {
         pageNumber
         totalPages
         entries {
@@ -27,6 +27,15 @@ const QUERY = gql`
           statementId
           commentId
           speakerId
+          authorReputationChange
+          targetReputationChange
+          userId
+          user {
+            id
+            username
+            name
+          }
+          targetUserId
           targetUser {
             id
             username
@@ -79,6 +88,7 @@ const ActivityLog = ({ params: { username }, t }) => (
                 key={a.id}
                 action={{ ...a, changes: new Map(JSON.parse(a.changes)) }}
                 withoutUser
+                viewingFrom={data.user}
               />
             ))
           )}

@@ -10,12 +10,16 @@
   "entity": "Entity",
   "moderation": "Moderation",
   "deletedUser": "Deleted user",
-  "madeAction": "{{action}}",
+  "authoredActionWithoutTarget": "{{action}} <2></2> ",
+  "targetedByAction": "{{action}} from <2></2> on <5></5>",
+  "authoredActionWithTarget": "{{action}} <2></2> from <5></5>",
+  "ownAction": "{{action}}: <2></2>",
   "action": {
     "create": "Created",
     "remove": "Removed",
     "update": "Updated",
     "delete": "Deleted",
+    "email_confirmed": "Email confirmed",
     "add": "Added",
     "restore": "Restored",
     "flag": "Flagged",
@@ -29,6 +33,10 @@
     "action_banned_spam": "Moderated ($t(moderation:reason.2))",
     "action_banned_irrelevant": "Moderated ($t(moderation:reason.3))",
     "action_banned_not_constructive": "Moderated ($t(moderation:reason.4))"
+  },
+  "actionTarget": {
+    "vote_up": "Received a positive vote",
+    "vote_down": "Received a negative vote"
   },
   "entities": {
     "video": "video",
