@@ -14,6 +14,11 @@
   "targetedByAction": "{{action}} from <2></2> on <5></5>",
   "authoredActionWithTarget": "{{action}} <2></2> from <5></5>",
   "ownAction": "{{action}}: <2></2>",
+  "actionDirection": {
+    "all": "All",
+    "authored": "From <1></1>",
+    "target": "Targeting <1></1>"
+  },
   "action": {
     "create": "Created",
     "remove": "Removed",

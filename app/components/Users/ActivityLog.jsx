@@ -9,12 +9,20 @@ import PaginationMenu from '../Utils/PaginationMenu'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import MessageView from '../Utils/MessageView'
 import { ErrorView } from '../Utils/ErrorView'
+import ActionsDirectionFilter from '../UsersActions/ActionsDirectionFilter'
 
 const QUERY = gql`
-  query UserActivityLog($username: String!, $offset: Int!, $limit: Int!) {
+  query UserActivityLog(
+    $username: String!
+    $offset: Int!
+    $limit: Int!
+    $direction: ActivityLogDirection!
+  ) {
     user(username: $username) {
       id
-      actions(limit: $limit, offset: $offset, direction: ALL) {
+      username
+      name
+      actions(limit: $limit, offset: $offset, direction: $direction) {
         pageNumber
         totalPages
         entries {
@@ -63,40 +71,50 @@ const renderPaginationMenu = (loading, user, fetchMore) => (
   </div>
 )
 
-const ActivityLog = ({ params: { username }, t }) => (
-  <Query query={QUERY} variables={{ username, offset: 1, limit: 10 }} fetchPolicy="network-only">
-    {({ loading, data, fetchMore, error }) => {
-      if (error) {
-        return <ErrorView error={error} />
-      }
+const ActivityLog = ({ params: { username }, t, location }) => {
+  const direction = location.query.direction || 'ALL'
+  return (
+    <Query
+      query={QUERY}
+      variables={{ username, offset: 1, limit: 10, direction }}
+      fetchPolicy="network-only"
+    >
+      {({ loading, data, fetchMore, error }) => {
+        if (error) {
+          return <ErrorView error={error} />
+        }
 
-      if (!loading && data.user.actions.entries.length === 0) {
-        return <MessageView>{t('noActivity')}</MessageView>
-      }
+        if (!loading && data.user.actions.entries.length === 0) {
+          return <MessageView>{t('noActivity')}</MessageView>
+        }
 
-      const paginationMenu = renderPaginationMenu(loading, data.user, fetchMore)
-      return (
-        <div className="activity-log container">
-          {paginationMenu}
-          {loading ? (
-            <div className="panel-block">
-              <LoadingFrame />
+        const paginationMenu = renderPaginationMenu(loading, data.user, fetchMore)
+        return (
+          <div>
+            <div className="activity-log container">
+              <p className="panel-heading">{t('main:menu.activity')}</p>
+              {data.user && <ActionsDirectionFilter user={data.user} value={direction} />}
+              {loading ? (
+                <div className="panel-block">
+                  <LoadingFrame />
+                </div>
+              ) : (
+                data.user.actions.entries.map((a) => (
+                  <UserAction
+                    key={a.id}
+                    action={{ ...a, changes: new Map(JSON.parse(a.changes)) }}
+                    withoutUser
+                    viewingFrom={data.user}
+                  />
+                ))
+              )}
+              {paginationMenu}
             </div>
-          ) : (
-            data.user.actions.entries.map((a) => (
-              <UserAction
-                key={a.id}
-                action={{ ...a, changes: new Map(JSON.parse(a.changes)) }}
-                withoutUser
-                viewingFrom={data.user}
-              />
-            ))
-          )}
-          {paginationMenu}
-        </div>
-      )
-    }}
-  </Query>
-)
+          </div>
+        )
+      }}
+    </Query>
+  )
+}
 
 export default withNamespaces('user')(ActivityLog)
