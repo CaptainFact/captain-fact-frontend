@@ -41,7 +41,9 @@
   },
   "actionTarget": {
     "vote_up": "Reçu un vote positif",
-    "vote_down": "Reçu un vote négatif"
+    "vote_down": "Reçu un vote négatif",
+    "revert_vote_up": "Perdu un vote positif",
+    "revert_vote_down": "Perdu un vote négatif"
   },
   "entities": {
     "video": "vidéo",
