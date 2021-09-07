@@ -68,7 +68,7 @@
     "debounce-promise": "~3.1.2",
     "diff": "~4.0.2",
     "dotenv-webpack": "~7.0.3",
-    "faker": "~4.1.0",
+    "faker": "~5.5.3",
     "formik": "^1.4.1",
     "graphql": "~14.0.2",
     "graphql-tag": "~2.10.1",
