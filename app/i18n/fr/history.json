@@ -10,12 +10,21 @@
   "entity": "Entité",
   "moderation": "Modération",
   "deletedUser": "Compte supprimé",
-  "madeAction": "{{action}} :",
+  "targetedByAction": "A {{action, lowerCase}} de <2></2> sur <5></5>",
+  "authoredActionWithTarget": "A {{action, lowerCase}} : <2></2> de <5></5>",
+  "authoredActionWithoutTarget": "A {{action, lowerCase}} : <2></2>",
+  "ownAction": "A {{action, lowerCase}} : <2></2>",
+  "actionDirection": {
+    "all": "Toutes",
+    "authored": "De <1></1>",
+    "target": "Visant <1></1>"
+  },
   "action": {
     "create": "Créé",
     "remove": "Retiré",
     "update": "Mis à jour",
     "delete": "Supprimé",
+    "email_confirmed": "Email confirmé",
     "add": "Ajouté",
     "restore": "Restauré",
     "flag": "Signalé",
@@ -29,6 +38,12 @@
     "action_banned_spam": "Modéré ($t(moderation:reason.2))",
     "action_banned_irrelevant": "Modéré ($t(moderation:reason.3))",
     "action_banned_not_constructive": "Modéré ($t(moderation:reason.4))"
+  },
+  "actionTarget": {
+    "vote_up": "Reçu un vote positif",
+    "vote_down": "Reçu un vote négatif",
+    "revert_vote_up": "Perdu un vote positif",
+    "revert_vote_down": "Perdu un vote négatif"
   },
   "entities": {
     "video": "vidéo",
