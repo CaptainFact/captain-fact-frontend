@@ -65,11 +65,11 @@
     "shiftStatements": "Décaler toutes les affirmations (en secondes)"
   },
   "speaker": {
-    "one": "Intervenant·e",
-    "remove": "Retirer l'intervenant·e",
+    "one": "Intervenant(e)",
+    "remove": "Retirer l'intervenant(e)",
     "confirmRemove": "Toutes les déclarations de {{speaker.full_name}} sur cette vidéo vont devenir orphelines",
-    "add": "Ajouter un·e intervenant·e",
-    "create": "Créer l'intervenant·e \"{{name}}\"",
+    "add": "Ajouter un(e) intervenant(e)",
+    "create": "Créer l'intervenant(e) \"{{name}}\"",
     "edit": "Modifier les informations de \"{{name}}\"",
     "search": "Tapez au moins 3 lettres pour lancer la recherche",
     "fullName": "Nom complet",
@@ -80,7 +80,7 @@
   "statement": {
     "remove": "Retirer la citation",
     "confirmRemove": "Êtes-vous sûr·e ?",
-    "textPlaceholder": "Retranscrivez ici les propos de l'intervenant·e",
+    "textPlaceholder": "Retranscrivez ici les propos de l'intervenant(e)",
     "noSpeakerTextPlaceholder": "Décrivez ce qui apparait à l'image ou ajoutez un intervenant",
     "noSpeakerWarning": "Un intervenant devrait être renseigné. Pour continuer malgré tout, appuyer sur « Sauvegarder ».",
     "text": "Le texte",
