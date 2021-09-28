@@ -68,7 +68,7 @@
     "one": "Intervenant(e)",
     "remove": "Retirer l'intervenant(e)",
     "confirmRemove": "Toutes les déclarations de {{speaker.full_name}} sur cette vidéo vont devenir orphelines",
-    "add": "Ajouter un·e intervenant(e)",
+    "add": "Ajouter un(e) intervenant(e)",
     "create": "Créer l'intervenant(e) \"{{name}}\"",
     "edit": "Modifier les informations de \"{{name}}\"",
     "search": "Tapez au moins 3 lettres pour lancer la recherche",
