@@ -93,7 +93,7 @@ export const SPEAKER_TITLE_LENGTH = [3, 240]
 export const MAX_VIDEO_CARD_SPEAKERS = 5
 
 // Statement
-export const STATEMENT_LENGTH = [10, 255]
+export const STATEMENT_LENGTH = [10, 280]
 // The minimum number of positive votes summed over all the comments for a
 // statement to be considered confirmed
 export const CONFIRMED_STATEMENT_MIN_VOTES = 0
