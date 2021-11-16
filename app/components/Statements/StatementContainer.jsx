@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
 import classNames from 'classnames'
+import IntersectionVisible from 'react-intersection-visible'
 
 import { StatementForm } from './StatementForm'
 import ModalConfirmDelete from '../Modal/ModalConfirmDelete'
@@ -20,7 +21,6 @@ import { withLoggedInUser } from '../LoggedInUser/UserProvider'
     speaker: statementSelectors.getStatementSpeaker(state, props),
     isFocused: statementSelectors.isStatementFocused(state, props),
     scrollTo: state.VideoDebate.statements.scrollTo,
-    autoscrollEnabled: state.UserPreferences.enableAutoscroll,
     formEnabled: state.VideoDebate.statements.formsCount > 0,
   }),
   { updateStatement, deleteStatement }
@@ -42,39 +42,61 @@ export default class StatementContainer extends React.PureComponent {
 
   render() {
     const { isDeleting, replyTo } = this.state
-    const { statement, isFocused, speaker, isAuthenticated, loggedInUser, t } = this.props
+    const {
+      statement,
+      isFocused,
+      speaker,
+      isAuthenticated,
+      loggedInUser,
+      t,
+      autoscrollEnabled,
+      toggleAutoscroll,
+    } = this.props
 
     return (
-      <div
-        className={classNames('statement-container', { 'is-focused': isFocused })}
-        ref="container"
+      <IntersectionVisible
+        onShow={() => {
+          if (isFocused && !autoscrollEnabled) {
+            toggleAutoscroll()
+          }
+        }}
+        onHide={() => {
+          if (isFocused && autoscrollEnabled) {
+            toggleAutoscroll()
+          }
+        }}
       >
-        <div className="card statement">
-          {this.renderStatementOrEditForm(speaker, statement)}
-          <StatementComments
-            statement={statement}
-            speaker={speaker}
-            setReplyToComment={this.setReplyToComment}
-          />
-          <CommentForm
-            statementID={statement.id}
-            replyTo={replyTo}
-            setReplyToComment={this.setReplyToComment}
-            user={isAuthenticated ? loggedInUser : null}
-          />
-          {isDeleting && (
-            <ModalConfirmDelete
-              title={t('statement.remove')}
-              className="is-small"
-              isAbsolute
-              isRemove
-              message={t('statement.confirmRemove')}
-              handleAbort={() => this.setState({ isDeleting: false })}
-              handleConfirm={() => this.props.deleteStatement({ id: statement.id })}
+        <div
+          className={classNames('statement-container', { 'is-focused': isFocused })}
+          ref="container"
+        >
+          <div className="card statement">
+            {this.renderStatementOrEditForm(speaker, statement)}
+            <StatementComments
+              statement={statement}
+              speaker={speaker}
+              setReplyToComment={this.setReplyToComment}
             />
-          )}
+            <CommentForm
+              statementID={statement.id}
+              replyTo={replyTo}
+              setReplyToComment={this.setReplyToComment}
+              user={isAuthenticated ? loggedInUser : null}
+            />
+            {isDeleting && (
+              <ModalConfirmDelete
+                title={t('statement.remove')}
+                className="is-small"
+                isAbsolute
+                isRemove
+                message={t('statement.confirmRemove')}
+                handleAbort={() => this.setState({ isDeleting: false })}
+                handleConfirm={() => this.props.deleteStatement({ id: statement.id })}
+              />
+            )}
+          </div>
         </div>
-      </div>
+      </IntersectionVisible>
     )
   }
 
@@ -113,6 +135,11 @@ export default class StatementContainer extends React.PureComponent {
   shouldScroll = (props, prevProps) => {
     // Return if not ready or if this is not the scroll target and not focused
     if (!this.isAutoScrollReady(props) || !this.isTarget(props)) {
+      return false
+    }
+
+    // Prevent unwanted autoscroll on autoscrollEnabled toggle
+    if (!props.scrollToFocusedStatement) {
       return false
     }
 

@@ -9,6 +9,7 @@ const StyledResizable = styled(Resizable)`
   @media screen and (max-width: 1279px) {
     width: 100% !important;
     max-width: 100% !important;
+    min-width: auto !important;
   }
 
   .right-resizable-handle {
