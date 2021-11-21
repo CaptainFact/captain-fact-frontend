@@ -109,7 +109,7 @@
     "styled-system": "~3.2.0",
     "tinycon": "~0.6.8",
     "uuid": "~8.3.2",
-    "validator": "13.5.1",
+    "validator": "13.7.0",
     "voca": "~1.4.0",
     "whatwg-fetch": "~3.0.0",
     "wikidata-sdk": "^7.7.1"
