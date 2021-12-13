@@ -48,11 +48,9 @@ class HelpPageContent extends PureComponent {
       return <ErrorView canGoBack={false} error={this.props.error} />
     }
     return (
-      <Markdown
-        className="content"
-        source={this.props.markdownContent}
-        renderers={this.renderers}
-      />
+      <Markdown className="content" components={this.renderers}>
+        {this.props.markdownContent}
+      </Markdown>
     )
   }
 
