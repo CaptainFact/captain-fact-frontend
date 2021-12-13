@@ -1,10 +1,6 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
+import { configureStore } from '@reduxjs/toolkit'
 import { reducer as formReducer } from 'redux-form'
-import Immutable from 'immutable'
 import promiseMiddleware from 'redux-promise'
-import thunk from 'redux-thunk'
-
-import { JS_ENV } from '../config'
 
 // Reducers
 import FlashesReducer from './flashes/reducer'
@@ -19,7 +15,7 @@ import ModerationReducer from './moderation/reducer'
 import VideosReducer from './videos/reducer'
 
 // Declare reducers
-const reducers = combineReducers({
+const reducers = {
   DisplayedUser: DisplayedUserReducer,
   UserPreferences: UserPreferencesReducer,
   Flashes: FlashesReducer,
@@ -31,23 +27,16 @@ const reducers = combineReducers({
   Moderation: ModerationReducer,
   Videos: VideosReducer,
   form: formReducer,
-})
-
-// Declare middlewares
-const middlewares = [thunk, promiseMiddleware]
-
-// If running in dev and browser has redux devtools extension activated, use it
-const getComposer = () => {
-  if (JS_ENV === 'prod' || !window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) {
-    return compose
-  }
-  return window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-    serialize: { immutable: Immutable },
-    shouldCatchErrors: true,
-  })
 }
 
+// Declare middlewares
+const middlewares = [promiseMiddleware]
+
 // Build store
-const store = createStore(reducers, getComposer()(applyMiddleware(...middlewares)))
+
+const store = configureStore({
+  reducer: reducers,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(...middlewares),
+})
 
 export default store
