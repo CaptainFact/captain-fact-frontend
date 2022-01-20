@@ -217,6 +217,9 @@ export default class Sidebar extends React.PureComponent {
         <this.MenuListLink to="/videos" iconName="television" onlyActiveOnIndex>
           {capitalize(t('entities.videoFactChecking'))}
         </this.MenuListLink>
+        <this.MenuListLink to="/statements" iconName="television" onlyActiveOnIndex>
+          {capitalize(t('entities.latestStatements'))}
+        </this.MenuListLink>
         <ReputationGuard requiredRep={MIN_REPUTATION_MODERATION}>
           <Query
             fetchPolicy="network-only"
