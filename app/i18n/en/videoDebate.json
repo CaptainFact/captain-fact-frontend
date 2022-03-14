@@ -126,5 +126,9 @@
         "search": "Type a name to search it on Wikipedia",
         "autofill": "Autofill from Wikipedia",
         "suggestions": "Suggested Wikidata entries:"
-    }
+    },
+    "modalSource": {
+        "close": "Close",
+        "errorMessage": "This source is not available to preview, click here on the link above <1/> to open it in a new tab."
+      }
 }

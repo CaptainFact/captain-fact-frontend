@@ -90,7 +90,7 @@ export class CommentDisplay extends React.PureComponent {
 
   renderCommentContent() {
     const { repliesCollapsed } = this.state
-    const { comment, withoutActions, replies, richMedias = true } = this.props
+    const { comment, withoutActions, withoutModalSource, replies, richMedias = true } = this.props
     const isOwnComment = comment.user && this.props.loggedInUser.id === comment.user.id
 
     return (
@@ -103,6 +103,7 @@ export class CommentDisplay extends React.PureComponent {
           nesting={this.props.nesting}
           replyingTo={this.props.replyingTo}
           richMedias={richMedias}
+          withoutModalSource={withoutModalSource}
         />
         {!withoutActions && (
           <CommentActions

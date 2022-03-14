@@ -94,3 +94,9 @@ export const loggedInUserTodayReputationGain = gql`
     }
   }
 `
+
+export const isIframeAllowed = gql`
+  query IsIframeAllowed($url: String) {
+    isIframeAllowed(url: $url)
+  }
+`
