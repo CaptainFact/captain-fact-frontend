@@ -5,8 +5,6 @@ import { ExternalLinkAlt } from 'styled-icons/fa-solid'
 
 import * as Matomo from '../../API/matomo'
 import { Icon } from '../Utils'
-import { LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
-import DismissableMessage from '../Utils/DismissableMessage'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import CFSocialProfiles from './CFSocialProfiles'
 import LastVideos from './LastVideos'
@@ -157,20 +155,6 @@ export default class Home extends React.PureComponent {
             <LastVideos />
           </div>
         </section>
-
-        {this.props.lng === 'fr' && (
-          <section className="subscribe-french-news">
-            <DismissableMessage
-              header={t('subscribeFrenchNews')}
-              localStorageDismissKey={LOCAL_STORAGE_KEYS.DISMISS_FRENCH_NEWS_SUBSCRIPTION}
-            >
-              <iframe
-                className="french-news-iframe"
-                src="https://fr.captainfact.io/iframe-accueil"
-              />
-            </DismissableMessage>
-          </section>
-        )}
 
         <section className="section section-alt-bg has-text-centered">
           <h2 className="title-alt">
