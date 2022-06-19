@@ -5,8 +5,6 @@ import { ExternalLinkAlt } from 'styled-icons/fa-solid'
 
 import * as Matomo from '../../API/matomo'
 import { Icon } from '../Utils'
-import { LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
-import DismissableMessage from '../Utils/DismissableMessage'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import CFSocialProfiles from './CFSocialProfiles'
 import LastVideos from './LastVideos'
