@@ -7,6 +7,7 @@ import {
 } from '../../state/video_debate/history/effects'
 import { reset } from '../../state/user_actions/reducer'
 import ActionsTable from '../UsersActions/ActionsTable'
+import { Helmet } from 'react-helmet'
 
 @connect(
   (state) => ({
@@ -30,10 +31,15 @@ export default class VideoDebateHistory extends React.PureComponent {
     const { isLoading, error, actions } = this.props
 
     return (
-      <div className="videodebate-actions-history">
-        {error && error}
-        <ActionsTable actions={actions} isLoading={isLoading} />
-      </div>
+      <React.Fragment>
+        <Helmet>
+          <meta name="robots" content="noindex" />
+        </Helmet>
+        <div className="videodebate-actions-history">
+          {error && error}
+          <ActionsTable actions={actions} isLoading={isLoading} />
+        </div>
+      </React.Fragment>
     )
   }
 }

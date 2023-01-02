@@ -74,6 +74,7 @@ export default class User extends React.PureComponent {
       <div className="user-page">
         <Helmet>
           <title>{user.name || prettyUsername}</title>
+          <meta name="robots" content="noindex" />
         </Helmet>
         <section className="hero is-light is-bold is-medium user-header">
           {user.id !== 0 && (
