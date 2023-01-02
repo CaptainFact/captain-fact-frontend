@@ -14,7 +14,7 @@ const UserAppellation = ({
   const prettyUsername = user ? `@${user.username}` : t('deletedAccount')
   const hasLink = user && !withoutActions
   const Component = hasLink ? Link : defaultComponent
-  const componentProps = hasLink ? { to: `/u/${user.username}` } : {}
+  const componentProps = hasLink ? { to: `/u/${user.username}`, rel: 'nofollow' } : {}
   const className = classNames('user-appellation', { deleted: !user })
 
   if (compact) {
