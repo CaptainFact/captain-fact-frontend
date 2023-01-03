@@ -12,9 +12,9 @@ import { Videos } from 'styled-icons/boxicons-solid'
 import { LogOut } from 'styled-icons/feather'
 
 const BASE_LINKS = [
-  { path: '', i18nKey: 'menu.profile', Icon: UserCircle },
+  { path: '', i18nKey: 'menu.activity', Icon: Activity },
   { path: '/videos', i18nKey: 'menu.addedVideos', Icon: Videos },
-  { path: '/activity', i18nKey: 'menu.activity', Icon: Activity },
+  { path: '/profile', i18nKey: 'menu.profile', Icon: UserCircle },
 ]
 
 const AUTHENTICATED_LINKS = [

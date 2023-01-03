@@ -44,8 +44,8 @@ const CFRouter = () => (
       <Route path="/reset_password/confirm/:token" component={ResetPasswordConfirmForm} />
       <Route path="/newsletter/unsubscribe/:token" component={NewsletterSubscription} />
       <Route path="/u/:username" component={User}>
-        <IndexRoute component={UserProfile} />
-        <Route path="/u/:username/activity" component={ActivityLog} />
+        <IndexRoute component={ActivityLog} />
+        <Route path="/u/:username/profile" component={UserProfile} />
         <Route path="/u/:username/settings" component={UserSettings} />
         <Route path="/u/:username/videos" component={UserAddedVideos} />
         <Route path="/u/:username/subscriptions" component={SubscriptionsPage} />
