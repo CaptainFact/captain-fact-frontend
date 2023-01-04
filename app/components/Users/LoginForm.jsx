@@ -5,7 +5,7 @@ import { withNamespaces } from 'react-i18next'
 import { get } from 'lodash'
 
 import ThirdPartyAuthList from './ThirdPartyAuthList'
-import { emailOrUsernameField, passwordField, submitButton } from './UserFormFields'
+import { UserEmailOrUsernameField, UserPasswordField, submitButton } from './UserFormFields'
 import Alert from '../Utils/Alert'
 import { tError } from '../../lib/errors'
 import { signIn } from '../../API/http_api/current_user'
@@ -68,8 +68,8 @@ export default class LoginForm extends React.PureComponent {
           </Link>
         </div>
         <hr />
-        {emailOrUsernameField(t)}
-        {passwordField(t)}
+        <UserEmailOrUsernameField t={t} />
+        <UserPasswordField t={t} />
         {submitButton(t('login'), valid)}
         <ThirdPartyAuthList />
       </form>

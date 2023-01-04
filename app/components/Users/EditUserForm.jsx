@@ -54,7 +54,7 @@ export default class EditUserForm extends React.PureComponent {
     const { handleSubmit, valid, t } = this.props
     return (
       <form className="edit-user-form form" onSubmit={handleSubmit((user) => this.submit(user))}>
-        {renderAllUserFields(valid, t, true)}
+        {renderAllUserFields(t, true)}
         {submitButton(
           <div>
             <Icon name="floppy-o" />

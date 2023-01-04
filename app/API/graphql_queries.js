@@ -90,6 +90,7 @@ export const loggedInUserPendingModerationCount = gql`
 export const loggedInUserTodayReputationGain = gql`
   query LoggedInUserTodayReputationGain {
     loggedInUser {
+      id
       todayReputationGain
     }
   }

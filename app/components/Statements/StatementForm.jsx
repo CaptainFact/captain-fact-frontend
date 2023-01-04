@@ -3,10 +3,12 @@ import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { withNamespaces } from 'react-i18next'
+import { Save } from '@styled-icons/feather/Save'
+import { Slash } from '@styled-icons/feather/Slash'
 
 import SpeakersSelect from '../Speakers/SpeakersSelect'
 import { ReactSelectWarningStyles } from '../../lib/react_select_theme'
-import { Icon, LinkWithIcon } from '../Utils'
+import { Icon } from '../Utils'
 import TimeEdit from '../Utils/TimeEdit'
 import { validateFieldLength } from '../../lib/form_validators'
 import { STATEMENT_LENGTH } from '../../constants'
@@ -21,6 +23,13 @@ import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 import ControlTextarea from '../FormUtils/ControlTextarea'
 import { cleanStrMultiline } from '../../lib/clean_str'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
+import UnstyledButton from '../StyledUtils/UnstyledButton'
+
+const validate = (values, props) => {
+  return {
+    text: validateFieldLength(props.t, values.text, STATEMENT_LENGTH),
+  }
+}
 
 @connect(
   ({ VideoDebate: { video, statements } }) => ({
@@ -30,8 +39,8 @@ import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
   }),
   { forcePosition, setScrollTo, incrementFormCount, decrementFormCount }
 )
-@reduxForm({ form: STATEMENT_FORM_NAME })
 @withNamespaces('videoDebate')
+@reduxForm({ form: STATEMENT_FORM_NAME, validate })
 export class StatementForm extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -40,12 +49,13 @@ export class StatementForm extends React.PureComponent {
         ? props.position
         : props.initialValues.time + props.offset
 
+    this.containerRef = React.createRef()
     this.state = { lockedTime, emptySpeakerWarningHadBeenShown: false }
   }
 
   componentDidMount() {
     this.props.incrementFormCount()
-    this.refs.container.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    this.containerRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
   }
 
   componentWillUnmount() {
@@ -67,7 +77,7 @@ export class StatementForm extends React.PureComponent {
     }
   }
 
-  handleSubmit(statement) {
+  handleSubmit = (statement) => {
     const { position, offset } = this.props
     const { lockedTime, emptySpeakerWarningHadBeenShown } = this.state
 
@@ -104,28 +114,38 @@ export class StatementForm extends React.PureComponent {
       ? speakers.find((s) => s.id === initialValues.speaker_id)
       : null
     const toggleTimeLockAction = this.state.lockedTime === false ? 'unlock' : 'lock'
-
+    console.log(this.props)
     return (
       <form
+        ref={this.containerRef}
+        onSubmit={handleSubmit(this.handleSubmit)}
         className={classNames('statement-form', {
           'card statement': !this.props.isBundled,
         })}
-        ref="container"
       >
         <header className="card-header">
           <div className="card-header-title">
-            <a className="button" onClick={() => this.moveTimeMarker(currentTime - 1)}>
+            <button
+              type="button"
+              className="button"
+              onClick={() => this.moveTimeMarker(currentTime - 1)}
+            >
               <Icon name="caret-left" />
-            </a>
+            </button>
             <TimeEdit
               time={currentTime}
               handleChange={this.moveTimeMarker}
               onTimeIconClick={() => this.moveTimeMarker(currentTime)}
             />
-            <a className="button" onClick={() => this.moveTimeMarker(currentTime + 1)}>
+            <button
+              type="button"
+              className="button"
+              onClick={() => this.moveTimeMarker(currentTime + 1)}
+            >
               <Icon name="caret-right" />
-            </a>
-            <a
+            </button>
+            <button
+              type="button"
               className="button"
               title={t('statement.reverseTimeLock', {
                 context: toggleTimeLockAction,
@@ -133,7 +153,7 @@ export class StatementForm extends React.PureComponent {
               onClick={this.toggleLock.bind(this)}
             >
               <Icon size="small" name={toggleTimeLockAction} />
-            </a>
+            </button>
             {speaker && speaker.picture && <img className="speaker-mini" src={speaker.picture} />}
             <Field
               name="speaker_id"
@@ -151,39 +171,45 @@ export class StatementForm extends React.PureComponent {
               name="text"
               component={ControlTextarea}
               normalize={cleanStrMultiline}
-              maxLength={STATEMENT_LENGTH[1]}
-              validate={(value) => validateFieldLength(t, value, STATEMENT_LENGTH)}
-              placeholder={
-                speaker ? t('statement.textPlaceholder') : t('statement.noSpeakerTextPlaceholder')
-              }
-              hideErrorIfEmpty
-              autoFocus
-              autosize
-              warningMessage={
-                this.state.emptySpeakerWarningHadBeenShown ? t('statement.noSpeakerWarning') : null
-              }
+              props={{
+                autoFocus: true,
+                autosize: true,
+                hideErrorIfEmpty: true,
+                maxLength: STATEMENT_LENGTH[1],
+                placeholder: speaker
+                  ? t('statement.textPlaceholder')
+                  : t('statement.noSpeakerTextPlaceholder'),
+                warningMessage: this.state.emptySpeakerWarningHadBeenShown
+                  ? t('statement.noSpeakerWarning')
+                  : null,
+              }}
             />
           </div>
         </div>
         <footer className="card-footer">
-          <LinkWithIcon
-            iconName="floppy-o"
+          <UnstyledButton
+            type="submit"
             className={classNames('card-footer-item', 'submit-button', {
               'is-loading': this.props.submitting,
             })}
             disabled={!valid || this.props.submitting}
-            onClick={handleSubmit(this.handleSubmit.bind(this))}
+            p=".75rem"
           >
+            <Save size="17px" />
+            &nbsp;
             {t('main:actions.save')}
-          </LinkWithIcon>
-          <LinkWithIcon
-            iconName="ban"
+          </UnstyledButton>
+          <UnstyledButton
+            type="button"
+            p=".75rem"
             className="card-footer-item"
             disabled={this.props.submitting}
             onClick={handleAbort}
           >
+            <Slash size="17px" />
+            &nbsp;
             {t('main:actions.cancel')}
-          </LinkWithIcon>
+          </UnstyledButton>
         </footer>
         <div className="helpStatement">
           <p>

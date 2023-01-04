@@ -1,5 +1,5 @@
 import React from 'react'
-import doCapitalize from 'voca/capitalize'
+import { capitalize as doCapitalize } from 'lodash'
 
 import { withNamespaces } from 'react-i18next'
 import formatSeconds from '../../lib/seconds_formatter'

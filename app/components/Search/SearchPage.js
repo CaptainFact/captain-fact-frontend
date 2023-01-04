@@ -3,7 +3,6 @@ import { withNamespaces, Trans } from 'react-i18next'
 import { connectSearchBox, Index, InfiniteHits } from 'react-instantsearch-dom'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import capitalize from 'voca/capitalize'
 import { Search as SearchIcon } from 'styled-icons/fa-solid'
 
 import Container from '../StyledUtils/Container'
@@ -16,6 +15,7 @@ import StatementHit from './StatementHit'
 import { ALGOLIA_INDEXES_NAMES } from '../../lib/algolia'
 import SearchBox from './SearchBox'
 import { optionsToQueryString } from '../../lib/url_utils'
+import { capitalize } from 'lodash'
 
 const MainContainer = styled.div`
   background: #f4f5f8;

@@ -2,7 +2,6 @@ import React from 'react'
 import { merge } from 'immutable'
 import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
-import capitalize from 'voca/capitalize'
 import { Helmet } from 'react-helmet'
 
 import { toAbsoluteURL } from '../../lib/cf_routes'
@@ -12,6 +11,7 @@ import { changeVideosLanguageFilter, setVideosFilter } from '../../state/user_pr
 import VideosFilterBar from './VideosFilterBar'
 import AddVideoBtn from './AddVideoBtn'
 import PaginatedVideosContainer from './PaginatedVideosContainer'
+import { capitalize } from 'lodash'
 
 @connect(
   (state) => ({

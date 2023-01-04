@@ -78,7 +78,7 @@ class RealSignupForm extends React.PureComponent {
           {t('alreadyHaveAccountQuestion')} <Link to="login">{t('login')}</Link>
         </strong>
         <hr />
-        {renderAllUserFields(valid, t)}
+        {renderAllUserFields(t)}
         <P mb="15px" color="#666" fontSize="12px">
           {t('iAgreeAndAcceptedPrivacy')}
           <Link to="/help/privacy">{t('privacyLinkLabel')}</Link>.

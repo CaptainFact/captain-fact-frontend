@@ -5,7 +5,7 @@ import { withNamespaces, Trans } from 'react-i18next'
 import { Box } from '@rebass/grid'
 import classNames from 'classnames'
 import { pick, truncate, capitalize } from 'lodash'
-import AsyncSelect from 'react-select/lib/Async'
+import AsyncSelect from 'react-select/async'
 import debounce from 'debounce-promise'
 import { Formik } from 'formik'
 

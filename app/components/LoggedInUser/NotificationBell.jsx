@@ -21,7 +21,7 @@ const UnreadNotificationsBadge = styled.div`
 `
 
 const NotificationBell = (props, ref) => (
-  <UnstyledButton {...props} ref={ref}>
+  <UnstyledButton p="7px" {...props} ref={ref}>
     <Query
       fetchPolicy="network-only"
       pollInterval={15000}

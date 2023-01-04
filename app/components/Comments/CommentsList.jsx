@@ -42,13 +42,14 @@ export class CommentsList extends React.PureComponent {
         <FlipMove enterAnimation="fade" leaveAnimation={false}>
           {comments.size > 0 ? (
             displayedComments.map((comment) => (
-              <CommentDisplay
-                key={comment.id}
-                comment={comment}
-                nesting={nesting}
-                replyingTo={replyingTo}
-                setReplyToComment={this.props.setReplyToComment}
-              />
+              <div key={comment.id}>
+                <CommentDisplay
+                  comment={comment}
+                  nesting={nesting}
+                  replyingTo={replyingTo}
+                  setReplyToComment={this.props.setReplyToComment}
+                />
+              </div>
             ))
           ) : (
             <CommentForm

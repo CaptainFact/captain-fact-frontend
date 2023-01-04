@@ -26,8 +26,9 @@ const StyledResizable = styled(Resizable)`
       left: 2px;
       height: 40px;
       width: 3px;
-      border-left: 1px solid ${({ resizing }) => themeGet(`colors.black.${resizing ? 300 : 200}`)};
-      border-right: 1px solid ${({ resizing }) => themeGet(`colors.black.${resizing ? 300 : 200}`)};
+      border-left: 1px solid ${({ $resizing }) => themeGet(`colors.black.${$resizing ? 300 : 200}`)};
+      border-right: 1px solid
+        ${({ $resizing }) => themeGet(`colors.black.${$resizing ? 300 : 200}`)};
       transition: border-color 0.1s ease-out;
     }
 
@@ -45,7 +46,7 @@ const ResizableColumn = ({ children }) => {
 
   return (
     <StyledResizable
-      resizing={resizing}
+      $resizing={resizing}
       onResizeStart={() => {
         setResizing(true)
       }}

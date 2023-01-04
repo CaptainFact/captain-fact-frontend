@@ -1,5 +1,4 @@
 import i18n from 'i18next'
-import titleCase from 'voca/title_case'
 
 import dateLocaleFR from 'date-fns/locale/fr'
 import datelocaleEN from 'date-fns/locale/en-US'
@@ -14,6 +13,7 @@ import * as pt_BR from './pt_BR'
 import store from '../state/index'
 import { changeLocale } from '../state/user_preferences/reducer'
 import { JS_ENV } from '../config'
+import { startCase } from 'lodash'
 
 // Add default formats for dates
 dateLocaleFR.defaultDateTimeFormat = "'Le' d MMM yyyy 'à' H:mm"
@@ -57,7 +57,7 @@ i18n.init({
         return value.toUpperCase()
       }
       if (format === 'titleCase') {
-        return titleCase(value)
+        return startCase(value)
       }
       if (format === 'unSnake') {
         return value.replace('_', ' ')

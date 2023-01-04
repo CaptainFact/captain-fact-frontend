@@ -122,6 +122,16 @@ const MenuPopup = styled(StyledPopup)`
   }
 `
 
+const getRedirectUrl = () => {
+  if (typeof window !== 'undefined') {
+    if (window.location.pathname.startsWith('/login') && !location.pathname.startsWith('/signup')) {
+      return location.pathname
+    }
+  }
+
+  return '/videos'
+}
+
 const Navbar = ({
   t,
   theme,
@@ -132,11 +142,7 @@ const Navbar = ({
   width,
 }) => {
   const isMobile = width < 600
-  const loginRedirect =
-    !location.pathname.startsWith('/login') && !location.pathname.startsWith('/signup')
-      ? location.pathname
-      : '/videos'
-
+  const loginRedirect = getRedirectUrl()
   return (
     <Box data-cy="Navbar">
       <Container height={theme.navbarHeight} width={1} />

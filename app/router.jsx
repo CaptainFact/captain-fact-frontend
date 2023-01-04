@@ -1,7 +1,6 @@
 // Import libs
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { createBrowserHistory } from 'history'
 
 // Import Views
 import Layout from './components/App/Layout'
@@ -32,7 +31,7 @@ import SupportUs from './components/SupportUs'
 import SearchPage from './components/Search/SearchPage'
 
 const CFRouter = () => (
-  <Router history={createBrowserHistory}>
+  <Router>
     <Layout>
       <Switch>
         <Route path="/" exact component={Home} />

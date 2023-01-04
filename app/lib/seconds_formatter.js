@@ -1,4 +1,4 @@
-import padLeft from 'voca/pad_left'
+import { padStart } from 'lodash'
 
 export default function formatSeconds(totalSeconds) {
   if (!totalSeconds) {
@@ -9,7 +9,7 @@ export default function formatSeconds(totalSeconds) {
   const absSeconds = Math.abs(totalSeconds)
   const hours = Math.trunc(absSeconds / 3600)
   const minutes = Math.trunc((absSeconds / 60) % 60)
-  const seconds = padLeft(absSeconds % 60, 2, '0')
+  const seconds = padStart(absSeconds % 60, 2, '0')
 
-  return `${sign}${hours}:${padLeft(minutes, 2, '0')}:${seconds}`
+  return `${sign}${hours}:${padStart(minutes, 2, '0')}:${seconds}`
 }

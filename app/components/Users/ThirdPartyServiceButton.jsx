@@ -7,6 +7,7 @@ const ThirdPartyServiceButton = ({ url, icon, className, newTab = false, ...prop
   <a
     href={url}
     target={newTab ? '_BLANK' : ''}
+    rel="noreferrer"
     className={classNames('icon is-large third-party-service-button', className)}
     {...props}
   >

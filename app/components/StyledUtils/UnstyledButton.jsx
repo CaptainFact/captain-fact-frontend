@@ -17,12 +17,19 @@ const UnstyledButton = styled.button`
   line-height: normal;
   outline-offset: 2px;
 
-  &:hover {
-    color: ${themeGet('colors.black.300')};
+  &:hover:not(:disabled) {
+    color: ${themeGet('colors.primary')};
   }
 
   &:focus {
-    outline: 1px dashed ${themeGet('colors.black.100')};
+    outline: 1px solid ${themeGet('colors.primary')};
+    outline-offset: 0px;
+    box-shadow: 0 0 5px 1px #6ba3a7;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
   }
 
   ${color}
