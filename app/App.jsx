@@ -5,10 +5,10 @@ import { polyfill as smoothSrollPolyfill } from 'smoothscroll-polyfill'
 import React from 'react'
 import { hot } from 'react-hot-loader/root'
 import { Provider as ReduxProvider } from 'react-redux'
-import { ApolloProvider } from 'react-apollo'
 import { ThemeProvider } from 'styled-components'
 import { I18nextProvider } from 'react-i18next'
 import { Configure, Index, InstantSearch } from 'react-instantsearch-dom'
+import { ApolloProvider } from '@apollo/client'
 
 // Load store
 import store from './state'

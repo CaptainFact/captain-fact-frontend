@@ -1,5 +1,5 @@
 import React from 'react'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/client/react/components'
 import gql from 'graphql-tag'
 import { Map } from 'immutable'
 import { withNamespaces } from 'react-i18next'
@@ -10,6 +10,7 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
 import MessageView from '../Utils/MessageView'
 import { ErrorView } from '../Utils/ErrorView'
 import ActionsDirectionFilter from '../UsersActions/ActionsDirectionFilter'
+import { get } from 'lodash'
 
 const QUERY = gql`
   query UserActivityLog(
@@ -84,17 +85,17 @@ const ActivityLog = ({ params: { username }, t, location }) => {
           return <ErrorView error={error} />
         }
 
-        if (!loading && data.user.actions.entries.length === 0) {
+        if (!loading && get(data, 'user.actions.entries.length') === 0) {
           return <MessageView>{t('noActivity')}</MessageView>
         }
 
-        const paginationMenu = renderPaginationMenu(loading, data.user, fetchMore)
+        const paginationMenu = renderPaginationMenu(loading, get(data, 'user'), fetchMore)
         return (
           <div>
             <div className="activity-log container">
               <p className="panel-heading">{t('main:menu.activity')}</p>
-              {data.user && <ActionsDirectionFilter user={data.user} value={direction} />}
-              {loading ? (
+              {get(data, 'user') && <ActionsDirectionFilter user={data.user} value={direction} />}
+              {!data || loading ? (
                 <div className="panel-block">
                   <LoadingFrame />
                 </div>

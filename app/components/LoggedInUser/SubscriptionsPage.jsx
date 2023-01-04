@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/client/react/components'
 import { get } from 'lodash'
 import { Flex, Box } from '@rebass/grid'
 import { Link } from 'react-router'
