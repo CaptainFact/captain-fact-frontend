@@ -1,5 +1,5 @@
 import React from 'react'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next'
 
 import { withLoggedInUser } from './UserProvider'
@@ -28,7 +28,7 @@ export default class LogoutPage extends React.Component {
       await this.props.logout()
     }
 
-    this.props.router.replace('/')
+    this.props.history.replace('/')
   }
 
   render() {

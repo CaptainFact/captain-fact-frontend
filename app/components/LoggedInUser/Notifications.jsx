@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import gql from 'graphql-tag'
 import { Query, Mutation } from '@apollo/client/react/components'
 import { get } from 'lodash'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 
 export const loggedInUserNotificationsQuery = gql`
   query LoggedInUserNotifications($page: Int! = 1, $pageSize: Int! = 30, $filter: String = ALL) {

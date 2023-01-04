@@ -1,5 +1,5 @@
 import React from 'react'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { confirmEmail } from '../../API/http_api/current_user'
@@ -12,7 +12,7 @@ export default class ConfirmEmail extends React.PureComponent {
   state = { loading: true, error: null }
 
   componentDidMount() {
-    confirmEmail(this.props.params.token).then(
+    confirmEmail(this.props.match.params.token).then(
       () => this.setState({ loading: false }),
       (e) => this.setState({ loading: false, error: e })
     )

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import { withNamespaces, Trans } from 'react-i18next'
 import { ExternalLinkAlt } from 'styled-icons/fa-solid'
 

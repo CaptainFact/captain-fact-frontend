@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { withNamespaces } from 'react-i18next'
 import FlipMove from 'react-flip-move'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import { Icon } from './Icon'
 import { addFlash, pause, removeFlash, unPause, update } from '../../state/flashes/reducer'
 import { tError } from '../../lib/errors'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { reduxForm, SubmissionError } from 'redux-form'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next'
 import { connect } from 'react-redux'
 
@@ -35,7 +35,7 @@ export default class EditUserForm extends React.PureComponent {
   componentDidUpdate() {
     // Redirect to user profile when logged in
     if (!this.props.loggedInUserLoading && !this.props.isAuthenticated) {
-      this.props.router.push('/')
+      this.props.history.push('/')
     }
   }
 

@@ -37,11 +37,12 @@ const validate = ({ url }) => {
 @withLoggedInUser
 export class AddVideoForm extends React.PureComponent {
   componentDidMount() {
-    const videoUrl = this.props.params.videoUrl || this.props.location.query.url
+    const searchParams = new URLSearchParams(location.search)
+    const videoUrl = this.props.match.params.videoUrl || searchParams.get('videoUrl')
     if (videoUrl) {
       this.props.searchVideo(decodeURI(videoUrl)).then((action) => {
         if (!action.error && action.payload !== null) {
-          this.props.router.push(`/videos/${action.payload.hash_id}`)
+          this.props.history.push(`/videos/${action.payload.hash_id}`)
         }
       })
     }
@@ -80,8 +81,9 @@ export class AddVideoForm extends React.PureComponent {
   }
 
   render() {
-    const { t, params, location, router, isAuthenticated, loggedInUser } = this.props
-    const initialURL = params.videoUrl || location.query.url
+    const { t, match, location, history, isAuthenticated, loggedInUser } = this.props
+    const searchParams = new URLSearchParams(location.search)
+    const initialURL = match.params.videoUrl || searchParams.get('url') || ''
     return (
       <Formik
         initialValues={{
@@ -95,9 +97,9 @@ export class AddVideoForm extends React.PureComponent {
           this.props.postVideo({ url, unlisted: !isPublicVideo }).then((action) => {
             setSubmitting(false)
             if (!action.error) {
-              router.push(`/videos/${action.payload.hash_id}`)
+              history.push(`/videos/${action.payload.hash_id}`)
             } else if (action.payload === 'unauthorized' && !isAuthenticated) {
-              router.push('/login')
+              history.push('/login')
             }
           })
         }}

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 import FlipMove from 'react-flip-move'
 
 import { StatementForm } from './StatementForm'
@@ -24,17 +24,20 @@ import { FULLHD_WIDTH_THRESHOLD } from '../../constants'
 @withRouter
 export default class StatementsList extends React.PureComponent {
   componentDidMount() {
-    if (this.props.location.query.statement) {
+    const searchParams = new URLSearchParams(this.props.location.search)
+    if (searchParams.has('statement')) {
       this.props.setScrollTo({
-        id: parseInt(this.props.location.query.statement),
+        id: parseInt(searchParams.get('statement')),
         __forceAutoScroll: true,
       })
     }
   }
 
   componentDidUpdate(oldProps) {
-    const curStatementQuery = this.props.location.query.statement
-    if (curStatementQuery && curStatementQuery !== oldProps.location.query.statement) {
+    const searchParams = new URLSearchParams(this.props.location.search)
+    const oldSearchParams = new URLSearchParams(oldProps.location.search)
+    const curStatementQuery = searchParams.get('statement')
+    if (curStatementQuery && curStatementQuery !== oldSearchParams.get('statement')) {
       this.props.setScrollTo({
         id: parseInt(curStatementQuery),
         __forceAutoScroll: true,

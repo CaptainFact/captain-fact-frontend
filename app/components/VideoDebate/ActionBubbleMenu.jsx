@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next'
 
 import { changeStatementFormSpeaker } from '../../state/video_debate/statements/reducer'
@@ -45,7 +45,7 @@ export default class ActionBubbleMenu extends React.PureComponent {
           <ActionBubble
             iconName="sign-in"
             label={t('main:menu.signup')}
-            onClick={() => this.props.router.push('/signup')}
+            onClick={() => this.props.history.push('/signup')}
           />
         )}
       </div>

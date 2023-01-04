@@ -39,7 +39,7 @@ import { getHDThumbnailUrl } from '../../lib/video_utils'
 export class VideoDebate extends React.PureComponent {
   componentDidMount() {
     // Join channels
-    const { videoId } = this.props.params
+    const { videoId } = this.props.match.params
     if (videoId) {
       this.props.joinVideoDebateChannel(videoId)
       this.props.joinStatementsChannel(videoId)
@@ -71,17 +71,17 @@ export class VideoDebate extends React.PureComponent {
   }
 
   render() {
-    const { videoErrors, isLoading, video, route } = this.props
-
+    const { videoErrors, isLoading, video, match } = this.props
     if (videoErrors) {
       return <ErrorView error={videoErrors} />
     }
 
+    const view = match.params.view || 'debate'
     return (
       <div id="video-show" className="columns is-gapless" data-video-language={video.language}>
         {!isLoading && this.renderMeta(video)}
-        <ColumnVideo view={route.view} />
-        <ColumnDebate view={route.view} videoId={this.props.params.videoId} />
+        <ColumnVideo view={view} />
+        <ColumnDebate view={view} videoId={this.props.match.params.videoId} />
       </div>
     )
   }

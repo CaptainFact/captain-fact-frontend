@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
+import { Link, withRouter } from 'react-router-dom'
 import { Trans, withNamespaces } from 'react-i18next'
 import { Helmet } from 'react-helmet'
 
@@ -30,9 +30,10 @@ import UserMenu from './UserMenu'
 )
 @withNamespaces('main')
 @withLoggedInUser
+@withRouter
 export default class User extends React.PureComponent {
   componentDidMount() {
-    this.props.fetchUser(this.props.params.username)
+    this.props.fetchUser(this.props.match.params.username)
   }
 
   componentDidUpdate(oldProps) {
@@ -43,11 +44,11 @@ export default class User extends React.PureComponent {
     ) {
       // TODO Remove old user profile from history
       // Redirect
-      this.props.router.replace(`/u/${this.props.user.username}`)
+      this.props.history.replace(`/u/${this.props.user.username}`)
     }
     // Showing another user
-    else if (this.props.params.username !== oldProps.params.username) {
-      this.props.fetchUser(this.props.params.username)
+    else if (this.props.match.params.username !== oldProps.match.params.username) {
+      this.props.fetchUser(this.props.match.params.username)
     }
   }
 

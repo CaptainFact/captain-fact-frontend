@@ -45,7 +45,7 @@ const StyledSearchBox = styled(AlgoliaSearchBox)`
 `
 
 /** Global Search Box */
-const SearchBox = ({ router, t }) => {
+const SearchBox = ({ location, history, t }) => {
   return (
     <StyledSearchBox
       translations={{ placeholder: t('search.placeholder') }}
@@ -53,15 +53,15 @@ const SearchBox = ({ router, t }) => {
       onSubmit={(e) => {
         e.preventDefault()
         const term = e.target.elements[0].value
-        const isSearchPage = router.location.pathname.startsWith('/search')
-        const route = isSearchPage ? router.location.pathname : '/search'
-        router.push({ pathname: route, query: { term } })
+        const isSearchPage = location.pathname.startsWith('/search')
+        const route = isSearchPage ? location.pathname : '/search'
+        history.push(`${route}?term=${encodeURIComponent(term)}`)
       }}
       onReset={(e) => {
         e.preventDefault()
-        const isSearchPage = router.location.pathname.startsWith('/search')
-        const route = isSearchPage ? router.location.pathname : '/search'
-        router.push({ pathname: route })
+        const isSearchPage = location.pathname.startsWith('/search')
+        const route = isSearchPage ? location.pathname : '/search'
+        history.push(route)
       }}
     />
   )

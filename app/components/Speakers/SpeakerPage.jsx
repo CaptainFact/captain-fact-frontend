@@ -1,5 +1,5 @@
 import React from 'react'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next'
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
@@ -33,7 +33,7 @@ import { LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
 )
 export class SpeakerPage extends React.PureComponent {
   componentDidMount() {
-    this.props.fetchSpeaker(this.props.params.slug_or_id)
+    this.props.fetchSpeaker(this.props.match.params.slug_or_id)
   }
 
   componentDidUpdate(oldProps) {
@@ -44,9 +44,9 @@ export class SpeakerPage extends React.PureComponent {
     } = this.props
 
     // Target speaker changed
-    if (this.props.params.slug_or_id !== oldProps.params.slug_or_id) {
+    if (this.props.match.params.slug_or_id !== oldProps.match.params.slug_or_id) {
       this.props.reset()
-      this.props.fetchSpeaker(this.props.params.slug_or_id)
+      this.props.fetchSpeaker(this.props.match.params.slug_or_id)
       return
     }
 
@@ -56,8 +56,8 @@ export class SpeakerPage extends React.PureComponent {
     }
 
     // Replace id by slug in URL if necessary
-    if (!speakerLoading && slug && slug !== this.props.params.slug_or_id) {
-      this.props.router.replace(`/s/${slug}`)
+    if (!speakerLoading && slug && slug !== this.props.match.params.slug_or_id) {
+      this.props.history.replace(`/s/${slug}`)
     }
   }
 
@@ -128,7 +128,8 @@ export class SpeakerPage extends React.PureComponent {
       return <LoadingFrame />
     }
 
-    const currentPage = parseInt(this.props.location.query.page) || 1
+    const searchParams = new URLSearchParams(location.search)
+    const currentPage = parseInt(searchParams.get('page')) || 1
     return (
       <PaginatedVideosContainer
         baseURL={this.props.location.pathname}

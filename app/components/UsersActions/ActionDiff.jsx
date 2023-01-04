@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import { Map, List } from 'immutable'
 import { diffWordsWithSpace } from 'diff'
 import titleCase from 'voca/title_case'

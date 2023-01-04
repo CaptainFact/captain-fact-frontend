@@ -72,8 +72,10 @@ const renderPaginationMenu = (loading, user, fetchMore) => (
   </div>
 )
 
-const ActivityLog = ({ params: { username }, t, location }) => {
-  const direction = location.query.direction || 'ALL'
+const ActivityLog = ({ match, t, location }) => {
+  const searchParams = new URLSearchParams(location.search)
+  const direction = searchParams.get('direction') || 'ALL'
+  const username = match.params.username
   return (
     <Query
       query={QUERY}

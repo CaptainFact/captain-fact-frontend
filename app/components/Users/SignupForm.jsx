@@ -1,7 +1,7 @@
 import React from 'react'
 import { reduxForm, SubmissionError } from 'redux-form'
 import { connect } from 'react-redux'
-import { withRouter, Link } from 'react-router'
+import { withRouter, Link } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next'
 
 import { renderAllUserFields, submitButton, validatePasswordRepeat } from './UserFormFields'
@@ -16,11 +16,12 @@ import { signUp } from '../../API/http_api/current_user'
 import { P } from '../StyledUtils/Text'
 
 const SignupForm = ({ location, t }) => {
-  if (!INVITATION_SYSTEM || location.query.invitation_token) {
+  const searchParams = new URLSearchParams(location.search)
+  if (!INVITATION_SYSTEM || searchParams.get('invitation_token')) {
     return (
       <RealSignupForm
         initialValues={{
-          invitation_token: location.query.invitation_token,
+          invitation_token: searchParams.get('invitation_token'),
         }}
       />
     )
@@ -49,7 +50,7 @@ class RealSignupForm extends React.PureComponent {
   UNSAFE_componentWillReceiveProps(props) {
     // Redirect to user profile when logged in
     if (props.isAuthenticated) {
-      props.router.push(`/u/${props.loggedInUser.username}`)
+      props.history.push(`/u/${props.loggedInUser.username}`)
     }
   }
 
