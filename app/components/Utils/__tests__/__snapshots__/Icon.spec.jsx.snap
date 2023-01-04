@@ -5,8 +5,8 @@ exports[`other props get passed to container 1`] = `
   className="icon"
   title="Add some stuff"
 >
-  <RawIcon
-    name="plus"
+  <i
+    className="fa icon-plus"
   />
 </span>
 `;
@@ -15,8 +15,8 @@ exports[`render icon 1`] = `
 <span
   className="icon"
 >
-  <RawIcon
-    name="plus"
+  <i
+    className="fa icon-plus"
   />
 </span>
 `;
@@ -25,8 +25,8 @@ exports[`set size 1`] = `
 <span
   className="icon is-large"
 >
-  <RawIcon
-    name="plus"
+  <i
+    className="fa icon-plus"
   />
 </span>
 `;

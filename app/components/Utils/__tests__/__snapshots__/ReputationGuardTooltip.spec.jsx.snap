@@ -1,47 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`user doesn't have required reputation 1`] = `
-<ForwardRef
-  contentStyle={
-    Object {
-      "maxWidth": 250,
-      "zIndex": 999,
-    }
-  }
-  on="hover"
-  position="bottom center"
-  trigger={
-    <div
-      className="help-tooltip-trigger"
-    >
-      Has reputation: false
-    </div>
-  }
+<div
+  aria-describedby="popup-1"
+  className="help-tooltip-trigger"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
 >
-  <Message
-    type="primary"
-  >
-    <Icon
-      name="info-circle"
-    />
-     
-    <Trans
-      i18nKey="errors:client.needReputation"
-      requiredRep={42}
-    >
-      You need at least 
-      <Component />
-      <Link
-        onlyActiveOnIndex={false}
-        style={Object {}}
-        to="/help/reputation"
-      >
-        translated[pages.reputation]
-      </Link>
-      points to do that
-    </Trans>
-  </Message>
-</ForwardRef>
+  Has reputation: false
+</div>
 `;
 
 exports[`user have required reputation 1`] = `"Has reputation: true"`;
