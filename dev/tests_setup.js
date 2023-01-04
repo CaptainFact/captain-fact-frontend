@@ -1,28 +1,23 @@
-import Enzyme, { shallow, render, mount } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
+/**
+ * render: lets us render the component as React would
+ * screen: a utility for finding elements the same way the user does
+ */
+import renderer from 'react-test-renderer'
 import React from 'react'
 import 'isomorphic-fetch'
 import 'fetch-mock'
 
 global.React = React
 
-// React 16 Enzyme adapter
-Enzyme.configure({ adapter: new Adapter() })
-
 // Configure global env variables
 process.env.HTTP_API_URL = 'http://test'
 process.env.INVITATION_SYSTEM = 'off'
-
-// Make Enzyme functions available in all test files without importing
-global.shallow = shallow
-global.render = render
-global.mount = mount
 
 // Add a helper to register snapshot
 global.snapshot = (element) => expect(element).toMatchSnapshot()
 
 // Shallow then snapshot component
-global.snapshotComponent = (component) => snapshot(shallow(component))
+global.snapshotComponent = (component) => snapshot(renderer.create(component).toJSON())
 
 /**
  * Apply all actions to given reducer and make a snapshot at each step.
