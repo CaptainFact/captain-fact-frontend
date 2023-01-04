@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/client/react/components'
 import { withNamespaces } from 'react-i18next'
 import classNames from 'classnames'
 import { get } from 'lodash'

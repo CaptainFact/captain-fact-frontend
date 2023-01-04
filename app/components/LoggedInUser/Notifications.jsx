@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import gql from 'graphql-tag'
-import { Query, Mutation } from 'react-apollo'
+import { Query, Mutation } from '@apollo/client/react/components'
 import { get } from 'lodash'
 import { withRouter } from 'react-router'
 

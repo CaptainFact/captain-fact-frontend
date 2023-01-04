@@ -1,5 +1,5 @@
 import React from 'react'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/client/react/components'
 import { get } from 'lodash'
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'

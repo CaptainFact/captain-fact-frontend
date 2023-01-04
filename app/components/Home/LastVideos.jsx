@@ -1,5 +1,5 @@
 import React from 'react'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/client/react/components'
 import { Flex } from '@rebass/grid'
 import styled from 'styled-components'
 
