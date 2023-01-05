@@ -59,7 +59,7 @@ export class ColumnVideo extends React.PureComponent {
                 </Link>
               </li>
               <li className={classNames({ 'is-active': !isDebate })}>
-                <Link to={videoHistoryURL(video.hash_id)}>
+                <Link to={videoHistoryURL(video.hash_id)} rel="nofollow">
                   <Icon size="small" name="history" />
                   <span>{t('history')}</span>
                 </Link>
