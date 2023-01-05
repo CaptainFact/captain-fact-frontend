@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import { themeGet } from 'styled-system'
 import { Flex, Box } from '@rebass/grid'
 import { translate } from 'react-i18next'
@@ -12,12 +12,12 @@ import { Clock } from 'styled-icons/fa-regular'
 import { Check } from 'styled-icons/fa-solid'
 import { DotFill } from 'styled-icons/octicons'
 
-import StyledLink from '../StyledUtils/StyledLink'
 import { TimeSince } from '../Utils/TimeSince'
 import Container from '../StyledUtils/Container'
 import { Span } from '../StyledUtils/Text'
 import NotificationDetails from './NotificationDetails'
 import { userNotificationsURL } from '../../lib/cf_routes'
+import UnstyledButton from '../StyledUtils/UnstyledButton'
 
 const NotificationContainer = styled((props) => <Flex {...omit(props, ['hasBeenSeen'])} />)`
   display: flex;
@@ -53,7 +53,7 @@ const NotificationsPopupContent = ({ user, notifications, markAsSeen, t }) => {
         borderColor="black.100"
       >
         <Span fontWeight="bold">Notifications</Span>
-        <StyledLink
+        <UnstyledButton
           disabled={!hasUnseen}
           onClick={() =>
             markAsSeen(
@@ -63,7 +63,7 @@ const NotificationsPopupContent = ({ user, notifications, markAsSeen, t }) => {
           }
         >
           {t('markAllAsRead')}
-        </StyledLink>
+        </UnstyledButton>
       </Container>
       {notifications.length === 0 ? (
         <Box p={4}>{t('empty')}</Box>

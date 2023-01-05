@@ -1,7 +1,7 @@
 import React from 'react'
 import Statement from '../Statements/Statement'
 import Container from '../StyledUtils/Container'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next'
 import { statementURL } from '../../lib/cf_routes'
 

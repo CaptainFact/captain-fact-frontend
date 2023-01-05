@@ -30,7 +30,7 @@ export default class ResetPasswordConfirmForm extends React.PureComponent {
 
   componentDidMount() {
     userAPI
-      .resetPasswordVerify(this.props.params.token)
+      .resetPasswordVerify(this.props.match.params.token)
       .then((user) => {
         this.setState({ status: 'confirm', user })
       })
@@ -41,7 +41,7 @@ export default class ResetPasswordConfirmForm extends React.PureComponent {
 
   submitForm(e) {
     userAPI
-      .resetPasswordConfirm(this.props.params.token, e.password)
+      .resetPasswordConfirm(this.props.match.params.token, e.password)
       .then((user) => {
         userAPI.signIn('identity', { ...user, password: e.password }).then(({ user, token }) => {
           this.props.updateLoggedInUser(user, token)

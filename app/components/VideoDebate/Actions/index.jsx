@@ -3,7 +3,7 @@ import { withNamespaces } from 'react-i18next'
 import { connect } from 'react-redux'
 import { flow } from 'lodash'
 import styled from 'styled-components'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 
 import {
   BellSlash,
@@ -53,7 +53,7 @@ const Actions = ({
   soundOnBackgroundFocus,
   toggleBackgroundSound,
   addModal,
-  router,
+  history,
 }) => (
   <Wrapper>
     {isAuthenticated && (
@@ -100,7 +100,7 @@ const Actions = ({
       />
     </ReputationGuard>
     <StyledAction
-      onClick={() => router.push('/help')}
+      onClick={() => history.push('/help')}
       activatedIcon={<Question />}
       label={t('main:menu.help')}
     />

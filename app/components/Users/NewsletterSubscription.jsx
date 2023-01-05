@@ -14,7 +14,7 @@ export default class NewsletterSubscription extends React.PureComponent {
 
   componentDidMount() {
     // Send request
-    HttpApi.get(`newsletter/unsubscribe/${this.props.params.token}`)
+    HttpApi.get(`newsletter/unsubscribe/${this.props.match.params.token}`)
       .then(() => this.setState({ status: 'success' }))
       .catch(() => this.setState({ status: 'error' }))
   }

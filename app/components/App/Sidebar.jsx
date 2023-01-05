@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
+import { NavLink } from 'react-router-dom'
 import { Query } from '@apollo/client/react/components'
 import { withNamespaces } from 'react-i18next'
 import classNames from 'classnames'
@@ -69,7 +69,7 @@ export default class Sidebar extends React.PureComponent {
   MenuLink({ title, iconName, customLink, className, children, ...props }) {
     const classes = classNames(className, { 'link-with-icon': !!iconName })
     return (
-      <Link
+      <NavLink
         className={classes}
         activeClassName="is-active"
         onClick={this.closeSideBarIfMobile}
@@ -78,7 +78,7 @@ export default class Sidebar extends React.PureComponent {
       >
         {iconName && <RawIcon name={iconName} />}
         {customLink ? children : <span>{children}</span>}
-      </Link>
+      </NavLink>
     )
   }
 
@@ -214,7 +214,7 @@ export default class Sidebar extends React.PureComponent {
     const t = this.props.t
     return (
       <ul className="menu-list">
-        <this.MenuListLink to="/videos" iconName="television" onlyActiveOnIndex>
+        <this.MenuListLink to="/videos" iconName="television" strict>
           {capitalize(t('entities.videoFactChecking'))}
         </this.MenuListLink>
         <ReputationGuard requiredRep={MIN_REPUTATION_MODERATION}>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 
 import { Report } from 'styled-icons/octicons'
 

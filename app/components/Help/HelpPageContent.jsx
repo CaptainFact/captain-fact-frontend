@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Markdown from 'react-markdown'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 
 import { isExternal, isDownloadableFile } from '../../lib/url_utils'
 import { LoadingFrame } from '../Utils/LoadingFrame'

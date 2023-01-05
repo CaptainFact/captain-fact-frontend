@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Query } from '@apollo/client/react/components'
 import { get } from 'lodash'
 import { Flex, Box } from '@rebass/grid'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { Videos } from 'styled-icons/boxicons-solid'

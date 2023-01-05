@@ -1,6 +1,6 @@
 import React from 'react'
 import { reduxForm, SubmissionError } from 'redux-form'
-import { Link, withRouter } from 'react-router'
+import { Link, withRouter } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next'
 import { get } from 'lodash'
 
@@ -21,8 +21,8 @@ export default class LoginForm extends React.PureComponent {
   }
 
   redirect() {
-    const pathName = get(this.props.router, 'location.state.redirect', '/videos')
-    this.props.router.replace(pathName)
+    const pathName = get(this.props.location, 'state.redirect', '/videos')
+    this.props.history.replace(pathName)
   }
 
   componentDidMount() {

@@ -12,10 +12,11 @@ export default class ThirdPartyCallback extends React.PureComponent {
   state = { error: null }
 
   componentDidMount() {
-    if (!this.props.location.query.error) {
-      signIn(this.props.params.provider, {
-        code: this.props.location.query.code,
-        invitation_token: this.props.location.query.state,
+    const searchParams = new URLSearchParams(location.search)
+    if (!searchParams.get()) {
+      signIn(this.props.match.params.provider, {
+        code: searchParams.get('code'),
+        invitation_token: searchParams.get('state'),
       })
         .then(({ user, token }) => {
           this.props.updateLoggedInUser(user, token)
@@ -28,7 +29,7 @@ export default class ThirdPartyCallback extends React.PureComponent {
 
   componentDidUpdate() {
     if (this.props.isAuthenticated && this.props.loggedInUser.username) {
-      this.props.router.push(`/u/${this.props.loggedInUser.username}/settings`)
+      this.props.history.push(`/u/${this.props.loggedInUser.username}/settings`)
     }
   }
 
@@ -36,8 +37,9 @@ export default class ThirdPartyCallback extends React.PureComponent {
     if (this.state.error) {
       return <ErrorView error={this.props.error} i18nNS="user:errors.error" />
     }
-    if (this.props.location.query.error) {
-      return <ErrorView error={this.props.location.query.error} i18nNS="user:errors.thirdParty" />
+    const searchParams = new URLSearchParams(location.search)
+    if (searchParams.get('error')) {
+      return <ErrorView error={searchParams.get('error')} i18nNS="user:errors.thirdParty" />
     }
     return <LoadingFrame title="Authenticating" />
   }

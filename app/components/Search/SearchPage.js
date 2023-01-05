@@ -2,7 +2,7 @@ import React from 'react'
 import { withNamespaces, Trans } from 'react-i18next'
 import { connectSearchBox, Index, InfiniteHits } from 'react-instantsearch-dom'
 import styled from 'styled-components'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import capitalize from 'voca/capitalize'
 import { Search as SearchIcon } from 'styled-icons/fa-solid'
 
@@ -15,6 +15,7 @@ import { SpeakerHit } from './SpeakerHit'
 import StatementHit from './StatementHit'
 import { ALGOLIA_INDEXES_NAMES } from '../../lib/algolia'
 import SearchBox from './SearchBox'
+import { optionsToQueryString } from '../../lib/url_utils'
 
 const MainContainer = styled.div`
   background: #f4f5f8;
@@ -90,15 +91,16 @@ const ROUTES_ENTITIES = {
   statements: ENTITY_STATEMENT,
 }
 
-const SearchPage = ({ t, refine, router }) => {
-  const rawTerm = router.location.query.term
+const SearchPage = ({ t, refine, match, location }) => {
+  const searchParams = new URLSearchParams(location.search)
+  const rawTerm = searchParams.get('term')
   const term = rawTerm ? decodeURIComponent(rawTerm) : ''
 
   React.useEffect(() => {
     refine(term)
   }, [term])
-
-  const selectedEntity = ROUTES_ENTITIES[router.params.entity]
+  console.log(match)
+  const selectedEntity = ROUTES_ENTITIES[match.params.entity]
   return (
     <MainContainer>
       <Container background="white">
@@ -125,7 +127,9 @@ const SearchPage = ({ t, refine, router }) => {
           <SearchTabsUl>
             {Object.keys(ENTITIES_COMPONENTS).map((entity) => (
               <li key={entity} className={selectedEntity === entity ? 'is-active' : ''}>
-                <Link to={{ pathname: `/search/${entity}s`, query: { term } }}>
+                <Link
+                  to={{ pathname: `/search/${entity}s`, search: optionsToQueryString({ term }) }}
+                >
                   <SearchIcon size="1em" />
                   &nbsp; {capitalize(t(`entities.${entity}`, { count: 5 }))}
                   {term && (

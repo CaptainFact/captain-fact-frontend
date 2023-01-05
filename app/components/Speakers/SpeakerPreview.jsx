@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link, withRouter } from 'react-router'
+import { Link, withRouter } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next'
 import classNames from 'classnames'
 import { Flex } from '@rebass/grid'
@@ -124,7 +124,7 @@ export class SpeakerPreview extends React.PureComponent {
     const historyRegex = new RegExp('/history/?$')
     const currentPath = this.props.location.pathname
     if (currentPath.match(historyRegex)) {
-      this.props.router.push(currentPath.replace(historyRegex, ''))
+      this.props.history.push(currentPath.replace(historyRegex, ''))
     }
     this.props.changeStatementFormSpeaker({ id: this.props.speaker.id })
   }

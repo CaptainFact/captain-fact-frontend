@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, withRouter } from 'react-router'
+import { Link, withRouter } from 'react-router-dom'
 import styled, { withTheme, css } from 'styled-components'
 import { Flex, Box } from '@rebass/grid'
 import { themeGet } from 'styled-system'

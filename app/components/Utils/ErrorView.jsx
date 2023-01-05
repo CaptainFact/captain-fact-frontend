@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, withRouter } from 'react-router'
+import { Link, withRouter } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next'
 
 import { LinkWithIcon } from '.'
@@ -31,7 +31,7 @@ export class ErrorView extends React.PureComponent {
             </p>
             {(canGoBack || canReload) && <br />}
             {canGoBack && (
-              <LinkWithIcon iconName="arrow-left" onClick={() => this.props.router.goBack()}>
+              <LinkWithIcon iconName="arrow-left" onClick={() => this.props.history.goBack()}>
                 {t('main:actions.goBack')}
               </LinkWithIcon>
             )}

@@ -24,7 +24,8 @@ import PaginatedVideosContainer from './PaginatedVideosContainer'
 export default class VideosIndexPage extends React.PureComponent {
   render() {
     const { t, languageFilter, videosFilter, setVideosFilter, location } = this.props
-    const currentPage = parseInt(location.query.page) || 1
+    const searchParams = new URLSearchParams(location.search)
+    const currentPage = parseInt(searchParams.get('page')) || 1
 
     return (
       <div className="videos-page">

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter, Link } from 'react-router'
+import { withRouter, Link } from 'react-router-dom'
 import { Flex, Box } from '@rebass/grid'
 import { translate } from 'react-i18next'
 import FlipMove from 'react-flip-move'
@@ -35,8 +35,8 @@ export default class NotificationsPage extends Component {
     })}`
   }
 
-  getFilter(location) {
-    return FILTERS.includes(location.query.filter) ? location.query.filter : 'ALL'
+  getFilter(searchParams) {
+    return FILTERS.includes(searchParams.filter) ? searchParams.filter : 'ALL'
   }
 
   renderFilters(selected) {
@@ -107,8 +107,9 @@ export default class NotificationsPage extends Component {
 
   render() {
     const { t, location } = this.props
-    const pageNumber = parseInt(location.query.page) || 1
-    const filter = this.getFilter(location)
+    const searchParams = new URLSearchParams(location.search)
+    const pageNumber = parseInt(searchParams.get('page')) || 1
+    const filter = this.getFilter(searchParams)
     const pollInterval = filter === 'ALL' && pageNumber === 1 ? 15000 : 0 // Only poll on first page
 
     return (

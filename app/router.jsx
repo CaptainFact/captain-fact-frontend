@@ -1,6 +1,7 @@
 // Import libs
 import React from 'react'
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
 
 // Import Views
 import Layout from './components/App/Layout'
@@ -31,41 +32,44 @@ import SupportUs from './components/SupportUs'
 import SearchPage from './components/Search/SearchPage'
 
 const CFRouter = () => (
-  <Router history={browserHistory}>
-    <Route component={Layout}>
-      <Route path="/" component={Home} />
-      <Route path="/signup" component={SignupForm} />
-      <Route path="/signup/callback/:provider" component={ThirdPartyCallback} />
-      <Route path="/login" component={LoginForm} />
-      <Route path="/logout" component={LogoutPage} />
-      <Route path="/login/callback/:provider" component={ThirdPartyCallback} />
-      <Route path="/confirm_email/:token" component={ConfirmEmail} />
-      <Route path="/reset_password" component={ResetPasswordRequestForm} />
-      <Route path="/reset_password/confirm/:token" component={ResetPasswordConfirmForm} />
-      <Route path="/newsletter/unsubscribe/:token" component={NewsletterSubscription} />
-      <Route path="/u/:username" component={User}>
-        <IndexRoute component={ActivityLog} />
-        <Route path="/u/:username/profile" component={UserProfile} />
-        <Route path="/u/:username/settings" component={UserSettings} />
-        <Route path="/u/:username/videos" component={UserAddedVideos} />
-        <Route path="/u/:username/subscriptions" component={SubscriptionsPage} />
-        <Route path="/u/:username/notifications" component={NotificationsPage} />
-      </Route>
-      <Route path="/videos" component={VideosIndexPage} />
-      <Route path="/videos/add" component={AddVideoForm} />
-      <Route path="/videos/add/:videoUrl" component={AddVideoForm} />
-      <Route path="/videos/:videoId" component={VideoDebate} view="debate" />
-      <Route path="/videos/:videoId/history" component={VideoDebate} view="history" />
-      <Route path="/s/:slug_or_id" component={SpeakerPage} />
-      <Route path="/help" component={Help} />
-      <Route path="/help/*" component={Help} />
-      <Route path="/extension" component={BrowserExtensionsPage} />
-      <Route path="/moderation" component={Moderation} />
-      <Route path="/support-us" component={SupportUs} />
-      <Route path="/search" component={SearchPage} />
-      <Route path="/search/:entity" component={SearchPage} />
-      <Route path="*" component={NotFound} />
-    </Route>
+  <Router history={createBrowserHistory}>
+    <Layout>
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/signup" exact component={SignupForm} />
+        <Route path="/signup/callback/:provider" exact component={ThirdPartyCallback} />
+        <Route path="/login" exact component={LoginForm} />
+        <Route path="/logout" exact component={LogoutPage} />
+        <Route path="/login/callback/:provider" exact component={ThirdPartyCallback} />
+        <Route path="/confirm_email/:token" exact component={ConfirmEmail} />
+        <Route path="/reset_password" exact component={ResetPasswordRequestForm} />
+        <Route path="/reset_password/confirm/:token" exact component={ResetPasswordConfirmForm} />
+        <Route path="/newsletter/unsubscribe/:token" exact component={NewsletterSubscription} />
+        <Route path="/u/:username">
+          <User>
+            <Switch>
+              <Route path="/u/:username" exact component={ActivityLog} />
+              <Route path="/u/:username/profile" exact component={UserProfile} />
+              <Route path="/u/:username/settings" exact component={UserSettings} />
+              <Route path="/u/:username/videos" exact component={UserAddedVideos} />
+              <Route path="/u/:username/subscriptions" exact component={SubscriptionsPage} />
+              <Route path="/u/:username/notifications" exact component={NotificationsPage} />
+            </Switch>
+          </User>
+        </Route>
+        <Route path="/videos" exact component={VideosIndexPage} />
+        <Route path="/videos/add" exact component={AddVideoForm} />
+        <Route path="/videos/add/:videoUrl" exact component={AddVideoForm} />
+        <Route path="/videos/:videoId/:view(history|debate)?" exact component={VideoDebate} />
+        <Route path="/s/:slug_or_id" exact component={SpeakerPage} />
+        <Route path="/help/:splat?" component={Help} />
+        <Route path="/extension" exact component={BrowserExtensionsPage} />
+        <Route path="/moderation" exact component={Moderation} />
+        <Route path="/support-us" exact component={SupportUs} />
+        <Route path="/search/:entity(videos|statements|speakers)?" component={SearchPage} />
+        <Route path="*" component={NotFound} />
+      </Switch>
+    </Layout>
   </Router>
 )
 

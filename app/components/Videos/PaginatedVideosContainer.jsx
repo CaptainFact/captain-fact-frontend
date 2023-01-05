@@ -1,6 +1,6 @@
 import React from 'react'
 import { Query } from '@apollo/client/react/components'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next'
 import { get } from 'lodash'
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { withNamespaces, Trans } from 'react-i18next'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import Popup from 'reactjs-popup'
 
 import { Icon } from './Icon'
