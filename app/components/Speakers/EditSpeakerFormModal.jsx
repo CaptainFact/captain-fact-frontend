@@ -116,6 +116,7 @@ class EditSpeakerFormModal extends React.PureComponent {
           values,
           isSubmitting,
           isValid,
+          dirty,
           submitForm,
           errors,
         }) => (
@@ -126,7 +127,7 @@ class EditSpeakerFormModal extends React.PureComponent {
               <div className="form-buttons">
                 <Button
                   onClick={submitForm}
-                  disabled={isSubmitting || !isValid}
+                  disabled={isSubmitting || !isValid || !dirty}
                   className={classNames('is-primary', { 'is-loading': isSubmitting })}
                 >
                   <Save size="1.25em" />

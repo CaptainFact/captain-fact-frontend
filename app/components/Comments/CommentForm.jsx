@@ -144,17 +144,17 @@ class CommentForm extends React.Component {
     )
   }
 
-  renderCommentForm(values, setFieldValue, isValid) {
+  renderCommentForm(values, setFieldValue, isDisabled) {
     const { replyTo, t } = this.props
     const i18nParams = replyTo ? { context: 'reply' } : null
 
     return !values.source ? (
-      <SubmitButton my={1} disabled={!isValid}>
+      <SubmitButton my={1} disabled={isDisabled}>
         {t('comment.post', i18nParams)}
       </SubmitButton>
     ) : (
       <Flex flex="1 1 460px" flexWrap="wrap">
-        <SubmitButton my={1} mr={1} disabled={!isValid} flex="1 1 130px">
+        <SubmitButton my={1} mr={1} disabled={isDisabled} flex="1 1 130px">
           {t('comment.post', i18nParams)}
         </SubmitButton>
         <Flex flex="3 1">
@@ -162,7 +162,7 @@ class CommentForm extends React.Component {
             my={1}
             mr={1}
             className="is-success"
-            disabled={!isValid || !values.source}
+            disabled={isDisabled || !values.source}
             onClick={() => setFieldValue('approve', true)}
           >
             {t('comment.approve', i18nParams)}
@@ -170,7 +170,7 @@ class CommentForm extends React.Component {
           <SubmitButton
             my={1}
             className="is-danger"
-            disabled={!isValid}
+            disabled={isDisabled}
             onClick={() => setFieldValue('approve', false)}
           >
             {t('comment.refute', i18nParams)}
@@ -180,7 +180,7 @@ class CommentForm extends React.Component {
     )
   }
 
-  renderIncitate(values, setFieldValue, isValid) {
+  renderIncitate(values, setFieldValue, isDisabled) {
     const { replyTo, inciteToParticipate } = this.props
     const i18nParams = replyTo ? { context: 'reply' } : null
     const name_class = inciteToParticipate == 'approve' ? 'is-success' : 'is-danger'
@@ -194,7 +194,7 @@ class CommentForm extends React.Component {
             my={1}
             mr={1}
             className={name_class}
-            disabled={!isValid || !values.source}
+            disabled={isDisabled || !values.source}
             onClick={() => setFieldValue('approve', approveField)}
           >
             {this.props.t(comment, i18nParams)}
@@ -210,7 +210,7 @@ class CommentForm extends React.Component {
 
     return (
       <Formik initialValues={initialValues} validate={this.validate} onSubmit={this.onSubmit}>
-        {({ handleBlur, handleSubmit, values, setFieldValue, isValid, errors }) => (
+        {({ handleBlur, handleSubmit, values, setFieldValue, isValid, dirty, errors }) => (
           <Box flex="1 1" as="form" onSubmit={handleSubmit}>
             <Flex flexDirection="column">
               <Container mb={2} position="relative">
@@ -252,8 +252,8 @@ class CommentForm extends React.Component {
                 </Flex>
 
                 {inciteToParticipate
-                  ? this.renderIncitate(values, setFieldValue, isValid)
-                  : this.renderCommentForm(values, setFieldValue, isValid)}
+                  ? this.renderIncitate(values, setFieldValue, !isValid || !dirty)
+                  : this.renderCommentForm(values, setFieldValue, !isValid || !dirty)}
               </Flex>
               {this.renderHelpMessage()}
             </Flex>
