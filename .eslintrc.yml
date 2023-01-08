@@ -25,12 +25,6 @@ settings:
   react:
     version: detect
 rules:
-  max-len:
-    - warn
-    - code: 100
-      ignoreStrings: true
-      ignoreTemplateLiterals: true
-      ignoreRegExpLiterals: true
   linebreak-style: ['error', 'unix']
   quotes: ['warn', 'single', { avoidEscape: true }]
   semi: ['error', 'never']
@@ -113,6 +107,7 @@ rules:
   block-spacing: off
   brace-style: off
   no-multi-spaces: off
+  max-len: off # Handled by prettier
   # React-specific temporarily disabled rules
   react/prop-types: off
   react/no-string-refs: off

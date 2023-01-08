@@ -2,6 +2,8 @@ import { destroy } from 'redux-form'
 
 import { SocketApi } from '../../../API'
 import { STATEMENTS_CHANNEL } from '../../../constants'
+import { errorToFlash } from '../../flashes/reducer'
+import { createEffect, returnSuccess } from '../../utils'
 import {
   add,
   fetchStatements,
@@ -11,8 +13,6 @@ import {
   update,
   updateAll,
 } from './reducer'
-import { createEffect, returnSuccess } from '../../utils'
-import { errorToFlash } from '../../flashes/reducer'
 
 export const joinStatementsChannel = (videoId) => (dispatch) => {
   // Connect to channel

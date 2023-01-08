@@ -1,8 +1,8 @@
 import React from 'react'
-import { SearchBox as AlgoliaSearchBox } from 'react-instantsearch-dom'
-import styled from 'styled-components'
 import { withNamespaces } from 'react-i18next'
+import { SearchBox as AlgoliaSearchBox } from 'react-instantsearch-dom'
 import { withRouter } from 'react-router'
+import styled from 'styled-components'
 
 const StyledSearchBox = styled(AlgoliaSearchBox)`
   input[type='search'] {

@@ -1,10 +1,10 @@
-import { Record, List, Map } from 'immutable'
-import { createAction, handleActions, combineActions } from 'redux-actions'
+import { List, Map, Record } from 'immutable'
+import { combineActions, createAction, handleActions } from 'redux-actions'
 
 import parseDateTime from '../../lib/parse_datetime'
-import UserAction from './record'
-import { resetVideoDebate } from '../video_debate/actions'
 import { getEntityIDFromAction } from '../../lib/user_action_entity_id'
+import { resetVideoDebate } from '../video_debate/actions'
+import UserAction from './record'
 
 export const setLoading = createAction('VIDEO_DEBATE_HISTORY/SET_LOADING')
 export const reset = createAction('VIDEO_DEBATE_HISTORY/RESET')

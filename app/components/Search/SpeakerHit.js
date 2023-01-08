@@ -1,5 +1,6 @@
-import React from 'react'
 import { Box } from '@rebass/grid'
+import React from 'react'
+
 import { SpeakerPreview } from '../Speakers/SpeakerPreview'
 
 export const SpeakerHit = ({ hit }) => {

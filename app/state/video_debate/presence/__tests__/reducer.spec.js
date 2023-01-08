@@ -1,4 +1,4 @@
-import reducer, { setPresence, presenceDiff } from '../reducer'
+import reducer, { presenceDiff, setPresence } from '../reducer'
 
 const INITIAL_STATE = reducer(undefined, {})
 

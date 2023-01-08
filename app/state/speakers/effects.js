@@ -1,11 +1,11 @@
 import HttpApi from '../../API/http_api'
+import { createEffect } from '../utils'
 import {
   actionFetchSpeaker,
   actionFetchSpeakerWikiLinks,
   setLoading,
   setLoadingWiki,
 } from './reducer'
-import { createEffect } from '../utils'
 
 export const fetchSpeaker = (slugOrId) =>
   createEffect(HttpApi.get(`speakers/${slugOrId}`), {

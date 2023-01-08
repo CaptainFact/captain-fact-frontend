@@ -1,7 +1,8 @@
 import fetchMock from 'fetch-mock'
+
+import User from '../../record'
 import { fetchUser } from '../effects'
 import { setLoading, setUser as setDisplayedUser } from '../reducer'
-import User from '../../record'
 
 // Prepare test data
 const self = new User({ id: 42, username: 'IamMe' })

@@ -1,11 +1,11 @@
-import { Record, Map, List, Set } from 'immutable'
-import { createAction, handleActions } from 'redux-actions'
 import isAfter from 'date-fns/isAfter'
+import { List, Map, Record, Set } from 'immutable'
+import { createAction, handleActions } from 'redux-actions'
 
-import Comment from './record'
 import parseDateTime from '../../../lib/parse_datetime'
-import { resetVideoDebate } from '../actions'
 import { logWarn } from '../../../logger'
+import { resetVideoDebate } from '../actions'
+import Comment from './record'
 
 export const addFlag = createAction('COMMENTS/ADD_FLAG')
 

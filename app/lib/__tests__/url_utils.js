@@ -1,4 +1,4 @@
-import { youtubeRegex, optionsToQueryString, isExternal } from '../url_utils'
+import { isExternal, optionsToQueryString, youtubeRegex } from '../url_utils'
 
 describe('Youtube regex', () => {
   it('should accept regular urls', () => {

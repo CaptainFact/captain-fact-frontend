@@ -1,7 +1,7 @@
-import { Record, Map } from 'immutable'
+import { Map, Record } from 'immutable'
 import { createAction, handleActions } from 'redux-actions'
-import parseDateTime from '../../lib/parse_datetime'
 
+import parseDateTime from '../../lib/parse_datetime'
 import ModerationEntry from './record'
 
 export const setLoading = createAction('MODERATION/SET_LOADING')

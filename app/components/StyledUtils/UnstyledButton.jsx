@@ -32,6 +32,14 @@ const UnstyledButton = styled.button`
     opacity: 0.5;
   }
 
+  /**
+ * Remove focus styles for non-keyboard focus.
+ */
+  :focus:not(:focus-visible) {
+    outline: 0;
+    box-shadow: none;
+  }
+
   ${(props) =>
     props.$asLink &&
     css`

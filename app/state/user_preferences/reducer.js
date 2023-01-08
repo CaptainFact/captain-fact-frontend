@@ -1,8 +1,9 @@
 import { Record } from 'immutable'
 import { createAction, handleActions } from 'redux-actions'
-import { MOBILE_WIDTH_THRESHOLD, SUPPORTED_LOCALES, ONLY_FEATURED } from '../../constants'
+
+import { MOBILE_WIDTH_THRESHOLD, ONLY_FEATURED, SUPPORTED_LOCALES } from '../../constants'
 import browserLocale from '../../i18n/browser_locale'
-import { setLocalStorage, LOCAL_STORAGE_KEYS, getFromLocalStorage } from '../../lib/local_storage'
+import { getFromLocalStorage, LOCAL_STORAGE_KEYS, setLocalStorage } from '../../lib/local_storage'
 
 export const toggleSidebar = createAction('USER_PREFERENCES/TOGGLE_SIDEBAR')
 export const closeSidebar = createAction('USER_PREFERENCES/CLOSE_SIDEBAR')

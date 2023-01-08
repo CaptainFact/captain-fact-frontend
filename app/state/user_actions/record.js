@@ -1,4 +1,5 @@
-import { Record, Map } from 'immutable'
+import { Map, Record } from 'immutable'
+
 import User from '../users/record'
 
 const UserAction = new Record({

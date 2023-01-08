@@ -1,9 +1,10 @@
 import React from 'react'
+import { withNamespaces } from 'react-i18next'
+import { Link } from 'react-router-dom'
+
+import { statementURL } from '../../lib/cf_routes'
 import Statement from '../Statements/Statement'
 import Container from '../StyledUtils/Container'
-import { Link } from 'react-router-dom'
-import { withNamespaces } from 'react-i18next'
-import { statementURL } from '../../lib/cf_routes'
 
 const StatementHit = ({ t, hit }) => {
   return (

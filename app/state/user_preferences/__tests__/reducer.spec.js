@@ -1,4 +1,4 @@
-import reducer, { toggleSidebar, closeSidebar } from '../reducer'
+import reducer, { closeSidebar, toggleSidebar } from '../reducer'
 
 const INITIAL_STATE = reducer(undefined, {})
 

@@ -1,5 +1,5 @@
-import reducer, { addModal, popModal } from '../reducer'
 import Modal from '../../../components/Modal/Modal'
+import reducer, { addModal, popModal } from '../reducer'
 
 const INITIAL_STATE = reducer(undefined, {})
 

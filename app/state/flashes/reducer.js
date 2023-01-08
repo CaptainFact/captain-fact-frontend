@@ -1,8 +1,9 @@
 import { List, Record } from 'immutable'
-import { handleActions, createAction, combineActions } from 'redux-actions'
-import { buildFlash } from './record'
-import { getErrorInfo } from '../../lib/errors'
+import { combineActions, createAction, handleActions } from 'redux-actions'
+
 import { NO_INTERNET_ERROR } from '../../constants'
+import { getErrorInfo } from '../../lib/errors'
+import { buildFlash } from './record'
 
 // Actions
 export const addFlash = createAction('FLASHES/ADD', (options) => buildFlash(options))
