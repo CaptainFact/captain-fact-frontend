@@ -61,7 +61,7 @@
     "clean-tag": "^2.0.2",
     "core-js": "~2.6.1",
     "date-fns": "^2.16.1",
-    "debounce": "~1.0.2",
+    "debounce": "~1.2.1",
     "debounce-promise": "~3.1.2",
     "diff": "~4.0.2",
     "dotenv-webpack": "~7.0.3",
