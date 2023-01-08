@@ -38,7 +38,22 @@ import { ColumnVideo } from './ColumnVideo'
 @withNamespaces('videoDebate')
 export class VideoDebate extends React.PureComponent {
   componentDidMount() {
-    // Join channels
+    this.joinChannels()
+  }
+
+  componentDidUpdate(prevProps) {
+    // Reload when navigating to another video
+    if (prevProps.match.params.videoId !== this.props.match.params.videoId) {
+      this.leaveChannels()
+      this.joinChannels()
+    }
+  }
+
+  componentWillUnmount() {
+    this.leaveChannels()
+  }
+
+  joinChannels = () => {
     const { videoId } = this.props.match.params
     if (videoId) {
       this.props.joinVideoDebateChannel(videoId)
@@ -47,7 +62,7 @@ export class VideoDebate extends React.PureComponent {
     }
   }
 
-  componentWillUnmount() {
+  leaveChannels = () => {
     this.props.leaveCommentsChannel()
     this.props.leaveStatementsChannel()
     this.props.leaveVideoDebateChannel()
