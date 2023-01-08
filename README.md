@@ -26,15 +26,11 @@ If you're already have the API running locally, a simple `npm install && npm sta
 should be enough. Otherwise follow the procedure below:
 
 - Install (if you don't have them):
-
-  - [Docker](https://docs.docker.com/install/)
-    and [docker-compose](https://docs.docker.com/compose/install/)
-    (to start the API easily)
+  - The API project: https://github.com/opencollective/opencollective-api
   - NodeJS, ideally using [asdf-vm](https://github.com/asdf-vm/asdf) with `NODEJS_CHECK_SIGNATURES=no asdf install`
   - App dependencies: `npm install`
 
 - Run:
-  - `docker-compose up` - Start the API
   - `npm start` - Start the front-end
   - `npm run test` - Runs all unit tests
 
