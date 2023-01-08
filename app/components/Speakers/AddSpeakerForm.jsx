@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
-import AsyncCreatable from 'react-select/lib/AsyncCreatable'
+import AsyncCreatable from 'react-select/async-creatable'
 import debounce from 'debounce-promise'
 
 import { checkLength } from '../../lib/form_validators'

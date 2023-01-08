@@ -10,25 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-      - name: Restore node_modules
-        uses: actions/cache@v1
-        id: node-modules
+      - uses: actions/setup-node@v3
         with:
-          path: node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
-      - name: Restore .npm cache
-        if: steps.node-modules.outputs.cache-hit != 'true'
-        uses: actions/cache@v1
+          node-version-file: '.tool-versions'
+          cache: 'npm'
+      - name: Cache Cypress Binary
+        id: cache-cypress-binary
+        uses: actions/cache@v3
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-npm-cache-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-cache-${{ hashFiles('package-lock.json') }}
-            ${{ runner.os }}-npm-cache-
+          path: ~/.cache/Cypress
+          key: ${{ runner.os }}-cypress-binary-${{ hashFiles('package-lock.json') }}
       - name: Install dependencies
-        if: steps.node-modules.outputs.cache-hit != 'true'
-        run: CYPRESS_INSTALL_BINARY=0 npm ci --prefer-offline --no-audit
+        run: npm ci
       - name: Start local API
         run: docker-compose up -d
       - name: Start Frontend
@@ -39,7 +32,3 @@ jobs:
         run: until curl localhost:4000; do sleep 1; done
       - name: Run tests
         run: npm run cypress
-      - name: Shutdown Frontend
-        run: kill $(jobs -p) || true
-      - name: Shutdown API
-        run: docker-compose down

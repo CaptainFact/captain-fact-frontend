@@ -44,7 +44,7 @@ ${stacktrace}
 
 const CrashReportPage = ({ t, error }) => {
   const stackTrace = truncate(error.stack, { length: 6000 })
-
+  console.error(error)
   return (
     <Flex px={2} py={6} flexDirection="column" alignItems="center">
       <Message type="warning">{t('crash')}</Message>

@@ -1,15 +1,15 @@
 import 'isomorphic-fetch'
-import trimRight from 'voca/trim_right'
 
 import { HTTP_API_URL } from '../../config'
 import parseServerError from '../server_error'
 import flashNoInternetError from '../no_internet_error'
 import { optionsToQueryString } from '../../lib/url_utils'
 import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
+import { trimEnd } from 'lodash'
 
 class CaptainFactHttpApi {
   constructor(baseUrl, token) {
-    this.baseUrl = `${trimRight(baseUrl, '/')}/`
+    this.baseUrl = `${trimEnd(baseUrl, '/')}/`
     this.hasToken = !!token
     this.headers = { 'Content-Type': 'application/json' }
     if (token) {

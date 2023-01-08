@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { Link } from 'react-router-dom'
 import { Map, List } from 'immutable'
 import { diffWordsWithSpace } from 'diff'
-import titleCase from 'voca/title_case'
+import { startCase } from 'lodash'
 
 import {
   ACTION_DELETE,
@@ -29,7 +29,7 @@ class ActionDiff extends PureComponent {
       <div className="action-diff">
         {diff.entrySeq().map(([key, changes]) => (
           <div key={key} className="diff-entry">
-            <div className="diff-key">{titleCase(this.formatChangeKey(key))}&nbsp;</div>
+            <div className="diff-key">{startCase(this.formatChangeKey(key))}&nbsp;</div>
             <span className="diff-view">{this.renderKeyDiff(key, changes)}</span>
           </div>
         ))}
@@ -43,7 +43,7 @@ class ActionDiff extends PureComponent {
       return (
         <div>
           <span className="removed">{this.formatChangeValue(changes.first().value, key)}</span>,
-          <span> -> </span>,
+          <span> -&gt; </span>,
           <span className="added">{this.formatChangeValue(changes.last().value, key)}</span>
         </div>
       )

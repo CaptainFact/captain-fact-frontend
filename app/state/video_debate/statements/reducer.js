@@ -4,6 +4,7 @@ import { change, destroy } from 'redux-form'
 
 import Statement from './record'
 import { resetVideoDebate } from '../actions'
+import { orderBy } from 'lodash'
 
 export const fetchStatements = createAction('STATEMENTS/FETCH')
 export const setLoading = createAction('STATEMENTS/SET_LOADING')
@@ -35,8 +36,13 @@ const StatementsReducer = handleActions(
     [fetchStatements]: {
       next: (state, { payload }) =>
         state.merge({
-          data: new List(payload.map((s) => new Statement(s))).sortBy((st) => st.time),
           isLoading: false,
+          data: new List(
+            orderBy(
+              payload.map((s) => new Statement(s)),
+              ['time', 'id']
+            )
+          ),
         }),
       throw: (state, { payload }) => state.merge({ isLoading: false, errors: payload }),
     },

@@ -1,7 +1,7 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
 import { withNamespaces } from 'react-i18next'
-import { passwordField, passwordRepeatField } from './UserFormFields'
+import { UserPasswordField, UserPasswordRepeatField } from './UserFormFields'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { ErrorView } from '../Utils/ErrorView'
 import UserPicture from './UserPicture'
@@ -70,8 +70,8 @@ export default class ResetPasswordConfirmForm extends React.PureComponent {
             <UserPicture user={user} size={USER_PICTURE_XLARGE} />
             <UserAppellation user={user} withoutActions />
           </div>
-          {passwordField(this.props.t)}
-          {passwordRepeatField(this.props.t)}
+          <UserPasswordField t={this.props.t} />
+          <UserPasswordRepeatField t={this.props.t} />
           <button type="submit" className="button">
             {this.props.t('resetPassword')}
           </button>

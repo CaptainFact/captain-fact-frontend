@@ -3,7 +3,6 @@ import { polyfill as smoothSrollPolyfill } from 'smoothscroll-polyfill'
 
 // Import libs
 import React from 'react'
-import { hot } from 'react-hot-loader/root'
 import { Provider as ReduxProvider } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 import { I18nextProvider } from 'react-i18next'
@@ -29,11 +28,6 @@ import theme from './styles/theme'
 
 // Activate polyfills
 smoothSrollPolyfill()
-
-// When a change is detected we tell webpack to accept the updated module
-if (module.hot) {
-  module.hot.accept()
-}
 
 const App = () => (
   <ThemeProvider theme={theme}>
@@ -63,4 +57,4 @@ const App = () => (
   </ThemeProvider>
 )
 
-export default hot(App)
+export default App

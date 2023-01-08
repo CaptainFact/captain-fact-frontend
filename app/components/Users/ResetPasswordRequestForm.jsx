@@ -1,7 +1,7 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
 import { withNamespaces } from 'react-i18next'
-import { emailField } from './UserFormFields'
+import { UserEmailField } from './UserFormFields'
 import { ErrorView } from '../Utils/ErrorView'
 import Alert from '../Utils/Alert'
 import { resetPasswordRequest } from '../../API/http_api/current_user'
@@ -36,7 +36,7 @@ export default class ResetPasswordRequestForm extends React.PureComponent {
     if (this.state.status === 'ready') {
       return (
         <div>
-          {emailField(this.props.t)}
+          <UserEmailField t={this.props.t} />
           <button type="submit" className="button">
             {this.props.t('resetPassword')}
           </button>

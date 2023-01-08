@@ -73,7 +73,9 @@ export default class StatementsList extends React.PureComponent {
           disableAllAnimations={window.innerWidth < FULLHD_WIDTH_THRESHOLD}
         >
           {statements.map((statement) => (
-            <StatementContainer key={statement.id} statement={statement} />
+            <div key={statement.id}>
+              <StatementContainer statement={statement} />
+            </div>
           ))}
         </FlipMove>
       </div>

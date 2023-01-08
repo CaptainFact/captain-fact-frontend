@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
-import titleCase from 'voca/title_case'
 
 import Modal from '../Modal/Modal'
 import { Icon } from '../Utils/Icon'
@@ -13,6 +12,7 @@ import { popModal } from '../../state/modals/reducer'
 import { ENTITY_STATEMENT } from '../../constants'
 import ActionsTable from '../UsersActions/ActionsTable'
 import { reset } from '../../state/user_actions/reducer'
+import { startCase } from 'lodash'
 
 @connect(
   (state) => ({
@@ -60,7 +60,7 @@ export class ModalHistory extends React.PureComponent {
       <Icon name="history" />
       <span>
         {' '}
-        {titleCase(t(`entities.${entity}`))} #{entityId}
+        {startCase(t(`entities.${entity}`))} #{entityId}
       </span>
     </div>
   )

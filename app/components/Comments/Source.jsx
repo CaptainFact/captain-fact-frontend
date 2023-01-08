@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactPlayer from 'react-player'
-import upperCase from 'voca/upper_case'
 import { youtubeRegex } from '../../lib/url_utils'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
@@ -11,12 +10,11 @@ const supportedPlayerUrls = [youtubeRegex]
  * ex: https://www.toto.fr/titi/page.lol => TOTO.FR
  */
 const getDisplayableHostname = (url) =>
-  upperCase(
-    url
-      .replace(/^https?:\/\//i, '')
-      .replace(/^www\./i, '')
-      .replace(/\/.*/g, '')
-  )
+  (url || '')
+    .toUpperCase()
+    .replace(/^https?:\/\//i, '')
+    .replace(/^www\./i, '')
+    .replace(/\/.*/g, '')
 
 /**
  * Check if we want to render medias from that website into players
@@ -49,7 +47,9 @@ export const Source = ({ source: { url, title, site_name }, withoutPlayer }) => 
   return (
     <div className="source-container">
       <ExternalLinkNewTab href={url} className="source">
-        <span className="site-name">{upperCase(site_name) || getDisplayableHostname(url)}</span>
+        <span className="site-name">
+          {site_name ? site_name.toUpperCase() : getDisplayableHostname(url)}
+        </span>
         <span className="article-title">{title}</span>
       </ExternalLinkNewTab>
     </div>

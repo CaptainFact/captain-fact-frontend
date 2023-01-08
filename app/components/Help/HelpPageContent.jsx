@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Markdown from 'react-markdown'
 import { Link } from 'react-router-dom'
+import remarkGfm from 'remark-gfm'
 
 import { isExternal, isDownloadableFile } from '../../lib/url_utils'
 import { LoadingFrame } from '../Utils/LoadingFrame'
@@ -48,11 +49,9 @@ class HelpPageContent extends PureComponent {
       return <ErrorView canGoBack={false} error={this.props.error} />
     }
     return (
-      <Markdown
-        className="content"
-        source={this.props.markdownContent}
-        renderers={this.renderers}
-      />
+      <Markdown className="content" renderers={this.renderers} remarkPlugins={[remarkGfm]}>
+        {this.props.markdownContent}
+      </Markdown>
     )
   }
 

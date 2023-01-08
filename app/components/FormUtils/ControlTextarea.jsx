@@ -13,11 +13,12 @@ const ControlTextarea = (params) => {
     autosize,
     maxLength,
     hideErrorIfEmpty,
-    meta: { touched, error, submitting },
+    meta,
     warningMessage,
     ...props
   } = params
-  const hasError = (!hideErrorIfEmpty || input.value.length > 0) && touched && error
+  const { touched, error, submitting, active } = meta
+  const hasError = (!hideErrorIfEmpty || input.value.length > 0) && touched && !active && error
   const inputProps = {
     ...input,
     ...props,
