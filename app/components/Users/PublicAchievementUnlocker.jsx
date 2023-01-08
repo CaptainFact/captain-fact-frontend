@@ -1,12 +1,12 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-import { withNamespaces } from 'react-i18next'
 import isPromise from 'is-promise'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { withNamespaces } from 'react-i18next'
+import { connect } from 'react-redux'
 
+import { unlockPublicAchievement } from '../../API/http_api/current_user'
 import { flashSuccessMsg } from '../../state/flashes/reducer'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
-import { unlockPublicAchievement } from '../../API/http_api/current_user'
 
 /**
  * Check if user has given achievement. If not, calls `meetConditions` and

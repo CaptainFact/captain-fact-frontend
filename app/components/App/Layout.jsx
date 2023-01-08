@@ -1,14 +1,14 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
+import { connect } from 'react-redux'
 
-import { FlashMessages } from '../Utils'
-import Navbar from './Navbar'
-import Sidebar from './Sidebar'
 import { MainModalContainer } from '../Modal/MainModalContainer'
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
+import { FlashMessages } from '../Utils'
 import BackgroundNotifier from './BackgroundNotifier'
 import CrashReportPage from './CrashReportPage'
+import Navbar from './Navbar'
+import Sidebar from './Sidebar'
 
 @connect((state) => ({
   locale: state.UserPreferences.locale,

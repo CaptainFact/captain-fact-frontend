@@ -1,6 +1,6 @@
-import React from 'react'
 import { Query } from '@apollo/client/react/components'
 import { Flex } from '@rebass/grid'
+import React from 'react'
 import styled from 'styled-components'
 
 import { VideosQuery } from '../../API/graphql_queries'

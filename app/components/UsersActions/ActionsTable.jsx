@@ -1,20 +1,20 @@
-import React from 'react'
 import Immutable from 'immutable'
 import PropTypes from 'prop-types'
+import React from 'react'
 import { withNamespaces } from 'react-i18next'
 import { connect } from 'react-redux'
 
+import { ACTION_DELETE, ACTION_REMOVE } from '../../constants'
 import { flashErrorUnauthenticated } from '../../state/flashes/reducer'
 import { revertVideoDebateUserAction } from '../../state/video_debate/history/effects'
-import { TimeSince } from '../Utils/TimeSince'
 import UserAppellation from '../Users/UserAppellation'
-import { Icon } from '../Utils/Icon'
-import ActionDiff from './ActionDiff'
-import ActionIcon from './ActionIcon'
-import ActionEntityLink from './ActionEntityLink'
-import { ACTION_DELETE, ACTION_REMOVE } from '../../constants'
-import { LoadingFrame } from '../Utils/LoadingFrame'
 import Button from '../Utils/Button'
+import { Icon } from '../Utils/Icon'
+import { LoadingFrame } from '../Utils/LoadingFrame'
+import { TimeSince } from '../Utils/TimeSince'
+import ActionDiff from './ActionDiff'
+import ActionEntityLink from './ActionEntityLink'
+import ActionIcon from './ActionIcon'
 
 @withNamespaces('history')
 @connect(

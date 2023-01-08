@@ -1,9 +1,9 @@
-import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
 import { formValueSelector } from 'redux-form'
+import { createSelector } from 'reselect'
 
-import { getVideoDebateSpeakers } from '../selectors'
 import { STATEMENT_FOCUS_TIME } from '../../../constants'
+import { getVideoDebateSpeakers } from '../selectors'
 
 export const getStatementSpeakerId = (state, props) => props.statement.speaker_id
 

@@ -1,9 +1,9 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next'
+import { withRouter } from 'react-router-dom'
 
-import { withLoggedInUser } from './UserProvider'
 import { LoadingFrame } from '../Utils/LoadingFrame'
+import { withLoggedInUser } from './UserProvider'
 
 @withRouter
 @withNamespaces('user')

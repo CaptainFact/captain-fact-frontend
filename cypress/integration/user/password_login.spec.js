@@ -1,4 +1,4 @@
-import { defaultEmail, defaultUsername, defaultPassword } from '../../support/helpers'
+import { defaultEmail, defaultPassword, defaultUsername } from '../../support/helpers'
 
 describe('User login', () => {
   beforeEach(() => {

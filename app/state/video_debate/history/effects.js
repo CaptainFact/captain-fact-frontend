@@ -1,14 +1,14 @@
 import { SocketApi } from '../../../API'
 import {
-  VIDEO_DEBATE_HISTORY_CHANNEL,
-  STATEMENTS_HISTORY_CHANNEL,
   ACTION_DELETE,
   ACTION_REMOVE,
   ENTITY_SPEAKER,
+  STATEMENTS_HISTORY_CHANNEL,
+  VIDEO_DEBATE_HISTORY_CHANNEL,
 } from '../../../constants'
-import { addAction, fetchAll } from '../../user_actions/reducer'
-import { errorToFlash } from '../../flashes/reducer'
 import { getEntityIDFromAction } from '../../../lib/user_action_entity_id'
+import { errorToFlash } from '../../flashes/reducer'
+import { addAction, fetchAll } from '../../user_actions/reducer'
 
 export const joinVideoDebateHistoryChannel = (videoId) => (dispatch) =>
   joinHistoryChannel(

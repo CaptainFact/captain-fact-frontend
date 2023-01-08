@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { VideoCard } from '../Videos/VideoCard'
 
 export const VideoHit = ({ hit }) => {

@@ -1,4 +1,5 @@
 import wikidata from 'wikidata-sdk'
+
 import { logWarn } from '../logger'
 
 export const searchOnWikidata = async (search, locale) => {

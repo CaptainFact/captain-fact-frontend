@@ -1,13 +1,14 @@
+import { Box, Flex } from '@rebass/grid'
 import React from 'react'
+import { withNamespaces } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { Flex, Box } from '@rebass/grid'
-import { withNamespaces } from 'react-i18next'
 import { fontWeight } from 'styled-system'
+
+import imgBasile from '../../assets/team/basile.jpg'
 import imgBenjamin from '../../assets/team/benjamin.png'
 import imgFlorence from '../../assets/team/florence.jpg'
 import imgFrederic from '../../assets/team/frederic.jpg'
-import imgBasile from '../../assets/team/basile.jpg'
 import imgMathieu from '../../assets/team/mathieu.jpg'
 
 const TEAM = [

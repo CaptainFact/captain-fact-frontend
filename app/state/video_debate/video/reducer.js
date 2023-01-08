@@ -1,11 +1,11 @@
-import { handleActions, createAction } from 'redux-actions'
-import { Record, List } from 'immutable'
+import { List, Record } from 'immutable'
+import { createAction, handleActions } from 'redux-actions'
 import { v4 as uuidv4 } from 'uuid'
 
 import { VIDEO_PLAYER_YOUTUBE } from '../../../constants'
 import { getTimecodesOffset } from '../../../lib/video_utils'
-import Video from '../../videos/record'
 import Speaker from '../../speakers/record'
+import Video from '../../videos/record'
 import { resetVideoDebate } from '../actions'
 
 // Define actions

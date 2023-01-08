@@ -1,4 +1,4 @@
-import { times, random } from 'lodash'
+import { random, times } from 'lodash'
 
 // Default API
 

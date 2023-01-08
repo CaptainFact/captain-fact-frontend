@@ -1,15 +1,15 @@
-import React from 'react'
 import { Query } from '@apollo/client/react/components'
-import { Link } from 'react-router-dom'
-import { withNamespaces } from 'react-i18next'
 import { get } from 'lodash'
+import React from 'react'
+import { withNamespaces } from 'react-i18next'
+import { Link } from 'react-router-dom'
 
-import { LoadingFrame } from '../Utils/LoadingFrame'
-import { ErrorView } from '../Utils/ErrorView'
-import { VideosGrid } from './VideosGrid'
-import PaginationMenu from '../Utils/PaginationMenu'
-import { ONLY_PARTNERS, ONLY_FEATURED } from '../../constants'
 import { VideosQuery } from '../../API/graphql_queries'
+import { ONLY_FEATURED, ONLY_PARTNERS } from '../../constants'
+import { ErrorView } from '../Utils/ErrorView'
+import { LoadingFrame } from '../Utils/LoadingFrame'
+import PaginationMenu from '../Utils/PaginationMenu'
+import { VideosGrid } from './VideosGrid'
 
 const INITIAL_VIDEOS = { pageNumber: 1, totalPages: 1, entries: [] }
 

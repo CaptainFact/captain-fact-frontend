@@ -1,10 +1,11 @@
+import { Box } from '@rebass/grid'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import {
   background,
   borderColor,
-  borders,
   borderRadius,
+  borders,
   boxShadow,
   color,
   display,
@@ -14,7 +15,6 @@ import {
   minHeight,
   minWidth,
 } from 'styled-system'
-import { Box } from '@rebass/grid'
 
 /**
  * A simple styled-component to contain content in a card UI using styled-system.

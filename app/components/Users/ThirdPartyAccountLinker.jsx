@@ -1,8 +1,8 @@
 import React from 'react'
 import { withNamespaces } from 'react-i18next'
 
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import { unlinkProvider } from '../../API/http_api/current_user'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import Button from '../Utils/Button'
 
 const ThirdPartyAccountLinker = ({ t, title, updateLoggedInUser, provider, isLinked, authURL }) => (

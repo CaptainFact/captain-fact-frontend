@@ -1,21 +1,21 @@
+import { capitalize } from 'lodash'
 import React from 'react'
-import { withNamespaces, Trans } from 'react-i18next'
+import { Trans, withNamespaces } from 'react-i18next'
 import { connectSearchBox, Index, InfiniteHits } from 'react-instantsearch-dom'
-import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 import { Search as SearchIcon } from 'styled-icons/fa-solid'
 
+import { ENTITY_SPEAKER, ENTITY_STATEMENT, ENTITY_VIDEO } from '../../constants'
+import { ALGOLIA_INDEXES_NAMES } from '../../lib/algolia'
+import { optionsToQueryString } from '../../lib/url_utils'
 import Container from '../StyledUtils/Container'
 import { P } from '../StyledUtils/Text'
-import { ENTITY_SPEAKER, ENTITY_STATEMENT, ENTITY_VIDEO } from '../../constants'
 import IndexSearchEntriesCount from './IndexSearchEntriesCount'
-import { VideoHit } from './VideoHit'
+import SearchBox from './SearchBox'
 import { SpeakerHit } from './SpeakerHit'
 import StatementHit from './StatementHit'
-import { ALGOLIA_INDEXES_NAMES } from '../../lib/algolia'
-import SearchBox from './SearchBox'
-import { optionsToQueryString } from '../../lib/url_utils'
-import { capitalize } from 'lodash'
+import { VideoHit } from './VideoHit'
 
 const MainContainer = styled.div`
   background: #f4f5f8;
@@ -99,7 +99,7 @@ const SearchPage = ({ t, refine, match, location }) => {
   React.useEffect(() => {
     refine(term)
   }, [term])
-  console.log(match)
+
   const selectedEntity = ROUTES_ENTITIES[match.params.entity]
   return (
     <MainContainer>

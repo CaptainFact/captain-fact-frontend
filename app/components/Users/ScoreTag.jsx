@@ -1,7 +1,8 @@
 import React from 'react'
-import Tag from '../Utils/Tag'
-import { Icon } from '../Utils/Icon'
 import { withNamespaces } from 'react-i18next'
+
+import { Icon } from '../Utils/Icon'
+import Tag from '../Utils/Tag'
 
 function getTagType(reputation) {
   if (reputation < 0) {

@@ -1,8 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import ReactPlayer from 'react-player'
+import { connect } from 'react-redux'
 
-import { setPosition, setPlaying } from '../../state/video_debate/video/reducer'
+import { setPlaying, setPosition } from '../../state/video_debate/video/reducer'
 
 /**
  * A player connected to VideoDebate state. Update position in it when playing

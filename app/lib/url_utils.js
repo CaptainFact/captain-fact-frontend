@@ -1,4 +1,4 @@
-import { toPairs, pickBy, isEmpty } from 'lodash'
+import { isEmpty, pickBy, toPairs } from 'lodash'
 
 /**
  * Transorm an object into a query string. Strips undefined values.

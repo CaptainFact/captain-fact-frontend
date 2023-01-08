@@ -1,7 +1,8 @@
-import React from 'react'
 import PropTypes from 'prop-types'
-import Message from './Message'
+import React from 'react'
+
 import { getFromLocalStorage, setLocalStorage } from '../../lib/local_storage'
+import Message from './Message'
 
 const getDefaultOpen = (localStorageDismissKey) => {
   if (!localStorageDismissKey) {

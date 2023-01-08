@@ -8,6 +8,7 @@ export const getTimecodesOffset = (video, videoPlayer) => {
     return video.youtube_offset
   }
 
+  // eslint-disable-next-line no-console
   console.warn(`getTimecode: Unknown provider ${videoPlayer}`)
   return 0
 }

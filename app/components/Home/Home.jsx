@@ -1,19 +1,19 @@
 import React from 'react'
+import { Trans, withNamespaces } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { withNamespaces, Trans } from 'react-i18next'
 import { ExternalLinkAlt } from 'styled-icons/fa-solid'
 
 import * as Matomo from '../../API/matomo'
-import { Icon } from '../Utils'
-import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
-import CFSocialProfiles from './CFSocialProfiles'
-import LastVideos from './LastVideos'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import imgExample1 from '../../assets/example1.jpg'
 import examplesImg1 from '../../assets/examples/image-1.jpg'
 import examplesImg2 from '../../assets/examples/image-2.jpg'
 import examplesImg3 from '../../assets/examples/image-3.jpg'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import Container from '../StyledUtils/Container'
+import { Icon } from '../Utils'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
+import CFSocialProfiles from './CFSocialProfiles'
+import LastVideos from './LastVideos'
 
 @withNamespaces('home')
 @withLoggedInUser

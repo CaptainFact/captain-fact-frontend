@@ -1,20 +1,19 @@
+import { Box, Flex } from '@rebass/grid'
 import React from 'react'
-import { withNamespaces, Trans } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { Trans, withNamespaces } from 'react-i18next'
 import ReactPlayer from 'react-player'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { Flex, Box } from '@rebass/grid'
 import { PlusCircle } from 'styled-icons/boxicons-solid'
 
 import { registerClick } from '../../API/matomo'
-import Button from '../Utils/Button'
-import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
-
 import chromeLogo from '../../assets/browsers/chrome.png'
 import firefoxLogo from '../../assets/browsers/firefox.png'
 import ieLogo from '../../assets/browsers/internet_explorer.png'
 import demoExtensionVideo from '../../assets/demos/demo-extension.mp4'
 import imgDisMoiExtension from '../../assets/dismoi-example.png'
+import Button from '../Utils/Button'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
 const PresentationBox = styled(Box)`
   background: white;

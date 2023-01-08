@@ -2,11 +2,11 @@ import React from 'react'
 import { Field } from 'redux-form'
 import isEmail from 'validator/lib/isEmail'
 
-import { PASSWORD_LENGTH, USERNAME_LENGTH, NAME_LENGTH } from '../../constants'
-import { validateFieldLength } from '../../lib/form_validators'
-import Button from '../Utils/Button'
-import ControlInput from '../FormUtils/ControlInput'
+import { NAME_LENGTH, PASSWORD_LENGTH, USERNAME_LENGTH } from '../../constants'
 import { cleanStr } from '../../lib/clean_str'
+import { validateFieldLength } from '../../lib/form_validators'
+import ControlInput from '../FormUtils/ControlInput'
+import Button from '../Utils/Button'
 
 // Common validators for Signup / Login
 

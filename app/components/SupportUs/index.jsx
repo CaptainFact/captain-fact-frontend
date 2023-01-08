@@ -1,9 +1,10 @@
 import React from 'react'
+
+import { JS_ENV } from '../../config'
+import { optionsToQueryString } from '../../lib/url_utils'
+import { useLoggedInUser } from '../LoggedInUser/UserProvider'
 import Container from '../StyledUtils/Container'
 import { LoadingFrame } from '../Utils/LoadingFrame'
-import { useLoggedInUser } from '../LoggedInUser/UserProvider'
-import { optionsToQueryString } from '../../lib/url_utils'
-import { JS_ENV } from '../../config'
 
 const getIframeURLParams = (isAuthenticated, loggedInUser) => {
   const params = { useTheme: true }

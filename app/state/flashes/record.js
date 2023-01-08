@@ -1,5 +1,6 @@
 import { Record } from 'immutable'
 import { v4 as uuidv4 } from 'uuid'
+
 import { DEFAULT_FLASH_DURATION } from '../../constants'
 
 const Flash = Record({

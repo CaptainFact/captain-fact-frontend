@@ -1,4 +1,4 @@
-import { Record, List } from 'immutable'
+import { List, Record } from 'immutable'
 
 const Video = new Record({
   id: 0,

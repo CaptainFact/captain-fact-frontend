@@ -1,7 +1,7 @@
 import HttpApi from '../../API/http_api'
-import { setSubmitting } from './reducer'
-import { createEffect, returnSuccess, generateFSAError } from '../utils'
 import { errorToFlash } from '../flashes/reducer'
+import { createEffect, generateFSAError, returnSuccess } from '../utils'
+import { setSubmitting } from './reducer'
 
 export const searchVideo = (videoUrl) => {
   return createEffect(HttpApi.post('search/video', { url: videoUrl }), {

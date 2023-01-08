@@ -1,5 +1,5 @@
-import React from 'react'
 import classNames from 'classnames'
+import React from 'react'
 
 const Tag = ({ type, size = 'small', className, children, ...props }) => (
   <div

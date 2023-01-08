@@ -1,5 +1,6 @@
 import React from 'react'
 import Select from 'react-select'
+
 import { ReactSelectStyles, ReactSelectTheme } from '../../lib/react_select_theme'
 
 const SpeakersSelect = ({ input, speakers, placeholder, styles }) => {

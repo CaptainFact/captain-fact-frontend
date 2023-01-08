@@ -1,9 +1,9 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
-import { LoadingFrame } from './LoadingFrame'
-import { ErrorView } from './ErrorView'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import { ErrorView } from './ErrorView'
+import { LoadingFrame } from './LoadingFrame'
 
 export const DumbReputationGuard = ({
   loggedInUser,

@@ -1,13 +1,13 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next'
+import { Link } from 'react-router-dom'
 
-import { Icon, TimeSince } from '../Utils'
+import { MAX_VIDEO_CARD_SPEAKERS } from '../../constants'
+import { videoURL } from '../../lib/cf_routes'
 import iterateWithSeparators from '../../lib/iterate_with_separators'
+import { Icon, TimeSince } from '../Utils'
 import CardLayout from '../Utils/CardLayout'
 import RawIcon from '../Utils/RawIcon'
-import { videoURL } from '../../lib/cf_routes'
-import { MAX_VIDEO_CARD_SPEAKERS } from '../../constants'
 
 @withNamespaces('videoDebate')
 export class VideoCard extends React.PureComponent {

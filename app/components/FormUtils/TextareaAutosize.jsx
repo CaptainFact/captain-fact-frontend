@@ -1,7 +1,7 @@
+import { omit } from 'lodash'
 import React from 'react'
 import styled from 'styled-components'
 import * as styledSystem from 'styled-system'
-import { omit } from 'lodash'
 
 const TextArea = styled.textarea`
   resize: none !important;

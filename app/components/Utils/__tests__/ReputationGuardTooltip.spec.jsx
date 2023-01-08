@@ -1,4 +1,5 @@
 import { t } from 'react-i18next'
+
 import { ReputationGuardTooltip } from '../ReputationGuardTooltip'
 
 const DEFAULT_CHILDREN = ({ hasReputation }) => `Has reputation: ${hasReputation}`

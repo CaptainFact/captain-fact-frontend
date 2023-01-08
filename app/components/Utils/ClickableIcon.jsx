@@ -1,14 +1,16 @@
-import React from 'react'
 import classNames from 'classnames'
+import React from 'react'
+
+import UnstyledButton from '../StyledUtils/UnstyledButton'
 import RawIcon from './RawIcon'
 
 export const ClickableIcon = ({ name, size, className, ...otherProps }) => {
   const sizeClass = size && `is-${size}`
 
   return (
-    <a className={classNames('icon', sizeClass, className)} {...otherProps}>
+    <UnstyledButton className={classNames('icon', sizeClass, className)} {...otherProps}>
       <RawIcon name={name} />
-    </a>
+    </UnstyledButton>
   )
 }
 

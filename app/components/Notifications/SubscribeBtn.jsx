@@ -1,10 +1,10 @@
-import React from 'react'
+import { Mutation } from '@apollo/client/react/components'
+import gql from 'graphql-tag'
 import PropTypes from 'prop-types'
-
+import React from 'react'
 import { BellSlash } from 'styled-icons/fa-solid'
 import { Bell } from 'styled-icons/fa-solid'
-import gql from 'graphql-tag'
-import { Mutation } from '@apollo/client/react/components'
+
 import Action from '../VideoDebate/Actions/Action'
 
 const updateSubscriptionQuery = gql`

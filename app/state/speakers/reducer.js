@@ -1,5 +1,6 @@
 import { Record } from 'immutable'
 import { createAction, handleActions } from 'redux-actions'
+
 import Speaker from './record'
 
 export const setLoading = createAction('SPEAKERS/SET_LOADING')

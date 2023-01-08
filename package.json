@@ -18,10 +18,10 @@
     "test:update": "jest -u",
     "wtest": "jest --watch",
     "coverage": "jest --coverage '--collectCoverageFrom=app/+(API|components|lib|state)/**/!(record).{js,jsx}'",
-    "lint": "eslint app/**/*.{js,jsx}",
-    "lint_fix": "npm run lint -- --fix",
-    "prettier": "prettier --write app/**/*.{js,jsx} && prettier --write cypress/**/*.js",
-    "prettier:check": "prettier --check app/**/*.{js,jsx} && prettier --check cypress/**/*.js"
+    "lint": "eslint --ext .js,.jsx app cypress",
+    "lint:fix": "npm run lint -- --fix && npm run prettier",
+    "prettier": "prettier --loglevel warn --write 'app/**/*.{js,jsx}' && prettier --write 'cypress/**/*.js'",
+    "prettier:check": "prettier --loglevel warn --check 'app/**/*.{js,jsx}' && prettier --check 'cypress/**/*.js'"
   },
   "jest": {
     "setupFiles": [
@@ -140,13 +140,14 @@
     "css-loader": "^5.2.7",
     "css-minimizer-webpack-plugin": "^4.2.2",
     "cypress": "^9.7.0",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb": "^17.1.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-chai-friendly": "^0.4.1",
     "eslint-plugin-cypress": "^2.8.1",
     "eslint-plugin-import": "^2.24.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
     "exports-loader": "^0.7.0",
     "fetch-mock": "^7.3.1",
     "file-loader": "^6.2.0",

@@ -1,13 +1,13 @@
 import React from 'react'
-import { connect } from 'react-redux'
-
-import { withNamespaces } from 'react-i18next'
 import FlipMove from 'react-flip-move'
+import { withNamespaces } from 'react-i18next'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Icon } from './Icon'
-import { addFlash, pause, removeFlash, unPause, update } from '../../state/flashes/reducer'
+
 import { tError } from '../../lib/errors'
+import { addFlash, pause, removeFlash, unPause, update } from '../../state/flashes/reducer'
 import { popModal } from '../../state/modals/reducer'
+import { Icon } from './Icon'
 
 const UPDATE_INTERVAL = 1000
 

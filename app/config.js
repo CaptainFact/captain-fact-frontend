@@ -6,7 +6,8 @@ function boolFromConfig(value) {
   if (['off', 'disabled', '0', 'false', 'no'].includes(lowerValue)) {
     return false
   }
-  console.error(`Unknown config value ${value}`)
+  // eslint-disable-next-line no-console
+  console.warn(`Unknown config value ${value}`)
   return false
 }
 

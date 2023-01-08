@@ -1,34 +1,33 @@
-import React from 'react'
-import { Link, withRouter } from 'react-router-dom'
-import styled, { withTheme, css } from 'styled-components'
-import { Flex, Box } from '@rebass/grid'
-import { themeGet } from 'styled-system'
-import { withResizeDetector } from 'react-resize-detector'
-import Popup from 'reactjs-popup'
-import { withNamespaces } from 'react-i18next'
+import { Box, Flex } from '@rebass/grid'
 import { omit } from 'lodash'
-
-import { CaretDown } from 'styled-icons/fa-solid'
-import { UserCircle } from 'styled-icons/fa-regular'
+import React from 'react'
+import { withNamespaces } from 'react-i18next'
+import { withResizeDetector } from 'react-resize-detector'
+import { Link, withRouter } from 'react-router-dom'
+import Popup from 'reactjs-popup'
+import styled, { css, withTheme } from 'styled-components'
 import { HelpCircle } from 'styled-icons/boxicons-regular'
+import { UserCircle } from 'styled-icons/fa-regular'
+import { CaretDown } from 'styled-icons/fa-solid'
+import { themeGet } from 'styled-system'
 
+import { ENABLE_PUBLIC_SEARCH } from '../../config'
+import { USER_PICTURE_LARGE } from '../../constants'
+import NotificationBell from '../LoggedInUser/NotificationBell'
+import Notifications from '../LoggedInUser/Notifications'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import NotificationsPopupContent from '../Notifications/NotificationsPopupContent'
+import SearchBox from '../Search/SearchBox'
+import Container from '../StyledUtils/Container'
+import { fadeIn } from '../StyledUtils/Keyframes'
+import StyledLink from '../StyledUtils/StyledLink'
+import ScoreTag from '../Users/ScoreTag'
+import UserMenu from '../Users/UserMenu'
+import UserPicture from '../Users/UserPicture'
+import { ErrorView } from '../Utils/ErrorView'
+import { LoadingFrame } from '../Utils/LoadingFrame'
 import Logo from './Logo'
 import MenuToggleSwitch from './MenuToggleSwitch'
-import UserPicture from '../Users/UserPicture'
-import { USER_PICTURE_LARGE } from '../../constants'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
-import { LoadingFrame } from '../Utils/LoadingFrame'
-import { fadeIn } from '../StyledUtils/Keyframes'
-import UserMenu from '../Users/UserMenu'
-import StyledLink from '../StyledUtils/StyledLink'
-import Notifications from '../LoggedInUser/Notifications'
-import { ErrorView } from '../Utils/ErrorView'
-import Container from '../StyledUtils/Container'
-import NotificationsPopupContent from '../Notifications/NotificationsPopupContent'
-import NotificationBell from '../LoggedInUser/NotificationBell'
-import ScoreTag from '../Users/ScoreTag'
-import SearchBox from '../Search/SearchBox'
-import { ENABLE_PUBLIC_SEARCH } from '../../config'
 
 const NavbarContainer = styled(Flex)`
   position: fixed;
@@ -195,6 +194,7 @@ const Navbar = ({
                       if (loading) {
                         return <LoadingFrame size="small" />
                       } else if (error) {
+                        // eslint-disable-next-line no-console
                         console.error(error)
                         return <ErrorView error={error} />
                       }

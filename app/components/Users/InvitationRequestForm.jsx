@@ -1,15 +1,15 @@
 import React from 'react'
+import { withNamespaces } from 'react-i18next'
 import { connect } from 'react-redux'
 import { Field, reduxForm, SubmissionError } from 'redux-form'
 import isEmail from 'validator/lib/isEmail'
-import { withNamespaces } from 'react-i18next'
 
-import browserLocale from '../../i18n/browser_locale'
 import { requestInvitation } from '../../API/http_api/current_user'
-import { errorToFlash, addFlash } from '../../state/flashes/reducer'
+import browserLocale from '../../i18n/browser_locale'
+import { addFlash, errorToFlash } from '../../state/flashes/reducer'
+import FieldWithButton from '../FormUtils/FieldWithButton'
 import Alert from '../Utils/Alert'
 import { Icon } from '../Utils/Icon'
-import FieldWithButton from '../FormUtils/FieldWithButton'
 
 const validate = ({ email }) => {
   if (!email || !isEmail(email)) {

@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import { themeGet, fontSize, fontWeight, space, color } from 'styled-system'
+import styled, { css } from 'styled-components'
+import { color, fontSize, fontWeight, space, themeGet } from 'styled-system'
 
 /**
  * A button with all browser styles removed.
@@ -31,6 +31,29 @@ const UnstyledButton = styled.button`
     cursor: not-allowed;
     opacity: 0.5;
   }
+
+  /**
+ * Remove focus styles for non-keyboard focus.
+ */
+  :focus:not(:focus-visible) {
+    outline: 0;
+    box-shadow: none;
+  }
+
+  ${(props) =>
+    props.$asLink &&
+    css`
+      color: ${themeGet('colors.primary')};
+      &:hover {
+        color: ${themeGet('colors.primary')};
+        text-decoration: underline;
+      }
+      &:focus {
+        outline: none;
+        text-decoration: underline;
+        box-shadow: none;
+      }
+    `}
 
   ${color}
   ${fontSize}

@@ -1,18 +1,18 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { withNamespaces } from 'react-i18next'
 import { Flex } from '@rebass/grid'
+import React from 'react'
+import { withNamespaces } from 'react-i18next'
+import { connect } from 'react-redux'
 
+import { deleteUserAccount } from '../../API/http_api/current_user'
 import { facebookAuthUrl } from '../../lib/third_party_auth'
 import { addModal, popModal } from '../../state/modals/reducer'
+import UserLanguageSelector from '../LoggedInUser/UserLanguageSelector'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import Button from '../Utils/Button'
+import { LoadingFrame } from '../Utils/LoadingFrame'
 import DeleteUserModal from './DeleteUserModal'
 import EditUserForm from './EditUserForm'
-import { LoadingFrame } from '../Utils/LoadingFrame'
-import Button from '../Utils/Button'
 import ThirdPartyAccountLinker from './ThirdPartyAccountLinker'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
-import UserLanguageSelector from '../LoggedInUser/UserLanguageSelector'
-import { deleteUserAccount } from '../../API/http_api/current_user'
 
 @connect((state) => ({ locale: state.UserPreferences.locale }), { addModal, popModal })
 @withNamespaces('user')

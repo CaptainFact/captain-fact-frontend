@@ -1,18 +1,17 @@
+import { Box, Flex } from '@rebass/grid'
 import React from 'react'
-import { Flex, Box } from '@rebass/grid'
 
-import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
-
-import imgImago from '../../assets/partners/imago.jpg'
 import imgDemocratieOuverte from '../../assets/partners/democratie-ouverte.jpg'
 import imgHeureka from '../../assets/partners/heureka.jpg'
+import imgImago from '../../assets/partners/imago.jpg'
+import imgLarchipelle from '../../assets/partners/larchipelle.jpg'
+import imgLeCanardRefractaire from '../../assets/partners/lecanardrefractaire.jpg'
 import imgSystemeD from '../../assets/partners/systemed.jpg'
 import imgTedxNoumea from '../../assets/partners/tedxnoumea.jpg'
 import imgThinkerView from '../../assets/partners/thinkerview.jpg'
 import imgTroncheEnBiais from '../../assets/partners/troncheenbiais.jpg'
 import imgYesWeHack from '../../assets/partners/yeswehack.jpg'
-import imgLeCanardRefractaire from '../../assets/partners/lecanardrefractaire.jpg'
-import imgLarchipelle from '../../assets/partners/larchipelle.jpg'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
 // prettier-ignore
 const PARTNERS = [

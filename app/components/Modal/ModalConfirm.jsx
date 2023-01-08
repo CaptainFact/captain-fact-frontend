@@ -1,13 +1,13 @@
-import React from 'react'
-import isPromise from 'is-promise'
 import classNames from 'classnames'
-
-import { connect } from 'react-redux'
-import Modal from './Modal'
-import { Icon } from '../Utils/Icon'
-import { popModal } from '../../state/modals/reducer'
-import { handleEffectResponse } from '../../lib/handle_effect_response'
+import isPromise from 'is-promise'
 import { omit } from 'lodash'
+import React from 'react'
+import { connect } from 'react-redux'
+
+import { handleEffectResponse } from '../../lib/handle_effect_response'
+import { popModal } from '../../state/modals/reducer'
+import { Icon } from '../Utils/Icon'
+import Modal from './Modal'
 
 @connect(null, { popModal })
 export class ModalConfirm extends React.PureComponent {

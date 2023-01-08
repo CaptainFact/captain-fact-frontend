@@ -1,7 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { reduxForm, formValueSelector } from 'redux-form'
 import { withNamespaces } from 'react-i18next'
+import { connect } from 'react-redux'
+import { formValueSelector, reduxForm } from 'redux-form'
+
 import {
   MODERATION_ACTION_ABUSIVE,
   MODERATION_ACTION_CONFIRM,

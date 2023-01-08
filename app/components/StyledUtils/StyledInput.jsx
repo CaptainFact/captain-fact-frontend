@@ -1,5 +1,5 @@
-import styled from 'styled-components'
 import tag from 'clean-tag'
+import styled from 'styled-components'
 import * as styledSystem from 'styled-system'
 
 const StyledInput = styled(tag.input)`

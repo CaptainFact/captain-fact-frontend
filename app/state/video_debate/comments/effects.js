@@ -1,20 +1,20 @@
 import { SocketApi } from '../../../API'
 import { COMMENTS_CHANNEL } from '../../../constants'
+import { errorToFlash } from '../../flashes/reducer'
+import { createEffect, generateFSAError } from '../../utils'
 import {
   add,
-  remove,
-  fetchAll,
-  update,
-  setLoading,
-  setVoting,
+  addFlag,
   addMyVote,
   endVoting,
-  addFlag,
-  updateScores,
+  fetchAll,
+  remove,
   scoreDiff,
+  setLoading,
+  setVoting,
+  update,
+  updateScores,
 } from './reducer'
-import { createEffect, generateFSAError } from '../../utils'
-import { errorToFlash } from '../../flashes/reducer'
 
 export const joinCommentsChannel = (videoId) => (dispatch) => {
   // Connect to channel

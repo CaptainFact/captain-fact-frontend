@@ -1,4 +1,4 @@
-import reducer, { setSubmitting, reset } from '../reducer'
+import reducer, { reset, setSubmitting } from '../reducer'
 
 const DEFAULT_STATE = reducer(undefined, {})
 

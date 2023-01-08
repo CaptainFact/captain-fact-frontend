@@ -1,9 +1,10 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next'
-import { LoadingFrame } from '../Utils/LoadingFrame'
+import { withRouter } from 'react-router-dom'
+
 import { confirmEmail } from '../../API/http_api/current_user'
 import { ErrorView } from '../Utils/ErrorView'
+import { LoadingFrame } from '../Utils/LoadingFrame'
 import MessageView from '../Utils/MessageView'
 
 @withRouter

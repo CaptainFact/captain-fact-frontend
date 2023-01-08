@@ -18,19 +18,19 @@ plugins:
   - react
   - jsx-a11y
   - import
+  - simple-import-sort
   - cypress
   - chai-friendly # See https://github.com/cypress-io/eslint-plugin-cypress#chai-and-no-unused-expressions
+settings:
+  react:
+    version: detect
 rules:
-  max-len:
-    - warn
-    - code: 100
-      ignoreStrings: true
-      ignoreTemplateLiterals: true
-      ignoreRegExpLiterals: true
   linebreak-style: ['error', 'unix']
   quotes: ['warn', 'single', { avoidEscape: true }]
   semi: ['error', 'never']
   import/first: ['warn']
+  import/no-named-as-default: ['warn']
+  simple-import-sort/imports: ['error']
   no-else-return: off
   no-trailing-spaces: ['warn']
   no-continue: off
@@ -39,7 +39,6 @@ rules:
   eol-last: ['warn']
   no-nested-ternary: ['warn']
   prefer-const: ['warn']
-  import/no-named-as-default: ['warn']
   no-restricted-globals: ['error', 'event', 'fdescribe']
   no-mixed-operators: ['warn']
   # See https://github.com/cypress-io/eslint-plugin-cypress#chai-and-no-unused-expressions
@@ -80,10 +79,11 @@ rules:
   jsx-a11y/media-has-caption: ['warn']
   jsx-a11y/accessible-emoji: ['warn']
   jsx-a11y/anchor-has-content: off
+  no-console: ['error']
+  curly: ['error']
 
   # Following rule haves been disabled for compatibility with
   # existing code. Some of them should be re-activated in the future.
-  no-console: off
   no-shadow: off
   nonblock-statement-body-position: off
   object-curly-spacing: off
@@ -93,7 +93,6 @@ rules:
   function-paren-newline: off
   arrow-parens: off
   arrow-body-style: off
-  curly: ['error']
   no-use-before-define: off
   no-param-reassign: off
   camelcase: off
@@ -108,6 +107,7 @@ rules:
   block-spacing: off
   brace-style: off
   no-multi-spaces: off
+  max-len: off # Handled by prettier
   # React-specific temporarily disabled rules
   react/prop-types: off
   react/no-string-refs: off

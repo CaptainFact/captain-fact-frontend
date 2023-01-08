@@ -1,15 +1,15 @@
 import { get } from 'lodash'
 
-import {
-  ENTITY_COMMENT,
-  ENTITY_STATEMENT,
-  ACTION_REMOVE,
-  ENTITY_VIDEO,
-  ACTION_UPDATE,
-  ENTITY_SPEAKER,
-  ACTION_ADD,
-} from '../constants'
 import { FRONTEND_URL } from '../config'
+import {
+  ACTION_ADD,
+  ACTION_REMOVE,
+  ACTION_UPDATE,
+  ENTITY_COMMENT,
+  ENTITY_SPEAKER,
+  ENTITY_STATEMENT,
+  ENTITY_VIDEO,
+} from '../constants'
 
 export const videoURL = (videoHashID) => {
   return `/videos/${videoHashID}`
@@ -45,7 +45,8 @@ export const userActionURL = (action) => {
       ? videoURL(videoHashId)
       : speakerURL(get(action, 'speaker.slug') || action.speakerId)
   } else {
-    console.log("Don't know how to generate URL for action", action)
+    // eslint-disable-next-line no-console
+    console.warn("Don't know how to generate URL for action", action)
   }
 }
 

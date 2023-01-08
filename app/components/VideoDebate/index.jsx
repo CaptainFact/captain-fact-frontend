@@ -1,23 +1,23 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { withNamespaces } from 'react-i18next'
 import { Helmet } from 'react-helmet'
+import { withNamespaces } from 'react-i18next'
+import { connect } from 'react-redux'
 
-import { ErrorView } from '../Utils'
+import { toAbsoluteURL, videoURL } from '../../lib/cf_routes'
+import { getHDThumbnailUrl } from '../../lib/video_utils'
+import { resetVideoDebate } from '../../state/video_debate/actions'
 import {
   joinCommentsChannel,
   leaveCommentsChannel,
 } from '../../state/video_debate/comments/effects'
+import { joinVideoDebateChannel, leaveVideoDebateChannel } from '../../state/video_debate/effects'
 import {
   joinStatementsChannel,
   leaveStatementsChannel,
 } from '../../state/video_debate/statements/effects'
-import { joinVideoDebateChannel, leaveVideoDebateChannel } from '../../state/video_debate/effects'
-import { resetVideoDebate } from '../../state/video_debate/actions'
-import { ColumnVideo } from './ColumnVideo'
+import { ErrorView } from '../Utils'
 import { ColumnDebate } from './ColumnDebate'
-import { videoURL, toAbsoluteURL } from '../../lib/cf_routes'
-import { getHDThumbnailUrl } from '../../lib/video_utils'
+import { ColumnVideo } from './ColumnVideo'
 
 @connect(
   (state) => ({

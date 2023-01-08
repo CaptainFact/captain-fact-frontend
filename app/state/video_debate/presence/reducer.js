@@ -1,5 +1,5 @@
-import { handleActions, createAction } from 'redux-actions'
 import { Record } from 'immutable'
+import { createAction, handleActions } from 'redux-actions'
 
 export const setPresence = createAction('PRESENCE/SET')
 export const presenceDiff = createAction('PRESENCE/DIFF')

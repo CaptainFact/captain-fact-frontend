@@ -1,8 +1,8 @@
 import HttpApi from '../../../API/http_api'
 import {
+  setError as setDisplayedUserError,
   setLoading,
   setUser as setDisplayedUser,
-  setError as setDisplayedUserError,
 } from './reducer'
 
 export const fetchUser = (username) => (dispatch) => {

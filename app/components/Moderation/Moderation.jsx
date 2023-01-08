@@ -1,20 +1,18 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-
 import { Report } from 'styled-icons/octicons'
 
 import { MIN_REPUTATION_MODERATION } from '../../constants'
+import { commentURL } from '../../lib/cf_routes'
 import { fetchRandomModeration, postModerationFeedback } from '../../state/moderation/effects'
-
 import UserAppellation from '../Users/UserAppellation'
 import UserAction from '../UsersActions/UserAction'
 import { LoadingFrame } from '../Utils'
 import Message from '../Utils/Message'
 import { withReputationGuard } from '../Utils/ReputationGuard'
 import { ModerationForm } from './ModerationForm'
-import { commentURL } from '../../lib/cf_routes'
 
 @connect(
   (state) => ({

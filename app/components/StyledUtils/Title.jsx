@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { fontSize, space, themeGet, style } from 'styled-system'
+import { fontSize, space, style, themeGet } from 'styled-system'
 
 export const textTransform = style({
   prop: 'textTransform',

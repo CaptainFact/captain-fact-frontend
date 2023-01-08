@@ -1,9 +1,9 @@
 import { SocketApi } from '../../API'
 import { VIDEO_DEBATE_CHANNEL } from '../../constants'
-import { presenceDiff, setPresence } from './presence/reducer'
-import * as videoReducer from './video/reducer'
 import { errorToFlash } from '../flashes/reducer'
 import { createEffect, generateFSAError } from '../utils'
+import { presenceDiff, setPresence } from './presence/reducer'
+import * as videoReducer from './video/reducer'
 
 export const joinVideoDebateChannel = (videoId) => (dispatch) => {
   // Connect to channel
@@ -67,6 +67,7 @@ export const changeSubscription = (newValue) => {
       return videoReducer.setSubscription(newValue)
     })
     .catch((e) => {
+      // eslint-disable-next-line no-console
       console.log(e)
     })
 }

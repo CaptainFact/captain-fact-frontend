@@ -1,8 +1,9 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
+import Popup from 'reactjs-popup'
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
-import Popup from 'reactjs-popup'
+
 import { fadeIn } from '../StyledUtils/Keyframes'
 
 const StyledPopup = styled(Popup)`

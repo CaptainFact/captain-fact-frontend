@@ -1,8 +1,9 @@
 import { Socket } from 'phoenix'
+
 import { WS_API_URL } from '../config'
-import parseServerError from './server_error'
-import noInternetError from './no_internet_error'
 import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../lib/local_storage'
+import noInternetError from './no_internet_error'
+import parseServerError from './server_error'
 
 class CaptainFactSocketApi {
   constructor(url) {

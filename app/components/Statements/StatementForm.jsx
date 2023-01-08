@@ -1,29 +1,29 @@
-import React from 'react'
-import { Field, reduxForm } from 'redux-form'
-import { connect } from 'react-redux'
-import classNames from 'classnames'
-import { withNamespaces } from 'react-i18next'
 import { Save } from '@styled-icons/feather/Save'
 import { Slash } from '@styled-icons/feather/Slash'
+import classNames from 'classnames'
+import React from 'react'
+import { withNamespaces } from 'react-i18next'
+import { connect } from 'react-redux'
+import { Field, reduxForm } from 'redux-form'
 
-import SpeakersSelect from '../Speakers/SpeakersSelect'
-import { ReactSelectWarningStyles } from '../../lib/react_select_theme'
-import { Icon } from '../Utils'
-import TimeEdit from '../Utils/TimeEdit'
-import { validateFieldLength } from '../../lib/form_validators'
 import { STATEMENT_LENGTH } from '../../constants'
-import { forcePosition } from '../../state/video_debate/video/reducer'
+import { cleanStrMultiline } from '../../lib/clean_str'
+import { validateFieldLength } from '../../lib/form_validators'
+import { handleFormEffectResponse } from '../../lib/handle_effect_response'
+import { ReactSelectWarningStyles } from '../../lib/react_select_theme'
 import {
   decrementFormCount,
   incrementFormCount,
   setScrollTo,
   STATEMENT_FORM_NAME,
 } from '../../state/video_debate/statements/reducer'
-import { handleFormEffectResponse } from '../../lib/handle_effect_response'
+import { forcePosition } from '../../state/video_debate/video/reducer'
 import ControlTextarea from '../FormUtils/ControlTextarea'
-import { cleanStrMultiline } from '../../lib/clean_str'
-import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
+import SpeakersSelect from '../Speakers/SpeakersSelect'
 import UnstyledButton from '../StyledUtils/UnstyledButton'
+import { Icon } from '../Utils'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
+import TimeEdit from '../Utils/TimeEdit'
 
 const validate = (values, props) => {
   return {
@@ -114,7 +114,6 @@ export class StatementForm extends React.PureComponent {
       ? speakers.find((s) => s.id === initialValues.speaker_id)
       : null
     const toggleTimeLockAction = this.state.lockedTime === false ? 'unlock' : 'lock'
-    console.log(this.props)
     return (
       <form
         ref={this.containerRef}

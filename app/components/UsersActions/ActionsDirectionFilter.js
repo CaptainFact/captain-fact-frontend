@@ -1,7 +1,8 @@
 import React from 'react'
 import { Trans, withNamespaces } from 'react-i18next'
-import UserAppellation from '../Users/UserAppellation'
 import { Link } from 'react-router-dom'
+
+import UserAppellation from '../Users/UserAppellation'
 
 const ActionsDirectionFilter = ({ user, value, t }) => {
   const baseLink = `/u/${user.username}/activity`

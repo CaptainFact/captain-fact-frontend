@@ -1,4 +1,4 @@
-import reducer, { setLoading, reset } from '../reducer'
+import reducer, { reset, setLoading } from '../reducer'
 
 const INITIAL_STATE = reducer(undefined, {})
 

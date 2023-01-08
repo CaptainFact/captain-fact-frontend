@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactPlayer from 'react-player'
+
 import { youtubeRegex } from '../../lib/url_utils'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 

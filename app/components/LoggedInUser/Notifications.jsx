@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import { Mutation, Query } from '@apollo/client/react/components'
 import gql from 'graphql-tag'
-import { Query, Mutation } from '@apollo/client/react/components'
 import { get } from 'lodash'
+import PropTypes from 'prop-types'
+import React from 'react'
 import { withRouter } from 'react-router-dom'
 
 export const loggedInUserNotificationsQuery = gql`

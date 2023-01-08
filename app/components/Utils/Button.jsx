@@ -1,7 +1,7 @@
-import React from 'react'
 import classNames from 'classnames'
+import React from 'react'
 import styled from 'styled-components'
-import { space, flex } from 'styled-system'
+import { flex, space } from 'styled-system'
 
 const BaseButton = styled.button`
   ${space}

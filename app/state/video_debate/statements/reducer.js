@@ -1,10 +1,10 @@
-import { Record, List } from 'immutable'
+import { List, Record } from 'immutable'
+import { orderBy } from 'lodash'
 import { combineActions, createAction, handleActions } from 'redux-actions'
 import { change, destroy } from 'redux-form'
 
-import Statement from './record'
 import { resetVideoDebate } from '../actions'
-import { orderBy } from 'lodash'
+import Statement from './record'
 
 export const fetchStatements = createAction('STATEMENTS/FETCH')
 export const setLoading = createAction('STATEMENTS/SET_LOADING')

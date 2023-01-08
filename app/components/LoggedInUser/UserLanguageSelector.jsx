@@ -1,8 +1,9 @@
 import React from 'react'
-import LanguageSelector from '../App/LanguageSelector'
-import i18n from '../../i18n/i18n'
-import { withLoggedInUser } from './UserProvider'
+
 import { updateUserInfo } from '../../API/http_api/current_user'
+import i18n from '../../i18n/i18n'
+import LanguageSelector from '../App/LanguageSelector'
+import { withLoggedInUser } from './UserProvider'
 
 /**
  * Updates the locale for loggedInUser, notify i18n to refresh the

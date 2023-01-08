@@ -1,8 +1,8 @@
 import React from 'react'
 import { withNamespaces } from 'react-i18next'
 
-import { SpeakerPreview } from './SpeakerPreview'
 import ModalConfirmDelete from '../Modal/ModalConfirmDelete'
+import { SpeakerPreview } from './SpeakerPreview'
 
 const ModalRemoveSpeaker = ({ handleAbort, speaker, t, ...props }) => (
   <ModalConfirmDelete

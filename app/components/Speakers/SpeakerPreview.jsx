@@ -1,10 +1,9 @@
+import { Flex } from '@rebass/grid'
+import classNames from 'classnames'
 import React from 'react'
+import { withNamespaces } from 'react-i18next'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
-import { withNamespaces } from 'react-i18next'
-import classNames from 'classnames'
-import { Flex } from '@rebass/grid'
-
 import { MicrophoneAlt } from 'styled-icons/boxicons-solid'
 
 import {
@@ -12,15 +11,15 @@ import {
   MIN_REPUTATION_REMOVE_SPEAKER,
   MIN_REPUTATION_UPDATE_SPEAKER,
 } from '../../constants'
-import ClickableIcon from '../Utils/ClickableIcon'
-import ReputationGuard from '../Utils/ReputationGuard'
-import EditSpeakerFormModal from './EditSpeakerFormModal'
-import ModalRemoveSpeaker from './ModalRemoveSpeaker'
 import { addModal } from '../../state/modals/reducer'
 import { removeSpeaker } from '../../state/video_debate/effects'
 import { changeStatementFormSpeaker } from '../../state/video_debate/statements/reducer'
 import { getFocusedStatementSpeakerId } from '../../state/video_debate/statements/selectors'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import ClickableIcon from '../Utils/ClickableIcon'
+import ReputationGuard from '../Utils/ReputationGuard'
+import EditSpeakerFormModal from './EditSpeakerFormModal'
+import ModalRemoveSpeaker from './ModalRemoveSpeaker'
 
 @withRouter
 @withNamespaces('videoDebate')

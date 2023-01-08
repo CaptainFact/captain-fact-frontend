@@ -1,14 +1,14 @@
-import React from 'react'
 import classNames from 'classnames'
+import React from 'react'
+import { withNamespaces } from 'react-i18next'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { withNamespaces } from 'react-i18next'
 
-import { changeStatementFormSpeaker } from '../../state/video_debate/statements/reducer'
-import { Icon } from '../Utils/Icon'
-import { hasStatementForm } from '../../state/video_debate/statements/selectors'
 import { destroyStatementForm } from '../../state/video_debate/statements/effects'
+import { changeStatementFormSpeaker } from '../../state/video_debate/statements/reducer'
+import { hasStatementForm } from '../../state/video_debate/statements/selectors'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import { Icon } from '../Utils/Icon'
 
 @connect(
   (state) => ({

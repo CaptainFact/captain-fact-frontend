@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { withNamespaces } from 'react-i18next'
 import classNames from 'classnames'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { withNamespaces } from 'react-i18next'
 
 @withNamespaces('main')
 export class LoadingFrame extends React.PureComponent {

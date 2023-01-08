@@ -1,9 +1,9 @@
 import React from 'react'
 import { withNamespaces } from 'react-i18next'
 
-import OwnCommentActions from './OwnCommentActions'
-import OtherCommentActions from './OtherCommentActions'
 import CommentAction from './CommentAction'
+import OtherCommentActions from './OtherCommentActions'
+import OwnCommentActions from './OwnCommentActions'
 
 const CommentActions = ({
   t,

@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Resizable } from 're-resizable'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 

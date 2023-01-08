@@ -1,11 +1,12 @@
 import 'isomorphic-fetch'
 
-import { HTTP_API_URL } from '../../config'
-import parseServerError from '../server_error'
-import flashNoInternetError from '../no_internet_error'
-import { optionsToQueryString } from '../../lib/url_utils'
-import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
 import { trimEnd } from 'lodash'
+
+import { HTTP_API_URL } from '../../config'
+import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
+import { optionsToQueryString } from '../../lib/url_utils'
+import flashNoInternetError from '../no_internet_error'
+import parseServerError from '../server_error'
 
 class CaptainFactHttpApi {
   constructor(baseUrl, token) {
@@ -43,6 +44,7 @@ class CaptainFactHttpApi {
           })
         })
         .catch((e) => {
+          // eslint-disable-next-line no-console
           console.error(e)
           // Special case when no internet connection
           reject('noInternet')

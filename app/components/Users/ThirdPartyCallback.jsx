@@ -1,10 +1,10 @@
 import React from 'react'
-
 import { withNamespaces } from 'react-i18next'
-import { LoadingFrame } from '../Utils/LoadingFrame'
-import { ErrorView } from '../Utils/ErrorView'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+
 import { signIn } from '../../API/http_api/current_user'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import { ErrorView } from '../Utils/ErrorView'
+import { LoadingFrame } from '../Utils/LoadingFrame'
 
 @withNamespaces('user')
 @withLoggedInUser

@@ -1,11 +1,11 @@
 import reducer, {
-  fetchAll,
-  setLoading,
   addSpeaker,
-  removeSpeaker,
-  updateSpeaker,
-  setPosition,
+  fetchAll,
   forcePosition,
+  removeSpeaker,
+  setLoading,
+  setPosition,
+  updateSpeaker,
 } from '../reducer'
 import fetchAllSuccess from './__fixtures__/fetch_all_success'
 

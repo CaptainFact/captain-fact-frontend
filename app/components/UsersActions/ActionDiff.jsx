@@ -1,8 +1,8 @@
+import { diffWordsWithSpace } from 'diff'
+import { List, Map } from 'immutable'
+import { startCase } from 'lodash'
 import React, { PureComponent } from 'react'
 import { Link } from 'react-router-dom'
-import { Map, List } from 'immutable'
-import { diffWordsWithSpace } from 'diff'
-import { startCase } from 'lodash'
 
 import {
   ACTION_DELETE,
@@ -11,10 +11,10 @@ import {
   ENTITY_SPEAKER,
   ENTITY_STATEMENT,
 } from '../../constants'
-import formatSeconds from '../../lib/seconds_formatter'
-import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import { speakerURL } from '../../lib/cf_routes'
+import formatSeconds from '../../lib/seconds_formatter'
 import { getEntityIdKey } from '../../lib/user_action_entity_id'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
 class ActionDiff extends PureComponent {
   render() {
