@@ -83,6 +83,7 @@ export function cleverDispatch(dispatch, getState, toDispatch, params = null) {
     })
     return lastValue
   }
+  // eslint-disable-next-line no-console
   console.warn(`Cannot dispatch ${toDispatch}`)
   return null
 }

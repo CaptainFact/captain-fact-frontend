@@ -80,6 +80,7 @@ export default class ShareModal extends React.PureComponent {
     try {
       success = document.execCommand('copy')
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.warn(`Copy failed: ${err}`)
     }
     if (success) {

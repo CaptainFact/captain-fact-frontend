@@ -100,6 +100,7 @@ const NotificationDetails = ({ notification, children }) => {
   const renderer = messageRenderers[notification.type]
 
   if (!renderer) {
+    // eslint-disable-next-line no-console
     console.warn('Unknown renderer for notification', notification)
     return null
   }

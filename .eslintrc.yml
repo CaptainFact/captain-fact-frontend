@@ -80,10 +80,11 @@ rules:
   jsx-a11y/media-has-caption: ['warn']
   jsx-a11y/accessible-emoji: ['warn']
   jsx-a11y/anchor-has-content: off
+  no-console: ['error']
+  curly: ['error']
 
   # Following rule haves been disabled for compatibility with
   # existing code. Some of them should be re-activated in the future.
-  no-console: off
   no-shadow: off
   nonblock-statement-body-position: off
   object-curly-spacing: off
@@ -93,7 +94,6 @@ rules:
   function-paren-newline: off
   arrow-parens: off
   arrow-body-style: off
-  curly: ['error']
   no-use-before-define: off
   no-param-reassign: off
   camelcase: off

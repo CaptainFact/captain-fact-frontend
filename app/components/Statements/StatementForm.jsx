@@ -114,7 +114,6 @@ export class StatementForm extends React.PureComponent {
       ? speakers.find((s) => s.id === initialValues.speaker_id)
       : null
     const toggleTimeLockAction = this.state.lockedTime === false ? 'unlock' : 'lock'
-    console.log(this.props)
     return (
       <form
         ref={this.containerRef}

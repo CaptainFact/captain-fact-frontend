@@ -195,6 +195,7 @@ const Navbar = ({
                       if (loading) {
                         return <LoadingFrame size="small" />
                       } else if (error) {
+                        // eslint-disable-next-line no-console
                         console.error(error)
                         return <ErrorView error={error} />
                       }

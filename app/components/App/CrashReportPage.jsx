@@ -44,6 +44,7 @@ ${stacktrace}
 
 const CrashReportPage = ({ t, error }) => {
   const stackTrace = truncate(error.stack, { length: 6000 })
+  // eslint-disable-next-line no-console
   console.error(error)
   return (
     <Flex px={2} py={6} flexDirection="column" alignItems="center">

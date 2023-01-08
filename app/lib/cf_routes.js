@@ -45,7 +45,8 @@ export const userActionURL = (action) => {
       ? videoURL(videoHashId)
       : speakerURL(get(action, 'speaker.slug') || action.speakerId)
   } else {
-    console.log("Don't know how to generate URL for action", action)
+    // eslint-disable-next-line no-console
+    console.warn("Don't know how to generate URL for action", action)
   }
 }
 
