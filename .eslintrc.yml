@@ -21,6 +21,9 @@ plugins:
   - simple-import-sort
   - cypress
   - chai-friendly # See https://github.com/cypress-io/eslint-plugin-cypress#chai-and-no-unused-expressions
+settings:
+  react:
+    version: detect
 rules:
   max-len:
     - warn
