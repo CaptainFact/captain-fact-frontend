@@ -1,5 +1,5 @@
-import { SubmissionError } from 'redux-form'
 import { Record } from 'immutable'
+import { SubmissionError } from 'redux-form'
 
 export const handleEffectResponse =
   ({ onSuccess, onError }) =>

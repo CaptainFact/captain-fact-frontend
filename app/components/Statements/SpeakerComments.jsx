@@ -1,9 +1,9 @@
 import React from 'react'
 import { withNamespaces } from 'react-i18next'
 
-import VerificationsOriginHeader from './VerificationsOriginHeader'
-import { SpeakerPreview } from '../Speakers/SpeakerPreview'
 import { CommentsList } from '../Comments/CommentsList'
+import { SpeakerPreview } from '../Speakers/SpeakerPreview'
+import VerificationsOriginHeader from './VerificationsOriginHeader'
 
 export default withNamespaces('videoDebate')(({ t, speaker, comments, setReplyToComment }) => {
   return comments.size === 0 ? null : (

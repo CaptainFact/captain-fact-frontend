@@ -1,6 +1,7 @@
 import React from 'react'
 import { withNamespaces } from 'react-i18next'
-import { ALL_VIDEOS, ONLY_PARTNERS, ONLY_COMMUNITY, ONLY_FEATURED } from '../../constants'
+
+import { ALL_VIDEOS, ONLY_COMMUNITY, ONLY_FEATURED, ONLY_PARTNERS } from '../../constants'
 
 const VideoSourceFiltersSelect = ({ value, onChange, t }) => (
   <div className="select">

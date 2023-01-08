@@ -1,4 +1,5 @@
 import React from 'react'
+
 import Icon from '../Utils/Icon'
 
 const ACTIONS_ICONS = {

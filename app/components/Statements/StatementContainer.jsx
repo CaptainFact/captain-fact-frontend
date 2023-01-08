@@ -1,18 +1,17 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { withNamespaces } from 'react-i18next'
 import classNames from 'classnames'
+import React from 'react'
+import { withNamespaces } from 'react-i18next'
+import { connect } from 'react-redux'
 
-import { StatementForm } from './StatementForm'
-import ModalConfirmDelete from '../Modal/ModalConfirmDelete'
-
-import * as statementSelectors from '../../state/video_debate/statements/selectors'
-import { deleteStatement, updateStatement } from '../../state/video_debate/statements/effects'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
-import StatementComments from './StatementComments'
+import { deleteStatement, updateStatement } from '../../state/video_debate/statements/effects'
+import * as statementSelectors from '../../state/video_debate/statements/selectors'
 import CommentForm from '../Comments/CommentForm'
-import Statement from './Statement'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import ModalConfirmDelete from '../Modal/ModalConfirmDelete'
+import Statement from './Statement'
+import StatementComments from './StatementComments'
+import { StatementForm } from './StatementForm'
 
 @connect(
   (state, props) => ({

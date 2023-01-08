@@ -1,9 +1,9 @@
-import React from 'react'
+import { Flex } from '@rebass/grid'
 import PropTypes from 'prop-types'
+import React from 'react'
 import styled, { css } from 'styled-components'
 import { themeGet } from 'styled-system'
 
-import { Flex } from '@rebass/grid'
 import logo from '../../assets/logo.svg'
 import borderlessLogo from '../../assets/logo-borderless.svg'
 import { Span } from '../StyledUtils/Text'

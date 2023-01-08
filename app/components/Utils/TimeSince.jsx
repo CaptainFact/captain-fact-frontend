@@ -1,9 +1,10 @@
+import differenceInSeconds from 'date-fns/differenceInSeconds'
+import format from 'date-fns/format'
+import distanceInWordsToNow from 'date-fns/formatDistanceToNow'
+import parseISO from 'date-fns/parseISO'
 import React from 'react'
 import { connect } from 'react-redux'
-import parseISO from 'date-fns/parseISO'
-import differenceInSeconds from 'date-fns/differenceInSeconds'
-import distanceInWordsToNow from 'date-fns/formatDistanceToNow'
-import format from 'date-fns/format'
+
 import { locales } from '../../i18n/i18n'
 
 const getSecondsSince = (time) => {

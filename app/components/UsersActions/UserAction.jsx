@@ -1,17 +1,17 @@
-import React from 'react'
-import { withNamespaces, Trans } from 'react-i18next'
+import { Box } from '@rebass/grid'
 import classNames from 'classnames'
+import React from 'react'
+import { Trans, withNamespaces } from 'react-i18next'
 
 import UserAppellation from '../Users/UserAppellation'
+import Button from '../Utils/Button'
+import { Icon } from '../Utils/Icon'
 import { TimeSince } from '../Utils/index'
 import Tag from '../Utils/Tag'
 import ActionDiff from './ActionDiff'
-import ActionIcon from './ActionIcon'
-import { Icon } from '../Utils/Icon'
 import ActionEntityLink from './ActionEntityLink'
-import { Box } from '@rebass/grid'
+import ActionIcon from './ActionIcon'
 import ReputationChangeTag from './ReputationChangeTag'
-import Button from '../Utils/Button'
 
 const getReputationChange = (viewingFrom, action) => {
   if (!viewingFrom) {

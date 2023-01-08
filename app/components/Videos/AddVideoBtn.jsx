@@ -1,9 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next'
-import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
+import { Link } from 'react-router-dom'
+
 import { MIN_REPUTATION_ADD_VIDEO } from '../../constants'
 import { Icon } from '../Utils/Icon'
+import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
 
 const AddVideoBtn = ({ t }) => {
   return (

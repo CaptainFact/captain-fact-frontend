@@ -1,38 +1,35 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
 import { Query } from '@apollo/client/react/components'
-import { withNamespaces } from 'react-i18next'
+import { Flex } from '@rebass/grid'
 import classNames from 'classnames'
 import { capitalize, get } from 'lodash'
-import { Flex } from '@rebass/grid'
+import React from 'react'
+import { withNamespaces } from 'react-i18next'
+import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
-
-import { Star } from 'styled-icons/fa-solid'
 import { EnvelopeFill } from 'styled-icons/bootstrap'
-
 import { Github } from 'styled-icons/fa-brands'
 import { Discord } from 'styled-icons/fa-brands'
 import { Twitter } from 'styled-icons/fa-brands'
 import { Facebook } from 'styled-icons/fa-brands'
 import { Mastodon } from 'styled-icons/fa-brands'
-
+import { Star } from 'styled-icons/fa-solid'
 import { LinkExternal } from 'styled-icons/octicons'
 
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import {
   loggedInUserPendingModerationCount,
   loggedInUserTodayReputationGain,
 } from '../../API/graphql_queries'
-import { MOBILE_WIDTH_THRESHOLD, MIN_REPUTATION_MODERATION } from '../../constants'
-import RawIcon from '../Utils/RawIcon'
-import ReputationGuard from '../Utils/ReputationGuard'
+import { MIN_REPUTATION_MODERATION, MOBILE_WIDTH_THRESHOLD } from '../../constants'
+import { MAX_DAILY_REPUTATION_GAIN } from '../../constants'
 import { closeSidebar, toggleSidebar } from '../../state/user_preferences/reducer'
 import UserLanguageSelector from '../LoggedInUser/UserLanguageSelector'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
-import Tag from '../Utils/Tag'
 import ProgressBar from '../Utils/ProgressBar'
-import { MAX_DAILY_REPUTATION_GAIN } from '../../constants'
+import RawIcon from '../Utils/RawIcon'
+import ReputationGuard from '../Utils/ReputationGuard'
+import Tag from '../Utils/Tag'
 
 const WhiteStar = styled(Star)`
   color: white;

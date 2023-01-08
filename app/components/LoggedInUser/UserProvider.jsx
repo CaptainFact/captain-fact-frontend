@@ -1,5 +1,5 @@
 import React from 'react'
-import User from '../../state/users/record'
+
 import { HttpApi, SocketApi } from '../../API'
 import {
   getFromLocalStorage,
@@ -7,6 +7,7 @@ import {
   removeFromLocalStorage,
   setLocalStorage,
 } from '../../lib/local_storage'
+import User from '../../state/users/record'
 
 /**
  * A context that stores all the info about currently logged in user as long

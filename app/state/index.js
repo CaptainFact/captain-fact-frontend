@@ -1,21 +1,20 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
-import { reducer as formReducer } from 'redux-form'
 import Immutable from 'immutable'
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
+import { reducer as formReducer } from 'redux-form'
 import promiseMiddleware from 'redux-promise'
 import thunk from 'redux-thunk'
 
 import { JS_ENV } from '../config'
-
 // Reducers
 import FlashesReducer from './flashes/reducer'
-import VideoDebateReducer from './video_debate/reducer'
+import HelpReducer from './help/reducer'
+import ModalsReducer from './modals/reducer'
+import ModerationReducer from './moderation/reducer'
+import SpeakersReducer from './speakers/reducer'
+import UsersActionsReducer from './user_actions/reducer'
 import UserPreferencesReducer from './user_preferences/reducer'
 import DisplayedUserReducer from './users/displayed_user/reducer'
-import ModalsReducer from './modals/reducer'
-import HelpReducer from './help/reducer'
-import UsersActionsReducer from './user_actions/reducer'
-import SpeakersReducer from './speakers/reducer'
-import ModerationReducer from './moderation/reducer'
+import VideoDebateReducer from './video_debate/reducer'
 import VideosReducer from './videos/reducer'
 
 // Declare reducers

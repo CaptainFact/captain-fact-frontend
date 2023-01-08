@@ -1,11 +1,11 @@
+import classNames from 'classnames'
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import classNames from 'classnames'
 
 import { popModal } from '../../state/modals/reducer'
-import { Icon } from '../Utils/Icon'
 import CloseButton from '../Utils/CloseButton'
+import { Icon } from '../Utils/Icon'
 
 const Modal = ({
   helpLink,

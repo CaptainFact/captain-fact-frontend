@@ -1,23 +1,22 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Trans, withNamespaces } from 'react-i18next'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
-
 import { InfoCircle } from 'styled-icons/fa-solid'
 import { ExclamationCircle } from 'styled-icons/fa-solid'
 
+import { getFromLocalStorage,LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
 import { isLoadingVideoDebate } from '../../state/video_debate/selectors'
-import VideoDebateHistory from './VideoDebateHistory'
-import ActionBubbleMenu from './ActionBubbleMenu'
-import StatementsList from '../Statements/StatementsList'
-import { LoadingFrame } from '../Utils/LoadingFrame'
 import { hasStatementForm } from '../../state/video_debate/statements/selectors'
-import { Icon } from '../Utils/Icon'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
-import Message from '../Utils/Message'
-import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
-import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
+import StatementsList from '../Statements/StatementsList'
 import DismissableMessage from '../Utils/DismissableMessage'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
+import { Icon } from '../Utils/Icon'
+import { LoadingFrame } from '../Utils/LoadingFrame'
+import Message from '../Utils/Message'
+import ActionBubbleMenu from './ActionBubbleMenu'
+import VideoDebateHistory from './VideoDebateHistory'
 
 const TitleContainer = styled.div`
   padding: 1.5rem;

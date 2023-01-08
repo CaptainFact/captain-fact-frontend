@@ -1,13 +1,12 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
-
-import { CommentsList } from '../Comments'
+import { connect } from 'react-redux'
 
 import { classifyComments } from '../../state/video_debate/comments/selectors'
+import { CommentsList } from '../Comments'
 import Tag from '../Utils/Tag'
-import VerificationsOriginHeader from './VerificationsOriginHeader'
 import SpeakerComments from './SpeakerComments'
+import VerificationsOriginHeader from './VerificationsOriginHeader'
 
 @withNamespaces('videoDebate')
 @connect((state, props) => {

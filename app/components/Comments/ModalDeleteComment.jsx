@@ -1,9 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
+import { connect } from 'react-redux'
 
-import { CommentDisplay } from './CommentDisplay'
 import ModalConfirmDelete from '../Modal/ModalConfirmDelete'
+import { CommentDisplay } from './CommentDisplay'
 
 const ModalDeleteComment = ({ handleAbort, comment, replies, t, ...otherProps }) => (
   <ModalConfirmDelete

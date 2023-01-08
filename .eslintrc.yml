@@ -18,6 +18,7 @@ plugins:
   - react
   - jsx-a11y
   - import
+  - simple-import-sort
   - cypress
   - chai-friendly # See https://github.com/cypress-io/eslint-plugin-cypress#chai-and-no-unused-expressions
 rules:
@@ -31,6 +32,8 @@ rules:
   quotes: ['warn', 'single', { avoidEscape: true }]
   semi: ['error', 'never']
   import/first: ['warn']
+  import/no-named-as-default: ['warn']
+  simple-import-sort/imports: ['error']
   no-else-return: off
   no-trailing-spaces: ['warn']
   no-continue: off
@@ -39,7 +42,6 @@ rules:
   eol-last: ['warn']
   no-nested-ternary: ['warn']
   prefer-const: ['warn']
-  import/no-named-as-default: ['warn']
   no-restricted-globals: ['error', 'event', 'fdescribe']
   no-mixed-operators: ['warn']
   # See https://github.com/cypress-io/eslint-plugin-cypress#chai-and-no-unused-expressions

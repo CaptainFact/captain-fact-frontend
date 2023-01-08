@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
+import { connect } from 'react-redux'
 
-import Achievement from './Achievement'
-import { Icon } from '../Utils/Icon'
 import { addModal } from '../../state/modals/reducer'
 import HelpModal from '../Help/HelpModal'
+import { Icon } from '../Utils/Icon'
+import Achievement from './Achievement'
 
 @connect((state) => ({ user: state.DisplayedUser.data }), { addModal })
 @withNamespaces('achievements')

@@ -1,17 +1,16 @@
-import React from 'react'
 import { Flex } from '@rebass/grid'
 import { truncate } from 'lodash'
-
+import React from 'react'
+import { withNamespaces } from 'react-i18next'
 import { Support } from 'styled-icons/boxicons-regular'
 import { Github } from 'styled-icons/fa-brands'
 import { Redo } from 'styled-icons/fa-solid'
 
-import { withNamespaces } from 'react-i18next'
-import Message from '../Utils/Message'
-import Button from '../Utils/Button'
-import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import { optionsToQueryString } from '../../lib/url_utils'
 import Container from '../StyledUtils/Container'
+import Button from '../Utils/Button'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
+import Message from '../Utils/Message'
 
 const getGithubIssueURL = (stacktrace) => {
   const navigatorInfo = typeof navigator === 'undefined' ? {} : navigator

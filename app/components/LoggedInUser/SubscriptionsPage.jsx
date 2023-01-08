@@ -1,19 +1,18 @@
-import React, { Component } from 'react'
 import { Query } from '@apollo/client/react/components'
+import { Box, Flex } from '@rebass/grid'
 import { get } from 'lodash'
-import { Flex, Box } from '@rebass/grid'
+import React, { Component } from 'react'
+import { translate } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-
 import { Videos } from 'styled-icons/boxicons-solid'
 
-import { translate } from 'react-i18next'
 import { loggedInUserSubscriptionsQuery } from '../../API/graphql_queries'
 import { videoURL } from '../../lib/cf_routes'
-import { LoadingFrame } from '../Utils/LoadingFrame'
 import SubscribeBtn from '../Notifications/SubscribeBtn'
-import { ErrorView } from '../Utils/ErrorView'
 import { StyledH2 } from '../StyledUtils/Title'
+import { ErrorView } from '../Utils/ErrorView'
+import { LoadingFrame } from '../Utils/LoadingFrame'
 import Message from '../Utils/Message'
 
 const SubscribeBtnBox = styled(Box)`

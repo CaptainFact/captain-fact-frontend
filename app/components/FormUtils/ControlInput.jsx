@@ -1,8 +1,8 @@
-import React from 'react'
 import classNames from 'classnames'
+import React from 'react'
 
-import Input from './Input'
 import Icon from '../Utils/Icon'
+import Input from './Input'
 
 const ControlInput = (props) => {
   const {

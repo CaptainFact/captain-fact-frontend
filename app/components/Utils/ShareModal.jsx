@@ -1,14 +1,14 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
+import { connect } from 'react-redux'
 
-import { FRONTEND_URL, FB_APP_ID } from '../../config'
-import Modal from '../Modal/Modal'
+import { FB_APP_ID, FRONTEND_URL } from '../../config'
+import { flashErrorMsg, flashSuccessMsg } from '../../state/flashes/reducer'
 import { popModal } from '../../state/modals/reducer'
 import FieldWithButton from '../FormUtils/FieldWithButton'
-import { Icon } from './Icon'
-import { flashErrorMsg, flashSuccessMsg } from '../../state/flashes/reducer'
+import Modal from '../Modal/Modal'
 import ThirdPartyServiceButton from '../Users/ThirdPartyServiceButton'
+import { Icon } from './Icon'
 
 @connect(null, { popModal, flashErrorMsg, flashSuccessMsg })
 @withNamespaces('main')

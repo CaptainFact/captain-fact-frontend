@@ -1,5 +1,5 @@
-import React from 'react'
 import classNames from 'classnames'
+import React from 'react'
 import { withNamespaces } from 'react-i18next'
 
 import ClickableIcon from '../Utils/ClickableIcon'

@@ -1,11 +1,11 @@
 import React from 'react'
-import { withNamespaces, Trans } from 'react-i18next'
+import { Trans, withNamespaces } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import Popup from 'reactjs-popup'
 
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import { Icon } from './Icon'
 import Message from './Message'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 
 export const ReputationGuardTooltip = ({
   t,

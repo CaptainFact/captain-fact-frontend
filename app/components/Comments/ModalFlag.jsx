@@ -1,11 +1,11 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
+import { connect } from 'react-redux'
 import { formValueSelector } from 'redux-form'
 
-import FlagForm from './FlagForm'
-import { ModalFormContainer } from '../Modal/ModalFormContainer'
 import HttpApi from '../../API/http_api'
+import { ModalFormContainer } from '../Modal/ModalFormContainer'
+import FlagForm from './FlagForm'
 
 const flagFormValueSelector = formValueSelector('flagForm')
 

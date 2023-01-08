@@ -1,5 +1,6 @@
-import React from 'react'
 import classNames from 'classnames'
+import React from 'react'
+
 import TextareaAutosize from './TextareaAutosize'
 import TextareaLengthCounter from './TextareaLengthCounter'
 

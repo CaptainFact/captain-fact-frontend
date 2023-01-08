@@ -1,17 +1,16 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { withNamespaces } from 'react-i18next'
-import { Formik } from 'formik'
 import { Flex } from '@rebass/grid'
-
+import { Formik } from 'formik'
+import React from 'react'
+import { withNamespaces } from 'react-i18next'
+import { connect } from 'react-redux'
 import { Edit } from 'styled-icons/fa-regular'
 
-import { shiftStatements } from '../../state/video_debate/effects'
-import Modal from '../Modal/Modal'
-import { popModal } from '../../state/modals/reducer'
 import { flashErrorMsg, flashSuccessMsg } from '../../state/flashes/reducer'
+import { popModal } from '../../state/modals/reducer'
+import { shiftStatements } from '../../state/video_debate/effects'
 import FieldWithButton from '../FormUtils/FieldWithButton'
 import StyledLabel from '../FormUtils/StyledLabel'
+import Modal from '../Modal/Modal'
 import { StyledH3 } from '../StyledUtils/Title'
 
 class EditVideoModal extends React.PureComponent {

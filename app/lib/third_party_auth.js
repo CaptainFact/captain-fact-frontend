@@ -1,4 +1,4 @@
-import { FRONTEND_URL, FB_APP_ID } from '../config'
+import { FB_APP_ID, FRONTEND_URL } from '../config'
 import { optionsToQueryString } from './url_utils'
 
 export const facebookAuthUrl = (callbackOptions) =>

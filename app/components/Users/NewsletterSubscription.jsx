@@ -1,8 +1,8 @@
 import React from 'react'
 import { withNamespaces } from 'react-i18next'
 
-import Alert from '../Utils/Alert'
 import { HttpApi } from '../../API'
+import Alert from '../Utils/Alert'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 
 @withNamespaces('user')

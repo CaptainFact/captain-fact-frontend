@@ -1,29 +1,26 @@
 // Import polyfills
-import { polyfill as smoothSrollPolyfill } from 'smoothscroll-polyfill'
+// Import styles
+import './styles/application.sass'
 
+import { ApolloProvider } from '@apollo/client'
 // Import libs
 import React from 'react'
-import { Provider as ReduxProvider } from 'react-redux'
-import { ThemeProvider } from 'styled-components'
 import { I18nextProvider } from 'react-i18next'
 import { Configure, Index, InstantSearch } from 'react-instantsearch-dom'
-import { ApolloProvider } from '@apollo/client'
-
-// Load store
-import store from './state'
+import { Provider as ReduxProvider } from 'react-redux'
+import { polyfill as smoothSrollPolyfill } from 'smoothscroll-polyfill'
+import { ThemeProvider } from 'styled-components'
 
 // Import APIs so they can load their configurations
 import GraphQLClient from './API/graphql_api'
-import i18n from './i18n/i18n'
 import UserProvider from './components/LoggedInUser/UserProvider'
-import { searchClient, ALGOLIA_INDEXES_NAMES } from './lib/algolia'
 import { ENTITY_SPEAKER, ENTITY_STATEMENT, ENTITY_VIDEO } from './constants'
-
+import i18n from './i18n/i18n'
+import { ALGOLIA_INDEXES_NAMES, searchClient } from './lib/algolia'
 // Import router
 import CFRouter from './router'
-
-// Import styles
-import './styles/application.sass'
+// Load store
+import store from './state'
 import theme from './styles/theme'
 
 // Activate polyfills

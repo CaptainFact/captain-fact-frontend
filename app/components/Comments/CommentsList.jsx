@@ -1,13 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import FlipMove from 'react-flip-move'
 import classNames from 'classnames'
+import PropTypes from 'prop-types'
+import React from 'react'
+import FlipMove from 'react-flip-move'
 
-import { CommentDisplay } from './CommentDisplay'
-import CommentsListHeader from './CommentsListHeader'
-import CommentsListExpender from './CommentsListExpender'
-import CommentForm from './CommentForm'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import { CommentDisplay } from './CommentDisplay'
+import CommentForm from './CommentForm'
+import CommentsListExpender from './CommentsListExpender'
+import CommentsListHeader from './CommentsListHeader'
 
 @withLoggedInUser
 export class CommentsList extends React.PureComponent {

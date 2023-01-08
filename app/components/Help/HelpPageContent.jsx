@@ -1,16 +1,16 @@
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import React, { PureComponent } from 'react'
 import Markdown from 'react-markdown'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import remarkGfm from 'remark-gfm'
 
-import { isExternal, isDownloadableFile } from '../../lib/url_utils'
-import { LoadingFrame } from '../Utils/LoadingFrame'
-import { ErrorView } from '../Utils/ErrorView'
+import { isDownloadableFile, isExternal } from '../../lib/url_utils'
 import { fetchHelpPage } from '../../state/help/effects'
 import { reset } from '../../state/help/reducer'
+import { ErrorView } from '../Utils/ErrorView'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
+import { LoadingFrame } from '../Utils/LoadingFrame'
 
 @connect(
   (state) => ({

@@ -1,8 +1,8 @@
-import React from 'react'
-import { Map } from 'immutable'
+import { Box, Flex } from '@rebass/grid'
 import classNames from 'classnames'
+import { Map } from 'immutable'
+import React from 'react'
 import { withNamespaces } from 'react-i18next'
-import { Flex, Box } from '@rebass/grid'
 import { Globe } from 'styled-icons/fa-solid'
 
 const defaultLocales = new Map({

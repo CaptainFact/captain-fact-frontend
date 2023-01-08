@@ -1,9 +1,9 @@
 import {
-  ENTITY_VIDEO,
-  ENTITY_SPEAKER,
-  ENTITY_STATEMENT,
   ENTITY_COMMENT,
   ENTITY_SOURCED_COMMENT,
+  ENTITY_SPEAKER,
+  ENTITY_STATEMENT,
+  ENTITY_VIDEO,
 } from '../constants'
 
 export function getEntityIDFromAction(action) {

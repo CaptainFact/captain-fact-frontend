@@ -1,11 +1,11 @@
 import React from 'react'
-import { withNamespaces, Trans } from 'react-i18next'
-
+import { Trans, withNamespaces } from 'react-i18next'
 import { Link, withRouter } from 'react-router-dom'
-import { Icon } from '../Utils/Icon'
-import HelpPageContent from './HelpPageContent'
+
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
+import { Icon } from '../Utils/Icon'
 import Message from '../Utils/Message'
+import HelpPageContent from './HelpPageContent'
 
 @withNamespaces('help')
 @withRouter

@@ -1,9 +1,9 @@
+import { Box } from '@rebass/grid'
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import { Box } from '@rebass/grid'
 
-import PaginatedVideosContainer from './PaginatedVideosContainer'
 import { VideosAddedByUserQuery } from '../../API/graphql_queries'
+import PaginatedVideosContainer from './PaginatedVideosContainer'
 
 @withRouter
 export default class UserAddedVideos extends React.Component {

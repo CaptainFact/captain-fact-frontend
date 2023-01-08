@@ -1,11 +1,11 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
+import { connect } from 'react-redux'
 import { Field, formValueSelector, reduxForm } from 'redux-form'
 
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import { ModalFormContainer } from '../Modal/ModalFormContainer'
 import { Icon } from '../Utils/Icon'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 
 const DELETE_FORM = 'deleteAccount'
 

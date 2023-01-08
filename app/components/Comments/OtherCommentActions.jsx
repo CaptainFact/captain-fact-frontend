@@ -1,10 +1,10 @@
+import classNames from 'classnames'
 import React from 'react'
 import { withNamespaces } from 'react-i18next'
-import classNames from 'classnames'
 
-import CommentAction from './CommentAction'
-import ReputationGuard from '../Utils/ReputationGuard'
 import { MIN_REPUTATION_FLAG } from '../../constants'
+import ReputationGuard from '../Utils/ReputationGuard'
+import CommentAction from './CommentAction'
 
 const OtherCommentActions = ({ t, isFlagged, handleReply, handleFlag }) => (
   <React.Fragment>

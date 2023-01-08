@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { themeGet, fontSize, fontWeight, space, color } from 'styled-system'
+import { color, fontSize, fontWeight, space, themeGet } from 'styled-system'
 
 /**
  * A button with all browser styles removed.

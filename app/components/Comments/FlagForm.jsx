@@ -1,12 +1,13 @@
+import { Box, Flex } from '@rebass/grid'
 import React from 'react'
-import { reduxForm } from 'redux-form'
 import { withNamespaces } from 'react-i18next'
+import { reduxForm } from 'redux-form'
 import styled from 'styled-components'
-import { Flex, Box } from '@rebass/grid'
-import FlagReasonSelect from '../Moderation/FlagReasonSelect'
-import { CommentDisplay } from './CommentDisplay'
-import Message from '../Utils/Message'
 import { Warning } from 'styled-icons/material'
+
+import FlagReasonSelect from '../Moderation/FlagReasonSelect'
+import Message from '../Utils/Message'
+import { CommentDisplay } from './CommentDisplay'
 
 const YellowWarning = styled(Warning)`
   color: #ffdd57;

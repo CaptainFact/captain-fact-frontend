@@ -1,13 +1,13 @@
-import React from 'react'
-import isPromise from 'is-promise'
 import classNames from 'classnames'
+import isPromise from 'is-promise'
+import React from 'react'
 import { withNamespaces } from 'react-i18next'
 import { connect } from 'react-redux'
 
-import Modal from './Modal'
-import { Icon } from '../Utils'
-import { popModal } from '../../state/modals/reducer'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
+import { popModal } from '../../state/modals/reducer'
+import { Icon } from '../Utils'
+import Modal from './Modal'
 
 @withNamespaces('main')
 @connect(null, { popModal })

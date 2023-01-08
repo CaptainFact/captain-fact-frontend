@@ -1,7 +1,7 @@
-import React from 'react'
 import { capitalize as doCapitalize } from 'lodash'
-
+import React from 'react'
 import { withNamespaces } from 'react-i18next'
+
 import formatSeconds from '../../lib/seconds_formatter'
 
 const i18nAtKey = 'misc.timeAt'

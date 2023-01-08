@@ -1,14 +1,14 @@
 import React from 'react'
-import { reduxForm, SubmissionError } from 'redux-form'
-import { withRouter } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import { reduxForm,SubmissionError } from 'redux-form'
 
-import { renderAllUserFields, submitButton, validatePasswordRepeat } from './UserFormFields'
-import { Icon } from '../Utils/Icon'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
-import { setUser as setDisplayedUser } from '../../state/users/displayed_user/reducer'
 import { updateUserInfo } from '../../API/http_api/current_user'
+import { setUser as setDisplayedUser } from '../../state/users/displayed_user/reducer'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import { Icon } from '../Utils/Icon'
+import { renderAllUserFields, submitButton, validatePasswordRepeat } from './UserFormFields'
 
 // A dirty trick to make the migration of user from redux to context easier.
 // As we plan to replace ReduxForm by Formik, there is no need in spending

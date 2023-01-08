@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { withNamespaces, Trans } from 'react-i18next'
 import { truncate } from 'lodash'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { Trans, withNamespaces } from 'react-i18next'
 
 import { userActionURL } from '../../lib/cf_routes'
 import UserAppellation from '../Users/UserAppellation'

@@ -3,13 +3,13 @@ import { withNamespaces } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import {
-  ENTITY_SPEAKER,
-  ENTITY_VIDEO,
-  ENTITY_STATEMENT,
   ENTITY_COMMENT,
   ENTITY_SOURCED_COMMENT,
+  ENTITY_SPEAKER,
+  ENTITY_STATEMENT,
+  ENTITY_VIDEO,
 } from '../../constants'
-import { speakerURL, statementURL, videoURL, commentURL } from '../../lib/cf_routes'
+import { commentURL, speakerURL, statementURL, videoURL } from '../../lib/cf_routes'
 
 const comment_mapper = ({ videoHashId, statementId, commentId }) => {
   return [commentId, commentURL(videoHashId, statementId, commentId)]

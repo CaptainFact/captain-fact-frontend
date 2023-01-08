@@ -1,13 +1,13 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
 
+import { reset } from '../../state/user_actions/reducer'
 import {
   joinVideoDebateHistoryChannel,
   leaveVideoDebateHistoryChannel,
 } from '../../state/video_debate/history/effects'
-import { reset } from '../../state/user_actions/reducer'
 import ActionsTable from '../UsersActions/ActionsTable'
-import { Helmet } from 'react-helmet'
 
 @connect(
   (state) => ({

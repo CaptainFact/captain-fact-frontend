@@ -1,9 +1,10 @@
-import React from 'react'
 import { Map } from 'immutable'
+import React from 'react'
 import { withNamespaces } from 'react-i18next'
+
+import LanguageSelector from '../App/LanguageSelector'
 import FieldWithLabelAddon from '../FormUtils/FieldWithLabelAddon'
 import VideoSourceFiltersSelect from './VideoSourceFiltersSelect'
-import LanguageSelector from '../App/LanguageSelector'
 
 const VideosFilterBar = ({ onLanguageChange, onSourceChange, source, language, t }) => {
   return (

@@ -1,13 +1,13 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { withNamespaces } from 'react-i18next'
+import { connect } from 'react-redux'
 
-import { ModalHistory } from '../VideoDebate/ModalHistory'
+import { ENTITY_STATEMENT } from '../../constants'
 import { addModal } from '../../state/modals/reducer'
+import { setScrollTo } from '../../state/video_debate/statements/reducer'
 import { forcePosition } from '../../state/video_debate/video/reducer'
 import ShareModal from '../Utils/ShareModal'
-import { ENTITY_STATEMENT } from '../../constants'
-import { setScrollTo } from '../../state/video_debate/statements/reducer'
+import { ModalHistory } from '../VideoDebate/ModalHistory'
 import StatementHeader from './StatementHeader'
 
 @connect(null, { addModal, forcePosition, setScrollTo })

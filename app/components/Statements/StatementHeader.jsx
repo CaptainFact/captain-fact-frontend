@@ -1,10 +1,11 @@
+import { Box } from '@rebass/grid'
 import React from 'react'
 import { withNamespaces } from 'react-i18next'
-import TimeDisplay from '../Utils/TimeDisplay'
+
+import { MIN_REPUTATION_REMOVE_STATEMENT, MIN_REPUTATION_UPDATE_STATEMENT } from '../../constants'
 import ClickableIcon from '../Utils/ClickableIcon'
-import { MIN_REPUTATION_UPDATE_STATEMENT, MIN_REPUTATION_REMOVE_STATEMENT } from '../../constants'
 import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
-import { Box } from '@rebass/grid'
+import TimeDisplay from '../Utils/TimeDisplay'
 
 export default withNamespaces('videoDebate')(
   ({

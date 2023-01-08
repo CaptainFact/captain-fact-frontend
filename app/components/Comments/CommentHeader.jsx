@@ -2,8 +2,8 @@ import React from 'react'
 import { withNamespaces } from 'react-i18next'
 
 import { USER_PICTURE_SMALL } from '../../constants'
-import UserPicture from '../Users/UserPicture'
 import UserAppellation from '../Users/UserAppellation'
+import UserPicture from '../Users/UserPicture'
 import { TimeSince } from '../Utils/TimeSince'
 
 const CommentHeader = ({ comment: { user, inserted_at }, withoutActions }) => (

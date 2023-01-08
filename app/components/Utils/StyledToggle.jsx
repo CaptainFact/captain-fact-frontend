@@ -1,10 +1,10 @@
-import React from 'react'
+import { Box, Flex } from '@rebass/grid'
+import { transparentize } from 'polished'
 import PropTypes from 'prop-types'
+import React from 'react'
 import Toggle from 'react-toggled'
 import styled, { css, keyframes } from 'styled-components'
-import { space, color, themeGet } from 'styled-system'
-import { Flex, Box } from '@rebass/grid'
-import { transparentize } from 'polished'
+import { color, space, themeGet } from 'styled-system'
 
 const getBgColor = (props) => themeGet(`colors.${props.bg}`, props.bg)(props)
 

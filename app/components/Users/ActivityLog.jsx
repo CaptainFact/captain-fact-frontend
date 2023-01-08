@@ -1,16 +1,16 @@
-import React from 'react'
 import { Query } from '@apollo/client/react/components'
 import gql from 'graphql-tag'
 import { Map } from 'immutable'
+import { get } from 'lodash'
+import React from 'react'
 import { withNamespaces } from 'react-i18next'
 
+import ActionsDirectionFilter from '../UsersActions/ActionsDirectionFilter'
 import UserAction from '../UsersActions/UserAction'
-import PaginationMenu from '../Utils/PaginationMenu'
+import { ErrorView } from '../Utils/ErrorView'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import MessageView from '../Utils/MessageView'
-import { ErrorView } from '../Utils/ErrorView'
-import ActionsDirectionFilter from '../UsersActions/ActionsDirectionFilter'
-import { get } from 'lodash'
+import PaginationMenu from '../Utils/PaginationMenu'
 
 const QUERY = gql`
   query UserActivityLog(

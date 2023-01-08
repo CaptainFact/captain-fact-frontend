@@ -1,14 +1,13 @@
-import React from 'react'
 import { Query } from '@apollo/client/react/components'
 import { get } from 'lodash'
+import React from 'react'
 import styled from 'styled-components'
+import { Bell } from 'styled-icons/fa-solid'
 import { themeGet } from 'styled-system'
 
-import { Bell } from 'styled-icons/fa-solid'
-
-import UnstyledButton from '../StyledUtils/UnstyledButton'
-import Container from '../StyledUtils/Container'
 import { loggedInUserUnreadNotificationsCount } from '../../API/graphql_queries'
+import Container from '../StyledUtils/Container'
+import UnstyledButton from '../StyledUtils/UnstyledButton'
 
 const UnreadNotificationsBadge = styled.div`
   position: absolute;

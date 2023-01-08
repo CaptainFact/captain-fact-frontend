@@ -1,15 +1,16 @@
 import React from 'react'
-import { reduxForm } from 'redux-form'
 import { withNamespaces } from 'react-i18next'
-import { UserPasswordField, UserPasswordRepeatField } from './UserFormFields'
-import { LoadingFrame } from '../Utils/LoadingFrame'
-import { ErrorView } from '../Utils/ErrorView'
-import UserPicture from './UserPicture'
-import { USER_PICTURE_XLARGE } from '../../constants'
-import UserAppellation from './UserAppellation'
-import Alert from '../Utils/Alert'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import { reduxForm } from 'redux-form'
+
 import * as userAPI from '../../API/http_api/current_user'
+import { USER_PICTURE_XLARGE } from '../../constants'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import Alert from '../Utils/Alert'
+import { ErrorView } from '../Utils/ErrorView'
+import { LoadingFrame } from '../Utils/LoadingFrame'
+import UserAppellation from './UserAppellation'
+import { UserPasswordField, UserPasswordRepeatField } from './UserFormFields'
+import UserPicture from './UserPicture'
 
 // Fields are auto-validated, only validate password and repeat are the same
 const validate = (params) => {

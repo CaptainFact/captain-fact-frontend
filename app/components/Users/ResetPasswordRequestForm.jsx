@@ -1,10 +1,11 @@
 import React from 'react'
-import { reduxForm } from 'redux-form'
 import { withNamespaces } from 'react-i18next'
-import { UserEmailField } from './UserFormFields'
-import { ErrorView } from '../Utils/ErrorView'
-import Alert from '../Utils/Alert'
+import { reduxForm } from 'redux-form'
+
 import { resetPasswordRequest } from '../../API/http_api/current_user'
+import Alert from '../Utils/Alert'
+import { ErrorView } from '../Utils/ErrorView'
+import { UserEmailField } from './UserFormFields'
 
 // Fields are auto-validated, only validate password and repeat are the same
 const validate = (params) => {

@@ -1,17 +1,17 @@
-import React from 'react'
 import { merge } from 'immutable'
-import { connect } from 'react-redux'
-import { withNamespaces } from 'react-i18next'
+import { capitalize } from 'lodash'
+import React from 'react'
 import { Helmet } from 'react-helmet'
+import { withNamespaces } from 'react-i18next'
+import { connect } from 'react-redux'
 
+import { ALL_VIDEOS, ONLY_COMMUNITY, ONLY_FEATURED, ONLY_PARTNERS } from '../../constants'
 import { toAbsoluteURL } from '../../lib/cf_routes'
-import { ALL_VIDEOS, ONLY_PARTNERS, ONLY_COMMUNITY, ONLY_FEATURED } from '../../constants'
-import { Icon } from '../Utils'
 import { changeVideosLanguageFilter, setVideosFilter } from '../../state/user_preferences/reducer'
-import VideosFilterBar from './VideosFilterBar'
+import { Icon } from '../Utils'
 import AddVideoBtn from './AddVideoBtn'
 import PaginatedVideosContainer from './PaginatedVideosContainer'
-import { capitalize } from 'lodash'
+import VideosFilterBar from './VideosFilterBar'
 
 @connect(
   (state) => ({

@@ -1,19 +1,19 @@
-import i18n from 'i18next'
-
-import dateLocaleFR from 'date-fns/locale/fr'
-import datelocaleEN from 'date-fns/locale/en-US'
 import datelocaleAR from 'date-fns/locale/ar-MA'
+import datelocaleEN from 'date-fns/locale/en-US'
 import datelocaleES from 'date-fns/locale/es'
+import dateLocaleFR from 'date-fns/locale/fr'
 import datelocalePTBR from 'date-fns/locale/pt-BR'
-import * as fr from './fr'
-import * as en from './en'
-import * as ar from './ar'
-import * as es from './es'
-import * as pt_BR from './pt_BR'
+import i18n from 'i18next'
+import { startCase } from 'lodash'
+
+import { JS_ENV } from '../config'
 import store from '../state/index'
 import { changeLocale } from '../state/user_preferences/reducer'
-import { JS_ENV } from '../config'
-import { startCase } from 'lodash'
+import * as ar from './ar'
+import * as en from './en'
+import * as es from './es'
+import * as fr from './fr'
+import * as pt_BR from './pt_BR'
 
 // Add default formats for dates
 dateLocaleFR.defaultDateTimeFormat = "'Le' d MMM yyyy 'à' H:mm"

@@ -1,15 +1,15 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { withNamespaces } from 'react-i18next'
-import { withRouter } from 'react-router-dom'
 import FlipMove from 'react-flip-move'
+import { withNamespaces } from 'react-i18next'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
-import { StatementForm } from './StatementForm'
-import { closeStatementForm, setScrollTo } from '../../state/video_debate/statements/reducer'
+import { FULLHD_WIDTH_THRESHOLD } from '../../constants'
 import { postStatement } from '../../state/video_debate/statements/effects'
+import { closeStatementForm, setScrollTo } from '../../state/video_debate/statements/reducer'
 import { statementFormValueSelector } from '../../state/video_debate/statements/selectors'
 import StatementContainer from './StatementContainer'
-import { FULLHD_WIDTH_THRESHOLD } from '../../constants'
+import { StatementForm } from './StatementForm'
 
 @connect(
   (state) => ({

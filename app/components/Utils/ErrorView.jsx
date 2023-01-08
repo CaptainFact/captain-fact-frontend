@@ -1,10 +1,10 @@
 import React from 'react'
-import { Link, withRouter } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next'
+import { Link, withRouter } from 'react-router-dom'
 
+import { getErrorInfo, tError } from '../../lib/errors'
 import { LinkWithIcon } from '.'
 import Message from './Message'
-import { getErrorInfo, tError } from '../../lib/errors'
 
 const refreshableErrors = ['join_crashed']
 

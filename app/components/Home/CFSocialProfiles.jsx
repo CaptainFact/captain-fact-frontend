@@ -1,9 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { Flex } from '@rebass/grid'
-import styled, { withTheme } from 'styled-components'
 import { get } from 'lodash'
-
+import PropTypes from 'prop-types'
+import React from 'react'
+import styled, { withTheme } from 'styled-components'
 import { Discord } from 'styled-icons/fa-brands'
 import { Facebook } from 'styled-icons/fa-brands'
 import { Twitter } from 'styled-icons/fa-brands'

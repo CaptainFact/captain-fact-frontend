@@ -1,17 +1,17 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { withNamespaces } from 'react-i18next'
-import AsyncCreatable from 'react-select/async-creatable'
 import debounce from 'debounce-promise'
+import React from 'react'
+import { withNamespaces } from 'react-i18next'
+import { connect } from 'react-redux'
+import AsyncCreatable from 'react-select/async-creatable'
 
-import { checkLength } from '../../lib/form_validators'
 import { SocketApi } from '../../API'
 import { SPEAKER_NAME_LENGTH } from '../../constants'
-import { addSpeaker } from '../../state/video_debate/effects'
-import capitalizeName from '../../lib/name_formatter'
 import { cleanStr } from '../../lib/clean_str'
-import Container from '../StyledUtils/Container'
+import { checkLength } from '../../lib/form_validators'
+import capitalizeName from '../../lib/name_formatter'
 import { ReactSelectStyles, ReactSelectTheme } from '../../lib/react_select_theme'
+import { addSpeaker } from '../../state/video_debate/effects'
+import Container from '../StyledUtils/Container'
 
 @connect(null, { addSpeaker })
 @withNamespaces('videoDebate')

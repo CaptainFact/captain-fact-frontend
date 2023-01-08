@@ -1,26 +1,26 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import classNames from 'classnames'
-import { withNamespaces } from 'react-i18next'
-import { Link } from 'react-router-dom'
 import { Flex } from '@rebass/grid'
+import classNames from 'classnames'
+import React from 'react'
+import { withNamespaces } from 'react-i18next'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { MIN_REPUTATION_ADD_SPEAKER } from '../../constants'
+import { videoHistoryURL, videoURL } from '../../lib/cf_routes'
 import {
   videoDebateOnlineUsersCount,
   videoDebateOnlineViewersCount,
 } from '../../state/video_debate/presence/selectors'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import AddSpeakerForm from '../Speakers/AddSpeakerForm'
 import { SpeakerPreview } from '../Speakers/SpeakerPreview'
-import { LoadingFrame, Icon } from '../Utils'
+import { Icon, LoadingFrame } from '../Utils'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
-import VideoDebatePlayer from './VideoDebatePlayer'
+import Actions from './Actions'
 import Presence from './Presence'
 import ResizableColumn from './ResizableColumn'
-import Actions from './Actions'
-import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
-import { videoURL, videoHistoryURL } from '../../lib/cf_routes'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import VideoDebatePlayer from './VideoDebatePlayer'
 
 @connect((state) => ({
   video: state.VideoDebate.video.data,
