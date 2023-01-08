@@ -13,7 +13,7 @@ export default class ThirdPartyCallback extends React.PureComponent {
 
   componentDidMount() {
     const searchParams = new URLSearchParams(location.search)
-    if (!searchParams.get()) {
+    if (!searchParams.has('error')) {
       signIn(this.props.match.params.provider, {
         code: searchParams.get('code'),
         invitation_token: searchParams.get('state'),
@@ -38,7 +38,7 @@ export default class ThirdPartyCallback extends React.PureComponent {
       return <ErrorView error={this.props.error} i18nNS="user:errors.error" />
     }
     const searchParams = new URLSearchParams(location.search)
-    if (searchParams.get('error')) {
+    if (searchParams.has('error')) {
       return <ErrorView error={searchParams.get('error')} i18nNS="user:errors.thirdParty" />
     }
     return <LoadingFrame title="Authenticating" />
