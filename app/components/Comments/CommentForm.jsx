@@ -1,4 +1,5 @@
 import { Box, Flex } from '@rebass/grid'
+import classNames from 'classnames'
 import { Formik } from 'formik'
 import { get } from 'lodash'
 import PropTypes from 'prop-types'
@@ -292,7 +293,14 @@ class CommentForm extends React.Component {
       // Just reveal below else statement
       this.renderCollapsedForm()
     ) : (
-      <Flex className="comment-form" flexDirection="column" p={3}>
+      <Flex
+        className={classNames(
+          'comment-form',
+          this.props.inciteToParticipate && 'incitation-comment'
+        )}
+        flexDirection="column"
+        p={3}
+      >
         {replyTo && (
           <Box>
             <Flex alignItems="center" mb={2}>

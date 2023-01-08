@@ -1,7 +1,8 @@
 @import "./variables"
 
 .comment-form
-  box-shadow: 0px 10px 6px -10px #dbdbdb inset
+  &:not(.incitation-comment)
+    box-shadow: 0px 10px 6px -10px #dbdbdb inset
   .textarea
     $commentboxSize: 80px
     min-height: $commentboxSize
