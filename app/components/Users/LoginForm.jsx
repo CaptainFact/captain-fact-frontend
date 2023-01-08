@@ -2,14 +2,14 @@ import { get } from 'lodash'
 import React from 'react'
 import { withNamespaces } from 'react-i18next'
 import { Link, withRouter } from 'react-router-dom'
-import { reduxForm,SubmissionError } from 'redux-form'
+import { reduxForm, SubmissionError } from 'redux-form'
 
 import { signIn } from '../../API/http_api/current_user'
 import { tError } from '../../lib/errors'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import Alert from '../Utils/Alert'
 import ThirdPartyAuthList from './ThirdPartyAuthList'
-import { submitButton,UserEmailOrUsernameField, UserPasswordField } from './UserFormFields'
+import { submitButton, UserEmailOrUsernameField, UserPasswordField } from './UserFormFields'
 
 @reduxForm({ form: 'loginForm' })
 @withRouter

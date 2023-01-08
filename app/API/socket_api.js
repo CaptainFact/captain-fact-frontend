@@ -1,7 +1,7 @@
 import { Socket } from 'phoenix'
 
 import { WS_API_URL } from '../config'
-import { getFromLocalStorage,LOCAL_STORAGE_KEYS } from '../lib/local_storage'
+import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../lib/local_storage'
 import noInternetError from './no_internet_error'
 import parseServerError from './server_error'
 

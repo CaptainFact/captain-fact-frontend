@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { color, fontSize, fontWeight, space, themeGet } from 'styled-system'
 
 /**
@@ -31,6 +31,21 @@ const UnstyledButton = styled.button`
     cursor: not-allowed;
     opacity: 0.5;
   }
+
+  ${(props) =>
+    props.$asLink &&
+    css`
+      color: ${themeGet('colors.primary')};
+      &:hover {
+        color: ${themeGet('colors.primary')};
+        text-decoration: underline;
+      }
+      &:focus {
+        outline: none;
+        text-decoration: underline;
+        box-shadow: none;
+      }
+    `}
 
   ${color}
   ${fontSize}

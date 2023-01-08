@@ -19,7 +19,7 @@
     "wtest": "jest --watch",
     "coverage": "jest --coverage '--collectCoverageFrom=app/+(API|components|lib|state)/**/!(record).{js,jsx}'",
     "lint": "eslint app/**/*.{js,jsx}",
-    "lint:fix": "npm run lint -- --fix",
+    "lint:fix": "npm run lint -- --fix && npm run prettier",
     "prettier": "prettier --write app/**/*.{js,jsx} && prettier --write cypress/**/*.js",
     "prettier:check": "prettier --check app/**/*.{js,jsx} && prettier --check cypress/**/*.js"
   },

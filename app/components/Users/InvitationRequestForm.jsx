@@ -1,7 +1,7 @@
 import React from 'react'
 import { withNamespaces } from 'react-i18next'
 import { connect } from 'react-redux'
-import { Field, reduxForm,SubmissionError } from 'redux-form'
+import { Field, reduxForm, SubmissionError } from 'redux-form'
 import isEmail from 'validator/lib/isEmail'
 
 import { requestInvitation } from '../../API/http_api/current_user'

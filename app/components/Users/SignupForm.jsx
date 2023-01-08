@@ -2,7 +2,7 @@ import React from 'react'
 import { withNamespaces } from 'react-i18next'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
-import { reduxForm,SubmissionError } from 'redux-form'
+import { reduxForm, SubmissionError } from 'redux-form'
 
 import { signUp } from '../../API/http_api/current_user'
 import { INVITATION_SYSTEM } from '../../config'

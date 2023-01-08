@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { InfoCircle } from 'styled-icons/fa-solid'
 import { ExclamationCircle } from 'styled-icons/fa-solid'
 
-import { getFromLocalStorage,LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
+import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
 import { isLoadingVideoDebate } from '../../state/video_debate/selectors'
 import { hasStatementForm } from '../../state/video_debate/statements/selectors'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'

@@ -1,8 +1,8 @@
-import { ApolloClient, createHttpLink,InMemoryCache } from '@apollo/client'
+import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 
 import { GRAPHQL_API_URL } from '../config'
-import { getFromLocalStorage,LOCAL_STORAGE_KEYS } from '../lib/local_storage'
+import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../lib/local_storage'
 
 const httpLink = createHttpLink({
   uri: GRAPHQL_API_URL,

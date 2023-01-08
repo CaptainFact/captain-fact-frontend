@@ -2,7 +2,7 @@ import React from 'react'
 import { withNamespaces } from 'react-i18next'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { reduxForm,SubmissionError } from 'redux-form'
+import { reduxForm, SubmissionError } from 'redux-form'
 
 import { updateUserInfo } from '../../API/http_api/current_user'
 import { setUser as setDisplayedUser } from '../../state/users/displayed_user/reducer'
