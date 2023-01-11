@@ -160,7 +160,7 @@
     "mini-css-extract-plugin": "^2.7.2",
     "node-sass": "8.0.0",
     "npx": "^10.2.0",
-    "prettier": "2.8.1",
+    "prettier": "2.8.2",
     "react-test-renderer": "^17.0.2",
     "sass-lint": "^1.13.1",
     "sass-loader": "^13.2.0",
