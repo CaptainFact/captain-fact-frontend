@@ -108,7 +108,7 @@
     "tslib": "^2.4.1",
     "uuid": "~9.0.0",
     "validator": "13.7.0",
-    "whatwg-fetch": "~3.0.0",
+    "whatwg-fetch": "~3.6.2",
     "wikidata-sdk": "^8.1.1",
     "zen-observable-ts": "^1.1.0"
   },
