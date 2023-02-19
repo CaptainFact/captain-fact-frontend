@@ -79,7 +79,7 @@ export default class Home extends React.PureComponent {
                     height="auto"
                     src={
                       this.props.lng === 'fr'
-                        ? 'https://www.youtube.com/embed/Hox_CHmC-so'
+                        ? 'https://www.youtube.com/watch?v=BxriDuVUuMQ'
                         : 'https://www.youtube.com/embed/cZn72yBtIFw'
                     }
                     frameBorder="0"
