@@ -101,7 +101,7 @@
     "remark-gfm": "3.0.1",
     "reselect": "~4.0.0",
     "smoothscroll-polyfill": "~0.4.4",
-    "styled-components": "~5.1.1",
+    "styled-components": "~5.3.9",
     "styled-icons": "~10.47.0",
     "styled-system": "~3.2.0",
     "tinycon": "~0.6.8",
