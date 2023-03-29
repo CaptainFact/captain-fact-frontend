@@ -50,7 +50,7 @@
     ]
   },
   "dependencies": {
-    "@apollo/client": "^3.7.3",
+    "@apollo/client": "^3.7.10",
     "@babel/polyfill": "~7.12.1",
     "@rebass/grid": "~6.0.0-5",
     "@styled-icons/bootstrap": "^10.33.0",
