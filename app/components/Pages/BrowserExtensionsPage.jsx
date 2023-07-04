@@ -107,41 +107,5 @@ export const BrowserExtensionsPage = withNamespaces('extension')(({ t }) => (
         </Box>
       </MainContainer>
     </section>
-    <section className="has-background-white">
-      <MainContainer
-        mt={['3.5em', '0em']}
-        py="2em"
-        px={['1em', '1em', '1em', '1em', '6em']}
-        flexWrap="wrap"
-        mx="auto"
-        justifyContent="center"
-      >
-        <Box width={[1, 1, 0.35]} mr={['0em', '10em']} mb="2em">
-          <p className="has-text-danger has-text-weight-bold">{t('disMoi.new')}</p>
-          <h1 className="title is-2">{t('disMoi.title')}</h1>
-          <h3 className="subtitle is-4 has-text-weight-bold">{t('disMoi.subtitle')}</h3>
-          <p>{t('disMoi.description')}</p>
-          <p className="is-italic">{t('disMoi.psText')}</p>
-          <ExternalLinkNewTab
-            className="has-text-weight-bold"
-            style={{ display: 'block', marginBottom: '1em' }}
-            href="https://www.dismoi.io/informateurs/55/CaptainFact.io"
-          >
-            {'>'} {t('disMoi.follow')}
-          </ExternalLinkNewTab>
-          <ExternalLinkNewTab
-            style={{ display: 'inline-flex' }}
-            className="button is-primary"
-            href="https://www.dismoi.io/"
-          >
-            {t('disMoi.learnMore')}
-          </ExternalLinkNewTab>
-        </Box>
-        <Box width={[1, 1, 0.5]}>
-          {' '}
-          <img src={imgDisMoiExtension} alt="Dis Moi Extension" />
-        </Box>
-      </MainContainer>
-    </section>
   </div>
 ))
