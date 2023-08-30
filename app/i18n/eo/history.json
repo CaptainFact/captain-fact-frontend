@@ -1,0 +1,57 @@
+{
+  "compare_show": "Kompari",
+  "compare_hide": "Kaŝi",
+  "compareAll": "Kompari ĉiujn",
+  "hideAll": "Kaŝi ĉiujn",
+  "when": "Kiam",
+  "who": "Kiu",
+  "changes": "Ŝanĝoj",
+  "revert": "Restarigi",
+  "entity": "Ento",
+  "moderation": "Modereco",
+  "deletedUser": "Foriga konto",
+  "targetedByAction": "{{action}} de <2></2> en <5></5>",
+  "authoredActionWithTarget": "{{action}}: <2></2> de <5></5>",
+  "authoredActionWithoutTarget": "{{action}}: <2></2>",
+  "ownAction": "{{action}}: <2></2>",
+  "actionDirection": {
+    "all": "̈Ĉiuj",
+    "authored": "De <1></1>",
+    "target": "Celante <1></1>"
+  },
+  "action": {
+    "create": "Kreis",
+    "remove": "Retiris",
+    "update": "Aktualigis",
+    "delete": "Forigis",
+    "email_confirmed": "Konfirma retpoŝto",
+    "add": "Aldonis",
+    "restore": "Restarigis",
+    "flag": "Raportis",
+    "vote_up": "Pozitive voĉdonis",
+    "vote_down": "Negative voĉdonis",
+    "self_vote": "Mem voĉdonis",
+    "revert_vote_up": "Nuligis sian pozitivan voĉdonon",
+    "revert_vote_down": "Nuligis sian negativan voĉdonon",
+    "revert_self_vote": "Nuligis sian memvoĉdonon",
+    "action_banned_bad_language": "Moderigis ($t(moderation:reason.1))",
+    "action_banned_spam": "Moderigis ($t(moderation:reason.2))",
+    "action_banned_irrelevant": "Moderigis ($t(moderation:reason.3))",
+    "action_banned_not_constructive": "Moderigis ($t(moderation:reason.4))"
+  },
+  "actionTarget": {
+    "vote_up": "Ricevis pozitivan voĉdonon",
+    "vote_down": "Ricevis negativan voĉdonon",
+    "revert_vote_up": "Perdis pozitivan voĉdonon",
+    "revert_vote_down": "Perdis negativan voĉdonon"
+  },
+  "entities": {
+    "video": "video",
+    "speaker": "parolanto",
+    "statement": "deklaro",
+    "comment": "komento",
+    "fact": "fontkomento",
+    "user_action": "ago",
+    "user": "uzanto"
+  }
+}

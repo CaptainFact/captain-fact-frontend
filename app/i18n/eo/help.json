@@ -1,0 +1,30 @@
+{
+  "categories": {
+    "siteUsage": "Uzo de la retejo",
+    "contribute": "Kontribui",
+    "others": "Alioj"
+  },
+  "pages": {
+    "about": "Pri la retejo",
+    "achievements": "Medaloj",
+    "ambassadors": "Fariĝi ambasadoro",
+    "credits": "Dankoj",
+    "contributionGuidelines": "Gvidilo de kontribuo",
+    "jobs": "Ni dungas!",
+    "moderation": "Modereco",
+    "privileges": "Privilegioj",
+    "reputation": "Reputacio",
+    "bug_report": "Raporti cimon",
+    "extension": "Aldonaĵo",
+    "privacy": "Privateco",
+    "contact": "Kontakti nin",
+    "censorship_requests": "Petoj de cenzuro",
+    "contribute/code": "Programistoj",
+    "contribute/tasks": "Sendependaj taskoj"
+  },
+  "title": "Helpo",
+  "goBack": "Reiri al la ĉefa helpmenuo",
+  "aboutTitle": "Pri helppaĝoj",
+  "about": "La helppaĝoj faciligas la komenciĝo de la platformo. ̈Ili volonte estas mallongaj kaj legi ilin forte estas kuraĝigita antaŭ de partopreni la laboron de kontrolo.",
+  "toStart": "Por komenciĝi, legu la <1>gvidilon de kontribuo</1> kaj la klarigojn de la <2>privilegioj</2> kaj la <3>sistemo de reputacio</3>."
+}
