@@ -139,7 +139,7 @@
     "coveralls": "^3.1.0",
     "css-loader": "^5.2.7",
     "css-minimizer-webpack-plugin": "^4.2.2",
-    "cypress": "^9.7.0",
+    "cypress": "^13.0.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-chai-friendly": "^0.4.1",
