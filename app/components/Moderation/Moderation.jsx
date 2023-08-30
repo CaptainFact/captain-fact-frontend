@@ -71,7 +71,7 @@ export default class Moderation extends React.PureComponent {
   renderAction(action) {
     return (
       <div className="box moderation-entry">
-        <UserAction action={action} />
+        <UserAction action={action} defaultExpanded />
         <br />
         <h4 className="box has-text-centered">
           <Link
