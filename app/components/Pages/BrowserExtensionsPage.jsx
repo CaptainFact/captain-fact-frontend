@@ -11,7 +11,6 @@ import chromeLogo from '../../assets/browsers/chrome.png'
 import firefoxLogo from '../../assets/browsers/firefox.png'
 import ieLogo from '../../assets/browsers/internet_explorer.png'
 import demoExtensionVideo from '../../assets/demos/demo-extension.mp4'
-import imgDisMoiExtension from '../../assets/dismoi-example.png'
 import Button from '../Utils/Button'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
