@@ -61,8 +61,15 @@ const getActionDescription = (t, action, viewingFrom) => {
   }
 }
 
-const UserAction = ({ action, className, t, withoutUser, viewingFrom }) => {
-  const [isExpanded, setExpanded] = React.useState(false)
+const UserAction = ({
+  action,
+  className,
+  t,
+  withoutUser,
+  viewingFrom,
+  defaultExpanded = false,
+}) => {
+  const [isExpanded, setExpanded] = React.useState(defaultExpanded)
   const { user, type, time } = action
   const reputationChange = getReputationChange(viewingFrom, action)
 

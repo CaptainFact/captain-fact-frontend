@@ -10,6 +10,7 @@ const defaultLocales = new Map({
   fr: 'Français',
   ar: 'العربية',
   es: 'Español',
+  eo: 'Esperanto',
   pt_BR: 'Português (Brasil)',
 })
 

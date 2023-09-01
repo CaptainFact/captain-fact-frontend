@@ -1,0 +1,49 @@
+{
+  "1": {
+    "title": "Bonvenon",
+    "description": "Bonvenon en la aventuro!"
+  },
+  "2": {
+    "title": "Ne estas roboto",
+    "description": "Kun tia bela retpoŝtadreso, vi ne povas esti roboto"
+  },
+  "3": {
+    "title": "Everybody hurts",
+    "description": "Serĉi helpon en la sekcio de helpo estis la bona farendaĵo"
+  },
+  "4": {
+    "title": "Kuglimuna",
+    "description": "Kun la aldonaĵo por retumilo, oni ne plu trompos vin"
+  },
+  "5": {
+    "title": "You're fake news !",
+    "description": "Vi ŝajne detruis tiun fonton"
+  },
+  "6": {
+    "title": "Maniulo pri sociaj retoj",
+    "description": "Vi ŝatas tiujn usonajn enteprenojn, kiuj spionas vin, ĉu ne?"
+  },
+  "7": {
+    "title": "Ambasadoro",
+    "description": "Vi fariĝis ambasadoro de la komunumo"
+  },
+  "8": {
+    "title": "Fantomĉasisto",
+    "description": "Dankon pro raporti tiun cimon al ni!"
+  },
+  "9": {
+    "title": "Fact Check Me, I'm Famous",
+    "description": "Gratulon pro atingi la supron de la klasifiko dum ĉi tiu monato, kapitano!"
+  },
+  "10": {
+    "title": "Artisto",
+    "description": "Unu el viaj kreaĵoj estas aldonanta en la projekto"
+  },
+  "11": {
+    "title": "Pozitivaj ondoj",
+    "description": "Ni konsideris unu el viaj sugestoj pri la plibonigo de la retejo"
+  },
+  "title": "Medaloj",
+  "about": "Rilate",
+  "unlocked": "Vi tuj malŝlosas la medalon « {{achievement}} »"
+}

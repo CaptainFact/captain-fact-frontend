@@ -1,0 +1,33 @@
+{
+    "title": "Eraro",
+    "crash": "😥 Neeeeeeee! La retejo kolapsis. ̈Ĝi ne estas via eraro, vi faris nenion malbonan.",
+    "contactSupport": "Kontakti la subtenon",
+    "addIssue": "Aldoni raporton en GitHub",
+    "reload": "Reŝargi la retpaĝon",
+    "errorDetails": "Teknikaj detaloj",
+    "server": {
+        "unknown": "Io malbone funkciis ĉe nia flanko, ni rigardos ĝin!",
+        "invalid_email": "Nevalida retadreso",
+        "invalid_token": "La kodo de kontrolo estas nevalida aŭ malaktualiĝis",
+        "invalid_invitation_token": "Via kodo de invito estas nevalida aŭ malaktualiĝis",
+        "reset_failed": "Rekomencigo malsuksesis",
+        "authentication_failed": "Aŭtentigo malsukcesis",
+        "invalid_email_password": "Nevalida retadreso aŭ pasvorto",
+        "not_enough_reputation": "Vi ne havas sufiĉe da reputacio por fari tion",
+        "limit_reached": "Vi atingis vian limon por tiu ago, reprovu post kelkaj minutoj",
+        "not_found": "Tiu ero ŝajne ne ekzistas, provu reŝargu la retpaĝon ĉu la problemo persistas",
+        "action_already_done": "Vi jam faris tiun agon",
+        "unauthenticated": "Vi devas ensaluti por fari tiun agon",
+        "unauthorized": "Bonvolu (re)ensaluti por daŭrigi",
+        "noInternet": "La konekto al la servilo malsukcesi, provu reŝargu la retpaĝon",
+        "remote_video_404": "Tiu video ŝajne ne ekzistas"
+    },
+    "client": {
+        "joinCrashed": "La konekto al la servilo malsukcesi",
+        "thirdParty": "Aŭtentigo malsukcesis",
+        "submissionError": "Problemo okazis dum sendo de datumoj",
+        "noVideoAvailable": "Neniu video estas disponebla",
+        "notEnoughReputation": "Ne sufiĉe da reputacio por aliri tiun eblon",
+        "needReputation": "Vi necesitas almenaŭ {{requiredRep}} punktoj de <2>reputacio</2> por fari tion"
+    }
+}

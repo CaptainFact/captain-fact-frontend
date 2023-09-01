@@ -1,0 +1,25 @@
+{
+  "header": {
+    "date": "Dato"
+  },
+  "actions": {
+    "flag_abusive": "Refuti tiun raporton",
+    "unsure": "Necerta",
+    "confirm": "Konfirmi tiun raporton"
+  },
+  "reason": {
+    "1": "Persona atako aŭ malkonvena lingvo",
+    "2": "Spamo aŭ nedezirata reklamado",
+    "3": "Ekstertema",
+    "4": "Ne konstrua"
+  },
+  "seeContext": "Vidi en ĝia kunteksto",
+  "whyReport": "Laŭ vi, kial tiu komento estis raportita?",
+  "flaggedFor": "raportis tion por \"$t(reason.{{reason}})\"",
+  "title": "Modereco",
+  "emptyModeration": "Estas nenio por moderigi ĉi tie. Iru manĝigi kelkajn trolojn kaj revenu poste.",
+  "pending": "Atendante la modereco",
+  "helpText1": "Ekde 125 poentoj de reputacio, vi povas kontribui al la modereco de enhavoj, kiun raportis la membroj de CaptainFact.",
+  "helpText2": "Vi povas konfirmi, deteni vin aŭ refuti la raporton, kio havas konsekvencojn por la reputacio de la uzanto.",
+  "learnMore": "Lerni pli pri la modereco"
+}
