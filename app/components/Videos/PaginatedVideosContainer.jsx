@@ -69,7 +69,11 @@ const PaginatedVideosContainer = ({
             onPageChange={() => window.scrollTo({ top: 0 })}
             LinkBuilder={({ 'data-page': page, ...props }) => {
               const urlParams = page > 1 ? `?page=${page}` : ''
-              return <Link to={`${baseURL}${urlParams}`} className="button" {...props} />
+              if (props.disabled) {
+                return <span className="button" {...props} />
+              } else {
+                return <Link to={`${baseURL}${urlParams}`} className="button" {...props} />
+              }
             }}
           />
         )
