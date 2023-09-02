@@ -29,11 +29,12 @@
   "accountSettings": "Agordoj de la konto",
   "newsletter": {
     "unsubscribe_success": "Vi estis malabonita de nia bulteno",
-    "unsubscribe_error": "Eraro dum la malabono, la kodo probable estas nevalida. Ĉu la problemo persistas, kontaktu nin"},
+    "unsubscribe_error": "Eraro dum la malabono, la kodo probable estas nevalida. Ĉu la problemo persistas, kontaktu nin"
+  },
   "noActivity": "Neniu registrita ago nuntempe",
   "browsingAnalyzer": "Analizo de la retumado",
   "reputation": "Reputacio",
   "reputationChange": "Evoluo de la reputacio",
-  "iAgreeAndAcceptedPrivacy": "Klakante sur "Enskribiĝi" mi akceptas ",
+  "iAgreeAndAcceptedPrivacy": "Klakante sur \"Enskribiĝi\" mi akceptas",
   "privacyLinkLabel": "la privateca politiko de CaptainFact"
 }

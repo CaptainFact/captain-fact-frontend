@@ -5,6 +5,7 @@ import { withNamespaces } from 'react-i18next'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
+import { FRONTEND_URL } from '../../config'
 import { LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
 import { fetchSpeaker, fetchWikiDataInfo } from '../../state/speakers/effects'
 import { reset } from '../../state/speakers/reducer'
@@ -72,6 +73,24 @@ export class SpeakerPage extends React.PureComponent {
     this.props.reset()
   }
 
+  getCanonicalUrl() {
+    // Get slug or ID
+    let slugOrId = this.props.match.params.slug_or_id
+    if (this.props.speaker) {
+      slugOrId = this.props.speaker.slug || this.props.speaker.id
+    }
+
+    // Add pagination
+    const searchParams = new URLSearchParams(location.search)
+    const currentPage = parseInt(searchParams.get('page')) || 1
+    const url = new URL(`${FRONTEND_URL}/s/${slugOrId}`)
+    if (currentPage > 1) {
+      url.searchParams.set('page', currentPage)
+    }
+
+    return url.href
+  }
+
   render() {
     const { t } = this.props
     if (this.props.error) {
@@ -86,6 +105,7 @@ export class SpeakerPage extends React.PureComponent {
           <meta property="og:title" content={title} />
           <meta property="og:description" content={speaker.title} />
           <meta name="twitter:card" content="summary" />
+          <link rel="canonical" href={this.getCanonicalUrl()} />
         </Helmet>
         <div className="hero is-light is-bold is-primary">
           <div className="hero-body">
