@@ -1,5 +1,6 @@
 import datelocaleAR from 'date-fns/locale/ar-MA'
 import datelocaleEN from 'date-fns/locale/en-US'
+import datelocaleEO from 'date-fns/locale/eo'
 import datelocaleES from 'date-fns/locale/es'
 import dateLocaleFR from 'date-fns/locale/fr'
 import datelocalePTBR from 'date-fns/locale/pt-BR'
@@ -11,6 +12,7 @@ import store from '../state/index'
 import { changeLocale } from '../state/user_preferences/reducer'
 import * as ar from './ar'
 import * as en from './en'
+import * as eo from './eo'
 import * as es from './es'
 import * as fr from './fr'
 import * as pt_BR from './pt_BR'
@@ -20,6 +22,8 @@ dateLocaleFR.defaultDateTimeFormat = "'Le' d MMM yyyy 'à' H:mm"
 dateLocaleFR.defaultDateFormat = "'Le' d MMM yyyy"
 datelocaleEN.defaultDateTimeFormat = "d MMM yyyy 'at' H:mm"
 datelocaleEN.defaultDateFormat = 'd MMM yyyy'
+datelocaleEO.defaultDateTimeFormat = 'P'
+datelocaleEO.defaultDateFormat = 'Pp'
 datelocaleES.defaultDateTimeFormat = "'El' d MMM yyyy 'a las' H:mm"
 datelocaleES.defaultDateFormat = "'El' d MMM yyyy"
 datelocaleAR.defaultDateTimeFormat = 'P'
@@ -32,13 +36,14 @@ export const locales = {
   en: datelocaleEN,
   ar: datelocaleAR,
   es: datelocaleES,
+  eo: datelocaleEO,
   pt_BR: datelocalePTBR,
 }
 
 // Configure I18N
 i18n.init({
   fallbackLng: 'en',
-  resources: { fr, en, ar, es, pt_BR },
+  resources: { fr, en, ar, es, pt_BR, eo },
   lng: store.getState().UserPreferences.locale,
   defaultNS: 'main',
   joinArrays: '\n',
