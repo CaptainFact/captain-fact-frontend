@@ -67,7 +67,7 @@
     "dotenv-webpack": "~7.0.3",
     "faker": "~5.5.3",
     "formik": "^2.2.9",
-    "graphql": "^16.6.0",
+    "graphql": "^16.8.1",
     "graphql-tag": "2.12.6",
     "i18next": "~19.0.2",
     "immutable": "~4.2.1",
