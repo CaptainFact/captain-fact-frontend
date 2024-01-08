@@ -123,7 +123,7 @@ const CommentsReducer = handleActions(
     [scoreDiff]: (state, { payload: { diff, comment } }) => {
       const commentPath = getCommentPath(comment)
       const commentIdx = getCommentIdx(state, commentPath, comment.id)
-      if (!commentIdx === -1) {
+      if (commentIdx === -1) {
         logWarn(`New vote registered on unknown comment: ${comment.id}`)
         return state
       }
