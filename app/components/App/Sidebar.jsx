@@ -146,7 +146,7 @@ export default class Sidebar extends React.PureComponent {
             <ExternalLinkNewTab href="https://github.com/CaptainFact">
               <Github size="1.5em" /> &nbsp;&nbsp;&nbsp;
             </ExternalLinkNewTab>
-            <ExternalLinkNewTab href="https://discord.gg/Z22Vhda">
+            <ExternalLinkNewTab href="https://discord.captainfact.io">
               <Discord size="1.5em" /> &nbsp;&nbsp;&nbsp;
             </ExternalLinkNewTab>
             <ExternalLinkNewTab href="https://twitter.com/CaptainFact_io">

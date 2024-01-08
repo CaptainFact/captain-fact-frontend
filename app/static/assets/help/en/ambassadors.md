@@ -1,6 +1,6 @@
-> Ambassadors are there to make sure the community is alright and to manage it. 
-> They also have the task of bringing the users's requests to the team and help 
-> in the project's governance system, through the use of veto and of a mandatory 
+> Ambassadors are there to make sure the community is alright and to manage it.
+> They also have the task of bringing the users's requests to the team and help
+> in the project's governance system, through the use of veto and of a mandatory
 > team consultation on some issues.
 
 # How they are appointed
@@ -8,7 +8,7 @@
 ### Preliminary conditions
 
 - You need to have at least `300` reputation on the site
-- You must have introduced yourself on the [Discord](https://discord.gg/2Qd7hMz),
+- You must have introduced yourself on the [Discord](https://discord.captainfact.io),
   and have engaged in the chat.
 - You need to show an open-minded mindset and be open to constructive criticism.
 - You must use your real name on CaptainFact and on Discord
@@ -37,7 +37,7 @@ are not at risk of being compromised.
 
 #### 👥 You are members of our community
 
-May it be on the site or the [Discord](https://discord.gg/2Qd7hMz), you
+May it be on the site or the [Discord](https://discord.captainfact.io), you
 can gauge the community's grievances, moderate the chat and help maintain
 a safe and healthy atmosphere on the platform.
 
