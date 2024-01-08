@@ -8,7 +8,7 @@
 ### Conditions préalables
 
 - Vous devez avoir au moins `300` points de réputation sur le site
-- Vous devez vous être présenté sur [Discord](https://discord.gg/2Qd7hMz),
+- Vous devez vous être présenté sur [Discord](https://discord.captainfact.io),
   et vous être engagé dans les discussions.
 - Montrer une attitude ouverte, accepter la critique constructive quand nécessaire.
 - Vous devez utiliser votre vrai nom sur CaptainFact et sur Discord
@@ -37,7 +37,7 @@ qu'il ne renie pas ses valeurs.
 
 #### 👥 Vous êtes membres de la communauté
 
-Que ça soit sur le site ou le [Discord](https://discord.gg/2Qd7hMz), vous
+Que ça soit sur le site ou le [Discord](https://discord.captainfact.io), vous
 pouvez prendre la température des utilisateurs, modérer les échanges et garantir
 une utilisation saine de la plateforme.
 

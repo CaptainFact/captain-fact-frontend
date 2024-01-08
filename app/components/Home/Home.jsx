@@ -120,7 +120,7 @@ export default class Home extends React.PureComponent {
                 Donateurs
               </ExternalLinkNewTab>{' '}
               –{' '}
-              <ExternalLinkNewTab href="https://discord.gg/Z22Vhda" rel="nofollow">
+              <ExternalLinkNewTab href="https://discord.captainfact.io" rel="nofollow">
                 Discord
               </ExternalLinkNewTab>{' '}
               –{' '}
