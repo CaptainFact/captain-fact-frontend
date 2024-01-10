@@ -90,7 +90,7 @@
     "react-redux": "~7.2.9",
     "react-resize-detector": "~8.0.4",
     "react-router-dom": "^5.3.4",
-    "react-select": "^3.2.0",
+    "react-select": "^5.8.0",
     "react-toggled": "^1.2.7",
     "reactjs-popup": "~2.0.4",
     "redux": "~4.2.0",
