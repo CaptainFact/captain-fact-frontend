@@ -102,7 +102,7 @@
     "styled-icons": "~10.47.0",
     "styled-system": "~3.2.0",
     "tinycon": "~0.6.8",
-    "uuid": "~9.0.0",
+    "uuid": "~9.0.1",
     "validator": "13.7.0",
     "wikidata-sdk": "^8.1.1"
   },
