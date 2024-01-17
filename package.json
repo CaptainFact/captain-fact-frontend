@@ -60,7 +60,7 @@
     "clean-tag": "^2.0.2",
     "date-fns": "^2.16.1",
     "debounce-promise": "~3.1.2",
-    "diff": "~4.0.2",
+    "diff": "~5.1.0",
     "dotenv-webpack": "~8.0.1",
     "faker": "~5.5.3",
     "formik": "^2.2.9",
