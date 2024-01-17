@@ -50,7 +50,7 @@
     ]
   },
   "dependencies": {
-    "@apollo/client": "^3.7.10",
+    "@apollo/client": "^3.8.9",
     "@rebass/grid": "~6.0.0-5",
     "@styled-icons/feather": "^10.47.0",
     "algoliasearch": "4.22.1",
