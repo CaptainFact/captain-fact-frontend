@@ -1,7 +1,7 @@
 import { capitalize } from 'lodash'
 import React from 'react'
 import { Trans, withNamespaces } from 'react-i18next'
-import { connectSearchBox, Index, InfiniteHits } from 'react-instantsearch-dom'
+import { Index, InfiniteHits, useSearchBox } from 'react-instantsearch'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { Search as SearchIcon } from 'styled-icons/fa-solid'
@@ -171,6 +171,16 @@ const SearchPage = ({ t, refine, match, location }) => {
       )}
     </MainContainer>
   )
+}
+
+function connectSearchBox(Component) {
+  const SearchBox = (props) => {
+    const data = useSearchBox(props)
+
+    return <Component {...props} {...data} />
+  }
+
+  return SearchBox
 }
 
 export default withNamespaces('main')(connectSearchBox(SearchPage))
