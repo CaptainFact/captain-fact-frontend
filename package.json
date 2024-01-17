@@ -123,7 +123,7 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "babel-plugin-wildcard": "^7.0.0",
     "browserslist": "^4.16.6",
-    "clean-webpack-plugin": "^2.0.2",
+    "clean-webpack-plugin": "^4.0.0",
     "compression-webpack-plugin": "^10.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^5.2.7",
