@@ -54,7 +54,7 @@
     "@babel/polyfill": "~7.12.1",
     "@rebass/grid": "~6.0.0-5",
     "@styled-icons/bootstrap": "^10.33.0",
-    "algoliasearch": "4.8.6",
+    "algoliasearch": "4.22.1",
     "animate.scss": "0.0.6",
     "bulma": "0.7.2",
     "classnames": "~2.3.1",
