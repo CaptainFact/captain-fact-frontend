@@ -60,7 +60,7 @@ export default class EditUserForm extends React.PureComponent {
             <Icon name="floppy-o" />
             <span>{t('main:actions.save')}</span>
           </div>,
-          valid
+          valid,
         )}
       </form>
     )

@@ -9,7 +9,7 @@ export const toggleSidebar = createAction('USER_PREFERENCES/TOGGLE_SIDEBAR')
 export const closeSidebar = createAction('USER_PREFERENCES/CLOSE_SIDEBAR')
 export const changeLocale = createAction('USER_PREFERENCES/CHANGE_LOCALE')
 export const changeVideosLanguageFilter = createAction(
-  'USER_PREFERENCES/CHANGE_VIDEOS_LANGUAGE_FILTER'
+  'USER_PREFERENCES/CHANGE_VIDEOS_LANGUAGE_FILTER',
 )
 export const setVideosFilter = createAction('USER_PREFERENCES/SET_VIDEOS_FILTER')
 export const toggleAutoscroll = createAction('STATEMENTS/TOGGLE_AUTOSCROLL')
@@ -64,7 +64,7 @@ const UserPreferencesReducer = handleActions(
       return updateState(state, 'enableSoundOnBackgroundFocus', !state.enableSoundOnBackgroundFocus)
     },
   },
-  loadState()
+  loadState(),
 )
 
 export default UserPreferencesReducer

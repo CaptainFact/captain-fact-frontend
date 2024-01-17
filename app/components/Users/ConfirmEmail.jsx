@@ -15,7 +15,7 @@ export default class ConfirmEmail extends React.PureComponent {
   componentDidMount() {
     confirmEmail(this.props.match.params.token).then(
       () => this.setState({ loading: false }),
-      (e) => this.setState({ loading: false, error: e })
+      (e) => this.setState({ loading: false, error: e }),
     )
   }
 

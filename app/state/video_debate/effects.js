@@ -17,8 +17,8 @@ export const joinVideoDebateChannel = (videoId) => (dispatch) => {
         presence_state: (s) => dispatch(setPresence(s)),
         presence_diff: (s) => dispatch(presenceDiff(s)),
         video_updated: ({ video }) => dispatch(videoReducer.updateVideo(video)),
-      })
-    )
+      }),
+    ),
   )
 }
 

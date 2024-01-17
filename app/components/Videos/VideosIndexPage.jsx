@@ -18,7 +18,7 @@ import VideosFilterBar from './VideosFilterBar'
     languageFilter: state.UserPreferences.videosLanguageFilter,
     videosFilter: state.UserPreferences.videosFilter,
   }),
-  { changeVideosLanguageFilter, setVideosFilter }
+  { changeVideosLanguageFilter, setVideosFilter },
 )
 @withNamespaces('main')
 export default class VideosIndexPage extends React.PureComponent {

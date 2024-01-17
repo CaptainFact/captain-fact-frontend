@@ -19,7 +19,7 @@ import { Icon } from '../Utils/Icon'
   {
     changeStatementFormSpeaker,
     destroyStatementForm,
-  }
+  },
 )
 @withNamespaces('videoDebate')
 @withRouter

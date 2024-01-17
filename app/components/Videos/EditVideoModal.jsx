@@ -76,5 +76,5 @@ const mapDispatchToProps = {
 }
 
 export default withNamespaces(['videoDebate', 'main'])(
-  connect((state) => ({ video: state.VideoDebate.video.data }), mapDispatchToProps)(EditVideoModal)
+  connect((state) => ({ video: state.VideoDebate.video.data }), mapDispatchToProps)(EditVideoModal),
 )

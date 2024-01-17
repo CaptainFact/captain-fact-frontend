@@ -57,7 +57,7 @@ const NotificationsPopupContent = ({ user, notifications, markAsSeen, t }) => {
           onClick={() =>
             markAsSeen(
               notifications.map((n) => n.id),
-              true
+              true,
             )
           }
         >

@@ -28,7 +28,9 @@ const Container = styled.button`
   border-radius: 1em;
   cursor: pointer;
   position: relative;
-  transition: background 0.3s, box-shadow 0.3s;
+  transition:
+    background 0.3s,
+    box-shadow 0.3s;
   box-shadow: 0px 0px 0.25em rgba(75, 75, 75, 0.38) inset;
   font: inherit;
   line-height: normal;

@@ -12,7 +12,7 @@ describe('Can comment on statements', () => {
       cy.get('.comment-form textarea[name=text]').should(
         'have.attr',
         'placeholder',
-        'Write a comment…'
+        'Write a comment…',
       )
 
       cy.get('.comment-form input[name=source]').should('have.attr', 'placeholder', 'Add a source')
@@ -24,7 +24,7 @@ describe('Can comment on statements', () => {
       cy.get('.comment-form textarea[name=text]').type(commentText)
       cy.contains(
         '.comment-form .textarea-length-counter',
-        new RegExp(`${commentText.length}\\s/\\s512`)
+        new RegExp(`${commentText.length}\\s/\\s512`),
       )
       cy.contains('button[type=submit]', 'Post comment').should('not.be.disabled')
       cy.contains('button[type=submit]', 'Post comment').click()

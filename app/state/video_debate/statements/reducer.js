@@ -40,8 +40,8 @@ const StatementsReducer = handleActions(
           data: new List(
             orderBy(
               payload.map((s) => new Statement(s)),
-              ['time', 'id']
-            )
+              ['time', 'id'],
+            ),
           ),
         }),
       throw: (state, { payload }) => state.merge({ isLoading: false, errors: payload }),
@@ -78,7 +78,7 @@ const StatementsReducer = handleActions(
           }
           // Re-sort them
           return statements.sortBy((st) => st.time)
-        })
+        }),
       )
     },
     [remove]: (state, { payload: { id } }) => {
@@ -93,7 +93,7 @@ const StatementsReducer = handleActions(
       state.set('formsCount', state.formsCount + payload),
     [resetVideoDebate]: () => INITIAL_STATE(),
   },
-  INITIAL_STATE()
+  INITIAL_STATE(),
 )
 
 function getInsertPosition(data, newStatement) {

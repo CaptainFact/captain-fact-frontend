@@ -12,7 +12,7 @@ test("user doesn't have required reputation", () => {
   snapshotComponent(
     <ReputationGuardTooltip t={t} requiredRep={42} checkReputation={() => false}>
       {DEFAULT_CHILDREN}
-    </ReputationGuardTooltip>
+    </ReputationGuardTooltip>,
   )
 })
 
@@ -20,6 +20,6 @@ test('user have required reputation', () => {
   snapshotComponent(
     <ReputationGuardTooltip t={t} requiredRep={42} checkReputation={() => true}>
       {DEFAULT_CHILDREN}
-    </ReputationGuardTooltip>
+    </ReputationGuardTooltip>,
   )
 })

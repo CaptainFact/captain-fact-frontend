@@ -126,5 +126,5 @@ export default flow(
   connect(mapStateToProps, mapDispatchToProps),
   withNamespaces('videoDebate'),
   withRouter,
-  withLoggedInUser
+  withLoggedInUser,
 )(Actions)

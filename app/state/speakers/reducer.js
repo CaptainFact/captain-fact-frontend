@@ -53,7 +53,7 @@ const SpeakersReducer = handleActions(
     [setLoadingWiki]: (state, { payload }) => state.set('isLoadingWiki', payload),
     [reset]: () => INITIAL_STATE(),
   },
-  INITIAL_STATE()
+  INITIAL_STATE(),
 )
 
 function checkLink(url) {

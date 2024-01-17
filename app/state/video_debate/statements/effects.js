@@ -24,8 +24,8 @@ export const joinStatementsChannel = (videoId) => (dispatch) => {
         statement_added: (s) => dispatch(add(s)),
         statement_updated: (s) => dispatch(update(s)),
         statements_updated: ({ statements }) => dispatch(updateAll(statements)),
-      })
-    )
+      }),
+    ),
   )
 }
 

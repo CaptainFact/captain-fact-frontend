@@ -34,7 +34,7 @@ const DisplayedUserReducer = handleActions(
     [setLoading]: (state, { payload }) => state.set('isLoading', payload),
     [resetUser]: () => INITIAL_STATE(),
   },
-  INITIAL_STATE()
+  INITIAL_STATE(),
 )
 
 export default DisplayedUserReducer

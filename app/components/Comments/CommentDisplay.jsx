@@ -32,7 +32,7 @@ import Vote from './Vote'
     commentVote,
     change,
     flashErrorUnauthenticated,
-  }
+  },
 )
 @withNamespaces('main')
 @withLoggedInUser

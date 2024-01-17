@@ -132,7 +132,7 @@ export default class NotificationsPage extends Component {
                           onClick={() =>
                             markAsSeen(
                               notifications.map((n) => n.id),
-                              false
+                              false,
                             )
                           }
                           disabled={!hasSeen}
@@ -144,7 +144,7 @@ export default class NotificationsPage extends Component {
                         onClick={() =>
                           markAsSeen(
                             notifications.map((n) => n.id),
-                            true
+                            true,
                           )
                         }
                         disabled={!hasUnseen}

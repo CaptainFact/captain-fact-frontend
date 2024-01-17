@@ -47,7 +47,7 @@ const CommentsReducer = handleActions(
     [fetchAll]: {
       next: (state, { payload: { comments, my_votes, my_flags } }) => {
         const preparedComments = new List(
-          comments.map(prepareComment).sort(commentsComparator)
+          comments.map(prepareComment).sort(commentsComparator),
         ).groupBy((c) => c.reply_to_id)
 
         const replies = preparedComments.delete(null)
@@ -75,7 +75,7 @@ const CommentsReducer = handleActions(
       const insertIdx = commentsList.findIndex((c) => commentsComparator(comment, c) < 0)
       const newCommentsList = commentsList.insert(
         insertIdx !== -1 ? insertIdx : commentsList.size,
-        comment
+        comment,
       )
       return state.setIn(commentPath, newCommentsList)
     },
@@ -105,7 +105,7 @@ const CommentsReducer = handleActions(
         const groupedComments = comments.groupBy((c) => c.statement_id).entries()
         for (const [statementId, newComments] of groupedComments) {
           state = state.updateIn(['comments', statementId], (oldList) =>
-            mergeCommentsList(oldList, newComments)
+            mergeCommentsList(oldList, newComments),
           )
         }
       }
@@ -114,7 +114,7 @@ const CommentsReducer = handleActions(
         const groupedReplies = replies.groupBy((r) => r.reply_to_id).entries()
         for (const [commentId, newComments] of groupedReplies) {
           state = state.updateIn(['replies', commentId], (oldList) =>
-            mergeCommentsList(oldList, newComments)
+            mergeCommentsList(oldList, newComments),
           )
         }
       }
@@ -133,7 +133,7 @@ const CommentsReducer = handleActions(
     },
     [resetVideoDebate]: () => INITIAL_STATE(),
   },
-  INITIAL_STATE()
+  INITIAL_STATE(),
 )
 
 // Sort comments by score. More recents come firsts if same score

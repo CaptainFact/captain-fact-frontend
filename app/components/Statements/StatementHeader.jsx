@@ -74,5 +74,5 @@ export default withNamespaces('videoDebate')(
         </div>
       )}
     </header>
-  )
+  ),
 )

@@ -286,6 +286,6 @@ export default withNamespaces('videoDebate')(
     (state) => ({
       locale: state.VideoDebate.video.data.language || state.UserPreferences.locale,
     }),
-    { updateSpeaker, popModal, errorToFlash }
-  )(EditSpeakerFormModal)
+    { updateSpeaker, popModal, errorToFlash },
+  )(EditSpeakerFormModal),
 )
