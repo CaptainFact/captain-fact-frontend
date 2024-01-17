@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { isExternal, optionsToQueryString, youtubeRegex } from '../url_utils'
 
 describe('Youtube regex', () => {

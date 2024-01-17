@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { t } from 'react-i18next'
 
 import { ReputationGuardTooltip } from '../ReputationGuardTooltip'

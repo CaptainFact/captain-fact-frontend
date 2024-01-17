@@ -4,14 +4,14 @@ exports[`should be able to add and remove modals 1`] = `Immutable.Stack []`;
 
 exports[`should be able to add and remove modals 2`] = `
 Immutable.Stack [
-  Object {
-    "Modal": Object {
+  {
+    "Modal": {
       "$$typeof": Symbol(react.memo),
       "WrappedComponent": [Function],
       "compare": null,
       "type": [Function],
     },
-    "props": Object {
+    "props": {
       "hello": "world",
       "id": 1,
     },
@@ -21,26 +21,26 @@ Immutable.Stack [
 
 exports[`should be able to add and remove modals 3`] = `
 Immutable.Stack [
-  Object {
-    "Modal": Object {
+  {
+    "Modal": {
       "$$typeof": Symbol(react.memo),
       "WrappedComponent": [Function],
       "compare": null,
       "type": [Function],
     },
-    "props": Object {
+    "props": {
       "hello": "world",
       "id": 2,
     },
   },
-  Object {
-    "Modal": Object {
+  {
+    "Modal": {
       "$$typeof": Symbol(react.memo),
       "WrappedComponent": [Function],
       "compare": null,
       "type": [Function],
     },
-    "props": Object {
+    "props": {
       "hello": "world",
       "id": 1,
     },
@@ -50,14 +50,14 @@ Immutable.Stack [
 
 exports[`should be able to add and remove modals 4`] = `
 Immutable.Stack [
-  Object {
-    "Modal": Object {
+  {
+    "Modal": {
       "$$typeof": Symbol(react.memo),
       "WrappedComponent": [Function],
       "compare": null,
       "type": [Function],
     },
-    "props": Object {
+    "props": {
       "hello": "world",
       "id": 1,
     },
