@@ -296,7 +296,7 @@ class CommentForm extends React.Component {
       <Flex
         className={classNames(
           'comment-form',
-          this.props.inciteToParticipate && 'incitation-comment'
+          this.props.inciteToParticipate && 'incitation-comment',
         )}
         flexDirection="column"
         p={3}

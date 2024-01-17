@@ -37,7 +37,7 @@ const validate = (values, props) => {
     speakers: video.data.speakers,
     submitting: statements.isSubmitting,
   }),
-  { forcePosition, setScrollTo, incrementFormCount, decrementFormCount }
+  { forcePosition, setScrollTo, incrementFormCount, decrementFormCount },
 )
 @withNamespaces('videoDebate')
 @reduxForm({ form: STATEMENT_FORM_NAME, validate })
@@ -103,7 +103,7 @@ export class StatementForm extends React.PureComponent {
     this.props.handleConfirm(statement).then(
       handleFormEffectResponse({
         onSuccess: ({ id }) => this.props.setScrollTo({ id, __forceAutoScroll: true }),
-      })
+      }),
     )
   }
 

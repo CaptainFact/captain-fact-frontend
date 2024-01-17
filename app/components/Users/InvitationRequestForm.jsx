@@ -30,7 +30,7 @@ export default class InvitationRequestForm extends React.PureComponent {
       (msg) => {
         this.props.errorToFlash(msg)
         throw new SubmissionError({ email: 'invalid_email' })
-      }
+      },
     )
   }
 

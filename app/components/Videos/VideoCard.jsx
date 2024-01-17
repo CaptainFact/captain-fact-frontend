@@ -75,14 +75,14 @@ export class VideoCard extends React.PureComponent {
       speakers,
       Math.min(speakers.length, MAX_VIDEO_CARD_SPEAKERS),
       t,
-      nbOthers < 1
+      nbOthers < 1,
     )
     for (const [speaker, separator] of speakerIterator) {
       speakerComponentsList.push(
         <span key={speaker.id}>
           <strong>{this.renderSpeakerName(speaker)}</strong>
           {separator}
-        </span>
+        </span>,
       )
     }
     if (nbOthers > 0) {
@@ -98,7 +98,7 @@ export class VideoCard extends React.PureComponent {
           <span title={title}>
             <strong>{t('main:misc.other', { count: nbOthers })}</strong>
           </span>
-        </span>
+        </span>,
       )
     }
 

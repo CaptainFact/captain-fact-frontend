@@ -20,7 +20,7 @@ import { ModerationForm } from './ModerationForm'
     error: state.Moderation.error,
     entry: state.Moderation.entry,
   }),
-  { fetchRandomModeration, postModerationFeedback }
+  { fetchRandomModeration, postModerationFeedback },
 )
 @withNamespaces('moderation')
 @withReputationGuard(MIN_REPUTATION_MODERATION)

@@ -41,7 +41,9 @@ const Wrapper = styled.button`
     position: absolute;
     border: 1px solid;
     border-radius: 50%;
-    transition: opacity 0.3s, color 0.3s;
+    transition:
+      opacity 0.3s,
+      color 0.3s;
     backface-visibility: hidden;
     overflow: visible;
     padding: ${({ size }) => `${size / 4}px`};

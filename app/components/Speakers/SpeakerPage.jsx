@@ -30,7 +30,7 @@ import { SpeakerPreview } from './SpeakerPreview'
     error: state.Speakers.error,
     userLocale: state.UserPreferences.locale,
   }),
-  { fetchSpeaker, fetchWikiDataInfo, reset, resetVideos }
+  { fetchSpeaker, fetchWikiDataInfo, reset, resetVideos },
 )
 export class SpeakerPage extends React.PureComponent {
   componentDidMount() {

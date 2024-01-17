@@ -27,8 +27,8 @@ export const joinCommentsChannel = (videoId) => (dispatch) => {
         comment_score_diff: (p) => dispatch(scoreDiff(p)),
         comment_updated: (c) => dispatch(update(c)),
         comments_scores_updated: ({ comments }) => dispatch(updateScores(comments)),
-      })
-    )
+      }),
+    ),
   )
 }
 
@@ -58,7 +58,7 @@ export const commentVote = (params) =>
       before: setVoting(params.comment.id),
       then: addMyVote(params),
       catch: [endVoting(params.comment.id), errorToFlash],
-    }
+    },
   )
 
 export const flagComment = ({ id, reason }) => {

@@ -26,7 +26,7 @@ export default class ResetPasswordRequestForm extends React.PureComponent {
   submitForm(e) {
     resetPasswordRequest(e.email).then(
       () => this.setState({ status: 'done' }),
-      () => this.setState({ status: 'error', payload: 'reset_failed' })
+      () => this.setState({ status: 'error', payload: 'reset_failed' }),
     )
   }
 

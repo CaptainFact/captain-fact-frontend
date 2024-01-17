@@ -19,7 +19,7 @@ import { Icon } from '../Utils/Icon'
     actions: state.UsersActions.actions,
     isLoading: state.UsersActions.isLoading,
   }),
-  { joinStatementHistoryChannel, leaveStatementHistoryChannel, popModal, reset }
+  { joinStatementHistoryChannel, leaveStatementHistoryChannel, popModal, reset },
 )
 @withNamespaces('history')
 export class ModalHistory extends React.PureComponent {

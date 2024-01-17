@@ -25,10 +25,10 @@ export const ALGOLIA_APP_ID = globals['ALGOLIA_APP_ID'] || process.env.ALGOLIA_A
 export const ALGOLIA_USAGE_API_KEY =
   globals['ALGOLIA_USAGE_API_KEY'] || process.env.ALGOLIA_USAGE_API_KEY
 export const INVITATION_SYSTEM = boolFromConfig(
-  globals['INVITATION_SYSTEM'] || process.env.INVITATION_SYSTEM || 'off'
+  globals['INVITATION_SYSTEM'] || process.env.INVITATION_SYSTEM || 'off',
 )
 export const ENABLE_PUBLIC_SEARCH = boolFromConfig(
-  globals['ENABLE_PUBLIC_SEARCH'] || process.env.ENABLE_PUBLIC_SEARCH || 'on'
+  globals['ENABLE_PUBLIC_SEARCH'] || process.env.ENABLE_PUBLIC_SEARCH || 'on',
 )
 
 // Some helpers based on env

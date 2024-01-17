@@ -31,7 +31,7 @@ test('add speaker', () => {
       id: 3,
       title: 'Title 3',
       full_name: 'Max Fray',
-    })
+    }),
   )
 })
 
@@ -47,7 +47,7 @@ test('update speaker', () => {
       id: 3,
       title: 'Title 3 Update',
       full_name: 'Max Fray Update',
-    })
+    }),
   )
 })
 
@@ -65,6 +65,6 @@ test('force Position', () => {
         requestId: 1,
         time: 0,
       },
-    })
+    }),
   )
 })

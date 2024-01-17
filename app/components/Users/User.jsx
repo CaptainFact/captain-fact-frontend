@@ -25,7 +25,7 @@ import UserPicture from './UserPicture'
     errors,
     user: data,
   }),
-  { fetchUser, resetUser }
+  { fetchUser, resetUser },
 )
 @withNamespaces('main')
 @withLoggedInUser

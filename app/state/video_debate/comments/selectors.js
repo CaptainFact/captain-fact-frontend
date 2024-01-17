@@ -35,7 +35,7 @@ export const classifyComments = createCachedSelector(
       approvingFacts: new List(approvingFacts),
       refutingFacts: new List(refutingFacts),
     }
-  }
+  },
 )((state, props) => props.statement.id)
 
 // ---- Private ----

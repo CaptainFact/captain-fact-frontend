@@ -21,7 +21,7 @@ import ActionIcon from './ActionIcon'
   (state) => ({
     lastActionsIds: state.UsersActions.lastActionsIds,
   }),
-  { revertVideoDebateUserAction, flashErrorUnauthenticated }
+  { revertVideoDebateUserAction, flashErrorUnauthenticated },
 )
 class ActionsTable extends React.PureComponent {
   constructor(props) {

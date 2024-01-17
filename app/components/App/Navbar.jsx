@@ -271,5 +271,5 @@ const Navbar = ({
 }
 
 export default withTheme(
-  withLoggedInUser(withNamespaces('main')(withRouter(withResizeDetector(Navbar))))
+  withLoggedInUser(withNamespaces('main')(withRouter(withResizeDetector(Navbar)))),
 )

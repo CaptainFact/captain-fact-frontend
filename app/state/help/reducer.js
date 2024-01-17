@@ -24,7 +24,7 @@ const HelpReducer = handleActions(
     [setLoading]: (state, { payload }) => state.set('isLoading', payload),
     [reset]: () => INITIAL_STATE(),
   },
-  INITIAL_STATE()
+  INITIAL_STATE(),
 )
 
 export default HelpReducer

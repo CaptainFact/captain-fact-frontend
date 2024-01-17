@@ -19,7 +19,7 @@ test('set presence', () => {
   snapshotReducer(
     reducer,
     INITIAL_STATE,
-    setPresence({ viewers: { count: 42 }, users: { count: 5 } })
+    setPresence({ viewers: { count: 42 }, users: { count: 5 } }),
   )
 })
 
@@ -29,6 +29,6 @@ test('presenceDiff', () => {
     INITIAL_STATE,
     presenceDiff(mockPresenceEvent({ userJoin: 2, viewerJoin: 5 })),
     presenceDiff(mockPresenceEvent({ userLeave: 2, viewerJoin: 5 })),
-    presenceDiff(mockPresenceEvent({ viewerLeave: 10 }))
+    presenceDiff(mockPresenceEvent({ viewerLeave: 10 })),
   )
 })
