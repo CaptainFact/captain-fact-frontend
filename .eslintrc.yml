@@ -4,10 +4,14 @@ env:
   jest: true
   node: true
   cypress/globals: true
+ignorePatterns:
+  - 'node_modules/'
+  - '/**/node_modules/'
+  - '**/node_modules/'
 extends:
   - 'eslint:recommended'
   - 'plugin:react/recommended'
-parser: babel-eslint
+parser: '@babel/eslint-parser'
 parserOptions:
   ecmaFeatures:
     experimentalObjectRestSpread: true
@@ -29,7 +33,6 @@ rules:
   quotes: ['warn', 'single', { avoidEscape: true }]
   semi: ['error', 'never']
   import/first: ['warn']
-  import/no-named-as-default: ['warn']
   simple-import-sort/imports: ['error']
   no-else-return: off
   no-trailing-spaces: ['warn']
