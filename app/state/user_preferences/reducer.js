@@ -15,7 +15,7 @@ export const setVideosFilter = createAction('USER_PREFERENCES/SET_VIDEOS_FILTER'
 export const toggleAutoscroll = createAction('STATEMENTS/TOGGLE_AUTOSCROLL')
 export const toggleBackgroundSound = createAction('STATEMENTS/TOGGLE_BACKGROUND_SOUND')
 
-const isMobile = window.innerWidth <= MOBILE_WIDTH_THRESHOLD
+const isMobile = typeof window !== 'undefined' && window.innerWidth <= MOBILE_WIDTH_THRESHOLD
 
 const Preferences = new Record({
   // Disable autoscroll and sidebar expended by default on mobile

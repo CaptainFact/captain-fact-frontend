@@ -84,8 +84,8 @@ Immutable.Record {
         "id": 739,
         "reply_to_id": null,
         "is_reported": false,
-        "user": Object {
-          "achievements": Array [
+        "user": {
+          "achievements": [
             4,
             3,
             6,
@@ -101,7 +101,7 @@ Immutable.Record {
           "speaker_id": null,
           "username": "Betree",
         },
-        "source": Object {
+        "source": {
           "language": null,
           "site_name": "www.lejdc.fr",
           "title": "Sur décision de justice - Alexandre Bain retrouve l'appellation pouilly-fumé",
@@ -117,8 +117,8 @@ Immutable.Record {
         "id": 737,
         "reply_to_id": null,
         "is_reported": false,
-        "user": Object {
-          "achievements": Array [
+        "user": {
+          "achievements": [
             4,
             3,
             6,
@@ -134,14 +134,14 @@ Immutable.Record {
           "speaker_id": null,
           "username": "Betree",
         },
-        "source": Object {
+        "source": {
           "language": "fr",
           "site_name": "FIGARO",
           "title": "La justice rend son AOC pouilly-fumé à un vigneron abusivement sanctionné",
           "url": "http://www.lefigaro.fr/societes/2017/05/28/20005-20170528ARTFIG00185-la-justice-rend-son-aoc-pouilly-fume-a-un-vigneron-abusivement-sanctionne.php",
         },
         "statement_id": 297,
-        "text": "Si l'AOC lui avait bien été retirée (et rendue depuis) la raison invoquée par le Figaro qui cite l'INAO est ailleurs : \\"plusieurs rendez-vous manqués, mais pour des raisons justifiées, avec l'Organisme d'inspection des vins du Centre\\"",
+        "text": "Si l'AOC lui avait bien été retirée (et rendue depuis) la raison invoquée par le Figaro qui cite l'INAO est ailleurs : "plusieurs rendez-vous manqués, mais pour des raisons justifiées, avec l'Organisme d'inspection des vins du Centre"",
         "approve": false,
         "inserted_at": 2018-03-13T16:55:07.288Z,
         "score": 2,
@@ -150,8 +150,8 @@ Immutable.Record {
         "id": 917,
         "reply_to_id": null,
         "is_reported": false,
-        "user": Object {
-          "achievements": Array [
+        "user": {
+          "achievements": [
             4,
             3,
             6,
@@ -180,8 +180,8 @@ Immutable.Record {
         "id": 774,
         "reply_to_id": null,
         "is_reported": false,
-        "user": Object {
-          "achievements": Array [
+        "user": {
+          "achievements": [
             6,
             3,
             8,
@@ -200,7 +200,7 @@ Immutable.Record {
           "speaker_id": null,
           "username": "tad2018",
         },
-        "source": Object {
+        "source": {
           "language": null,
           "site_name": null,
           "title": "Planetoscope - Statistiques : Consommation de pesticides phytosanitaires en France",
@@ -220,8 +220,8 @@ Immutable.Record {
         "id": 738,
         "reply_to_id": 737,
         "is_reported": false,
-        "user": Object {
-          "achievements": Array [
+        "user": {
+          "achievements": [
             4,
             3,
             6,
@@ -239,7 +239,7 @@ Immutable.Record {
         },
         "source": null,
         "statement_id": 297,
-        "text": "\\"l'Inao (Institut national de l'origine et de la qualité) a considéré que le viticulteur refusait de se soumettre à un contrôle obligatoire et a décidé, en 2015, de lui retirer son AOC.\\"",
+        "text": ""l'Inao (Institut national de l'origine et de la qualité) a considéré que le viticulteur refusait de se soumettre à un contrôle obligatoire et a décidé, en 2015, de lui retirer son AOC."",
         "approve": null,
         "inserted_at": 2018-03-13T16:55:49.045Z,
         "score": 2,
@@ -250,8 +250,8 @@ Immutable.Record {
         "id": 778,
         "reply_to_id": 775,
         "is_reported": false,
-        "user": Object {
-          "achievements": Array [
+        "user": {
+          "achievements": [
             4,
             3,
             6,
@@ -280,8 +280,8 @@ Immutable.Record {
         "id": 775,
         "reply_to_id": 739,
         "is_reported": false,
-        "user": Object {
-          "achievements": Array [
+        "user": {
+          "achievements": [
             6,
             3,
             8,
@@ -313,8 +313,8 @@ Immutable.Record {
         "id": 809,
         "reply_to_id": 778,
         "is_reported": false,
-        "user": Object {
-          "achievements": Array [
+        "user": {
+          "achievements": [
             6,
             3,
             8,

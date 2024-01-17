@@ -12,7 +12,7 @@ function boolFromConfig(value) {
 }
 
 // Get the CF global config
-const globals = window.CF_GLOBALS || {}
+const globals = (typeof window !== 'undefined' && window.CF_GLOBALS) || {}
 
 // Raw env export
 export const JS_ENV = globals['JS_ENV'] || process.env.JS_ENV
