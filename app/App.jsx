@@ -6,7 +6,7 @@ import { ApolloProvider } from '@apollo/client'
 // Import libs
 import React from 'react'
 import { I18nextProvider } from 'react-i18next'
-import { Configure, Index, InstantSearch } from 'react-instantsearch-dom'
+import { Configure, Index, InstantSearch } from 'react-instantsearch'
 import { Provider as ReduxProvider } from 'react-redux'
 import { polyfill as smoothSrollPolyfill } from 'smoothscroll-polyfill'
 import { ThemeProvider } from 'styled-components'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { withNamespaces } from 'react-i18next'
-import { SearchBox as AlgoliaSearchBox } from 'react-instantsearch-dom'
+import { SearchBox as AlgoliaSearchBox } from 'react-instantsearch'
 import { withRouter } from 'react-router'
 import styled from 'styled-components'
 
