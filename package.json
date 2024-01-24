@@ -89,7 +89,7 @@
     "react-router-dom": "5.3.4",
     "react-select": "^5.8.0",
     "react-toggled": "^1.2.7",
-    "reactjs-popup": "~2.0.4",
+    "reactjs-popup": "~2.0.6",
     "redux": "~4.2.0",
     "redux-actions": "~2.6.5",
     "redux-form": "8.3.9",
