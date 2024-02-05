@@ -124,7 +124,7 @@
     "babel-plugin-wildcard": "^7.0.0",
     "browserslist": "^4.22.2",
     "clean-webpack-plugin": "^4.0.0",
-    "compression-webpack-plugin": "^10.0.0",
+    "compression-webpack-plugin": "^11.0.0",
     "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^5.2.7",
     "css-minimizer-webpack-plugin": "^4.2.2",
