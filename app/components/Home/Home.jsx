@@ -1,3 +1,4 @@
+import { Flex } from '@rebass/grid'
 import React from 'react'
 import { Trans, withNamespaces } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -40,6 +41,7 @@ export default class Home extends React.PureComponent {
                     To train a critical mind, improve the quality of information and
                     decision-making.
                     <br />
+                    <br />
                     Against fake news, fraud and disinformation
                   </Trans>
                 </h2>
@@ -50,7 +52,7 @@ export default class Home extends React.PureComponent {
                     <p>
                       <Link
                         onClick={() => Matomo.registerClick('Home', 'Button', 'ExtensionPage')}
-                        className="button is-primary is-medium"
+                        className="button is-medium"
                         to="/extension"
                       >
                         {t('installExtension')}
@@ -62,7 +64,7 @@ export default class Home extends React.PureComponent {
                     <p>
                       <Link
                         onClick={() => Matomo.registerClick('Home', 'Button', 'SignUp')}
-                        className="button is-secondary is-medium"
+                        className="button is-gradient-primary-light is-medium"
                         to="/signup"
                       >
                         {t('registerAndFactCheck')}
@@ -92,7 +94,7 @@ export default class Home extends React.PureComponent {
           </div>
         </section>
 
-        {this.props.lng === 'fr' && (
+        {this.props.lng === 'fr' && process.env.HIDE_FR_SITE !== 'true' && (
           <section className="section know-more-fr has-text-centered">
             <p className="has-text-weight-semibold">
               {t('knowMoreFR')}
@@ -128,10 +130,7 @@ export default class Home extends React.PureComponent {
                 Équipe
               </ExternalLinkNewTab>
               <br />
-              <ExternalLinkNewTab
-                className="button is-primary is-large"
-                href="https://fr.captainfact.io"
-              >
+              <ExternalLinkNewTab className="button is-large" href="https://fr.captainfact.io">
                 {t('goToFRSite')}
               </ExternalLinkNewTab>
             </p>
@@ -141,19 +140,19 @@ export default class Home extends React.PureComponent {
         <section className="section last-videos" style={{ paddingBottom: '3em' }}>
           <div className="has-text-centered">
             <h2 className="title is-3">{t('latest')}</h2>
+          </div>
+          <div className="last-videos-cards">
+            <LastVideos />
+          </div>
+          <Flex justifyContent="center" mt={3}>
             <Link
               onClick={() => Matomo.registerClick('Home', 'Button', 'SeeAllVideos')}
-              className="button animated-hover is-medium is-gradient-primary-light"
+              className="button is-medium"
               to="/videos"
             >
               {t('seeVideos')}
             </Link>
-          </div>
-          <br />
-          <br />
-          <div className="last-videos-cards">
-            <LastVideos />
-          </div>
+          </Flex>
         </section>
 
         <section className="section section-alt-bg has-text-centered">
@@ -211,7 +210,7 @@ export default class Home extends React.PureComponent {
                 </p>
                 <Link
                   onClick={() => Matomo.registerClick('Home', 'Button', 'ExtensionPage')}
-                  className="button is-primary is-medium"
+                  className="button is-medium"
                   to="/extension"
                 >
                   {t('installExtension')}
@@ -230,7 +229,7 @@ export default class Home extends React.PureComponent {
                 </p>
                 <Link
                   onClick={() => Matomo.registerClick('Home', 'Button', 'SignUp')}
-                  className="button is-primary is-medium"
+                  className="button is-medium"
                   to="/signup"
                 >
                   {t('registerAndFactCheck')}
@@ -262,10 +261,11 @@ export default class Home extends React.PureComponent {
                   <br />
                 </p>
                 <ExternalLinkNewTab
-                  className="button is-primary is-medium"
+                  className="button is-medium"
                   href="https://github.com/CaptainFact/captain-fact/wiki/Les-partenariats-entre-les-chaînes-Youtube-et-CaptainFact.io"
                 >
-                  {t('learnMore')} (fr)
+                  {t('learnMore')}
+                  {this.props.lng !== 'fr' ? ' (FR)' : ''}
                 </ExternalLinkNewTab>
               </div>
             </div>
@@ -296,15 +296,12 @@ export default class Home extends React.PureComponent {
           </div>
         </section>
 
-        {this.props.lng === 'fr' && (
+        {this.props.lng === 'fr' && process.env.HIDE_FR_SITE !== 'true' && (
           <section className="section know-more-fr has-text-centered">
             <p className="has-text-weight-semibold">
               {t('knowMoreFR')}
               <br />
-              <ExternalLinkNewTab
-                className="button is-primary is-large"
-                href="https://fr.captainfact.io"
-              >
+              <ExternalLinkNewTab className="button is-large" href="https://fr.captainfact.io">
                 {t('goToFRSite')}
               </ExternalLinkNewTab>
             </p>

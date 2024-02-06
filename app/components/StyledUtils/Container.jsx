@@ -40,6 +40,7 @@ const Container = styled.div`
   ${styledSystem.zIndex}
 
   ${styledCustom.cursor}
+  ${styledCustom.gap}
 `
 
 export default Container

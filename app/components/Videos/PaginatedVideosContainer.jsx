@@ -6,8 +6,10 @@ import { Link } from 'react-router-dom'
 
 import { VideosQuery } from '../../API/graphql_queries'
 import { ONLY_FEATURED, ONLY_PARTNERS } from '../../constants'
+import Container from '../StyledUtils/Container'
 import { ErrorView } from '../Utils/ErrorView'
 import { LoadingFrame } from '../Utils/LoadingFrame'
+import Message from '../Utils/Message'
 import PaginationMenu from '../Utils/PaginationMenu'
 import { VideosGrid } from './VideosGrid'
 
@@ -57,7 +59,11 @@ const PaginatedVideosContainer = ({
           return <ErrorView error={error} />
         }
         if (!loading && videos.entries.length === 0) {
-          return <h2>{t('errors:client.noVideoAvailable')}</h2>
+          return (
+            <Container mt="32px" display="inline-block">
+              <Message>{t('errors:client.noVideoAvailable')}</Message>
+            </Container>
+          )
         }
 
         const paginationMenu = !showPagination ? null : (
@@ -80,7 +86,6 @@ const PaginatedVideosContainer = ({
 
         return (
           <div>
-            {paginationMenu}
             {loading ? <LoadingFrame /> : <VideosGrid videos={videos.entries} />}
             {paginationMenu}
           </div>

@@ -1,3 +1,5 @@
+import { Box, Flex } from '@rebass/grid'
+import { Clock } from '@styled-icons/feather'
 import React from 'react'
 import { withNamespaces } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -41,30 +43,27 @@ export class VideoCard extends React.PureComponent {
     )
   }
 
-  renderVideoMetadata({ speakers, insertedAt, isPartner }, t) {
+  renderVideoMetadata({ speakers, insertedAt }, t) {
     return (
       <div className="video-metadata">
-        <div>
-          {this.renderAddedByLabel(isPartner, t)}
-          &nbsp;
+        <Flex alignItems="center" justifyContent="center">
+          {this.renderAddedByLabel(t)}
+          <span>&nbsp;</span>
           <TimeSince time={insertedAt} />
-        </div>
+        </Flex>
         {speakers && speakers.length > 0 && this.renderSpeakersList(speakers, t)}
       </div>
     )
   }
 
-  renderAddedByLabel(isPartner, t) {
-    return isPartner ? (
-      <span className="added-by">
-        <Icon name="star" />
-        <strong>{t('video.addedBy', { userType: '$t(video.partner)' })}</strong>
-      </span>
-    ) : (
-      <span className="added-by">
-        <Icon name="user" />
+  renderAddedByLabel(t) {
+    return (
+      <Flex className="added-by" alignItems="center">
+        <Box mr={2}>
+          <Clock size="1em" />
+        </Box>
         <span>{t('video.addedBy', { userType: '$t(video.user)' })}</span>
-      </span>
+      </Flex>
     )
   }
 
@@ -104,10 +103,12 @@ export class VideoCard extends React.PureComponent {
 
     return (
       <div className="speakers-list">
-        <Icon name="users" />
-        {t('main:misc.staring')}
-        &nbsp;
-        {speakerComponentsList}
+        <Icon name="users" style={{ verticalAlign: 'bottom' }} />
+        <span>
+          {t('main:misc.staring')}
+          &nbsp;
+        </span>
+        {speakerComponentsList}.
       </div>
     )
   }

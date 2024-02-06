@@ -1,5 +1,13 @@
 .video-card
+  border-radius: 6px
+  overflow: hidden
   text-align: center
+  transition: all .2s ease
+  border: 1px solid $border-color
+  box-shadow: none
+  transition: all .2s ease
+  &:hover
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1)
   .card-image
     img
       border-radius: 0 0 5px 5px
@@ -31,15 +39,13 @@
         color: transparentize(darken($primary-neutral, 45), 0.3)
 
   .video-metadata
-    color: #bdbdbd
+    color: $text-light
     width: 100%
     &>div:first-child
       padding: 5px
     .icon
       margin-right: 5px
-    .added-by .icon-star
-      color: $secondary
-      
+
   .speakers-list
     text-align: left
     padding: 0.75rem 1rem

@@ -20,7 +20,11 @@ export default class LanguageSelector extends React.PureComponent {
     const options = defaultLocales.merge(this.props.additionalOptions || {}).sortBy((v, k) => k)
 
     return (
-      <select onChange={(e) => this.props.handleChange(e.target.value)} value={this.props.value}>
+      <select
+        onChange={(e) => this.props.handleChange(e.target.value)}
+        value={this.props.value}
+        id={this.props.id}
+      >
         {this.renderLocalesMap(options)}
       </select>
     )

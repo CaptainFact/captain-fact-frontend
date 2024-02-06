@@ -65,7 +65,7 @@ class PublicAchievementUnlocker extends React.PureComponent {
       const achievementTitle = this.props.t(`${this.props.achievementId}.title`)
       this.props.flashSuccessMsg('achievements:unlocked', {
         i18nParams: { achievement: achievementTitle },
-        infoUrl: `/u/${this.props.loggedInUser.username}`,
+        infoUrl: `/u/${this.props.loggedInUser.username}/profile`,
         iconName: 'trophy',
       })
     })

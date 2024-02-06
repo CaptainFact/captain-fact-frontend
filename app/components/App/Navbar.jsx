@@ -21,7 +21,9 @@ import SearchBox from '../Search/SearchBox'
 import Container from '../StyledUtils/Container'
 import { fadeIn } from '../StyledUtils/Keyframes'
 import StyledLink from '../StyledUtils/StyledLink'
+import { Span } from '../StyledUtils/Text'
 import ScoreTag from '../Users/ScoreTag'
+import UserAppellation from '../Users/UserAppellation'
 import UserMenu from '../Users/UserMenu'
 import UserPicture from '../Users/UserPicture'
 import { ErrorView } from '../Utils/ErrorView'
@@ -36,7 +38,7 @@ const NavbarContainer = styled(Flex)`
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  background: rgba(255, 255, 255, 0.9);
+  background: white;
   height: ${themeGet('navbarHeight')}px;
   border-bottom: 1px solid ${themeGet('colors.black.200')};
   box-shadow: 0px 0px 15px rgba(125, 125, 125, 0.25);
@@ -63,8 +65,13 @@ const UserMenuEntry = styled((props) => <StyledLink {...omit(props, 'isActive')}
   display: block;
   border-left: 2px solid white;
   background: white;
+  font-size: 1.1em;
+  padding: 10px 15px;
+  outline: none;
 
-  &:hover {
+  &:hover,
+  &:active,
+  &:focus {
     background: ${themeGet('colors.black.50')};
   }
 
@@ -81,10 +88,13 @@ const UserMenuEntry = styled((props) => <StyledLink {...omit(props, 'isActive')}
     `}
 `
 
-UserMenuEntry.defaultProps = {
-  px: 2,
-  py: 1,
-}
+const UserHero = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid ${themeGet('colors.black.100')};
+  padding: 10px 15px;
+`
 
 const ScoreHelpButton = styled(HelpCircle)`
   color: #39b714;
@@ -117,7 +127,7 @@ const NotificationPopup = styled(StyledPopup)`
 `
 const MenuPopup = styled(StyledPopup)`
   &-content {
-    width: 200px;
+    min-width: 200px;
   }
 `
 
@@ -219,23 +229,34 @@ const Navbar = ({
                     </UserMenuTrigger>
                   }
                 >
-                  <UserMenu user={loggedInUser} hasLogout isSelf>
-                    {({ Icon, key, route, title, index, isActive, onClick }) => (
-                      <UserMenuEntry
-                        key={key}
-                        to={route}
-                        index={index}
-                        isActive={isActive}
-                        onClick={onClick}
-                      >
-                        <Box>
-                          <Icon size="1em" />
-                          &nbsp;
-                          {title}
-                        </Box>
-                      </UserMenuEntry>
-                    )}
-                  </UserMenu>
+                  <div>
+                    <UserHero>
+                      <UserPicture size={USER_PICTURE_LARGE} user={loggedInUser} />
+                      <Flex flexDirection="column" justifyContent="center">
+                        <UserAppellation user={loggedInUser} withoutActions />
+                        <Span fontSize="0.8em" color="black.500">
+                          {loggedInUser.email}
+                        </Span>
+                      </Flex>
+                    </UserHero>
+                    <UserMenu user={loggedInUser} hasLogout isSelf>
+                      {({ Icon, key, route, title, index, isActive, onClick }) => (
+                        <UserMenuEntry
+                          key={key}
+                          to={route}
+                          index={index}
+                          isActive={isActive}
+                          onClick={onClick}
+                        >
+                          <Box>
+                            <Icon size="1em" />
+                            &nbsp;
+                            {title}
+                          </Box>
+                        </UserMenuEntry>
+                      )}
+                    </UserMenu>
+                  </div>
                 </MenuPopup>
               </Flex>
             ) : (

@@ -30,15 +30,17 @@ import Action from './Action'
 
 const Wrapper = styled.div`
   display: flex;
-  padding: 15px 10px 0 10px;
+  padding: 15px 10px;
+  align-items: center;
+  gap: 10px;
+  box-shadow: #f3f3f3 0px 10px 10px -10px;
+  margin-bottom: 5px;
 `
 
-const StyledAction = styled(Action)`
-  margin: 0 10px 0 0;
-
-  &:last-child {
-    margin-right: 0;
-  }
+const Separator = styled.div`
+  width: 1px;
+  height: 20px;
+  background: ${({ theme }) => theme.colors.black[200]};
 `
 
 const Actions = ({
@@ -55,15 +57,20 @@ const Actions = ({
 }) => (
   <Wrapper>
     {isAuthenticated && (
-      <StyledAction
-        activated={isSubscribed}
-        onClick={() => changeSubscription(!isSubscribed)}
-        activatedIcon={<Bell />}
-        deactivatedIcon={<BellSlash />}
-      />
+      <React.Fragment>
+        <Action
+          activated={isSubscribed}
+          onClick={() => changeSubscription(!isSubscribed)}
+          activatedIcon={<Bell />}
+          deactivatedIcon={<BellSlash />}
+          isSecondary
+          label={isSubscribed ? t('video.unsubscribe') : t('video.subscribe')}
+        />
+        <Separator />
+      </React.Fragment>
     )}
 
-    <StyledAction
+    <Action
       activated={hasAutoscroll}
       onClick={() => toggleAutoscroll()}
       activatedIcon={<ArrowsAltV />}
@@ -71,7 +78,7 @@ const Actions = ({
         context: hasAutoscroll ? 'disable' : 'enable',
       })}
     />
-    <StyledAction
+    <Action
       activated={soundOnBackgroundFocus}
       onClick={() => toggleBackgroundSound()}
       activatedIcon={<VolumeUp />}
@@ -80,7 +87,18 @@ const Actions = ({
         context: soundOnBackgroundFocus ? 'disable' : 'enable',
       })}
     />
-    <StyledAction
+
+    <ReputationGuard requiredRep={MIN_REPUTATION_UPDATE_VIDEO}>
+      <Action
+        onClick={() => addModal({ Modal: EditVideoModal })}
+        activatedIcon={<PencilAlt />}
+        label={t('video.edit')}
+      />
+    </ReputationGuard>
+
+    <Separator />
+
+    <Action
       onClick={() =>
         addModal({
           Modal: ShareModal,
@@ -90,14 +108,8 @@ const Actions = ({
       activatedIcon={<ShareAlt />}
       label={t('main:actions.share')}
     />
-    <ReputationGuard requiredRep={MIN_REPUTATION_UPDATE_VIDEO}>
-      <StyledAction
-        onClick={() => addModal({ Modal: EditVideoModal })}
-        activatedIcon={<PencilAlt />}
-        label={t('video.edit')}
-      />
-    </ReputationGuard>
-    <StyledAction
+
+    <Action
       onClick={() => history.push('/help')}
       activatedIcon={<Question />}
       label={t('main:menu.help')}
