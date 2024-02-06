@@ -2,11 +2,13 @@
   $maxHomeSectionWidth: 1160px
   display: flex
   flex-direction: column
-  background-attachment: fixed 
+  background-attachment: fixed
 
   .header-img
     display: block
   .hero
+    display: flex
+    align-items: center
     background: #EDEDED
     min-height: 25vh
     .title1
@@ -64,52 +66,61 @@
     +mobile
       min-height: 20vh
     .hero-body
+      max-width: 1900px
       padding: 0em 4em
       margin: 0 auto
+      & > .columns
+        gap: 2em
       +mobile
         padding: 0rem 1rem
         font-size: 12px
       +tablet
         padding: 0em 2em
       +desktop
-        padding: 2em 4em
+        padding: 4em 6em
+        padding-bottom: 6em
       .logo-container
         text-align: center
         margin-bottom: 3em
   .hero:first-child
     .hero-body
       margin: 0
-  
+
   .responsive-video-container
     flex: 1
     padding-bottom: 56.25%
     position: relative
     overflow: hidden
     height: 0
-  
+
   .responsive-youtube-video
-      position: absolute
-      top: 0
-      left: 0
-      height: 100%
-      width: 100%
+    position: absolute
+    top: 0
+    left: 0
+    height: 100%
+    width: 100%
 
   .know-more-fr
     background-color: $primary-dark
     a
       color: $white
       font-size: $size-5
+      &.button
+        color: #363636
+        font-weight: normal
     p
       font-size: $size-5
     .button
       margin-top: 1em
-    
+
   .last-videos-cards
     margin: 0 auto
     max-width: $maxHomeSectionWidth
 
   .presentation
     font-size: $size-5
+    +tablet
+      min-height: 75px
 
   .section
     margin: 0
@@ -160,7 +171,7 @@
       max-width: 670px
     .button
       margin: 1em
-  
+
   .subscribe-french-news
     background: $white
     padding: 2em

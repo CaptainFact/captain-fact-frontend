@@ -41,7 +41,7 @@ export default class Moderation extends React.PureComponent {
     }
 
     return (
-      <div className="section">
+      <div id="moderation-page" className="section">
         <h1 className="title is-1 has-text-centered">
           {t('title')} <Report size="1em" />
         </h1>
@@ -52,7 +52,11 @@ export default class Moderation extends React.PureComponent {
             {t('learnMore')}
           </Link>
         </div>
-        {!entry && <Message className="has-text-centered">{t('emptyModeration')}</Message>}
+        {!entry && (
+          <Message mt={4} className="has-text-centered mt-6">
+            {t('emptyModeration')}
+          </Message>
+        )}
         {entry && (
           <div>
             {this.renderAction(entry.action)}

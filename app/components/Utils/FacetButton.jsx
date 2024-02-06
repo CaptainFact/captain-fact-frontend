@@ -43,7 +43,7 @@ const Wrapper = styled.button`
     border-radius: 50%;
     transition:
       opacity 0.3s,
-      color 0.3s;
+      color 0.1s;
     backface-visibility: hidden;
     overflow: visible;
     padding: ${({ size }) => `${size / 4}px`};
@@ -52,11 +52,12 @@ const Wrapper = styled.button`
 
     /* Activated icon */
     &:nth-child(1) {
-      color: ${themeGet('colors.yellow')};
+      color: ${(props) =>
+        props.$isSecondary ? props.theme.colors.secondary : props.theme.colors.black[400]};
       transform: rotateY(180deg);
 
       &:hover {
-        opacity: 0.7;
+        color: ${themeGet('colors.primary')};
       }
     }
 
@@ -66,7 +67,7 @@ const Wrapper = styled.button`
       opacity: ${({ activated }) => (activated ? 0 : 0.7)};
 
       &:hover {
-        color: #e2b26f;
+        color: ${themeGet('colors.black.500')};
       }
     }
   }
@@ -81,9 +82,16 @@ const FacetButton = ({
   size,
   keepTooltipInside,
   className,
+  isSecondary,
 }) => {
   const popupContent = (
-    <Wrapper activated={activated} onClick={onClick} size={size} className={className}>
+    <Wrapper
+      activated={activated}
+      onClick={onClick}
+      size={size}
+      $isSecondary={isSecondary}
+      className={className}
+    >
       {activatedIcon}
       {deactivatedIcon || activatedIcon}
     </Wrapper>

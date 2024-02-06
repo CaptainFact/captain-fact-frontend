@@ -1,13 +1,12 @@
-import { merge } from 'immutable'
 import { capitalize } from 'lodash'
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { withNamespaces } from 'react-i18next'
 import { connect } from 'react-redux'
 
-import { ALL_VIDEOS, ONLY_COMMUNITY, ONLY_FEATURED, ONLY_PARTNERS } from '../../constants'
 import { toAbsoluteURL } from '../../lib/cf_routes'
 import { changeVideosLanguageFilter, setVideosFilter } from '../../state/user_preferences/reducer'
+import Container from '../StyledUtils/Container'
 import { Icon } from '../Utils'
 import AddVideoBtn from './AddVideoBtn'
 import PaginatedVideosContainer from './PaginatedVideosContainer'
@@ -42,14 +41,37 @@ export default class VideosIndexPage extends React.PureComponent {
             <Icon name="television" />
             <span> {capitalize(t('entities.videoFactChecking'))}</span>
           </h2>
-          <AddVideoBtn />
         </section>
-        <VideosFilterBar
-          onLanguageChange={(v) => this.onVideosLanguageChange(v)}
-          onSourceChange={(v) => setVideosFilter(v)}
-          language={languageFilter}
-          source={videosFilter}
-        />
+        <Container
+          flexDirection={['column-reverse', 'row']}
+          flexWrap="wrap"
+          display="flex"
+          gap="20px"
+          justifyContent="space-between"
+          alignItems="center"
+          maxWidth="1315px"
+          px="20px"
+          py="15px"
+          mx="auto"
+          mt={['30px', '80px']}
+          mb="32px"
+          boxShadow="rgba(0, 0, 0, 0.1) 0px 10px 10px -10px"
+          borderBottom="1px solid #f2f2f2"
+          bg="white"
+          css={{
+            position: 'sticky',
+            top: 60,
+            zIndex: 100,
+          }}
+        >
+          <VideosFilterBar
+            onLanguageChange={(v) => this.onVideosLanguageChange(v)}
+            onSourceChange={(v) => setVideosFilter(v)}
+            language={languageFilter}
+            source={videosFilter}
+          />
+          <AddVideoBtn />
+        </Container>
         <PaginatedVideosContainer
           baseURL={this.props.location.pathname}
           currentPage={currentPage}
@@ -63,20 +85,5 @@ export default class VideosIndexPage extends React.PureComponent {
   onVideosLanguageChange(value) {
     const language = value === 'all' ? null : value
     this.props.changeVideosLanguageFilter(language)
-  }
-
-  buildFilters() {
-    const { languageFilter, onlyFromPartners } = this.props
-
-    const partnerFilter = {
-      [ALL_VIDEOS]: {},
-      [ONLY_PARTNERS]: { is_partner: true },
-      [ONLY_COMMUNITY]: { is_partner: false },
-      [ONLY_FEATURED]: { is_featured: true },
-    }[onlyFromPartners]
-
-    const languageVideosFilter = languageFilter ? { language: languageFilter } : {}
-
-    return merge({}, partnerFilter, languageVideosFilter)
   }
 }
