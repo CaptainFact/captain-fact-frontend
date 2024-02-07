@@ -37,7 +37,10 @@
     "action_banned_bad_language": "Moderated ($t(moderation:reason.1))",
     "action_banned_spam": "Moderated ($t(moderation:reason.2))",
     "action_banned_irrelevant": "Moderated ($t(moderation:reason.3))",
-    "action_banned_not_constructive": "Moderated ($t(moderation:reason.4))"
+    "action_banned_not_constructive": "Moderated ($t(moderation:reason.4))",
+    "confirmed_flag": "Confirmed a flag",
+    "abused_flag": "Refuted a flag",
+    "social_network_linked": "Linked a social network account"
   },
   "actionTarget": {
     "vote_up": "Received a positive vote",
