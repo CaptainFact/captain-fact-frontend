@@ -58,8 +58,8 @@ export default class VideosIndexPage extends React.PureComponent {
           boxShadow="rgba(0, 0, 0, 0.1) 0px 10px 10px -10px"
           borderBottom="1px solid #f2f2f2"
           bg="white"
+          position={['initial', null, 'sticky']}
           css={{
-            position: 'sticky',
             top: 60,
             zIndex: 100,
           }}
