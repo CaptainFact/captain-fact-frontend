@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import UserAppellation from '../Users/UserAppellation'
 
 const ActionsDirectionFilter = ({ user, value, t }) => {
-  const baseLink = `/u/${user.username}/activity`
+  const baseLink = `/u/${user.username}`
   const getLinkProps = (filterValue) => ({
     className: filterValue === value ? 'is-active' : '',
     to: filterValue === 'ALL' ? baseLink : `${baseLink}?direction=${filterValue}`,

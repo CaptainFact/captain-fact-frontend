@@ -40,7 +40,6 @@ rules:
   no-plusplus: off
   radix: off
   eol-last: ['warn']
-  no-nested-ternary: ['warn']
   prefer-const: ['warn']
   no-restricted-globals: ['error', 'event', 'fdescribe']
   no-mixed-operators: ['warn']
