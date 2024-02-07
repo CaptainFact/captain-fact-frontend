@@ -67,15 +67,12 @@
       min-height: 20vh
     .hero-body
       max-width: 1900px
-      padding: 0em 4em
       margin: 0 auto
       & > .columns
         gap: 2em
       +mobile
-        padding: 0rem 1rem
+        padding: 3rem 2rem
         font-size: 12px
-      +tablet
-        padding: 0em 2em
       +desktop
         padding: 4em 6em
         padding-bottom: 6em
@@ -148,8 +145,6 @@
       clip-path: ellipse(60% 25% at 50% 100%)
 
   .section:not(.hero)
-    .title
-      color: $primary
     +mobile
       .title.is-3
         margin-bottom: 1em
