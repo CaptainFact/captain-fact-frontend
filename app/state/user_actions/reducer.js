@@ -42,7 +42,7 @@ const UsersActionsReducer = handleActions(
     },
     [combineActions(reset, resetVideoDebate)]: () => INITIAL_STATE(),
   },
-  INITIAL_STATE()
+  INITIAL_STATE(),
 )
 export default UsersActionsReducer
 

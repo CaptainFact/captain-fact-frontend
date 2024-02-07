@@ -27,7 +27,7 @@ export class ModalFormContainer extends React.PureComponent {
           handleFormEffectResponse({
             onSuccess: () => this.props.popModal(),
             onError: () => this.setState({ isSubmitting: false }),
-          })
+          }),
         )
       }
     }

@@ -179,7 +179,7 @@ class ActionDiff extends PureComponent {
     }
     // Format time like 0:42 -> 1:35
     if (key === 'time') {
-      return value ? formatSeconds(value) : ''
+      return formatSeconds(value)
     }
     if (key === 'source' || key === 'url') {
       return <ExternalLinkNewTab href={value}>{value}</ExternalLinkNewTab>

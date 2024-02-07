@@ -36,9 +36,16 @@ h1
   background-color: $primary
   color: $white-bis
   border: none
-  &:hover, &:active, &:focus
+  &:hover
     color: $white-bis
     border-color: $grey-light
+    background: linear-gradient(15deg, lighten($primary, 7), darken($primary, 7) 70%)
+    background-color: lighten($primary, 5)
+
+  &:active, &:focus
+    color: $white-bis
+    border-color: $grey-light
+    background: linear-gradient(15deg, lighten($primary, 10), darken($primary, 10) 70%)
 
 .is-gradient-info
   background: linear-gradient(45deg, $info, darken($info, 30) 65%)
@@ -49,3 +56,56 @@ h1
   border-color: darken($white, 15)
   &:hover
     color: darken($white, 10)
+
+/** Spacing helpers **/
+
+@for $i from 0 through 10
+  $value: $i * 0.25
+  @if $i > 4
+    $value: ($i - 4) * 1.5
+
+  .m-#{$i}
+    margin: #{$value}rem
+
+  .mt-#{$i}
+    margin-top: #{$value}rem
+
+  .mr-#{$i}
+    margin-right: #{$value}rem
+
+  .mb-#{$i}
+    margin-bottom: #{$value}rem
+
+  .ml-#{$i}
+    margin-left: #{$value}rem
+
+  .mx-#{$i}
+    margin-left: #{$value}rem
+    margin-right: #{$value}rem
+
+  .my-#{$i}
+    margin-top: #{$value}rem
+    margin-bottom: #{$value}rem
+
+  .p-#{$i}
+    padding: #{$value}rem
+
+  .pt-#{$i}
+    padding-top: #{$value}rem
+
+  .pr-#{$i}
+    padding-right: #{$value}rem
+
+  .pb-#{$i}
+    padding-bottom: #{$value}rem
+
+  .pl-#{$i}
+    padding-left: #{$value}rem
+
+  .px-#{$i}
+    padding-left: #{$value}rem
+    padding-right: #{$value}rem
+
+  .py-#{$i}
+    padding-top: #{$value}rem
+    padding-bottom: #{$value}rem

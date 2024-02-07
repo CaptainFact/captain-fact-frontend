@@ -64,12 +64,19 @@ export default class Sidebar extends React.PureComponent {
 
   MenuLink({ title, iconName, customLink, className, children, ...props }) {
     const classes = classNames(className, { 'link-with-icon': !!iconName })
+
     return (
       <NavLink
         className={classes}
         activeClassName="is-active"
         onClick={this.closeSideBarIfMobile}
         title={title ? title : children}
+        // For `/help/contact`, override the default `isActive` as we would activate both help and contact otherwise
+        isActive={
+          props.to === '/help'
+            ? (match, location) => (location.pathname === '/help/contact' ? false : match)
+            : null
+        }
         {...props}
       >
         {iconName && <RawIcon name={iconName} />}
@@ -146,7 +153,7 @@ export default class Sidebar extends React.PureComponent {
             <ExternalLinkNewTab href="https://github.com/CaptainFact">
               <Github size="1.5em" /> &nbsp;&nbsp;&nbsp;
             </ExternalLinkNewTab>
-            <ExternalLinkNewTab href="https://discord.gg/Z22Vhda">
+            <ExternalLinkNewTab href="https://discord.captainfact.io">
               <Discord size="1.5em" /> &nbsp;&nbsp;&nbsp;
             </ExternalLinkNewTab>
             <ExternalLinkNewTab href="https://twitter.com/CaptainFact_io">

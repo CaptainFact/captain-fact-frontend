@@ -1,8 +1,7 @@
-import tag from 'clean-tag'
 import styled from 'styled-components'
 import * as styledSystem from 'styled-system'
 
-const StyledInput = styled(tag.input)`
+const StyledInput = styled.input`
   ${styledSystem.space}
   ${styledSystem.borders}
   ${styledSystem.borderColor}

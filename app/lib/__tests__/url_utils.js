@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { isExternal, optionsToQueryString, youtubeRegex } from '../url_utils'
 
 describe('Youtube regex', () => {
@@ -19,7 +23,7 @@ describe('Youtube regex', () => {
     expect(youtubeRegex.test('https://youtu.be')).toBe(false)
     // Channel
     expect(youtubeRegex.test('https://www.youtube.com/channel/UCQgWpmt02UtJkyO32HGUASQ')).toBe(
-      false
+      false,
     )
     // Empty string
     expect(youtubeRegex.test('')).toBe(false)

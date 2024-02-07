@@ -22,7 +22,7 @@ import { StatementForm } from './StatementForm'
     autoscrollEnabled: state.UserPreferences.enableAutoscroll,
     formEnabled: state.VideoDebate.statements.formsCount > 0,
   }),
-  { updateStatement, deleteStatement }
+  { updateStatement, deleteStatement },
 )
 @withLoggedInUser
 @withNamespaces('videoDebate')
@@ -92,7 +92,7 @@ export default class StatementContainer extends React.PureComponent {
                 this.setState({ isEditing: false })
                 return response
               },
-            })
+            }),
           )
         }
       />

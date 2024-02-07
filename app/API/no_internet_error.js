@@ -9,6 +9,6 @@ export default function noInternetError() {
       message: NO_INTERNET_ERROR,
       timeLeft: 999999999999,
       infoText: 'actions.reload',
-    })
+    }),
   )
 }

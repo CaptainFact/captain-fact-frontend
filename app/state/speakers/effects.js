@@ -24,6 +24,6 @@ export const fetchWikiDataInfo =
         const res = parser.parseFromString(xml, 'text/xml')
         const links = Array.from(res.getElementsByTagName('uri')).map((e) => e.textContent)
         return dispatch(actionFetchSpeakerWikiLinks(links))
-      })
+      }),
     )
   }

@@ -23,7 +23,7 @@
         "remote_video_404": "Tiu video ŝajne ne ekzistas"
     },
     "client": {
-        "joinCrashed": "La konekto al la servilo malsukcesi",
+        "joinCrashed": "La konekto al la servilo malsukcesis",
         "thirdParty": "Aŭtentigo malsukcesis",
         "submissionError": "Problemo okazis dum sendo de datumoj",
         "noVideoAvailable": "Neniu video estas disponebla",

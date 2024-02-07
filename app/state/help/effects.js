@@ -19,7 +19,7 @@ export const fetchHelpPage = (pageName) => (dispatch, getState) => {
           return ERROR_NOT_FOUND
         }
         throw new Error('Cannot fetch help page')
-      })
-    )
+      }),
+    ),
   )
 }

@@ -57,10 +57,10 @@ Immutable.Record {
 
 exports[`set presence 2`] = `
 Immutable.Record {
-  "viewers": Object {
+  "viewers": {
     "count": 42,
   },
-  "users": Object {
+  "users": {
     "count": 5,
   },
 }

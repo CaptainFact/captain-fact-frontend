@@ -38,6 +38,6 @@ MenuToggleSwitch.propTypes = {
 
 export default withTheme(
   connect(({ UserPreferences: { sidebarExpended } }) => ({ sidebarExpended }), { toggleSidebar })(
-    MenuToggleSwitch
-  )
+    MenuToggleSwitch,
+  ),
 )

@@ -39,7 +39,7 @@ const CFSocialProfiles = ({ size, color, justifyContent, theme }) => {
         name="Discord"
         Icon={Discord}
         size={size}
-        url="https://discord.gg/2Qd7hMz"
+        url="https://discord.captainfact.io"
         color={themeColor}
       />
       <SocialIconLink

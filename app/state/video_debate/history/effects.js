@@ -14,7 +14,7 @@ export const joinVideoDebateHistoryChannel = (videoId) => (dispatch) =>
   joinHistoryChannel(
     dispatch,
     VIDEO_DEBATE_HISTORY_CHANNEL,
-    `${VIDEO_DEBATE_HISTORY_CHANNEL}:${videoId}`
+    `${VIDEO_DEBATE_HISTORY_CHANNEL}:${videoId}`,
   )
 
 export const leaveVideoDebateHistoryChannel = () => () =>
@@ -24,7 +24,7 @@ export const joinStatementHistoryChannel = (statementId) => (dispatch) =>
   joinHistoryChannel(
     dispatch,
     STATEMENTS_HISTORY_CHANNEL,
-    `${STATEMENTS_HISTORY_CHANNEL}:${statementId}`
+    `${STATEMENTS_HISTORY_CHANNEL}:${statementId}`,
   )
 
 export const leaveStatementHistoryChannel = () => () =>
@@ -46,7 +46,7 @@ function joinHistoryChannel(dispatch, channelId, topic) {
     fetchAll(
       SocketApi.joinChannel(channelId, topic, {
         action_added: (a) => dispatch(addAction(a)),
-      })
-    )
+      }),
+    ),
   )
 }

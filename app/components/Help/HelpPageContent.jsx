@@ -19,7 +19,7 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
     error: state.Help.error,
     locale: state.UserPreferences.locale,
   }),
-  { fetchHelpPage, reset }
+  { fetchHelpPage, reset },
 )
 class HelpPageContent extends PureComponent {
   constructor(props) {

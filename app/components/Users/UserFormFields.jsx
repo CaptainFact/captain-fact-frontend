@@ -22,7 +22,7 @@ export const validatePasswordRepeat = ({ password, passwordRepeat }) => {
 export const UserEmailField = ({ t }) => {
   const validate = React.useCallback(
     (email) => (!email || !isEmail(email)) && t('errors:server.invalid_email'),
-    [t]
+    [t],
   )
 
   return (
@@ -54,7 +54,7 @@ export const UserEmailOrUsernameField = ({ t }) => {
 export const UserPasswordField = ({ t, isOptional = false }) => {
   const validate = React.useCallback(
     (v) => (!v && isOptional ? null : validateFieldLength(t, v, PASSWORD_LENGTH)),
-    [t]
+    [t],
   )
   return (
     <Field

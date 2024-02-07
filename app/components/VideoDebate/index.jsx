@@ -33,7 +33,7 @@ import { ColumnVideo } from './ColumnVideo'
     leaveStatementsChannel,
     leaveVideoDebateChannel,
     resetVideoDebate,
-  }
+  },
 )
 @withNamespaces('videoDebate')
 export class VideoDebate extends React.PureComponent {

@@ -10,7 +10,7 @@ export const getStatementSpeakerId = (state, props) => props.statement.speaker_i
 export const getStatementSpeaker = createCachedSelector(
   getStatementSpeakerId,
   getVideoDebateSpeakers,
-  (speakerId, speakers) => speakers.find((s) => s.id === speakerId)
+  (speakerId, speakers) => speakers.find((s) => s.id === speakerId),
 )((state, props) => props.statement.id)
 
 export const getFocusedStatementId = createSelector(
@@ -26,7 +26,7 @@ export const getFocusedStatementId = createSelector(
     return statement && adjustedPosition <= statement.time + STATEMENT_FOCUS_TIME
       ? statement.id
       : -1
-  }
+  },
 )
 
 export const getFocusedStatementSpeakerId = createSelector(
@@ -38,13 +38,13 @@ export const getFocusedStatementSpeakerId = createSelector(
     }
     const statement = statements.find((s) => s.id === focusId)
     return (statement && statement.speaker_id) || null
-  }
+  },
 )
 
 export const isStatementFocused = createSelector(
   getFocusedStatementId,
   (state, props) => props.statement.id,
-  (focusedStatementId, statementId) => focusedStatementId === statementId
+  (focusedStatementId, statementId) => focusedStatementId === statementId,
 )
 
 export const statementFormValueSelector = formValueSelector('StatementForm')

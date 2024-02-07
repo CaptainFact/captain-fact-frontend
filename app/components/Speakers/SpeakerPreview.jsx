@@ -27,7 +27,7 @@ import ModalRemoveSpeaker from './ModalRemoveSpeaker'
   (state, props) => ({
     isFocused: getFocusedStatementSpeakerId(state) === props.speaker.id,
   }),
-  { addModal, changeStatementFormSpeaker, removeSpeaker }
+  { addModal, changeStatementFormSpeaker, removeSpeaker },
 )
 @withLoggedInUser
 export class SpeakerPreview extends React.PureComponent {

@@ -25,7 +25,7 @@ export class ModalConfirm extends React.PureComponent {
         handleEffectResponse({
           onSuccess: () => this.props.popModal(),
           onError: () => this.setState({ isSubmitting: false }),
-        })
+        }),
       )
     }
   }

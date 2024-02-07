@@ -2,6 +2,10 @@ import { SUPPORTED_LOCALES } from '../constants'
 
 // Util to get browser locale
 const navigatorLocale = () => {
+  if (typeof window === 'undefined') {
+    return 'en'
+  }
+
   return window.navigator.userLanguage || window.navigator.language || 'en'
 }
 

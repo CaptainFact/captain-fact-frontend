@@ -100,13 +100,13 @@ const FlashesReducer = handleActions(
         return state.update('flashes', (flashes) =>
           flashes
             .map((f) => f.set('timeLeft', f.timeLeft - payload))
-            .filter((msg) => msg.timeLeft > 0)
+            .filter((msg) => msg.timeLeft > 0),
         )
       }
       return state
     },
   },
-  INITIAL_STATE()
+  INITIAL_STATE(),
 )
 
 export default FlashesReducer

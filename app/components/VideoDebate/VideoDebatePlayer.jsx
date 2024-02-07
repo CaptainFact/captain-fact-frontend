@@ -14,7 +14,7 @@ import { setPlaying, setPosition } from '../../state/video_debate/video/reducer'
     forcedPosition: state.VideoDebate.video.playback.forcedPosition,
     isPlaying: state.VideoDebate.video.playback.isPlaying,
   }),
-  { setPosition, setPlaying }
+  { setPosition, setPlaying },
 )
 export default class VideoDebatePlayer extends React.Component {
   shouldComponentUpdate(newProps) {

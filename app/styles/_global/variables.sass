@@ -6,24 +6,22 @@
 // Primary colors
 
 $green: #39b714
-$red: #e0454e
+$red: #b82d36
 $blue: #75caff
 
 $primary: #6ba3a7
 $primary-dark: #547b81
-$primary-darker: #095191
+$primary-darker: #3c5a73
 $primary-light: #5D9BD4
 $primary-lighter: #8ABAE5
 $primary-neutral: #5f82a0
 $primary-desaturated: #5c82a3
 
-$secondary: #ffb03f
-$secondary-dark: #FF9E16
-$secondary-darker: #E08300
-$secondary-light: #FFBF65
-$secondary-lighter: #FFD292
-//$secondary-neutral: #b57c4a
-//$secondary-desaturated: #c67b39
+$secondary: #2D6282
+$secondary-dark: darken($secondary, 10)
+$secondary-darker: darken($secondary, 20)
+$secondary-light: lighten($secondary, 10)
+$secondary-lighter: lighten($secondary, 20)
 
 $primary-gradient: linear-gradient(45deg,#78b4b4,#587979 71%,#3c5a73)
 
@@ -73,7 +71,7 @@ $sidebar_full_collapse_banner_height: 70px
 @import "bulma/sass/utilities/derived-variables"
 
 // Link colors
-$link: $primary
+$link: darken($primary, 15)
 $link-invert: $primary-invert
 $link-visited: $purple
 

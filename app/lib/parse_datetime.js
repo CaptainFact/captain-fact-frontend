@@ -7,8 +7,8 @@ export const parseUTC = (date) =>
       date.getHours(),
       date.getMinutes(),
       date.getSeconds(),
-      date.getMilliseconds()
-    )
+      date.getMilliseconds(),
+    ),
   )
 
 const parseDateTime = (dateStr) => parseUTC(new Date(dateStr))

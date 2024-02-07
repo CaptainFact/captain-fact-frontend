@@ -45,3 +45,7 @@ export const borderStyle = style({
 export const listStyle = style({
   prop: 'listStyle',
 })
+
+export const gap = style({
+  prop: 'gap',
+})

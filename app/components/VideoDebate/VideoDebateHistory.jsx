@@ -15,7 +15,7 @@ import ActionsTable from '../UsersActions/ActionsTable'
     error: state.UsersActions.error,
     actions: state.UsersActions.actions,
   }),
-  { joinVideoDebateHistoryChannel, leaveVideoDebateHistoryChannel, reset }
+  { joinVideoDebateHistoryChannel, leaveVideoDebateHistoryChannel, reset },
 )
 export default class VideoDebateHistory extends React.PureComponent {
   componentDidMount() {

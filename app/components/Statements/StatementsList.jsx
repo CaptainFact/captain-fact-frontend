@@ -18,7 +18,7 @@ import { StatementForm } from './StatementForm'
     statementFormSpeakerId: statementFormValueSelector(state, 'speaker_id'),
     offset: state.VideoDebate.video.offset,
   }),
-  { closeStatementForm, postStatement, setScrollTo }
+  { closeStatementForm, postStatement, setScrollTo },
 )
 @withNamespaces('videoDebate')
 @withRouter

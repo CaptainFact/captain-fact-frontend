@@ -12,6 +12,7 @@ const theme = {
     blue: '#75caff',
     yellow: '#ffb03f',
     primary: '#6ba3a7',
+    secondary: '#2D6282',
     info: '#75caff',
     white: '#ffffff',
     black: {

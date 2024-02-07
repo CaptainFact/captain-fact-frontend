@@ -1,7 +1,7 @@
 <p align="center"><img src="app/static/assets/img/logo.png" height="100"/></p>
 <h1 align="center"><a href="https://captainfact.io">CaptainFact.io</a></h1>
 <p align="center">
-<a href="https://discord.gg/2Qd7hMz" title="Discord"><img src="https://discordapp.com/api/guilds/416782744748687361/widget.png" alt="Discord"></a>
+<a href="https://discord.captainfact.io" title="Discord"><img src="https://discordapp.com/api/guilds/416782744748687361/widget.png" alt="Discord"></a>
 <a href="https://twitter.com/CaptainFact_io" title="Twitter"><img src="https://img.shields.io/twitter/follow/CaptainFact_io.svg?style=social&label=Follow"></a>
 <a href="https://opencollective.com/captainfact_io" title="Backers on Open Collective"><img src="https://opencollective.com/captainfact_io/backers/badge.svg"></a>
 </p>
@@ -26,6 +26,7 @@ If you're already have the API running locally, a simple `npm install && npm sta
 should be enough. Otherwise follow the procedure below:
 
 - Install (if you don't have them):
+
   - The API project: https://github.com/opencollective/opencollective-api
   - NodeJS, ideally using [asdf-vm](https://github.com/asdf-vm/asdf) with `NODEJS_CHECK_SIGNATURES=no asdf install`
   - App dependencies: `npm install`

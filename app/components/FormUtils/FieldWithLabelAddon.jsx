@@ -2,12 +2,12 @@ import React from 'react'
 
 import Button from '../Utils/Button'
 
-const FieldWithLabelAddon = ({ label, children }) => {
+const FieldWithLabelAddon = ({ label, children, inputId }) => {
   return (
     <div className="field has-addons">
-      <p className="control">
+      <label className="control" htmlFor={inputId}>
         <Button className="is-static">{label}</Button>
-      </p>
+      </label>
       <div className="control">{children}</div>
     </div>
   )

@@ -20,11 +20,11 @@ const PresenceReducer = handleActions(
           })
           .updateIn(['users', 'count'], (x) => {
             return x + joins.users.count - leaves.users.count
-          })
+          }),
       )
     },
   },
-  INITIAL_STATE()
+  INITIAL_STATE(),
 )
 
 export default PresenceReducer

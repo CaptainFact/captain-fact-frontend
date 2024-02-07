@@ -59,7 +59,7 @@ export default class StatementComments extends React.PureComponent {
           header={this.renderCommentsListHeader(
             'refute',
             'danger',
-            this.calculateScore(refutingFacts)
+            this.calculateScore(refutingFacts),
           )}
           statementID={this.props.statement.id}
           commentType="refute"
@@ -71,7 +71,7 @@ export default class StatementComments extends React.PureComponent {
           header={this.renderCommentsListHeader(
             'approve',
             'success',
-            this.calculateScore(approvingFacts)
+            this.calculateScore(approvingFacts),
           )}
           statementID={this.props.statement.id}
           commentType="approve"

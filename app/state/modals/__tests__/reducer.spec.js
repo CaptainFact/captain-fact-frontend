@@ -22,6 +22,6 @@ it('should be able to add and remove modals', () => {
     addModal(createTestModal(1)),
     addModal(createTestModal(2)),
     popModal(),
-    popModal()
+    popModal(),
   )
 })

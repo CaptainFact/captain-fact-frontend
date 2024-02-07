@@ -31,7 +31,7 @@ const pageSelectButtonsList = (
   nbEnd,
   disabled,
   onPageChange,
-  nbShowArround = 2
+  nbShowArround = 2,
 ) => {
   const result = []
   let curPage = nbStart

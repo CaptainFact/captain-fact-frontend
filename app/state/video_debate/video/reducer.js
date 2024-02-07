@@ -105,7 +105,7 @@ const VideoReducer = handleActions(
         p.mergeDeep({
           position: payload,
           forcedPosition: { time: payload, requestId: uuidv4() },
-        })
+        }),
       )
     },
     [setPlaying]: (state, { payload }) => {
@@ -116,6 +116,6 @@ const VideoReducer = handleActions(
     },
     [resetVideoDebate]: () => INITIAL_STATE(),
   },
-  INITIAL_STATE()
+  INITIAL_STATE(),
 )
 export default VideoReducer

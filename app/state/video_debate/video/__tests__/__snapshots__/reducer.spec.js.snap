@@ -211,8 +211,8 @@ Immutable.Record {
   "player": "youtube",
   "offset": 0,
   "playback": Immutable.Record {
-    "position": Object {
-      "forcedPosition": Object {
+    "position": {
+      "forcedPosition": {
         "requestId": 1,
         "time": 0,
       },
@@ -220,8 +220,8 @@ Immutable.Record {
     },
     "forcedPosition": Immutable.Record {
       "requestId": "A-UNIQUE-UUID",
-      "time": Object {
-        "forcedPosition": Object {
+      "time": {
+        "forcedPosition": {
           "requestId": 1,
           "time": 0,
         },

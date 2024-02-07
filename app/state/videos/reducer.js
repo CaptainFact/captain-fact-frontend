@@ -13,7 +13,7 @@ const VideosReducer = handleActions(
     [setSubmitting]: (state, { payload }) => state.set('isSubmitting', payload),
     [reset]: () => INITIAL_STATE(),
   },
-  INITIAL_STATE()
+  INITIAL_STATE(),
 )
 
 export default VideosReducer

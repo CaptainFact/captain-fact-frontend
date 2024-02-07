@@ -3,9 +3,9 @@ import { withNamespaces } from 'react-i18next'
 
 import { ALL_VIDEOS, ONLY_COMMUNITY, ONLY_FEATURED, ONLY_PARTNERS } from '../../constants'
 
-const VideoSourceFiltersSelect = ({ value, onChange, t }) => (
+const VideoSourceFiltersSelect = ({ id, value, onChange, t }) => (
   <div className="select">
-    <select value={value} onChange={(e) => onChange(e.target.value)}>
+    <select value={value} onChange={(e) => onChange(e.target.value)} id={id}>
       <option value={ALL_VIDEOS}>{t('all')}</option>
       <option value={ONLY_FEATURED}>{t('featured')}</option>
       <option value={ONLY_PARTNERS}>{t('partners')}</option>

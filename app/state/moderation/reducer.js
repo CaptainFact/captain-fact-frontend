@@ -34,7 +34,7 @@ const ModerationReducer = handleActions(
     [setLoading]: (state, { payload }) => state.set('isLoading', payload),
     [removeModerationEntry]: (state) => state.set('entry', null),
   },
-  INITIAL_STATE()
+  INITIAL_STATE(),
 )
 
 const prepareEntry = (entry) => {

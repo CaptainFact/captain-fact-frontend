@@ -23,8 +23,16 @@ class CaptainFactSocketApi {
 
   createSocket(token) {
     this.socket = new Socket(this.socketUrl, { params: { token } })
-    this.socket.onError(noInternetError)
-    this.socket.onClose(noInternetError)
+    this.socket.onError((e) => {
+      // eslint-disable-next-line no-console
+      console.warn('Socket error:', e)
+      noInternetError()
+    })
+    this.socket.onClose((e) => {
+      if (!e.wasClean) {
+        noInternetError()
+      }
+    })
   }
 
   /**

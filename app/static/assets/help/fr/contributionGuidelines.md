@@ -1,6 +1,6 @@
 ## Pourquoi fact-check ? Pourquoi utiliser CaptainFact ?
 
-*« Le fact-checking ou vérification des faits est l’acte de vérifier une affirmation, afin d’en déterminer la véracité et l’exactitude. »*
+_« Le fact-checking ou vérification des faits est l’acte de vérifier une affirmation, afin d’en déterminer la véracité et l’exactitude. »_
 
 CaptainFact permet de vérifier efficacement - ensemble - ce qui se dit en vidéo, en sourçant ce qui est affirmé.
 
@@ -10,26 +10,26 @@ CaptainFact permet de vérifier efficacement - ensemble - ce qui se dit en vidé
 
 ## Quoi vérifier ? Quelles affirmations citer sur CaptainFact ?
 
-
-*« Le ciel est bleu ! »*
+_« Le ciel est bleu ! »_
 
 Notre outil permet de citer le passage d’une vidéo, afin de la vérifier avec les autres membres du site. Mais toutes les affirmations ne méritent pas d’être citées et vérifiées.
 
 Pour avoir sa place sur CaptainFact, une citation doit remplir au moins un des critères suivants :
 
-* être vérifiable grâce à l’exposition de faits ;
-* faire mention d'une source ou d'un contenu que l’on peut vérifier ;
-* présenter des éléments incomplets ou approximatifs ;
-* présenter un argument fallacieux, trompeur ou mensonger.
+- être vérifiable grâce à l’exposition de faits ;
+- faire mention d'une source ou d'un contenu que l’on peut vérifier ;
+- présenter des éléments incomplets ou approximatifs ;
+- présenter un argument fallacieux, trompeur ou mensonger.
 
 Ne méritent pas travail de vérification :
-* les évidences comme « Le ciel est bleu ! » ;
-* les figures de style et l’humour (comme les hyperboles, les métaphores, etc) ;
-* les erreurs mineures ;
-* les opinions personnelles.
 
-Les opinions doivent autant que possible éviter d'apparaître dans les citations. 
-Vous pouvez, si cela ne la prive pas de son sens, remplacer les jugements de 
+- les évidences comme « Le ciel est bleu ! » ;
+- les figures de style et l’humour (comme les hyperboles, les métaphores, etc) ;
+- les erreurs mineures ;
+- les opinions personnelles.
+
+Les opinions doivent autant que possible éviter d'apparaître dans les citations.
+Vous pouvez, si cela ne la prive pas de son sens, remplacer les jugements de
 valeur (le mieux, le pire, stupide...etc) par des `[...]`.
 
 Par exemple :
@@ -49,86 +49,86 @@ Nous proposons ci-dessous une typologie non-exhaustive des sources qu’il est p
 
 Elles possèdent bien souvent un service de presse et un service statistique, sources d’informations primaires de grande valeur pour le fact-checker.
 
-*Ex : [Organisation Mondiale du Commerce](https://www.wto.org/indexfr.htm), [l’Organisation des Nations Unies](http://www.un.org/fr/index.html), …*
+_Ex : [Organisation Mondiale du Commerce](https://www.wto.org/indexfr.htm), [l’Organisation des Nations Unies](http://www.un.org/fr/index.html), …_
 
 ### Les États et collectivités
 
-Les communiqués et rapports produits par les États, les parlements, les ministères et les  administrations territoriales (région, département, municipalités) ou les rapports et statistiques fournis par les différentes agences et institutions publiques.
+Les communiqués et rapports produits par les États, les parlements, les ministères et les administrations territoriales (région, département, municipalités) ou les rapports et statistiques fournis par les différentes agences et institutions publiques.
 
-*Ex : [le ministère des Armées](https://www.defense.gouv.fr/), [la région Auvergne-Rhône-Alpes](https://www.auvergnerhonealpes.fr/), [l’INSEE](https://www.insee.fr/), …*
+_Ex : [le ministère des Armées](https://www.defense.gouv.fr/), [la région Auvergne-Rhône-Alpes](https://www.auvergnerhonealpes.fr/), [l’INSEE](https://www.insee.fr/), …_
 
-```(!) Les communiqués auront tendance à relayer le point de vue de leur gouvernement ou leur mairie et la rigueur méthodologique est variable.```
+`(!) Les communiqués auront tendance à relayer le point de vue de leur gouvernement ou leur mairie et la rigueur méthodologique est variable.`
 
 ### Les agences de presse
 
 Quel que soit leur actionnaire, les journalistes des agences de presse sont tous tenus au respect de la déontologie du journalisme et au principe de protection des sources d'information. Néanmoins, celles contrôlées par des États posent inévitablement au fact-checker la question de la fiabilité de l’information produite.
 
-*Ex : [Associated Press](https://www.ap.org/en-gb/), [Reuters](https://reuters.com/) et [l'Agence France-Presse](https://www.afp.com/fr), …*
+_Ex : [Associated Press](https://www.ap.org/en-gb/), [Reuters](https://reuters.com/) et [l'Agence France-Presse](https://www.afp.com/fr), …_
 
-```(!) Le cas des agences de presse contrôlées par des États pose la question de la fiabilité de l’information produite en fonction de la nature du régime politique en place.```
+`(!) Le cas des agences de presse contrôlées par des États pose la question de la fiabilité de l’information produite en fonction de la nature du régime politique en place.`
 
 ### Médias de masse
 
 L'expression médias de masse regroupe les médias diffusés à grande échelle pour répondre rapidement à une demande d'information d'un public vaste.
 
-*Ex : [Le Monde](https://www.lemonde.fr/), [Slate](https://slate.com/), France 2, LCI, RFI, Europe 1, ...*
+_Ex : [Le Monde](https://www.lemonde.fr/), [Slate](https://slate.com/), France 2, LCI, RFI, Europe 1, ..._
 
-```(!) L’évaluation d’un média de masse impose au fact-checker de nombreuses interrogations – parmi lesquelles le contrôle,  la liberté de discours ou encore le business model.```
+`(!) L’évaluation d’un média de masse impose au fact-checker de nombreuses interrogations – parmi lesquelles le contrôle,  la liberté de discours ou encore le business model.`
 
 ### Publications scientifiques
 
-Les publications scientifiques permettent de diffuser des informations scientifiques et techniques produites par des travaux de recherche et  généralement destinées à des chercheurs ou à un public de spécialistes.
+Les publications scientifiques permettent de diffuser des informations scientifiques et techniques produites par des travaux de recherche et généralement destinées à des chercheurs ou à un public de spécialistes.
 
-*Ex : [Nature](https://www.nature.com/nature/), …*
+_Ex : [Nature](https://www.nature.com/nature/), …_
 
-```(!) Il incombe au fact-checker de vérifier le financement de l’étude en question ou la méthodologie employée.```
+`(!) Il incombe au fact-checker de vérifier le financement de l’étude en question ou la méthodologie employée.`
 
 ### ONG
 
 Une organisation non gouvernementale (ONG) est une association à but non lucratif, d'intérêt public, qui ne relève ni de l'État, ni d'institutions internationales.
 
-*Ex : [Amnesty](https://www.amnesty.org/fr/), [WWF](https://www.wwf.fr/), …*
+_Ex : [Amnesty](https://www.amnesty.org/fr/), [WWF](https://www.wwf.fr/), …_
 
-```(!) Considérer les questions du financement, de l’historique et de la transparence des actions menées ou de la réputation de l’organisation.```
+`(!) Considérer les questions du financement, de l’historique et de la transparence des actions menées ou de la réputation de l’organisation.`
 
 ### Blogs et autres médias indépendants
 
-Un grand nombre de médias de qualité très variable et dont l’ambition est de proposer un autre prisme de lecture ou de traiter  des thématiques jugées absentes ou insuffisamment traitées par les médias traditionnels. Leur indépendance leur confère des avantages, mais ne garantit ni rigueur méthodologique, ni absence d’intérêts dissimulés.
+Un grand nombre de médias de qualité très variable et dont l’ambition est de proposer un autre prisme de lecture ou de traiter des thématiques jugées absentes ou insuffisamment traitées par les médias traditionnels. Leur indépendance leur confère des avantages, mais ne garantit ni rigueur méthodologique, ni absence d’intérêts dissimulés.
 
-```(!) L’évaluation  d’une source de type blog demande donc un travail considérable au fact-checker avant toute reprise.```
+`(!) L’évaluation  d’une source de type blog demande donc un travail considérable au fact-checker avant toute reprise.`
 
 ### Individus
 
-```Déterminer si l’information produite par les individus eux-mêmes peut constituer une source valable est loin d’être évident à cause de ses biais ou son caractère subjectif.```
+`Déterminer si l’information produite par les individus eux-mêmes peut constituer une source valable est loin d’être évident à cause de ses biais ou son caractère subjectif.`
 
-*Ex : des témoignages, des interviews, comme celui de [djihadistes européens capturés par des combattants kurdes](https://www.francetvinfo.fr/monde/proche-orient/offensive-jihadiste-en-irak/syrie-un-jihadiste-francais-face-a-son-geolier_2571977.html) et interrogés par des journalistes européens, sous surveillance de leurs gardiens. 
-Il est légitime de questionner les informations recueillies dans ces conditions et les éventuelles révélations qu’elles contiendraient sur les agissements de leur organisation ou la magnanimité de leurs gardiens.*
+_Ex : des témoignages, des interviews, comme celui de [djihadistes européens capturés par des combattants kurdes](https://www.francetvinfo.fr/monde/proche-orient/offensive-jihadiste-en-irak/syrie-un-jihadiste-francais-face-a-son-geolier_2571977.html) et interrogés par des journalistes européens, sous surveillance de leurs gardiens.
+Il est légitime de questionner les informations recueillies dans ces conditions et les éventuelles révélations qu’elles contiendraient sur les agissements de leur organisation ou la magnanimité de leurs gardiens._
 
 ### Wikipédia
 
 Il est acceptable de se référer à une page Wikipédia comme source, à condition de vérifier dans les notes de bas de page la source utilisée dans l’article et sa disponibilité.
 
-```(!) Se méfier des articles sur des thématiques sujettes à polémique, souvent indiqué par une bannière.```
+`(!) Se méfier des articles sur des thématiques sujettes à polémique, souvent indiqué par une bannière.`
 
 ## Comment évaluer une source ?
 
 La question de l’évaluation d’une source est toujours délicate mais semble plus que jamais nécessaire à l’ère de la guerre de l’information et de la crise de légitimité des médias traditionnels. Internet a multiplié la quantité d’informations et de contenus auxquels nous sommes confrontés et nous impose d’évaluer, trier et hiérarchiser nos sources.
 
-Ce processus  critique doit être préalable à toute rediffusion d’information et de contenu. Nous proposons ci-dessous une liste non-exhaustive de points à considérer à se poser pour évaluer la fiabilité et la crédibilité d’une source.
+Ce processus critique doit être préalable à toute rediffusion d’information et de contenu. Nous proposons ci-dessous une liste non-exhaustive de points à considérer à se poser pour évaluer la fiabilité et la crédibilité d’une source.
 
 ### Degré de proximité
 
 Limiter le degré d’éloignement avec l’information, c’est limiter les altérations et les interprétations a posteriori de l’information d’origine, qu’elles soient involontaires ou malhonnêtes. Bien entendu, il n’est pas toujours possible de remonter à la source d’origine, par exemple dans le cas de sources anonymes protégées par des journalistes ou d’éléments confidentiels provenant d’informateurs des services de renseignement. On remontera dans ce cas à la source la plus proche de la source originelle.
 
-*Ex : Pour comprendre le débat public sur la légalisation de l’avortement en Argentine à l’été 2018, il est préférable de se référer à des médias argentins ([La Nacion](https://www.lanacion.com.ar/2159529-el-debate-constitucional-sobre-la-legalizacion-del-aborto), [Clarín](https://www.clarin.com/sociedad/aborto-paso-paso-primer-panuelazo-rechazo-senado_0_Hk8BoXJ-m.html)…) plutôt qu’à des médias français généralistes qui, bien que potentiellement capables de fournir une information tout aussi exacte, seront généralement limités dans leur traitement, pour des raisons de priorisation de l’information ou encore d’absence de correspondants locaux en nombre suffisant.*
+_Ex : Pour comprendre le débat public sur la légalisation de l’avortement en Argentine à l’été 2018, il est préférable de se référer à des médias argentins ([La Nacion](https://www.lanacion.com.ar/2159529-el-debate-constitucional-sobre-la-legalizacion-del-aborto), [Clarín](https://www.clarin.com/sociedad/aborto-paso-paso-primer-panuelazo-rechazo-senado_0_Hk8BoXJ-m.html)…) plutôt qu’à des médias français généralistes qui, bien que potentiellement capables de fournir une information tout aussi exacte, seront généralement limités dans leur traitement, pour des raisons de priorisation de l’information ou encore d’absence de correspondants locaux en nombre suffisant._
 
 ### Liberté d’opinion et de discours
 
-Il existe encore aujourd’hui des États où la presse reste contrôlée par l’Etat et où toute prise de position contraire à celle de l’Etat ou du gouvernement est censurée, voire sévèrement  réprimée. Il est donc important pour le fact-checker d’évaluer la recevabilité d’une information provenant d’un titre de presse d’un pays donné en tenant compte de la réalité politique du pays de provenance.
+Il existe encore aujourd’hui des États où la presse reste contrôlée par l’Etat et où toute prise de position contraire à celle de l’Etat ou du gouvernement est censurée, voire sévèrement réprimée. Il est donc important pour le fact-checker d’évaluer la recevabilité d’une information provenant d’un titre de presse d’un pays donné en tenant compte de la réalité politique du pays de provenance.
 
-*Ex : La Turquie a par exemple fait la récente expérience  de [l’entravement progressif de sa presse d’opposition](https://www.theguardian.com/world/2016/aug/29/stop-the-press-turkey-crackdown-journalists-overdrive-since-coup) à mesure que M. Recep Tayyip Erdogan  renforçait sa position présidentielle  et son pouvoir politique. *
+_Ex : La Turquie a par exemple fait la récente expérience de [l’entravement progressif de sa presse d’opposition](https://www.theguardian.com/world/2016/aug/29/stop-the-press-turkey-crackdown-journalists-overdrive-since-coup) à mesure que M. Recep Tayyip Erdogan renforçait sa position présidentielle et son pouvoir politique. _
 
-**Outils :** Les indicateurs de niveau de démocratie et  liberté politique sont nombreux et un certain nombre sont [recensés sur Wikipédia](https://en.wikipedia.org/wiki/List_of_freedom_indices). 
+**Outils :** Les indicateurs de niveau de démocratie et liberté politique sont nombreux et un certain nombre sont [recensés sur Wikipédia](https://en.wikipedia.org/wiki/List_of_freedom_indices).
 Quant au cas plus spécifique de la liberté de la presse, deux indicateurs principaux sont généralement retenus : [le classement mondial annuel de la liberté de la presse](https://rsf.org/fr/classement) et [l’indicateur annuel de liberté de la presse](https://freedomhouse.org/report/freedom-press/freedom-press-2017).
 
 ### Contrôle
@@ -148,11 +148,11 @@ L’auteur d’un contenu doit donc être évalué en même temps que le fond de
 ## Comment commencer sur CaptainFact ?
 
 1. **Parcourir une vidéo** déjà efficacement vérifiée et prendre exemples :
-   * [Effondrement de la civilisation ? Pablo Servigne](https://captainfact.io/videos/GO1J)
-   * [Natacha Polony : Journalistes et médias sous contrôles ?](https://captainfact.io/videos/GQd4)
-   * [Est-ce une bonne chose de rendre les transports gratuits ?](https://captainfact.io/videos/GBjk)
+   - [Effondrement de la civilisation ? Pablo Servigne](https://captainfact.io/videos/GO1J)
+   - [Natacha Polony : Journalistes et médias sous contrôles ?](https://captainfact.io/videos/GQd4)
+   - [Est-ce une bonne chose de rendre les transports gratuits ?](https://captainfact.io/videos/GBjk)
 2. **Identifier et citer** les propos qui méritent d’être vérifiés, avant de s'exercer à la vérification.
-2. **S'exercer** en vérifiant et en votant positivement ou négativement les sources présentées par la communauté.
-3. **Vérifier des citations** et leur apporter des sources ou des commentaires.
-4. Rejoindre le serveur Discord pour obtenir de l’assistance : https://discord.gg/rkvJcdh
-5. **Partager ce guide :)**
+3. **S'exercer** en vérifiant et en votant positivement ou négativement les sources présentées par la communauté.
+4. **Vérifier des citations** et leur apporter des sources ou des commentaires.
+5. Rejoindre le serveur Discord pour obtenir de l’assistance : https://discord.captainfact.io
+6. **Partager ce guide :)**

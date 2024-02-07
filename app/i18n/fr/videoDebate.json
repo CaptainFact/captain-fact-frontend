@@ -58,11 +58,13 @@
     "addYourSource": "Ajouter la vôtre"
   },
   "video": {
-    "addedBy": "Ajoutée par un {{userType}}",
+    "addedBy": "Ajoutée",
     "partner": "partenaire",
     "user": "utilisateur",
     "edit": "Editer la vidéo",
-    "shiftStatements": "Décaler toutes les affirmations (en secondes)"
+    "shiftStatements": "Décaler toutes les affirmations (en secondes)",
+    "subscribe": "S'abonner aux notifications",
+    "unsubscribe": "Se désabonner des notifications"
   },
   "speaker": {
     "one": "Intervenant(e)",
