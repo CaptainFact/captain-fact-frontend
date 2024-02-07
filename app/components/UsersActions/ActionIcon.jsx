@@ -10,6 +10,7 @@ const ACTIONS_ICONS = {
   add: 'plus',
   revert: 'undo',
   flag: 'flag',
+  confirmed_flag: 'flag',
   vote_up: 'chevron-up',
   vote_down: 'chevron-down',
   self_vote: 'chevron-up',

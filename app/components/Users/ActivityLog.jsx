@@ -87,11 +87,7 @@ const ActivityLog = ({ match, t, location }) => {
           return <ErrorView error={error} />
         }
 
-        if (!loading && get(data, 'user.actions.entries.length') === 0) {
-          return <MessageView>{t('noActivity')}</MessageView>
-        }
-
-        const paginationMenu = renderPaginationMenu(loading, get(data, 'user'), fetchMore)
+        const isEmpty = get(data, 'user.actions.entries.length') === 0
         return (
           <div>
             <div className="activity-log container">
@@ -101,6 +97,8 @@ const ActivityLog = ({ match, t, location }) => {
                 <div className="panel-block">
                   <LoadingFrame />
                 </div>
+              ) : isEmpty ? (
+                <MessageView>{t('noActivity')}</MessageView>
               ) : (
                 data.user.actions.entries.map((a) => (
                   <UserAction
@@ -111,7 +109,7 @@ const ActivityLog = ({ match, t, location }) => {
                   />
                 ))
               )}
-              {paginationMenu}
+              {!isEmpty && renderPaginationMenu(loading, get(data, 'user'), fetchMore)}
             </div>
           </div>
         )
