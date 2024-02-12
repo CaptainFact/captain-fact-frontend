@@ -1,0 +1,60 @@
+{
+  "compare_show": "Сравнить",
+  "compare_hide": "Скрыть",
+  "compareAll": "Сравнить все",
+  "hideAll": "Скрыть все",
+  "when": "Когда",
+  "who": "Кто",
+  "changes": "Изменения",
+  "revert": "Восстановить",
+  "entity": "Сущность",
+  "moderation": "Модерация",
+  "deletedUser": "Удаленный пользователь",
+  "authoredActionWithoutTarget": "{{action}} <2></2> ",
+  "targetedByAction": "{{action}} с <2></2> на <5></5>",
+  "authoredActionWithTarget": "{{action}} <2></2> от <5></5>",
+  "ownAction": "{{action}}: <2></2>",
+  "actionDirection": {
+    "all": "Все",
+    "authored": "От <1></1>",
+    "target": "Таргетинг <1></1>"
+  },
+  "action": {
+    "create": "Создано",
+    "remove": "Убрано",
+    "update": "Обновлено",
+    "delete": "Удалено",
+    "email_confirmed": "Электронная почта подтверждена",
+    "add": "Добавлено",
+    "restore": "Восстановлено",
+    "flag": "Отмечено",
+    "vote_up": "Проголосовали",
+    "vote_down": "Проголосовали против",
+    "self_vote": "Проголосовал сам",
+    "revert_vote_up": "Отклоненное голосование",
+    "revert_vote_down": "Отклоненное голосование",
+    "revert_self_vote": "Отменено самоголосование",
+    "action_banned_bad_language": "Модерация ($t(moderation:reason.1))",
+    "action_banned_spam": "Модерация ($t(moderation:reason.2))",
+    "action_banned_irrelevant": "Модерация ($t(moderation:reason.3))",
+    "action_banned_not_constructive": "Модерация ($t(moderation:reason.4))",
+    "confirmed_flag": "Подтвердил отметку",
+    "abused_flag": "Отклонил отметку",
+    "social_network_linked": "Связал аккаунт в социальной сети"
+  },
+  "actionTarget": {
+    "vote_up": "Получил положительный голос",
+    "vote_down": "Получил отрицательный голос",
+    "revert_vote_up": "Потерял положительный голос",
+    "revert_vote_down": "Потерял отрицательный голос"
+  },
+  "entities": {
+    "video": "видео",
+    "speaker": "спикер (докладчик)",
+    "statement": "цитата",
+    "comment": "комментарий",
+    "факт": "комментарий к источнику",
+    "user_action": "действие",
+    "user": "пользователь"
+  }
+}
