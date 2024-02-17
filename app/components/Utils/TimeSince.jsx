@@ -5,7 +5,7 @@ import parseISO from 'date-fns/parseISO'
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { locales } from '../../i18n/i18n'
+import { LocaleDates } from '../../i18n/locale-dates'
 
 const getSecondsSince = (time) => {
   if (!time) {
@@ -36,7 +36,7 @@ export class TimeSince extends React.PureComponent {
   render() {
     // eslint-disable-next-line no-unused-vars
     const { time, locale, dispatch, addSuffix = true, isDateTime = true, ...props } = this.props
-    const localeObj = locales[locale]
+    const localeObj = LocaleDates[locale]
     const dateFormat = isDateTime ? localeObj.defaultDateTimeFormat : localeObj.defaultDateFormat
     const timeAsDate = typeof time === 'string' ? parseISO(time) : time
 

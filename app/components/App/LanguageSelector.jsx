@@ -11,6 +11,7 @@ const defaultLocales = new Map({
   ar: 'العربية',
   es: 'Español',
   eo: 'Esperanto',
+  ru: 'Русский',
   pt_BR: 'Português (Brasil)',
 })
 
@@ -48,6 +49,12 @@ export default class LanguageSelector extends React.PureComponent {
       return '🇩🇿'
     } else if (value === 'pt_BR') {
       return '🇧🇷'
+    } else if (value === 'es') {
+      return '🇪🇸'
+    } else if (value === 'eo') {
+      return '🌍'
+    } else if (value === 'ru') {
+      return '🇷🇺'
     }
     return <Globe size={!size ? '2em' : '1em'} />
   }
