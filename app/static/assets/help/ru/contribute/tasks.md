@@ -6,7 +6,7 @@
 # Дизайн
 
 Задачи, связанные с геймификацией, вы можете посмотреть
-здесь](https://github.com/CaptainFact/captain-fact-frontend/issues/6)
+[здесь](https://github.com/CaptainFact/captain-fact-frontend/issues/6)
 
 Для всего остального, или если вам не удобно работать с Github, вы можете 
 [связаться с нами](/help/contact) напрямую.
