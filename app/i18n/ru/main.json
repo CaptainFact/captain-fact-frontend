@@ -6,7 +6,7 @@
     "speaker_plural": "спикеры (докладчики)",
     "statement": "цитата",
     "statement_plural": "цитаты",
-    "videoFactChecking": "Проверка фактов (фактчекинг) в видео"
+    "videoFactChecking": "фактчекинг в видео"
   },
   "menu": {
     "login": "Войти",
@@ -19,7 +19,7 @@
     "yourProfile": "Ваш профиль",
     "dailyGain": "Ежедневный прирост",
     "content": "Содержание",
-    "factChecking": "Проверка фактов (фактчекинг)",
+    "factChecking": "фактчекинг",
     "language": "Язык",
     "other": "Другое",
     "donation": "Поддержите нас",
