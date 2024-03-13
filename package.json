@@ -57,7 +57,7 @@
     "animate.scss": "0.0.6",
     "bulma": "0.7.2",
     "classnames": "~2.3.1",
-    "date-fns": "^2.16.1",
+    "date-fns": "^3.4.0",
     "debounce-promise": "~3.1.2",
     "diff": "~5.1.0",
     "dotenv-webpack": "~8.0.1",
