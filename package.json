@@ -95,7 +95,7 @@
     "redux-form": "8.3.9",
     "redux-promise": "~0.6.0",
     "redux-thunk": "~2.3.0",
-    "remark-gfm": "3.0.1",
+    "remark-gfm": "4.0.0",
     "reselect": "~4.0.0",
     "smoothscroll-polyfill": "~0.4.4",
     "styled-components": "~5.3.9",
