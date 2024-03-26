@@ -12,7 +12,6 @@ import { P } from '../StyledUtils/Text'
 import Alert from '../Utils/Alert'
 import Message from '../Utils/Message'
 import InvitationRequestForm from './InvitationRequestForm'
-import ThirdPartyAuthList from './ThirdPartyAuthList'
 import { renderAllUserFields, submitButton, validatePasswordRepeat } from './UserFormFields'
 
 const SignupForm = ({ location, t }) => {
@@ -84,7 +83,6 @@ class RealSignupForm extends React.PureComponent {
           <Link to="/help/privacy">{t('privacyLinkLabel')}</Link>.
         </P>
         {submitButton(t('signup'), valid)}
-        <ThirdPartyAuthList />
       </form>
     )
   }

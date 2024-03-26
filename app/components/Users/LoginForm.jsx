@@ -8,7 +8,6 @@ import { signIn } from '../../API/http_api/current_user'
 import { tError } from '../../lib/errors'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import Alert from '../Utils/Alert'
-import ThirdPartyAuthList from './ThirdPartyAuthList'
 import { submitButton, UserEmailOrUsernameField, UserPasswordField } from './UserFormFields'
 
 @reduxForm({ form: 'loginForm' })
@@ -71,7 +70,6 @@ export default class LoginForm extends React.PureComponent {
         <UserEmailOrUsernameField t={t} />
         <UserPasswordField t={t} />
         {submitButton(t('login'), valid)}
-        <ThirdPartyAuthList />
       </form>
     )
   }

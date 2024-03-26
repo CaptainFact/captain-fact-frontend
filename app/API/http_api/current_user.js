@@ -20,11 +20,6 @@ export const signUp = (userParams, invitationToken) => {
   return HttpApi.post('users', { user: userParams, invitation_token: invitationToken })
 }
 
-/** Unlink a third-party account. */
-export const unlinkProvider = (provider) => {
-  return HttpApi.delete(`auth/${provider}/link`)
-}
-
 /** Request a password reset for given email */
 export const resetPasswordRequest = (email) => {
   return HttpApi.post('users/reset_password/request', { email })

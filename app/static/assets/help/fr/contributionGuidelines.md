@@ -79,7 +79,7 @@ _Ex : [Le Monde](https://www.lemonde.fr/), [Slate](https://slate.com/), France 2
 
 Les publications scientifiques permettent de diffuser des informations scientifiques et techniques produites par des travaux de recherche et généralement destinées à des chercheurs ou à un public de spécialistes.
 
-_Ex : [Nature](https://www.nature.com/nature/), …_
+_Ex : [Nature](https://www.nature.com/nature/), [Cochrane Library](https://www.cochranelibrary.com/), …_
 
 `(!) Il incombe au fact-checker de vérifier le financement de l’étude en question ou la méthodologie employée.`
 

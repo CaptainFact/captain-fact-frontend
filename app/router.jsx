@@ -21,7 +21,6 @@ import NewsletterSubscription from './components/Users/NewsletterSubscription'
 import ResetPasswordConfirmForm from './components/Users/ResetPasswordConfirmForm'
 import ResetPasswordRequestForm from './components/Users/ResetPasswordRequestForm'
 import SignupForm from './components/Users/SignupForm'
-import ThirdPartyCallback from './components/Users/ThirdPartyCallback'
 import User from './components/Users/User'
 import UserProfile from './components/Users/UserProfile'
 import UserSettings from './components/Users/UserSettings'
@@ -36,10 +35,8 @@ const CFRouter = () => (
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/signup" exact component={SignupForm} />
-        <Route path="/signup/callback/:provider" exact component={ThirdPartyCallback} />
         <Route path="/login" exact component={LoginForm} />
         <Route path="/logout" exact component={LogoutPage} />
-        <Route path="/login/callback/:provider" exact component={ThirdPartyCallback} />
         <Route path="/confirm_email/:token" exact component={ConfirmEmail} />
         <Route path="/reset_password" exact component={ResetPasswordRequestForm} />
         <Route path="/reset_password/confirm/:token" exact component={ResetPasswordConfirmForm} />
