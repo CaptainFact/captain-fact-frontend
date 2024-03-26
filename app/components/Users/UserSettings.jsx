@@ -4,7 +4,6 @@ import { withNamespaces } from 'react-i18next'
 import { connect } from 'react-redux'
 
 import { deleteUserAccount } from '../../API/http_api/current_user'
-import { facebookAuthUrl } from '../../lib/third_party_auth'
 import { addModal, popModal } from '../../state/modals/reducer'
 import UserLanguageSelector from '../LoggedInUser/UserLanguageSelector'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
@@ -12,14 +11,13 @@ import Button from '../Utils/Button'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import DeleteUserModal from './DeleteUserModal'
 import EditUserForm from './EditUserForm'
-import ThirdPartyAccountLinker from './ThirdPartyAccountLinker'
 
 @connect((state) => ({ locale: state.UserPreferences.locale }), { addModal, popModal })
 @withNamespaces('user')
 @withLoggedInUser
 export default class UserSettings extends React.PureComponent {
   render() {
-    const { t, addModal, loggedInUser, locale, logout } = this.props
+    const { t, addModal, locale, logout } = this.props
     return this.props.isLoading ? (
       <LoadingFrame />
     ) : (
@@ -35,18 +33,6 @@ export default class UserSettings extends React.PureComponent {
           <Flex justifyContent="center">
             <UserLanguageSelector />
           </Flex>
-        </div>
-        <br />
-        <hr />
-        <br />
-        <div className="has-text-centered">
-          <h3 className="title is-3">{t('linkedAccounts')}</h3>
-          <ThirdPartyAccountLinker
-            provider="facebook"
-            title="Facebook"
-            isLinked={!!loggedInUser.fb_user_id}
-            authURL={facebookAuthUrl()}
-          />
         </div>
         <br />
         <hr />
