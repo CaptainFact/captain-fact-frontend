@@ -18,6 +18,7 @@ export default withNamespaces('videoDebate')(
     handleShare,
     handleDelete,
     withoutActions,
+    customButtons,
   }) => (
     <header className="card-header">
       <div className="card-header-title">
@@ -29,48 +30,54 @@ export default withNamespaces('videoDebate')(
         )}
         <strong>{speaker ? speaker.full_name : ''}</strong>
       </div>
-      {!withoutActions && (
+      {(!withoutActions || customButtons) && (
         <div className="card-header-icon">
-          <ReputationGuardTooltip
-            requiredRep={MIN_REPUTATION_REMOVE_STATEMENT}
-            tooltipPosition="left center"
-          >
-            {({ hasReputation }) => (
+          {!withoutActions && (
+            <React.Fragment>
+              <ReputationGuardTooltip
+                requiredRep={MIN_REPUTATION_REMOVE_STATEMENT}
+                tooltipPosition="left center"
+              >
+                {({ hasReputation }) => (
+                  <ClickableIcon
+                    name="times"
+                    size="action-size"
+                    title={t('main:actions.remove')}
+                    onClick={handleDelete}
+                    disabled={!hasReputation}
+                  />
+                )}
+              </ReputationGuardTooltip>
+              <ReputationGuardTooltip
+                requiredRep={MIN_REPUTATION_UPDATE_STATEMENT}
+                tooltipPosition="left center"
+              >
+                {({ hasReputation }) => (
+                  <ClickableIcon
+                    name="pencil"
+                    size="action-size"
+                    title={t('main:actions.edit')}
+                    onClick={handleEdit}
+                    disabled={!hasReputation}
+                  />
+                )}
+              </ReputationGuardTooltip>
               <ClickableIcon
-                name="times"
+                name="history"
                 size="action-size"
-                title={t('main:actions.remove')}
-                onClick={handleDelete}
-                disabled={!hasReputation}
+                title={t('history')}
+                onClick={handleShowHistory}
               />
-            )}
-          </ReputationGuardTooltip>
-          <ReputationGuardTooltip
-            requiredRep={MIN_REPUTATION_UPDATE_STATEMENT}
-            tooltipPosition="left center"
-          >
-            {({ hasReputation }) => (
               <ClickableIcon
-                name="pencil"
+                name="share-alt"
                 size="action-size"
-                title={t('main:actions.edit')}
-                onClick={handleEdit}
-                disabled={!hasReputation}
+                title={t('main:actions.share')}
+                onClick={handleShare}
               />
-            )}
-          </ReputationGuardTooltip>
-          <ClickableIcon
-            name="history"
-            size="action-size"
-            title={t('history')}
-            onClick={handleShowHistory}
-          />
-          <ClickableIcon
-            name="share-alt"
-            size="action-size"
-            title={t('main:actions.share')}
-            onClick={handleShare}
-          />
+            </React.Fragment>
+          )}
+
+          {customButtons || null}
         </div>
       )}
     </header>
