@@ -1,4 +1,5 @@
 import { Flex } from '@rebass/grid'
+import { FileText } from '@styled-icons/feather'
 import classNames from 'classnames'
 import React from 'react'
 import { withNamespaces } from 'react-i18next'
@@ -6,7 +7,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { MIN_REPUTATION_ADD_SPEAKER } from '../../constants'
-import { videoHistoryURL, videoURL } from '../../lib/cf_routes'
+import { videoCaptionsUrl, videoHistoryURL, videoURL } from '../../lib/cf_routes'
 import {
   videoDebateOnlineUsersCount,
   videoDebateOnlineViewersCount,
@@ -14,8 +15,9 @@ import {
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import AddSpeakerForm from '../Speakers/AddSpeakerForm'
 import { SpeakerPreview } from '../Speakers/SpeakerPreview'
+import Container from '../StyledUtils/Container'
 import { Icon, LoadingFrame } from '../Utils'
-import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
+import Message from '../Utils/Message'
 import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
 import Actions from './Actions'
 import Presence from './Presence'
@@ -38,10 +40,9 @@ export class ColumnVideo extends React.PureComponent {
       return <LoadingFrame title={this.props.t('loading.video')} />
     }
 
-    const { video, view, t } = this.props
+    const { video, view, t, isAuthenticated } = this.props
     const { url, title, speakers } = video
-    const isDebate = view === 'debate'
-
+    const isDebate = !view || view === 'debate'
     return (
       <ResizableColumn>
         <div id="col-video" className="column">
@@ -58,17 +59,18 @@ export class ColumnVideo extends React.PureComponent {
                   <span>{t('debate')}</span>
                 </Link>
               </li>
-              <li className={classNames({ 'is-active': !isDebate })}>
+              <li className={classNames({ 'is-active': view === 'history' })}>
                 <Link to={videoHistoryURL(video.hash_id)} rel="nofollow">
                   <Icon size="small" name="history" />
                   <span>{t('history')}</span>
                 </Link>
               </li>
-              <li>
-                <ExternalLinkNewTab href="https://forum.captainfact.io/">
-                  <Icon size="small" name="comments-o" />
-                  <span>{t('chat')}</span>
-                </ExternalLinkNewTab>
+              <li className={classNames({ 'is-active': view === 'captions' })}>
+                <Link to={videoCaptionsUrl(video.hash_id)} rel="nofollow">
+                  <FileText size="20" />
+                  &nbsp;
+                  <span>{t('captions.title')}</span>
+                </Link>
               </li>
             </ul>
           </div>
@@ -89,6 +91,19 @@ export class ColumnVideo extends React.PureComponent {
                 ))}
               </div>
             </div>
+          )}
+          {view === 'captions' && (
+            <Container p={4}>
+              <Message>
+                {t('captions.description1')}
+                {isAuthenticated && (
+                  <React.Fragment>
+                    <br />
+                    {t('captions.description2')}
+                  </React.Fragment>
+                )}
+              </Message>
+            </Container>
           )}
         </div>
       </ResizableColumn>

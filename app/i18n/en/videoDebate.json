@@ -107,9 +107,18 @@
     "help10": "- Is this a personal opinion?",
     "helpLink": "Read the contribution guidelines"
   },
+  "captions": {
+    "errorLoading": "An error occurred while loading the captions",
+    "notFound": "No captions found",
+    "title": "Transcript",
+    "playSelection": "Play selection",
+    "description1": "This transcript is directly imported from YouTube's subtitles and may contain errors. It is intended to facilitate the search for passages in the video and the extraction of statements.",
+    "description2": "To add a statement from the text, select the passage to quote and click on the (+) button at the bottom right."
+  },
   "loading": {
     "statements": "Loading Statements",
-    "video": "Loading Video"
+    "video": "Loading Video",
+    "captions": "Loading Captions"
   },
   "tips": {
     "firstStatement": "You can <1>add a first statement</1> by clicking on the <3></3> icon next to the speaker's name",

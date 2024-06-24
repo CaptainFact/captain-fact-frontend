@@ -51,7 +51,9 @@
     "edit": "Edit",
     "loading": "Loading",
     "share": "Share",
-    "apply": "Apply"
+    "apply": "Apply",
+    "close": "Close",
+    "play": "Play"
   },
   "misc": {
     "timeAt": "at",

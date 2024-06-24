@@ -11,6 +11,8 @@ $sub-bubble-icon-size: 24px
   right: $bubble-margin
   bottom: $bubble-margin
   position: fixed
+  opacity: 1
+  transition: bottom 0.3s, opacity 0.3s
   z-index: 99
   &:not(:hover) .action-bubble:not(:first-child)
     display: none
@@ -19,6 +21,9 @@ $sub-bubble-icon-size: 24px
       display: block
     @media(pointer: none)
       display: block
+  &.hiddenBelow
+    bottom: -100px
+    opacity: 0
 
 .action-bubble
   height: $main-bubble-height

@@ -56,7 +56,11 @@ const CFRouter = () => (
         <Route path="/videos" exact component={VideosIndexPage} />
         <Route path="/videos/add" exact component={AddVideoForm} />
         <Route path="/videos/add/:videoUrl" exact component={AddVideoForm} />
-        <Route path="/videos/:videoId/:view(history|debate)?" exact component={VideoDebate} />
+        <Route
+          path="/videos/:videoId/:view(history|debate|captions)?"
+          exact
+          component={VideoDebate}
+        />
         <Route path="/s/:slug_or_id" exact component={SpeakerPage} />
         <Route path="/help/:splat?" component={Help} />
         <Route path="/extension" exact component={BrowserExtensionsPage} />
