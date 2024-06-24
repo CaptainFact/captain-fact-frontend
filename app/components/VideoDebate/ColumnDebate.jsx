@@ -10,16 +10,19 @@ import { isLoadingVideoDebate } from '../../state/video_debate/selectors'
 import { hasStatementForm } from '../../state/video_debate/statements/selectors'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import StatementsList from '../Statements/StatementsList'
+import Container from '../StyledUtils/Container'
 import DismissableMessage from '../Utils/DismissableMessage'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import { Icon } from '../Utils/Icon'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import Message from '../Utils/Message'
 import ActionBubbleMenu from './ActionBubbleMenu'
+import CaptionsExtractor from './CaptionsExtractor'
 import VideoDebateHistory from './VideoDebateHistory'
 
 const TitleContainer = styled.div`
   padding: 1.5rem;
+  margin-top: 1.5rem;
 `
 const TitleH1 = styled.h1`
   color: #0a0a0a;
@@ -90,8 +93,13 @@ export class ColumnDebate extends React.PureComponent {
 
     if (view === 'history') {
       return <VideoDebateHistory videoId={videoId} />
-    }
-    if (view === 'debate') {
+    } else if (view === 'captions') {
+      return (
+        <Container px={['20px', '32px']} my={4} mx="auto" maxWidth="1046px">
+          <CaptionsExtractor videoId={videoId} />
+        </Container>
+      )
+    } else if (view === 'debate') {
       if (isLoading) {
         return <LoadingFrame title={this.props.t('loading.statements')} />
       }

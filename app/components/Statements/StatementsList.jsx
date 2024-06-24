@@ -1,3 +1,4 @@
+import memoizeOne from 'memoize-one'
 import React from 'react'
 import FlipMove from 'react-flip-move'
 import { withNamespaces } from 'react-i18next'
@@ -16,6 +17,8 @@ import { StatementForm } from './StatementForm'
     speakers: state.VideoDebate.video.data.speakers,
     statements: state.VideoDebate.statements.data,
     statementFormSpeakerId: statementFormValueSelector(state, 'speaker_id'),
+    statementFormText: statementFormValueSelector(state, 'text'),
+    statementFormTime: statementFormValueSelector(state, 'time'),
     offset: state.VideoDebate.video.offset,
   }),
   { closeStatementForm, postStatement, setScrollTo },
@@ -45,6 +48,12 @@ export default class StatementsList extends React.PureComponent {
     }
   }
 
+  getInitialValues = memoizeOne((speakerId, text, time) => ({
+    speaker_id: speakerId,
+    text,
+    time,
+  }))
+
   render() {
     const { speakers, statementFormSpeakerId, statements, offset } = this.props
     const speakerId =
@@ -54,7 +63,11 @@ export default class StatementsList extends React.PureComponent {
         {statementFormSpeakerId !== undefined && (
           <StatementForm
             offset={offset}
-            initialValues={{ speaker_id: speakerId }}
+            initialValues={this.getInitialValues(
+              speakerId,
+              this.props.statementFormText,
+              this.props.statementFormTime,
+            )}
             enableReinitialize
             keepDirtyOnReinitialize
             handleAbort={() => this.props.closeStatementForm()}

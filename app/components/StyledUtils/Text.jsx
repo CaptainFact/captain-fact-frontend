@@ -1,5 +1,14 @@
 import styled from 'styled-components'
-import { color, display, fontSize, fontStyle, fontWeight, space, textAlign } from 'styled-system'
+import {
+  color,
+  display,
+  fontSize,
+  fontStyle,
+  fontWeight,
+  lineHeight,
+  space,
+  textAlign,
+} from 'styled-system'
 
 export const Span = styled.span`
   ${color}
@@ -25,4 +34,5 @@ export const P = styled.p`
   ${space}
   ${display}
   ${textAlign}
+  ${lineHeight}
 `

@@ -19,6 +19,10 @@ export const videoHistoryURL = (videoHashID) => {
   return `${videoURL(videoHashID)}/history`
 }
 
+export const videoCaptionsUrl = (videoHashID) => {
+  return `${videoURL(videoHashID)}/captions`
+}
+
 export const statementURL = (videoHashID, statementID) => {
   return `${videoURL(videoHashID)}?statement=${statementID}`
 }

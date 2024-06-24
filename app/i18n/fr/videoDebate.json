@@ -107,9 +107,18 @@
     "help10": "- les opinions personnelles.",
     "helpLink": "Voir le guide de contribution complet"
   },
+  "captions": {
+    "errorLoading": "Erreur lors de la récupération des sous-titres",
+    "notFound": "Aucun sous-titre n'est disponible pour cette vidéo",
+    "title": "Transcription",
+    "playSelection": "Jouer la sélection",
+    "description1": "Cette transcription est directement importée depuis les sous-titres YouTube et peut contenir des erreurs. Elle a vocation à faciliter la recherche de passages dans la vidéo et l'extraction de citations.",
+    "description2": "Pour ajouter une citation depuis le texte, selectionnez le passage à citer puis cliquez sur le bouton (+) en bas à droite."
+  },
   "loading": {
     "statements": "Chargement des textes",
-    "video": "Chargement de la video"
+    "video": "Chargement de la video",
+    "captions": "Chargement des sous-titres"
   },
   "tips": {
     "firstStatement": "Vous pouvez <1>ajouter une citation</1> en cliquant sur l'icone <3></3> à côté du nom de l'intervenant",

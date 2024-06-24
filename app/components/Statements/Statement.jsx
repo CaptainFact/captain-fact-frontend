@@ -27,6 +27,7 @@ export default class Statement extends React.PureComponent {
           handleTimeClick={withoutActions ? null : this.handleTimeClick}
           handleShare={() => this.shareModal()}
           withoutActions={withoutActions}
+          customButtons={this.props.customButtons}
         />
         <div className="card-content statement-text-container">
           <h3 className="statement-text">{statement.text}</h3>

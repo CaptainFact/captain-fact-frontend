@@ -50,7 +50,9 @@
     "edit": "Éditer",
     "loading": "Chargement",
     "share": "Partager",
-    "apply": "Appliquer"
+    "apply": "Appliquer",
+    "close": "Fermer",
+    "play": "Lire"
   },
   "misc": {
     "timeAt": "à",
