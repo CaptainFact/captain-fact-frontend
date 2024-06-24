@@ -72,7 +72,7 @@
     "isomorphic-fetch": "~3.0.0",
     "lodash": "^4.17.21",
     "memoize-one": "6.0.0",
-    "phoenix": "~1.7.10",
+    "phoenix": "~1.7.14",
     "polished": "^4.3.1",
     "prop-types": "~15.8.1",
     "re-reselect": "~4.0.0",
