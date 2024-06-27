@@ -60,6 +60,16 @@ $sub-bubble-icon-size: 24px
     padding-top: ($main-bubble-height / 2) - ($default-bubble-icon-size / 8)
     i
       transition: transform 0.3s
+  .spinner-container
+    display: flex
+    justify-content: center
+    align-items: center
+    height: 100%
+    .round-spinner
+      height: $default-bubble-icon-size / 2
+      width: $default-bubble-icon-size / 2
+      color: white
+      text-align: center
 
 .action-bubble:not(.activated)
   background: $grey-light
