@@ -59,8 +59,8 @@ const getStatementsAtPosition = (statements, caption, nextCaption) => {
 
   const selected = []
   for (const statement of statements) {
-    if (statement.time >= caption.start) {
-      if (!nextCaption || statement.time < nextCaption.start) {
+    if (statement.time >= Math.floor(caption.start)) {
+      if (!nextCaption || Math.floor(nextCaption.start) > statement.time) {
         selected.push(statement)
       } else {
         break
