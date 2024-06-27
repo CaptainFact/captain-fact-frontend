@@ -105,7 +105,9 @@
     "help8": "- les figures de style et l’humour ;",
     "help9": "- les erreurs mineures ;",
     "help10": "- les opinions personnelles.",
-    "helpLink": "Voir le guide de contribution complet"
+    "helpLink": "Voir le guide de contribution complet",
+    "startAutomaticExtraction": "Démarrer l'extraction automatique",
+    "automaticExtractionSuccess": "Extraction des citations automatique réussie"
   },
   "captions": {
     "errorLoading": "Erreur lors de la récupération des sous-titres",
