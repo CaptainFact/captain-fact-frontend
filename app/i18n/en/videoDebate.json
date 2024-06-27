@@ -105,7 +105,9 @@
     "help8": "- Is the statement likely to be repeated and shared?",
     "help9": "- Is this a minor error or an acceptable hyperbole - often used in politics?",
     "help10": "- Is this a personal opinion?",
-    "helpLink": "Read the contribution guidelines"
+    "helpLink": "Read the contribution guidelines",
+    "startAutomaticExtraction": "Start automatic extraction",
+    "automaticExtractionSuccess": "Statements extracted successfully"
   },
   "captions": {
     "errorLoading": "An error occurred while loading the captions",

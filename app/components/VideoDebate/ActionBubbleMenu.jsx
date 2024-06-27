@@ -1,32 +1,61 @@
+import { Mutation } from '@apollo/client/react/components'
 import classNames from 'classnames'
+import gql from 'graphql-tag'
 import React from 'react'
 import { withNamespaces } from 'react-i18next'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
+import { MIN_REPUTATION_START_AUTOMATIC_STATEMENTS_EXTRACTION } from '../../constants'
+import { flashError, flashSuccessMsg } from '../../state/flashes/reducer'
 import { destroyStatementForm } from '../../state/video_debate/statements/effects'
 import { changeStatementForm } from '../../state/video_debate/statements/reducer'
 import { hasStatementForm } from '../../state/video_debate/statements/selectors'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import { Icon } from '../Utils/Icon'
 
+const startAutomaticStatementsExtractionMutation = gql`
+  mutation StartAutomaticStatementsExtraction($videoId: Int!) {
+    startAutomaticStatementsExtraction(videoId: $videoId) {
+      id
+    }
+  }
+`
+
 @connect(
   (state) => ({
     hasAutoscroll: state.UserPreferences.enableAutoscroll,
     soundOnBackgroundFocus: state.UserPreferences.enableSoundOnBackgroundFocus,
     hasStatementForm: hasStatementForm(state),
+    hasStatements: state.VideoDebate.statements.data.size > 0,
+    videoId: state.VideoDebate.video.data.id,
   }),
   {
     changeStatementForm,
     destroyStatementForm,
+    flashError,
+    flashSuccessMsg,
   },
 )
 @withNamespaces('videoDebate')
 @withRouter
 @withLoggedInUser
 export default class ActionBubbleMenu extends React.PureComponent {
+  state = {
+    hasCalledStatementsExtract: false,
+  }
+
   render() {
-    const { t, hasStatementForm, isAuthenticated, hidden, customActions } = this.props
+    const {
+      t,
+      hasStatementForm,
+      isAuthenticated,
+      hidden,
+      customActions,
+      loggedInUser,
+      hasStatements,
+      videoId,
+    } = this.props
     return (
       <div
         className={classNames('action-bubble-container', {
@@ -42,6 +71,31 @@ export default class ActionBubbleMenu extends React.PureComponent {
               activated={!hasStatementForm}
               onClick={() => !hidden && this.onStatementBubbleClick()}
             />
+            {!hasStatements &&
+              loggedInUser.reputation >= MIN_REPUTATION_START_AUTOMATIC_STATEMENTS_EXTRACTION && (
+                <Mutation mutation={startAutomaticStatementsExtractionMutation}>
+                  {(startAutomaticStatementsExtraction, { loading }) => (
+                    <ActionBubble
+                      disabled={loading || this.state.hasCalledStatementsExtract}
+                      loading={loading}
+                      iconName="tasks"
+                      label={t('statement.startAutomaticExtraction')}
+                      onClick={async () => {
+                        try {
+                          this.setState({ hasCalledStatementsExtract: true })
+                          await startAutomaticStatementsExtraction({ variables: { videoId } })
+                          this.props.flashSuccessMsg(
+                            'videoDebate:statement.automaticExtractionSuccess',
+                          )
+                        } catch (e) {
+                          this.setState({ hasCalledStatementsExtract: true })
+                          this.props.flashError({ message: t('errors:server.unknown') })
+                        }
+                      }}
+                    />
+                  )}
+                </Mutation>
+              )}
             {customActions || null}
           </React.Fragment>
         ) : (
@@ -71,9 +125,15 @@ export default class ActionBubbleMenu extends React.PureComponent {
   }
 }
 
-export const ActionBubble = ({ iconName, label, activated = true, ...props }) => (
+export const ActionBubble = ({ iconName, label, activated = true, loading = false, ...props }) => (
   <div className={classNames('action-bubble', { activated })} {...props}>
     <div className="label">{label}</div>
-    <Icon name={iconName} />
+    {loading ? (
+      <div className="spinner-container">
+        <span className="round-spinner" />
+      </div>
+    ) : (
+      <Icon name={iconName} />
+    )}
   </div>
 )
