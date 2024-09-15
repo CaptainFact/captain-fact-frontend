@@ -17,6 +17,7 @@ const ACTIONS_ICONS = {
   revert_vote_up: 'chevron-down',
   revert_vote_down: 'chevron-up',
   revert_self_vote: 'chevron-down',
+  start_automatic_statements_extraction: 'tasks',
 }
 
 const getIconName = (type) => ACTIONS_ICONS[type] || 'question'

@@ -9,6 +9,7 @@ import { FULLHD_WIDTH_THRESHOLD } from '../../constants'
 import { postStatement } from '../../state/video_debate/statements/effects'
 import { closeStatementForm, setScrollTo } from '../../state/video_debate/statements/reducer'
 import { statementFormValueSelector } from '../../state/video_debate/statements/selectors'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import StatementContainer from './StatementContainer'
 import { StatementForm } from './StatementForm'
 
@@ -25,6 +26,7 @@ import { StatementForm } from './StatementForm'
 )
 @withNamespaces('videoDebate')
 @withRouter
+@withLoggedInUser
 export default class StatementsList extends React.PureComponent {
   componentDidMount() {
     const searchParams = new URLSearchParams(this.props.location.search)
@@ -54,10 +56,19 @@ export default class StatementsList extends React.PureComponent {
     time,
   }))
 
+  filterStatements = memoizeOne((statements, isLoggedIn) => {
+    if (!isLoggedIn) {
+      return statements.filter((s) => !s.is_draft)
+    } else {
+      return statements
+    }
+  })
+
   render() {
-    const { speakers, statementFormSpeakerId, statements, offset } = this.props
+    const { speakers, statementFormSpeakerId, offset } = this.props
     const speakerId =
       speakers.size === 1 && !statementFormSpeakerId ? speakers.get(0).id : statementFormSpeakerId
+    const statements = this.filterStatements(this.props.statements, this.props.isAuthenticated)
     return (
       <div className="statements-list">
         {statementFormSpeakerId !== undefined && (

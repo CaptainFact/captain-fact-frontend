@@ -20,6 +20,7 @@ export default class Statement extends React.PureComponent {
       <div>
         <StatementHeader
           statementTime={statement.time + offset}
+          isDraft={statement.is_draft}
           speaker={speaker}
           handleEdit={handleEdit}
           handleDelete={handleDelete}

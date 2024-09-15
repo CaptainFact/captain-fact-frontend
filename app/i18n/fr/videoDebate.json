@@ -81,6 +81,10 @@
   },
   "statement": {
     "remove": "Retirer la citation",
+    "draft": "Brouillon",
+    "draftDetails": "Cette citation a été extraite automatiquement. Elle doit être vérifiée et complétée avant d'être publiée. Seuls les utilisateurs inscrits peuvent voir les brouillons.",
+    "discard": "Supprimer",
+    "publish": "Publier",
     "confirmRemove": "Êtes-vous sûr·e ?",
     "textPlaceholder": "Retranscrivez ici les propos de l'intervenant(e)",
     "noSpeakerTextPlaceholder": "Décrivez ce qui apparait à l'image ou ajoutez un intervenant",

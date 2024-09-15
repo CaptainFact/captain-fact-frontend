@@ -81,6 +81,10 @@
   },
   "statement": {
     "remove": "Remove statement",
+    "draft": "Draft",
+    "draftDetails": "This statement was automatically extracted from the video, it is not yet verified and may contain errors. Only registered users can see it.",
+    "discard": "Discard",
+    "publish": "Publish",
     "confirmRemove": "Do you really want to remove this statement?",
     "textPlaceholder": "Type a raw transcript of what the speaker says",
     "noSpeakerTextPlaceholder": "Describe what you see or select a speaker",

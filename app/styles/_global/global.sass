@@ -57,6 +57,12 @@ h1
   &:hover
     color: darken($white, 10)
 
+.is-justify-content-flex-end
+  justify-content: flex-end
+
+.is-justify-content-center
+  justify-content: center
+
 /** Spacing helpers **/
 
 @for $i from 0 through 10
@@ -109,3 +115,6 @@ h1
   .py-#{$i}
     padding-top: #{$value}rem
     padding-bottom: #{$value}rem
+
+  .gap-#{$i}
+    gap: #{$value}rem
