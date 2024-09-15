@@ -5,5 +5,6 @@ const Statement = new Record({
   text: '',
   time: 0,
   speaker_id: 0,
+  is_draft: false,
 })
 export default Statement
