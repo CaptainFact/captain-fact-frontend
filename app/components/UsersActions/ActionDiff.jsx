@@ -20,7 +20,6 @@ class ActionDiff extends PureComponent {
   render() {
     const allActions = this.props.allActions || new List([this.props.action])
     const diff = this.generateDiff(allActions, this.props.action)
-
     if (diff.size === 0) {
       return null
     }
@@ -63,6 +62,8 @@ class ActionDiff extends PureComponent {
   formatChangeValue(value, key) {
     if (key === 'speaker_id' && value) {
       return <Link to={speakerURL(value)}>#{value}</Link>
+    } else if (key === 'is_draft' && !value) {
+      return 'No'
     }
     return value
   }

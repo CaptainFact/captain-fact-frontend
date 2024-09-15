@@ -40,7 +40,8 @@
     "action_banned_not_constructive": "Modéré ($t(moderation:reason.4))",
     "confirmed_flag": "A confirmé un signalement",
     "abused_flag": "A réfuté d'un signalement",
-    "social_network_linked": "Compte lié à un réseau social"
+    "social_network_linked": "Compte lié à un réseau social",
+    "start_automatic_statements_extraction": "Démarré l'extraction automatique des citations"
   },
   "actionTarget": {
     "vote_up": "Reçu un vote positif",

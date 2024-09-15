@@ -1,14 +1,18 @@
+import { Check, X } from '@styled-icons/feather'
 import classNames from 'classnames'
 import React from 'react'
 import { withNamespaces } from 'react-i18next'
 import { connect } from 'react-redux'
 
+import { MIN_REPUTATION_REMOVE_STATEMENT, MIN_REPUTATION_UPDATE_STATEMENT } from '../../constants'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 import { deleteStatement, updateStatement } from '../../state/video_debate/statements/effects'
 import * as statementSelectors from '../../state/video_debate/statements/selectors'
 import CommentForm from '../Comments/CommentForm'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import ModalConfirmDelete from '../Modal/ModalConfirmDelete'
+import UnstyledButton from '../StyledUtils/UnstyledButton'
+import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
 import Statement from './Statement'
 import StatementComments from './StatementComments'
 import { StatementForm } from './StatementForm'
@@ -27,7 +31,7 @@ import { StatementForm } from './StatementForm'
 @withLoggedInUser
 @withNamespaces('videoDebate')
 export default class StatementContainer extends React.PureComponent {
-  state = { isDeleting: false, isEditing: false, replyTo: null }
+  state = { isDeleting: false, isEditing: false, replyTo: null, editDraftAction: null }
 
   componentDidUpdate(prevProps) {
     if (this.shouldScroll(this.props, prevProps)) {
@@ -40,7 +44,7 @@ export default class StatementContainer extends React.PureComponent {
   }
 
   render() {
-    const { isDeleting, replyTo } = this.state
+    const { isDeleting, isEditing, replyTo } = this.state
     const { statement, isFocused, speaker, isAuthenticated, loggedInUser, t } = this.props
 
     return (
@@ -50,17 +54,69 @@ export default class StatementContainer extends React.PureComponent {
       >
         <div className="card statement">
           {this.renderStatementOrEditForm(speaker, statement)}
-          <StatementComments
-            statement={statement}
-            speaker={speaker}
-            setReplyToComment={this.setReplyToComment}
-          />
-          <CommentForm
-            statementID={statement.id}
-            replyTo={replyTo}
-            setReplyToComment={this.setReplyToComment}
-            user={isAuthenticated ? loggedInUser : null}
-          />
+          {statement.is_draft && !isEditing ? (
+            <footer className="card-footer">
+              <ReputationGuardTooltip requiredRep={MIN_REPUTATION_UPDATE_STATEMENT} asChild>
+                {({ hasReputation }) => (
+                  <UnstyledButton
+                    className={classNames('card-footer-item', 'submit-button', {
+                      'is-loading': this.props.submitting,
+                    })}
+                    p=".75rem"
+                    disabled={Boolean(!hasReputation || this.state.editDraftAction)}
+                    onClick={async () => {
+                      this.setState({ editDraftAction: 'save' })
+                      try {
+                        await this.props.updateStatement(statement.set('is_draft', false))
+                      } finally {
+                        this.setState({ editDraftAction: null })
+                      }
+                    }}
+                  >
+                    <Check size={16} className="mr-1" />
+                    {t('statement.publish')}
+                  </UnstyledButton>
+                )}
+              </ReputationGuardTooltip>
+              <ReputationGuardTooltip requiredRep={MIN_REPUTATION_REMOVE_STATEMENT} asChild>
+                {({ hasReputation }) => (
+                  <UnstyledButton
+                    type="button"
+                    p=".75rem"
+                    className="card-footer-item"
+                    disabled={Boolean(!hasReputation || this.state.editDraftAction)}
+                    onClick={async () => {
+                      this.setState({ editDraftAction: 'discard' })
+                      try {
+                        await this.props.deleteStatement({ id: statement.id })
+                      } finally {
+                        this.setState({ editDraftAction: null })
+                      }
+                    }}
+                  >
+                    <X size={16} className="mr-1" />
+                    {t('statement.discard')}
+                  </UnstyledButton>
+                )}
+              </ReputationGuardTooltip>
+            </footer>
+          ) : (
+            <React.Fragment>
+              <StatementComments
+                statement={statement}
+                speaker={speaker}
+                setReplyToComment={this.setReplyToComment}
+              />
+              {!statement.is_draft && (
+                <CommentForm
+                  statementID={statement.id}
+                  replyTo={replyTo}
+                  setReplyToComment={this.setReplyToComment}
+                  user={isAuthenticated ? loggedInUser : null}
+                />
+              )}
+            </React.Fragment>
+          )}
           {isDeleting && (
             <ModalConfirmDelete
               title={t('statement.remove')}

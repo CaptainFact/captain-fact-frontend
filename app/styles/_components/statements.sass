@@ -43,6 +43,11 @@ $statement-text-color: #e0e7f1
   .card-footer
     border-top: none
     border-bottom: 1px solid #dbdbdb
+    .help-tooltip-trigger
+      display: flex
+      flex: 1
+      &:not(:last-child)
+        border-right: 1px solid #dbdbdb
     &.comments
       display: block
       .expend-comment-form
