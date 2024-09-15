@@ -94,7 +94,7 @@
     "react-toggled": "^1.2.7",
     "reactjs-popup": "~2.0.6",
     "redux": "~4.2.0",
-    "redux-actions": "~2.6.5",
+    "redux-actions": "~3.0.3",
     "redux-form": "8.3.9",
     "redux-promise": "~0.6.0",
     "redux-thunk": "~2.3.0",
