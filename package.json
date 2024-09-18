@@ -76,7 +76,7 @@
     "polished": "^4.3.1",
     "prop-types": "~15.8.1",
     "re-reselect": "~4.0.0",
-    "re-resizable": "^6.9.17",
+    "re-resizable": "^6.9.18",
     "react": "~17.0.2",
     "react-dom": "~17.0.2",
     "react-flip-move": "3.0.5",
