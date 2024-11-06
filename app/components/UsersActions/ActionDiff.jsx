@@ -62,9 +62,12 @@ class ActionDiff extends PureComponent {
   formatChangeValue(value, key) {
     if (key === 'speaker_id' && value) {
       return <Link to={speakerURL(value)}>#{value}</Link>
-    } else if (key === 'is_draft' && !value) {
+    } else if (['is_draft', 'unlisted'].includes(key) && !value) {
       return 'No'
+    } else if (typeof value === 'boolean') {
+      return value ? 'Yes' : 'No'
     }
+
     return value
   }
 
