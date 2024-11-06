@@ -50,7 +50,7 @@
     ]
   },
   "dependencies": {
-    "@apollo/client": "^3.9.4",
+    "@apollo/client": "^3.11.8",
     "@popperjs/core": "2.11.8",
     "@rebass/grid": "~6.0.0-5",
     "@styled-icons/feather": "^10.47.0",
