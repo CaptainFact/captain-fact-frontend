@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { fontSize, space, style, themeGet } from 'styled-system'
+import { fontSize, fontWeight, space, style, themeGet } from 'styled-system'
 
 export const textTransform = style({
   prop: 'textTransform',
@@ -11,6 +11,7 @@ export const StyledH1 = styled.h1`
   ${fontSize}
   ${space}
   ${textTransform}
+  ${fontWeight}
 `
 
 export const StyledH2 = styled.h2`
@@ -19,6 +20,7 @@ export const StyledH2 = styled.h2`
   ${fontSize}
   ${space}
   ${textTransform}
+  ${fontWeight}
 `
 
 export const StyledH3 = styled.h3`
@@ -27,6 +29,7 @@ export const StyledH3 = styled.h3`
   ${fontSize}
   ${space}
   ${textTransform}
+  ${fontWeight}
 `
 
 export const StyledH4 = styled.h4`
@@ -35,6 +38,7 @@ export const StyledH4 = styled.h4`
   ${fontSize}
   ${space}
   ${textTransform}
+  ${fontWeight}
 `
 
 export const StyledH5 = styled.h5`
@@ -43,6 +47,7 @@ export const StyledH5 = styled.h5`
   ${fontSize}
   ${space}
   ${textTransform}
+  ${fontWeight}
 `
 
 export const StyledH6 = styled.h6`
@@ -51,4 +56,5 @@ export const StyledH6 = styled.h6`
   ${fontSize}
   ${space}
   ${textTransform}
+  ${fontWeight}
 `
