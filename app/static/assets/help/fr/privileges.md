@@ -25,6 +25,7 @@ renforcer leur signification.
 | 75         | Supprimer / restaurer une citation                          |
 | 75         | Déplacer toutes les citations d'une vidéo (time shift)      |
 | 75         | Supprimer un intervenant                                    |
+| 100        | Modifier la visibilité d'une vidéo (publique/non listée)    |
 | 125        | Moins de restrictions spécifiques aux nouveaux utilisateurs |
 | 125        | Accès aux outils de modération collective                   |
 | 125        | Restaurer un intervenant                                    |
