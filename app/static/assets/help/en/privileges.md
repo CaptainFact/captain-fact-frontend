@@ -25,6 +25,7 @@ Judgement actions such as voting and flagging are limited to avoid abusing them 
 | 75         | Remove / restore statement        |
 | 75         | Shift all video's statements      |
 | 75         | Remove speaker                    |
+| 100        | Change the visibility of a video  |
 | 125        | No more new user restrictions     |
 | 125        | Access to the moderation platform |
 | 125        | Restore speaker                   |
