@@ -1,36 +1,36 @@
-## Pourquoi fact-check ? Pourquoi utiliser CaptainFact ?
+## Comment bien débuter sur CaptainFact ?
+Vous venez de découvrir le site et vous êtes intéressé pour contribuer à la vérification des faits ? Pour commencer, **nous vous conseillons de parcourir une vidéo** déjà efficacement vérifiée pour prendre exemple. En voici quelques unes dont vous pouvez vous inspirer :
+- [Effondrement de la civilisation ? Pablo Servigne](https://captainfact.io/videos/GO1J)
+- [Est-ce une bonne chose de rendre les transports gratuits ?](https://captainfact.io/videos/GBjk)
+- ?
 
-_« Le fact-checking ou vérification des faits est l’acte de vérifier une affirmation, afin d’en déterminer la véracité et l’exactitude. »_
+## Identifier et citer les affirmations à vérifier
+La première chose à faire est de visionner la vidéo à la recherche d’affirmations énoncées par les intervenants et de les citer le plus fidèlement possible à l’aide du bouton `ajouter une citation`.
 
-CaptainFact permet de vérifier efficacement - ensemble - ce qui se dit en vidéo, en sourçant ce qui est affirmé.
-
-**Ce guide permet de comprendre rapidement comment contribuer.**
-
-**La vérité compte.**
-
-## Quoi vérifier ? Quelles affirmations citer sur CaptainFact ?
-
-_« Le ciel est bleu ! »_
-
-Notre outil permet de citer le passage d’une vidéo, afin de la vérifier avec les autres membres du site. Mais toutes les affirmations ne méritent pas d’être citées et vérifiées.
-
-Pour avoir sa place sur CaptainFact, une citation doit remplir au moins un des critères suivants :
+Pour avoir sa place sur CaptainFact, **une citation doit remplir au moins un des critères suivants** :
 
 - être vérifiable grâce à l’exposition de faits ;
-- faire mention d'une source ou d'un contenu que l’on peut vérifier ;
-- présenter des éléments incomplets ou approximatifs ;
-- présenter un argument fallacieux, trompeur ou mensonger.
 
-Ne méritent pas travail de vérification :
+- faire mention d'une source ou d'un contenu que l’on peut vérifier ;
+
+- présenter des éléments incomplets ou approximatifs ;
+
+- présenter un argument fallacieux, trompeur ou mensonger ;
+
+- sinon mériter une note / référence pour en améliorer la compréhension.
+
+**Ne méritent pas travail de vérification :**
 
 - les évidences comme « Le ciel est bleu ! » ;
-- les figures de style et l’humour (comme les hyperboles, les métaphores, etc) ;
+
+- les figures de style et l’humour ;
+
 - les erreurs mineures ;
+
 - les opinions personnelles.
 
-Les opinions doivent autant que possible éviter d'apparaître dans les citations.
-Vous pouvez, si cela ne la prive pas de son sens, remplacer les jugements de
-valeur (le mieux, le pire, stupide...etc) par des `[...]`.
+**Les opinions doivent autant que possible éviter d'apparaître dans les citations.**
+Vous pouvez, si cela ne la prive pas de son sens, remplacer les jugements de valeur (le mieux, le pire, stupide...etc) par points de suspension entre crochets `[...]`.
 
 Par exemple :
 
@@ -40,119 +40,32 @@ Peut devenir :
 
 > Cette mesure sociale \[...] n'a fait que créer une augmentation du chômage
 
-## Comment vérifier les faits ? Quelles sources présenter sur CaptainFact ?
+**Avant de valider l’ajout d’une nouvelle citation**, il est conseillé de vérifier :
+qu’elle n’existe pas déjà ;
+qu’elle contient un unique fait à vérifier tout en restant la plus fidèle possible aux propos de l’intervenant ;
+que le timecode (moment de la vidéo où sont prononcés les propos cités) est bien positionné au début de l’affirmation ;
+que l’intervenant cité est bien indiqué.
 
-Hiérarchiser le nombre incalculable de sources rendues accessible grâce à Internet est un processus complexe.
-Nous proposons ci-dessous une typologie non-exhaustive des sources qu’il est possible d’utiliser.
+Un guide plus complet pour bien citer est disponible sur notre [serveur Discord](https://discord.captainfact.io/).
+## Voter pour ou contre les commentaires des autres contributeurs
+Une fois qu’une citation est faite, chacun peut ajouter un commentaire sourcé pour confirmer, réfuter ou apporter une précision à l’affirmation citée. **Il est important de vérifier la pertinence et la fiabilité de ces commentaires**, et cela est un bon moyen d’apprendre à en ajouter soi-même.
 
-### Les organisations Internationales
+Pour cela, vérifiez si le commentaire n’est pas hors-sujet par rapport à la citation, puis allez jeter un coup d'œil à la source associée (si elle existe) pour vérifier sa fiabilité et si elle correspond bien à l’affirmation citée.
 
-Elles possèdent bien souvent un service de presse et un service statistique, sources d’informations primaires de grande valeur pour le fact-checker.
+**Si vous jugez le commentaire fiable et pertinent, vous pouvez alors voter positivement** pour le signaler au reste de la communauté et faire gagner des points de réputation au contributeur l’ayant apporté.
 
-_Ex : [Organisation Mondiale du Commerce](https://www.wto.org/indexfr.htm), [l’Organisation des Nations Unies](http://www.un.org/fr/index.html), …_
+**Si au contraire vous pensez que le commentaire n’a pas sa place sur CaptainFact, vous pouvez voter négativement**, voire le signaler s’il s’agit d’une attaque personnelle, de langage inapproprié, de spam ou de publicité. **Dans tous les cas, il est conseillé d’ajouter une réponse au commentaire** en expliquant (avec calme et pédagogie) ce qui vous paraît incorrect.
 
-### Les États et collectivités
+Gardez en tête que **les votes sur CaptainFact ne sont pas là pour donner son avis sur les commentaires des autres contributeurs** (tel un vulgaire *like* sur Facebook) mais pour mettre en avant les commentaires les plus fiables et pertinents.
 
-Les communiqués et rapports produits par les États, les parlements, les ministères et les administrations territoriales (région, département, municipalités) ou les rapports et statistiques fournis par les différentes agences et institutions publiques.
+## Vérifier les citations en y ajoutant des commentaires
+Le plus gros du travail de vérification des faits réside en l’ajout de commentaires sourcés aux citations qui viennent confirmer ou réfuter les affirmations citées.
 
-_Ex : [le ministère des Armées](https://www.defense.gouv.fr/), [la région Auvergne-Rhône-Alpes](https://www.auvergnerhonealpes.fr/), [l’INSEE](https://www.insee.fr/), …_
+En se concentrant sur les citations qui n’ont pas encore été vérifiées, **cherchez une source accessible à tous sur Internet qui permettrait de confirmer ou de réfuter l’affirmation citée**. Une fois que vous l’avez trouvée, cliquez sur `+ Ajouter une source ou un commentaire`, copiez/collez le lien vers votre source dans l’espace `Ajouter une source` prévu à cet effet, puis écrivez un commentaire (facultatif) pour résumer ce qu’affirme votre source et/ou où trouver l’information dans votre source. Enfin, cliquez sur `J’approuve` ou `Je réfute` pour placer votre commentaire sourcé en tant que confirmation ou réfutation de la citation.
 
-`(!) Les communiqués auront tendance à relayer le point de vue de leur gouvernement ou leur mairie et la rigueur méthodologique est variable.`
+Si les autres contributeurs jugent vos commentaires fiables et pertinents, vous devriez commencer à gagner des points de réputation, nécessaires pour débloquer plus d’actions sur CaptainFact, telles que l’ajout de nouvelles vidéos à vérifier ou l’accès à  l’espace de modération des commentaires signalés.
 
-### Les agences de presse
+## D’autres questions ? Des remarques ? Besoin de plus d’aide ?
+D’autres pages d’aide sont présentes sur le site pour des explications plus détaillées sur certaines fonctionnalités.
 
-Quel que soit leur actionnaire, les journalistes des agences de presse sont tous tenus au respect de la déontologie du journalisme et au principe de protection des sources d'information. Néanmoins, celles contrôlées par des États posent inévitablement au fact-checker la question de la fiabilité de l’information produite.
-
-_Ex : [Associated Press](https://www.ap.org/en-gb/), [Reuters](https://reuters.com/) et [l'Agence France-Presse](https://www.afp.com/fr), …_
-
-`(!) Le cas des agences de presse contrôlées par des États pose la question de la fiabilité de l’information produite en fonction de la nature du régime politique en place.`
-
-### Médias de masse
-
-L'expression médias de masse regroupe les médias diffusés à grande échelle pour répondre rapidement à une demande d'information d'un public vaste.
-
-_Ex : [Le Monde](https://www.lemonde.fr/), [Slate](https://slate.com/), France 2, LCI, RFI, Europe 1, ..._
-
-`(!) L’évaluation d’un média de masse impose au fact-checker de nombreuses interrogations – parmi lesquelles le contrôle,  la liberté de discours ou encore le business model.`
-
-### Publications scientifiques
-
-Les publications scientifiques permettent de diffuser des informations scientifiques et techniques produites par des travaux de recherche et généralement destinées à des chercheurs ou à un public de spécialistes.
-
-_Ex : [Nature](https://www.nature.com/nature/), [Cochrane Library](https://www.cochranelibrary.com/), …_
-
-`(!) Il incombe au fact-checker de vérifier le financement de l’étude en question ou la méthodologie employée.`
-
-### ONG
-
-Une organisation non gouvernementale (ONG) est une association à but non lucratif, d'intérêt public, qui ne relève ni de l'État, ni d'institutions internationales.
-
-_Ex : [Amnesty](https://www.amnesty.org/fr/), [WWF](https://www.wwf.fr/), …_
-
-`(!) Considérer les questions du financement, de l’historique et de la transparence des actions menées ou de la réputation de l’organisation.`
-
-### Blogs et autres médias indépendants
-
-Un grand nombre de médias de qualité très variable et dont l’ambition est de proposer un autre prisme de lecture ou de traiter des thématiques jugées absentes ou insuffisamment traitées par les médias traditionnels. Leur indépendance leur confère des avantages, mais ne garantit ni rigueur méthodologique, ni absence d’intérêts dissimulés.
-
-`(!) L’évaluation  d’une source de type blog demande donc un travail considérable au fact-checker avant toute reprise.`
-
-### Individus
-
-`Déterminer si l’information produite par les individus eux-mêmes peut constituer une source valable est loin d’être évident à cause de ses biais ou son caractère subjectif.`
-
-_Ex : des témoignages, des interviews, comme celui de [djihadistes européens capturés par des combattants kurdes](https://www.francetvinfo.fr/monde/proche-orient/offensive-jihadiste-en-irak/syrie-un-jihadiste-francais-face-a-son-geolier_2571977.html) et interrogés par des journalistes européens, sous surveillance de leurs gardiens.
-Il est légitime de questionner les informations recueillies dans ces conditions et les éventuelles révélations qu’elles contiendraient sur les agissements de leur organisation ou la magnanimité de leurs gardiens._
-
-### Wikipédia
-
-Il est acceptable de se référer à une page Wikipédia comme source, à condition de vérifier dans les notes de bas de page la source utilisée dans l’article et sa disponibilité.
-
-`(!) Se méfier des articles sur des thématiques sujettes à polémique, souvent indiqué par une bannière.`
-
-## Comment évaluer une source ?
-
-La question de l’évaluation d’une source est toujours délicate mais semble plus que jamais nécessaire à l’ère de la guerre de l’information et de la crise de légitimité des médias traditionnels. Internet a multiplié la quantité d’informations et de contenus auxquels nous sommes confrontés et nous impose d’évaluer, trier et hiérarchiser nos sources.
-
-Ce processus critique doit être préalable à toute rediffusion d’information et de contenu. Nous proposons ci-dessous une liste non-exhaustive de points à considérer à se poser pour évaluer la fiabilité et la crédibilité d’une source.
-
-### Degré de proximité
-
-Limiter le degré d’éloignement avec l’information, c’est limiter les altérations et les interprétations a posteriori de l’information d’origine, qu’elles soient involontaires ou malhonnêtes. Bien entendu, il n’est pas toujours possible de remonter à la source d’origine, par exemple dans le cas de sources anonymes protégées par des journalistes ou d’éléments confidentiels provenant d’informateurs des services de renseignement. On remontera dans ce cas à la source la plus proche de la source originelle.
-
-_Ex : Pour comprendre le débat public sur la légalisation de l’avortement en Argentine à l’été 2018, il est préférable de se référer à des médias argentins ([La Nacion](https://www.lanacion.com.ar/2159529-el-debate-constitucional-sobre-la-legalizacion-del-aborto), [Clarín](https://www.clarin.com/sociedad/aborto-paso-paso-primer-panuelazo-rechazo-senado_0_Hk8BoXJ-m.html)…) plutôt qu’à des médias français généralistes qui, bien que potentiellement capables de fournir une information tout aussi exacte, seront généralement limités dans leur traitement, pour des raisons de priorisation de l’information ou encore d’absence de correspondants locaux en nombre suffisant._
-
-### Liberté d’opinion et de discours
-
-Il existe encore aujourd’hui des États où la presse reste contrôlée par l’Etat et où toute prise de position contraire à celle de l’Etat ou du gouvernement est censurée, voire sévèrement réprimée. Il est donc important pour le fact-checker d’évaluer la recevabilité d’une information provenant d’un titre de presse d’un pays donné en tenant compte de la réalité politique du pays de provenance.
-
-_Ex : La Turquie a par exemple fait la récente expérience de [l’entravement progressif de sa presse d’opposition](https://www.theguardian.com/world/2016/aug/29/stop-the-press-turkey-crackdown-journalists-overdrive-since-coup) à mesure que M. Recep Tayyip Erdogan renforçait sa position présidentielle et son pouvoir politique. _
-
-**Outils :** Les indicateurs de niveau de démocratie et liberté politique sont nombreux et un certain nombre sont [recensés sur Wikipédia](https://en.wikipedia.org/wiki/List_of_freedom_indices).
-Quant au cas plus spécifique de la liberté de la presse, deux indicateurs principaux sont généralement retenus : [le classement mondial annuel de la liberté de la presse](https://rsf.org/fr/classement) et [l’indicateur annuel de liberté de la presse](https://freedomhouse.org/report/freedom-press/freedom-press-2017).
-
-### Contrôle
-
-La question de l’appartenance et du contrôle des médias est régulièrement soulevée dans le débat public, les citoyens s'alarment d’une tendance à la concentration des médias aux mains de riches investisseurs privés.
-
-**Outil :** Le Monde diplomatique produit et met à jour régulièrement [sa carte](https://github.com/mdiplo/Medias_francais) « des médias d’information qui « font l’opinion » et qui dépendent d’intérêts industriels ou financiers, de groupes de presse ou de l’État » et dresse un bon aperçu de la concentration qui existe aujourd’hui en France.
-
-Pour autant, la méthode du fact-checker ne doit pas être la disqualification a priori d’une organisation en raison de ses propriétaires ou actionnaires, mais l’évaluation factuelle d’un contenu particulier, en tenant compte les possibles conflits d’intérêts et la transparence.
-
-### Auteur
-
-Il paraît essentiel que, pour des raisons de transparence vis-à-vis de leur audience, médias et autres producteurs de contenus d’information indiquent de façon claire qui est l’auteur d’un article ou d’un autre type contenu. Il est en effet crucial pour que le public soit capable d’évaluer la qualité et la légitimité de l’auteur, en s’intéressant par exemple à son parcours professionnel, son domaine d’expertise, son historique de publications, ou encore ses fonctions actuelles dans telle ou telle autre organisation.
-
-L’auteur d’un contenu doit donc être évalué en même temps que le fond de ce contenu, puisqu’il donne des indications sur la qualité et la légitimité des faits ou vues avancés. En règle générale, on se méfiera particulièrement des contenus sans auteur identifiable, qui ne remplissent pas les critères de transparence que le public est en droit d’attendre.
-
-## Comment commencer sur CaptainFact ?
-
-1. **Parcourir une vidéo** déjà efficacement vérifiée et prendre exemples :
-   - [Effondrement de la civilisation ? Pablo Servigne](https://captainfact.io/videos/GO1J)
-   - [Natacha Polony : Journalistes et médias sous contrôles ?](https://captainfact.io/videos/GQd4)
-   - [Est-ce une bonne chose de rendre les transports gratuits ?](https://captainfact.io/videos/GBjk)
-2. **Identifier et citer** les propos qui méritent d’être vérifiés, avant de s'exercer à la vérification.
-3. **S'exercer** en vérifiant et en votant positivement ou négativement les sources présentées par la communauté.
-4. **Vérifier des citations** et leur apporter des sources ou des commentaires.
-5. Rejoindre le serveur Discord pour obtenir de l’assistance : https://discord.captainfact.io
-6. **Partager ce guide :)**
+N’hésitez pas à nous [contacter](/help/contact), notamment par le biais de notre [serveur Discord](https://discord.captainfact.io/), sur lequel vous pouvez discuter avec la communauté par écrit, ou bien nous rejoindre pendant **nos rendez-vous vocaux ouverts à tous**, chaque mardi soir à 21h.
