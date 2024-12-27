@@ -42,3 +42,8 @@ score = (nb_confirm - nb_abuse) / total_feedbacks
 
 For information about reputation changes linked to moderation,  
 [check this](/help/reputation).
+
+# Rules for video content moderation
+
+To better promote verified videos, videos with zero source after 30 days since posting become unlisted. This action is performed by the technical team and can be requested by a user.
+_NB: Unlisted videos do not appear on the fact checking page or the browser extension. However, it is still possible to contribute with the link. They can be re-listed with a justified request from a user._
