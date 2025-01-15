@@ -86,7 +86,7 @@
     "react-markdown": "~8.0.7",
     "react-player": "~2.14.1",
     "react-popper": "2.3.0",
-    "react-redux": "~7.2.9",
+    "react-redux": "~9.2.0",
     "react-resize-detector": "~9.1.1",
     "react-router": "5.3.4",
     "react-router-dom": "5.3.4",
