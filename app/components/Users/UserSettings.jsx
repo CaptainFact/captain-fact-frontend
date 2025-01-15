@@ -17,7 +17,7 @@ import EditUserForm from './EditUserForm'
 @withLoggedInUser
 export default class UserSettings extends React.PureComponent {
   render() {
-    const { t, addModal, locale, logout } = this.props
+    const { t, addModal, logout } = this.props
     return this.props.isLoading ? (
       <LoadingFrame />
     ) : (
@@ -33,17 +33,6 @@ export default class UserSettings extends React.PureComponent {
           <Flex justifyContent="center">
             <UserLanguageSelector />
           </Flex>
-        </div>
-        <br />
-        <hr />
-        <br />
-        <div className="has-text-centered">
-          <h3 className="title is-3">{t('browsingAnalyzer')}</h3>
-          <iframe
-            title="Matomo opt-out"
-            style={{ border: 0, height: 175, width: 600 }}
-            src={`https://stats.captainfact.io/index.php?module=CoreAdminHome&action=optOut&language=${locale}&fontFamily=Ubuntu`}
-          />
         </div>
         <br />
         <hr />
