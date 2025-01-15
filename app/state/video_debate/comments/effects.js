@@ -1,6 +1,7 @@
+import { toastError } from '@/lib/toasts'
+
 import { SocketApi } from '../../../API'
 import { COMMENTS_CHANNEL } from '../../../constants'
-import { errorToFlash } from '../../flashes/reducer'
 import { createEffect, generateFSAError } from '../../utils'
 import {
   add,
@@ -44,7 +45,7 @@ export const postComment = (comment) => {
 
 export const deleteComment = ({ id }) => {
   return createEffect(SocketApi.push(COMMENTS_CHANNEL, 'delete_comment', { id }), {
-    catch: errorToFlash,
+    catch: toastError,
   })
 }
 
@@ -57,13 +58,13 @@ export const commentVote = (params) =>
     {
       before: setVoting(params.comment.id),
       then: addMyVote(params),
-      catch: [endVoting(params.comment.id), errorToFlash],
+      catch: [endVoting(params.comment.id), toastError],
     },
   )
 
 export const flagComment = ({ id, reason }) => {
   return createEffect(SocketApi.push(COMMENTS_CHANNEL, 'flag_comment', { id, reason }), {
     then: addFlag(id),
-    catch: errorToFlash,
+    catch: toastError,
   })
 }

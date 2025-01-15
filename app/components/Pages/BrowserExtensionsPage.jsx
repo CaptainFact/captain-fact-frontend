@@ -1,35 +1,20 @@
-import { Box, Flex } from '@rebass/grid'
 import React from 'react'
-import { Trans, withNamespaces } from 'react-i18next'
+import { Trans, withTranslation } from 'react-i18next'
 import ReactPlayer from 'react-player'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
 import { PlusCircle } from 'styled-icons/boxicons-solid'
 
-import { registerClick } from '../../API/matomo'
 import chromeLogo from '../../assets/browsers/chrome.png'
 import firefoxLogo from '../../assets/browsers/firefox.png'
 import ieLogo from '../../assets/browsers/internet_explorer.png'
 import demoExtensionVideo from '../../assets/demos/demo-extension.mp4'
-import Button from '../Utils/Button'
+import { Button } from '../ui/button'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
-
-const PresentationBox = styled(Box)`
-  background: white;
-  padding: 2.5em 2em;
-  border-radius: 0.25em;
-  box-shadow: -1px 7px 14px #9c9c9c;
-  flex-basis: 475px;
-`
-
-const MainContainer = styled(Flex)`
-  max-width: 1400px;
-`
 
 const Presentation = ({ t }) => (
   <p>
     {t('description')}{' '}
-    <Trans i18nKey="moreInfo">
+    <Trans i18nKey="extension:moreInfo">
       [Is]
       <ExternalLinkNewTab href="https://github.com/CaptainFact">open-source</ExternalLinkNewTab>
       [Respect]<Link to="/help/extension">[Privacy]</Link>.
@@ -37,74 +22,80 @@ const Presentation = ({ t }) => (
   </p>
 )
 
-const BrowserExtensionInstall = ({ label, img, url, name, disabled = false }) => (
-  <Flex mb="0.75em" flexWrap="wrap" justifyContent={['center', 'flex-start']}>
-    <Box width="50px" flexBasis="50px" mx={['1em', '1.5em']}>
+const BrowserExtensionInstall = ({ isPrimary, label, img, url, name, disabled = false }) => (
+  <div className="flex flex-wrap mb-4 justify-start items-center">
+    <div className="w-[40px] sm:w-[50px] mr-4 sm:mr-6 flex-shrink-0">
       <img src={img} alt={name} />
-    </Box>
-    <Box>
-      <ExternalLinkNewTab
-        href={url}
-        onClick={() => registerClick('ExtensionPage', 'Button', `Install-${name}`)}
+    </div>
+    <ExternalLinkNewTab href={url} className="flex-1">
+      <Button
+        variant={isPrimary ? 'default' : 'outline'}
+        disabled={disabled}
+        size="lg"
+        className="w-full text-sm sm:text-base"
       >
-        <Button style={{ width: '235px' }} className="is-large" disabled={disabled}>
-          <PlusCircle size="1em" />
-          &nbsp;&nbsp;{label}
-        </Button>
-      </ExternalLinkNewTab>
-    </Box>
-  </Flex>
+        <PlusCircle size="1em" />
+        <span className="ml-2">{label}</span>
+      </Button>
+    </ExternalLinkNewTab>
+  </div>
 )
 
-export const BrowserExtensionsPage = withNamespaces('extension')(({ t }) => (
-  <div className="browser-extension-page">
-    <section className="hero is-gradient-primary is-medium is-bold">
-      <section className="hero-body">
-        <div className="container">
-          <h1 className="title is-2">{t('title')}</h1>
-          <h2 className="subtitle is-3">{t('subtitle')}</h2>
+const getBrowserType = () => {
+  const ua = navigator.userAgent
+  if (ua.indexOf('Chrome') !== -1) {
+    return 'Chrome'
+  } else if (ua.indexOf('Firefox') !== -1) {
+    return 'Firefox'
+  } else if (ua.indexOf('MSIE') !== -1 || ua.indexOf('Trident') !== -1) {
+    return 'IE'
+  }
+  return 'Unknown'
+}
+
+export const BrowserExtensionsPage = withTranslation('extension')(({ t }) => {
+  const browserType = getBrowserType()
+  return (
+    <div>
+      <section className="bg-gradient-to-tr from-primary to-primary/90 py-16 sm:py-24 text-white">
+        <div className="container mx-auto px-4">
+          <h1 className="text-3xl sm:text-4xl font-bold mb-4">{t('title')}</h1>
+          <h2 className="text-2xl sm:text-3xl">{t('subtitle')}</h2>
         </div>
       </section>
-    </section>
-    <section>
-      <MainContainer
-        mt={['-3.5em', '-8em']}
-        p="1em"
-        flexWrap="wrap"
-        mx="auto"
-        alignItems="center"
-        justifyContent="space-around"
-      >
-        <PresentationBox width={[1, 1, 0.4]} mr={['0em', '5em']} mb="2em" fontSize={4}>
-          <Presentation t={t} />
-          <br />
-          <BrowserExtensionInstall
-            img={chromeLogo}
-            label={`${t('addTo')} Chrome`}
-            url="https://chrome.google.com/webstore/detail/fnnhlmbnlbgomamcolcpgncflofhjckm"
-            name="Chrome"
-          />
-          <BrowserExtensionInstall
-            img={firefoxLogo}
-            url="https://addons.mozilla.org/addon/captainfact/"
-            label={`${t('addTo')} Firefox`}
-            name="Firefox"
-          />
-          <BrowserExtensionInstall img={ieLogo} label="Just kidding" name="IE" disabled />
-        </PresentationBox>
-        <Box width={[1, 1, 0.4]} style={{ flexGrow: 1 }}>
+      <section>
+        <div className="container -mt-12 sm:-mt-20 p-4 flex gap-6 mx-auto justify-between items-center md:flex-row flex-col-reverse">
+          <div className="w-full max-w-[500px] bg-white p-6 sm:p-10 rounded shadow-lg text-base sm:text-lg">
+            <Presentation t={t} />
+            <br />
+            <BrowserExtensionInstall
+              img={chromeLogo}
+              label={`${t('addTo')} Chrome`}
+              url="https://chrome.google.com/webstore/detail/fnnhlmbnlbgomamcolcpgncflofhjckm"
+              name="Chrome"
+              isPrimary={browserType === 'Chrome'}
+            />
+            <BrowserExtensionInstall
+              img={firefoxLogo}
+              url="https://addons.mozilla.org/addon/captainfact/"
+              label={`${t('addTo')} Firefox`}
+              name="Firefox"
+              isPrimary={browserType === 'Firefox'}
+            />
+            <BrowserExtensionInstall img={ieLogo} label="Just kidding" name="IE" disabled />
+          </div>
           <ReactPlayer
             controls
-            width="600px"
-            height="338px"
-            className="video"
+            width="100%"
+            height="auto"
+            className="shadow-lg rounded-lg overflow-hidden max-w-[690px] aspect-video"
             muted
             playing
             loop
             url={demoExtensionVideo}
           />
-        </Box>
-      </MainContainer>
-    </section>
-  </div>
-))
+        </div>
+      </section>
+    </div>
+  )
+})

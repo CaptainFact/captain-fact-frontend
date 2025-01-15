@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 
-export const loggedInUserNotificationsQuery = gql`
+const loggedInUserNotificationsQuery = gql`
   query LoggedInUserNotifications($page: Int! = 1, $pageSize: Int! = 30, $filter: String = ALL) {
     loggedInUser {
       id

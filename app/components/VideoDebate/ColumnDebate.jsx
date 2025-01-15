@@ -1,37 +1,23 @@
+import { MessageCircle } from 'lucide-react'
 import React from 'react'
-import { Trans, withNamespaces } from 'react-i18next'
+import { Trans, withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
-import { InfoCircle } from 'styled-icons/fa-solid'
-import { ExclamationCircle } from 'styled-icons/fa-solid'
+import { ExclamationCircle, InfoCircle } from 'styled-icons/fa-solid'
 
 import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
 import { isLoadingVideoDebate } from '../../state/video_debate/selectors'
 import { hasStatementForm } from '../../state/video_debate/statements/selectors'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import StatementsList from '../Statements/StatementsList'
-import Container from '../StyledUtils/Container'
+import { ScrollArea } from '../ui/scroll-area'
+import { Skeleton } from '../ui/skeleton'
 import DismissableMessage from '../Utils/DismissableMessage'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
-import { Icon } from '../Utils/Icon'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import Message from '../Utils/Message'
 import ActionBubbleMenu from './ActionBubbleMenu'
 import CaptionsExtractor from './CaptionsExtractor'
 import VideoDebateHistory from './VideoDebateHistory'
-
-const TitleContainer = styled.div`
-  padding: 1.5rem;
-  margin-top: 1.5rem;
-`
-const TitleH1 = styled.h1`
-  color: #0a0a0a;
-  line-height: 140%;
-  font-family: Merriweather, serif;
-  font-size: 1.7rem;
-  margin: 0 auto;
-  max-width: 980px;
-`
 
 @connect((state) => ({
   isLoading: isLoadingVideoDebate(state),
@@ -41,7 +27,7 @@ const TitleH1 = styled.h1`
   unlisted: state.VideoDebate.video.data.unlisted,
   videoTitle: state.VideoDebate.video.data.title,
 }))
-@withNamespaces('videoDebate')
+@withTranslation('videoDebate')
 @withLoggedInUser
 export class ColumnDebate extends React.PureComponent {
   constructor(props) {
@@ -78,8 +64,8 @@ export class ColumnDebate extends React.PureComponent {
       helpMessage = t('tips.firstSpeaker')
     } else {
       helpMessage = (
-        <Trans i18nKey="tips.firstStatement" parent="span">
-          [Now] <strong>[add]</strong> [click] <Icon name="commenting-o" />
+        <Trans i18nKey="videoDebate:tips.firstStatement" parent="span">
+          [Now] <strong>[add]</strong> [click] <MessageCircle size="1em" className="inline" />
           &nbsp;[icon]
         </Trans>
       )
@@ -95,9 +81,9 @@ export class ColumnDebate extends React.PureComponent {
       return <VideoDebateHistory videoId={videoId} />
     } else if (view === 'captions') {
       return (
-        <Container px={['20px', '32px']} my={4} mx="auto" maxWidth="1046px">
+        <div className="px-5 sm:px-8 my-4 mx-auto max-w-[1046px]">
           <CaptionsExtractor videoId={videoId} />
-        </Container>
+        </div>
       )
     } else if (view === 'debate') {
       if (isLoading) {
@@ -107,9 +93,9 @@ export class ColumnDebate extends React.PureComponent {
       const hasStatementsComponents = hasStatements || this.props.hasStatementForm
       const hasMessages = this.props.unlisted || !hasStatementsComponents
       return (
-        <div className="statements-list-container">
+        <div>
           {hasMessages && (
-            <div className="video-debate-help">
+            <div>
               {this.props.unlisted && this.renderWarning(this.props.t('warningUnlisted'))}
               {!hasStatementsComponents && this.renderHelp()}
             </div>
@@ -126,7 +112,7 @@ export class ColumnDebate extends React.PureComponent {
     return (
       <DismissableMessage
         localStorageDismissKey={LOCAL_STORAGE_KEYS.DISMISS_VIDEO_INTRODUCTION}
-        className="introduction"
+        className="mb-12"
         header={t('introTitle')}
       >
         <p>{t('intro')}</p>
@@ -151,22 +137,27 @@ export class ColumnDebate extends React.PureComponent {
   }
 
   renderTitle() {
-    const { t, videoTitle } = this.props
-
+    const { t, videoTitle, isLoading } = this.props
     return (
-      <TitleContainer>
-        <TitleH1>{`${t('pageTitle')} ${videoTitle}`}</TitleH1>
-      </TitleContainer>
+      <h1 className="text-center text-2xl font-semibold max-w-4xl mx-auto mb-10 pb-8 shadow-[0px_12px_8px_-10px_#e1e1e1] rounded-lg">
+        {t('pageTitle')}{' '}
+        {videoTitle ||
+          (isLoading ? <Skeleton className="w-48 h-6 inline-block align-middle ml-3" /> : '...')}
+      </h1>
     )
   }
 
   render() {
     return (
-      <div id="col-debate" className="column">
-        {this.state.showIntroduction && this.renderIntroduction()}
-        {this.renderTitle()}
-        {this.renderContent()}
-      </div>
+      <ScrollArea className="w-full bg-neutral-50 2xl:h-[--main-height] [&>div>div]:!block 2xl:[&>div>div]:!table">
+        <div className="py-12 sm:px-4 px-2">
+          {this.renderTitle()}
+          {this.state.showIntroduction && (
+            <div className="mx-6 mt-4">{this.renderIntroduction()}</div>
+          )}
+          {this.renderContent()}
+        </div>
+      </ScrollArea>
     )
   }
 }

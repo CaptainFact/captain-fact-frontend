@@ -1,14 +1,9 @@
 import { omit } from 'lodash'
 import React from 'react'
-import styled from 'styled-components'
-import * as styledSystem from 'styled-system'
 
-const TextArea = styled.textarea`
-  resize: none !important;
-  ${styledSystem.minHeight}
-  ${styledSystem.maxHeight}
-  ${styledSystem.height}
-`
+import { cn } from '@/lib/css-utils'
+
+import { Textarea } from '../ui/textarea'
 
 /**
  * A textarea that grows with its content.
@@ -46,8 +41,8 @@ export default class TextareaAutosize extends React.PureComponent {
 
   render() {
     return (
-      <TextArea
-        className="textarea"
+      <Textarea
+        className={cn('resize-none', this.props.className)}
         ref={this.textarea}
         onChange={this._handleChange}
         resize

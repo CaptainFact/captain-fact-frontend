@@ -1,6 +1,7 @@
+import { ChevronUp } from 'lucide-react'
 import React from 'react'
 
-import Tag from '../Utils/Tag'
+import { Badge } from '../ui/badge'
 import { Source } from './Source'
 
 const COLLAPSE_CONTENT_ABOVE_NESTING = 6
@@ -12,12 +13,24 @@ const CommentContent = ({ comment: { source, text }, nesting, replyingTo, richMe
   return (
     <div>
       {shouldRenderTextBlock && (
-        <div className="comment-text">
-          {isCollapsed && <Tag style={{ marginRight: 5 }}>@{replyingTo.username}</Tag>}
+        <div className="relative bg-white inline-block whitespace-pre-wrap border rounded py-1 px-2 text-sm break-words max-w-full">
+          <ChevronUp
+            size={20}
+            className="absolute left-[2px] w-5 h-5 text-neutral-300 -top-[12px] fill-white stroke-1"
+          />
+          {isCollapsed && (
+            <Badge variant="outline" className="mr-2">
+              @{replyingTo.username}
+            </Badge>
+          )}
           {text}
         </div>
       )}
-      {source && <Source withoutPlayer={!richMedias} source={source} />}
+      {source && (
+        <div>
+          <Source withoutPlayer={!richMedias} source={source} />
+        </div>
+      )}
     </div>
   )
 }

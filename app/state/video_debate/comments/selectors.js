@@ -5,7 +5,7 @@ const EMPTY_COMMENTS_LIST = new List()
 
 export const getAllComments = (state) => state.VideoDebate.comments.comments
 
-export const getStatementAllComments = (state, props) => {
+const getStatementAllComments = (state, props) => {
   return getAllComments(state).get(props.statement.id, EMPTY_COMMENTS_LIST)
 }
 

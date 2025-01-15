@@ -1,11 +1,11 @@
 {
   "entities": {
     "video": "vidéo",
-    "video_plural": "vidéos",
+    "video_other": "vidéos",
     "speaker": "intervenant(e)",
-    "speaker_plural": "intervenant(e)s",
+    "speaker_other": "intervenant(e)s",
     "statement": "déclaration",
-    "statement_plural": "déclarations",
+    "statement_other": "déclarations",
     "videoFactChecking": "Vidéos"
   },
   "menu": {
@@ -22,7 +22,7 @@
     "language": "Langue",
     "other": "Autre",
     "donation": "Nous soutenir",
-    "extension": "Télécharger l'extension",
+    "extension": "Ajouter l'extension",
     "help": "Aide",
     "moderation": "Modération",
     "addedVideos": "Vidéos ajoutées",
@@ -33,6 +33,7 @@
     "contact": "Contact"
   },
   "actions": {
+    "all": "Actions",
     "save": "Sauvegarder",
     "cancel": "Annuler",
     "send": "Envoyer",
@@ -62,9 +63,9 @@
     "fieldMaxLength": "Doit faire moins de {{max}} caractères",
     "and": "et",
     "other": "{{count}} autre",
-    "other_plural": "{{count}} autres",
+    "other_other": "{{count}} autres",
     "character": "caractère",
-    "character_plural": "caractères",
+    "character_other": "caractères",
     "clipboardSuccess": "Adresse copiée dans le presse-papier",
     "clipboardFail": "Impossible d'enregistrer l'adresse dans le presse-papier",
     "all": "Tous",
@@ -76,7 +77,7 @@
   },
   "videos": {
     "introTitle": "Ajouter une vidéo à vérifier sur CaptainFact",
-    "intro": "CaptainFact est une plateforme de vérification collaborative des vidéos, permettant d’ajouter des sources et des références qui améliorent la qualité des informations. Les vérifications s'affichent ensuite dans la vidéo Youtube grâce à l'extension navigateur.",
+    "intro": "CaptainFact est une plateforme de vérification collaborative des vidéos, permettant d’ajouter des sources et des références qui améliorent la qualité des informations. Les vérifications s'affichent ensuite dans la vidéo YouTube grâce à l'extension navigateur.",
     "seeExtension": "Découvrir l'extension navigateur",
     "intro2": "Vous pouvez ajouter une nouvelle vidéo à vérifier (si vous êtes un membre avec au moins {{requiredPoints}} pts de réputation) ou demander à la communauté de le faire :",
     "contact": "Demander l'ajout de la vidéo",
@@ -90,7 +91,7 @@
     "unlistedDescription": "Les vidéos non listées n'apparaitront ni dans la liste des vidéos ni dans l'extension. Elles vous permettent de travailler sur un contenu sans que celui-ci ne soit mis en avant par la plateforme.",
     "requiredPoints": "{{requiredPoints}} pts requis",
     "supportedPlatforms": "Les plateformes actuellement supportées sont YouTube et Facebook.",
-    "adviceTitle": "Quelle vidéo ajouter pour vérification sur CaptainFact ?",
+    "adviceTitle": "Quelles vidéos ajouter sur CaptainFact ?",
     "advice1": "De préférence, merci d’ajouter au site des vidéos :",
     "adviceBulletPoint1": "pour lesquelles vous allez extraire ou vérifier des citations ;",
     "adviceBulletPoint2": "qui comportent des faits à vérifier ;",
@@ -105,8 +106,8 @@
   },
   "speakerpage": {
     "title1": "Fact-checking des vidéos avec ",
-    "info1": "CaptainFact est une plateforme de fact-checking collaboratif permettant de vérifier les informations dans les vidéos YouTube.",
-    "info2": "Les propos des intervenants ci-dessous peuvent être sourcés, confirmés ou réfutés par les membres du site. Les vérifications s'affichent dans la vidéo Youtube si vous avez installé notre extension navigateur contre la désinformation.",
+    "info1": "CaptainFact est une plateforme de fact-checking collaborative permettant de vérifier les informations dans les vidéos YouTube.",
+    "info2": "Les propos des intervenants ci-dessous peuvent être sourcés, confirmés ou réfutés par les membres du site. Les vérifications s'affichent dans la vidéo YouTube si vous avez installé notre extension navigateur contre la désinformation.",
     "more": "En savoir plus"
   },
   "search": {
@@ -118,5 +119,6 @@
   "all": "Toutes",
   "partners": "Partenaires",
   "users": "Utilisateurs",
-  "featured": "Tendances"
+  "featured": "Tendances",
+  "disconnected": "Vous êtes déconnecté"
 }

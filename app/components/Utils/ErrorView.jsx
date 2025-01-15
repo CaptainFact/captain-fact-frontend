@@ -1,52 +1,44 @@
+import { AlertCircle, ArrowLeft, RefreshCw } from 'lucide-react'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { Link, withRouter } from 'react-router-dom'
 
 import { getErrorInfo, tError } from '../../lib/errors'
-import { LinkWithIcon } from '.'
-import Message from './Message'
+import { Alert, AlertDescription, AlertTitle } from '../ui/alert'
+import { Button } from '../ui/button'
 
 const refreshableErrors = ['join_crashed']
 
 @withRouter
-@withNamespaces('errors')
+@withTranslation('errors')
 export class ErrorView extends React.PureComponent {
   render() {
     const { t, error = 'unknown', canGoBack = true } = this.props
     const canReload = this.props.canReload || refreshableErrors.includes(error)
     return (
-      <div className="message-view">
-        <Message
-          type="danger"
-          header={
-            <p>
-              <strong>{t('title')}</strong>
-            </p>
-          }
-        >
-          <div>
-            <p>
-              {tError(t, error)}
-              {this.getMoreInfo()}
-            </p>
-            {(canGoBack || canReload) && <br />}
+      <Alert variant="destructive">
+        <AlertCircle className="h-4 w-4" />
+        <AlertTitle>{t('title')}</AlertTitle>
+        <AlertDescription>
+          <p>{tError(t, error)}</p>
+          <p>{this.getMoreInfo()}</p>
+          {(canGoBack || canReload) && <br />}
+          <div className="flex items-center gap-2 flex-wrap">
             {canGoBack && (
-              <LinkWithIcon iconName="arrow-left" onClick={() => this.props.history.goBack()}>
+              <Button size="xs" variant="outline" onClick={() => this.props.history.goBack()}>
+                <ArrowLeft size="1em" />
                 {t('main:actions.goBack')}
-              </LinkWithIcon>
+              </Button>
             )}
             {canReload && (
-              <LinkWithIcon
-                iconName="refresh"
-                onClick={() => location.reload()}
-                style={{ float: 'right' }}
-              >
+              <Button size="xs" variant="outline" onClick={() => location.reload()}>
+                <RefreshCw size="1em" />
                 {t('main:actions.reload')}
-              </LinkWithIcon>
+              </Button>
             )}
           </div>
-        </Message>
-      </div>
+        </AlertDescription>
+      </Alert>
     )
   }
 

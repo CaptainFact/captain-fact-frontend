@@ -1,4 +1,3 @@
-import { Box, Flex } from '@rebass/grid'
 import React from 'react'
 
 import imgDemocratieOuverte from '../../assets/partners/democratie-ouverte.jpg'
@@ -31,17 +30,18 @@ const PARTNERS = [
  * Render all CaptainFact partners
  */
 const AllPartners = () => (
-  <Flex flexWrap="wrap" alignItems="center" justifyContent="space-around">
+  <div className="flex flex-wrap items-center justify-around">
     {PARTNERS.map(({ name, url, img }) => (
-      <Box key={name} mb="1em">
+      <div key={name} className="mb-4">
         <ExternalLinkNewTab href={url} title={name}>
           <figure className="image is-96x96">
             <img src={img} alt={name} />
           </figure>
         </ExternalLinkNewTab>
-      </Box>
+      </div>
     ))}
-  </Flex>
+  </div>
 )
 
+// ts-unused-exports:disable-next-line
 export default AllPartners

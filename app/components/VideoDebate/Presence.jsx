@@ -1,20 +1,17 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 
-import { Icon } from '../Utils'
-import Tag from '../Utils/Tag'
+import { Badge } from '../ui/badge'
 
 const Presence = ({ t, nbUsers, nbViewers }) => (
   <div className="presence">
-    <Tag type="primary">
-      <Icon size="small" name="group" />
+    <Badge>
       <span>{t('presence.user', { count: nbUsers })}</span>
-    </Tag>
-    <Tag className="viewers">
-      <Icon size="small" name="eye" />
+    </Badge>
+    <Badge variant="outline">
       <span>{t('presence.viewer', { count: nbViewers })}</span>
-    </Tag>
+    </Badge>
   </div>
 )
 
@@ -23,4 +20,4 @@ Presence.propTypes = {
   nbViewers: PropTypes.number.isRequired,
 }
 
-export default withNamespaces('videoDebate')(Presence)
+export default withTranslation('videoDebate')(Presence)

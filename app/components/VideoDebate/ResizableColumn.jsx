@@ -6,13 +6,15 @@ import { themeGet } from 'styled-system'
 
 const StyledResizable = styled(Resizable)`
   /* Overwrite resizable column behaviour on small device */
-  @media screen and (max-width: 1279px) {
+  @media not all and (min-width: 1536px) {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 100% !important;
   }
 
   .right-resizable-handle {
+    background: white;
+    margin-right: 10px;
     @media (max-width: 1279px) {
       display: none;
     }
@@ -42,11 +44,12 @@ const StyledResizable = styled(Resizable)`
   }
 `
 
-const ResizableColumn = ({ children }) => {
+const ResizableColumn = ({ children, className }) => {
   const [resizing, setResizing] = useState(false)
 
   return (
     <StyledResizable
+      className={className}
       $resizing={resizing}
       onResizeStart={() => {
         setResizing(true)
@@ -55,7 +58,7 @@ const ResizableColumn = ({ children }) => {
         setResizing(false)
       }}
       defaultSize={{ width: '40%' }}
-      maxWidth="70%"
+      maxWidth="60%"
       minWidth="400px"
       enable={{
         top: false,
@@ -70,7 +73,7 @@ const ResizableColumn = ({ children }) => {
       handleStyles={{
         right: {
           width: '9px',
-          right: '-10px',
+          right: '-15px',
         },
       }}
       handleClasses={{

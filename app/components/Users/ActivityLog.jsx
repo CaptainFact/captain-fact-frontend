@@ -3,8 +3,10 @@ import gql from 'graphql-tag'
 import { Map } from 'immutable'
 import { get } from 'lodash'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../ui/card'
+import { Tabs } from '../ui/tabs'
 import ActionsDirectionFilter from '../UsersActions/ActionsDirectionFilter'
 import UserAction from '../UsersActions/UserAction'
 import { ErrorView } from '../Utils/ErrorView'
@@ -56,61 +58,78 @@ const QUERY = gql`
   }
 `
 
-const renderPaginationMenu = (loading, user, fetchMore) => (
-  <div className="panel-heading">
+const renderPaginationMenu = (loading, user) => (
+  <div className="bg-gray-50 p-4 w-full">
     <PaginationMenu
       disabled={loading}
       currentPage={user ? user.actions.pageNumber : 1}
       total={user ? user.actions.totalPages : 1}
-      onPageChange={(selectedPage) =>
-        fetchMore({
-          variables: { offset: selectedPage },
-          updateQuery: (_, { fetchMoreResult }) => fetchMoreResult,
-        })
-      }
+      getPageLink={(page) => `?page=${page}`}
     />
   </div>
 )
 
+const getPaginationParams = (searchParams) => {
+  const queryPage = parseInt(searchParams.get('page')) || 1
+  const page = queryPage > 0 ? queryPage : 1
+  return { limit: 20, page }
+}
+
 const ActivityLog = ({ match, t, location }) => {
   const searchParams = new URLSearchParams(location.search)
   const direction = searchParams.get('direction') || 'ALL'
+  const paginationParams = getPaginationParams(searchParams)
   const username = match.params.username
   return (
     <Query
       query={QUERY}
-      variables={{ username, offset: 1, limit: 10, direction }}
       fetchPolicy="network-only"
+      variables={{
+        username,
+        direction,
+        offset: paginationParams.page, // API is wrong here: it uses page instead of offset
+        limit: paginationParams.limit,
+      }}
     >
-      {({ loading, data, fetchMore, error }) => {
+      {({ loading, data, error }) => {
         if (error) {
           return <ErrorView error={error} />
         }
 
         const isEmpty = get(data, 'user.actions.entries.length') === 0
         return (
-          <div>
-            <div className="activity-log container">
-              <p className="panel-heading">{t('main:menu.activity')}</p>
-              {get(data, 'user') && <ActionsDirectionFilter user={data.user} value={direction} />}
-              {!data || loading ? (
-                <div className="panel-block">
-                  <LoadingFrame />
-                </div>
-              ) : isEmpty ? (
-                <MessageView>{t('noActivity')}</MessageView>
-              ) : (
-                data.user.actions.entries.map((a) => (
-                  <UserAction
-                    key={a.id}
-                    action={{ ...a, changes: new Map(JSON.parse(a.changes)) }}
-                    withoutUser
-                    viewingFrom={data.user}
-                  />
-                ))
-              )}
-              {!isEmpty && renderPaginationMenu(loading, get(data, 'user'), fetchMore)}
-            </div>
+          <div className="container mx-auto max-w-[1200px] px-4 py-16">
+            <Card className="content mx-auto">
+              <Tabs defaultValue="ALL">
+                <CardHeader>
+                  <CardTitle className="mb-3">{t('main:menu.activity')}</CardTitle>
+                  {data?.user && <ActionsDirectionFilter user={data.user} value={direction} />}
+                </CardHeader>
+
+                <CardContent>
+                  {!data || loading ? (
+                    <div className="p-4 border border-gray-200">
+                      <LoadingFrame />
+                    </div>
+                  ) : isEmpty ? (
+                    <MessageView>{t('noActivity')}</MessageView>
+                  ) : (
+                    data.user.actions.entries.map((a) => (
+                      <UserAction
+                        key={a.id}
+                        action={{ ...a, changes: new Map(JSON.parse(a.changes)) }}
+                        withoutUser
+                        viewingFrom={data.user}
+                      />
+                    ))
+                  )}
+                </CardContent>
+
+                {!isEmpty && (
+                  <CardFooter>{renderPaginationMenu(loading, get(data, 'user'))}</CardFooter>
+                )}
+              </Tabs>
+            </Card>
           </div>
         )
       }}
@@ -118,4 +137,4 @@ const ActivityLog = ({ match, t, location }) => {
   )
 }
 
-export default withNamespaces('user')(ActivityLog)
+export default withTranslation('user')(ActivityLog)

@@ -31,7 +31,7 @@ global.snapshotReducer = (reducer, initialState, ...actions) => {
   }, initialState)
 }
 
-const mockWithNamespaces = () => (Component) => {
+const mockwithTranslation = () => (Component) => {
   Component.defaultProps = {
     ...Component.defaultProps,
     t: (str) => `Translated[${str}]`,
@@ -47,8 +47,8 @@ jest.mock('react-i18next', () => ({
   Interpolate: ({ i18nKey, ...props }) =>
     `Interpolated[${i18nKey}] with props ${JSON.stringify(props)}`,
   Trans: ({ i18nKey, ...props }) => `Trans[${i18nKey}] with props ${JSON.stringify(props)}`,
-  translate: mockWithNamespaces,
-  withNamespaces: mockWithNamespaces,
+  translate: mockwithTranslation,
+  withTranslation: mockwithTranslation,
   t: (str) => `Translated[${str}]`,
 }))
 

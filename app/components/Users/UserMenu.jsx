@@ -1,15 +1,12 @@
 import 'react'
 
 import PropTypes from 'prop-types'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { withRouter } from 'react-router'
 import { Videos } from 'styled-icons/boxicons-solid'
 import { UserCircle } from 'styled-icons/fa-regular'
 import { Bell } from 'styled-icons/fa-solid'
-import { Activity } from 'styled-icons/feather'
-import { Settings } from 'styled-icons/feather'
-import { Rss } from 'styled-icons/feather'
-import { LogOut } from 'styled-icons/feather'
+import { Activity, LogOut, Rss, Settings } from 'styled-icons/feather'
 
 const BASE_LINKS = [
   { path: '', i18nKey: 'menu.activity', Icon: Activity },
@@ -78,4 +75,4 @@ UserMenu.defaultProps = {
   isSelf: false,
 }
 
-export default withNamespaces('main')(withRouter(UserMenu))
+export default withTranslation('main')(withRouter(UserMenu))

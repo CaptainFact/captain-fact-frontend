@@ -18,12 +18,13 @@ const ProgressBarContainer = styled.div`
   }
 `
 
-const StyledProgress = styled.progress`
+const StyledProgress = styled.div`
   display: block;
   border: none;
   background-color: ${(props) => props.outerBackgroundColor};
   height: ${(props) => props.height};
   width: 100%;
+  border-radius: 0 8px 8px 0;
 `
 
 const ProgressBar = ({ outerBackgroundColor, innerBackgroundColor, height, max, value }) => {

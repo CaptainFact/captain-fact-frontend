@@ -1,8 +1,9 @@
 import { destroy } from 'redux-form'
 
+import { toastError } from '@/lib/toasts'
+
 import { SocketApi } from '../../../API'
 import { STATEMENTS_CHANNEL } from '../../../constants'
-import { errorToFlash } from '../../flashes/reducer'
 import { createEffect, returnSuccess } from '../../utils'
 import {
   add,
@@ -37,17 +38,17 @@ export const postStatement = (statement) =>
   createEffect(SocketApi.push(STATEMENTS_CHANNEL, 'new_statement', statement), {
     before: setSubmitting(true),
     then: [setSubmitting(false), returnSuccess],
-    catch: [setSubmitting(false), errorToFlash],
+    catch: [setSubmitting(false), toastError],
   })
 
 export const updateStatement = (statement) =>
   createEffect(SocketApi.push(STATEMENTS_CHANNEL, 'update_statement', statement), {
-    catch: errorToFlash,
+    catch: toastError,
   })
 
 export const deleteStatement = (statement) =>
   createEffect(SocketApi.push(STATEMENTS_CHANNEL, 'remove_statement', statement), {
-    catch: errorToFlash,
+    catch: toastError,
   })
 
 export const destroyStatementForm = () => destroy('StatementForm')

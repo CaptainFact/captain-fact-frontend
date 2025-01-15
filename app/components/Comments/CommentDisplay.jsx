@@ -1,15 +1,15 @@
-import classNames from 'classnames'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import { change } from 'redux-form'
 
+import { cn } from '@/lib/css-utils'
+import { toastErrorUnauthenticated } from '@/lib/toasts'
+
 import { COLLAPSE_REPLIES_AT_NESTING } from '../../constants'
-import { flashErrorUnauthenticated } from '../../state/flashes/reducer'
 import { addModal } from '../../state/modals/reducer'
 import { commentVote, deleteComment, flagComment } from '../../state/video_debate/comments/effects'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
-import MediaLayout from '../Utils/MediaLayout'
 import CommentActions from './CommentActions'
 import CommentContent from './CommentContent'
 import CommentHeader from './CommentHeader'
@@ -31,10 +31,9 @@ import Vote from './Vote'
     flagComment,
     commentVote,
     change,
-    flashErrorUnauthenticated,
   },
 )
-@withNamespaces('main')
+@withTranslation('main')
 @withLoggedInUser
 export class CommentDisplay extends React.PureComponent {
   constructor(props) {
@@ -46,29 +45,32 @@ export class CommentDisplay extends React.PureComponent {
   }
 
   render() {
-    const { comment, withoutActions, className, replies, hideThread } = this.props
+    const { comment, withoutActions, replies, hideThread, isQuoted } = this.props
     const { isBlurred, repliesCollapsed } = this.state
     const approveClass = this.getApproveClass(comment.approve)
-    const allClassNames = classNames('comment', className, approveClass, {
-      isBlurred,
-      hasSource: !!comment.source,
+    const allClassNames = cn({
+      'opacity-50 blur-sm': isBlurred,
+      'border-l': this.props.nesting > 1,
+      'border-green-500': approveClass === 'approve',
+      'border-red-500': approveClass === 'refute',
+      'bg-neutral-100 border-gray-500': isQuoted,
     })
 
     return (
-      <div>
-        <MediaLayout
-          ContainerType="article"
-          className={allClassNames}
-          left={!withoutActions && this.renderCommentLeft()}
-          content={this.renderCommentContent()}
-        />
+      <div className={allClassNames}>
+        <article className={'flex gap-4 p-4'}>
+          {!withoutActions && <div className="flex-shrink-0">{this.renderCommentLeft()}</div>}
+          <div className="flex-grow min-w-0">{this.renderCommentContent()}</div>
+        </article>
         {!hideThread && !repliesCollapsed && replies && (
-          <CommentsList
-            comments={this.props.replies}
-            nesting={this.props.nesting + 1}
-            replyingTo={this.props.comment.user}
-            setReplyToComment={this.props.setReplyToComment}
-          />
+          <div className="ml-7">
+            <CommentsList
+              comments={this.props.replies}
+              nesting={this.props.nesting + 1}
+              replyingTo={this.props.comment.user}
+              setReplyToComment={this.props.setReplyToComment}
+            />
+          </div>
         )}
       </div>
     )
@@ -141,7 +143,7 @@ export class CommentDisplay extends React.PureComponent {
       return true
     }
 
-    this.props.flashErrorUnauthenticated()
+    toastErrorUnauthenticated()
     return false
   }
 
@@ -172,7 +174,7 @@ export class CommentDisplay extends React.PureComponent {
     return this.props.setReplyToComment(this.props.comment)
   }
 
-  handleFlag = (initialReason) => {
+  handleFlag = () => {
     if (!this.ensureAuthenticated()) {
       return
     }
@@ -189,7 +191,6 @@ export class CommentDisplay extends React.PureComponent {
           })
         },
         comment: this.props.comment,
-        initialReason,
       },
     })
   }

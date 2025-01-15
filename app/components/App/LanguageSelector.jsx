@@ -1,9 +1,16 @@
-import { Box, Flex } from '@rebass/grid'
-import classNames from 'classnames'
 import { Map } from 'immutable'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { Globe } from 'styled-icons/fa-solid'
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { cn } from '@/lib/css-utils'
 
 const defaultLocales = new Map({
   en: 'English',
@@ -15,32 +22,33 @@ const defaultLocales = new Map({
   pt_BR: 'Português (Brasil)',
 })
 
-@withNamespaces() // Force waiting for translations to be loaded
+@withTranslation() // Force waiting for translations to be loaded
 export default class LanguageSelector extends React.PureComponent {
   renderSelect() {
     const options = defaultLocales.merge(this.props.additionalOptions || {}).sortBy((v, k) => k)
 
     return (
-      <select
-        onChange={(e) => this.props.handleChange(e.target.value)}
-        value={this.props.value}
-        id={this.props.id}
-      >
-        {this.renderLocalesMap(options)}
-      </select>
+      <Select onValueChange={this.props.handleChange} value={this.props.value} id={this.props.id}>
+        <SelectTrigger className="w-full md:min-w-32 min-w-12">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent data-cy="language-selector-options">
+          {this.renderLocalesMap(options)}
+        </SelectContent>
+      </Select>
     )
   }
 
   renderLocalesMap(localesMap) {
     return localesMap.entrySeq().map(([key, value]) => (
-      <option key={key} value={key}>
+      <SelectItem key={key} value={key}>
         {value}
-      </option>
+      </SelectItem>
     ))
   }
 
   renderIcon() {
-    const { value, size } = this.props
+    const { value } = this.props
     if (value === 'fr') {
       return '🇫🇷'
     } else if (value === 'en') {
@@ -56,16 +64,18 @@ export default class LanguageSelector extends React.PureComponent {
     } else if (value === 'ru') {
       return '🇷🇺'
     }
-    return <Globe size={!size ? '2em' : '1em'} />
+    return <Globe size={'2em'} />
   }
 
   render() {
-    const sizeClass = this.props.size ? `is-${this.props.size}` : null
     return (
-      <Flex className={classNames('language-selector', this.props.className)} alignItems="center">
-        {this.props.withIcon && <Box mx="0.5em">{this.renderIcon()}</Box>}
-        <span className={classNames('select', sizeClass)}>{this.renderSelect()}</span>
-      </Flex>
+      <div
+        className={cn('flex items-center min-w-24', this.props.className)}
+        data-cy="language-selector"
+      >
+        {this.props.withIcon && <div className="mr-2">{this.renderIcon()}</div>}
+        {this.renderSelect()}
+      </div>
     )
   }
 }

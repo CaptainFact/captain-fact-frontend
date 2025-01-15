@@ -1,25 +1,23 @@
-import { Box, Flex } from '@rebass/grid'
 import { Formik } from 'formik'
+import { Eye, EyeOff } from 'lucide-react'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import ReactPlayer from 'react-player'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { Eye } from 'styled-icons/fa-regular'
-import { EyeSlash } from 'styled-icons/fa-regular'
+
+import { cn } from '@/lib/css-utils'
 
 import { MIN_REPUTATION_ADD_UNLISTED_VIDEO, MIN_REPUTATION_ADD_VIDEO } from '../../constants'
-import { LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
 import { facebookVideoRegex, youtubeRegex } from '../../lib/url_utils'
 import { postVideo, searchVideo } from '../../state/videos/effects'
 import FieldWithButton from '../FormUtils/FieldWithButton'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
-import DismissableMessage from '../Utils/DismissableMessage'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../ui/card'
+import { Switch } from '../ui/switch'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import { LoadingFrame } from '../Utils/LoadingFrame'
-import Message from '../Utils/Message'
 import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
-import StyledToggle from '../Utils/StyledToggle'
 
 const validate = ({ url }) => {
   if (!youtubeRegex.test(url) && !facebookVideoRegex.test(url)) {
@@ -31,7 +29,7 @@ const validate = ({ url }) => {
 }
 
 @withRouter
-@withNamespaces('main')
+@withTranslation('main')
 @connect(null, { postVideo, searchVideo })
 @withLoggedInUser
 export class AddVideoForm extends React.PureComponent {
@@ -49,33 +47,36 @@ export class AddVideoForm extends React.PureComponent {
 
   renderVideo = (value, error) => {
     return error || !value ? (
-      <div className="video">
+      <div className="w-full aspect-video bg-gray-100">
         <div />
       </div>
     ) : (
-      <ReactPlayer className="video" url={value} controls width="" height="" />
+      <ReactPlayer className="w-full aspect-video" url={value} controls />
     )
   }
 
   renderVideoAdvice() {
     const { t } = this.props
     return (
-      <Box mb={2}>
-        <Message header={t('videos.adviceTitle')}>
-          <div className="content">
-            <p>{t('videos.advice1')}</p>
-            <ul>
-              <li>{t('videos.adviceBulletPoint1')}</li>
-              <li>{t('videos.adviceBulletPoint2')}</li>
-              <li>{t('videos.adviceBulletPoint3')}</li>
-              <li>{t('videos.adviceBulletPoint4')}</li>
-            </ul>
-            <ExternalLinkNewTab href="/help/contributionGuidelines">
-              {t('videos.adviceReadMoreLink')}
-            </ExternalLinkNewTab>
-          </div>
-        </Message>
-      </Box>
+      <Card className="mb-4 mx-2 md:mx-auto w-full md:max-w-[600px] mt-32">
+        <CardHeader>
+          <CardTitle>{t('videos.adviceTitle')}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p>{t('videos.advice1')}</p>
+          <ul className="list-disc pl-6 space-y-1 mb-5">
+            <li>{t('videos.adviceBulletPoint1')}</li>
+            <li>{t('videos.adviceBulletPoint2')}</li>
+            <li>{t('videos.adviceBulletPoint3')}</li>
+            <li>{t('videos.adviceBulletPoint4')}</li>
+          </ul>
+        </CardContent>
+        <CardFooter>
+          <ExternalLinkNewTab href="/help/contributionGuidelines">
+            {t('videos.adviceReadMoreLink')}
+          </ExternalLinkNewTab>
+        </CardFooter>
+      </Card>
     )
   }
 
@@ -103,35 +104,22 @@ export class AddVideoForm extends React.PureComponent {
           })
         }}
       >
-        {({ handleSubmit, handleChange, handleBlur, values, errors, isSubmitting }) => (
-          <div id="video-show" className="columns is-gapless">
-            <form id="col-video" className="column is-4 form" onSubmit={handleSubmit}>
+        {({
+          handleSubmit,
+          handleChange,
+          setFieldValue,
+          handleBlur,
+          values,
+          errors,
+          isSubmitting,
+        }) => (
+          <div className="grid grid-cols-1 md:grid-cols-4">
+            <form
+              className="md:col-span-1 bg-white border-r h-[--main-height]"
+              onSubmit={handleSubmit}
+            >
               {this.renderVideo(values.url, errors.url)}
-              <Box p={2}>
-                <DismissableMessage
-                  className="introduction"
-                  header={t('videos.introTitle')}
-                  localStorageDismissKey={LOCAL_STORAGE_KEYS.DISMISS_ADD_VIDEO_INTRODUCTION}
-                >
-                  <p>{t('videos.intro')}</p>
-                  <p>
-                    <ExternalLinkNewTab href="/extension">
-                      {t('videos.seeExtension')}
-                    </ExternalLinkNewTab>
-                  </p>
-                  <br />
-                  <p>
-                    <b>{t('videos.intro2', { requiredPoints: MIN_REPUTATION_ADD_VIDEO })}</b>
-                  </p>
-                  <p>
-                    <ExternalLinkNewTab href="/help/contact">
-                      {t('videos.contact')}
-                    </ExternalLinkNewTab>
-                  </p>
-                  <br />
-                  <p>{t('videos.supportedPlatforms')}</p>
-                </DismissableMessage>
-                {this.renderVideoAdvice()}
+              <div className="p-4">
                 <FieldWithButton
                   input={{
                     onChange: handleChange,
@@ -143,51 +131,55 @@ export class AddVideoForm extends React.PureComponent {
                   onBlur={handleBlur}
                   buttonLabel={this.props.t('videos.addThis')}
                   placeholder={this.props.t('videos.placeholder')}
-                  buttonClassName="is-primary"
-                  meta={{ invalid: errors.url, submitting: isSubmitting }}
+                  meta={{ invalid: errors.url && values.url, submitting: isSubmitting }}
                   expandInput
                 />
-              </Box>
+              </div>
 
-              <Flex flexDirection="column" justifyContent="center" alignItems="center" py={4}>
-                <ReputationGuardTooltip requiredRep={MIN_REPUTATION_ADD_VIDEO}>
-                  {({ hasReputation }) => (
-                    <StyledToggle
-                      name="isPublicVideo"
-                      onChange={hasReputation ? handleChange : () => undefined}
+              <ReputationGuardTooltip requiredRep={MIN_REPUTATION_ADD_VIDEO}>
+                {({ hasReputation }) => (
+                  <div className="flex items-center space-x-2 mb-4 pl-5">
+                    <Switch
+                      id="switch-isPublicVideo"
                       checked={values.isPublicVideo}
-                      size="1.5em"
-                      label={t(values.isPublicVideo ? 'videos.public' : 'videos.unlisted')}
-                      mb={4}
+                      disabled={!hasReputation}
+                      onCheckedChange={(checked) => setFieldValue('isPublicVideo', checked)}
                     />
-                  )}
-                </ReputationGuardTooltip>
+                    <label className="min-w-28 cursor-pointer" htmlFor="switch-isPublicVideo">
+                      {t(values.isPublicVideo ? 'videos.public' : 'videos.unlisted')}
+                    </label>
+                  </div>
+                )}
+              </ReputationGuardTooltip>
 
-                <Box width={0.8}>
-                  <Message>
-                    <Eye size="1em" />
-                    &nbsp; {t('videos.publicDescription')} (
-                    <ExternalLinkNewTab href="/help/privileges">
-                      {t('videos.requiredPoints', { requiredPoints: MIN_REPUTATION_ADD_VIDEO })}
-                    </ExternalLinkNewTab>
-                    )
-                    <br />
-                    <br />
-                    <EyeSlash size="1em" />
-                    &nbsp; {t('videos.unlistedDescription')} (
-                    <ExternalLinkNewTab href="/help/privileges">
-                      {t('videos.requiredPoints', {
-                        requiredPoints: MIN_REPUTATION_ADD_UNLISTED_VIDEO,
-                      })}
-                    </ExternalLinkNewTab>
-                    )
-                  </Message>
-                </Box>
-              </Flex>
+              <Card className="pt-4 mx-4 text-sm">
+                <CardContent>
+                  <div
+                    className={cn('flex items-center', {
+                      'font-bold': values.isPublicVideo,
+                    })}
+                  >
+                    <Eye size={24} className="mr-4" />
+                    <span>{t('videos.publicDescription')}</span>
+                  </div>
+                  <div
+                    className={cn('flex items-center mt-4', {
+                      'font-bold': !values.isPublicVideo,
+                    })}
+                  >
+                    <EyeOff size={42} className="mr-4" />
+                    <span>{t('videos.unlistedDescription')}</span>
+                  </div>
+                </CardContent>
+              </Card>
             </form>
 
-            <div id="col-debate" className="column">
-              {isSubmitting && <LoadingFrame title={this.props.t('videos.analysing')} />}
+            <div className="md:col-span-3">
+              {isSubmitting ? (
+                <LoadingFrame title={this.props.t('videos.analysing')} />
+              ) : (
+                this.renderVideoAdvice()
+              )}
             </div>
           </div>
         )}

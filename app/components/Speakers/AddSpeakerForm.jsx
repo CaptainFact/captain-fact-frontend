@@ -1,6 +1,6 @@
 import debounce from 'debounce-promise'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import AsyncCreatable from 'react-select/async-creatable'
 
@@ -14,7 +14,7 @@ import { addSpeaker } from '../../state/video_debate/effects'
 import Container from '../StyledUtils/Container'
 
 @connect(null, { addSpeaker })
-@withNamespaces('videoDebate')
+@withTranslation('videoDebate')
 export default class AddSpeakerForm extends React.PureComponent {
   searchSpeakerRequest = debounce((query) => {
     return query.length < 3
@@ -44,7 +44,7 @@ export default class AddSpeakerForm extends React.PureComponent {
     const { disabled, t } = this.props
     return (
       <AsyncCreatable
-        allowCreateWhileLoading
+        allowCreateWhileLoading={false}
         isDisabled={disabled}
         isValidNewOption={(value) => value.length >= 3}
         formatCreateLabel={this.promptTextCreator}

@@ -1,62 +1,44 @@
-import classNames from 'classnames'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 
-import Button from './Button'
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination'
 
-const PaginationEllipsis = () => (
-  <li>
-    <span className="pagination-ellipsis">&hellip;</span>
-  </li>
-)
-
-const makeLink = (LinkBuilder, page, disabled, onPageChange = null, isCurrent = false) => (
-  <li key={page}>
-    <LinkBuilder
-      className={classNames('pagination-link', { 'is-current': isCurrent })}
-      disabled={disabled}
-      aria-label={`Go to page ${page}`}
-      onClick={onPageChange ? () => onPageChange(page) : undefined}
-      data-page={page}
-    >
+const makeLink = (page, disabled, getPageLink, isCurrent = false) => (
+  <PaginationItem key={page}>
+    <PaginationLink disabled={disabled} to={getPageLink(page)} isActive={isCurrent}>
       {page}
-    </LinkBuilder>
-  </li>
+    </PaginationLink>
+  </PaginationItem>
 )
 
-const pageSelectButtonsList = (
-  LinkBuilder,
-  nbStart,
-  nbCur,
-  nbEnd,
-  disabled,
-  onPageChange,
-  nbShowArround = 2,
-) => {
+const pageSelectButtonsList = (nbStart, nbCur, nbEnd, disabled, getPageLink, nbShowAround = 1) => {
   const result = []
   let curPage = nbStart
   while (curPage <= nbEnd) {
     let component = null
 
-    // Left pagination part
     if (curPage < nbCur) {
-      if (curPage === nbStart || curPage >= nbCur - nbShowArround - 1) {
-        component = makeLink(LinkBuilder, curPage, disabled, onPageChange)
+      if (curPage === nbStart || curPage >= nbCur - nbShowAround - 1) {
+        component = makeLink(curPage, disabled, getPageLink, false)
         curPage += 1
       } else {
         component = <PaginationEllipsis key="ellipsis-left" />
-        curPage = nbCur - nbShowArround
+        curPage = nbCur - nbShowAround
       }
-    }
-    // Always show a selected link for current page
-    else if (curPage === nbCur) {
-      component = makeLink(LinkBuilder, curPage, disabled, null, true)
+    } else if (curPage === nbCur) {
+      component = makeLink(curPage, disabled, getPageLink, true)
       curPage += 1
-    }
-    // Right pagination part
-    else if (curPage > nbCur) {
-      if (curPage >= nbEnd - 1 || curPage <= nbCur + nbShowArround) {
-        component = makeLink(LinkBuilder, curPage, disabled, onPageChange)
+    } else if (curPage > nbCur) {
+      if (curPage >= nbEnd - 1 || curPage <= nbCur + nbShowAround) {
+        component = makeLink(curPage, disabled, getPageLink, false)
         curPage += 1
       } else {
         component = <PaginationEllipsis key="ellipsis-right" />
@@ -68,43 +50,34 @@ const pageSelectButtonsList = (
   return result
 }
 
-const PaginationMenu = ({
-  className,
-  disabled,
-  currentPage = 1,
-  total = 1,
-  isRounded,
-  onPageChange,
-  LinkBuilder = (props) => <Button {...props} />,
-  t,
-}) => {
-  const allClasses = classNames('pagination is-centered', className, {
-    'is-rounded': isRounded,
-  })
+const PaginationMenu = ({ className, currentPage = 1, total = 1, getPageLink, disabled, t }) => (
+  <Pagination className={className}>
+    <PaginationContent>
+      {currentPage > 1 && (
+        <PaginationItem>
+          <PaginationPrevious
+            to={getPageLink(currentPage - 1)}
+            disabled={disabled || currentPage === 1}
+          >
+            {t('pagination.prev')}
+          </PaginationPrevious>
+        </PaginationItem>
+      )}
 
-  return (
-    <nav className={allClasses} role="navigation" aria-label="pagination">
-      <LinkBuilder
-        onClick={onPageChange ? () => onPageChange(currentPage - 1) : undefined}
-        disabled={disabled || currentPage === 1}
-        className="pagination-previous"
-        data-page={currentPage - 1}
-      >
-        {t('pagination.prev')}
-      </LinkBuilder>
-      <LinkBuilder
-        onClick={onPageChange ? () => onPageChange(currentPage + 1) : undefined}
-        disabled={disabled || currentPage === total}
-        className="pagination-next"
-        data-page={currentPage + 1}
-      >
-        {t('pagination.next')}
-      </LinkBuilder>
-      <ul className="pagination-list">
-        {pageSelectButtonsList(LinkBuilder, 1, currentPage, total, disabled, onPageChange)}
-      </ul>
-    </nav>
-  )
-}
+      {pageSelectButtonsList(1, currentPage, total, disabled, getPageLink)}
 
-export default withNamespaces('main')(PaginationMenu)
+      {currentPage < total && (
+        <PaginationItem>
+          <PaginationNext
+            disabled={disabled || currentPage === total}
+            to={getPageLink(currentPage + 1)}
+          >
+            {t('pagination.next')}
+          </PaginationNext>
+        </PaginationItem>
+      )}
+    </PaginationContent>
+  </Pagination>
+)
+
+export default withTranslation('main')(PaginationMenu)

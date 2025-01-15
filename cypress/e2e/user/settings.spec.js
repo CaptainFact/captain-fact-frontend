@@ -8,7 +8,8 @@ describe('Settings', () => {
   })
 
   it('can change language', () => {
-    cy.get('.user-page .language-selector select').select('fr').should('have.value', 'fr')
+    cy.get('[data-cy="user-settings"] [data-cy="language-selector"] button').click()
+    cy.get('[data-cy="language-selector-options"]').contains('Français').click()
     cy.contains('Langue').should('exist')
   })
 
@@ -18,14 +19,14 @@ describe('Settings', () => {
       .clear()
       .type(`${newName}{enter}`)
       .then(() => {
-        cy.get('.main-appelation').should('contain', newName)
+        cy.get('[data-cy="user-appellation"]').should('contain', newName)
         cy.get('input[name="name"]').should('have.value', newName)
       })
   })
 
-  it("fails to change password if they doesn't match", () => {
+  it("fails to change password if they don't match", () => {
     cy.get('input[name="password"]').clear().type('password{enter}')
     cy.get('input[name="passwordRepeat"]').clear().type('notTheSame{enter}').blur()
-    cy.contains("Passwords doesn't match").should('exist')
+    cy.contains("Passwords don't match").should('exist')
   })
 })

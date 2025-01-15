@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-export const videoDebatePresence = (state) => state.VideoDebate.presence
+const videoDebatePresence = (state) => state.VideoDebate.presence
 
 export const videoDebateOnlineUsersCount = createSelector(
   videoDebatePresence,

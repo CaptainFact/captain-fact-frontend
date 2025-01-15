@@ -1,7 +1,7 @@
 import { truncate } from 'lodash'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { Trans, withNamespaces } from 'react-i18next'
+import { Trans, withTranslation } from 'react-i18next'
 
 import { userActionURL } from '../../lib/cf_routes'
 import UserAppellation from '../Users/UserAppellation'
@@ -28,7 +28,7 @@ const Quote = ({ children }) => (
 const messageRenderers = {
   new_comment: ({ action: { video, user, comment } }) => {
     return (
-      <Trans i18nKey="message.newComment">
+      <Trans i18nKey="notifications:message.newComment">
         New comment from <NotifUserAppelation user={user} /> on{' '}
         <strong>{{ videoTitle: video.title }}</strong>:{' '}
         <Quote>{{ text: truncate(comment.text, 40) }}</Quote>
@@ -36,57 +36,57 @@ const messageRenderers = {
     )
   },
   reply_to_comment: ({ action: { user, video, comment } }) => (
-    <Trans i18nKey="message.replyToComment">
+    <Trans i18nKey="notifications:message.replyToComment">
       <NotifUserAppelation user={user} /> replied to your comment on{' '}
       <strong>{{ videoTitle: video.title }}</strong>:{' '}
       <Quote>{{ text: truncate(comment.text, 40) }}</Quote>
     </Trans>
   ),
   new_speaker: ({ action: { user, speaker, video } }) => (
-    <Trans i18nKey="message.newSpeaker">
+    <Trans i18nKey="notifications:message.newSpeaker">
       <NotifUserAppelation user={user} /> added {{ speakerName: speaker.fullName }} to the speakers
       on <strong>{{ videoTitle: video.title }}</strong>
     </Trans>
   ),
   new_statement: ({ action: { user, video, changes } }) => (
-    <Trans i18nKey="message.newStatement">
+    <Trans i18nKey="notifications:message.newStatement">
       <NotifUserAppelation user={user} /> added a statement on{' '}
       <strong>{{ videoTitle: video.title }}</strong>:{' '}
       <Quote>{{ text: getTruncatedChange(changes, 'text', 40) }}</Quote>
     </Trans>
   ),
   updated_statement: ({ action: { user, video, changes } }) => (
-    <Trans i18nKey="message.updatedStatement">
+    <Trans i18nKey="notifications:message.updatedStatement">
       <NotifUserAppelation user={user} /> updated a statement on{' '}
       <strong>{{ videoTitle: video.title }}</strong>:{' '}
       <Quote>{{ text: getTruncatedChange(changes, 'text', 40) }}"</Quote>
     </Trans>
   ),
   updated_video: ({ action: { user, video } }) => (
-    <Trans i18nKey="message.updatedVideo">
+    <Trans i18nKey="notifications:message.updatedVideo">
       <NotifUserAppelation user={user} /> updated video's details:{' '}
       <strong>{{ videoTitle: video.title }}</strong>
     </Trans>
   ),
   updated_speaker: ({ action: { user, speaker } }) => (
-    <Trans i18nKey="message.updatedSpeaker">
+    <Trans i18nKey="notifications:message.updatedSpeaker">
       <NotifUserAppelation user={user} /> updated {{ speakerName: speaker.fullName }}'s details
     </Trans>
   ),
   removed_speaker: ({ action: { user, video, speaker } }) => (
-    <Trans i18nKey="message.removedSpeaker">
+    <Trans i18nKey="notifications:message.removedSpeaker">
       <NotifUserAppelation user={user} /> removed {{ speakerName: speaker.fullName }} from{' '}
       <strong>{{ videoTitle: video.title }}</strong>
     </Trans>
   ),
   removed_statement: ({ action: { user, video } }) => (
-    <Trans i18nKey="message.removedStatement">
+    <Trans i18nKey="notifications:message.removedStatement">
       <NotifUserAppelation user={user} /> removed a statement on{' '}
       <strong>{{ videoTitle: video.title }}</strong>
     </Trans>
   ),
   email_confirmed: () => (
-    <Trans i18nKey="message.emailConfirmed">
+    <Trans i18nKey="notifications:message.emailConfirmed">
       Yay! Your email is now confirmed 💪💪💪 (+15pts reputation)
     </Trans>
   ),
@@ -118,4 +118,4 @@ NotificationDetails.propTypes = {
   children: PropTypes.func.isRequired,
 }
 
-export default withNamespaces('notifications')(NotificationDetails)
+export default withTranslation('notifications')(NotificationDetails)

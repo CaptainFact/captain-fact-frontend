@@ -1,5 +1,9 @@
 import React from 'react'
 
-import { ErrorView } from '../Utils'
+import { ErrorView } from '../Utils/ErrorView'
 
-export const NotFound = () => <ErrorView error="not_found" />
+export const NotFound = () => (
+  <div className="px-2 my-12 max-w-[500px] mx-auto">
+    <ErrorView error="not_found" />
+  </div>
+)

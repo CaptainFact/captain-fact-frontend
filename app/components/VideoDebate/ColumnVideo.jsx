@@ -1,8 +1,6 @@
-import { Flex } from '@rebass/grid'
-import { FileText } from '@styled-icons/feather'
-import classNames from 'classnames'
+import { CheckCircle, FileText, History } from 'lucide-react'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -16,10 +14,11 @@ import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import AddSpeakerForm from '../Speakers/AddSpeakerForm'
 import { SpeakerPreview } from '../Speakers/SpeakerPreview'
 import Container from '../StyledUtils/Container'
-import { Icon, LoadingFrame } from '../Utils'
+import { Tabs, TabsList, TabsTrigger } from '../ui/tabs'
+import { LoadingFrame } from '../Utils/LoadingFrame'
 import Message from '../Utils/Message'
-import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
-import Actions from './Actions'
+import { ReputationGuardTooltip } from '../Utils/ReputationGuardTooltip'
+import Actions from './Actions/Actions'
 import Presence from './Presence'
 import ResizableColumn from './ResizableColumn'
 import VideoDebatePlayer from './VideoDebatePlayer'
@@ -30,80 +29,86 @@ import VideoDebatePlayer from './VideoDebatePlayer'
   nbUsers: videoDebateOnlineUsersCount(state),
   nbViewers: videoDebateOnlineViewersCount(state),
 }))
-@withNamespaces('videoDebate')
+@withTranslation('videoDebate')
 @withLoggedInUser
 export class ColumnVideo extends React.PureComponent {
   render() {
     const { isLoading } = this.props
-
-    if (isLoading) {
-      return <LoadingFrame title={this.props.t('loading.video')} />
-    }
-
     const { video, view, t, isAuthenticated } = this.props
-    const { url, title, speakers } = video
+    const { url, speakers } = video || {}
     const isDebate = !view || view === 'debate'
+
+    // We use a full width class on mobile with CSS important
     return (
-      <ResizableColumn>
-        <div id="col-video" className="column">
-          <VideoDebatePlayer url={url} />
-          <Flex alignItems="center" px={[2, 3]} py={3} className="videoInfo">
-            <h2 className="title is-4 has-text-weight-light">{title}</h2>
-            <Presence nbUsers={this.props.nbUsers} nbViewers={this.props.nbViewers} />
-          </Flex>
-          <div className="tabs is-toggle is-fullwidth">
-            <ul>
-              <li className={classNames({ 'is-active': isDebate })}>
-                <Link to={videoURL(video.hash_id)}>
-                  <Icon size="small" name="check-circle" />
-                  <span>{t('debate')}</span>
-                </Link>
-              </li>
-              <li className={classNames({ 'is-active': view === 'history' })}>
-                <Link to={videoHistoryURL(video.hash_id)} rel="nofollow">
-                  <Icon size="small" name="history" />
-                  <span>{t('history')}</span>
-                </Link>
-              </li>
-              <li className={classNames({ 'is-active': view === 'captions' })}>
-                <Link to={videoCaptionsUrl(video.hash_id)} rel="nofollow">
-                  <FileText size="20" />
-                  &nbsp;
-                  <span>{t('captions.title')}</span>
-                </Link>
-              </li>
-            </ul>
-          </div>
-          {isDebate && (
-            <div>
-              <Actions />
-              <div className="actions">
-                <ReputationGuardTooltip
-                  requiredRep={MIN_REPUTATION_ADD_SPEAKER}
-                  tooltipPosition="top center"
-                >
-                  {({ hasReputation }) => <AddSpeakerForm disabled={!hasReputation} />}
-                </ReputationGuardTooltip>
+      <ResizableColumn className="max-2xl:!w-full max-2xl:!max-w-full">
+        <div id="col-video" className="2xl:h-[--main-height] w-full overflow-y-auto p-0">
+          {isLoading ? (
+            <LoadingFrame title={this.props.t('loading.video')} />
+          ) : (
+            <React.Fragment>
+              <VideoDebatePlayer url={url} />
+              <div className="hidden items-center px-2 md:px-3 py-3">
+                <Presence nbUsers={this.props.nbUsers} nbViewers={this.props.nbViewers} />
               </div>
-              <div className="speakers-list">
-                {speakers.map((speaker) => (
-                  <SpeakerPreview key={speaker.id} speaker={speaker} />
-                ))}
-              </div>
-            </div>
-          )}
-          {view === 'captions' && (
-            <Container p={4}>
-              <Message>
-                {t('captions.description1')}
-                {isAuthenticated && (
-                  <React.Fragment>
-                    <br />
-                    {t('captions.description2')}
-                  </React.Fragment>
-                )}
-              </Message>
-            </Container>
+              <Tabs value={view}>
+                <TabsList className="w-full rounded-none flex-wrap h-auto">
+                  <Link to={videoURL(video.hash_id)} className="flex-1">
+                    <TabsTrigger value="debate" className="w-full">
+                      <CheckCircle size="1em" />
+                      &nbsp;
+                      {t('debate')}
+                    </TabsTrigger>
+                  </Link>
+                  <Link to={videoHistoryURL(video.hash_id)} className="flex-1">
+                    <TabsTrigger value="history" className="w-full">
+                      &nbsp;
+                      <History size="1em" />
+                      &nbsp;
+                      {t('history')}
+                    </TabsTrigger>
+                  </Link>
+                  <Link to={videoCaptionsUrl(video.hash_id)} className="flex-1">
+                    <TabsTrigger value="captions" className="w-full">
+                      <FileText size="1em" />
+                      &nbsp;
+                      {t('captions.title')}
+                    </TabsTrigger>
+                  </Link>
+                </TabsList>
+              </Tabs>
+              {isDebate && (
+                <div>
+                  <Actions />
+                  <div className="p-4 text-sm">
+                    <ReputationGuardTooltip
+                      requiredRep={MIN_REPUTATION_ADD_SPEAKER}
+                      tooltipPosition="top"
+                    >
+                      {({ hasReputation }) => <AddSpeakerForm disabled={!hasReputation} />}
+                    </ReputationGuardTooltip>
+                  </div>
+                  <div className="px-3 pb-4 flex flex-col gap-4">
+                    {speakers.map((speaker) => (
+                      <SpeakerPreview key={speaker.id} speaker={speaker} />
+                    ))}
+                  </div>
+                </div>
+              )}
+              {view === 'captions' && (
+                <Container p={4}>
+                  <Message>
+                    {t('captions.description1')}
+                    {isAuthenticated && (
+                      <React.Fragment>
+                        <br />
+                        <br />
+                        {t('captions.description2')}
+                      </React.Fragment>
+                    )}
+                  </Message>
+                </Container>
+              )}
+            </React.Fragment>
           )}
         </div>
       </ResizableColumn>

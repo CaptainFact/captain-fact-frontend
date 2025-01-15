@@ -1,5 +1,5 @@
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { SearchBox as AlgoliaSearchBox } from 'react-instantsearch-dom'
 import { withRouter } from 'react-router'
 import styled from 'styled-components'
@@ -22,8 +22,8 @@ const StyledSearchBox = styled(AlgoliaSearchBox)`
 
   button[type='submit'] {
     position: absolute;
-    left: 4px;
-    top: 8px;
+    left: 10px;
+    top: 12px;
     border: none;
     cursor: pointer;
     background: none;
@@ -67,4 +67,4 @@ const SearchBox = ({ location, history, t }) => {
   )
 }
 
-export default withNamespaces('main')(withRouter(SearchBox))
+export default withTranslation('main')(withRouter(SearchBox))

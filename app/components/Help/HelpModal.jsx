@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 
 import { popModal } from '../../state/modals/reducer'
 import Modal from '../Modal/Modal'
 import HelpPageContent from './HelpPageContent'
 
-@withNamespaces('help')
+@withTranslation('help')
 @connect(null, { popModal })
 class HelpModal extends PureComponent {
   render() {

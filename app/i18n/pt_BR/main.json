@@ -1,11 +1,11 @@
 {
   "entities": {
     "video": "vídeo",
-    "video_plural": "vídeos",
+    "video_other": "vídeos",
     "speaker": "locutor(a)",
-    "speaker_plural": "locutores(as)",
+    "speaker_other": "locutores(as)",
     "statement": "declaração",
-    "statement_plural": "declarações"
+    "statement_other": "declarações"
   },
   "menu": {
     "login": "Fazer login",
@@ -57,9 +57,9 @@
     "fieldMaxLength": "Máximo de {{max}} caracteres",
     "and": "e",
     "other": "{{count}} outro",
-    "other_plural": "{{count}} outros",
+    "other_other": "{{count}} outros",
     "character": "caractere",
-    "character_plural": "caracteres",
+    "character_other": "caracteres",
     "clipboardSuccess": "Endereço copiado para a área de transferência",
     "clipboardFail": "Não foi possível copiar para a área de transferência",
     "all": "Todos",
@@ -90,9 +90,9 @@
     "next": "Página seguinte"
   },
   "speakerpage": {
-    "title1": "Verificando fatos de vídeos do Youtube de ",
-    "info1": "CaptainFact é uma plataforma de fact-checking colaborativa, permitindo verificar as informações em vídeos do Youtube.",
-    "info2": "A descrição dos locutores abaixo podem ter fontes adicionadas e ser confirmados ou refutados pelos membros do site. As verificações são exibidas dentro do vídeo do Youtube se você tiver instalado a extensão para navegador contra a desinformação.",
+    "title1": "Verificando fatos de vídeos do YouTube de ",
+    "info1": "CaptainFact é uma plataforma de fact-checking colaborativa, permitindo verificar as informações em vídeos do YouTube.",
+    "info2": "A descrição dos locutores abaixo podem ter fontes adicionadas e ser confirmados ou refutados pelos membros do site. As verificações são exibidas dentro do vídeo do YouTube se você tiver instalado a extensão para navegador contra a desinformação.",
     "more": "Saber mais"
   },
   "all": "Todos",

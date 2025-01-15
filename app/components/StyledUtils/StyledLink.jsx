@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { borders, color, display, fontSize, fontWeight, space } from 'styled-system'
 
+/** @deprecated */
 const StyledLink = styled(Link)`
   ${color}
   ${fontSize}

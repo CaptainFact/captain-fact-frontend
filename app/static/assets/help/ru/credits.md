@@ -13,7 +13,8 @@
 
 - [Elixir](https://elixir-lang.org)
 - [Phoenix Framework](https://github.com/phoenixframework/phoenix)
+- [Absinthe GraphQL](https://github.com/absinthe-graphql/absinthe)
 - [React](https://facebook.github.io/react/)
-- [Bulma](http://bulma.io/)
+- [TailwindCSS](https://tailwindcss.com/)
 - [Redux](http://redux.js.org/)
 - Фонд Викимедиа для изображений колонок и других связанных с ними метаданных. Более подробную информацию об этом разделе можно найти по адресу [наше хранилище данных](https://github.com/CaptainFact/captain-fact-data)

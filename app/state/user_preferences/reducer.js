@@ -1,7 +1,7 @@
 import { Record } from 'immutable'
 import { createAction, handleActions } from 'redux-actions'
 
-import { MOBILE_WIDTH_THRESHOLD, ONLY_FEATURED, SUPPORTED_LOCALES } from '../../constants'
+import { ONLY_FEATURED, SUPPORTED_LOCALES, TABLET_WIDTH_THRESHOLD } from '../../constants'
 import browserLocale from '../../i18n/browser_locale'
 import { getFromLocalStorage, LOCAL_STORAGE_KEYS, setLocalStorage } from '../../lib/local_storage'
 
@@ -15,7 +15,7 @@ export const setVideosFilter = createAction('USER_PREFERENCES/SET_VIDEOS_FILTER'
 export const toggleAutoscroll = createAction('STATEMENTS/TOGGLE_AUTOSCROLL')
 export const toggleBackgroundSound = createAction('STATEMENTS/TOGGLE_BACKGROUND_SOUND')
 
-const isMobile = typeof window !== 'undefined' && window.innerWidth <= MOBILE_WIDTH_THRESHOLD
+const isMobile = typeof window !== 'undefined' && window.innerWidth <= TABLET_WIDTH_THRESHOLD
 
 const Preferences = new Record({
   // Disable autoscroll and sidebar expended by default on mobile

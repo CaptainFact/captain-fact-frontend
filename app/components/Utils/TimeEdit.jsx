@@ -1,33 +1,8 @@
+import { Clock } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import { Time } from 'styled-icons/boxicons-regular'
-import { themeGet } from 'styled-system'
 
 import formatSeconds from '../../lib/seconds_formatter'
-
-const TimeEditContainer = styled.div`
-  &&& {
-    margin: 0 10px 0 0;
-    width: 92px;
-
-    @media (max-width: 768px) {
-      min-width: 92px;
-      width: 30%;
-    }
-  }
-`
-
-const TimeIconButton = styled.button`
-  padding: 0;
-  border: 0;
-  outline: none;
-  background: none;
-  cursor: pointer;
-
-  &:hover > ${Time} {
-    color: ${themeGet('colors.black.300')};
-  }
-`
+import { Input } from '../ui/input'
 
 const handleTimeEdit = (newTimeCode, setFormattedTime, handleChange) => {
   setFormattedTime(newTimeCode)
@@ -48,23 +23,24 @@ const TimeEdit = ({ time, handleChange, onTimeIconClick }) => {
   }, [time])
 
   return (
-    <TimeEditContainer className="control has-icons-left">
-      <TimeIconButton
-        type="button"
-        className="icon is-left"
-        style={{ pointerEvents: 'auto' }}
-        onClick={onTimeIconClick}
-      >
-        <Time size={20} />
-      </TimeIconButton>
-      <input
-        type="text"
-        className="input"
-        placeholder="00:00:00"
-        value={formattedTime}
-        onChange={(e) => handleTimeEdit(e.target.value, setFormattedTime, handleChange)}
-      />
-    </TimeEditContainer>
+    <div className="w-[110px] md:w-[30%] md:min-w-[110px]">
+      <div className="relative">
+        <button
+          type="button"
+          className="absolute left-2 top-1/2 -translate-y-1/2 p-0 border-0 outline-none bg-transparent cursor-pointer hover:text-gray-600"
+          onClick={onTimeIconClick}
+        >
+          <Clock size={20} />
+        </button>
+        <Input
+          type="text"
+          className="pl-8 py-2"
+          placeholder="00:00:00"
+          value={formattedTime}
+          onChange={(e) => handleTimeEdit(e.target.value, setFormattedTime, handleChange)}
+        />
+      </div>
+    </div>
   )
 }
 

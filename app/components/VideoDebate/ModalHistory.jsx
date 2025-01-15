@@ -1,6 +1,7 @@
 import { startCase } from 'lodash'
+import { History } from 'lucide-react'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 
 import { ENTITY_STATEMENT } from '../../constants'
@@ -12,7 +13,6 @@ import {
 } from '../../state/video_debate/history/effects'
 import Modal from '../Modal/Modal'
 import ActionsTable from '../UsersActions/ActionsTable'
-import { Icon } from '../Utils/Icon'
 
 @connect(
   (state) => ({
@@ -21,7 +21,7 @@ import { Icon } from '../Utils/Icon'
   }),
   { joinStatementHistoryChannel, leaveStatementHistoryChannel, popModal, reset },
 )
-@withNamespaces('history')
+@withTranslation('history')
 export class ModalHistory extends React.PureComponent {
   componentDidMount() {
     if (this.props.entity === ENTITY_STATEMENT) {
@@ -56,8 +56,8 @@ export class ModalHistory extends React.PureComponent {
   }
 
   renderTitle = (t, entity, entityId) => (
-    <div>
-      <Icon name="history" />
+    <div className="flex items-center gap-2">
+      <History size={24} />
       <span>
         {' '}
         {startCase(t(`entities.${entity}`))} #{entityId}

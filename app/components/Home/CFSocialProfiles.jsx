@@ -1,89 +1,39 @@
-import { Flex } from '@rebass/grid'
-import { get } from 'lodash'
-import PropTypes from 'prop-types'
+import { Facebook, Github, Twitter } from 'lucide-react'
 import React from 'react'
-import styled, { withTheme } from 'styled-components'
-import { Discord } from 'styled-icons/fa-brands'
-import { Facebook } from 'styled-icons/fa-brands'
-import { Twitter } from 'styled-icons/fa-brands'
-import { Github } from 'styled-icons/fa-brands'
-import { Mastodon } from 'styled-icons/fa-brands'
+import { Discord } from 'styled-icons/remix-line'
 
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
-const IconLinkContainer = styled(ExternalLinkNewTab)`
-  margin: 0 0.5em;
-`
-
-/**
- * Render a social icon with the proper link and add a popup with the title
- * of the social network.
- */
-const SocialIconLink = ({ Icon, name, url, size, color }) => {
+const SocialIconLink = ({ Icon, size, name, url }) => {
   return (
-    <IconLinkContainer title={name} href={url}>
-      <Icon size={size} color={color} />
-    </IconLinkContainer>
+    <ExternalLinkNewTab
+      title={name}
+      href={url}
+      className="mx-2 transition-all duration-300 hover:opacity-80 hover:scale-110 hover:-rotate-6 text-white hover:text-white/90"
+    >
+      <Icon size={size ?? 32} className="text-current" />
+    </ExternalLinkNewTab>
   )
 }
 
-/**
- * Render social profiles icons for other CaptainFact profiles on
- * Facebook, Twitter...
- */
-const CFSocialProfiles = ({ size, color, justifyContent, theme }) => {
-  const themeColor = get(theme, `colors.${color}`, color)
+const CFSocialProfiles = () => {
   return (
-    <Flex justifyContent={justifyContent} style={{ height: size + 2 }}>
+    <div className="flex justify-center items-center gap-4">
       <SocialIconLink
         name="Discord"
         Icon={Discord}
-        size={size}
+        size={38}
         url="https://discord.captainfact.io"
-        color={themeColor}
       />
-      <SocialIconLink
-        name="Github"
-        Icon={Github}
-        size={size}
-        url="https://github.com/CaptainFact"
-        color={themeColor}
-      />
-      <SocialIconLink
-        name="Twitter"
-        Icon={Twitter}
-        size={size}
-        url="https://twitter.com/CaptainFact_io"
-        color={themeColor}
-      />
+      <SocialIconLink name="Github" Icon={Github} url="https://github.com/CaptainFact" />
+      <SocialIconLink name="Twitter" Icon={Twitter} url="https://twitter.com/CaptainFact_io" />
       <SocialIconLink
         name="Facebook"
         Icon={Facebook}
-        size={size}
         url="https://www.facebook.com/CaptainFact.io"
-        color={themeColor}
       />
-      <SocialIconLink
-        name="Mastodon"
-        Icon={Mastodon}
-        size={size}
-        url="https://mamot.fr/@CaptainFact"
-        color={themeColor}
-      />
-    </Flex>
+    </div>
   )
 }
 
-CFSocialProfiles.propTypes = {
-  /** Icons size. Default to 2em */
-  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /** Passed to Flex */
-  justifyContent: PropTypes.string,
-}
-
-CFSocialProfiles.defaultProps = {
-  size: '2em',
-  justifyContent: 'center',
-}
-
-export default withTheme(CFSocialProfiles)
+export default CFSocialProfiles

@@ -6,7 +6,7 @@ import { getEntityIDFromAction } from '../../lib/user_action_entity_id'
 import { resetVideoDebate } from '../video_debate/actions'
 import UserAction from './record'
 
-export const setLoading = createAction('VIDEO_DEBATE_HISTORY/SET_LOADING')
+const setLoading = createAction('VIDEO_DEBATE_HISTORY/SET_LOADING')
 export const reset = createAction('VIDEO_DEBATE_HISTORY/RESET')
 export const fetchAll = createAction('VIDEO_DEBATE_HISTORY/FETCH')
 export const addAction = createAction('VIDEO_DEBATE_HISTORY/ADD_ACTION')

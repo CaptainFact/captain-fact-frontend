@@ -17,6 +17,11 @@ import { setPlaying, setPosition } from '../../state/video_debate/video/reducer'
   { setPosition, setPlaying },
 )
 export default class VideoDebatePlayer extends React.Component {
+  constructor(props) {
+    super(props)
+    this.playerRef = React.createRef()
+  }
+
   shouldComponentUpdate(newProps) {
     return this.props.url !== newProps.url || this.props.isPlaying !== newProps.isPlaying
   }
@@ -24,11 +29,12 @@ export default class VideoDebatePlayer extends React.Component {
   UNSAFE_componentWillReceiveProps(newProps) {
     const { forcedPosition } = newProps
     if (
+      this.playerRef.current &&
       forcedPosition.requestId !== null &&
       forcedPosition.requestId !== this.props.forcedPosition.requestId
     ) {
       this.props.setPlaying(true)
-      this.refs.player.seekTo(forcedPosition.time)
+      this.playerRef.current.seekTo(forcedPosition.time)
     }
   }
 
@@ -37,8 +43,8 @@ export default class VideoDebatePlayer extends React.Component {
 
     return (
       <ReactPlayer
-        ref="player"
-        className="video"
+        ref={this.playerRef}
+        className="w-full aspect-video"
         url={url}
         playing={isPlaying}
         onPlay={() => setPlaying(true)}

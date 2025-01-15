@@ -1,5 +1,6 @@
-import classNames from 'classnames'
 import React from 'react'
+
+import { cn } from '@/lib/css-utils'
 
 import TextareaAutosize from './TextareaAutosize'
 import TextareaLengthCounter from './TextareaLengthCounter'
@@ -8,10 +9,10 @@ const ControlTextarea = (params) => {
   const {
     input,
     label,
-    icon,
     type,
     placeholder,
     autosize,
+    minLength,
     maxLength,
     hideErrorIfEmpty,
     meta,
@@ -23,7 +24,7 @@ const ControlTextarea = (params) => {
   const inputProps = {
     ...input,
     ...props,
-    className: classNames('textarea', { 'is-danger': hasError }),
+    className: cn(props.className, hasError && 'border-red-600'),
     placeholder: placeholder || label,
     disabled: submitting,
     type,
@@ -31,12 +32,23 @@ const ControlTextarea = (params) => {
   const textarea = autosize ? <TextareaAutosize {...inputProps} /> : <textarea {...inputProps} />
 
   return (
-    <p className={classNames('control', { 'has-icon': !!icon })}>
+    <div className="w-full relative">
       {textarea}
-      <TextareaLengthCounter length={input.value.length} maxLength={maxLength} />
-      {hasError && <span className="help is-danger">{error}</span>}
-      {warningMessage && <span className="help is-warning">{warningMessage}</span>}
-    </p>
+      <TextareaLengthCounter
+        length={input.value.length}
+        minLength={minLength}
+        maxLength={maxLength}
+      />
+      <div
+        className={cn(
+          'overflow-hidden transition-[height] duration-200 ease-out',
+          hasError ? 'h-5' : 'h-0',
+        )}
+      >
+        <span className="text-sm text-red-500">{error}</span>
+      </div>
+      {warningMessage && <span>{warningMessage}</span>}
+    </div>
   )
 }
 

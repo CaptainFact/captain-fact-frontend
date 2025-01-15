@@ -6,10 +6,8 @@ module.exports = (isProd) => [
   // =========
   // = Babel =
   // =========
-  // Load jsx extensions with babel so we can use
-  // 'import' instead of 'require' and es6 syntax
   {
-    test: /\.(js|jsx)$/,
+    test: /\.(js|jsx|ts|tsx)$/,
     exclude: /node_modules/,
     loader: 'babel-loader',
     options: {
@@ -158,23 +156,8 @@ module.exports = (isProd) => [
   // ==========
   // = Styles =
   // ==========
-  // Global CSS (from node_modules)
-  // ==============================
   {
-    test: /\.css/,
-    include: path.resolve(__dirname, 'node_modules'),
-    use: [
-      {
-        loader: !isProd ? 'style-loader' : MiniCssExtractPlugin.loader,
-      },
-      {
-        loader: 'css-loader',
-      },
-    ],
-  },
-  {
-    test: /\.(sass|scss)$/,
-    include: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'app/styles')],
+    test: /\.css$/,
     use: [
       {
         loader: !isProd ? 'style-loader' : MiniCssExtractPlugin.loader,
@@ -183,15 +166,15 @@ module.exports = (isProd) => [
         loader: 'css-loader',
       },
       {
-        loader: 'sass-loader',
-        // TODO check this
-        // options: {
-        //   includePaths: [
-        //     path.resolve(__dirname, 'node_modules'),
-        //     path.resolve(__dirname, 'app/styles'),
-        //     path.resolve(__dirname, 'node_modules/animate.scss/vendor/assets/stylesheets'),
-        //   ],
-        // },
+        loader: 'postcss-loader', // Processes Tailwind and other PostCSS plugins
+        options: {
+          postcssOptions: {
+            plugins: [
+              require('tailwindcss'), // Tailwind plugin
+              require('autoprefixer'), // Autoprefixer for browser compatibility
+            ],
+          },
+        },
       },
     ],
   },

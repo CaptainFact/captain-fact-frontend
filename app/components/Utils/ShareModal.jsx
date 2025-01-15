@@ -1,17 +1,21 @@
+import { Clipboard, Facebook, Mail, Twitter } from 'lucide-react'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
+import { ShareAlt } from 'styled-icons/boxicons-regular'
+
+import { toast } from '@/hooks/use-toast'
 
 import { FB_APP_ID, FRONTEND_URL } from '../../config'
-import { flashErrorMsg, flashSuccessMsg } from '../../state/flashes/reducer'
 import { popModal } from '../../state/modals/reducer'
 import FieldWithButton from '../FormUtils/FieldWithButton'
 import Modal from '../Modal/Modal'
-import ThirdPartyServiceButton from '../Users/ThirdPartyServiceButton'
-import { Icon } from './Icon'
+import { Button } from '../ui/button'
+import { Separator } from '../ui/separator'
+import ExternalLinkNewTab from './ExternalLinkNewTab'
 
-@connect(null, { popModal, flashErrorMsg, flashSuccessMsg })
-@withNamespaces('main')
+@connect(null, { popModal })
+@withTranslation('main')
 export default class ShareModal extends React.PureComponent {
   render() {
     const url = FRONTEND_URL + this.props.path
@@ -22,40 +26,35 @@ export default class ShareModal extends React.PureComponent {
         className="modal-share"
         title={
           <span>
-            <Icon name="share-alt" /> {this.props.t('actions.share')}
+            <ShareAlt size={14} /> {this.props.t('actions.share')}
           </span>
         }
       >
         <FieldWithButton
-          className="is-medium share-link-field"
+          id="share-link-field"
           input={{ value: url, readOnly: true }}
           buttonClassName="is-medium"
-          buttonLabel={<Icon name="clipboard" />}
+          buttonLabel={<Clipboard size="1em" />}
           buttonClickHandler={this.copyUrlToClipboard.bind(this)}
           expandInput
         />
-        <hr />
-        <div style={{ textAlign: 'center' }}>
-          <ThirdPartyServiceButton
-            icon="twitter"
-            name="Twitter"
-            url={this.twitterLink(encodedUrl)}
-            newTab
-          />
-          <ThirdPartyServiceButton
-            icon="facebook"
-            name="Facebook"
-            url={this.facebookLink(encodedUrl)}
-            newTab
-          />
-          <span style={{ marginLeft: 5 }}>
-            <ThirdPartyServiceButton
-              icon="envelope"
-              name="Mail"
-              url={this.mailLink(encodedUrl)}
-              newTab
-            />
-          </span>
+        <Separator className="my-6" />
+        <div className="flex justify-center items-center gap-3 mt-2">
+          <ExternalLinkNewTab href={this.twitterLink(encodedUrl)}>
+            <Button name="Twitter" title="Twitter" variant="outline" size="lg">
+              <Twitter size="1em" />
+            </Button>
+          </ExternalLinkNewTab>
+          <ExternalLinkNewTab href={this.facebookLink(encodedUrl)}>
+            <Button name="Facebook" title="Facebook" variant="outline" size="lg">
+              <Facebook size="1em" />
+            </Button>
+          </ExternalLinkNewTab>
+          <ExternalLinkNewTab href={this.mailLink(encodedUrl)}>
+            <Button name="Mail" title="Mail" variant="outline" size="lg">
+              <Mail size="1em" />
+            </Button>
+          </ExternalLinkNewTab>
         </div>
       </Modal>
     )
@@ -75,7 +74,8 @@ export default class ShareModal extends React.PureComponent {
   }
 
   copyUrlToClipboard() {
-    document.getElementsByClassName('share-link-field')[0].select()
+    const { t } = this.props
+    document.getElementById('share-link-field').select()
     let success = false
     try {
       success = document.execCommand('copy')
@@ -84,9 +84,19 @@ export default class ShareModal extends React.PureComponent {
       console.warn(`Copy failed: ${err}`)
     }
     if (success) {
-      this.props.flashSuccessMsg('misc.clipboardSuccess')
+      toast({
+        description: (
+          <div className="flex items-center gap-2">
+            <Clipboard size="1em" />
+            {t('misc.clipboardSuccess')}
+          </div>
+        ),
+      })
     } else {
-      this.props.flashErrorMsg('misc.clipboardFail')
+      toast({
+        variant: 'destructive',
+        description: t('misc.clipboardFail'),
+      })
     }
   }
 }

@@ -1,22 +1,32 @@
+import { CirclePlus } from 'lucide-react'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import { MIN_REPUTATION_ADD_VIDEO } from '../../constants'
-import { Icon } from '../Utils/Icon'
+import { Button } from '../ui/button'
 import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
 
 const AddVideoBtn = ({ t }) => {
   return (
     <ReputationGuardTooltip requiredRep={MIN_REPUTATION_ADD_VIDEO}>
-      {({ hasReputation }) => (
-        <Link to="/videos/add" className="button is-primary" disabled={!hasReputation}>
-          <Icon name="plus-circle" />
-          <span>{t('videos.add')}</span>
-        </Link>
-      )}
+      {({ hasReputation }) =>
+        !hasReputation ? (
+          <Button disabled={true} className="h-auto">
+            <CirclePlus size={24} />
+            <span>{t('videos.add')}</span>
+          </Button>
+        ) : (
+          <Link to="/videos/add">
+            <Button className="h-auto">
+              <CirclePlus size={24} />
+              <span>{t('videos.add')}</span>
+            </Button>
+          </Link>
+        )
+      }
     </ReputationGuardTooltip>
   )
 }
 
-export default withNamespaces('main')(AddVideoBtn)
+export default withTranslation('main')(AddVideoBtn)

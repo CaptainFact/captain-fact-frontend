@@ -1,11 +1,12 @@
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { reduxForm } from 'redux-form'
 
 import * as userAPI from '../../API/http_api/current_user'
 import { USER_PICTURE_XLARGE } from '../../constants'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
-import Alert from '../Utils/Alert'
+import { Button } from '../ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { ErrorView } from '../Utils/ErrorView'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import UserAppellation from './UserAppellation'
@@ -21,7 +22,7 @@ const validate = (params) => {
 }
 
 @reduxForm({ form: 'resetPassword', validate })
-@withNamespaces('user')
+@withTranslation('user')
 @withLoggedInUser
 export default class ResetPasswordConfirmForm extends React.PureComponent {
   constructor(props) {
@@ -54,6 +55,17 @@ export default class ResetPasswordConfirmForm extends React.PureComponent {
       })
   }
 
+  render() {
+    return (
+      <form
+        className="max-w-md mx-auto p-6"
+        onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}
+      >
+        {this.renderContent()}
+      </form>
+    )
+  }
+
   renderContent() {
     if (this.state.status === 'error') {
       return <ErrorView error={this.state.user} i18nNS="user:errors.error" canGoBack={false} />
@@ -66,32 +78,30 @@ export default class ResetPasswordConfirmForm extends React.PureComponent {
     if (this.state.status === 'confirm') {
       const user = this.state.user
       return (
-        <div>
-          <div className="user-box">
-            <UserPicture user={user} size={USER_PICTURE_XLARGE} />
-            <UserAppellation user={user} withoutActions />
-          </div>
-          <UserPasswordField t={this.props.t} />
-          <UserPasswordRepeatField t={this.props.t} />
-          <button type="submit" className="button">
-            {this.props.t('resetPassword')}
-          </button>
+        <div className="px-2 my-12">
+          <Card className="max-w-[500px] mx-auto">
+            <CardHeader>
+              <CardTitle>{this.props.t('resetPassword')}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-col items-center mb-3">
+                <UserPicture user={user} size={USER_PICTURE_XLARGE} />
+                <UserAppellation user={user} withoutActions />
+              </div>
+              <div className="flex flex-col gap-3 border-t pt-4 mt-4">
+                <UserPasswordField t={this.props.t} />
+                <UserPasswordRepeatField t={this.props.t} />
+                <Button type="submit" variant="outline">
+                  {this.props.t('resetPassword')}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       )
     }
     if (this.state.status === 'confirm_success') {
-      return <Alert>{this.props.t('resetPasswordSuccess')}</Alert>
+      return <div className="px-2 my-12">{this.props.t('resetPasswordSuccess')}</div>
     }
-  }
-
-  render() {
-    return (
-      <form
-        className="form user-form"
-        onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}
-      >
-        {this.renderContent()}
-      </form>
-    )
   }
 }

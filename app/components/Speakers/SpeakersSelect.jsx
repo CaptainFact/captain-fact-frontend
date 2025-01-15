@@ -1,16 +1,18 @@
 import React from 'react'
 import Select from 'react-select'
 
+import { cn } from '@/lib/css-utils'
+
 import { ReactSelectStyles, ReactSelectTheme } from '../../lib/react_select_theme'
 
-const SpeakersSelect = ({ input, speakers, placeholder, styles }) => {
+const SpeakersSelect = ({ input, speakers, placeholder, styles, className }) => {
   const selectedSpeakerId = input.value
   const speaker = selectedSpeakerId && speakers.find((s) => s.id === selectedSpeakerId)
   const getOption = (speaker) => ({ value: speaker, label: speaker.full_name })
 
   return (
     <Select
-      className="speaker-select"
+      className={cn('whitespace-nowrap', className)}
       placeholder={placeholder}
       options={[...speakers.toJS().map(getOption)]}
       value={speaker ? getOption(speaker) : null}

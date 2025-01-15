@@ -1,11 +1,11 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 
 import { toAbsoluteURL } from '../../lib/cf_routes'
 import { changeVideosLanguageFilter, setVideosFilter } from '../../state/user_preferences/reducer'
-import Container from '../StyledUtils/Container'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import AddVideoBtn from './AddVideoBtn'
 import PaginatedVideosContainer from './PaginatedVideosContainer'
 import VideosFilterBar from './VideosFilterBar'
@@ -17,7 +17,8 @@ import VideosFilterBar from './VideosFilterBar'
   }),
   { changeVideosLanguageFilter, setVideosFilter },
 )
-@withNamespaces('main')
+@withTranslation('main')
+@withLoggedInUser
 export default class VideosIndexPage extends React.PureComponent {
   render() {
     const { t, languageFilter, videosFilter, setVideosFilter, location } = this.props
@@ -25,7 +26,7 @@ export default class VideosIndexPage extends React.PureComponent {
     const currentPage = parseInt(searchParams.get('page')) || 1
 
     return (
-      <div className="videos-page">
+      <div className="py-16">
         <Helmet>
           <meta property="og:url" content={toAbsoluteURL('/videos')} />
           <meta property="og:title" content="Les vidéos sourcées et vérifiées sur CaptainFact" />
@@ -34,57 +35,30 @@ export default class VideosIndexPage extends React.PureComponent {
             content="Découvrez diverses vidéos sourcées et vérifiées par la communauté CaptainFact"
           />
         </Helmet>
-        <Container
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          maxWidth="1315px"
-          mx="auto"
-          px="20px"
-          pb="24px"
-          borderBottom="1px solid #f7f7f7"
-        >
-          <h2 className="is-size-3">
-            {t('menu.factChecking')}
+        <div className="flex justify-between items-center max-w-[1315px] mx-auto px-5 pb-6 sm:pb-12 border-b border-neutral-100">
+          <h2 className="text-2xl">
+            <strong>{t('menu.factChecking')}</strong>
             <span className="mx-1"> &rsaquo; </span>
             {t('entities.videoFactChecking')}
           </h2>
-          <AddVideoBtn />
-        </Container>
-        <Container
-          flexDirection={['column-reverse', 'row']}
-          flexWrap="wrap"
-          display="flex"
-          gap="20px"
-          justifyContent="space-between"
-          alignItems="center"
-          maxWidth="1315px"
-          px="20px"
-          py="15px"
-          mx="auto"
-          mb="32px"
-          boxShadow="rgba(0, 0, 0, 0.1) 0px 10px 10px -10px"
-          borderBottom="1px solid #f2f2f2"
-          bg="white"
-          position={['initial', null, 'sticky']}
-          css={{
-            top: 60,
-            zIndex: 100,
-          }}
-        >
+          {this.props.isAuthenticated && <AddVideoBtn />}
+        </div>
+        <div className="z-10 flex flex-col-reverse md:flex-row flex-wrap gap-5 justify-between items-center max-w-[1315px] px-5 pt-2 mx-auto mb-8 border-b border-neutral-200 bg-white md:sticky static top-[60px] z-100 shadow-md">
           <VideosFilterBar
             onLanguageChange={(v) => this.onVideosLanguageChange(v)}
             onSourceChange={(v) => setVideosFilter(v)}
             language={languageFilter}
             source={videosFilter}
           />
-        </Container>
-        <PaginatedVideosContainer
-          baseURL={this.props.location.pathname}
-          currentPage={currentPage}
-          language={languageFilter}
-          source={videosFilter}
-        />
+        </div>
+        <div className="mx-auto max-w-[1315px]">
+          <PaginatedVideosContainer
+            baseURL={this.props.location.pathname}
+            currentPage={currentPage}
+            language={languageFilter}
+            source={videosFilter}
+          />
+        </div>
       </div>
     )
   }

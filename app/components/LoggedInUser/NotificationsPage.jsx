@@ -1,7 +1,6 @@
-import { Box, Flex } from '@rebass/grid'
 import React, { Component } from 'react'
 import FlipMove from 'react-flip-move'
-import { translate } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { Link, withRouter } from 'react-router-dom'
 import { Clock } from 'styled-icons/fa-regular'
 import { Check } from 'styled-icons/fa-solid'
@@ -9,13 +8,11 @@ import { DotFill } from 'styled-icons/octicons'
 
 import { optionsToQueryString } from '../../lib/url_utils'
 import NotificationDetails from '../Notifications/NotificationDetails'
-import Container from '../StyledUtils/Container'
-import StyledLink from '../StyledUtils/StyledLink'
-import { Span } from '../StyledUtils/Text'
-import Button from '../Utils/Button'
+import { Button } from '../ui/button'
+import { Card } from '../ui/card'
+import { Tabs, TabsList, TabsTrigger } from '../ui/tabs'
 import { ErrorView } from '../Utils/ErrorView'
 import { LoadingFrame } from '../Utils/LoadingFrame'
-import Message from '../Utils/Message'
 import PaginationMenu from '../Utils/PaginationMenu'
 import { TimeSince } from '../Utils/TimeSince'
 import Notifications from './Notifications'
@@ -24,7 +21,7 @@ import { withLoggedInUser } from './UserProvider'
 const FILTERS = ['ALL', 'SEEN', 'UNSEEN']
 
 @withRouter
-@translate('notifications')
+@withTranslation('notifications')
 @withLoggedInUser
 export default class NotificationsPage extends Component {
   buildLink(page, filter) {
@@ -35,72 +32,62 @@ export default class NotificationsPage extends Component {
   }
 
   getFilter(searchParams) {
-    return FILTERS.includes(searchParams.filter) ? searchParams.filter : 'ALL'
+    const filter = searchParams.get('filter')
+    return FILTERS.includes(filter) ? filter : 'ALL'
   }
 
   renderFilters(selected) {
-    return FILTERS.map((filter) => (
-      <StyledLink
-        key={filter}
-        mx={3}
-        fontWeight={selected === filter ? 'bold' : 'normal'}
-        to={this.buildLink(1, filter)}
-      >
-        {this.props.t(`filters.${filter}`)}
-      </StyledLink>
-    ))
+    return (
+      <Tabs value={selected}>
+        <TabsList>
+          {FILTERS.map((filter) => (
+            <Link key={filter} to={this.buildLink(1, filter)}>
+              <TabsTrigger value={filter}>{this.props.t(`filters.${filter}`)}</TabsTrigger>
+            </Link>
+          ))}
+        </TabsList>
+      </Tabs>
+    )
   }
 
   renderNotifications(notifications, markAsSeen) {
     return notifications.length === 0 ? (
-      <Message>{this.props.t('empty')}</Message>
+      <Card className="text-center py-6 my-6">{this.props.t('empty')}</Card>
     ) : (
-      <FlipMove>
-        {notifications.map((n) => (
-          <NotificationDetails key={n.id} notification={n}>
-            {({ message, seenAt, link, insertedAt }) => (
-              <Container
-                display="flex"
-                alignItems="center"
-                mb={3}
-                p={3}
-                borderRadius={4}
-                background={seenAt ? 'white' : 'rgba(117,202,255,0.15)'}
-              >
-                <Container
-                  display="flex"
-                  flexDirection="column"
-                  borderRight={1}
-                  pr={3}
-                  borderColor="black.100"
-                  width={0.85}
+      <Card>
+        <FlipMove>
+          {notifications.map((n) => (
+            <NotificationDetails key={n.id} notification={n}>
+              {({ message, seenAt, link, insertedAt }) => (
+                <div
+                  className={`flex items-center border-b last:border-none p-4 rounded hover:bg-blue-50/20
+                      ${seenAt ? 'bg-white' : 'bg-blue-50'}`}
                 >
-                  <StyledLink
-                    to={link}
-                    onClick={() => markAsSeen(n.id, true)}
-                    color="black.400"
-                    mb={1}
-                  >
-                    {message}
-                  </StyledLink>
-                  <Span color="black.300">
-                    <Clock size="1em" />
-                    &nbsp;
-                    <TimeSince time={insertedAt} />
-                  </Span>
-                </Container>
-                <Flex ml={3} width={0.15} justifyContent="center">
-                  {seenAt ? (
-                    <DotFill cursor="pointer" size={24} onClick={() => markAsSeen(n.id, false)} />
-                  ) : (
-                    <Check cursor="pointer" size={24} onClick={() => markAsSeen(n.id, true)} />
-                  )}
-                </Flex>
-              </Container>
-            )}
-          </NotificationDetails>
-        ))}
-      </FlipMove>
+                  <div className="flex flex-col pr-3 border-r border-gray-200 w-[85%] text-sm">
+                    <Link
+                      to={link}
+                      onClick={() => markAsSeen(n.id, true)}
+                      className="text-gray-700 mb-1 hover:text-gray-900"
+                    >
+                      {message}
+                    </Link>
+                    <span className="text-gray-500">
+                      <Clock size="1em" />
+                      &nbsp;
+                      <TimeSince time={insertedAt} />
+                    </span>
+                  </div>
+                  <div className="ml-3 w-[15%] flex justify-center">
+                    <Button variant="ghost" onClick={() => markAsSeen(n.id, !seenAt)}>
+                      {seenAt ? <DotFill size={24} /> : <Check size={24} />}
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </NotificationDetails>
+          ))}
+        </FlipMove>
+      </Card>
     )
   }
 
@@ -112,7 +99,12 @@ export default class NotificationsPage extends Component {
     const pollInterval = filter === 'ALL' && pageNumber === 1 ? 15000 : 0 // Only poll on first page
 
     return (
-      <Notifications pageSize={10} pageNumber={pageNumber} filter={filter}>
+      <Notifications
+        pageSize={10}
+        pageNumber={pageNumber}
+        filter={filter}
+        pollInterval={pollInterval}
+      >
         {({ loading, error, notifications, pageNumber, totalPages, markAsSeen }) => {
           if (error) {
             return <ErrorView error={error} />
@@ -121,14 +113,15 @@ export default class NotificationsPage extends Component {
           const hasSeen = notifications && notifications.find((n) => n.seenAt)
           const hasUnseen = notifications && notifications.find((n) => !n.seenAt)
           return (
-            <Flex flexDirection="column" alignItems="center">
-              <Container mb={3} p={[2, 4]} width={1} maxWidth={1200}>
-                <Flex flexDirection="column">
-                  <Flex justifyContent="space-between" mb={4} flexWrap="wrap">
-                    <Flex>{this.renderFilters(filter)}</Flex>
-                    <Flex flexWrap="wrap">
-                      <Box mr={2}>
+            <div className="flex flex-col items-center my-6">
+              <div className="mb-3 p-2 md:p-4 w-full max-w-[1200px]">
+                <div className="flex flex-col">
+                  <div className="flex justify-between mb-4 flex-wrap">
+                    <div className="flex">{this.renderFilters(filter)}</div>
+                    <div className="flex flex-wrap">
+                      <div className="mr-2">
                         <Button
+                          variant="outline"
                           onClick={() =>
                             markAsSeen(
                               notifications.map((n) => n.id),
@@ -139,8 +132,9 @@ export default class NotificationsPage extends Component {
                         >
                           {t('markAllAsUnseen')}
                         </Button>
-                      </Box>
+                      </div>
                       <Button
+                        variant="outline"
                         onClick={() =>
                           markAsSeen(
                             notifications.map((n) => n.id),
@@ -151,26 +145,20 @@ export default class NotificationsPage extends Component {
                       >
                         {t('markAllAsRead')}
                       </Button>
-                    </Flex>
-                  </Flex>
+                    </div>
+                  </div>
 
                   {loading ? <LoadingFrame /> : this.renderNotifications(notifications, markAsSeen)}
-                </Flex>
-              </Container>
+                </div>
+              </div>
               {totalPages > 1 && (
                 <PaginationMenu
-                  className="videos-pagination"
                   currentPage={pageNumber}
                   total={totalPages}
-                  isRounded
-                  onPageChange={() => window.scrollTo({ top: 0 })}
-                  pollInterval={pollInterval}
-                  LinkBuilder={({ 'data-page': page, ...props }) => {
-                    return <Link to={this.buildLink(page, filter)} className="button" {...props} />
-                  }}
+                  getPageLink={(page) => this.buildLink(page, filter)}
                 />
               )}
-            </Flex>
+            </div>
           )
         }}
       </Notifications>

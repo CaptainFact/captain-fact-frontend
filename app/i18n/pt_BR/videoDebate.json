@@ -17,7 +17,7 @@
   "flagForm": {
     "title": "Por que denunciar esse comentário?",
     "xAvailable": "{{count}} disponível",
-    "xAvailable_plural": "{{count}} disponíveis"
+    "xAvailable_other": "{{count}} disponíveis"
   },
   "comment": {
     "writeComment": "Escrever um comentário...",
@@ -25,7 +25,7 @@
     "post": "Adicionar comentário",
     "post_reply": "Adicionar resposta",
     "deleteThread": "Deletar o comentário",
-    "deleteThread_plural": "Deletar a thread",
+    "deleteThread_other": "Deletar a thread",
     "replies_hide": "Esconder respostas",
     "replies_show": "Mostrar respostas ({{count}})",
     "loadMore_replies": "Carregar mais respostas ({{count}})",
@@ -97,9 +97,9 @@
   },
   "presence": {
     "viewer": "{{count}} espectador",
-    "viewer_plural": "{{count}} espectadores",
+    "viewer_other": "{{count}} espectadores",
     "user": "{{count}} fact-checker",
-    "user_plural": "{{count}} fact-checkers"
+    "user_other": "{{count}} fact-checkers"
   },
   "warningUnlisted": "Esse vídeo não está listado publicamente. Ele não pode receber a visibilidade necessária para que fontes e citações sejam corretamente discutidas.",
   "wikidata": {

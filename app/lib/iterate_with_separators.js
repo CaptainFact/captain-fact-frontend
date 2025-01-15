@@ -16,7 +16,7 @@ export default function* iterateWithSeparators(iterator, size, t, endWithAnd = t
     } else if (entryNum + 2 <= size) {
       yield [value, ', ']
     } else {
-      yield [value, '']
+      yield [value, '.']
     }
   }
 }

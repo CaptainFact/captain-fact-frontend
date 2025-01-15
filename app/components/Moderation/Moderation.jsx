@@ -1,15 +1,18 @@
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Report } from 'styled-icons/octicons'
 
+import { toast } from '@/hooks/use-toast'
+
 import { MIN_REPUTATION_MODERATION } from '../../constants'
 import { commentURL } from '../../lib/cf_routes'
 import { fetchRandomModeration, postModerationFeedback } from '../../state/moderation/effects'
+import { Button } from '../ui/button'
 import UserAppellation from '../Users/UserAppellation'
 import UserAction from '../UsersActions/UserAction'
-import { LoadingFrame } from '../Utils'
+import { LoadingFrame } from '../Utils/LoadingFrame'
 import Message from '../Utils/Message'
 import { withReputationGuard } from '../Utils/ReputationGuard'
 import { ModerationForm } from './ModerationForm'
@@ -22,7 +25,7 @@ import { ModerationForm } from './ModerationForm'
   }),
   { fetchRandomModeration, postModerationFeedback },
 )
-@withNamespaces('moderation')
+@withTranslation('moderation')
 @withReputationGuard(MIN_REPUTATION_MODERATION)
 export default class Moderation extends React.PureComponent {
   componentDidMount() {
@@ -30,7 +33,16 @@ export default class Moderation extends React.PureComponent {
   }
 
   postFeedback(values) {
-    this.props.postModerationFeedback(values).then(() => this.props.fetchRandomModeration())
+    this.props
+      .postModerationFeedback(values)
+      .then(() => {
+        toast({
+          variant: 'success',
+          title: 'Flag submitted',
+          description: 'Thank you for your feedback!',
+        })
+      })
+      .then(() => this.props.fetchRandomModeration())
   }
 
   render() {
@@ -41,51 +53,51 @@ export default class Moderation extends React.PureComponent {
     }
 
     return (
-      <div id="moderation-page" className="section">
-        <h1 className="title is-1 has-text-centered">
-          {t('title')} <Report size="1em" />
+      <main className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold text-center mb-6">
+          {t('title')} <Report className="inline w-8 h-8" />
         </h1>
-        <div className="has-text-centered">
-          <p>{t('helpText1')}</p>
-          <p>{t('helpText2')}</p>
-          <Link className="has-text-weight-bold" to="/help/moderation">
+        <div className="text-center mb-8">
+          <p className="mb-2">{t('helpText1')}</p>
+          <p className="mb-4">{t('helpText2')}</p>
+          <Link className="font-bold hover:underline" to="/help/moderation">
             {t('learnMore')}
           </Link>
         </div>
-        {!entry && (
-          <Message mt={4} className="has-text-centered mt-6">
-            {t('emptyModeration')}
-          </Message>
-        )}
+        {!entry && <Message className="text-center mt-8">{t('emptyModeration')}</Message>}
         {entry && (
           <div>
             {this.renderAction(entry.action)}
-            <hr />
+            <hr className="my-6" />
             {entry.flags.map(({ source_user, reason }) => (
-              <div key={source_user.id} className="has-text-centered">
+              <div key={source_user.id} className="text-center mb-2">
                 <UserAppellation user={source_user} /> {t('flaggedFor', { reason })}
               </div>
             ))}
           </div>
         )}
-      </div>
+      </main>
     )
   }
 
   renderAction(action) {
     return (
-      <div className="box moderation-entry">
+      <div className="bg-white rounded-lg shadow-md p-6">
         <UserAction action={action} defaultExpanded />
-        <br />
-        <h4 className="box has-text-centered">
-          <Link
-            target="_blank"
-            to={commentURL(action.videoHashId, action.statementId, action.commentId)}
-          >
-            <strong>{this.props.t('seeContext')}</strong>
-          </Link>
-        </h4>
-        <hr />
+        <div className="my-4">
+          <div className="bg-gray-50 rounded p-4 text-center">
+            <Button variant="outline">
+              <Link
+                target="_blank"
+                to={commentURL(action.videoHashId, action.statementId, action.commentId)}
+                className="font-bold hover:underline"
+              >
+                {this.props.t('seeContext')}
+              </Link>
+            </Button>
+          </div>
+        </div>
+        <hr className="my-4" />
         <ModerationForm
           action={action}
           initialValues={{ action_id: action.id }}

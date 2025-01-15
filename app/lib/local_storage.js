@@ -19,7 +19,7 @@ export const getFromLocalStorage = (key, defaultValue) => {
   try {
     const value = window.localStorage.getItem(key)
     return typeof value === 'undefined' ? defaultValue : value
-  } catch (e) {
+  } catch {
     return defaultValue
   }
 }
@@ -31,7 +31,7 @@ export const getFromLocalStorage = (key, defaultValue) => {
 export const setLocalStorage = (key, value) => {
   try {
     window.localStorage.setItem(key, value)
-  } catch (e) {
+  } catch {
     // Ignore errors
   }
 }
@@ -43,7 +43,7 @@ export const setLocalStorage = (key, value) => {
 export const removeFromLocalStorage = (key) => {
   try {
     window.localStorage.removeItem(key)
-  } catch (e) {
+  } catch {
     // Ignore errors
   }
 }
