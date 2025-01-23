@@ -7,17 +7,21 @@ describe('User login', () => {
   })
 
   it('has a link to reset password', () => {
-    cy.contains('Forgotten password').should('have.attr', 'href', '/reset_password')
+    cy.get('[data-cy="sign-in-up-container"]')
+      .contains('a', 'Forgotten password')
+      .should('have.attr', 'href', '/reset_password')
   })
 
   it('has a link to register', () => {
-    cy.get('a[href="/signup"]:contains("Sign up")').should('exist')
+    cy.get('[data-cy="sign-in-up-container"]')
+      .find('a[href="/signup"]:contains("Sign up")')
+      .should('exist')
   })
 
   it('works with default dev account when using email', () => {
     cy.get('input[name=email]').type(defaultEmail)
     cy.get('input[name=password]').type(defaultPassword)
-    cy.get('.user-form .button:contains("Log in")').click()
+    cy.contains('[data-cy="sign-in-up-container"] button', 'Log in').click()
     cy.url()
       .should('include', '/videos')
       .then(() => {
@@ -30,7 +34,7 @@ describe('User login', () => {
   it('works with default dev account when using username', () => {
     cy.get('input[name=email]').type(defaultUsername)
     cy.get('input[name=password]').type(defaultPassword)
-    cy.get('.user-form .button:contains("Log in")').click()
+    cy.contains('[data-cy="sign-in-up-container"] button', 'Log in').click()
     cy.url()
       .should('include', '/videos')
       .then(() => {

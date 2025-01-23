@@ -1,46 +1,33 @@
-import { Box, Flex } from '@rebass/grid'
-import classNames from 'classnames'
 import { Formik } from 'formik'
 import { get } from 'lodash'
+import { Check, CircleX, HelpCircle, MessagesSquare, Plus, ShieldBan } from 'lucide-react'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import styled from 'styled-components'
-import { Plus } from 'styled-icons/boxicons-regular'
-import { HelpCircle } from 'styled-icons/boxicons-solid'
-import { space } from 'styled-system'
 import isURL from 'validator/lib/isURL'
+
+import { cn } from '@/lib/css-utils'
+import { toastError, toastErrorUnauthenticated } from '@/lib/toasts'
 
 import { COMMENT_LENGTH, USER_PICTURE_LARGE } from '../../constants'
 import { cleanStrMultiline } from '../../lib/clean_str'
 import { validateLengthI18n } from '../../lib/form_validators'
 import { logError } from '../../logger'
-import { errorToFlash, flashErrorUnauthenticated } from '../../state/flashes/reducer'
 import { postComment } from '../../state/video_debate/comments/effects'
-import TextareaAutosize from '../FormUtils/TextareaAutosize'
 import TextareaLengthCounter from '../FormUtils/TextareaLengthCounter'
-import Container from '../StyledUtils/Container'
-import StyledInput from '../StyledUtils/StyledInput'
-import { Span } from '../StyledUtils/Text'
+import { Button } from '../ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { Input } from '../ui/input'
+import { Textarea } from '../ui/textarea'
 import UserAppellation from '../Users/UserAppellation'
 import UserPicture from '../Users/UserPicture'
-import Button from '../Utils/Button'
-import CloseButton from '../Utils/CloseButton'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import { CommentDisplay } from './CommentDisplay'
 
-const SubmitButton = styled((props) => (
-  <Button type="submit" my={1} flex="1 1 100px" {...props} />
-))``
-
-const StyledHelpCircle = styled(HelpCircle)`
-  ${space}
-`
-
-@connect(null, { postComment, flashErrorUnauthenticated, errorToFlash })
-@withNamespaces('videoDebate')
+@connect(null, { postComment })
+@withTranslation('videoDebate')
 @withRouter
 class CommentForm extends React.Component {
   static propTypes = {
@@ -52,7 +39,7 @@ class CommentForm extends React.Component {
     replyTo: PropTypes.shape({ id: PropTypes.number }),
     /** The commenting user, or null if none is logged in */
     user: PropTypes.object,
-    /** @ignore *from withNamespaces* */
+    /** @ignore *from withTranslation* */
     t: PropTypes.func.isRequired,
     /** Do we incitate to participate */
     inciteToParticipate: PropTypes.oneOf(['approve', 'refute']),
@@ -64,7 +51,7 @@ class CommentForm extends React.Component {
     if (this.props.user) {
       this.setState({ isCollapsed: false })
     } else {
-      this.props.flashErrorUnauthenticated()
+      toastErrorUnauthenticated()
     }
   }
 
@@ -87,7 +74,7 @@ class CommentForm extends React.Component {
       })
       .catch((e) => {
         logError(e)
-        this.props.errorToFlash(e)
+        toastError(e)
       })
   }
 
@@ -110,97 +97,116 @@ class CommentForm extends React.Component {
     const { t } = this.props
 
     return (
-      <Box mt={3}>
-        <Box mb={2}>
-          <p>{t('comment.help1')}</p>
-        </Box>
-        <Box mb={2}>
-          <p>
-            <strong>{t('comment.boldHelp2')}</strong> {t('comment.help2')}{' '}
-            <i>{t('comment.help2Quote')}</i>
-          </p>
-        </Box>
-        <Box mb={3}>
-          <p>
-            <strong>{t('comment.boldHelp3')}</strong> {t('comment.help3')}{' '}
-            <ExternalLinkNewTab href="https://informationisbeautiful.net/visualizations/rhetological-fallacies/">
-              {t('comment.help3Link')}
+      <Card className="my-3">
+        <CardHeader>
+          <CardTitle>{t('comment.helpTitle')}</CardTitle>
+        </CardHeader>
+        <CardContent className="text-sm">
+          <div className="mb-2">
+            <p>{t('comment.help1')}</p>
+          </div>
+          <div className="mb-2">
+            <p>
+              <strong>{t('comment.boldHelp2')}</strong> {t('comment.help2')}{' '}
+              <i>{t('comment.help2Quote')}</i>
+            </p>
+          </div>
+          <div className="mb-3">
+            <p>
+              <strong>{t('comment.boldHelp3')}</strong> {t('comment.help3')}{' '}
+              <ExternalLinkNewTab href="https://informationisbeautiful.net/visualizations/rhetological-fallacies/">
+                {t('comment.help3Link')}
+              </ExternalLinkNewTab>
+              .
+            </p>
+            {t('comment.helpFallacy')}{' '}
+            <ExternalLinkNewTab
+              href={`https://yourlogicalfallacyis.com/${t('comment.fallacyFallacyUrl')}`}
+            >
+              {t('comment.fallacyLink')}
             </ExternalLinkNewTab>
             .
-          </p>
-          {t('comment.helpFallacy')}{' '}
-          <ExternalLinkNewTab
-            href={`https://yourlogicalfallacyis.com/${t('comment.fallacyFallacyUrl')}`}
-          >
-            {t('comment.fallacyLink')}
+          </div>
+          <ExternalLinkNewTab className="button" href="/help/contributionGuidelines">
+            {t('comment.helpButton')}
+            <HelpCircle size={15} className="ml-1 inline-block" />
           </ExternalLinkNewTab>
-          .
-        </Box>
-        <ExternalLinkNewTab className="button" href="/help/contributionGuidelines">
-          {t('comment.helpButton')}
-          <StyledHelpCircle size={15} ml={1} />
-        </ExternalLinkNewTab>
-      </Box>
+        </CardContent>
+      </Card>
     )
   }
 
-  renderCommentForm(values, setFieldValue, isDisabled) {
+  renderSubmitButtons(values, setFieldValue, isDisabled) {
     const { replyTo, t } = this.props
     const i18nParams = replyTo ? { context: 'reply' } : null
 
     return !values.source ? (
-      <SubmitButton my={1} disabled={isDisabled}>
+      <Button
+        type="submit"
+        variant="outline"
+        disabled={isDisabled}
+        className="flex-1 whitespace-nowrap"
+      >
+        <MessagesSquare size={15} />
         {t('comment.post', i18nParams)}
-      </SubmitButton>
+      </Button>
     ) : (
-      <Flex flex="1 1 460px" flexWrap="wrap">
-        <SubmitButton my={1} mr={1} disabled={isDisabled} flex="1 1 130px">
-          {t('comment.post', i18nParams)}
-        </SubmitButton>
-        <Flex flex="3 1">
-          <SubmitButton
-            my={1}
-            mr={1}
-            className="is-success"
+      <div className="flex flex-1 flex-wrap min-w-[460px] gap-1">
+        <div className="flex flex-1 gap-1">
+          <Button
+            type="submit"
+            variant="success"
+            className="flex-1 whitespace-nowrap"
             disabled={isDisabled || !values.source}
             onClick={() => setFieldValue('approve', true)}
           >
+            <Check size={15} />
             {t('comment.approve', i18nParams)}
-          </SubmitButton>
-          <SubmitButton
-            my={1}
-            className="is-danger"
+          </Button>
+          <Button
+            type="submit"
+            variant="destructive"
+            className="flex-1 whitespace-nowrap"
             disabled={isDisabled}
             onClick={() => setFieldValue('approve', false)}
           >
+            <ShieldBan size={15} />
             {t('comment.refute', i18nParams)}
-          </SubmitButton>
-        </Flex>
-      </Flex>
+          </Button>
+        </div>
+        <Button
+          variant="outline"
+          type="submit"
+          disabled={isDisabled}
+          className="flex-1 whitespace-nowrap"
+        >
+          <MessagesSquare size={15} />
+          {t('comment.post', i18nParams)}
+        </Button>
+      </div>
     )
   }
 
   renderIncitate(values, setFieldValue, isDisabled) {
-    const { replyTo, inciteToParticipate } = this.props
+    const { replyTo, inciteToParticipate, t } = this.props
     const i18nParams = replyTo ? { context: 'reply' } : null
-    const name_class = inciteToParticipate == 'approve' ? 'is-success' : 'is-danger'
-    const comment = inciteToParticipate == 'approve' ? 'comment.approve' : 'comment.refute'
-    const approveField = inciteToParticipate == 'approve' ? true : false
+    const variant = inciteToParticipate === 'approve' ? 'success' : 'destructive'
+    const comment = inciteToParticipate === 'approve' ? 'comment.approve' : 'comment.refute'
+    const approveField = inciteToParticipate === 'approve'
 
     return (
-      <Flex flex="1 1 460px" flexWrap="wrap">
-        <Flex flex="3 1">
-          <SubmitButton
-            my={1}
-            mr={1}
-            className={name_class}
+      <div className="flex flex-1 flex-wrap min-w-[460px]">
+        <div className="flex flex-[3_1_0%]">
+          <Button
+            variant={variant}
+            className="my-1 mr-1 flex-1"
             disabled={isDisabled || !values.source}
             onClick={() => setFieldValue('approve', approveField)}
           >
-            {this.props.t(comment, i18nParams)}
-          </SubmitButton>
-        </Flex>
-      </Flex>
+            {t(comment, i18nParams)}
+          </Button>
+        </div>
+      </div>
     )
   }
 
@@ -211,32 +217,27 @@ class CommentForm extends React.Component {
     return (
       <Formik initialValues={initialValues} validate={this.validate} onSubmit={this.onSubmit}>
         {({ handleBlur, handleSubmit, values, setFieldValue, isValid, dirty, errors }) => (
-          <Box flex="1 1" as="form" onSubmit={handleSubmit}>
-            <Flex flexDirection="column">
-              <Container mb={2} position="relative">
-                <TextareaAutosize
+          <form onSubmit={handleSubmit} className="flex-1">
+            <div className="flex flex-col">
+              <div className="mb-2 relative">
+                <Textarea
                   name="text"
                   value={values.text}
                   onChange={(e) => setFieldValue('text', cleanStrMultiline(e.target.value))}
                   onBlur={handleBlur}
+                  // eslint-disable-next-line jsx-a11y/no-autofocus
                   autoFocus
                   placeholder={t('comment.writeComment')}
                   disabled={false}
-                  minHeight={80}
-                  maxHeight={180}
-                  focus
+                  className="min-h-[80px] max-h-[180px]"
                 />
                 <TextareaLengthCounter length={values.text.length} maxLength={COMMENT_LENGTH[1]} />
-                {errors.text && (
-                  <Span color="red" fontSize={6}>
-                    {errors.text}
-                  </Span>
-                )}
-              </Container>
+                {errors.text && <span className="text-red-500 text-sm">{errors.text}</span>}
+              </div>
 
-              <Flex flexWrap="wrap">
-                <Flex flexDirection="column" flex="3 1 330px" mr={2} my={1}>
-                  <StyledInput
+              <div className="flex flex-wrap my-1 gap-2">
+                <div className="flex flex-col flex-[3_1_330px] mr-2">
+                  <Input
                     name="source"
                     value={values.source}
                     onChange={(e) => setFieldValue('source', e.target.value.trim())}
@@ -245,19 +246,17 @@ class CommentForm extends React.Component {
                     autoComplete="off"
                   />
                   {errors.source && (
-                    <Span color="red" fontSize={6} mt={1}>
-                      {errors.source.url}
-                    </Span>
+                    <span className="text-red-500 text-sm mt-1">{errors.source.url}</span>
                   )}
-                </Flex>
+                </div>
 
                 {inciteToParticipate
                   ? this.renderIncitate(values, setFieldValue, !isValid || !dirty)
-                  : this.renderCommentForm(values, setFieldValue, !isValid || !dirty)}
-              </Flex>
+                  : this.renderSubmitButtons(values, setFieldValue, !isValid || !dirty)}
+              </div>
               {this.renderHelpMessage()}
-            </Flex>
-          </Box>
+            </div>
+          </form>
         )}
       </Formik>
     )
@@ -266,22 +265,22 @@ class CommentForm extends React.Component {
   renderCollapsedForm() {
     const { inciteToParticipate, t } = this.props
     const commentIncitateTo =
-      'comment.incitateTo' + (inciteToParticipate == 'approve' ? 'Confirm' : 'Refute')
+      'comment.incitateTo' + (inciteToParticipate === 'approve' ? 'Confirm' : 'Refute')
 
     return inciteToParticipate ? (
-      <Flex className="comment-form incitation-comment">
-        <span>{t(commentIncitateTo)}.</span>
-        <Button className="is-inverted is-primary" onClick={() => this.expandForm()}>
+      <div className="p-2 mb-3 text-center items-center justify-center flex flex-col text-sm">
+        <span className="mt-3">{t(commentIncitateTo)}.</span>
+        <Button size="xs" variant="link" onClick={() => this.expandForm()}>
           <span>&nbsp;{t('comment.addYourSource')}.</span>
         </Button>
-      </Flex>
+      </div>
     ) : (
-      <Flex className="comment-form" p={2} justifyContent="center">
-        <Button className="is-inverted is-primary" onClick={() => this.expandForm()}>
-          <Plus size="1.2em" style={{ marginRight: 5 }} />
+      <div className="flex justify-center p-2 border-t border-gray-200">
+        <Button variant="link" onClick={() => this.expandForm()}>
+          <Plus className="w-5 h-5 mr-1" />
           <span>{t('comment.revealForm')}</span>
         </Button>
-      </Flex>
+      </div>
     )
   }
 
@@ -290,43 +289,48 @@ class CommentForm extends React.Component {
     const isSelfReply = get(user, 'id') === get(replyTo, 'user.id')
 
     return !user || (this.state.isCollapsed && !replyTo) ? (
-      // Just reveal below else statement
       this.renderCollapsedForm()
     ) : (
-      <Flex
-        className={classNames(
-          'comment-form',
+      <div
+        data-cy="comment-form-container"
+        className={cn(
+          'flex flex-col px-3 pb-3 pt-5 comment-form shadow-[0_10px_6px_-10px_#dbdbdb_inset]',
           this.props.inciteToParticipate && 'incitation-comment',
         )}
-        flexDirection="column"
-        p={3}
       >
         {replyTo && (
-          <Box>
-            <Flex alignItems="center" mb={2}>
-              <CloseButton size="1.5em" onClick={() => this.props.setReplyToComment(null)} />
-              <Span ml={2}>
+          <div className="mb-2">
+            <div className="flex items-center mb-2">
+              <Button
+                size="icon-xs"
+                variant="outline"
+                className="h-7 w-7"
+                onClick={() => this.props.setReplyToComment(null)}
+              >
+                <CircleX size={15} />
+              </Button>
+              <span className="ml-2 text-sm">
                 {t(isSelfReply ? 'comment.replyingToSelf' : 'comment.replyingTo')}{' '}
                 <UserAppellation defaultComponent="span" user={replyTo.user} />
-              </Span>
-            </Flex>
+              </span>
+            </div>
             <CommentDisplay
-              className="quoted"
+              isQuoted
               richMedias={false}
               comment={replyTo}
               withoutActions
               withoutHeader
               hideThread
             />
-          </Box>
+          </div>
         )}
-        <Flex>
-          <Box mr={2}>
+        <div className="flex">
+          <div className="mr-2">
             <UserPicture user={user} size={USER_PICTURE_LARGE} />
-          </Box>
+          </div>
           {this.renderForm()}
-        </Flex>
-      </Flex>
+        </div>
+      </div>
     )
   }
 }

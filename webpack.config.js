@@ -2,8 +2,8 @@ const path = require('path')
 
 // Plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 const loadersConf = require('./webpack.loaders')
 
@@ -24,11 +24,12 @@ module.exports = {
     rules: loadersConf(false),
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
-    modules: [path.join(__dirname, 'src'), 'node_modules'],
-    alias: {
-      styles: path.resolve(__dirname, 'styles/'),
-    },
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+    plugins: [
+      new TsconfigPathsPlugin({
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+      }),
+    ],
   },
   optimization: {
     splitChunks: { chunks: 'all' },
@@ -43,10 +44,6 @@ module.exports = {
     hot: true,
   },
   plugins: [
-    // regroup styles in app.css bundle
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-    }),
     // copy static assets as they are required from external sources
     new CopyWebpackPlugin({
       patterns: [{ from: 'app/static', to: '', toType: 'dir' }],

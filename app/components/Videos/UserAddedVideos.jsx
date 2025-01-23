@@ -1,4 +1,3 @@
-import { Box } from '@rebass/grid'
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 
@@ -11,7 +10,7 @@ export default class UserAddedVideos extends React.Component {
     const searchParams = new URLSearchParams(this.props.location.search)
     const currentPage = parseInt(searchParams.get('page')) || 1
     return (
-      <Box py={4} px={2}>
+      <div className="container max-w-[1200px] mx-auto my-12">
         <PaginatedVideosContainer
           baseURL={this.props.location.pathname}
           currentPage={currentPage}
@@ -19,7 +18,7 @@ export default class UserAddedVideos extends React.Component {
           queryArgs={{ username: this.props.match.params.username }}
           videosPath="user.videosAdded"
         />
-      </Box>
+      </div>
     )
   }
 }

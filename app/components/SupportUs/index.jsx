@@ -36,9 +36,11 @@ const SupportUs = () => {
         src={`${ocDomain}/embed/captainfact_io/donate${iframeUrlParams}`}
         style={{ width: '100%', height: '100%', display: isLoading ? 'none' : 'block' }}
         onLoad={() => setLoading(false)}
+        title="Support us on Open Collective"
       />
     </Container>
   )
 }
 
+// ts-unused-exports:disable-next-line
 export default SupportUs

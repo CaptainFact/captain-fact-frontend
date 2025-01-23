@@ -1,19 +1,21 @@
-import { Flex } from '@rebass/grid'
+import { CircleAlert } from 'lucide-react'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 
 import { deleteUserAccount } from '../../API/http_api/current_user'
 import { addModal, popModal } from '../../state/modals/reducer'
 import UserLanguageSelector from '../LoggedInUser/UserLanguageSelector'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
-import Button from '../Utils/Button'
+import { Button } from '../ui/button'
+import { Card } from '../ui/card'
+import { Separator } from '../ui/separator'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import DeleteUserModal from './DeleteUserModal'
 import EditUserForm from './EditUserForm'
 
 @connect((state) => ({ locale: state.UserPreferences.locale }), { addModal, popModal })
-@withNamespaces('user')
+@withTranslation('user')
 @withLoggedInUser
 export default class UserSettings extends React.PureComponent {
   render() {
@@ -21,26 +23,27 @@ export default class UserSettings extends React.PureComponent {
     return this.props.isLoading ? (
       <LoadingFrame />
     ) : (
-      <div className="section">
-        <div className="has-text-centered">
-          <h3 className="title is-3">{t('accountSettings')}</h3>
-        </div>
-        <EditUserForm />
-        <br />
-        <hr />
-        <div className="has-text-centered">
-          <h3 className="title is-3">{t('main:menu.language')}</h3>
-          <Flex justifyContent="center">
-            <UserLanguageSelector />
-          </Flex>
-        </div>
-        <br />
-        <hr />
-        <br />
-        <div className="has-text-centered">
-          <h3 className="title is-3">{t('dangerZone')}</h3>
+      <div data-cy="user-settings" className="p-6">
+        <Card className="mt-6 p-6 mx-auto max-w-[500px]">
+          <h3 className="text-2xl font-semibold mb-4">{t('main:menu.language')}</h3>
+          <UserLanguageSelector />
+        </Card>
+
+        <Card className="mt-6 p-6 mx-auto max-w-[500px]">
+          <h3 className="text-2xl font-semibold mb-4">{t('accountSettings')}</h3>
+          <EditUserForm />
+        </Card>
+
+        <Separator className="my-12 mx-auto max-w-[540px]" />
+
+        <Card className="mt-6 p-6 mx-auto max-w-[500px]">
+          <h3 className="text-2xl font-semibold mb-4 text-red-500 flex items-center">
+            <CircleAlert size="0.9em" className="mr-2" />
+            {t('dangerZone')}
+          </h3>
           <Button
-            className="is-danger"
+            variant="destructive"
+            className="w-full"
             onClick={() =>
               addModal({
                 Modal: DeleteUserModal,
@@ -57,7 +60,7 @@ export default class UserSettings extends React.PureComponent {
           >
             {t('deleteAccount')}
           </Button>
-        </div>
+        </Card>
       </div>
     )
   }

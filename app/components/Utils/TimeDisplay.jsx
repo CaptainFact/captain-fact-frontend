@@ -1,23 +1,32 @@
 import { capitalize as doCapitalize } from 'lodash'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
+
+import { cn } from '@/lib/css-utils'
 
 import formatSeconds from '../../lib/seconds_formatter'
-import UnstyledButton from '../StyledUtils/UnstyledButton'
+import { Button } from '../ui/button'
 
 const i18nAtKey = 'misc.timeAt'
 
-const TimeDisplay = ({ time, handleClick, t, textBefore = true, capitalize = true }) => {
+const TimeDisplay = ({
+  time,
+  textClassName,
+  handleClick,
+  t,
+  textBefore = true,
+  capitalize = true,
+}) => {
   const formattedTime = formatSeconds(time)
   const content = handleClick ? (
-    <UnstyledButton onClick={() => handleClick(time)} $asLink>
+    <Button variant="link" className={cn('px-1', textClassName)} onClick={() => handleClick(time)}>
       {formattedTime}
-    </UnstyledButton>
+    </Button>
   ) : (
     formattedTime
   )
   return (
-    <span className="time-display">
+    <div className={textClassName}>
       {textBefore && (
         <span>
           {capitalize ? doCapitalize(t(i18nAtKey)) : t(i18nAtKey)}
@@ -25,8 +34,8 @@ const TimeDisplay = ({ time, handleClick, t, textBefore = true, capitalize = tru
         </span>
       )}
       {content}
-    </span>
+    </div>
   )
 }
 
-export default withNamespaces('main')(TimeDisplay)
+export default withTranslation('main')(TimeDisplay)

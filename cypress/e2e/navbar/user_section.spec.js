@@ -6,6 +6,6 @@ describe('Navbar with a logged in user', () => {
   })
 
   it('should contains user picture', () => {
-    cy.get('@Navbar').find('.user-picture').should('exist')
+    cy.get('@Navbar').find('[data-cy="user-picture"]').should('exist')
   })
 })

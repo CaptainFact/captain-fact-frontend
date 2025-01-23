@@ -1,21 +1,23 @@
-import classNames from 'classnames'
 import isPromise from 'is-promise'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
+
+import { cn } from '@/lib/css-utils'
 
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
 import { popModal } from '../../state/modals/reducer'
-import { Icon } from '../Utils'
+import { Button } from '../ui/button'
 import Modal from './Modal'
 
-@withNamespaces('main')
+@withTranslation('main')
 @connect(null, { popModal })
 export class ModalFormContainer extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = { isSubmitting: false }
     this.close = this.close.bind(this)
+    this.formRef = React.createRef()
   }
 
   handleSubmit(submitFunc) {
@@ -41,30 +43,21 @@ export class ModalFormContainer extends React.PureComponent {
   }
 
   renderFormButtons() {
-    const confirmType = this.props.confirmType ? `is-${this.props.confirmType}` : 'is-primary'
     const isSubmitting = this.props.isSubmitting || this.state.isSubmitting
     return (
-      <div className="form-buttons">
-        <a
+      <div className="flex justify-end gap-2">
+        <Button
           type="submit"
           disabled={isSubmitting || this.props.confirmLoading || this.props.confirmDisabled}
-          className={classNames('button', confirmType, {
-            'is-loading': isSubmitting || this.props.confirmLoading,
-          })}
-          onClick={() => this.refs.form.submit()}
+          loading={isSubmitting || this.props.confirmLoading}
+          onClick={() => this.formRef.current?.submit()}
+          variant="destructive"
         >
-          <Icon name={this.props.confirmIcon || 'floppy-o'} />
           <div>{this.props.confirmText || this.props.t('actions.save')}</div>
-        </a>
-        <a
-          type="reset"
-          className={classNames('button')}
-          disabled={isSubmitting}
-          onClick={this.close}
-        >
-          <Icon name="ban" />
+        </Button>
+        <Button type="reset" variant="outline" disabled={isSubmitting} onClick={this.close}>
           <div>{this.props.t('actions.cancel')}</div>
-        </a>
+        </Button>
       </div>
     )
   }
@@ -75,10 +68,14 @@ export class ModalFormContainer extends React.PureComponent {
       <Modal
         {...modalParams}
         handleCloseClick={this.close}
-        className={classNames('modal-form', className)}
+        className={cn('modal-form', className)}
         footer={this.renderFormButtons()}
       >
-        <FormComponent ref="form" {...formProps} onSubmit={this.handleSubmit(handleConfirm)} />
+        <FormComponent
+          ref={this.formRef}
+          {...formProps}
+          onSubmit={this.handleSubmit(handleConfirm)}
+        />
       </Modal>
     )
   }

@@ -1,11 +1,12 @@
+import { CheckCircle, CircleAlert } from 'lucide-react'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 
 import { HttpApi } from '../../API'
-import Alert from '../Utils/Alert'
+import { Alert, AlertDescription } from '../ui/alert'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 
-@withNamespaces('user')
+@withTranslation('user')
 export default class NewsletterSubscription extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -23,13 +24,22 @@ export default class NewsletterSubscription extends React.PureComponent {
     if (this.state.status === 'loading') {
       return <LoadingFrame />
     }
-    const cssType = this.state.status === 'success' ? this.state.status : 'danger'
+
+    const isSuccess = this.state.status === 'success'
+    const alertVariant = isSuccess ? 'success' : 'destructive'
     return (
-      <div className="section">
-        <Alert type={cssType} style={{ maxWidth: 400, margin: '3em auto' }}>
-          {this.props.t('newsletter.unsubscribe', {
-            context: this.state.status,
-          })}
+      <div className="container mx-auto my-24 p-6">
+        <Alert variant={alertVariant} className="mb-4">
+          <AlertDescription>
+            {isSuccess ? (
+              <CheckCircle size="1em" className="inline mr-2" />
+            ) : (
+              <CircleAlert size="1em" className="inline mr-2" />
+            )}
+            {this.props.t('newsletter.unsubscribe', {
+              context: this.state.status,
+            })}
+          </AlertDescription>
         </Alert>
       </div>
     )

@@ -1,11 +1,11 @@
 {
   "entities": {
     "video": "vídeo",
-    "video_plural": "vídeos",
+    "video_other": "vídeos",
     "speaker": "locutor·a",
-    "speaker_plural": "locutoras·es",
+    "speaker_other": "locutoras·es",
     "statement": "declaración",
-    "statement_plural": "declaraciónes"
+    "statement_other": "declaraciónes"
   },
   "menu": {
     "login": "Entrar al sitio",
@@ -54,9 +54,9 @@
     "fieldMaxLength": "Debe tener menos de {{max}} caracteres",
     "and": "y",
     "other": "{{count}} otro",
-    "other_plural": "{{count}} otros",
+    "other_other": "{{count}} otros",
     "character": "caracteres",
-    "character_plural": "caracteres",
+    "character_other": "caracteres",
     "clipboardSuccess": "Dirección copiada en el portapapeles",
     "clipboardFail": "No se puede guardar la dirección en el portapapeles",
     "all": "Todos",

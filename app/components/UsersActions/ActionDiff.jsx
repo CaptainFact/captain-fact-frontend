@@ -25,11 +25,15 @@ class ActionDiff extends PureComponent {
     }
 
     return (
-      <div className="action-diff">
+      <div className="p-3 text-left text-sm bg-slate-800 shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.3)] rounded-sm">
         {diff.entrySeq().map(([key, changes]) => (
-          <div key={key} className="diff-entry">
-            <div className="diff-key">{startCase(this.formatChangeKey(key))}&nbsp;</div>
-            <span className="diff-view">{this.renderKeyDiff(key, changes)}</span>
+          <div key={key} className="mb-3 last:mb-0">
+            <div className="inline-block mr-2 font-medium min-w-[70px] text-amber-400 align-top text-xs uppercase tracking-wide">
+              {startCase(this.formatChangeKey(key))}&nbsp;
+            </div>
+            <span className="inline-block max-w-full whitespace-pre-wrap break-words">
+              {this.renderKeyDiff(key, changes)}
+            </span>
           </div>
         ))}
       </div>
@@ -41,15 +45,28 @@ class ActionDiff extends PureComponent {
     if (changes.size === 2 && changes.first().removed && changes.last().added) {
       return (
         <div>
-          <span className="removed">{this.formatChangeValue(changes.first().value, key)}</span>,
-          <span> -&gt; </span>,
-          <span className="added">{this.formatChangeValue(changes.last().value, key)}</span>
+          <span className="px-1 py-0.5 bg-red-900/50 line-through opacity-60">
+            {this.formatChangeValue(changes.first().value, key)}
+          </span>
+          <span className="mx-1 text-slate-400">→</span>
+          <span className="px-1 py-0.5 bg-emerald-800/50">
+            {this.formatChangeValue(changes.last().value, key)}
+          </span>
         </div>
       )
     }
     // Generate a real diff
     return changes.map((change, idx) => (
-      <span key={idx} className={change.added ? 'added' : change.removed ? 'removed' : ''}>
+      <span
+        key={idx}
+        className={`text-slate-200 ${
+          change.added
+            ? 'px-1 py-0.5 bg-emerald-800/50'
+            : change.removed
+              ? 'px-1 py-0.5 bg-red-900/50 line-through opacity-60 whitespace-normal'
+              : ''
+        }`}
+      >
         {this.formatChangeValue(change.value, key)}
       </span>
     ))
@@ -61,7 +78,11 @@ class ActionDiff extends PureComponent {
 
   formatChangeValue(value, key) {
     if (key === 'speaker_id' && value) {
-      return <Link to={speakerURL(value)}>#{value}</Link>
+      return (
+        <Link to={speakerURL(value)} className="text-white underline">
+          #{value}
+        </Link>
+      )
     } else if (['is_draft', 'unlisted'].includes(key) && !value) {
       return 'No'
     } else if (typeof value === 'boolean') {
@@ -186,7 +207,11 @@ class ActionDiff extends PureComponent {
       return formatSeconds(value)
     }
     if (key === 'source' || key === 'url') {
-      return <ExternalLinkNewTab href={value}>{value}</ExternalLinkNewTab>
+      return (
+        <ExternalLinkNewTab className="text-neutral-200 underline" href={value}>
+          {value}
+        </ExternalLinkNewTab>
+      )
     }
     return value
   }

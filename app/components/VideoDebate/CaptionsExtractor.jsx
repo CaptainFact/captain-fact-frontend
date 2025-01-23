@@ -1,7 +1,8 @@
 import { gql, useQuery } from '@apollo/client'
 import { debounce } from 'lodash'
+import { CirclePlay, CircleX, MessageCircle } from 'lucide-react'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { usePopper } from 'react-popper'
 import { connect } from 'react-redux'
 import styled, { css } from 'styled-components'
@@ -10,9 +11,9 @@ import { forcePosition, setPlaying } from '../../state/video_debate/video/reduce
 import Statement from '../Statements/Statement'
 import Container from '../StyledUtils/Container'
 import { P } from '../StyledUtils/Text'
-import UnstyledButton from '../StyledUtils/UnstyledButton'
-import { Icon, LoadingFrame } from '../Utils'
+import { Button } from '../ui/button'
 import ClickableIcon from '../Utils/ClickableIcon'
+import { LoadingFrame } from '../Utils/LoadingFrame'
 import Message from '../Utils/Message'
 import ActionBubbleMenu, { ActionBubble } from './ActionBubbleMenu'
 
@@ -111,21 +112,7 @@ const StatementTooltip = styled.div`
   }
 `
 
-const StatementIconButton = styled(UnstyledButton)`
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  padding: 4px;
-  margin-right: 4px;
-  cursor: pointer;
-  width: 34px;
-  height: 34px;
-  &:hover {
-    background: #f9f9f9;
-  }
-`
-
-const StatementIndicator = withNamespaces('main')(({ statement, onPlayClick, t }) => {
+const StatementIndicator = withTranslation('main')(({ statement, onPlayClick, t }) => {
   const [referenceElement, setReferenceElement] = React.useState(null)
   const [popperElement, setPopperElement] = React.useState(null)
   const [arrowElement, setArrowElement] = React.useState(null)
@@ -142,9 +129,15 @@ const StatementIndicator = withNamespaces('main')(({ statement, onPlayClick, t }
 
   return (
     <>
-      <StatementIconButton ref={setReferenceElement} onClick={() => setShow(true)}>
-        <Icon name="commenting-o" size="small" className="has-text-primary" />
-      </StatementIconButton>
+      <Button
+        size="icon-xs"
+        variant="outline"
+        className="mr-2"
+        ref={setReferenceElement}
+        onClick={() => setShow(true)}
+      >
+        <MessageCircle size={16} />
+      </Button>
 
       {show && (
         <StatementTooltip ref={setPopperElement} style={styles.popper} {...attributes.popper}>
@@ -155,15 +148,15 @@ const StatementIndicator = withNamespaces('main')(({ statement, onPlayClick, t }
             customButtons={
               <React.Fragment>
                 <ClickableIcon
-                  name="play-circle"
-                  size="action-size"
+                  icon={<CirclePlay size={16} />}
+                  size="xs"
                   title={t('actions.play')}
                   onClick={() => onPlayClick(statement.time)}
                 />
                 <ClickableIcon
                   title={t('actions.close')}
-                  name="close"
-                  size="action-size"
+                  icon={<CircleX size={16} />}
+                  size="xs"
                   onClick={() => setShow(false)}
                 />
               </React.Fragment>
@@ -262,7 +255,7 @@ const CaptionsExtractor = ({
         hidden={!selection.text}
         customActions={
           <ActionBubble
-            iconName="play-circle"
+            icon={CirclePlay}
             label={t('captions.playSelection')}
             activated
             onClick={() => {
@@ -291,4 +284,4 @@ export default connect(
     forcePosition,
     setPlaying,
   },
-)(withNamespaces('videoDebate')(CaptionsExtractor))
+)(withTranslation('videoDebate')(CaptionsExtractor))

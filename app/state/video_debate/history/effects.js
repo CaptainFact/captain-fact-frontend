@@ -1,3 +1,5 @@
+import { toastError } from '@/lib/toasts'
+
 import { SocketApi } from '../../../API'
 import {
   ACTION_DELETE,
@@ -7,7 +9,6 @@ import {
   VIDEO_DEBATE_HISTORY_CHANNEL,
 } from '../../../constants'
 import { getEntityIDFromAction } from '../../../lib/user_action_entity_id'
-import { errorToFlash } from '../../flashes/reducer'
 import { addAction, fetchAll } from '../../user_actions/reducer'
 
 export const joinVideoDebateHistoryChannel = (videoId) => (dispatch) =>
@@ -30,14 +31,14 @@ export const joinStatementHistoryChannel = (statementId) => (dispatch) =>
 export const leaveStatementHistoryChannel = () => () =>
   SocketApi.leaveChannel(STATEMENTS_HISTORY_CHANNEL)
 
-export const revertVideoDebateUserAction = (action) => (dispatch) => {
+export const revertVideoDebateUserAction = (action) => () => {
   if (action.type !== ACTION_DELETE && action.type !== ACTION_REMOVE) {
     return
   }
   const msg = action.entity === ENTITY_SPEAKER ? 'restore_speaker' : 'restore_statement'
   return SocketApi.push(VIDEO_DEBATE_HISTORY_CHANNEL, msg, {
     id: getEntityIDFromAction(action),
-  }).catch((e) => dispatch(errorToFlash(e)))
+  }).catch((e) => toastError(e))
 }
 
 function joinHistoryChannel(dispatch, channelId, topic) {

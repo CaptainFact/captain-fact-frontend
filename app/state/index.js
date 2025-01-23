@@ -6,7 +6,6 @@ import thunk from 'redux-thunk'
 
 import { JS_ENV } from '../config'
 // Reducers
-import FlashesReducer from './flashes/reducer'
 import HelpReducer from './help/reducer'
 import ModalsReducer from './modals/reducer'
 import ModerationReducer from './moderation/reducer'
@@ -21,7 +20,6 @@ import VideosReducer from './videos/reducer'
 const reducers = combineReducers({
   DisplayedUser: DisplayedUserReducer,
   UserPreferences: UserPreferencesReducer,
-  Flashes: FlashesReducer,
   Speakers: SpeakersReducer,
   VideoDebate: VideoDebateReducer,
   Modals: ModalsReducer,

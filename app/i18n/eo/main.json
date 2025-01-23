@@ -1,11 +1,11 @@
 {
   "entities": {
     "video": "video",
-    "video_plural": "videoj",
+    "video_other": "videoj",
     "speaker": "parolanto",
-    "speaker_plural": "parolantoj",
+    "speaker_other": "parolantoj",
     "statement": "deklaro",
-    "statement_plural": "deklaroj",
+    "statement_other": "deklaroj",
     "videoFactChecking": "Kontrolo de videoj"
   },
   "menu": {
@@ -60,9 +60,9 @@
     "fieldMaxLength": "Ĝi devas esti malpli ol {{max}} signoj longa",
     "and": "kaj",
     "other": "{{count}} alio",
-    "other_plural": "{{count}} alioj",
+    "other_other": "{{count}} alioj",
     "character": "signo",
-    "character_plural": "signoj",
+    "character_other": "signoj",
     "clipboardSuccess": "Adreso kopiita al poŝo",
     "clipboardFail": "Neeblas kopii la adreson en la poŝo",
     "all": "Ĉiuj",
@@ -74,7 +74,7 @@
   },
   "videos": {
     "introTitle": "Aldoni videon por kontroli ĝin en CaptainFact",
-    "intro": "CaptainFact estas kunlabora platformo de kontrolo de videoj. Ĝi permesas aldoni fontojn kaj referencojn, kiuj plibonigas la kvaliton de la informoj. La kontroloj poste afiŝiĝas en la video de Youtube danke al la aldonaĵo por retumilo.",
+    "intro": "CaptainFact estas kunlabora platformo de kontrolo de videoj. Ĝi permesas aldoni fontojn kaj referencojn, kiuj plibonigas la kvaliton de la informoj. La kontroloj poste afiŝiĝas en la video de YouTube danke al la aldonaĵo por retumilo.",
     "seeExtension": "Malkovri la aldonaĵo por retumilo",
     "intro2": "Vi povus aldoni novan videon por kontroli ĝin (se vi estus ano kun almenaŭ {{requiredPoints}} punktoj de reputacio) aŭ petus komunumon fari ĝin:",
     "contact": "Peti la aldonon de la video",

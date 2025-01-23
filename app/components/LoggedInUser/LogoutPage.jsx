@@ -1,12 +1,12 @@
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { withRouter } from 'react-router-dom'
 
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { withLoggedInUser } from './UserProvider'
 
 @withRouter
-@withNamespaces('user')
+@withTranslation('user')
 @withLoggedInUser
 export default class LogoutPage extends React.Component {
   componentDidMount() {

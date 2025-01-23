@@ -1,5 +1,7 @@
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
+
+import { cn } from '@/lib/css-utils'
 
 import imgAmbassador from '../../assets/achievements/ambassador.jpg'
 import videoAmbassador from '../../assets/achievements/ambassador.mp4'
@@ -21,28 +23,37 @@ import imgTrump from '../../assets/achievements/trump.png'
 import imgWelcome from '../../assets/achievements/welcome.jpg'
 // Import all achievements videos
 import videoWelcome from '../../assets/achievements/welcome.mp4'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { Separator } from '../ui/separator'
 
 const KNOWN_ACHIEVEMENTS = {
-  1: { img: imgWelcome, video: videoWelcome },
-  2: { img: imgRobot, video: videoRobot },
-  3: { img: imgHelp },
-  4: { img: imgBulletproof },
-  5: { img: imgTrump },
-  6: { img: imgSocialAddict, video: videoSocialAddict },
-  7: { img: imgAmbassador, video: videoAmbassador },
-  8: { img: imgBug, video: videoBug },
-  9: { img: imgFamous, video: videoFamous },
-  10: { img: imgArtist },
-  11: { img: imgGoodVibes },
+  1: { img: imgWelcome, video: videoWelcome, borderClass: 'shiny-border' },
+  2: { img: imgRobot, video: videoRobot, borderClass: 'shiny-border' },
+  3: { img: imgHelp, borderClass: 'shiny-border' },
+  4: { img: imgBulletproof, borderClass: 'shiny-border' },
+  5: { img: imgTrump, borderClass: 'gold-border' },
+  6: { img: imgSocialAddict, video: videoSocialAddict, borderClass: 'shiny-border' },
+  7: { img: imgAmbassador, video: videoAmbassador, borderClass: 'rainbow-border' },
+  8: { img: imgBug, video: videoBug, borderClass: 'gold-border' },
+  9: { img: imgFamous, video: videoFamous, borderClass: 'gold-border' },
+  10: { img: imgArtist, borderClass: 'rainbow-border' },
+  11: { img: imgGoodVibes, borderClass: 'gold-border' },
 }
 
 const UNKNOWN_ACHIEVEMENT = { img: imgDefault }
 
 const renderVisual = ({ img, video }) =>
   video ? (
-    <video src={video} poster={img} autoPlay loop controls={false} />
+    <video
+      src={video}
+      poster={img}
+      autoPlay
+      loop
+      controls={false}
+      className="w-full h-48 object-cover rounded-t-xl"
+    />
   ) : (
-    <img src={img} alt="" />
+    <img src={img} alt="" className="w-full h-48 object-cover rounded-t-xl" />
   )
 
 const Achievement = ({ t, id }) => {
@@ -50,18 +61,26 @@ const Achievement = ({ t, id }) => {
   const achievement = KNOWN_ACHIEVEMENTS[id] || UNKNOWN_ACHIEVEMENT
 
   return (
-    <div className="achievement">
-      <div className="card has-text-centered">
-        <div className="card-image">{renderVisual(achievement)}</div>
-        <div className="card-content">
-          <div className="content">
-            <h3 className="title is-3">{title}</h3>
-            <p>{description}</p>
-          </div>
+    <div className="md:transition-all overflow-hidden md:duration-300 md:transform md:perspective-1000 md:hover:scale-105 rounded-2xl hover:shadow-lg">
+      <Card className={cn('p-3 max-w-[350px] mx-auto', achievement.borderClass)}>
+        <div className="bg-gray-800 rounded-2xl">
+          <div className="w-full">{renderVisual(achievement)}</div>
+          <CardHeader>
+            <CardTitle
+              className="text-2xl text-center font-bold text-white pb-5
+          transition-all duration-300 [text-shadow:0_0_5px_#4299e1] md:hover:[text-shadow:0_0_20px_#4299e1]"
+            >
+              {title}
+            </CardTitle>
+          </CardHeader>
+          <Separator className="w-8/12 mx-auto mb-3 bg-gray-600" />
+          <CardContent>
+            <p className="text-center text-gray-100">{description}</p>
+          </CardContent>
         </div>
-      </div>
+      </Card>
     </div>
   )
 }
 
-export default withNamespaces('achievements')(Achievement)
+export default withTranslation('achievements')(Achievement)

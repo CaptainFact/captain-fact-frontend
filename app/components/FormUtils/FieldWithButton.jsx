@@ -1,28 +1,35 @@
-import classNames from 'classnames'
 import React from 'react'
 
-import Input from './Input'
+import { cn } from '@/lib/css-utils'
 
-export default (props) => {
+import { Button } from '../ui/button'
+import { Input } from '../ui/input'
+
+const FieldWithButton = (props) => {
   const { submitting, invalid } = props.meta || {}
-  const { buttonClassName, buttonLabel, buttonClickHandler, expandInput, ...inputProps } = props
+  const { buttonClassName, buttonLabel, buttonClickHandler, ...inputProps } = props
   return (
-    <div className="field has-addons">
-      <div className={classNames('control', { 'is-expanded': expandInput })}>
-        <Input {...inputProps} />
-      </div>
+    <div className={cn('flex items-center')}>
+      <Input
+        {...inputProps}
+        {...inputProps.input}
+        className={cn(inputProps.className, 'rounded-tr-none rounded-br-none', {
+          'border-red-500': invalid,
+        })}
+      />
       <div className="control">
-        <button
+        <Button
           type="submit"
-          className={classNames('button', buttonClassName, {
-            'is-loading': submitting,
-          })}
+          loading={submitting}
           disabled={submitting || invalid}
           onClick={buttonClickHandler}
+          className={cn(buttonClassName, 'rounded-tl-none rounded-bl-none whitespace-nowrap')}
         >
           {buttonLabel}
-        </button>
+        </Button>
       </div>
     </div>
   )
 }
+
+export default FieldWithButton

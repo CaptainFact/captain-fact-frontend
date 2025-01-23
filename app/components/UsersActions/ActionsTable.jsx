@@ -1,27 +1,35 @@
 import Immutable from 'immutable'
+import { Indent, Undo } from 'lucide-react'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+
 import { ACTION_DELETE, ACTION_REMOVE } from '../../constants'
-import { flashErrorUnauthenticated } from '../../state/flashes/reducer'
 import { revertVideoDebateUserAction } from '../../state/video_debate/history/effects'
+import { Button } from '../ui/button'
 import UserAppellation from '../Users/UserAppellation'
-import Button from '../Utils/Button'
-import { Icon } from '../Utils/Icon'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import { TimeSince } from '../Utils/TimeSince'
 import ActionDiff from './ActionDiff'
 import ActionEntityLink from './ActionEntityLink'
 import ActionIcon from './ActionIcon'
 
-@withNamespaces('history')
+@withTranslation('history')
 @connect(
   (state) => ({
     lastActionsIds: state.UsersActions.lastActionsIds,
   }),
-  { revertVideoDebateUserAction, flashErrorUnauthenticated },
+  { revertVideoDebateUserAction },
 )
 class ActionsTable extends React.PureComponent {
   constructor(props) {
@@ -31,45 +39,25 @@ class ActionsTable extends React.PureComponent {
 
   render() {
     return (
-      <table className="actions-list table">
-        <thead>{this.renderHeader()}</thead>
-        <tbody>{this.renderBody()}</tbody>
-      </table>
+      <Table>
+        <TableHeader>{this.renderHeader()}</TableHeader>
+        <TableBody>{this.renderBody()}</TableBody>
+      </Table>
     )
   }
 
   // ---- Table header ----
 
   renderHeader = () => {
-    const { t, actions, showEntity } = this.props
-    const isMostlyComparing = this.state.expendedDiffs.count() / actions.count() > 0.5
-
+    const { t, showEntity } = this.props
     return (
-      <tr>
-        <th>{t('when')}</th>
-        <th>{t('who')}</th>
-        <th>Action</th>
-        {showEntity && <th>{t('entity')}</th>}
-        <th>{this.renderCompareAllButton(isMostlyComparing)}</th>
-        <th>{t('revert')}</th>
-      </tr>
-    )
-  }
-
-  renderCompareAllButton = (isMostlyComparing) => {
-    return (
-      <Button
-        onClick={
-          isMostlyComparing
-            ? () => this.collapseDiffs()
-            : () =>
-                this.setState({
-                  expendedDiffs: this.props.actions.map((a) => a.id),
-                })
-        }
-      >
-        {this.props.t(isMostlyComparing ? 'hideAll' : 'compareAll')}
-      </Button>
+      <TableRow>
+        <TableHead>{t('when')}</TableHead>
+        <TableHead>{t('who')}</TableHead>
+        <TableHead>Action</TableHead>
+        {showEntity && <TableHead>{t('entity')}</TableHead>}
+        <TableHead>{t('main:actions.all')}</TableHead>
+      </TableRow>
     )
   }
 
@@ -84,11 +72,11 @@ class ActionsTable extends React.PureComponent {
   renderBody = () => {
     if (this.props.isLoading) {
       return (
-        <tr style={{ background: 'none' }}>
-          <td colSpan={this.getNbCols()}>
+        <TableRow style={{ background: 'none' }}>
+          <TableCell colSpan={this.getNbCols()}>
             <LoadingFrame />
-          </td>
-        </tr>
+          </TableCell>
+        </TableRow>
       )
     }
     return this.props.actions.map((a) => this.renderAction(a))
@@ -108,46 +96,49 @@ class ActionsTable extends React.PureComponent {
     const reversible = isLastActionForEntity && isReversibleType
 
     return (
-      <tr key={action.id}>
-        <td>
+      <TableRow key={action.id}>
+        <TableCell>
           <TimeSince time={action.time} />
-        </td>
-        <td>{this.renderUser(action.user)}</td>
-        <td>
-          <ActionIcon type={action.type} />
+        </TableCell>
+        <TableCell>{this.renderUser(action.user)}</TableCell>
+        <TableCell>
+          <ActionIcon className="inline" type={action.type} />
           <strong> {t(`action.${action.type}`)}</strong>
-        </td>
+        </TableCell>
         {showEntity && (
-          <td>
+          <TableCell>
             <ActionEntityLink action={action} />
-          </td>
+          </TableCell>
         )}
-        <td>
-          <Button onClick={() => this.toggleDiff(action, isDiffing)}>
-            <Icon size="small" name="indent" />
+        <TableCell>
+          <Button variant="outline" size="xs" onClick={() => this.toggleDiff(action, isDiffing)}>
+            <Indent size="1em" />
             <span>{t(isDiffing ? 'compare_hide' : 'compare_show')} </span>
           </Button>
-        </td>
-        <td>
           {reversible && (
-            <Button onClick={() => this.props.revertVideoDebateUserAction(action)}>
-              <Icon size="small" name="undo" />
+            <Button
+              variant="outline"
+              size="xs"
+              onClick={() => this.props.revertVideoDebateUserAction(action)}
+              className="ml-2"
+            >
+              <Undo size="1em" />
               <span>{t('revert')}</span>
             </Button>
           )}
-        </td>
-      </tr>
+        </TableCell>
+      </TableRow>
     )
   }
 
   renderUser = (user) => <UserAppellation user={user} compact />
 
   renderDiffLine = (action) => (
-    <tr key={`${action.id}-diff`}>
-      <td colSpan={this.getNbCols()} style={{ padding: 0 }}>
+    <TableRow key={`${action.id}-diff`}>
+      <TableCell colSpan={this.getNbCols()} style={{ padding: 0 }}>
         <ActionDiff action={action} allActions={this.props.actions} />
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   )
 
   toggleDiff = (action, isDiffing) => {

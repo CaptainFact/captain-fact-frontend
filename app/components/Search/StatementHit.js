@@ -1,5 +1,5 @@
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import { statementURL } from '../../lib/cf_routes'
@@ -19,4 +19,4 @@ const StatementHit = ({ t, hit }) => {
   )
 }
 
-export default withNamespaces('main')(StatementHit)
+export default withTranslation('main')(StatementHit)

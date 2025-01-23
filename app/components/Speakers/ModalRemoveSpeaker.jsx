@@ -1,5 +1,5 @@
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 
 import ModalConfirmDelete from '../Modal/ModalConfirmDelete'
 import { SpeakerPreview } from './SpeakerPreview'
@@ -15,4 +15,4 @@ const ModalRemoveSpeaker = ({ handleAbort, speaker, t, ...props }) => (
   />
 )
 
-export default withNamespaces('videoDebate')(ModalRemoveSpeaker)
+export default withTranslation('videoDebate')(ModalRemoveSpeaker)

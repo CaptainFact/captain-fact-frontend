@@ -1,5 +1,5 @@
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 
 import { ENTITY_STATEMENT } from '../../constants'
@@ -11,7 +11,7 @@ import { ModalHistory } from '../VideoDebate/ModalHistory'
 import StatementHeader from './StatementHeader'
 
 @connect(null, { addModal, forcePosition, setScrollTo })
-@withNamespaces('videoDebate')
+@withTranslation('videoDebate')
 export default class Statement extends React.PureComponent {
   render() {
     const { statement, speaker, handleEdit, handleDelete, withoutActions, offset = 0 } = this.props
@@ -30,8 +30,9 @@ export default class Statement extends React.PureComponent {
           withoutActions={withoutActions}
           customButtons={this.props.customButtons}
         />
-        <div className="card-content statement-text-container">
-          <h3 className="statement-text">{statement.text}</h3>
+        <div className="bg-[#31455d] text-white p-5 shadow-inner flex items-start gap-4">
+          <span className="h-[50px] -mt-2 sm:text-7xl text-5xl font-serif text-neutral-300">“</span>
+          <blockquote className="text-lg italic py-1">{statement.text}</blockquote>
         </div>
       </div>
     )

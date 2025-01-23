@@ -4,6 +4,7 @@ import { startCase } from 'lodash'
 import { JS_ENV } from '../config'
 import store from '../state/index'
 import { changeLocale } from '../state/user_preferences/reducer'
+/* eslint-disable import/no-unresolved */
 import * as ar from './ar'
 import * as en from './en'
 import * as eo from './eo'
@@ -11,6 +12,7 @@ import * as es from './es'
 import * as fr from './fr'
 import * as pt_BR from './pt_BR'
 import * as ru from './ru'
+/* eslint-enable import/no-unresolved */
 
 // Configure I18N
 i18n.init({

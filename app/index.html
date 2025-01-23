@@ -32,6 +32,29 @@
       padding-top: 20vh;
       text-align: center;
       font-size: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    @keyframes animated-logo {
+      0% {
+        transform: perspective(120px) rotateY(0deg);
+      }
+
+      50% {
+        transform: perspective(120px) rotateY(-180deg);
+      }
+
+      100% {
+        transform: perspective(120px) rotateY(-360deg);
+      }
+    }
+
+    .animated-logo {
+      animation: animated-logo 3s ease infinite;
     }
   </style>
 </head>

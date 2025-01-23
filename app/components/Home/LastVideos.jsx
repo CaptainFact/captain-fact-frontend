@@ -1,24 +1,12 @@
 import { Query } from '@apollo/client/react/components'
-import { Flex } from '@rebass/grid'
 import React from 'react'
-import styled from 'styled-components'
 
 import { VideosQuery } from '../../API/graphql_queries'
 import { VideoCard } from '../Videos/VideoCard'
 
-const VideosContainer = styled(Flex)`
-  flex-wrap: wrap;
-  justify-content: center;
-  // Override the default Bulma .column.
-  .column {
-    flex-basis: 250px;
-    min-width: 250px;
-  }
-`
-
 const LastVideos = () => {
   return (
-    <VideosContainer>
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4">
       <Query query={VideosQuery} variables={{ limit: 4 }}>
         {({ data }) => {
           return data && data.videos && data.videos.entries.length > 0
@@ -26,7 +14,7 @@ const LastVideos = () => {
             : null
         }}
       </Query>
-    </VideosContainer>
+    </div>
   )
 }
 

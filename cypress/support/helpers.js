@@ -12,12 +12,14 @@ export const defaultUsername = Cypress.env('CYPRESS_USERNAME')
 
 export const defaultPassword = Cypress.env('CYPRESS_PASSWORD')
 
+// ts-unused-exports:disable-next-line
 export const defaultUser = {
   email: defaultEmail,
   username: defaultUsername,
   password: defaultPassword,
 }
 
+// ts-unused-exports:disable-next-line
 export const randomYoutubeId = () => {
   return times(13, () => random(35).toString(36)).join('')
 }

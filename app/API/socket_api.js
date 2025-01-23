@@ -2,7 +2,6 @@ import { Socket } from 'phoenix'
 
 import { WS_API_URL } from '../config'
 import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../lib/local_storage'
-import noInternetError from './no_internet_error'
 import parseServerError from './server_error'
 
 class CaptainFactSocketApi {
@@ -26,11 +25,11 @@ class CaptainFactSocketApi {
     this.socket.onError((e) => {
       // eslint-disable-next-line no-console
       console.warn('Socket error:', e)
-      noInternetError()
     })
     this.socket.onClose((e) => {
       if (!e.wasClean) {
-        noInternetError()
+        // eslint-disable-next-line no-console
+        console.warn('Socket closed with errors:', e)
       }
     })
   }

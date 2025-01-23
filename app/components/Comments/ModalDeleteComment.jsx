@@ -1,5 +1,5 @@
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 
 import ModalConfirmDelete from '../Modal/ModalConfirmDelete'
@@ -16,4 +16,4 @@ const ModalDeleteComment = ({ handleAbort, comment, replies, t, ...otherProps })
 
 export default connect((state, props) => ({
   replies: state.VideoDebate.comments.replies.get(props.comment.id),
-}))(withNamespaces('videoDebate')(ModalDeleteComment))
+}))(withTranslation('videoDebate')(ModalDeleteComment))

@@ -1,26 +1,34 @@
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { Field } from 'redux-form'
+
+import { Label } from '@/components/ui/label'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 
 const VALID_REASONS = ['1', '2']
 
-const FlagReason = ({ value, label }) => (
-  <label className="radio">
-    <Field name="reason" component="input" type="radio" value={value} /> {label}
-  </label>
-)
-
 const FlagReasonSelect = ({ t }) => {
   const labels = t('reason', { returnObjects: true })
+
   return (
     <div className="flag-reason-select field">
-      <p className="control">
-        {VALID_REASONS.map((key) => (
-          <FlagReason key={key} value={key} label={labels[key]} />
-        ))}
-      </p>
+      <Field
+        name="reason"
+        component={({ input }) => (
+          <RadioGroup onValueChange={input.onChange} value={input.value}>
+            {VALID_REASONS.map((key) => (
+              <div key={key} className="flex items-center space-x-3">
+                <RadioGroupItem value={key} id={`reason-${key}`} />
+                <Label htmlFor={`reason-${key}`} className="text-lg">
+                  {labels[key]}
+                </Label>
+              </div>
+            ))}
+          </RadioGroup>
+        )}
+      />
     </div>
   )
 }
 
-export default withNamespaces('moderation')(FlagReasonSelect)
+export default withTranslation('moderation')(FlagReasonSelect)

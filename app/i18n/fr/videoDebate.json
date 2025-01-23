@@ -18,8 +18,8 @@
   "flagForm": {
     "title": "Pourquoi signaler ce commentaire ?",
     "xAvailable": "{{count}} disponnible",
-    "xAvailable_plural": "{{count}} disponnibles",
-    "warningMessage1": "Si un de vos signalements est jugé abusif… vous perdez de la réputation.",
+    "xAvailable_other": "{{count}} disponnibles",
+    "warningMessage1": "Si un de vos signalements est jugé abusif, vous perdez de la réputation.",
     "warningMessage2": "Êtes-vous sûr de vouloir pénaliser la réputation de l’auteur de ce contenu ? Est-il vraiment nuisible ?",
     "warningMessage3": "PS : Le fact-checking sur CaptainFact est un exercice citoyen d’entraide qui nécessite bienveillance et tolérance."
   },
@@ -29,7 +29,7 @@
     "post": "Ajouter en commentaire",
     "post_reply": "Ajouter en réponse",
     "deleteThread": "Supprimer le commentaire",
-    "deleteThread_plural": "Supprimer le fil de discussion",
+    "deleteThread_other": "Supprimer le fil de discussion",
     "replies_hide": "Cacher les réponses",
     "replies_show": "Montrer les réponses ({{count}})",
     "loadMore_replies": "Charger plus de réponses ({{count}})",
@@ -42,6 +42,7 @@
     "refute_reply": "Je réfute ce commentaire",
     "revealForm": "Ajouter une source ou un commentaire",
     "invalidURL": "Le lien vers la source n'est pas valide",
+    "helpTitle": "Comment contribuer ?",
     "help1": "Différence entre les commentaires et les sources : les sources qui confirment ou réfutent la citation seront affichées à tous les utilisateurs de l’extension navigateur durant la lecture de la vidéo. Les commentaires quant à eux peuvent contextualiser l'information ou concerner :",
     "boldHelp2": "Des sources introuvables ?",
     "help2": "Si vous ne trouvez aucune source malgré vos recherches, mentionnez-le en commentaire, par exemple :",
@@ -69,7 +70,7 @@
   "speaker": {
     "one": "Intervenant(e)",
     "remove": "Retirer l'intervenant(e)",
-    "confirmRemove": "Toutes les déclarations de {{speaker.full_name}} sur cette vidéo vont devenir orphelines",
+    "confirmRemove": "Toutes les déclarations de {{speaker.full_name}} sur cette vidéo vont devenir orphelines.",
     "add": "Ajouter un(e) intervenant(e)",
     "create": "Créer l'intervenant(e) \"{{name}}\"",
     "edit": "Modifier les informations de \"{{name}}\"",
@@ -77,7 +78,11 @@
     "fullName": "Nom complet",
     "title": "Titre",
     "titlePlaceholder": "Politicien, docteur, journaliste...",
-    "noneFound": "Aucun intervenant trouvé pour ce nom"
+    "noneFound": "Aucun intervenant trouvé pour ce nom",
+    "details": "Détails de l'intervenant(e)",
+    "select": "Selectionner",
+    "removed": "Intervenant(e) retiré(e)",
+    "removed_description": "{{name}} a été retiré(e) de la liste des intervenants"
   },
   "statement": {
     "remove": "Retirer la citation",
@@ -98,6 +103,7 @@
     "soundOnBackgroundFocus_disable": "Ne pas jouer de son quand la citation change en arriere plan",
     "reverseTimeLock_lock": "Déverrouiller la position",
     "reverseTimeLock_unlock": "Verrouiller la position",
+    "helpTitle": "À propos des citations",
     "help1": "Pour avoir sa place sur CaptainFact, une citation doit remplir au moins un des critères suivants :",
     "help2": "- être vérifiable grâce à l’exposition de faits ;",
     "help3": "- faire mention d'une source ou d'un contenu que l’on peut vérifier ;",
@@ -133,9 +139,9 @@
   },
   "presence": {
     "viewer": "{{count}} spectateur",
-    "viewer_plural": "{{count}} spectateurs",
+    "viewer_other": "{{count}} spectateurs",
     "user": "{{count}} fact-checker",
-    "user_plural": "{{count}} fact-checkers"
+    "user_other": "{{count}} fact-checkers"
   },
   "warningUnlisted": "Cette vidéo n'est pas listée publiquement. Elle n'a peut-être pas reçu la visibilité nécessaire pour que les sources et citations soient correctement discutées.",
   "wikidata": {

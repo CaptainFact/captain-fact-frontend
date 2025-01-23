@@ -14,13 +14,6 @@ export const getTimecodesOffset = (video, videoPlayer) => {
 }
 
 /**
- * Return the timecode shifted with appropriate offset.
- */
-export const getTimecode = (videoPlayer, video, baseTimecode) => {
-  return getTimecodesOffset(video, videoPlayer) + baseTimecode
-}
-
-/**
  * Returns HD thumbnail URL if any, otherwise returns the default thumbnail URL.
  */
 export const getHDThumbnailUrl = (video) => {
@@ -29,9 +22,4 @@ export const getHDThumbnailUrl = (video) => {
   }
 
   return video.thumbnail
-}
-
-export const THUMBNAILS_SIZES = {
-  MEDIUM: 'MEDIUM',
-  LARGE: 'LARGE',
 }

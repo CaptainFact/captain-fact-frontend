@@ -1,51 +1,59 @@
-import classNames from 'classnames'
+import { DialogDescription } from '@radix-ui/react-dialog'
+import { CircleHelp } from 'lucide-react'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
+import { cn } from '@/lib/css-utils'
+
 import { popModal } from '../../state/modals/reducer'
-import CloseButton from '../Utils/CloseButton'
-import { Icon } from '../Utils/Icon'
 
 const Modal = ({
   helpLink,
   popModal,
   isActive = true,
   title = null,
+  description = null,
   children = null,
   footer = null,
   className = null,
   isAbsolute = false,
-  overrideContentStructure = false,
   handleCloseClick = null,
-}) => (
-  <div
-    className={classNames('modal', className, {
-      'is-active': isActive,
-      'is-absolute': isAbsolute,
-    })}
-  >
-    <div className="modal-background" onClick={handleCloseClick || popModal} />
-    <div className="modal-card">
-      {title && (
-        <header className="modal-card-head">
-          <div className="modal-card-title">{title}</div>
-          {helpLink && (
-            <Link to={helpLink} className="help-link" target="_blank">
-              <Icon name="question-circle" size="medium" />
-            </Link>
-          )}
-          <CloseButton size="1.5em" title="Close" onClick={handleCloseClick || popModal} />
-        </header>
-      )}
-      {overrideContentStructure ? (
-        children
-      ) : (
-        <section className="modal-card-body">{children}</section>
-      )}
-      {footer && <footer className="modal-card-foot">{footer}</footer>}
-    </div>
-  </div>
-)
+}) => {
+  const { t } = useTranslation()
+  return (
+    <Dialog open={isActive} onOpenChange={() => (handleCloseClick || popModal)()}>
+      <DialogContent className={cn(className, { fixed: isAbsolute })}>
+        {title && (
+          <DialogHeader>
+            <DialogTitle>{title}</DialogTitle>
+            {(description || helpLink) && (
+              <DialogDescription>
+                {helpLink ? (
+                  <Link to={helpLink} target="_blank">
+                    <CircleHelp className="inline" size={16} />{' '}
+                    {description || t('help:pages.about')}
+                  </Link>
+                ) : (
+                  description
+                )}
+              </DialogDescription>
+            )}
+          </DialogHeader>
+        )}
+        <div className="py-4">{children}</div>
+        {footer && <DialogFooter>{footer}</DialogFooter>}
+      </DialogContent>
+    </Dialog>
+  )
+}
 
 export default connect(null, { popModal })(Modal)

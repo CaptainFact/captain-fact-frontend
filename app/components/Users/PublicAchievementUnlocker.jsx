@@ -1,11 +1,12 @@
 import isPromise from 'is-promise'
+import { Link } from 'lucide-react'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
-import { connect } from 'react-redux'
+import { withTranslation } from 'react-i18next'
+
+import { toast } from '@/hooks/use-toast'
 
 import { unlockPublicAchievement } from '../../API/http_api/current_user'
-import { flashSuccessMsg } from '../../state/flashes/reducer'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 
 /**
@@ -14,8 +15,7 @@ import { withLoggedInUser } from '../LoggedInUser/UserProvider'
  * If no meetConditions is passed, component will just unlock achievement on
  * mount / update.
  */
-@connect(null, { flashSuccessMsg })
-@withNamespaces('achievements')
+@withTranslation('achievements')
 @withLoggedInUser
 class PublicAchievementUnlocker extends React.PureComponent {
   componentDidMount() {
@@ -63,10 +63,14 @@ class PublicAchievementUnlocker extends React.PureComponent {
     unlockPublicAchievement(this.props.achievementId).then((user) => {
       this.props.updateLoggedInUser(user)
       const achievementTitle = this.props.t(`${this.props.achievementId}.title`)
-      this.props.flashSuccessMsg('achievements:unlocked', {
-        i18nParams: { achievement: achievementTitle },
-        infoUrl: `/u/${this.props.loggedInUser.username}/profile`,
-        iconName: 'trophy',
+      toast({
+        variant: 'success',
+        title: this.props.t('achievements:unlocked', { achievement: achievementTitle }),
+        action: (
+          <Link to={`/u/${this.props.loggedInUser.username}/profile`}>
+            {this.props.t('main:actions.moreInfo')}
+          </Link>
+        ),
       })
     })
   }

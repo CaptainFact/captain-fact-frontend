@@ -1,80 +1,84 @@
-import classNames from 'classnames'
 import isPromise from 'is-promise'
-import { omit } from 'lodash'
-import React from 'react'
+import { Ban } from 'lucide-react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
+
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog'
 
 import { handleEffectResponse } from '../../lib/handle_effect_response'
 import { popModal } from '../../state/modals/reducer'
-import { Icon } from '../Utils/Icon'
-import Modal from './Modal'
+import { Button } from '../ui/button'
 
-@connect(null, { popModal })
-export class ModalConfirm extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = { isSubmitting: false }
-    this.close = this.close.bind(this)
-  }
+const BaseModalConfirm = ({
+  title,
+  content,
+  message,
+  handleConfirm,
+  handleAbort,
+  confirmIcon = null,
+  confirmText,
+  abortIcon = <Ban size="1em" />,
+  abortText,
+  confirmDisabled,
+  popModal,
+  ...props
+}) => {
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  handleSubmit(v) {
-    const promise = this.props.handleConfirm(v)
+  const handleSubmit = (v) => {
+    const promise = handleConfirm(v)
     if (isPromise(promise)) {
-      this.setState({ isSubmitting: true })
+      setIsSubmitting(true)
       return promise.then(
         handleEffectResponse({
-          onSuccess: () => this.props.popModal(),
-          onError: () => this.setState({ isSubmitting: false }),
+          onSuccess: () => popModal(),
+          onError: () => setIsSubmitting(false),
         }),
       )
     }
   }
 
-  renderFormButtons() {
-    return (
-      <div className="form-buttons">
-        <a
-          className={classNames('button', 'is-danger', {
-            'is-loading': this.state.isSubmitting,
-          })}
-          disabled={this.state.isSubmitting || this.props.confirmDisabled}
-          onClick={this.handleSubmit.bind(this)}
-        >
-          {this.props.confirmIcon && <Icon name={this.props.confirmIcon} />}
-          <span>{this.props.confirmText}</span>
-        </a>
-        <a className="button" disabled={this.state.isSubmitting} onClick={this.close}>
-          {this.props.abortIcon && <Icon name={this.props.abortIcon} />}
-          <span>{this.props.abortText}</span>
-        </a>
-      </div>
-    )
-  }
-
-  close() {
-    if (this.props.handleAbort) {
-      this.props.handleAbort()
+  const handleClose = () => {
+    if (handleAbort) {
+      handleAbort()
     }
-    this.props.popModal()
+    popModal()
   }
 
-  render() {
-    const { className, content, message, ...props } = this.props
-    return (
-      <Modal
-        className={classNames('modal-confirm', className)}
-        handleCloseClick={this.close}
-        footer={this.renderFormButtons()}
-        {...omit(props, ['handleConfirm'])}
-      >
-        {content && (
-          <div>
-            {content}
-            {message && <hr />}
+  return (
+    <AlertDialog open {...props} onOpenChange={handleClose}>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>{title}</AlertDialogTitle>
+          <AlertDialogDescription>{message}</AlertDialogDescription>
+        </AlertDialogHeader>
+        {content && <AlertDialogDescription>{content}</AlertDialogDescription>}
+        <AlertDialogFooter>
+          <div className="flex gap-2 justify-end w-full">
+            <Button
+              variant="destructive"
+              disabled={isSubmitting || confirmDisabled}
+              onClick={handleSubmit}
+            >
+              {confirmIcon}
+              <span>{confirmText}</span>
+            </Button>
+            <Button variant="outline" disabled={isSubmitting} onClick={handleClose}>
+              {abortIcon}
+              <span>{abortText}</span>
+            </Button>
           </div>
-        )}
-        <h3 className="title is-4">{message}</h3>
-      </Modal>
-    )
-  }
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
 }
+
+export const ModalConfirm = connect(null, { popModal })(BaseModalConfirm)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { withRouter } from 'react-router-dom'
 
 import { confirmEmail } from '../../API/http_api/current_user'
@@ -8,7 +8,7 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
 import MessageView from '../Utils/MessageView'
 
 @withRouter
-@withNamespaces('user')
+@withTranslation('user')
 export default class ConfirmEmail extends React.PureComponent {
   state = { loading: true, error: null }
 

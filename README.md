@@ -59,30 +59,21 @@ app
 │   │   └── selectors.js => Re-select selectors to select data in state
 │   └── ...
 ├── static => Static assets, directly copied to the public directory
-├── styles => Stylesheets in .sass format, all included from application.sass
 └── router.jsx => Application router and main entry point
 ```
 
 #### Styling
 
-Styling is based on [Bulma](https://bulma.io/documentation/) and was initially
-customized with SASS. However we now include [styled-components](https://github.com/emotion-js/emotion), [styled-system](https://github.com/jxnblk/styled-system) and [@rebass/grid](https://github.com/rebassjs/grid).
-This has become the prefered way to build new components.
-
-#### Icons
-
-We bundle a custom font icon built with [IcoMoon](https://icomoon.io/). You can find scripts and config
-for this in `dev/` but the preferred (and easiest) way to add new icons today
-is to use `https://styled-icons.js.org/`.
+Styling is based on [Tailwind](https://tailwindcss.com). Some legacy code still uses [styled-components](https://styled-components.com/), but its usage is discouraged.
 
 ## Main Libraries / Frameworks
 
 - [ES6](http://es6-features.org) with [Babel](https://babeljs.io/)
 - [React](https://reactjs.org/): View layer
-- [Redux](https://redux.js.org/): State management
 - [React Router](https://github.com/ReactTraining/react-router): Routing
 - [Phoenix](https://phoenixframework.org/): Interaction with [https://hexdocs.pm/phoenix/Phoenix.Socket.html](Phoenix.Socket)
-- [Bulma](https://bulma.io/): Base styles
+- [TailwindCSS](https://tailwindcss.com/): Utility-first CSS framework
+- [Redux](https://redux.js.org/): State management (deprecated)
 
 ## Linked projects
 

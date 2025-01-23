@@ -1,4 +1,4 @@
-export const parseUTC = (date) =>
+const parseUTC = (date) =>
   new Date(
     Date.UTC(
       date.getFullYear(),

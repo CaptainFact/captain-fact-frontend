@@ -1,52 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`can set header 1`] = `
-<article
-  className="message is-info"
+<div
+  className="relative w-full rounded-lg border px-4 py-3 text-sm [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg~*]:pl-7 border-info/50 text-info dark:border-info [&>svg]:text-info message is-info"
+  role="alert"
 >
-  <div
-    className="message-header"
+  <h5
+    className="mb-1 font-medium leading-none tracking-tight message-header flex justify-between items-center"
   >
     Awesome title
-  </div>
+  </h5>
   <div
-    className="message-body"
+    className="text-sm [&_p]:leading-relaxed message-body"
   >
     Hellooow
   </div>
-</article>
+</div>
 `;
 
 exports[`can set type 1`] = `
-<article
-  className="message is-warning"
+<div
+  className="relative w-full rounded-lg border px-4 py-3 text-sm [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg~*]:pl-7 border-warning/50 text-warning dark:border-warning [&>svg]:text-warning message is-warning"
+  role="alert"
 >
   <div
-    className="message-body"
+    className="text-sm [&_p]:leading-relaxed message-body"
   >
     Alert !
   </div>
-</article>
+</div>
 `;
 
 exports[`render message 1`] = `
-<article
-  className="message is-info"
+<div
+  className="relative w-full rounded-lg border px-4 py-3 text-sm [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg~*]:pl-7 border-info/50 text-info dark:border-info [&>svg]:text-info message is-info"
+  role="alert"
 >
   <div
-    className="message-body"
+    className="text-sm [&_p]:leading-relaxed message-body"
   >
     Hello
   </div>
-</article>
+</div>
 `;
 
 exports[`without body 1`] = `
-<article
-  className="message is-info"
+<div
+  className="relative w-full rounded-lg border px-4 py-3 text-sm [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg~*]:pl-7 border-info/50 text-info dark:border-info [&>svg]:text-info message is-info"
+  role="alert"
 >
   <div
-    className="message-body"
+    className="text-sm [&_p]:leading-relaxed message-body"
   />
-</article>
+</div>
 `;

@@ -1,11 +1,11 @@
 {
   "entities": {
     "video": "видео",
-    "video_plural": "список видео",
+    "video_other": "список видео",
     "speaker": "спикер (докладчик)",
-    "speaker_plural": "спикеры (докладчики)",
+    "speaker_other": "спикеры (докладчики)",
     "statement": "цитата",
-    "statement_plural": "цитаты",
+    "statement_other": "цитаты",
     "videoFactChecking": "фактчекинг в видео"
   },
   "menu": {
@@ -61,9 +61,9 @@
     "fieldMaxLength": "Должно быть меньше {{max}} символов",
     "and": "и",
     "other": "{{count}} другое",
-    "other_plural": "{{count}} другие",
+    "other_other": "{{count}} другие",
     "character": "символ",
-    "character_plural": "символы",
+    "character_other": "символы",
     "clipboardSuccess": "URL скопирован в буфер обмена",
     "clipboardFail": "Невозможно скопировать в буфер обмена",
     "all": "Все",

@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 import FlipMove from 'react-flip-move'
@@ -37,7 +36,7 @@ export class CommentsList extends React.PureComponent {
     const displayedComments = this.getDisplayedComments()
 
     return (
-      <div className={classNames('comments-list', className)}>
+      <div className={className} data-cy={`comments-list-${commentType || 'comments'}`}>
         {header && <CommentsListHeader header={header} />}
         <FlipMove enterAnimation="fade" leaveAnimation={false}>
           {comments.size > 0 ? (

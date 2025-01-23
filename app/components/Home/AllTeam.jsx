@@ -1,9 +1,10 @@
-import { Box, Flex } from '@rebass/grid'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { fontWeight } from 'styled-system'
+
+import { userProfileURL } from '@/lib/cf_routes'
 
 import imgBasile from '../../assets/team/basile.jpg'
 import imgBenjamin from '../../assets/team/benjamin.png'
@@ -60,7 +61,7 @@ const TeamPicture = styled.img`
   height: 100px;
 `
 
-const TeamTextBox = styled(Box)`
+const TeamTextBox = styled.div`
   color: #0a0a0a;
   text-align: center;
   line-height: 1;
@@ -76,30 +77,31 @@ const TeamText = styled.span`
  */
 const AllTeam = ({ t }) => {
   return (
-    <Flex flexWrap="wrap" justifyContent={['center', 'left']}>
+    <div className="flex flex-wrap justify-center sm:justify-left">
       {TEAM.map(({ firstName, lastName, title1, title2, username, img }) => (
-        <Box key={firstName} mx={2}>
-          <Flex flexDirection="column">
-            <Link to={`/u/${username}`}>
+        <div key={firstName} className="mx-2">
+          <div className="flex flex-col">
+            <Link to={userProfileURL({ username })}>
               <TeamPicture
                 title={`${firstName} ${lastName}`}
                 src={img}
                 alt={`${firstName} ${lastName}`}
               />
-              <TeamTextBox mt={3} mb={2} fontWeight="bold">
+              <TeamTextBox className="mt-3 mb-2 font-bold">
                 <TeamText>{firstName}</TeamText>
                 <TeamText>{lastName}</TeamText>
               </TeamTextBox>
-              <TeamTextBox mb={4}>
+              <TeamTextBox className="mb-4">
                 <TeamText>{t(`${title1}`)}</TeamText>
                 <TeamText>{t(`${title2}`)}</TeamText>
               </TeamTextBox>
             </Link>
-          </Flex>
-        </Box>
+          </div>
+        </div>
       ))}
-    </Flex>
+    </div>
   )
 }
 
-export default withNamespaces('home')(AllTeam)
+// ts-unused-exports:disable-next-line
+export default withTranslation('home')(AllTeam)

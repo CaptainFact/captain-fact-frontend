@@ -1,7 +1,7 @@
-import { Box } from '@rebass/grid'
+import { ExternalLink } from 'lucide-react'
 import React from 'react'
 import Helmet from 'react-helmet'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
@@ -11,16 +11,16 @@ import { fetchSpeaker, fetchWikiDataInfo } from '../../state/speakers/effects'
 import { reset } from '../../state/speakers/reducer'
 import { reset as resetVideos } from '../../state/videos/reducer'
 import { Span } from '../StyledUtils/Text'
+import { Button } from '../ui/button'
 import DismissableMessage from '../Utils/DismissableMessage'
 import { ErrorView } from '../Utils/ErrorView'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
-import { Icon } from '../Utils/Icon'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import PaginatedVideosContainer from '../Videos/PaginatedVideosContainer'
 import { SpeakerPreview } from './SpeakerPreview'
 
 @withRouter
-@withNamespaces('main')
+@withTranslation('main')
 @connect(
   (state) => ({
     speaker: state.Speakers.currentSpeaker,
@@ -107,31 +107,33 @@ export class SpeakerPage extends React.PureComponent {
           <meta name="twitter:card" content="summary" />
           <link rel="canonical" href={this.getCanonicalUrl()} />
         </Helmet>
-        <div className="hero is-light is-bold is-primary">
-          <div className="hero-body">
-            <h1 className="title">
+        <div className="bg-gray-100 py-8">
+          <div className="container mx-auto px-4">
+            <h1 className="mb-6">
               <Span fontSize={3}>{t('speakerpage.title1')}</Span>{' '}
-              <Box mt={3}>
+              <div className="mt-3">
                 <SpeakerPreview withoutActions speaker={this.props.speaker} />
-              </Box>
+              </div>
             </h1>
-            <hr />
-            <div className="subtitle">{this.renderWikidata()}</div>
+            <hr className="my-4 border-t border-gray-200" />
+            <div className="text-lg text-gray-600">{this.renderWikidata()}</div>
           </div>
         </div>
-        <div className="pagination is-centered videos-pagination">
+        <div className="flex justify-center my-6">
           <DismissableMessage
             localStorageDismissKey={LOCAL_STORAGE_KEYS.DISMISS_SPEAKER_INTRODUCTION}
+            className="max-w-3xl mx-4"
           >
-            <strong>{t('speakerpage.info1')}</strong>
-            <br />
-            <br />
-            {t('speakerpage.info2')}{' '}
-            <ExternalLinkNewTab href="/">{t('speakerpage.more')}</ExternalLinkNewTab>
+            <strong className="block mb-2">{t('speakerpage.info1')}</strong>
+            <p className="mb-4">
+              {t('speakerpage.info2')}{' '}
+              <ExternalLinkNewTab href="/" className="text-blue-600 hover:text-blue-800">
+                {t('speakerpage.more')}
+              </ExternalLinkNewTab>
+            </p>
           </DismissableMessage>
         </div>
-        <br />
-        {this.renderVideos()}
+        <div className="container mx-auto px-4">{this.renderVideos()}</div>
       </div>
     )
   }
@@ -164,9 +166,11 @@ export class SpeakerPage extends React.PureComponent {
       return null
     }
     return (
-      <ExternalLinkNewTab href={url} className="link-with-icon">
-        <Icon name="external-link" /> <span>{siteName}</span>
-      </ExternalLinkNewTab>
+      <Button variant="outline">
+        <ExternalLinkNewTab href={url} className="flex items-center gap-2">
+          <ExternalLink size="1em" /> <span>{siteName}</span>
+        </ExternalLinkNewTab>
+      </Button>
     )
   }
 }

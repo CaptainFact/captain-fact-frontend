@@ -4,7 +4,6 @@
 .vscode
 .eslintrc.yml
 .gitignore
-.sass-lint.yml
 .travis.yml
 
 node_modules

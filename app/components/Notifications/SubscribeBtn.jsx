@@ -2,10 +2,9 @@ import { Mutation } from '@apollo/client/react/components'
 import gql from 'graphql-tag'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { BellSlash } from 'styled-icons/fa-solid'
-import { Bell } from 'styled-icons/fa-solid'
+import { Bell, BellSlash } from 'styled-icons/fa-solid'
 
-import Action from '../VideoDebate/Actions/Action'
+import Action from '../VideoDebate/Actions/ActionButton'
 
 const updateSubscriptionQuery = gql`
   mutation UpdateSubscription($entityId: Int!, $scope: String!, $isSubscribed: Boolean!) {

@@ -37,4 +37,5 @@ OpenCollectiveContributors.propTypes = {
   button: PropTypes.bool,
 }
 
+// ts-unused-exports:disable-next-line
 export default OpenCollectiveContributors
