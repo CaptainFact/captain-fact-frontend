@@ -158,7 +158,7 @@
     "css-loader": "^5.2.7",
     "css-minimizer-webpack-plugin": "^4.2.2",
     "cypress": "^13.15.2",
-    "eslint": "^8.57.0",
+    "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-import-resolver-typescript": "^3.7.0",
     "eslint-plugin-chai-friendly": "^1.0.1",
