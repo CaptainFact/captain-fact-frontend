@@ -45,6 +45,7 @@ const NavbarContainer = styled.div`
   box-shadow: 0px 0px 15px rgba(125, 125, 125, 0.25);
   transition: top 0.3s;
   animation: ${fadeIn} 0.3s;
+  padding: 0 10px;
 `
 
 const UserMenuTrigger = styled.div`
@@ -156,10 +157,10 @@ const Navbar = ({
       <NavbarContainer>
         {/* Left */}
         <div className="flex items-center">
-          <Container display="flex" alignItems="center" height={theme.navbarHeight - 1}>
+          <Container display="flex" gap={4} alignItems="center" height={theme.navbarHeight - 1}>
             {/* Show X icon only on small device */}
             <MenuToggleSwitch toggleableIcon={width <= 768} />
-            {(isAuthenticated ? width >= 425 : width >= 275) && (
+            {(isAuthenticated ? width >= 425 : width >= 380) && (
               <Link to="/">
                 <Logo borderless />
               </Link>
@@ -261,7 +262,7 @@ const Navbar = ({
                 </Link>
                 <Link to={{ pathname: '/login', state: { redirect: loginRedirect } }} mr={2}>
                   <Button className="sm:h-9 sm:px-4 sm:py-2 sm:text-sm text-xs px-2">
-                    <LogIn className="max-[300px]:hidden" size={16} />
+                    <LogIn size={16} />
                     {t('menu.login')}
                   </Button>
                 </Link>

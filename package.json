@@ -3,7 +3,8 @@
   "version": "1.2.1",
   "private": true,
   "engines": {
-    "npm": ">=8.19.2"
+    "npm": ">=10.8.2",
+    "node": ">=18.20.6"
   },
   "scripts": {
     "build": "webpack-cli --config webpack.production.config.js",
