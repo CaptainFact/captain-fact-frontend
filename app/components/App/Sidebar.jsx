@@ -1,35 +1,33 @@
 import { Query } from '@apollo/client/react/components'
-import { Flex } from '@rebass/grid'
-import classNames from 'classnames'
 import { capitalize, get } from 'lodash'
+import { CircleHelp, Flag, Heart, ListVideo, Mail, Puzzle, Users } from 'lucide-react'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
-import { EnvelopeFill } from 'styled-icons/bootstrap'
-import { Github } from 'styled-icons/fa-brands'
-import { Discord } from 'styled-icons/fa-brands'
-import { Twitter } from 'styled-icons/fa-brands'
-import { Facebook } from 'styled-icons/fa-brands'
-import { Mastodon } from 'styled-icons/fa-brands'
+import { Discord, Facebook, Github, Mastodon, Twitter } from 'styled-icons/fa-brands'
 import { Star } from 'styled-icons/fa-solid'
 import { LinkExternal } from 'styled-icons/octicons'
+
+import { cn } from '@/lib/css-utils'
 
 import {
   loggedInUserPendingModerationCount,
   loggedInUserTodayReputationGain,
 } from '../../API/graphql_queries'
-import { MIN_REPUTATION_MODERATION, MOBILE_WIDTH_THRESHOLD } from '../../constants'
-import { MAX_DAILY_REPUTATION_GAIN } from '../../constants'
+import {
+  MAX_DAILY_REPUTATION_GAIN,
+  MIN_REPUTATION_MODERATION,
+  TABLET_WIDTH_THRESHOLD,
+} from '../../constants'
 import { closeSidebar, toggleSidebar } from '../../state/user_preferences/reducer'
 import UserLanguageSelector from '../LoggedInUser/UserLanguageSelector'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import { Badge } from '../ui/badge'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import ProgressBar from '../Utils/ProgressBar'
-import RawIcon from '../Utils/RawIcon'
 import ReputationGuard from '../Utils/ReputationGuard'
-import Tag from '../Utils/Tag'
 
 const WhiteStar = styled(Star)`
   color: white;
@@ -41,12 +39,14 @@ const WhiteStar = styled(Star)`
 `
 const DailyGainText = styled.p`
   color: #858585;
+  font-size: 0.9em;
 `
+
 @connect((state) => ({ sidebarExpended: state.UserPreferences.sidebarExpended }), {
   toggleSidebar,
   closeSidebar,
 })
-@withNamespaces('main')
+@withTranslation('main')
 @withLoggedInUser
 export default class Sidebar extends React.PureComponent {
   constructor(props) {
@@ -57,20 +57,24 @@ export default class Sidebar extends React.PureComponent {
   }
 
   closeSideBarIfMobile() {
-    if (window.innerWidth <= MOBILE_WIDTH_THRESHOLD) {
+    if (window.innerWidth <= TABLET_WIDTH_THRESHOLD) {
       this.props.closeSidebar()
     }
   }
 
-  MenuLink({ title, iconName, customLink, className, children, ...props }) {
-    const classes = classNames(className, { 'link-with-icon': !!iconName })
+  MenuLink({ title, className, children, ...props }) {
+    const classes = cn(
+      'flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md hover:text-gray-900',
+      { 'bg-gray-100': props.isActive },
+      className,
+    )
 
     return (
       <NavLink
         className={classes}
-        activeClassName="is-active"
+        activeClassName="bg-primary/10"
         onClick={this.closeSideBarIfMobile}
-        title={title ? title : children}
+        title={title}
         // For `/help/contact`, override the default `isActive` as we would activate both help and contact otherwise
         isActive={
           props.to === '/help'
@@ -79,8 +83,7 @@ export default class Sidebar extends React.PureComponent {
         }
         {...props}
       >
-        {iconName && <RawIcon name={iconName} />}
-        {customLink ? children : <span>{children}</span>}
+        {children}
       </NavLink>
     )
   }
@@ -92,82 +95,90 @@ export default class Sidebar extends React.PureComponent {
   render() {
     const { sidebarExpended, className, t, isAuthenticated } = this.props
     return (
-      <Flex
-        as="aside"
+      <aside
         id="sidebar"
-        className={classNames('menu', className, { expended: sidebarExpended })}
-        flexDirection="column"
+        className={cn(
+          'flex flex-col bg-white h-full fixed left-0 top-14 bottom-0 z-50 w-full sm:w-72 shadow-lg transition-transform duration-200 ease-in-out',
+          { '-translate-x-full sm:-translate-x-72': !sidebarExpended },
+          className,
+        )}
       >
-        <div className="menu-content">
-          <p className="menu-label hide-when-collapsed">{t('menu.language')}</p>
-          <UserLanguageSelector className="hide-when-collapsed" size="small" />
+        <div className="flex flex-col flex-grow overflow-y-auto p-4">
+          <p className={'text-gray-600 uppercase text-sm font-semibold mb-2'}>
+            {t('menu.language')}
+          </p>
+          <UserLanguageSelector className={cn('mb-4')} size="small" />
           {isAuthenticated ? (
             <React.Fragment>
-              <p className="menu-label">{t('menu.yourProfile')}</p>
+              <p className="text-gray-600 uppercase text-sm font-semibold mb-2">
+                {t('menu.yourProfile')}
+              </p>
               {this.renderMenuProfile()}
             </React.Fragment>
           ) : null}
-          <p className="menu-label">{t('menu.factChecking')}</p>
+          <p className="text-gray-600 uppercase text-sm font-semibold mb-2">
+            {t('menu.factChecking')}
+          </p>
           {this.renderMenuContent()}
-          <p className="menu-label">{t('menu.other')}</p>
-          <ul className="menu-list">
-            <li />
-            <this.MenuListLink to="/extension" iconName="puzzle-piece">
+          <p className="text-gray-600 uppercase text-sm font-semibold mb-2 mt-3">
+            {t('menu.other')}
+          </p>
+          <ul>
+            <this.MenuListLink to="/help">
+              <CircleHelp size="1.2em" className="mr-2" />
+              <span>{t('menu.help')}</span>
+            </this.MenuListLink>
+            <this.MenuListLink to="/help/contact" title={t('menu.contact')}>
+              <Mail size="1.2em" className="mr-2" />
+              <span>{t('menu.contact')}</span>
+            </this.MenuListLink>
+            <this.MenuListLink to="/extension">
+              <Puzzle size="1.2em" className="mr-2" />
               {t('menu.extension')}
             </this.MenuListLink>
             <ExternalLinkNewTab
               href="https://forum.captainfact.io"
-              className="hide-when-collapsed link-with-icon"
+              className={
+                'flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md hover:text-gray-900'
+              }
             >
-              <RawIcon name="users" />
-              {t('menu.forum')}&nbsp;
-              <LinkExternal size="1em" />
+              <Users size="1.2em" className="mr-2" />
+              {t('menu.forum')}
+              <LinkExternal size="0.9em" className="text-gray-500 hover:text-gray-900 ml-2" />
             </ExternalLinkNewTab>
             <ExternalLinkNewTab
               href="https://opencollective.com/captainfact_io"
-              className="hide-when-collapsed link-with-icon"
+              className={
+                'flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md hover:text-gray-900'
+              }
             >
-              <RawIcon name="heart" />
+              <Heart size="1.2em" className="mr-2" />
               {t('menu.donation')}&nbsp;
-              <LinkExternal size="1em" />
+              <LinkExternal size="0.9em" className="text-gray-500 hover:text-gray-900 ml-2" />
             </ExternalLinkNewTab>
-            <this.MenuListLink to="/help" iconName="question-circle">
-              {t('menu.help')}
-            </this.MenuListLink>
-            <this.MenuListLink
-              to="/help/contact"
-              title={t('menu.contact')}
-              customLink
-              className="link-with-icon"
-            >
-              <i className="styled-icon">
-                <EnvelopeFill size="1.2em" />
-              </i>
-              <span>{t('menu.contact')}</span>
-            </this.MenuListLink>
           </ul>
-          <p className="menu-label">{t('menu.followus')}</p>
-          <div className="hide-when-collapsed social-networks">
-            {' '}
-            &nbsp; &nbsp;
+          <p className="text-gray-600 uppercase text-sm font-semibold mt-3 mb-2">
+            {t('menu.followus')}
+          </p>
+          <div className={'flex space-x-4 px-4'}>
             <ExternalLinkNewTab href="https://github.com/CaptainFact">
-              <Github size="1.5em" /> &nbsp;&nbsp;&nbsp;
+              <Github size="1.5em" className="text-gray-700 hover:text-gray-900" />
             </ExternalLinkNewTab>
             <ExternalLinkNewTab href="https://discord.captainfact.io">
-              <Discord size="1.5em" /> &nbsp;&nbsp;&nbsp;
+              <Discord size="1.5em" className="text-gray-700 hover:text-gray-900" />
             </ExternalLinkNewTab>
             <ExternalLinkNewTab href="https://twitter.com/CaptainFact_io">
-              <Twitter size="1.5em" /> &nbsp;&nbsp;&nbsp;
+              <Twitter size="1.5em" className="text-gray-700 hover:text-gray-900" />
             </ExternalLinkNewTab>
             <ExternalLinkNewTab href="https://www.facebook.com/CaptainFact.io">
-              <Facebook size="1.5em" /> &nbsp;&nbsp;&nbsp;
+              <Facebook size="1.5em" className="text-gray-700 hover:text-gray-900" />
             </ExternalLinkNewTab>
             <ExternalLinkNewTab href="https://mamot.fr/@CaptainFact">
-              <Mastodon size="1.5em" /> &nbsp;&nbsp;&nbsp;
+              <Mastodon size="1.5em" className="text-gray-700 hover:text-gray-900" />
             </ExternalLinkNewTab>
           </div>
         </div>
-      </Flex>
+      </aside>
     )
   }
 
@@ -184,8 +195,8 @@ export default class Sidebar extends React.PureComponent {
           const dailyGain = get(data, 'loggedInUser.todayReputationGain', 0)
 
           return (
-            <Flex flexDirection="column" alignItems="center">
-              <Flex style={{ width: '90%' }} alignItems="center">
+            <div className="flex flex-col items-center">
+              <div className="flex items-center w-[90%]">
                 <WhiteStar size={20} />
                 <ProgressBar
                   height="7px"
@@ -194,11 +205,11 @@ export default class Sidebar extends React.PureComponent {
                   max={MAX_DAILY_REPUTATION_GAIN}
                   value={dailyGain}
                 />
-              </Flex>
+              </div>
               <DailyGainText>
                 {`${t('menu.dailyGain')} ${dailyGain}/${MAX_DAILY_REPUTATION_GAIN}`}
               </DailyGainText>
-            </Flex>
+            </div>
           )
         }}
       </Query>
@@ -207,7 +218,7 @@ export default class Sidebar extends React.PureComponent {
 
   renderMenuProfile() {
     return (
-      <ul className="menu-list hide-when-collapsed">
+      <ul className={'space-y-2 mb-4'}>
         <li>{this.renderDailyGainGauge()}</li>
       </ul>
     )
@@ -216,8 +227,9 @@ export default class Sidebar extends React.PureComponent {
   renderMenuContent() {
     const t = this.props.t
     return (
-      <ul className="menu-list">
-        <this.MenuListLink to="/videos" iconName="television" strict>
+      <ul>
+        <this.MenuListLink to="/videos" strict>
+          <ListVideo size="1.2em" className="mr-2" />
           {capitalize(t('entities.videoFactChecking'))}
         </this.MenuListLink>
         <ReputationGuard requiredRep={MIN_REPUTATION_MODERATION}>
@@ -229,9 +241,14 @@ export default class Sidebar extends React.PureComponent {
             {({ data }) => {
               const pendingCount = get(data, 'loggedInUser.actions_pending_moderation', 0)
               return (
-                <this.MenuListLink to="/moderation" iconName="flag">
+                <this.MenuListLink to="/moderation">
+                  <Flag size="1.2em" className="mr-2" />
                   {t('menu.moderation')}
-                  {Boolean(pendingCount) && <Tag type="danger">{pendingCount}</Tag>}
+                  {Boolean(pendingCount) && (
+                    <Badge className="ml-2" variant="destructive">
+                      {pendingCount}
+                    </Badge>
+                  )}
                 </this.MenuListLink>
               )
             }}

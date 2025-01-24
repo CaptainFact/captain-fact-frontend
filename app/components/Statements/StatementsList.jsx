@@ -1,7 +1,7 @@
 import memoizeOne from 'memoize-one'
 import React from 'react'
 import FlipMove from 'react-flip-move'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
@@ -24,7 +24,7 @@ import { StatementForm } from './StatementForm'
   }),
   { closeStatementForm, postStatement, setScrollTo },
 )
-@withNamespaces('videoDebate')
+@withTranslation('videoDebate')
 @withRouter
 @withLoggedInUser
 export default class StatementsList extends React.PureComponent {
@@ -70,31 +70,34 @@ export default class StatementsList extends React.PureComponent {
       speakers.size === 1 && !statementFormSpeakerId ? speakers.get(0).id : statementFormSpeakerId
     const statements = this.filterStatements(this.props.statements, this.props.isAuthenticated)
     return (
-      <div className="statements-list">
+      <div>
         {statementFormSpeakerId !== undefined && (
-          <StatementForm
-            offset={offset}
-            initialValues={this.getInitialValues(
-              speakerId,
-              this.props.statementFormText,
-              this.props.statementFormTime,
-            )}
-            enableReinitialize
-            keepDirtyOnReinitialize
-            handleAbort={() => this.props.closeStatementForm()}
-            handleConfirm={(s) =>
-              this.props.postStatement(s).then((e) => {
-                if (!e.error) {
-                  this.props.closeStatementForm()
-                }
-                return e
-              })
-            }
-          />
+          <div className="mb-4 max-w-[980px] mx-auto">
+            <StatementForm
+              offset={offset}
+              initialValues={this.getInitialValues(
+                speakerId,
+                this.props.statementFormText,
+                this.props.statementFormTime,
+              )}
+              enableReinitialize
+              keepDirtyOnReinitialize
+              handleAbort={() => this.props.closeStatementForm()}
+              handleConfirm={(s) =>
+                this.props.postStatement(s).then((e) => {
+                  if (!e.error) {
+                    this.props.closeStatementForm()
+                  }
+                  return e
+                })
+              }
+            />
+          </div>
         )}
         <FlipMove
           enterAnimation="fade"
           disableAllAnimations={window.innerWidth < FULLHD_WIDTH_THRESHOLD}
+          className="flex flex-col gap-8"
         >
           {statements.map((statement) => (
             <div key={statement.id}>

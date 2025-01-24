@@ -1,13 +1,13 @@
-import { Box } from '@rebass/grid'
-import classNames from 'classnames'
+import { ChevronDown, ChevronUp, Clock } from 'lucide-react'
 import React from 'react'
-import { Trans, withNamespaces } from 'react-i18next'
+import { Trans, withTranslation } from 'react-i18next'
 
+import { cn } from '@/lib/css-utils'
+
+import { Badge } from '../ui/badge'
+import { Button } from '../ui/button'
 import UserAppellation from '../Users/UserAppellation'
-import Button from '../Utils/Button'
-import { Icon } from '../Utils/Icon'
-import { TimeSince } from '../Utils/index'
-import Tag from '../Utils/Tag'
+import { TimeSince } from '../Utils/TimeSince'
 import ActionDiff from './ActionDiff'
 import ActionEntityLink from './ActionEntityLink'
 import ActionIcon from './ActionIcon'
@@ -74,38 +74,49 @@ const UserAction = ({
   const reputationChange = getReputationChange(viewingFrom, action)
 
   return (
-    <div className={classNames(className, 'user-action', 'card')}>
-      <div className="card-content action-description">
-        <Tag type="info">
-          <Icon name="clock-o" />
-          &nbsp;
-          <TimeSince time={time} />
-        </Tag>
-        <Tag className="action-type" type="info">
-          <ActionIcon type={type} />
-        </Tag>
+    <div className={cn(className, 'bg-white rounded-lg shadow-sm p-4 border-b')}>
+      <div className="flex items-center gap-2 flex-wrap">
+        <Badge variant="outline">
+          <Clock size={12} />
+          <span className="ml-1">
+            <TimeSince time={time} />
+          </span>
+        </Badge>
+
+        <Badge variant="outline">
+          <ActionIcon type={type} size={12} />
+        </Badge>
+
         {Boolean(reputationChange) && (
-          <Box css={{ display: 'inline-block' }}>
+          <span className="inline-flex items-center">
             <ReputationChangeTag reputation={reputationChange} withIcon />
-            &nbsp;
-          </Box>
+          </span>
         )}
+
         {!withoutUser && <UserAppellation user={user} />}
-        <span className="action-description">{getActionDescription(t, action, viewingFrom)}</span>
+
+        <span className="text-gray-700">{getActionDescription(t, action, viewingFrom)}</span>
+
         {Boolean(action.changes && action.changes.size) && (
           <Button
-            className="is-small"
+            size="xs"
+            variant="outline"
             onClick={() => setExpanded(!isExpanded)}
-            css={{ float: 'right', borderRadius: '100%' }}
+            className="ml-auto"
             title="Expand"
           >
-            +
+            {isExpanded ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
           </Button>
         )}
       </div>
-      {isExpanded && <ActionDiff action={action} />}
+
+      {isExpanded && (
+        <div className="mt-4 border-t pt-4">
+          <ActionDiff action={action} />
+        </div>
+      )}
     </div>
   )
 }
 
-export default withNamespaces('history')(UserAction)
+export default withTranslation('history')(UserAction)

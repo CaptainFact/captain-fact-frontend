@@ -18,7 +18,7 @@
   "flagForm": {
     "title": "Why do you want to flag this comment?",
     "xAvailable": "{{count}} available",
-    "xAvailable_plural": "{{count}} available",
+    "xAvailable_other": "{{count}} available",
     "warningMessage1": "If one of your flags is considered abusive, you will lose reputation.",
     "warningMessage2": "Are you sure the user’s contribution is worth a loss of reputation? Is it truly harmful?",
     "warningMessage3": "PS: Collaborative fact-checking on CaptainFact requires mutual kindness and indulgence."
@@ -29,7 +29,7 @@
     "post": "Post comment",
     "post_reply": "Post reply",
     "deleteThread": "Delete comment",
-    "deleteThread_plural": "Delete thread",
+    "deleteThread_other": "Delete thread",
     "replies_hide": "Hide replies",
     "replies_show": "Show replies ({{count}})",
     "loadMore_replies": "Load more replies ({{count}})",
@@ -42,6 +42,7 @@
     "refute_reply": "Refute this comment",
     "revealForm": "Add a source or comment",
     "invalidURL": "Invalid source URL",
+    "helpTitle": "How to contribute?",
     "help1": "For CaptainFact browser extension’s users, sources that confirm or refute the statement will be displayed directly on YouTube’s player. Comments are less highlighted within the browser extension, but can add value when the following situations occur:",
     "boldHelp2": "What if I cannot find sources?",
     "help2": "Write it in a new comment. Example:",
@@ -77,7 +78,9 @@
     "fullName": "Full name",
     "title": "Title",
     "titlePlaceholder": "Politician, doctor, journalist…",
-    "noneFound": "No speaker found for this name"
+    "noneFound": "No speaker found for this name",
+    "details": "Speaker details",
+    "select": "Select"
   },
   "statement": {
     "remove": "Remove statement",
@@ -98,6 +101,7 @@
     "soundOnBackgroundFocus_disable": "Don't play a sound when the focus change in background",
     "reverseTimeLock_lock": "Unlock time marker",
     "reverseTimeLock_unlock": "Lock time marker",
+    "helpTitle": "About statements",
     "help1": "To have its place on CaptainFact, a quote must fill out at least one of the following criteria:",
     "help2": "- be verifiable",
     "help3": "- mention a source or a content on which a comment could make the link",
@@ -133,9 +137,9 @@
   },
   "presence": {
     "viewer": "{{count}} viewer",
-    "viewer_plural": "{{count}} viewers",
+    "viewer_other": "{{count}} viewers",
     "user": "{{count}} fact-checker",
-    "user_plural": "{{count}} fact-checkers"
+    "user_other": "{{count}} fact-checkers"
   },
   "warningUnlisted": "This video is not listed publicly. It may not have received the visibility required for statements and sources to be challenged. Be careful with the information you'll find here.",
   "wikidata": {

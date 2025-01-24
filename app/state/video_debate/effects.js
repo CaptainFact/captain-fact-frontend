@@ -1,6 +1,11 @@
+import React from 'react'
+import { Trans } from 'react-i18next'
+
+import { toast } from '@/hooks/use-toast'
+import { toastError } from '@/lib/toasts'
+
 import { SocketApi } from '../../API'
 import { VIDEO_DEBATE_CHANNEL } from '../../constants'
-import { errorToFlash } from '../flashes/reducer'
 import { createEffect, generateFSAError } from '../utils'
 import { presenceDiff, setPresence } from './presence/reducer'
 import * as videoReducer from './video/reducer'
@@ -28,13 +33,24 @@ export const leaveVideoDebateChannel = () => () => {
 
 export const addSpeaker = (speaker) => {
   return createEffect(SocketApi.push(VIDEO_DEBATE_CHANNEL, 'new_speaker', speaker), {
-    catch: errorToFlash,
+    catch: toastError,
   })
 }
 
 export const removeSpeaker = (speaker) => {
   return createEffect(SocketApi.push(VIDEO_DEBATE_CHANNEL, 'remove_speaker', speaker), {
-    catch: errorToFlash,
+    catch: toastError,
+    then: () => {
+      toast({
+        variant: 'success',
+        title: <Trans i18nKey="videoDebate:speaker.removed">Speaker removed</Trans>,
+        description: (
+          <Trans i18nKey="videoDebate:speaker.removed_description">
+            {{ name: speaker.full_name }} has been removed from the speakers
+          </Trans>
+        ),
+      })
+    },
   })
 }
 
@@ -54,7 +70,7 @@ export const updateSpeaker = (speaker) => {
  */
 export const shiftStatements = (offsets) => {
   return createEffect(SocketApi.push(VIDEO_DEBATE_CHANNEL, 'shift_statements', offsets), {
-    catch: errorToFlash,
+    catch: toastError,
   })
 }
 

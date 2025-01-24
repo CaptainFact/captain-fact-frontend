@@ -1,16 +1,10 @@
-import classNames from 'classnames'
 import React from 'react'
 
-import Button from '../Utils/Button'
-import { Icon } from '../Utils/Icon'
+import { Button } from '../ui/button'
 
-const CommentAction = ({ className, onClick, title, iconName, disabled }) => (
-  <Button
-    className={classNames('is-inverted is-primary', className)}
-    onClick={onClick}
-    disabled={disabled}
-  >
-    <Icon name={iconName} />
+const CommentAction = ({ className, variant = 'link', onClick, title, icon = null, disabled }) => (
+  <Button variant={variant} size="xs" className={className} onClick={onClick} disabled={disabled}>
+    {icon}
     <span>{title}</span>
   </Button>
 )

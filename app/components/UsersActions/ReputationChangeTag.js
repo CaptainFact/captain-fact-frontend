@@ -1,23 +1,23 @@
+import { Star } from 'lucide-react'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 
-import { Icon } from '../Utils/Icon'
-import Tag from '../Utils/Tag'
+import { Badge } from '../ui/badge'
 
 function getTagType(reputation) {
   if (reputation < 0) {
-    return 'dark'
+    return 'destructive'
   } else {
     return 'success'
   }
 }
 
 const ReputationChangeTag = ({ t, reputation, size = 'small', withIcon = false }) => (
-  <Tag className="scoreTag" type={getTagType(reputation)} size={size} title={t('reputationChange')}>
-    {withIcon && <Icon name="star" style={{ marginRight: 5, color: 'yellow' }} />}
+  <Badge variant={getTagType(reputation)} size={size} title={t('reputationChange')}>
+    {withIcon && <Star size="1em" className="mr-1" />}
     {reputation > 0 && '+'}
     {reputation}
-  </Tag>
+  </Badge>
 )
 
-export default withNamespaces('user')(ReputationChangeTag)
+export default withTranslation('user')(ReputationChangeTag)

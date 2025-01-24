@@ -1,15 +1,13 @@
 import { Query } from '@apollo/client/react/components'
 import { get } from 'lodash'
+import { VideoOff } from 'lucide-react'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import { VideosQuery } from '../../API/graphql_queries'
 import { ONLY_FEATURED, ONLY_PARTNERS } from '../../constants'
-import Container from '../StyledUtils/Container'
 import { ErrorView } from '../Utils/ErrorView'
 import { LoadingFrame } from '../Utils/LoadingFrame'
-import Message from '../Utils/Message'
 import PaginationMenu from '../Utils/PaginationMenu'
 import { VideosGrid } from './VideosGrid'
 
@@ -56,31 +54,29 @@ const PaginatedVideosContainer = ({
       {({ loading, error, data }) => {
         const videos = get(data, videosPath, INITIAL_VIDEOS)
         if (error) {
-          return <ErrorView error={error} />
+          return (
+            <div className="w-fit mx-auto px-2">
+              <ErrorView error={error} />
+            </div>
+          )
         }
         if (!loading && videos.entries.length === 0) {
           return (
-            <Container mt="32px" display="inline-block">
-              <Message>{t('errors:client.noVideoAvailable')}</Message>
-            </Container>
+            <div className="flex flex-col items-center justify-center my-12">
+              <div className="bg-neutral-100 rounded-full p-6">
+                <VideoOff size={64} />
+              </div>
+              <p className="text-xl mt-4 font-bold">{t('errors:client.noVideoAvailable')}</p>
+            </div>
           )
         }
 
         const paginationMenu = !showPagination ? null : (
           <PaginationMenu
-            className="videos-pagination"
+            className="mt-12"
             currentPage={videos.pageNumber}
             total={videos.totalPages}
-            isRounded
-            onPageChange={() => window.scrollTo({ top: 0 })}
-            LinkBuilder={({ 'data-page': page, ...props }) => {
-              const urlParams = page > 1 ? `?page=${page}` : ''
-              if (props.disabled) {
-                return <span className="button" {...props} />
-              } else {
-                return <Link to={`${baseURL}${urlParams}`} className="button" {...props} />
-              }
-            }}
+            getPageLink={(page) => `${baseURL}?page=${page}`}
           />
         )
 
@@ -95,4 +91,4 @@ const PaginatedVideosContainer = ({
   )
 }
 
-export default withNamespaces('main')(PaginatedVideosContainer)
+export default withTranslation('main')(PaginatedVideosContainer)

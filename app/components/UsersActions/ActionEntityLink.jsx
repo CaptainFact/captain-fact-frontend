@@ -1,5 +1,5 @@
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import {
@@ -41,4 +41,4 @@ const ActionEntityLink = ({ t, action }) => {
   return url ? <Link to={url}>{full_label}</Link> : full_label
 }
 
-export default withNamespaces('history')(ActionEntityLink)
+export default withTranslation('history')(ActionEntityLink)

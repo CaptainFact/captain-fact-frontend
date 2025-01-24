@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
@@ -22,14 +23,12 @@ module.exports = {
     filename: '[name].[chunkhash].js',
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
-    modules: [
-      path.join(__dirname, 'src'),
-      path.join(__dirname, 'node_modules'), // the old 'fallback' option (needed for npm link-ed packages)
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+    plugins: [
+      new TsconfigPathsPlugin({
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+      }),
     ],
-    alias: {
-      styles: path.resolve(__dirname, 'styles/'),
-    },
   },
   optimization: {
     splitChunks: {

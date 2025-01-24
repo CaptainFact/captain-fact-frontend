@@ -5,7 +5,6 @@ import { trimEnd } from 'lodash'
 import { HTTP_API_URL } from '../../config'
 import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
 import { optionsToQueryString } from '../../lib/url_utils'
-import flashNoInternetError from '../no_internet_error'
 import parseServerError from '../server_error'
 
 class CaptainFactHttpApi {
@@ -48,7 +47,6 @@ class CaptainFactHttpApi {
           console.error(e)
           // Special case when no internet connection
           reject('noInternet')
-          flashNoInternetError()
         })
     })
   }

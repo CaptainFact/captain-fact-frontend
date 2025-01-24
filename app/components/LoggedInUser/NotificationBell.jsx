@@ -1,26 +1,14 @@
 import { Query } from '@apollo/client/react/components'
 import { get } from 'lodash'
 import React from 'react'
-import styled from 'styled-components'
 import { Bell } from 'styled-icons/fa-solid'
-import { themeGet } from 'styled-system'
 
 import { loggedInUserUnreadNotificationsCount } from '../../API/graphql_queries'
-import Container from '../StyledUtils/Container'
-import UnstyledButton from '../StyledUtils/UnstyledButton'
-
-const UnreadNotificationsBadge = styled.div`
-  position: absolute;
-  background: ${themeGet('colors.info')};
-  color: white;
-  padding: 2px 6px;
-  border-radius: 8px;
-  top: -5px;
-  right: -5px;
-`
+import { Badge } from '../ui/badge'
+import { Button } from '../ui/button'
 
 const NotificationBell = (props, ref) => (
-  <UnstyledButton p="7px" {...props} ref={ref}>
+  <Button variant="ghost" {...props} ref={ref}>
     <Query
       fetchPolicy="network-only"
       pollInterval={15000}
@@ -29,14 +17,21 @@ const NotificationBell = (props, ref) => (
       {({ data }) => {
         const unreadCount = get(data, 'loggedInUser.notifications.totalEntries', 0)
         return (
-          <Container position="relative">
+          <div className="relative">
             <Bell size={24} />
-            {unreadCount > 0 && <UnreadNotificationsBadge>{unreadCount}</UnreadNotificationsBadge>}
-          </Container>
+            {unreadCount > 0 && (
+              <Badge
+                variant="destructive"
+                className="absolute -top-2 -right-2 py-[2px] px-1 text-xs"
+              >
+                {unreadCount}
+              </Badge>
+            )}
+          </div>
         )
       }}
     </Query>
-  </UnstyledButton>
+  </Button>
 )
 
 export default React.forwardRef(NotificationBell)

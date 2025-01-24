@@ -1,17 +1,28 @@
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
 import { ALL_VIDEOS, ONLY_COMMUNITY, ONLY_FEATURED, ONLY_PARTNERS } from '../../constants'
 
 const VideoSourceFiltersSelect = ({ id, value, onChange, t }) => (
-  <div className="select">
-    <select value={value} onChange={(e) => onChange(e.target.value)} id={id}>
-      <option value={ALL_VIDEOS}>{t('all')}</option>
-      <option value={ONLY_FEATURED}>{t('featured')}</option>
-      <option value={ONLY_PARTNERS}>{t('partners')}</option>
-      <option value={ONLY_COMMUNITY}>{t('users')}</option>
-    </select>
-  </div>
+  <Select value={value} onValueChange={onChange} defaultValue={ALL_VIDEOS}>
+    <SelectTrigger id={id} className="min-w-32">
+      <SelectValue />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectItem value={ALL_VIDEOS}>{t('all')}</SelectItem>
+      <SelectItem value={ONLY_FEATURED}>{t('featured')}</SelectItem>
+      <SelectItem value={ONLY_PARTNERS}>{t('partners')}</SelectItem>
+      <SelectItem value={ONLY_COMMUNITY}>{t('users')}</SelectItem>
+    </SelectContent>
+  </Select>
 )
 
-export default withNamespaces('main')(VideoSourceFiltersSelect)
+export default withTranslation('main')(VideoSourceFiltersSelect)

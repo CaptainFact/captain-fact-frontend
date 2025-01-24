@@ -1,20 +1,36 @@
-import classNames from 'classnames'
+import { CircleX } from 'lucide-react'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-/**
- * See https://bulma.io/documentation/components/message/
- */
+import { cn } from '@/lib/css-utils'
+
+import { Alert, AlertDescription, AlertTitle } from '../ui/alert'
+import { Button } from '../ui/button'
+
+// Map old message types to new alert variants
+const typeToVariantMap = {
+  info: 'info',
+  danger: 'destructive',
+  warning: 'warning',
+  primary: 'default',
+  link: 'default',
+  dark: 'default',
+}
+
 const Message = ({ type, header, className, children, onClose }) => (
-  <article className={classNames('message', `is-${type}`, className)}>
+  <Alert variant={typeToVariantMap[type]} className={cn('message', `is-${type}`, className)}>
     {(header || onClose) && (
-      <div className="message-header">
+      <AlertTitle className="message-header flex justify-between items-center">
         {header || <div />}
-        {onClose && <button className="delete" aria-label="delete" onClick={onClose} />}
-      </div>
+        {onClose && (
+          <Button variant="ghost" size="icon-xs" aria-label="delete" onClick={onClose}>
+            <CircleX size={16} />
+          </Button>
+        )}
+      </AlertTitle>
     )}
-    <div className="message-body">{children}</div>
-  </article>
+    <AlertDescription className="message-body">{children}</AlertDescription>
+  </Alert>
 )
 
 Message.propTypes = {

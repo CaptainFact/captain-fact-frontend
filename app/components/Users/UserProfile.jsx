@@ -1,14 +1,14 @@
+import { CircleHelp } from 'lucide-react'
 import React, { PureComponent } from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 
 import { addModal } from '../../state/modals/reducer'
 import HelpModal from '../Help/HelpModal'
-import { Icon } from '../Utils/Icon'
 import Achievement from './Achievement'
 
 @connect((state) => ({ user: state.DisplayedUser.data }), { addModal })
-@withNamespaces('achievements')
+@withTranslation('achievements')
 class UserProfile extends PureComponent {
   render() {
     const {
@@ -16,20 +16,22 @@ class UserProfile extends PureComponent {
       t,
     } = this.props
     return (
-      <div className="columns is-marginless" style={{ paddingTop: 40 }}>
-        <div className="column has-text-centered">
-          <h2 className="title is-2 is-centered">
-            <Icon size="large" name="trophy" /> {t('title')}
+      <div className="content mx-auto py-12">
+        <div className="w-full text-center">
+          <h2 className="text-4xl font-bold mb-4 flex items-center justify-center">
+            <span className="ml-2">{t('title')}</span>
           </h2>
-          <a className="subtitle link-with-icon" onClick={this.achievementsHelpModal.bind(this)}>
-            <Icon name="question-circle" />
-            <span> {t('about')}</span>
-          </a>
-          <br />
-          <br />
-          <div className="columns is-marginless is-multiline is-centered achievements">
+          <button
+            className="inline-flex items-center hover:underline hover:text-primary"
+            onClick={this.achievementsHelpModal.bind(this)}
+          >
+            <CircleHelp size={20} />
+            <span className="ml-1">{t('about')}</span>
+          </button>
+
+          <div className="mt-8 flex flex-wrap justify-center gap-6">
             {achievements.map((id) => (
-              <div key={id} className="column is-4" style={{ flexBasis: 325 }}>
+              <div key={id} className="w-full max-w-[325px] sm:w-1/2 lg:w-1/3 p-2">
                 <Achievement id={id} />
               </div>
             ))}

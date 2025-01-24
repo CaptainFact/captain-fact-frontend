@@ -1,14 +1,13 @@
-import { Flex } from '@rebass/grid'
 import { truncate } from 'lodash'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { Support } from 'styled-icons/boxicons-regular'
 import { Github } from 'styled-icons/fa-brands'
 import { Redo } from 'styled-icons/fa-solid'
 
 import { optionsToQueryString } from '../../lib/url_utils'
 import Container from '../StyledUtils/Container'
-import Button from '../Utils/Button'
+import { Button } from '../ui/button'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import Message from '../Utils/Message'
 
@@ -46,28 +45,28 @@ const CrashReportPage = ({ t, error }) => {
   // eslint-disable-next-line no-console
   console.error(error)
   return (
-    <Flex px={2} py={6} flexDirection="column" alignItems="center">
-      <Message type="warning">{t('crash')}</Message>
-      <br />
-      <Flex mt={5} flexWrap="wrap" alignItems="center" justifyContent="center">
-        <Button as="a" href="mailto:bug-report@captainfact.io" m={2} className="is-large">
-          <Support size="1em" />
-          &nbsp;{t('contactSupport')}
-        </Button>
-        <Button
-          m={2}
-          className="is-large"
-          as={ExternalLinkNewTab}
-          href={getGithubIssueURL(stackTrace)}
-        >
-          <Github size="0.9em" />
-          &nbsp;{t('addIssue')}
-        </Button>
-        <Button m={2} className="is-large" onClick={() => location.reload()}>
+    <div className="flex flex-col items-center py-16">
+      <div>
+        <Message type="danger">{t('crash')}</Message>
+      </div>
+      <div className="flex gap-2 mt-12">
+        <a href="mailto:bug-report@captainfact.io">
+          <Button variant="outline" className="is-large">
+            <Support size="1em" />
+            &nbsp;{t('contactSupport')}
+          </Button>
+        </a>
+        <ExternalLinkNewTab href={getGithubIssueURL(stackTrace)}>
+          <Button variant="outline">
+            <Github size="0.9em" />
+            &nbsp;{t('addIssue')}
+          </Button>
+        </ExternalLinkNewTab>
+        <Button variant="outline" onClick={() => location.reload()}>
           <Redo size="0.7em" />
           &nbsp;{t('reload')}
         </Button>
-      </Flex>
+      </div>
       {stackTrace && (
         <Container mt={5} maxWidth={1200}>
           <details>
@@ -78,8 +77,8 @@ const CrashReportPage = ({ t, error }) => {
           </details>
         </Container>
       )}
-    </Flex>
+    </div>
   )
 }
 
-export default withNamespaces('errors')(CrashReportPage)
+export default withTranslation('errors')(CrashReportPage)

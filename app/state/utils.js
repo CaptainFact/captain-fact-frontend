@@ -69,22 +69,25 @@ export function returnSuccess(returnValue) {
  * @param params params to give to action creators
  * @returns {*}
  */
-export function cleverDispatch(dispatch, getState, toDispatch, params = null) {
+function cleverDispatch(dispatch, getState, toDispatch, params = null) {
   if (typeof toDispatch === 'function') {
-    return dispatch(toDispatch(params))
-  }
-  if (isAction(toDispatch)) {
+    const action = toDispatch(params)
+    if (action) {
+      return dispatch(action)
+    }
+  } else if (isAction(toDispatch)) {
     return dispatch(toDispatch)
-  }
-  if (isIterable(toDispatch)) {
+  } else if (isIterable(toDispatch)) {
     let lastValue = null
     toDispatch.forEach((a) => {
       lastValue = cleverDispatch(dispatch, getState, a, params)
     })
     return lastValue
+  } else {
+    // eslint-disable-next-line no-console
+    console.warn(`Cannot dispatch ${toDispatch}`)
   }
-  // eslint-disable-next-line no-console
-  console.warn(`Cannot dispatch ${toDispatch}`)
+
   return null
 }
 
@@ -106,7 +109,7 @@ export function generateFSAError(payload) {
  * @param payload message || object
  * @returns {{type: string, error: boolean, payload: *}}
  */
-export function generateFSASuccess(payload) {
+function generateFSASuccess(payload) {
   return {
     type: 'SUCCESS',
     error: false,
@@ -119,7 +122,7 @@ export function generateFSASuccess(payload) {
  * @param obj
  * @returns {boolean}
  */
-export function isAction(obj) {
+function isAction(obj) {
   return obj !== null && typeof obj === 'object' && typeof obj.type === 'string'
 }
 

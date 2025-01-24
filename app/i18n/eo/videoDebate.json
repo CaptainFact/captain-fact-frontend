@@ -18,7 +18,7 @@
   "flagForm": {
     "title": "Kial raporti tiun komenton?",
     "xAvailable": "{{count}} disponebla",
-    "xAvailable_plural": "{{count}} disponeblaj",
+    "xAvailable_other": "{{count}} disponeblaj",
     "warningMessage1": "Se unu el viaj raportoj estus juĝista kiel ekscesa… vi perdus reputacion.",
     "warningMessage2": "Ĉu vi nepre volas damaĝi la reputacion de la aŭtoro de tiu komento? Ĉu ĝi vere nocas?",
     "warningMessage3": "PS: La kontrolo ĉe CaptainFact estas civitana ekzerco de interhelpo, kiu necesitas indulgon kaj toleron."
@@ -29,7 +29,7 @@
     "post": "Aldoni kiel komenton",
     "post_reply": "Aldoni kiel respondon",
     "deleteThread": "Forigi la komenton",
-    "deleteThread_plural": "Forigi la faldenon",
+    "deleteThread_other": "Forigi la faldenon",
     "replies_hide": "Kaŝi la respondojn",
     "replies_show": "Montri la respondojn ({{count}})",
     "loadMore_replies": "Ŝarĝi pli da respondoj ({{count}})",
@@ -116,9 +116,9 @@
   },
   "presence": {
     "viewer": "{{count}} spektanto",
-    "viewer_plural": "{{count}} spektantoj",
+    "viewer_other": "{{count}} spektantoj",
     "user": "{{count}} kontrolisto",
-    "user_plural": "{{count}} kontrolistoj"
+    "user_other": "{{count}} kontrolistoj"
   },
   "warningUnlisted": "Ĉi tiu video ne estas listigita publike. Ĝi eble ne ricevus sufiĉe da videbleco por la fontoj kaj la deklaroj povus esti diskutitaj ĝuste.",
   "wikidata": {

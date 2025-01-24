@@ -9,7 +9,7 @@
   "flagForm": {
     "title": "¿Por qué informar de este comentario?",
     "xAvailable": "{{count}} disponible",
-    "xAvailable_plural": "{{count}} disponibles"
+    "xAvailable_other": "{{count}} disponibles"
   },
   "comment": {
     "writeComment": "Escribe un comentario...",
@@ -17,7 +17,7 @@
     "post": "Añadir en comentario",
     "post_reply": "Añadir en respuesta",
     "deleteThread": "Suprimir el comentario",
-    "deleteThread_plural": "Suprimir el asunto",
+    "deleteThread_other": "Suprimir el asunto",
     "replies_hide": "Ocultar las respuestas",
     "replies_show": "Mostrar las respuestas ({{count}})",
     "loadMore_replies": "Cargar más respuestas ({{count}})",
@@ -77,9 +77,9 @@
   },
   "presence": {
     "viewer": "{{count}} espectador",
-    "viewer_plural": "{{count}} espectadores",
+    "viewer_other": "{{count}} espectadores",
     "user": "{{count}} verificador·a",
-    "user_plural": "{{count}} verificadores·as"
+    "user_other": "{{count}} verificadores·as"
   },
   "warningUnlisted": "Este video no está en la lista pública. Puede no haber recibido la visibilidad necesaria para que las fuentes y las citas se discutan adecuadamente.",
   "wikidata": {

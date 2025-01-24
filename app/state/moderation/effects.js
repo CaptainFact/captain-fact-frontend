@@ -1,5 +1,6 @@
+import { toastError } from '@/lib/toasts'
+
 import HttpApi from '../../API/http_api'
-import { errorToFlash } from '../flashes/reducer'
 import { createEffect } from '../utils'
 import { removeModerationEntry, setLoading, setModerationEntry } from './reducer'
 
@@ -13,6 +14,6 @@ export const fetchRandomModeration = () => {
 export const postModerationFeedback = (values) => {
   return createEffect(HttpApi.post('moderation/feedback', values), {
     then: removeModerationEntry,
-    catch: errorToFlash,
+    catch: toastError,
   })
 }

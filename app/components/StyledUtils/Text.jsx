@@ -10,6 +10,7 @@ import {
   textAlign,
 } from 'styled-system'
 
+/** @deprecated */
 export const Span = styled.span`
   ${color}
   ${fontSize}
@@ -18,14 +19,7 @@ export const Span = styled.span`
   ${space}
 `
 
-export const Small = styled.small`
-  ${color}
-  ${fontSize}
-  ${fontWeight}
-  ${space}
-  ${display}
-`
-
+/** @deprecated */
 export const P = styled.p`
   ${color}
   ${fontSize}

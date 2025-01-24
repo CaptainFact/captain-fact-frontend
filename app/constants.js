@@ -62,8 +62,8 @@ export const MIN_REPUTATION_MODERATION = 125
 
 /* ------ UI, animations ------ */
 
-export const MOBILE_WIDTH_THRESHOLD = 768 // TODO Use syled-components theme
-export const FULLHD_WIDTH_THRESHOLD = 1408 // TODO Use syled-components theme
+export const TABLET_WIDTH_THRESHOLD = 1024
+export const FULLHD_WIDTH_THRESHOLD = 1408
 
 export const USER_PICTURE_SMALL = 24
 export const USER_PICTURE_LARGE = 48
@@ -71,9 +71,6 @@ export const USER_PICTURE_XLARGE = 96
 
 // Duration during which statement should stay focused
 export const STATEMENT_FOCUS_TIME = 30 // seconds
-
-// Flash messages duration
-export const DEFAULT_FLASH_DURATION = 6000 // milliseconds
 
 // Above this nesting, comments will be automatically collapsed
 export const COLLAPSE_REPLIES_AT_NESTING = 2
@@ -91,7 +88,7 @@ export const COMMENT_LENGTH = [0, 512]
 // Speakers
 export const SPEAKER_NAME_LENGTH = [3, 120]
 export const SPEAKER_TITLE_LENGTH = [3, 240]
-export const MAX_VIDEO_CARD_SPEAKERS = 5
+export const MAX_VIDEO_CARD_SPEAKERS = 3
 
 // Statement
 export const STATEMENT_LENGTH = [10, 280]

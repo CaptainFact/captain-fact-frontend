@@ -1,24 +1,19 @@
 import { Query } from '@apollo/client/react/components'
-import { Box, Flex } from '@rebass/grid'
 import { get } from 'lodash'
 import React, { Component } from 'react'
-import { translate } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
 import { Videos } from 'styled-icons/boxicons-solid'
 
 import { loggedInUserSubscriptionsQuery } from '../../API/graphql_queries'
 import { videoURL } from '../../lib/cf_routes'
 import SubscribeBtn from '../Notifications/SubscribeBtn'
 import { StyledH2 } from '../StyledUtils/Title'
+import { Card } from '../ui/card'
 import { ErrorView } from '../Utils/ErrorView'
 import { LoadingFrame } from '../Utils/LoadingFrame'
-import Message from '../Utils/Message'
 
-const SubscribeBtnBox = styled(Box)`
-  display: flex;
-`
-@translate('main')
+@withTranslation('main')
 export default class NotificationsPage extends Component {
   renderScopeIcon() {
     return <Videos size="1.5em" />
@@ -40,35 +35,33 @@ export default class NotificationsPage extends Component {
 
           const subscriptions = get(data, 'loggedInUser.subscriptions', [])
           return (
-            <Flex flexDirection="column" alignItems="center" px={3} py={4}>
-              <StyledH2 textTransform="capitalize">
-                {this.props.t('entities.video_plural')}
-              </StyledH2>
-              <Box>
+            <div className="flex flex-col items-center px-3 py-4">
+              <StyledH2 textTransform="capitalize">{this.props.t('entities.video_other')}</StyledH2>
+              <div>
                 {subscriptions.length === 0 ? (
-                  <Message>No subscriptions</Message>
+                  <Card className="p-6">No subscriptions</Card>
                 ) : (
                   subscriptions.map((subscription) => (
-                    <Flex key={subscription.id} mb={3} alignItems="center">
-                      <SubscribeBtnBox mr={2}>
+                    <div key={subscription.id} className="flex mb-3 items-center">
+                      <div className="flex mr-2">
                         <SubscribeBtn
                           size={24}
                           scope={subscription.scope}
                           entityId={subscription.videoId}
                           isSubscribed={subscription.isSubscribed}
                         />
-                      </SubscribeBtnBox>
-                      <Box mr={1}>{this.renderScopeIcon(subscription.scope)}</Box>
-                      <Box>
-                        <Link to={videoURL(subscription.video.hashId)}>
+                      </div>
+                      <div className="mr-1">{this.renderScopeIcon(subscription.scope)}</div>
+                      <div>
+                        <Link className="hover:underline" to={videoURL(subscription.video.hashId)}>
                           {subscription.video.title}
                         </Link>
-                      </Box>
-                    </Flex>
+                      </div>
+                    </div>
                   ))
                 )}
-              </Box>
-            </Flex>
+              </div>
+            </div>
           )
         }}
       </Query>

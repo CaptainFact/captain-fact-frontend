@@ -1,11 +1,11 @@
-import { Box, Flex } from '@rebass/grid'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { reduxForm } from 'redux-form'
 import styled from 'styled-components'
 import { Warning } from 'styled-icons/material'
 
 import FlagReasonSelect from '../Moderation/FlagReasonSelect'
+import { Separator } from '../ui/separator'
 import Message from '../Utils/Message'
 import { CommentDisplay } from './CommentDisplay'
 
@@ -14,29 +14,30 @@ const YellowWarning = styled(Warning)`
 `
 
 @reduxForm({ form: 'flagForm' })
-@withNamespaces('videoDebate')
+@withTranslation('videoDebate')
 export default class FlagForm extends React.PureComponent {
   render() {
     const { handleSubmit, t } = this.props
 
     return (
-      <form className="form flag-form" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <Message type="warning">
+            <div className="flex items-center">
+              <div className="mr-2">
+                <YellowWarning size={40} />
+              </div>
+              <div>
+                <p>{t('flagForm.warningMessage1')}</p>
+                <p>{t('flagForm.warningMessage2')}</p>
+                <p>{t('flagForm.warningMessage3')}</p>
+              </div>
+            </div>
+          </Message>
+        </div>
         <CommentDisplay comment={this.props.comment} withoutActions hideThread />
-        <hr />
+        <Separator className="my-4" />
         <FlagReasonSelect />
-        <hr />
-        <Message type="warning">
-          <Flex alignItems="center">
-            <Box mr={2}>
-              <YellowWarning size={40} />
-            </Box>
-            <Box>
-              <p>{t('flagForm.warningMessage1')}</p>
-              <p>{t('flagForm.warningMessage2')}</p>
-              <p>{t('flagForm.warningMessage3')}</p>
-            </Box>
-          </Flex>
-        </Message>
       </form>
     )
   }

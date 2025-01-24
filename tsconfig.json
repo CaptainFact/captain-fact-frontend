@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "ES6",
+    "module": "ESNext",
+    "strict": false,
+    "allowJs": true,
+    "checkJs": false,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["ESNext", "dom", "dom.iterable"],
+    "paths": {
+      "@/components/*": ["app/components/*"],
+      "@/lib/*": ["app/lib/*"],
+      "@/styles/*": ["app/styles/*"],
+      "@/hooks/*": ["app/hooks/*"],
+      "@/ui/*": ["app/components/ui/*"]
+    }
+  },
+  "include": ["app/custom.d.ts", "app/**/*", "cypress/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.d.ts"]
+}

@@ -1,12 +1,11 @@
-import { Box, Flex } from '@rebass/grid'
 import { omit } from 'lodash'
+import { LogIn } from 'lucide-react'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { withResizeDetector } from 'react-resize-detector'
 import { Link, withRouter } from 'react-router-dom'
 import Popup from 'reactjs-popup'
 import styled, { css, withTheme } from 'styled-components'
-import { HelpCircle } from 'styled-icons/boxicons-regular'
 import { UserCircle } from 'styled-icons/fa-regular'
 import { CaretDown } from 'styled-icons/fa-solid'
 import { themeGet } from 'styled-system'
@@ -22,6 +21,7 @@ import Container from '../StyledUtils/Container'
 import { fadeIn } from '../StyledUtils/Keyframes'
 import StyledLink from '../StyledUtils/StyledLink'
 import { Span } from '../StyledUtils/Text'
+import { Button } from '../ui/button'
 import ScoreTag from '../Users/ScoreTag'
 import UserAppellation from '../Users/UserAppellation'
 import UserMenu from '../Users/UserMenu'
@@ -31,11 +31,12 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
 import Logo from './Logo'
 import MenuToggleSwitch from './MenuToggleSwitch'
 
-const NavbarContainer = styled(Flex)`
+const NavbarContainer = styled.div`
   position: fixed;
-  z-index: 9999;
+  z-index: 40;
   top: 0;
   width: 100%;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   background: white;
@@ -44,9 +45,11 @@ const NavbarContainer = styled(Flex)`
   box-shadow: 0px 0px 15px rgba(125, 125, 125, 0.25);
   transition: top 0.3s;
   animation: ${fadeIn} 0.3s;
+  padding: 0 10px;
 `
 
-const UserMenuTrigger = styled(Flex)`
+const UserMenuTrigger = styled.div`
+  display: flex;
   align-items: center;
   height: 38px;
   cursor: pointer;
@@ -65,7 +68,7 @@ const UserMenuEntry = styled((props) => <StyledLink {...omit(props, 'isActive')}
   display: block;
   border-left: 2px solid white;
   background: white;
-  font-size: 1.1em;
+  font-size: 1em;
   padding: 10px 15px;
   outline: none;
 
@@ -96,10 +99,6 @@ const UserHero = styled.div`
   padding: 10px 15px;
 `
 
-const ScoreHelpButton = styled(HelpCircle)`
-  color: #39b714;
-`
-
 const UserLoading = styled(UserCircle)`
   animation: ${fadeIn} 0.75s infinite linear alternate;
   margin-right: ${themeGet('space.2')};
@@ -107,7 +106,7 @@ const UserLoading = styled(UserCircle)`
 
 const StyledPopup = styled(Popup)`
   &-content {
-    z-index: 9999;
+    z-index: 50;
     overflow: hidden;
     background-color: ${themeGet('colors.white')};
     border: 1px solid #d3d3d3;
@@ -153,21 +152,21 @@ const Navbar = ({
   const isMobile = width < 600
   const loginRedirect = getRedirectUrl()
   return (
-    <Box data-cy="Navbar">
+    <div data-cy="Navbar">
       <Container height={theme.navbarHeight} width={1} />
-      <NavbarContainer px={2}>
+      <NavbarContainer>
         {/* Left */}
-        <Flex alignItems="center">
-          <Container display="flex" alignItems="center" height={theme.navbarHeight - 1}>
+        <div className="flex items-center">
+          <Container display="flex" gap={4} alignItems="center" height={theme.navbarHeight - 1}>
             {/* Show X icon only on small device */}
             <MenuToggleSwitch toggleableIcon={width <= 768} />
-            {width >= 425 && (
-              <StyledLink className="logo" to="/" ml={1}>
-                <Logo height={theme.navbarHeight - 24} borderless />
-              </StyledLink>
+            {(isAuthenticated ? width >= 425 : width >= 380) && (
+              <Link to="/">
+                <Logo borderless />
+              </Link>
             )}
           </Container>
-        </Flex>
+        </div>
         {/* Center - holds the search bar (hidden on mobile) */}
         {(ENABLE_PUBLIC_SEARCH || location.pathname.startsWith('/search')) && (
           <Container
@@ -184,15 +183,12 @@ const Navbar = ({
         {loggedInUserLoading ? (
           <UserLoading size={38} title="Loading" />
         ) : (
-          <Flex>
+          <div className="flex">
             {isAuthenticated ? (
-              <Flex alignItems="center">
-                <StyledLink to="/help/reputation" mr={1}>
-                  <ScoreHelpButton size={25} title="Reputation Help Button" />
-                </StyledLink>
-                <Box mr={[3, 4]}>
+              <div className="flex items-center">
+                <div className="mr-3">
                   <ScoreTag reputation={loggedInUser.reputation} size="large" withIcon />
-                </Box>
+                </div>
                 <NotificationPopup
                   position="bottom right"
                   offsetX={isMobile ? 75 : 0}
@@ -224,7 +220,7 @@ const Navbar = ({
                   contentStyle={{ zIndex: 9999 }}
                   trigger={
                     <UserMenuTrigger>
-                      <UserPicture size={USER_PICTURE_LARGE} user={loggedInUser} />
+                      <UserPicture size={36} user={loggedInUser} />
                       <CaretDown size={24} />
                     </UserMenuTrigger>
                   }
@@ -232,12 +228,12 @@ const Navbar = ({
                   <div>
                     <UserHero>
                       <UserPicture size={USER_PICTURE_LARGE} user={loggedInUser} />
-                      <Flex flexDirection="column" justifyContent="center">
+                      <div className="flex flex-col justify-center">
                         <UserAppellation user={loggedInUser} withoutActions />
                         <Span fontSize="0.8em" color="black.500">
                           {loggedInUser.email}
                         </Span>
-                      </Flex>
+                      </div>
                     </UserHero>
                     <UserMenu user={loggedInUser} hasLogout isSelf>
                       {({ Icon, key, route, title, index, isActive, onClick }) => (
@@ -248,49 +244,37 @@ const Navbar = ({
                           isActive={isActive}
                           onClick={onClick}
                         >
-                          <Box>
+                          <div className="flex items-center gap-2">
                             <Icon size="1em" />
                             &nbsp;
                             {title}
-                          </Box>
+                          </div>
                         </UserMenuEntry>
                       )}
                     </UserMenu>
                   </div>
                 </MenuPopup>
-              </Flex>
+              </div>
             ) : (
-              <React.Fragment>
-                <StyledLink
-                  to={{ pathname: '/login', state: { redirect: loginRedirect } }}
-                  className="button is-primary is-outlined"
-                  mr={2}
-                >
-                  <span>{t('menu.login')}</span>
-                </StyledLink>
-                <StyledLink
-                  display={['none !important', 'inline-flex !important']}
-                  to="/extension"
-                  className="button is-primary"
-                  mr={2}
-                >
-                  <span>{t('menu.extension')}</span>
-                </StyledLink>
-                <Link
-                  to={{ pathname: '/signup', state: { redirect: loginRedirect } }}
-                  className="button is-primary"
-                >
-                  <span>{t('menu.signup')}</span>
+              <div className="flex gap-2">
+                <Link to="/extension" className="hidden sm:inline-flex" mr={2}>
+                  <Button variant="outline">{t('menu.extension')}</Button>
                 </Link>
-              </React.Fragment>
+                <Link to={{ pathname: '/login', state: { redirect: loginRedirect } }} mr={2}>
+                  <Button className="sm:h-9 sm:px-4 sm:py-2 sm:text-sm text-xs px-2">
+                    <LogIn size={16} />
+                    {t('menu.login')}
+                  </Button>
+                </Link>
+              </div>
             )}
-          </Flex>
+          </div>
         )}
       </NavbarContainer>
-    </Box>
+    </div>
   )
 }
 
 export default withTheme(
-  withLoggedInUser(withNamespaces('main')(withRouter(withResizeDetector(Navbar)))),
+  withLoggedInUser(withTranslation('main')(withRouter(withResizeDetector(Navbar)))),
 )

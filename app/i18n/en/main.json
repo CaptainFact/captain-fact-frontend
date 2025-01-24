@@ -1,11 +1,11 @@
 {
   "entities": {
     "video": "video",
-    "video_plural": "videos",
+    "video_other": "videos",
     "speaker": "speaker",
-    "speaker_plural": "speakers",
+    "speaker_other": "speakers",
     "statement": "statement",
-    "statement_plural": "statements",
+    "statement_other": "statements",
     "videoFactChecking": "Videos"
   },
   "menu": {
@@ -34,6 +34,7 @@
     "contact": "Contact"
   },
   "actions": {
+    "all": "Actions",
     "save": "Save",
     "cancel": "Cancel",
     "send": "Send",
@@ -63,9 +64,9 @@
     "fieldMaxLength": "Must be less than {{max}} characters",
     "and": "and",
     "other": "{{count}} other",
-    "other_plural": "{{count}} others",
+    "other_other": "{{count}} others",
     "character": "character",
-    "character_plural": "characters",
+    "character_other": "characters",
     "clipboardSuccess": "URL copied to clipboard",
     "clipboardFail": "Cannot copy to clipboard",
     "all": "All",
@@ -91,7 +92,7 @@
     "unlistedDescription": "Unlisted videos will not be listed on the \"videos\" page, nor in the browser extension. Use them to work on a content that you don't want to bring forward on the platform.",
     "requiredPoints": "{{requiredPoints}} pts required",
     "supportedPlatforms": "Currently supported platforms are YouTube and Facebook.",
-    "adviceTitle": "Which video is worth being added?",
+    "adviceTitle": "Which videos are worth being added?",
     "advice1": "Preferably, you are encouraged to add videos:",
     "adviceBulletPoint1": "from which you will extract and / or verify statements;",
     "adviceBulletPoint2": "that contain facts to check;",
@@ -117,5 +118,6 @@
   "all": "All",
   "partners": "Partners",
   "users": "Users",
-  "featured": "Featured"
+  "featured": "Featured",
+  "disconnected": "You are disconnected"
 }

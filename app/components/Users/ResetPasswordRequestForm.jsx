@@ -1,9 +1,10 @@
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { reduxForm } from 'redux-form'
 
 import { resetPasswordRequest } from '../../API/http_api/current_user'
-import Alert from '../Utils/Alert'
+import { Button } from '../ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { ErrorView } from '../Utils/ErrorView'
 import { UserEmailField } from './UserFormFields'
 
@@ -16,7 +17,7 @@ const validate = (params) => {
 }
 
 @reduxForm({ form: 'resetPassword', validate })
-@withNamespaces('user')
+@withTranslation('user')
 export default class ResetPasswordRequestForm extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -36,27 +37,33 @@ export default class ResetPasswordRequestForm extends React.PureComponent {
     }
     if (this.state.status === 'ready') {
       return (
-        <div>
+        <div className="space-y-4">
           <UserEmailField t={this.props.t} />
-          <button type="submit" className="button">
+          <Button type="submit" variant="outline">
             {this.props.t('resetPassword')}
-          </button>
+          </Button>
         </div>
       )
     }
     if (this.state.status === 'done') {
-      return <Alert>{this.props.t('resetPasswordRequestSuccess')}</Alert>
+      return this.props.t('resetPasswordRequestSuccess')
     }
   }
 
   render() {
     return (
-      <form
-        className="form user-form"
-        onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}
-      >
-        {this.renderContent()}
-      </form>
+      <div className="px-2 my-12">
+        <Card className="max-w-[500px] mx-auto">
+          <CardHeader>
+            <CardTitle>{this.props.t('resetPassword')}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}>
+              {this.renderContent()}
+            </form>
+          </CardContent>
+        </Card>
+      </div>
     )
   }
 }

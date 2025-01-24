@@ -1,10 +1,11 @@
-import { Save } from '@styled-icons/feather/Save'
-import { Slash } from '@styled-icons/feather/Slash'
-import classNames from 'classnames'
+import { ChevronLeft, ChevronRight, Lock, Mic, Save, Slash, Unlock } from 'lucide-react'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
+
+import { cn } from '@/lib/css-utils'
+import { Button } from '@/ui/button'
 
 import { STATEMENT_LENGTH } from '../../constants'
 import { cleanStrMultiline } from '../../lib/clean_str'
@@ -20,8 +21,7 @@ import {
 import { forcePosition } from '../../state/video_debate/video/reducer'
 import ControlTextarea from '../FormUtils/ControlTextarea'
 import SpeakersSelect from '../Speakers/SpeakersSelect'
-import UnstyledButton from '../StyledUtils/UnstyledButton'
-import { Icon } from '../Utils'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import TimeEdit from '../Utils/TimeEdit'
 
@@ -39,9 +39,9 @@ const validate = (values, props) => {
   }),
   { forcePosition, setScrollTo, incrementFormCount, decrementFormCount },
 )
-@withNamespaces('videoDebate')
+@withTranslation('videoDebate')
 @reduxForm({ form: STATEMENT_FORM_NAME, validate })
-export class StatementForm extends React.PureComponent {
+export class StatementForm extends React.Component {
   constructor(props) {
     super(props)
     const lockedTime =
@@ -55,7 +55,7 @@ export class StatementForm extends React.PureComponent {
 
   componentDidMount() {
     this.props.incrementFormCount()
-    this.containerRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    this.containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
   }
 
   componentWillUnmount() {
@@ -113,129 +113,154 @@ export class StatementForm extends React.PureComponent {
     const speaker = initialValues.speaker_id
       ? speakers.find((s) => s.id === initialValues.speaker_id)
       : null
-    const toggleTimeLockAction = this.state.lockedTime === false ? 'unlock' : 'lock'
+    const LockIcon = this.state.lockedTime === false ? Unlock : Lock
+
     return (
       <form
         ref={this.containerRef}
         onSubmit={handleSubmit(this.handleSubmit)}
-        className={classNames('statement-form', {
-          'card statement': !this.props.isBundled,
+        className={cn('bg-white rounded-lg shadow-lg border border-gray-200', {
+          'animate-fadeInDown z-10': !this.props.isBundled,
         })}
       >
-        <header className="card-header">
-          <div className="card-header-title">
-            <button
+        <header className="flex items-center gap-3 p-2 border-b border-gray-200">
+          <div className="flex-0 basis-0 flex items-center gap-1">
+            <Button
+              variant="ghost"
+              size="icon-xs"
               type="button"
-              className="button"
+              title={t('statement.reverseTimeLock', {
+                context: this.state.lockedTime === false ? 'unlock' : 'lock',
+              })}
+              onClick={this.toggleLock.bind(this)}
+            >
+              <LockIcon className="h-4 w-4" />
+            </Button>
+
+            <Button
+              variant="ghost"
+              size="icon-xs"
+              type="button"
+              className="w-6"
               onClick={() => this.moveTimeMarker(currentTime - 1)}
             >
-              <Icon name="caret-left" />
-            </button>
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+
             <TimeEdit
               time={currentTime}
               handleChange={this.moveTimeMarker}
               onTimeIconClick={() => this.moveTimeMarker(currentTime)}
             />
-            <button
+
+            <Button
+              variant="ghost"
+              size="icon-xs"
               type="button"
-              className="button"
+              className="w-6"
               onClick={() => this.moveTimeMarker(currentTime + 1)}
             >
-              <Icon name="caret-right" />
-            </button>
-            <button
-              type="button"
-              className="button"
-              title={t('statement.reverseTimeLock', {
-                context: toggleTimeLockAction,
-              })}
-              onClick={this.toggleLock.bind(this)}
-            >
-              <Icon size="small" name={toggleTimeLockAction} />
-            </button>
-            {speaker && speaker.picture && <img className="speaker-mini" src={speaker.picture} />}
-            <Field
-              name="speaker_id"
-              component={SpeakersSelect}
-              speakers={speakers}
-              placeholder={t('speaker.add')}
-              styles={this.state.emptySpeakerWarningHadBeenShown ? ReactSelectWarningStyles : null}
-              onChange={() => this.setState({ emptySpeakerWarningHadBeenShown: false })}
-            />
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+          <div className="flex items-center gap-2">
+            {speaker?.picture ? (
+              <img className="h-6 w-6 rounded-full" src={speaker.picture} alt={speaker.name} />
+            ) : (
+              <div className="h-6 w-6 rounded-full bg-gray-200 flex items-center justify-center">
+                <Mic size={12} className="text-gray-400" />
+              </div>
+            )}
+
+            <div>
+              <Field
+                name="speaker_id"
+                component={SpeakersSelect}
+                props={{ className: 'text-xs' }}
+                speakers={speakers}
+                placeholder={t('speaker.add')}
+                styles={
+                  this.state.emptySpeakerWarningHadBeenShown ? ReactSelectWarningStyles : null
+                }
+                onChange={() => this.setState({ emptySpeakerWarningHadBeenShown: false })}
+              />
+            </div>
           </div>
         </header>
-        <div className="card-content">
-          <div className="statement-text">
-            <Field
-              name="text"
-              component={ControlTextarea}
-              normalize={cleanStrMultiline}
-              props={{
-                autoFocus: true,
-                autosize: true,
-                hideErrorIfEmpty: true,
-                maxLength: STATEMENT_LENGTH[1],
-                placeholder: speaker
-                  ? t('statement.textPlaceholder')
-                  : t('statement.noSpeakerTextPlaceholder'),
-                warningMessage: this.state.emptySpeakerWarningHadBeenShown
-                  ? t('statement.noSpeakerWarning')
-                  : null,
-              }}
-            />
-          </div>
+
+        <div className="bg-[#31455d] text-white p-5 shadow-inner flex items-start gap-1">
+          <span className="h-[50px] -mt-2 sm:text-7xl text-5xl font-serif text-neutral-300">“</span>
+          <Field
+            name="text"
+            component={ControlTextarea}
+            normalize={cleanStrMultiline}
+            props={{
+              autoFocus: true,
+              autosize: true,
+              hideErrorIfEmpty: true,
+              minLength: STATEMENT_LENGTH[0],
+              maxLength: STATEMENT_LENGTH[1],
+              placeholder: speaker
+                ? t('statement.textPlaceholder')
+                : t('statement.noSpeakerTextPlaceholder'),
+              warningMessage: this.state.emptySpeakerWarningHadBeenShown
+                ? t('statement.noSpeakerWarning')
+                : null,
+              className:
+                'text-lg italic py-1 w-full min-h-[50px] md:text-lg text-white placeholder:text-gray-400 px-1',
+            }}
+          />
         </div>
-        <footer className="card-footer">
-          <UnstyledButton
+
+        <footer className="flex border-b border-gray-200">
+          <Button
             type="submit"
-            className={classNames('card-footer-item', 'submit-button', {
-              'is-loading': this.props.submitting,
-            })}
+            className="flex-1 rounded-none"
             disabled={!valid || this.props.submitting}
-            p=".75rem"
+            isLoading={this.props.submitting}
           >
-            <Save size="17px" />
-            &nbsp;
+            <Save className="h-4 w-4 mr-2" />
             {t('main:actions.save')}
-          </UnstyledButton>
-          <UnstyledButton
+          </Button>
+
+          <Button
             type="button"
-            p=".75rem"
-            className="card-footer-item"
+            variant="ghost"
+            className="flex-1 rounded-none border-l border-gray-200"
             disabled={this.props.submitting}
             onClick={handleAbort}
           >
-            <Slash size="17px" />
-            &nbsp;
+            <Slash className="h-4 w-4 mr-2" />
             {t('main:actions.cancel')}
-          </UnstyledButton>
+          </Button>
         </footer>
-        <div className="helpStatement">
-          <p>
-            <strong>{t('statement.help1')}</strong>
-          </p>
-          <p>{t('statement.help2')}</p>
-          <p>{t('statement.help3')}</p>
-          <p>{t('statement.help4')}</p>
-          <p>{t('statement.help5')}</p>
-          <p>
-            <i>{t('statement.help11')}</i>
-          </p>
-          <p>
-            <br />
-            <strong>{t('statement.help6')}</strong>
-          </p>
-          <p>{t('statement.help7')}</p>
-          <p>{t('statement.help8')}</p>
-          <p>{t('statement.help9')}</p>
-          <p>{t('statement.help10')}</p>
-          <p>
-            <br />
-            <ExternalLinkNewTab href="/help/contributionGuidelines">
-              {t('statement.helpLink')}
-            </ExternalLinkNewTab>
-          </p>
-        </div>
+
+        <Card className="m-3">
+          <CardHeader>
+            <CardTitle>{t('statement.helpTitle')}</CardTitle>
+          </CardHeader>
+          <CardContent className="text-sm">
+            <p className="font-medium">{t('statement.help1')}</p>
+            <p>{t('statement.help2')}</p>
+            <p>{t('statement.help3')}</p>
+            <p>{t('statement.help4')}</p>
+            <p>{t('statement.help5')}</p>
+            <p>
+              <i>{t('statement.help11')}</i>
+            </p>
+            <p className="font-medium mt-2">{t('statement.help6')}</p>
+            <p>{t('statement.help7')}</p>
+            <p>{t('statement.help8')}</p>
+            <p>{t('statement.help9')}</p>
+            <p>{t('statement.help10')}</p>
+            <p>
+              <br />
+              <ExternalLinkNewTab href="/help/contributionGuidelines">
+                {t('statement.helpLink')}
+              </ExternalLinkNewTab>
+            </p>
+          </CardContent>
+        </Card>
       </form>
     )
   }

@@ -17,6 +17,7 @@
   "dangerZone": "Danger Zone",
   "registeredSince": "Registered for <1/>",
   "forgottenPassword": "Forgotten password",
+  "settingsUpdated": "User settings updated",
   "resetPassword": "Reset password",
   "resetPasswordRequestSuccess": "If an account is associated with this address, look for an e-mail to reset your password.",
   "resetPasswordSuccess": "Password changed",

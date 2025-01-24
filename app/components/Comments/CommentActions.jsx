@@ -1,5 +1,6 @@
+import { Eye, EyeOff } from 'lucide-react'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 
 import CommentAction from './CommentAction'
 import OtherCommentActions from './OtherCommentActions'
@@ -16,27 +17,32 @@ const CommentActions = ({
   handleFlag,
   handleToggleShowReplies,
 }) => (
-  <nav className="comment-actions">
-    {isOwnComment ? (
-      <OwnCommentActions handleAddToThread={handleReply} handleDelete={handleDelete} />
-    ) : (
-      <OtherCommentActions
-        handleReply={handleReply}
-        handleFlag={handleFlag}
-        isFlagged={isFlagged}
-      />
-    )}
+  <div className="mt-2">
+    <div className="flex flex-wrap items-center gap-1">
+      {isOwnComment ? (
+        <OwnCommentActions handleAddToThread={handleReply} handleDelete={handleDelete} />
+      ) : (
+        <OtherCommentActions
+          handleReply={handleReply}
+          handleFlag={handleFlag}
+          isFlagged={isFlagged}
+        />
+      )}
+    </div>
     {nbReplies !== 0 && (
       <CommentAction
+        variant="outline"
         title={t('comment.replies', {
           context: repliesCollapsed ? 'show' : 'hide',
           count: nbReplies,
         })}
+        className="mt-1"
         iconName={repliesCollapsed ? 'eye' : 'eye-slash'}
+        icon={repliesCollapsed ? <Eye size="1em" /> : <EyeOff size="1em" />}
         onClick={handleToggleShowReplies}
       />
     )}
-  </nav>
+  </div>
 )
 
-export default withNamespaces('videoDebate')(CommentActions)
+export default withTranslation('videoDebate')(CommentActions)

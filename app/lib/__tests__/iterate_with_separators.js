@@ -9,16 +9,16 @@ it('should work with empty lists', () => {
 })
 
 it('should return a list of values with separators', () => {
-  expect(iteratorTester(['hello'])).toEqual([['hello', '']])
+  expect(iteratorTester(['hello'])).toEqual([['hello', '.']])
 
   expect(iteratorTester(['bananas', 'coconuts'])).toEqual([
     ['bananas', ' and '],
-    ['coconuts', ''],
+    ['coconuts', '.'],
   ])
 
   expect(iteratorTester(['bananas', 'coconuts', 'pineapple'])).toEqual([
     ['bananas', ', '],
     ['coconuts', ' and '],
-    ['pineapple', ''],
+    ['pineapple', '.'],
   ])
 })

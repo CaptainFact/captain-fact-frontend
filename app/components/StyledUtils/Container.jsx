@@ -3,6 +3,7 @@ import * as styledSystem from 'styled-system'
 
 import * as styledCustom from '../../lib/styled_components_custom'
 
+/** @deprecated */
 const Container = styled.div`
   ${styledSystem.alignItems}
   ${styledSystem.alignSelf}

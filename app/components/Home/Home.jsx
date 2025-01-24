@@ -1,330 +1,236 @@
-import { Flex } from '@rebass/grid'
+import { ExternalLink, ListVideo, LogIn, Mail, Puzzle } from 'lucide-react'
 import React from 'react'
-import { Trans, withNamespaces } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { ExternalLinkAlt } from 'styled-icons/fa-solid'
 
-import * as Matomo from '../../API/matomo'
+import { checkExtensionInstall } from '@/lib/browser-extension'
+
 import imgExample1 from '../../assets/example1.jpg'
 import examplesImg1 from '../../assets/examples/image-1.jpg'
 import examplesImg2 from '../../assets/examples/image-2.jpg'
 import examplesImg3 from '../../assets/examples/image-3.jpg'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import { useLoggedInUser } from '../LoggedInUser/UserProvider'
 import Container from '../StyledUtils/Container'
-import { Icon } from '../Utils'
+import { Button } from '../ui/button'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import CFSocialProfiles from './CFSocialProfiles'
 import LastVideos from './LastVideos'
 
-@withNamespaces('home')
-@withLoggedInUser
-export default class Home extends React.PureComponent {
-  render() {
-    const { t } = this.props
+const Home = () => {
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation('home')
+  const { isAuthenticated } = useLoggedInUser()
+  const [hasBrowserExtension, setHasBrowserExtension] = React.useState(false)
 
-    return (
-      <div className="home-page is-gradient-primary">
-        <section className="hero">
-          <div className="hero-body">
-            <div className="columns is-desktop">
-              <div className="column is-7-desktop">
-                <h1 className="title1">
-                  Captain
-                  <strong>
-                    <u>Fact</u>.
-                  </strong>
-                </h1>
-                <br />
-                <h2 className="title">{t('titleCF')}</h2>
-                <h2 className="title light-title">
-                  <Trans i18nKey="presentationTitle">
-                    To train a critical mind, improve the quality of information and
-                    decision-making.
-                    <br />
-                    <br />
-                    Against fake news, fraud and disinformation
-                  </Trans>
-                </h2>
-                <p className="presentation is-italic">{t('presentation')}</p>
-                <div className="columns">
-                  <div className="column is-5">
-                    <p className="presentation is-bold">{t('presentationTextButton1')}</p>
-                    <p>
-                      <Link
-                        onClick={() => Matomo.registerClick('Home', 'Button', 'ExtensionPage')}
-                        className="button is-medium"
-                        to="/extension"
-                      >
+  React.useEffect(() => {
+    checkExtensionInstall().then((hasExtension) => {
+      setHasBrowserExtension(hasExtension)
+    })
+  }, [])
+
+  return (
+    <div>
+      <section className="py-16 sm:py-32">
+        <div className="container mx-auto px-4">
+          <div className="lg:flex lg:space-x-8 lg:items-center">
+            <div className="lg:w-7/12">
+              <h1 className="text-4xl sm:text-6xl font-medium mb-4 font-serif tracking-wide">
+                Captain
+                <strong>
+                  <u>Fact</u>.
+                </strong>
+              </h1>
+              <br />
+              <h2 className="text-2xl sm:text-3xl font-semibold mb-1">{t('titleCF')}</h2>
+              <h2 className="text-xl font-light mb-2">
+                <Trans i18nKey="home:presentationTitle">
+                  To train a critical mind, improve the quality of information and decision-making.
+                </Trans>
+              </h2>
+              <p className="italic mb-6">{t('presentation')}</p>
+              <div className="flex flex-wrap gap-4">
+                <div className="w-full md:w-5/12">
+                  <p className="font-bold mb-4 min-h-[72px]">{t('presentationTextButton1')}</p>
+                  {!hasBrowserExtension && (
+                    <Link to="/extension">
+                      <Button variant="outline" className="h-auto">
+                        <Puzzle size="1em" />
                         {t('installExtension')}
-                      </Link>
-                    </p>
-                  </div>
-                  <div className="column is-5">
-                    <p className="presentation is-bold">{t('presentationTextButton2')}</p>
-                    <p>
-                      <Link
-                        onClick={() => Matomo.registerClick('Home', 'Button', 'SignUp')}
-                        className="button is-gradient-primary-light is-medium"
-                        to="/signup"
-                      >
+                      </Button>
+                    </Link>
+                  )}
+                </div>
+                <div className="w-full md:w-5/12">
+                  <p className="font-bold mb-4 min-h-[72px]">{t('presentationTextButton2')}</p>
+                  {!isAuthenticated && (
+                    <Link to="/signup">
+                      <Button className="h-auto">
+                        <LogIn size="1em" />
                         {t('registerAndFactCheck')}
-                      </Link>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="top-video column is-5-desktop is-flex">
-                <div className="responsive-video-container">
-                  <iframe
-                    className="responsive-youtube-video"
-                    width="100%"
-                    height="auto"
-                    src={
-                      this.props.lng === 'fr'
-                        ? 'https://www.youtube.com/embed/BxriDuVUuMQ'
-                        : 'https://www.youtube.com/embed/cZn72yBtIFw'
-                    }
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
+                      </Button>
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
+            <div className="w-full lg:w-5/12 mt-8 lg:mt-0">
+              <div className="relative w-full aspect-video">
+                <iframe
+                  className="absolute top-0 left-0 w-full h-full"
+                  src={
+                    language === 'fr'
+                      ? 'https://www.youtube.com/embed/BxriDuVUuMQ'
+                      : 'https://www.youtube.com/embed/cZn72yBtIFw'
+                  }
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  title="CaptainFact Presentation"
+                />
+              </div>
+            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {this.props.lng === 'fr' && process.env.HIDE_FR_SITE !== 'true' && (
-          <section className="section know-more-fr has-text-centered">
-            <p className="has-text-weight-semibold">
-              {t('knowMoreFR')}
-              <br />
-              <ExternalLinkNewTab href="https://fr.captainfact.io/#partenariat" rel="nofollow">
-                Partenariats
-              </ExternalLinkNewTab>{' '}
-              –{' '}
-              <ExternalLinkNewTab href="https://fr.captainfact.io/#actions" rel="nofollow">
-                Actions
-              </ExternalLinkNewTab>{' '}
-              –{' '}
-              <ExternalLinkNewTab
-                href="https://fr.captainfact.io/presentation-du-journal-du-fact-checking-collaboratif"
-                rel="nofollow"
-              >
-                Journal
-              </ExternalLinkNewTab>{' '}
-              –{' '}
-              <ExternalLinkNewTab href="https://fr.captainfact.io/forum-captainfact" rel="nofollow">
-                Forum
-              </ExternalLinkNewTab>{' '}
-              –{' '}
-              <ExternalLinkNewTab href="https://fr.captainfact.io/#participer" rel="nofollow">
-                Donateurs
-              </ExternalLinkNewTab>{' '}
-              –{' '}
-              <ExternalLinkNewTab href="https://discord.captainfact.io" rel="nofollow">
-                Discord
-              </ExternalLinkNewTab>{' '}
-              –{' '}
-              <ExternalLinkNewTab href="https://fr.captainfact.io/equipe" rel="nofollow">
-                Équipe
+      <section className="py-12 bg-gray-100">
+        <div className="container mx-auto px-4">
+          {/* First row */}
+          <div className="flex flex-wrap -mx-4 mb-16">
+            <div className="w-full md:w-6/12 px-4 mb-8 md:mb-0">
+              <h2 className="text-3xl font-semibold mb-4">{t('howTitle')}</h2>
+              <Container color="black.600">
+                {t('how')}
+                <ol className="list-decimal pl-6 space-y-2 mt-2 mb-4">
+                  <li className="ml-2">{t('how1')}</li>
+                  <li className="ml-2">{t('how2')}</li>
+                  <li className="ml-2">{t('how3')}</li>
+                </ol>
+              </Container>
+              <p>{t('how4')}</p>
+              <ExternalLinkNewTab href="https://www.youtube.com/watch?v=LsRkg2hRTiI">
+                <Button variant="outline" className="mt-4">
+                  {t('demo')} <ExternalLink size={16} />
+                </Button>
               </ExternalLinkNewTab>
-              <br />
-              <ExternalLinkNewTab className="button is-large" href="https://fr.captainfact.io">
-                {t('goToFRSite')}
-              </ExternalLinkNewTab>
-            </p>
-          </section>
-        )}
+            </div>
+            <div className="w-full md:w-6/12 px-4">
+              <img src={imgExample1} alt="exemple video captainfact" className="mb-4 w-full" />
+            </div>
+          </div>
 
-        <section className="section last-videos" style={{ paddingBottom: '3em' }}>
-          <div className="has-text-centered">
-            <h2 className="title is-3">{t('latest')}</h2>
+          {/* Second row */}
+          <div className="flex flex-wrap -mx-4 mb-16">
+            <div className="w-full md:w-6/12 px-4 mb-8 md:mb-0">
+              <img src={examplesImg1} alt="CaptainFact interface example" className="w-full" />
+            </div>
+            <div className="w-full md:w-6/12 px-4">
+              <div className="md:pl-8">
+                <h2 className="text-3xl font-semibold mb-4">{t('example1Title1')}</h2>
+                <h2 className="text-2xl font-light mb-4">{t('example1Title2')}</h2>
+                <p className="mb-6">{t('example1Text')}</p>
+                <Link to="/extension">
+                  <Button variant="outline">
+                    <Puzzle size="1em" />
+                    {t('installExtension')}
+                  </Button>
+                </Link>
+              </div>
+            </div>
           </div>
-          <div className="last-videos-cards">
-            <LastVideos />
+
+          {/* Third row */}
+          <div className="flex flex-wrap -mx-4 mb-16">
+            <div className="w-full md:w-6/12 px-4 mb-8 md:mb-0">
+              <div className="md:pr-8">
+                <h2 className="text-3xl font-semibold mb-4">{t('example2Title1')}</h2>
+                <h2 className="text-2xl font-light mb-4">{t('example2Title2')}</h2>
+                <p className="mb-6">{t('example2Text')}</p>
+                <Link to="/signup">
+                  <Button variant="outline">
+                    <LogIn size={16} />
+                    {t('registerAndFactCheck')}
+                  </Button>
+                </Link>
+              </div>
+            </div>
+            <div className="w-full md:w-6/12 px-4">
+              <img src={examplesImg2} alt="CaptainFact interface example" className="w-full" />
+            </div>
           </div>
-          <Flex justifyContent="center" mt={3}>
-            <Link
-              onClick={() => Matomo.registerClick('Home', 'Button', 'SeeAllVideos')}
-              className="button is-medium"
-              to="/videos"
-            >
+
+          {/* Fourth row */}
+          <div className="flex flex-wrap -mx-4">
+            <div className="w-full md:w-6/12 px-4 mb-8 md:mb-0">
+              <img src={examplesImg3} alt="CaptainFact interface example" className="w-full" />
+            </div>
+            <div className="w-full md:w-6/12 px-4">
+              <div className="md:pl-8">
+                <h2 className="text-3xl font-semibold mb-4">{t('example3Title1')}</h2>
+                <h2 className="text-2xl font-light mb-4">{t('example3Title2')}</h2>
+                <p className="mb-6">{t('example3Text')}</p>
+                <ExternalLinkNewTab href="https://github.com/CaptainFact/captain-fact/wiki/Les-partenariats-entre-les-chaînes-Youtube-et-CaptainFact.io">
+                  <Button variant="outline">
+                    {t('learnMore')}
+                    {language !== 'fr' ? ' (FR)' : ''}
+                    <ExternalLink size={16} />
+                  </Button>
+                </ExternalLinkNewTab>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-12 pb-16 bg-white">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-semibold">{t('latest')}</h2>
+        </div>
+        <div className="container mx-auto px-4 mt-12 mb-12">
+          <LastVideos />
+        </div>
+        <div className="flex justify-center mt-3">
+          <Link to="/videos">
+            <Button variant="outline">
+              <ListVideo size={16} />
               {t('seeVideos')}
-            </Link>
-          </Flex>
-        </section>
+            </Button>
+          </Link>
+        </div>
+      </section>
 
-        <section className="section section-alt-bg has-text-centered">
-          <h2 className="title-alt">
-            <strong>{t('headerPunchline')}</strong>
-            <br />
-            {t('headerPunchline2')}
-          </h2>
-        </section>
-
-        <section className="section hero has-background-white">
-          <div className="hero-body how">
-            <div className="columns">
-              <div className="column is-6 presentation content">
-                <br />
-                <br />
-                <h2 className="title is-3">{t('howTitle')}</h2>
-                <Container color="black.600">
-                  {t('how')}
-                  <br />
-                  <ol>
-                    <li>{t('how1')}</li>
-                    <li>{t('how2')}</li>
-                    <li>{t('how3')}</li>
-                  </ol>
-                </Container>
-                <p>{t('how4')}</p>
-              </div>
-              <div className="column is-6">
-                <br />
-                <br />
-                <img src={imgExample1} alt="exemple video captainfact" />
-                <br />
-                <ExternalLinkNewTab href="https://www.youtube.com/watch?v=LsRkg2hRTiI">
-                  {t('demo')} <ExternalLinkAlt size="1em" />
-                </ExternalLinkNewTab>
-              </div>
+      <section className="py-20 bg-gray-100">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-wrap">
+            <div className="w-full md:w-1/2 px-4 mb-8 md:mb-0">
+              <h2 className="text-2xl font-bold mb-2">{t('forWho1Title1')}</h2>
+              <h2 className="text-2xl font-light mb-4">{t('forWho1Title2')}</h2>
+              <p className="mb-6">{t('forWho1Text')}</p>
             </div>
-            <div className="columns">
-              <div className="column is-6">
-                <br />
-                <br />
-                <img src={examplesImg1} alt="exemple image captainfact" />
-                <br />
-                <br />
-              </div>
-              <div className="column is-6 presentation content">
-                <br />
-                <br />
-                <h2 className="title-alt">{t('example1Title1')}</h2>
-                <h2 className="title light-title is-3">{t('example1Title2')}</h2>
-                <p>
-                  {t('example1Text')}
-                  <br />
-                </p>
-                <Link
-                  onClick={() => Matomo.registerClick('Home', 'Button', 'ExtensionPage')}
-                  className="button is-medium"
-                  to="/extension"
-                >
-                  {t('installExtension')}
-                </Link>
-              </div>
-            </div>
-            <div className="columns">
-              <div className="column is-6 presentation content">
-                <br />
-                <br />
-                <h2 className="title-alt">{t('example2Title1')}</h2>
-                <h2 className="title light-title is-3">{t('example2Title2')}</h2>
-                <p>
-                  {t('example2Text')}
-                  <br />
-                </p>
-                <Link
-                  onClick={() => Matomo.registerClick('Home', 'Button', 'SignUp')}
-                  className="button is-medium"
-                  to="/signup"
-                >
-                  {t('registerAndFactCheck')}
-                </Link>
-              </div>
-              <div className="column is-6 ">
-                <br />
-                <br />
-                <img src={examplesImg2} alt="exemple image captainfact" />
-                <br />
-                <br />
-              </div>
-            </div>
-            <div className="columns">
-              <div className="column is-6">
-                <br />
-                <br />
-                <img src={examplesImg3} alt="exemple image captainfact" />
-                <br />
-                <br />
-              </div>
-              <div className="column is-6 presentation content">
-                <br />
-                <br />
-                <h2 className="title-alt">{t('example3Title1')}</h2>
-                <h2 className="title light-title is-3">{t('example3Title2')}</h2>
-                <p>
-                  {t('example3Text')}
-                  <br />
-                </p>
-                <ExternalLinkNewTab
-                  className="button is-medium"
-                  href="https://github.com/CaptainFact/captain-fact/wiki/Les-partenariats-entre-les-chaînes-Youtube-et-CaptainFact.io"
-                >
-                  {t('learnMore')}
-                  {this.props.lng !== 'fr' ? ' (FR)' : ''}
-                </ExternalLinkNewTab>
-              </div>
+            <div className="w-full md:w-1/2 px-4">
+              <h2 className="text-2xl font-bold mb-2">{t('forWho2Title1')}</h2>
+              <h2 className="text-2xl font-light mb-4">{t('forWho2Title2')}</h2>
+              <p className="mb-6">{t('forWho2Text')}</p>
             </div>
           </div>
-        </section>
-
-        <section className="section hero section-alt-bg">
-          <div className="hero-body">
-            <div className="columns">
-              <div className="column is-6">
-                <h2 className="title-alt is-bold">{t('forWho1Title1')}</h2>
-                <h2 className="title light-title is-3">{t('forWho1Title2')}</h2>
-                <p className="presentation">{t('forWho1Text')}</p>
-              </div>
-              <div className="column is-6">
-                <h2 className="title-alt is-bold">{t('forWho2Title1')}</h2>
-                <h2 className="title light-title is-3">{t('forWho2Title2')}</h2>
-                <p className="presentation">{t('forWho2Text')}</p>
-              </div>
-            </div>
-            <Link
-              onClick={() => Matomo.registerClick('Home', 'Button', 'ContactUs')}
-              className="button is-primary is-medium"
-              to="/help/contact"
-            >
-              {t('contactus')}
+          <div className="flex justify-center mt-4">
+            <Link to="/help/contact">
+              <Button variant="outline">
+                <Mail size={14} />
+                {t('contactus')}
+              </Button>
             </Link>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {this.props.lng === 'fr' && process.env.HIDE_FR_SITE !== 'true' && (
-          <section className="section know-more-fr has-text-centered">
-            <p className="has-text-weight-semibold">
-              {t('knowMoreFR')}
-              <br />
-              <ExternalLinkNewTab className="button is-large" href="https://fr.captainfact.io">
-                {t('goToFRSite')}
-              </ExternalLinkNewTab>
-            </p>
-          </section>
-        )}
-
-        <section className="section">
-          <CFSocialProfiles size="3em" color="white" />
-        </section>
-
-        <footer className="footer">
-          <div className="has-text-centered">
-            <Trans i18nKey="footer">
-              Created with <Icon name="heart" /> using
-            </Trans>
-            <ExternalLinkNewTab href="https://elixir-lang.org">Elixir</ExternalLinkNewTab>
-            ,&nbsp;
-            <ExternalLinkNewTab href="https://phoenixframework.org">Phoenix</ExternalLinkNewTab>
-            &nbsp;{t('main:misc.and')}&nbsp;
-            <ExternalLinkNewTab href="https://reactjs.org/">React</ExternalLinkNewTab>
-          </div>
-        </footer>
-      </div>
-    )
-  }
+      <section className="py-12 bg-gradient-to-b from-primary/90 to-primary/80 text-white">
+        <CFSocialProfiles />
+      </section>
+    </div>
+  )
 }
+
+export default Home

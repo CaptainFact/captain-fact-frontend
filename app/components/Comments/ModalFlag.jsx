@@ -1,5 +1,5 @@
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import { formValueSelector } from 'redux-form'
 
@@ -10,7 +10,7 @@ import FlagForm from './FlagForm'
 const flagFormValueSelector = formValueSelector('flagForm')
 
 @connect((state) => ({ selectedReason: flagFormValueSelector(state, 'reason') }))
-@withNamespaces('videoDebate')
+@withTranslation('videoDebate')
 export default class ModalFlag extends React.PureComponent {
   state = { isLoading: true, flagsAvailable: 0, error: null }
 
@@ -37,7 +37,6 @@ export default class ModalFlag extends React.PureComponent {
         confirmIcon="flag"
         FormComponent={FlagForm}
         formProps={{ comment, initialValues: { reason: initialReason } }}
-        helpLink="/help/moderation"
         {...otherProps}
       />
     )

@@ -1,27 +1,39 @@
+import {
+  ChevronDown,
+  ChevronUp,
+  Flag,
+  HelpCircle,
+  ListChecks,
+  Pencil,
+  Plus,
+  Undo,
+  X,
+} from 'lucide-react'
 import React from 'react'
 
-import Icon from '../Utils/Icon'
-
 const ACTIONS_ICONS = {
-  create: 'plus',
-  remove: 'times',
-  update: 'pencil',
-  delete: 'times',
-  add: 'plus',
-  revert: 'undo',
-  flag: 'flag',
-  confirmed_flag: 'flag',
-  vote_up: 'chevron-up',
-  vote_down: 'chevron-down',
-  self_vote: 'chevron-up',
-  revert_vote_up: 'chevron-down',
-  revert_vote_down: 'chevron-up',
-  revert_self_vote: 'chevron-down',
-  start_automatic_statements_extraction: 'tasks',
+  create: Plus,
+  remove: X,
+  update: Pencil,
+  delete: X,
+  add: Plus,
+  revert: Undo,
+  flag: Flag,
+  confirmed_flag: Flag,
+  vote_up: ChevronUp,
+  vote_down: ChevronDown,
+  self_vote: ChevronUp,
+  revert_vote_up: ChevronDown,
+  revert_vote_down: ChevronUp,
+  revert_self_vote: ChevronDown,
+  start_automatic_statements_extraction: ListChecks,
 }
 
-const getIconName = (type) => ACTIONS_ICONS[type] || 'question'
+const getIcon = (type) => ACTIONS_ICONS[type] || HelpCircle
 
-const ActionIcon = ({ type }) => <Icon name={getIconName(type)} size="mini" />
+const ActionIcon = ({ type, className, size = 14 }) => {
+  const Icon = getIcon(type)
+  return <Icon className={className} size={size} />
+}
 
 export default ActionIcon

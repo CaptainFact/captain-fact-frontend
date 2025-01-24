@@ -1,3 +1,4 @@
+import { AtSign, IdCard, Lock, Mail } from 'lucide-react'
 import React from 'react'
 import { Field } from 'redux-form'
 import isEmail from 'validator/lib/isEmail'
@@ -6,20 +7,20 @@ import { NAME_LENGTH, PASSWORD_LENGTH, USERNAME_LENGTH } from '../../constants'
 import { cleanStr } from '../../lib/clean_str'
 import { validateFieldLength } from '../../lib/form_validators'
 import ControlInput from '../FormUtils/ControlInput'
-import Button from '../Utils/Button'
+import { Button } from '../ui/button'
 
 // Common validators for Signup / Login
 
 export const validatePasswordRepeat = ({ password, passwordRepeat }) => {
   if (passwordRepeat !== password) {
-    return { passwordRepeat: "Passwords doesn't match" }
+    return { passwordRepeat: "Passwords don't match" }
   }
   return {}
 }
 
 // Common fields
 
-export const UserEmailField = ({ t }) => {
+export const UserEmailField = ({ t, ...props }) => {
   const validate = React.useCallback(
     (email) => (!email || !isEmail(email)) && t('errors:server.invalid_email'),
     [t],
@@ -31,9 +32,10 @@ export const UserEmailField = ({ t }) => {
       type="email"
       placeholder={t('email')}
       component={ControlInput}
-      icon="envelope"
+      icon={<Mail size={16} className="text-gray-300" />}
       normalize={(s) => s.trim()}
       validate={validate}
+      {...props}
     />
   )
 }
@@ -45,7 +47,7 @@ export const UserEmailOrUsernameField = ({ t }) => {
       type="text"
       placeholder={t('emailOrUsername')}
       component={ControlInput}
-      icon="user"
+      icon={<IdCard size={16} className="text-gray-300" />}
       normalize={(s) => s.trim()}
     />
   )
@@ -63,7 +65,7 @@ export const UserPasswordField = ({ t, isOptional = false }) => {
       type="password"
       component={ControlInput}
       validate={validate}
-      icon="lock"
+      icon={<Lock size={16} className="text-gray-300" />}
     />
   )
 }
@@ -75,12 +77,12 @@ export const UserPasswordRepeatField = ({ t }) => {
       placeholder={t('repeatPassword')}
       type="password"
       component={ControlInput}
-      icon="lock"
+      icon={<Lock size={16} className="text-gray-300" />}
     />
   )
 }
 
-export const UserUsernameField = ({ t }) => {
+const UserUsernameField = ({ t }) => {
   const validate = React.useCallback((v) => validateFieldLength(t, v, USERNAME_LENGTH), [t])
   return (
     <Field
@@ -88,13 +90,13 @@ export const UserUsernameField = ({ t }) => {
       placeholder={t('username')}
       component={ControlInput}
       normalize={(s) => s.trim()}
-      icon="at"
+      icon={<AtSign size={16} className="text-gray-300" />}
       validate={validate}
     />
   )
 }
 
-export const UserNameField = ({ t }) => {
+const UserNameField = ({ t }) => {
   const validate = React.useCallback((v) => v && validateFieldLength(t, v, NAME_LENGTH), [t])
   return (
     <Field
@@ -102,22 +104,33 @@ export const UserNameField = ({ t }) => {
       placeholder={`${t('realName')} (${t('optional')})`}
       component={ControlInput}
       normalize={cleanStr}
-      icon="identity"
+      icon={<IdCard size={16} className="text-gray-300" />}
       validate={validate}
     />
   )
 }
 
-export const submitButton = (text, valid) => (
-  <p className="control">
-    <Button type="submit" className="is-success is-medium" disabled={!valid}>
+export const submitButton = (
+  text,
+  valid,
+  { loading = false, size = 'default', variant = 'default' } = {},
+) => (
+  <div className="mt-6">
+    <Button
+      type="submit"
+      loading={loading}
+      disabled={!valid}
+      size={size}
+      variant={variant}
+      className="w-full"
+    >
       {text}
     </Button>
-  </p>
+  </div>
 )
 
 export const renderAllUserFields = (t, isPasswdOptional = false) => (
-  <div>
+  <div className="space-y-4">
     <UserUsernameField t={t} />
     <UserNameField t={t} />
     <UserEmailField t={t} />

@@ -5,7 +5,7 @@ import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import { ErrorView } from './ErrorView'
 import { LoadingFrame } from './LoadingFrame'
 
-export const DumbReputationGuard = ({
+const DumbReputationGuard = ({
   loggedInUser,
   loggedInUserLoading,
   checkReputation,

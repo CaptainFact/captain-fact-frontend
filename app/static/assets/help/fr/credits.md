@@ -20,8 +20,9 @@ une preuve d'honnêteté et de rigueur intellectuelle exemplaire.
 
 - [Elixir](https://elixir-lang.org)
 - [Phoenix Framework](https://github.com/phoenixframework/phoenix)
+- [Absinthe GraphQL](https://github.com/absinthe-graphql/absinthe)
 - [React](https://facebook.github.io/react/)
-- [Bulma](http://bulma.io/)
+- [TailwindCSS](https://tailwindcss.com/)
 - [Redux](http://redux.js.org/)
 - La fondation Wikimedia pour les images d'intervenants et d'autres métadonées associées. Vous
   pouvez trouvez plus d'informations sur cette partie sur

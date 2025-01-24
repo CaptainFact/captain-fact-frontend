@@ -1,19 +1,20 @@
 import { Mutation } from '@apollo/client/react/components'
-import { Flex } from '@rebass/grid'
 import { Formik } from 'formik'
 import gql from 'graphql-tag'
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import Select from 'react-select'
 import { Edit } from 'styled-icons/fa-regular'
 
-import { flashErrorMsg, flashSuccessMsg } from '../../state/flashes/reducer'
+import { toast } from '@/hooks/use-toast'
+
 import { popModal } from '../../state/modals/reducer'
 import { shiftStatements } from '../../state/video_debate/effects'
 import FieldWithButton from '../FormUtils/FieldWithButton'
 import Modal from '../Modal/Modal'
 import { StyledH3 } from '../StyledUtils/Title'
+import { Separator } from '../ui/separator'
 
 const editVideoMutation = gql`
   mutation editVideo($id: ID!, $unlisted: Boolean) {
@@ -27,7 +28,7 @@ const editVideoMutation = gql`
 class EditVideoModal extends React.PureComponent {
   renderTitle() {
     return (
-      <div className="is-flex gap-2">
+      <div className="flex gap-2 items-center">
         <Edit size="1em" /> {this.props.t('video.edit')}
       </div>
     )
@@ -42,7 +43,7 @@ class EditVideoModal extends React.PureComponent {
 
     return (
       <Modal handleCloseClick={popModal} title={this.renderTitle()}>
-        <Flex flexDirection="column">
+        <div className="flex flex-col">
           <StyledH3 mb={2} fontSize="15px" fontWeight="700">
             Change visibility
           </StyledH3>
@@ -56,11 +57,14 @@ class EditVideoModal extends React.PureComponent {
                     await editVideo({
                       variables: { id: video.id, unlisted: values.unlisted },
                     })
-                    this.props.flashSuccessMsg('Visibility changed')
+                    toast({ description: 'Visibility changed' })
                     window.location.reload()
                   } catch (e) {
                     console.error(e) // eslint-disable-line no-console
-                    this.props.flashErrorMsg('Failed to change visibility')
+                    toast({
+                      variant: 'error',
+                      description: 'Failed to change visibility',
+                    })
                   }
                 }}
               >
@@ -86,11 +90,11 @@ class EditVideoModal extends React.PureComponent {
               </Formik>
             )}
           </Mutation>
-        </Flex>
+        </div>
         {video['youtube_id'] && (
           <React.Fragment>
-            <hr />
-            <Flex flexDirection="column">
+            <Separator className="my-4" />
+            <div className="flex flex-col">
               <StyledH3 mb={2} fontSize="15px" fontWeight="700">
                 {t('video.shiftStatements')}
               </StyledH3>
@@ -122,7 +126,7 @@ class EditVideoModal extends React.PureComponent {
                   </form>
                 )}
               </Formik>
-            </Flex>
+            </div>
           </React.Fragment>
         )}
       </Modal>
@@ -132,11 +136,9 @@ class EditVideoModal extends React.PureComponent {
 
 const mapDispatchToProps = {
   popModal,
-  flashErrorMsg,
-  flashSuccessMsg,
   shiftStatements,
 }
 
-export default withNamespaces(['videoDebate', 'main'])(
+export default withTranslation(['videoDebate', 'main'])(
   connect((state) => ({ video: state.VideoDebate.video.data }), mapDispatchToProps)(EditVideoModal),
 )
