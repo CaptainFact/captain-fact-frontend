@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v3
         with:
-          node-version-file: '.tool-versions'
+          node-version-file: package.json
           cache: 'npm'
       - name: Install dependencies
         run: CYPRESS_INSTALL_BINARY=0 npm ci
@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v3
         with:
-          node-version-file: '.tool-versions'
+          node-version-file: package.json
           cache: 'npm'
       - name: Install dependencies
         run: CYPRESS_INSTALL_BINARY=0 npm ci
@@ -33,7 +33,7 @@ jobs:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v3
         with:
-          node-version-file: '.tool-versions'
+            node-version-file: package.json
           cache: 'npm'
       - name: Install dependencies
         run: CYPRESS_INSTALL_BINARY=0 npm ci
@@ -45,7 +45,7 @@ jobs:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v3
         with:
-          node-version-file: '.tool-versions'
+          node-version-file: package.json
           cache: 'npm'
       - name: Install dependencies
         run: CYPRESS_INSTALL_BINARY=0 npm ci
@@ -58,7 +58,7 @@ jobs:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v3
         with:
-          node-version-file: '.tool-versions'
+          node-version-file: package.json
           cache: 'npm'
       - name: Install dependencies
         run: CYPRESS_INSTALL_BINARY=0 npm ci

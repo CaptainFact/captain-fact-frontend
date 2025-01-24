@@ -55,7 +55,7 @@ const PaginatedVideosContainer = ({
         const videos = get(data, videosPath, INITIAL_VIDEOS)
         if (error) {
           return (
-            <div className="w-fit mx-auto">
+            <div className="w-fit mx-auto px-2">
               <ErrorView error={error} />
             </div>
           )
