@@ -6,7 +6,11 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 
 const loggedInUserNotificationsQuery = gql`
-  query LoggedInUserNotifications($page: Int! = 1, $pageSize: Int! = 30, $filter: NotificationsFilter = ALL) {
+  query LoggedInUserNotifications(
+    $page: Int! = 1
+    $pageSize: Int! = 30
+    $filter: NotificationsFilter = ALL
+  ) {
     loggedInUser {
       id
       notifications(page: $page, pageSize: $pageSize, filter: $filter) {

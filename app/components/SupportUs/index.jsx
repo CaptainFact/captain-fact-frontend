@@ -28,7 +28,7 @@ const SupportUs = () => {
   const ocDomain = OPENCOLLECTIVE_DOMAINS[JS_ENV] || OPENCOLLECTIVE_DOMAINS.prod
   const iframeUrlParams = getIframeURLParams(isAuthenticated, loggedInUser)
   return (
-    <div className='flex justify-center items-center h-[--main-height] w-full overflow-y-auto'>
+    <div className="flex justify-center items-center h-[--main-height] w-full overflow-y-auto">
       {isLoading && <LoadingFrame />}
       <iframe
         ref={iframeRef}
