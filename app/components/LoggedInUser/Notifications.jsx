@@ -6,7 +6,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 
 const loggedInUserNotificationsQuery = gql`
-  query LoggedInUserNotifications($page: Int! = 1, $pageSize: Int! = 30, $filter: String = ALL) {
+  query LoggedInUserNotifications($page: Int! = 1, $pageSize: Int! = 30, $filter: NotificationsFilter = ALL) {
     loggedInUser {
       id
       notifications(page: $page, pageSize: $pageSize, filter: $filter) {
@@ -50,7 +50,7 @@ const loggedInUserNotificationsQuery = gql`
 `
 
 const markAsSeenMutation = gql`
-  mutation UpdateNotification($ids: [Int!], $seen: Boolean!) {
+  mutation UpdateNotification($ids: [ID]!, $seen: Boolean!) {
     updateNotifications(ids: $ids, seen: $seen) {
       id
       seenAt

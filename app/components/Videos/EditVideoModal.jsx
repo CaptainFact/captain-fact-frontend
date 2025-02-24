@@ -17,7 +17,7 @@ import { StyledH3 } from '../StyledUtils/Title'
 import { Separator } from '../ui/separator'
 
 const editVideoMutation = gql`
-  mutation editVideo($id: ID!, $unlisted: Boolean) {
+  mutation editVideo($id: ID!, $unlisted: Boolean!) {
     editVideo(id: $id, unlisted: $unlisted) {
       id
       unlisted
@@ -73,7 +73,6 @@ class EditVideoModal extends React.PureComponent {
                     <Select
                       className="speaker-select"
                       placeholder="Select visibility"
-                      menuPortalTarget={document.body}
                       styles={{ menuPortal: (base) => ({ ...base, zIndex: 99999 }) }}
                       options={unlistedOptions}
                       value={unlistedOptions.find((option) => option.value === values.unlisted)}
