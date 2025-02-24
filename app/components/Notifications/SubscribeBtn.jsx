@@ -7,7 +7,7 @@ import { Bell, BellSlash } from 'styled-icons/fa-solid'
 import Action from '../VideoDebate/Actions/ActionButton'
 
 const updateSubscriptionQuery = gql`
-  mutation UpdateSubscription($entityId: Int!, $scope: String!, $isSubscribed: Boolean!) {
+  mutation UpdateSubscription($entityId: ID!, $scope: String!, $isSubscribed: Boolean!) {
     updateSubscription(entityId: $entityId, scope: $scope, isSubscribed: $isSubscribed) {
       id
       isSubscribed
