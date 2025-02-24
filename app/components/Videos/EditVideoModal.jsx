@@ -17,7 +17,7 @@ import { StyledH3 } from '../StyledUtils/Title'
 import { Separator } from '../ui/separator'
 
 const editVideoMutation = gql`
-  mutation editVideo($id: ID!, $unlisted: Boolean) {
+  mutation editVideo($id: ID!, $unlisted: Boolean!) {
     editVideo(id: $id, unlisted: $unlisted) {
       id
       unlisted

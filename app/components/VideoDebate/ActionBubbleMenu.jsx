@@ -16,7 +16,7 @@ import { hasStatementForm } from '../../state/video_debate/statements/selectors'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 
 const startAutomaticStatementsExtractionMutation = gql`
-  mutation StartAutomaticStatementsExtraction($videoId: Int!) {
+  mutation StartAutomaticStatementsExtraction($videoId: ID!) {
     startAutomaticStatementsExtraction(videoId: $videoId) {
       id
     }

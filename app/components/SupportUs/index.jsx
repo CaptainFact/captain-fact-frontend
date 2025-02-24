@@ -3,7 +3,6 @@ import React from 'react'
 import { JS_ENV } from '../../config'
 import { optionsToQueryString } from '../../lib/url_utils'
 import { useLoggedInUser } from '../LoggedInUser/UserProvider'
-import Container from '../StyledUtils/Container'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 
 const getIframeURLParams = (isAuthenticated, loggedInUser) => {
@@ -17,7 +16,7 @@ const getIframeURLParams = (isAuthenticated, loggedInUser) => {
 }
 
 const OPENCOLLECTIVE_DOMAINS = {
-  dev: 'http://localhost:3000',
+  dev: 'https://opencollective.com',
   staging: 'https://staging.opencollective.com',
   prod: 'https://opencollective.com',
 }
@@ -29,7 +28,7 @@ const SupportUs = () => {
   const ocDomain = OPENCOLLECTIVE_DOMAINS[JS_ENV] || OPENCOLLECTIVE_DOMAINS.prod
   const iframeUrlParams = getIframeURLParams(isAuthenticated, loggedInUser)
   return (
-    <Container display="flex" width="100%" height="100%" justifyContent="center">
+    <div className="flex justify-center items-center h-[--main-height] w-full overflow-y-auto">
       {isLoading && <LoadingFrame />}
       <iframe
         ref={iframeRef}
@@ -38,7 +37,7 @@ const SupportUs = () => {
         onLoad={() => setLoading(false)}
         title="Support us on Open Collective"
       />
-    </Container>
+    </div>
   )
 }
 
