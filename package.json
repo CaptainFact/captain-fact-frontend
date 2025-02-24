@@ -102,7 +102,7 @@
     "react-dom": "18.3.1",
     "react-flip-move": "3.0.5",
     "react-helmet": "6.1.0",
-    "react-i18next": "^12.3.1",
+    "react-i18next": "^15.4.1",
     "react-instantsearch-dom": "6.40.4",
     "react-markdown": "9.0.3",
     "react-player": "~2.14.1",
