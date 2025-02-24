@@ -73,6 +73,7 @@ class EditVideoModal extends React.PureComponent {
                     <Select
                       className="speaker-select"
                       placeholder="Select visibility"
+                      menuPortalTarget={document.body}
                       styles={{ menuPortal: (base) => ({ ...base, zIndex: 99999 }) }}
                       options={unlistedOptions}
                       value={unlistedOptions.find((option) => option.value === values.unlisted)}
