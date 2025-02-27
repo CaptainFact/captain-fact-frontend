@@ -117,7 +117,7 @@
     "redux-actions": "~2.6.5",
     "redux-form": "8.3.9",
     "redux-promise": "~0.6.0",
-    "redux-thunk": "~2.3.0",
+    "redux-thunk": "~3.1.0",
     "remark-gfm": "4.0.0",
     "reselect": "~4.0.0",
     "smoothscroll-polyfill": "~0.4.4",
