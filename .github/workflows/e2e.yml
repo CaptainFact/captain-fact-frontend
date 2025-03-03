@@ -40,7 +40,7 @@ jobs:
             ${{ runner.os }}-mix-${{ env.cache-name }}-
             ${{ runner.os }}-mix-
       - name: Restore Elixir build folder
-        uses: actions/cache@v1
+        uses: actions/cache@v3
         with:
           path: ./api/build
           key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}

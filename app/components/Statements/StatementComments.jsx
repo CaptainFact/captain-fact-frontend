@@ -4,6 +4,7 @@ import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 
 import { Badge } from '@/components/ui/badge'
+import { cn } from '@/lib/css-utils'
 
 import { classifyComments } from '../../state/video_debate/comments/selectors'
 import { CommentsList } from '../Comments/CommentsList'
@@ -43,7 +44,7 @@ export default class StatementComments extends React.PureComponent {
     const hasSpeakerComments = speakerComments.size > 0
 
     return !hasCommunityComments ? null : (
-      <React.Fragment>
+      <div className="bg-[#fefefe]">
         {hasSpeakerComments && (
           <div className="bg-neutral-100 text-center flex justify-center items-center gap-2 p-1">
             <Users size={14} />
@@ -53,16 +54,16 @@ export default class StatementComments extends React.PureComponent {
         <Separator />
         {hasSourcedComments && this.renderSourcedComments()}
         {hasRegularComments && this.renderRegularComments()}
-      </React.Fragment>
+      </div>
     )
   }
 
   renderSourcedComments() {
     const { approvingFacts, refutingFacts, setReplyToComment } = this.props
     return (
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap shadow-[0_5px_5px_-5px_#bdbdbd] mb-2">
         <CommentsList
-          className="w-full md:w-1/2 flex-grow basis-[450px] flex-col"
+          className="w-full md:w-1/2 flex-grow basis-[450px] flex-col bg-red-100/5 pb-2"
           comments={refutingFacts}
           setReplyToComment={setReplyToComment}
           header={this.renderCommentsListHeader(
@@ -73,8 +74,11 @@ export default class StatementComments extends React.PureComponent {
           statementID={this.props.statement.id}
           commentType="refute"
         />
+        <div className="hidden md:flex items-stretch self-stretch my-2">
+          <Separator orientation="vertical" className="bg-neutral-100" />
+        </div>
         <CommentsList
-          className="w-full md:w-1/2 flex-grow basis-[450px] flex-col"
+          className="w-full md:w-1/2 flex-grow basis-[450px] flex-col bg-green-100/5 pb-2"
           comments={approvingFacts}
           setReplyToComment={setReplyToComment}
           header={this.renderCommentsListHeader(
@@ -92,7 +96,7 @@ export default class StatementComments extends React.PureComponent {
   renderRegularComments() {
     const { comments, setReplyToComment } = this.props
     return (
-      <div className="p-3">
+      <div className="px-3">
         <CommentsList
           comments={comments}
           setReplyToComment={setReplyToComment}
@@ -104,9 +108,13 @@ export default class StatementComments extends React.PureComponent {
   }
 
   renderCommentsListHeader(label, variant, score = null) {
+    const separatorClassName = cn(
+      'flex-1 mx-2',
+      variant === 'destructive' ? 'bg-red-800/30' : variant === 'success' ? 'bg-green-700/30' : '',
+    )
     return (
       <div className="flex mt-2 mb-3 items-center">
-        <Separator className="flex-1 mx-2" />
+        <Separator className={separatorClassName} />
         <div className="flex items-center gap-2 font-bold">
           <span>{this.props.t(label)}</span>
           {score !== null && (
@@ -115,7 +123,7 @@ export default class StatementComments extends React.PureComponent {
             </Badge>
           )}
         </div>
-        <Separator className="flex-1 mx-2" />
+        <Separator className={separatorClassName} />
       </div>
     )
   }

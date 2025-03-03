@@ -32,6 +32,7 @@ const UserPicture = ({
   <Avatar
     data-cy="user-picture"
     className={cn(
+      'border',
       size === USER_PICTURE_SMALL
         ? 'w-6 h-6'
         : size === USER_PICTURE_LARGE
