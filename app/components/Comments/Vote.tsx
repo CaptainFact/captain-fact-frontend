@@ -10,7 +10,7 @@ import Spinner from '../ui/spinner'
 
 const Score = ({ isVoting, isReported, score }) => {
   return (
-    <Badge variant="outline" className="min-w-9 h-[22px] justify-center">
+    <Badge variant="outline" className="min-w-9 h-[22px] justify-center bg-white">
       {isVoting ? <Spinner size={13} /> : isReported ? <Ban size={13} /> : <span>{score}</span>}
     </Badge>
   )
