@@ -107,7 +107,7 @@
   },
   "speakerpage": {
     "title1": "Fact checking of ",
-    "info1": "CaptainFact are a fact-checking platform for YouTube video",
+    "info1": "CaptainFact is a fact-checking platform for YouTube video",
     "info2": "Speaker's statements can be confirmed or refuted by CaptainFact's members. All verifications are displayed during the video, if you have installed our browser extension.",
     "more": "See more information"
   },
@@ -119,5 +119,11 @@
   "partners": "Partners",
   "users": "Users",
   "featured": "Featured",
-  "disconnected": "You are disconnected"
+  "disconnected": "You are disconnected",
+  "theme": {
+    "title": "Theme",
+    "auto": "Auto",
+    "dark": "Dark",
+    "light": "Light"
+  }
 }

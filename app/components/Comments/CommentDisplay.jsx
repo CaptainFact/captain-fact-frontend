@@ -51,9 +51,9 @@ export class CommentDisplay extends React.PureComponent {
     const allClassNames = cn({
       'opacity-50 blur-sm': isBlurred,
       'border-l': this.props.nesting > 1,
-      'border-green-500': approveClass === 'approve',
-      'border-red-500': approveClass === 'refute',
-      'bg-neutral-100 border-gray-500': isQuoted,
+      'border-green-500 dark:border-green-600': approveClass === 'approve',
+      'border-red-500 dark:border-red-600': approveClass === 'refute',
+      'bg-neutral-100 dark:bg-accent border-gray-500 dark:border-border': isQuoted,
     })
 
     return (

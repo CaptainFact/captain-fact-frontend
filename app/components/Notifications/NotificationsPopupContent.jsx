@@ -15,11 +15,11 @@ import NotificationDetails from './NotificationDetails'
 const NotificationsPopupContent = ({ user, notifications, markAsSeen, t }) => {
   const hasUnseen = notifications.find((n) => !n.seenAt)
   return (
-    <div className="flex flex-col items-center">
-      <div className="flex justify-between w-full p-2 border-b border-gray-200">
-        <span className="font-bold">Notifications</span>
+    <div className="flex flex-col items-center bg-background">
+      <div className="flex justify-between w-full p-2 border-b border-gray-200 dark:border-border">
+        <span className="font-bold dark:text-foreground">Notifications</span>
         <button
-          className="bg-transparent border-0 cursor-pointer disabled:opacity-50"
+          className="bg-transparent border-0 cursor-pointer disabled:opacity-50 dark:text-foreground"
           disabled={!hasUnseen}
           onClick={() =>
             markAsSeen(
@@ -32,19 +32,19 @@ const NotificationsPopupContent = ({ user, notifications, markAsSeen, t }) => {
         </button>
       </div>
       {notifications.length === 0 ? (
-        <div className="p-4">{t('empty')}</div>
+        <div className="p-4 dark:text-foreground">{t('empty')}</div>
       ) : (
         <React.Fragment>
-          <ScrollArea className="h-[450px] shadow-inner">
+          <ScrollArea className="h-[450px] shadow-inner dark:bg-background">
             {notifications.map((n) => (
               <NotificationDetails key={n.id} notification={n}>
                 {({ message, seenAt, insertedAt, link }) => (
                   <div
-                    className={`flex text-xs p-2 border-b border-gray-200 ${!seenAt ? 'bg-blue-50' : ''} hover:bg-blue-50/20`}
+                    className={`flex text-xs p-2 border-b border-gray-200 dark:border-border ${!seenAt ? 'bg-blue-50 dark:bg-blue-950/30' : ''} hover:bg-blue-50/20 dark:hover:bg-blue-950/40`}
                   >
                     <Link to={link} onClick={() => markAsSeen(n.id, true)} className="flex-1">
                       <div className="flex flex-col">
-                        <span className="mb-1 text-gray-700">{message}</span>
+                        <span className="mb-1 text-gray-700 dark:text-foreground">{message}</span>
                         <span className="text-muted-foreground">
                           <Clock size="1em" />
                           &nbsp;
@@ -64,7 +64,7 @@ const NotificationsPopupContent = ({ user, notifications, markAsSeen, t }) => {
               </NotificationDetails>
             ))}
           </ScrollArea>
-          <div className="p-2 w-full text-center shadow-[0_-5px_15px_-5px_#f4f4f4] border-t">
+          <div className="p-2 w-full text-center shadow-[0_-5px_15px_-5px_#f4f4f4] dark:shadow-[0_-5px_15px_-5px_rgba(0,0,0,0.3)] border-t dark:border-border">
             <Link to={userNotificationsURL(user)}>
               <Button variant="outline">{t('seeAll')}</Button>
             </Link>

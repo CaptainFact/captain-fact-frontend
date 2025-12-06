@@ -7,13 +7,13 @@ import { SpeakerPreview } from '../Speakers/SpeakerPreview'
 
 export default withTranslation('videoDebate')(({ t, speaker, comments, setReplyToComment }) => {
   return comments.size === 0 ? null : (
-    <div className="border-b border-gray-200">
-      <div className="bg-neutral-100 text-center flex justify-center items-center gap-2 p-1 border-b border-gray-200">
+    <div className="border-b border-gray-200 dark:border-border">
+      <div className="bg-neutral-100 dark:bg-accent text-center flex justify-center items-center gap-2 p-1 border-b border-gray-200 dark:border-border dark:text-foreground">
         <Mic size={14} />
         {t('speaker.one')}
       </div>
       <div className="flex">
-        <div className="bg-neutral-100 pl-2 pr-4 py-3 border-r border-gray-200">
+        <div className="bg-neutral-100 dark:bg-accent pl-2 pr-4 py-3 border-r border-gray-200 dark:border-border">
           {speaker && <SpeakerPreview speaker={speaker} withoutActions />}
         </div>
         <div>

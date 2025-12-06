@@ -56,16 +56,16 @@ export default class StatementContainer extends React.PureComponent {
     return (
       <Card
         ref={this.containerRef}
-        className={cn('max-w-[980px] mx-auto bg-white', { 'shadow-lg': isFocused })}
+        className={cn('max-w-[980px] mx-auto bg-white dark:bg-background', { 'shadow-lg': isFocused })}
       >
         {this.renderStatementOrEditForm(speaker, statement)}
         {statement.is_draft && !isEditing ? (
-          <footer className="flex border-t border-gray-200">
+          <footer className="flex border-t border-gray-200 dark:border-border">
             <ReputationGuardTooltip requiredRep={MIN_REPUTATION_UPDATE_STATEMENT} asChild>
               {({ hasReputation }) => (
                 <Button
                   variant="ghost"
-                  className="flex-1 rounded-none border-r border-gray-200"
+                  className="flex-1 rounded-none border-r border-gray-200 dark:border-border"
                   disabled={Boolean(!hasReputation || this.state.editDraftAction)}
                   onClick={async () => {
                     this.setState({ editDraftAction: 'save' })

@@ -11,7 +11,6 @@ import { STATEMENT_LENGTH } from '../../constants'
 import { cleanStrMultiline } from '../../lib/clean_str'
 import { validateFieldLength } from '../../lib/form_validators'
 import { handleFormEffectResponse } from '../../lib/handle_effect_response'
-import { ReactSelectWarningStyles } from '../../lib/react_select_theme'
 import {
   decrementFormCount,
   incrementFormCount,
@@ -119,11 +118,11 @@ export class StatementForm extends React.Component {
       <form
         ref={this.containerRef}
         onSubmit={handleSubmit(this.handleSubmit)}
-        className={cn('bg-white rounded-lg shadow-lg border border-gray-200', {
+        className={cn('bg-white dark:bg-background rounded-lg shadow-lg dark:shadow-xl border border-gray-200 dark:border-border', {
           'animate-fadeInDown z-10': !this.props.isBundled,
         })}
       >
-        <header className="flex items-center gap-3 p-2 border-b border-gray-200">
+        <header className="flex items-center gap-3 p-2 border-b border-gray-200 dark:border-border">
           <div className="flex-0 basis-0 flex items-center gap-1">
             <Button
               variant="ghost"
@@ -167,8 +166,8 @@ export class StatementForm extends React.Component {
             {speaker?.picture ? (
               <img className="h-6 w-6 rounded-full" src={speaker.picture} alt={speaker.name} />
             ) : (
-              <div className="h-6 w-6 rounded-full bg-gray-200 flex items-center justify-center">
-                <Mic size={12} className="text-gray-400" />
+              <div className="h-6 w-6 rounded-full bg-gray-200 dark:bg-accent flex items-center justify-center">
+                <Mic size={12} className="text-gray-400 dark:text-muted-foreground" />
               </div>
             )}
 
@@ -176,20 +175,20 @@ export class StatementForm extends React.Component {
               <Field
                 name="speaker_id"
                 component={SpeakersSelect}
-                props={{ className: 'text-xs' }}
+                props={{ 
+                  className: 'text-xs',
+                  warning: this.state.emptySpeakerWarningHadBeenShown
+                }}
                 speakers={speakers}
                 placeholder={t('speaker.add')}
-                styles={
-                  this.state.emptySpeakerWarningHadBeenShown ? ReactSelectWarningStyles : null
-                }
                 onChange={() => this.setState({ emptySpeakerWarningHadBeenShown: false })}
               />
             </div>
           </div>
         </header>
 
-        <div className="bg-[#31455d] text-white p-5 shadow-inner flex items-start gap-1">
-          <span className="h-[50px] -mt-2 sm:text-7xl text-5xl font-serif text-neutral-300">“</span>
+        <div className="bg-[#31455d] dark:bg-[hsl(210,30%,20%)] text-white dark:text-foreground p-5 shadow-inner flex items-start gap-1">
+          <span className="h-[50px] -mt-2 sm:text-7xl text-5xl font-serif text-neutral-300 dark:text-neutral-400">“</span>
           <Field
             name="text"
             component={ControlTextarea}
@@ -207,12 +206,12 @@ export class StatementForm extends React.Component {
                 ? t('statement.noSpeakerWarning')
                 : null,
               className:
-                'text-lg italic py-1 w-full min-h-[50px] md:text-lg text-white placeholder:text-gray-400 px-1',
+                'text-lg italic py-1 w-full min-h-[50px] md:text-lg text-white dark:text-foreground placeholder:text-gray-400 dark:placeholder:text-gray-500 px-1',
             }}
           />
         </div>
 
-        <footer className="flex border-b border-gray-200">
+        <footer className="flex border-b border-gray-200 dark:border-border">
           <Button
             type="submit"
             className="flex-1 rounded-none"
@@ -226,7 +225,7 @@ export class StatementForm extends React.Component {
           <Button
             type="button"
             variant="ghost"
-            className="flex-1 rounded-none border-l border-gray-200"
+            className="flex-1 rounded-none border-l border-gray-200 dark:border-border"
             disabled={this.props.submitting}
             onClick={handleAbort}
           >
@@ -239,7 +238,7 @@ export class StatementForm extends React.Component {
           <CardHeader>
             <CardTitle>{t('statement.helpTitle')}</CardTitle>
           </CardHeader>
-          <CardContent className="text-sm">
+          <CardContent className="text-sm dark:text-foreground">
             <p className="font-medium">{t('statement.help1')}</p>
             <p>{t('statement.help2')}</p>
             <p>{t('statement.help3')}</p>

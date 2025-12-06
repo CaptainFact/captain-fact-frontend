@@ -16,8 +16,8 @@ const CommentHeader = ({ comment: { user, inserted_at }, withoutActions }) => (
     ) : (
       <UserAppellation />
     )}
-    <span>-</span>
-    <div className="inline text-xs text-neutral-500">
+    <span className="dark:text-muted-foreground">-</span>
+    <div className="inline text-xs text-neutral-500 dark:text-muted-foreground">
       <TimeSince time={inserted_at} />
     </div>
   </div>

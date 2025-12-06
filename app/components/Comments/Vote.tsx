@@ -10,7 +10,7 @@ import Spinner from '../ui/spinner'
 
 const Score = ({ isVoting, isReported, score }) => {
   return (
-    <Badge variant="outline" className="min-w-9 h-[22px] justify-center bg-white">
+    <Badge variant="outline" className="min-w-9 h-[22px] justify-center bg-white dark:bg-background dark:text-foreground dark:border-border">
       {isVoting ? <Spinner size={13} /> : isReported ? <Ban size={13} /> : <span>{score}</span>}
     </Badge>
   )
@@ -21,7 +21,7 @@ const Vote = ({ isVoting, score, myVote, onVote, isReported }) => (
     <Button
       variant="ghost"
       size="icon-xs"
-      className={cn('h-6 w-6 hover:text-green-400', { 'text-green-500': myVote > 0 })}
+      className={cn('h-6 w-6 hover:text-green-400 dark:hover:text-green-500', { 'text-green-500 dark:text-green-400': myVote > 0 })}
       onClick={() => (myVote <= 0 ? onVote(1) : onVote(0))}
       aria-label="Upvote"
     >
@@ -33,7 +33,7 @@ const Vote = ({ isVoting, score, myVote, onVote, isReported }) => (
     <Button
       variant="ghost"
       size="icon-xs"
-      className={cn('h-6 w-6 hover:text-red-400', { 'text-red-500': myVote < 0 })}
+      className={cn('h-6 w-6 hover:text-red-400 dark:hover:text-red-500', { 'text-red-500 dark:text-red-400': myVote < 0 })}
       onClick={() => (myVote >= 0 ? onVote(-1) : onVote(0))}
       aria-label="Downvote"
     >

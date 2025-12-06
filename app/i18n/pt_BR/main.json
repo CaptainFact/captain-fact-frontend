@@ -98,5 +98,11 @@
   "all": "Todos",
   "partners": "Parceiros",
   "users": "Usuários",
-  "featured": "Populares"
+  "featured": "Populares",
+  "theme": {
+    "title": "Tema",
+    "auto": "Automático",
+    "dark": "Escuro",
+    "light": "Claro"
+  }
 }

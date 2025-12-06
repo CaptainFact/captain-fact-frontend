@@ -8,7 +8,7 @@ import VideoSourceFiltersSelect from './VideoSourceFiltersSelect'
 
 const VideosFilterBar = ({ onLanguageChange, onSourceChange, source, language, t }) => {
   return (
-    <nav className="flex flex-wrap items-center justify-between mb-4 gap-4">
+    <nav className="flex flex-wrap items-center justify-between mb-4 gap-4 dark:text-foreground">
       <FieldWithLabelAddon label={t('misc.source')} inputId="video-source-filter">
         <VideoSourceFiltersSelect
           value={source}

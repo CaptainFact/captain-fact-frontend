@@ -120,5 +120,11 @@
   "partners": "Partenaires",
   "users": "Utilisateurs",
   "featured": "Tendances",
-  "disconnected": "Vous êtes déconnecté"
+  "disconnected": "Vous êtes déconnecté",
+  "theme": {
+    "title": "Thème",
+    "auto": "Automatique",
+    "dark": "Sombre",
+    "light": "Clair"
+  }
 }

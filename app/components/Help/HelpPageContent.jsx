@@ -54,19 +54,19 @@ class HelpPageContent extends PureComponent {
         className="content"
         remarkPlugins={[remarkGfm]}
         components={{
-          h1: (props) => <h1 className="text-4xl mb-8 mt-12 text-gray-800 font-bold" {...props} />,
-          h2: (props) => <h2 className="text-3xl font-bold mt-8 mb-6 text-gray-700" {...props} />,
-          h3: (props) => <h3 className="text-2xl font-bold mb-4 mt-6 text-gray-600" {...props} />,
+          h1: (props) => <h1 className="text-4xl mb-8 mt-12 text-gray-800 dark:text-foreground font-bold" {...props} />,
+          h2: (props) => <h2 className="text-3xl font-bold mt-8 mb-6 text-gray-700 dark:text-foreground" {...props} />,
+          h3: (props) => <h3 className="text-2xl font-bold mb-4 mt-6 text-gray-600 dark:text-foreground" {...props} />,
           h4: (props) => (
-            <h4 className="text-xl mb-4 mt-6 text-gray-600 font-semibold" {...props} />
+            <h4 className="text-xl mb-4 mt-6 text-gray-600 dark:text-foreground font-semibold" {...props} />
           ),
-          p: (props) => <p className="text-lg leading-relaxed text-gray-600 my-6" {...props} />,
+          p: (props) => <p className="text-lg leading-relaxed text-gray-600 dark:text-foreground my-6" {...props} />,
           ul: (props) => (
-            <ul className="list-disc list-outside ml-6 mb-6 space-y-2 text-gray-600" {...props} />
+            <ul className="list-disc list-outside ml-6 mb-6 space-y-2 text-gray-600 dark:text-foreground" {...props} />
           ),
           ol: (props) => (
             <ol
-              className="list-decimal list-outside ml-6 mb-6 space-y-2 text-gray-600"
+              className="list-decimal list-outside ml-6 mb-6 space-y-2 text-gray-600 dark:text-foreground"
               {...props}
             />
           ),
@@ -75,7 +75,7 @@ class HelpPageContent extends PureComponent {
           // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
           blockquote: ({ node, ...props }) => (
             <blockquote
-              className="border-l-4 border-blue-400 bg-blue-50 text-gray-600 px-6 py-1 mb-6 rounded-r italic leading-relaxed"
+              className="border-l-4 border-blue-400 dark:border-blue-500 bg-blue-50 dark:bg-blue-950/30 text-gray-600 dark:text-foreground px-6 py-1 mb-6 rounded-r italic leading-relaxed"
               {...props}
             />
           ),
@@ -83,14 +83,14 @@ class HelpPageContent extends PureComponent {
           code: ({ node, className, children, ...props }) => {
             return typeof children === 'string' && children.length < 30 ? (
               <code
-                className="bg-gray-100 text-pink-600 px-2 py-0.5 rounded font-mono text-sm"
+                className="bg-gray-100 dark:bg-accent text-pink-600 dark:text-pink-400 px-2 py-0.5 rounded font-mono text-sm"
                 {...props}
               >
                 {children}
               </code>
             ) : (
               <blockquote
-                className="border-l-4 border-blue-400 bg-blue-50 text-gray-600 px-6 py-3 mb-6 rounded-r italic leading-relaxed"
+                className="border-l-4 border-blue-400 dark:border-blue-500 bg-blue-50 dark:bg-blue-950/30 text-gray-600 dark:text-foreground px-6 py-3 mb-6 rounded-r italic leading-relaxed"
                 {...props}
               >
                 {children}
@@ -108,28 +108,28 @@ class HelpPageContent extends PureComponent {
           table: ({ node, ...props }) => (
             <div className="overflow-x-auto mb-6">
               <table
-                className="min-w-full border-collapse bg-white shadow-sm rounded-lg"
+                className="min-w-full border-collapse bg-white dark:bg-background shadow-sm dark:shadow-md rounded-lg"
                 {...props}
               />
             </div>
           ),
           // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
           thead: ({ node, ...props }) => (
-            <thead className="bg-gray-50 border-b border-gray-200" {...props} />
+            <thead className="bg-gray-50 dark:bg-accent border-b border-gray-200 dark:border-border" {...props} />
           ),
           // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
           tr: ({ node, ...props }) => (
             <tr
-              className="border-b border-gray-100 hover:bg-gray-50 transition-colors duration-150"
+              className="border-b border-gray-100 dark:border-border hover:bg-gray-50 dark:hover:bg-accent transition-colors duration-150"
               {...props}
             />
           ),
           // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
           th: ({ node, ...props }) => (
-            <th className="p-3 font-medium text-left text-gray-700" {...props} />
+            <th className="p-3 font-medium text-left text-gray-700 dark:text-foreground" {...props} />
           ),
           // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-          td: ({ node, ...props }) => <td className="p-3 text-gray-600" {...props} />,
+          td: ({ node, ...props }) => <td className="p-3 text-gray-600 dark:text-foreground" {...props} />,
         }}
       >
         {this.props.markdownContent}

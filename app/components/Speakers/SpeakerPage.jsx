@@ -106,16 +106,16 @@ export class SpeakerPage extends React.PureComponent {
           <meta name="twitter:card" content="summary" />
           <link rel="canonical" href={this.getCanonicalUrl()} />
         </Helmet>
-        <div className="bg-gray-100 py-8">
+        <div className="bg-gray-100 dark:bg-[hsl(0,0%,14%)] py-8">
           <div className="container mx-auto px-4">
-            <h1 className="mb-6">
+            <h1 className="mb-6 dark:text-foreground">
               <span className="text-[1.8rem]">{t('speakerpage.title1')}</span>{' '}
               <div className="mt-3">
                 <SpeakerPreview withoutActions speaker={this.props.speaker} />
               </div>
             </h1>
-            <hr className="my-4 border-t border-gray-200" />
-            <div className="text-lg text-gray-600">{this.renderWikidata()}</div>
+            <hr className="my-4 border-t border-gray-200 dark:border-border" />
+            <div className="text-lg text-gray-600 dark:text-muted-foreground">{this.renderWikidata()}</div>
           </div>
         </div>
         <div className="flex justify-center my-6">
@@ -123,10 +123,10 @@ export class SpeakerPage extends React.PureComponent {
             localStorageDismissKey={LOCAL_STORAGE_KEYS.DISMISS_SPEAKER_INTRODUCTION}
             className="max-w-3xl mx-4"
           >
-            <strong className="block mb-2">{t('speakerpage.info1')}</strong>
-            <p className="mb-4">
+            <strong className="block mb-2 dark:text-foreground">{t('speakerpage.info1')}</strong>
+            <p className="mb-4 dark:text-foreground">
               {t('speakerpage.info2')}{' '}
-              <ExternalLinkNewTab href="/" className="text-blue-600 hover:text-blue-800">
+              <ExternalLinkNewTab href="/" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300">
                 {t('speakerpage.more')}
               </ExternalLinkNewTab>
             </p>

@@ -48,7 +48,7 @@ export class ColumnDebate extends React.PureComponent {
 
   renderWarning(message) {
     return (
-      <Message type="warning">
+      <Message type="warning" className="mb-6">
         <ExclamationCircle size="1em" />
         &nbsp;&nbsp;{message}
       </Message>
@@ -139,7 +139,7 @@ export class ColumnDebate extends React.PureComponent {
   renderTitle() {
     const { t, videoTitle, isLoading } = this.props
     return (
-      <h1 className="text-center text-2xl font-semibold max-w-4xl mx-auto mb-10 pb-8 shadow-[0px_12px_8px_-10px_#e1e1e1] rounded-lg">
+      <h1 className="text-center text-2xl font-semibold max-w-4xl mx-auto mb-10 pb-8 shadow-[0px_12px_8px_-10px_#e1e1e1] dark:shadow-[0px_12px_8px_-10px_rgba(0,0,0,0.3)] rounded-lg">
         {t('pageTitle')}{' '}
         {videoTitle ||
           (isLoading ? <Skeleton className="w-48 h-6 inline-block align-middle ml-3" /> : '...')}
@@ -149,8 +149,8 @@ export class ColumnDebate extends React.PureComponent {
 
   render() {
     return (
-      <ScrollArea className="w-full bg-neutral-50 2xl:h-[--main-height] [&>div>div]:!block 2xl:[&>div>div]:!table">
-        <div className="py-12 sm:px-4 px-2">
+      <ScrollArea className="w-full bg-neutral-50 dark:bg-background 2xl:h-[--main-height] [&>div>div]:!block 2xl:[&>div>div]:!table">
+        <div className="py-12 sm:px-4 px-2 dark:text-foreground">
           {this.renderTitle()}
           {this.state.showIntroduction && (
             <div className="mx-6 mt-4">{this.renderIntroduction()}</div>

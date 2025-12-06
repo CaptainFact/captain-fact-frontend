@@ -50,8 +50,8 @@ export default class Sidebar extends React.PureComponent {
 
   MenuLink({ title, className, children, ...props }) {
     const classes = cn(
-      'flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md hover:text-gray-900',
-      { 'bg-gray-100': props.isActive },
+      'flex items-center px-4 py-2 text-gray-700 dark:text-foreground hover:bg-gray-100 dark:hover:bg-accent rounded-md hover:text-gray-900 dark:hover:text-foreground',
+      { 'bg-gray-100 dark:bg-accent': props.isActive },
       className,
     )
 
@@ -84,29 +84,29 @@ export default class Sidebar extends React.PureComponent {
       <aside
         id="sidebar"
         className={cn(
-          'flex flex-col bg-white h-full fixed left-0 top-14 bottom-0 z-50 w-full sm:w-72 shadow-lg transition-transform duration-200 ease-in-out',
+          'flex flex-col bg-white dark:bg-[hsl(0,0%,12%)] h-full fixed left-0 top-14 bottom-0 z-50 w-full sm:w-72 shadow-lg transition-transform duration-200 ease-in-out',
           { '-translate-x-full sm:-translate-x-72': !sidebarExpended },
           className,
         )}
       >
         <div className="flex flex-col flex-grow overflow-y-auto p-4">
-          <p className={'text-gray-600 uppercase text-sm font-semibold mb-2'}>
+          <p className={'text-gray-600 dark:text-muted-foreground uppercase text-sm font-semibold mb-2'}>
             {t('menu.language')}
           </p>
           <UserLanguageSelector className={cn('mb-4')} size="small" />
           {isAuthenticated ? (
             <React.Fragment>
-              <p className="text-gray-600 uppercase text-sm font-semibold mb-2">
+              <p className="text-gray-600 dark:text-muted-foreground uppercase text-sm font-semibold mb-2">
                 {t('menu.yourProfile')}
               </p>
               {this.renderMenuProfile()}
             </React.Fragment>
           ) : null}
-          <p className="text-gray-600 uppercase text-sm font-semibold mb-2">
+          <p className="text-gray-600 dark:text-muted-foreground uppercase text-sm font-semibold mb-2">
             {t('menu.factChecking')}
           </p>
           {this.renderMenuContent()}
-          <p className="text-gray-600 uppercase text-sm font-semibold mb-2 mt-3">
+          <p className="text-gray-600 dark:text-muted-foreground uppercase text-sm font-semibold mb-2 mt-3">
             {t('menu.other')}
           </p>
           <ul>
@@ -125,42 +125,42 @@ export default class Sidebar extends React.PureComponent {
             <ExternalLinkNewTab
               href="https://forum.captainfact.io"
               className={
-                'flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md hover:text-gray-900'
+                'flex items-center px-4 py-2 text-gray-700 dark:text-foreground hover:bg-gray-100 dark:hover:bg-accent rounded-md hover:text-gray-900 dark:hover:text-foreground'
               }
             >
               <Users size="1.2em" className="mr-2" />
               {t('menu.forum')}
-              <LinkExternal size="0.9em" className="text-gray-500 hover:text-gray-900 ml-2" />
+              <LinkExternal size="0.9em" className="text-gray-500 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground ml-2" />
             </ExternalLinkNewTab>
             <ExternalLinkNewTab
               href="https://opencollective.com/captainfact_io"
               className={
-                'flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md hover:text-gray-900'
+                'flex items-center px-4 py-2 text-gray-700 dark:text-foreground hover:bg-gray-100 dark:hover:bg-accent rounded-md hover:text-gray-900 dark:hover:text-foreground'
               }
             >
               <Heart size="1.2em" className="mr-2" />
               {t('menu.donation')}&nbsp;
-              <LinkExternal size="0.9em" className="text-gray-500 hover:text-gray-900 ml-2" />
+              <LinkExternal size="0.9em" className="text-gray-500 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground ml-2" />
             </ExternalLinkNewTab>
           </ul>
-          <p className="text-gray-600 uppercase text-sm font-semibold mt-3 mb-2">
+          <p className="text-gray-600 dark:text-muted-foreground uppercase text-sm font-semibold mt-3 mb-2">
             {t('menu.followus')}
           </p>
           <div className={'flex space-x-4 px-4'}>
             <ExternalLinkNewTab href="https://github.com/CaptainFact">
-              <Github size="1.5em" className="text-gray-700 hover:text-gray-900" />
+              <Github size="1.5em" className="text-gray-700 dark:text-foreground hover:text-gray-900 dark:hover:text-foreground" />
             </ExternalLinkNewTab>
             <ExternalLinkNewTab href="https://discord.captainfact.io">
-              <Discord size="1.5em" className="text-gray-700 hover:text-gray-900" />
+              <Discord size="1.5em" className="text-gray-700 dark:text-foreground hover:text-gray-900 dark:hover:text-foreground" />
             </ExternalLinkNewTab>
             <ExternalLinkNewTab href="https://twitter.com/CaptainFact_io">
-              <Twitter size="1.5em" className="text-gray-700 hover:text-gray-900" />
+              <Twitter size="1.5em" className="text-gray-700 dark:text-foreground hover:text-gray-900 dark:hover:text-foreground" />
             </ExternalLinkNewTab>
             <ExternalLinkNewTab href="https://www.facebook.com/CaptainFact.io">
-              <Facebook size="1.5em" className="text-gray-700 hover:text-gray-900" />
+              <Facebook size="1.5em" className="text-gray-700 dark:text-foreground hover:text-gray-900 dark:hover:text-foreground" />
             </ExternalLinkNewTab>
             <ExternalLinkNewTab href="https://mamot.fr/@CaptainFact">
-              <Mastodon size="1.5em" className="text-gray-700 hover:text-gray-900" />
+              <Mastodon size="1.5em" className="text-gray-700 dark:text-foreground hover:text-gray-900 dark:hover:text-foreground" />
             </ExternalLinkNewTab>
           </div>
         </div>
@@ -192,7 +192,7 @@ export default class Sidebar extends React.PureComponent {
                   value={dailyGain}
                 />
               </div>
-              <p className="text-[#858585] text-[0.9em]">
+              <p className="text-[#858585] dark:text-muted-foreground text-[0.9em]">
                 {`${t('menu.dailyGain')} ${dailyGain}/${MAX_DAILY_REPUTATION_GAIN}`}
               </p>
             </div>

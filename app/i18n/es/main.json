@@ -82,5 +82,11 @@
   },
   "all": "Todas",
   "partners": "Asociados",
-  "users": "Usuarios"
+  "users": "Usuarios",
+  "theme": {
+    "title": "Tema",
+    "auto": "Automático",
+    "dark": "Oscuro",
+    "light": "Claro"
+  }
 }

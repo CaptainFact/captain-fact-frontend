@@ -22,12 +22,12 @@ const ScoreTag = ({ reputation, withIcon = false, className = undefined }) => (
       <Badge
         variant={getTagType(reputation)}
         className={cn(
-          reputation > 0 ? 'bg-white' : 'bg-destructive',
-          'animated-border-score py-1',
+          reputation > 0 ? 'bg-white dark:bg-background' : 'bg-destructive',
+          'animated-border-score py-1 dark:text-foreground',
           className,
         )}
       >
-        {withIcon && <Star size="1em" className="mr-1 text-neutral-500 fill-yellow-200" />}
+        {withIcon && <Star size="1em" className="mr-1 text-neutral-500 dark:text-neutral-400 fill-yellow-200 dark:fill-yellow-300" />}
         {reputation}
       </Badge>
     </TooltipTrigger>
@@ -35,7 +35,7 @@ const ScoreTag = ({ reputation, withIcon = false, className = undefined }) => (
       <Trans i18nKey="user:reputationTooltip">
         Reputation is a measurement of how much the community trusts you; it is earned by
         participating and is increased by other members voting on your contributions.{' '}
-        <Link className="underline text-white" to="/help/reputation">
+        <Link className="underline text-white dark:text-foreground" to="/help/reputation">
           Learn more
         </Link>
         .

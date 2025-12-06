@@ -38,21 +38,21 @@ const SearchPage = ({ t, refine, match, location }) => {
 
   const selectedEntity = ROUTES_ENTITIES[match.params.entity]
   return (
-    <div className="flex flex-col min-h-full bg-[#f4f5f8]">
-      <div className="bg-white">
+    <div className="flex flex-col min-h-full bg-[#f4f5f8] dark:bg-background">
+      <div className="bg-white dark:bg-background">
         <div className="lg:px-12 lg:pt-12 pt-8 px-4">
           <div className="relative max-w-[600px] flex-1 mb-3 block md:hidden">
             <SearchBox />
           </div>
-          <h2 className="text-xl font-normal text-[#363636]">
+          <h2 className="text-xl font-normal text-[#363636] dark:text-foreground">
             <Trans i18nKey="search.results" query={term}>
               Search results for: <strong>{{ query: term || '…' }}</strong>
             </Trans>
           </h2>
-          <p className="text-[#8c8c8c] text-sm mt-1 italic">Powered by Algolia</p>
+          <p className="text-[#8c8c8c] dark:text-muted-foreground text-sm mt-1 italic">Powered by Algolia</p>
         </div>
         <div className="mt-8">
-          <ul className="flex border-b border-[#dbdbdb] px-4 lg:px-10 flex-wrap">
+          <ul className="flex border-b border-[#dbdbdb] dark:border-border px-4 lg:px-10 flex-wrap">
             {Object.keys(ENTITIES_COMPONENTS).map((entity) => (
               <li
                 key={entity}
@@ -63,10 +63,10 @@ const SearchPage = ({ t, refine, match, location }) => {
                   className={`flex items-center px-4 py-2 text-sm ${
                     selectedEntity === entity
                       ? 'text-primary'
-                      : 'text-[#4a4a4a] hover:text-[#363636]'
+                      : 'text-[#4a4a4a] dark:text-foreground hover:text-[#363636] dark:hover:text-foreground'
                   }`}
                 >
-                  <SearchIcon size="1em" className="mr-1" />
+                  <SearchIcon size="1em" className="mr-1 dark:text-foreground" />
                   {capitalize(t(`entities.${entity}`, { count: 5 }))}
                   {term && (
                     <span className="ml-1">
@@ -81,8 +81,8 @@ const SearchPage = ({ t, refine, match, location }) => {
       </div>
       {!term ? (
         <div className="flex flex-col justify-center items-center flex-1">
-          <SearchIcon size={64} />
-          <p className="mt-4 text-center px-2">
+          <SearchIcon size={64} className="text-foreground dark:text-foreground" />
+          <p className="mt-4 text-center px-2 dark:text-foreground">
             <Trans i18nKey="search.noQuery">
               Type something in the search bar above to start searching
             </Trans>
@@ -96,7 +96,7 @@ const SearchPage = ({ t, refine, match, location }) => {
                 <InfiniteHits
                   translations={{ loadMore: t('search.loadMore') }}
                   hitComponent={ENTITIES_COMPONENTS[selectedEntity]}
-                  className="[&_.ais-InfiniteHits-loadMore]:bg-transparent [&_.ais-InfiniteHits-loadMore]:border-[#6ba3a7] [&_.ais-InfiniteHits-loadMore]:text-[#6ba3a7] [&_.ais-InfiniteHits-loadMore]:cursor-pointer [&_.ais-InfiniteHits-loadMore]:justify-center [&_.ais-InfiniteHits-loadMore]:px-3 [&_.ais-InfiniteHits-loadMore]:py-2 [&_.ais-InfiniteHits-loadMore]:text-center [&_.ais-InfiniteHits-loadMore]:whitespace-nowrap [&_.ais-InfiniteHits-loadMore]:border [&_.ais-InfiniteHits-loadMore]:rounded [&_.ais-InfiniteHits-loadMore]:mt-10 [&_.ais-InfiniteHits-loadMore:disabled]:hidden"
+                  className="[&_.ais-InfiniteHits-loadMore]:bg-transparent [&_.ais-InfiniteHits-loadMore]:border-[#6ba3a7] dark:[&_.ais-InfiniteHits-loadMore]:border-primary [&_.ais-InfiniteHits-loadMore]:text-[#6ba3a7] dark:[&_.ais-InfiniteHits-loadMore]:text-primary [&_.ais-InfiniteHits-loadMore]:cursor-pointer [&_.ais-InfiniteHits-loadMore]:justify-center [&_.ais-InfiniteHits-loadMore]:px-3 [&_.ais-InfiniteHits-loadMore]:py-2 [&_.ais-InfiniteHits-loadMore]:text-center [&_.ais-InfiniteHits-loadMore]:whitespace-nowrap [&_.ais-InfiniteHits-loadMore]:border [&_.ais-InfiniteHits-loadMore]:rounded [&_.ais-InfiniteHits-loadMore]:mt-10 [&_.ais-InfiniteHits-loadMore:disabled]:hidden"
                 />
               </div>
             </div>

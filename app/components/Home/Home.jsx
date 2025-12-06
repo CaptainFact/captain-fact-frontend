@@ -35,20 +35,20 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="lg:flex lg:space-x-8 lg:items-center">
             <div className="lg:w-7/12">
-              <h1 className="text-4xl sm:text-6xl font-medium mb-4 font-serif tracking-wide">
+              <h1 className="text-4xl sm:text-6xl font-medium mb-4 font-serif tracking-wide text-foreground">
                 Captain
                 <strong>
                   <u>Fact</u>.
                 </strong>
               </h1>
               <br />
-              <h2 className="text-2xl sm:text-3xl font-semibold mb-1">{t('titleCF')}</h2>
-              <h2 className="text-xl font-light mb-2">
+              <h2 className="text-2xl sm:text-3xl font-semibold mb-1 text-foreground">{t('titleCF')}</h2>
+              <h2 className="text-xl font-light mb-2 text-foreground">
                 <Trans i18nKey="home:presentationTitle">
                   To train a critical mind, improve the quality of information and decision-making.
                 </Trans>
               </h2>
-              <p className="italic mb-6">{t('presentation')}</p>
+              <p className="italic mb-6 text-foreground">{t('presentation')}</p>
               <div className="flex flex-wrap gap-4">
                 <div className="w-full md:w-5/12">
                   <p className="font-bold mb-4 min-h-[72px]">{t('presentationTextButton1')}</p>
@@ -62,7 +62,7 @@ const Home = () => {
                   )}
                 </div>
                 <div className="w-full md:w-5/12">
-                  <p className="font-bold mb-4 min-h-[72px]">{t('presentationTextButton2')}</p>
+                  <p className="font-bold mb-4 min-h-[72px] text-foreground">{t('presentationTextButton2')}</p>
                   {!isAuthenticated && (
                     <Link to="/signup">
                       <Button className="h-auto">
@@ -94,13 +94,13 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="py-12 bg-gray-100">
+      <section className="py-12 bg-gray-100 dark:bg-background">
         <div className="container mx-auto px-4">
           {/* First row */}
           <div className="flex flex-wrap -mx-4 mb-16">
             <div className="w-full md:w-6/12 px-4 mb-8 md:mb-0">
-              <h2 className="text-3xl font-semibold mb-4">{t('howTitle')}</h2>
-              <div className="text-[#0a0a0a]">
+              <h2 className="text-3xl font-semibold mb-4 text-foreground">{t('howTitle')}</h2>
+              <div className="text-[#0a0a0a] dark:text-foreground">
                 {t('how')}
                 <ol className="list-decimal pl-6 space-y-2 mt-2 mb-4">
                   <li className="ml-2">{t('how1')}</li>
@@ -108,7 +108,7 @@ const Home = () => {
                   <li className="ml-2">{t('how3')}</li>
                 </ol>
               </div>
-              <p>{t('how4')}</p>
+              <p className="text-foreground">{t('how4')}</p>
               <ExternalLinkNewTab href="https://www.youtube.com/watch?v=LsRkg2hRTiI">
                 <Button variant="outline" className="mt-4">
                   {t('demo')} <ExternalLink size={16} />
@@ -127,9 +127,9 @@ const Home = () => {
             </div>
             <div className="w-full md:w-6/12 px-4">
               <div className="md:pl-8">
-                <h2 className="text-3xl font-semibold mb-4">{t('example1Title1')}</h2>
-                <h2 className="text-2xl font-light mb-4">{t('example1Title2')}</h2>
-                <p className="mb-6">{t('example1Text')}</p>
+                <h2 className="text-3xl font-semibold mb-4 text-foreground">{t('example1Title1')}</h2>
+                <h2 className="text-2xl font-light mb-4 text-foreground">{t('example1Title2')}</h2>
+                <p className="mb-6 text-foreground">{t('example1Text')}</p>
                 <Link to="/extension">
                   <Button variant="outline">
                     <Puzzle size="1em" />
@@ -144,9 +144,9 @@ const Home = () => {
           <div className="flex flex-wrap -mx-4 mb-16">
             <div className="w-full md:w-6/12 px-4 mb-8 md:mb-0">
               <div className="md:pr-8">
-                <h2 className="text-3xl font-semibold mb-4">{t('example2Title1')}</h2>
-                <h2 className="text-2xl font-light mb-4">{t('example2Title2')}</h2>
-                <p className="mb-6">{t('example2Text')}</p>
+                <h2 className="text-3xl font-semibold mb-4 text-foreground">{t('example2Title1')}</h2>
+                <h2 className="text-2xl font-light mb-4 text-foreground">{t('example2Title2')}</h2>
+                <p className="mb-6 text-foreground">{t('example2Text')}</p>
                 <Link to="/signup">
                   <Button variant="outline">
                     <LogIn size={16} />
@@ -167,9 +167,9 @@ const Home = () => {
             </div>
             <div className="w-full md:w-6/12 px-4">
               <div className="md:pl-8">
-                <h2 className="text-3xl font-semibold mb-4">{t('example3Title1')}</h2>
-                <h2 className="text-2xl font-light mb-4">{t('example3Title2')}</h2>
-                <p className="mb-6">{t('example3Text')}</p>
+                <h2 className="text-3xl font-semibold mb-4 text-foreground">{t('example3Title1')}</h2>
+                <h2 className="text-2xl font-light mb-4 text-foreground">{t('example3Title2')}</h2>
+                <p className="mb-6 text-foreground">{t('example3Text')}</p>
                 <ExternalLinkNewTab href="https://github.com/CaptainFact/captain-fact/wiki/Les-partenariats-entre-les-chaînes-Youtube-et-CaptainFact.io">
                   <Button variant="outline">
                     {t('learnMore')}
@@ -183,9 +183,9 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="py-12 pb-16 bg-white">
+      <section className="py-12 pb-16 bg-white dark:bg-background">
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-semibold">{t('latest')}</h2>
+          <h2 className="text-2xl font-semibold text-foreground">{t('latest')}</h2>
         </div>
         <div className="container mx-auto px-4 mt-12 mb-12">
           <LastVideos />
@@ -200,18 +200,18 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-gray-100">
+      <section className="py-20 bg-gray-100 dark:bg-background">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap">
             <div className="w-full md:w-1/2 px-4 mb-8 md:mb-0">
-              <h2 className="text-2xl font-bold mb-2">{t('forWho1Title1')}</h2>
-              <h2 className="text-2xl font-light mb-4">{t('forWho1Title2')}</h2>
-              <p className="mb-6">{t('forWho1Text')}</p>
+              <h2 className="text-2xl font-bold mb-2 text-foreground">{t('forWho1Title1')}</h2>
+              <h2 className="text-2xl font-light mb-4 text-foreground">{t('forWho1Title2')}</h2>
+              <p className="mb-6 text-foreground">{t('forWho1Text')}</p>
             </div>
             <div className="w-full md:w-1/2 px-4">
-              <h2 className="text-2xl font-bold mb-2">{t('forWho2Title1')}</h2>
-              <h2 className="text-2xl font-light mb-4">{t('forWho2Title2')}</h2>
-              <p className="mb-6">{t('forWho2Text')}</p>
+              <h2 className="text-2xl font-bold mb-2 text-foreground">{t('forWho2Title1')}</h2>
+              <h2 className="text-2xl font-light mb-4 text-foreground">{t('forWho2Title2')}</h2>
+              <p className="mb-6 text-foreground">{t('forWho2Text')}</p>
             </div>
           </div>
           <div className="flex justify-center mt-4">

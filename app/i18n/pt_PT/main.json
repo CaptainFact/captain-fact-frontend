@@ -82,5 +82,11 @@
     "speaker": "orador"
   },
   "partners": "Parceiros",
-  "all": "Tudo"
+  "all": "Tudo",
+  "theme": {
+    "title": "Tema",
+    "auto": "Automático",
+    "dark": "Escuro",
+    "light": "Claro"
+  }
 }

@@ -60,18 +60,18 @@ export default class NotificationsPage extends Component {
             <NotificationDetails key={n.id} notification={n}>
               {({ message, seenAt, link, insertedAt }) => (
                 <div
-                  className={`flex items-center border-b last:border-none p-4 rounded hover:bg-blue-50/20
-                      ${seenAt ? 'bg-white' : 'bg-blue-50'}`}
+                  className={`flex items-center border-b dark:border-border last:border-none p-4 rounded hover:bg-blue-50/20 dark:hover:bg-blue-950/40
+                      ${seenAt ? 'bg-white dark:bg-background' : 'bg-blue-50 dark:bg-blue-950/30'}`}
                 >
-                  <div className="flex flex-col pr-3 border-r border-gray-200 w-[85%] text-sm">
+                  <div className="flex flex-col pr-3 border-r border-gray-200 dark:border-border w-[85%] text-sm">
                     <Link
                       to={link}
                       onClick={() => markAsSeen(n.id, true)}
-                      className="text-gray-700 mb-1 hover:text-gray-900"
+                      className="text-gray-700 dark:text-foreground mb-1 hover:text-gray-900 dark:hover:text-foreground"
                     >
                       {message}
                     </Link>
-                    <span className="text-gray-500">
+                    <span className="text-gray-500 dark:text-muted-foreground">
                       <Clock size="1em" />
                       &nbsp;
                       <TimeSince time={insertedAt} />

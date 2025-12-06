@@ -24,7 +24,7 @@ export class ModerationForm extends React.PureComponent {
     const { t, flagReason } = this.props
     return (
       <div>
-        <h4 className="text-lg font-medium mb-4">{t('whyReport')}</h4>
+        <h4 className="text-lg font-medium mb-4 dark:text-foreground">{t('whyReport')}</h4>
         <FlagReasonSelect />
         <div className="flex gap-2 mt-6 flex-wrap">
           <Button
