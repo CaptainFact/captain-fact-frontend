@@ -5,7 +5,6 @@ import React from 'react'
 import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import styled from 'styled-components'
 import { Discord, Facebook, Github, Mastodon, Twitter } from 'styled-icons/fa-brands'
 import { Star } from 'styled-icons/fa-solid'
 import { LinkExternal } from 'styled-icons/octicons'
@@ -28,19 +27,6 @@ import { Badge } from '../ui/badge'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import ProgressBar from '../Utils/ProgressBar'
 import ReputationGuard from '../Utils/ReputationGuard'
-
-const WhiteStar = styled(Star)`
-  color: white;
-  background-color: #6ba3a7;
-  padding: 4px;
-  border-radius: 50%;
-  margin-right: -1px;
-  z-index: 1;
-`
-const DailyGainText = styled.p`
-  color: #858585;
-  font-size: 0.9em;
-`
 
 @connect((state) => ({ sidebarExpended: state.UserPreferences.sidebarExpended }), {
   toggleSidebar,
@@ -197,7 +183,7 @@ export default class Sidebar extends React.PureComponent {
           return (
             <div className="flex flex-col items-center">
               <div className="flex items-center w-[90%]">
-                <WhiteStar size={20} />
+                <Star size={20} className="text-white bg-[#6ba3a7] p-1 rounded-full -mr-px z-[1]" />
                 <ProgressBar
                   height="7px"
                   outerBackgroundColor="#c4c4c4"
@@ -206,9 +192,9 @@ export default class Sidebar extends React.PureComponent {
                   value={dailyGain}
                 />
               </div>
-              <DailyGainText>
+              <p className="text-[#858585] text-[0.9em]">
                 {`${t('menu.dailyGain')} ${dailyGain}/${MAX_DAILY_REPUTATION_GAIN}`}
-              </DailyGainText>
+              </p>
             </div>
           )
         }}

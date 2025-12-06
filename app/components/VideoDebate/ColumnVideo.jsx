@@ -13,7 +13,6 @@ import {
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import AddSpeakerForm from '../Speakers/AddSpeakerForm'
 import { SpeakerPreview } from '../Speakers/SpeakerPreview'
-import Container from '../StyledUtils/Container'
 import { Tabs, TabsList, TabsTrigger } from '../ui/tabs'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import Message from '../Utils/Message'
@@ -95,7 +94,7 @@ export class ColumnVideo extends React.PureComponent {
                 </div>
               )}
               {view === 'captions' && (
-                <Container p={4}>
+                <div className="p-4">
                   <Message>
                     {t('captions.description1')}
                     {isAuthenticated && (
@@ -106,7 +105,7 @@ export class ColumnVideo extends React.PureComponent {
                       </React.Fragment>
                     )}
                   </Message>
-                </Container>
+                </div>
               )}
             </React.Fragment>
           )}

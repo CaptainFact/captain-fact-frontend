@@ -6,7 +6,6 @@ import { Github } from 'styled-icons/fa-brands'
 import { Redo } from 'styled-icons/fa-solid'
 
 import { optionsToQueryString } from '../../lib/url_utils'
-import Container from '../StyledUtils/Container'
 import { Button } from '../ui/button'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import Message from '../Utils/Message'
@@ -68,14 +67,14 @@ const CrashReportPage = ({ t, error }) => {
         </Button>
       </div>
       {stackTrace && (
-        <Container mt={5} maxWidth={1200}>
+        <div className="mt-5 max-w-[1200px]">
           <details>
             <summary style={{ textAlign: 'center', marginBottom: 12 }}>{t('errorDetails')}</summary>
-            <Container p={3}>
+            <div className="p-3">
               <pre style={{ whiteSpace: 'pre-wrap' }}>{stackTrace}</pre>
-            </Container>
+            </div>
           </details>
-        </Container>
+        </div>
       )}
     </div>
   )

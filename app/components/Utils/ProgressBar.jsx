@@ -1,45 +1,27 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import styled from 'styled-components'
-
-const ProgressBarContainer = styled.div`
-  width: 100%;
-  progress[value] {
-    appearance: none;
-    ::-webkit-progress-bar {
-      background-color: ${(props) => props.outerBackgroundColor};
-    }
-    ::-webkit-progress-value {
-      background-color: ${(props) => props.innerBackgroundColor};
-    }
-    ::-moz-progress-bar {
-      background-color: ${(props) => props.innerBackgroundColor};
-    }
-  }
-`
-
-const StyledProgress = styled.div`
-  display: block;
-  border: none;
-  background-color: ${(props) => props.outerBackgroundColor};
-  height: ${(props) => props.height};
-  width: 100%;
-  border-radius: 0 8px 8px 0;
-`
 
 const ProgressBar = ({ outerBackgroundColor, innerBackgroundColor, height, max, value }) => {
+  const percentage = (value / max) * 100
   return (
-    <ProgressBarContainer
-      outerBackgroundColor={outerBackgroundColor}
-      innerBackgroundColor={innerBackgroundColor}
-    >
-      <StyledProgress
-        outerBackgroundColor={outerBackgroundColor}
-        height={height}
-        value={value}
-        max={max}
-      />
-    </ProgressBarContainer>
+    <div className="w-full">
+      <div
+        className="block border-none rounded-r-lg"
+        style={{
+          backgroundColor: outerBackgroundColor,
+          height: height,
+          width: '100%',
+        }}
+      >
+        <div
+          className="h-full rounded-r-lg transition-all"
+          style={{
+            backgroundColor: innerBackgroundColor,
+            width: `${percentage}%`,
+          }}
+        />
+      </div>
+    </div>
   )
 }
 

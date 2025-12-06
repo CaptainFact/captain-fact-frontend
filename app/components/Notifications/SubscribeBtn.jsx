@@ -1,8 +1,8 @@
 import { Mutation } from '@apollo/client/react/components'
 import gql from 'graphql-tag'
+import { Bell, BellOff } from 'lucide-react'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { Bell, BellSlash } from 'styled-icons/fa-solid'
 
 import Action from '../VideoDebate/Actions/ActionButton'
 
@@ -26,8 +26,8 @@ const SubscribeBtn = ({ isSubscribed, entityId, scope, ...props }) => (
             variables: { isSubscribed: !isSubscribed },
           })
         }
-        activatedIcon={<Bell />}
-        deactivatedIcon={<BellSlash />}
+        activatedIcon={<Bell className="w-full h-full" />}
+        deactivatedIcon={<BellOff className="w-full h-full" />}
         {...props}
       />
     )}

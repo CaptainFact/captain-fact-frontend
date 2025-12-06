@@ -1,56 +1,22 @@
 import PropTypes from 'prop-types'
 import { Resizable } from 're-resizable'
 import React, { useState } from 'react'
-import styled from 'styled-components'
-import { themeGet } from 'styled-system'
 
-const StyledResizable = styled(Resizable)`
-  /* Overwrite resizable column behaviour on small device */
-  @media not all and (min-width: 1536px) {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-  }
-
-  .right-resizable-handle {
-    background: white;
-    margin-right: 10px;
-    @media (max-width: 1279px) {
-      display: none;
-    }
-
-    border-left: 1px solid ${themeGet('colors.black.200')};
-    border-right: 1px solid ${themeGet('colors.black.200')};
-
-    &:after {
-      content: '';
-      position: absolute;
-      top: calc(50% - 20px);
-      left: 2px;
-      height: 40px;
-      width: 3px;
-      border-left: 1px solid ${({ $resizing }) => themeGet(`colors.black.${$resizing ? 300 : 200}`)};
-      border-right: 1px solid
-        ${({ $resizing }) => themeGet(`colors.black.${$resizing ? 300 : 200}`)};
-      transition: border-color 0.1s ease-out;
-    }
-
-    &:hover {
-      &:after {
-        border-left-color: ${themeGet('colors.black.300')};
-        border-right-color: ${themeGet('colors.black.300')};
-      }
-    }
-  }
-`
+import { cn } from '../../lib/css-utils'
 
 const ResizableColumn = ({ children, className }) => {
   const [resizing, setResizing] = useState(false)
 
   return (
-    <StyledResizable
-      className={className}
-      $resizing={resizing}
+    <Resizable
+      className={cn(
+        'max-xl:w-full max-xl:max-w-full max-xl:min-w-full',
+        '[&_.right-resizable-handle]:bg-white [&_.right-resizable-handle]:mr-2.5 [&_.right-resizable-handle]:max-xl:hidden [&_.right-resizable-handle]:border-l [&_.right-resizable-handle]:border-r [&_.right-resizable-handle]:border-[#dadada] [&_.right-resizable-handle]:hover:[&:after]:border-l-[#c2c2c2] [&_.right-resizable-handle]:hover:[&:after]:border-r-[#c2c2c2]',
+        '[&_.right-resizable-handle]:after:content-[""] [&_.right-resizable-handle]:after:absolute [&_.right-resizable-handle]:after:top-[calc(50%-20px)] [&_.right-resizable-handle]:after:left-0.5 [&_.right-resizable-handle]:after:h-10 [&_.right-resizable-handle]:after:w-[3px] [&_.right-resizable-handle]:after:border-l [&_.right-resizable-handle]:after:border-r [&_.right-resizable-handle]:after:border-[#dadada] [&_.right-resizable-handle]:after:transition-[border-color] [&_.right-resizable-handle]:after:duration-100 [&_.right-resizable-handle]:after:ease-out',
+        resizing &&
+          '[&_.right-resizable-handle]:after:border-l-[#c2c2c2] [&_.right-resizable-handle]:after:border-r-[#c2c2c2]',
+        className,
+      )}
       onResizeStart={() => {
         setResizing(true)
       }}
@@ -81,7 +47,7 @@ const ResizableColumn = ({ children, className }) => {
       }}
     >
       {children}
-    </StyledResizable>
+    </Resizable>
   )
 }
 
