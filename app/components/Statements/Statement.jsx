@@ -17,7 +17,7 @@ export default class Statement extends React.PureComponent {
     const { statement, speaker, handleEdit, handleDelete, withoutActions, offset = 0 } = this.props
 
     return (
-      <div>
+      <div data-cy="statement">
         <StatementHeader
           statementTime={statement.time + offset}
           isDraft={statement.is_draft}

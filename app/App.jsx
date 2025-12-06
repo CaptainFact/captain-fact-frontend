@@ -16,6 +16,7 @@ import UserProvider from './components/LoggedInUser/UserProvider'
 import { ToastProvider } from './components/ui/toast'
 import { TooltipProvider } from './components/ui/tooltip'
 import { ENTITY_SPEAKER, ENTITY_STATEMENT, ENTITY_VIDEO } from './constants'
+import { useTheme } from './hooks/use-theme'
 import i18n from './i18n/i18n'
 import { ALGOLIA_INDEXES_NAMES, searchClient } from './lib/algolia'
 // Import router
@@ -25,6 +26,12 @@ import store from './state'
 
 // Activate polyfills
 smoothScrollPolyfill()
+
+// Component to initialize theme
+const ThemeInitializer = () => {
+  useTheme()
+  return null
+}
 
 const App = () => (
   <ToastProvider>

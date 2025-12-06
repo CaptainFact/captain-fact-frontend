@@ -22,6 +22,7 @@ import UserMenu from '../Users/UserMenu'
 import UserPicture from '../Users/UserPicture'
 import { ErrorView } from '../Utils/ErrorView'
 import { LoadingFrame } from '../Utils/LoadingFrame'
+import ThemeToggle from '../ThemeToggle'
 import Logo from './Logo'
 import MenuToggleSwitch from './MenuToggleSwitch'
 
@@ -41,7 +42,7 @@ const Navbar = ({ t, loggedInUser, isAuthenticated, loggedInUserLoading, locatio
   return (
     <div data-cy="Navbar">
       <div className="h-[60px] w-full" />
-      <div className="fixed z-40 top-0 w-full flex justify-between items-center bg-white h-[60px] border-b border-[#dadada] shadow-[0px_0px_15px_rgba(125,125,125,0.25)] transition-[top] duration-300 animate-fadeInUp px-2.5">
+      <div className="fixed z-40 top-0 w-full flex justify-between items-center bg-white dark:bg-background h-[60px] border-b border-[#dadada] dark:border-border shadow-[0px_0px_15px_rgba(125,125,125,0.25)] transition-[top] duration-300 animate-fadeInUp px-2.5">
         {/* Left */}
         <div className="flex items-center">
           <div className="flex gap-4 items-center h-[59px]">
@@ -68,7 +69,8 @@ const Navbar = ({ t, loggedInUser, isAuthenticated, loggedInUserLoading, locatio
             className="animate-[fadeIn_0.75s_infinite_linear_alternate] mr-2 opacity-50"
           />
         ) : (
-          <div className="flex">
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
             {isAuthenticated ? (
               <div className="flex items-center">
                 <div className="mr-3">
