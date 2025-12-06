@@ -64,7 +64,7 @@ app
 
 #### Styling
 
-Styling is based on [Tailwind](https://tailwindcss.com). Some legacy code still uses [styled-components](https://styled-components.com/), but its usage is discouraged.
+Styling is based on [Tailwind](https://tailwindcss.com).
 
 ## Main Libraries / Frameworks
 

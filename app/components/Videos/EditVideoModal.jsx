@@ -13,7 +13,6 @@ import { popModal } from '../../state/modals/reducer'
 import { shiftStatements } from '../../state/video_debate/effects'
 import FieldWithButton from '../FormUtils/FieldWithButton'
 import Modal from '../Modal/Modal'
-import { StyledH3 } from '../StyledUtils/Title'
 import { Separator } from '../ui/separator'
 
 const editVideoMutation = gql`
@@ -44,9 +43,7 @@ class EditVideoModal extends React.PureComponent {
     return (
       <Modal handleCloseClick={popModal} title={this.renderTitle()}>
         <div className="flex flex-col">
-          <StyledH3 mb={2} fontSize="15px" fontWeight="700">
-            Change visibility
-          </StyledH3>
+          <h3 className="mb-2 text-[15px] font-bold">Change visibility</h3>
           <Mutation mutation={editVideoMutation}>
             {(editVideo) => (
               <Formik
@@ -95,9 +92,7 @@ class EditVideoModal extends React.PureComponent {
           <React.Fragment>
             <Separator className="my-4" />
             <div className="flex flex-col">
-              <StyledH3 mb={2} fontSize="15px" fontWeight="700">
-                {t('video.shiftStatements')}
-              </StyledH3>
+              <h3 className="mb-2 text-[15px] font-bold">{t('video.shiftStatements')}</h3>
               <Formik
                 initialValues={{ youtube_offset: video.youtube_offset }}
                 onSubmit={async (values, { setSubmitting }) => {

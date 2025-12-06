@@ -11,7 +11,6 @@ import { checkLength } from '../../lib/form_validators'
 import capitalizeName from '../../lib/name_formatter'
 import { ReactSelectStyles, ReactSelectTheme } from '../../lib/react_select_theme'
 import { addSpeaker } from '../../state/video_debate/effects'
-import Container from '../StyledUtils/Container'
 
 @connect(null, { addSpeaker })
 @withTranslation('videoDebate')
@@ -56,9 +55,9 @@ export default class AddSpeakerForm extends React.PureComponent {
         noOptionsMessage={() => t('speaker.search')}
         components={{
           LoadingMessage: () => (
-            <Container display="flex" p={3} color="black.400" justifyContent="center">
+            <div className="flex p-3 text-[#4a4a4a] justify-center">
               {t('main:actions.loading')}...
-            </Container>
+            </div>
           ),
         }}
         styles={ReactSelectStyles}

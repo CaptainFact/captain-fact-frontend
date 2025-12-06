@@ -10,7 +10,6 @@ import examplesImg1 from '../../assets/examples/image-1.jpg'
 import examplesImg2 from '../../assets/examples/image-2.jpg'
 import examplesImg3 from '../../assets/examples/image-3.jpg'
 import { useLoggedInUser } from '../LoggedInUser/UserProvider'
-import Container from '../StyledUtils/Container'
 import { Button } from '../ui/button'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import CFSocialProfiles from './CFSocialProfiles'
@@ -101,14 +100,14 @@ const Home = () => {
           <div className="flex flex-wrap -mx-4 mb-16">
             <div className="w-full md:w-6/12 px-4 mb-8 md:mb-0">
               <h2 className="text-3xl font-semibold mb-4">{t('howTitle')}</h2>
-              <Container color="black.600">
+              <div className="text-[#0a0a0a]">
                 {t('how')}
                 <ol className="list-decimal pl-6 space-y-2 mt-2 mb-4">
                   <li className="ml-2">{t('how1')}</li>
                   <li className="ml-2">{t('how2')}</li>
                   <li className="ml-2">{t('how3')}</li>
                 </ol>
-              </Container>
+              </div>
               <p>{t('how4')}</p>
               <ExternalLinkNewTab href="https://www.youtube.com/watch?v=LsRkg2hRTiI">
                 <Button variant="outline" className="mt-4">

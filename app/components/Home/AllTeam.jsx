@@ -1,8 +1,6 @@
 import React from 'react'
 import { withTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import { fontWeight } from 'styled-system'
 
 import { userProfileURL } from '@/lib/cf_routes'
 
@@ -55,23 +53,6 @@ const TEAM = [
   },
 ]
 
-const TeamPicture = styled.img`
-  border-radius: 4em;
-  margin: 0 1em;
-  height: 100px;
-`
-
-const TeamTextBox = styled.div`
-  color: #0a0a0a;
-  text-align: center;
-  line-height: 1;
-  ${fontWeight}
-`
-
-const TeamText = styled.span`
-  display: block;
-`
-
 /**
  * Render all CaptainFact team
  */
@@ -82,19 +63,20 @@ const AllTeam = ({ t }) => {
         <div key={firstName} className="mx-2">
           <div className="flex flex-col">
             <Link to={userProfileURL({ username })}>
-              <TeamPicture
+              <img
+                className="rounded-[4em] my-0 mx-4 h-[100px]"
                 title={`${firstName} ${lastName}`}
                 src={img}
                 alt={`${firstName} ${lastName}`}
               />
-              <TeamTextBox className="mt-3 mb-2 font-bold">
-                <TeamText>{firstName}</TeamText>
-                <TeamText>{lastName}</TeamText>
-              </TeamTextBox>
-              <TeamTextBox className="mb-4">
-                <TeamText>{t(`${title1}`)}</TeamText>
-                <TeamText>{t(`${title2}`)}</TeamText>
-              </TeamTextBox>
+              <div className="text-[#0a0a0a] text-center leading-none mt-3 mb-2 font-bold">
+                <span className="block">{firstName}</span>
+                <span className="block">{lastName}</span>
+              </div>
+              <div className="text-[#0a0a0a] text-center leading-none mb-4">
+                <span className="block">{t(`${title1}`)}</span>
+                <span className="block">{t(`${title2}`)}</span>
+              </div>
             </Link>
           </div>
         </div>

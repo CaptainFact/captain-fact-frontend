@@ -1,32 +1,17 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
-import styled, { withTheme } from 'styled-components'
 import { Menu as MenuIcon, X as XIcon } from 'styled-icons/boxicons-regular'
-import { themeGet } from 'styled-system'
 
 import { toggleSidebar } from '../../state/user_preferences/reducer'
 
-const Button = styled.button`
-  background: none;
-  outline: none;
-  border: 0;
-  padding: 0;
-  height: 100%;
-  width: 45px;
-  cursor: pointer;
-  user-select: none;
-  color: ${themeGet('colors.black.400')};
-
-  &:hover {
-    color: ${themeGet('colors.black.500')};
-  }
-`
-
 const MenuToggleSwitch = ({ toggleSidebar, sidebarExpended, toggleableIcon }) => (
-  <Button onClick={() => toggleSidebar()}>
+  <button
+    onClick={() => toggleSidebar()}
+    className="bg-none outline-none border-0 p-0 h-full w-[45px] cursor-pointer select-none text-[#4a4a4a] hover:text-[#252525]"
+  >
     {sidebarExpended && toggleableIcon ? <XIcon /> : <MenuIcon />}
-  </Button>
+  </button>
 )
 
 MenuToggleSwitch.propTypes = {
@@ -35,8 +20,6 @@ MenuToggleSwitch.propTypes = {
   toggleableIcon: PropTypes.bool.isRequired,
 }
 
-export default withTheme(
-  connect(({ UserPreferences: { sidebarExpended } }) => ({ sidebarExpended }), { toggleSidebar })(
-    MenuToggleSwitch,
-  ),
-)
+export default connect(({ UserPreferences: { sidebarExpended } }) => ({ sidebarExpended }), {
+  toggleSidebar,
+})(MenuToggleSwitch)

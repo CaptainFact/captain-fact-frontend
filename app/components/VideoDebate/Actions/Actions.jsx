@@ -3,7 +3,6 @@ import React from 'react'
 import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import styled from 'styled-components'
 import {
   ArrowsAltV,
   Bell,
@@ -23,25 +22,11 @@ import { destroyStatementForm } from '../../../state/video_debate/statements/eff
 import { changeStatementFormSpeaker } from '../../../state/video_debate/statements/reducer'
 import { hasStatementForm } from '../../../state/video_debate/statements/selectors'
 import { withLoggedInUser } from '../../LoggedInUser/UserProvider'
+import { Separator } from '../../ui/separator'
 import ReputationGuard from '../../Utils/ReputationGuard'
 import ShareModal from '../../Utils/ShareModal'
 import EditVideoModal from '../../Videos/EditVideoModal'
 import Action from './ActionButton'
-
-const Wrapper = styled.div`
-  display: flex;
-  padding: 15px 10px;
-  align-items: center;
-  gap: 10px;
-  box-shadow: #f3f3f3 0px 10px 10px -10px;
-  margin-bottom: 5px;
-`
-
-const Separator = styled.div`
-  width: 1px;
-  height: 20px;
-  background: ${({ theme }) => theme.colors.black[200]};
-`
 
 const Actions = ({
   t,
@@ -55,7 +40,7 @@ const Actions = ({
   addModal,
   history,
 }) => (
-  <Wrapper>
+  <div className="flex py-[15px] px-2.5 items-center gap-2.5 shadow-[#f3f3f3_0px_10px_10px_-10px] mb-1.5">
     {isAuthenticated && (
       <React.Fragment>
         <Action
@@ -66,7 +51,7 @@ const Actions = ({
           isSecondary
           label={isSubscribed ? t('video.unsubscribe') : t('video.subscribe')}
         />
-        <Separator />
+        <Separator className="w-px h-5 bg-[#dadada]" />
       </React.Fragment>
     )}
 
@@ -96,7 +81,7 @@ const Actions = ({
       />
     </ReputationGuard>
 
-    <Separator />
+    <Separator className="w-px h-5 bg-[#dadada]" />
 
     <Action
       onClick={() =>
@@ -114,7 +99,7 @@ const Actions = ({
       activatedIcon={<Question />}
       label={t('main:menu.help')}
     />
-  </Wrapper>
+  </div>
 )
 
 const mapStateToProps = (state) => ({

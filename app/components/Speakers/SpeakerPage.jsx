@@ -10,7 +10,6 @@ import { LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
 import { fetchSpeaker, fetchWikiDataInfo } from '../../state/speakers/effects'
 import { reset } from '../../state/speakers/reducer'
 import { reset as resetVideos } from '../../state/videos/reducer'
-import { Span } from '../StyledUtils/Text'
 import { Button } from '../ui/button'
 import DismissableMessage from '../Utils/DismissableMessage'
 import { ErrorView } from '../Utils/ErrorView'
@@ -110,7 +109,7 @@ export class SpeakerPage extends React.PureComponent {
         <div className="bg-gray-100 py-8">
           <div className="container mx-auto px-4">
             <h1 className="mb-6">
-              <Span fontSize={3}>{t('speakerpage.title1')}</Span>{' '}
+              <span className="text-[1.8rem]">{t('speakerpage.title1')}</span>{' '}
               <div className="mt-3">
                 <SpeakerPreview withoutActions speaker={this.props.speaker} />
               </div>

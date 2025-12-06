@@ -5,12 +5,10 @@ import React from 'react'
 import { withTranslation } from 'react-i18next'
 import { usePopper } from 'react-popper'
 import { connect } from 'react-redux'
-import styled, { css } from 'styled-components'
 
+import { cn } from '../../lib/css-utils'
 import { forcePosition, setPlaying } from '../../state/video_debate/video/reducer'
 import Statement from '../Statements/Statement'
-import Container from '../StyledUtils/Container'
-import { P } from '../StyledUtils/Text'
 import { Button } from '../ui/button'
 import ClickableIcon from '../Utils/ClickableIcon'
 import { LoadingFrame } from '../Utils/LoadingFrame'
@@ -28,28 +26,6 @@ const captionsQuery = gql`
       }
     }
   }
-`
-
-const CaptionText = styled.span`
-  color: #000;
-  transition:
-    color 0.3s,
-    text-shadow 0.3s;
-
-  ${({ $isCurrent, $isPlaying, $isPast }) => {
-    if ($isPlaying) {
-      if ($isCurrent) {
-        return css`
-          text-shadow: #9f9f9f 1px 1px 0px;
-          color: #000;
-        `
-      } else if (!$isPast) {
-        return css`
-          color: #999;
-        `
-      }
-    }
-  }}
 `
 
 // A statement is displayed before each caption whe
@@ -71,46 +47,6 @@ const getStatementsAtPosition = (statements, caption, nextCaption) => {
 
   return selected
 }
-
-const Arrow = styled.div`
-  visibility: hidden;
-
-  &,
-  &::before {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: white;
-  }
-
-  &::before {
-    visibility: visible;
-    content: '';
-    transform: rotate(45deg);
-  }
-`
-
-const StatementTooltip = styled.div`
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding-bottom: 8px;
-  font-size: 12px;
-  box-shadow: rgb(112 112 112 / 38%) -4px 7px 8px;
-
-  &[data-popper-placement^='top'] ${Arrow} {
-    bottom: -4px;
-  }
-  &[data-popper-placement^='bottom'] ${Arrow} {
-    top: -4px;
-  }
-  &[data-popper-placement^='left'] ${Arrow} {
-    right: -4px;
-  }
-  &[data-popper-placement^='right'] ${Arrow} {
-    left: -4px;
-  }
-`
 
 const StatementIndicator = withTranslation('main')(({ statement, onPlayClick, t }) => {
   const [referenceElement, setReferenceElement] = React.useState(null)
@@ -140,7 +76,18 @@ const StatementIndicator = withTranslation('main')(({ statement, onPlayClick, t 
       </Button>
 
       {show && (
-        <StatementTooltip ref={setPopperElement} style={styles.popper} {...attributes.popper}>
+        <div
+          ref={setPopperElement}
+          style={styles.popper}
+          {...attributes.popper}
+          className={cn(
+            'bg-white border border-[#ccc] rounded-lg pb-2 text-xs shadow-[rgb(112_112_112_/_38%)_-4px_7px_8px]',
+            '[&[data-popper-placement^="top"]_.arrow]:bottom-[-4px]',
+            '[&[data-popper-placement^="bottom"]_.arrow]:top-[-4px]',
+            '[&[data-popper-placement^="left"]_.arrow]:right-[-4px]',
+            '[&[data-popper-placement^="right"]_.arrow]:left-[-4px]',
+          )}
+        >
           <Statement
             statement={statement}
             speaker={statement.speaker}
@@ -162,8 +109,12 @@ const StatementIndicator = withTranslation('main')(({ statement, onPlayClick, t 
               </React.Fragment>
             }
           />
-          <Arrow ref={setArrowElement} style={styles.arrow} />
-        </StatementTooltip>
+          <div
+            ref={setArrowElement}
+            style={styles.arrow}
+            className="arrow invisible [&::before]:visible [&::before]:content-[''] [&::before]:absolute [&::before]:w-2 [&::before]:h-2 [&::before]:bg-white [&::before]:rotate-45 [&]:absolute [&]:w-2 [&]:h-2 [&]:bg-white"
+          />
+        </div>
       )}
     </>
   )
@@ -218,11 +169,16 @@ const CaptionsExtractor = ({
   }
 
   return (
-    <Container position="relative" textAlign="justify">
-      <P fontSize={['16px', '20px']} lineHeight="1.5" ref={textContainerRef}>
+    <div className="relative text-justify">
+      <p className="text-base md:text-xl leading-[1.5]" ref={textContainerRef}>
         {data.video.captions.map((caption, index) => {
           const nextCaption = data.video.captions[index + 1]
           const statementsAtPosition = getStatementsAtPosition(statements, caption, nextCaption)
+          const isPlaying = Boolean(playbackPosition)
+          const isPast = playbackPosition > caption.start + caption.duration
+          const isCurrent =
+            playbackPosition >= caption.start &&
+            playbackPosition <= caption.start + caption.duration
           return (
             <React.Fragment key={index}>
               {statementsAtPosition.map((statement) => (
@@ -235,21 +191,20 @@ const CaptionsExtractor = ({
                   }}
                 />
               ))}
-              <CaptionText
+              <span
                 data-start={caption.start}
-                $isPlaying={Boolean(playbackPosition)}
-                $isPast={playbackPosition > caption.start + caption.duration}
-                $isCurrent={
-                  playbackPosition >= caption.start &&
-                  playbackPosition <= caption.start + caption.duration
-                }
+                className={cn(
+                  'text-black transition-[color,text-shadow] duration-300',
+                  isPlaying && isCurrent && 'text-black [text-shadow:#9f9f9f_1px_1px_0px]',
+                  isPlaying && !isPast && !isCurrent && 'text-[#999]',
+                )}
               >
                 {caption.text}
-              </CaptionText>{' '}
+              </span>{' '}
             </React.Fragment>
           )
         })}
-      </P>
+      </p>
 
       <ActionBubbleMenu
         hidden={!selection.text}
@@ -271,7 +226,7 @@ const CaptionsExtractor = ({
           }
         }}
       />
-    </Container>
+    </div>
   )
 }
 

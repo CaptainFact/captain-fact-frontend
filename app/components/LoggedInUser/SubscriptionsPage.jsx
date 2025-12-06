@@ -8,7 +8,6 @@ import { Videos } from 'styled-icons/boxicons-solid'
 import { loggedInUserSubscriptionsQuery } from '../../API/graphql_queries'
 import { videoURL } from '../../lib/cf_routes'
 import SubscribeBtn from '../Notifications/SubscribeBtn'
-import { StyledH2 } from '../StyledUtils/Title'
 import { Card } from '../ui/card'
 import { ErrorView } from '../Utils/ErrorView'
 import { LoadingFrame } from '../Utils/LoadingFrame'
@@ -36,7 +35,9 @@ export default class NotificationsPage extends Component {
           const subscriptions = get(data, 'loggedInUser.subscriptions', [])
           return (
             <div className="flex flex-col items-center px-3 py-4">
-              <StyledH2 textTransform="capitalize">{this.props.t('entities.video_other')}</StyledH2>
+              <h2 className="text-[2.5rem] mb-4 capitalize">
+                {this.props.t('entities.video_other')}
+              </h2>
               <div>
                 {subscriptions.length === 0 ? (
                   <Card className="p-6">No subscriptions</Card>

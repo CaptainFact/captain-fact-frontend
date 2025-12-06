@@ -2,68 +2,29 @@ import React from 'react'
 import { withTranslation } from 'react-i18next'
 import { SearchBox as AlgoliaSearchBox } from 'react-instantsearch-dom'
 import { withRouter } from 'react-router'
-import styled from 'styled-components'
-
-const StyledSearchBox = styled(AlgoliaSearchBox)`
-  input[type='search'] {
-    border: 1px solid lightgrey;
-    padding: 8px;
-    border-radius: 4px;
-    padding-left: 32px;
-    background: #fafafa;
-    font-size: 14px;
-    outline: none;
-    width: 100%;
-    &:focus {
-      border-color: #6ba3a7;
-      box-shadow: 0 0 0 0.125em rgb(107 163 167 / 25%);
-    }
-  }
-
-  button[type='submit'] {
-    position: absolute;
-    left: 10px;
-    top: 12px;
-    border: none;
-    cursor: pointer;
-    background: none;
-
-    svg {
-      width: 15px;
-      height: 15px;
-    }
-  }
-
-  button[type='reset'] {
-    position: absolute;
-    right: 6px;
-    top: 10px;
-    border: none;
-    background: none;
-    cursor: pointer;
-  }
-`
 
 /** Global Search Box */
 const SearchBox = ({ location, history, t }) => {
   return (
-    <StyledSearchBox
-      translations={{ placeholder: t('search.placeholder') }}
-      searchAsYouType={false}
-      onSubmit={(e) => {
-        e.preventDefault()
-        const term = e.target.elements[0].value
-        const isSearchPage = location.pathname.startsWith('/search')
-        const route = isSearchPage ? location.pathname : '/search'
-        history.push(`${route}?term=${encodeURIComponent(term)}`)
-      }}
-      onReset={(e) => {
-        e.preventDefault()
-        const isSearchPage = location.pathname.startsWith('/search')
-        const route = isSearchPage ? location.pathname : '/search'
-        history.push(route)
-      }}
-    />
+    <div className="[&_input[type='search']]:border [&_input[type='search']]:border-[lightgrey] [&_input[type='search']]:p-2 [&_input[type='search']]:rounded [&_input[type='search']]:pl-8 [&_input[type='search']]:bg-[#fafafa] [&_input[type='search']]:text-sm [&_input[type='search']]:outline-none [&_input[type='search']]:w-full [&_input[type='search']:focus]:border-[#6ba3a7] [&_input[type='search']:focus]:shadow-[0_0_0_0.125em_rgb(107_163_167_/_25%)] [&_button[type='submit']]:absolute [&_button[type='submit']]:left-2.5 [&_button[type='submit']]:top-3 [&_button[type='submit']]:border-0 [&_button[type='submit']]:cursor-pointer [&_button[type='submit']]:bg-none [&_button[type='submit']_svg]:w-[15px] [&_button[type='submit']_svg]:h-[15px] [&_button[type='reset']]:absolute [&_button[type='reset']]:right-[15px] [&_button[type='reset']]:top-[15px] [&_button[type='reset']]:border-0 [&_button[type='reset']]:bg-none [&_button[type='reset']]:cursor-pointer">
+      <AlgoliaSearchBox
+        translations={{ placeholder: t('search.placeholder') }}
+        searchAsYouType={false}
+        onSubmit={(e) => {
+          e.preventDefault()
+          const term = e.target.elements[0].value
+          const isSearchPage = location.pathname.startsWith('/search')
+          const route = isSearchPage ? location.pathname : '/search'
+          history.push(`${route}?term=${encodeURIComponent(term)}`)
+        }}
+        onReset={(e) => {
+          e.preventDefault()
+          const isSearchPage = location.pathname.startsWith('/search')
+          const route = isSearchPage ? location.pathname : '/search'
+          history.push(route)
+        }}
+      />
+    </div>
   )
 }
 

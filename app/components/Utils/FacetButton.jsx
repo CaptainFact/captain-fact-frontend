@@ -1,77 +1,8 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import Popup from 'reactjs-popup'
-import styled from 'styled-components'
-import { themeGet } from 'styled-system'
 
-import { fadeIn } from '../StyledUtils/Keyframes'
-
-const StyledPopup = styled(Popup)`
-  &-content {
-    max-width: 200px;
-    padding: 3px 8px;
-    font-size: 14px;
-    font-weight: 700;
-    color: #ffffff;
-    background: rgba(54, 54, 54, 0.8);
-    box-shadow: none;
-    animation: ${fadeIn} 0.1s;
-
-    .popup-arrow {
-      color: rgba(54, 54, 54, 0.8);
-    }
-  }
-`
-
-const Wrapper = styled.button`
-  border: 0;
-  background: 0;
-  padding: 0;
-  outline: none;
-  display: inline-flex;
-  text-align: center;
-  cursor: pointer;
-  width: ${({ size }) => `${size}px`};
-  height: ${({ size }) => `${size}px`};
-  transform: rotateY(${({ activated }) => (activated ? 180 : 0)}deg);
-  transform-style: preserve-3d;
-  transition: transform 0.3s;
-
-  > svg {
-    position: absolute;
-    border: 1px solid;
-    border-radius: 50%;
-    transition:
-      opacity 0.3s,
-      color 0.1s;
-    backface-visibility: hidden;
-    overflow: visible;
-    padding: ${({ size }) => `${size / 4}px`};
-    width: 100%;
-    height: 100%;
-
-    /* Activated icon */
-    &:nth-child(1) {
-      color: ${(props) =>
-        props.$isSecondary ? props.theme.colors.secondary : props.theme.colors.black[400]};
-      transform: rotateY(180deg);
-
-      &:hover {
-        color: ${themeGet('colors.primary')};
-      }
-    }
-
-    /* Deactivated icon */
-    &:nth-child(2) {
-      color: #9b9b9b;
-      opacity: ${({ activated }) => (activated ? 0 : 0.7)};
-
-      &:hover {
-        color: ${themeGet('colors.black.500')};
-      }
-    }
-  }
-`
+import { cn } from '../../lib/css-utils'
 
 const FacetButton = ({
   label,
@@ -85,28 +16,67 @@ const FacetButton = ({
   isSecondary,
 }) => {
   const popupContent = (
-    <Wrapper
-      activated={activated}
+    <button
       onClick={onClick}
-      size={size}
-      $isSecondary={isSecondary}
-      className={className}
+      className={cn(
+        'border-0 bg-0 p-0 outline-none inline-flex text-center cursor-pointer transition-transform duration-300 [&_svg]:h-full [&_svg]:w-full [&_svg]:[vertical-align:super]',
+        className,
+      )}
+      style={{
+        width: `${size}px`,
+        height: `${size}px`,
+        transform: `rotateY(${activated ? 180 : 0}deg)`,
+        transformStyle: 'preserve-3d',
+      }}
     >
-      {activatedIcon}
-      {deactivatedIcon || activatedIcon}
-    </Wrapper>
+      <span
+        className={cn(
+          'absolute p-[25%] border border-solid rounded-full transition-[opacity,color] duration-300 [backface-visibility:hidden] overflow-visible w-full h-full',
+          isSecondary ? 'text-[#2D6282]' : 'text-[#4a4a4a]',
+          'hover:text-primary',
+        )}
+        style={{
+          transform: 'rotateY(180deg)',
+        }}
+      >
+        {activatedIcon}
+      </span>
+      <span
+        className={cn(
+          'absolute p-[25%] border border-solid rounded-full transition-[opacity,color] duration-300 [backface-visibility:hidden] overflow-visible w-full h-full text-[#9b9b9b] hover:text-[#252525]',
+        )}
+        style={{
+          opacity: activated ? 0 : 0.7,
+        }}
+      >
+        {deactivatedIcon || activatedIcon}
+      </span>
+    </button>
   )
 
   return label ? (
-    <StyledPopup
+    <Popup
       trigger={popupContent}
       position={['bottom center', 'bottom left', 'bottom right']}
       offsetY={4}
       on={['hover', 'focus']}
       keepTooltipInside={keepTooltipInside}
+      contentStyle={{
+        maxWidth: '200px',
+        padding: '3px 8px',
+        fontSize: '14px',
+        fontWeight: 700,
+        color: '#ffffff',
+        background: 'rgba(54, 54, 54, 0.8)',
+        boxShadow: 'none',
+        animation: 'fadeIn 0.1s',
+      }}
+      arrowStyle={{
+        color: 'rgba(54, 54, 54, 0.8)',
+      }}
     >
       {label}
-    </StyledPopup>
+    </Popup>
   ) : (
     popupContent
   )
