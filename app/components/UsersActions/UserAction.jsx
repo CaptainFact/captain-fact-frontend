@@ -74,7 +74,12 @@ const UserAction = ({
   const reputationChange = getReputationChange(viewingFrom, action)
 
   return (
-    <div className={cn(className, 'bg-white dark:bg-background rounded-lg shadow-sm dark:shadow-md p-4 border-b dark:border-border')}>
+    <div
+      className={cn(
+        className,
+        'bg-white dark:bg-background rounded-lg shadow-sm dark:shadow-md p-4 border-b dark:border-border',
+      )}
+    >
       <div className="flex items-center gap-2 flex-wrap">
         <Badge variant="outline">
           <Clock size={12} />
@@ -95,7 +100,9 @@ const UserAction = ({
 
         {!withoutUser && <UserAppellation user={user} />}
 
-        <span className="text-gray-700 dark:text-foreground">{getActionDescription(t, action, viewingFrom)}</span>
+        <span className="text-gray-700 dark:text-foreground">
+          {getActionDescription(t, action, viewingFrom)}
+        </span>
 
         {Boolean(action.changes && action.changes.size) && (
           <Button

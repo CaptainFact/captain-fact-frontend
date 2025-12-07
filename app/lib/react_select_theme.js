@@ -1,18 +1,10 @@
 import React from 'react'
-import AsyncCreatable from 'react-select/async-creatable'
 import AsyncSelect from 'react-select/async'
-import Select from 'react-select'
+import AsyncCreatable from 'react-select/async-creatable'
 
 import { useTheme } from '@/hooks/use-theme'
 
 import CFTheme from '../styles/theme'
-
-const isDarkMode = () => {
-  if (typeof window === 'undefined') {
-    return false
-  }
-  return document.documentElement.classList.contains('dark')
-}
 
 const createStyles = (darkMode) => ({
   control: (base, { isFocused }) => ({
@@ -38,13 +30,21 @@ const createStyles = (darkMode) => ({
     ...base,
     cursor: 'pointer',
     backgroundColor: isSelected
-      ? (darkMode ? 'hsl(0, 0%, 20%)' : base.backgroundColor)
+      ? darkMode
+        ? 'hsl(0, 0%, 20%)'
+        : base.backgroundColor
       : isFocused
-      ? (darkMode ? 'hsl(0, 0%, 18%)' : base.backgroundColor)
-      : (darkMode ? 'hsl(0, 0%, 12%)' : base.backgroundColor),
+        ? darkMode
+          ? 'hsl(0, 0%, 18%)'
+          : base.backgroundColor
+        : darkMode
+          ? 'hsl(0, 0%, 12%)'
+          : base.backgroundColor,
     color: darkMode ? 'hsl(0, 0%, 98%)' : base.color,
     '&:active': {
-      backgroundColor: darkMode ? 'hsl(0, 0%, 20%)' : base['&:active']?.backgroundColor || base.backgroundColor,
+      backgroundColor: darkMode
+        ? 'hsl(0, 0%, 20%)'
+        : base['&:active']?.backgroundColor || base.backgroundColor,
     },
   }),
   input: (base) => ({
@@ -68,7 +68,7 @@ const createWarningStyles = (darkMode) => ({
     backgroundColor: darkMode ? 'hsl(0, 0%, 12%)' : base.backgroundColor,
     borderColor: CFTheme.colors.yellow,
     color: darkMode ? 'hsl(0, 0%, 98%)' : base.color,
-    '&:hover': { 
+    '&:hover': {
       borderColor: CFTheme.colors.yellow,
     },
     ...(isFocused && {
@@ -85,13 +85,21 @@ const createWarningStyles = (darkMode) => ({
     ...base,
     cursor: 'pointer',
     backgroundColor: isSelected
-      ? (darkMode ? 'hsl(0, 0%, 20%)' : base.backgroundColor)
+      ? darkMode
+        ? 'hsl(0, 0%, 20%)'
+        : base.backgroundColor
       : isFocused
-      ? (darkMode ? 'hsl(0, 0%, 18%)' : base.backgroundColor)
-      : (darkMode ? 'hsl(0, 0%, 12%)' : base.backgroundColor),
+        ? darkMode
+          ? 'hsl(0, 0%, 18%)'
+          : base.backgroundColor
+        : darkMode
+          ? 'hsl(0, 0%, 12%)'
+          : base.backgroundColor,
     color: darkMode ? 'hsl(0, 0%, 98%)' : base.color,
     '&:active': {
-      backgroundColor: darkMode ? 'hsl(0, 0%, 20%)' : base['&:active']?.backgroundColor || base.backgroundColor,
+      backgroundColor: darkMode
+        ? 'hsl(0, 0%, 20%)'
+        : base['&:active']?.backgroundColor || base.backgroundColor,
     },
   }),
   input: (base) => ({
@@ -128,11 +136,6 @@ export const useReactSelectWarningStyles = () => {
   return createWarningStyles(darkMode)
 }
 
-// Static exports for backward compatibility (non-reactive)
-// These will check dark mode at render time but won't update when theme changes
-export const ReactSelectStyles = createStyles(isDarkMode())
-export const ReactSelectWarningStyles = createWarningStyles(isDarkMode())
-
 export const ReactSelectTheme = (reactSelectTheme) => ({
   ...reactSelectTheme,
   colors: {
@@ -160,12 +163,3 @@ export const ReactiveAsyncSelect = React.forwardRef((props, ref) => {
   return <AsyncSelect {...props} styles={props.styles || styles} ref={ref} />
 })
 ReactiveAsyncSelect.displayName = 'ReactiveAsyncSelect'
-
-/**
- * Wrapper for Select that uses reactive styles
- */
-export const ReactiveSelect = React.forwardRef((props, ref) => {
-  const styles = useReactSelectStyles()
-  return <Select {...props} styles={props.styles || styles} ref={ref} />
-})
-ReactiveSelect.displayName = 'ReactiveSelect'

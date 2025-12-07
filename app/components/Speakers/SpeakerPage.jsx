@@ -115,7 +115,9 @@ export class SpeakerPage extends React.PureComponent {
               </div>
             </h1>
             <hr className="my-4 border-t border-gray-200 dark:border-border" />
-            <div className="text-lg text-gray-600 dark:text-muted-foreground">{this.renderWikidata()}</div>
+            <div className="text-lg text-gray-600 dark:text-muted-foreground">
+              {this.renderWikidata()}
+            </div>
           </div>
         </div>
         <div className="flex justify-center my-6">
@@ -126,7 +128,10 @@ export class SpeakerPage extends React.PureComponent {
             <strong className="block mb-2 dark:text-foreground">{t('speakerpage.info1')}</strong>
             <p className="mb-4 dark:text-foreground">
               {t('speakerpage.info2')}{' '}
-              <ExternalLinkNewTab href="/" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300">
+              <ExternalLinkNewTab
+                href="/"
+                className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
+              >
                 {t('speakerpage.more')}
               </ExternalLinkNewTab>
             </p>

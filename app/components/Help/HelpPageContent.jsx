@@ -54,15 +54,41 @@ class HelpPageContent extends PureComponent {
         className="content"
         remarkPlugins={[remarkGfm]}
         components={{
-          h1: (props) => <h1 className="text-4xl mb-8 mt-12 text-gray-800 dark:text-foreground font-bold" {...props} />,
-          h2: (props) => <h2 className="text-3xl font-bold mt-8 mb-6 text-gray-700 dark:text-foreground" {...props} />,
-          h3: (props) => <h3 className="text-2xl font-bold mb-4 mt-6 text-gray-600 dark:text-foreground" {...props} />,
-          h4: (props) => (
-            <h4 className="text-xl mb-4 mt-6 text-gray-600 dark:text-foreground font-semibold" {...props} />
+          h1: (props) => (
+            <h1
+              className="text-4xl mb-8 mt-12 text-gray-800 dark:text-foreground font-bold"
+              {...props}
+            />
           ),
-          p: (props) => <p className="text-lg leading-relaxed text-gray-600 dark:text-foreground my-6" {...props} />,
+          h2: (props) => (
+            <h2
+              className="text-3xl font-bold mt-8 mb-6 text-gray-700 dark:text-foreground"
+              {...props}
+            />
+          ),
+          h3: (props) => (
+            <h3
+              className="text-2xl font-bold mb-4 mt-6 text-gray-600 dark:text-foreground"
+              {...props}
+            />
+          ),
+          h4: (props) => (
+            <h4
+              className="text-xl mb-4 mt-6 text-gray-600 dark:text-foreground font-semibold"
+              {...props}
+            />
+          ),
+          p: (props) => (
+            <p
+              className="text-lg leading-relaxed text-gray-600 dark:text-foreground my-6"
+              {...props}
+            />
+          ),
           ul: (props) => (
-            <ul className="list-disc list-outside ml-6 mb-6 space-y-2 text-gray-600 dark:text-foreground" {...props} />
+            <ul
+              className="list-disc list-outside ml-6 mb-6 space-y-2 text-gray-600 dark:text-foreground"
+              {...props}
+            />
           ),
           ol: (props) => (
             <ol
@@ -115,7 +141,10 @@ class HelpPageContent extends PureComponent {
           ),
           // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
           thead: ({ node, ...props }) => (
-            <thead className="bg-gray-50 dark:bg-accent border-b border-gray-200 dark:border-border" {...props} />
+            <thead
+              className="bg-gray-50 dark:bg-accent border-b border-gray-200 dark:border-border"
+              {...props}
+            />
           ),
           // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
           tr: ({ node, ...props }) => (
@@ -126,10 +155,15 @@ class HelpPageContent extends PureComponent {
           ),
           // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
           th: ({ node, ...props }) => (
-            <th className="p-3 font-medium text-left text-gray-700 dark:text-foreground" {...props} />
+            <th
+              className="p-3 font-medium text-left text-gray-700 dark:text-foreground"
+              {...props}
+            />
           ),
           // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-          td: ({ node, ...props }) => <td className="p-3 text-gray-600 dark:text-foreground" {...props} />,
+          td: ({ node, ...props }) => (
+            <td className="p-3 text-gray-600 dark:text-foreground" {...props} />
+          ),
         }}
       >
         {this.props.markdownContent}

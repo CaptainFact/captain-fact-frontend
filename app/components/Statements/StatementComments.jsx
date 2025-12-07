@@ -110,7 +110,11 @@ export default class StatementComments extends React.PureComponent {
   renderCommentsListHeader(label, variant, score = null) {
     const separatorClassName = cn(
       'flex-1 mx-2',
-      variant === 'destructive' ? 'bg-red-800/30 dark:bg-red-900/40' : variant === 'success' ? 'bg-green-700/30 dark:bg-green-800/40' : '',
+      variant === 'destructive'
+        ? 'bg-red-800/30 dark:bg-red-900/40'
+        : variant === 'success'
+          ? 'bg-green-700/30 dark:bg-green-800/40'
+          : '',
     )
     return (
       <div className="flex mt-2 mb-3 items-center">

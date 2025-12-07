@@ -42,7 +42,9 @@ const Home = () => {
                 </strong>
               </h1>
               <br />
-              <h2 className="text-2xl sm:text-3xl font-semibold mb-1 text-foreground">{t('titleCF')}</h2>
+              <h2 className="text-2xl sm:text-3xl font-semibold mb-1 text-foreground">
+                {t('titleCF')}
+              </h2>
               <h2 className="text-xl font-light mb-2 text-foreground">
                 <Trans i18nKey="home:presentationTitle">
                   To train a critical mind, improve the quality of information and decision-making.
@@ -62,7 +64,9 @@ const Home = () => {
                   )}
                 </div>
                 <div className="w-full md:w-5/12">
-                  <p className="font-bold mb-4 min-h-[72px] text-foreground">{t('presentationTextButton2')}</p>
+                  <p className="font-bold mb-4 min-h-[72px] text-foreground">
+                    {t('presentationTextButton2')}
+                  </p>
                   {!isAuthenticated && (
                     <Link to="/signup">
                       <Button className="h-auto">
@@ -127,7 +131,9 @@ const Home = () => {
             </div>
             <div className="w-full md:w-6/12 px-4">
               <div className="md:pl-8">
-                <h2 className="text-3xl font-semibold mb-4 text-foreground">{t('example1Title1')}</h2>
+                <h2 className="text-3xl font-semibold mb-4 text-foreground">
+                  {t('example1Title1')}
+                </h2>
                 <h2 className="text-2xl font-light mb-4 text-foreground">{t('example1Title2')}</h2>
                 <p className="mb-6 text-foreground">{t('example1Text')}</p>
                 <Link to="/extension">
@@ -144,7 +150,9 @@ const Home = () => {
           <div className="flex flex-wrap -mx-4 mb-16">
             <div className="w-full md:w-6/12 px-4 mb-8 md:mb-0">
               <div className="md:pr-8">
-                <h2 className="text-3xl font-semibold mb-4 text-foreground">{t('example2Title1')}</h2>
+                <h2 className="text-3xl font-semibold mb-4 text-foreground">
+                  {t('example2Title1')}
+                </h2>
                 <h2 className="text-2xl font-light mb-4 text-foreground">{t('example2Title2')}</h2>
                 <p className="mb-6 text-foreground">{t('example2Text')}</p>
                 <Link to="/signup">
@@ -167,7 +175,9 @@ const Home = () => {
             </div>
             <div className="w-full md:w-6/12 px-4">
               <div className="md:pl-8">
-                <h2 className="text-3xl font-semibold mb-4 text-foreground">{t('example3Title1')}</h2>
+                <h2 className="text-3xl font-semibold mb-4 text-foreground">
+                  {t('example3Title1')}
+                </h2>
                 <h2 className="text-2xl font-light mb-4 text-foreground">{t('example3Title2')}</h2>
                 <p className="mb-6 text-foreground">{t('example3Text')}</p>
                 <ExternalLinkNewTab href="https://github.com/CaptainFact/captain-fact/wiki/Les-partenariats-entre-les-chaînes-Youtube-et-CaptainFact.io">

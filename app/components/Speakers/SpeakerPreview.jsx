@@ -77,7 +77,9 @@ export class SpeakerPreview extends React.PureComponent {
     return (
       <Link
         to={`/s/${speaker.slug || speaker.id}`}
-        className={'sm:font-medium sm:text-base text-sm hover:underline text-neutral-900 dark:text-foreground'}
+        className={
+          'sm:font-medium sm:text-base text-sm hover:underline text-neutral-900 dark:text-foreground'
+        }
         target="_blank"
       >
         {speaker.full_name}

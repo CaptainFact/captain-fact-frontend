@@ -144,7 +144,9 @@ class EditSpeakerFormModal extends React.PureComponent {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Wikidata search */}
                 <div className="space-y-4">
-                  <h3 className="font-medium text-gray-900 dark:text-foreground mb-3">{t('wikidata.autofill')}</h3>
+                  <h3 className="font-medium text-gray-900 dark:text-foreground mb-3">
+                    {t('wikidata.autofill')}
+                  </h3>
                   <div className="mb-4">
                     {values.wikidata_item_id && !hasWikidataSearchBar ? (
                       <div className="bg-blue-50 dark:bg-blue-950/30 p-3 rounded-md">
@@ -246,10 +248,15 @@ class EditSpeakerFormModal extends React.PureComponent {
 
                 {/* Speaker form */}
                 <div className="space-y-4 md:border-l md:border-gray-200 dark:md:border-border md:pl-6">
-                  <h3 className="font-medium text-gray-900 dark:text-foreground mb-3">{t('speaker.details')}</h3>
+                  <h3 className="font-medium text-gray-900 dark:text-foreground mb-3">
+                    {t('speaker.details')}
+                  </h3>
                   <div className="space-y-4">
                     <div className="space-y-2">
-                      <label htmlFor="full_name" className="block text-sm font-medium dark:text-foreground">
+                      <label
+                        htmlFor="full_name"
+                        className="block text-sm font-medium dark:text-foreground"
+                      >
                         {this.getLabel(t('speaker.fullName'), SPEAKER_NAME_LENGTH[1])}
                       </label>
                       <Input
@@ -267,7 +274,10 @@ class EditSpeakerFormModal extends React.PureComponent {
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="title" className="block text-sm font-medium dark:text-foreground">
+                      <label
+                        htmlFor="title"
+                        className="block text-sm font-medium dark:text-foreground"
+                      >
                         {this.getLabel(t('speaker.title'), SPEAKER_TITLE_LENGTH[1])}
                       </label>
                       <Input
@@ -278,11 +288,16 @@ class EditSpeakerFormModal extends React.PureComponent {
                         onChange={(e) => setFieldValue('title', cleanStr(e.target.value))}
                         autoComplete="off"
                       />
-                      {errors.title && <p className="text-red-500 dark:text-red-400 text-sm">{errors.title}</p>}
+                      {errors.title && (
+                        <p className="text-red-500 dark:text-red-400 text-sm">{errors.title}</p>
+                      )}
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="wikidata_item_id" className="block text-sm font-medium dark:text-foreground">
+                      <label
+                        htmlFor="wikidata_item_id"
+                        className="block text-sm font-medium dark:text-foreground"
+                      >
                         {t('wikidata.id')}
                       </label>
                       <Input
@@ -298,7 +313,9 @@ class EditSpeakerFormModal extends React.PureComponent {
                         autoComplete="off"
                       />
                       {errors.wikidata_item_id && (
-                        <p className="text-red-500 dark:text-red-400 text-sm">{errors.wikidata_item_id}</p>
+                        <p className="text-red-500 dark:text-red-400 text-sm">
+                          {errors.wikidata_item_id}
+                        </p>
                       )}
                     </div>
                   </div>

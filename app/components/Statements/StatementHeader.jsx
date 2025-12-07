@@ -49,7 +49,9 @@ export default withTranslation('videoDebate')(
         {speaker && speaker.picture && (
           <img className="mr-1.5 h-6 w-6 rounded-full" src={speaker.picture} alt="" />
         )}
-        <strong className="sm:text-base text-xs mr-1 dark:text-foreground">{speaker ? speaker.full_name : ''}</strong>
+        <strong className="sm:text-base text-xs mr-1 dark:text-foreground">
+          {speaker ? speaker.full_name : ''}
+        </strong>
       </div>
       <div className="flex items-center gap-2">
         {customButtons}

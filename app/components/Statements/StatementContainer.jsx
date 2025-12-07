@@ -56,7 +56,9 @@ export default class StatementContainer extends React.PureComponent {
     return (
       <Card
         ref={this.containerRef}
-        className={cn('max-w-[980px] mx-auto bg-white dark:bg-background', { 'shadow-lg': isFocused })}
+        className={cn('max-w-[980px] mx-auto bg-white dark:bg-background', {
+          'shadow-lg': isFocused,
+        })}
       >
         {this.renderStatementOrEditForm(speaker, statement)}
         {statement.is_draft && !isEditing ? (

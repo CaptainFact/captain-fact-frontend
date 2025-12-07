@@ -119,9 +119,12 @@ export class StatementForm extends React.Component {
         data-cy="statement-form"
         ref={this.containerRef}
         onSubmit={handleSubmit(this.handleSubmit)}
-        className={cn('bg-white dark:bg-background rounded-lg shadow-lg dark:shadow-xl border border-gray-200 dark:border-border', {
-          'animate-fadeInDown z-10': !this.props.isBundled,
-        })}
+        className={cn(
+          'bg-white dark:bg-background rounded-lg shadow-lg dark:shadow-xl border border-gray-200 dark:border-border',
+          {
+            'animate-fadeInDown z-10': !this.props.isBundled,
+          },
+        )}
       >
         <header className="flex items-center gap-3 p-2 border-b border-gray-200 dark:border-border">
           <div className="flex-0 basis-0 flex items-center gap-1">
@@ -176,9 +179,9 @@ export class StatementForm extends React.Component {
               <Field
                 name="speaker_id"
                 component={SpeakersSelect}
-                props={{ 
+                props={{
                   className: 'text-xs',
-                  warning: this.state.emptySpeakerWarningHadBeenShown
+                  warning: this.state.emptySpeakerWarningHadBeenShown,
                 }}
                 speakers={speakers}
                 placeholder={t('speaker.add')}
@@ -189,7 +192,9 @@ export class StatementForm extends React.Component {
         </header>
 
         <div className="bg-[#31455d] dark:bg-[hsl(210,30%,20%)] text-white dark:text-foreground p-5 shadow-inner flex items-start gap-1">
-          <span className="h-[50px] -mt-2 sm:text-7xl text-5xl font-serif text-neutral-300 dark:text-neutral-400">“</span>
+          <span className="h-[50px] -mt-2 sm:text-7xl text-5xl font-serif text-neutral-300 dark:text-neutral-400">
+            “
+          </span>
           <Field
             name="text"
             component={ControlTextarea}

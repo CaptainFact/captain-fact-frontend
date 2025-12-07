@@ -60,7 +60,10 @@ export default class Moderation extends React.PureComponent {
         <div className="text-center mb-8">
           <p className="mb-2 dark:text-foreground">{t('helpText1')}</p>
           <p className="mb-4 dark:text-foreground">{t('helpText2')}</p>
-          <Link className="font-bold hover:underline dark:text-foreground dark:hover:text-primary" to="/help/moderation">
+          <Link
+            className="font-bold hover:underline dark:text-foreground dark:hover:text-primary"
+            to="/help/moderation"
+          >
             {t('learnMore')}
           </Link>
         </div>

@@ -12,13 +12,7 @@ import { popModal } from '../../state/modals/reducer'
 import { shiftStatements } from '../../state/video_debate/effects'
 import FieldWithButton from '../FormUtils/FieldWithButton'
 import Modal from '../Modal/Modal'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '../ui/select'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { Separator } from '../ui/separator'
 
 const editVideoMutation = gql`
@@ -102,7 +96,9 @@ class EditVideoModal extends React.PureComponent {
           <React.Fragment>
             <Separator className="my-4" />
             <div className="flex flex-col">
-              <h3 className="mb-2 text-[15px] font-bold dark:text-foreground">{t('video.shiftStatements')}</h3>
+              <h3 className="mb-2 text-[15px] font-bold dark:text-foreground">
+                {t('video.shiftStatements')}
+              </h3>
               <Formik
                 initialValues={{ youtube_offset: video.youtube_offset }}
                 onSubmit={async (values, { setSubmitting }) => {

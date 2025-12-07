@@ -30,7 +30,9 @@ export class VideoCard extends React.PureComponent {
         </CardHeader>
         <CardContent className="px-2 py-4 text-center flex-grow">
           <Link to={linkTarget} className="flex items-center h-full">
-            <h4 className="text-lg font-medium text-black dark:text-foreground text-center w-full">{title}</h4>
+            <h4 className="text-lg font-medium text-black dark:text-foreground text-center w-full">
+              {title}
+            </h4>
           </Link>
         </CardContent>
         <CardFooter className="p-4 text-sm text-gray-600 dark:text-muted-foreground border-t dark:border-border mt-auto">

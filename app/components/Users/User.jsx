@@ -106,7 +106,10 @@ export default class User extends React.PureComponent {
                   key={key}
                   className={`list-none border-primary ${isActive ? 'border-b-2' : ''}`}
                 >
-                  <Link to={route} className="flex items-center gap-2 px-4 py-2 text-neutral-700 dark:text-foreground hover:text-neutral-900 dark:hover:text-foreground">
+                  <Link
+                    to={route}
+                    className="flex items-center gap-2 px-4 py-2 text-neutral-700 dark:text-foreground hover:text-neutral-900 dark:hover:text-foreground"
+                  >
                     <Icon className="w-4 h-4" />
                     {title}
                   </Link>

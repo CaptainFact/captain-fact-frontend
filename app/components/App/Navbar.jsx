@@ -1,6 +1,6 @@
-import { LogIn, Monitor, Moon, Sun } from 'lucide-react'
-import React, { useEffect, useMemo } from 'react'
-import { useTranslation, withTranslation } from 'react-i18next'
+import { LogIn } from 'lucide-react'
+import React, { useMemo } from 'react'
+import { withTranslation } from 'react-i18next'
 import { withResizeDetector } from 'react-resize-detector'
 import { Link, withRouter } from 'react-router-dom'
 import Popup from 'reactjs-popup'
@@ -36,67 +36,42 @@ const getRedirectUrl = () => {
   return '/videos'
 }
 
-// Inline theme selector component for user menu
-const InlineThemeSelector = () => {
-  const { theme, setTheme } = useTheme()
-  const { t } = useTranslation('main')
-
-  const themes = [
-    { value: 'auto', label: t('theme.auto'), Icon: Monitor },
-    { value: 'light', label: t('theme.light'), Icon: Sun },
-    { value: 'dark', label: t('theme.dark'), Icon: Moon },
-  ]
-
-  return (
-    <div className="border-b border-[#e7e7e7] dark:border-border px-[15px] py-2.5">
-      <div className="flex gap-1 w-full">
-        {themes.map(({ value, label, Icon }) => (
-          <button
-            key={value}
-            onClick={() => setTheme(value)}
-            className={cn(
-              'flex-1 flex items-center justify-center gap-1.5 px-2 py-1.5 text-sm rounded-md outline-none transition-colors',
-              theme === value
-                ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-                : 'bg-white dark:bg-background text-gray-700 dark:text-foreground hover:bg-[#f5f7fa] dark:hover:bg-accent active:bg-[#f5f7fa] dark:active:bg-accent focus:bg-[#f5f7fa] dark:focus:bg-accent',
-            )}
-            title={label}
-          >
-            <Icon size={14} />
-            <span className="hidden sm:inline">{label}</span>
-          </button>
-        ))}
-      </div>
-    </div>
-  )
-}
-
 const Navbar = ({ t, loggedInUser, isAuthenticated, loggedInUserLoading, location, width }) => {
   const isMobile = width < 600
   const loginRedirect = getRedirectUrl()
   const { resolvedTheme } = useTheme()
   const isDarkMode = resolvedTheme === 'dark'
-  
-  const notificationsPopupStyle = useMemo(() => ({
-    zIndex: 9999,
-    overflow: 'hidden',
-    backgroundColor: isDarkMode ? 'hsl(0, 0%, 12%)' : '#ffffff',
-    border: isDarkMode ? '1px solid hsl(0, 0%, 20%)' : '1px solid #d3d3d3',
-    borderRadius: '5px',
-    boxShadow: isDarkMode ? 'rgba(0, 0, 0, 0.3) 5px 10px 15px -6px' : 'rgba(150, 150, 150, 0.2) 5px 10px 15px -6px',
-    width: isMobile ? '95%' : '400px',
-  }), [isDarkMode, isMobile])
-  
-  const userMenuPopupStyle = useMemo(() => ({
-    zIndex: 9999,
-    overflow: 'hidden',
-    backgroundColor: isDarkMode ? 'hsl(0, 0%, 12%)' : '#ffffff',
-    border: isDarkMode ? '1px solid hsl(0, 0%, 20%)' : '1px solid #d3d3d3',
-    borderRadius: '5px',
-    boxShadow: isDarkMode ? 'rgba(0, 0, 0, 0.3) 5px 10px 15px -6px' : 'rgba(150, 150, 150, 0.2) 5px 10px 15px -6px',
-    minWidth: '200px',
-  }), [isDarkMode])
-  
+
+  const notificationsPopupStyle = useMemo(
+    () => ({
+      zIndex: 9999,
+      overflow: 'hidden',
+      backgroundColor: isDarkMode ? 'hsl(0, 0%, 12%)' : '#ffffff',
+      border: isDarkMode ? '1px solid hsl(0, 0%, 20%)' : '1px solid #d3d3d3',
+      borderRadius: '5px',
+      boxShadow: isDarkMode
+        ? 'rgba(0, 0, 0, 0.3) 5px 10px 15px -6px'
+        : 'rgba(150, 150, 150, 0.2) 5px 10px 15px -6px',
+      width: isMobile ? '95%' : '400px',
+    }),
+    [isDarkMode, isMobile],
+  )
+
+  const userMenuPopupStyle = useMemo(
+    () => ({
+      zIndex: 9999,
+      overflow: 'hidden',
+      backgroundColor: isDarkMode ? 'hsl(0, 0%, 12%)' : '#ffffff',
+      border: isDarkMode ? '1px solid hsl(0, 0%, 20%)' : '1px solid #d3d3d3',
+      borderRadius: '5px',
+      boxShadow: isDarkMode
+        ? 'rgba(0, 0, 0, 0.3) 5px 10px 15px -6px'
+        : 'rgba(150, 150, 150, 0.2) 5px 10px 15px -6px',
+      minWidth: '200px',
+    }),
+    [isDarkMode],
+  )
+
   return (
     <div data-cy="Navbar">
       <div className="h-[60px] w-full" />
@@ -174,10 +149,11 @@ const Navbar = ({ t, loggedInUser, isAuthenticated, loggedInUserLoading, locatio
                       <UserPicture size={USER_PICTURE_LARGE} user={loggedInUser} />
                       <div className="flex flex-col justify-center">
                         <UserAppellation user={loggedInUser} withoutActions />
-                        <span className="text-[0.8em] text-[#252525] dark:text-muted-foreground">{loggedInUser.email}</span>
+                        <span className="text-[0.8em] text-[#252525] dark:text-muted-foreground">
+                          {loggedInUser.email}
+                        </span>
                       </div>
                     </div>
-                    <InlineThemeSelector />
                     <UserMenu user={loggedInUser} hasLogout isSelf>
                       {({ Icon, key, route, title, index, isActive, onClick }) => (
                         <Link

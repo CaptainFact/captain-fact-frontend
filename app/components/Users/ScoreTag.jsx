@@ -27,7 +27,12 @@ const ScoreTag = ({ reputation, withIcon = false, className = undefined }) => (
           className,
         )}
       >
-        {withIcon && <Star size="1em" className="mr-1 text-neutral-500 dark:text-neutral-400 fill-yellow-200 dark:fill-yellow-300" />}
+        {withIcon && (
+          <Star
+            size="1em"
+            className="mr-1 text-neutral-500 dark:text-neutral-400 fill-yellow-200 dark:fill-yellow-300"
+          />
+        )}
         {reputation}
       </Badge>
     </TooltipTrigger>

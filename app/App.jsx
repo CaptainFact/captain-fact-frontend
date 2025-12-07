@@ -35,23 +35,23 @@ const App = () => (
           <ThemeProvider>
             <TooltipProvider>
               <UserProvider>
-              <InstantSearch
-                searchClient={searchClient}
-                indexName={ALGOLIA_INDEXES_NAMES[ENTITY_VIDEO]}
-              >
-                <Index indexName={ALGOLIA_INDEXES_NAMES[ENTITY_VIDEO]}>
-                  <Configure hitsPerPage={16} />
-                </Index>
-                <Index indexName={ALGOLIA_INDEXES_NAMES[ENTITY_SPEAKER]}>
-                  <Configure hitsPerPage={32} />
-                </Index>
-                <Index indexName={ALGOLIA_INDEXES_NAMES[ENTITY_STATEMENT]}>
-                  <Configure hitsPerPage={24} />
-                </Index>
-                <CFRouter />
-              </InstantSearch>
-            </UserProvider>
-          </TooltipProvider>
+                <InstantSearch
+                  searchClient={searchClient}
+                  indexName={ALGOLIA_INDEXES_NAMES[ENTITY_VIDEO]}
+                >
+                  <Index indexName={ALGOLIA_INDEXES_NAMES[ENTITY_VIDEO]}>
+                    <Configure hitsPerPage={16} />
+                  </Index>
+                  <Index indexName={ALGOLIA_INDEXES_NAMES[ENTITY_SPEAKER]}>
+                    <Configure hitsPerPage={32} />
+                  </Index>
+                  <Index indexName={ALGOLIA_INDEXES_NAMES[ENTITY_STATEMENT]}>
+                    <Configure hitsPerPage={24} />
+                  </Index>
+                  <CFRouter />
+                </InstantSearch>
+              </UserProvider>
+            </TooltipProvider>
           </ThemeProvider>
         </I18nextProvider>
       </ApolloProvider>

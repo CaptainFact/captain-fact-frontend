@@ -1,8 +1,8 @@
-import React from 'react'
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
+import React, { createContext, ReactNode,useContext, useEffect, useState } from 'react'
+
 import { getFromLocalStorage, LOCAL_STORAGE_KEYS, setLocalStorage } from '@/lib/local_storage'
 
-export type Theme = 'auto' | 'dark' | 'light'
+type Theme = 'auto' | 'dark' | 'light'
 
 interface ThemeContextType {
   theme: Theme
@@ -17,16 +17,16 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
  */
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window === 'undefined') return 'auto'
+    if (typeof window === 'undefined') {return 'auto'}
     const stored = getFromLocalStorage(LOCAL_STORAGE_KEYS.THEME, 'auto') as Theme
     return stored === 'dark' || stored === 'light' || stored === 'auto' ? stored : 'auto'
   })
 
   const [resolvedTheme, setResolvedTheme] = useState<'dark' | 'light'>(() => {
-    if (typeof window === 'undefined') return 'light'
+    if (typeof window === 'undefined') {return 'light'}
     const stored = getFromLocalStorage(LOCAL_STORAGE_KEYS.THEME, 'auto') as Theme
-    if (stored === 'dark') return 'dark'
-    if (stored === 'light') return 'light'
+    if (stored === 'dark') {return 'dark'}
+    if (stored === 'light') {return 'light'}
     // Auto mode: check prefers-color-scheme
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
   })

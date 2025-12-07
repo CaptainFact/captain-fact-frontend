@@ -49,7 +49,9 @@ const SearchPage = ({ t, refine, match, location }) => {
               Search results for: <strong>{{ query: term || '…' }}</strong>
             </Trans>
           </h2>
-          <p className="text-[#8c8c8c] dark:text-muted-foreground text-sm mt-1 italic">Powered by Algolia</p>
+          <p className="text-[#8c8c8c] dark:text-muted-foreground text-sm mt-1 italic">
+            Powered by Algolia
+          </p>
         </div>
         <div className="mt-8">
           <ul className="flex border-b border-[#dbdbdb] dark:border-border px-4 lg:px-10 flex-wrap">

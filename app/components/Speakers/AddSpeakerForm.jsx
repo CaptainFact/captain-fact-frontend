@@ -8,7 +8,7 @@ import { SPEAKER_NAME_LENGTH } from '../../constants'
 import { cleanStr } from '../../lib/clean_str'
 import { checkLength } from '../../lib/form_validators'
 import capitalizeName from '../../lib/name_formatter'
-import { ReactiveAsyncCreatable, ReactSelectStyles, ReactSelectTheme } from '../../lib/react_select_theme'
+import { ReactiveAsyncCreatable, ReactSelectTheme } from '../../lib/react_select_theme'
 import { addSpeaker } from '../../state/video_debate/effects'
 
 @connect(null, { addSpeaker })
