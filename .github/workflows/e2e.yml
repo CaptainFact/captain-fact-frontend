@@ -76,3 +76,12 @@ jobs:
       - name: Start E2E tests
         working-directory: api
         run: ./scripts/run_e2e_ci.sh
+      # Upload Cypress artifacts
+      - name: Upload Cypress screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots
+          path: frontend/cypress/screenshots
+          retention-days: 7
+          if-no-files-found: ignore

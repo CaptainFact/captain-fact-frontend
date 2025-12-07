@@ -117,6 +117,7 @@ export class StatementForm extends React.Component {
 
     return (
       <form
+        data-cy="statement-form"
         ref={this.containerRef}
         onSubmit={handleSubmit(this.handleSubmit)}
         className={cn('bg-white rounded-lg shadow-lg border border-gray-200', {

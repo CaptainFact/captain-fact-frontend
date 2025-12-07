@@ -139,6 +139,14 @@ export const ActionBubble = ({
   ...props
 }) => (
   <div
+    role="button"
+    tabIndex={0}
+    onKeyDown={(e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        props.onClick?.()
+      }
+    }}
+    data-cy="action-bubble"
     className={cn(
       'mb-2 first:mb-0 transition-all duration-300',
       'cursor-pointer shadow-md hover:shadow-lg right-0',
