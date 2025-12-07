@@ -3,6 +3,8 @@ const { defineConfig } = require('cypress')
 module.exports = defineConfig({
   projectId: 'iivzis',
   videoUploadOnPasses: false,
+  screenshotOnRunFailure: true,
+  screenshotsFolder: 'cypress/screenshots',
   env: {
     CYPRESS_API_URL: 'http://localhost:4000',
     CYPRESS_USERNAME: 'Captain',
