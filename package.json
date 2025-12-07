@@ -24,7 +24,9 @@
     "prettier": "prettier --loglevel warn --write 'app/**/*.{js,jsx}' && prettier --write 'cypress/**/*.js'",
     "prettier:check": "prettier --loglevel warn --check 'app/**/*.{js,jsx}' && prettier --check 'cypress/**/*.js'",
     "ts-unused-exports": "ts-unused-exports tsconfig.json --ignoreFiles='app/constants.js' --ignoreFiles='/components/ui/*'",
-    "typescript": "tsc --noEmit"
+    "typescript": "tsc --noEmit",
+    "generate:types": "graphql-codegen --config codegen.yml",
+    "generate:types:watch": "graphql-codegen --config codegen.yml --watch"
   },
   "jest": {
     "setupFiles": [
@@ -59,6 +61,7 @@
     ]
   },
   "dependencies": {
+    "@absinthe/socket": "^0.2.1",
     "@apollo/client": "^3.14.0",
     "@popperjs/core": "2.11.8",
     "@radix-ui/react-alert-dialog": "^1.1.15",
@@ -130,6 +133,9 @@
     "validator": "13.15.15",
     "wikidata-sdk": "^8.1.1"
   },
+  "overrides": {
+    "graphql": "^16.12.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.28.5",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
@@ -187,6 +193,10 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.103.0",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.2.2"
+    "webpack-dev-server": "^5.2.2",
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/typescript": "^4.0.7",
+    "@graphql-codegen/typescript-operations": "^4.2.0",
+    "@graphql-codegen/typescript-react-apollo": "^4.1.1"
   }
 }

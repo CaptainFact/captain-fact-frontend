@@ -14,6 +14,7 @@ import { toastError } from '@/lib/toasts'
 
 import { searchOnWikidata } from '../../API/wikidata'
 import { SPEAKER_NAME_LENGTH, SPEAKER_TITLE_LENGTH } from '../../constants'
+import { useUserPreferences } from '../../contexts/UserPreferencesContext'
 import { cleanStr } from '../../lib/clean_str'
 import { validateLengthI18n } from '../../lib/form_validators'
 import capitalizeName from '../../lib/name_formatter'
@@ -329,11 +330,19 @@ class EditSpeakerFormModal extends React.PureComponent {
   }
 }
 
-export default withTranslation('videoDebate')(
+const ConnectedEditSpeakerFormModal = withTranslation('videoDebate')(
   connect(
     (state) => ({
-      locale: state.VideoDebate.video.data.language || state.UserPreferences.locale,
+      videoLanguage: state.VideoDebate.video.data?.language,
     }),
     { updateSpeaker, popModal },
   )(EditSpeakerFormModal),
 )
+
+const EditSpeakerFormModalWithPreferences = (props) => {
+  const { locale: userLocale } = useUserPreferences()
+  const locale = props.videoLanguage || userLocale
+  return <ConnectedEditSpeakerFormModal {...props} locale={locale} />
+}
+
+export default EditSpeakerFormModalWithPreferences

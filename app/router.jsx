@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 // Import Views
 import Layout from './components/App/Layout'
+import SubscriptionPOC from './components/GraphQL/SubscriptionPOC'
 import Help from './components/Help/Help'
 import Home from './components/Home/Home'
 import LogoutPage from './components/LoggedInUser/LogoutPage'
@@ -12,7 +13,7 @@ import SubscriptionsPage from './components/LoggedInUser/SubscriptionsPage'
 import Moderation from './components/Moderation/Moderation'
 import { BrowserExtensionsPage, NotFound } from './components/Pages'
 import SearchPage from './components/Search/SearchPage'
-import { SpeakerPage } from './components/Speakers/SpeakerPage'
+import SpeakerPage from './components/Speakers/SpeakerPage'
 import SupportUs from './components/SupportUs'
 import ActivityLog from './components/Users/ActivityLog'
 import ConfirmEmail from './components/Users/ConfirmEmail'
@@ -24,6 +25,7 @@ import SignupForm from './components/Users/SignupForm'
 import User from './components/Users/User'
 import UserProfile from './components/Users/UserProfile'
 import UserSettings from './components/Users/UserSettings'
+import VideoDebateV2 from './components/VideoDebate/v2/VideoDebateV2'
 import { VideoDebate } from './components/VideoDebate/VideoDebate'
 import { AddVideoForm } from './components/Videos/AddVideoForm'
 import UserAddedVideos from './components/Videos/UserAddedVideos'
@@ -61,11 +63,17 @@ const CFRouter = () => (
           exact
           component={VideoDebate}
         />
+        <Route
+          path="/v2/videos/:videoId/:view(history|debate|captions)?"
+          exact
+          component={VideoDebateV2}
+        />
         <Route path="/s/:slug_or_id" exact component={SpeakerPage} />
         <Route path="/help/:splat?" component={Help} />
         <Route path="/extension" exact component={BrowserExtensionsPage} />
         <Route path="/moderation" exact component={Moderation} />
         <Route path="/support-us" exact component={SupportUs} />
+        <Route path="/graphql-subscription-poc" exact component={SubscriptionPOC} />
         <Route path="/search/:entity(videos|statements|speakers)?" component={SearchPage} />
         <Route path="*" component={NotFound} />
       </Switch>

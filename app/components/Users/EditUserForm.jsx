@@ -1,13 +1,11 @@
 import React from 'react'
 import { withTranslation } from 'react-i18next'
-import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { reduxForm, SubmissionError } from 'redux-form'
 
 import { toast } from '@/hooks/use-toast'
 
 import { updateUserInfo } from '../../API/http_api/current_user'
-import { setUser as setDisplayedUser } from '../../state/users/displayed_user/reducer'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import { renderAllUserFields, submitButton, validatePasswordRepeat } from './UserFormFields'
 
@@ -31,7 +29,6 @@ const dirtyLoggedInUserToReduxForm = (Component) => (props) => {
 @reduxForm({ form: 'editUserForm', validate: validatePasswordRepeat })
 @withRouter
 @withTranslation('user')
-@connect(null, { setDisplayedUser })
 export default class EditUserForm extends React.PureComponent {
   componentDidUpdate() {
     // Redirect to user profile when logged in
@@ -44,7 +41,6 @@ export default class EditUserForm extends React.PureComponent {
     return updateUserInfo(user)
       .then((user) => {
         this.props.updateLoggedInUser(user)
-        this.props.setDisplayedUser(user)
         toast({
           variant: 'success',
           title: this.props.t('settingsUpdated'),

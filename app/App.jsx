@@ -12,6 +12,7 @@ import { polyfill as smoothScrollPolyfill } from 'smoothscroll-polyfill'
 
 // Import APIs so they can load their configurations
 import GraphQLClient from './API/graphql_api'
+import { UserPreferencesProvider } from './contexts/UserPreferencesContext'
 import UserProvider from './components/LoggedInUser/UserProvider'
 import { ToastProvider } from './components/ui/toast'
 import { TooltipProvider } from './components/ui/tooltip'
@@ -33,25 +34,27 @@ const App = () => (
       <ApolloProvider client={GraphQLClient}>
         <I18nextProvider i18n={i18n}>
           <ThemeProvider>
-            <TooltipProvider>
-              <UserProvider>
-                <InstantSearch
-                  searchClient={searchClient}
-                  indexName={ALGOLIA_INDEXES_NAMES[ENTITY_VIDEO]}
-                >
-                  <Index indexName={ALGOLIA_INDEXES_NAMES[ENTITY_VIDEO]}>
-                    <Configure hitsPerPage={16} />
-                  </Index>
-                  <Index indexName={ALGOLIA_INDEXES_NAMES[ENTITY_SPEAKER]}>
-                    <Configure hitsPerPage={32} />
-                  </Index>
-                  <Index indexName={ALGOLIA_INDEXES_NAMES[ENTITY_STATEMENT]}>
-                    <Configure hitsPerPage={24} />
-                  </Index>
-                  <CFRouter />
-                </InstantSearch>
-              </UserProvider>
-            </TooltipProvider>
+            <UserPreferencesProvider>
+              <TooltipProvider>
+                <UserProvider>
+                  <InstantSearch
+                    searchClient={searchClient}
+                    indexName={ALGOLIA_INDEXES_NAMES[ENTITY_VIDEO]}
+                  >
+                    <Index indexName={ALGOLIA_INDEXES_NAMES[ENTITY_VIDEO]}>
+                      <Configure hitsPerPage={16} />
+                    </Index>
+                    <Index indexName={ALGOLIA_INDEXES_NAMES[ENTITY_SPEAKER]}>
+                      <Configure hitsPerPage={32} />
+                    </Index>
+                    <Index indexName={ALGOLIA_INDEXES_NAMES[ENTITY_STATEMENT]}>
+                      <Configure hitsPerPage={24} />
+                    </Index>
+                    <CFRouter />
+                  </InstantSearch>
+                </UserProvider>
+              </TooltipProvider>
+            </UserPreferencesProvider>
           </ThemeProvider>
         </I18nextProvider>
       </ApolloProvider>

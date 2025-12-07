@@ -6,6 +6,7 @@ import { reduxForm, SubmissionError } from 'redux-form'
 
 import { toastError } from '@/lib/toasts'
 
+import { useUserPreferences } from '../../contexts/UserPreferencesContext'
 import { signUp } from '../../API/http_api/current_user'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import { SignInUpContainer } from './SignInUpContainer'
@@ -14,7 +15,7 @@ import { renderAllUserFields, submitButton, validatePasswordRepeat } from './Use
 @withRouter
 @withTranslation('user')
 @reduxForm({ form: 'signupForm', validate: validatePasswordRepeat })
-@connect((state) => ({ locale: state.UserPreferences.locale }))
+@connect(() => ({}))
 @withLoggedInUser
 class SignupForm extends React.PureComponent {
   componentDidUpdate(prevProps) {
@@ -72,4 +73,9 @@ class SignupForm extends React.PureComponent {
   }
 }
 
-export default SignupForm
+const SignupFormWithPreferences = (props) => {
+  const { locale } = useUserPreferences()
+  return <SignupForm {...props} locale={locale} />
+}
+
+export default SignupFormWithPreferences

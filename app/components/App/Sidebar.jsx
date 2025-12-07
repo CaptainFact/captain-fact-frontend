@@ -21,6 +21,12 @@ import { Star } from 'styled-icons/fa-solid'
 import { LinkExternal } from 'styled-icons/octicons'
 
 import { cn } from '@/lib/css-utils'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 
 import {
   loggedInUserPendingModerationCount,
@@ -31,8 +37,8 @@ import {
   MIN_REPUTATION_MODERATION,
   TABLET_WIDTH_THRESHOLD,
 } from '../../constants'
+import { useUserPreferences } from '../../contexts/UserPreferencesContext'
 import { useTheme } from '../../hooks/use-theme'
-import { closeSidebar, toggleSidebar } from '../../state/user_preferences/reducer'
 import UserLanguageSelector from '../LoggedInUser/UserLanguageSelector'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import { Badge } from '../ui/badge'
@@ -52,34 +58,38 @@ const ThemeSelector = () => {
   ]
 
   return (
-    <div className="flex gap-1 w-full mb-4">
-      {themes.map(({ value, label, Icon }) => (
-        <button
-          key={value}
-          onClick={() => setTheme(value)}
-          className={cn(
-            'flex-1 flex items-center justify-center gap-1.5 px-2 py-1.5 text-sm rounded-md outline-none transition-colors',
-            theme === value
-              ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-              : 'bg-white dark:bg-background text-gray-700 dark:text-foreground hover:bg-[#f5f7fa] dark:hover:bg-accent active:bg-[#f5f7fa] dark:active:bg-accent focus:bg-[#f5f7fa] dark:focus:bg-accent',
-          )}
-          title={label}
-        >
-          <Icon size={14} />
-          <span className="hidden sm:inline">{label}</span>
-        </button>
-      ))}
-    </div>
+    <TooltipProvider delayDuration={50}>
+      <div className="flex gap-1 w-full mb-4">
+        {themes.map(({ value, label, Icon }) => (
+          <Tooltip key={value}>
+            <TooltipTrigger asChild>
+              <button
+                onClick={() => setTheme(value)}
+                className={cn(
+                  'flex-1 flex items-center justify-center p-2 rounded-md outline-none transition-colors',
+                  theme === value
+                    ? 'bg-primary text-primary-foreground hover:bg-primary/90'
+                    : 'bg-white dark:bg-background text-gray-700 dark:text-foreground hover:bg-[#f5f7fa] dark:hover:bg-accent active:bg-[#f5f7fa] dark:active:bg-accent focus:bg-[#f5f7fa] dark:focus:bg-accent',
+                )}
+                aria-label={label}
+              >
+                <Icon size={18} />
+              </button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{label}</p>
+            </TooltipContent>
+          </Tooltip>
+        ))}
+      </div>
+    </TooltipProvider>
   )
 }
 
-@connect((state) => ({ sidebarExpended: state.UserPreferences.sidebarExpended }), {
-  toggleSidebar,
-  closeSidebar,
-})
+@connect(() => ({}))
 @withTranslation('main')
 @withLoggedInUser
-export default class Sidebar extends React.PureComponent {
+class Sidebar extends React.PureComponent {
   constructor(props) {
     super(props)
     this.MenuListLink = this.MenuListLink.bind(this)
@@ -124,7 +134,7 @@ export default class Sidebar extends React.PureComponent {
   }
 
   render() {
-    const { sidebarExpended, className, t, isAuthenticated } = this.props
+    const { sidebarExpended, toggleSidebar, closeSidebar, className, t, isAuthenticated } = this.props
     return (
       <aside
         id="sidebar"
@@ -149,7 +159,7 @@ export default class Sidebar extends React.PureComponent {
           <ThemeSelector />
           {isAuthenticated ? (
             <React.Fragment>
-              <p className="text-gray-600 dark:text-muted-foreground uppercase text-sm font-semibold mb-2">
+              <p className="text-gray-600 dark:text-muted-foreground uppercase text-sm font-semibold mb-2 mt-3">
                 {t('menu.yourProfile')}
               </p>
               {this.renderMenuProfile()}
@@ -318,3 +328,17 @@ export default class Sidebar extends React.PureComponent {
     )
   }
 }
+
+const SidebarWithPreferences = (props) => {
+  const { sidebarExpended, toggleSidebar, closeSidebar } = useUserPreferences()
+  return (
+    <Sidebar
+      {...props}
+      sidebarExpended={sidebarExpended}
+      toggleSidebar={toggleSidebar}
+      closeSidebar={closeSidebar}
+    />
+  )
+}
+
+export default SidebarWithPreferences

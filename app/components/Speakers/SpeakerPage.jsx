@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import { FRONTEND_URL } from '../../config'
+import { useUserPreferences } from '../../contexts/UserPreferencesContext'
 import { LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
 import { fetchSpeaker, fetchWikiDataInfo } from '../../state/speakers/effects'
 import { reset } from '../../state/speakers/reducer'
@@ -27,11 +28,10 @@ import { SpeakerPreview } from './SpeakerPreview'
     speakerLoading: state.Speakers.isLoading,
     wikiLoading: state.Speakers.isLoadingWiki,
     error: state.Speakers.error,
-    userLocale: state.UserPreferences.locale,
   }),
   { fetchSpeaker, fetchWikiDataInfo, reset, resetVideos },
 )
-export class SpeakerPage extends React.PureComponent {
+class SpeakerPage extends React.PureComponent {
   componentDidMount() {
     this.props.fetchSpeaker(this.props.match.params.slug_or_id)
   }
@@ -178,3 +178,10 @@ export class SpeakerPage extends React.PureComponent {
     )
   }
 }
+
+const SpeakerPageWithPreferences = (props) => {
+  const { locale: userLocale } = useUserPreferences()
+  return <SpeakerPage {...props} userLocale={userLocale} />
+}
+
+export default SpeakerPageWithPreferences

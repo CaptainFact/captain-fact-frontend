@@ -7,18 +7,33 @@ export const VideosQuery = gql`
       totalPages
       entries {
         id
-        hash_id: hashId
-        youtube_id: youtubeId
+        hashId
+        youtubeId
         title
         insertedAt
         isPartner
         thumbnail
         speakers {
-          full_name: fullName
+          fullName
           id
           slug
         }
       }
+    }
+  }
+`
+
+export const UserQuery = gql`
+  query User($username: String!) {
+    user(username: $username) {
+      id
+      username
+      name
+      reputation
+      registeredAt
+      pictureUrl
+      miniPictureUrl
+      achievements
     }
   }
 `
@@ -32,14 +47,14 @@ export const VideosAddedByUserQuery = gql`
         totalPages
         entries {
           id
-          hash_id: hashId
-          youtube_id: youtubeId
+          hashId
+          youtubeId
           title
           insertedAt
           isPartner
           thumbnail
           speakers {
-            full_name: fullName
+            fullName
             id
             slug
           }
@@ -82,7 +97,7 @@ export const loggedInUserPendingModerationCount = gql`
   query LoggedInUserUnreadNotificationsCount {
     loggedInUser {
       id
-      actions_pending_moderation
+      actionsPendingModeration
     }
   }
 `
@@ -92,6 +107,138 @@ export const loggedInUserTodayReputationGain = gql`
     loggedInUser {
       id
       todayReputationGain
+    }
+  }
+`
+
+export const VideoDebateQuery = gql`
+  query VideoDebate($id: ID!) {
+    video(hashId: $id) {
+      id
+      hashId
+      title
+      url
+      thumbnail
+      language
+      unlisted
+      youtubeOffset
+      speakers {
+        id
+        fullName
+        slug
+        picture
+      }
+      statements {
+        id
+        text
+        time
+        isDraft
+        speaker {
+          id
+          fullName
+          picture
+        }
+        comments {
+          id
+          text
+          approve
+          score
+          insertedAt
+          replyToId
+          user {
+            id
+            username
+            pictureUrl
+          }
+          source {
+            id
+            url
+          }
+        }
+      }
+    }
+  }
+`
+
+export const DELETE_STATEMENT_MUTATION = gql`
+  mutation DeleteStatement($id: ID!) {
+    deleteStatement(id: $id) {
+      id
+    }
+  }
+`
+
+export const UPDATE_STATEMENT_MUTATION = gql`
+  mutation UpdateStatement($id: ID!, $text: String, $time: Int, $speakerId: ID, $isDraft: Boolean) {
+    updateStatement(id: $id, text: $text, time: $time, speakerId: $speakerId, isDraft: $isDraft) {
+      id
+      time
+      text
+      isDraft
+      video {
+        id
+      }
+    }
+  }
+`
+
+export const CREATE_COMMENT_MUTATION = gql`
+  mutation CreateComment(
+    $statementId: ID!
+    $text: String
+    $source: String
+    $replyToId: ID
+    $approve: Boolean
+  ) {
+    createComment(
+      statementId: $statementId
+      text: $text
+      source: $source
+      replyToId: $replyToId
+      approve: $approve
+    ) {
+      id
+      text
+      approve
+      insertedAt
+      replyToId
+      statementId
+      user {
+        id
+        username
+        pictureUrl
+      }
+      source {
+        id
+        url
+      }
+    }
+  }
+`
+
+export const DELETE_COMMENT_MUTATION = gql`
+  mutation DeleteComment($id: ID!) {
+    deleteComment(id: $id) {
+      id
+      statementId
+      replyToId
+    }
+  }
+`
+
+export const VOTE_COMMENT_MUTATION = gql`
+  mutation VoteComment($commentId: ID!, $value: Int!) {
+    voteComment(commentId: $commentId, value: $value) {
+      id
+      score
+    }
+  }
+`
+
+export const FLAG_COMMENT_MUTATION = gql`
+  mutation FlagComment($commentId: ID!, $reason: Int!) {
+    flagComment(commentId: $commentId, reason: $reason) {
+      id
     }
   }
 `

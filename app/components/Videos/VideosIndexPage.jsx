@@ -3,25 +3,19 @@ import { Helmet } from 'react-helmet'
 import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 
+import { useUserPreferences } from '../../contexts/UserPreferencesContext'
 import { toAbsoluteURL } from '../../lib/cf_routes'
-import { changeVideosLanguageFilter, setVideosFilter } from '../../state/user_preferences/reducer'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import AddVideoBtn from './AddVideoBtn'
 import PaginatedVideosContainer from './PaginatedVideosContainer'
 import VideosFilterBar from './VideosFilterBar'
 
-@connect(
-  (state) => ({
-    languageFilter: state.UserPreferences.videosLanguageFilter,
-    videosFilter: state.UserPreferences.videosFilter,
-  }),
-  { changeVideosLanguageFilter, setVideosFilter },
-)
+@connect(() => ({}))
 @withTranslation('main')
 @withLoggedInUser
-export default class VideosIndexPage extends React.PureComponent {
+class VideosIndexPage extends React.PureComponent {
   render() {
-    const { t, languageFilter, videosFilter, setVideosFilter, location } = this.props
+    const { t, location, languageFilter, videosFilter, setVideosFilter, changeVideosLanguageFilter } = this.props
     const searchParams = new URLSearchParams(location.search)
     const currentPage = parseInt(searchParams.get('page')) || 1
 
@@ -45,7 +39,10 @@ export default class VideosIndexPage extends React.PureComponent {
         </div>
         <div className="z-10 flex flex-col-reverse md:flex-row flex-wrap gap-5 justify-between items-center max-w-[1315px] px-5 pt-2 mx-auto mb-8 border-b border-neutral-200 dark:border-border bg-white dark:bg-background md:sticky static top-[60px] z-100 shadow-md">
           <VideosFilterBar
-            onLanguageChange={(v) => this.onVideosLanguageChange(v)}
+            onLanguageChange={(v) => {
+              const language = v === 'all' ? null : v
+              changeVideosLanguageFilter(language)
+            }}
             onSourceChange={(v) => setVideosFilter(v)}
             language={languageFilter}
             source={videosFilter}
@@ -62,9 +59,24 @@ export default class VideosIndexPage extends React.PureComponent {
       </div>
     )
   }
-
-  onVideosLanguageChange(value) {
-    const language = value === 'all' ? null : value
-    this.props.changeVideosLanguageFilter(language)
-  }
 }
+
+const VideosIndexPageWithPreferences = (props) => {
+  const {
+    videosLanguageFilter: languageFilter,
+    videosFilter,
+    changeVideosLanguageFilter,
+    setVideosFilter,
+  } = useUserPreferences()
+  return (
+    <VideosIndexPage
+      {...props}
+      languageFilter={languageFilter}
+      videosFilter={videosFilter}
+      changeVideosLanguageFilter={changeVideosLanguageFilter}
+      setVideosFilter={setVideosFilter}
+    />
+  )
+}
+
+export default VideosIndexPageWithPreferences

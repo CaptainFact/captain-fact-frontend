@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { checkExtensionInstall } from '@/lib/browser-extension'
 import { cn } from '@/lib/css-utils'
 
+import { useUserPreferences } from '../../contexts/UserPreferencesContext'
 import { MainModalContainer } from '../Modal/MainModalContainer'
 import { Toaster } from '../ui/toaster'
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
@@ -13,11 +14,8 @@ import CrashReportPage from './CrashReportPage'
 import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 
-@connect((state) => ({
-  locale: state.UserPreferences.locale,
-  sidebarExpended: state.UserPreferences.sidebarExpended,
-}))
-export default class Layout extends React.PureComponent {
+@connect(() => ({}))
+class Layout extends React.PureComponent {
   state = { error: null }
 
   /** Called when app crashes */
@@ -75,3 +73,10 @@ export default class Layout extends React.PureComponent {
     )
   }
 }
+
+const LayoutWithPreferences = (props) => {
+  const { locale, sidebarExpended } = useUserPreferences()
+  return <Layout {...props} locale={locale} sidebarExpended={sidebarExpended} />
+}
+
+export default LayoutWithPreferences

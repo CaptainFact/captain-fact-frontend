@@ -2,12 +2,12 @@ import { Clock } from 'lucide-react'
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Trans, withTranslation } from 'react-i18next'
-import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 
+import GraphQLClient from '../../API/graphql_api'
+import { UserQuery } from '../../API/graphql_queries'
 import { USER_PICTURE_XLARGE } from '../../constants'
-import { fetchUser } from '../../state/users/displayed_user/effects'
-import { resetUser } from '../../state/users/displayed_user/reducer'
+import parseDateTime from '../../lib/parse_datetime'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import { ErrorView } from '../Utils/ErrorView'
 import { LoadingFrame } from '../Utils/LoadingFrame'
@@ -17,55 +17,99 @@ import UserAppellation from './UserAppellation'
 import UserMenu from './UserMenu'
 import UserPicture from './UserPicture'
 
-@connect(
-  ({ DisplayedUser: { isLoading, errors, data } }) => ({
-    isLoading,
-    errors,
-    user: data,
-  }),
-  { fetchUser, resetUser },
-)
+// Context to provide user data to child components
+export const DisplayedUserContext = React.createContext({
+  user: {
+    id: 0,
+    username: '___________',
+    name: '',
+    reputation: 0,
+    registeredAt: null,
+  },
+})
+
 @withTranslation('main')
 @withLoggedInUser
 @withRouter
 export default class User extends React.PureComponent {
-  componentDidMount() {
-    this.props.fetchUser(this.props.match.params.username)
+  constructor(props) {
+    super(props)
+    this.state = {
+      isLoading: false,
+      errors: null,
+      user: {
+        id: 0,
+        username: '___________',
+        name: '',
+        reputation: 0,
+        registeredAt: null,
+      },
+    }
   }
 
-  componentDidUpdate(oldProps) {
+  componentDidMount() {
+    this.fetchUser(this.props.match.params.username)
+  }
+
+  componentDidUpdate(oldProps, oldState) {
     // If user's username was updated
     if (
-      this.props.user.id === oldProps.user.id &&
-      this.props.user.username !== oldProps.user.username
+      this.state.user.id !== 0 &&
+      this.state.user.id === oldState.user?.id &&
+      this.state.user.username !== oldState.user?.username
     ) {
       // TODO Remove old user profile from history
       // Redirect
-      this.props.history.replace(`/u/${this.props.user.username}`)
+      this.props.history.replace(`/u/${this.state.user.username}`)
     }
     // Showing another user
     else if (this.props.match.params.username !== oldProps.match.params.username) {
-      this.props.fetchUser(this.props.match.params.username)
+      this.fetchUser(this.props.match.params.username)
     }
   }
 
-  componentWillUnmount() {
-    this.props.resetUser()
+  fetchUser(username) {
+    this.setState({ isLoading: true, errors: null })
+    GraphQLClient.query({
+      query: UserQuery,
+      variables: { username },
+      fetchPolicy: 'network-only',
+    })
+      .then(({ data }) => {
+        const user = data?.user
+        if (!user) {
+          throw new Error('User not found')
+        }
+        this.setState({
+          user,
+          isLoading: false,
+          errors: null,
+        })
+      })
+      .catch((error) => {
+        this.setState({
+          errors: error,
+          isLoading: false,
+        })
+      })
   }
 
   isSelf() {
-    return this.props.isAuthenticated && this.props.loggedInUser.id === this.props.user.id
+    return (
+      this.props.isAuthenticated &&
+      this.props.loggedInUser?.id?.toString() === this.state.user.id
+    )
   }
 
   render() {
-    if (this.props.errors) {
-      return <ErrorView error={this.props.errors} canReload />
+    if (this.state.errors) {
+      return <ErrorView error={this.state.errors} canReload />
     }
-    if (this.props.isLoading) {
+    if (this.state.isLoading) {
       return <LoadingFrame />
     }
 
-    const user = this.props.user || {}
+    const user = this.state.user || {}
     const prettyUsername = `@${user.username}`
 
     return (
@@ -86,10 +130,12 @@ export default class User extends React.PureComponent {
                 <UserAppellation user={user} withoutActions />
                 <div className="flex items-center gap-2 text-gray-600 dark:text-muted-foreground">
                   <Clock className="w-4 h-4" />
-                  <Trans i18nKey="user:registeredSince">
-                    Registered for
-                    <TimeSince time={user.registered_at} addSuffix={false} isDateTime={false} />
-                  </Trans>
+                  <span>
+                    <Trans i18nKey="user:registeredSince">
+                      Registered for
+                      <TimeSince time={user.registeredAt} addSuffix={false} isDateTime={false} />
+                    </Trans>
+                  </span>
                 </div>
               </div>
               <div className="ml-auto">
@@ -118,7 +164,9 @@ export default class User extends React.PureComponent {
             </UserMenu>
           </div>
         </div>
-        {this.props.children}
+        <DisplayedUserContext.Provider value={{ user }}>
+          {this.props.children}
+        </DisplayedUserContext.Provider>
       </div>
     )
   }

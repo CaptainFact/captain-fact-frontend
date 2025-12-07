@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Tinycon from 'tinycon'
 
+import { useUserPreferences } from '../../contexts/UserPreferencesContext'
+
 import confirmSoundFileURL from '../../assets/sounds/background_statement_confirm.mp3'
 import neutralSoundFileURL from '../../assets/sounds/background_statement_neutral.mp3'
 import refuteSoundFileURL from '../../assets/sounds/background_statement_refute.mp3'
@@ -95,12 +97,18 @@ class BackgroundNotifier extends React.PureComponent {
   }
 }
 
-export default connect((state) => {
+const ConnectedBackgroundNotifier = connect((state) => {
   const focusedStatementId = getFocusedStatementId(state)
   const comments = getAllComments(state).get(focusedStatementId, [])
   return {
-    soundEnabled: state.UserPreferences.enableSoundOnBackgroundFocus,
     focusedStatementId,
     comments,
   }
 })(BackgroundNotifier)
+
+const BackgroundNotifierWithPreferences = (props) => {
+  const { enableSoundOnBackgroundFocus: soundEnabled } = useUserPreferences()
+  return <ConnectedBackgroundNotifier {...props} soundEnabled={soundEnabled} />
+}
+
+export default BackgroundNotifierWithPreferences

@@ -13,8 +13,8 @@ import { TimeSince } from '../Utils/TimeSince'
 export class VideoCard extends React.PureComponent {
   render() {
     const { t, video } = this.props
-    const { hash_id, title } = video
-    const linkTarget = videoURL(hash_id)
+    const { hashId, title } = video
+    const linkTarget = videoURL(hashId)
 
     return (
       <Card className="overflow-hidden h-full flex flex-col group bg-white dark:bg-[hsl(0,0%,14%)]">

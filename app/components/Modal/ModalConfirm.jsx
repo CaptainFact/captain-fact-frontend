@@ -59,7 +59,7 @@ const BaseModalConfirm = ({
           <AlertDialogTitle>{title}</AlertDialogTitle>
           <AlertDialogDescription>{message}</AlertDialogDescription>
         </AlertDialogHeader>
-        {content && <AlertDialogDescription>{content}</AlertDialogDescription>}
+        {content && <div>{content}</div>}
         <AlertDialogFooter>
           <div className="flex gap-2 justify-end w-full">
             <Button

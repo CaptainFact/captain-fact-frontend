@@ -1,61 +1,44 @@
 import { startCase } from 'lodash'
 import { History } from 'lucide-react'
-import React from 'react'
-import { withTranslation } from 'react-i18next'
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
 
 import { ENTITY_STATEMENT } from '../../constants'
-import { popModal } from '../../state/modals/reducer'
 import { reset } from '../../state/user_actions/reducer'
 import {
   joinStatementHistoryChannel,
   leaveStatementHistoryChannel,
 } from '../../state/video_debate/history/effects'
-import Modal from '../Modal/Modal'
 import ActionsTable from '../UsersActions/ActionsTable'
 
-@connect(
-  (state) => ({
-    actions: state.UsersActions.actions,
-    isLoading: state.UsersActions.isLoading,
-  }),
-  { joinStatementHistoryChannel, leaveStatementHistoryChannel, popModal, reset },
-)
-@withTranslation('history')
-export class ModalHistory extends React.PureComponent {
-  componentDidMount() {
-    if (this.props.entity === ENTITY_STATEMENT) {
-      this.props.joinStatementHistoryChannel(this.props.entityId)
+const ModalHistory = ({ open, onOpenChange, entity, entityId }) => {
+  const { t } = useTranslation('history')
+  const dispatch = useDispatch()
+  const actions = useSelector((state) => state.UsersActions.actions)
+  const isLoading = useSelector((state) => state.UsersActions.isLoading)
+
+  useEffect(() => {
+    if (open && entity === ENTITY_STATEMENT) {
+      dispatch(joinStatementHistoryChannel(entityId))
     }
-  }
-
-  componentWillUnmount() {
-    if (this.props.entity === ENTITY_STATEMENT) {
-      this.props.leaveStatementHistoryChannel()
+    return () => {
+      if (entity === ENTITY_STATEMENT) {
+        dispatch(leaveStatementHistoryChannel())
+      }
+      dispatch(reset())
     }
-    this.props.reset()
-  }
+  }, [open, entity, entityId, dispatch])
 
-  render() {
-    const { entity, entityId, actions, isLoading, t, ...props } = this.props
-    return (
-      <Modal
-        className="modal modal-history"
-        title={this.renderTitle(t, entity, entityId)}
-        handleCloseClick={this.props.popModal}
-        {...props}
-      >
-        <ActionsTable
-          actions={actions}
-          isLoading={isLoading}
-          showRestore={false}
-          showEntity={false}
-        />
-      </Modal>
-    )
-  }
-
-  renderTitle = (t, entity, entityId) => (
+  const renderTitle = () => (
     <div className="flex items-center gap-2">
       <History size={24} />
       <span>
@@ -64,4 +47,23 @@ export class ModalHistory extends React.PureComponent {
       </span>
     </div>
   )
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="modal modal-history">
+        <DialogHeader>
+          <DialogTitle>{renderTitle()}</DialogTitle>
+        </DialogHeader>
+        <ActionsTable
+          actions={actions}
+          isLoading={isLoading}
+          showRestore={false}
+          showEntity={false}
+        />
+      </DialogContent>
+    </Dialog>
+  )
 }
+
+export { ModalHistory }
+export default ModalHistory

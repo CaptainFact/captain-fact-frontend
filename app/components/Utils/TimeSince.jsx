@@ -3,8 +3,8 @@ import format from 'date-fns/format'
 import distanceInWordsToNow from 'date-fns/formatDistanceToNow'
 import parseISO from 'date-fns/parseISO'
 import React from 'react'
-import { connect } from 'react-redux'
 
+import { useUserPreferences } from '../../contexts/UserPreferencesContext'
 import { LocaleDates } from '../../i18n/locale-dates'
 
 const getSecondsSince = (time) => {
@@ -16,7 +16,6 @@ const getSecondsSince = (time) => {
   }
 }
 
-@connect((state) => ({ locale: state.UserPreferences.locale }))
 export class TimeSince extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -36,7 +35,20 @@ export class TimeSince extends React.PureComponent {
   render() {
     // eslint-disable-next-line no-unused-vars
     const { time, locale, dispatch, addSuffix = true, isDateTime = true, ...props } = this.props
-    const localeObj = LocaleDates[locale]
+    // Normalize locale key (e.g., 'pt-BR' -> 'pt_BR') and fallback to 'en' if not found
+    const normalizedLocale = (locale && typeof locale === 'string') ? locale.replace('-', '_') : 'en'
+    let localeObj = LocaleDates[normalizedLocale]
+    
+    // Ensure we have a valid locale object with required properties
+    if (!localeObj || !localeObj.defaultDateTimeFormat) {
+      localeObj = LocaleDates.en
+    }
+    
+    // Final fallback - if even 'en' doesn't exist, return null
+    if (!localeObj || !localeObj.defaultDateTimeFormat) {
+      return null
+    }
+    
     const dateFormat = isDateTime ? localeObj.defaultDateTimeFormat : localeObj.defaultDateFormat
     const timeAsDate = typeof time === 'string' ? parseISO(time) : time
 
@@ -76,3 +88,11 @@ export class TimeSince extends React.PureComponent {
     this.timeout = null
   }
 }
+
+const TimeSinceWithPreferences = (props) => {
+  const preferences = useUserPreferences()
+  const locale = preferences?.locale || 'en'
+  return <TimeSince {...props} locale={locale} />
+}
+
+export default TimeSinceWithPreferences

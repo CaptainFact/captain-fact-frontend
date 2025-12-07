@@ -1,0 +1,28 @@
+overwrite: true
+schema: ${GRAPHQL_API_URL:http://localhost:4002}
+documents:
+  - 'app/**/*.{js,jsx,ts,tsx}'
+  - '!app/**/*.test.{js,jsx,ts,tsx}'
+  - '!app/**/*.spec.{js,jsx,ts,tsx}'
+config:
+  skipDocumentsValidation: true
+generates:
+  app/API/types/generated.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+    config:
+      skipTypename: false
+      enumsAsTypes: true
+      scalars:
+        ID: string
+        NaiveDateTime: string
+        Upload: File
+      maybeValue: T | null
+      avoidOptionals: false
+      constEnums: true
+      useTypeImports: true
+      dedupeOperationSuffix: true
+      dedupeFragments: true
+      onlyOperationTypes: false
+      mergeFragmentTypes: true

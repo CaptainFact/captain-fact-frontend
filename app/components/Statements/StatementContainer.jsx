@@ -3,6 +3,8 @@ import React from 'react'
 import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 
+import { useUserPreferences } from '../../contexts/UserPreferencesContext'
+
 import { cn } from '@/lib/css-utils'
 
 import { MIN_REPUTATION_REMOVE_STATEMENT, MIN_REPUTATION_UPDATE_STATEMENT } from '../../constants'
@@ -25,14 +27,13 @@ import { StatementForm } from './StatementForm'
     speaker: statementSelectors.getStatementSpeaker(state, props),
     isFocused: statementSelectors.isStatementFocused(state, props),
     scrollTo: state.VideoDebate.statements.scrollTo,
-    autoscrollEnabled: state.UserPreferences.enableAutoscroll,
     formEnabled: state.VideoDebate.statements.formsCount > 0,
   }),
   { updateStatement, deleteStatement },
 )
 @withLoggedInUser
 @withTranslation('videoDebate')
-export default class StatementContainer extends React.PureComponent {
+class StatementContainer extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = { isDeleting: false, isEditing: false, replyTo: null, editDraftAction: null }
@@ -215,3 +216,10 @@ export default class StatementContainer extends React.PureComponent {
     }
   }
 }
+
+const StatementContainerWithPreferences = (props) => {
+  const { enableAutoscroll: autoscrollEnabled } = useUserPreferences()
+  return <StatementContainer {...props} autoscrollEnabled={autoscrollEnabled} />
+}
+
+export default StatementContainerWithPreferences

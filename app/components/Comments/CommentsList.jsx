@@ -21,6 +21,30 @@ export class CommentsList extends React.PureComponent {
     }
   }
 
+  // Normalize comments to array - handles both arrays and Immutable-like objects
+  normalizeToArray(comments) {
+    if (!comments) return []
+    if (Array.isArray(comments)) return comments
+    if (comments.toArray) return comments.toArray()
+    if (comments.size !== undefined) {
+      // Immutable-like object - convert to array
+      const result = []
+      for (let i = 0; i < comments.size; i++) {
+        result.push(comments.get(i))
+      }
+      return result
+    }
+    return []
+  }
+
+  // Get length of comments - handles both arrays and Immutable-like objects
+  getCommentsLength(comments) {
+    if (!comments) return 0
+    if (Array.isArray(comments)) return comments.length
+    if (comments.size !== undefined) return comments.size
+    return 0
+  }
+
   render() {
     const {
       comments,
@@ -32,24 +56,35 @@ export class CommentsList extends React.PureComponent {
       isAuthenticated,
       loggedInUser,
       nesting = 1,
+      repliesByParent,
     } = this.props
-    const displayedComments = this.getDisplayedComments()
+    const commentsArray = this.normalizeToArray(comments)
+    const commentsLength = this.getCommentsLength(comments)
+    const displayedComments = this.getDisplayedComments(commentsArray)
 
     return (
       <div className={className} data-cy={`comments-list-${commentType || 'comments'}`}>
         {header && <CommentsListHeader header={header} />}
         <FlipMove enterAnimation="fade" leaveAnimation={false}>
-          {comments.size > 0 ? (
-            displayedComments.map((comment) => (
-              <div key={comment.id}>
-                <CommentDisplay
-                  comment={comment}
-                  nesting={nesting}
-                  replyingTo={replyingTo}
-                  setReplyToComment={this.props.setReplyToComment}
-                />
-              </div>
-            ))
+          {commentsLength > 0 ? (
+            displayedComments.map((comment) => {
+              // Get replies for this comment if repliesByParent is provided
+              const replies = repliesByParent && repliesByParent[comment.id] 
+                ? this.normalizeToArray(repliesByParent[comment.id])
+                : undefined
+              
+              return (
+                <div key={comment.id}>
+                  <CommentDisplay
+                    comment={comment}
+                    nesting={nesting}
+                    replyingTo={replyingTo}
+                    setReplyToComment={this.props.setReplyToComment}
+                    replies={replies}
+                  />
+                </div>
+              )
+            })
           ) : (
             <CommentForm
               statementID={statementID}
@@ -60,9 +95,9 @@ export class CommentsList extends React.PureComponent {
             />
           )}
         </FlipMove>
-        {displayedComments.size < comments.size && (
+        {displayedComments.length < commentsLength && (
           <CommentsListExpender
-            count={comments.size - displayedComments.size}
+            count={commentsLength - displayedComments.length}
             onClick={() => this.handleExpendList(this.state.nbComments)}
           />
         )}
@@ -70,12 +105,21 @@ export class CommentsList extends React.PureComponent {
     )
   }
 
-  getDisplayedComments() {
+  getDisplayedComments(commentsArray) {
     const [lowLimit, highLimit] = this.state.nbComments
+    const result = []
     let numComment = 0
-    return this.props.comments.takeWhile((c) => {
-      return ++numComment <= lowLimit || (numComment <= highLimit && c.score > -1)
-    })
+    
+    for (const comment of commentsArray) {
+      numComment++
+      if (numComment <= lowLimit || (numComment <= highLimit && (comment.score || 0) > -1)) {
+        result.push(comment)
+      } else {
+        break
+      }
+    }
+    
+    return result
   }
 
   handleExpendList([lowLimit, highLimit]) {

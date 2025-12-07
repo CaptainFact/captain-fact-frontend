@@ -3,6 +3,7 @@ import React from 'react'
 import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 
+import { useUserPreferences } from '../../contexts/UserPreferencesContext'
 import { deleteUserAccount } from '../../API/http_api/current_user'
 import { addModal, popModal } from '../../state/modals/reducer'
 import UserLanguageSelector from '../LoggedInUser/UserLanguageSelector'
@@ -14,10 +15,10 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
 import DeleteUserModal from './DeleteUserModal'
 import EditUserForm from './EditUserForm'
 
-@connect((state) => ({ locale: state.UserPreferences.locale }), { addModal, popModal })
+@connect(() => ({}), { addModal, popModal })
 @withTranslation('user')
 @withLoggedInUser
-export default class UserSettings extends React.PureComponent {
+class UserSettings extends React.PureComponent {
   render() {
     const { t, addModal, logout } = this.props
     return this.props.isLoading ? (
@@ -65,3 +66,10 @@ export default class UserSettings extends React.PureComponent {
     )
   }
 }
+
+const UserSettingsWithPreferences = (props) => {
+  const { locale } = useUserPreferences()
+  return <UserSettings {...props} locale={locale} />
+}
+
+export default UserSettingsWithPreferences

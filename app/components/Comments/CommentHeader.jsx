@@ -6,7 +6,7 @@ import UserAppellation from '../Users/UserAppellation'
 import UserPicture from '../Users/UserPicture'
 import { TimeSince } from '../Utils/TimeSince'
 
-const CommentHeader = ({ comment: { user, inserted_at }, withoutActions }) => (
+const CommentHeader = ({ comment: { user, inserted_at, insertedAt }, withoutActions }) => (
   <div className="flex flex-wrap items-center gap-1 mb-1">
     {user ? (
       <div className="flex items-center gap-1">
@@ -18,7 +18,7 @@ const CommentHeader = ({ comment: { user, inserted_at }, withoutActions }) => (
     )}
     <span className="dark:text-muted-foreground">-</span>
     <div className="inline text-xs text-neutral-500 dark:text-muted-foreground">
-      <TimeSince time={inserted_at} />
+      <TimeSince time={inserted_at || insertedAt} />
     </div>
   </div>
 )

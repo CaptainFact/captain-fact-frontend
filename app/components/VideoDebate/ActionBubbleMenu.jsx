@@ -6,6 +6,8 @@ import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
+import { useUserPreferences } from '../../contexts/UserPreferencesContext'
+
 import { toast } from '@/hooks/use-toast'
 import { cn } from '@/lib/css-utils'
 
@@ -25,8 +27,6 @@ const startAutomaticStatementsExtractionMutation = gql`
 
 @connect(
   (state) => ({
-    hasAutoscroll: state.UserPreferences.enableAutoscroll,
-    soundOnBackgroundFocus: state.UserPreferences.enableSoundOnBackgroundFocus,
     hasStatementForm: hasStatementForm(state),
     hasStatements: state.VideoDebate.statements.data.size > 0,
     videoId: state.VideoDebate.video.data.id,
@@ -39,7 +39,7 @@ const startAutomaticStatementsExtractionMutation = gql`
 @withTranslation('videoDebate')
 @withRouter
 @withLoggedInUser
-export default class ActionBubbleMenu extends React.PureComponent {
+class ActionBubbleMenu extends React.PureComponent {
   state = {
     hasCalledStatementsExtract: false,
   }
@@ -128,6 +128,22 @@ export default class ActionBubbleMenu extends React.PureComponent {
     }
   }
 }
+
+const ActionBubbleMenuWithPreferences = (props) => {
+  const {
+    enableAutoscroll: hasAutoscroll,
+    enableSoundOnBackgroundFocus: soundOnBackgroundFocus,
+  } = useUserPreferences()
+  return (
+    <ActionBubbleMenu
+      {...props}
+      hasAutoscroll={hasAutoscroll}
+      soundOnBackgroundFocus={soundOnBackgroundFocus}
+    />
+  )
+}
+
+export default ActionBubbleMenuWithPreferences
 
 export const ActionBubble = ({
   icon: Icon,
