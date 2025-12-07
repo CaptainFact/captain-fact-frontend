@@ -12,7 +12,7 @@ import { Button } from '../ui/button'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
 const Presentation = ({ t }) => (
-  <p>
+  <p className="dark:text-foreground">
     {t('description')}{' '}
     <Trans i18nKey="extension:moreInfo">
       [Is]
@@ -65,7 +65,7 @@ export const BrowserExtensionsPage = withTranslation('extension')(({ t }) => {
       </section>
       <section>
         <div className="container -mt-12 sm:-mt-20 p-4 flex gap-6 mx-auto justify-between items-center md:flex-row flex-col-reverse">
-          <div className="w-full max-w-[500px] bg-white p-6 sm:p-10 rounded shadow-lg text-base sm:text-lg">
+          <div className="w-full max-w-[500px] bg-white dark:bg-background p-6 sm:p-10 rounded shadow-lg dark:shadow-xl text-base sm:text-lg">
             <Presentation t={t} />
             <br />
             <BrowserExtensionInstall

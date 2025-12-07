@@ -82,5 +82,11 @@
   },
   "all": "Alle",
   "partners": "Partnere",
-  "users": "Brukere"
+  "users": "Brukere",
+  "theme": {
+    "title": "Tema",
+    "auto": "Automatisk",
+    "dark": "Mørk",
+    "light": "Lys"
+  }
 }

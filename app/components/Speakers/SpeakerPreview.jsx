@@ -44,7 +44,7 @@ export class SpeakerPreview extends React.PureComponent {
           </div>
           <div className="flex-1 flex flex-col min-w-0">
             {this.renderName(speaker)}
-            <p className="sm:text-sm max-w-full text-xs text-neutral-600">
+            <p className="sm:text-sm max-w-full text-xs text-neutral-600 dark:text-muted-foreground">
               {speaker.title || '...'}
             </p>
           </div>
@@ -64,10 +64,10 @@ export class SpeakerPreview extends React.PureComponent {
 
   renderSpeakerThumb(speaker) {
     return (
-      <Avatar className="bg-white rounded-full flex items-center justify-center border border-neutral-200">
+      <Avatar className="bg-white dark:bg-background rounded-full flex items-center justify-center border border-neutral-200 dark:border-border">
         <AvatarImage src={speaker.picture} />
         <AvatarFallback>
-          <Mic className="text-neutral-600" />
+          <Mic className="text-neutral-600 dark:text-muted-foreground" />
         </AvatarFallback>
       </Avatar>
     )
@@ -77,7 +77,9 @@ export class SpeakerPreview extends React.PureComponent {
     return (
       <Link
         to={`/s/${speaker.slug || speaker.id}`}
-        className={'sm:font-medium sm:text-base text-sm hover:underline text-neutral-900'}
+        className={
+          'sm:font-medium sm:text-base text-sm hover:underline text-neutral-900 dark:text-foreground'
+        }
         target="_blank"
       >
         {speaker.full_name}

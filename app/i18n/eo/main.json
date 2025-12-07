@@ -116,5 +116,11 @@
   "all": "Ĉiuj",
   "partners": "Partneroj",
   "users": "Uzantoj",
-  "featured": "Inklinoj"
+  "featured": "Inklinoj",
+  "theme": {
+    "title": "Temo",
+    "auto": "Aŭtomata",
+    "dark": "Malhela",
+    "light": "Hela"
+  }
 }

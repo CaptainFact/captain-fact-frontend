@@ -7,7 +7,7 @@ import borderlessLogo from '../../assets/logo-borderless.svg'
  * The main website logo.
  */
 const Logo = ({ borderless = false }) => (
-  <div className="flex items-center max-h-full font-serif font-medium text-black-500 tracking-wide text-black">
+  <div className="flex items-center max-h-full font-serif font-medium text-black-500 tracking-wide text-black dark:text-foreground">
     <img
       alt="C"
       src={borderless ? borderlessLogo : logo}

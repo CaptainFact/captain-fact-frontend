@@ -2,14 +2,13 @@ import debounce from 'debounce-promise'
 import React from 'react'
 import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
-import AsyncCreatable from 'react-select/async-creatable'
 
 import { SocketApi } from '../../API'
 import { SPEAKER_NAME_LENGTH } from '../../constants'
 import { cleanStr } from '../../lib/clean_str'
 import { checkLength } from '../../lib/form_validators'
 import capitalizeName from '../../lib/name_formatter'
-import { ReactSelectStyles, ReactSelectTheme } from '../../lib/react_select_theme'
+import { ReactiveAsyncCreatable, ReactSelectTheme } from '../../lib/react_select_theme'
 import { addSpeaker } from '../../state/video_debate/effects'
 
 @connect(null, { addSpeaker })
@@ -42,7 +41,7 @@ export default class AddSpeakerForm extends React.PureComponent {
   render() {
     const { disabled, t } = this.props
     return (
-      <AsyncCreatable
+      <ReactiveAsyncCreatable
         allowCreateWhileLoading={false}
         isDisabled={disabled}
         isValidNewOption={(value) => value.length >= 3}
@@ -55,12 +54,11 @@ export default class AddSpeakerForm extends React.PureComponent {
         noOptionsMessage={() => t('speaker.search')}
         components={{
           LoadingMessage: () => (
-            <div className="flex p-3 text-[#4a4a4a] justify-center">
+            <div className="flex p-3 text-[#4a4a4a] dark:text-foreground justify-center">
               {t('main:actions.loading')}...
             </div>
           ),
         }}
-        styles={ReactSelectStyles}
         theme={ReactSelectTheme}
       />
     )

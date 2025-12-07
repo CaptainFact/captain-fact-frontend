@@ -23,7 +23,7 @@ export const StatementDropdownMenu = ({
   const { t } = useTranslation('videoDebate')
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon-xs">
           <MoreHorizontal size="1em" />
         </Button>

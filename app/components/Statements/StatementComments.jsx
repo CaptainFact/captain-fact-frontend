@@ -44,9 +44,9 @@ export default class StatementComments extends React.PureComponent {
     const hasSpeakerComments = speakerComments.size > 0
 
     return !hasCommunityComments ? null : (
-      <div className="bg-[#fefefe]">
+      <div className="bg-[#fefefe] dark:bg-background">
         {hasSpeakerComments && (
-          <div className="bg-neutral-100 text-center flex justify-center items-center gap-2 p-1">
+          <div className="bg-neutral-100 dark:bg-accent text-center flex justify-center items-center gap-2 p-1 dark:text-foreground">
             <Users size={14} />
             {t('community')}
           </div>
@@ -75,7 +75,7 @@ export default class StatementComments extends React.PureComponent {
           commentType="refute"
         />
         <div className="hidden md:flex items-stretch self-stretch my-2">
-          <Separator orientation="vertical" className="bg-neutral-100" />
+          <Separator orientation="vertical" className="bg-neutral-100 dark:bg-border" />
         </div>
         <CommentsList
           className="w-full md:w-1/2 flex-grow basis-[450px] flex-col bg-green-100/5 pb-2"
@@ -110,12 +110,16 @@ export default class StatementComments extends React.PureComponent {
   renderCommentsListHeader(label, variant, score = null) {
     const separatorClassName = cn(
       'flex-1 mx-2',
-      variant === 'destructive' ? 'bg-red-800/30' : variant === 'success' ? 'bg-green-700/30' : '',
+      variant === 'destructive'
+        ? 'bg-red-800/30 dark:bg-red-900/40'
+        : variant === 'success'
+          ? 'bg-green-700/30 dark:bg-green-800/40'
+          : '',
     )
     return (
       <div className="flex mt-2 mb-3 items-center">
         <Separator className={separatorClassName} />
-        <div className="flex items-center gap-2 font-bold">
+        <div className="flex items-center gap-2 font-bold dark:text-foreground">
           <span>{this.props.t(label)}</span>
           {score !== null && (
             <Badge variant={variant} className="rounded-full px-4">

@@ -4,7 +4,6 @@ import gql from 'graphql-tag'
 import React from 'react'
 import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
-import Select from 'react-select'
 import { Edit } from 'styled-icons/fa-regular'
 
 import { toast } from '@/hooks/use-toast'
@@ -13,6 +12,7 @@ import { popModal } from '../../state/modals/reducer'
 import { shiftStatements } from '../../state/video_debate/effects'
 import FieldWithButton from '../FormUtils/FieldWithButton'
 import Modal from '../Modal/Modal'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { Separator } from '../ui/separator'
 
 const editVideoMutation = gql`
@@ -27,7 +27,7 @@ const editVideoMutation = gql`
 class EditVideoModal extends React.PureComponent {
   renderTitle() {
     return (
-      <div className="flex gap-2 items-center">
+      <div className="flex gap-2 items-center dark:text-foreground">
         <Edit size="1em" /> {this.props.t('video.edit')}
       </div>
     )
@@ -43,7 +43,7 @@ class EditVideoModal extends React.PureComponent {
     return (
       <Modal handleCloseClick={popModal} title={this.renderTitle()}>
         <div className="flex flex-col">
-          <h3 className="mb-2 text-[15px] font-bold">Change visibility</h3>
+          <h3 className="mb-2 text-[15px] font-bold dark:text-foreground">Change visibility</h3>
           <Mutation mutation={editVideoMutation}>
             {(editVideo) => (
               <Formik
@@ -68,20 +68,24 @@ class EditVideoModal extends React.PureComponent {
                 {({ handleSubmit, isSubmitting, setFieldValue, values }) => (
                   <form onSubmit={handleSubmit}>
                     <Select
-                      className="speaker-select"
-                      placeholder="Select visibility"
-                      menuPortalTarget={document.body}
-                      styles={{ menuPortal: (base) => ({ ...base, zIndex: 99999 }) }}
-                      options={unlistedOptions}
-                      value={unlistedOptions.find((option) => option.value === values.unlisted)}
-                      name="unlisted"
-                      isLoading={isSubmitting}
+                      value={String(values.unlisted)}
                       disabled={isSubmitting}
-                      onChange={({ value }) => {
-                        setFieldValue('unlisted', value)
+                      onValueChange={(value) => {
+                        setFieldValue('unlisted', value === 'true')
                         handleSubmit()
                       }}
-                    />
+                    >
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select visibility" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {unlistedOptions.map((option) => (
+                          <SelectItem key={String(option.value)} value={String(option.value)}>
+                            {option.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </form>
                 )}
               </Formik>
@@ -92,7 +96,9 @@ class EditVideoModal extends React.PureComponent {
           <React.Fragment>
             <Separator className="my-4" />
             <div className="flex flex-col">
-              <h3 className="mb-2 text-[15px] font-bold">{t('video.shiftStatements')}</h3>
+              <h3 className="mb-2 text-[15px] font-bold dark:text-foreground">
+                {t('video.shiftStatements')}
+              </h3>
               <Formik
                 initialValues={{ youtube_offset: video.youtube_offset }}
                 onSubmit={async (values, { setSubmitting }) => {

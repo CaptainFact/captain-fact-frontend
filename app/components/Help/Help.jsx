@@ -39,9 +39,9 @@ export default class Help extends React.PureComponent {
   renderIndexContent() {
     return (
       <div>
-        <div className="mb-8 rounded overflow-hidden shadow-lg bg-white">
+        <div className="mb-8 rounded overflow-hidden shadow-lg bg-white dark:bg-background">
           <h4 className="font-bold mb-2 p-4 bg-primary text-white">{this.props.t('aboutTitle')}</h4>
-          <p className="p-4">
+          <p className="p-4 dark:text-foreground">
             {this.props.t('about')}&nbsp;
             <Trans i18nKey="help:toStart">
               toStart
@@ -53,7 +53,7 @@ export default class Help extends React.PureComponent {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card className="overflow-hidden rounded-md">
-            <div className="bg-gray-100 p-3 font-semibold border-b">
+            <div className="bg-gray-100 dark:bg-accent p-3 font-semibold border-b dark:border-border">
               {this.props.t('categories.siteUsage')}
             </div>
             {this.renderPageMenuEntry('contributionGuidelines')}
@@ -64,7 +64,7 @@ export default class Help extends React.PureComponent {
             {this.renderPageMenuEntry('extension')}
           </Card>
           <Card className="overflow-hidden rounded-md">
-            <div className="bg-gray-100 p-3 font-semibold border-b">
+            <div className="bg-gray-100 dark:bg-accent p-3 font-semibold border-b dark:border-border">
               {this.props.t('categories.contribute')}
             </div>
             {this.renderPageMenuEntry('ambassadors')}
@@ -72,7 +72,7 @@ export default class Help extends React.PureComponent {
             {this.renderPageMenuEntry('bug_report')}
           </Card>
           <Card className="overflow-hidden rounded-md">
-            <div className="bg-gray-100 p-3 font-semibold border-b">
+            <div className="bg-gray-100 dark:bg-accent p-3 font-semibold border-b dark:border-border">
               {this.props.t('categories.others')}
             </div>
             {this.renderPageMenuEntry('about')}
@@ -90,7 +90,7 @@ export default class Help extends React.PureComponent {
     return this.renderPageLink(
       subPage,
       label,
-      'p-3 block hover:bg-gray-50 border-b hover:underline text-black',
+      'p-3 block hover:bg-gray-50 dark:hover:bg-accent border-b dark:border-border hover:underline text-black dark:text-foreground',
     )
   }
 
@@ -111,7 +111,7 @@ export default class Help extends React.PureComponent {
         </h1>
         <Link
           to="/help"
-          className="text-lg flex items-center text-gray-100 hover:text-gray-50 hover:underline"
+          className="text-lg flex items-center text-gray-100 dark:text-gray-200 hover:text-gray-50 dark:hover:text-gray-100 hover:underline"
         >
           <ArrowLeft size="1em" />
           <span className="ml-2">{t('goBack')}</span>

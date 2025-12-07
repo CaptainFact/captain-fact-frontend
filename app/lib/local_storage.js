@@ -9,6 +9,7 @@ export const LOCAL_STORAGE_KEYS = {
   DISMISS_FRENCH_NEWS_SUBSCRIPTION: 'dismissFrenchNewsSubscription',
   DISMISS_VIDEO_INTRODUCTION: 'dismissVideoHelp',
   DISMISS_SPEAKER_INTRODUCTION: 'dismissSpeakerIntroduction',
+  THEME: 'theme',
 }
 
 /**

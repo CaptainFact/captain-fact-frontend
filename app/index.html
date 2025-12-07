@@ -24,6 +24,31 @@
     window.CF_GLOBALS = {};
   </script>
   <!-- End runtime env variables -->
+  
+  <!-- Initialize theme before React loads to prevent flash -->
+  <script>
+    (function() {
+      try {
+        const theme = localStorage.getItem('theme') || 'auto';
+        const root = document.documentElement;
+        if (theme === 'dark') {
+          root.classList.add('dark');
+        } else if (theme === 'light') {
+          root.classList.remove('dark');
+        } else {
+          // Auto mode: check prefers-color-scheme
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (prefersDark) {
+            root.classList.add('dark');
+          } else {
+            root.classList.remove('dark');
+          }
+        }
+      } catch (e) {
+        // Ignore errors
+      }
+    })();
+  </script>
 
   <!-- Preloading frame base style (without animation) -->
   <style>
@@ -37,6 +62,11 @@
       align-items: center;
       justify-content: center;
       gap: 40px;
+    }
+
+    html.dark body {
+      color: #fff;
+      background-color: hsl(0 0% 9%);
     }
 
     @keyframes animated-logo {

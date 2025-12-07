@@ -76,9 +76,9 @@ export class ColumnVideo extends React.PureComponent {
                 </TabsList>
               </Tabs>
               {isDebate && (
-                <div>
+                <div className="dark:bg-background">
                   <Actions />
-                  <div className="p-4 text-sm">
+                  <div className="p-4 text-sm dark:text-foreground">
                     <ReputationGuardTooltip
                       requiredRep={MIN_REPUTATION_ADD_SPEAKER}
                       tooltipPosition="top"
@@ -94,7 +94,7 @@ export class ColumnVideo extends React.PureComponent {
                 </div>
               )}
               {view === 'captions' && (
-                <div className="p-4">
+                <div className="p-4 dark:bg-background">
                   <Message>
                     {t('captions.description1')}
                     {isAuthenticated && (

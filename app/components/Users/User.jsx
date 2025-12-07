@@ -74,17 +74,17 @@ export default class User extends React.PureComponent {
           <title>{user.name || prettyUsername}</title>
           <meta name="robots" content="noindex" />
         </Helmet>
-        <section className="pt-16 bg-gradient-to-tr from-neutral-100 to-neutral-300">
+        <section className="pt-16 bg-gradient-to-tr from-neutral-100 to-neutral-300 dark:from-[hsl(0,0%,14%)] dark:to-[hsl(0,0%,16%)]">
           {user.id !== 0 && (
             <div className="flex items-center gap-4 container mx-auto px-4">
-              <div className="bg-white p-2 rounded-xl">
+              <div className="bg-white dark:bg-background p-2 rounded-xl">
                 <div className="shadow-lg">
                   <UserPicture user={user} size={USER_PICTURE_XLARGE} />
                 </div>
               </div>
               <div>
                 <UserAppellation user={user} withoutActions />
-                <div className="flex items-center gap-2 text-gray-600">
+                <div className="flex items-center gap-2 text-gray-600 dark:text-muted-foreground">
                   <Clock className="w-4 h-4" />
                   <Trans i18nKey="user:registeredSince">
                     Registered for
@@ -98,7 +98,7 @@ export default class User extends React.PureComponent {
             </div>
           )}
         </section>
-        <div className="-mt-2 bg-white flex justify-center border-b border-gray-200">
+        <div className="-mt-2 bg-white dark:bg-background flex justify-center border-b border-gray-200 dark:border-border">
           <div className="flex flex-wrap">
             <UserMenu user={user} isSelf={this.isSelf()}>
               {({ Icon, key, route, title, isActive }) => (
@@ -106,7 +106,10 @@ export default class User extends React.PureComponent {
                   key={key}
                   className={`list-none border-primary ${isActive ? 'border-b-2' : ''}`}
                 >
-                  <Link to={route} className="flex items-center gap-2 px-4 py-2 text-neutral-700">
+                  <Link
+                    to={route}
+                    className="flex items-center gap-2 px-4 py-2 text-neutral-700 dark:text-foreground hover:text-neutral-900 dark:hover:text-foreground"
+                  >
                     <Icon className="w-4 h-4" />
                     {title}
                   </Link>

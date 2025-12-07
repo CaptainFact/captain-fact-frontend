@@ -1,5 +1,5 @@
 import { LogIn } from 'lucide-react'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { withTranslation } from 'react-i18next'
 import { withResizeDetector } from 'react-resize-detector'
 import { Link, withRouter } from 'react-router-dom'
@@ -9,6 +9,7 @@ import { CaretDown } from 'styled-icons/fa-solid'
 
 import { ENABLE_PUBLIC_SEARCH } from '../../config'
 import { USER_PICTURE_LARGE } from '../../constants'
+import { useTheme } from '../../hooks/use-theme'
 import { cn } from '../../lib/css-utils'
 import NotificationBell from '../LoggedInUser/NotificationBell'
 import Notifications from '../LoggedInUser/Notifications'
@@ -38,10 +39,43 @@ const getRedirectUrl = () => {
 const Navbar = ({ t, loggedInUser, isAuthenticated, loggedInUserLoading, location, width }) => {
   const isMobile = width < 600
   const loginRedirect = getRedirectUrl()
+  const { resolvedTheme } = useTheme()
+  const isDarkMode = resolvedTheme === 'dark'
+
+  const notificationsPopupStyle = useMemo(
+    () => ({
+      zIndex: 9999,
+      overflow: 'hidden',
+      backgroundColor: isDarkMode ? 'hsl(0, 0%, 12%)' : '#ffffff',
+      border: isDarkMode ? '1px solid hsl(0, 0%, 20%)' : '1px solid #d3d3d3',
+      borderRadius: '5px',
+      boxShadow: isDarkMode
+        ? 'rgba(0, 0, 0, 0.3) 5px 10px 15px -6px'
+        : 'rgba(150, 150, 150, 0.2) 5px 10px 15px -6px',
+      width: isMobile ? '95%' : '400px',
+    }),
+    [isDarkMode, isMobile],
+  )
+
+  const userMenuPopupStyle = useMemo(
+    () => ({
+      zIndex: 9999,
+      overflow: 'hidden',
+      backgroundColor: isDarkMode ? 'hsl(0, 0%, 12%)' : '#ffffff',
+      border: isDarkMode ? '1px solid hsl(0, 0%, 20%)' : '1px solid #d3d3d3',
+      borderRadius: '5px',
+      boxShadow: isDarkMode
+        ? 'rgba(0, 0, 0, 0.3) 5px 10px 15px -6px'
+        : 'rgba(150, 150, 150, 0.2) 5px 10px 15px -6px',
+      minWidth: '200px',
+    }),
+    [isDarkMode],
+  )
+
   return (
     <div data-cy="Navbar">
       <div className="h-[60px] w-full" />
-      <div className="fixed z-40 top-0 w-full flex justify-between items-center bg-white h-[60px] border-b border-[#dadada] shadow-[0px_0px_15px_rgba(125,125,125,0.25)] transition-[top] duration-300 animate-fadeInUp px-2.5">
+      <div className="fixed z-40 top-0 w-full flex justify-between items-center bg-white dark:bg-background h-[60px] border-b border-[#dadada] dark:border-border shadow-[0px_0px_15px_rgba(125,125,125,0.25)] dark:shadow-[0px_0px_15px_rgba(0,0,0,0.25)] transition-[top] duration-300 animate-fadeInUp px-2.5">
         {/* Left */}
         <div className="flex items-center">
           <div className="flex gap-4 items-center h-[59px]">
@@ -68,7 +102,7 @@ const Navbar = ({ t, loggedInUser, isAuthenticated, loggedInUserLoading, locatio
             className="animate-[fadeIn_0.75s_infinite_linear_alternate] mr-2 opacity-50"
           />
         ) : (
-          <div className="flex">
+          <div className="flex items-center gap-2">
             {isAuthenticated ? (
               <div className="flex items-center">
                 <div className="mr-3">
@@ -77,15 +111,7 @@ const Navbar = ({ t, loggedInUser, isAuthenticated, loggedInUserLoading, locatio
                 <Popup
                   position="bottom right"
                   offsetX={isMobile ? 75 : 0}
-                  contentStyle={{
-                    zIndex: 9999,
-                    overflow: 'hidden',
-                    backgroundColor: '#ffffff',
-                    border: '1px solid #d3d3d3',
-                    borderRadius: '5px',
-                    boxShadow: 'rgba(150, 150, 150, 0.2) 5px 10px 15px -6px',
-                    width: isMobile ? '95%' : '400px',
-                  }}
+                  contentStyle={notificationsPopupStyle}
                   trigger={<NotificationBell mr={[3, 4]} />}
                 >
                   <Notifications>
@@ -110,28 +136,22 @@ const Navbar = ({ t, loggedInUser, isAuthenticated, loggedInUserLoading, locatio
                 </Popup>
                 <Popup
                   position="bottom right"
-                  contentStyle={{
-                    zIndex: 9999,
-                    overflow: 'hidden',
-                    backgroundColor: '#ffffff',
-                    border: '1px solid #d3d3d3',
-                    borderRadius: '5px',
-                    boxShadow: 'rgba(150, 150, 150, 0.2) 5px 10px 15px -6px',
-                    minWidth: '200px',
-                  }}
+                  contentStyle={userMenuPopupStyle}
                   trigger={
-                    <div className="flex items-center h-[38px] cursor-pointer hover:text-[#c2c2c2] [&_figure]:max-h-full [&_figure]:max-w-[38px]">
+                    <div className="flex items-center h-[38px] cursor-pointer hover:text-[#c2c2c2] dark:hover:text-gray-400 [&_figure]:max-h-full [&_figure]:max-w-[38px]">
                       <UserPicture size={36} user={loggedInUser} />
                       <CaretDown size={24} />
                     </div>
                   }
                 >
-                  <div>
-                    <div className="flex items-center gap-2 border-b border-[#e7e7e7] px-[15px] py-2.5">
+                  <div className="bg-background">
+                    <div className="flex items-center gap-2 border-b border-[#e7e7e7] dark:border-border px-[15px] py-2.5 dark:bg-slate-900 bg-slate-100">
                       <UserPicture size={USER_PICTURE_LARGE} user={loggedInUser} />
                       <div className="flex flex-col justify-center">
                         <UserAppellation user={loggedInUser} withoutActions />
-                        <span className="text-[0.8em] text-[#252525]">{loggedInUser.email}</span>
+                        <span className="text-[0.8em] text-[#252525] dark:text-muted-foreground">
+                          {loggedInUser.email}
+                        </span>
                       </div>
                     </div>
                     <UserMenu user={loggedInUser} hasLogout isSelf>
@@ -141,8 +161,8 @@ const Navbar = ({ t, loggedInUser, isAuthenticated, loggedInUserLoading, locatio
                           to={route}
                           onClick={onClick}
                           className={cn(
-                            'block border-l-2 border-white bg-white text-base px-[15px] py-2.5 outline-none hover:bg-[#f5f7fa] active:bg-[#f5f7fa] focus:bg-[#f5f7fa]',
-                            index > 0 && 'border-t border-[#e7e7e7]',
+                            'block border-l-2 border-white dark:border-background bg-white dark:bg-background text-base px-[15px] py-2.5 outline-none text-gray-700 dark:text-foreground hover:bg-[#f5f7fa] dark:hover:bg-accent active:bg-[#f5f7fa] dark:active:bg-accent focus:bg-[#f5f7fa] dark:focus:bg-accent',
+                            index > 0 && 'border-t border-[#e7e7e7] dark:border-border',
                             isActive && 'border-l-2 border-primary',
                           )}
                         >

@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { Trans, withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
-import AsyncSelect from 'react-select/async'
 import { Save } from 'styled-icons/boxicons-regular'
 import { Ban } from 'styled-icons/fa-solid'
 import { LinkExternal } from 'styled-icons/octicons'
@@ -18,7 +17,7 @@ import { SPEAKER_NAME_LENGTH, SPEAKER_TITLE_LENGTH } from '../../constants'
 import { cleanStr } from '../../lib/clean_str'
 import { validateLengthI18n } from '../../lib/form_validators'
 import capitalizeName from '../../lib/name_formatter'
-import { ReactSelectStyles, ReactSelectTheme } from '../../lib/react_select_theme'
+import { ReactiveAsyncSelect, ReactSelectTheme } from '../../lib/react_select_theme'
 import { wikidataURL } from '../../lib/url_utils'
 import { popModal } from '../../state/modals/reducer'
 import { updateSpeaker } from '../../state/video_debate/effects'
@@ -145,15 +144,17 @@ class EditSpeakerFormModal extends React.PureComponent {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Wikidata search */}
                 <div className="space-y-4">
-                  <h3 className="font-medium text-gray-900 mb-3">{t('wikidata.autofill')}</h3>
+                  <h3 className="font-medium text-gray-900 dark:text-foreground mb-3">
+                    {t('wikidata.autofill')}
+                  </h3>
                   <div className="mb-4">
                     {values.wikidata_item_id && !hasWikidataSearchBar ? (
-                      <div className="bg-blue-50 p-3 rounded-md">
+                      <div className="bg-blue-50 dark:bg-blue-950/30 p-3 rounded-md">
                         <Trans i18nKey="videoDebate:wikidata.using">
                           Using data from{' '}
                           <a
                             href={wikidataURL(values.wikidata_item_id)}
-                            className="font-medium"
+                            className="font-medium dark:text-blue-400 dark:hover:text-blue-300"
                             target="_blank"
                             rel="noopener noreferrer"
                           >
@@ -172,12 +173,11 @@ class EditSpeakerFormModal extends React.PureComponent {
                         </Trans>
                       </div>
                     ) : (
-                      <AsyncSelect
+                      <ReactiveAsyncSelect
                         inputId="wikidata-search"
                         placeholder={this.props.t('wikidata.search')}
                         tabSelectsValue={false}
                         loadOptions={this.loadOptions}
-                        styles={ReactSelectStyles}
                         theme={ReactSelectTheme}
                         noOptionsMessage={({ inputValue }) =>
                           inputValue.length < 3 ? t('speaker.search') : t('speaker.noneFound')
@@ -247,11 +247,16 @@ class EditSpeakerFormModal extends React.PureComponent {
                 </div>
 
                 {/* Speaker form */}
-                <div className="space-y-4 md:border-l md:border-gray-200 md:pl-6">
-                  <h3 className="font-medium text-gray-900 mb-3">{t('speaker.details')}</h3>
+                <div className="space-y-4 md:border-l md:border-gray-200 dark:md:border-border md:pl-6">
+                  <h3 className="font-medium text-gray-900 dark:text-foreground mb-3">
+                    {t('speaker.details')}
+                  </h3>
                   <div className="space-y-4">
                     <div className="space-y-2">
-                      <label htmlFor="full_name" className="block text-sm font-medium">
+                      <label
+                        htmlFor="full_name"
+                        className="block text-sm font-medium dark:text-foreground"
+                      >
                         {this.getLabel(t('speaker.fullName'), SPEAKER_NAME_LENGTH[1])}
                       </label>
                       <Input
@@ -264,12 +269,15 @@ class EditSpeakerFormModal extends React.PureComponent {
                         }
                       />
                       {errors.full_name && (
-                        <p className="text-red-500 text-sm">{errors.full_name}</p>
+                        <p className="text-red-500 dark:text-red-400 text-sm">{errors.full_name}</p>
                       )}
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="title" className="block text-sm font-medium">
+                      <label
+                        htmlFor="title"
+                        className="block text-sm font-medium dark:text-foreground"
+                      >
                         {this.getLabel(t('speaker.title'), SPEAKER_TITLE_LENGTH[1])}
                       </label>
                       <Input
@@ -280,11 +288,16 @@ class EditSpeakerFormModal extends React.PureComponent {
                         onChange={(e) => setFieldValue('title', cleanStr(e.target.value))}
                         autoComplete="off"
                       />
-                      {errors.title && <p className="text-red-500 text-sm">{errors.title}</p>}
+                      {errors.title && (
+                        <p className="text-red-500 dark:text-red-400 text-sm">{errors.title}</p>
+                      )}
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="wikidata_item_id" className="block text-sm font-medium">
+                      <label
+                        htmlFor="wikidata_item_id"
+                        className="block text-sm font-medium dark:text-foreground"
+                      >
                         {t('wikidata.id')}
                       </label>
                       <Input
@@ -300,7 +313,9 @@ class EditSpeakerFormModal extends React.PureComponent {
                         autoComplete="off"
                       />
                       {errors.wikidata_item_id && (
-                        <p className="text-red-500 text-sm">{errors.wikidata_item_id}</p>
+                        <p className="text-red-500 dark:text-red-400 text-sm">
+                          {errors.wikidata_item_id}
+                        </p>
                       )}
                     </div>
                   </div>

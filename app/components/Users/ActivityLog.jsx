@@ -59,7 +59,7 @@ const QUERY = gql`
 `
 
 const renderPaginationMenu = (loading, user) => (
-  <div className="bg-gray-50 p-4 w-full">
+  <div className="bg-gray-50 dark:bg-background p-4 w-full">
     <PaginationMenu
       disabled={loading}
       currentPage={user ? user.actions.pageNumber : 1}
@@ -108,7 +108,7 @@ const ActivityLog = ({ match, t, location }) => {
 
                 <CardContent>
                   {!data || loading ? (
-                    <div className="p-4 border border-gray-200">
+                    <div className="p-4 border border-gray-200 dark:border-border">
                       <LoadingFrame />
                     </div>
                   ) : isEmpty ? (

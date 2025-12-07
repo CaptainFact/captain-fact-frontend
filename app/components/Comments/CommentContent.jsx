@@ -13,10 +13,10 @@ const CommentContent = ({ comment: { source, text }, nesting, replyingTo, richMe
   return (
     <div>
       {shouldRenderTextBlock && (
-        <div className="relative bg-white inline-block whitespace-pre-wrap border rounded py-1 px-2 text-sm break-words max-w-full">
+        <div className="relative bg-white dark:bg-background inline-block whitespace-pre-wrap border dark:border-border rounded py-1 px-2 text-sm break-words max-w-full dark:text-foreground">
           <ChevronUp
             size={20}
-            className="absolute left-[2px] w-5 h-5 text-neutral-300 -top-[12px] fill-white stroke-1"
+            className="absolute left-[2px] w-5 h-5 text-neutral-300 dark:text-border -top-[12px] fill-white dark:fill-background stroke-1"
           />
           {isCollapsed && (
             <Badge variant="outline" className="mr-2">

@@ -11,10 +11,10 @@ const ResizableColumn = ({ children, className }) => {
     <Resizable
       className={cn(
         'max-xl:w-full max-xl:max-w-full max-xl:min-w-full',
-        '[&_.right-resizable-handle]:bg-white [&_.right-resizable-handle]:mr-2.5 [&_.right-resizable-handle]:max-xl:hidden [&_.right-resizable-handle]:border-l [&_.right-resizable-handle]:border-r [&_.right-resizable-handle]:border-[#dadada] [&_.right-resizable-handle]:hover:[&:after]:border-l-[#c2c2c2] [&_.right-resizable-handle]:hover:[&:after]:border-r-[#c2c2c2]',
-        '[&_.right-resizable-handle]:after:content-[""] [&_.right-resizable-handle]:after:absolute [&_.right-resizable-handle]:after:top-[calc(50%-20px)] [&_.right-resizable-handle]:after:left-0.5 [&_.right-resizable-handle]:after:h-10 [&_.right-resizable-handle]:after:w-[3px] [&_.right-resizable-handle]:after:border-l [&_.right-resizable-handle]:after:border-r [&_.right-resizable-handle]:after:border-[#dadada] [&_.right-resizable-handle]:after:transition-[border-color] [&_.right-resizable-handle]:after:duration-100 [&_.right-resizable-handle]:after:ease-out',
+        '[&_.right-resizable-handle]:bg-white dark:[&_.right-resizable-handle]:bg-background [&_.right-resizable-handle]:mr-2.5 [&_.right-resizable-handle]:max-xl:hidden [&_.right-resizable-handle]:border-l [&_.right-resizable-handle]:border-r [&_.right-resizable-handle]:border-[#dadada] dark:[&_.right-resizable-handle]:border-border [&_.right-resizable-handle]:hover:[&:after]:border-l-[#c2c2c2] dark:[&_.right-resizable-handle]:hover:[&:after]:border-l-border [&_.right-resizable-handle]:hover:[&:after]:border-r-[#c2c2c2] dark:[&_.right-resizable-handle]:hover:[&:after]:border-r-border',
+        '[&_.right-resizable-handle]:after:content-[""] [&_.right-resizable-handle]:after:absolute [&_.right-resizable-handle]:after:top-[calc(50%-20px)] [&_.right-resizable-handle]:after:left-0.5 [&_.right-resizable-handle]:after:h-10 [&_.right-resizable-handle]:after:w-[3px] [&_.right-resizable-handle]:after:border-l [&_.right-resizable-handle]:after:border-r [&_.right-resizable-handle]:after:border-[#dadada] dark:[&_.right-resizable-handle]:after:border-border [&_.right-resizable-handle]:after:transition-[border-color] [&_.right-resizable-handle]:after:duration-100 [&_.right-resizable-handle]:after:ease-out',
         resizing &&
-          '[&_.right-resizable-handle]:after:border-l-[#c2c2c2] [&_.right-resizable-handle]:after:border-r-[#c2c2c2]',
+          '[&_.right-resizable-handle]:after:border-l-[#c2c2c2] dark:[&_.right-resizable-handle]:after:border-l-border [&_.right-resizable-handle]:after:border-r-[#c2c2c2] dark:[&_.right-resizable-handle]:after:border-r-border',
         className,
       )}
       onResizeStart={() => {

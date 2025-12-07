@@ -40,7 +40,7 @@ const Actions = ({
   addModal,
   history,
 }) => (
-  <div className="flex py-[15px] px-2.5 items-center gap-2.5 shadow-[#f3f3f3_0px_10px_10px_-10px] mb-1.5">
+  <div className="flex py-[15px] px-2.5 items-center gap-2.5 shadow-[#f3f3f3_0px_10px_10px_-10px] dark:shadow-[rgba(0,0,0,0.3)_0px_10px_10px_-10px] mb-1.5">
     {isAuthenticated && (
       <React.Fragment>
         <Action

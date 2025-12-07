@@ -19,7 +19,7 @@ const FlagReasonSelect = ({ t }) => {
             {VALID_REASONS.map((key) => (
               <div key={key} className="flex items-center space-x-3">
                 <RadioGroupItem value={key} id={`reason-${key}`} />
-                <Label htmlFor={`reason-${key}`} className="text-lg">
+                <Label htmlFor={`reason-${key}`} className="text-lg dark:text-foreground">
                   {labels[key]}
                 </Label>
               </div>

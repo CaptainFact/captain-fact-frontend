@@ -30,8 +30,10 @@ export default class Statement extends React.PureComponent {
           withoutActions={withoutActions}
           customButtons={this.props.customButtons}
         />
-        <div className="bg-[#31455d] text-white p-5 shadow-inner flex items-start gap-4">
-          <span className="h-[50px] -mt-2 sm:text-7xl text-5xl font-serif text-neutral-300">“</span>
+        <div className="bg-[#31455d] dark:bg-[hsl(210,30%,20%)] text-white dark:text-foreground p-5 shadow-inner flex items-start gap-4">
+          <span className="h-[50px] -mt-2 sm:text-7xl text-5xl font-serif text-neutral-300 dark:text-neutral-400">
+            “
+          </span>
           <blockquote className="text-lg italic py-1">{statement.text}</blockquote>
         </div>
       </div>

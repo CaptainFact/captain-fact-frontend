@@ -21,7 +21,7 @@ export const SpeakerDropdownMenu = ({ handleRemove, handleEdit, handleAddStateme
   const { t } = useTranslation('videoDebate')
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon-xs" className="sm:h-7 sm:w-7 h-6 w-6">
           <MoreHorizontal size="1em" />
         </Button>

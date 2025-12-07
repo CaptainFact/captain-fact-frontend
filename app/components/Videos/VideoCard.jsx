@@ -17,7 +17,7 @@ export class VideoCard extends React.PureComponent {
     const linkTarget = videoURL(hash_id)
 
     return (
-      <Card className="overflow-hidden h-full flex flex-col group">
+      <Card className="overflow-hidden h-full flex flex-col group bg-white dark:bg-[hsl(0,0%,14%)]">
         <CardHeader className="p-0">
           <Link to={linkTarget} className="relative block">
             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 transition-opacity group-hover:bg-opacity-10">
@@ -30,10 +30,12 @@ export class VideoCard extends React.PureComponent {
         </CardHeader>
         <CardContent className="px-2 py-4 text-center flex-grow">
           <Link to={linkTarget} className="flex items-center h-full">
-            <h4 className="text-lg font-medium text-black text-center w-full">{title}</h4>
+            <h4 className="text-lg font-medium text-black dark:text-foreground text-center w-full">
+              {title}
+            </h4>
           </Link>
         </CardContent>
-        <CardFooter className="p-4 text-sm text-gray-600 border-t mt-auto">
+        <CardFooter className="p-4 text-sm text-gray-600 dark:text-muted-foreground border-t dark:border-border mt-auto">
           {this.renderVideoMetadata(video, t)}
         </CardFooter>
       </Card>
@@ -53,7 +55,7 @@ export class VideoCard extends React.PureComponent {
 
   renderAddedByLabel(t) {
     return (
-      <div className="text-gray-600 inline">
+      <div className="text-gray-600 dark:text-muted-foreground inline">
         <Clock className="w-4 h-4 mr-2 inline" />
         <span>{t('video.addedBy', { userType: '$t(video.user)' })}</span>
       </div>
@@ -85,7 +87,7 @@ export class VideoCard extends React.PureComponent {
         .map((s) => s.full_name)
         .join(', ')
       speakerComponentsList.push(
-        <span key="others" className="inline align-middle">
+        <span key="others" className="inline align-middle dark:text-muted-foreground">
           &nbsp;
           {t('main:misc.and')}{' '}
           <span title={title}>
@@ -96,7 +98,7 @@ export class VideoCard extends React.PureComponent {
     }
 
     return (
-      <div className="text-gray-600">
+      <div className="text-gray-600 dark:text-muted-foreground">
         <Users className="w-4 h-4 mr-2 inline" />
         <span className="inline align-middle">
           {t('main:misc.staring')}

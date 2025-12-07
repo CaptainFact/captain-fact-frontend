@@ -1,1 +1,8 @@
-{}
+{
+  "theme": {
+    "title": "Tema",
+    "auto": "Automatico",
+    "dark": "Scuro",
+    "light": "Chiaro"
+  }
+}

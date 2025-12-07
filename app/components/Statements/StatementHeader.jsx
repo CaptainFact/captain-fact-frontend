@@ -21,9 +21,9 @@ export default withTranslation('videoDebate')(
     withoutActions,
     customButtons = null,
   }) => (
-    <header className="flex items-center justify-between border-b border-gray-200 p-3">
+    <header className="flex items-center justify-between border-b border-gray-200 dark:border-border p-3 dark:bg-background">
       <div className="flex items-center">
-        <div className="mr-2 min-w-[60px] border-r border-gray-200 pr-2.5 text-gray-600 font-medium">
+        <div className="mr-2 min-w-[60px] border-r border-gray-200 dark:border-border pr-2.5 text-gray-600 dark:text-muted-foreground font-medium">
           <TimeDisplay
             time={statementTime}
             handleClick={handleTimeClick}
@@ -36,7 +36,7 @@ export default withTranslation('videoDebate')(
             on="hover"
             trigger={
               <div className="mr-2">
-                <span className="inline-flex items-center rounded-md bg-yellow-100 px-2 py-1 text-xs text-yellow-800">
+                <span className="inline-flex items-center rounded-md bg-yellow-100 dark:bg-yellow-900 px-2 py-1 text-xs text-yellow-800 dark:text-yellow-200">
                   <span className="mr-1">{t('statement.draft')}</span>
                   <InfoCircle size={12} />
                 </span>
@@ -49,7 +49,9 @@ export default withTranslation('videoDebate')(
         {speaker && speaker.picture && (
           <img className="mr-1.5 h-6 w-6 rounded-full" src={speaker.picture} alt="" />
         )}
-        <strong className="sm:text-base text-xs mr-1">{speaker ? speaker.full_name : ''}</strong>
+        <strong className="sm:text-base text-xs mr-1 dark:text-foreground">
+          {speaker ? speaker.full_name : ''}
+        </strong>
       </div>
       <div className="flex items-center gap-2">
         {customButtons}

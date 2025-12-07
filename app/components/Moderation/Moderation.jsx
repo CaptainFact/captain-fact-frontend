@@ -54,13 +54,16 @@ export default class Moderation extends React.PureComponent {
 
     return (
       <main className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-center mb-6">
+        <h1 className="text-4xl font-bold text-center mb-6 dark:text-foreground">
           {t('title')} <Report className="inline w-8 h-8" />
         </h1>
         <div className="text-center mb-8">
-          <p className="mb-2">{t('helpText1')}</p>
-          <p className="mb-4">{t('helpText2')}</p>
-          <Link className="font-bold hover:underline" to="/help/moderation">
+          <p className="mb-2 dark:text-foreground">{t('helpText1')}</p>
+          <p className="mb-4 dark:text-foreground">{t('helpText2')}</p>
+          <Link
+            className="font-bold hover:underline dark:text-foreground dark:hover:text-primary"
+            to="/help/moderation"
+          >
             {t('learnMore')}
           </Link>
         </div>
@@ -68,9 +71,9 @@ export default class Moderation extends React.PureComponent {
         {entry && (
           <div>
             {this.renderAction(entry.action)}
-            <hr className="my-6" />
+            <hr className="my-6 dark:border-border" />
             {entry.flags.map(({ source_user, reason }) => (
-              <div key={source_user.id} className="text-center mb-2">
+              <div key={source_user.id} className="text-center mb-2 dark:text-foreground">
                 <UserAppellation user={source_user} /> {t('flaggedFor', { reason })}
               </div>
             ))}
@@ -82,22 +85,22 @@ export default class Moderation extends React.PureComponent {
 
   renderAction(action) {
     return (
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="bg-white dark:bg-background rounded-lg shadow-md dark:shadow-xl p-6">
         <UserAction action={action} defaultExpanded />
         <div className="my-4">
-          <div className="bg-gray-50 rounded p-4 text-center">
+          <div className="bg-gray-50 dark:bg-accent rounded p-4 text-center">
             <Button variant="outline">
               <Link
                 target="_blank"
                 to={commentURL(action.videoHashId, action.statementId, action.commentId)}
-                className="font-bold hover:underline"
+                className="font-bold hover:underline dark:text-foreground"
               >
                 {this.props.t('seeContext')}
               </Link>
             </Button>
           </div>
         </div>
-        <hr className="my-4" />
+        <hr className="my-4 dark:border-border" />
         <ModerationForm
           action={action}
           initialValues={{ action_id: action.id }}

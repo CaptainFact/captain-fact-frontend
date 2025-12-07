@@ -268,14 +268,14 @@ class CommentForm extends React.Component {
       'comment.incitateTo' + (inciteToParticipate === 'approve' ? 'Confirm' : 'Refute')
 
     return inciteToParticipate ? (
-      <div className="p-2 mb-3 text-center items-center justify-center flex flex-col text-sm">
+      <div className="p-2 mb-3 text-center items-center justify-center flex flex-col text-sm dark:text-foreground">
         <span className="mt-3">{t(commentIncitateTo)}.</span>
         <Button size="xs" variant="link" onClick={() => this.expandForm()}>
           <span>&nbsp;{t('comment.addYourSource')}.</span>
         </Button>
       </div>
     ) : (
-      <div className="flex justify-center p-2 border-t border-gray-200">
+      <div className="flex justify-center p-2 border-t border-gray-200 dark:border-border">
         <Button variant="link" onClick={() => this.expandForm()}>
           <Plus className="w-5 h-5 mr-1" />
           <span>{t('comment.revealForm')}</span>
@@ -294,7 +294,7 @@ class CommentForm extends React.Component {
       <div
         data-cy="comment-form-container"
         className={cn(
-          'flex flex-col px-3 pb-3 pt-5 comment-form shadow-[0_10px_6px_-10px_#dbdbdb_inset]',
+          'flex flex-col px-3 pb-3 pt-5 comment-form shadow-[0_10px_6px_-10px_#dbdbdb_inset] dark:shadow-[0_10px_6px_-10px_rgba(0,0,0,0.3)_inset] dark:bg-background',
           this.props.inciteToParticipate && 'incitation-comment',
         )}
       >
@@ -309,7 +309,7 @@ class CommentForm extends React.Component {
               >
                 <CircleX size={15} />
               </Button>
-              <span className="ml-2 text-sm">
+              <span className="ml-2 text-sm dark:text-foreground">
                 {t(isSelfReply ? 'comment.replyingToSelf' : 'comment.replyingTo')}{' '}
                 <UserAppellation defaultComponent="span" user={replyTo.user} />
               </span>
