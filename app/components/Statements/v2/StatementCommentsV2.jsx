@@ -28,7 +28,7 @@ const sortComments = (comments) => {
 const groupComments = (comments) => {
   const topLevel = []
   const repliesByParent = {}
-  
+
   comments.forEach((comment) => {
     if (comment.replyToId) {
       // This is a reply
@@ -42,31 +42,28 @@ const groupComments = (comments) => {
       topLevel.push(comment)
     }
   })
-  
+
   // Sort top-level comments
   const sortedTopLevel = sortComments(topLevel)
-  
+
   // Sort replies for each parent
   Object.keys(repliesByParent).forEach((parentId) => {
     repliesByParent[parentId] = sortComments(repliesByParent[parentId])
   })
-  
+
   return { topLevel: sortedTopLevel, repliesByParent }
 }
 
 const StatementCommentsV2 = ({ statement, speaker, setReplyToComment, votesMap, t }) => {
   const comments = statement.comments || []
-  
+
   // Group comments into top-level and replies (memoized)
-  const { topLevel, repliesByParent } = useMemo(
-    () => groupComments(comments),
-    [comments]
-  )
+  const { topLevel, repliesByParent } = useMemo(() => groupComments(comments), [comments])
 
   // Classify top-level comments only (memoized)
   const classifiedComments = useMemo(
-    () => classifyComments(topLevel, statement.speakerId),
-    [topLevel, statement.speakerId]
+    () => classifyComments(topLevel, statement.speaker?.id),
+    [topLevel, statement.speaker?.id],
   )
 
   const { regularComments, selfComments, approvingFacts, refutingFacts } = classifiedComments
@@ -115,6 +112,7 @@ const StatementCommentsV2 = ({ statement, speaker, setReplyToComment, votesMap, 
           speaker={speaker}
           comments={selfComments}
           repliesByParent={repliesByParent}
+          votesMap={votesMap}
         />
       </React.Fragment>
     )
@@ -143,7 +141,11 @@ const StatementCommentsV2 = ({ statement, speaker, setReplyToComment, votesMap, 
               className="w-full md:w-1/2 flex-grow basis-[450px] flex-col bg-red-100/5 pb-2"
               comments={refutingFacts}
               setReplyToComment={setReplyToComment}
-              header={renderCommentsListHeader('refute', 'destructive', calculateScore(refutingFacts))}
+              header={renderCommentsListHeader(
+                'refute',
+                'destructive',
+                calculateScore(refutingFacts),
+              )}
               statementID={statement.id}
               commentType="refute"
               repliesByParent={repliesByParent}
@@ -156,7 +158,11 @@ const StatementCommentsV2 = ({ statement, speaker, setReplyToComment, votesMap, 
               className="w-full md:w-1/2 flex-grow basis-[450px] flex-col bg-green-100/5 pb-2"
               comments={approvingFacts}
               setReplyToComment={setReplyToComment}
-              header={renderCommentsListHeader('approve', 'success', calculateScore(approvingFacts))}
+              header={renderCommentsListHeader(
+                'approve',
+                'success',
+                calculateScore(approvingFacts),
+              )}
               statementID={statement.id}
               commentType="approve"
               repliesByParent={repliesByParent}

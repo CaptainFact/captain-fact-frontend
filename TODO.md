@@ -5,3 +5,5 @@
 - Setting speaker when editing statement doesn't work.
 - Speaker focus
 - BackgroundNotifier
+- Votes not properly recorded in "speaker" view of statement
+- Performance: check memoization and re-rendering logic

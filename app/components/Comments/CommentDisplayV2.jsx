@@ -35,6 +35,7 @@ const CommentDisplayV2 = ({
   richMedias = true,
   loggedInUserVote: initialLoggedInUserVote = 0,
   isFlagged: initialIsFlagged = false,
+  votesMap,
 }) => {
   const dispatch = useDispatch()
   const { isAuthenticated, loggedInUser } = useLoggedInUser()
@@ -249,6 +250,7 @@ const CommentDisplayV2 = ({
             replyingTo={comment.user}
             setReplyToComment={setReplyToComment}
             repliesByParent={repliesByParent}
+            votesMap={votesMap}
           />
         </div>
       )}

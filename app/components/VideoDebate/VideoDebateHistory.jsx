@@ -8,14 +8,14 @@ import {
   VIDEO_HISTORY_ACTIONS_QUERY,
 } from '../../API/graphql_queries'
 import ActionsTable from '../UsersActions/ActionsTable'
+import { ErrorView } from '../Utils/ErrorView'
 
 const VideoDebateHistory = ({ videoId }) => {
-  const [actions, setActions] = useState([])
-
   // Fetch initial history actions
-  const { loading, data } = useQuery(VIDEO_HISTORY_ACTIONS_QUERY, {
+  const { loading, data, error, client } = useQuery(VIDEO_HISTORY_ACTIONS_QUERY, {
     variables: { videoId },
     skip: !videoId,
+    fetchPolicy: 'cache-and-network',
   })
 
   // Subscribe to new actions
@@ -25,25 +25,27 @@ const VideoDebateHistory = ({ videoId }) => {
     onData: ({ data }) => {
       if (data?.data?.videoHistoryActionAdded) {
         const newAction = data.data.videoHistoryActionAdded
-        setActions((prevActions) => [newAction, ...prevActions])
+
+        // Update the cache by adding the new action to the existing query
+        client.cache.updateQuery(
+          {
+            query: VIDEO_HISTORY_ACTIONS_QUERY,
+            variables: { videoId },
+          },
+          (existingData) => {
+            if (!existingData) {
+              return existingData
+            }
+
+            return {
+              ...existingData,
+              videoHistoryActions: [newAction, ...existingData.videoHistoryActions],
+            }
+          },
+        )
       }
     },
   })
-
-  // Update actions when initial data loads
-  useEffect(() => {
-    if (data?.videoHistoryActions) {
-      const sortedActions = [...data.videoHistoryActions].sort(
-        (a, b) => new Date(b.time) - new Date(a.time),
-      )
-      setActions(sortedActions)
-    }
-  }, [data])
-
-  // Clear actions when videoId changes
-  useEffect(() => {
-    setActions([])
-  }, [videoId])
 
   return (
     <React.Fragment>
@@ -51,7 +53,11 @@ const VideoDebateHistory = ({ videoId }) => {
         <meta name="robots" content="noindex" />
       </Helmet>
       <div className="videodebate-actions-history">
-        <ActionsTable actions={actions} isLoading={loading} />
+        {error ? (
+          <ErrorView error={error} canGoBack={false} />
+        ) : (
+          <ActionsTable actions={data?.videoHistoryActions || []} isLoading={loading} />
+        )}
       </div>
     </React.Fragment>
   )

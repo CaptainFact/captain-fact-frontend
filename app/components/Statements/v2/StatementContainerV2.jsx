@@ -44,8 +44,7 @@ const StatementContainerV2 = ({
 
   const { enableAutoscroll: autoscrollEnabled } = useUserPreferences()
 
-  // Find speaker for this statement
-  const speaker = statement.speakerId ? speakers.find((s) => s.id === statement.speakerId) : null
+  const speaker = statement.speaker
 
   // Check if this statement is focused/scrolled to
   const isFocused = scrollTo && scrollTo.id === statement.id

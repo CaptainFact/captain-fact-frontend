@@ -26,6 +26,7 @@ const COMMENT_FRAGMENT = gql`
       username
       pictureUrl
       miniPictureUrl
+      speakerId
     }
     source {
       id
@@ -44,6 +45,7 @@ const STATEMENT_FRAGMENT = gql`
       id
       fullName
       picture
+      title
     }
     comments {
       ...CommentFields

@@ -13,17 +13,7 @@ export default withTranslation('videoDebate')(({
   repliesByParent,
   votesMap,
 }) => {
-  // Normalize comments to array - handles both arrays and Immutable-like objects
-  const commentsArray = Array.isArray(comments)
-    ? comments
-    : comments?.toArray
-      ? comments.toArray()
-      : comments?.size
-        ? Array.from({ length: comments.size }, (_, i) => comments.get(i))
-        : []
-  const commentsLength = commentsArray.length
-
-  return commentsLength === 0 ? null : (
+  return comments.length === 0 ? null : (
     <div className="border-b border-gray-200 dark:border-border">
       <div className="bg-neutral-100 dark:bg-accent text-center flex justify-center items-center gap-2 p-1 border-b border-gray-200 dark:border-border dark:text-foreground">
         <Mic size={14} />
@@ -35,7 +25,7 @@ export default withTranslation('videoDebate')(({
         </div>
         <div>
           <CommentsListV2
-            comments={commentsArray}
+            comments={comments}
             setReplyToComment={setReplyToComment}
             repliesByParent={repliesByParent}
             votesMap={votesMap}

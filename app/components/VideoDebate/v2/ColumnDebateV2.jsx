@@ -167,7 +167,9 @@ const ColumnDebateV2 = ({
     <ScrollArea className="w-full bg-neutral-50 dark:bg-background 2xl:h-[--main-height] [&>div>div]:!block 2xl:[&>div>div]:!table">
       <div className="py-12 sm:px-4 px-2 dark:text-foreground">
         {renderTitle()}
-        {showIntroduction && <div className="mx-6 mt-4">{renderIntroduction()}</div>}
+        {showIntroduction && view === 'debate' && (
+          <div className="mx-6 mt-4">{renderIntroduction()}</div>
+        )}
         {renderContent()}
       </div>
     </ScrollArea>

@@ -76,6 +76,7 @@ const CommentsListV2 = ({
                   replies={replies}
                   repliesByParent={repliesByParent}
                   loggedInUserVote={loggedInUserVote}
+                  votesMap={votesMap}
                 />
               </div>
             )

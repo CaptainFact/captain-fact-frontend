@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client'
 import { Indent, Undo } from 'lucide-react'
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import {
@@ -15,6 +15,7 @@ import {
 
 import { RESTORE_SPEAKER_MUTATION, RESTORE_STATEMENT_MUTATION } from '../../API/graphql_queries'
 import { ACTION_DELETE, ACTION_REMOVE, ENTITY_SPEAKER, ENTITY_STATEMENT } from '../../constants'
+import { getEntityIDFromAction } from '../../lib/user_action_entity_id'
 import { Button } from '../ui/button'
 import UserAppellation from '../Users/UserAppellation'
 import { LoadingFrame } from '../Utils/LoadingFrame'
@@ -23,12 +24,29 @@ import ActionDiff from './ActionDiff'
 import ActionEntityLink from './ActionEntityLink'
 import ActionIcon from './ActionIcon'
 
-const ActionsTable = ({ actions, isLoading, lastActionsIds = [], showEntity = true }) => {
+const ActionsTable = ({ actions, isLoading, showEntity = true }) => {
   const { t } = useTranslation('history')
   const [expandedDiffs, setExpandedDiffs] = useState([])
 
   const [restoreStatement] = useMutation(RESTORE_STATEMENT_MUTATION)
   const [restoreSpeaker] = useMutation(RESTORE_SPEAKER_MUTATION)
+
+  // Compute which actions are the last ones for their entities
+  const lastActionIds = useMemo(() => {
+    const lastActionsMap = {}
+
+    actions.forEach((action) => {
+      const entityKey = `${action.entity}:${getEntityIDFromAction(action)}`
+      const existingAction = lastActionsMap[entityKey]
+
+      // Keep the action with the most recent time
+      if (!existingAction || action.time > existingAction.time) {
+        lastActionsMap[entityKey] = action
+      }
+    })
+
+    return new Set(Object.values(lastActionsMap).map((action) => action.id))
+  }, [actions])
 
   const getNbCols = () => 7 - !showEntity
 
@@ -60,7 +78,7 @@ const ActionsTable = ({ actions, isLoading, lastActionsIds = [], showEntity = tr
   }
 
   const renderActionLine = (action, isDiffing = false) => {
-    const isLastActionForEntity = lastActionsIds.includes(action.id)
+    const isLastActionForEntity = lastActionIds.has(action.id)
     const isReversibleType = [ACTION_DELETE, ACTION_REMOVE].includes(action.type)
     const reversible = isLastActionForEntity && isReversibleType
 
@@ -145,13 +163,11 @@ ActionsTable.propTypes = {
   actions: PropTypes.array.isRequired,
   isLoading: PropTypes.bool,
   showEntity: PropTypes.bool,
-  lastActionsIds: PropTypes.array,
 }
 
 ActionsTable.defaultProps = {
   isLoading: false,
   showEntity: true,
-  lastActionsIds: [],
 }
 
 export default ActionsTable

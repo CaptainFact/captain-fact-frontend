@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { AvatarFallback } from '@radix-ui/react-avatar'
-import { Edit, Mic, MoreVertical, Plus, Trash2 } from 'lucide-react'
+import { Mic } from 'lucide-react'
 import React, { useState } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Link, useHistory } from 'react-router-dom'
@@ -10,13 +10,8 @@ import { toast } from '@/hooks/use-toast'
 import { REMOVE_SPEAKER_FROM_VIDEO_MUTATION } from '../../API/graphql_queries'
 import ModalConfirmDelete from '../Modal/ModalConfirmDelete'
 import { Avatar, AvatarImage } from '../ui/avatar'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '../ui/dropdown-menu'
 import EditSpeakerFormModal from './EditSpeakerFormModal'
+import { SpeakerDropdownMenu } from './SpeakerDropdownMenu'
 
 const SpeakerPreviewV2 = ({
   speaker,
@@ -94,27 +89,11 @@ const SpeakerPreviewV2 = ({
       </div>
       <div className="flex">
         {isAuthenticated && showActions && (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button className="p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800">
-                <MoreVertical size={16} />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={handleAddStatement}>
-                <Plus size={16} className="mr-2" />
-                {t('statement.add')}
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={handleEditSpeaker}>
-                <Edit size={16} className="mr-2" />
-                {t('main:actions.edit')}
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={handleRemoveSpeaker} className="text-red-600">
-                <Trash2 size={16} className="mr-2" />
-                {t('speaker.remove')}
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <SpeakerDropdownMenu
+            handleRemove={handleRemoveSpeaker}
+            handleEdit={handleEditSpeaker}
+            handleAddStatement={handleAddStatement}
+          />
         )}
       </div>
     </div>
