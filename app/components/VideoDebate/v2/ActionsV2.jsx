@@ -18,7 +18,6 @@ import { toastError } from '@/lib/toasts'
 
 import { MIN_REPUTATION_UPDATE_VIDEO } from '../../../constants'
 import { useUserPreferences } from '../../../contexts/UserPreferencesContext'
-import { shiftStatements } from '../../../state/video_debate/effects'
 import { withLoggedInUser } from '../../LoggedInUser/UserProvider'
 import { Separator } from '../../ui/separator'
 import ReputationGuard from '../../Utils/ReputationGuard'
@@ -52,7 +51,9 @@ const ActionsV2 = ({ video, t, isAuthenticated }) => {
   // For now, we'll manage it locally via the mutation response
 
   const handleSubscriptionToggle = async () => {
-    if (!video) {return}
+    if (!video) {
+      return
+    }
     try {
       const result = await updateSubscription({
         variables: {
@@ -89,7 +90,9 @@ const ActionsV2 = ({ video, t, isAuthenticated }) => {
     history.push('/help')
   }
 
-  if (!video) {return null}
+  if (!video) {
+    return null
+  }
 
   return (
     <div className="flex py-[15px] px-2.5 items-center gap-2.5 shadow-[#f3f3f3_0px_10px_10px_-10px] dark:shadow-[rgba(0,0,0,0.3)_0px_10px_10px_-10px] mb-1.5">
@@ -131,27 +134,17 @@ const ActionsV2 = ({ video, t, isAuthenticated }) => {
 
       <Separator className="w-px h-5 bg-[#dadada]" />
 
-      <Action
-        onClick={handleShare}
-        activatedIcon={<Share2 />}
-        label={t('main:actions.share')}
-      />
+      <Action onClick={handleShare} activatedIcon={<Share2 />} label={t('main:actions.share')} />
 
       <Action onClick={handleHelp} activatedIcon={<HelpCircle />} label={t('main:menu.help')} />
-      <ShareModal
-        open={shareModalOpen}
-        onOpenChange={setShareModalOpen}
-        path={location.pathname}
-      />
+      <ShareModal open={shareModalOpen} onOpenChange={setShareModalOpen} path={location.pathname} />
       <EditVideoModal
         open={editVideoModalOpen}
         onOpenChange={setEditVideoModalOpen}
         video={video}
-        shiftStatements={shiftStatements}
       />
     </div>
   )
 }
 
 export default withTranslation('videoDebate')(withLoggedInUser(ActionsV2))
-

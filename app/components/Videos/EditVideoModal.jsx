@@ -5,16 +5,9 @@ import { Edit } from 'lucide-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { toast } from '@/hooks/use-toast'
 
-import { shiftStatements } from '../../state/video_debate/effects'
 import FieldWithButton from '../FormUtils/FieldWithButton'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { Separator } from '../ui/separator'
@@ -28,11 +21,24 @@ const editVideoMutation = gql`
   }
 `
 
-const EditVideoModal = ({ open, onOpenChange, video, shiftStatements }) => {
+const shiftStatementsMutation = gql`
+  mutation shiftStatements($videoId: ID!, $youtubeOffset: Int!) {
+    shiftStatements(videoId: $videoId, youtubeOffset: $youtubeOffset) {
+      id
+      youtubeId
+      youtubeOffset
+    }
+  }
+`
+
+const EditVideoModal = ({ open, onOpenChange, video }) => {
   const { t } = useTranslation(['videoDebate', 'main'])
   const [editVideo] = useMutation(editVideoMutation)
+  const [shiftStatements] = useMutation(shiftStatementsMutation)
 
-  if (!video) {return null}
+  if (!video) {
+    return null
+  }
 
   const unlistedOptions = [
     { value: true, label: t('main:videos.unlisted') },
@@ -105,11 +111,23 @@ const EditVideoModal = ({ open, onOpenChange, video, shiftStatements }) => {
                 {t('video.shiftStatements')}
               </h3>
               <Formik
-                initialValues={{ youtube_offset: video.youtube_offset }}
+                initialValues={{ youtubeOffset: video.youtubeOffset }}
                 onSubmit={async (values, { setSubmitting }) => {
                   setSubmitting(true)
-                  if (shiftStatements) {
-                    await shiftStatements(values)
+                  try {
+                    await shiftStatements({
+                      variables: {
+                        videoId: video.id,
+                        youtubeOffset: values.youtubeOffset,
+                      },
+                    })
+                    toast({ description: 'Statements shifted successfully' })
+                  } catch (e) {
+                    console.error(e) // eslint-disable-line no-console
+                    toast({
+                      variant: 'error',
+                      description: 'Failed to shift statements',
+                    })
                   }
                   setSubmitting(false)
                   onOpenChange(false)
@@ -120,9 +138,9 @@ const EditVideoModal = ({ open, onOpenChange, video, shiftStatements }) => {
                     <FieldWithButton
                       type="number"
                       input={{
-                        name: 'youtube_offset',
+                        name: 'youtubeOffset',
                         max: '10000000',
-                        value: values.youtube_offset,
+                        value: values.youtubeOffset,
                         onChange: handleChange,
                       }}
                       meta={{ submitting: isSubmitting }}

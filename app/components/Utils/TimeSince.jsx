@@ -36,19 +36,19 @@ export class TimeSince extends React.PureComponent {
     // eslint-disable-next-line no-unused-vars
     const { time, locale, dispatch, addSuffix = true, isDateTime = true, ...props } = this.props
     // Normalize locale key (e.g., 'pt-BR' -> 'pt_BR') and fallback to 'en' if not found
-    const normalizedLocale = (locale && typeof locale === 'string') ? locale.replace('-', '_') : 'en'
+    const normalizedLocale = locale && typeof locale === 'string' ? locale.replace('-', '_') : 'en'
     let localeObj = LocaleDates[normalizedLocale]
-    
+
     // Ensure we have a valid locale object with required properties
     if (!localeObj || !localeObj.defaultDateTimeFormat) {
       localeObj = LocaleDates.en
     }
-    
+
     // Final fallback - if even 'en' doesn't exist, return null
     if (!localeObj || !localeObj.defaultDateTimeFormat) {
       return null
     }
-    
+
     const dateFormat = isDateTime ? localeObj.defaultDateTimeFormat : localeObj.defaultDateFormat
     const timeAsDate = typeof time === 'string' ? parseISO(time) : time
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { connect } from 'react-redux'
 
 import { checkExtensionInstall } from '@/lib/browser-extension'
 import { cn } from '@/lib/css-utils'
@@ -9,12 +8,10 @@ import { useUserPreferences } from '../../contexts/UserPreferencesContext'
 import { MainModalContainer } from '../Modal/MainModalContainer'
 import { Toaster } from '../ui/toaster'
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
-import BackgroundNotifier from './BackgroundNotifier'
 import CrashReportPage from './CrashReportPage'
 import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 
-@connect(() => ({}))
 class Layout extends React.PureComponent {
   state = { error: null }
 
@@ -65,7 +62,6 @@ class Layout extends React.PureComponent {
           >
             {!this.state.error ? children : <CrashReportPage error={this.state.error} />}
           </div>
-          <BackgroundNotifier />
           <PublicAchievementUnlocker achievementId={4} meetConditionsFunc={checkExtensionInstall} />
         </div>
         <Toaster />

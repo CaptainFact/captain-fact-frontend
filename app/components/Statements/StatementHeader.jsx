@@ -13,7 +13,6 @@ export default withTranslation('videoDebate')(
     statementTime,
     isDraft,
     speaker,
-    handleTimeClick,
     handleShowHistory,
     handleEdit,
     handleShare,
@@ -24,11 +23,7 @@ export default withTranslation('videoDebate')(
     <header className="flex items-center justify-between border-b border-gray-200 dark:border-border p-3 dark:bg-background">
       <div className="flex items-center">
         <div className="mr-2 min-w-[60px] border-r border-gray-200 dark:border-border pr-2.5 text-gray-600 dark:text-muted-foreground font-medium">
-          <TimeDisplay
-            time={statementTime}
-            handleClick={handleTimeClick}
-            textClassName="sm:text-sm text-xs"
-          />
+          <TimeDisplay time={statementTime} textClassName="sm:text-sm text-xs" />
         </div>
         {isDraft && (
           <Popup

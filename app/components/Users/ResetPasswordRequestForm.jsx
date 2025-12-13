@@ -1,69 +1,82 @@
-import React from 'react'
-import { withTranslation } from 'react-i18next'
-import { reduxForm } from 'redux-form'
+import { useFormik } from 'formik'
+import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { resetPasswordRequest } from '../../API/http_api/current_user'
+import { validateUserForm } from '../../lib/user_validations'
 import { Button } from '../ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { ErrorView } from '../Utils/ErrorView'
-import { UserEmailField } from './UserFormFields'
+import { FormikUserEmailField } from './UserFormFields'
 
-// Fields are auto-validated, only validate password and repeat are the same
-const validate = (params) => {
-  if (params.password) {
-    return params.password === params.passwordRepeat ? {} : { passwordRepeat: "Doesn't match" }
-  }
-  return {}
-}
+const ResetPasswordRequestForm = () => {
+  const { t } = useTranslation('user')
+  const [status, setStatus] = useState('ready')
+  const [error, setError] = useState(null)
 
-@reduxForm({ form: 'resetPassword', validate })
-@withTranslation('user')
-export default class ResetPasswordRequestForm extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = { status: 'ready', payload: null }
-  }
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+    },
+    validate: (values) =>
+      validateUserForm(t, values, { emailRequired: true, passwordRequired: false }),
+    onSubmit: async (values) => {
+      try {
+        await resetPasswordRequest(values.email)
+        setStatus('done')
+      } catch {
+        setStatus('error')
+        setError('reset_failed')
+      }
+    },
+  })
 
-  submitForm(e) {
-    resetPasswordRequest(e.email).then(
-      () => this.setState({ status: 'done' }),
-      () => this.setState({ status: 'error', payload: 'reset_failed' }),
-    )
-  }
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting, isValid } =
+    formik
 
-  renderContent() {
-    if (this.state.status === 'error') {
-      return <ErrorView error={this.state.payload} i18nNS="user:errors.error" canGoBack={false} />
-    }
-    if (this.state.status === 'ready') {
+  const renderContent = () => {
+    if (status === 'error') {
+      return <ErrorView error={error} i18nNS="user:errors.error" canGoBack={false} />
+    } else if (status === 'ready') {
       return (
         <div className="space-y-4">
-          <UserEmailField t={this.props.t} />
-          <Button type="submit" variant="outline">
-            {this.props.t('resetPassword')}
+          <FormikUserEmailField
+            t={t}
+            values={values}
+            errors={errors}
+            touched={touched}
+            handleChange={handleChange}
+            handleBlur={handleBlur}
+          />
+          <Button
+            type="submit"
+            variant="outline"
+            disabled={!isValid || isSubmitting}
+            loading={isSubmitting}
+          >
+            {t('resetPassword')}
           </Button>
         </div>
       )
-    }
-    if (this.state.status === 'done') {
-      return this.props.t('resetPasswordRequestSuccess')
+    } else if (status === 'done') {
+      return t('resetPasswordRequestSuccess')
+    } else {
+      return null
     }
   }
 
-  render() {
-    return (
-      <div className="px-2 my-12">
-        <Card className="max-w-[500px] mx-auto">
-          <CardHeader>
-            <CardTitle>{this.props.t('resetPassword')}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}>
-              {this.renderContent()}
-            </form>
-          </CardContent>
-        </Card>
-      </div>
-    )
-  }
+  return (
+    <div className="px-2 my-12">
+      <Card className="max-w-[500px] mx-auto">
+        <CardHeader>
+          <CardTitle>{t('resetPassword')}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit}>{renderContent()}</form>
+        </CardContent>
+      </Card>
+    </div>
+  )
 }
+
+export default ResetPasswordRequestForm

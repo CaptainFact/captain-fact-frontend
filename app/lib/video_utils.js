@@ -5,7 +5,7 @@ import { VIDEO_PLAYER_YOUTUBE } from '../constants'
  */
 export const getTimecodesOffset = (video, videoPlayer) => {
   if (videoPlayer === VIDEO_PLAYER_YOUTUBE) {
-    return video.youtube_offset
+    return video.youtubeOffset
   }
 
   // eslint-disable-next-line no-console

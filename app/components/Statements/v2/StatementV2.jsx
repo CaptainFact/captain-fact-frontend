@@ -2,9 +2,8 @@ import React, { useState } from 'react'
 import { withTranslation } from 'react-i18next'
 
 import { ENTITY_STATEMENT } from '../../../constants'
-import { useVideoPlayback } from '../../../contexts/VideoPlaybackContext'
 import ShareModal from '../../Utils/ShareModal'
-import { ModalHistory } from '../../VideoDebate/ModalHistory'
+import { StatementHistoryDialog } from '../../VideoDebate/StatementHistoryDialog'
 import StatementHeader from '../StatementHeader'
 
 const StatementV2 = ({
@@ -17,19 +16,8 @@ const StatementV2 = ({
   onSetScrollTo,
   t,
 }) => {
-  const { forcePosition } = useVideoPlayback()
   const [shareModalOpen, setShareModalOpen] = useState(false)
   const [historyModalOpen, setHistoryModalOpen] = useState(false)
-
-  const handleTimeClick = (time) => {
-    forcePosition(time)
-    if (onSetScrollTo) {
-      onSetScrollTo({
-        id: statement.id,
-        __forceAutoScroll: true,
-      })
-    }
-  }
 
   const shareModal = () => {
     setShareModalOpen(true)
@@ -48,7 +36,6 @@ const StatementV2 = ({
         handleEdit={handleEdit}
         handleDelete={handleDelete}
         handleShowHistory={showHistory}
-        handleTimeClick={withoutActions ? null : handleTimeClick}
         handleShare={shareModal}
         withoutActions={withoutActions}
       />
@@ -63,7 +50,7 @@ const StatementV2 = ({
         onOpenChange={setShareModalOpen}
         path={`${location.pathname}?statement=${statement.id}`}
       />
-      <ModalHistory
+      <StatementHistoryDialog
         open={historyModalOpen}
         onOpenChange={setHistoryModalOpen}
         entity={ENTITY_STATEMENT}

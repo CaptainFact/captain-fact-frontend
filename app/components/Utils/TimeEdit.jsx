@@ -1,6 +1,7 @@
 import { Clock } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 
+import { useVideoPlayback } from '../../contexts/VideoPlaybackContext'
 import formatSeconds from '../../lib/seconds_formatter'
 import { Input } from '../ui/input'
 
@@ -15,12 +16,16 @@ const handleTimeEdit = (newTimeCode, setFormattedTime, handleChange) => {
   }
 }
 
-const TimeEdit = ({ time, handleChange, onTimeIconClick }) => {
+const TimeEdit = ({ time, handleChange, onTimeIconClick, isLocked = true }) => {
+  const { position: contextPosition } = useVideoPlayback()
   const [formattedTime, setFormattedTime] = useState('')
 
+  // Use context position when unlocked, otherwise use the provided time
+  const displayTime = isLocked ? time : contextPosition
+
   useEffect(() => {
-    setFormattedTime(formatSeconds(time))
-  }, [time])
+    setFormattedTime(formatSeconds(displayTime))
+  }, [displayTime])
 
   return (
     <div className="w-[110px] md:w-[30%] md:min-w-[110px]">

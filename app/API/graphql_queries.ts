@@ -111,55 +111,6 @@ export const loggedInUserTodayReputationGain = gql`
   }
 `
 
-export const VideoDebateQuery = gql`
-  query VideoDebate($id: ID!) {
-    video(hashId: $id) {
-      id
-      hashId
-      title
-      url
-      thumbnail
-      language
-      unlisted
-      youtubeOffset
-      speakers {
-        id
-        fullName
-        slug
-        picture
-      }
-      statements {
-        id
-        text
-        time
-        isDraft
-        speaker {
-          id
-          fullName
-          picture
-        }
-        comments {
-          id
-          text
-          approve
-          score
-          insertedAt
-          replyToId
-          user {
-            id
-            username
-            pictureUrl
-          }
-          source {
-            id
-            url
-          }
-        }
-      }
-    }
-  }
-`
-
 export const DELETE_STATEMENT_MUTATION = gql`
   mutation DeleteStatement($id: ID!) {
     deleteStatement(id: $id) {
@@ -378,6 +329,54 @@ export const VIDEO_HISTORY_ACTIONS_QUERY = gql`
 export const VIDEO_HISTORY_ACTION_ADDED_SUBSCRIPTION = gql`
   subscription VideoHistoryActionAdded($videoId: ID!) {
     videoHistoryActionAdded(videoId: $videoId) {
+      id
+      type
+      entity
+      changes
+      time
+      user {
+        id
+        username
+        name
+        pictureUrl
+        miniPictureUrl
+      }
+      speakerId
+      statementId
+      commentId
+      videoId
+      videoHashId
+    }
+  }
+`
+
+export const STATEMENT_HISTORY_ACTIONS_QUERY = gql`
+  query StatementHistoryActions($statementId: ID!) {
+    statementHistoryActions(statementId: $statementId) {
+      id
+      type
+      entity
+      changes
+      time
+      user {
+        id
+        username
+        name
+        pictureUrl
+        miniPictureUrl
+      }
+      speakerId
+      statementId
+      commentId
+      videoId
+      videoHashId
+    }
+  }
+`
+
+export const STATEMENT_HISTORY_ACTION_ADDED_SUBSCRIPTION = gql`
+  subscription StatementHistoryActionAdded($statementId: ID!) {
+    statementHistoryActionAdded(statementId: $statementId) {
       id
       type
       entity

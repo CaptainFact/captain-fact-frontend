@@ -70,6 +70,7 @@ const StatementFormV2 = ({
   onConfirm,
   onSetScrollTo,
   onSuccess,
+  // TODO: THis position is not used anymore
   position = 0,
   videoId,
   t,

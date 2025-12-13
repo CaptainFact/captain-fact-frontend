@@ -8,19 +8,11 @@ import { JS_ENV } from '../config'
 // Reducers
 import ModalsReducer from './modals/reducer'
 import ModerationReducer from './moderation/reducer'
-import SpeakersReducer from './speakers/reducer'
-import UsersActionsReducer from './user_actions/reducer'
-import VideoDebateReducer from './video_debate/reducer'
-import VideosReducer from './videos/reducer'
 
 // Declare reducers
 const reducers = combineReducers({
-  Speakers: SpeakersReducer,
-  VideoDebate: VideoDebateReducer,
   Modals: ModalsReducer,
-  UsersActions: UsersActionsReducer,
   Moderation: ModerationReducer,
-  Videos: VideosReducer,
   form: formReducer,
 })
 

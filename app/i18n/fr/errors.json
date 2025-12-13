@@ -5,6 +5,7 @@
   "addIssue": "Ajouter un ticket sur GitHub",
   "reload": "Recharger la page",
   "errorDetails": "Details techniques",
+  "required": "Ce champ est requis",
   "server": {
     "unknown": "Quelque chose a mal fonctionné de notre côté, on regarde ça !",
     "invalid_email": "Adresse e-mail invalide.",

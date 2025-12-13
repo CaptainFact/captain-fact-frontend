@@ -1,7 +1,6 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import FlipMove from 'react-flip-move'
 import { withTranslation } from 'react-i18next'
-import { useLocation } from 'react-router-dom'
 
 import { FULLHD_WIDTH_THRESHOLD } from '../../../constants'
 import { withLoggedInUser } from '../../LoggedInUser/UserProvider'
@@ -12,7 +11,6 @@ const StatementsListV2 = ({
   statements,
   speakers,
   statementForm,
-  scrollTo,
   offset,
   onSetStatementForm,
   onClearStatementForm,
@@ -22,22 +20,11 @@ const StatementsListV2 = ({
   isAuthenticated,
   t,
 }) => {
-  const location = useLocation()
-
-  // Handle URL query parameter for scrolling to statement
-  useEffect(() => {
-    const searchParams = new URLSearchParams(location.search)
-    if (searchParams.has('statement')) {
-      onSetScrollTo({
-        id: parseInt(searchParams.get('statement')),
-        __forceAutoScroll: true,
-      })
-    }
-  }, [location.search, onSetScrollTo])
-
   // Filter statements based on authentication
   const filteredStatements = useMemo(() => {
-    if (!statements) {return []}
+    if (!statements) {
+      return []
+    }
     if (!isAuthenticated) {
       return statements.filter((s) => !s.isDraft)
     }
@@ -85,9 +72,8 @@ const StatementsListV2 = ({
               statement={statement}
               speakers={speakers || []}
               offset={offset}
-              scrollTo={scrollTo}
-              onSetScrollTo={onSetScrollTo}
               votesMap={votesMap}
+              onSetScrollTo={onSetScrollTo}
             />
           </div>
         ))}

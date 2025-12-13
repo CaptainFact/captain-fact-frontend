@@ -1,94 +1,119 @@
+import { useFormik } from 'formik'
 import { get } from 'lodash'
 import { CircleAlert } from 'lucide-react'
-import React from 'react'
-import { withTranslation } from 'react-i18next'
-import { Link, withRouter } from 'react-router-dom'
-import { reduxForm, SubmissionError } from 'redux-form'
+import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 
 import { signIn } from '../../API/http_api/current_user'
 import { tError } from '../../lib/errors'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import { validateUserForm } from '../../lib/user_validations'
+import { useLoggedInUser } from '../LoggedInUser/UserProvider'
 import { Alert, AlertDescription } from '../ui/alert'
+import { Button } from '../ui/button'
 import { Separator } from '../ui/separator'
 import { SignInUpContainer } from './SignInUpContainer'
-import { submitButton, UserEmailOrUsernameField, UserPasswordField } from './UserFormFields'
+import { FormikUserEmailOrUsernameField, FormikUserPasswordField } from './UserFormFields'
 
-@reduxForm({ form: 'loginForm' })
-@withRouter
-@withTranslation('user')
-@withLoggedInUser
-export default class LoginForm extends React.PureComponent {
-  state = {
-    error: null,
+const LoginForm = () => {
+  const { t } = useTranslation('user')
+  const history = useHistory()
+  const location = useLocation()
+  const { isAuthenticated, updateLoggedInUser } = useLoggedInUser()
+  const [error, setError] = useState(null)
+
+  const redirect = () => {
+    const pathName = get(location, 'state.redirect', '/videos')
+    history.replace(pathName)
   }
 
-  redirect() {
-    const pathName = get(this.props.location, 'state.redirect', '/videos')
-    this.props.history.replace(pathName)
-  }
-
-  componentDidMount() {
-    if (this.props.isAuthenticated) {
-      this.redirect()
+  useEffect(() => {
+    if (isAuthenticated) {
+      redirect()
     }
-  }
+  }, [isAuthenticated])
 
-  componentDidUpdate() {
-    // Redirect when logged in
-    if (this.props.isAuthenticated) {
-      this.redirect()
-    }
-  }
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validate: (values) =>
+      validateUserForm(t, values, { emailRequired: true, passwordRequired: true }),
+    onSubmit: async (values) => {
+      try {
+        setError(null)
+        const { user, token } = await signIn('identity', values)
+        updateLoggedInUser(user, token)
+      } catch (error) {
+        if (typeof error === 'string') {
+          setError(error)
+        }
+        throw error
+      }
+    },
+  })
 
-  render() {
-    const { handleSubmit, updateLoggedInUser, valid, t } = this.props
-    const { error } = this.state
-    return (
-      <SignInUpContainer>
-        <form
-          onSubmit={handleSubmit((user) => {
-            return signIn('identity', user)
-              .then(({ user, token }) => {
-                updateLoggedInUser(user, token)
-              })
-              .catch((e) => {
-                if (typeof e === 'string') {
-                  this.setState({ error: e })
-                }
-                throw new SubmissionError(e)
-              })
-          })}
-        >
-          <div className="mb-4">
-            <strong>{t('needAnAccountQuestion')}</strong>{' '}
-            <span className="ml-1">
-              <Link to="/signup">{t('signup')}</Link>
-            </span>
-          </div>
-          <hr className="mb-6" />
-          {error && (
-            <Alert variant="destructive" className="mb-4">
-              <AlertDescription>
-                <CircleAlert size="1em" className="inline mr-2" />
-                {tError(t, error)}
-              </AlertDescription>
-            </Alert>
-          )}
-          <div className="space-y-4">
-            <UserEmailOrUsernameField t={t} />
-            <UserPasswordField t={t} />
-          </div>
-          <div className="mt-6">
-            {submitButton(t('login'), valid, { loading: this.props.submitting })}
-          </div>
-          <Separator className="my-6" />
-          <div className="text-center">
-            <Link to="/reset_password" className="block text-sm">
-              {t('forgottenPassword')}
-            </Link>
-          </div>
-        </form>
-      </SignInUpContainer>
-    )
-  }
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting, isValid } =
+    formik
+
+  return (
+    <SignInUpContainer>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <strong>{t('needAnAccountQuestion')}</strong>{' '}
+          <span className="ml-1 underline">
+            <Link to="/signup">{t('signup')}</Link>
+          </span>
+        </div>
+        <hr className="mb-6" />
+        {error && (
+          <Alert variant="destructive" className="mb-4">
+            <AlertDescription>
+              <CircleAlert size="1em" className="inline mr-2" />
+              {tError(t, error)}
+            </AlertDescription>
+          </Alert>
+        )}
+        <div className="space-y-4">
+          <FormikUserEmailOrUsernameField
+            t={t}
+            values={values}
+            errors={errors}
+            touched={touched}
+            handleChange={handleChange}
+            handleBlur={handleBlur}
+            required={true}
+          />
+          <FormikUserPasswordField
+            t={t}
+            values={values}
+            errors={errors}
+            touched={touched}
+            handleChange={handleChange}
+            handleBlur={handleBlur}
+            required={true}
+          />
+        </div>
+        <div className="mt-6">
+          <Button
+            type="submit"
+            disabled={!isValid || isSubmitting}
+            loading={isSubmitting}
+            className="w-full"
+          >
+            {t('login')}
+          </Button>
+        </div>
+        <Separator className="my-6" />
+        <div className="text-center">
+          <Link to="/reset_password" className="block text-sm">
+            {t('forgottenPassword')}
+          </Link>
+        </div>
+      </form>
+    </SignInUpContainer>
+  )
 }
+
+export default LoginForm

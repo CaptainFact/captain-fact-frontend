@@ -43,6 +43,7 @@ const SpeakerPreviewV2 = ({
       title: t('speaker.remove'),
       description: t('speaker.confirmRemove', { speaker }),
     })
+    setDeleteModalOpen(false)
   }
 
   const handleEditSpeaker = () => {

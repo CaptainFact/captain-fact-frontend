@@ -1,13 +1,10 @@
 import { CircleAlert } from 'lucide-react'
-import React from 'react'
-import { withTranslation } from 'react-i18next'
-import { connect } from 'react-redux'
+import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
-import { deleteUserAccount } from '../../API/http_api/current_user'
 import { useUserPreferences } from '../../contexts/UserPreferencesContext'
-import { addModal, popModal } from '../../state/modals/reducer'
 import UserLanguageSelector from '../LoggedInUser/UserLanguageSelector'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import { useLoggedInUser } from '../LoggedInUser/UserProvider'
 import { Button } from '../ui/button'
 import { Card } from '../ui/card'
 import { Separator } from '../ui/separator'
@@ -15,56 +12,48 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
 import DeleteUserModal from './DeleteUserModal'
 import EditUserForm from './EditUserForm'
 
-@connect(() => ({}), { addModal, popModal })
-@withTranslation('user')
-@withLoggedInUser
-class UserSettings extends React.PureComponent {
-  render() {
-    const { t, addModal, logout } = this.props
-    return this.props.isLoading ? (
-      <LoadingFrame />
-    ) : (
-      <div data-cy="user-settings" className="p-6">
-        <Card className="mt-6 p-6 mx-auto max-w-[500px]">
-          <h3 className="text-2xl font-semibold mb-4">{t('main:menu.language')}</h3>
-          <UserLanguageSelector />
-        </Card>
+const UserSettings = () => {
+  const { t } = useTranslation('user')
+  const { loggedInUserLoading, logout } = useLoggedInUser()
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false)
 
-        <Card className="mt-6 p-6 mx-auto max-w-[500px]">
-          <h3 className="text-2xl font-semibold mb-4">{t('accountSettings')}</h3>
-          <EditUserForm />
-        </Card>
-
-        <Separator className="my-12 mx-auto max-w-[540px]" />
-
-        <Card className="mt-6 p-6 mx-auto max-w-[500px]">
-          <h3 className="text-2xl font-semibold mb-4 text-red-500 flex items-center">
-            <CircleAlert size="0.9em" className="mr-2" />
-            {t('dangerZone')}
-          </h3>
-          <Button
-            variant="destructive"
-            className="w-full"
-            onClick={() =>
-              addModal({
-                Modal: DeleteUserModal,
-                props: {
-                  handleConfirm: () => {
-                    return deleteUserAccount().then(() => {
-                      logout()
-                      this.props.popModal()
-                    })
-                  },
-                },
-              })
-            }
-          >
-            {t('deleteAccount')}
-          </Button>
-        </Card>
-      </div>
-    )
+  const handleDeleteSuccess = () => {
+    logout()
   }
+
+  return loggedInUserLoading ? (
+    <LoadingFrame />
+  ) : (
+    <div data-cy="user-settings" className="p-6">
+      <Card className="mt-6 p-6 mx-auto max-w-[500px]">
+        <h3 className="text-2xl font-semibold mb-4">{t('main:menu.language')}</h3>
+        <UserLanguageSelector />
+      </Card>
+
+      <Card className="mt-6 p-6 mx-auto max-w-[500px]">
+        <h3 className="text-2xl font-semibold mb-4">{t('accountSettings')}</h3>
+        <EditUserForm />
+      </Card>
+
+      <Separator className="my-12 mx-auto max-w-[540px]" />
+
+      <Card className="mt-6 p-6 mx-auto max-w-[500px]">
+        <h3 className="text-2xl font-semibold mb-4 text-red-500 flex items-center">
+          <CircleAlert size="0.9em" className="mr-2" />
+          {t('dangerZone')}
+        </h3>
+        <Button variant="destructive" className="w-full" onClick={() => setDeleteModalOpen(true)}>
+          {t('deleteAccount')}
+        </Button>
+      </Card>
+
+      <DeleteUserModal
+        open={deleteModalOpen}
+        onOpenChange={setDeleteModalOpen}
+        onSuccess={handleDeleteSuccess}
+      />
+    </div>
+  )
 }
 
 const UserSettingsWithPreferences = (props) => {

@@ -84,7 +84,7 @@ export class VideoCard extends React.PureComponent {
     if (nbOthers > 0) {
       const title = speakers
         .slice(MAX_VIDEO_CARD_SPEAKERS)
-        .map((s) => s.full_name)
+        .map((s) => s.fullName)
         .join(', ')
       speakerComponentsList.push(
         <span key="others" className="inline align-middle dark:text-muted-foreground">
@@ -110,6 +110,6 @@ export class VideoCard extends React.PureComponent {
   }
 
   renderSpeakerName(speaker) {
-    return <Link to={`/s/${speaker.slug || speaker.id}`}>{speaker.full_name}</Link>
+    return <Link to={`/s/${speaker.slug || speaker.id}`}>{speaker.fullName}</Link>
   }
 }

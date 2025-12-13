@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from 'react'
+import React, { createContext, useCallback, useContext, useMemo, useReducer } from 'react'
 
 const initialState = {
   position: 0,
@@ -33,26 +33,35 @@ const VideoPlaybackContext = createContext(null)
 export const VideoPlaybackProvider = ({ children }) => {
   const [state, dispatch] = useReducer(playbackReducer, initialState)
 
-  const setPosition = (position) => {
-    dispatch({ type: 'SET_POSITION', payload: position })
-  }
+  const setPosition = useCallback(
+    (position) => {
+      const truncatedPosition = Math.floor(position)
+      if (truncatedPosition !== state.position) {
+        dispatch({ type: 'SET_POSITION', payload: truncatedPosition })
+      }
+    },
+    [state.position],
+  )
 
-  const setPlaying = (isPlaying) => {
+  const setPlaying = useCallback((isPlaying) => {
     dispatch({ type: 'SET_PLAYING', payload: isPlaying })
-  }
+  }, [])
 
-  const forcePosition = (time) => {
+  const forcePosition = useCallback((time) => {
     dispatch({ type: 'FORCE_POSITION', payload: time })
-  }
+  }, [])
 
-  const value = {
-    position: state.position,
-    isPlaying: state.isPlaying,
-    forcedPosition: state.forcedPosition,
-    setPosition,
-    setPlaying,
-    forcePosition,
-  }
+  const value = useMemo(
+    () => ({
+      position: state.position,
+      isPlaying: state.isPlaying,
+      forcedPosition: state.forcedPosition,
+      setPosition,
+      setPlaying,
+      forcePosition,
+    }),
+    [state.position, state.isPlaying, state.forcedPosition, setPosition, setPlaying, forcePosition],
+  )
 
   return <VideoPlaybackContext.Provider value={value}>{children}</VideoPlaybackContext.Provider>
 }
@@ -64,5 +73,3 @@ export const useVideoPlayback = () => {
   }
   return context
 }
-
-

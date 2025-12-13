@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { Check, X } from '@styled-icons/feather'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { withTranslation } from 'react-i18next'
 
 import { cn } from '@/lib/css-utils'
@@ -11,7 +11,6 @@ import {
   MIN_REPUTATION_REMOVE_STATEMENT,
   MIN_REPUTATION_UPDATE_STATEMENT,
 } from '../../../constants'
-import { useUserPreferences } from '../../../contexts/UserPreferencesContext'
 import CommentFormV2 from '../../Comments/CommentFormV2'
 import { withLoggedInUser } from '../../LoggedInUser/UserProvider'
 import ModalConfirmDelete from '../../Modal/ModalConfirmDelete'
@@ -26,14 +25,12 @@ const StatementContainerV2 = ({
   statement,
   speakers,
   offset,
-  scrollTo,
   votesMap,
+  onSetScrollTo,
   isAuthenticated,
   loggedInUser,
   t,
-  onSetScrollTo,
 }) => {
-  const containerRef = useRef(null)
   const [isDeleting, setIsDeleting] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [replyTo, setReplyTo] = useState(null)
@@ -42,26 +39,7 @@ const StatementContainerV2 = ({
   const [deleteStatement] = useMutation(DELETE_STATEMENT_MUTATION)
   const [updateStatement] = useMutation(UPDATE_STATEMENT_MUTATION)
 
-  const { enableAutoscroll: autoscrollEnabled } = useUserPreferences()
-
   const speaker = statement.speaker
-
-  // Check if this statement is focused/scrolled to
-  const isFocused = scrollTo && scrollTo.id === statement.id
-
-  // Handle scrolling
-  useEffect(() => {
-    if (scrollTo && scrollTo.id === statement.id && containerRef.current) {
-      const shouldScroll =
-        autoscrollEnabled || (scrollTo.__forceAutoScroll && scrollTo.id === statement.id)
-      if (shouldScroll) {
-        containerRef.current.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center',
-        })
-      }
-    }
-  }, [scrollTo, statement.id, autoscrollEnabled])
 
   const handleUpdateStatement = async (updatedStatement) => {
     try {
@@ -131,17 +109,14 @@ const StatementContainerV2 = ({
 
   return (
     <Card
-      ref={containerRef}
-      className={cn('max-w-[980px] mx-auto bg-white dark:bg-background', {
-        'shadow-lg': isFocused,
-      })}
+      id={`statement-${statement.id}`}
+      className="max-w-[980px] mx-auto bg-white dark:bg-background"
     >
       {isEditing ? (
         <StatementFormV2
           offset={offset}
           initialValues={statement}
           speakers={speakers}
-          position={0}
           onAbort={() => setIsEditing(false)}
           onConfirm={handleUpdateStatement}
           onSetScrollTo={onSetScrollTo}

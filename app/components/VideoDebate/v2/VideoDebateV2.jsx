@@ -1,12 +1,13 @@
 import { gql, useApolloClient, useQuery, useSubscription } from '@apollo/client'
-import React, { useEffect, useMemo, useReducer, useRef } from 'react'
+import React, { useCallback, useEffect, useMemo, useReducer, useRef } from 'react'
 import { Helmet } from 'react-helmet'
 import { withTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 
 import { VideoPlaybackProvider } from '../../../contexts/VideoPlaybackContext'
 import { toAbsoluteURL, videoURL } from '../../../lib/cf_routes'
 import { getHDThumbnailUrl } from '../../../lib/video_utils'
+import BackgroundNotifier from '../../App/BackgroundNotifier'
 import { ErrorView } from '../../Utils/ErrorView'
 import ColumnDebateV2 from './ColumnDebateV2'
 import ColumnVideoV2 from './ColumnVideoV2'
@@ -66,6 +67,7 @@ const VIDEO_DEBATE_QUERY = gql`
       language
       unlisted
       youtubeOffset
+      youtubeId
       speakers {
         id
         fullName
@@ -141,17 +143,11 @@ const COMMENT_SCORE_DIFF_SUBSCRIPTION = gql`
 
 // State management reducer
 const initialState = {
-  scrollTo: null,
   statementForm: null, // { speaker_id, text, time } or null
 }
 
 const videoDebateReducer = (state, action) => {
   switch (action.type) {
-    case 'SET_SCROLL_TO':
-      return {
-        ...state,
-        scrollTo: action.payload,
-      }
     case 'SET_STATEMENT_FORM':
       return {
         ...state,
@@ -342,12 +338,13 @@ const useVideoDebateSubscriptions = (subscribeToMore, videoId) => {
 
 const VideoDebateV2 = ({ t: _t }) => {
   const { videoId, view } = useParams()
+  const location = useLocation()
   const [state, dispatch] = useReducer(videoDebateReducer, initialState)
   const prevVideoIdRef = useRef(null)
 
   // Fetch initial video data
   const { data, loading, error, subscribeToMore } = useQuery(VIDEO_DEBATE_QUERY, {
-    variables: { id: videoId, videoId: null },
+    variables: { id: videoId },
     skip: !videoId,
   })
 
@@ -360,7 +357,73 @@ const VideoDebateV2 = ({ t: _t }) => {
   }, [videoId])
 
   // Subscribe to all video debate events
-  useVideoDebateSubscriptions(subscribeToMore, data?.video?.id, data?.video?.hashId)
+  useVideoDebateSubscriptions(subscribeToMore, data?.video?.id)
+
+  // Simple scroll function for components that need to scroll to elements
+  const handleScrollTo = useCallback((target) => {
+    if (typeof target === 'string') {
+      // Direct element ID
+      const element = document.getElementById(target)
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        })
+      }
+    } else if (target && target.id) {
+      // Legacy object format { id, ... }
+      const element = document.getElementById(`statement-${target.id}`)
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        })
+      }
+    }
+  }, [])
+
+  // Handle scrolling to statement or comment once data is loaded
+  useEffect(() => {
+    if (data?.video?.statements && !loading) {
+      const searchParams = new URLSearchParams(location.search)
+      const statementId = searchParams.get('statement')
+      const commentId = searchParams.get('c')
+
+      // Validate that the target exists in the current video data
+      let targetElementId = null
+
+      if (commentId) {
+        // Check if the comment exists in any statement
+        const commentExists = data.video.statements.some((statement) =>
+          statement.comments?.some((comment) => comment.id === parseInt(commentId)),
+        )
+        if (commentExists) {
+          targetElementId = `comment-${commentId}`
+        }
+      } else if (statementId) {
+        // Check if the statement exists
+        const statementExists = data.video.statements.some(
+          (statement) => statement.id === parseInt(statementId),
+        )
+        if (statementExists) {
+          targetElementId = `statement-${statementId}`
+        }
+      }
+
+      if (targetElementId) {
+        // Use setTimeout to ensure DOM is fully rendered
+        setTimeout(() => {
+          const element = document.getElementById(targetElementId)
+          if (element) {
+            element.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center',
+            })
+          }
+        }, 100)
+      }
+    }
+  }, [data?.video?.statements, loading]) // Only run when data loads, not on every URL change
 
   // All hooks must be called before any conditional returns
   const currentView = view || 'debate'
@@ -417,11 +480,14 @@ const VideoDebateV2 = ({ t: _t }) => {
           videoId={data?.video?.id}
           statements={statementsWithComments}
           statementForm={state.statementForm}
-          scrollTo={state.scrollTo}
           votesMap={data?.loggedInUser?.votes}
           onSetStatementForm={(form) => dispatch({ type: 'SET_STATEMENT_FORM', payload: form })}
           onClearStatementForm={() => dispatch({ type: 'CLEAR_STATEMENT_FORM' })}
-          onSetScrollTo={(scrollTo) => dispatch({ type: 'SET_SCROLL_TO', payload: scrollTo })}
+          onSetScrollTo={handleScrollTo}
+        />
+        <BackgroundNotifier
+          statements={statementsWithComments}
+          videoOffset={data?.video?.youtubeOffset || 0}
         />
       </div>
     </VideoPlaybackProvider>

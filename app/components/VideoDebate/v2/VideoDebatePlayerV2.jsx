@@ -8,7 +8,7 @@ import { useVideoPlayback } from '../../../contexts/VideoPlaybackContext'
  * Updates position when playing and seeks to position when requested.
  */
 const VideoDebatePlayerV2 = ({ url }) => {
-  const { position, forcedPosition, isPlaying, setPosition, setPlaying } = useVideoPlayback()
+  const { forcedPosition, isPlaying, setPosition, setPlaying } = useVideoPlayback()
   const playerRef = useRef(null)
   const prevForcedPositionRef = useRef(null)
 
@@ -41,4 +41,3 @@ const VideoDebatePlayerV2 = ({ url }) => {
 }
 
 export default VideoDebatePlayerV2
-

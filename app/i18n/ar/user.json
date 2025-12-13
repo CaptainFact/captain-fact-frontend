@@ -33,5 +33,7 @@
         "unsubscribe_success": "لقد تم إلغاء اشتراكك في نشرتنا الاخبارية",
         "unsubscribe_error": "الرمز المميز المقدّم يبدو غير صالح. إذا استمرت المشكلة ، اتصل بنا"
     },
-    "browsingAnalyzer": "تحليل التصفح"
+    "browsingAnalyzer": "تحليل التصفح",
+    "signupSuccessTitle": "مرحباً بك على متن الطائرة!",
+    "signupSuccessDescription": "تم إنشاء حسابك بنجاح."
 }

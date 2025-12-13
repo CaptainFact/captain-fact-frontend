@@ -208,7 +208,7 @@ const CommentDisplayV2 = ({
 
   return (
     <div className={allClassNames}>
-      <article className={'flex gap-4 p-4'}>
+      <article id={`comment-${comment.id}`} className={'flex gap-4 p-4'}>
         {!withoutActions && (
           <div className="flex-shrink-0">
             <Vote

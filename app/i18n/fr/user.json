@@ -38,5 +38,10 @@
   "reputationChange": "Évolution de la réputation",
   "reputationTooltip": "La réputation est une mesure de la confiance que la communauté vous accorde ; elle est gagnée en participant et est augmentée par les votes des autres membres sur vos contributions. <2>En savoir plus</2>.",
   "iAgreeAndAcceptedPrivacy": "En cliquant sur « S'enregistrer » j'accepte ",
-  "privacyLinkLabel": "la politique de confidentialité de CaptainFact"
+  "privacyLinkLabel": "la politique de confidentialité de CaptainFact",
+  "signupSuccessTitle": "Bienvenue à bord !",
+  "signupSuccessDescription": "Votre compte a été créé avec succès.",
+  "errors": {
+    "passwordsDontMatch": "Les mots de passe ne correspondent pas"
+  }
 }

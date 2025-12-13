@@ -7,7 +7,7 @@ import { addModal } from '../../state/modals/reducer'
 import { setScrollTo } from '../../state/video_debate/statements/reducer'
 import { forcePosition } from '../../state/video_debate/video/reducer'
 import ShareModal from '../Utils/ShareModal'
-import { ModalHistory } from '../VideoDebate/ModalHistory'
+import { StatementHistoryDialog } from '../VideoDebate/StatementHistoryDialog'
 import StatementHeader from './StatementHeader'
 
 @connect(null, { addModal, forcePosition, setScrollTo })
@@ -59,7 +59,7 @@ export default class Statement extends React.PureComponent {
 
   showHistory() {
     this.props.addModal({
-      Modal: ModalHistory,
+      Modal: StatementHistoryDialog,
       props: {
         entity: ENTITY_STATEMENT,
         entityId: this.props.statement.id,

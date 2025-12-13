@@ -1,140 +1,233 @@
 import { AtSign, IdCard, Lock, Mail } from 'lucide-react'
 import React from 'react'
-import { Field } from 'redux-form'
-import isEmail from 'validator/lib/isEmail'
 
-import { NAME_LENGTH, PASSWORD_LENGTH, USERNAME_LENGTH } from '../../constants'
 import { cleanStr } from '../../lib/clean_str'
-import { validateFieldLength } from '../../lib/form_validators'
-import ControlInput from '../FormUtils/ControlInput'
-import { Button } from '../ui/button'
+import { Input } from '../ui/input'
+import { Label } from '../ui/label'
 
-// Common validators for Signup / Login
-
-export const validatePasswordRepeat = ({ password, passwordRepeat }) => {
-  if (passwordRepeat !== password) {
-    return { passwordRepeat: "Passwords don't match" }
-  }
-  return {}
-}
-
-// Common fields
-
-export const UserEmailField = ({ t, ...props }) => {
-  const validate = React.useCallback(
-    (email) => (!email || !isEmail(email)) && t('errors:server.invalid_email'),
-    [t],
-  )
-
+export const FormikUserEmailField = ({
+  t,
+  values,
+  errors,
+  touched,
+  handleChange,
+  handleBlur,
+  label = t('email'),
+  placeholder = 'example@example.com',
+  _required = true,
+  ...props
+}) => {
   return (
-    <Field
-      name="email"
-      type="email"
-      placeholder={t('email')}
-      component={ControlInput}
-      icon={<Mail size={16} className="text-gray-300" />}
-      normalize={(s) => s.trim()}
-      validate={validate}
-      {...props}
-    />
+    <div className="space-y-2">
+      <Label htmlFor="email">{label}</Label>
+      <div className="relative">
+        <Input
+          id="email"
+          name="email"
+          type="email"
+          placeholder={placeholder}
+          value={values.email}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className={`pl-10 ${touched.email && errors.email ? 'border-red-600' : ''}`}
+          {...props}
+        />
+        <Mail
+          size={16}
+          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-300"
+        />
+      </div>
+      {touched.email && errors.email && (
+        <span className="text-xs text-red-600 pl-1">{errors.email}</span>
+      )}
+    </div>
   )
 }
 
-export const UserEmailOrUsernameField = ({ t }) => {
+export const FormikUserEmailOrUsernameField = ({
+  t,
+  values,
+  errors,
+  touched,
+  handleChange,
+  handleBlur,
+  label = t('emailOrUsername'),
+  ...props
+}) => {
   return (
-    <Field
-      name="email"
-      type="text"
-      placeholder={t('emailOrUsername')}
-      component={ControlInput}
-      icon={<IdCard size={16} className="text-gray-300" />}
-      normalize={(s) => s.trim()}
-    />
+    <div className="space-y-2">
+      <Label htmlFor="email">{label}</Label>
+      <div className="relative">
+        <Input
+          id="email"
+          name="email"
+          type="text"
+          placeholder="example@example.com"
+          value={values.email}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className={`pl-10 ${touched.email && errors.email ? 'border-red-600' : ''}`}
+          {...props}
+        />
+        <IdCard
+          size={16}
+          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-300"
+        />
+      </div>
+      {touched.email && errors.email && (
+        <span className="text-xs text-red-600 pl-1">{errors.email}</span>
+      )}
+    </div>
   )
 }
 
-export const UserPasswordField = ({ t, isOptional = false }) => {
-  const validate = React.useCallback(
-    (v) => (!v && isOptional ? null : validateFieldLength(t, v, PASSWORD_LENGTH)),
-    [t],
-  )
+export const FormikUserPasswordField = ({
+  t,
+  values,
+  errors,
+  touched,
+  handleChange,
+  handleBlur,
+  label,
+  required = true,
+  ...props
+}) => {
   return (
-    <Field
-      name="password"
-      placeholder={t(isOptional ? 'passwordOptional' : 'password')}
-      type="password"
-      component={ControlInput}
-      validate={validate}
-      icon={<Lock size={16} className="text-gray-300" />}
-    />
+    <div className="space-y-2">
+      <Label htmlFor="password">{label || t(required ? 'password' : 'passwordOptional')}</Label>
+      <div className="relative">
+        <Input
+          id="password"
+          name="password"
+          type="password"
+          value={values.password}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className={`pl-10 ${touched.password && errors.password ? 'border-red-600' : ''}`}
+          {...props}
+        />
+        <Lock
+          size={16}
+          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-300"
+        />
+      </div>
+      {touched.password && errors.password && (
+        <span className="text-xs text-red-600 pl-1">{errors.password}</span>
+      )}
+    </div>
   )
 }
 
-export const UserPasswordRepeatField = ({ t }) => {
+export const FormikUserPasswordRepeatField = ({
+  t,
+  values,
+  errors,
+  touched,
+  handleChange,
+  handleBlur,
+  label = t('repeatPassword'),
+  ...props
+}) => {
   return (
-    <Field
-      name="passwordRepeat"
-      placeholder={t('repeatPassword')}
-      type="password"
-      component={ControlInput}
-      icon={<Lock size={16} className="text-gray-300" />}
-    />
+    <div className="space-y-2">
+      <Label htmlFor="passwordRepeat">{label}</Label>
+      <div className="relative">
+        <Input
+          id="passwordRepeat"
+          name="passwordRepeat"
+          type="password"
+          value={values.passwordRepeat}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className={`pl-10 ${touched.passwordRepeat && errors.passwordRepeat ? 'border-red-600' : ''}`}
+          {...props}
+        />
+        <Lock
+          size={16}
+          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-300"
+        />
+      </div>
+      {touched.passwordRepeat && errors.passwordRepeat && (
+        <span className="text-xs text-red-600 pl-1">{errors.passwordRepeat}</span>
+      )}
+    </div>
   )
 }
 
-const UserUsernameField = ({ t }) => {
-  const validate = React.useCallback((v) => validateFieldLength(t, v, USERNAME_LENGTH), [t])
+export const FormikUserUsernameField = ({
+  t,
+  values,
+  errors,
+  touched,
+  handleChange,
+  handleBlur,
+  label = t('username'),
+  ...props
+}) => {
   return (
-    <Field
-      name="username"
-      placeholder={t('username')}
-      component={ControlInput}
-      normalize={(s) => s.trim()}
-      icon={<AtSign size={16} className="text-gray-300" />}
-      validate={validate}
-    />
+    <div className="space-y-2">
+      <Label htmlFor="username">{label}</Label>
+      <div className="relative">
+        <Input
+          id="username"
+          name="username"
+          type="text"
+          placeholder={label}
+          value={values.username}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className={`pl-10 ${touched.username && errors.username ? 'border-red-600' : ''}`}
+          {...props}
+        />
+        <AtSign
+          size={16}
+          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-300"
+        />
+      </div>
+      {touched.username && errors.username && (
+        <span className="text-xs text-red-600 pl-1">{errors.username}</span>
+      )}
+    </div>
   )
 }
 
-const UserNameField = ({ t }) => {
-  const validate = React.useCallback((v) => v && validateFieldLength(t, v, NAME_LENGTH), [t])
+export const FormikUserNameField = ({
+  t,
+  values,
+  errors,
+  touched,
+  handleChange,
+  handleBlur,
+  label = `${t('realName')} (${t('optional')})`,
+  ...props
+}) => {
   return (
-    <Field
-      name="name"
-      placeholder={`${t('realName')} (${t('optional')})`}
-      component={ControlInput}
-      normalize={cleanStr}
-      icon={<IdCard size={16} className="text-gray-300" />}
-      validate={validate}
-    />
+    <div className="space-y-2">
+      <Label htmlFor="name">{label}</Label>
+      <div className="relative">
+        <Input
+          id="name"
+          name="name"
+          type="text"
+          placeholder={label}
+          value={values.name}
+          onChange={(e) => {
+            handleChange({
+              target: { name: 'name', value: cleanStr(e.target.value).trim() },
+            })
+          }}
+          onBlur={handleBlur}
+          className={`pl-10 ${touched.name && errors.name ? 'border-red-600' : ''}`}
+          {...props}
+        />
+        <IdCard
+          size={16}
+          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-300"
+        />
+      </div>
+      {touched.name && errors.name && (
+        <span className="text-xs text-red-600 pl-1">{errors.name}</span>
+      )}
+    </div>
   )
 }
-
-export const submitButton = (
-  text,
-  valid,
-  { loading = false, size = 'default', variant = 'default' } = {},
-) => (
-  <div className="mt-6">
-    <Button
-      type="submit"
-      loading={loading}
-      disabled={!valid}
-      size={size}
-      variant={variant}
-      className="w-full"
-    >
-      {text}
-    </Button>
-  </div>
-)
-
-export const renderAllUserFields = (t, isPasswdOptional = false) => (
-  <div className="space-y-4">
-    <UserUsernameField t={t} />
-    <UserNameField t={t} />
-    <UserEmailField t={t} />
-    <UserPasswordField t={t} isOptional={isPasswdOptional} />
-    <UserPasswordRepeatField t={t} />
-  </div>
-)

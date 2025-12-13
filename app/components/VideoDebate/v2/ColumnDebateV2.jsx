@@ -23,7 +23,6 @@ const ColumnDebateV2 = ({
   videoId,
   statements,
   statementForm,
-  scrollTo,
   votesMap,
   onSetStatementForm,
   onClearStatementForm,
@@ -104,7 +103,6 @@ const ColumnDebateV2 = ({
               statements={statements}
               speakers={video?.speakers || []}
               statementForm={statementForm}
-              scrollTo={scrollTo}
               offset={video?.youtubeOffset || 0}
               onSetStatementForm={onSetStatementForm}
               onClearStatementForm={onClearStatementForm}

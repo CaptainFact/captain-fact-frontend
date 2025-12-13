@@ -37,5 +37,11 @@
   "reputation": "Reputation",
   "reputationChange": "Reputation change",
   "iAgreeAndAcceptedPrivacy": "By clicking \"Sign up\", I agree that I have read and accepted ",
-  "privacyLinkLabel": "CaptainFact Privacy Policy"
+  "privacyLinkLabel": "CaptainFact Privacy Policy",
+  "signupSuccessTitle": "Welcome aboard!",
+  "signupSuccessDescription": "Your account has been created successfully.",
+  "errors": {
+    "passwordsDontMatch": "Passwords don't match",
+    "usernameDoesNotMatch": "Username does not match"
+  }
 }

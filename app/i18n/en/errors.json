@@ -5,6 +5,7 @@
   "addIssue": "File an issue on GitHub",
   "reload": "Reload the page",
   "errorDetails": "Technical details",
+  "required": "This field is required",
   "server": {
     "unknown": "Something didn't work on our side, we'll check it out!",
     "invalid_email": "Invalid email address",

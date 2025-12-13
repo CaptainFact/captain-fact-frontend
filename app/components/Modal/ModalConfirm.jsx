@@ -28,6 +28,8 @@ const BaseModalConfirm = ({
   abortText,
   confirmDisabled,
   popModal,
+  open,
+  onOpenChange,
   ...props
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -38,7 +40,14 @@ const BaseModalConfirm = ({
       setIsSubmitting(true)
       return promise.then(
         handleEffectResponse({
-          onSuccess: () => popModal(),
+          onSuccess: () => {
+            // In controlled mode, let the parent handle closing
+            if (onOpenChange) {
+              onOpenChange(false)
+            } else {
+              popModal()
+            }
+          },
           onError: () => setIsSubmitting(false),
         }),
       )
@@ -49,11 +58,21 @@ const BaseModalConfirm = ({
     if (handleAbort) {
       handleAbort()
     }
-    popModal()
+    // In controlled mode, use onOpenChange, otherwise use Redux popModal
+    if (onOpenChange) {
+      onOpenChange(false)
+    } else {
+      popModal()
+    }
   }
 
+  const alertDialogProps =
+    open !== undefined
+      ? { open, onOpenChange: handleClose }
+      : { open: true, onOpenChange: handleClose }
+
   return (
-    <AlertDialog open {...props} onOpenChange={handleClose}>
+    <AlertDialog {...alertDialogProps} {...props}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>{title}</AlertDialogTitle>

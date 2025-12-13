@@ -51,13 +51,6 @@ app
 ├── components => All react components
 ├── i18n => Translations
 ├── lib => Misc utilities
-├── state => All redux related
-│   ├── comments
-│   │   ├── effects.js => Async actions creators, always return a promise
-│   │   ├── record.js => The object representing a single comment
-│   │   ├── reducer.js => Reducer + actions creators, always return an action object
-│   │   └── selectors.js => Re-select selectors to select data in state
-│   └── ...
 ├── static => Static assets, directly copied to the public directory
 └── router.jsx => Application router and main entry point
 ```
@@ -73,7 +66,6 @@ Styling is based on [Tailwind](https://tailwindcss.com).
 - [React Router](https://github.com/ReactTraining/react-router): Routing
 - [Phoenix](https://phoenixframework.org/): Interaction with [https://hexdocs.pm/phoenix/Phoenix.Socket.html](Phoenix.Socket)
 - [TailwindCSS](https://tailwindcss.com/): Utility-first CSS framework
-- [Redux](https://redux.js.org/): State management (deprecated)
 
 ## Linked projects
 
