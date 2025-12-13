@@ -20,8 +20,20 @@ import TimeEdit from '../../Utils/TimeEdit'
 import SpeakersSelectV2 from './SpeakersSelectV2'
 
 const CREATE_STATEMENT_MUTATION = gql`
-  mutation CreateStatement($videoId: ID!, $text: String!, $time: Int!, $speakerId: ID, $isDraft: Boolean) {
-    createStatement(videoId: $videoId, text: $text, time: $time, speakerId: $speakerId, isDraft: $isDraft) {
+  mutation CreateStatement(
+    $videoId: ID!
+    $text: String!
+    $time: Int!
+    $speakerId: ID
+    $isDraft: Boolean
+  ) {
+    createStatement(
+      videoId: $videoId
+      text: $text
+      time: $time
+      speakerId: $speakerId
+      isDraft: $isDraft
+    ) {
       id
       time
       text
@@ -40,6 +52,9 @@ const UPDATE_STATEMENT_MUTATION = gql`
       time
       text
       isDraft
+      speaker {
+        id
+      }
       video {
         id
       }
@@ -172,9 +187,7 @@ const StatementFormV2 = ({
   const currentTime = lockedTime === false ? position : lockedTime
   // Handle both camelCase (from GraphQL) and snake_case (form state)
   const speakerId = initialValues.speakerId || initialValues.speaker_id
-  const speaker = speakerId
-    ? speakers.find((s) => s.id === speakerId)
-    : null
+  const speaker = speakerId ? speakers.find((s) => s.id === speakerId) : null
   const LockIcon = lockedTime === false ? Unlock : Lock
 
   return (
@@ -188,7 +201,16 @@ const StatementFormV2 = ({
       onSubmit={handleSubmit}
       enableReinitialize
     >
-      {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting, setFieldValue }) => (
+      {({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        isSubmitting,
+        setFieldValue,
+      }) => (
         <form
           data-cy="statement-form"
           ref={containerRef}
@@ -239,7 +261,11 @@ const StatementFormV2 = ({
             </div>
             <div className="flex items-center gap-2">
               {speaker?.picture ? (
-                <img className="h-6 w-6 rounded-full" src={speaker.picture} alt={speaker.fullName} />
+                <img
+                  className="h-6 w-6 rounded-full"
+                  src={speaker.picture}
+                  alt={speaker.fullName}
+                />
               ) : (
                 <div className="h-6 w-6 rounded-full bg-gray-200 dark:bg-accent flex items-center justify-center">
                   <Mic size={12} className="text-gray-400 dark:text-muted-foreground" />
@@ -289,7 +315,9 @@ const StatementFormV2 = ({
                 maxLength={STATEMENT_LENGTH[1]}
               />
               {emptySpeakerWarningHadBeenShown && (
-                <span className="text-yellow-300 text-sm mt-1 block">{t('statement.noSpeakerWarning')}</span>
+                <span className="text-yellow-300 text-sm mt-1 block">
+                  {t('statement.noSpeakerWarning')}
+                </span>
               )}
               {errors.text && touched.text && (
                 <span className="text-red-300 text-sm mt-1 block">{errors.text}</span>

@@ -1,45 +1,64 @@
-import React from 'react'
+import { useQuery, useSubscription } from '@apollo/client'
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
-import { connect } from 'react-redux'
 
-import { reset } from '../../state/user_actions/reducer'
 import {
-  joinVideoDebateHistoryChannel,
-  leaveVideoDebateHistoryChannel,
-} from '../../state/video_debate/history/effects'
+  VIDEO_HISTORY_ACTION_ADDED_SUBSCRIPTION,
+  VIDEO_HISTORY_ACTIONS_QUERY,
+} from '../../API/graphql_queries'
 import ActionsTable from '../UsersActions/ActionsTable'
 
-@connect(
-  (state) => ({
-    isLoading: state.UsersActions.isLoading,
-    error: state.UsersActions.error,
-    actions: state.UsersActions.actions,
-  }),
-  { joinVideoDebateHistoryChannel, leaveVideoDebateHistoryChannel, reset },
-)
-export default class VideoDebateHistory extends React.PureComponent {
-  componentDidMount() {
-    this.props.joinVideoDebateHistoryChannel(this.props.videoId)
-  }
+const VideoDebateHistory = ({ videoId }) => {
+  const [actions, setActions] = useState([])
 
-  componentWillUnmount() {
-    this.props.leaveVideoDebateHistoryChannel()
-    this.props.reset()
-  }
+  // Fetch initial history actions
+  const { loading, data } = useQuery(VIDEO_HISTORY_ACTIONS_QUERY, {
+    variables: { videoId },
+    skip: !videoId,
+  })
 
-  render() {
-    const { isLoading, error, actions } = this.props
+  // Subscribe to new actions
+  useSubscription(VIDEO_HISTORY_ACTION_ADDED_SUBSCRIPTION, {
+    variables: { videoId },
+    skip: !videoId,
+    onData: ({ data }) => {
+      if (data?.data?.videoHistoryActionAdded) {
+        const newAction = data.data.videoHistoryActionAdded
+        setActions((prevActions) => [newAction, ...prevActions])
+      }
+    },
+  })
 
-    return (
-      <React.Fragment>
-        <Helmet>
-          <meta name="robots" content="noindex" />
-        </Helmet>
-        <div className="videodebate-actions-history">
-          {error && error}
-          <ActionsTable actions={actions} isLoading={isLoading} />
-        </div>
-      </React.Fragment>
-    )
-  }
+  // Update actions when initial data loads
+  useEffect(() => {
+    if (data?.videoHistoryActions) {
+      const sortedActions = [...data.videoHistoryActions].sort(
+        (a, b) => new Date(b.time) - new Date(a.time),
+      )
+      setActions(sortedActions)
+    }
+  }, [data])
+
+  // Clear actions when videoId changes
+  useEffect(() => {
+    setActions([])
+  }, [videoId])
+
+  return (
+    <React.Fragment>
+      <Helmet>
+        <meta name="robots" content="noindex" />
+      </Helmet>
+      <div className="videodebate-actions-history">
+        <ActionsTable actions={actions} isLoading={loading} />
+      </div>
+    </React.Fragment>
+  )
 }
+
+VideoDebateHistory.propTypes = {
+  videoId: PropTypes.string.isRequired,
+}
+
+export default VideoDebateHistory

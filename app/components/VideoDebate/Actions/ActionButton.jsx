@@ -8,8 +8,4 @@ Action.propTypes = {
   ...FacetButton.propTypes,
 }
 
-Action.defaultProps = {
-  ...FacetButton.defaultProps,
-}
-
 export default Action

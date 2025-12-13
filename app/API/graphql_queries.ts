@@ -175,6 +175,9 @@ export const UPDATE_STATEMENT_MUTATION = gql`
       time
       text
       isDraft
+      speaker {
+        id
+      }
       video {
         id
       }
@@ -272,6 +275,126 @@ export const CREATE_SPEAKER_MUTATION = gql`
       fullName
       slug
       picture
+    }
+  }
+`
+
+export const REMOVE_SPEAKER_FROM_VIDEO_MUTATION = gql`
+  mutation RemoveSpeakerFromVideo($videoId: ID!, $speakerId: ID!) {
+    removeSpeakerFromVideo(videoId: $videoId, speakerId: $speakerId) {
+      id
+    }
+  }
+`
+
+export const UPDATE_SPEAKER_MUTATION = gql`
+  mutation UpdateSpeaker($id: ID!, $fullName: String, $title: String, $wikidataItemId: String) {
+    updateSpeaker(id: $id, fullName: $fullName, title: $title, wikidataItemId: $wikidataItemId) {
+      id
+      fullName
+      title
+      wikidataItemId
+      picture
+      slug
+    }
+  }
+`
+
+export const RESTORE_STATEMENT_MUTATION = gql`
+  mutation RestoreStatement($id: ID!) {
+    restoreStatement(id: $id) {
+      id
+      text
+      time
+      isDraft
+      speaker {
+        id
+        fullName
+        picture
+      }
+      video {
+        id
+      }
+    }
+  }
+`
+
+export const RESTORE_SPEAKER_MUTATION = gql`
+  mutation RestoreSpeaker($speakerId: ID!, $videoId: ID!) {
+    restoreSpeaker(speakerId: $speakerId, videoId: $videoId) {
+      id
+      fullName
+      slug
+      picture
+    }
+  }
+`
+
+export const SPEAKER_QUERY = gql`
+  query Speaker($id: ID, $slug: String) {
+    speaker(id: $id, slug: $slug) {
+      id
+      slug
+      fullName
+      title
+      wikidataItemId
+      picture
+      videos {
+        id
+        hashId
+        title
+        thumbnail
+        insertedAt
+        isPartner
+      }
+    }
+  }
+`
+
+export const VIDEO_HISTORY_ACTIONS_QUERY = gql`
+  query VideoHistoryActions($videoId: ID!) {
+    videoHistoryActions(videoId: $videoId) {
+      id
+      type
+      entity
+      changes
+      time
+      user {
+        id
+        username
+        name
+        pictureUrl
+        miniPictureUrl
+      }
+      speakerId
+      statementId
+      commentId
+      videoId
+      videoHashId
+    }
+  }
+`
+
+export const VIDEO_HISTORY_ACTION_ADDED_SUBSCRIPTION = gql`
+  subscription VideoHistoryActionAdded($videoId: ID!) {
+    videoHistoryActionAdded(videoId: $videoId) {
+      id
+      type
+      entity
+      changes
+      time
+      user {
+        id
+        username
+        name
+        pictureUrl
+        miniPictureUrl
+      }
+      speakerId
+      statementId
+      commentId
+      videoId
+      videoHashId
     }
   }
 `

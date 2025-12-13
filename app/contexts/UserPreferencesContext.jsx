@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import i18n from '../i18n/i18n'
 
 import { ONLY_FEATURED, SUPPORTED_LOCALES, TABLET_WIDTH_THRESHOLD } from '../constants'
 import browserLocale from '../i18n/browser_locale'
+import i18n from '../i18n/i18n'
 import { getFromLocalStorage, LOCAL_STORAGE_KEYS, setLocalStorage } from '../lib/local_storage'
 
 

@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { updateUserInfo } from '../../API/http_api/current_user'
-import i18n from '../../i18n/i18n'
 import { useUserPreferences } from '../../contexts/UserPreferencesContext'
+import i18n from '../../i18n/i18n'
 import LanguageSelector from '../App/LanguageSelector'
 import { withLoggedInUser } from './UserProvider'
 

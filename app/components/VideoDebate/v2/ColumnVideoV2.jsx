@@ -16,7 +16,7 @@ import ResizableColumn from '../ResizableColumn'
 import ActionsV2 from './ActionsV2'
 import VideoDebatePlayerV2 from './VideoDebatePlayerV2'
 
-const ColumnVideoV2 = ({ video, isLoading, view, t, isAuthenticated }) => {
+const ColumnVideoV2 = ({ video, isLoading, view, t, isAuthenticated, onSetStatementForm }) => {
   const { url, speakers = [] } = video || {}
   const isDebate = !view || view === 'debate'
 
@@ -73,7 +73,13 @@ const ColumnVideoV2 = ({ video, isLoading, view, t, isAuthenticated }) => {
                 </div>
                 <div className="px-3 pb-4 flex flex-col gap-4">
                   {speakers.map((speaker) => (
-                    <SpeakerPreviewV2 key={speaker.id} speaker={speaker} />
+                    <SpeakerPreviewV2
+                      key={speaker.id}
+                      speaker={speaker}
+                      videoId={video.id}
+                      isAuthenticated={isAuthenticated}
+                      onSetStatementForm={onSetStatementForm}
+                    />
                   ))}
                 </div>
               </div>

@@ -6,8 +6,8 @@ import { reduxForm, SubmissionError } from 'redux-form'
 
 import { toastError } from '@/lib/toasts'
 
-import { useUserPreferences } from '../../contexts/UserPreferencesContext'
 import { signUp } from '../../API/http_api/current_user'
+import { useUserPreferences } from '../../contexts/UserPreferencesContext'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import { SignInUpContainer } from './SignInUpContainer'
 import { renderAllUserFields, submitButton, validatePasswordRepeat } from './UserFormFields'

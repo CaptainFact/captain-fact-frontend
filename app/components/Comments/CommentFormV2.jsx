@@ -11,20 +11,20 @@ import isURL from 'validator/lib/isURL'
 import { cn } from '@/lib/css-utils'
 import { toastError, toastErrorUnauthenticated } from '@/lib/toasts'
 
-import { COMMENT_LENGTH, USER_PICTURE_LARGE } from '../../../constants'
-import { CREATE_COMMENT_MUTATION } from '../../../API/graphql_queries'
-import { cleanStrMultiline } from '../../../lib/clean_str'
-import { validateLengthI18n } from '../../../lib/form_validators'
-import { logError } from '../../../logger'
-import TextareaLengthCounter from '../../FormUtils/TextareaLengthCounter'
-import { Button } from '../../ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card'
-import { Input } from '../../ui/input'
-import { Textarea } from '../../ui/textarea'
-import UserAppellation from '../../Users/UserAppellation'
-import UserPicture from '../../Users/UserPicture'
-import ExternalLinkNewTab from '../../Utils/ExternalLinkNewTab'
-import { CommentDisplay } from '../CommentDisplay'
+import { CREATE_COMMENT_MUTATION } from '../../API/graphql_queries'
+import { COMMENT_LENGTH, USER_PICTURE_LARGE } from '../../constants'
+import { cleanStrMultiline } from '../../lib/clean_str'
+import { validateLengthI18n } from '../../lib/form_validators'
+import { logError } from '../../logger'
+import TextareaLengthCounter from '../FormUtils/TextareaLengthCounter'
+import { Button } from '../ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { Input } from '../ui/input'
+import { Textarea } from '../ui/textarea'
+import UserAppellation from '../Users/UserAppellation'
+import UserPicture from '../Users/UserPicture'
+import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
+import CommentDisplayV2 from './CommentDisplayV2'
 
 const CommentFormV2 = ({
   statementID,
@@ -126,7 +126,12 @@ const CommentFormV2 = ({
     const i18nParams = replyTo ? { context: 'reply' } : null
 
     return !values.source ? (
-      <Button type="submit" variant="outline" disabled={isDisabled} className="flex-1 whitespace-nowrap">
+      <Button
+        type="submit"
+        variant="outline"
+        disabled={isDisabled}
+        className="flex-1 whitespace-nowrap"
+      >
         <MessagesSquare size={15} />
         {t('comment.post', i18nParams)}
       </Button>
@@ -154,7 +159,12 @@ const CommentFormV2 = ({
             {t('comment.refute', i18nParams)}
           </Button>
         </div>
-        <Button variant="outline" type="submit" disabled={isDisabled} className="flex-1 whitespace-nowrap">
+        <Button
+          variant="outline"
+          type="submit"
+          disabled={isDisabled}
+          className="flex-1 whitespace-nowrap"
+        >
           <MessagesSquare size={15} />
           {t('comment.post', i18nParams)}
         </Button>
@@ -283,7 +293,7 @@ const CommentFormV2 = ({
               <UserAppellation defaultComponent="span" user={replyTo.user} />
             </span>
           </div>
-          <CommentDisplay
+          <CommentDisplayV2
             isQuoted
             richMedias={false}
             comment={replyTo}

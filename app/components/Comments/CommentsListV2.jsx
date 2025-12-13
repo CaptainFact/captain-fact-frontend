@@ -4,7 +4,7 @@ import FlipMove from 'react-flip-move'
 
 import { useLoggedInUser } from '../LoggedInUser/UserProvider'
 import CommentDisplayV2 from './CommentDisplayV2'
-import CommentForm from './CommentForm'
+import CommentFormV2 from './CommentFormV2'
 import CommentsListExpender from './CommentsListExpender'
 import CommentsListHeader from './CommentsListHeader'
 
@@ -81,7 +81,7 @@ const CommentsListV2 = ({
             )
           })
         ) : (
-          <CommentForm
+          <CommentFormV2
             statementID={statementID}
             replyTo={replyingTo}
             setReplyToComment={setReplyToComment}

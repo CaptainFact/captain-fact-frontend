@@ -6,13 +6,13 @@ import { withTranslation } from 'react-i18next'
 import { cn } from '@/lib/css-utils'
 import { toastError } from '@/lib/toasts'
 
+import { DELETE_STATEMENT_MUTATION, UPDATE_STATEMENT_MUTATION } from '../../../API/graphql_queries'
 import {
-  DELETE_STATEMENT_MUTATION,
-  UPDATE_STATEMENT_MUTATION,
-} from '../../../API/graphql_queries'
+  MIN_REPUTATION_REMOVE_STATEMENT,
+  MIN_REPUTATION_UPDATE_STATEMENT,
+} from '../../../constants'
 import { useUserPreferences } from '../../../contexts/UserPreferencesContext'
-import { MIN_REPUTATION_REMOVE_STATEMENT, MIN_REPUTATION_UPDATE_STATEMENT } from '../../../constants'
-import CommentFormV2 from '../../Comments/v2/CommentFormV2'
+import CommentFormV2 from '../../Comments/CommentFormV2'
 import { withLoggedInUser } from '../../LoggedInUser/UserProvider'
 import ModalConfirmDelete from '../../Modal/ModalConfirmDelete'
 import { Button } from '../../ui/button'
@@ -45,9 +45,7 @@ const StatementContainerV2 = ({
   const { enableAutoscroll: autoscrollEnabled } = useUserPreferences()
 
   // Find speaker for this statement
-  const speaker = statement.speakerId
-    ? speakers.find((s) => s.id === statement.speakerId)
-    : null
+  const speaker = statement.speakerId ? speakers.find((s) => s.id === statement.speakerId) : null
 
   // Check if this statement is focused/scrolled to
   const isFocused = scrollTo && scrollTo.id === statement.id

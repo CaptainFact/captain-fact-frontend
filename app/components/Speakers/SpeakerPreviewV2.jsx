@@ -1,16 +1,74 @@
+import { useMutation } from '@apollo/client'
 import { AvatarFallback } from '@radix-ui/react-avatar'
-import { Mic } from 'lucide-react'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { Edit, Mic, MoreVertical, Plus, Trash2 } from 'lucide-react'
+import React, { useState } from 'react'
+import { withTranslation } from 'react-i18next'
+import { Link, useHistory } from 'react-router-dom'
 
+import { toast } from '@/hooks/use-toast'
+
+import { REMOVE_SPEAKER_FROM_VIDEO_MUTATION } from '../../API/graphql_queries'
+import ModalConfirmDelete from '../Modal/ModalConfirmDelete'
 import { Avatar, AvatarImage } from '../ui/avatar'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '../ui/dropdown-menu'
+import EditSpeakerFormModal from './EditSpeakerFormModal'
 
-const SpeakerPreviewV2 = ({ speaker, className }) => {
+const SpeakerPreviewV2 = ({
+  speaker,
+  className,
+  videoId,
+  isAuthenticated = false,
+  showActions = true,
+  onSetStatementForm,
+  t,
+}) => {
+  const history = useHistory()
+  const [removeSpeakerFromVideo] = useMutation(REMOVE_SPEAKER_FROM_VIDEO_MUTATION)
+  const [editModalOpen, setEditModalOpen] = useState(false)
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false)
+
   if (!speaker) {
     return null
   }
 
-  return (
+  const handleRemoveSpeaker = () => {
+    setDeleteModalOpen(true)
+  }
+
+  const handleConfirmRemoveSpeaker = async () => {
+    await removeSpeakerFromVideo({
+      variables: { videoId, speakerId: speaker.id },
+    })
+    toast({
+      title: t('speaker.remove'),
+      description: t('speaker.confirmRemove', { speaker }),
+    })
+  }
+
+  const handleEditSpeaker = () => {
+    setEditModalOpen(true)
+  }
+
+  const handleAddStatement = () => {
+    // Navigate to debate view if we're on history page
+    const currentPath = window.location.pathname
+    const historyRegex = new RegExp('/history/?$')
+    if (currentPath.match(historyRegex)) {
+      history.push(currentPath.replace(historyRegex, ''))
+    }
+
+    // Set the statement form with the speaker
+    if (onSetStatementForm) {
+      onSetStatementForm({ speakerId: speaker.id })
+    }
+  }
+
+  const mainContent = (
     <div className={`flex items-center justify-between gap-2 animate-fadeInUp ${className || ''}`}>
       <div className="flex items-center">
         <div className="flex-none w-[50px] flex justify-center items-center mr-3">
@@ -34,8 +92,52 @@ const SpeakerPreviewV2 = ({ speaker, className }) => {
           </p>
         </div>
       </div>
+      <div className="flex">
+        {isAuthenticated && showActions && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800">
+                <MoreVertical size={16} />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={handleAddStatement}>
+                <Plus size={16} className="mr-2" />
+                {t('statement.add')}
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={handleEditSpeaker}>
+                <Edit size={16} className="mr-2" />
+                {t('main:actions.edit')}
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={handleRemoveSpeaker} className="text-red-600">
+                <Trash2 size={16} className="mr-2" />
+                {t('speaker.remove')}
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
+      </div>
     </div>
+  )
+
+  return (
+    <>
+      {mainContent}
+      <EditSpeakerFormModal
+        speaker={speaker}
+        open={editModalOpen}
+        onOpenChange={setEditModalOpen}
+      />
+      <ModalConfirmDelete
+        open={deleteModalOpen}
+        onOpenChange={setDeleteModalOpen}
+        title={t('speaker.remove')}
+        message={t('speaker.confirmRemove', { speaker })}
+        handleConfirm={handleConfirmRemoveSpeaker}
+        isRemove
+      />
+    </>
   )
 }
 
-export default SpeakerPreviewV2
+export default withTranslation('videoDebate')(SpeakerPreviewV2)

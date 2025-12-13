@@ -67,7 +67,7 @@
   "speaker": {
     "one": "Parolanto",
     "remove": "Retiri la parolanton",
-    "confirmRemove": "Ĉiuj deklaroj de {{speaker.full_name}} pri ĉi tiu video fariĝos orfaj",
+    "confirmRemove": "Ĉiuj deklaroj de {{speaker.fullName}} pri ĉi tiu video fariĝos orfaj",
     "add": "Aldoni parolanton",
     "create": "Krei la parolanton \"{{name}}\"",
     "edit": "Ŝanĝi la informojn de \"{{name}}\"",

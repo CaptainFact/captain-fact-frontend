@@ -3,10 +3,10 @@ import { startCase } from 'lodash'
 
 import { JS_ENV } from '../config'
 import { SUPPORTED_LOCALES } from '../constants'
-import browserLocale from './browser_locale'
 import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../lib/local_storage'
 /* eslint-disable import/no-unresolved */
 import * as ar from './ar'
+import browserLocale from './browser_locale'
 import * as en from './en'
 import * as eo from './eo'
 import * as es from './es'

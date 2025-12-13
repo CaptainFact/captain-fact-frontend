@@ -6,12 +6,11 @@ import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { useUserPreferences } from '../../contexts/UserPreferencesContext'
-
 import { toast } from '@/hooks/use-toast'
 import { cn } from '@/lib/css-utils'
 
 import { MIN_REPUTATION_START_AUTOMATIC_STATEMENTS_EXTRACTION } from '../../constants'
+import { useUserPreferences } from '../../contexts/UserPreferencesContext'
 import { destroyStatementForm } from '../../state/video_debate/statements/effects'
 import { changeStatementForm } from '../../state/video_debate/statements/reducer'
 import { hasStatementForm } from '../../state/video_debate/statements/selectors'

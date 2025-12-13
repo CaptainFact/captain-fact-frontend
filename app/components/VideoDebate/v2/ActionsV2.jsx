@@ -11,13 +11,13 @@ import {
   VolumeX,
 } from 'lucide-react'
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
+import { useHistory } from 'react-router-dom'
 
 import { toastError } from '@/lib/toasts'
 
-import { useUserPreferences } from '../../../contexts/UserPreferencesContext'
 import { MIN_REPUTATION_UPDATE_VIDEO } from '../../../constants'
+import { useUserPreferences } from '../../../contexts/UserPreferencesContext'
 import { shiftStatements } from '../../../state/video_debate/effects'
 import { withLoggedInUser } from '../../LoggedInUser/UserProvider'
 import { Separator } from '../../ui/separator'
@@ -52,7 +52,7 @@ const ActionsV2 = ({ video, t, isAuthenticated }) => {
   // For now, we'll manage it locally via the mutation response
 
   const handleSubscriptionToggle = async () => {
-    if (!video) return
+    if (!video) {return}
     try {
       const result = await updateSubscription({
         variables: {
@@ -89,7 +89,7 @@ const ActionsV2 = ({ video, t, isAuthenticated }) => {
     history.push('/help')
   }
 
-  if (!video) return null
+  if (!video) {return null}
 
   return (
     <div className="flex py-[15px] px-2.5 items-center gap-2.5 shadow-[#f3f3f3_0px_10px_10px_-10px] dark:shadow-[rgba(0,0,0,0.3)_0px_10px_10px_-10px] mb-1.5">

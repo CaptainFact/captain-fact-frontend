@@ -26,7 +26,6 @@ import User from './components/Users/User'
 import UserProfile from './components/Users/UserProfile'
 import UserSettings from './components/Users/UserSettings'
 import VideoDebateV2 from './components/VideoDebate/v2/VideoDebateV2'
-import { VideoDebate } from './components/VideoDebate/VideoDebate'
 import { AddVideoForm } from './components/Videos/AddVideoForm'
 import UserAddedVideos from './components/Videos/UserAddedVideos'
 import VideosIndexPage from './components/Videos/VideosIndexPage'
@@ -58,11 +57,6 @@ const CFRouter = () => (
         <Route path="/videos" exact component={VideosIndexPage} />
         <Route path="/videos/add" exact component={AddVideoForm} />
         <Route path="/videos/add/:videoUrl" exact component={AddVideoForm} />
-        {/* <Route
-          path="/videos/:videoId/:view(history|debate|captions)?"
-          exact
-          component={VideoDebate}
-        /> */}
         <Route
           path="/videos/:videoId/:view(history|debate|captions)?"
           exact

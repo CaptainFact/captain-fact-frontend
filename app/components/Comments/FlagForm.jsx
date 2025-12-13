@@ -6,7 +6,7 @@ import { Warning } from 'styled-icons/material'
 import FlagReasonSelect from '../Moderation/FlagReasonSelect'
 import { Separator } from '../ui/separator'
 import Message from '../Utils/Message'
-import { CommentDisplay } from './CommentDisplay'
+import CommentDisplayV2 from './CommentDisplayV2'
 
 @reduxForm({ form: 'flagForm' })
 @withTranslation('videoDebate')
@@ -30,7 +30,7 @@ export default class FlagForm extends React.PureComponent {
             </div>
           </Message>
         </div>
-        <CommentDisplay comment={this.props.comment} withoutActions hideThread />
+        <CommentDisplayV2 comment={this.props.comment} withoutActions hideThread />
         <Separator className="my-4" />
         <FlagReasonSelect />
       </form>

@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from 'react'
-import { useLocation } from 'react-router-dom'
 import FlipMove from 'react-flip-move'
 import { withTranslation } from 'react-i18next'
+import { useLocation } from 'react-router-dom'
 
 import { FULLHD_WIDTH_THRESHOLD } from '../../../constants'
 import { withLoggedInUser } from '../../LoggedInUser/UserProvider'
@@ -37,7 +37,7 @@ const StatementsListV2 = ({
 
   // Filter statements based on authentication
   const filteredStatements = useMemo(() => {
-    if (!statements) return []
+    if (!statements) {return []}
     if (!isAuthenticated) {
       return statements.filter((s) => !s.isDraft)
     }

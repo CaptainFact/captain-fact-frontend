@@ -12,9 +12,9 @@ import DismissableMessage from '../../Utils/DismissableMessage'
 import ExternalLinkNewTab from '../../Utils/ExternalLinkNewTab'
 import { LoadingFrame } from '../../Utils/LoadingFrame'
 import Message from '../../Utils/Message'
-import ActionBubbleMenuV2 from './ActionBubbleMenuV2'
 import CaptionsExtractor from '../CaptionsExtractor'
 import VideoDebateHistory from '../VideoDebateHistory'
+import ActionBubbleMenuV2 from './ActionBubbleMenuV2'
 
 const ColumnDebateV2 = ({
   video,

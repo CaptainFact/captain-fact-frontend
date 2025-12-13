@@ -2,11 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Tinycon from 'tinycon'
 
-import { useUserPreferences } from '../../contexts/UserPreferencesContext'
-
 import confirmSoundFileURL from '../../assets/sounds/background_statement_confirm.mp3'
 import neutralSoundFileURL from '../../assets/sounds/background_statement_neutral.mp3'
 import refuteSoundFileURL from '../../assets/sounds/background_statement_refute.mp3'
+import { useUserPreferences } from '../../contexts/UserPreferencesContext'
 import { isStatementConfirmed } from '../../lib/statements_utils'
 import { getAllComments } from '../../state/video_debate/comments/selectors'
 import { getFocusedStatementId } from '../../state/video_debate/statements/selectors'

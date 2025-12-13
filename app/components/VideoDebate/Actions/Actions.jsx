@@ -14,19 +14,18 @@ import {
   VolumeUp,
 } from 'styled-icons/fa-solid'
 
-import { useUserPreferences } from '../../../contexts/UserPreferencesContext'
 import { MIN_REPUTATION_UPDATE_VIDEO } from '../../../constants'
+import { useUserPreferences } from '../../../contexts/UserPreferencesContext'
 import { addModal } from '../../../state/modals/reducer'
-import ShareModal from '../../Utils/ShareModal'
-import EditVideoModal from '../../Videos/EditVideoModal'
-import { changeSubscription } from '../../../state/video_debate/effects'
+import { changeSubscription , shiftStatements } from '../../../state/video_debate/effects'
 import { destroyStatementForm } from '../../../state/video_debate/statements/effects'
 import { changeStatementFormSpeaker } from '../../../state/video_debate/statements/reducer'
 import { hasStatementForm } from '../../../state/video_debate/statements/selectors'
-import { shiftStatements } from '../../../state/video_debate/effects'
 import { withLoggedInUser } from '../../LoggedInUser/UserProvider'
 import { Separator } from '../../ui/separator'
 import ReputationGuard from '../../Utils/ReputationGuard'
+import ShareModal from '../../Utils/ShareModal'
+import EditVideoModal from '../../Videos/EditVideoModal'
 import Action from './ActionButton'
 
 const Actions = ({
@@ -48,8 +47,8 @@ const Actions = ({
   const [editVideoModalOpen, setEditVideoModalOpen] = useState(false)
 
   return (
-  <div className="flex py-[15px] px-2.5 items-center gap-2.5 shadow-[#f3f3f3_0px_10px_10px_-10px] dark:shadow-[rgba(0,0,0,0.3)_0px_10px_10px_-10px] mb-1.5">
-    {isAuthenticated && (
+    <div className="flex py-[15px] px-2.5 items-center gap-2.5 shadow-[#f3f3f3_0px_10px_10px_-10px] dark:shadow-[rgba(0,0,0,0.3)_0px_10px_10px_-10px] mb-1.5">
+      {isAuthenticated && (
       <React.Fragment>
         <Action
           activated={isSubscribed}
@@ -108,7 +107,7 @@ const Actions = ({
         path={location.pathname}
       />
       {video && (
-        <EditVideoModal
+      <EditVideoModal
           open={editVideoModalOpen}
           onOpenChange={setEditVideoModalOpen}
           video={video}

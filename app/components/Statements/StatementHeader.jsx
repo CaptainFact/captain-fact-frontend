@@ -50,7 +50,7 @@ export default withTranslation('videoDebate')(
           <img className="mr-1.5 h-6 w-6 rounded-full" src={speaker.picture} alt="" />
         )}
         <strong className="sm:text-base text-xs mr-1 dark:text-foreground">
-          {speaker ? speaker.full_name : ''}
+          {speaker ? speaker.fullName : ''}
         </strong>
       </div>
       <div className="flex items-center gap-2">

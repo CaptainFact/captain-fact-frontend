@@ -67,6 +67,8 @@ const VIDEO_DEBATE_QUERY = gql`
       speakers {
         id
         fullName
+        title
+        wikidataItemId
         slug
         picture
       }
@@ -197,12 +199,12 @@ const useVideoDebateSubscriptions = (subscribeToMore, videoId) => {
         }
         const newStatement = subscriptionData.data.statementAdded
         const existingStatements = prev.video?.statements || []
-        
+
         // Check if statement already exists (avoid duplicates)
         if (existingStatements.some((s) => s.id === newStatement.id)) {
           return prev
         }
-        
+
         return {
           ...prev,
           video: {
@@ -272,7 +274,7 @@ const useVideoDebateSubscriptions = (subscribeToMore, videoId) => {
         fields: {
           statements(existingStatements = [], { readField }) {
             return existingStatements.filter(
-              (statementRef) => readField('id', statementRef) !== removedId
+              (statementRef) => readField('id', statementRef) !== removedId,
             )
           },
         },
@@ -284,7 +286,7 @@ const useVideoDebateSubscriptions = (subscribeToMore, videoId) => {
     variables: { videoId: videoId },
     skip: !videoId,
     onData: ({ data }) => {
-      if (!data.data?.commentRemoved ) {
+      if (!data.data?.commentRemoved) {
         return
       }
       const removed = data.data.commentRemoved
@@ -292,7 +294,6 @@ const useVideoDebateSubscriptions = (subscribeToMore, videoId) => {
       if (!statementId) {
         return
       }
-
 
       // Modify the statement's comments
       client.cache.modify({
@@ -327,7 +328,9 @@ const useVideoDebateSubscriptions = (subscribeToMore, videoId) => {
         id: client.cache.identify({ __typename: 'Statement', id: statementId }),
         fields: {
           comments(existingComments = []) {
-            return existingComments.map((c) => c.id === comment.id ? { ...c, score: (c.score || 0) + diff } : c)
+            return existingComments.map((c) =>
+              c.id === comment.id ? { ...c, score: (c.score || 0) + diff } : c,
+            )
           },
         },
       })
@@ -403,6 +406,7 @@ const VideoDebateV2 = ({ t: _t }) => {
           video={data?.video}
           isLoading={loading}
           view={currentView}
+          onSetStatementForm={(form) => dispatch({ type: 'SET_STATEMENT_FORM', payload: form })}
         />
         <ColumnDebateV2
           video={data?.video}

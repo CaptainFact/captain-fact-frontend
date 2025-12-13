@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { withTranslation } from 'react-i18next'
 
-import { useVideoPlayback } from '../../../contexts/VideoPlaybackContext'
 import { ENTITY_STATEMENT } from '../../../constants'
+import { useVideoPlayback } from '../../../contexts/VideoPlaybackContext'
 import ShareModal from '../../Utils/ShareModal'
 import { ModalHistory } from '../../VideoDebate/ModalHistory'
 import StatementHeader from '../StatementHeader'
@@ -74,4 +74,3 @@ const StatementV2 = ({
 }
 
 export default withTranslation('videoDebate')(StatementV2)
-

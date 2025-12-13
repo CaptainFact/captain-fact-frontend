@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { SpeakerPreview } from '../Speakers/SpeakerPreview'
+import SpeakerPreviewV2 from '../Speakers/SpeakerPreviewV2'
 
 export const SpeakerHit = ({ hit }) => {
   return (
     <div className="m-3">
-      <SpeakerPreview withoutActions speaker={hit} />
+      <SpeakerPreviewV2 speaker={hit} withoutActions />
     </div>
   )
 }

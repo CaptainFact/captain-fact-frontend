@@ -12,11 +12,11 @@ import { polyfill as smoothScrollPolyfill } from 'smoothscroll-polyfill'
 
 // Import APIs so they can load their configurations
 import GraphQLClient from './API/graphql_api'
-import { UserPreferencesProvider } from './contexts/UserPreferencesContext'
 import UserProvider from './components/LoggedInUser/UserProvider'
 import { ToastProvider } from './components/ui/toast'
 import { TooltipProvider } from './components/ui/tooltip'
 import { ENTITY_SPEAKER, ENTITY_STATEMENT, ENTITY_VIDEO } from './constants'
+import { UserPreferencesProvider } from './contexts/UserPreferencesContext'
 import { ThemeProvider } from './hooks/use-theme'
 import i18n from './i18n/i18n'
 import { ALGOLIA_INDEXES_NAMES, searchClient } from './lib/algolia'

@@ -49,7 +49,7 @@
   "speaker": {
     "one": "Locutor(a)",
     "remove": "Remover locutor(a)",
-    "confirmRemove": "Todas as declarações de {{speaker.full_name}} nesse vídeo vão se tornar órfãs",
+    "confirmRemove": "Todas as declarações de {{speaker.fullName}} nesse vídeo vão se tornar órfãs",
     "add": "Adicionar um(a) locutor(a)",
     "create": "Criar locutor(a) \"{{name}}\"",
     "edit": "Modificar as informações de \"{{name}}\"",

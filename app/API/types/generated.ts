@@ -180,8 +180,12 @@ export type PaginatedVideos = {
 
 export type RootMutationType = {
   __typename?: 'RootMutationType';
+  /** Add an existing speaker to a video */
+  addSpeakerToVideo?: Maybe<Speaker>;
   /** Create a new comment on a statement */
   createComment?: Maybe<Comment>;
+  /** Create a new speaker and add it to a video */
+  createSpeaker?: Maybe<Speaker>;
   /** Create a new statement on a video */
   createStatement?: Maybe<Statement>;
   /** Delete an existing comment */
@@ -191,11 +195,19 @@ export type RootMutationType = {
   editVideo?: Maybe<Video>;
   /** Flag a comment */
   flagComment?: Maybe<CommentFlagged>;
+  /** Remove a speaker from a video */
+  removeSpeakerFromVideo?: Maybe<SpeakerRemoved>;
+  /** Restore a removed speaker */
+  restoreSpeaker?: Maybe<Speaker>;
+  /** Restore a deleted statement */
+  restoreStatement?: Maybe<Statement>;
   setVideoCaptions?: Maybe<Video>;
   /** Use this to start the automatic statements extraction job. Requires elevated permissions. */
   startAutomaticStatementsExtraction?: Maybe<Video>;
   /** Use this to mark a notifications as seen */
   updateNotifications?: Maybe<Array<Maybe<Notification>>>;
+  /** Update an existing speaker */
+  updateSpeaker?: Maybe<Speaker>;
   /** Update an existing statement */
   updateStatement?: Maybe<Statement>;
   /** Use this to (un)subscribe from an item notifications */
@@ -205,12 +217,24 @@ export type RootMutationType = {
 };
 
 
+export type RootMutationTypeAddSpeakerToVideoArgs = {
+  speakerId: Scalars['ID']['input'];
+  videoId: Scalars['ID']['input'];
+};
+
+
 export type RootMutationTypeCreateCommentArgs = {
   approve?: InputMaybe<Scalars['Boolean']['input']>;
   replyToId?: InputMaybe<Scalars['ID']['input']>;
   source?: InputMaybe<Scalars['String']['input']>;
   statementId: Scalars['ID']['input'];
   text?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type RootMutationTypeCreateSpeakerArgs = {
+  fullName: Scalars['String']['input'];
+  videoId: Scalars['ID']['input'];
 };
 
 
@@ -245,6 +269,23 @@ export type RootMutationTypeFlagCommentArgs = {
 };
 
 
+export type RootMutationTypeRemoveSpeakerFromVideoArgs = {
+  speakerId: Scalars['ID']['input'];
+  videoId: Scalars['ID']['input'];
+};
+
+
+export type RootMutationTypeRestoreSpeakerArgs = {
+  speakerId: Scalars['ID']['input'];
+  videoId: Scalars['ID']['input'];
+};
+
+
+export type RootMutationTypeRestoreStatementArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
 export type RootMutationTypeSetVideoCaptionsArgs = {
   captions: Scalars['Upload']['input'];
   videoId: Scalars['ID']['input'];
@@ -259,6 +300,14 @@ export type RootMutationTypeStartAutomaticStatementsExtractionArgs = {
 export type RootMutationTypeUpdateNotificationsArgs = {
   ids: Array<InputMaybe<Scalars['ID']['input']>>;
   seen: Scalars['Boolean']['input'];
+};
+
+
+export type RootMutationTypeUpdateSpeakerArgs = {
+  fullName?: InputMaybe<Scalars['String']['input']>;
+  id: Scalars['ID']['input'];
+  title?: InputMaybe<Scalars['String']['input']>;
+  wikidataItemId?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -294,12 +343,18 @@ export type RootQueryType = {
   appInfo?: Maybe<AppInfo>;
   /** Get logged in user */
   loggedInUser?: Maybe<User>;
+  /** Search for speakers by name */
+  searchSpeakers?: Maybe<Array<Maybe<Speaker>>>;
+  /** Get a single speaker */
+  speaker?: Maybe<Speaker>;
   /** Get all statements */
   statements?: Maybe<PaginatedStatements>;
   /** Get user public info */
   user?: Maybe<User>;
   /** Get a single video */
   video?: Maybe<Video>;
+  /** Get history actions for a video */
+  videoHistoryActions?: Maybe<Array<Maybe<UserAction>>>;
   /** Get all videos */
   videos?: Maybe<PaginatedVideos>;
 };
@@ -308,6 +363,18 @@ export type RootQueryType = {
 export type RootQueryTypeAllVideosArgs = {
   filters?: InputMaybe<VideoFilter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type RootQueryTypeSearchSpeakersArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  query: Scalars['String']['input'];
+};
+
+
+export type RootQueryTypeSpeakerArgs = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -328,6 +395,11 @@ export type RootQueryTypeVideoArgs = {
   hashId?: InputMaybe<Scalars['ID']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type RootQueryTypeVideoHistoryActionsArgs = {
+  videoId: Scalars['ID']['input'];
 };
 
 
@@ -876,7 +948,10 @@ export type UpdateStatementMutationVariables = Exact<{
 
 export type UpdateStatementMutation = (
   { updateStatement?: (
-    { id: string, time: number, text: string, isDraft: boolean, video?: (
+    { id: string, time: number, text: string, isDraft: boolean, speaker?: (
+      { id: string }
+      & { __typename?: 'Speaker' }
+    ) | null, video?: (
       { id: string }
       & { __typename?: 'Video' }
     ) | null }
@@ -947,6 +1022,160 @@ export type FlagCommentMutation = (
     & { __typename?: 'CommentFlagged' }
   ) | null }
   & { __typename?: 'RootMutationType' }
+);
+
+export type SearchSpeakersQueryVariables = Exact<{
+  query: Scalars['String']['input'];
+  limit?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type SearchSpeakersQuery = (
+  { searchSpeakers?: Array<(
+    { id: string, fullName: string, slug?: string | null, picture?: string | null }
+    & { __typename?: 'Speaker' }
+  ) | null> | null }
+  & { __typename?: 'RootQueryType' }
+);
+
+export type AddSpeakerToVideoMutationVariables = Exact<{
+  videoId: Scalars['ID']['input'];
+  speakerId: Scalars['ID']['input'];
+}>;
+
+
+export type AddSpeakerToVideoMutation = (
+  { addSpeakerToVideo?: (
+    { id: string, fullName: string, slug?: string | null, picture?: string | null }
+    & { __typename?: 'Speaker' }
+  ) | null }
+  & { __typename?: 'RootMutationType' }
+);
+
+export type CreateSpeakerMutationVariables = Exact<{
+  videoId: Scalars['ID']['input'];
+  fullName: Scalars['String']['input'];
+}>;
+
+
+export type CreateSpeakerMutation = (
+  { createSpeaker?: (
+    { id: string, fullName: string, slug?: string | null, picture?: string | null }
+    & { __typename?: 'Speaker' }
+  ) | null }
+  & { __typename?: 'RootMutationType' }
+);
+
+export type RemoveSpeakerFromVideoMutationVariables = Exact<{
+  videoId: Scalars['ID']['input'];
+  speakerId: Scalars['ID']['input'];
+}>;
+
+
+export type RemoveSpeakerFromVideoMutation = (
+  { removeSpeakerFromVideo?: (
+    { id: string }
+    & { __typename?: 'SpeakerRemoved' }
+  ) | null }
+  & { __typename?: 'RootMutationType' }
+);
+
+export type UpdateSpeakerMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  fullName?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  wikidataItemId?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type UpdateSpeakerMutation = (
+  { updateSpeaker?: (
+    { id: string, fullName: string, title?: string | null, wikidataItemId?: string | null, picture?: string | null, slug?: string | null }
+    & { __typename?: 'Speaker' }
+  ) | null }
+  & { __typename?: 'RootMutationType' }
+);
+
+export type RestoreStatementMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type RestoreStatementMutation = (
+  { restoreStatement?: (
+    { id: string, text: string, time: number, isDraft: boolean, speaker?: (
+      { id: string, fullName: string, picture?: string | null }
+      & { __typename?: 'Speaker' }
+    ) | null, video?: (
+      { id: string }
+      & { __typename?: 'Video' }
+    ) | null }
+    & { __typename?: 'Statement' }
+  ) | null }
+  & { __typename?: 'RootMutationType' }
+);
+
+export type RestoreSpeakerMutationVariables = Exact<{
+  speakerId: Scalars['ID']['input'];
+  videoId: Scalars['ID']['input'];
+}>;
+
+
+export type RestoreSpeakerMutation = (
+  { restoreSpeaker?: (
+    { id: string, fullName: string, slug?: string | null, picture?: string | null }
+    & { __typename?: 'Speaker' }
+  ) | null }
+  & { __typename?: 'RootMutationType' }
+);
+
+export type SpeakerQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['ID']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type SpeakerQuery = (
+  { speaker?: (
+    { id: string, slug?: string | null, fullName: string, title?: string | null, wikidataItemId?: string | null, picture?: string | null, videos?: Array<(
+      { id: string, hashId: string, title: string, thumbnail: string, insertedAt: string, isPartner?: boolean | null }
+      & { __typename?: 'Video' }
+    ) | null> | null }
+    & { __typename?: 'Speaker' }
+  ) | null }
+  & { __typename?: 'RootQueryType' }
+);
+
+export type VideoHistoryActionsQueryVariables = Exact<{
+  videoId: Scalars['ID']['input'];
+}>;
+
+
+export type VideoHistoryActionsQuery = (
+  { videoHistoryActions?: Array<(
+    { id: string, type: string, entity: string, changes?: string | null, time?: string | null, speakerId?: number | null, statementId?: number | null, commentId?: number | null, videoId?: number | null, videoHashId?: string | null, user?: (
+      { id: string, username: string, name?: string | null, pictureUrl: string, miniPictureUrl: string }
+      & { __typename?: 'User' }
+    ) | null }
+    & { __typename?: 'UserAction' }
+  ) | null> | null }
+  & { __typename?: 'RootQueryType' }
+);
+
+export type VideoHistoryActionAddedSubscriptionVariables = Exact<{
+  videoId: Scalars['ID']['input'];
+}>;
+
+
+export type VideoHistoryActionAddedSubscription = (
+  { videoHistoryActionAdded?: (
+    { id: string, type: string, entity: string, changes?: string | null, time?: string | null, speakerId?: number | null, statementId?: number | null, commentId?: number | null, videoId?: number | null, videoHashId?: string | null, user?: (
+      { id: string, username: string, name?: string | null, pictureUrl: string, miniPictureUrl: string }
+      & { __typename?: 'User' }
+    ) | null }
+    & { __typename?: 'UserAction' }
+  ) | null }
+  & { __typename?: 'RootSubscriptionType' }
 );
 
 export type StatementAddedSubscriptionVariables = Exact<{
@@ -1254,7 +1483,10 @@ export type UpdateStatementMutationVariables = Exact<{
 
 export type UpdateStatementMutation = (
   { updateStatement?: (
-    { id: string, time: number, text: string, isDraft: boolean, video?: (
+    { id: string, time: number, text: string, isDraft: boolean, speaker?: (
+      { id: string }
+      & { __typename?: 'Speaker' }
+    ) | null, video?: (
       { id: string }
       & { __typename?: 'Video' }
     ) | null }
@@ -1384,7 +1616,7 @@ export type VideoDebateQueryVariables = Exact<{
 export type VideoDebateQuery = (
   { video?: (
     { id: string, hashId: string, title: string, url: string, thumbnail: string, language?: string | null, unlisted: boolean, youtubeOffset: number, speakers?: Array<(
-      { id: string, fullName: string, slug?: string | null, picture?: string | null }
+      { id: string, fullName: string, title?: string | null, wikidataItemId?: string | null, slug?: string | null, picture?: string | null }
       & { __typename?: 'Speaker' }
     ) | null> | null, statements?: Array<(
       { id: string, text: string, time: number, isDraft: boolean, speaker?: (

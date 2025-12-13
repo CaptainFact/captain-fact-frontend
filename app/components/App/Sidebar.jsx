@@ -1,4 +1,4 @@
-import { Query } from '@apollo/client/react/components'
+import { useQuery } from '@apollo/client'
 import { capitalize, get } from 'lodash'
 import {
   CircleHelp,
@@ -20,13 +20,8 @@ import { Discord, Facebook, Github, Mastodon, Twitter } from 'styled-icons/fa-br
 import { Star } from 'styled-icons/fa-solid'
 import { LinkExternal } from 'styled-icons/octicons'
 
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { cn } from '@/lib/css-utils'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip'
 
 import {
   loggedInUserPendingModerationCount,
@@ -45,6 +40,61 @@ import { Badge } from '../ui/badge'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import ProgressBar from '../Utils/ProgressBar'
 import ReputationGuard from '../Utils/ReputationGuard'
+
+// Daily gain gauge component
+const DailyGainGauge = ({ t }) => {
+  const { data } = useQuery(loggedInUserTodayReputationGain, {
+    fetchPolicy: 'network-only',
+    pollInterval: 30000,
+  })
+
+  const dailyGain = get(data, 'loggedInUser.todayReputationGain', 0)
+
+  return (
+    <div className="flex flex-col items-center">
+      <div className="flex items-center w-[90%]">
+        <Star size={20} className="text-white bg-[#6ba3a7] p-1 rounded-full -mr-px z-[1]" />
+        <ProgressBar
+          height="7px"
+          outerBackgroundColor="#c4c4c4"
+          innerBackgroundColor="#6ba3a7"
+          max={MAX_DAILY_REPUTATION_GAIN}
+          value={dailyGain}
+        />
+      </div>
+      <p className="text-[#858585] dark:text-muted-foreground text-[0.9em]">
+        {`${t('menu.dailyGain')} ${dailyGain}/${MAX_DAILY_REPUTATION_GAIN}`}
+      </p>
+    </div>
+  )
+}
+
+// Moderation menu item component
+const ModerationMenuItem = ({ t }) => {
+  const { data } = useQuery(loggedInUserPendingModerationCount, {
+    fetchPolicy: 'network-only',
+    pollInterval: 25000,
+  })
+
+  const pendingCount = get(data, 'loggedInUser.actions_pending_moderation', 0)
+
+  return (
+    <li>
+      <a
+        href="/moderation"
+        className="flex items-center px-4 py-2 text-gray-700 dark:text-foreground hover:bg-gray-100 dark:hover:bg-accent rounded-md hover:text-gray-900 dark:hover:text-foreground"
+      >
+        <Flag size="1.2em" className="mr-2" />
+        {t('menu.moderation')}
+        {Boolean(pendingCount) && (
+          <Badge className="ml-2" variant="destructive">
+            {pendingCount}
+          </Badge>
+        )}
+      </a>
+    </li>
+  )
+}
 
 // Theme selector component for sidebar
 const ThemeSelector = () => {
@@ -134,7 +184,8 @@ class Sidebar extends React.PureComponent {
   }
 
   render() {
-    const { sidebarExpended, toggleSidebar, closeSidebar, className, t, isAuthenticated } = this.props
+    const { sidebarExpended, toggleSidebar, closeSidebar, className, t, isAuthenticated } =
+      this.props
     return (
       <aside
         id="sidebar"
@@ -254,36 +305,7 @@ class Sidebar extends React.PureComponent {
 
   renderDailyGainGauge() {
     const { t } = this.props
-
-    return (
-      <Query
-        fetchPolicy="network-only"
-        pollInterval={30000}
-        query={loggedInUserTodayReputationGain}
-      >
-        {({ data }) => {
-          const dailyGain = get(data, 'loggedInUser.todayReputationGain', 0)
-
-          return (
-            <div className="flex flex-col items-center">
-              <div className="flex items-center w-[90%]">
-                <Star size={20} className="text-white bg-[#6ba3a7] p-1 rounded-full -mr-px z-[1]" />
-                <ProgressBar
-                  height="7px"
-                  outerBackgroundColor="#c4c4c4"
-                  innerBackgroundColor="#6ba3a7"
-                  max={MAX_DAILY_REPUTATION_GAIN}
-                  value={dailyGain}
-                />
-              </div>
-              <p className="text-[#858585] dark:text-muted-foreground text-[0.9em]">
-                {`${t('menu.dailyGain')} ${dailyGain}/${MAX_DAILY_REPUTATION_GAIN}`}
-              </p>
-            </div>
-          )
-        }}
-      </Query>
-    )
+    return <DailyGainGauge t={t} />
   }
 
   renderMenuProfile() {
@@ -303,26 +325,7 @@ class Sidebar extends React.PureComponent {
           {capitalize(t('entities.videoFactChecking'))}
         </this.MenuListLink>
         <ReputationGuard requiredRep={MIN_REPUTATION_MODERATION}>
-          <Query
-            fetchPolicy="network-only"
-            pollInterval={25000}
-            query={loggedInUserPendingModerationCount}
-          >
-            {({ data }) => {
-              const pendingCount = get(data, 'loggedInUser.actions_pending_moderation', 0)
-              return (
-                <this.MenuListLink to="/moderation">
-                  <Flag size="1.2em" className="mr-2" />
-                  {t('menu.moderation')}
-                  {Boolean(pendingCount) && (
-                    <Badge className="ml-2" variant="destructive">
-                      {pendingCount}
-                    </Badge>
-                  )}
-                </this.MenuListLink>
-              )
-            }}
-          </Query>
+          <ModerationMenuItem t={t} />
         </ReputationGuard>
       </ul>
     )

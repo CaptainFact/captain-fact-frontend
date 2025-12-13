@@ -42,7 +42,7 @@
     "title": "Tittel",
     "one": "Taler",
     "remove": "Fjern taler",
-    "confirmRemove": "Alle påstander av {{speaker.full_name}} på denne videoen vil bli foreldreløse",
+    "confirmRemove": "Alle påstander av {{speaker.fullName}} på denne videoen vil bli foreldreløse",
     "add": "Legg til taler",
     "create": "Legg til taler \"{{name}}\"",
     "edit": "Rediger \"{{name}}\"-info",

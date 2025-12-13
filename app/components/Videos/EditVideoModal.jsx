@@ -32,7 +32,7 @@ const EditVideoModal = ({ open, onOpenChange, video, shiftStatements }) => {
   const { t } = useTranslation(['videoDebate', 'main'])
   const [editVideo] = useMutation(editVideoMutation)
 
-  if (!video) return null
+  if (!video) {return null}
 
   const unlistedOptions = [
     { value: true, label: t('main:videos.unlisted') },
@@ -97,7 +97,7 @@ const EditVideoModal = ({ open, onOpenChange, video, shiftStatements }) => {
             )}
           </Formik>
         </div>
-        {video['youtube_id'] && (
+        {video.youtubeId && (
           <React.Fragment>
             <Separator className="my-4" />
             <div className="flex flex-col">

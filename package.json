@@ -23,7 +23,7 @@
     "lint:fix": "npm run lint -- --fix && npm run prettier",
     "prettier": "prettier --loglevel warn --write 'app/**/*.{js,jsx}' && prettier --write 'cypress/**/*.js'",
     "prettier:check": "prettier --loglevel warn --check 'app/**/*.{js,jsx}' && prettier --check 'cypress/**/*.js'",
-    "ts-unused-exports": "ts-unused-exports tsconfig.json --ignoreFiles='app/constants.js' --ignoreFiles='/components/ui/*'",
+    "ts-unused-exports": "ts-unused-exports tsconfig.json --ignoreFiles='app/constants.js' --ignoreFiles='/components/ui/*' --ignoreFiles='app/API/types/generated.ts'",
     "typescript": "tsc --noEmit",
     "generate:types": "graphql-codegen --config codegen.yml",
     "generate:types:watch": "graphql-codegen --config codegen.yml --watch"

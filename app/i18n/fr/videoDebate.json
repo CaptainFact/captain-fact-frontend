@@ -70,7 +70,7 @@
   "speaker": {
     "one": "Intervenant(e)",
     "remove": "Retirer l'intervenant(e)",
-    "confirmRemove": "Toutes les déclarations de {{speaker.full_name}} sur cette vidéo vont devenir orphelines.",
+    "confirmRemove": "Toutes les déclarations de {{speaker.fullName}} sur cette vidéo vont devenir orphelines.",
     "add": "Ajouter un(e) intervenant(e)",
     "create": "Créer l'intervenant(e) \"{{name}}\"",
     "edit": "Modifier les informations de \"{{name}}\"",

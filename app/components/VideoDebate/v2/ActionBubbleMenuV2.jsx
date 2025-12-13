@@ -2,8 +2,8 @@ import { useMutation } from '@apollo/client'
 import gql from 'graphql-tag'
 import { ListTodo, LogIn, MessageSquare, X } from 'lucide-react'
 import React from 'react'
-import { useHistory } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
+import { useHistory } from 'react-router-dom'
 
 import { toast } from '@/hooks/use-toast'
 import { cn } from '@/lib/css-utils'
@@ -50,7 +50,9 @@ const ActionBubbleMenuV2 = ({
   }
 
   const handleAutomaticExtraction = async () => {
-    if (!video?.id) return
+    if (!video?.id) {
+      return
+    }
     try {
       setHasCalledStatementsExtract(true)
       await startAutomaticStatementsExtraction({ variables: { videoId: video.id } })
@@ -105,7 +107,7 @@ const ActionBubbleMenuV2 = ({
   )
 }
 
-export const ActionBubble = ({
+const ActionBubble = ({
   icon: Icon,
   label,
   activated = true,
@@ -153,6 +155,3 @@ export const ActionBubble = ({
 )
 
 export default withTranslation('videoDebate')(withLoggedInUser(ActionBubbleMenuV2))
-
-
-
