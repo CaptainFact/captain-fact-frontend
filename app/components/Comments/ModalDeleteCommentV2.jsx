@@ -19,3 +19,5 @@ const ModalDeleteCommentV2 = ({ handleAbort, comment, replies = [], ...otherProp
 }
 
 export default ModalDeleteCommentV2
+
+

@@ -18,6 +18,7 @@ const StatementsListV2 = ({
   onClearStatementForm,
   onSetScrollTo,
   videoId,
+  votesMap,
   isAuthenticated,
   t,
 }) => {
@@ -86,6 +87,7 @@ const StatementsListV2 = ({
               offset={offset}
               scrollTo={scrollTo}
               onSetScrollTo={onSetScrollTo}
+              votesMap={votesMap}
             />
           </div>
         ))}

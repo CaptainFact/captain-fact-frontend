@@ -30,10 +30,12 @@ const loggedInUserNotificationsQuery = gql`
             statementId
             commentId
             user {
+              id
               name
               username
             }
             video {
+              id
               hashId
               title
             }
@@ -43,6 +45,7 @@ const loggedInUserNotificationsQuery = gql`
               fullName
             }
             comment {
+              id
               text
             }
             changes

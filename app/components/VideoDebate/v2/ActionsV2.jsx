@@ -14,6 +14,8 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
 
+import { toastError } from '@/lib/toasts'
+
 import { useUserPreferences } from '../../../contexts/UserPreferencesContext'
 import { MIN_REPUTATION_UPDATE_VIDEO } from '../../../constants'
 import { shiftStatements } from '../../../state/video_debate/effects'
@@ -63,7 +65,7 @@ const ActionsV2 = ({ video, t, isAuthenticated }) => {
         setIsSubscribed(result.data.updateSubscription.isSubscribed)
       }
     } catch (error) {
-      console.error('Failed to update subscription:', error)
+      toastError(error)
     }
   }
 

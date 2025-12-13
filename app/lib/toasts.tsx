@@ -3,9 +3,10 @@
  * transition to shadcn toasts.
  */
 
-import { Ghost, Link } from 'lucide-react'
+import { Ghost } from 'lucide-react'
 import React from 'react'
 import { Trans } from 'react-i18next'
+import { Link } from 'react-router-dom'
 
 import { ToastAction } from '@/components/ui/toast'
 import { toast } from '@/hooks/use-toast'
@@ -38,7 +39,7 @@ export const toastErrorUnauthenticated = () => {
 }
 
 export function toastError(error) {
-  if (typeof error === 'object' && error !== null && error.message) {
+  if (typeof error === 'object' && error !== null) {
     error = error.message
   }
 
@@ -50,10 +51,16 @@ export function toastError(error) {
       title: <Trans i18nKey="errors:title" />,
       description: (
         <div>
-          <p className="block mb-1">{error}</p>
-          <Link className="block" to={errorInfo.url}>
-            <Trans i18nKey={errorInfo.i18nKey || 'actions.moreInfo'} />
-          </Link>
+          {errorInfo.i18nKey && (
+            <p className="block mb-1">
+              <Trans i18nKey={errorInfo.i18nKey} />
+            </p>
+          )}
+          {errorInfo.url && (
+            <Link className="block underline" to={errorInfo.url}>
+              <Trans i18nKey={'actions.moreInfo'} />
+            </Link>
+          )}
         </div>
       ),
     })

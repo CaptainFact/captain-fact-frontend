@@ -75,3 +75,5 @@ The codegen configuration is in `codegen.yml` at the project root. The schema UR
 - The generated file is automatically created and should be committed to version control
 - Never manually edit `generated.ts` - it will be overwritten on regeneration
 - If you need custom types, create them in separate files and import alongside the generated types
+
+

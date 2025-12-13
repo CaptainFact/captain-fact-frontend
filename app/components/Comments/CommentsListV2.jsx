@@ -25,6 +25,7 @@ const CommentsListV2 = ({
   nesting = 1,
   repliesByParent,
   setReplyToComment,
+  votesMap,
 }) => {
   const { isAuthenticated, loggedInUser } = useLoggedInUser()
   const [nbComments, setNbComments] = useState(() => getNbDisplayedRange(nesting))
@@ -62,6 +63,8 @@ const CommentsListV2 = ({
           displayedComments.map((comment) => {
             // Get replies for this comment if repliesByParent is provided
             const replies = repliesByParent?.[comment.id]
+            // Get logged in user's vote for this comment
+            const loggedInUserVote = votesMap?.[comment.id] || 0
 
             return (
               <div key={comment.id}>
@@ -72,6 +75,7 @@ const CommentsListV2 = ({
                   setReplyToComment={setReplyToComment}
                   replies={replies}
                   repliesByParent={repliesByParent}
+                  loggedInUserVote={loggedInUserVote}
                 />
               </div>
             )

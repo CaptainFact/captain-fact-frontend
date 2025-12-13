@@ -3,9 +3,13 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { cn } from '@/lib/css-utils'
-import { toastErrorUnauthenticated } from '@/lib/toasts'
+import { toastError, toastErrorUnauthenticated } from '@/lib/toasts'
 
-import { DELETE_COMMENT_MUTATION, FLAG_COMMENT_MUTATION, VOTE_COMMENT_MUTATION } from '../../API/graphql_queries'
+import {
+  DELETE_COMMENT_MUTATION,
+  FLAG_COMMENT_MUTATION,
+  VOTE_COMMENT_MUTATION,
+} from '../../API/graphql_queries'
 import { COLLAPSE_REPLIES_AT_NESTING } from '../../constants'
 import { addModal } from '../../state/modals/reducer'
 import { useLoggedInUser } from '../LoggedInUser/UserProvider'
@@ -29,17 +33,15 @@ const CommentDisplayV2 = ({
   hideThread = false,
   isQuoted = false,
   richMedias = true,
-  myVote: initialMyVote = 0,
+  loggedInUserVote: initialLoggedInUserVote = 0,
   isFlagged: initialIsFlagged = false,
 }) => {
   const dispatch = useDispatch()
   const { isAuthenticated, loggedInUser } = useLoggedInUser()
-  
+
   const [isBlurred, setIsBlurred] = useState(false)
-  const [repliesCollapsed, setRepliesCollapsed] = useState(
-    nesting === COLLAPSE_REPLIES_AT_NESTING
-  )
-  
+  const [repliesCollapsed, setRepliesCollapsed] = useState(nesting === COLLAPSE_REPLIES_AT_NESTING)
+
   const [isFlagged, setIsFlagged] = useState(initialIsFlagged)
 
   const approveClass = getApproveClass(comment.approve)
@@ -54,39 +56,38 @@ const CommentDisplayV2 = ({
   const isOwnComment = comment.user && loggedInUser?.id?.toString() === comment.user.id
   const repliesArray = Array.isArray(replies) ? replies : []
 
-  const [voteComment, {loading: isVoting}] = useMutation(VOTE_COMMENT_MUTATION, {
-    optimisticResponse: (variables) => {
-      const myVote = initialMyVote
-      const newVote = myVote === variables.value ? 0 : variables.value
-      // Calculate the score change: if toggling off, subtract the vote; if switching, adjust accordingly
-      const scoreChange = newVote === 0 
-        ? -myVote // Removing vote: subtract previous vote value
-        : myVote === 0 
-          ? newVote // Adding new vote: add vote value
-          : newVote - myVote // Switching vote: difference between old and new
-      
-      return {
-        voteComment: {
-          __typename: 'Comment',
-          id: comment.id,
-          score: (comment.score || 0) + scoreChange,
-        },
-      }
-    },
-  })
+  const [voteComment, { loading: isVoting }] = useMutation(VOTE_COMMENT_MUTATION)
 
   const handleVote = async (value) => {
     if (!ensureAuthenticated()) {
       return false
     }
-    
+
+    try {
       await voteComment({
-        variables: {
-          commentId: comment.id,
-          value: value,
+        variables: { commentId: comment.id, value: value },
+        update: (cache, { data }) => {
+          if (!data?.voteComment || !loggedInUser?.id) {
+            return
+          }
+
+          // Update the loggedInUser.votes map
+          cache.modify({
+            id: cache.identify({ __typename: 'User', id: loggedInUser.id }),
+            fields: {
+              votes(existingVotes = {}) {
+                return {
+                  ...existingVotes,
+                  [comment.id]: value,
+                }
+              },
+            },
+          })
         },
       })
-  
+    } catch (e) {
+      toastError(e)
+    }
   }
 
   const [deleteComment] = useMutation(DELETE_COMMENT_MUTATION, {
@@ -94,10 +95,10 @@ const CommentDisplayV2 = ({
       if (!data?.deleteComment) {
         return
       }
-      
+
       const deletedComment = data.deleteComment
       const statementId = deletedComment.statementId
-      
+
       if (!statementId) {
         return
       }
@@ -134,16 +135,15 @@ const CommentDisplayV2 = ({
           handleConfirm: async () => {
             setIsBlurred(false)
             try {
-              await deleteComment({variables: {  id: comment.id,},
-              })
-            } catch {
-              // TODO
+              await deleteComment({ variables: { id: comment.id } })
+            } catch (error) {
+              toastError(error)
             }
           },
           comment: comment,
           replies: repliesArray,
         },
-      })
+      }),
     )
   }
 
@@ -156,7 +156,7 @@ const CommentDisplayV2 = ({
 
   const [flagComment] = useMutation(FLAG_COMMENT_MUTATION, {
     onError: (error) => {
-      console.error('Failed to flag comment:', error)
+      toastError(error)
     },
   })
 
@@ -185,7 +185,7 @@ const CommentDisplayV2 = ({
           },
           comment: comment,
         },
-      })
+      }),
     )
   }
 
@@ -213,16 +213,14 @@ const CommentDisplayV2 = ({
             <Vote
               isVoting={isVoting}
               score={comment.score}
-              myVote={initialMyVote}
+              loggedInUserVote={initialLoggedInUserVote}
               onVote={handleVote}
               isReported={comment.is_reported}
             />
           </div>
         )}
         <div className="flex-grow min-w-0">
-          {!withoutHeader && (
-            <CommentHeader comment={comment} withoutActions={withoutActions} />
-          )}
+          {!withoutHeader && <CommentHeader comment={comment} withoutActions={withoutActions} />}
           <CommentContent
             comment={comment}
             nesting={nesting}

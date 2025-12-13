@@ -1,28 +1,22 @@
 import { CheckCircle, FileText, History } from 'lucide-react'
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 
 import { MIN_REPUTATION_ADD_SPEAKER } from '../../../constants'
 import { videoCaptionsUrl, videoHistoryURL, videoURL } from '../../../lib/cf_routes'
 import { withLoggedInUser } from '../../LoggedInUser/UserProvider'
-import AddSpeakerForm from '../../Speakers/AddSpeakerForm'
-import { SpeakerPreview } from '../../Speakers/SpeakerPreview'
+import AddSpeakerFormV2 from '../../Speakers/AddSpeakerFormV2'
+import SpeakerPreviewV2 from '../../Speakers/SpeakerPreviewV2'
 import { Tabs, TabsList, TabsTrigger } from '../../ui/tabs'
 import { LoadingFrame } from '../../Utils/LoadingFrame'
 import Message from '../../Utils/Message'
 import { ReputationGuardTooltip } from '../../Utils/ReputationGuardTooltip'
-import ActionsV2 from './ActionsV2'
 import ResizableColumn from '../ResizableColumn'
+import ActionsV2 from './ActionsV2'
 import VideoDebatePlayerV2 from './VideoDebatePlayerV2'
 
-const ColumnVideoV2 = ({
-  video,
-  isLoading,
-  view,
-  t,
-  isAuthenticated,
-}) => {
+const ColumnVideoV2 = ({ video, isLoading, view, t, isAuthenticated }) => {
   const { url, speakers = [] } = video || {}
   const isDebate = !view || view === 'debate'
 
@@ -72,12 +66,14 @@ const ColumnVideoV2 = ({
                     requiredRep={MIN_REPUTATION_ADD_SPEAKER}
                     tooltipPosition="top"
                   >
-                    {({ hasReputation }) => <AddSpeakerForm disabled={!hasReputation} />}
+                    {({ hasReputation }) => (
+                      <AddSpeakerFormV2 disabled={!hasReputation} videoId={video.id} />
+                    )}
                   </ReputationGuardTooltip>
                 </div>
                 <div className="px-3 pb-4 flex flex-col gap-4">
                   {speakers.map((speaker) => (
-                    <SpeakerPreview key={speaker.id} speaker={speaker} />
+                    <SpeakerPreviewV2 key={speaker.id} speaker={speaker} />
                   ))}
                 </div>
               </div>
@@ -104,4 +100,3 @@ const ColumnVideoV2 = ({
 }
 
 export default withTranslation('videoDebate')(withLoggedInUser(ColumnVideoV2))
-

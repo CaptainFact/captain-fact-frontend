@@ -26,3 +26,5 @@ generates:
       dedupeFragments: true
       onlyOperationTypes: false
       mergeFragmentTypes: true
+
+

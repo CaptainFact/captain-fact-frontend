@@ -12,6 +12,7 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  JSON: { input: any; output: any; }
   NaiveDateTime: { input: string; output: string; }
   Upload: { input: File; output: File; }
 };
@@ -66,6 +67,12 @@ export type Comment = {
   text?: Maybe<Scalars['String']['output']>;
   /** User who made the comment */
   user?: Maybe<User>;
+};
+
+/** Reference to a flagged comment */
+export type CommentFlagged = {
+  __typename?: 'CommentFlagged';
+  id: Scalars['ID']['output'];
 };
 
 /** Reference to a comment involved in a score update */
@@ -182,6 +189,8 @@ export type RootMutationType = {
   /** Delete an existing statement */
   deleteStatement?: Maybe<StatementRemoved>;
   editVideo?: Maybe<Video>;
+  /** Flag a comment */
+  flagComment?: Maybe<CommentFlagged>;
   setVideoCaptions?: Maybe<Video>;
   /** Use this to start the automatic statements extraction job. Requires elevated permissions. */
   startAutomaticStatementsExtraction?: Maybe<Video>;
@@ -227,6 +236,12 @@ export type RootMutationTypeDeleteStatementArgs = {
 export type RootMutationTypeEditVideoArgs = {
   id: Scalars['ID']['input'];
   unlisted: Scalars['Boolean']['input'];
+};
+
+
+export type RootMutationTypeFlagCommentArgs = {
+  commentId: Scalars['ID']['input'];
+  reason: Scalars['Int']['input'];
 };
 
 
@@ -538,6 +553,8 @@ export type User = {
   username: Scalars['String']['output'];
   /** A paginated list of videos added by this user */
   videosAdded?: Maybe<PaginatedVideos>;
+  /** User's votes on comments as a map (commentId => vote value) */
+  votes?: Maybe<Scalars['JSON']['output']>;
 };
 
 
@@ -569,6 +586,13 @@ export type UserSubscriptionsArgs = {
 export type UserVideosAddedArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** A user registered on the website */
+export type UserVotesArgs = {
+  videoHashId?: InputMaybe<Scalars['ID']['input']>;
+  videoId?: InputMaybe<Scalars['ID']['input']>;
 };
 
 /** Describe a user action */
@@ -917,7 +941,13 @@ export type FlagCommentMutationVariables = Exact<{
 }>;
 
 
-export type FlagCommentMutation = { __typename?: 'RootMutationType' };
+export type FlagCommentMutation = (
+  { flagComment?: (
+    { id: string }
+    & { __typename?: 'CommentFlagged' }
+  ) | null }
+  & { __typename?: 'RootMutationType' }
+);
 
 export type StatementAddedSubscriptionVariables = Exact<{
   videoId: Scalars['ID']['input'];
@@ -1141,16 +1171,16 @@ export type LoggedInUserNotificationsQuery = (
       { pageNumber?: number | null, pageSize?: number | null, totalEntries?: number | null, totalPages?: number | null, entries?: Array<(
         { id: string, seenAt?: string | null, insertedAt: string, type: string, action?: (
           { entity: string, type: string, speakerId?: number | null, statementId?: number | null, commentId?: number | null, changes?: string | null, user?: (
-            { name?: string | null, username: string }
+            { id: string, name?: string | null, username: string }
             & { __typename?: 'User' }
           ) | null, video?: (
-            { hashId: string, title: string }
+            { id: string, hashId: string, title: string }
             & { __typename?: 'Video' }
           ) | null, speaker?: (
             { id: string, slug?: string | null, fullName: string }
             & { __typename?: 'Speaker' }
           ) | null, comment?: (
-            { text?: string | null }
+            { id: string, text?: string | null }
             & { __typename?: 'Comment' }
           ) | null }
           & { __typename?: 'UserAction' }
@@ -1373,6 +1403,9 @@ export type VideoDebateQuery = (
       & { __typename?: 'Statement' }
     ) | null> | null }
     & { __typename?: 'Video' }
+  ) | null, loggedInUser?: (
+    { id: string, votes?: any | null }
+    & { __typename?: 'User' }
   ) | null }
   & { __typename?: 'RootQueryType' }
 );

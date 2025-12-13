@@ -74,6 +74,10 @@ const VIDEO_DEBATE_QUERY = gql`
         ...StatementFields
       }
     }
+    loggedInUser {
+      id
+      votes(videoHashId: $id)
+    }
   }
   ${STATEMENT_FRAGMENT}
 `
@@ -174,19 +178,19 @@ const sortComments = (comments) => {
 }
 
 // Custom hook to handle all video debate subscriptions
-const useVideoDebateSubscriptions = (subscribeToMore, numericVideoId, videoHashId) => {
+const useVideoDebateSubscriptions = (subscribeToMore, videoId) => {
   const client = useApolloClient()
 
   // Use subscribeToMore for new entries (additions)
   useEffect(() => {
-    if (!subscribeToMore || !numericVideoId) {
+    if (!subscribeToMore || !videoId) {
       return
     }
 
     // Subscribe to statement additions
     const unsubscribeStatementAdded = subscribeToMore({
       document: STATEMENT_ADDED_SUBSCRIPTION,
-      variables: { videoId: numericVideoId },
+      variables: { videoId: videoId },
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData.data?.statementAdded) {
           return prev
@@ -212,7 +216,7 @@ const useVideoDebateSubscriptions = (subscribeToMore, numericVideoId, videoHashI
     // Subscribe to comment additions
     const unsubscribeCommentAdded = subscribeToMore({
       document: COMMENT_ADDED_SUBSCRIPTION,
-      variables: { videoId: numericVideoId },
+      variables: { videoId: videoId },
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData.data?.commentAdded) {
           return prev
@@ -251,30 +255,20 @@ const useVideoDebateSubscriptions = (subscribeToMore, numericVideoId, videoHashI
       unsubscribeStatementAdded()
       unsubscribeCommentAdded()
     }
-  }, [subscribeToMore, numericVideoId])
+  }, [subscribeToMore, videoId])
 
   // Use useSubscription with onData and cache.modify for deletions
   useSubscription(STATEMENT_REMOVED_SUBSCRIPTION, {
-    variables: { videoId: numericVideoId },
-    skip: !numericVideoId,
+    variables: { videoId: videoId },
+    skip: !videoId,
     onData: ({ data }) => {
-      if (!data.data?.statementRemoved || !videoHashId) {
+      if (!data.data?.statementRemoved) {
         return
       }
       const removedId = data.data.statementRemoved.id
-      
-      // Read the video from cache to get proper cache ID
-      const videoData = client.cache.readQuery({
-        query: VIDEO_DEBATE_QUERY,
-        variables: { id: videoHashId },
-      })
-
-      if (!videoData?.video) {
-        return
-      }
 
       client.cache.modify({
-        id: client.cache.identify(videoData.video),
+        id: client.cache.identify({ __typename: 'Video', id: videoId }),
         fields: {
           statements(existingStatements = [], { readField }) {
             return existingStatements.filter(
@@ -287,10 +281,10 @@ const useVideoDebateSubscriptions = (subscribeToMore, numericVideoId, videoHashI
   })
 
   useSubscription(COMMENT_REMOVED_SUBSCRIPTION, {
-    variables: { videoId: numericVideoId },
-    skip: !numericVideoId,
+    variables: { videoId: videoId },
+    skip: !videoId,
     onData: ({ data }) => {
-      if (!data.data?.commentRemoved || !videoHashId) {
+      if (!data.data?.commentRemoved ) {
         return
       }
       const removed = data.data.commentRemoved
@@ -299,24 +293,10 @@ const useVideoDebateSubscriptions = (subscribeToMore, numericVideoId, videoHashI
         return
       }
 
-      // Find the statement in cache
-      const videoData = client.cache.readQuery({
-        query: VIDEO_DEBATE_QUERY,
-        variables: { id: videoHashId },
-      })
-
-      if (!videoData?.video?.statements) {
-        return
-      }
-
-      const statement = videoData.video.statements.find((s) => s.id === statementId)
-      if (!statement) {
-        return
-      }
 
       // Modify the statement's comments
       client.cache.modify({
-        id: client.cache.identify(statement),
+        id: client.cache.identify({ __typename: 'Statement', id: statementId }),
         fields: {
           comments(existingComments = [], { readField }) {
             return existingComments.filter((commentRef) => {
@@ -331,10 +311,10 @@ const useVideoDebateSubscriptions = (subscribeToMore, numericVideoId, videoHashI
   })
 
   useSubscription(COMMENT_SCORE_DIFF_SUBSCRIPTION, {
-    variables: { videoId: numericVideoId },
-    skip: !numericVideoId,
+    variables: { videoId: videoId },
+    skip: !videoId,
     onData: ({ data }) => {
-      if (!data.data?.commentScoreDiff || !videoHashId) {
+      if (!data.data?.commentScoreDiff) {
         return
       }
       const { comment, diff } = data.data.commentScoreDiff
@@ -343,45 +323,12 @@ const useVideoDebateSubscriptions = (subscribeToMore, numericVideoId, videoHashI
         return
       }
 
-      // Find the statement in cache
-      const videoData = client.cache.readQuery({
-        query: VIDEO_DEBATE_QUERY,
-        variables: { id: videoHashId },
-      })
-
-      if (!videoData?.video?.statements) {
-        return
-      }
-
-      const statement = videoData.video.statements.find((s) => s.id === statementId)
-      if (!statement) {
-        return
-      }
-
-      // Read the statement fragment to get current comments
-      const statementData = client.cache.readFragment({
-        id: client.cache.identify(statement),
-        fragment: STATEMENT_FRAGMENT,
-        fragmentName: 'StatementFields',
-      })
-
-      if (!statementData?.comments) {
-        return
-      }
-
-      // Update the comment score and sort
-      const updatedComments = statementData.comments.map((c) =>
-        c.id === comment.id ? { ...c, score: (c.score || 0) + diff } : c
-      )
-
-      // Write back the updated statement with sorted comments
-      client.cache.writeFragment({
-        id: client.cache.identify(statement),
-        fragment: STATEMENT_FRAGMENT,
-        fragmentName: 'StatementFields',
-        data: {
-          ...statementData,
-          comments: sortComments(updatedComments),
+      client.cache.modify({
+        id: client.cache.identify({ __typename: 'Statement', id: statementId }),
+        fields: {
+          comments(existingComments = []) {
+            return existingComments.map((c) => c.id === comment.id ? { ...c, score: (c.score || 0) + diff } : c)
+          },
         },
       })
     },
@@ -395,7 +342,7 @@ const VideoDebateV2 = ({ t: _t }) => {
 
   // Fetch initial video data
   const { data, loading, error, subscribeToMore } = useQuery(VIDEO_DEBATE_QUERY, {
-    variables: { id: videoId },
+    variables: { id: videoId, videoId: null },
     skip: !videoId,
   })
 
@@ -407,12 +354,8 @@ const VideoDebateV2 = ({ t: _t }) => {
     prevVideoIdRef.current = videoId
   }, [videoId])
 
-  // Get numeric video ID for mutations and subscriptions (not hashId)
-  const numericVideoId = data?.video?.id
-  const videoHashId = data?.video?.hashId || videoId
-
   // Subscribe to all video debate events
-  useVideoDebateSubscriptions(subscribeToMore, numericVideoId, videoHashId)
+  useVideoDebateSubscriptions(subscribeToMore, data?.video?.id, data?.video?.hashId)
 
   // All hooks must be called before any conditional returns
   const currentView = view || 'debate'
@@ -465,10 +408,11 @@ const VideoDebateV2 = ({ t: _t }) => {
           video={data?.video}
           isLoading={loading}
           view={currentView}
-          videoId={numericVideoId}
+          videoId={data?.video?.id}
           statements={statementsWithComments}
           statementForm={state.statementForm}
           scrollTo={state.scrollTo}
+          votesMap={data?.loggedInUser?.votes}
           onSetStatementForm={(form) => dispatch({ type: 'SET_STATEMENT_FORM', payload: form })}
           onClearStatementForm={() => dispatch({ type: 'CLEAR_STATEMENT_FORM' })}
           onSetScrollTo={(scrollTo) => dispatch({ type: 'SET_SCROLL_TO', payload: scrollTo })}

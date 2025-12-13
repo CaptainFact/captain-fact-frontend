@@ -242,3 +242,36 @@ export const FLAG_COMMENT_MUTATION = gql`
     }
   }
 `
+
+export const SEARCH_SPEAKERS_QUERY = gql`
+  query SearchSpeakers($query: String!, $limit: Int) {
+    searchSpeakers(query: $query, limit: $limit) {
+      id
+      fullName
+      slug
+      picture
+    }
+  }
+`
+
+export const ADD_SPEAKER_TO_VIDEO_MUTATION = gql`
+  mutation AddSpeakerToVideo($videoId: ID!, $speakerId: ID!) {
+    addSpeakerToVideo(videoId: $videoId, speakerId: $speakerId) {
+      id
+      fullName
+      slug
+      picture
+    }
+  }
+`
+
+export const CREATE_SPEAKER_MUTATION = gql`
+  mutation CreateSpeaker($videoId: ID!, $fullName: String!) {
+    createSpeaker(videoId: $videoId, fullName: $fullName) {
+      id
+      fullName
+      slug
+      picture
+    }
+  }
+`

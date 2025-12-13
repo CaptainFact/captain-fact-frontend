@@ -57,6 +57,7 @@ export class CommentsList extends React.PureComponent {
       loggedInUser,
       nesting = 1,
       repliesByParent,
+      votesMap, // Accept but don't use (for compatibility with SpeakerComments)
     } = this.props
     const commentsArray = this.normalizeToArray(comments)
     const commentsLength = this.getCommentsLength(comments)

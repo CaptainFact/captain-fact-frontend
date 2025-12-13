@@ -24,6 +24,7 @@ const ColumnDebateV2 = ({
   statements,
   statementForm,
   scrollTo,
+  votesMap,
   onSetStatementForm,
   onClearStatementForm,
   onSetScrollTo,
@@ -109,6 +110,7 @@ const ColumnDebateV2 = ({
               onClearStatementForm={onClearStatementForm}
               onSetScrollTo={onSetScrollTo}
               videoId={videoId}
+              votesMap={votesMap}
             />
           )}
           <ActionBubbleMenuV2

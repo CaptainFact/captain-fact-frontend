@@ -54,7 +54,7 @@ const groupComments = (comments) => {
   return { topLevel: sortedTopLevel, repliesByParent }
 }
 
-const StatementCommentsV2 = ({ statement, speaker, setReplyToComment, t }) => {
+const StatementCommentsV2 = ({ statement, speaker, setReplyToComment, votesMap, t }) => {
   const comments = statement.comments || []
   
   // Group comments into top-level and replies (memoized)
@@ -127,6 +127,7 @@ const StatementCommentsV2 = ({ statement, speaker, setReplyToComment, t }) => {
         speaker={speaker}
         comments={selfComments}
         repliesByParent={repliesByParent}
+        votesMap={votesMap}
       />
       <div className="bg-[#fefefe] dark:bg-background">
         {hasSpeakerComments && (
@@ -146,6 +147,7 @@ const StatementCommentsV2 = ({ statement, speaker, setReplyToComment, t }) => {
               statementID={statement.id}
               commentType="refute"
               repliesByParent={repliesByParent}
+              votesMap={votesMap}
             />
             <div className="hidden md:flex items-stretch self-stretch my-2">
               <Separator orientation="vertical" className="bg-neutral-100 dark:border-border" />
@@ -158,6 +160,7 @@ const StatementCommentsV2 = ({ statement, speaker, setReplyToComment, t }) => {
               statementID={statement.id}
               commentType="approve"
               repliesByParent={repliesByParent}
+              votesMap={votesMap}
             />
           </div>
         )}
@@ -169,6 +172,7 @@ const StatementCommentsV2 = ({ statement, speaker, setReplyToComment, t }) => {
               header={renderCommentsListHeader('comments')}
               className="w-full max-w-full"
               repliesByParent={repliesByParent}
+              votesMap={votesMap}
             />
           </div>
         )}

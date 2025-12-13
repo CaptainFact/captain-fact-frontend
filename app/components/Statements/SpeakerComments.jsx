@@ -5,7 +5,7 @@ import { withTranslation } from 'react-i18next'
 import { CommentsList } from '../Comments/CommentsList'
 import { SpeakerPreview } from '../Speakers/SpeakerPreview'
 
-export default withTranslation('videoDebate')(({ t, speaker, comments, setReplyToComment, repliesByParent }) => {
+export default withTranslation('videoDebate')(({ t, speaker, comments, setReplyToComment, repliesByParent, votesMap }) => {
   // Normalize comments to array - handles both arrays and Immutable-like objects
   const commentsArray = Array.isArray(comments) 
     ? comments 
@@ -23,7 +23,7 @@ export default withTranslation('videoDebate')(({ t, speaker, comments, setReplyT
           {speaker && <SpeakerPreview speaker={speaker} withoutActions />}
         </div>
         <div>
-          <CommentsList comments={commentsArray} setReplyToComment={setReplyToComment} repliesByParent={repliesByParent} />
+          <CommentsList comments={commentsArray} setReplyToComment={setReplyToComment} repliesByParent={repliesByParent} votesMap={votesMap} />
         </div>
       </div>
     </div>

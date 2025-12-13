@@ -154,3 +154,5 @@ export const ActionBubble = ({
 
 export default withTranslation('videoDebate')(withLoggedInUser(ActionBubbleMenuV2))
 
+
+

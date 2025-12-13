@@ -27,6 +27,7 @@ const StatementContainerV2 = ({
   speakers,
   offset,
   scrollTo,
+  votesMap,
   isAuthenticated,
   loggedInUser,
   t,
@@ -194,6 +195,7 @@ const StatementContainerV2 = ({
             statement={statement}
             speaker={speaker}
             setReplyToComment={setReplyTo}
+            votesMap={votesMap}
           />
           {!statement.isDraft && (
             <CommentFormV2
