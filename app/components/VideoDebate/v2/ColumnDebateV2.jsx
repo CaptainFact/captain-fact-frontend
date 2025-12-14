@@ -81,7 +81,7 @@ const ColumnDebateV2 = ({
     } else if (view === 'captions') {
       return (
         <div className="px-5 sm:px-8 my-4 mx-auto max-w-[1046px]">
-          <CaptionsExtractor videoId={videoId} />
+          <CaptionsExtractor videoId={videoId} statements={statements} />
         </div>
       )
     } else if (view === 'debate') {

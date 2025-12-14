@@ -111,6 +111,39 @@ export const loggedInUserTodayReputationGain = gql`
   }
 `
 
+export const loggedInUserAvailableFlags = gql`
+  query LoggedInUserAvailableFlags {
+    loggedInUser {
+      id
+      availableFlags
+    }
+  }
+`
+
+export const CREATE_VIDEO_MUTATION = gql`
+  mutation CreateVideo($url: String!, $unlisted: Boolean!) {
+    createVideo(url: $url, unlisted: $unlisted) {
+      id
+      hashId
+      title
+      url
+      unlisted
+    }
+  }
+`
+
+export const SEARCH_VIDEO_QUERY = gql`
+  query SearchVideo($url: String!) {
+    searchVideo(url: $url) {
+      id
+      hashId
+      title
+      url
+      unlisted
+    }
+  }
+`
+
 export const DELETE_STATEMENT_MUTATION = gql`
   mutation DeleteStatement($id: ID!) {
     deleteStatement(id: $id) {
@@ -277,6 +310,50 @@ export const RESTORE_SPEAKER_MUTATION = gql`
       fullName
       slug
       picture
+    }
+  }
+`
+
+export const MODERATE_ACTION_MUTATION = gql`
+  mutation ModerateAction($actionId: ID!, $reason: Int!, $value: Int!) {
+    moderateAction(actionId: $actionId, reason: $reason, value: $value) {
+      id
+    }
+  }
+`
+
+export const RANDOM_MODERATION_QUERY = gql`
+  query RandomModeration {
+    randomModeration {
+      action {
+        id
+        type
+        entity
+        changes
+        time
+        user {
+          id
+          username
+          name
+          pictureUrl
+          miniPictureUrl
+        }
+        speakerId
+        statementId
+        commentId
+        videoId
+        videoHashId
+      }
+      flags {
+        sourceUser: source_user {
+          id
+          username
+          name
+          pictureUrl
+          miniPictureUrl
+        }
+        reason
+      }
     }
   }
 `

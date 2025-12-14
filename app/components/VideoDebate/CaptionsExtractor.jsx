@@ -4,10 +4,9 @@ import { CirclePlay, CircleX, MessageCircle } from 'lucide-react'
 import React from 'react'
 import { withTranslation } from 'react-i18next'
 import { usePopper } from 'react-popper'
-import { connect } from 'react-redux'
 
 import { cn } from '../../lib/css-utils'
-import { forcePosition, setPlaying } from '../../state/video_debate/video/reducer'
+import { useVideoPlayback } from '../../contexts/VideoPlaybackContext'
 import Statement from '../Statements/Statement'
 import { Button } from '../ui/button'
 import ClickableIcon from '../Utils/ClickableIcon'
@@ -120,17 +119,11 @@ const StatementIndicator = withTranslation('main')(({ statement, onPlayClick, t 
   )
 })
 
-const CaptionsExtractor = ({
-  t,
-  videoId,
-  playbackPosition,
-  statements,
-  setPlaying,
-  forcePosition,
-}) => {
+const CaptionsExtractor = ({ t, videoId, statements }) => {
   const { data, loading, error } = useQuery(captionsQuery, { variables: { videoId } })
   const [selection, setSelection] = React.useState({ text: null })
   const textContainerRef = React.useRef()
+  const { position: playbackPosition, setPlaying, forcePosition } = useVideoPlayback()
 
   // Watch for selection changes
   React.useEffect(() => {
@@ -230,13 +223,4 @@ const CaptionsExtractor = ({
   )
 }
 
-export default connect(
-  (state) => ({
-    statements: state.VideoDebate.statements.data,
-    playbackPosition: state.VideoDebate.video.playback.position,
-  }),
-  {
-    forcePosition,
-    setPlaying,
-  },
-)(withTranslation('videoDebate')(CaptionsExtractor))
+export default withTranslation('videoDebate')(CaptionsExtractor)

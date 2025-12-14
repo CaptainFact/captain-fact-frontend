@@ -13,7 +13,7 @@ import ModerationReducer from './moderation/reducer'
 const reducers = combineReducers({
   Modals: ModalsReducer,
   Moderation: ModerationReducer,
-  form: formReducer,
+  // form: formReducer,
 })
 
 // Declare middlewares

@@ -26,7 +26,7 @@ import User from './components/Users/User'
 import UserProfile from './components/Users/UserProfile'
 import UserSettings from './components/Users/UserSettings'
 import VideoDebateV2 from './components/VideoDebate/v2/VideoDebateV2'
-import { AddVideoForm } from './components/Videos/AddVideoForm'
+import AddVideoForm from './components/Videos/AddVideoForm'
 import UserAddedVideos from './components/Videos/UserAddedVideos'
 import VideosIndexPage from './components/Videos/VideosIndexPage'
 
