@@ -8,8 +8,8 @@ import { useHistory } from 'react-router-dom'
 import { toast } from '@/hooks/use-toast'
 import { cn } from '@/lib/css-utils'
 
-import { MIN_REPUTATION_START_AUTOMATIC_STATEMENTS_EXTRACTION } from '../../../constants'
-import { withLoggedInUser } from '../../LoggedInUser/UserProvider'
+import { MIN_REPUTATION_START_AUTOMATIC_STATEMENTS_EXTRACTION } from '../../constants'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 
 const startAutomaticStatementsExtractionMutation = gql`
   mutation StartAutomaticStatementsExtraction($videoId: ID!) {

@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { withTranslation } from 'react-i18next'
 
-import { ENTITY_STATEMENT } from '../../../constants'
-import ShareModal from '../../Utils/ShareModal'
-import { StatementHistoryDialog } from '../../VideoDebate/StatementHistoryDialog'
-import StatementHeader from '../StatementHeader'
+import { ENTITY_STATEMENT } from '../../constants'
+import ShareModal from '../Utils/ShareModal'
+import { StatementHistoryDialog } from '../VideoDebate/StatementHistoryDialog'
+import StatementHeader from './StatementHeader'
 
 const StatementV2 = ({
   statement,

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import ReactPlayer from 'react-player'
 
-import { useVideoPlayback } from '../../../contexts/VideoPlaybackContext'
+import { useVideoPlayback } from '../../contexts/VideoPlaybackContext'
 
 /**
  * A player component with local state for position/playing.

@@ -7,12 +7,12 @@ import { usePopper } from 'react-popper'
 
 import { useVideoPlayback } from '../../contexts/VideoPlaybackContext'
 import { cn } from '../../lib/css-utils'
-import StatementV2 from '../Statements/v2/StatementV2'
+import StatementV2 from '../Statements/StatementV2'
 import { Button } from '../ui/button'
 import ClickableIcon from '../Utils/ClickableIcon'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import Message from '../Utils/Message'
-import ActionBubbleMenuV2, { ActionBubble } from './v2/ActionBubbleMenuV2'
+import ActionBubbleMenuV2, { ActionBubble } from './ActionBubbleMenuV2'
 
 const captionsQuery = gql`
   query VideoCaptionsQuery($videoId: ID!) {

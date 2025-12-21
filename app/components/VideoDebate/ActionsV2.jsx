@@ -16,14 +16,14 @@ import { useHistory } from 'react-router-dom'
 
 import { toastError } from '@/lib/toasts'
 
-import { MIN_REPUTATION_UPDATE_VIDEO } from '../../../constants'
-import { useUserPreferences } from '../../../contexts/UserPreferencesContext'
-import { withLoggedInUser } from '../../LoggedInUser/UserProvider'
-import { Separator } from '../../ui/separator'
-import ReputationGuard from '../../Utils/ReputationGuard'
-import ShareModal from '../../Utils/ShareModal'
-import EditVideoModal from '../../Videos/EditVideoModal'
-import Action from '../Actions/ActionButton'
+import { MIN_REPUTATION_UPDATE_VIDEO } from '../../constants'
+import { useUserPreferences } from '../../contexts/UserPreferencesContext'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import { Separator } from '../ui/separator'
+import ReputationGuard from '../Utils/ReputationGuard'
+import ShareModal from '../Utils/ShareModal'
+import EditVideoModal from '../Videos/EditVideoModal'
+import Action from './ActionButton'
 
 const UPDATE_SUBSCRIPTION_MUTATION = gql`
   mutation UpdateSubscription($entityId: ID!, $scope: String!, $isSubscribed: Boolean!) {

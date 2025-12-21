@@ -5,9 +5,9 @@ import { withTranslation } from 'react-i18next'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/css-utils'
 
-import CommentsListV2 from '../../Comments/CommentsListV2'
-import { Separator } from '../../ui/separator'
-import SpeakerComments from '../SpeakerComments'
+import CommentsListV2 from '../Comments/CommentsListV2'
+import { Separator } from '../ui/separator'
+import SpeakerComments from './SpeakerComments'
 import { classifyComments } from './utils'
 
 // Sort comments by score (descending) and then by insertion time

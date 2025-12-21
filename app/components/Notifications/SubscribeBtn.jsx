@@ -4,7 +4,7 @@ import { Bell, BellOff } from 'lucide-react'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Action from '../VideoDebate/Actions/ActionButton'
+import Action from '../VideoDebate/ActionButton'
 
 const updateSubscriptionQuery = gql`
   mutation UpdateSubscription($entityId: ID!, $scope: String!, $isSubscribed: Boolean!) {

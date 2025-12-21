@@ -3,20 +3,15 @@ import { Check, X } from '@styled-icons/feather'
 import React, { useState } from 'react'
 import { withTranslation } from 'react-i18next'
 
-import { cn } from '@/lib/css-utils'
 import { toastError } from '@/lib/toasts'
 
-import { DELETE_STATEMENT_MUTATION, UPDATE_STATEMENT_MUTATION } from '../../../API/graphql_queries'
-import {
-  MIN_REPUTATION_REMOVE_STATEMENT,
-  MIN_REPUTATION_UPDATE_STATEMENT,
-} from '../../../constants'
-import CommentFormV2 from '../../Comments/CommentFormV2'
-import DialogConfirmDelete from '../../Dialogs/DialogConfirmDelete'
-import { withLoggedInUser } from '../../LoggedInUser/UserProvider'
-import { Button } from '../../ui/button'
-import { Card } from '../../ui/card'
-import ReputationGuardTooltip from '../../Utils/ReputationGuardTooltip'
+import { DELETE_STATEMENT_MUTATION, UPDATE_STATEMENT_MUTATION } from '../../API/graphql_queries'
+import { MIN_REPUTATION_REMOVE_STATEMENT, MIN_REPUTATION_UPDATE_STATEMENT } from '../../constants'
+import CommentFormV2 from '../Comments/CommentFormV2'
+import DialogConfirmDelete from '../Dialogs/DialogConfirmDelete'
+import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import { Button } from '../ui/button'
+import { Card } from '../ui/card'
 import StatementCommentsV2 from './StatementCommentsV2'
 import StatementFormV2 from './StatementFormV2'
 import StatementV2 from './StatementV2'
