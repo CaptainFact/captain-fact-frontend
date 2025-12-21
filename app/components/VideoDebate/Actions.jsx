@@ -1,5 +1,4 @@
-import { useMutation } from '@apollo/client'
-import { gql } from '@apollo/client'
+import { gql, useMutation } from '@apollo/client'
 import {
   ArrowUpDown,
   Bell,
@@ -30,6 +29,7 @@ const UPDATE_SUBSCRIPTION_MUTATION = gql`
     updateSubscription(entityId: $entityId, scope: $scope, isSubscribed: $isSubscribed) {
       id
       isSubscribed
+      reason
     }
   }
 `

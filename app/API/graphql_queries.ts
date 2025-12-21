@@ -111,15 +111,6 @@ export const loggedInUserTodayReputationGain = gql`
   }
 `
 
-export const loggedInUserAvailableFlags = gql`
-  query LoggedInUserAvailableFlags {
-    loggedInUser {
-      id
-      availableFlags
-    }
-  }
-`
-
 export const loggedInUserQuery = gql`
   query LoggedInUser {
     loggedInUser {
@@ -169,19 +160,12 @@ export const DELETE_STATEMENT_MUTATION = gql`
   }
 `
 
-export const UPDATE_STATEMENT_MUTATION = gql`
-  mutation UpdateStatement($id: ID!, $text: String, $time: Int, $speakerId: ID, $isDraft: Boolean) {
-    updateStatement(id: $id, text: $text, time: $time, speakerId: $speakerId, isDraft: $isDraft) {
+export const UPDATE_SUBSCRIPTION_MUTATION = gql`
+  mutation UpdateSubscription($entityId: ID!, $scope: String!, $isSubscribed: Boolean!) {
+    updateSubscription(entityId: $entityId, scope: $scope, isSubscribed: $isSubscribed) {
       id
-      time
-      text
-      isDraft
-      speaker {
-        id
-      }
-      video {
-        id
-      }
+      isSubscribed
+      reason
     }
   }
 `

@@ -28,13 +28,14 @@ export type ActivityLog = {
 };
 
 /** Whether the user was a target or an author of the action */
-export type ActivityLogDirection =
+export enum ActivityLogDirection {
   /** All actions */
-  | 'ALL'
+  All = 'ALL',
   /** Actions taken by the author */
-  | 'AUTHOR'
+  Author = 'AUTHOR',
   /** Actions taken against the target */
-  | 'TARGET';
+  Target = 'TARGET'
+}
 
 /** Information about the application */
 export type AppInfo = {
@@ -113,13 +114,14 @@ export type Notification = {
 };
 
 /** The notifications status */
-export type NotificationsFilter =
+export enum NotificationsFilter {
   /** All notifications */
-  | 'ALL'
+  All = 'ALL',
   /** Seen notifications */
-  | 'SEEN'
+  Seen = 'SEEN',
   /** Unseen notifications */
-  | 'UNSEEN';
+  Unseen = 'UNSEEN'
+}
 
 /** A user subscription to entities changes, used by notifications generator */
 export type NotificationsSubscription = {
@@ -202,6 +204,8 @@ export type RootMutationType = {
   /** Restore a deleted statement */
   restoreStatement?: Maybe<Statement>;
   setVideoCaptions?: Maybe<Video>;
+  /** Shift all statements of a video by a given offset */
+  shiftStatements?: Maybe<Video>;
   /** Use this to start the automatic statements extraction job. Requires elevated permissions. */
   startAutomaticStatementsExtraction?: Maybe<Video>;
   /** Use this to mark a notifications as seen */
@@ -292,6 +296,12 @@ export type RootMutationTypeSetVideoCaptionsArgs = {
 };
 
 
+export type RootMutationTypeShiftStatementsArgs = {
+  videoId: Scalars['ID']['input'];
+  youtubeOffset: Scalars['Int']['input'];
+};
+
+
 export type RootMutationTypeStartAutomaticStatementsExtractionArgs = {
   videoId: Scalars['ID']['input'];
 };
@@ -347,6 +357,8 @@ export type RootQueryType = {
   searchSpeakers?: Maybe<Array<Maybe<Speaker>>>;
   /** Get a single speaker */
   speaker?: Maybe<Speaker>;
+  /** Get history actions for a statement */
+  statementHistoryActions?: Maybe<Array<Maybe<UserAction>>>;
   /** Get all statements */
   statements?: Maybe<PaginatedStatements>;
   /** Get user public info */
@@ -375,6 +387,11 @@ export type RootQueryTypeSearchSpeakersArgs = {
 export type RootQueryTypeSpeakerArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type RootQueryTypeStatementHistoryActionsArgs = {
+  statementId: Scalars['ID']['input'];
 };
 
 
@@ -603,8 +620,12 @@ export type User = {
   actions?: Maybe<ActivityLog>;
   /** Actions pending moderation */
   actionsPendingModeration?: Maybe<Scalars['Int']['output']>;
+  /** Number of comment flags available for this user (-1 means unlimited) */
+  availableFlags?: Maybe<Scalars['Int']['output']>;
   /** Unique user ID */
   id: Scalars['ID']['output'];
+  /** Whether the user is a publisher */
+  isPublisher?: Maybe<Scalars['Boolean']['output']>;
   /** Small version of the user picture (48x48) */
   miniPictureUrl: Scalars['String']['output'];
   /** Optional full-name */
@@ -617,6 +638,8 @@ export type User = {
   registeredAt: Scalars['NaiveDateTime']['output'];
   /** Reputation of the user. See https://captainfact.io/help/reputation */
   reputation?: Maybe<Scalars['Int']['output']>;
+  /** User's speaker ID (if any) */
+  speakerId?: Maybe<Scalars['String']['output']>;
   /** User subscriptions */
   subscriptions?: Maybe<Array<Maybe<NotificationsSubscription>>>;
   /** User's reputation of the day. See https://captainfact.io/help/reputation */
@@ -697,7 +720,7 @@ export type UserAction = {
   /** Id of the User targeted by the action */
   targetUserId?: Maybe<Scalars['ID']['output']>;
   /** Datetime at which the action has been done */
-  time?: Maybe<Scalars['String']['output']>;
+  time?: Maybe<Scalars['NaiveDateTime']['output']>;
   /** Action type */
   type: Scalars['String']['output'];
   /** User who made the action */
@@ -787,32 +810,14 @@ export type VideosIndexQueryVariables = Exact<{
 }>;
 
 
-export type VideosIndexQuery = (
-  { videos?: (
-    { pageNumber?: number | null, totalPages?: number | null, entries?: Array<(
-      { id: string, hashId: string, youtubeId?: string | null, title: string, insertedAt: string, isPartner?: boolean | null, thumbnail: string, speakers?: Array<(
-        { fullName: string, id: string, slug?: string | null }
-        & { __typename?: 'Speaker' }
-      ) | null> | null }
-      & { __typename?: 'Video' }
-    ) | null> | null }
-    & { __typename?: 'PaginatedVideos' }
-  ) | null }
-  & { __typename?: 'RootQueryType' }
-);
+export type VideosIndexQuery = { __typename?: 'RootQueryType', videos?: { __typename?: 'PaginatedVideos', pageNumber?: number | null, totalPages?: number | null, entries?: Array<{ __typename?: 'Video', id: string, hashId: string, youtubeId?: string | null, title: string, insertedAt: string, isPartner?: boolean | null, thumbnail: string, speakers?: Array<{ __typename?: 'Speaker', fullName: string, id: string, slug?: string | null } | null> | null } | null> | null } | null };
 
 export type UserQueryVariables = Exact<{
   username: Scalars['String']['input'];
 }>;
 
 
-export type UserQuery = (
-  { user?: (
-    { id: string, username: string, name?: string | null, reputation?: number | null, registeredAt: string, pictureUrl: string, miniPictureUrl: string, achievements?: Array<number | null> | null }
-    & { __typename?: 'User' }
-  ) | null }
-  & { __typename?: 'RootQueryType' }
-);
+export type UserQuery = { __typename?: 'RootQueryType', user?: { __typename?: 'User', id: string, username: string, name?: string | null, reputation?: number | null, registeredAt: string, pictureUrl: string, miniPictureUrl: string, achievements?: Array<number | null> | null } | null };
 
 export type UserAddedVideosIndexQueryVariables = Exact<{
   offset?: Scalars['Int']['input'];
@@ -821,144 +826,65 @@ export type UserAddedVideosIndexQueryVariables = Exact<{
 }>;
 
 
-export type UserAddedVideosIndexQuery = (
-  { user?: (
-    { id: string, videosAdded?: (
-      { pageNumber?: number | null, totalPages?: number | null, entries?: Array<(
-        { id: string, hashId: string, youtubeId?: string | null, title: string, insertedAt: string, isPartner?: boolean | null, thumbnail: string, speakers?: Array<(
-          { fullName: string, id: string, slug?: string | null }
-          & { __typename?: 'Speaker' }
-        ) | null> | null }
-        & { __typename?: 'Video' }
-      ) | null> | null }
-      & { __typename?: 'PaginatedVideos' }
-    ) | null }
-    & { __typename?: 'User' }
-  ) | null }
-  & { __typename?: 'RootQueryType' }
-);
+export type UserAddedVideosIndexQuery = { __typename?: 'RootQueryType', user?: { __typename?: 'User', id: string, videosAdded?: { __typename?: 'PaginatedVideos', pageNumber?: number | null, totalPages?: number | null, entries?: Array<{ __typename?: 'Video', id: string, hashId: string, youtubeId?: string | null, title: string, insertedAt: string, isPartner?: boolean | null, thumbnail: string, speakers?: Array<{ __typename?: 'Speaker', fullName: string, id: string, slug?: string | null } | null> | null } | null> | null } | null } | null };
 
 export type LoggedInUserSubscriptionsQueryVariables = Exact<{
   scopes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
 }>;
 
 
-export type LoggedInUserSubscriptionsQuery = (
-  { loggedInUser?: (
-    { id: string, subscriptions?: Array<(
-      { id: string, scope: string, videoId?: number | null, isSubscribed: boolean, video?: (
-        { hashId: string, title: string }
-        & { __typename?: 'Video' }
-      ) | null }
-      & { __typename?: 'NotificationsSubscription' }
-    ) | null> | null }
-    & { __typename?: 'User' }
-  ) | null }
-  & { __typename?: 'RootQueryType' }
-);
+export type LoggedInUserSubscriptionsQuery = { __typename?: 'RootQueryType', loggedInUser?: { __typename?: 'User', id: string, subscriptions?: Array<{ __typename?: 'NotificationsSubscription', id: string, scope: string, videoId?: number | null, isSubscribed: boolean, video?: { __typename?: 'Video', hashId: string, title: string } | null } | null> | null } | null };
 
 export type LoggedInUserUnreadNotificationsCountQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LoggedInUserUnreadNotificationsCountQuery = (
-  { loggedInUser?: (
-    { id: string, notifications?: (
-      { totalEntries?: number | null }
-      & { __typename?: 'PaginatedNotifications' }
-    ) | null }
-    & { __typename?: 'User' }
-  ) | null }
-  & { __typename?: 'RootQueryType' }
-);
+export type LoggedInUserUnreadNotificationsCountQuery = { __typename?: 'RootQueryType', loggedInUser?: { __typename?: 'User', id: string, notifications?: { __typename?: 'PaginatedNotifications', totalEntries?: number | null } | null } | null };
 
-export type LoggedInUserUnreadNotificationsCountQueryVariables = Exact<{ [key: string]: never; }>;
+export type LoggedInUserPendingModerationCountQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LoggedInUserUnreadNotificationsCountQuery = (
-  { loggedInUser?: (
-    { id: string, actionsPendingModeration?: number | null }
-    & { __typename?: 'User' }
-  ) | null }
-  & { __typename?: 'RootQueryType' }
-);
+export type LoggedInUserPendingModerationCountQuery = { __typename?: 'RootQueryType', loggedInUser?: { __typename?: 'User', id: string, actionsPendingModeration?: number | null } | null };
 
 export type LoggedInUserTodayReputationGainQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LoggedInUserTodayReputationGainQuery = (
-  { loggedInUser?: (
-    { id: string, todayReputationGain?: number | null }
-    & { __typename?: 'User' }
-  ) | null }
-  & { __typename?: 'RootQueryType' }
-);
+export type LoggedInUserTodayReputationGainQuery = { __typename?: 'RootQueryType', loggedInUser?: { __typename?: 'User', id: string, todayReputationGain?: number | null } | null };
 
-export type VideoDebateQueryVariables = Exact<{
-  id: Scalars['ID']['input'];
+export type LoggedInUserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LoggedInUserQuery = { __typename?: 'RootQueryType', loggedInUser?: { __typename?: 'User', id: string, username: string, name?: string | null, reputation?: number | null, registeredAt: string, pictureUrl: string, miniPictureUrl: string, achievements?: Array<number | null> | null, availableFlags?: number | null, isPublisher?: boolean | null } | null };
+
+export type CreateVideoMutationVariables = Exact<{
+  url: Scalars['String']['input'];
+  unlisted: Scalars['Boolean']['input'];
 }>;
 
 
-export type VideoDebateQuery = (
-  { video?: (
-    { id: string, hashId: string, title: string, url: string, thumbnail: string, language?: string | null, unlisted: boolean, youtubeOffset: number, speakers?: Array<(
-      { id: string, fullName: string, slug?: string | null, picture?: string | null }
-      & { __typename?: 'Speaker' }
-    ) | null> | null, statements?: Array<(
-      { id: string, text: string, time: number, isDraft: boolean, speaker?: (
-        { id: string, fullName: string, picture?: string | null }
-        & { __typename?: 'Speaker' }
-      ) | null, comments?: Array<(
-        { id: string, text?: string | null, approve?: boolean | null, score: number, insertedAt: string, replyToId?: string | null, user?: (
-          { id: string, username: string, pictureUrl: string }
-          & { __typename?: 'User' }
-        ) | null, source?: (
-          { id: string, url: string }
-          & { __typename?: 'Source' }
-        ) | null }
-        & { __typename?: 'Comment' }
-      ) | null> | null }
-      & { __typename?: 'Statement' }
-    ) | null> | null }
-    & { __typename?: 'Video' }
-  ) | null }
-  & { __typename?: 'RootQueryType' }
-);
+export type CreateVideoMutation = { __typename?: 'RootMutationType' };
+
+export type SearchVideoQueryVariables = Exact<{
+  url: Scalars['String']['input'];
+}>;
+
+
+export type SearchVideoQuery = { __typename?: 'RootQueryType' };
 
 export type DeleteStatementMutationVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type DeleteStatementMutation = (
-  { deleteStatement?: (
-    { id: string }
-    & { __typename?: 'StatementRemoved' }
-  ) | null }
-  & { __typename?: 'RootMutationType' }
-);
+export type DeleteStatementMutation = { __typename?: 'RootMutationType', deleteStatement?: { __typename?: 'StatementRemoved', id: string } | null };
 
-export type UpdateStatementMutationVariables = Exact<{
-  id: Scalars['ID']['input'];
-  text?: InputMaybe<Scalars['String']['input']>;
-  time?: InputMaybe<Scalars['Int']['input']>;
-  speakerId?: InputMaybe<Scalars['ID']['input']>;
-  isDraft?: InputMaybe<Scalars['Boolean']['input']>;
+export type UpdateSubscriptionMutationVariables = Exact<{
+  entityId: Scalars['ID']['input'];
+  scope: Scalars['String']['input'];
+  isSubscribed: Scalars['Boolean']['input'];
 }>;
 
 
-export type UpdateStatementMutation = (
-  { updateStatement?: (
-    { id: string, time: number, text: string, isDraft: boolean, speaker?: (
-      { id: string }
-      & { __typename?: 'Speaker' }
-    ) | null, video?: (
-      { id: string }
-      & { __typename?: 'Video' }
-    ) | null }
-    & { __typename?: 'Statement' }
-  ) | null }
-  & { __typename?: 'RootMutationType' }
-);
+export type UpdateSubscriptionMutation = { __typename?: 'RootMutationType', updateSubscription?: { __typename?: 'NotificationsSubscription', id: string, isSubscribed: boolean, reason?: string | null } | null };
 
 export type CreateCommentMutationVariables = Exact<{
   statementId: Scalars['ID']['input'];
@@ -969,32 +895,14 @@ export type CreateCommentMutationVariables = Exact<{
 }>;
 
 
-export type CreateCommentMutation = (
-  { createComment?: (
-    { id: string, text?: string | null, approve?: boolean | null, insertedAt: string, replyToId?: string | null, statementId?: string | null, user?: (
-      { id: string, username: string, pictureUrl: string }
-      & { __typename?: 'User' }
-    ) | null, source?: (
-      { id: string, url: string }
-      & { __typename?: 'Source' }
-    ) | null }
-    & { __typename?: 'Comment' }
-  ) | null }
-  & { __typename?: 'RootMutationType' }
-);
+export type CreateCommentMutation = { __typename?: 'RootMutationType', createComment?: { __typename?: 'Comment', id: string, text?: string | null, approve?: boolean | null, insertedAt: string, replyToId?: string | null, statementId?: string | null, user?: { __typename?: 'User', id: string, username: string, pictureUrl: string } | null, source?: { __typename?: 'Source', id: string, url: string } | null } | null };
 
 export type DeleteCommentMutationVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type DeleteCommentMutation = (
-  { deleteComment?: (
-    { id: string, statementId?: string | null, replyToId?: string | null }
-    & { __typename?: 'CommentRemoved' }
-  ) | null }
-  & { __typename?: 'RootMutationType' }
-);
+export type DeleteCommentMutation = { __typename?: 'RootMutationType', deleteComment?: { __typename?: 'CommentRemoved', id: string, statementId?: string | null, replyToId?: string | null } | null };
 
 export type VoteCommentMutationVariables = Exact<{
   commentId: Scalars['ID']['input'];
@@ -1002,13 +910,7 @@ export type VoteCommentMutationVariables = Exact<{
 }>;
 
 
-export type VoteCommentMutation = (
-  { voteComment?: (
-    { id: string, score: number }
-    & { __typename?: 'Comment' }
-  ) | null }
-  & { __typename?: 'RootMutationType' }
-);
+export type VoteCommentMutation = { __typename?: 'RootMutationType', voteComment?: { __typename?: 'Comment', id: string, score: number } | null };
 
 export type FlagCommentMutationVariables = Exact<{
   commentId: Scalars['ID']['input'];
@@ -1016,13 +918,7 @@ export type FlagCommentMutationVariables = Exact<{
 }>;
 
 
-export type FlagCommentMutation = (
-  { flagComment?: (
-    { id: string }
-    & { __typename?: 'CommentFlagged' }
-  ) | null }
-  & { __typename?: 'RootMutationType' }
-);
+export type FlagCommentMutation = { __typename?: 'RootMutationType', flagComment?: { __typename?: 'CommentFlagged', id: string } | null };
 
 export type SearchSpeakersQueryVariables = Exact<{
   query: Scalars['String']['input'];
@@ -1030,13 +926,7 @@ export type SearchSpeakersQueryVariables = Exact<{
 }>;
 
 
-export type SearchSpeakersQuery = (
-  { searchSpeakers?: Array<(
-    { id: string, fullName: string, slug?: string | null, picture?: string | null }
-    & { __typename?: 'Speaker' }
-  ) | null> | null }
-  & { __typename?: 'RootQueryType' }
-);
+export type SearchSpeakersQuery = { __typename?: 'RootQueryType', searchSpeakers?: Array<{ __typename?: 'Speaker', id: string, fullName: string, slug?: string | null, picture?: string | null } | null> | null };
 
 export type AddSpeakerToVideoMutationVariables = Exact<{
   videoId: Scalars['ID']['input'];
@@ -1044,13 +934,7 @@ export type AddSpeakerToVideoMutationVariables = Exact<{
 }>;
 
 
-export type AddSpeakerToVideoMutation = (
-  { addSpeakerToVideo?: (
-    { id: string, fullName: string, slug?: string | null, picture?: string | null }
-    & { __typename?: 'Speaker' }
-  ) | null }
-  & { __typename?: 'RootMutationType' }
-);
+export type AddSpeakerToVideoMutation = { __typename?: 'RootMutationType', addSpeakerToVideo?: { __typename?: 'Speaker', id: string, fullName: string, slug?: string | null, picture?: string | null } | null };
 
 export type CreateSpeakerMutationVariables = Exact<{
   videoId: Scalars['ID']['input'];
@@ -1058,13 +942,7 @@ export type CreateSpeakerMutationVariables = Exact<{
 }>;
 
 
-export type CreateSpeakerMutation = (
-  { createSpeaker?: (
-    { id: string, fullName: string, slug?: string | null, picture?: string | null }
-    & { __typename?: 'Speaker' }
-  ) | null }
-  & { __typename?: 'RootMutationType' }
-);
+export type CreateSpeakerMutation = { __typename?: 'RootMutationType', createSpeaker?: { __typename?: 'Speaker', id: string, fullName: string, slug?: string | null, picture?: string | null } | null };
 
 export type RemoveSpeakerFromVideoMutationVariables = Exact<{
   videoId: Scalars['ID']['input'];
@@ -1072,13 +950,7 @@ export type RemoveSpeakerFromVideoMutationVariables = Exact<{
 }>;
 
 
-export type RemoveSpeakerFromVideoMutation = (
-  { removeSpeakerFromVideo?: (
-    { id: string }
-    & { __typename?: 'SpeakerRemoved' }
-  ) | null }
-  & { __typename?: 'RootMutationType' }
-);
+export type RemoveSpeakerFromVideoMutation = { __typename?: 'RootMutationType', removeSpeakerFromVideo?: { __typename?: 'SpeakerRemoved', id: string } | null };
 
 export type UpdateSpeakerMutationVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -1088,32 +960,14 @@ export type UpdateSpeakerMutationVariables = Exact<{
 }>;
 
 
-export type UpdateSpeakerMutation = (
-  { updateSpeaker?: (
-    { id: string, fullName: string, title?: string | null, wikidataItemId?: string | null, picture?: string | null, slug?: string | null }
-    & { __typename?: 'Speaker' }
-  ) | null }
-  & { __typename?: 'RootMutationType' }
-);
+export type UpdateSpeakerMutation = { __typename?: 'RootMutationType', updateSpeaker?: { __typename?: 'Speaker', id: string, fullName: string, title?: string | null, wikidataItemId?: string | null, picture?: string | null, slug?: string | null } | null };
 
 export type RestoreStatementMutationVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type RestoreStatementMutation = (
-  { restoreStatement?: (
-    { id: string, text: string, time: number, isDraft: boolean, speaker?: (
-      { id: string, fullName: string, picture?: string | null }
-      & { __typename?: 'Speaker' }
-    ) | null, video?: (
-      { id: string }
-      & { __typename?: 'Video' }
-    ) | null }
-    & { __typename?: 'Statement' }
-  ) | null }
-  & { __typename?: 'RootMutationType' }
-);
+export type RestoreStatementMutation = { __typename?: 'RootMutationType', restoreStatement?: { __typename?: 'Statement', id: string, text: string, time: number, isDraft: boolean, speaker?: { __typename?: 'Speaker', id: string, fullName: string, picture?: string | null } | null, video?: { __typename?: 'Video', id: string } | null } | null };
 
 export type RestoreSpeakerMutationVariables = Exact<{
   speakerId: Scalars['ID']['input'];
@@ -1121,13 +975,21 @@ export type RestoreSpeakerMutationVariables = Exact<{
 }>;
 
 
-export type RestoreSpeakerMutation = (
-  { restoreSpeaker?: (
-    { id: string, fullName: string, slug?: string | null, picture?: string | null }
-    & { __typename?: 'Speaker' }
-  ) | null }
-  & { __typename?: 'RootMutationType' }
-);
+export type RestoreSpeakerMutation = { __typename?: 'RootMutationType', restoreSpeaker?: { __typename?: 'Speaker', id: string, fullName: string, slug?: string | null, picture?: string | null } | null };
+
+export type ModerateActionMutationVariables = Exact<{
+  actionId: Scalars['ID']['input'];
+  reason: Scalars['Int']['input'];
+  value: Scalars['Int']['input'];
+}>;
+
+
+export type ModerateActionMutation = { __typename?: 'RootMutationType' };
+
+export type RandomModerationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type RandomModerationQuery = { __typename?: 'RootQueryType' };
 
 export type SpeakerQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']['input']>;
@@ -1135,257 +997,35 @@ export type SpeakerQueryVariables = Exact<{
 }>;
 
 
-export type SpeakerQuery = (
-  { speaker?: (
-    { id: string, slug?: string | null, fullName: string, title?: string | null, wikidataItemId?: string | null, picture?: string | null, videos?: Array<(
-      { id: string, hashId: string, title: string, thumbnail: string, insertedAt: string, isPartner?: boolean | null }
-      & { __typename?: 'Video' }
-    ) | null> | null }
-    & { __typename?: 'Speaker' }
-  ) | null }
-  & { __typename?: 'RootQueryType' }
-);
+export type SpeakerQuery = { __typename?: 'RootQueryType', speaker?: { __typename?: 'Speaker', id: string, slug?: string | null, fullName: string, title?: string | null, wikidataItemId?: string | null, picture?: string | null, videos?: Array<{ __typename?: 'Video', id: string, hashId: string, title: string, thumbnail: string, insertedAt: string, isPartner?: boolean | null } | null> | null } | null };
 
 export type VideoHistoryActionsQueryVariables = Exact<{
   videoId: Scalars['ID']['input'];
 }>;
 
 
-export type VideoHistoryActionsQuery = (
-  { videoHistoryActions?: Array<(
-    { id: string, type: string, entity: string, changes?: string | null, time?: string | null, speakerId?: number | null, statementId?: number | null, commentId?: number | null, videoId?: number | null, videoHashId?: string | null, user?: (
-      { id: string, username: string, name?: string | null, pictureUrl: string, miniPictureUrl: string }
-      & { __typename?: 'User' }
-    ) | null }
-    & { __typename?: 'UserAction' }
-  ) | null> | null }
-  & { __typename?: 'RootQueryType' }
-);
+export type VideoHistoryActionsQuery = { __typename?: 'RootQueryType', videoHistoryActions?: Array<{ __typename?: 'UserAction', id: string, type: string, entity: string, changes?: string | null, time?: string | null, speakerId?: number | null, statementId?: number | null, commentId?: number | null, videoId?: number | null, videoHashId?: string | null, user?: { __typename?: 'User', id: string, username: string, name?: string | null, pictureUrl: string, miniPictureUrl: string } | null } | null> | null };
 
 export type VideoHistoryActionAddedSubscriptionVariables = Exact<{
   videoId: Scalars['ID']['input'];
 }>;
 
 
-export type VideoHistoryActionAddedSubscription = (
-  { videoHistoryActionAdded?: (
-    { id: string, type: string, entity: string, changes?: string | null, time?: string | null, speakerId?: number | null, statementId?: number | null, commentId?: number | null, videoId?: number | null, videoHashId?: string | null, user?: (
-      { id: string, username: string, name?: string | null, pictureUrl: string, miniPictureUrl: string }
-      & { __typename?: 'User' }
-    ) | null }
-    & { __typename?: 'UserAction' }
-  ) | null }
-  & { __typename?: 'RootSubscriptionType' }
-);
+export type VideoHistoryActionAddedSubscription = { __typename?: 'RootSubscriptionType', videoHistoryActionAdded?: { __typename?: 'UserAction', id: string, type: string, entity: string, changes?: string | null, time?: string | null, speakerId?: number | null, statementId?: number | null, commentId?: number | null, videoId?: number | null, videoHashId?: string | null, user?: { __typename?: 'User', id: string, username: string, name?: string | null, pictureUrl: string, miniPictureUrl: string } | null } | null };
 
-export type StatementAddedSubscriptionVariables = Exact<{
-  videoId: Scalars['ID']['input'];
+export type StatementHistoryActionsQueryVariables = Exact<{
+  statementId: Scalars['ID']['input'];
 }>;
 
 
-export type StatementAddedSubscription = (
-  { statementAdded?: (
-    { id: string, time: number, text: string, isDraft: boolean, speaker?: (
-      { id: string, fullName: string, picture?: string | null }
-      & { __typename?: 'Speaker' }
-    ) | null, video?: (
-      { id: string }
-      & { __typename?: 'Video' }
-    ) | null }
-    & { __typename?: 'Statement' }
-  ) | null }
-  & { __typename?: 'RootSubscriptionType' }
-);
+export type StatementHistoryActionsQuery = { __typename?: 'RootQueryType', statementHistoryActions?: Array<{ __typename?: 'UserAction', id: string, type: string, entity: string, changes?: string | null, time?: string | null, speakerId?: number | null, statementId?: number | null, commentId?: number | null, videoId?: number | null, videoHashId?: string | null, user?: { __typename?: 'User', id: string, username: string, name?: string | null, pictureUrl: string, miniPictureUrl: string } | null } | null> | null };
 
-export type StatementUpdatedSubscriptionVariables = Exact<{
-  videoId: Scalars['ID']['input'];
+export type StatementHistoryActionAddedSubscriptionVariables = Exact<{
+  statementId: Scalars['ID']['input'];
 }>;
 
 
-export type StatementUpdatedSubscription = (
-  { statementUpdated?: (
-    { id: string, time: number, text: string, isDraft: boolean, speaker?: (
-      { id: string, fullName: string, picture?: string | null }
-      & { __typename?: 'Speaker' }
-    ) | null, video?: (
-      { id: string }
-      & { __typename?: 'Video' }
-    ) | null }
-    & { __typename?: 'Statement' }
-  ) | null }
-  & { __typename?: 'RootSubscriptionType' }
-);
-
-export type StatementRemovedSubscriptionVariables = Exact<{
-  videoId: Scalars['ID']['input'];
-}>;
-
-
-export type StatementRemovedSubscription = (
-  { statementRemoved?: (
-    { id: string }
-    & { __typename?: 'StatementRemoved' }
-  ) | null }
-  & { __typename?: 'RootSubscriptionType' }
-);
-
-export type CommentAddedSubscriptionVariables = Exact<{
-  videoId: Scalars['ID']['input'];
-}>;
-
-
-export type CommentAddedSubscription = (
-  { commentAdded?: (
-    { id: string, text?: string | null, approve?: boolean | null, score: number, insertedAt: string, replyToId?: string | null, statementId?: string | null, user?: (
-      { id: string, username: string, pictureUrl: string }
-      & { __typename?: 'User' }
-    ) | null, source?: (
-      { id: string, url: string }
-      & { __typename?: 'Source' }
-    ) | null }
-    & { __typename?: 'Comment' }
-  ) | null }
-  & { __typename?: 'RootSubscriptionType' }
-);
-
-export type CommentUpdatedSubscriptionVariables = Exact<{
-  videoId: Scalars['ID']['input'];
-}>;
-
-
-export type CommentUpdatedSubscription = (
-  { commentUpdated?: (
-    { id: string, text?: string | null, approve?: boolean | null, score: number, insertedAt: string, replyToId?: string | null, statementId?: string | null, user?: (
-      { id: string, username: string, pictureUrl: string }
-      & { __typename?: 'User' }
-    ) | null, source?: (
-      { id: string, url: string }
-      & { __typename?: 'Source' }
-    ) | null }
-    & { __typename?: 'Comment' }
-  ) | null }
-  & { __typename?: 'RootSubscriptionType' }
-);
-
-export type CommentRemovedSubscriptionVariables = Exact<{
-  videoId: Scalars['ID']['input'];
-}>;
-
-
-export type CommentRemovedSubscription = (
-  { commentRemoved?: (
-    { id: string, statementId?: string | null, replyToId?: string | null }
-    & { __typename?: 'CommentRemoved' }
-  ) | null }
-  & { __typename?: 'RootSubscriptionType' }
-);
-
-export type CommentScoreDiffSubscriptionVariables = Exact<{
-  videoId: Scalars['ID']['input'];
-}>;
-
-
-export type CommentScoreDiffSubscription = (
-  { commentScoreDiff?: (
-    { diff: number, comment: (
-      { id: string, statementId?: string | null, replyToId?: string | null }
-      & { __typename?: 'CommentReference' }
-    ) }
-    & { __typename?: 'CommentScoreDiff' }
-  ) | null }
-  & { __typename?: 'RootSubscriptionType' }
-);
-
-export type StatementAddedSubscriptionVariables = Exact<{
-  videoId: Scalars['ID']['input'];
-}>;
-
-
-export type StatementAddedSubscription = (
-  { statementAdded?: (
-    { id: string, time: number, text: string, isDraft: boolean, video?: (
-      { id: string }
-      & { __typename?: 'Video' }
-    ) | null }
-    & { __typename?: 'Statement' }
-  ) | null }
-  & { __typename?: 'RootSubscriptionType' }
-);
-
-export type CommentAddedSubscriptionVariables = Exact<{
-  videoId: Scalars['ID']['input'];
-}>;
-
-
-export type CommentAddedSubscription = (
-  { commentAdded?: (
-    { id: string, text?: string | null, replyToId?: string | null, score: number }
-    & { __typename?: 'Comment' }
-  ) | null }
-  & { __typename?: 'RootSubscriptionType' }
-);
-
-export type CommentScoreDiffSubscriptionVariables = Exact<{
-  videoId: Scalars['ID']['input'];
-}>;
-
-
-export type CommentScoreDiffSubscription = (
-  { commentScoreDiff?: (
-    { diff: number, comment: (
-      { id: string, statementId?: string | null, replyToId?: string | null }
-      & { __typename?: 'CommentReference' }
-    ) }
-    & { __typename?: 'CommentScoreDiff' }
-  ) | null }
-  & { __typename?: 'RootSubscriptionType' }
-);
-
-export type StatementRemovedSubscriptionVariables = Exact<{
-  videoId: Scalars['ID']['input'];
-}>;
-
-
-export type StatementRemovedSubscription = (
-  { statementRemoved?: (
-    { id: string }
-    & { __typename?: 'StatementRemoved' }
-  ) | null }
-  & { __typename?: 'RootSubscriptionType' }
-);
-
-export type CommentRemovedSubscriptionVariables = Exact<{
-  videoId: Scalars['ID']['input'];
-}>;
-
-
-export type CommentRemovedSubscription = (
-  { commentRemoved?: (
-    { id: string, statementId?: string | null, replyToId?: string | null }
-    & { __typename?: 'CommentRemoved' }
-  ) | null }
-  & { __typename?: 'RootSubscriptionType' }
-);
-
-export type CreateStatementMutationVariables = Exact<{
-  videoId: Scalars['ID']['input'];
-  text: Scalars['String']['input'];
-  time: Scalars['Int']['input'];
-  speakerId?: InputMaybe<Scalars['ID']['input']>;
-  isDraft?: InputMaybe<Scalars['Boolean']['input']>;
-}>;
-
-
-export type CreateStatementMutation = (
-  { createStatement?: (
-    { id: string, time: number, text: string, isDraft: boolean, video?: (
-      { id: string }
-      & { __typename?: 'Video' }
-    ) | null }
-    & { __typename?: 'Statement' }
-  ) | null }
-  & { __typename?: 'RootMutationType' }
-);
+export type StatementHistoryActionAddedSubscription = { __typename?: 'RootSubscriptionType', statementHistoryActionAdded?: { __typename?: 'UserAction', id: string, type: string, entity: string, changes?: string | null, time?: string | null, speakerId?: number | null, statementId?: number | null, commentId?: number | null, videoId?: number | null, videoHashId?: string | null, user?: { __typename?: 'User', id: string, username: string, name?: string | null, pictureUrl: string, miniPictureUrl: string } | null } | null };
 
 export type LoggedInUserNotificationsQueryVariables = Exact<{
   page?: Scalars['Int']['input'];
@@ -1394,34 +1034,7 @@ export type LoggedInUserNotificationsQueryVariables = Exact<{
 }>;
 
 
-export type LoggedInUserNotificationsQuery = (
-  { loggedInUser?: (
-    { id: string, notifications?: (
-      { pageNumber?: number | null, pageSize?: number | null, totalEntries?: number | null, totalPages?: number | null, entries?: Array<(
-        { id: string, seenAt?: string | null, insertedAt: string, type: string, action?: (
-          { entity: string, type: string, speakerId?: number | null, statementId?: number | null, commentId?: number | null, changes?: string | null, user?: (
-            { id: string, name?: string | null, username: string }
-            & { __typename?: 'User' }
-          ) | null, video?: (
-            { id: string, hashId: string, title: string }
-            & { __typename?: 'Video' }
-          ) | null, speaker?: (
-            { id: string, slug?: string | null, fullName: string }
-            & { __typename?: 'Speaker' }
-          ) | null, comment?: (
-            { id: string, text?: string | null }
-            & { __typename?: 'Comment' }
-          ) | null }
-          & { __typename?: 'UserAction' }
-        ) | null }
-        & { __typename?: 'Notification' }
-      ) | null> | null }
-      & { __typename?: 'PaginatedNotifications' }
-    ) | null }
-    & { __typename?: 'User' }
-  ) | null }
-  & { __typename?: 'RootQueryType' }
-);
+export type LoggedInUserNotificationsQuery = { __typename?: 'RootQueryType', loggedInUser?: { __typename?: 'User', id: string, notifications?: { __typename?: 'PaginatedNotifications', pageNumber?: number | null, pageSize?: number | null, totalEntries?: number | null, totalPages?: number | null, entries?: Array<{ __typename?: 'Notification', id: string, seenAt?: string | null, insertedAt: string, type: string, action?: { __typename?: 'UserAction', entity: string, type: string, speakerId?: number | null, statementId?: number | null, commentId?: number | null, changes?: string | null, user?: { __typename?: 'User', id: string, name?: string | null, username: string } | null, video?: { __typename?: 'Video', id: string, hashId: string, title: string } | null, speaker?: { __typename?: 'Speaker', id: string, slug?: string | null, fullName: string } | null, comment?: { __typename?: 'Comment', id: string, text?: string | null } | null } | null } | null> | null } | null } | null };
 
 export type UpdateNotificationMutationVariables = Exact<{
   ids: Array<InputMaybe<Scalars['ID']['input']>> | InputMaybe<Scalars['ID']['input']>;
@@ -1429,28 +1042,7 @@ export type UpdateNotificationMutationVariables = Exact<{
 }>;
 
 
-export type UpdateNotificationMutation = (
-  { updateNotifications?: Array<(
-    { id: string, seenAt?: string | null }
-    & { __typename?: 'Notification' }
-  ) | null> | null }
-  & { __typename?: 'RootMutationType' }
-);
-
-export type UpdateSubscriptionMutationVariables = Exact<{
-  entityId: Scalars['ID']['input'];
-  scope: Scalars['String']['input'];
-  isSubscribed: Scalars['Boolean']['input'];
-}>;
-
-
-export type UpdateSubscriptionMutation = (
-  { updateSubscription?: (
-    { id: string, isSubscribed: boolean, reason?: string | null }
-    & { __typename?: 'NotificationsSubscription' }
-  ) | null }
-  & { __typename?: 'RootMutationType' }
-);
+export type UpdateNotificationMutation = { __typename?: 'RootMutationType', updateNotifications?: Array<{ __typename?: 'Notification', id: string, seenAt?: string | null } | null> | null };
 
 export type CreateStatementMutationVariables = Exact<{
   videoId: Scalars['ID']['input'];
@@ -1461,16 +1053,7 @@ export type CreateStatementMutationVariables = Exact<{
 }>;
 
 
-export type CreateStatementMutation = (
-  { createStatement?: (
-    { id: string, time: number, text: string, isDraft: boolean, video?: (
-      { id: string }
-      & { __typename?: 'Video' }
-    ) | null }
-    & { __typename?: 'Statement' }
-  ) | null }
-  & { __typename?: 'RootMutationType' }
-);
+export type CreateStatementMutation = { __typename?: 'RootMutationType', createStatement?: { __typename?: 'Statement', id: string, time: number, text: string, isDraft: boolean, speaker?: { __typename?: 'Speaker', id: string } | null, video?: { __typename?: 'Video', id: string } | null } | null };
 
 export type UpdateStatementMutationVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -1481,19 +1064,7 @@ export type UpdateStatementMutationVariables = Exact<{
 }>;
 
 
-export type UpdateStatementMutation = (
-  { updateStatement?: (
-    { id: string, time: number, text: string, isDraft: boolean, speaker?: (
-      { id: string }
-      & { __typename?: 'Speaker' }
-    ) | null, video?: (
-      { id: string }
-      & { __typename?: 'Video' }
-    ) | null }
-    & { __typename?: 'Statement' }
-  ) | null }
-  & { __typename?: 'RootMutationType' }
-);
+export type UpdateStatementMutation = { __typename?: 'RootMutationType', updateStatement?: { __typename?: 'Statement', id: string, time: number, text: string, isDraft: boolean, speaker?: { __typename?: 'Speaker', id: string } | null, video?: { __typename?: 'Video', id: string } | null } | null };
 
 export type UserActivityLogQueryVariables = Exact<{
   username: Scalars['String']['input'];
@@ -1503,67 +1074,14 @@ export type UserActivityLogQueryVariables = Exact<{
 }>;
 
 
-export type UserActivityLogQuery = (
-  { user?: (
-    { id: string, username: string, name?: string | null, actions?: (
-      { pageNumber?: number | null, totalPages?: number | null, entries?: Array<(
-        { id: string, type: string, entity: string, time?: string | null, changes?: string | null, videoHashId?: string | null, statementId?: number | null, commentId?: number | null, speakerId?: number | null, authorReputationChange?: number | null, targetReputationChange?: number | null, userId?: string | null, targetUserId?: string | null, user?: (
-          { id: string, username: string, name?: string | null }
-          & { __typename?: 'User' }
-        ) | null, targetUser?: (
-          { id: string, username: string, name?: string | null }
-          & { __typename?: 'User' }
-        ) | null }
-        & { __typename?: 'UserAction' }
-      ) | null> | null }
-      & { __typename?: 'ActivityLog' }
-    ) | null }
-    & { __typename?: 'User' }
-  ) | null }
-  & { __typename?: 'RootQueryType' }
-);
+export type UserActivityLogQuery = { __typename?: 'RootQueryType', user?: { __typename?: 'User', id: string, username: string, name?: string | null, actions?: { __typename?: 'ActivityLog', pageNumber?: number | null, totalPages?: number | null, entries?: Array<{ __typename?: 'UserAction', id: string, type: string, entity: string, time?: string | null, changes?: string | null, videoHashId?: string | null, statementId?: number | null, commentId?: number | null, speakerId?: number | null, authorReputationChange?: number | null, targetReputationChange?: number | null, userId?: string | null, targetUserId?: string | null, user?: { __typename?: 'User', id: string, username: string, name?: string | null } | null, targetUser?: { __typename?: 'User', id: string, username: string, name?: string | null } | null } | null> | null } | null } | null };
 
 export type StartAutomaticStatementsExtractionMutationVariables = Exact<{
   videoId: Scalars['ID']['input'];
 }>;
 
 
-export type StartAutomaticStatementsExtractionMutation = (
-  { startAutomaticStatementsExtraction?: (
-    { id: string }
-    & { __typename?: 'Video' }
-  ) | null }
-  & { __typename?: 'RootMutationType' }
-);
-
-export type VideoCaptionsQueryVariables = Exact<{
-  videoId: Scalars['ID']['input'];
-}>;
-
-
-export type VideoCaptionsQuery = (
-  { video?: (
-    { id: string, captions?: Array<(
-      { text: string, start: number, duration?: number | null }
-      & { __typename?: 'VideoCaption' }
-    ) | null> | null }
-    & { __typename?: 'Video' }
-  ) | null }
-  & { __typename?: 'RootQueryType' }
-);
-
-export type StartAutomaticStatementsExtractionMutationVariables = Exact<{
-  videoId: Scalars['ID']['input'];
-}>;
-
-
-export type StartAutomaticStatementsExtractionMutation = (
-  { startAutomaticStatementsExtraction?: (
-    { id: string }
-    & { __typename?: 'Video' }
-  ) | null }
-  & { __typename?: 'RootMutationType' }
-);
+export type StartAutomaticStatementsExtractionMutation = { __typename?: 'RootMutationType', startAutomaticStatementsExtraction?: { __typename?: 'Video', id: string } | null };
 
 export type UpdateSubscriptionMutationVariables = Exact<{
   entityId: Scalars['ID']['input'];
@@ -1572,164 +1090,60 @@ export type UpdateSubscriptionMutationVariables = Exact<{
 }>;
 
 
-export type UpdateSubscriptionMutation = (
-  { updateSubscription?: (
-    { id: string, isSubscribed: boolean }
-    & { __typename?: 'NotificationsSubscription' }
-  ) | null }
-  & { __typename?: 'RootMutationType' }
-);
+export type UpdateSubscriptionMutation = { __typename?: 'RootMutationType', updateSubscription?: { __typename?: 'NotificationsSubscription', id: string, isSubscribed: boolean, reason?: string | null } | null };
 
-export type CommentFieldsFragment = (
-  { id: string, text?: string | null, approve?: boolean | null, score: number, insertedAt: string, replyToId?: string | null, statementId?: string | null, user?: (
-    { id: string, username: string, pictureUrl: string, miniPictureUrl: string }
-    & { __typename?: 'User' }
-  ) | null, source?: (
-    { id: string, url: string }
-    & { __typename?: 'Source' }
-  ) | null }
-  & { __typename?: 'Comment' }
-);
+export type VideoCaptionsQueryVariables = Exact<{
+  videoId: Scalars['ID']['input'];
+}>;
 
-export type StatementFieldsFragment = (
-  { id: string, text: string, time: number, isDraft: boolean, speaker?: (
-    { id: string, fullName: string, picture?: string | null }
-    & { __typename?: 'Speaker' }
-  ) | null, comments?: Array<(
-    { id: string, text?: string | null, approve?: boolean | null, score: number, insertedAt: string, replyToId?: string | null, statementId?: string | null, user?: (
-      { id: string, username: string, pictureUrl: string, miniPictureUrl: string }
-      & { __typename?: 'User' }
-    ) | null, source?: (
-      { id: string, url: string }
-      & { __typename?: 'Source' }
-    ) | null }
-    & { __typename?: 'Comment' }
-  ) | null> | null }
-  & { __typename?: 'Statement' }
-);
+
+export type VideoCaptionsQuery = { __typename?: 'RootQueryType', video?: { __typename?: 'Video', id: string, captions?: Array<{ __typename?: 'VideoCaption', text: string, start: number, duration?: number | null } | null> | null } | null };
+
+export type CommentFieldsFragment = { __typename?: 'Comment', id: string, text?: string | null, approve?: boolean | null, score: number, insertedAt: string, replyToId?: string | null, statementId?: string | null, user?: { __typename?: 'User', id: string, username: string, pictureUrl: string, miniPictureUrl: string, speakerId?: string | null } | null, source?: { __typename?: 'Source', id: string, url: string, title?: string | null, siteName?: string | null } | null };
+
+export type StatementFieldsFragment = { __typename?: 'Statement', id: string, text: string, time: number, isDraft: boolean, speaker?: { __typename?: 'Speaker', id: string, fullName: string, picture?: string | null, title?: string | null } | null, comments?: Array<{ __typename?: 'Comment', id: string, text?: string | null, approve?: boolean | null, score: number, insertedAt: string, replyToId?: string | null, statementId?: string | null, user?: { __typename?: 'User', id: string, username: string, pictureUrl: string, miniPictureUrl: string, speakerId?: string | null } | null, source?: { __typename?: 'Source', id: string, url: string, title?: string | null, siteName?: string | null } | null } | null> | null };
 
 export type VideoDebateQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type VideoDebateQuery = (
-  { video?: (
-    { id: string, hashId: string, title: string, url: string, thumbnail: string, language?: string | null, unlisted: boolean, youtubeOffset: number, speakers?: Array<(
-      { id: string, fullName: string, title?: string | null, wikidataItemId?: string | null, slug?: string | null, picture?: string | null }
-      & { __typename?: 'Speaker' }
-    ) | null> | null, statements?: Array<(
-      { id: string, text: string, time: number, isDraft: boolean, speaker?: (
-        { id: string, fullName: string, picture?: string | null }
-        & { __typename?: 'Speaker' }
-      ) | null, comments?: Array<(
-        { id: string, text?: string | null, approve?: boolean | null, score: number, insertedAt: string, replyToId?: string | null, statementId?: string | null, user?: (
-          { id: string, username: string, pictureUrl: string, miniPictureUrl: string }
-          & { __typename?: 'User' }
-        ) | null, source?: (
-          { id: string, url: string }
-          & { __typename?: 'Source' }
-        ) | null }
-        & { __typename?: 'Comment' }
-      ) | null> | null }
-      & { __typename?: 'Statement' }
-    ) | null> | null }
-    & { __typename?: 'Video' }
-  ) | null, loggedInUser?: (
-    { id: string, votes?: any | null }
-    & { __typename?: 'User' }
-  ) | null }
-  & { __typename?: 'RootQueryType' }
-);
+export type VideoDebateQuery = { __typename?: 'RootQueryType', video?: { __typename?: 'Video', id: string, hashId: string, title: string, url: string, thumbnail: string, language?: string | null, unlisted: boolean, youtubeOffset: number, youtubeId?: string | null, speakers?: Array<{ __typename?: 'Speaker', id: string, fullName: string, title?: string | null, wikidataItemId?: string | null, slug?: string | null, picture?: string | null } | null> | null, statements?: Array<{ __typename?: 'Statement', id: string, text: string, time: number, isDraft: boolean, speaker?: { __typename?: 'Speaker', id: string, fullName: string, picture?: string | null, title?: string | null } | null, comments?: Array<{ __typename?: 'Comment', id: string, text?: string | null, approve?: boolean | null, score: number, insertedAt: string, replyToId?: string | null, statementId?: string | null, user?: { __typename?: 'User', id: string, username: string, pictureUrl: string, miniPictureUrl: string, speakerId?: string | null } | null, source?: { __typename?: 'Source', id: string, url: string, title?: string | null, siteName?: string | null } | null } | null> | null } | null> | null } | null, loggedInUser?: { __typename?: 'User', id: string, votes?: any | null } | null };
 
 export type StatementAddedSubscriptionVariables = Exact<{
   videoId: Scalars['ID']['input'];
 }>;
 
 
-export type StatementAddedSubscription = (
-  { statementAdded?: (
-    { id: string, text: string, time: number, isDraft: boolean, video?: (
-      { id: string }
-      & { __typename?: 'Video' }
-    ) | null, speaker?: (
-      { id: string, fullName: string, picture?: string | null }
-      & { __typename?: 'Speaker' }
-    ) | null, comments?: Array<(
-      { id: string, text?: string | null, approve?: boolean | null, score: number, insertedAt: string, replyToId?: string | null, statementId?: string | null, user?: (
-        { id: string, username: string, pictureUrl: string, miniPictureUrl: string }
-        & { __typename?: 'User' }
-      ) | null, source?: (
-        { id: string, url: string }
-        & { __typename?: 'Source' }
-      ) | null }
-      & { __typename?: 'Comment' }
-    ) | null> | null }
-    & { __typename?: 'Statement' }
-  ) | null }
-  & { __typename?: 'RootSubscriptionType' }
-);
+export type StatementAddedSubscription = { __typename?: 'RootSubscriptionType', statementAdded?: { __typename?: 'Statement', id: string, text: string, time: number, isDraft: boolean, video?: { __typename?: 'Video', id: string } | null, speaker?: { __typename?: 'Speaker', id: string, fullName: string, picture?: string | null, title?: string | null } | null, comments?: Array<{ __typename?: 'Comment', id: string, text?: string | null, approve?: boolean | null, score: number, insertedAt: string, replyToId?: string | null, statementId?: string | null, user?: { __typename?: 'User', id: string, username: string, pictureUrl: string, miniPictureUrl: string, speakerId?: string | null } | null, source?: { __typename?: 'Source', id: string, url: string, title?: string | null, siteName?: string | null } | null } | null> | null } | null };
 
 export type StatementRemovedSubscriptionVariables = Exact<{
   videoId: Scalars['ID']['input'];
 }>;
 
 
-export type StatementRemovedSubscription = (
-  { statementRemoved?: (
-    { id: string }
-    & { __typename?: 'StatementRemoved' }
-  ) | null }
-  & { __typename?: 'RootSubscriptionType' }
-);
+export type StatementRemovedSubscription = { __typename?: 'RootSubscriptionType', statementRemoved?: { __typename?: 'StatementRemoved', id: string } | null };
 
 export type CommentAddedSubscriptionVariables = Exact<{
   videoId: Scalars['ID']['input'];
 }>;
 
 
-export type CommentAddedSubscription = (
-  { commentAdded?: (
-    { id: string, text?: string | null, approve?: boolean | null, score: number, insertedAt: string, replyToId?: string | null, statementId?: string | null, user?: (
-      { id: string, username: string, pictureUrl: string, miniPictureUrl: string }
-      & { __typename?: 'User' }
-    ) | null, source?: (
-      { id: string, url: string }
-      & { __typename?: 'Source' }
-    ) | null }
-    & { __typename?: 'Comment' }
-  ) | null }
-  & { __typename?: 'RootSubscriptionType' }
-);
+export type CommentAddedSubscription = { __typename?: 'RootSubscriptionType', commentAdded?: { __typename?: 'Comment', id: string, text?: string | null, approve?: boolean | null, score: number, insertedAt: string, replyToId?: string | null, statementId?: string | null, user?: { __typename?: 'User', id: string, username: string, pictureUrl: string, miniPictureUrl: string, speakerId?: string | null } | null, source?: { __typename?: 'Source', id: string, url: string, title?: string | null, siteName?: string | null } | null } | null };
 
 export type CommentRemovedSubscriptionVariables = Exact<{
   videoId: Scalars['ID']['input'];
 }>;
 
 
-export type CommentRemovedSubscription = (
-  { commentRemoved?: (
-    { id: string, statementId?: string | null, replyToId?: string | null }
-    & { __typename?: 'CommentRemoved' }
-  ) | null }
-  & { __typename?: 'RootSubscriptionType' }
-);
+export type CommentRemovedSubscription = { __typename?: 'RootSubscriptionType', commentRemoved?: { __typename?: 'CommentRemoved', id: string, statementId?: string | null, replyToId?: string | null } | null };
 
 export type CommentScoreDiffSubscriptionVariables = Exact<{
   videoId: Scalars['ID']['input'];
 }>;
 
 
-export type CommentScoreDiffSubscription = (
-  { commentScoreDiff?: (
-    { diff: number, comment: (
-      { id: string, statementId?: string | null, replyToId?: string | null }
-      & { __typename?: 'CommentReference' }
-    ) }
-    & { __typename?: 'CommentScoreDiff' }
-  ) | null }
-  & { __typename?: 'RootSubscriptionType' }
-);
+export type CommentScoreDiffSubscription = { __typename?: 'RootSubscriptionType', commentScoreDiff?: { __typename?: 'CommentScoreDiff', diff: number, comment: { __typename?: 'CommentReference', id: string, statementId?: string | null, replyToId?: string | null } } | null };
 
 export type EditVideoMutationVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -1737,10 +1151,12 @@ export type EditVideoMutationVariables = Exact<{
 }>;
 
 
-export type EditVideoMutation = (
-  { editVideo?: (
-    { id: string, unlisted: boolean }
-    & { __typename?: 'Video' }
-  ) | null }
-  & { __typename?: 'RootMutationType' }
-);
+export type EditVideoMutation = { __typename?: 'RootMutationType', editVideo?: { __typename?: 'Video', id: string, unlisted: boolean } | null };
+
+export type ShiftStatementsMutationVariables = Exact<{
+  videoId: Scalars['ID']['input'];
+  youtubeOffset: Scalars['Int']['input'];
+}>;
+
+
+export type ShiftStatementsMutation = { __typename?: 'RootMutationType', shiftStatements?: { __typename?: 'Video', id: string, youtubeId?: string | null, youtubeOffset: number } | null };

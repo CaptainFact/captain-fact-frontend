@@ -1,9 +1,8 @@
-import { useMutation } from '@apollo/client'
+import { gql, useMutation } from '@apollo/client'
 import { Formik } from 'formik'
-import { gql } from '@apollo/client'
 import { ChevronLeft, ChevronRight, Lock, Mic, Save, Slash, Unlock } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
-import { withTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 
 import { cn } from '@/lib/css-utils'
 import { toastError } from '@/lib/toasts'
@@ -38,7 +37,6 @@ const CREATE_STATEMENT_MUTATION = gql`
       time
       text
       isDraft
-      speakerId
       speaker {
         id
       }
@@ -49,14 +47,13 @@ const CREATE_STATEMENT_MUTATION = gql`
   }
 `
 
-const UPDATE_STATEMENT_MUTATION = gql`
+export const UPDATE_STATEMENT_MUTATION = gql`
   mutation UpdateStatement($id: ID!, $text: String, $time: Int, $speakerId: ID, $isDraft: Boolean) {
     updateStatement(id: $id, text: $text, time: $time, speakerId: $speakerId, isDraft: $isDraft) {
       id
       time
       text
       isDraft
-      speakerId
       speaker {
         id
       }
@@ -72,14 +69,13 @@ const StatementForm = ({
   initialValues,
   speakers,
   onAbort,
-  onConfirm,
   onSetScrollTo,
   onSuccess,
   // TODO: THis position is not used anymore
   position = 0,
   videoId,
-  t,
 }) => {
+  const { t } = useTranslation('videoDebate')
   const containerRef = useRef(null)
   const [lockedTime, setLockedTime] = useState(
     initialValues.time === undefined ? position : initialValues.time + offset,
@@ -141,11 +137,7 @@ const StatementForm = ({
       let response
       const isUpdate = initialValues.id !== undefined
 
-      if (isUpdate && onConfirm) {
-        // For updates, use onConfirm if provided (for backward compatibility)
-        // Ensure id is included in the statement object
-        response = await onConfirm({ ...statement, id: initialValues.id })
-      } else if (isUpdate) {
+      if (isUpdate) {
         // For updates, use GraphQL mutation
         const result = await updateStatement({
           variables: {
@@ -157,11 +149,8 @@ const StatementForm = ({
           },
         })
         response = result.data?.updateStatement || { id: initialValues.id }
+        onSuccess?.()
       } else {
-        // For new statements, use GraphQL mutation
-        if (!videoId) {
-          throw new Error('videoId is required for creating new statements')
-        }
         const result = await createStatement({
           variables: {
             videoId: videoId,
@@ -208,16 +197,7 @@ const StatementForm = ({
       onSubmit={handleSubmit}
       enableReinitialize
     >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        isSubmitting,
-        setFieldValue,
-      }) => (
+      {({ values, errors, touched, handleBlur, handleSubmit, isSubmitting, setFieldValue }) => (
         <form
           data-cy="statement-form"
           ref={containerRef}
@@ -387,4 +367,4 @@ const StatementForm = ({
   )
 }
 
-export default withTranslation('videoDebate')(StatementForm)
+export default StatementForm

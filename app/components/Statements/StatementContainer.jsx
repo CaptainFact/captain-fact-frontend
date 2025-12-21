@@ -5,7 +5,7 @@ import { withTranslation } from 'react-i18next'
 
 import { toastError } from '@/lib/toasts'
 
-import { DELETE_STATEMENT_MUTATION, UPDATE_STATEMENT_MUTATION } from '../../API/graphql_queries'
+import { DELETE_STATEMENT_MUTATION } from '../../API/graphql_queries'
 import { MIN_REPUTATION_REMOVE_STATEMENT, MIN_REPUTATION_UPDATE_STATEMENT } from '../../constants'
 import CommentForm from '../Comments/CommentForm'
 import DialogConfirmDelete from '../Dialogs/DialogConfirmDelete'
@@ -15,7 +15,7 @@ import { Card } from '../ui/card'
 import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
 import Statement from './Statement'
 import StatementComments from './StatementComments'
-import StatementForm from './StatementForm'
+import StatementForm, { UPDATE_STATEMENT_MUTATION } from './StatementForm'
 
 const StatementContainer = ({
   statement,
@@ -36,25 +36,6 @@ const StatementContainer = ({
   const [updateStatement] = useMutation(UPDATE_STATEMENT_MUTATION)
 
   const speaker = statement.speaker
-
-  const handleUpdateStatement = async (updatedStatement) => {
-    try {
-      await updateStatement({
-        variables: {
-          id: updatedStatement.id,
-          text: updatedStatement.text,
-          time: updatedStatement.time,
-          speakerId: updatedStatement.speakerId || null,
-          isDraft: updatedStatement.isDraft || false,
-        },
-      })
-      setIsEditing(false)
-      return { id: updatedStatement.id }
-    } catch (error) {
-      toastError(error)
-      throw error
-    }
-  }
 
   const handleDeleteStatement = async () => {
     try {
@@ -114,7 +95,7 @@ const StatementContainer = ({
           initialValues={statement}
           speakers={speakers}
           onAbort={() => setIsEditing(false)}
-          onConfirm={handleUpdateStatement}
+          onSuccess={() => setIsEditing(false)}
           onSetScrollTo={onSetScrollTo}
         />
       ) : (

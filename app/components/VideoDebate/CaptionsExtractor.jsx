@@ -16,7 +16,7 @@ import ActionBubbleMenu, { ActionBubble } from './ActionBubbleMenu'
 
 const captionsQuery = gql`
   query VideoCaptionsQuery($videoId: ID!) {
-    video(hashId: $videoId) {
+    video(id: $videoId) {
       id
       captions {
         text

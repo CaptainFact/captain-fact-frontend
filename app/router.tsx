@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 // Import Views
 import Layout from './components/App/Layout'
-import SubscriptionPOC from './components/GraphQL/SubscriptionPOC'
 import Help from './components/Help/Help'
 import Home from './components/Home/Home'
 import LogoutPage from './components/LoggedInUser/LogoutPage'
@@ -67,7 +66,6 @@ const CFRouter = () => (
         <Route path="/extension" exact component={BrowserExtensionsPage} />
         <Route path="/moderation" exact component={Moderation} />
         <Route path="/support-us" exact component={SupportUs} />
-        <Route path="/graphql-subscription-poc" exact component={SubscriptionPOC} />
         <Route path="/search/:entity(videos|statements|speakers)?" component={SearchPage} />
         <Route path="*" component={NotFound} />
       </Switch>

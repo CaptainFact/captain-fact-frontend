@@ -76,7 +76,9 @@ const ColumnDebate = ({
   }
 
   const renderContent = () => {
-    if (view === 'history') {
+    if (isLoading) {
+      return <LoadingFrame title={t('loading.statements')} />
+    } else if (view === 'history') {
       return <VideoDebateHistory videoId={videoId} />
     } else if (view === 'captions') {
       return (
@@ -85,10 +87,6 @@ const ColumnDebate = ({
         </div>
       )
     } else if (view === 'debate') {
-      if (isLoading) {
-        return <LoadingFrame title={t('loading.statements')} />
-      }
-
       const hasMessages = video?.unlisted || !hasStatementsComponents
       return (
         <div>
