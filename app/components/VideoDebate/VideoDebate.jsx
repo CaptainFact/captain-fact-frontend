@@ -9,8 +9,8 @@ import { toAbsoluteURL, videoURL } from '../../lib/cf_routes'
 import { getHDThumbnailUrl } from '../../lib/video_utils'
 import BackgroundNotifier from '../App/BackgroundNotifier'
 import { ErrorView } from '../Utils/ErrorView'
-import ColumnDebateV2 from './ColumnDebateV2'
-import ColumnVideoV2 from './ColumnVideoV2'
+import ColumnDebateV2 from './ColumnDebate'
+import ColumnVideoV2 from './ColumnVideo'
 
 // GraphQL Fragments
 const COMMENT_FRAGMENT = gql`

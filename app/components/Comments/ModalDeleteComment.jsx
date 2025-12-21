@@ -2,7 +2,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import DialogConfirmDelete from '../Dialogs/DialogConfirmDelete'
-import CommentDisplayV2 from './CommentDisplayV2'
+import CommentDisplayV2 from './CommentDisplay'
 
 const ModalDeleteCommentV2 = ({ handleAbort, comment, replies = [], ...otherProps }) => {
   const { t } = useTranslation('videoDebate')

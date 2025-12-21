@@ -3,7 +3,7 @@ import { ExternalLink } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import Helmet from 'react-helmet'
 import { withTranslation } from 'react-i18next'
-import { useHistory, useLocation,useParams } from 'react-router-dom'
+import { useHistory, useLocation, useParams } from 'react-router-dom'
 
 import { SPEAKER_QUERY } from '../../API/graphql_queries'
 import { FRONTEND_URL } from '../../config'
@@ -15,7 +15,7 @@ import { ErrorView } from '../Utils/ErrorView'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import PaginatedVideosContainer from '../Videos/PaginatedVideosContainer'
-import SpeakerPreviewV2 from './SpeakerPreviewV2'
+import SpeakerPreviewV2 from './SpeakerPreview'
 
 const SpeakerPage = ({ t }) => {
   const { slug_or_id } = useParams()

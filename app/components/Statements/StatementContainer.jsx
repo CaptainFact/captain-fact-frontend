@@ -7,14 +7,14 @@ import { toastError } from '@/lib/toasts'
 
 import { DELETE_STATEMENT_MUTATION, UPDATE_STATEMENT_MUTATION } from '../../API/graphql_queries'
 import { MIN_REPUTATION_REMOVE_STATEMENT, MIN_REPUTATION_UPDATE_STATEMENT } from '../../constants'
-import CommentFormV2 from '../Comments/CommentFormV2'
+import CommentFormV2 from '../Comments/CommentForm'
 import DialogConfirmDelete from '../Dialogs/DialogConfirmDelete'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import { Button } from '../ui/button'
 import { Card } from '../ui/card'
-import StatementCommentsV2 from './StatementCommentsV2'
-import StatementFormV2 from './StatementFormV2'
-import StatementV2 from './StatementV2'
+import StatementCommentsV2 from './StatementComments'
+import StatementFormV2 from './StatementForm'
+import StatementV2 from './Statement'
 
 const StatementContainerV2 = ({
   statement,

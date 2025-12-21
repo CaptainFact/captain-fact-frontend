@@ -12,7 +12,7 @@ import { useLoggedInUser } from '../LoggedInUser/UserProvider'
 import CommentActions from './CommentActions'
 import CommentContent from './CommentContent'
 import CommentHeader from './CommentHeader'
-import CommentsListV2 from './CommentsListV2'
+import CommentsListV2 from './CommentsList'
 import ModalFlag from './ModalFlag'
 import Vote from './Vote'
 

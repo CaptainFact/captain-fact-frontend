@@ -4,8 +4,8 @@ import { withTranslation } from 'react-i18next'
 
 import { FULLHD_WIDTH_THRESHOLD } from '../../constants'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
-import StatementContainerV2 from './StatementContainerV2'
-import StatementFormV2 from './StatementFormV2'
+import StatementContainerV2 from './StatementContainer'
+import StatementFormV2 from './StatementForm'
 
 const StatementsListV2 = ({
   statements,

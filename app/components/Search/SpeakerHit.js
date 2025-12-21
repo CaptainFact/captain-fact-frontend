@@ -1,6 +1,6 @@
 import React from 'react'
 
-import SpeakerPreviewV2 from '../Speakers/SpeakerPreviewV2'
+import SpeakerPreviewV2 from '../Speakers/SpeakerPreview'
 
 export const SpeakerHit = ({ hit }) => {
   return (

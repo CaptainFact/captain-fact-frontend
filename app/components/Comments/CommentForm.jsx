@@ -24,7 +24,7 @@ import { Textarea } from '../ui/textarea'
 import UserAppellation from '../Users/UserAppellation'
 import UserPicture from '../Users/UserPicture'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
-import CommentDisplayV2 from './CommentDisplayV2'
+import CommentDisplayV2 from './CommentDisplay'
 
 const CommentFormV2 = ({
   statementID,

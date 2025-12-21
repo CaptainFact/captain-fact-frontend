@@ -3,7 +3,7 @@ import { withTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import { statementURL } from '../../lib/cf_routes'
-import StatementV2 from '../Statements/StatementV2'
+import StatementV2 from '../Statements/Statement'
 
 const StatementHit = ({ t, hit }) => {
   return (

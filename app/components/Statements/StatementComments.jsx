@@ -5,7 +5,7 @@ import { withTranslation } from 'react-i18next'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/css-utils'
 
-import CommentsListV2 from '../Comments/CommentsListV2'
+import CommentsListV2 from '../Comments/CommentsList'
 import { Separator } from '../ui/separator'
 import SpeakerComments from './SpeakerComments'
 import { classifyComments } from './utils'

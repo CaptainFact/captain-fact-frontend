@@ -17,7 +17,7 @@ import TextareaLengthCounter from '../FormUtils/TextareaLengthCounter'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import TimeEdit from '../Utils/TimeEdit'
-import SpeakersSelectV2 from './SpeakersSelectV2'
+import SpeakersSelectV2 from './SpeakersSelect'
 
 const CREATE_STATEMENT_MUTATION = gql`
   mutation CreateStatement(

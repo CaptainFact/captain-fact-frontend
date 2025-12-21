@@ -2,8 +2,8 @@ import { Mic } from 'lucide-react'
 import React from 'react'
 import { withTranslation } from 'react-i18next'
 
-import CommentsListV2 from '../Comments/CommentsListV2'
-import SpeakerPreviewV2 from '../Speakers/SpeakerPreviewV2'
+import CommentsListV2 from '../Comments/CommentsList'
+import SpeakerPreviewV2 from '../Speakers/SpeakerPreview'
 
 export default withTranslation('videoDebate')(({
   t,

@@ -3,8 +3,8 @@ import React, { useMemo, useState } from 'react'
 import FlipMove from 'react-flip-move'
 
 import { useLoggedInUser } from '../LoggedInUser/UserProvider'
-import CommentDisplayV2 from './CommentDisplayV2'
-import CommentFormV2 from './CommentFormV2'
+import CommentDisplayV2 from './CommentDisplay'
+import CommentFormV2 from './CommentForm'
 import CommentsListExpender from './CommentsListExpender'
 import CommentsListHeader from './CommentsListHeader'
 
