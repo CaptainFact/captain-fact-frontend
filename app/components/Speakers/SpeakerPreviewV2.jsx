@@ -121,3 +121,5 @@ const SpeakerPreviewV2 = ({
 }
 
 export default withTranslation('videoDebate')(SpeakerPreviewV2)
+
+

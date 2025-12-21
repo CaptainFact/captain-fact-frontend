@@ -1,6 +1,5 @@
 import Immutable from 'immutable'
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
-import { reducer as formReducer } from 'redux-form'
 import promiseMiddleware from 'redux-promise'
 import thunk from 'redux-thunk'
 
@@ -13,7 +12,6 @@ import ModerationReducer from './moderation/reducer'
 const reducers = combineReducers({
   Modals: ModalsReducer,
   Moderation: ModerationReducer,
-  // form: formReducer,
 })
 
 // Declare middlewares

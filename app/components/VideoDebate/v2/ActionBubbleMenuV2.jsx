@@ -107,7 +107,7 @@ const ActionBubbleMenuV2 = ({
   )
 }
 
-const ActionBubble = ({
+export const ActionBubble = ({
   icon: Icon,
   label,
   activated = true,

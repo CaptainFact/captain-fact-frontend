@@ -77,3 +77,5 @@ The codegen configuration is in `codegen.yml` at the project root. The schema UR
 - If you need custom types, create them in separate files and import alongside the generated types
 
 
+
+

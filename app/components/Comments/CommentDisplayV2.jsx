@@ -39,7 +39,7 @@ const CommentDisplayV2 = ({
 }) => {
   const dispatch = useDispatch()
   const { isAuthenticated, loggedInUser } = useLoggedInUser()
-
+  const [hasFlagModal, setHasFlagModal] = useState(false)
   const [isBlurred, setIsBlurred] = useState(false)
   const [repliesCollapsed, setRepliesCollapsed] = useState(nesting === COLLAPSE_REPLIES_AT_NESTING)
 
@@ -155,39 +155,12 @@ const CommentDisplayV2 = ({
     return setReplyToComment(comment)
   }
 
-  const [flagComment] = useMutation(FLAG_COMMENT_MUTATION, {
-    onError: (error) => {
-      toastError(error)
-    },
-  })
-
   const handleFlag = () => {
     if (!ensureAuthenticated()) {
       return
+    } else {
+      setHasFlagModal(true)
     }
-    setIsBlurred(true)
-    dispatch(
-      addModal({
-        Modal: ModalFlag,
-        props: {
-          handleAbort: () => setIsBlurred(false),
-          handleConfirm: async ({ reason }) => {
-            setIsBlurred(false)
-            try {
-              await flagComment({
-                variables: {
-                  commentId: comment.id,
-                  reason: parseInt(reason),
-                },
-              })
-            } catch {
-              // Error already logged in onError
-            }
-          },
-          comment: comment,
-        },
-      }),
-    )
   }
 
   const toggleShowReplies = () => {
@@ -254,6 +227,7 @@ const CommentDisplayV2 = ({
           />
         </div>
       )}
+      {hasFlagModal && <ModalFlag comment={comment} open onOpenChange={setHasFlagModal} />}
     </div>
   )
 }

@@ -1,7 +1,5 @@
 import { List, Record } from 'immutable'
-import { isUndefined, omitBy } from 'lodash'
 import { combineActions, createAction, handleActions } from 'redux-actions'
-import { change } from 'redux-form'
 
 import { resetVideoDebate } from '../actions'
 
@@ -11,14 +9,6 @@ const decrementFormCount = createAction('STATEMENTS/DECREMENT_FORM_COUNT', () =>
 
 // Statement form actions
 export const STATEMENT_FORM_NAME = 'StatementForm'
-export const changeStatementFormSpeaker = ({ id }) => change(STATEMENT_FORM_NAME, 'speaker_id', id)
-export const changeStatementForm = (values) => {
-  return (dispatch) => {
-    Object.entries(omitBy(values, isUndefined)).forEach(([key, value]) =>
-      dispatch(change(STATEMENT_FORM_NAME, key, value)),
-    )
-  }
-}
 
 const INITIAL_STATE = new Record({
   isLoading: false,

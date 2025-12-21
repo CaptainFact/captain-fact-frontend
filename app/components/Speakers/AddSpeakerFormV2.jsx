@@ -105,3 +105,5 @@ const AddSpeakerFormV2 = ({ disabled, videoId, t }) => {
 }
 
 export default withTranslation('videoDebate')(AddSpeakerFormV2)
+
+

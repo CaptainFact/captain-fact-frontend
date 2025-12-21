@@ -1,13 +1,14 @@
 import { useMutation } from '@apollo/client'
 import { Formik } from 'formik'
-import { Flag } from 'lucide-react'
-import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import { Flag, TriangleAlert } from 'lucide-react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { toastError } from '@/lib/toasts'
+
 import { FLAG_COMMENT_MUTATION } from '../../API/graphql_queries'
-import { popModal } from '../../state/modals/reducer'
 import { useLoggedInUser } from '../LoggedInUser/UserProvider'
+import FlagReasonSelect from '../Moderation/FlagReasonSelect'
 import { Button } from '../ui/button'
 import {
   Dialog,
@@ -17,27 +18,17 @@ import {
   DialogHeader,
   DialogTitle,
 } from '../ui/dialog'
-import FlagForm from './FlagForm'
+import { Separator } from '../ui/separator'
+import Message from '../Utils/Message'
+import CommentDisplayV2 from './CommentDisplayV2'
 
-const ModalFlag = ({
-  comment,
-  initialReason,
-  open,
-  onOpenChange,
-  onSuccess,
-  handleConfirm,
-  handleAbort,
-  popModal
-}) => {
+const ModalFlag = ({ initialReason, comment, open, onOpenChange }) => {
   const { t } = useTranslation('videoDebate')
   const { t: tMain } = useTranslation('main')
-  const { user, loading: userLoading } = useLoggedInUser()
+  const { loggedInUser, loading: userLoading } = useLoggedInUser()
   const [flagComment, { loading: flaggingLoading }] = useMutation(FLAG_COMMENT_MUTATION)
 
-  // Determine if we're using controlled mode or legacy Redux mode
-  const isControlled = open !== undefined && onOpenChange
-
-  const handleSubmit = async (values, { resetForm }) => {
+  const handleSubmit = async (values) => {
     try {
       await flagComment({
         variables: {
@@ -45,46 +36,18 @@ const ModalFlag = ({
           reason: parseInt(values.reason, 10),
         },
       })
-      resetForm()
-
-      // Handle success based on modal pattern
-      if (isControlled) {
-        onOpenChange(false)
-        if (onSuccess) {
-          onSuccess()
-        }
-      } else {
-        // Legacy Redux mode - call handleConfirm with the reason
-        if (handleConfirm) {
-          await handleConfirm({ reason: values.reason })
-        }
-        popModal()
-      }
     } catch (error) {
-      console.error('Error flagging comment:', error)
+      toastError(error)
     }
   }
-
-  const flagsAvailable = user?.availableFlags ?? 0
 
   const handleClose = () => {
-    if (isControlled) {
-      onOpenChange(false)
-    } else {
-      // Legacy Redux mode
-      if (handleAbort) {
-        handleAbort()
-      }
-      popModal()
-    }
+    onOpenChange(false)
   }
 
-  const dialogProps = isControlled
-    ? { open, onOpenChange: handleClose }
-    : { open: true, onOpenChange: handleClose }
-
+  const flagsAvailable = loggedInUser?.available_flags ?? 0
   return (
-    <Dialog {...dialogProps}>
+    <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>{t('flagForm.title')}</DialogTitle>
@@ -98,7 +61,25 @@ const ModalFlag = ({
         >
           {({ handleSubmit, values, isValid }) => (
             <>
-              <FlagForm comment={comment} />
+              <form onSubmit={handleSubmit} className="mb-4">
+                <div className="mb-4">
+                  <Message type="warning">
+                    <div className="flex items-center">
+                      <div className="mr-2">
+                        <TriangleAlert size={40} className="text-yellow-500" />
+                      </div>
+                      <div>
+                        <p>{t('flagForm.warningMessage1')}</p>
+                        <p>{t('flagForm.warningMessage2')}</p>
+                        <p>{t('flagForm.warningMessage3')}</p>
+                      </div>
+                    </div>
+                  </Message>
+                </div>
+                <CommentDisplayV2 comment={comment} withoutActions hideThread />
+                <Separator className="my-4" />
+                <FlagReasonSelect />
+              </form>
 
               <DialogFooter>
                 <Button
@@ -137,4 +118,4 @@ const ModalFlag = ({
   )
 }
 
-export default connect(null, { popModal })(ModalFlag)
+export default ModalFlag

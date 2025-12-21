@@ -5,14 +5,14 @@ import React from 'react'
 import { withTranslation } from 'react-i18next'
 import { usePopper } from 'react-popper'
 
-import { cn } from '../../lib/css-utils'
 import { useVideoPlayback } from '../../contexts/VideoPlaybackContext'
+import { cn } from '../../lib/css-utils'
 import Statement from '../Statements/Statement'
 import { Button } from '../ui/button'
 import ClickableIcon from '../Utils/ClickableIcon'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import Message from '../Utils/Message'
-import ActionBubbleMenu, { ActionBubble } from './ActionBubbleMenu'
+import ActionBubbleMenuV2, { ActionBubble } from './v2/ActionBubbleMenuV2'
 
 const captionsQuery = gql`
   query VideoCaptionsQuery($videoId: ID!) {
@@ -199,7 +199,7 @@ const CaptionsExtractor = ({ t, videoId, statements }) => {
         })}
       </p>
 
-      <ActionBubbleMenu
+      <ActionBubbleMenuV2
         hidden={!selection.text}
         customActions={
           <ActionBubble

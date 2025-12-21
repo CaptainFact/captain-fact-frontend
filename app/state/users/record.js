@@ -14,6 +14,7 @@ const User = new Record({
   achievements: [],
   is_publisher: false,
   speaker_id: null,
+  available_flags: 0,
 })
 
 export default User

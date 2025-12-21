@@ -1,4 +1,3 @@
-import { formValueSelector } from 'redux-form'
 import { createSelector } from 'reselect'
 
 import { STATEMENT_FOCUS_TIME } from '../../../constants'
@@ -18,9 +17,3 @@ export const getFocusedStatementId = createSelector(
       : -1
   },
 )
-
-const statementFormValueSelector = formValueSelector('StatementForm')
-
-export const hasStatementForm = (state) => {
-  return statementFormValueSelector(state, 'speaker_id') !== undefined
-}
