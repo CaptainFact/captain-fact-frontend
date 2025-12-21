@@ -79,7 +79,7 @@ const ModerationMenuItem = () => {
   return (
     <li>
       <Link
-        href="/moderation"
+        to="/moderation"
         className="flex items-center px-4 py-2 text-gray-700 dark:text-foreground hover:bg-gray-100 dark:hover:bg-accent rounded-md hover:text-gray-900 dark:hover:text-foreground"
       >
         <Flag size="1.2em" className="mr-2" />
