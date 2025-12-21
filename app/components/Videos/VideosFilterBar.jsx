@@ -1,4 +1,3 @@
-import { Map } from 'immutable'
 import React from 'react'
 import { withTranslation } from 'react-i18next'
 
@@ -19,12 +18,10 @@ const VideosFilterBar = ({ onLanguageChange, onSourceChange, source, language, t
       <FieldWithLabelAddon label={t('misc.languageFilter')} inputId="video-language-filter">
         <LanguageSelector
           id="video-language-filter"
-          additionalOptions={
-            new Map({
-              all: t('misc.all'),
-              unknown: t('misc.unknown'),
-            })
-          }
+          additionalOptions={{
+            all: t('misc.all'),
+            unknown: t('misc.unknown'),
+          }}
           handleChange={onLanguageChange}
           value={language || 'all'}
         />

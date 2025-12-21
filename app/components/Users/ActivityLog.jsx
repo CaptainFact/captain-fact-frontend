@@ -1,6 +1,5 @@
 import { Query } from '@apollo/client/react/components'
 import gql from 'graphql-tag'
-import { Map } from 'immutable'
 import { get } from 'lodash'
 import React from 'react'
 import { withTranslation } from 'react-i18next'
@@ -117,7 +116,7 @@ const ActivityLog = ({ match, t, location }) => {
                     data.user.actions.entries.map((a) => (
                       <UserAction
                         key={a.id}
-                        action={{ ...a, changes: new Map(JSON.parse(a.changes)) }}
+                        action={{ ...a, changes: JSON.parse(a.changes) }}
                         withoutUser
                         viewingFrom={data.user}
                       />

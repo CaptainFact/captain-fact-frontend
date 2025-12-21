@@ -7,7 +7,7 @@ import { usePopper } from 'react-popper'
 
 import { useVideoPlayback } from '../../contexts/VideoPlaybackContext'
 import { cn } from '../../lib/css-utils'
-import Statement from '../Statements/Statement'
+import StatementV2 from '../Statements/v2/StatementV2'
 import { Button } from '../ui/button'
 import ClickableIcon from '../Utils/ClickableIcon'
 import { LoadingFrame } from '../Utils/LoadingFrame'
@@ -87,7 +87,7 @@ const StatementIndicator = withTranslation('main')(({ statement, onPlayClick, t 
             '[&[data-popper-placement^="right"]_.arrow]:left-[-4px]',
           )}
         >
-          <Statement
+          <StatementV2
             statement={statement}
             speaker={statement.speaker}
             withoutActions

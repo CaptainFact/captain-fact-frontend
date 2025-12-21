@@ -1,7 +1,6 @@
 import isPromise from 'is-promise'
 import { Ban } from 'lucide-react'
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
 
 import {
   AlertDialog,
@@ -13,10 +12,9 @@ import {
 } from '@/components/ui/alert-dialog'
 
 import { handleEffectResponse } from '../../lib/handle_effect_response'
-import { popModal } from '../../state/modals/reducer'
 import { Button } from '../ui/button'
 
-const BaseModalConfirm = ({
+export const DialogConfirm = ({
   title,
   content,
   message,
@@ -27,7 +25,6 @@ const BaseModalConfirm = ({
   abortIcon = <Ban size="1em" />,
   abortText,
   confirmDisabled,
-  popModal,
   open,
   onOpenChange,
   ...props
@@ -44,8 +41,6 @@ const BaseModalConfirm = ({
             // In controlled mode, let the parent handle closing
             if (onOpenChange) {
               onOpenChange(false)
-            } else {
-              popModal()
             }
           },
           onError: () => setIsSubmitting(false),
@@ -58,11 +53,9 @@ const BaseModalConfirm = ({
     if (handleAbort) {
       handleAbort()
     }
-    // In controlled mode, use onOpenChange, otherwise use Redux popModal
+
     if (onOpenChange) {
       onOpenChange(false)
-    } else {
-      popModal()
     }
   }
 
@@ -76,7 +69,7 @@ const BaseModalConfirm = ({
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>{title}</AlertDialogTitle>
-          <AlertDialogDescription>{message}</AlertDialogDescription>
+          {message && <AlertDialogDescription>{message}</AlertDialogDescription>}
         </AlertDialogHeader>
         {content && <div>{content}</div>}
         <AlertDialogFooter>
@@ -99,5 +92,3 @@ const BaseModalConfirm = ({
     </AlertDialog>
   )
 }
-
-export const ModalConfirm = connect(null, { popModal })(BaseModalConfirm)

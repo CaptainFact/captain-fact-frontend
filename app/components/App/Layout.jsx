@@ -5,7 +5,6 @@ import { checkExtensionInstall } from '@/lib/browser-extension'
 import { cn } from '@/lib/css-utils'
 
 import { useUserPreferences } from '../../contexts/UserPreferencesContext'
-import { MainModalContainer } from '../Modal/MainModalContainer'
 import { Toaster } from '../ui/toaster'
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
 import CrashReportPage from './CrashReportPage'
@@ -51,7 +50,6 @@ class Layout extends React.PureComponent {
       <React.Fragment>
         <div lang={locale}>
           {this.renderMetadata()}
-          <MainModalContainer />
           <Navbar />
           <Sidebar />
           <div

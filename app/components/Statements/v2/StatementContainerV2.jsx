@@ -13,7 +13,7 @@ import {
 } from '../../../constants'
 import CommentFormV2 from '../../Comments/CommentFormV2'
 import { withLoggedInUser } from '../../LoggedInUser/UserProvider'
-import ModalConfirmDelete from '../../Modal/ModalConfirmDelete'
+import DialogConfirmDelete from '../../Dialogs/DialogConfirmDelete'
 import { Button } from '../../ui/button'
 import { Card } from '../../ui/card'
 import ReputationGuardTooltip from '../../Utils/ReputationGuardTooltip'
@@ -181,7 +181,7 @@ const StatementContainerV2 = ({
       )}
 
       {isDeleting && (
-        <ModalConfirmDelete
+        <DialogConfirmDelete
           title={t('statement.remove')}
           className="text-sm"
           isAbsolute

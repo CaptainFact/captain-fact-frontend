@@ -104,7 +104,10 @@ const UserAction = ({
           {getActionDescription(t, action, viewingFrom)}
         </span>
 
-        {Boolean(action.changes && action.changes.size) && (
+        {Boolean(
+          action.changes &&
+            (typeof action.changes === 'string' || Object.keys(action.changes || {}).length > 0),
+        ) && (
           <Button
             size="xs"
             variant="outline"

@@ -10,14 +10,7 @@ import { FLAG_COMMENT_MUTATION } from '../../API/graphql_queries'
 import { useLoggedInUser } from '../LoggedInUser/UserProvider'
 import FlagReasonSelect from '../Moderation/FlagReasonSelect'
 import { Button } from '../ui/button'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '../ui/dialog'
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog'
 import { Separator } from '../ui/separator'
 import Message from '../Utils/Message'
 import CommentDisplayV2 from './CommentDisplayV2'
@@ -51,7 +44,6 @@ const ModalFlag = ({ initialReason, comment, open, onOpenChange }) => {
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>{t('flagForm.title')}</DialogTitle>
-          <DialogDescription>{t('flagForm.description')}</DialogDescription>
         </DialogHeader>
 
         <Formik

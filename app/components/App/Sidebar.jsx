@@ -14,7 +14,6 @@ import {
 } from 'lucide-react'
 import React from 'react'
 import { useTranslation, withTranslation } from 'react-i18next'
-import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { Discord, Facebook, Github, Mastodon, Twitter } from 'styled-icons/fa-brands'
 import { Star } from 'styled-icons/fa-solid'
@@ -136,7 +135,6 @@ const ThemeSelector = () => {
   )
 }
 
-@connect(() => ({}))
 @withTranslation('main')
 @withLoggedInUser
 class Sidebar extends React.PureComponent {

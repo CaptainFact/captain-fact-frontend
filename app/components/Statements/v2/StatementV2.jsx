@@ -14,6 +14,7 @@ const StatementV2 = ({
   withoutActions,
   offset = 0,
   onSetScrollTo,
+  customButtons,
   t,
 }) => {
   const [shareModalOpen, setShareModalOpen] = useState(false)
@@ -31,13 +32,14 @@ const StatementV2 = ({
     <div data-cy="statement">
       <StatementHeader
         statementTime={statement.time + offset}
-        isDraft={statement.isDraft}
+        isDraft={statement.isDraft || statement.is_draft}
         speaker={speaker}
         handleEdit={handleEdit}
         handleDelete={handleDelete}
         handleShowHistory={showHistory}
         handleShare={shareModal}
         withoutActions={withoutActions}
+        customButtons={customButtons}
       />
       <div className="bg-[#31455d] dark:bg-[hsl(210,30%,20%)] text-white dark:text-foreground p-5 shadow-inner flex items-start gap-4">
         <span className="h-[50px] -mt-2 sm:text-7xl text-5xl font-serif text-neutral-300 dark:text-neutral-400">

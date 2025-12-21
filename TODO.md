@@ -1,6 +1,8 @@
 # Now
 
 - [x] Finish removing redux/redux-form
+- [x] Remove react-redux
+- [ ] Remove legacy sockets
 - [ ] Handle errors properly, with toasts. There are many console.error('Failed to delete comment:', error) in the codebase.
 - [ ] Setting speaker when editing statement doesn't work.
 - [ ] Speaker focus in speakers list

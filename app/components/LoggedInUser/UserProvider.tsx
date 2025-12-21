@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { HttpApi, SocketApi } from '../../API'
+import { HttpApi } from '../../API'
 import {
   getFromLocalStorage,
   LOCAL_STORAGE_KEYS,
@@ -135,11 +135,9 @@ class UserProvider extends React.Component<UserProviderProps, UserProviderState>
   updateToken = (token: string | null): void => {
     if (token) {
       HttpApi.setAuthorizationToken(token)
-      SocketApi.setAuthorizationToken(token)
       setLocalStorage(LOCAL_STORAGE_KEYS.TOKEN, token)
     } else {
       HttpApi.resetToken()
-      SocketApi.resetToken()
       removeFromLocalStorage(LOCAL_STORAGE_KEYS.TOKEN)
     }
   }

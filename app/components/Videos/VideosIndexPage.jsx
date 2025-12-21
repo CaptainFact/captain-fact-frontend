@@ -1,7 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { withTranslation } from 'react-i18next'
-import { connect } from 'react-redux'
 
 import { useUserPreferences } from '../../contexts/UserPreferencesContext'
 import { toAbsoluteURL } from '../../lib/cf_routes'
@@ -10,12 +9,18 @@ import AddVideoBtn from './AddVideoBtn'
 import PaginatedVideosContainer from './PaginatedVideosContainer'
 import VideosFilterBar from './VideosFilterBar'
 
-@connect(() => ({}))
 @withTranslation('main')
 @withLoggedInUser
 class VideosIndexPage extends React.PureComponent {
   render() {
-    const { t, location, languageFilter, videosFilter, setVideosFilter, changeVideosLanguageFilter } = this.props
+    const {
+      t,
+      location,
+      languageFilter,
+      videosFilter,
+      setVideosFilter,
+      changeVideosLanguageFilter,
+    } = this.props
     const searchParams = new URLSearchParams(location.search)
     const currentPage = parseInt(searchParams.get('page')) || 1
 

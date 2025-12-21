@@ -8,7 +8,7 @@ import { Link, useHistory } from 'react-router-dom'
 import { toast } from '@/hooks/use-toast'
 
 import { REMOVE_SPEAKER_FROM_VIDEO_MUTATION } from '../../API/graphql_queries'
-import ModalConfirmDelete from '../Modal/ModalConfirmDelete'
+import DialogConfirmDelete from '../Dialogs/DialogConfirmDelete'
 import { Avatar, AvatarImage } from '../ui/avatar'
 import EditSpeakerFormModal from './EditSpeakerFormModal'
 import { SpeakerDropdownMenu } from './SpeakerDropdownMenu'
@@ -108,7 +108,7 @@ const SpeakerPreviewV2 = ({
         open={editModalOpen}
         onOpenChange={setEditModalOpen}
       />
-      <ModalConfirmDelete
+      <DialogConfirmDelete
         open={deleteModalOpen}
         onOpenChange={setDeleteModalOpen}
         title={t('speaker.remove')}

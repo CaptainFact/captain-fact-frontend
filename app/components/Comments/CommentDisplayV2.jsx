@@ -1,23 +1,18 @@
 import { useMutation } from '@apollo/client'
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 
 import { cn } from '@/lib/css-utils'
 import { toastError, toastErrorUnauthenticated } from '@/lib/toasts'
 
-import {
-  DELETE_COMMENT_MUTATION,
-  FLAG_COMMENT_MUTATION,
-  VOTE_COMMENT_MUTATION,
-} from '../../API/graphql_queries'
+import { DELETE_COMMENT_MUTATION, VOTE_COMMENT_MUTATION } from '../../API/graphql_queries'
 import { COLLAPSE_REPLIES_AT_NESTING } from '../../constants'
-import { addModal } from '../../state/modals/reducer'
 import { useLoggedInUser } from '../LoggedInUser/UserProvider'
+import DialogConfirmDelete from '../Dialogs/DialogConfirmDelete'
 import CommentActions from './CommentActions'
 import CommentContent from './CommentContent'
 import CommentHeader from './CommentHeader'
 import CommentsListV2 from './CommentsListV2'
-import ModalDeleteCommentV2 from './ModalDeleteCommentV2'
 import ModalFlag from './ModalFlag'
 import Vote from './Vote'
 
@@ -37,17 +32,17 @@ const CommentDisplayV2 = ({
   isFlagged: initialIsFlagged = false,
   votesMap,
 }) => {
-  const dispatch = useDispatch()
+  const { t } = useTranslation('videoDebate')
   const { isAuthenticated, loggedInUser } = useLoggedInUser()
   const [hasFlagModal, setHasFlagModal] = useState(false)
-  const [isBlurred, setIsBlurred] = useState(false)
+  const [hasDeleteModal, setHasDeleteModal] = useState(false)
   const [repliesCollapsed, setRepliesCollapsed] = useState(nesting === COLLAPSE_REPLIES_AT_NESTING)
 
   const [isFlagged, setIsFlagged] = useState(initialIsFlagged)
 
   const approveClass = getApproveClass(comment.approve)
   const allClassNames = cn({
-    'opacity-50 blur-sm': isBlurred,
+    'opacity-50 blur-sm': hasDeleteModal || hasFlagModal,
     'border-l': nesting > 1,
     'border-green-500 dark:border-green-600': approveClass === 'approve',
     'border-red-500 dark:border-red-600': approveClass === 'refute',
@@ -127,25 +122,7 @@ const CommentDisplayV2 = ({
   })
 
   const handleDelete = () => {
-    setIsBlurred(true)
-    dispatch(
-      addModal({
-        Modal: ModalDeleteCommentV2,
-        props: {
-          handleAbort: () => setIsBlurred(false),
-          handleConfirm: async () => {
-            setIsBlurred(false)
-            try {
-              await deleteComment({ variables: { id: comment.id } })
-            } catch (error) {
-              toastError(error)
-            }
-          },
-          comment: comment,
-          replies: repliesArray,
-        },
-      }),
-    )
+    setHasDeleteModal(true)
   }
 
   const handleReply = () => {
@@ -228,6 +205,22 @@ const CommentDisplayV2 = ({
         </div>
       )}
       {hasFlagModal && <ModalFlag comment={comment} open onOpenChange={setHasFlagModal} />}
+      {hasDeleteModal && (
+        <DialogConfirmDelete
+          open
+          onOpenChange={setHasDeleteModal}
+          title={t('comment.deleteThread', { count: repliesArray.length + 1 })}
+          handleConfirm={async () => {
+            await deleteComment({ variables: { id: comment.id } })
+            setHasDeleteModal(false)
+          }}
+          content={
+            <div className="border-2 border-red-100">
+              <CommentDisplayV2 comment={comment} withoutActions />
+            </div>
+          }
+        />
+      )}
     </div>
   )
 }
