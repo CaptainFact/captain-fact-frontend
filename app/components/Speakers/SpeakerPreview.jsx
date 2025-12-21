@@ -13,7 +13,7 @@ import { Avatar, AvatarImage } from '../ui/avatar'
 import EditSpeakerFormModal from './EditSpeakerFormModal'
 import { SpeakerDropdownMenu } from './SpeakerDropdownMenu'
 
-const SpeakerPreviewV2 = ({
+const SpeakerPreview = ({
   speaker,
   className,
   videoId,
@@ -120,6 +120,4 @@ const SpeakerPreviewV2 = ({
   )
 }
 
-export default withTranslation('videoDebate')(SpeakerPreviewV2)
-
-
+export default withTranslation('videoDebate')(SpeakerPreview)

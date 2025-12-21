@@ -7,12 +7,12 @@ import { usePopper } from 'react-popper'
 
 import { useVideoPlayback } from '../../contexts/VideoPlaybackContext'
 import { cn } from '../../lib/css-utils'
-import StatementV2 from '../Statements/Statement'
+import Statement from '../Statements/Statement'
 import { Button } from '../ui/button'
 import ClickableIcon from '../Utils/ClickableIcon'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import Message from '../Utils/Message'
-import ActionBubbleMenuV2, { ActionBubble } from './ActionBubbleMenu'
+import ActionBubbleMenu, { ActionBubble } from './ActionBubbleMenu'
 
 const captionsQuery = gql`
   query VideoCaptionsQuery($videoId: ID!) {
@@ -87,7 +87,7 @@ const StatementIndicator = withTranslation('main')(({ statement, onPlayClick, t 
             '[&[data-popper-placement^="right"]_.arrow]:left-[-4px]',
           )}
         >
-          <StatementV2
+          <Statement
             statement={statement}
             speaker={statement.speaker}
             withoutActions
@@ -199,7 +199,7 @@ const CaptionsExtractor = ({ t, videoId, statements }) => {
         })}
       </p>
 
-      <ActionBubbleMenuV2
+      <ActionBubbleMenu
         hidden={!selection.text}
         customActions={
           <ActionBubble

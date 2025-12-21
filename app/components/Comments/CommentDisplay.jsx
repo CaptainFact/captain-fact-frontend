@@ -12,11 +12,11 @@ import { useLoggedInUser } from '../LoggedInUser/UserProvider'
 import CommentActions from './CommentActions'
 import CommentContent from './CommentContent'
 import CommentHeader from './CommentHeader'
-import CommentsListV2 from './CommentsList'
+import CommentsList from './CommentsList'
 import ModalFlag from './ModalFlag'
 import Vote from './Vote'
 
-const CommentDisplayV2 = ({
+const CommentDisplay = ({
   comment,
   nesting = 1,
   replyingTo,
@@ -194,7 +194,7 @@ const CommentDisplayV2 = ({
       </article>
       {!hideThread && !repliesCollapsed && repliesArray.length > 0 && (
         <div className="ml-7">
-          <CommentsListV2
+          <CommentsList
             comments={repliesArray}
             nesting={nesting + 1}
             replyingTo={comment.user}
@@ -216,7 +216,7 @@ const CommentDisplayV2 = ({
           }}
           content={
             <div className="border-2 border-red-100">
-              <CommentDisplayV2 comment={comment} withoutActions />
+              <CommentDisplay comment={comment} withoutActions />
             </div>
           }
         />
@@ -225,4 +225,4 @@ const CommentDisplayV2 = ({
   )
 }
 
-export default CommentDisplayV2
+export default CommentDisplay

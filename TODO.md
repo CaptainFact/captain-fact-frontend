@@ -12,6 +12,9 @@
 - [ ] Flag modal not working
 - [ ] Move loggedInUser to GraphQL type (currently using a record)
 - [ ] Rename all components from "V2"
+- [ ] convert more components to TypeScript
+- [ ] convert more components to functional components
+- [ ] remove legacy withTranslation/withRouter hooks and replace with hooks
 
 # To test
 

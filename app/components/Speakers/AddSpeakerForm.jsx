@@ -13,7 +13,7 @@ import { checkLength } from '../../lib/form_validators'
 import capitalizeName from '../../lib/name_formatter'
 import { ReactiveAsyncCreatable, ReactSelectTheme } from '../../lib/react_select_theme'
 
-const AddSpeakerFormV2 = ({ disabled, videoId, t }) => {
+const AddSpeakerForm = ({ disabled, videoId, t }) => {
   const [isSearching, setIsSearching] = useState(false)
 
   const [searchSpeakers, { loading: searchLoading }] = useLazyQuery(SEARCH_SPEAKERS_QUERY)
@@ -104,6 +104,4 @@ const AddSpeakerFormV2 = ({ disabled, videoId, t }) => {
   )
 }
 
-export default withTranslation('videoDebate')(AddSpeakerFormV2)
-
-
+export default withTranslation('videoDebate')(AddSpeakerForm)

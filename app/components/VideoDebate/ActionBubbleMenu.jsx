@@ -19,7 +19,7 @@ const startAutomaticStatementsExtractionMutation = gql`
   }
 `
 
-const ActionBubbleMenuV2 = ({
+const ActionBubbleMenu = ({
   video,
   hasStatementForm,
   hasStatements,
@@ -154,4 +154,4 @@ export const ActionBubble = ({
   </div>
 )
 
-export default withTranslation('videoDebate')(withLoggedInUser(ActionBubbleMenuV2))
+export default withTranslation('videoDebate')(withLoggedInUser(ActionBubbleMenu))

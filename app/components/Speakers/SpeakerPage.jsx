@@ -15,7 +15,7 @@ import { ErrorView } from '../Utils/ErrorView'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import PaginatedVideosContainer from '../Videos/PaginatedVideosContainer'
-import SpeakerPreviewV2 from './SpeakerPreview'
+import SpeakerPreview from './SpeakerPreview'
 
 const SpeakerPage = ({ t }) => {
   const { slug_or_id } = useParams()
@@ -162,7 +162,7 @@ const SpeakerPage = ({ t }) => {
           <h1 className="mb-6 dark:text-foreground">
             <span className="text-[1.8rem]">{t('speakerpage.title1')}</span>{' '}
             <div className="mt-3">
-              {speaker && <SpeakerPreviewV2 withoutActions speaker={speaker} />}
+              {speaker && <SpeakerPreview withoutActions speaker={speaker} />}
             </div>
           </h1>
           <hr className="my-4 border-t border-gray-200 dark:border-border" />

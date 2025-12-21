@@ -3,21 +3,25 @@ import { Check, X } from '@styled-icons/feather'
 import React, { useState } from 'react'
 import { withTranslation } from 'react-i18next'
 
+import { cn } from '@/lib/css-utils'
 import { toastError } from '@/lib/toasts'
 
-import { DELETE_STATEMENT_MUTATION, UPDATE_STATEMENT_MUTATION } from '../../API/graphql_queries'
-import { MIN_REPUTATION_REMOVE_STATEMENT, MIN_REPUTATION_UPDATE_STATEMENT } from '../../constants'
-import CommentForm from '../Comments/CommentForm'
-import DialogConfirmDelete from '../Dialogs/DialogConfirmDelete'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
-import { Button } from '../ui/button'
-import { Card } from '../ui/card'
-import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
-import Statement from './Statement'
+import { DELETE_STATEMENT_MUTATION, UPDATE_STATEMENT_MUTATION } from '../../../API/graphql_queries'
+import {
+  MIN_REPUTATION_REMOVE_STATEMENT,
+  MIN_REPUTATION_UPDATE_STATEMENT,
+} from '../../../constants'
+import CommentFormV2 from '../../Comments/CommentForm'
+import DialogConfirmDelete from '../../Dialogs/DialogConfirmDelete'
+import { withLoggedInUser } from '../../LoggedInUser/UserProvider'
+import { Button } from '../../ui/button'
+import { Card } from '../../ui/card'
+import ReputationGuardTooltip from '../../Utils/ReputationGuardTooltip'
 import StatementComments from './StatementComments'
-import StatementForm from './StatementForm'
+import StatementFormV2 from './StatementForm'
+import StatementV2 from './Statement'
 
-const StatementContainer = ({
+const StatementContainerV2 = ({
   statement,
   speakers,
   offset,
@@ -109,7 +113,7 @@ const StatementContainer = ({
       className="max-w-[980px] mx-auto bg-white dark:bg-background"
     >
       {isEditing ? (
-        <StatementForm
+        <StatementFormV2
           offset={offset}
           initialValues={statement}
           speakers={speakers}
@@ -118,7 +122,7 @@ const StatementContainer = ({
           onSetScrollTo={onSetScrollTo}
         />
       ) : (
-        <Statement
+        <StatementV2
           statement={statement}
           speaker={speaker}
           handleEdit={() => setIsEditing(true)}
@@ -166,7 +170,7 @@ const StatementContainer = ({
             votesMap={votesMap}
           />
           {!statement.isDraft && (
-            <CommentForm
+            <CommentFormV2
               statementID={statement.id}
               replyTo={replyTo}
               setReplyToComment={setReplyTo}
@@ -191,4 +195,4 @@ const StatementContainer = ({
   )
 }
 
-export default withTranslation('videoDebate')(withLoggedInUser(StatementContainer))
+export default withTranslation('videoDebate')(withLoggedInUser(StatementContainerV2))

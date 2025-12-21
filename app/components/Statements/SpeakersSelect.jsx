@@ -9,15 +9,7 @@ import {
   useReactSelectWarningStyles,
 } from '../../lib/react_select_theme'
 
-const SpeakersSelectV2 = ({
-  speakers,
-  value,
-  onChange,
-  onBlur,
-  placeholder,
-  warning,
-  className,
-}) => {
+const SpeakersSelect = ({ speakers, value, onChange, onBlur, placeholder, warning, className }) => {
   const reactiveStyles = useReactSelectStyles()
   const reactiveWarningStyles = useReactSelectWarningStyles()
   const speaker = value && speakers.find((s) => s.id === value)
@@ -43,4 +35,4 @@ const SpeakersSelectV2 = ({
   )
 }
 
-export default SpeakersSelectV2
+export default SpeakersSelect

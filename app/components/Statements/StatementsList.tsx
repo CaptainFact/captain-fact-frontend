@@ -1,13 +1,12 @@
 import React, { useMemo } from 'react'
 import FlipMove from 'react-flip-move'
-import { withTranslation } from 'react-i18next'
 
 import { FULLHD_WIDTH_THRESHOLD } from '../../constants'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
-import StatementContainerV2 from './StatementContainer'
-import StatementFormV2 from './StatementForm'
+import { useLoggedInUser } from '../LoggedInUser/UserProvider'
+import StatementContainer from './StatementContainer'
+import StatementForm from './StatementForm'
 
-const StatementsListV2 = ({
+const StatementsList = ({
   statements,
   speakers,
   statementForm,
@@ -17,9 +16,9 @@ const StatementsListV2 = ({
   onSetScrollTo,
   videoId,
   votesMap,
-  isAuthenticated,
-  t,
 }) => {
+  const { isAuthenticated } = useLoggedInUser()
+
   // Filter statements based on authentication
   const filteredStatements = useMemo(() => {
     if (!statements) {
@@ -46,7 +45,7 @@ const StatementsListV2 = ({
     <div>
       {statementForm !== null && (
         <div className="mb-4 max-w-[980px] mx-auto">
-          <StatementFormV2
+          <StatementForm
             offset={offset}
             initialValues={{
               speakerId: speakerId,
@@ -68,7 +67,7 @@ const StatementsListV2 = ({
       >
         {filteredStatements.map((statement) => (
           <div key={statement.id}>
-            <StatementContainerV2
+            <StatementContainer
               statement={statement}
               speakers={speakers || []}
               offset={offset}
@@ -82,4 +81,4 @@ const StatementsListV2 = ({
   )
 }
 
-export default withTranslation('videoDebate')(withLoggedInUser(StatementsListV2))
+export default StatementsList

@@ -5,18 +5,18 @@ import { ExclamationCircle, InfoCircle } from 'styled-icons/fa-solid'
 
 import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
-import StatementsListV2 from '../Statements/StatementsList'
+import StatementsList from '../Statements/StatementsList'
 import { ScrollArea } from '../ui/scroll-area'
 import { Skeleton } from '../ui/skeleton'
 import DismissableMessage from '../Utils/DismissableMessage'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import Message from '../Utils/Message'
-import ActionBubbleMenuV2 from './ActionBubbleMenu'
+import ActionBubbleMenu from './ActionBubbleMenu'
 import CaptionsExtractor from './CaptionsExtractor'
 import VideoDebateHistory from './VideoDebateHistory'
 
-const ColumnDebateV2 = ({
+const ColumnDebate = ({
   video,
   isLoading,
   view,
@@ -99,7 +99,7 @@ const ColumnDebateV2 = ({
             </div>
           )}
           {hasStatementsComponents && (
-            <StatementsListV2
+            <StatementsList
               statements={statements}
               speakers={video?.speakers || []}
               statementForm={statementForm}
@@ -111,7 +111,7 @@ const ColumnDebateV2 = ({
               votesMap={votesMap}
             />
           )}
-          <ActionBubbleMenuV2
+          <ActionBubbleMenu
             video={video}
             hasStatementForm={hasStatementForm}
             hasStatements={hasStatements}
@@ -123,50 +123,42 @@ const ColumnDebateV2 = ({
     }
   }
 
-  const renderIntroduction = () => {
-    return (
-      <DismissableMessage
-        localStorageDismissKey={LOCAL_STORAGE_KEYS.DISMISS_VIDEO_INTRODUCTION}
-        className="mb-12"
-        header={t('introTitle')}
-      >
-        <p>{t('intro')}</p>
-        <ExternalLinkNewTab href="/extension">{t('extensionDL')}</ExternalLinkNewTab>
-
-        <p>
-          <br />
-          <strong>{t('intro1')}</strong>
-        </p>
-        <p>
-          <strong>{t('intro2')}</strong>
-        </p>
-        <p>
-          <strong>{t('intro3')}</strong>
-        </p>
-        <p>
-          <strong>{t('intro4')}</strong>
-          <ExternalLinkNewTab href="/help/privileges">{t('intro5')}</ExternalLinkNewTab>.
-        </p>
-      </DismissableMessage>
-    )
-  }
-
-  const renderTitle = () => {
-    return (
-      <h1 className="text-center text-2xl font-semibold max-w-4xl mx-auto mb-10 pb-8 shadow-[0px_12px_8px_-10px_#e1e1e1] dark:shadow-[0px_12px_8px_-10px_rgba(0,0,0,0.3)] rounded-lg">
-        {t('pageTitle')}{' '}
-        {video?.title ||
-          (isLoading ? <Skeleton className="w-48 h-6 inline-block align-middle ml-3" /> : '...')}
-      </h1>
-    )
-  }
-
   return (
     <ScrollArea className="w-full bg-neutral-50 dark:bg-background 2xl:h-[--main-height] [&>div>div]:!block 2xl:[&>div>div]:!table">
       <div className="py-12 sm:px-4 px-2 dark:text-foreground">
-        {renderTitle()}
+        <h1 className="text-center text-2xl font-semibold max-w-4xl mx-auto mb-10 pb-8 shadow-[0px_12px_8px_-10px_#e1e1e1] dark:shadow-[0px_12px_8px_-10px_rgba(0,0,0,0.3)] rounded-lg">
+          {t('pageTitle')}{' '}
+          {video?.title ||
+            (isLoading ? <Skeleton className="w-48 h-6 inline-block align-middle ml-3" /> : '...')}
+        </h1>
         {showIntroduction && view === 'debate' && (
-          <div className="mx-6 mt-4">{renderIntroduction()}</div>
+          <div className="mx-6 mt-4">
+            {' '}
+            <DismissableMessage
+              localStorageDismissKey={LOCAL_STORAGE_KEYS.DISMISS_VIDEO_INTRODUCTION}
+              className="mb-12"
+              header={t('introTitle')}
+              onDismiss={() => setShowIntroduction(false)}
+            >
+              <p>{t('intro')}</p>
+              <ExternalLinkNewTab href="/extension">{t('extensionDL')}</ExternalLinkNewTab>
+
+              <p>
+                <br />
+                <strong>{t('intro1')}</strong>
+              </p>
+              <p>
+                <strong>{t('intro2')}</strong>
+              </p>
+              <p>
+                <strong>{t('intro3')}</strong>
+              </p>
+              <p>
+                <strong>{t('intro4')}</strong>
+                <ExternalLinkNewTab href="/help/privileges">{t('intro5')}</ExternalLinkNewTab>.
+              </p>
+            </DismissableMessage>
+          </div>
         )}
         {renderContent()}
       </div>
@@ -174,4 +166,4 @@ const ColumnDebateV2 = ({
   )
 }
 
-export default withTranslation('videoDebate')(withLoggedInUser(ColumnDebateV2))
+export default withTranslation('videoDebate')(withLoggedInUser(ColumnDebate))

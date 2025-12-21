@@ -13,7 +13,7 @@ import { Button } from '../ui/button'
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog'
 import { Separator } from '../ui/separator'
 import Message from '../Utils/Message'
-import CommentDisplayV2 from './CommentDisplay'
+import CommentDisplay from './CommentDisplay'
 
 const ModalFlag = ({ initialReason, comment, open, onOpenChange }) => {
   const { t } = useTranslation('videoDebate')
@@ -68,7 +68,7 @@ const ModalFlag = ({ initialReason, comment, open, onOpenChange }) => {
                     </div>
                   </Message>
                 </div>
-                <CommentDisplayV2 comment={comment} withoutActions hideThread />
+                <CommentDisplay comment={comment} withoutActions hideThread />
                 <Separator className="my-4" />
                 <FlagReasonSelect />
               </form>

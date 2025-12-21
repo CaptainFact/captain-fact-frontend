@@ -2,8 +2,8 @@ import { Mic } from 'lucide-react'
 import React from 'react'
 import { withTranslation } from 'react-i18next'
 
-import CommentsListV2 from '../Comments/CommentsList'
-import SpeakerPreviewV2 from '../Speakers/SpeakerPreview'
+import CommentsList from '../Comments/CommentsList'
+import SpeakerPreview from '../Speakers/SpeakerPreview'
 
 export default withTranslation('videoDebate')(({
   t,
@@ -21,10 +21,10 @@ export default withTranslation('videoDebate')(({
       </div>
       <div className="flex">
         <div className="bg-neutral-100 dark:bg-accent pl-2 pr-4 py-3 border-r border-gray-200 dark:border-border">
-          {speaker && <SpeakerPreviewV2 speaker={speaker} withoutActions />}
+          {speaker && <SpeakerPreview speaker={speaker} withoutActions />}
         </div>
         <div>
-          <CommentsListV2
+          <CommentsList
             comments={comments}
             setReplyToComment={setReplyToComment}
             repliesByParent={repliesByParent}

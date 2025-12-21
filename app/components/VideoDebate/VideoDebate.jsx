@@ -9,8 +9,8 @@ import { toAbsoluteURL, videoURL } from '../../lib/cf_routes'
 import { getHDThumbnailUrl } from '../../lib/video_utils'
 import BackgroundNotifier from '../App/BackgroundNotifier'
 import { ErrorView } from '../Utils/ErrorView'
-import ColumnDebateV2 from './ColumnDebate'
-import ColumnVideoV2 from './ColumnVideo'
+import ColumnDebate from './ColumnDebate'
+import ColumnVideo from './ColumnVideo'
 
 // GraphQL Fragments
 const COMMENT_FRAGMENT = gql`
@@ -336,7 +336,7 @@ const useVideoDebateSubscriptions = (subscribeToMore, videoId) => {
   })
 }
 
-const VideoDebateV2 = ({ t: _t }) => {
+const VideoDebate = ({ t: _t }) => {
   const { videoId, view } = useParams()
   const location = useLocation()
   const [state, dispatch] = useReducer(videoDebateReducer, initialState)
@@ -467,13 +467,13 @@ const VideoDebateV2 = ({ t: _t }) => {
         data-video-language={data?.video?.language}
       >
         {!loading && data?.video && renderMeta(data.video)}
-        <ColumnVideoV2
+        <ColumnVideo
           video={data?.video}
           isLoading={loading}
           view={currentView}
           onSetStatementForm={(form) => dispatch({ type: 'SET_STATEMENT_FORM', payload: form })}
         />
-        <ColumnDebateV2
+        <ColumnDebate
           video={data?.video}
           isLoading={loading}
           view={currentView}
@@ -494,4 +494,4 @@ const VideoDebateV2 = ({ t: _t }) => {
   )
 }
 
-export default withTranslation('videoDebate')(VideoDebateV2)
+export default withTranslation('videoDebate')(VideoDebate)

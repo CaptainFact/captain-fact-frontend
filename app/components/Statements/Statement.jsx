@@ -6,7 +6,7 @@ import ShareModal from '../Utils/ShareModal'
 import { StatementHistoryDialog } from '../VideoDebate/StatementHistoryDialog'
 import StatementHeader from './StatementHeader'
 
-const StatementV2 = ({
+const Statement = ({
   statement,
   speaker,
   handleEdit,
@@ -62,4 +62,4 @@ const StatementV2 = ({
   )
 }
 
-export default withTranslation('videoDebate')(StatementV2)
+export default withTranslation('videoDebate')(Statement)

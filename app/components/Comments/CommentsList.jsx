@@ -3,8 +3,8 @@ import React, { useMemo, useState } from 'react'
 import FlipMove from 'react-flip-move'
 
 import { useLoggedInUser } from '../LoggedInUser/UserProvider'
-import CommentDisplayV2 from './CommentDisplay'
-import CommentFormV2 from './CommentForm'
+import CommentDisplay from './CommentDisplay'
+import CommentForm from './CommentForm'
 import CommentsListExpender from './CommentsListExpender'
 import CommentsListHeader from './CommentsListHeader'
 
@@ -15,7 +15,7 @@ const getNbDisplayedRange = (nesting) => {
   return [4 - nesting, 6 - nesting]
 }
 
-const CommentsListV2 = ({
+const CommentsList = ({
   comments = [],
   className,
   commentType,
@@ -68,7 +68,7 @@ const CommentsListV2 = ({
 
             return (
               <div key={comment.id}>
-                <CommentDisplayV2
+                <CommentDisplay
                   comment={comment}
                   nesting={nesting}
                   replyingTo={replyingTo}
@@ -82,7 +82,7 @@ const CommentsListV2 = ({
             )
           })
         ) : (
-          <CommentFormV2
+          <CommentForm
             statementID={statementID}
             replyTo={replyingTo}
             setReplyToComment={setReplyToComment}
@@ -102,7 +102,7 @@ const CommentsListV2 = ({
   )
 }
 
-CommentsListV2.propTypes = {
+CommentsList.propTypes = {
   comments: PropTypes.array,
   className: PropTypes.string,
   commentType: PropTypes.string,
@@ -114,4 +114,4 @@ CommentsListV2.propTypes = {
   setReplyToComment: PropTypes.func,
 }
 
-export default CommentsListV2
+export default CommentsList

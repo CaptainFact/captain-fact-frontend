@@ -6,17 +6,17 @@ import { Link } from 'react-router-dom'
 import { MIN_REPUTATION_ADD_SPEAKER } from '../../constants'
 import { videoCaptionsUrl, videoHistoryURL, videoURL } from '../../lib/cf_routes'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
-import AddSpeakerFormV2 from '../Speakers/AddSpeakerForm'
-import SpeakerPreviewV2 from '../Speakers/SpeakerPreview'
+import AddSpeakerForm from '../Speakers/AddSpeakerForm'
+import SpeakerPreview from '../Speakers/SpeakerPreview'
 import { Tabs, TabsList, TabsTrigger } from '../ui/tabs'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import Message from '../Utils/Message'
 import { ReputationGuardTooltip } from '../Utils/ReputationGuardTooltip'
-import ActionsV2 from './Actions'
+import Actions from './Actions'
 import ResizableColumn from './ResizableColumn'
-import VideoDebatePlayerV2 from './VideoDebatePlayer'
+import VideoDebatePlayer from './VideoDebatePlayer'
 
-const ColumnVideoV2 = ({ video, isLoading, view, t, isAuthenticated, onSetStatementForm }) => {
+const ColumnVideo = ({ video, isLoading, view, t, isAuthenticated, onSetStatementForm }) => {
   const { url, speakers = [] } = video || {}
   const isDebate = !view || view === 'debate'
 
@@ -27,7 +27,7 @@ const ColumnVideoV2 = ({ video, isLoading, view, t, isAuthenticated, onSetStatem
           <LoadingFrame title={t('loading.video')} />
         ) : (
           <React.Fragment>
-            {video && <VideoDebatePlayerV2 url={url} />}
+            {video && <VideoDebatePlayer url={url} />}
             <Tabs value={view}>
               <TabsList className="w-full rounded-none flex-wrap h-auto">
                 {video && (
@@ -60,20 +60,20 @@ const ColumnVideoV2 = ({ video, isLoading, view, t, isAuthenticated, onSetStatem
             </Tabs>
             {isDebate && video && (
               <div className="dark:bg-background">
-                <ActionsV2 video={video} />
+                <Actions video={video} />
                 <div className="p-4 text-sm dark:text-foreground">
                   <ReputationGuardTooltip
                     requiredRep={MIN_REPUTATION_ADD_SPEAKER}
                     tooltipPosition="top"
                   >
                     {({ hasReputation }) => (
-                      <AddSpeakerFormV2 disabled={!hasReputation} videoId={video.id} />
+                      <AddSpeakerForm disabled={!hasReputation} videoId={video.id} />
                     )}
                   </ReputationGuardTooltip>
                 </div>
                 <div className="px-3 pb-4 flex flex-col gap-4">
                   {speakers.map((speaker) => (
-                    <SpeakerPreviewV2
+                    <SpeakerPreview
                       key={speaker.id}
                       speaker={speaker}
                       videoId={video.id}
@@ -105,4 +105,4 @@ const ColumnVideoV2 = ({ video, isLoading, view, t, isAuthenticated, onSetStatem
   )
 }
 
-export default withTranslation('videoDebate')(withLoggedInUser(ColumnVideoV2))
+export default withTranslation('videoDebate')(withLoggedInUser(ColumnVideo))

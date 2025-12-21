@@ -34,7 +34,7 @@ const UPDATE_SUBSCRIPTION_MUTATION = gql`
   }
 `
 
-const ActionsV2 = ({ video, t, isAuthenticated }) => {
+const Actions = ({ video, t, isAuthenticated }) => {
   const history = useHistory()
   const {
     enableAutoscroll: hasAutoscroll,
@@ -147,4 +147,4 @@ const ActionsV2 = ({ video, t, isAuthenticated }) => {
   )
 }
 
-export default withTranslation('videoDebate')(withLoggedInUser(ActionsV2))
+export default withTranslation('videoDebate')(withLoggedInUser(Actions))

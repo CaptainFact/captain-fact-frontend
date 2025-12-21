@@ -24,16 +24,9 @@ import { Textarea } from '../ui/textarea'
 import UserAppellation from '../Users/UserAppellation'
 import UserPicture from '../Users/UserPicture'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
-import CommentDisplayV2 from './CommentDisplay'
+import CommentDisplay from './CommentDisplay'
 
-const CommentFormV2 = ({
-  statementID,
-  setReplyToComment,
-  replyTo,
-  user,
-  inciteToParticipate,
-  t,
-}) => {
+const CommentForm = ({ statementID, setReplyToComment, replyTo, user, inciteToParticipate, t }) => {
   const [isCollapsed, setIsCollapsed] = useState(true)
   const [createComment] = useMutation(CREATE_COMMENT_MUTATION)
 
@@ -293,7 +286,7 @@ const CommentFormV2 = ({
               <UserAppellation defaultComponent="span" user={replyTo.user} />
             </span>
           </div>
-          <CommentDisplayV2
+          <CommentDisplay
             isQuoted
             richMedias={false}
             comment={replyTo}
@@ -313,7 +306,7 @@ const CommentFormV2 = ({
   )
 }
 
-CommentFormV2.propTypes = {
+CommentForm.propTypes = {
   statementID: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   setReplyToComment: PropTypes.func.isRequired,
   replyTo: PropTypes.shape({ id: PropTypes.number }),
@@ -321,4 +314,4 @@ CommentFormV2.propTypes = {
   inciteToParticipate: PropTypes.oneOf(['approve', 'refute']),
 }
 
-export default withTranslation('videoDebate')(withRouter(CommentFormV2))
+export default withTranslation('videoDebate')(withRouter(CommentForm))

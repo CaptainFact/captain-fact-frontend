@@ -17,7 +17,7 @@ import TextareaLengthCounter from '../FormUtils/TextareaLengthCounter'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import TimeEdit from '../Utils/TimeEdit'
-import SpeakersSelectV2 from './SpeakersSelect'
+import SpeakersSelect from './SpeakersSelect'
 
 const CREATE_STATEMENT_MUTATION = gql`
   mutation CreateStatement(
@@ -67,7 +67,7 @@ const UPDATE_STATEMENT_MUTATION = gql`
   }
 `
 
-const StatementFormV2 = ({
+const StatementForm = ({
   offset,
   initialValues,
   speakers,
@@ -280,7 +280,7 @@ const StatementFormV2 = ({
               )}
 
               <div>
-                <SpeakersSelectV2
+                <SpeakersSelect
                   name="speakerId"
                   speakers={speakers}
                   value={values.speakerId}
@@ -387,4 +387,4 @@ const StatementFormV2 = ({
   )
 }
 
-export default withTranslation('videoDebate')(StatementFormV2)
+export default withTranslation('videoDebate')(StatementForm)
