@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { Formik } from 'formik'
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 import { ChevronLeft, ChevronRight, Lock, Mic, Save, Slash, Unlock } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { withTranslation } from 'react-i18next'

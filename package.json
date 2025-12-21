@@ -25,8 +25,8 @@
     "prettier:check": "prettier --loglevel warn --check 'app/**/*.{js,jsx}' && prettier --check 'cypress/**/*.js'",
     "ts-unused-exports": "ts-unused-exports tsconfig.json --ignoreFiles='app/constants.js' --ignoreFiles='/components/ui/*' --ignoreFiles='app/API/types/generated.ts'",
     "typescript": "tsc --noEmit",
-    "generate:types": "graphql-codegen --config codegen.yml",
-    "generate:types:watch": "graphql-codegen --config codegen.yml --watch"
+    "graphql:update": "graphql-codegen --config codegen.yml",
+    "graphql:update:watch": "graphql-codegen --config codegen.yml --watch"
   },
   "jest": {
     "setupFiles": [
@@ -89,7 +89,6 @@
     "faker": "~5.5.3",
     "formik": "^2.4.9",
     "graphql": "^16.12.0",
-    "graphql-tag": "2.12.6",
     "i18next": "^22.5.1",
     "immutable": "~4.3.7",
     "is-promise": "~4.0.0",
@@ -192,9 +191,9 @@
     "webpack": "^5.103.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.2.2",
-    "@graphql-codegen/cli": "^5.0.2",
-    "@graphql-codegen/typescript": "^4.0.7",
-    "@graphql-codegen/typescript-operations": "^4.2.0",
+    "@graphql-codegen/cli": "^5.0.7",
+    "@graphql-codegen/typescript": "^5.0.3",
+    "@graphql-codegen/typescript-operations": "^5.0.3",
     "@graphql-codegen/typescript-react-apollo": "^4.1.1"
   }
 }

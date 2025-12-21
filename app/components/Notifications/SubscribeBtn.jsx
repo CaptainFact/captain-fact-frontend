@@ -1,5 +1,5 @@
+import { gql } from '@apollo/client'
 import { Mutation } from '@apollo/client/react/components'
-import gql from 'graphql-tag'
 import { Bell, BellOff } from 'lucide-react'
 import PropTypes from 'prop-types'
 import React from 'react'

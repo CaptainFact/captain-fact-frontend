@@ -1,26 +1,41 @@
 import React from 'react'
 
 import { HttpApi } from '../../API'
+import GraphQLClient from '../../API/graphql_api'
+import { loggedInUserQuery } from '../../API/graphql_queries'
+import { User } from '../../API/types/generated'
 import {
   getFromLocalStorage,
   LOCAL_STORAGE_KEYS,
   removeFromLocalStorage,
   setLocalStorage,
 } from '../../lib/local_storage'
-import User from '../../state/users/record'
+
+interface GraphQLError {
+  extensions?: {
+    code?: string
+  }
+}
+
+interface ApolloError {
+  graphQLErrors?: GraphQLError[]
+  networkError?: {
+    statusCode?: number
+  }
+}
 
 interface UserContextType {
-  loggedInUser: typeof User
+  loggedInUser: User | null
   loggedInUserLoading: boolean
   isAuthenticated: boolean
   login: () => Promise<boolean>
   logout: () => Promise<void>
   checkReputation: (reputation: number) => boolean
-  updateLoggedInUser: (loggedInUser: any, token?: string) => void
+  updateLoggedInUser: (loggedInUser: User | null, token?: string) => void
 }
 
 interface UserProviderState {
-  loggedInUser: typeof User
+  loggedInUser: User | null
   loggedInUserLoading: boolean
   isAuthenticated: boolean
 }
@@ -34,7 +49,7 @@ interface UserProviderProps {
  * with methods to update it (login, logout...) and helpers like checkReputation.
  */
 const UserContext = React.createContext<UserContextType>({
-  loggedInUser: new User(),
+  loggedInUser: null,
   loggedInUserLoading: false,
   isAuthenticated: false,
   login: async () => false,
@@ -48,7 +63,10 @@ const UserContext = React.createContext<UserContextType>({
  */
 class UserProvider extends React.Component<UserProviderProps, UserProviderState> {
   state: UserProviderState = {
-    loggedInUser: new User(JSON.parse(getFromLocalStorage(LOCAL_STORAGE_KEYS.LOGGED_IN_USER))),
+    loggedInUser: (() => {
+      const stored = getFromLocalStorage(LOCAL_STORAGE_KEYS.LOGGED_IN_USER)
+      return stored ? JSON.parse(stored) : null
+    })(),
     loggedInUserLoading: false,
     isAuthenticated: false,
   }
@@ -65,10 +83,22 @@ class UserProvider extends React.Component<UserProviderProps, UserProviderState>
     }
     this.setState({ loggedInUserLoading: true })
     try {
-      const loggedInUser = await HttpApi.get('users/me')
-      this.updateLoggedInUser(loggedInUser)
-    } catch (error) {
-      if (error === 'unauthorized') {
+      const { data } = await GraphQLClient.query({
+        query: loggedInUserQuery,
+        fetchPolicy: 'network-only',
+      })
+      if (data?.loggedInUser) {
+        this.updateLoggedInUser(data.loggedInUser)
+      } else {
+        this.setState({ loggedInUserLoading: false })
+      }
+    } catch (error: unknown) {
+      const apolloError = error as ApolloError
+      // Check if it's an authentication error
+      if (
+        apolloError?.graphQLErrors?.some((e) => e.extensions?.code === 'UNAUTHENTICATED') ||
+        apolloError?.networkError?.statusCode === 401
+      ) {
         // Token expired
         this.logout()
       } else {
@@ -85,7 +115,7 @@ class UserProvider extends React.Component<UserProviderProps, UserProviderState>
     this.updateToken(null)
     removeFromLocalStorage(LOCAL_STORAGE_KEYS.LOGGED_IN_USER)
     this.setState({
-      loggedInUser: new User(),
+      loggedInUser: null,
       isAuthenticated: false,
       loggedInUserLoading: false,
     })
@@ -97,27 +127,33 @@ class UserProvider extends React.Component<UserProviderProps, UserProviderState>
    */
   checkReputation = (reputation: number): boolean => {
     const { isAuthenticated, loggedInUser } = this.state
-    return isAuthenticated && (loggedInUser.is_publisher || loggedInUser.reputation >= reputation)
+    return isAuthenticated && (loggedInUser.isPublisher || loggedInUser.reputation >= reputation)
   }
 
   /**
    * Update loggedInUser with given object. If `token` is provided, will also
    * update token in localStorage.
    */
-  updateLoggedInUser = (loggedInUser: any, token?: string): void => {
+  updateLoggedInUser = (loggedInUser: User | null, token?: string): void => {
     if (token) {
       this.updateToken(token)
     }
 
-    this.setState((state) => {
-      const user = state.loggedInUser.merge(loggedInUser)
-      setLocalStorage(LOCAL_STORAGE_KEYS.LOGGED_IN_USER, JSON.stringify(user.toJSON()))
-      return {
-        loggedInUser: user,
+    if (loggedInUser) {
+      setLocalStorage(LOCAL_STORAGE_KEYS.LOGGED_IN_USER, JSON.stringify(loggedInUser))
+      this.setState({
+        loggedInUser,
         loggedInUserLoading: false,
         isAuthenticated: true,
-      }
-    })
+      })
+    } else {
+      removeFromLocalStorage(LOCAL_STORAGE_KEYS.LOGGED_IN_USER)
+      this.setState({
+        loggedInUser: null,
+        loggedInUserLoading: false,
+        isAuthenticated: false,
+      })
+    }
   }
 
   // ---- Private ----
@@ -150,7 +186,7 @@ class UserProvider extends React.Component<UserProviderProps, UserProviderState>
     if (event.key === 'loggedInUser') {
       // Has logged out from another tab
       if (event.oldValue && !event.newValue) {
-        return this.setState({ loggedInUser: new User(), isAuthenticated: false })
+        return this.setState({ loggedInUser: null, isAuthenticated: false })
       }
 
       // Has logged in from another tab
@@ -158,15 +194,18 @@ class UserProvider extends React.Component<UserProviderProps, UserProviderState>
         const value = JSON.parse(event.newValue)
         const token = getFromLocalStorage(LOCAL_STORAGE_KEYS.TOKEN)
         this.updateToken(token)
-        return this.setState({ loggedInUser: new User(value), isAuthenticated: true })
+        return this.setState({ loggedInUser: value, isAuthenticated: true })
       }
 
       // User updated
-      const { value: oldUser } = new User(JSON.parse(event.oldValue))
-      const { value: newUser } = new User(JSON.parse(event.newValue))
+      if (event.oldValue && event.newValue) {
+        const oldUser = JSON.parse(event.oldValue)
+        const newUser = JSON.parse(event.newValue)
 
-      if (!oldUser || !oldUser.equals(newUser)) {
-        this.setState({ loggedInUser: newUser, isAuthenticated: true })
+        // Simple comparison - check if IDs are different or if user data changed
+        if (oldUser?.id !== newUser?.id || JSON.stringify(oldUser) !== JSON.stringify(newUser)) {
+          this.setState({ loggedInUser: newUser, isAuthenticated: true })
+        }
       }
     }
   }
@@ -191,11 +230,15 @@ class UserProvider extends React.Component<UserProviderProps, UserProviderState>
 /**
  * A high order component (HOC) that binds `UserContext` to the given `Component`.
  */
-export const withLoggedInUser =
-  <P extends object>(Component: React.ComponentType<P & UserContextType>) =>
-  (props: P) => (
+export const withLoggedInUser = <P extends object>(
+  Component: React.ComponentType<P & UserContextType>,
+) => {
+  const WrappedComponent = (props: P) => (
     <UserContext.Consumer>{(store) => <Component {...props} {...store} />}</UserContext.Consumer>
   )
+  WrappedComponent.displayName = `withLoggedInUser(${Component.displayName || Component.name || 'Component'})`
+  return WrappedComponent
+}
 
 export const useLoggedInUser = (): UserContextType => React.useContext(UserContext)
 

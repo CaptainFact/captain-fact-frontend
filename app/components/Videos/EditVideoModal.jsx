@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { Formik } from 'formik'
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 import { Edit } from 'lucide-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'

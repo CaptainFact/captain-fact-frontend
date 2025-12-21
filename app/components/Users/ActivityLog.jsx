@@ -1,5 +1,5 @@
 import { Query } from '@apollo/client/react/components'
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 import { get } from 'lodash'
 import React from 'react'
 import { withTranslation } from 'react-i18next'

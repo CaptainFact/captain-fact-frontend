@@ -19,6 +19,7 @@
 - [ ] Adding a link in a comment text shows wrong error message
 - [ ] Adding a link in a statement text shows wrong error message
 - [ ] should we remove phoenix from frontend?
+- [x] replace graphql-tag with @apollo/client
 
 # To test
 

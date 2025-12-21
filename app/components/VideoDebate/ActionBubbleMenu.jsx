@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 import { ListTodo, LogIn, MessageSquare, X } from 'lucide-react'
 import React from 'react'
 import { withTranslation } from 'react-i18next'

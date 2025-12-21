@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 export const VideosQuery = gql`
   query VideosIndex($offset: Int! = 1, $limit: Int! = 16, $filters: VideoFilter = {}) {
@@ -94,7 +94,7 @@ export const loggedInUserUnreadNotificationsCount = gql`
 `
 
 export const loggedInUserPendingModerationCount = gql`
-  query LoggedInUserUnreadNotificationsCount {
+  query LoggedInUserPendingModerationCount {
     loggedInUser {
       id
       actionsPendingModeration
@@ -116,6 +116,23 @@ export const loggedInUserAvailableFlags = gql`
     loggedInUser {
       id
       availableFlags
+    }
+  }
+`
+
+export const loggedInUserQuery = gql`
+  query LoggedInUser {
+    loggedInUser {
+      id
+      username
+      name
+      reputation
+      registeredAt
+      pictureUrl
+      miniPictureUrl
+      achievements
+      availableFlags
+      isPublisher
     }
   }
 `
