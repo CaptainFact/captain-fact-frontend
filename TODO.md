@@ -2,17 +2,24 @@
 
 - [x] Finish removing redux/redux-form
 - [x] Remove react-redux
-- [ ] Remove legacy sockets
+- [x] Remove legacy sockets
 - [ ] Handle errors properly, with toasts. There are many console.error('Failed to delete comment:', error) in the codebase.
-- [ ] Setting speaker when editing statement doesn't work.
+- [x] Setting speaker when editing statement doesn't work.
 - [ ] Speaker focus in speakers list
-- [ ] BackgroundNotifier
-- [ ] Votes not properly recorded in "speaker" view of statement
-- [ ] Autoscroll
-- [ ] Some links are not using the Link component
-- [ ] Redirected to home when visiting http://localhost:3333/u/Betree/settings directly
+- [x] Votes not properly recorded in "speaker" view of statement
+- [x] Some links are not using the Link component
+- [x] Redirected to home when visiting http://localhost:3333/u/Betree/settings directly
 - [ ] Flag modal not working
 - [ ] Move loggedInUser to GraphQL type (currently using a record)
+- [ ] Rename all components from "V2"
+
+# To test
+
+- [ ] Autoscroll
+- [ ] BackgroundNotifier
+- [ ] drafts
+- [ ] transcription
+- [ ] search
 
 # Ideas
 

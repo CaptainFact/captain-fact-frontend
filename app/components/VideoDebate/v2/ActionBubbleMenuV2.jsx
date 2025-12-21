@@ -45,7 +45,7 @@ const ActionBubbleMenuV2 = ({
         history.push(`/videos/${match[1]}`)
       }
 
-      onSetStatementForm({ speaker_id: 0 })
+      onSetStatementForm({ speakerId: 0 })
     }
   }
 

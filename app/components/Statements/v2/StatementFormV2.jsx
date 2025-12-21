@@ -38,6 +38,10 @@ const CREATE_STATEMENT_MUTATION = gql`
       time
       text
       isDraft
+      speakerId
+      speaker {
+        id
+      }
       video {
         id
       }
@@ -52,6 +56,7 @@ const UPDATE_STATEMENT_MUTATION = gql`
       time
       text
       isDraft
+      speakerId
       speaker {
         id
       }
@@ -124,12 +129,12 @@ const StatementFormV2 = ({
     }
 
     // Handle speaker warning
-    if (!statement.speaker_id && !emptySpeakerWarningHadBeenShown) {
+    if (!statement.speakerId && !emptySpeakerWarningHadBeenShown) {
       setEmptySpeakerWarningHadBeenShown(true)
       setSubmitting(false)
       return
-    } else if (!statement.speaker_id) {
-      statement.speaker_id = null
+    } else if (!statement.speakerId) {
+      statement.speakerId = null
     }
 
     try {
@@ -147,7 +152,7 @@ const StatementFormV2 = ({
             id: initialValues.id,
             text: statement.text,
             time: statement.time,
-            speakerId: statement.speaker_id || null,
+            speakerId: statement.speakerId || null,
             isDraft: statement.isDraft || false,
           },
         })
@@ -162,7 +167,7 @@ const StatementFormV2 = ({
             videoId: videoId,
             text: statement.text,
             time: statement.time,
-            speakerId: statement.speaker_id || null,
+            speakerId: statement.speakerId || null,
             isDraft: statement.isDraft || false,
           },
         })
@@ -187,14 +192,15 @@ const StatementFormV2 = ({
 
   const currentTime = lockedTime === false ? position : lockedTime
   // Handle both camelCase (from GraphQL) and snake_case (form state)
-  const speakerId = initialValues.speakerId || initialValues.speaker_id
+  // Extract speakerId from either direct property or nested speaker object
+  const speakerId = initialValues.speakerId || initialValues.speaker?.id || null
   const speaker = speakerId ? speakers.find((s) => s.id === speakerId) : null
   const LockIcon = lockedTime === false ? Unlock : Lock
 
   return (
     <Formik
       initialValues={{
-        speaker_id: speakerId || null,
+        speakerId: speakerId || null,
         text: initialValues.text || '',
         time: initialValues.time,
       }}
@@ -275,11 +281,11 @@ const StatementFormV2 = ({
 
               <div>
                 <SpeakersSelectV2
-                  name="speaker_id"
+                  name="speakerId"
                   speakers={speakers}
-                  value={values.speaker_id}
+                  value={values.speakerId}
                   onChange={(value) => {
-                    setFieldValue('speaker_id', value)
+                    setFieldValue('speakerId', value)
                     setEmptySpeakerWarningHadBeenShown(false)
                   }}
                   onBlur={handleBlur}

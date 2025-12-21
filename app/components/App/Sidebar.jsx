@@ -14,7 +14,7 @@ import {
 } from 'lucide-react'
 import React from 'react'
 import { useTranslation, withTranslation } from 'react-i18next'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { Discord, Facebook, Github, Mastodon, Twitter } from 'styled-icons/fa-brands'
 import { Star } from 'styled-icons/fa-solid'
 import { LinkExternal } from 'styled-icons/octicons'
@@ -68,18 +68,17 @@ const DailyGainGauge = ({ t }) => {
   )
 }
 
-// Moderation menu item component
-const ModerationMenuItem = ({ t }) => {
+const ModerationMenuItem = () => {
+  const { t } = useTranslation('main')
   const { data } = useQuery(loggedInUserPendingModerationCount, {
     fetchPolicy: 'network-only',
-    pollInterval: 25000,
+    pollInterval: 120_000,
   })
 
-  const pendingCount = get(data, 'loggedInUser.actions_pending_moderation', 0)
-
+  const pendingCount = get(data, 'loggedInUser.actionsPendingModeration', 0)
   return (
     <li>
-      <a
+      <Link
         href="/moderation"
         className="flex items-center px-4 py-2 text-gray-700 dark:text-foreground hover:bg-gray-100 dark:hover:bg-accent rounded-md hover:text-gray-900 dark:hover:text-foreground"
       >
@@ -90,7 +89,7 @@ const ModerationMenuItem = ({ t }) => {
             {pendingCount}
           </Badge>
         )}
-      </a>
+      </Link>
     </li>
   )
 }
@@ -323,7 +322,7 @@ class Sidebar extends React.PureComponent {
           {capitalize(t('entities.videoFactChecking'))}
         </this.MenuListLink>
         <ReputationGuard requiredRep={MIN_REPUTATION_MODERATION}>
-          <ModerationMenuItem t={t} />
+          <ModerationMenuItem />
         </ReputationGuard>
       </ul>
     )

@@ -33,8 +33,8 @@ const StatementsListV2 = ({
 
   // Get speaker ID for form
   const speakerId = useMemo(() => {
-    if (statementForm?.speaker_id !== undefined) {
-      return statementForm.speaker_id
+    if (statementForm?.speakerId !== undefined) {
+      return statementForm.speakerId
     }
     if (speakers && speakers.length === 1) {
       return speakers[0].id
@@ -49,7 +49,7 @@ const StatementsListV2 = ({
           <StatementFormV2
             offset={offset}
             initialValues={{
-              speaker_id: speakerId,
+              speakerId: speakerId,
               text: statementForm.text || '',
               time: statementForm.time,
             }}

@@ -12,8 +12,8 @@ import {
   MIN_REPUTATION_UPDATE_STATEMENT,
 } from '../../../constants'
 import CommentFormV2 from '../../Comments/CommentFormV2'
-import { withLoggedInUser } from '../../LoggedInUser/UserProvider'
 import DialogConfirmDelete from '../../Dialogs/DialogConfirmDelete'
+import { withLoggedInUser } from '../../LoggedInUser/UserProvider'
 import { Button } from '../../ui/button'
 import { Card } from '../../ui/card'
 import ReputationGuardTooltip from '../../Utils/ReputationGuardTooltip'
@@ -81,7 +81,7 @@ const StatementContainerV2 = ({
           id: statement.id,
           text: statement.text,
           time: statement.time,
-          speakerId: statement.speakerId || null,
+          speakerId: statement.speakerId || statement.speaker?.id || null,
           isDraft: false,
         },
       })

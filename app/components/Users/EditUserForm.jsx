@@ -1,8 +1,7 @@
 import { useFormik } from 'formik'
 import { AtSign, IdCard, Lock, Mail } from 'lucide-react'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { useHistory } from 'react-router-dom'
 
 import { toast } from '@/hooks/use-toast'
 
@@ -16,16 +15,7 @@ import { Label } from '../ui/label'
 
 const EditUserForm = () => {
   const { t } = useTranslation('user')
-  const history = useHistory()
-  const { loggedInUser, loggedInUserLoading, isAuthenticated, updateLoggedInUser } =
-    useLoggedInUser()
-
-  useEffect(() => {
-    // Redirect to user profile when not authenticated
-    if (!loggedInUserLoading && !isAuthenticated) {
-      history.push('/')
-    }
-  }, [loggedInUserLoading, isAuthenticated, history])
+  const { loggedInUser, updateLoggedInUser } = useLoggedInUser()
 
   const validateForm = (values) =>
     validateUserForm(t, values, {

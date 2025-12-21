@@ -1,8 +1,8 @@
 import { CircleAlert } from 'lucide-react'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useHistory } from 'react-router-dom'
 
-import { useUserPreferences } from '../../contexts/UserPreferencesContext'
 import UserLanguageSelector from '../LoggedInUser/UserLanguageSelector'
 import { useLoggedInUser } from '../LoggedInUser/UserProvider'
 import { Button } from '../ui/button'
@@ -11,11 +11,24 @@ import { Separator } from '../ui/separator'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import DeleteUserModal from './DeleteUserModal'
 import EditUserForm from './EditUserForm'
+import { DisplayedUserContext } from './User'
 
-const UserSettings = () => {
+export default function UserSettings() {
   const { t } = useTranslation('user')
-  const { loggedInUserLoading, logout } = useLoggedInUser()
+  const { loggedInUserLoading, logout, loggedInUser, isAuthenticated } = useLoggedInUser()
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
+  const { user } = React.useContext(DisplayedUserContext)
+  const history = useHistory()
+
+  // Redirect if not viewing own settings
+  React.useEffect(() => {
+    if (
+      !loggedInUserLoading &&
+      (!isAuthenticated || loggedInUser?.id.toString() !== user.id.toString())
+    ) {
+      history.push('/')
+    }
+  }, [loggedInUserLoading, isAuthenticated, history])
 
   const handleDeleteSuccess = () => {
     logout()
@@ -55,10 +68,3 @@ const UserSettings = () => {
     </div>
   )
 }
-
-const UserSettingsWithPreferences = (props) => {
-  const { locale } = useUserPreferences()
-  return <UserSettings {...props} locale={locale} />
-}
-
-export default UserSettingsWithPreferences

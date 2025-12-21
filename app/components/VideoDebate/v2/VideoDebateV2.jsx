@@ -143,7 +143,7 @@ const COMMENT_SCORE_DIFF_SUBSCRIPTION = gql`
 
 // State management reducer
 const initialState = {
-  statementForm: null, // { speaker_id, text, time } or null
+  statementForm: null, // { speakerId, text, time } or null
 }
 
 const videoDebateReducer = (state, action) => {
