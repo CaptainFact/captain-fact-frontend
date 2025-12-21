@@ -67,7 +67,7 @@ const markAsSeenMutation = gql`
 /**
  * Hook to get a user's notifications
  */
-export const useNotifications = ({ pageSize, pageNumber, pollInterval, filter }) => {
+const useNotifications = ({ pageSize, pageNumber, pollInterval, filter }) => {
   const { loading, error, data } = useQuery(loggedInUserNotificationsQuery, {
     variables: { filter, pageSize, page: pageNumber },
     pollInterval,

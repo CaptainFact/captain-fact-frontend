@@ -18,6 +18,7 @@
 - [ ] add multiple times the same source, further comments are not displayed
 - [ ] Adding a link in a comment text shows wrong error message
 - [ ] Adding a link in a statement text shows wrong error message
+- [ ] should we remove phoenix from frontend?
 
 # To test
 

@@ -7,7 +7,7 @@ import { validateFieldLength } from './form_validators'
 /**
  * Form values interface for user forms
  */
-export interface UserFormValues {
+interface UserFormValues {
   email?: string
   password?: string
   passwordRepeat?: string
@@ -19,7 +19,7 @@ export interface UserFormValues {
 /**
  * Validation options for user forms
  */
-export interface UserFormValidationOptions {
+interface UserFormValidationOptions {
   emailRequired?: boolean
   passwordRequired?: boolean
   includeUsername?: boolean
@@ -30,14 +30,14 @@ export interface UserFormValidationOptions {
 /**
  * Validation errors object
  */
-export interface ValidationErrors {
+interface ValidationErrors {
   [key: string]: string | undefined
 }
 
 /**
  * Validates an email field
  */
-export const validateEmail = (
+const validateEmail = (
   t: TFunction,
   email: string | undefined,
   required: boolean = true,
@@ -54,7 +54,7 @@ export const validateEmail = (
 /**
  * Validates a password field
  */
-export const validatePassword = (
+const validatePassword = (
   t: TFunction,
   password: string | undefined,
   required: boolean = true,
@@ -71,7 +71,7 @@ export const validatePassword = (
 /**
  * Validates a password repeat field (must match the original password)
  */
-export const validatePasswordRepeat = (
+const validatePasswordRepeat = (
   t: TFunction,
   passwordRepeat: string | undefined,
   password: string | undefined,
@@ -85,7 +85,7 @@ export const validatePasswordRepeat = (
 /**
  * Validates a username field
  */
-export const validateUsername = (
+const validateUsername = (
   t: TFunction,
   username: string | undefined,
 ): string | undefined => {
@@ -98,7 +98,7 @@ export const validateUsername = (
 /**
  * Validates a name field (optional)
  */
-export const validateName = (
+const validateName = (
   t: TFunction,
   name: string | undefined,
 ): string | undefined => {

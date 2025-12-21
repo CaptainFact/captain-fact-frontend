@@ -2,16 +2,10 @@ import { useQuery, useSubscription } from '@apollo/client'
 import { startCase } from 'lodash'
 import { History } from 'lucide-react'
 import PropTypes from 'prop-types'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 
 import {
   STATEMENT_HISTORY_ACTION_ADDED_SUBSCRIPTION,
@@ -94,4 +88,3 @@ StatementHistoryDialog.propTypes = {
 }
 
 export { StatementHistoryDialog }
-export default StatementHistoryDialog
