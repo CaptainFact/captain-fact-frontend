@@ -32,6 +32,8 @@ const COMMENT_FRAGMENT = gql`
     source {
       id
       url
+      title
+      siteName
     }
   }
 `

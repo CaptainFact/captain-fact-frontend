@@ -33,7 +33,7 @@ const isPlayer = (url) => {
 
 const PLAYER_CONFIG = { youtube: { playerVars: { showinfo: 1 } } }
 
-export const Source = ({ source: { url, title, site_name }, withoutPlayer }) => {
+export const Source = ({ source: { url, title, siteName }, withoutPlayer }) => {
   if (!withoutPlayer && isPlayer(url)) {
     return (
       <ReactPlayer
@@ -54,7 +54,7 @@ export const Source = ({ source: { url, title, site_name }, withoutPlayer }) => 
       <div className="flex items-center gap-1">
         <ExternalLink className="flex-grow-0 flex-shrink-0 basis-[14x]" size={14} />
         <span className="font-semibold truncate group-hover:underline">
-          {site_name ? site_name.toUpperCase() : getDisplayableHostname(url)}
+          {siteName ? siteName.toUpperCase() : getDisplayableHostname(url)}
         </span>
       </div>
       <span className="italic text-[0.95em]">{title}</span>
