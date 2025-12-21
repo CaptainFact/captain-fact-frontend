@@ -1,4 +1,3 @@
-import { gql } from '@apollo/client'
 import { Mutation } from '@apollo/client/react/components'
 import { UPDATE_SUBSCRIPTION_MUTATION } from 'app/API/graphql_queries'
 import { Bell, BellOff } from 'lucide-react'

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/heading-has-content */
-import PropTypes from 'prop-types'
+
 import React, { useEffect, useState } from 'react'
 import Markdown from 'react-markdown'
 import { Link } from 'react-router-dom'
@@ -14,7 +14,7 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
 
 const ERROR_NOT_FOUND = 'not_found'
 
-const HelpPageContent = ({ page, onLinkClick }) => {
+const HelpPageContent = ({ page, onLinkClick }: { page: string; onLinkClick: () => void }) => {
   const { locale } = useUserPreferences()
   const [markdownContent, setMarkdownContent] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -28,11 +28,11 @@ const HelpPageContent = ({ page, onLinkClick }) => {
       try {
         const response = await fetch(`/assets/help/${locale}/${page}.md`)
         const contentType = response.headers.get('Content-Type')
-        
+
         if (contentType && !contentType.includes('markdown')) {
           throw ERROR_NOT_FOUND
         }
-        
+
         if (response.status === 200 || response.status === 304) {
           const text = await response.text()
           setMarkdownContent(text)
@@ -55,11 +55,11 @@ const HelpPageContent = ({ page, onLinkClick }) => {
   if (isLoading) {
     return <LoadingFrame />
   }
-  
+
   if (error) {
     return <ErrorView canGoBack={false} error={error} />
   }
-  
+
   return (
     <Markdown
       className="content"
@@ -110,25 +110,36 @@ const HelpPageContent = ({ page, onLinkClick }) => {
         // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
         li: ({ node, ...props }) => <li className="leading-relaxed mb-2" {...props} />,
         // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-        blockquote: ({ node, ...props }) => (
-          <blockquote
-            className="border-l-4 border-blue-400 dark:border-blue-500 bg-blue-50 dark:bg-blue-950/30 text-gray-600 dark:text-foreground px-6 py-1 mb-6 rounded-r italic leading-relaxed"
-            {...props}
-          />
-        ),
+        blockquote: ({ node, ...props }) => {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const { ref: _ref, ...restProps } =
+            props as React.ComponentPropsWithoutRef<'blockquote'> & { ref?: React.Ref<HTMLElement> }
+          return (
+            <blockquote
+              className="border-l-4 border-blue-400 dark:border-blue-500 bg-blue-50 dark:bg-blue-950/30 text-gray-600 dark:text-foreground px-6 py-1 mb-6 rounded-r italic leading-relaxed"
+              {...restProps}
+            />
+          )
+        },
         // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
         code: ({ node, className, children, ...props }) => {
-          return typeof children === 'string' && children.length < 30 ? (
-            <code
-              className="bg-gray-100 dark:bg-accent text-pink-600 dark:text-pink-400 px-2 py-0.5 rounded font-mono text-sm"
-              {...props}
-            >
-              {children}
-            </code>
-          ) : (
+          if (typeof children === 'string' && children.length < 30) {
+            return (
+              <code
+                className="bg-gray-100 dark:bg-accent text-pink-600 dark:text-pink-400 px-2 py-0.5 rounded font-mono text-sm"
+                {...props}
+              >
+                {children}
+              </code>
+            )
+          }
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const { ref: _ref, ...restProps } =
+            props as React.ComponentPropsWithoutRef<'blockquote'> & { ref?: React.Ref<HTMLElement> }
+          return (
             <blockquote
               className="border-l-4 border-blue-400 dark:border-blue-500 bg-blue-50 dark:bg-blue-950/30 text-gray-600 dark:text-foreground px-6 py-3 mb-6 rounded-r italic leading-relaxed"
-              {...props}
+              {...restProps}
             >
               {children}
             </blockquote>
@@ -166,10 +177,7 @@ const HelpPageContent = ({ page, onLinkClick }) => {
         ),
         // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
         th: ({ node, ...props }) => (
-          <th
-            className="p-3 font-medium text-left text-gray-700 dark:text-foreground"
-            {...props}
-          />
+          <th className="p-3 font-medium text-left text-gray-700 dark:text-foreground" {...props} />
         ),
         // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
         td: ({ node, ...props }) => (
@@ -180,12 +188,6 @@ const HelpPageContent = ({ page, onLinkClick }) => {
       {markdownContent}
     </Markdown>
   )
-}
-
-HelpPageContent.propTypes = {
-  page: PropTypes.string.isRequired,
-  onLinkClick: PropTypes.func,
-  locale: PropTypes.string.isRequired,
 }
 
 export default HelpPageContent

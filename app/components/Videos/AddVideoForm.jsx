@@ -1,4 +1,4 @@
-import { useMutation } from '@apollo/client'
+import { useLazyQuery, useMutation } from '@apollo/client'
 import { Formik } from 'formik'
 import { Eye, EyeOff } from 'lucide-react'
 import React, { useEffect } from 'react'
@@ -35,7 +35,7 @@ const renderVideo = (value, error) => {
       <div />
     </div>
   ) : (
-    <ReactPlayer className="w-full aspect-video" url={value} controls />
+    <ReactPlayer className="w-full aspect-video" width="" height="" url={value} controls />
   )
 }
 
@@ -70,7 +70,7 @@ const AddVideoForm = () => {
   const { isAuthenticated, loggedInUser } = useLoggedInUser()
 
   const [createVideo, { loading: creatingVideo }] = useMutation(CREATE_VIDEO_MUTATION)
-  const [searchVideoQuery] = useMutation(SEARCH_VIDEO_QUERY)
+  const [searchVideoQuery] = useLazyQuery(SEARCH_VIDEO_QUERY)
 
   useEffect(() => {
     if (videoUrl) {
@@ -125,7 +125,7 @@ const AddVideoForm = () => {
       }) => (
         <div className="grid grid-cols-1 md:grid-cols-4">
           <form
-            className="md:col-span-1 bg-white border-r h-[--main-height]"
+            className="md:col-span-2 bg-white border-r h-[--main-height]"
             onSubmit={handleSubmit}
           >
             {renderVideo(values.url, errors.url)}
@@ -190,7 +190,7 @@ const AddVideoForm = () => {
             </Card>
           </form>
 
-          <div className="md:col-span-3">
+          <div className="md:col-span-2">
             {isSubmitting ? <LoadingFrame title={t('videos.analysing')} /> : renderVideoAdvice(t)}
           </div>
         </div>

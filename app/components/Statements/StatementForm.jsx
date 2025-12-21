@@ -159,14 +159,25 @@ const StatementForm = ({
             speakerId: statement.speakerId || null,
             isDraft: statement.isDraft || false,
           },
+          update: (cache, { data }) => {
+            cache.modify({
+              id: cache.identify({ __typename: 'Video', id: videoId }),
+              fields: {
+                statements: (existingStatements = []) => [
+                  ...existingStatements,
+                  data.createStatement,
+                ],
+              },
+            })
+          },
         })
         response = result.data?.createStatement || { success: true }
       }
 
       setSubmitting(false)
-      // The GraphQL subscription will handle adding/updating the statement
+
       // If we have an ID from the response, scroll to it
-      if (response && response.id) {
+      if (response.id) {
         onSetScrollTo({ id: response.id, __forceAutoScroll: true })
       }
       // Call onSuccess callback if provided (e.g., to clear the form)

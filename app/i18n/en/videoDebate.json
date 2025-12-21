@@ -70,6 +70,7 @@
   "speaker": {
     "one": "Speaker",
     "remove": "Remove speaker",
+    "removed": "Speaker removed",
     "confirmRemove": "All statements made by {{speaker.fullName}} on this video will become orphans",
     "add": "Add speaker",
     "create": "Create speaker \"{{name}}\"",

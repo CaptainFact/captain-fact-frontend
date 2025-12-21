@@ -106,7 +106,7 @@ const UserAction = ({
 
         {Boolean(
           action.changes &&
-            (typeof action.changes === 'string' || Object.keys(action.changes || {}).length > 0),
+            (typeof action.changes === 'string' || Object.keys(action.changes).length > 0),
         ) && (
           <Button
             size="xs"

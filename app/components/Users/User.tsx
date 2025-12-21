@@ -133,9 +133,7 @@ const User: React.FC<UserProps> = ({ children }) => {
           </UserMenu>
         </div>
       </div>
-      <DisplayedUserContext.Provider value={{ user: user || null }}>
-        {children}
-      </DisplayedUserContext.Provider>
+      <DisplayedUserContext.Provider value={{ user }}>{children}</DisplayedUserContext.Provider>
     </div>
   )
 }

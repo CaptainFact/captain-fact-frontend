@@ -11,6 +11,7 @@ import BackgroundNotifier from '../App/BackgroundNotifier'
 import { ErrorView } from '../Utils/ErrorView'
 import ColumnDebate from './ColumnDebate'
 import ColumnVideo from './ColumnVideo'
+import { removeSpeakerFromVideoCache } from './graphql-cache'
 
 // GraphQL Fragments
 const COMMENT_FRAGMENT = gql`
@@ -143,6 +144,40 @@ const COMMENT_SCORE_DIFF_SUBSCRIPTION = gql`
   }
 `
 
+const SPEAKER_ADDED_SUBSCRIPTION = gql`
+  subscription SpeakerAdded($videoId: ID!) {
+    speakerAdded(videoId: $videoId) {
+      id
+      fullName
+      title
+      wikidataItemId
+      slug
+      picture
+    }
+  }
+`
+
+const SPEAKER_UPDATED_SUBSCRIPTION = gql`
+  subscription SpeakerUpdated($videoId: ID!) {
+    speakerUpdated(videoId: $videoId) {
+      id
+      fullName
+      title
+      wikidataItemId
+      slug
+      picture
+    }
+  }
+`
+
+const SPEAKER_REMOVED_SUBSCRIPTION = gql`
+  subscription SpeakerRemoved($videoId: ID!) {
+    speakerRemoved(videoId: $videoId) {
+      id
+    }
+  }
+`
+
 // State management reducer
 const initialState = {
   statementForm: null, // { speakerId, text, time } or null
@@ -252,10 +287,77 @@ const useVideoDebateSubscriptions = (subscribeToMore, videoId) => {
       },
     })
 
+    // Subscribe to speaker additions
+    const unsubscribeSpeakerAdded = subscribeToMore({
+      document: SPEAKER_ADDED_SUBSCRIPTION,
+      variables: { videoId: videoId },
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data?.speakerAdded) {
+          return prev
+        }
+        const newSpeaker = subscriptionData.data.speakerAdded
+        const existingSpeakers = prev.video?.speakers || []
+
+        // Check if speaker already exists (avoid duplicates)
+        if (existingSpeakers.some((s) => s.id === newSpeaker.id)) {
+          return prev
+        }
+
+        return {
+          ...prev,
+          video: {
+            ...prev.video,
+            speakers: [...existingSpeakers, newSpeaker],
+          },
+        }
+      },
+    })
+
+    // Subscribe to speaker updates
+    const unsubscribeSpeakerUpdated = subscribeToMore({
+      document: SPEAKER_UPDATED_SUBSCRIPTION,
+      variables: { videoId: videoId },
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data?.speakerUpdated) {
+          return prev
+        }
+        const updatedSpeaker = subscriptionData.data.speakerUpdated
+        const existingSpeakers = prev.video?.speakers || []
+
+        // Check if speaker exists and update it
+        const speakerExists = existingSpeakers.some((s) => s.id === updatedSpeaker.id)
+        if (!speakerExists) {
+          return prev
+        }
+
+        // Update speaker in speakers array and also in statements that reference it
+        return {
+          ...prev,
+          video: {
+            ...prev.video,
+            speakers: existingSpeakers.map((speaker) =>
+              speaker.id === updatedSpeaker.id ? updatedSpeaker : speaker,
+            ),
+            statements: (prev.video?.statements || []).map((statement) => {
+              if (statement.speaker?.id === updatedSpeaker.id) {
+                return {
+                  ...statement,
+                  speaker: updatedSpeaker,
+                }
+              }
+              return statement
+            }),
+          },
+        }
+      },
+    })
+
     // Cleanup subscriptions on unmount
     return () => {
       unsubscribeStatementAdded()
       unsubscribeCommentAdded()
+      unsubscribeSpeakerAdded()
+      unsubscribeSpeakerUpdated()
     }
   }, [subscribeToMore, videoId])
 
@@ -334,6 +436,18 @@ const useVideoDebateSubscriptions = (subscribeToMore, videoId) => {
           },
         },
       })
+    },
+  })
+
+  useSubscription(SPEAKER_REMOVED_SUBSCRIPTION, {
+    variables: { videoId: videoId },
+    skip: !videoId,
+    onData: ({ data }) => {
+      if (!data.data?.speakerRemoved) {
+        return
+      } else {
+        removeSpeakerFromVideoCache(client.cache, videoId, data.data.speakerRemoved.id)
+      }
     },
   })
 }

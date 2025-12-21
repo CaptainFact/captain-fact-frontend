@@ -10,6 +10,7 @@ import { toast } from '@/hooks/use-toast'
 import { REMOVE_SPEAKER_FROM_VIDEO_MUTATION } from '../../API/graphql_queries'
 import DialogConfirmDelete from '../Dialogs/DialogConfirmDelete'
 import { Avatar, AvatarImage } from '../ui/avatar'
+import { removeSpeakerFromVideoCache } from '../VideoDebate/graphql-cache'
 import EditSpeakerFormModal from './EditSpeakerFormModal'
 import { SpeakerDropdownMenu } from './SpeakerDropdownMenu'
 
@@ -38,10 +39,12 @@ const SpeakerPreview = ({
   const handleConfirmRemoveSpeaker = async () => {
     await removeSpeakerFromVideo({
       variables: { videoId, speakerId: speaker.id },
+      update: (cache) => {
+        removeSpeakerFromVideoCache(cache, videoId, speaker.id)
+      },
     })
     toast({
-      title: t('speaker.remove'),
-      description: t('speaker.confirmRemove', { speaker }),
+      title: t('speaker.removed'),
     })
     setDeleteModalOpen(false)
   }

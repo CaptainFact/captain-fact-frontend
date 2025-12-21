@@ -1,24 +1,68 @@
-import { useLazyQuery, useMutation } from '@apollo/client'
+import { gql, useLazyQuery, useMutation } from '@apollo/client'
 import React, { useMemo, useState } from 'react'
 import { withTranslation } from 'react-i18next'
 
-import {
-  ADD_SPEAKER_TO_VIDEO_MUTATION,
-  CREATE_SPEAKER_MUTATION,
-  SEARCH_SPEAKERS_QUERY,
-} from '../../API/graphql_queries'
+import { toastError } from '@/lib/toasts'
+
+import { SEARCH_SPEAKERS_QUERY } from '../../API/graphql_queries'
 import { SPEAKER_NAME_LENGTH } from '../../constants'
 import { cleanStr } from '../../lib/clean_str'
 import { checkLength } from '../../lib/form_validators'
 import capitalizeName from '../../lib/name_formatter'
 import { ReactiveAsyncCreatable, ReactSelectTheme } from '../../lib/react_select_theme'
 
+const videoDebateSpeakerFieldsFragment = gql`
+  fragment SpeakerFields on Speaker {
+    id
+    fullName
+    slug
+    picture
+    title
+  }
+`
+
+const ADD_SPEAKER_TO_VIDEO_MUTATION = gql`
+  mutation AddSpeakerToVideo($videoId: ID!, $speakerId: ID!) {
+    addSpeakerToVideo(videoId: $videoId, speakerId: $speakerId) {
+      ...SpeakerFields
+    }
+  }
+  ${videoDebateSpeakerFieldsFragment}
+`
+
+const CREATE_SPEAKER_MUTATION = gql`
+  mutation CreateSpeaker($videoId: ID!, $fullName: String!) {
+    createSpeaker(videoId: $videoId, fullName: $fullName) {
+      ...SpeakerFields
+    }
+  }
+  ${videoDebateSpeakerFieldsFragment}
+`
+
 const AddSpeakerForm = ({ disabled, videoId, t }) => {
   const [isSearching, setIsSearching] = useState(false)
 
   const [searchSpeakers, { loading: searchLoading }] = useLazyQuery(SEARCH_SPEAKERS_QUERY)
-  const [addSpeakerToVideo] = useMutation(ADD_SPEAKER_TO_VIDEO_MUTATION)
-  const [createSpeaker] = useMutation(CREATE_SPEAKER_MUTATION)
+  const [addSpeakerToVideo] = useMutation(ADD_SPEAKER_TO_VIDEO_MUTATION, {
+    update: (cache, { data }) => {
+      cache.modify({
+        id: cache.identify({ __typename: 'Video', id: videoId }),
+        fields: {
+          speakers: (existingSpeakers = []) => [...existingSpeakers, data.addSpeakerToVideo],
+        },
+      })
+    },
+  })
+  const [createSpeaker] = useMutation(CREATE_SPEAKER_MUTATION, {
+    update: (cache, { data }) => {
+      cache.modify({
+        id: cache.identify({ __typename: 'Video', id: videoId }),
+        fields: {
+          speakers: (existingSpeakers = []) => [...existingSpeakers, data.createSpeaker],
+        },
+      })
+    },
+  })
 
   const debouncedSearch = useMemo(() => {
     let timeoutId
@@ -48,19 +92,23 @@ const AddSpeakerForm = ({ disabled, videoId, t }) => {
   }
 
   const onChange = async ({ value }, { action }) => {
-    if (action === 'select-option' && value && value.id) {
-      // Add existing speaker to video
-      await addSpeakerToVideo({
-        variables: { videoId, speakerId: value.id },
-      })
-    } else if (action === 'create-option' && checkLength(value, SPEAKER_NAME_LENGTH)) {
-      // Create new speaker and add to video
-      await createSpeaker({
-        variables: {
-          videoId,
-          fullName: capitalizeName(cleanStr(value)),
-        },
-      })
+    try {
+      if (action === 'select-option' && value && value.id) {
+        // Add existing speaker to video
+        await addSpeakerToVideo({
+          variables: { videoId, speakerId: value.id },
+        })
+      } else if (action === 'create-option' && checkLength(value, SPEAKER_NAME_LENGTH)) {
+        // Create new speaker and add to video
+        await createSpeaker({
+          variables: {
+            videoId,
+            fullName: capitalizeName(cleanStr(value)),
+          },
+        })
+      }
+    } catch (error) {
+      toastError(error)
     }
   }
 

@@ -242,27 +242,6 @@ export const SEARCH_SPEAKERS_QUERY = gql`
   }
 `
 
-export const ADD_SPEAKER_TO_VIDEO_MUTATION = gql`
-  mutation AddSpeakerToVideo($videoId: ID!, $speakerId: ID!) {
-    addSpeakerToVideo(videoId: $videoId, speakerId: $speakerId) {
-      id
-      fullName
-      slug
-      picture
-    }
-  }
-`
-
-export const CREATE_SPEAKER_MUTATION = gql`
-  mutation CreateSpeaker($videoId: ID!, $fullName: String!) {
-    createSpeaker(videoId: $videoId, fullName: $fullName) {
-      id
-      fullName
-      slug
-      picture
-    }
-  }
-`
 
 export const REMOVE_SPEAKER_FROM_VIDEO_MUTATION = gql`
   mutation RemoveSpeakerFromVideo($videoId: ID!, $speakerId: ID!) {
