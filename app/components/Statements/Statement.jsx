@@ -15,7 +15,7 @@ const Statement = ({
   offset = 0,
   onSetScrollTo,
   customButtons,
-  t,
+  withoutPlayback,
 }) => {
   const [shareModalOpen, setShareModalOpen] = useState(false)
   const [historyModalOpen, setHistoryModalOpen] = useState(false)
@@ -40,6 +40,7 @@ const Statement = ({
         handleShare={shareModal}
         withoutActions={withoutActions}
         customButtons={customButtons}
+        withoutPlayback={withoutPlayback}
       />
       <div className="bg-[#31455d] dark:bg-[hsl(210,30%,20%)] text-white dark:text-foreground p-5 shadow-inner flex items-start gap-4">
         <span className="h-[50px] -mt-2 sm:text-7xl text-5xl font-serif text-neutral-300 dark:text-neutral-400">

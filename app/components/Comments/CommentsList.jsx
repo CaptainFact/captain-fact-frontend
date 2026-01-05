@@ -26,6 +26,7 @@ const CommentsList = ({
   repliesByParent,
   setReplyToComment,
   votesMap,
+  flagsMap,
 }) => {
   const { isAuthenticated, loggedInUser } = useLoggedInUser()
   const [nbComments, setNbComments] = useState(() => getNbDisplayedRange(nesting))
@@ -65,6 +66,8 @@ const CommentsList = ({
             const replies = repliesByParent?.[comment.id]
             // Get logged in user's vote for this comment
             const loggedInUserVote = votesMap?.[comment.id] || 0
+            // Get logged in user's flag status for this comment
+            const isFlagged = flagsMap?.[comment.id] || false
 
             return (
               <div key={comment.id}>
@@ -76,19 +79,22 @@ const CommentsList = ({
                   replies={replies}
                   repliesByParent={repliesByParent}
                   loggedInUserVote={loggedInUserVote}
+                  isFlagged={isFlagged}
                   votesMap={votesMap}
                 />
               </div>
             )
           })
         ) : (
-          <CommentForm
-            statementID={statementID}
-            replyTo={replyingTo}
-            setReplyToComment={setReplyToComment}
-            user={isAuthenticated ? loggedInUser : null}
-            inciteToParticipate={commentType}
-          />
+          <div key="comment-form">
+            <CommentForm
+              statementID={statementID}
+              replyTo={replyingTo}
+              setReplyToComment={setReplyToComment}
+              user={isAuthenticated ? loggedInUser : null}
+              inciteToParticipate={commentType}
+            />
+          </div>
         )}
       </FlipMove>
       {displayedComments.length < commentsLength && (
@@ -107,7 +113,7 @@ CommentsList.propTypes = {
   className: PropTypes.string,
   commentType: PropTypes.string,
   header: PropTypes.node,
-  statementID: PropTypes.number,
+  statementID: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   replyingTo: PropTypes.object,
   nesting: PropTypes.number,
   repliesByParent: PropTypes.object,

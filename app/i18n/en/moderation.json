@@ -8,10 +8,10 @@
     "confirm": "Confirm flag"
   },
   "reason": {
-    "1": "Personal attack or inappropriate language",
-    "2": "Unwanted commercial content or spam",
-    "3": "Irrelevant",
-    "4": "Not constructive"
+    "BAD_LANGUAGE": "Personal attack or inappropriate language",
+    "SPAM": "Unwanted commercial content or spam",
+    "IRRELEVANT": "Irrelevant",
+    "NOT_CONSTRUCTIVE": "Not constructive"
   },
   "seeContext": "See in context",
   "whyReport": "Why do you think this comment was reported?",
@@ -21,5 +21,7 @@
   "pending": "Pending moderation",
   "helpText1": "Once you have reached 125 reputation points, you are allowed to moderate the content flagged by the CaptainFact Community.",
   "helpText2": "You can confirm, forbear, or refute the flag, which will have an impact on user's reputation.",
-  "learnMore": "More information about moderation"
+  "learnMore": "More information about moderation",
+  "flagSubmitted": "Flag submitted",
+  "thankYouFeedback": "Thank you for your feedback!"
 }

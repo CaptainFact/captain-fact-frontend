@@ -1,5 +1,4 @@
 import { useMutation } from '@apollo/client'
-import { gql } from '@apollo/client'
 import { ListTodo, LogIn, MessageSquare, X } from 'lucide-react'
 import React from 'react'
 import { withTranslation } from 'react-i18next'
@@ -10,14 +9,7 @@ import { cn } from '@/lib/css-utils'
 
 import { MIN_REPUTATION_START_AUTOMATIC_STATEMENTS_EXTRACTION } from '../../constants'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
-
-const startAutomaticStatementsExtractionMutation = gql`
-  mutation StartAutomaticStatementsExtraction($videoId: ID!) {
-    startAutomaticStatementsExtraction(videoId: $videoId) {
-      id
-    }
-  }
-`
+import { START_AUTOMATIC_STATEMENTS_EXTRACTION_MUTATION } from './graphql'
 
 const ActionBubbleMenu = ({
   video,
@@ -32,7 +24,7 @@ const ActionBubbleMenu = ({
   const history = useHistory()
   const [hasCalledStatementsExtract, setHasCalledStatementsExtract] = React.useState(false)
   const [startAutomaticStatementsExtraction, { loading }] = useMutation(
-    startAutomaticStatementsExtractionMutation,
+    START_AUTOMATIC_STATEMENTS_EXTRACTION_MUTATION,
   )
 
   const onStatementBubbleClick = () => {

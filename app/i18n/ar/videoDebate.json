@@ -8,7 +8,8 @@
   "flagForm": {
     "title": "لما تريد الإبلاغ عن هذا التعليق؟",
     "xAvailable": "{{count}} متوفر",
-    "xAvailable_other": "{{count}} متوفرة"
+    "xAvailable_other": "{{count}} متوفرة",
+    "successMessage": "تم الإبلاغ عن التعليق بنجاح"
   },
   "comment": {
     "writeComment": "اكتب تعليقًا…",

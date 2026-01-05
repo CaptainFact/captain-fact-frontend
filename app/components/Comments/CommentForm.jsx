@@ -4,8 +4,7 @@ import { get } from 'lodash'
 import { Check, CircleX, HelpCircle, MessagesSquare, Plus, ShieldBan } from 'lucide-react'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import { withTranslation } from 'react-i18next'
-import { withRouter } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import isURL from 'validator/lib/isURL'
 
 import { cn } from '@/lib/css-utils'
@@ -26,7 +25,8 @@ import UserPicture from '../Users/UserPicture'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import CommentDisplay from './CommentDisplay'
 
-const CommentForm = ({ statementID, setReplyToComment, replyTo, user, inciteToParticipate, t }) => {
+const CommentForm = ({ statementID, setReplyToComment, replyTo, user, inciteToParticipate }) => {
+  const { t } = useTranslation('videoDebate')
   const [isCollapsed, setIsCollapsed] = useState(true)
   const [createComment] = useMutation(CREATE_COMMENT_MUTATION)
 
@@ -129,7 +129,7 @@ const CommentForm = ({ statementID, setReplyToComment, replyTo, user, inciteToPa
         {t('comment.post', i18nParams)}
       </Button>
     ) : (
-      <div className="flex flex-1 flex-wrap min-w-[460px] gap-1">
+      <div className="flex flex-1 flex-wrap gap-1">
         <div className="flex flex-1 gap-1">
           <Button
             type="submit"
@@ -172,11 +172,10 @@ const CommentForm = ({ statementID, setReplyToComment, replyTo, user, inciteToPa
     const approveField = inciteToParticipate === 'approve'
 
     return (
-      <div className="flex flex-1 flex-wrap min-w-[460px]">
+      <div className="flex flex-1 flex-wrap">
         <div className="flex flex-[3_1_0%]">
           <Button
             variant={variant}
-            className="my-1 mr-1 flex-1"
             disabled={isDisabled || !values.source}
             onClick={() => setFieldValue('approve', approveField)}
           >
@@ -193,7 +192,7 @@ const CommentForm = ({ statementID, setReplyToComment, replyTo, user, inciteToPa
     return (
       <Formik initialValues={initialValues} validate={validate} onSubmit={onSubmit}>
         {({ handleBlur, handleSubmit, values, setFieldValue, isValid, dirty, errors }) => (
-          <form onSubmit={handleSubmit} className="flex-1">
+          <form onSubmit={handleSubmit} className="flex-1 min-w-0">
             <div className="flex flex-col">
               <div className="mb-2 relative">
                 <Textarea
@@ -211,7 +210,7 @@ const CommentForm = ({ statementID, setReplyToComment, replyTo, user, inciteToPa
               </div>
 
               <div className="flex flex-wrap my-1 gap-2">
-                <div className="flex flex-col flex-[3_1_330px] mr-2">
+                <div className="flex flex-col flex-[3_1_0%] min-w-0 mr-2">
                   <Input
                     name="source"
                     value={values.source}
@@ -296,10 +295,8 @@ const CommentForm = ({ statementID, setReplyToComment, replyTo, user, inciteToPa
           />
         </div>
       )}
-      <div className="flex">
-        <div className="mr-2">
-          <UserPicture user={user} size={USER_PICTURE_LARGE} />
-        </div>
+      <div className="flex gap-2 min-w-0" id="user-form">
+        <UserPicture user={user} size={USER_PICTURE_LARGE} />
         {renderForm()}
       </div>
     </div>
@@ -314,4 +311,4 @@ CommentForm.propTypes = {
   inciteToParticipate: PropTypes.oneOf(['approve', 'refute']),
 }
 
-export default withTranslation('videoDebate')(withRouter(CommentForm))
+export default CommentForm

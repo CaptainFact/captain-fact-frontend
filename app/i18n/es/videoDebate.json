@@ -9,7 +9,8 @@
   "flagForm": {
     "title": "¿Por qué informar de este comentario?",
     "xAvailable": "{{count}} disponible",
-    "xAvailable_other": "{{count}} disponibles"
+    "xAvailable_other": "{{count}} disponibles",
+    "successMessage": "Comentario denunciado con éxito"
   },
   "comment": {
     "writeComment": "Escribe un comentario...",

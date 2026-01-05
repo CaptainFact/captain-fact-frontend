@@ -1,4 +1,4 @@
-import { gql, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import { debounce } from 'lodash'
 import { CirclePlay, CircleX, MessageCircle } from 'lucide-react'
 import React from 'react'
@@ -13,19 +13,7 @@ import ClickableIcon from '../Utils/ClickableIcon'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import Message from '../Utils/Message'
 import ActionBubbleMenu, { ActionBubble } from './ActionBubbleMenu'
-
-const captionsQuery = gql`
-  query VideoCaptionsQuery($videoId: ID!) {
-    video(id: $videoId) {
-      id
-      captions {
-        text
-        start
-        duration
-      }
-    }
-  }
-`
+import { VIDEO_CAPTIONS_QUERY } from './graphql'
 
 // A statement is displayed before each caption whe
 const getStatementsAtPosition = (statements, caption, nextCaption) => {
@@ -120,7 +108,7 @@ const StatementIndicator = withTranslation('main')(({ statement, onPlayClick, t 
 })
 
 const CaptionsExtractor = ({ t, videoId, statements }) => {
-  const { data, loading, error } = useQuery(captionsQuery, { variables: { videoId } })
+  const { data, loading, error } = useQuery(VIDEO_CAPTIONS_QUERY, { variables: { videoId } })
   const [selection, setSelection] = React.useState({ text: null })
   const textContainerRef = React.useRef()
   const { position: playbackPosition, setPlaying, forcePosition } = useVideoPlayback()

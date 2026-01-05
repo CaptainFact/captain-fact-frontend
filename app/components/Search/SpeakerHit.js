@@ -5,7 +5,14 @@ import SpeakerPreview from '../Speakers/SpeakerPreview'
 export const SpeakerHit = ({ hit }) => {
   return (
     <div className="m-3">
-      <SpeakerPreview speaker={hit} withoutActions />
+      <SpeakerPreview
+        withoutActions
+        speaker={{
+          ...hit,
+          fullName: hit.full_name,
+          wikidataItemId: hit.wikidata_item_id,
+        }}
+      />
     </div>
   )
 }

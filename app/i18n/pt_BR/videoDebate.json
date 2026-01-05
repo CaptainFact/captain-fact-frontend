@@ -17,7 +17,8 @@
   "flagForm": {
     "title": "Por que denunciar esse comentário?",
     "xAvailable": "{{count}} disponível",
-    "xAvailable_other": "{{count}} disponíveis"
+    "xAvailable_other": "{{count}} disponíveis",
+    "successMessage": "Comentário denunciado com sucesso"
   },
   "comment": {
     "writeComment": "Escrever um comentário...",

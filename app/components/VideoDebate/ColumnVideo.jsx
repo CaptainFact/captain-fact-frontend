@@ -1,11 +1,11 @@
 import { CheckCircle, FileText, History } from 'lucide-react'
 import React from 'react'
-import { withTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import { MIN_REPUTATION_ADD_SPEAKER } from '../../constants'
 import { videoCaptionsUrl, videoHistoryURL, videoURL } from '../../lib/cf_routes'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import { useLoggedInUser } from '../LoggedInUser/UserProvider'
 import AddSpeakerForm from '../Speakers/AddSpeakerForm'
 import SpeakerPreview from '../Speakers/SpeakerPreview'
 import { Tabs, TabsList, TabsTrigger } from '../ui/tabs'
@@ -14,11 +14,14 @@ import Message from '../Utils/Message'
 import { ReputationGuardTooltip } from '../Utils/ReputationGuardTooltip'
 import Actions from './Actions'
 import ResizableColumn from './ResizableColumn'
+import { SpeakersList } from './SpeakersList'
 import VideoDebatePlayer from './VideoDebatePlayer'
 
-const ColumnVideo = ({ video, isLoading, view, t, isAuthenticated, onSetStatementForm }) => {
+const ColumnVideo = ({ video, isLoading, view, onSetStatementForm }) => {
   const { url, speakers = [] } = video || {}
   const isDebate = !view || view === 'debate'
+  const { t } = useTranslation('videoDebate')
+  const { isAuthenticated } = useLoggedInUser()
 
   return (
     <ResizableColumn className="max-2xl:!w-full max-2xl:!max-w-full">
@@ -72,15 +75,12 @@ const ColumnVideo = ({ video, isLoading, view, t, isAuthenticated, onSetStatemen
                   </ReputationGuardTooltip>
                 </div>
                 <div className="px-3 pb-4 flex flex-col gap-4">
-                  {speakers.map((speaker) => (
-                    <SpeakerPreview
-                      key={speaker.id}
-                      speaker={speaker}
-                      videoId={video.id}
-                      isAuthenticated={isAuthenticated}
-                      onSetStatementForm={onSetStatementForm}
-                    />
-                  ))}
+                  <SpeakersList
+                    speakers={speakers}
+                    videoId={video.id}
+                    isAuthenticated={isAuthenticated}
+                    onSetStatementForm={onSetStatementForm}
+                  />
                 </div>
               </div>
             )}
@@ -105,4 +105,4 @@ const ColumnVideo = ({ video, isLoading, view, t, isAuthenticated, onSetStatemen
   )
 }
 
-export default withTranslation('videoDebate')(withLoggedInUser(ColumnVideo))
+export default ColumnVideo

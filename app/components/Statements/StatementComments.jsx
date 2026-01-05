@@ -54,7 +54,7 @@ const groupComments = (comments) => {
   return { topLevel: sortedTopLevel, repliesByParent }
 }
 
-const StatementComments = ({ statement, speaker, setReplyToComment, votesMap, t }) => {
+const StatementComments = ({ statement, speaker, setReplyToComment, votesMap, flagsMap, t }) => {
   const comments = statement.comments || []
 
   // Group comments into top-level and replies (memoized)
@@ -113,6 +113,7 @@ const StatementComments = ({ statement, speaker, setReplyToComment, votesMap, t 
           comments={selfComments}
           repliesByParent={repliesByParent}
           votesMap={votesMap}
+          flagsMap={flagsMap}
         />
       </React.Fragment>
     )
@@ -123,10 +124,11 @@ const StatementComments = ({ statement, speaker, setReplyToComment, votesMap, t 
       <SpeakerComments
         setReplyToComment={setReplyToComment}
         speaker={speaker}
-        comments={selfComments}
-        repliesByParent={repliesByParent}
-        votesMap={votesMap}
-      />
+          comments={selfComments}
+          repliesByParent={repliesByParent}
+          votesMap={votesMap}
+          flagsMap={flagsMap}
+        />
       <div className="bg-[#fefefe] dark:bg-background">
         {hasSpeakerComments && (
           <div className="bg-neutral-100 dark:bg-accent text-center flex justify-center items-center gap-2 p-1 dark:text-foreground">
@@ -150,6 +152,7 @@ const StatementComments = ({ statement, speaker, setReplyToComment, votesMap, t 
               commentType="refute"
               repliesByParent={repliesByParent}
               votesMap={votesMap}
+              flagsMap={flagsMap}
             />
             <div className="hidden md:flex items-stretch self-stretch my-2">
               <Separator orientation="vertical" className="bg-neutral-100 dark:border-border" />
@@ -167,6 +170,7 @@ const StatementComments = ({ statement, speaker, setReplyToComment, votesMap, t 
               commentType="approve"
               repliesByParent={repliesByParent}
               votesMap={votesMap}
+              flagsMap={flagsMap}
             />
           </div>
         )}
@@ -179,6 +183,7 @@ const StatementComments = ({ statement, speaker, setReplyToComment, votesMap, t 
               className="w-full max-w-full"
               repliesByParent={repliesByParent}
               votesMap={votesMap}
+              flagsMap={flagsMap}
             />
           </div>
         )}

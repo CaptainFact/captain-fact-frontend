@@ -40,7 +40,14 @@ export const toastErrorUnauthenticated = () => {
 
 export function toastError(error) {
   if (typeof error === 'object' && error !== null) {
-    error = error.message
+    // Handle GraphQL errors - extract message from graphQLErrors array
+    if (error.graphQLErrors && error.graphQLErrors.length > 0) {
+      error = error.graphQLErrors[0].message || error.message || 'unexpected'
+    } else if (error.networkError) {
+      error = error.networkError.message || error.message || 'unexpected'
+    } else {
+      error = error.message || 'unexpected'
+    }
   }
 
   const errorInfo = getErrorInfo(error)

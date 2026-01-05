@@ -1,5 +1,5 @@
 import React from 'react'
-import { withTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import Popup from 'reactjs-popup'
 import { InfoCircle } from 'styled-icons/fa-solid'
 
@@ -7,23 +7,28 @@ import Message from '../Utils/Message'
 import TimeDisplay from '../Utils/TimeDisplay'
 import { StatementDropdownMenu } from './StatementDropdownMenu'
 
-export default withTranslation('videoDebate')(
-  ({
-    t,
-    statementTime,
-    isDraft,
-    speaker,
-    handleShowHistory,
-    handleEdit,
-    handleShare,
-    handleDelete,
-    withoutActions,
-    customButtons = null,
-  }) => (
+const StatementHeader = ({
+  statementTime,
+  isDraft,
+  speaker,
+  handleShowHistory,
+  handleEdit,
+  handleShare,
+  handleDelete,
+  withoutActions,
+  customButtons = null,
+  withoutPlayback,
+}) => {
+  const { t } = useTranslation('videoDebate')
+  return (
     <header className="flex items-center justify-between border-b border-gray-200 dark:border-border p-3 dark:bg-background">
       <div className="flex items-center">
         <div className="mr-2 min-w-[60px] border-r border-gray-200 dark:border-border pr-2.5 text-gray-600 dark:text-muted-foreground font-medium">
-          <TimeDisplay time={statementTime} textClassName="sm:text-sm text-xs" />
+          <TimeDisplay
+            time={statementTime}
+            textClassName="sm:text-sm text-xs"
+            withoutPlayback={withoutPlayback}
+          />
         </div>
         {isDraft && (
           <Popup
@@ -61,5 +66,7 @@ export default withTranslation('videoDebate')(
         )}
       </div>
     </header>
-  ),
-)
+  )
+}
+
+export default StatementHeader

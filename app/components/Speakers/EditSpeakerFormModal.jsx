@@ -67,11 +67,6 @@ const EditSpeakerFormModal = ({ speaker, open, onOpenChange, t }) => {
         },
       })
 
-      toast({
-        title: t('speaker.edit'),
-        description: t('main:actions.save'),
-      })
-
       onOpenChange(false)
     } catch {
       toast({

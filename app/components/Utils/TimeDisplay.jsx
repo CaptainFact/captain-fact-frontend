@@ -10,10 +10,30 @@ import { Button } from '../ui/button'
 
 const i18nAtKey = 'misc.timeAt'
 
-const TimeDisplay = ({ time, textClassName, t, textBefore = true, capitalize = true }) => {
+const PositionButton = ({ time, textClassName, formattedTime }) => {
   const { forcePosition } = useVideoPlayback()
-  const formattedTime = formatSeconds(time)
+  return (
+    <Button
+      variant="link"
+      className={cn('px-1', textClassName)}
+      onClick={() => {
+        forcePosition(time)
+      }}
+    >
+      {formattedTime}
+    </Button>
+  )
+}
 
+const TimeDisplay = ({
+  time,
+  textClassName,
+  t,
+  withoutPlayback = false,
+  textBefore = true,
+  capitalize = true,
+}) => {
+  const formattedTime = formatSeconds(time)
   return (
     <div className={textClassName}>
       {textBefore && (
@@ -22,13 +42,11 @@ const TimeDisplay = ({ time, textClassName, t, textBefore = true, capitalize = t
           &nbsp;
         </span>
       )}
-      <Button
-        variant="link"
-        className={cn('px-1', textClassName)}
-        onClick={() => forcePosition(time)}
-      >
-        {formattedTime}
-      </Button>
+      {withoutPlayback ? (
+        <span>{formattedTime}</span>
+      ) : (
+        <PositionButton time={time} textClassName={textClassName} formattedTime={formattedTime} />
+      )}
     </div>
   )
 }

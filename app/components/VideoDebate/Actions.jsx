@@ -1,4 +1,4 @@
-import { gql, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import {
   ArrowUpDown,
   Bell,
@@ -23,16 +23,7 @@ import ReputationGuard from '../Utils/ReputationGuard'
 import ShareModal from '../Utils/ShareModal'
 import EditVideoModal from '../Videos/EditVideoModal'
 import Action from './ActionButton'
-
-const UPDATE_SUBSCRIPTION_MUTATION = gql`
-  mutation UpdateSubscription($entityId: ID!, $scope: String!, $isSubscribed: Boolean!) {
-    updateSubscription(entityId: $entityId, scope: $scope, isSubscribed: $isSubscribed) {
-      id
-      isSubscribed
-      reason
-    }
-  }
-`
+import { UPDATE_SUBSCRIPTION_MUTATION } from './graphql'
 
 const Actions = ({ video, t, isAuthenticated }) => {
   const history = useHistory()

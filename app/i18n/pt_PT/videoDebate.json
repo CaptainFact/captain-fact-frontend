@@ -9,7 +9,8 @@
   "flagForm": {
     "title": "Porque é que quer sinalizar este comentário?",
     "xAvailable": "{{count}} disponível",
-    "xAvailable_other": "{{count}} disponíveis"
+    "xAvailable_other": "{{count}} disponíveis",
+    "successMessage": "Comentário sinalizado com sucesso"
   },
   "comment": {
     "writeComment": "Escreva um comentário…",

@@ -4,6 +4,7 @@ import { Flag, TriangleAlert } from 'lucide-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { useToast } from '@/hooks/use-toast'
 import { toastError } from '@/lib/toasts'
 
 import { FLAG_COMMENT_MUTATION } from '../../API/graphql_queries'
@@ -15,20 +16,56 @@ import { Separator } from '../ui/separator'
 import Message from '../Utils/Message'
 import CommentDisplay from './CommentDisplay'
 
-const ModalFlag = ({ initialReason, comment, open, onOpenChange }) => {
+const ModalFlag = ({ initialReason, comment, open, onOpenChange, onFlagSuccess }) => {
   const { t } = useTranslation('videoDebate')
   const { t: tMain } = useTranslation('main')
   const { loggedInUser, loading: userLoading } = useLoggedInUser()
-  const [flagComment, { loading: flaggingLoading }] = useMutation(FLAG_COMMENT_MUTATION)
+  const [flagComment, { loading: flaggingLoading }] = useMutation(FLAG_COMMENT_MUTATION, {
+    update: (cache, { data }) => {
+      if (data?.flagComment && comment.id) {
+        // Update the cache to mark this comment as flagged
+        // The flags are stored in loggedInUser.flags as a map
+        try {
+          cache.modify({
+            id: cache.identify({ __typename: 'User', id: loggedInUser?.id }),
+            fields: {
+              flags(existingFlags = {}, { readField }) {
+                return {
+                  ...existingFlags,
+                  [comment.id]: true,
+                }
+              },
+            },
+          })
+        } catch (error) {
+          // Cache update might fail, which is fine
+          console.warn('Could not update cache for flagged comment:', error)
+        }
+      }
+    },
+  })
+  const { toast } = useToast()
 
   const handleSubmit = async (values) => {
     try {
       await flagComment({
         variables: {
           commentId: comment.id,
-          reason: parseInt(values.reason, 10),
+          reason: values.reason,
         },
       })
+
+      toast({
+        title: t('flagForm.successMessage'),
+        variant: 'success',
+      })
+
+      // Notify parent component that flag was successful
+      if (onFlagSuccess) {
+        onFlagSuccess(comment.id)
+      }
+
+      onOpenChange(false)
     } catch (error) {
       toastError(error)
     }
@@ -38,7 +75,7 @@ const ModalFlag = ({ initialReason, comment, open, onOpenChange }) => {
     onOpenChange(false)
   }
 
-  const flagsAvailable = loggedInUser?.available_flags ?? 0
+  const flagsAvailable = loggedInUser?.availableFlags ?? 0
   return (
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[500px]">
@@ -51,7 +88,7 @@ const ModalFlag = ({ initialReason, comment, open, onOpenChange }) => {
           onSubmit={handleSubmit}
           enableReinitialize
         >
-          {({ handleSubmit, values, isValid }) => (
+          {({ handleSubmit, values, isValid, setFieldValue }) => (
             <>
               <form onSubmit={handleSubmit} className="mb-4">
                 <div className="mb-4">
@@ -70,7 +107,7 @@ const ModalFlag = ({ initialReason, comment, open, onOpenChange }) => {
                 </div>
                 <CommentDisplay comment={comment} withoutActions hideThread />
                 <Separator className="my-4" />
-                <FlagReasonSelect />
+                <FlagReasonSelect onChange={(value) => setFieldValue('reason', value)} />
               </form>
 
               <DialogFooter>

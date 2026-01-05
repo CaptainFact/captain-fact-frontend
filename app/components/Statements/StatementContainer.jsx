@@ -1,15 +1,16 @@
 import { useMutation } from '@apollo/client'
 import { Check, X } from '@styled-icons/feather'
 import React, { useState } from 'react'
-import { withTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 
+import { cn } from '@/lib/css-utils'
 import { toastError } from '@/lib/toasts'
 
 import { DELETE_STATEMENT_MUTATION } from '../../API/graphql_queries'
 import { MIN_REPUTATION_REMOVE_STATEMENT, MIN_REPUTATION_UPDATE_STATEMENT } from '../../constants'
 import CommentForm from '../Comments/CommentForm'
 import DialogConfirmDelete from '../Dialogs/DialogConfirmDelete'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import { useLoggedInUser } from '../LoggedInUser/UserProvider'
 import { Button } from '../ui/button'
 import { Card } from '../ui/card'
 import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
@@ -22,11 +23,12 @@ const StatementContainer = ({
   speakers,
   offset,
   votesMap,
+  flagsMap,
   onSetScrollTo,
-  isAuthenticated,
-  loggedInUser,
-  t,
+  isFocused = true,
 }) => {
+  const { loggedInUser, isAuthenticated } = useLoggedInUser()
+  const { t } = useTranslation('videoDebate')
   const [isDeleting, setIsDeleting] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [replyTo, setReplyTo] = useState(null)
@@ -87,7 +89,10 @@ const StatementContainer = ({
   return (
     <Card
       id={`statement-${statement.id}`}
-      className="max-w-[980px] mx-auto bg-white dark:bg-background"
+      className={cn(
+        'max-w-[980px] mx-auto bg-white dark:bg-background',
+        isFocused && 'shadow-lg shadow-primary/20',
+      )}
     >
       {isEditing ? (
         <StatementForm
@@ -145,6 +150,7 @@ const StatementContainer = ({
             speaker={speaker}
             setReplyToComment={setReplyTo}
             votesMap={votesMap}
+            flagsMap={flagsMap}
           />
           {!statement.isDraft && (
             <CommentForm
@@ -172,4 +178,4 @@ const StatementContainer = ({
   )
 }
 
-export default withTranslation('videoDebate')(withLoggedInUser(StatementContainer))
+export default StatementContainer

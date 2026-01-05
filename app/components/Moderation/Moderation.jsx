@@ -1,5 +1,5 @@
-import { useLazyQuery } from '@apollo/client'
-import React, { useEffect } from 'react'
+import { useQuery } from '@apollo/client'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Report } from 'styled-icons/octicons'
@@ -19,17 +19,13 @@ import ModerationForm from './ModerationForm'
 
 const Moderation = () => {
   const { t } = useTranslation('moderation')
-  const [fetchRandomModeration, { data, loading, refetch }] = useLazyQuery(RANDOM_MODERATION_QUERY)
-
-  useEffect(() => {
-    fetchRandomModeration()
-  }, [fetchRandomModeration])
+  const { data, loading, refetch } = useQuery(RANDOM_MODERATION_QUERY)
 
   const postFeedback = () => {
     toast({
       variant: 'success',
-      title: 'Flag submitted',
-      description: 'Thank you for your feedback!',
+      title: t('flagSubmitted'),
+      description: t('thankYouFeedback'),
     })
     refetch()
   }

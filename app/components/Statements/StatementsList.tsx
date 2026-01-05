@@ -11,11 +11,12 @@ const StatementsList = ({
   speakers,
   statementForm,
   offset,
-  onSetStatementForm,
   onClearStatementForm,
   onSetScrollTo,
   videoId,
   votesMap,
+  flagsMap,
+  focusedStatementId = undefined,
 }) => {
   const { isAuthenticated } = useLoggedInUser()
 
@@ -72,7 +73,9 @@ const StatementsList = ({
               speakers={speakers || []}
               offset={offset}
               votesMap={votesMap}
+              flagsMap={flagsMap}
               onSetScrollTo={onSetScrollTo}
+              isFocused={focusedStatementId === statement.id}
             />
           </div>
         ))}

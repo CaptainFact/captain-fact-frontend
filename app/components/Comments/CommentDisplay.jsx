@@ -140,6 +140,12 @@ const CommentDisplay = ({
     }
   }
 
+  const handleFlagSuccess = (commentId) => {
+    if (commentId === comment.id) {
+      setIsFlagged(true)
+    }
+  }
+
   const toggleShowReplies = () => {
     setRepliesCollapsed(!repliesCollapsed)
   }
@@ -204,7 +210,14 @@ const CommentDisplay = ({
           />
         </div>
       )}
-      {hasFlagModal && <ModalFlag comment={comment} open onOpenChange={setHasFlagModal} />}
+      {hasFlagModal && (
+        <ModalFlag
+          comment={comment}
+          open
+          onOpenChange={setHasFlagModal}
+          onFlagSuccess={handleFlagSuccess}
+        />
+      )}
       {hasDeleteModal && (
         <DialogConfirmDelete
           open

@@ -1,33 +1,34 @@
+# For agent
+
+- [ ] User flags are not surfaced in the videodebate UI
+- [ ] Adding a link in a comment text shows wrong error message (should be the message from the API)
+- [ ] Adding a link in a statement text shows wrong error message (should be the message from the API)
+- [ ] Autoscroll => doesn't seem to work
+- [ ] Same for linking directly to a comment, it doesn't scroll to it
+
 # Now
 
-- [x] Finish removing redux/redux-form
-- [x] Remove react-redux
-- [x] Remove legacy sockets
 - [ ] Handle errors properly, with toasts. There are many console.error('Failed to delete comment:', error) in the codebase.
-- [x] Setting speaker when editing statement doesn't work.
-- [ ] Speaker focus in speakers list
-- [x] Votes not properly recorded in "speaker" view of statement
-- [x] Some links are not using the Link component
-- [x] Redirected to home when visiting http://localhost:3333/u/Betree/settings directly
-- [ ] Flag modal not working
-- [ ] Move loggedInUser to GraphQL type (currently using a record)
-- [ ] Rename all components from "V2"
-- [ ] convert more components to TypeScript
-- [ ] convert more components to functional components
-- [ ] remove legacy withTranslation/withRouter hooks and replace with hooks
-- [ ] add multiple times the same source, further comments are not displayed
-- [ ] Adding a link in a comment text shows wrong error message
-- [ ] Adding a link in a statement text shows wrong error message
-- [ ] should we remove phoenix from frontend?
-- [x] replace graphql-tag with @apollo/client
+- [x] Flag modal not working
+- [x] Not finished app/components/Moderation/ModerationForm.jsx
+- [x] I18n ModerationForm
+- [ ] whenever a comment score is updated, refetch user's vote for it. or refetch votes regularly
+- [ ] Bug: add multiple times the same source, further comments are not displayed
+- [ ] we use cache.modify in the subscriptions update. this is not right for reacting to things like "comment_updated". We should use cache.writeFragment instead.
+- [ ] review commentScoreDiff logic
+- [ ] the video column re-renders every second
 
 # To test
 
-- [ ] Autoscroll
-- [ ] BackgroundNotifier
+- [x] BackgroundNotifier
 - [ ] drafts
 - [ ] transcription
 - [ ] search
+- [ ] deconnect/catchup
+
+# Follow-ups
+
+- [ ] Remove withTranslation/withRouter hooks and replace with hooks
 
 # Ideas
 

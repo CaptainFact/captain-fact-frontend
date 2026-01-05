@@ -2,10 +2,11 @@ import { useMutation } from '@apollo/client'
 import { AvatarFallback } from '@radix-ui/react-avatar'
 import { Mic } from 'lucide-react'
 import React, { useState } from 'react'
-import { withTranslation } from 'react-i18next'
+import { useTranslation, withTranslation } from 'react-i18next'
 import { Link, useHistory } from 'react-router-dom'
 
 import { toast } from '@/hooks/use-toast'
+import { cn } from '@/lib/css-utils'
 
 import { REMOVE_SPEAKER_FROM_VIDEO_MUTATION } from '../../API/graphql_queries'
 import DialogConfirmDelete from '../Dialogs/DialogConfirmDelete'
@@ -18,11 +19,12 @@ const SpeakerPreview = ({
   speaker,
   className,
   videoId,
+  isAnimated = false,
   isAuthenticated = false,
   showActions = true,
-  onSetStatementForm,
-  t,
+  onSetStatementForm = null,
 }) => {
+  const { t } = useTranslation('videoDebate')
   const history = useHistory()
   const [removeSpeakerFromVideo] = useMutation(REMOVE_SPEAKER_FROM_VIDEO_MUTATION)
   const [editModalOpen, setEditModalOpen] = useState(false)
@@ -71,7 +73,12 @@ const SpeakerPreview = ({
     <div className={`flex items-center justify-between gap-2 animate-fadeInUp ${className || ''}`}>
       <div className="flex items-center">
         <div className="flex-none w-[50px] flex justify-center items-center mr-3">
-          <Avatar className="bg-white dark:bg-background rounded-full flex items-center justify-center border border-neutral-200 dark:border-border">
+          <Avatar
+            className={cn(
+              'bg-white dark:bg-background rounded-full flex items-center justify-center border border-neutral-200 dark:border-border',
+              isAnimated && 'animate-borderPulse',
+            )}
+          >
             <AvatarImage src={speaker.picture} />
             <AvatarFallback>
               <Mic className="text-neutral-600 dark:text-muted-foreground" />

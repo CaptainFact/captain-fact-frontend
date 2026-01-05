@@ -42,12 +42,14 @@ export class VideoCard extends React.PureComponent {
     )
   }
 
-  renderVideoMetadata({ speakers, insertedAt }, t) {
+  renderVideoMetadata({ speakers, insertedAt, user }, t) {
     return (
       <div className="space-y-2 text-xs">
-        <div>
-          {this.renderAddedByLabel(t)} <TimeSince time={insertedAt} />
-        </div>
+        {user && (
+          <div>
+            {this.renderAddedByLabel(t)} {insertedAt && <TimeSince time={insertedAt} />}
+          </div>
+        )}
         {speakers && speakers.length > 0 && this.renderSpeakersList(speakers, t)}
       </div>
     )

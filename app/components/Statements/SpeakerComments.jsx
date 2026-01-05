@@ -12,6 +12,7 @@ export default withTranslation('videoDebate')(({
   setReplyToComment,
   repliesByParent,
   votesMap,
+  flagsMap,
 }) => {
   return comments.length === 0 ? null : (
     <div className="border-b border-gray-200 dark:border-border">
@@ -29,6 +30,7 @@ export default withTranslation('videoDebate')(({
             setReplyToComment={setReplyToComment}
             repliesByParent={repliesByParent}
             votesMap={votesMap}
+            flagsMap={flagsMap}
           />
         </div>
       </div>

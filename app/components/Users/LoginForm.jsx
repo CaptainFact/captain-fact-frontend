@@ -107,7 +107,10 @@ const LoginForm = () => {
         </div>
         <Separator className="my-6" />
         <div className="text-center">
-          <Link to="/reset_password" className="block text-sm">
+          <Link
+            to={`/reset_password?email=${encodeURIComponent(values.email)}`}
+            className="block text-sm"
+          >
             {t('forgottenPassword')}
           </Link>
         </div>

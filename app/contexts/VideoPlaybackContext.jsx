@@ -30,7 +30,7 @@ const playbackReducer = (state, action) => {
 
 const VideoPlaybackContext = createContext(null)
 
-export const VideoPlaybackProvider = ({ children }) => {
+export const VideoPlaybackProvider = ({ children, onUpdatePosition }) => {
   const [state, dispatch] = useReducer(playbackReducer, initialState)
 
   const setPosition = useCallback(
@@ -38,6 +38,7 @@ export const VideoPlaybackProvider = ({ children }) => {
       const truncatedPosition = Math.floor(position)
       if (truncatedPosition !== state.position) {
         dispatch({ type: 'SET_POSITION', payload: truncatedPosition })
+        onUpdatePosition?.(truncatedPosition)
       }
     },
     [state.position],
@@ -73,5 +74,3 @@ export const useVideoPlayback = () => {
   }
   return context
 }
-
-

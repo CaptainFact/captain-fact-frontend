@@ -10,7 +10,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import {
   STATEMENT_HISTORY_ACTION_ADDED_SUBSCRIPTION,
   STATEMENT_HISTORY_ACTIONS_QUERY,
-} from '../../API/graphql_queries'
+} from './graphql'
 import { ENTITY_STATEMENT } from '../../constants'
 import ActionsTable from '../UsersActions/ActionsTable'
 

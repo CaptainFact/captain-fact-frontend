@@ -1,10 +1,12 @@
+import { useFocusedStatement } from 'app/contexts/FocusedStatementContext'
 import { MessageCircle } from 'lucide-react'
-import React from 'react'
-import { Trans, withTranslation } from 'react-i18next'
+import React, { useEffect, useRef } from 'react'
+import { Trans, useTranslation } from 'react-i18next'
 import { ExclamationCircle, InfoCircle } from 'styled-icons/fa-solid'
 
 import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import { useLoggedInUser } from '../LoggedInUser/UserProvider'
+import { useUserPreferences } from '../../contexts/UserPreferencesContext'
 import StatementsList from '../Statements/StatementsList'
 import { ScrollArea } from '../ui/scroll-area'
 import { Skeleton } from '../ui/skeleton'
@@ -24,12 +26,13 @@ const ColumnDebate = ({
   statements,
   statementForm,
   votesMap,
+  flagsMap,
   onSetStatementForm,
   onClearStatementForm,
   onSetScrollTo,
-  t,
-  isAuthenticated,
 }) => {
+  const { isAuthenticated } = useLoggedInUser()
+  const { t } = useTranslation('videoDebate')
   const [showIntroduction, setShowIntroduction] = React.useState(
     !getFromLocalStorage(LOCAL_STORAGE_KEYS.DISMISS_VIDEO_INTRODUCTION),
   )
@@ -38,6 +41,26 @@ const ColumnDebate = ({
   const hasSpeakers = video?.speakers && video.speakers.length > 0
   const hasStatementForm = statementForm !== null
   const hasStatementsComponents = hasStatements || hasStatementForm
+  const { statement: focusedStatement } = useFocusedStatement()
+  const { enableAutoscroll } = useUserPreferences()
+  const prevFocusedStatementIdRef = useRef(null)
+
+  // Autoscroll to focused statement when it changes
+  useEffect(() => {
+    if (enableAutoscroll && focusedStatement?.id && focusedStatement.id !== prevFocusedStatementIdRef.current) {
+      prevFocusedStatementIdRef.current = focusedStatement.id
+      // Use setTimeout to ensure DOM is updated
+      setTimeout(() => {
+        const element = document.getElementById(`statement-${focusedStatement.id}`)
+        if (element) {
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+          })
+        }
+      }, 100)
+    }
+  }, [focusedStatement?.id, enableAutoscroll])
 
   const renderInfo = (message) => {
     return (
@@ -107,6 +130,8 @@ const ColumnDebate = ({
               onSetScrollTo={onSetScrollTo}
               videoId={videoId}
               votesMap={votesMap}
+              flagsMap={flagsMap}
+              focusedStatementId={focusedStatement?.id}
             />
           )}
           <ActionBubbleMenu
@@ -164,4 +189,4 @@ const ColumnDebate = ({
   )
 }
 
-export default withTranslation('videoDebate')(withLoggedInUser(ColumnDebate))
+export default ColumnDebate

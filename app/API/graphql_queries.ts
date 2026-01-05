@@ -224,7 +224,7 @@ export const VOTE_COMMENT_MUTATION = gql`
 `
 
 export const FLAG_COMMENT_MUTATION = gql`
-  mutation FlagComment($commentId: ID!, $reason: Int!) {
+  mutation FlagComment($commentId: ID!, $reason: FlagReason!) {
     flagComment(commentId: $commentId, reason: $reason) {
       id
     }
@@ -241,7 +241,6 @@ export const SEARCH_SPEAKERS_QUERY = gql`
     }
   }
 `
-
 
 export const REMOVE_SPEAKER_FROM_VIDEO_MUTATION = gql`
   mutation RemoveSpeakerFromVideo($videoId: ID!, $speakerId: ID!) {
@@ -299,6 +298,10 @@ export const MODERATE_ACTION_MUTATION = gql`
     moderateAction(actionId: $actionId, reason: $reason, value: $value) {
       id
     }
+    loggedInUser {
+      id
+      actionsPendingModeration
+    }
   }
 `
 
@@ -325,7 +328,7 @@ export const RANDOM_MODERATION_QUERY = gql`
         videoHashId
       }
       flags {
-        sourceUser: source_user {
+        sourceUser {
           id
           username
           name
