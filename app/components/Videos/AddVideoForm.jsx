@@ -11,6 +11,7 @@ import { cn } from '@/lib/css-utils'
 import { CREATE_VIDEO_MUTATION, SEARCH_VIDEO_QUERY } from '../../API/graphql_queries'
 import { MIN_REPUTATION_ADD_UNLISTED_VIDEO, MIN_REPUTATION_ADD_VIDEO } from '../../constants'
 import { facebookVideoRegex, youtubeRegex } from '../../lib/url_utils'
+import { logError } from '../../logger'
 import { useLoggedInUser } from '../LoggedInUser/UserProvider'
 import { Button } from '../ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../ui/card'
@@ -69,7 +70,7 @@ const AddVideoForm = () => {
   const { videoUrl, url: initialURL } = useParams()
   const { isAuthenticated, loggedInUser } = useLoggedInUser()
 
-  const [createVideo, { loading: creatingVideo }] = useMutation(CREATE_VIDEO_MUTATION)
+  const [createVideo] = useMutation(CREATE_VIDEO_MUTATION)
   const [searchVideoQuery] = useLazyQuery(SEARCH_VIDEO_QUERY)
 
   useEffect(() => {
@@ -83,7 +84,7 @@ const AddVideoForm = () => {
           }
         })
         .catch((error) => {
-          console.error('Error searching video:', error)
+          logError(`Error searching video: ${error}`)
         })
     }
   }, [videoUrl, searchVideoQuery, history])
@@ -105,7 +106,7 @@ const AddVideoForm = () => {
             history.push(`/videos/${result.data.createVideo.hashId}`)
           }
         } catch (error) {
-          console.error('Error creating video:', error)
+          logError(`Error creating video: ${error}`)
           if (error.message?.includes('unauthorized') && !isAuthenticated) {
             history.push('/login')
           }

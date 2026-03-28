@@ -4,9 +4,12 @@ import React, { useEffect, useRef } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { ExclamationCircle, InfoCircle } from 'styled-icons/fa-solid'
 
-import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
-import { useLoggedInUser } from '../LoggedInUser/UserProvider'
+import { VIDEO_PLAYER_YOUTUBE } from '../../constants'
 import { useUserPreferences } from '../../contexts/UserPreferencesContext'
+import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
+import { scrollElementIntoView } from '../../lib/scroll_utils'
+import { getTimecodesOffset } from '../../lib/video_utils'
+import { useLoggedInUser } from '../LoggedInUser/UserProvider'
 import StatementsList from '../Statements/StatementsList'
 import { ScrollArea } from '../ui/scroll-area'
 import { Skeleton } from '../ui/skeleton'
@@ -47,18 +50,18 @@ const ColumnDebate = ({
 
   // Autoscroll to focused statement when it changes
   useEffect(() => {
-    if (enableAutoscroll && focusedStatement?.id && focusedStatement.id !== prevFocusedStatementIdRef.current) {
-      prevFocusedStatementIdRef.current = focusedStatement.id
-      // Use setTimeout to ensure DOM is updated
-      setTimeout(() => {
-        const element = document.getElementById(`statement-${focusedStatement.id}`)
-        if (element) {
-          element.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center',
-          })
-        }
-      }, 100)
+    if (!enableAutoscroll || !focusedStatement?.id) {
+      return
+    }
+    if (focusedStatement.id === prevFocusedStatementIdRef.current) {
+      return
+    }
+
+    prevFocusedStatementIdRef.current = focusedStatement.id
+
+    const element = document.getElementById(`statement-${focusedStatement.id}`)
+    if (element) {
+      scrollElementIntoView(element)
     }
   }, [focusedStatement?.id, enableAutoscroll])
 
@@ -106,7 +109,12 @@ const ColumnDebate = ({
     } else if (view === 'captions') {
       return (
         <div className="px-5 sm:px-8 my-4 mx-auto max-w-[1046px]">
-          <CaptionsExtractor videoId={videoId} statements={statements} />
+          <CaptionsExtractor
+            videoId={videoId}
+            statements={statements}
+            onSetStatementForm={onSetStatementForm}
+            onClearStatementForm={onClearStatementForm}
+          />
         </div>
       )
     } else if (view === 'debate') {
@@ -124,7 +132,7 @@ const ColumnDebate = ({
               statements={statements}
               speakers={video?.speakers || []}
               statementForm={statementForm}
-              offset={video?.youtubeOffset || 0}
+              offset={getTimecodesOffset(video ?? { youtubeOffset: 0 }, VIDEO_PLAYER_YOUTUBE)}
               onSetStatementForm={onSetStatementForm}
               onClearStatementForm={onClearStatementForm}
               onSetScrollTo={onSetScrollTo}

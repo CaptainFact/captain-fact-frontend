@@ -7,18 +7,18 @@ import { useTranslation } from 'react-i18next'
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 
+import { ENTITY_STATEMENT } from '../../constants'
+import ActionsTable from '../UsersActions/ActionsTable'
 import {
   STATEMENT_HISTORY_ACTION_ADDED_SUBSCRIPTION,
   STATEMENT_HISTORY_ACTIONS_QUERY,
 } from './graphql'
-import { ENTITY_STATEMENT } from '../../constants'
-import ActionsTable from '../UsersActions/ActionsTable'
 
 const StatementHistoryDialog = ({ open, onOpenChange, entity, entityId }) => {
   const { t } = useTranslation('history')
 
   // Fetch initial history actions
-  const { loading, data, error, client } = useQuery(STATEMENT_HISTORY_ACTIONS_QUERY, {
+  const { loading, data, client } = useQuery(STATEMENT_HISTORY_ACTIONS_QUERY, {
     variables: { statementId: entityId },
     skip: !entityId || entity !== ENTITY_STATEMENT || !open,
     fetchPolicy: 'cache-and-network',

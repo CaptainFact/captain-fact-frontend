@@ -134,7 +134,7 @@ class ActionDiff extends PureComponent {
         return JSON.parse(action.changes) || {}
       }
       return action.changes || {}
-    } catch (e) {
+    } catch {
       // If parsing fails, return empty object
       return {}
     }
@@ -151,7 +151,7 @@ class ActionDiff extends PureComponent {
         } else {
           changes = action.changes || {}
         }
-      } catch (e) {
+      } catch {
         // If parsing fails, use empty object
         changes = {}
       }

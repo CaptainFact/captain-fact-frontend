@@ -17,6 +17,9 @@ const ActionBubbleMenu = ({
   hasStatements,
   onSetStatementForm,
   onClearStatementForm,
+  hidden,
+  customActions,
+  getStatementInitialValues,
   t,
   isAuthenticated,
   loggedInUser,
@@ -37,7 +40,8 @@ const ActionBubbleMenu = ({
         history.push(`/videos/${match[1]}`)
       }
 
-      onSetStatementForm({ speakerId: 0 })
+      const initialValues = getStatementInitialValues ? getStatementInitialValues() : {}
+      onSetStatementForm({ speakerId: 0, ...initialValues })
     }
   }
 
@@ -51,7 +55,7 @@ const ActionBubbleMenu = ({
       toast({
         description: t('videoDebate:statement.automaticExtractionSuccess'),
       })
-    } catch (e) {
+    } catch {
       setHasCalledStatementsExtract(true)
       toast({ variant: 'destructive', description: t('errors:server.unknown') })
     }
@@ -62,7 +66,8 @@ const ActionBubbleMenu = ({
       className={cn(
         'fixed bottom-6 items-center right-6 flex flex-col-reverse z-50 transition-all duration-300',
         {
-          '-bottom-24 opacity-0': false, // hidden prop can be added later
+          '-bottom-24 opacity-0': hidden,
+          'pointer-events-none': hidden,
           group: !hasStatementForm,
         },
       )}
@@ -76,6 +81,7 @@ const ActionBubbleMenu = ({
             onClick={onStatementBubbleClick}
             primary
           />
+          {customActions}
           {!hasStatements &&
             loggedInUser?.reputation >= MIN_REPUTATION_START_AUTOMATIC_STATEMENTS_EXTRACTION && (
               <ActionBubble

@@ -13,7 +13,6 @@ const Statement = ({
   handleDelete,
   withoutActions,
   offset = 0,
-  onSetScrollTo,
   customButtons,
   withoutPlayback,
 }) => {

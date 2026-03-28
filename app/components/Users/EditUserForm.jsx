@@ -1,3 +1,4 @@
+import { useApolloClient } from '@apollo/client'
 import { useFormik } from 'formik'
 import { AtSign, IdCard, Lock, Mail } from 'lucide-react'
 import React from 'react'
@@ -16,6 +17,7 @@ import { Label } from '../ui/label'
 const EditUserForm = () => {
   const { t } = useTranslation('user')
   const { loggedInUser, updateLoggedInUser } = useLoggedInUser()
+  const apolloClient = useApolloClient()
 
   const validateForm = (values) =>
     validateUserForm(t, values, {
@@ -40,6 +42,21 @@ const EditUserForm = () => {
       try {
         const user = await updateUserInfo(values)
         updateLoggedInUser(user)
+
+        // Sync updated fields into the Apollo cache so UserQuery-based
+        // components (e.g. the profile Hero) reflect the change immediately
+        // without a page refresh.
+        const cacheId = apolloClient.cache.identify({ __typename: 'User', id: user.id })
+        if (cacheId) {
+          apolloClient.cache.modify({
+            id: cacheId,
+            fields: {
+              name: () => user.name ?? null,
+              username: () => user.username,
+            },
+          })
+        }
+
         toast({
           variant: 'success',
           title: t('settingsUpdated'),

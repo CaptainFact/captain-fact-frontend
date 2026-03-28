@@ -107,7 +107,13 @@ const StatementIndicator = withTranslation('main')(({ statement, onPlayClick, t 
   )
 })
 
-const CaptionsExtractor = ({ t, videoId, statements }) => {
+const CaptionsExtractor = ({
+  t,
+  videoId,
+  statements,
+  onSetStatementForm,
+  onClearStatementForm,
+}) => {
   const { data, loading, error } = useQuery(VIDEO_CAPTIONS_QUERY, { variables: { videoId } })
   const [selection, setSelection] = React.useState({ text: null })
   const textContainerRef = React.useRef()
@@ -200,12 +206,12 @@ const CaptionsExtractor = ({ t, videoId, statements }) => {
             }}
           />
         }
-        getStatementInitialValues={() => {
-          return {
-            text: selection.text,
-            time: Math.floor(selection.start),
-          }
-        }}
+        getStatementInitialValues={() => ({
+          text: selection.text,
+          time: Math.floor(selection.start),
+        })}
+        onSetStatementForm={onSetStatementForm}
+        onClearStatementForm={onClearStatementForm}
       />
     </div>
   )

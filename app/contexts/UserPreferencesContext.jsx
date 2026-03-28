@@ -5,8 +5,6 @@ import browserLocale from '../i18n/browser_locale'
 import i18n from '../i18n/i18n'
 import { getFromLocalStorage, LOCAL_STORAGE_KEYS, setLocalStorage } from '../lib/local_storage'
 
-
-
 const loadPreferences = () => {
   const isMobile = typeof window !== 'undefined' && window.innerWidth <= TABLET_WIDTH_THRESHOLD
 
@@ -27,7 +25,7 @@ const loadPreferences = () => {
     if (stored) {
       localStoragePrefs = JSON.parse(stored)
     }
-  } catch (e) {
+  } catch {
     // Or from default if it fails
     setLocalStorage(LOCAL_STORAGE_KEYS.PREFERENCES, JSON.stringify(defaultPreferences))
     localStoragePrefs = { locale: browserLocale() }
@@ -118,7 +116,3 @@ export const useUserPreferences = () => {
   }
   return context
 }
-
-
-
-

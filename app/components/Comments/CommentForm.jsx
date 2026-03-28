@@ -200,6 +200,7 @@ const CommentForm = ({ statementID, setReplyToComment, replyTo, user, inciteToPa
                   value={values.text}
                   onChange={(e) => setFieldValue('text', cleanStrMultiline(e.target.value))}
                   onBlur={handleBlur}
+                  // eslint-disable-next-line jsx-a11y/no-autofocus -- focus comment field when opening reply/new comment
                   autoFocus
                   placeholder={t('comment.writeComment')}
                   disabled={false}

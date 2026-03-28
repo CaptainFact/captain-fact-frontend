@@ -117,6 +117,7 @@ export const loggedInUserQuery = gql`
       id
       username
       name
+      email
       reputation
       registeredAt
       pictureUrl
@@ -298,10 +299,6 @@ export const MODERATE_ACTION_MUTATION = gql`
     moderateAction(actionId: $actionId, reason: $reason, value: $value) {
       id
     }
-    loggedInUser {
-      id
-      actionsPendingModeration
-    }
   }
 `
 
@@ -358,102 +355,6 @@ export const SPEAKER_QUERY = gql`
         insertedAt
         isPartner
       }
-    }
-  }
-`
-
-export const VIDEO_HISTORY_ACTIONS_QUERY = gql`
-  query VideoHistoryActions($videoId: ID!) {
-    videoHistoryActions(videoId: $videoId) {
-      id
-      type
-      entity
-      changes
-      time
-      user {
-        id
-        username
-        name
-        pictureUrl
-        miniPictureUrl
-      }
-      speakerId
-      statementId
-      commentId
-      videoId
-      videoHashId
-    }
-  }
-`
-
-export const VIDEO_HISTORY_ACTION_ADDED_SUBSCRIPTION = gql`
-  subscription VideoHistoryActionAdded($videoId: ID!) {
-    videoHistoryActionAdded(videoId: $videoId) {
-      id
-      type
-      entity
-      changes
-      time
-      user {
-        id
-        username
-        name
-        pictureUrl
-        miniPictureUrl
-      }
-      speakerId
-      statementId
-      commentId
-      videoId
-      videoHashId
-    }
-  }
-`
-
-export const STATEMENT_HISTORY_ACTIONS_QUERY = gql`
-  query StatementHistoryActions($statementId: ID!) {
-    statementHistoryActions(statementId: $statementId) {
-      id
-      type
-      entity
-      changes
-      time
-      user {
-        id
-        username
-        name
-        pictureUrl
-        miniPictureUrl
-      }
-      speakerId
-      statementId
-      commentId
-      videoId
-      videoHashId
-    }
-  }
-`
-
-export const STATEMENT_HISTORY_ACTION_ADDED_SUBSCRIPTION = gql`
-  subscription StatementHistoryActionAdded($statementId: ID!) {
-    statementHistoryActionAdded(statementId: $statementId) {
-      id
-      type
-      entity
-      changes
-      time
-      user {
-        id
-        username
-        name
-        pictureUrl
-        miniPictureUrl
-      }
-      speakerId
-      statementId
-      commentId
-      videoId
-      videoHashId
     }
   }
 `

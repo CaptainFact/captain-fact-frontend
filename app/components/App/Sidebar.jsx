@@ -181,8 +181,7 @@ class Sidebar extends React.PureComponent {
   }
 
   render() {
-    const { sidebarExpended, toggleSidebar, closeSidebar, className, t, isAuthenticated } =
-      this.props
+    const { sidebarExpended, className, t, isAuthenticated } = this.props
     return (
       <aside
         id="sidebar"

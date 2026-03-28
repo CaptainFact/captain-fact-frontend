@@ -5,23 +5,11 @@ export const SUPPORTED_LOCALES = ['fr', 'en', 'ar', 'es', 'pt_BR', 'eo', 'ru']
 export const MAX_DAILY_REPUTATION_GAIN = 25
 
 // Actions
-export const ACTION_CREATE = 'create'
 export const ACTION_REMOVE = 'remove'
 export const ACTION_UPDATE = 'update'
 export const ACTION_DELETE = 'delete'
 export const ACTION_ADD = 'add'
 export const ACTION_RESTORE = 'restore'
-export const ACTION_FLAG = 'flag'
-export const ACTION_VOTE_UP = 'vote_up'
-export const ACTION_VOTE_DOWN = 'vote_down'
-export const ACTION_SELF_VOTE = 'self_vote'
-export const ACTION_REVERT_VOTE_UP = 'revert_vote_up'
-export const ACTION_REVERT_VOTE_DOWN = 'revert_vote_down'
-export const ACTION_REVERT_SELF_VOTE = 'revert_self_vote'
-export const ACTION_BANNED_BAD_LANGUAGE = 'action_banned_bad_language'
-export const ACTION_BANNED_BAD_SPAM = 'action_banned_spam'
-export const ACTION_BANNED_BAD_IRRELEVANT = 'action_banned_irrelevant'
-export const ACTION_BANNED_BAD_NOT_CONSTRUCTIVE = 'action_banned_not_constructive'
 
 // Moderation actions
 export const MODERATION_ACTION_CONFIRM = 1
@@ -34,8 +22,6 @@ export const ENTITY_SPEAKER = 'speaker'
 export const ENTITY_STATEMENT = 'statement'
 export const ENTITY_COMMENT = 'comment'
 export const ENTITY_SOURCED_COMMENT = 'fact'
-export const ENTITY_USER = 'user'
-export const ENTITY_USER_ACTION = 'user_action'
 
 // Required reputations
 export const MIN_REPUTATION_ADD_STATEMENT = -5
@@ -46,7 +32,6 @@ export const MIN_REPUTATION_FLAG = 15
 export const MIN_REPUTATION_UPDATE_SPEAKER = 75
 export const MIN_REPUTATION_ADD_SPEAKER = 30
 export const MIN_REPUTATION_REMOVE_STATEMENT = 75
-export const MIN_REPUTATION_RESTORE_ENTITY = 75
 export const MIN_REPUTATION_REMOVE_SPEAKER = 75
 export const MIN_REPUTATION_UPDATE_VIDEO = 75
 export const MIN_REPUTATION_ADD_VIDEO = 75

@@ -1,4 +1,4 @@
-import { TFunction } from 'react-i18next'
+import type { TFunction } from 'i18next'
 import isEmail from 'validator/lib/isEmail'
 
 import { NAME_LENGTH, PASSWORD_LENGTH, USERNAME_LENGTH } from '../constants'
@@ -21,6 +21,8 @@ interface UserFormValues {
  */
 interface UserFormValidationOptions {
   emailRequired?: boolean
+  /** When true, the `email` field accepts either a valid e-mail or a username (login). */
+  emailOrUsername?: boolean
   passwordRequired?: boolean
   includeUsername?: boolean
   includeName?: boolean
@@ -49,6 +51,30 @@ const validateEmail = (
     return t('errors:server.invalid_email')
   }
   return undefined
+}
+
+/**
+ * Login field: valid e-mail, or username length rules (same as registration).
+ */
+const validateEmailOrUsername = (
+  t: TFunction,
+  value: string | undefined,
+  required: boolean = true,
+): string | undefined => {
+  if (required && (!value || value.trim() === '')) {
+    return t('errors:required')
+  }
+  if (!value || value.trim() === '') {
+    return undefined
+  }
+  const trimmed = value.trim()
+  if (trimmed.includes('@')) {
+    if (!isEmail(trimmed)) {
+      return t('errors:server.invalid_email')
+    }
+    return undefined
+  }
+  return validateFieldLength(t, trimmed, USERNAME_LENGTH)
 }
 
 /**
@@ -118,6 +144,7 @@ export const validateUserForm = (
 ): ValidationErrors => {
   const {
     emailRequired = true,
+    emailOrUsername = false,
     passwordRequired = true,
     includeUsername = false,
     includeName = false,
@@ -126,8 +153,10 @@ export const validateUserForm = (
 
   const errors: ValidationErrors = {}
 
-  // Email validation
-  const emailError = validateEmail(t, values.email, emailRequired)
+  // Email (or login identifier) validation
+  const emailError = emailOrUsername
+    ? validateEmailOrUsername(t, values.email, emailRequired)
+    : validateEmail(t, values.email, emailRequired)
   if (emailError) {
     errors.email = emailError
   }

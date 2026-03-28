@@ -21,7 +21,8 @@
     "unauthenticated": "Vous devez vous connecter pour effectuer cette action.",
     "unauthorized": "Merci de vous (re)connecter pour continuer.",
     "noInternet": "La connexion au serveur a échoué, essayez de rafraichir la page.",
-    "remote_video_404": "Il semble que cette vidéo n'existe pas."
+    "remote_video_404": "Il semble que cette vidéo n'existe pas.",
+    "comment_text_contains_url": "Le corps du commentaire ne peut pas contenir d'URL. Utilisez le champ source à la place."
   },
   "client": {
     "joinCrashed": "La connexion au serveur a échoué.",

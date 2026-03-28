@@ -7,6 +7,7 @@ import { toastError, toastErrorUnauthenticated } from '@/lib/toasts'
 
 import { DELETE_COMMENT_MUTATION, VOTE_COMMENT_MUTATION } from '../../API/graphql_queries'
 import { COLLAPSE_REPLIES_AT_NESTING } from '../../constants'
+import { logWarn } from '../../logger'
 import DialogConfirmDelete from '../Dialogs/DialogConfirmDelete'
 import { useLoggedInUser } from '../LoggedInUser/UserProvider'
 import CommentActions from './CommentActions'
@@ -116,7 +117,7 @@ const CommentDisplay = ({
         })
       } catch (error) {
         // Cache update might fail if statement is not in cache, which is fine
-        console.warn('Could not update cache for deleted comment:', error)
+        logWarn(`Could not update cache for deleted comment: ${error}`)
       }
     },
   })

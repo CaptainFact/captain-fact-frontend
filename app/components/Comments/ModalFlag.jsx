@@ -8,6 +8,7 @@ import { useToast } from '@/hooks/use-toast'
 import { toastError } from '@/lib/toasts'
 
 import { FLAG_COMMENT_MUTATION } from '../../API/graphql_queries'
+import { logWarn } from '../../logger'
 import { useLoggedInUser } from '../LoggedInUser/UserProvider'
 import FlagReasonSelect from '../Moderation/FlagReasonSelect'
 import { Button } from '../ui/button'
@@ -29,7 +30,7 @@ const ModalFlag = ({ initialReason, comment, open, onOpenChange, onFlagSuccess }
           cache.modify({
             id: cache.identify({ __typename: 'User', id: loggedInUser?.id }),
             fields: {
-              flags(existingFlags = {}, { readField }) {
+              flags(existingFlags = {}) {
                 return {
                   ...existingFlags,
                   [comment.id]: true,
@@ -39,7 +40,7 @@ const ModalFlag = ({ initialReason, comment, open, onOpenChange, onFlagSuccess }
           })
         } catch (error) {
           // Cache update might fail, which is fine
-          console.warn('Could not update cache for flagged comment:', error)
+          logWarn(`Could not update cache for flagged comment: ${error}`)
         }
       }
     },

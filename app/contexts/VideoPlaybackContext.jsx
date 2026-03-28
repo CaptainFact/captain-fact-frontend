@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useMemo, useReducer } from 'react'
+import React, { createContext, useCallback, useContext, useMemo, useReducer, useRef } from 'react'
 
 const initialState = {
   position: 0,
@@ -33,12 +33,20 @@ const VideoPlaybackContext = createContext(null)
 export const VideoPlaybackProvider = ({ children, onUpdatePosition }) => {
   const [state, dispatch] = useReducer(playbackReducer, initialState)
 
+  // Always keep a ref to the latest onUpdatePosition so setPosition never
+  // holds a stale closure. We can't put onUpdatePosition directly in
+  // setPosition's deps because it is recreated on every parent render
+  // (inline arrow function in VideoDebate), which would invalidate the
+  // memoized context value and cause all consumers to re-render.
+  const onUpdatePositionRef = useRef(onUpdatePosition)
+  onUpdatePositionRef.current = onUpdatePosition
+
   const setPosition = useCallback(
     (position) => {
       const truncatedPosition = Math.floor(position)
       if (truncatedPosition !== state.position) {
         dispatch({ type: 'SET_POSITION', payload: truncatedPosition })
-        onUpdatePosition?.(truncatedPosition)
+        onUpdatePositionRef.current?.(truncatedPosition)
       }
     },
     [state.position],

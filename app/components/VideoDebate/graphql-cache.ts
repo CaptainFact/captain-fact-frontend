@@ -4,7 +4,7 @@ import {  VIDEO_DEBATE_QUERY } from './graphql'
 
 // Helper to get Video database ID from hashId
 const getVideoIdFromHashId = (cache: ApolloCache<any>, videoHashId: string): string | null => {
-  const data = cache.readQuery({
+  const data = cache.readQuery<{ video?: { id: string } | null }>({
     query: VIDEO_DEBATE_QUERY,
     variables: { id: videoHashId },
   })
@@ -48,8 +48,8 @@ export const updateCacheOnStatementAdded = (
         // Add new statement and sort by time
         const newStatements = [...existingStatements, toReference(newStatement)]
         return newStatements.sort((a, b) => {
-          const aTime = readField('time', a) || 0
-          const bTime = readField('time', b) || 0
+          const aTime = Number(readField('time', a) ?? 0)
+          const bTime = Number(readField('time', b) ?? 0)
           return aTime - bTime
         })
       },

@@ -15,6 +15,14 @@ import { Separator } from '../ui/separator'
 import { SignInUpContainer } from './SignInUpContainer'
 import { FormikUserEmailOrUsernameField, FormikUserPasswordField } from './UserFormFields'
 
+const getResetUrl = (email) => {
+  if (email) {
+    return `/reset_password?email=${encodeURIComponent(email)}`
+  } else {
+    return '/reset_password'
+  }
+}
+
 const LoginForm = () => {
   const { t } = useTranslation('user')
   const history = useHistory()
@@ -39,7 +47,11 @@ const LoginForm = () => {
       password: '',
     },
     validate: (values) =>
-      validateUserForm(t, values, { emailRequired: true, passwordRequired: true }),
+      validateUserForm(t, values, {
+        emailRequired: true,
+        emailOrUsername: true,
+        passwordRequired: true,
+      }),
     onSubmit: async (values) => {
       try {
         setError(null)
@@ -107,10 +119,7 @@ const LoginForm = () => {
         </div>
         <Separator className="my-6" />
         <div className="text-center">
-          <Link
-            to={`/reset_password?email=${encodeURIComponent(values.email)}`}
-            className="block text-sm"
-          >
+          <Link className="block text-sm" to={getResetUrl(values.email)}>
             {t('forgottenPassword')}
           </Link>
         </div>

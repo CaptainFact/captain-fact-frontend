@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom'
 import { ToastAction } from '@/components/ui/toast'
 import { toast } from '@/hooks/use-toast'
 
-import { getErrorInfo } from './errors'
+import { getErrorInfo, normalizeServerErrorMessage } from './errors'
 import { WithRouterForRenderProp } from './router'
 
 export const toastErrorUnauthenticated = () => {
@@ -41,13 +41,19 @@ export const toastErrorUnauthenticated = () => {
 export function toastError(error) {
   if (typeof error === 'object' && error !== null) {
     // Handle GraphQL errors - extract message from graphQLErrors array
-    if (error.graphQLErrors && error.graphQLErrors.length > 0) {
+    if (error.cause?.message) {
+      error = error.cause.message
+    } else if (error.graphQLErrors && error.graphQLErrors.length > 0) {
       error = error.graphQLErrors[0].message || error.message || 'unexpected'
     } else if (error.networkError) {
       error = error.networkError.message || error.message || 'unexpected'
     } else {
       error = error.message || 'unexpected'
     }
+  }
+
+  if (typeof error === 'string') {
+    error = normalizeServerErrorMessage(error)
   }
 
   const errorInfo = getErrorInfo(error)

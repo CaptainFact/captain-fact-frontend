@@ -10,7 +10,6 @@
 <a href="https://github.com/CaptainFact/captain-fact-frontend/releases"><img src="https://img.shields.io/github/v/release/CaptainFact/captain-fact-frontend" alt="GitHub release" /></a>
 <a href="https://github.com/CaptainFact/captain-fact-frontend/actions/workflows/release.yml"><img src="https://github.com/CaptainFact/captain-fact-frontend/actions/workflows/release.yml/badge.svg" alt='Release Status' /></a>
 <a href='https://coveralls.io/github/CaptainFact/captain-fact-frontend?branch=staging'><img src='https://coveralls.io/repos/github/CaptainFact/captain-fact-frontend/badge.svg?branch=staging' alt='Coverage Status' /></a>
-<a href="https://hosted.weblate.org/engage/captainfact-frontend-ui/"><img src="https://hosted.weblate.org/widgets/captainfact-frontend-ui/-/svg-badge.svg" alt="Translation status" /></a>
 </p>
 <hr/>
 <p align="center">

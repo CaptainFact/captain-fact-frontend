@@ -1,13 +1,15 @@
 import { ApolloClient, useQuery, useSubscription } from '@apollo/client'
 import { FocusedStatementProvider } from 'app/contexts/FocusedStatementContext'
-import React, { useCallback, useEffect, useMemo, useReducer, useRef } from 'react'
+import React, { useCallback, useEffect, useReducer, useRef } from 'react'
 import { Helmet } from 'react-helmet'
-import { withTranslation } from 'react-i18next'
 import { useLocation, useParams } from 'react-router-dom'
 
+import { VIDEO_PLAYER_YOUTUBE } from '../../constants'
 import { VideoPlaybackProvider } from '../../contexts/VideoPlaybackContext'
 import { toAbsoluteURL, videoURL } from '../../lib/cf_routes'
-import { getHDThumbnailUrl } from '../../lib/video_utils'
+import { scrollElementIntoView } from '../../lib/scroll_utils'
+import { getApolloErrorKey } from '../../lib/errors'
+import { getHDThumbnailUrl, getTimecodesOffset } from '../../lib/video_utils'
 import BackgroundNotifier from '../App/BackgroundNotifier'
 import { ErrorView } from '../Utils/ErrorView'
 import ColumnDebate from './ColumnDebate'
@@ -196,30 +198,21 @@ const VideoDebate = () => {
   // Subscribe to all video debate events
   useVideoDebateSubscriptions(client, videoId, videoDatabaseId)
 
-  // Simple scroll function for components that need to scroll to elements
+  // Scroll function for components that need to scroll to elements
   const handleScrollTo = useCallback((target) => {
+    let elementId: string | null = null
     if (typeof target === 'string') {
-      // Direct element ID (could be statement-{id} or comment-{id})
-      const element = document.getElementById(target)
-      if (element) {
-        element.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center',
-        })
-      }
-    } else if (target && target.id) {
+      elementId = target
+    } else if (target?.id) {
       // Legacy object format { id, ... }
-      // Check if it's a comment (starts with 'comment-') or statement
-      const elementId = target.id.toString().startsWith('comment-')
+      elementId = target.id.toString().startsWith('comment-')
         ? target.id.toString()
         : `statement-${target.id}`
-      const element = document.getElementById(elementId)
-      if (element) {
-        element.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center',
-        })
-      }
+    }
+    if (!elementId) {return}
+    const element = document.getElementById(elementId)
+    if (element) {
+      scrollElementIntoView(element)
     }
   }, [])
 
@@ -236,19 +229,15 @@ const VideoDebate = () => {
       if (commentId) {
         // Check if the comment exists in any statement
         const commentExists = data.video.statements.some((statement) =>
-          statement.comments?.some((comment) => {
-            const commentIdNum = typeof comment.id === 'string' ? parseInt(comment.id) : comment.id
-            const searchCommentIdNum = typeof commentId === 'string' ? parseInt(commentId) : commentId
-            return commentIdNum === searchCommentIdNum
-          }),
+          statement.comments?.some((comment) => String(comment.id) === String(commentId)),
         )
         if (commentExists) {
           targetElementId = `comment-${commentId}`
         }
       } else if (statementId) {
-        // Check if the statement exists
+        // statement.id is a string from GraphQL — compare as strings
         const statementExists = data.video.statements.some(
-          (statement) => statement.id === parseInt(statementId),
+          (statement) => String(statement.id) === String(statementId),
         )
         if (statementExists) {
           targetElementId = `statement-${statementId}`
@@ -256,16 +245,13 @@ const VideoDebate = () => {
       }
 
       if (targetElementId) {
-        // Use setTimeout to ensure DOM is fully rendered
-        setTimeout(() => {
+        // Defer one frame to ensure the statements list has rendered
+        requestAnimationFrame(() => {
           const element = document.getElementById(targetElementId)
           if (element) {
-            element.scrollIntoView({
-              behavior: 'smooth',
-              block: 'center',
-            })
+            scrollElementIntoView(element)
           }
-        }, 100)
+        })
       }
     }
   }, [data?.video?.statements, loading]) // Only run when data loads, not on every URL change
@@ -295,12 +281,12 @@ const VideoDebate = () => {
 
   // Early return after all hooks
   if (error) {
-    return <ErrorView error={error} />
+    return <ErrorView error={getApolloErrorKey(error)} />
   }
 
   return (
     <FocusedStatementProvider
-      offset={data?.video?.youtubeOffset || 0}
+      offset={getTimecodesOffset(data?.video ?? { youtubeOffset: 0 }, VIDEO_PLAYER_YOUTUBE)}
       statements={data?.video?.statements}
     >
       {({ updatePosition }) => (
@@ -315,6 +301,9 @@ const VideoDebate = () => {
               video={data?.video}
               isLoading={loading}
               view={currentView}
+              videoSubscriptionIsSubscribed={
+                data?.loggedInUser?.subscriptions?.[0]?.isSubscribed ?? false
+              }
               onSetStatementForm={(form) => dispatch({ type: 'SET_STATEMENT_FORM', payload: form })}
             />
             <ColumnDebate

@@ -1,5 +1,5 @@
-import { Query } from '@apollo/client/react/components'
 import { gql } from '@apollo/client'
+import { Query } from '@apollo/client/react/components'
 import { get } from 'lodash'
 import React from 'react'
 import { withTranslation } from 'react-i18next'

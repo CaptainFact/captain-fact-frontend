@@ -124,11 +124,11 @@ const StatementComments = ({ statement, speaker, setReplyToComment, votesMap, fl
       <SpeakerComments
         setReplyToComment={setReplyToComment}
         speaker={speaker}
-          comments={selfComments}
-          repliesByParent={repliesByParent}
-          votesMap={votesMap}
-          flagsMap={flagsMap}
-        />
+        comments={selfComments}
+        repliesByParent={repliesByParent}
+        votesMap={votesMap}
+        flagsMap={flagsMap}
+      />
       <div className="bg-[#fefefe] dark:bg-background">
         {hasSpeakerComments && (
           <div className="bg-neutral-100 dark:bg-accent text-center flex justify-center items-center gap-2 p-1 dark:text-foreground">

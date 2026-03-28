@@ -24,7 +24,12 @@ class PublicAchievementUnlocker extends React.PureComponent {
 
   componentDidUpdate(oldProps) {
     const { isAuthenticated, loggedInUser } = this.props
-    if (isAuthenticated && loggedInUser.achievements !== oldProps.loggedInUser.achievements) {
+    if (!isAuthenticated || !loggedInUser) {
+      return
+    }
+    const prevAchievements = oldProps.loggedInUser?.achievements
+    const nextAchievements = loggedInUser.achievements
+    if (prevAchievements !== nextAchievements) {
       this.unlockIfNecessary()
     }
   }
@@ -34,7 +39,7 @@ class PublicAchievementUnlocker extends React.PureComponent {
   }
 
   unlockIfNecessary = () => {
-    if (!this.props.isAuthenticated || this.hasAchievement()) {
+    if (!this.props.isAuthenticated || !this.props.loggedInUser || this.hasAchievement()) {
       return false
     }
 
@@ -56,7 +61,8 @@ class PublicAchievementUnlocker extends React.PureComponent {
   }
 
   hasAchievement = () => {
-    return this.props.loggedInUser.achievements.includes(this.props.achievementId)
+    const achievements = this.props.loggedInUser?.achievements
+    return Array.isArray(achievements) && achievements.includes(this.props.achievementId)
   }
 
   doUnlockAchievement = () => {

@@ -110,7 +110,6 @@ const StatementContainer = ({
           handleEdit={() => setIsEditing(true)}
           handleDelete={() => setIsDeleting(true)}
           offset={offset}
-          onSetScrollTo={onSetScrollTo}
         />
       )}
 

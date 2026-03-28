@@ -25,7 +25,7 @@ const getInitialLocale = () => {
         return prefs.locale
       }
     }
-  } catch (e) {
+  } catch {
     // Fall through to browser locale
   }
   return browserLocale()

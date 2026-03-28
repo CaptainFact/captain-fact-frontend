@@ -36,7 +36,7 @@ const StatementHeader = ({
             on="hover"
             trigger={
               <div className="mr-2">
-                <span className="inline-flex items-center rounded-md bg-yellow-100 dark:bg-yellow-900 px-2 py-1 text-xs text-yellow-800 dark:text-yellow-200">
+                <span className="cursor-help inline-flex items-center rounded-md bg-yellow-100 dark:bg-yellow-900 px-2 py-1 text-xs text-yellow-800 dark:text-yellow-200">
                   <span className="mr-1">{t('statement.draft')}</span>
                   <InfoCircle size={12} />
                 </span>

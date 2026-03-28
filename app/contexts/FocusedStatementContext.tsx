@@ -2,7 +2,7 @@ import { Statement } from 'app/API/types/generated'
 import { STATEMENT_FOCUS_TIME } from 'app/constants'
 import React, { createContext, useContext } from 'react'
 
-export const FocusedStatementContext = createContext({
+const FocusedStatementContext = createContext({
   statement: null as Statement | null,
 })
 

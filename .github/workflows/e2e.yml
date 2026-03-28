@@ -9,17 +9,32 @@ jobs:
   cypress:
     runs-on: ubuntu-22.04 # Remember to update this when changing Erlang version. See https://github.com/erlef/setup-beam
     services:
-      db:
-        image: captainfact/dev-db:latest
+      postgres:
+        image: postgres:16-alpine
         ports: ['5432:5432']
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: captain_fact_test
         options: >-
-          --health-cmd pg_isready
+          --health-cmd "pg_isready -U postgres"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
     steps:
       # Checkout
-      - name: Checkout API
+      # Try to use the API branch matching the frontend branch so co-developed changes
+      # are tested together. Fall back to staging when no matching branch exists.
+      - name: Checkout API (matching branch)
+        id: checkout-api
+        uses: actions/checkout@v3
+        continue-on-error: true
+        with:
+          repository: CaptainFact/captain-fact-api
+          ref: ${{ github.ref_name }}
+          path: api
+      - name: Checkout API (staging fallback)
+        if: steps.checkout-api.outcome == 'failure'
         uses: actions/checkout@v3
         with:
           repository: CaptainFact/captain-fact-api
@@ -32,7 +47,7 @@ jobs:
           path: frontend
       # Setup API
       - name: Restore Elixir cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ./api/deps
           key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
@@ -40,7 +55,7 @@ jobs:
             ${{ runner.os }}-mix-${{ env.cache-name }}-
             ${{ runner.os }}-mix-
       - name: Restore Elixir build folder
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ./api/build
           key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
@@ -62,7 +77,7 @@ jobs:
         run: mix compile
       - name: Prepare DB
         working-directory: api
-        run: mix ecto.create && mix ecto.migrate
+        run: mix ecto.create && mix ecto.migrate && mix ecto.seed
       # Setup Frontend
       - uses: actions/setup-node@v3
         with:

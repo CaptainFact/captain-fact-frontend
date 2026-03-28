@@ -2,13 +2,7 @@ import { Clipboard, Facebook, Mail, Share2, Twitter } from 'lucide-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { toast } from '@/hooks/use-toast'
 
 import { FB_APP_ID, FRONTEND_URL } from '../../config'

@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 // GraphQL Fragments
-export const COMMENT_FRAGMENT = gql`
+const COMMENT_FRAGMENT = gql`
   fragment VideoDebateCommentFields on Comment {
     id
     text
@@ -26,7 +26,7 @@ export const COMMENT_FRAGMENT = gql`
   }
 `
 
-export const SPEAKER_FRAGMENT = gql`
+const SPEAKER_FRAGMENT = gql`
   fragment VideoDebateSpeakerFields on Speaker {
     id
     fullName
@@ -37,7 +37,7 @@ export const SPEAKER_FRAGMENT = gql`
   }
 `
 
-export const STATEMENT_FRAGMENT = gql`
+const STATEMENT_FRAGMENT = gql`
   fragment VideoDebateStatementFields on Statement {
     id
     text
@@ -78,6 +78,9 @@ export const VIDEO_DEBATE_QUERY = gql`
       id
       votes(videoHashId: $id)
       flags(videoHashId: $id)
+      subscriptions(scopes: ["video"], videoHashId: $id) {
+        isSubscribed
+      }
     }
   }
   ${STATEMENT_FRAGMENT}

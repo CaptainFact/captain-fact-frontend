@@ -1,11 +1,11 @@
 import { useQuery, useSubscription } from '@apollo/client'
 import PropTypes from 'prop-types'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Helmet } from 'react-helmet'
 
-import { VIDEO_HISTORY_ACTION_ADDED_SUBSCRIPTION, VIDEO_HISTORY_ACTIONS_QUERY } from './graphql'
 import ActionsTable from '../UsersActions/ActionsTable'
 import { ErrorView } from '../Utils/ErrorView'
+import { VIDEO_HISTORY_ACTION_ADDED_SUBSCRIPTION, VIDEO_HISTORY_ACTIONS_QUERY } from './graphql'
 
 const VideoDebateHistory = ({ videoId }) => {
   // Fetch initial history actions

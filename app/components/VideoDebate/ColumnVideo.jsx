@@ -7,7 +7,6 @@ import { MIN_REPUTATION_ADD_SPEAKER } from '../../constants'
 import { videoCaptionsUrl, videoHistoryURL, videoURL } from '../../lib/cf_routes'
 import { useLoggedInUser } from '../LoggedInUser/UserProvider'
 import AddSpeakerForm from '../Speakers/AddSpeakerForm'
-import SpeakerPreview from '../Speakers/SpeakerPreview'
 import { Tabs, TabsList, TabsTrigger } from '../ui/tabs'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import Message from '../Utils/Message'
@@ -17,7 +16,13 @@ import ResizableColumn from './ResizableColumn'
 import { SpeakersList } from './SpeakersList'
 import VideoDebatePlayer from './VideoDebatePlayer'
 
-const ColumnVideo = ({ video, isLoading, view, onSetStatementForm }) => {
+const ColumnVideo = ({
+  video,
+  isLoading,
+  view,
+  videoSubscriptionIsSubscribed,
+  onSetStatementForm,
+}) => {
   const { url, speakers = [] } = video || {}
   const isDebate = !view || view === 'debate'
   const { t } = useTranslation('videoDebate')
@@ -63,7 +68,10 @@ const ColumnVideo = ({ video, isLoading, view, onSetStatementForm }) => {
             </Tabs>
             {isDebate && video && (
               <div className="dark:bg-background">
-                <Actions video={video} />
+                <Actions
+                  video={video}
+                  videoSubscriptionIsSubscribed={videoSubscriptionIsSubscribed}
+                />
                 <div className="p-4 text-sm dark:text-foreground">
                   <ReputationGuardTooltip
                     requiredRep={MIN_REPUTATION_ADD_SPEAKER}

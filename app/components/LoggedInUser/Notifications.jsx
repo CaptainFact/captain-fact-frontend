@@ -1,5 +1,4 @@
-import { useMutation, useQuery } from '@apollo/client'
-import { gql } from '@apollo/client'
+import { gql, useMutation, useQuery } from '@apollo/client'
 import { get } from 'lodash'
 import PropTypes from 'prop-types'
 import { useMemo } from 'react'

@@ -2,12 +2,7 @@ import { CircleHelp } from 'lucide-react'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 
 import HelpPageContent from '../Help/HelpPageContent'
 import Achievement from './Achievement'

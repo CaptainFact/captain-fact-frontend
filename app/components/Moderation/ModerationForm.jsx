@@ -6,7 +6,10 @@ import { useTranslation } from 'react-i18next'
 
 import { toastError } from '@/lib/toasts'
 
-import { MODERATE_ACTION_MUTATION } from '../../API/graphql_queries'
+import {
+  loggedInUserPendingModerationCount,
+  MODERATE_ACTION_MUTATION,
+} from '../../API/graphql_queries'
 import {
   MODERATION_ACTION_ABUSIVE,
   MODERATION_ACTION_CONFIRM,
@@ -19,7 +22,9 @@ import FlagReasonSelect from './FlagReasonSelect'
 const ModerationForm = ({ action, onSubmit }) => {
   const { t } = useTranslation('moderation')
   const { loading: userLoading } = useLoggedInUser()
-  const [moderateAction, { loading: moderatingLoading }] = useMutation(MODERATE_ACTION_MUTATION)
+  const [moderateAction, { loading: moderatingLoading }] = useMutation(MODERATE_ACTION_MUTATION, {
+    refetchQueries: [{ query: loggedInUserPendingModerationCount }],
+  })
 
   // Convert enum value to integer for moderateAction (which still uses Int!)
   const enumToInt = (enumValue) => {

@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    CF_GLOBALS?: Record<string, string | undefined>
+  }
+}
+
 function boolFromConfig(value) {
   const lowerValue = value && value.toLowerCase()
   if (['on', 'enabled', '1', 'true', 'yes'].includes(lowerValue)) {

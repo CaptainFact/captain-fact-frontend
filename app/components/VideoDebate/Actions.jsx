@@ -9,7 +9,7 @@ import {
   Volume2,
   VolumeX,
 } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { withTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 
@@ -25,7 +25,7 @@ import EditVideoModal from '../Videos/EditVideoModal'
 import Action from './ActionButton'
 import { UPDATE_SUBSCRIPTION_MUTATION } from './graphql'
 
-const Actions = ({ video, t, isAuthenticated }) => {
+const Actions = ({ video, videoSubscriptionIsSubscribed, t, isAuthenticated }) => {
   const history = useHistory()
   const {
     enableAutoscroll: hasAutoscroll,
@@ -33,13 +33,16 @@ const Actions = ({ video, t, isAuthenticated }) => {
     toggleAutoscroll,
     toggleBackgroundSound,
   } = useUserPreferences()
-  const [isSubscribed, setIsSubscribed] = useState(false)
+  const [isSubscribed, setIsSubscribed] = useState(() =>
+    Boolean(videoSubscriptionIsSubscribed ?? false),
+  )
   const [shareModalOpen, setShareModalOpen] = useState(false)
   const [editVideoModalOpen, setEditVideoModalOpen] = useState(false)
   const [updateSubscription] = useMutation(UPDATE_SUBSCRIPTION_MUTATION)
 
-  // TODO: Fetch subscription status from GraphQL if needed
-  // For now, we'll manage it locally via the mutation response
+  useEffect(() => {
+    setIsSubscribed(Boolean(videoSubscriptionIsSubscribed ?? false))
+  }, [video?.id, videoSubscriptionIsSubscribed])
 
   const handleSubscriptionToggle = async () => {
     if (!video) {
