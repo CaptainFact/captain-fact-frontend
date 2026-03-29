@@ -77,10 +77,16 @@ module.exports = {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
+        borderPulse: {
+          '0%': { boxShadow: '0 0 0 0px hsl(var(--primary-foreground))' },
+          '50%': { boxShadow: '0 0 0 1px hsl(var(--primary))' },
+          '100%': { boxShadow: '0 0 0 0px hsl(var(--primary-foreground))' },
+        },
       },
       animation: {
         fadeInUp: 'fadeInUp 0.3s ease-out',
         fadeIn: 'fadeIn 0.3s',
+        borderPulse: 'borderPulse 2s infinite',
       },
     },
   },

@@ -1,7 +1,6 @@
 import { LogIn } from 'lucide-react'
 import React, { useMemo } from 'react'
 import { withTranslation } from 'react-i18next'
-import { withResizeDetector } from 'react-resize-detector'
 import { Link, withRouter } from 'react-router-dom'
 import Popup from 'reactjs-popup'
 import { UserCircle } from 'styled-icons/fa-regular'
@@ -9,6 +8,7 @@ import { CaretDown } from 'styled-icons/fa-solid'
 
 import { ENABLE_PUBLIC_SEARCH } from '../../config'
 import { USER_PICTURE_LARGE } from '../../constants'
+import { useResizeObserver } from '../../hooks/use-resize-observer'
 import { useTheme } from '../../hooks/use-theme'
 import { cn } from '../../lib/css-utils'
 import NotificationBell from '../LoggedInUser/NotificationBell'
@@ -36,7 +36,8 @@ const getRedirectUrl = () => {
   return '/videos'
 }
 
-const Navbar = ({ t, loggedInUser, isAuthenticated, loggedInUserLoading, location, width }) => {
+const Navbar = ({ t, loggedInUser, isAuthenticated, loggedInUserLoading, location }) => {
+  const { ref, width } = useResizeObserver()
   const isMobile = width < 600
   const loginRedirect = getRedirectUrl()
   const { resolvedTheme } = useTheme()
@@ -73,7 +74,7 @@ const Navbar = ({ t, loggedInUser, isAuthenticated, loggedInUserLoading, locatio
   )
 
   return (
-    <div data-cy="Navbar">
+    <div data-cy="Navbar" ref={ref}>
       <div className="h-[60px] w-full" />
       <div className="fixed z-40 top-0 w-full flex justify-between items-center bg-white dark:bg-background h-[60px] border-b border-[#dadada] dark:border-border shadow-[0px_0px_15px_rgba(125,125,125,0.25)] dark:shadow-[0px_0px_15px_rgba(0,0,0,0.25)] transition-[top] duration-300 animate-fadeInUp px-2.5">
         {/* Left */}
@@ -197,4 +198,4 @@ const Navbar = ({ t, loggedInUser, isAuthenticated, loggedInUserLoading, locatio
   )
 }
 
-export default withLoggedInUser(withTranslation('main')(withRouter(withResizeDetector(Navbar))))
+export default withLoggedInUser(withTranslation('main')(withRouter(Navbar)))

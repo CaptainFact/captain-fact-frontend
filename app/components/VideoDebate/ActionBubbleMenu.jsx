@@ -1,132 +1,108 @@
-import { Mutation } from '@apollo/client/react/components'
-import gql from 'graphql-tag'
+import { useMutation } from '@apollo/client'
 import { ListTodo, LogIn, MessageSquare, X } from 'lucide-react'
 import React from 'react'
 import { withTranslation } from 'react-i18next'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import { toast } from '@/hooks/use-toast'
 import { cn } from '@/lib/css-utils'
 
 import { MIN_REPUTATION_START_AUTOMATIC_STATEMENTS_EXTRACTION } from '../../constants'
-import { destroyStatementForm } from '../../state/video_debate/statements/effects'
-import { changeStatementForm } from '../../state/video_debate/statements/reducer'
-import { hasStatementForm } from '../../state/video_debate/statements/selectors'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import { START_AUTOMATIC_STATEMENTS_EXTRACTION_MUTATION } from './graphql'
 
-const startAutomaticStatementsExtractionMutation = gql`
-  mutation StartAutomaticStatementsExtraction($videoId: ID!) {
-    startAutomaticStatementsExtraction(videoId: $videoId) {
-      id
-    }
-  }
-`
+const ActionBubbleMenu = ({
+  video,
+  hasStatementForm,
+  hasStatements,
+  onSetStatementForm,
+  onClearStatementForm,
+  hidden,
+  customActions,
+  getStatementInitialValues,
+  t,
+  isAuthenticated,
+  loggedInUser,
+}) => {
+  const history = useHistory()
+  const [hasCalledStatementsExtract, setHasCalledStatementsExtract] = React.useState(false)
+  const [startAutomaticStatementsExtraction, { loading }] = useMutation(
+    START_AUTOMATIC_STATEMENTS_EXTRACTION_MUTATION,
+  )
 
-@connect(
-  (state) => ({
-    hasAutoscroll: state.UserPreferences.enableAutoscroll,
-    soundOnBackgroundFocus: state.UserPreferences.enableSoundOnBackgroundFocus,
-    hasStatementForm: hasStatementForm(state),
-    hasStatements: state.VideoDebate.statements.data.size > 0,
-    videoId: state.VideoDebate.video.data.id,
-  }),
-  {
-    changeStatementForm,
-    destroyStatementForm,
-  },
-)
-@withTranslation('videoDebate')
-@withRouter
-@withLoggedInUser
-export default class ActionBubbleMenu extends React.PureComponent {
-  state = {
-    hasCalledStatementsExtract: false,
-  }
-
-  render() {
-    const {
-      t,
-      hasStatementForm,
-      isAuthenticated,
-      hidden,
-      customActions,
-      loggedInUser,
-      hasStatements,
-      videoId,
-    } = this.props
-    return (
-      <div
-        className={cn(
-          'fixed bottom-6 items-center right-6 flex flex-col-reverse z-50 transition-all duration-300',
-          {
-            '-bottom-24 opacity-0': hidden,
-            group: !hasStatementForm,
-          },
-        )}
-      >
-        {isAuthenticated ? (
-          <React.Fragment>
-            <ActionBubble
-              icon={hasStatementForm ? X : MessageSquare}
-              label={t(hasStatementForm ? 'statement.abortAdd' : 'statement.add')}
-              activated={!hasStatementForm}
-              onClick={() => !hidden && this.onStatementBubbleClick()}
-              primary
-            />
-            {!hasStatements &&
-              loggedInUser.reputation >= MIN_REPUTATION_START_AUTOMATIC_STATEMENTS_EXTRACTION && (
-                <Mutation mutation={startAutomaticStatementsExtractionMutation}>
-                  {(startAutomaticStatementsExtraction, { loading }) => (
-                    <ActionBubble
-                      disabled={loading || this.state.hasCalledStatementsExtract}
-                      loading={loading}
-                      icon={ListTodo}
-                      label={t('statement.startAutomaticExtraction')}
-                      onClick={async () => {
-                        try {
-                          this.setState({ hasCalledStatementsExtract: true })
-                          await startAutomaticStatementsExtraction({ variables: { videoId } })
-                          toast({
-                            description: t('videoDebate:statement.automaticExtractionSuccess'),
-                          })
-                        } catch (e) {
-                          this.setState({ hasCalledStatementsExtract: true })
-                          toast({ variant: 'destructive', description: t('errors:server.unknown') })
-                        }
-                      }}
-                    />
-                  )}
-                </Mutation>
-              )}
-            {customActions || null}
-          </React.Fragment>
-        ) : (
-          <ActionBubble
-            icon={LogIn}
-            label={t('main:menu.signup')}
-            onClick={() => this.props.history.push('/signup')}
-            primary
-          />
-        )}
-      </div>
-    )
-  }
-
-  onStatementBubbleClick() {
-    if (this.props.hasStatementForm) {
-      this.props.destroyStatementForm()
+  const onStatementBubbleClick = () => {
+    if (hasStatementForm) {
+      onClearStatementForm()
     } else {
       const subPathRegex = new RegExp('/videos/(.+)/(captions|transcript)/?')
       const match = subPathRegex.exec(location.pathname)
       if (match) {
-        this.props.history.push(`/videos/${match[1]}`)
+        history.push(`/videos/${match[1]}`)
       }
 
-      const values = this.props.getStatementInitialValues?.() || {}
-      this.props.changeStatementForm({ speaker_id: 0, ...values })
+      const initialValues = getStatementInitialValues ? getStatementInitialValues() : {}
+      onSetStatementForm({ speakerId: 0, ...initialValues })
     }
   }
+
+  const handleAutomaticExtraction = async () => {
+    if (!video?.id) {
+      return
+    }
+    try {
+      setHasCalledStatementsExtract(true)
+      await startAutomaticStatementsExtraction({ variables: { videoId: video.id } })
+      toast({
+        description: t('videoDebate:statement.automaticExtractionSuccess'),
+      })
+    } catch {
+      setHasCalledStatementsExtract(true)
+      toast({ variant: 'destructive', description: t('errors:server.unknown') })
+    }
+  }
+
+  return (
+    <div
+      className={cn(
+        'fixed bottom-6 items-center right-6 flex flex-col-reverse z-50 transition-all duration-300',
+        {
+          '-bottom-24 opacity-0': hidden,
+          'pointer-events-none': hidden,
+          group: !hasStatementForm,
+        },
+      )}
+    >
+      {isAuthenticated ? (
+        <React.Fragment>
+          <ActionBubble
+            icon={hasStatementForm ? X : MessageSquare}
+            label={t(hasStatementForm ? 'statement.abortAdd' : 'statement.add')}
+            activated={!hasStatementForm}
+            onClick={onStatementBubbleClick}
+            primary
+          />
+          {customActions}
+          {!hasStatements &&
+            loggedInUser?.reputation >= MIN_REPUTATION_START_AUTOMATIC_STATEMENTS_EXTRACTION && (
+              <ActionBubble
+                disabled={loading || hasCalledStatementsExtract}
+                loading={loading}
+                icon={ListTodo}
+                label={t('statement.startAutomaticExtraction')}
+                onClick={handleAutomaticExtraction}
+              />
+            )}
+        </React.Fragment>
+      ) : (
+        <ActionBubble
+          icon={LogIn}
+          label={t('main:menu.signup')}
+          onClick={() => history.push('/signup')}
+          primary
+        />
+      )}
+    </div>
+  )
 }
 
 export const ActionBubble = ({
@@ -175,3 +151,5 @@ export const ActionBubble = ({
     )}
   </div>
 )
+
+export default withTranslation('videoDebate')(withLoggedInUser(ActionBubbleMenu))

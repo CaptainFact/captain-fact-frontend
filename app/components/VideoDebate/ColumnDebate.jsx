@@ -1,13 +1,15 @@
+import { useFocusedStatement } from 'app/contexts/FocusedStatementContext'
 import { MessageCircle } from 'lucide-react'
-import React from 'react'
-import { Trans, withTranslation } from 'react-i18next'
-import { connect } from 'react-redux'
+import React, { useEffect, useRef } from 'react'
+import { Trans, useTranslation } from 'react-i18next'
 import { ExclamationCircle, InfoCircle } from 'styled-icons/fa-solid'
 
+import { VIDEO_PLAYER_YOUTUBE } from '../../constants'
+import { useUserPreferences } from '../../contexts/UserPreferencesContext'
 import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../../lib/local_storage'
-import { isLoadingVideoDebate } from '../../state/video_debate/selectors'
-import { hasStatementForm } from '../../state/video_debate/statements/selectors'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import { scrollElementIntoView } from '../../lib/scroll_utils'
+import { getTimecodesOffset } from '../../lib/video_utils'
+import { useLoggedInUser } from '../LoggedInUser/UserProvider'
 import StatementsList from '../Statements/StatementsList'
 import { ScrollArea } from '../ui/scroll-area'
 import { Skeleton } from '../ui/skeleton'
@@ -19,25 +21,51 @@ import ActionBubbleMenu from './ActionBubbleMenu'
 import CaptionsExtractor from './CaptionsExtractor'
 import VideoDebateHistory from './VideoDebateHistory'
 
-@connect((state) => ({
-  isLoading: isLoadingVideoDebate(state),
-  hasStatements: state.VideoDebate.statements.data.size !== 0,
-  hasSpeakers: state.VideoDebate.video.data.speakers.size !== 0,
-  hasStatementForm: hasStatementForm(state),
-  unlisted: state.VideoDebate.video.data.unlisted,
-  videoTitle: state.VideoDebate.video.data.title,
-}))
-@withTranslation('videoDebate')
-@withLoggedInUser
-export class ColumnDebate extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = {
-      showIntroduction: !getFromLocalStorage(LOCAL_STORAGE_KEYS.DISMISS_VIDEO_INTRODUCTION),
-    }
-  }
+const ColumnDebate = ({
+  video,
+  isLoading,
+  view,
+  videoId,
+  statements,
+  statementForm,
+  votesMap,
+  flagsMap,
+  onSetStatementForm,
+  onClearStatementForm,
+  onSetScrollTo,
+}) => {
+  const { isAuthenticated } = useLoggedInUser()
+  const { t } = useTranslation('videoDebate')
+  const [showIntroduction, setShowIntroduction] = React.useState(
+    !getFromLocalStorage(LOCAL_STORAGE_KEYS.DISMISS_VIDEO_INTRODUCTION),
+  )
 
-  renderInfo(message) {
+  const hasStatements = statements && statements.length > 0
+  const hasSpeakers = video?.speakers && video.speakers.length > 0
+  const hasStatementForm = statementForm !== null
+  const hasStatementsComponents = hasStatements || hasStatementForm
+  const { statement: focusedStatement } = useFocusedStatement()
+  const { enableAutoscroll } = useUserPreferences()
+  const prevFocusedStatementIdRef = useRef(null)
+
+  // Autoscroll to focused statement when it changes
+  useEffect(() => {
+    if (!enableAutoscroll || !focusedStatement?.id) {
+      return
+    }
+    if (focusedStatement.id === prevFocusedStatementIdRef.current) {
+      return
+    }
+
+    prevFocusedStatementIdRef.current = focusedStatement.id
+
+    const element = document.getElementById(`statement-${focusedStatement.id}`)
+    if (element) {
+      scrollElementIntoView(element)
+    }
+  }, [focusedStatement?.id, enableAutoscroll])
+
+  const renderInfo = (message) => {
     return (
       <Message>
         <InfoCircle size="1em" />
@@ -46,7 +74,7 @@ export class ColumnDebate extends React.PureComponent {
     )
   }
 
-  renderWarning(message) {
+  const renderWarning = (message) => {
     return (
       <Message type="warning" className="mb-6">
         <ExclamationCircle size="1em" />
@@ -55,8 +83,7 @@ export class ColumnDebate extends React.PureComponent {
     )
   }
 
-  renderHelp() {
-    const { hasSpeakers, isAuthenticated, t } = this.props
+  const renderHelp = () => {
     let helpMessage = ''
     if (!isAuthenticated) {
       helpMessage = t('tips.noContentUnauthenticated')
@@ -71,93 +98,103 @@ export class ColumnDebate extends React.PureComponent {
       )
     }
 
-    return this.renderInfo(helpMessage)
+    return renderInfo(helpMessage)
   }
 
-  renderContent() {
-    const { isLoading, view, videoId, hasStatements } = this.props
-
-    if (view === 'history') {
+  const renderContent = () => {
+    if (isLoading) {
+      return <LoadingFrame title={t('loading.statements')} />
+    } else if (view === 'history') {
       return <VideoDebateHistory videoId={videoId} />
     } else if (view === 'captions') {
       return (
         <div className="px-5 sm:px-8 my-4 mx-auto max-w-[1046px]">
-          <CaptionsExtractor videoId={videoId} />
+          <CaptionsExtractor
+            videoId={videoId}
+            statements={statements}
+            onSetStatementForm={onSetStatementForm}
+            onClearStatementForm={onClearStatementForm}
+          />
         </div>
       )
     } else if (view === 'debate') {
-      if (isLoading) {
-        return <LoadingFrame title={this.props.t('loading.statements')} />
-      }
-
-      const hasStatementsComponents = hasStatements || this.props.hasStatementForm
-      const hasMessages = this.props.unlisted || !hasStatementsComponents
+      const hasMessages = video?.unlisted || !hasStatementsComponents
       return (
         <div>
           {hasMessages && (
             <div>
-              {this.props.unlisted && this.renderWarning(this.props.t('warningUnlisted'))}
-              {!hasStatementsComponents && this.renderHelp()}
+              {video?.unlisted && renderWarning(t('warningUnlisted'))}
+              {!hasStatementsComponents && renderHelp()}
             </div>
           )}
-          {hasStatementsComponents && <StatementsList />}
-          <ActionBubbleMenu />
+          {hasStatementsComponents && (
+            <StatementsList
+              statements={statements}
+              speakers={video?.speakers || []}
+              statementForm={statementForm}
+              offset={getTimecodesOffset(video ?? { youtubeOffset: 0 }, VIDEO_PLAYER_YOUTUBE)}
+              onSetStatementForm={onSetStatementForm}
+              onClearStatementForm={onClearStatementForm}
+              onSetScrollTo={onSetScrollTo}
+              videoId={videoId}
+              votesMap={votesMap}
+              flagsMap={flagsMap}
+              focusedStatementId={focusedStatement?.id}
+            />
+          )}
+          <ActionBubbleMenu
+            video={video}
+            hasStatementForm={hasStatementForm}
+            hasStatements={hasStatements}
+            onSetStatementForm={onSetStatementForm}
+            onClearStatementForm={onClearStatementForm}
+          />
         </div>
       )
     }
   }
 
-  renderIntroduction() {
-    const { t } = this.props
-    return (
-      <DismissableMessage
-        localStorageDismissKey={LOCAL_STORAGE_KEYS.DISMISS_VIDEO_INTRODUCTION}
-        className="mb-12"
-        header={t('introTitle')}
-      >
-        <p>{t('intro')}</p>
-        <ExternalLinkNewTab href="/extension">{t('extensionDL')}</ExternalLinkNewTab>
+  return (
+    <ScrollArea className="w-full bg-neutral-50 dark:bg-background 2xl:h-[--main-height] [&>div>div]:!block 2xl:[&>div>div]:!table">
+      <div className="py-12 sm:px-4 px-2 dark:text-foreground">
+        <h1 className="text-center text-2xl font-semibold max-w-4xl mx-auto mb-10 pb-8 shadow-[0px_12px_8px_-10px_#e1e1e1] dark:shadow-[0px_12px_8px_-10px_rgba(0,0,0,0.3)] rounded-lg">
+          {t('pageTitle')}{' '}
+          {video?.title ||
+            (isLoading ? <Skeleton className="w-48 h-6 inline-block align-middle ml-3" /> : '...')}
+        </h1>
+        {showIntroduction && view === 'debate' && (
+          <div className="mx-6 mt-4">
+            {' '}
+            <DismissableMessage
+              localStorageDismissKey={LOCAL_STORAGE_KEYS.DISMISS_VIDEO_INTRODUCTION}
+              className="mb-12"
+              header={t('introTitle')}
+              onDismiss={() => setShowIntroduction(false)}
+            >
+              <p>{t('intro')}</p>
+              <ExternalLinkNewTab href="/extension">{t('extensionDL')}</ExternalLinkNewTab>
 
-        <p>
-          <br />
-          <strong>{t('intro1')}</strong>
-        </p>
-        <p>
-          <strong>{t('intro2')}</strong>
-        </p>
-        <p>
-          <strong>{t('intro3')}</strong>
-        </p>
-        <p>
-          <strong>{t('intro4')}</strong>
-          <ExternalLinkNewTab href="/help/privileges">{t('intro5')}</ExternalLinkNewTab>.
-        </p>
-      </DismissableMessage>
-    )
-  }
-
-  renderTitle() {
-    const { t, videoTitle, isLoading } = this.props
-    return (
-      <h1 className="text-center text-2xl font-semibold max-w-4xl mx-auto mb-10 pb-8 shadow-[0px_12px_8px_-10px_#e1e1e1] dark:shadow-[0px_12px_8px_-10px_rgba(0,0,0,0.3)] rounded-lg">
-        {t('pageTitle')}{' '}
-        {videoTitle ||
-          (isLoading ? <Skeleton className="w-48 h-6 inline-block align-middle ml-3" /> : '...')}
-      </h1>
-    )
-  }
-
-  render() {
-    return (
-      <ScrollArea className="w-full bg-neutral-50 dark:bg-background 2xl:h-[--main-height] [&>div>div]:!block 2xl:[&>div>div]:!table">
-        <div className="py-12 sm:px-4 px-2 dark:text-foreground">
-          {this.renderTitle()}
-          {this.state.showIntroduction && (
-            <div className="mx-6 mt-4">{this.renderIntroduction()}</div>
-          )}
-          {this.renderContent()}
-        </div>
-      </ScrollArea>
-    )
-  }
+              <p>
+                <br />
+                <strong>{t('intro1')}</strong>
+              </p>
+              <p>
+                <strong>{t('intro2')}</strong>
+              </p>
+              <p>
+                <strong>{t('intro3')}</strong>
+              </p>
+              <p>
+                <strong>{t('intro4')}</strong>
+                <ExternalLinkNewTab href="/help/privileges">{t('intro5')}</ExternalLinkNewTab>.
+              </p>
+            </DismissableMessage>
+          </div>
+        )}
+        {renderContent()}
+      </div>
+    </ScrollArea>
+  )
 }
+
+export default ColumnDebate

@@ -2,10 +2,11 @@ import i18n from 'i18next'
 import { startCase } from 'lodash'
 
 import { JS_ENV } from '../config'
-import store from '../state/index'
-import { changeLocale } from '../state/user_preferences/reducer'
+import { SUPPORTED_LOCALES } from '../constants'
+import { getFromLocalStorage, LOCAL_STORAGE_KEYS } from '../lib/local_storage'
 /* eslint-disable import/no-unresolved */
 import * as ar from './ar'
+import browserLocale from './browser_locale'
 import * as en from './en'
 import * as eo from './eo'
 import * as es from './es'
@@ -14,12 +15,28 @@ import * as pt_BR from './pt_BR'
 import * as ru from './ru'
 /* eslint-enable import/no-unresolved */
 
+// Get initial locale from localStorage or browser
+const getInitialLocale = () => {
+  try {
+    const stored = getFromLocalStorage(LOCAL_STORAGE_KEYS.PREFERENCES)
+    if (stored) {
+      const prefs = JSON.parse(stored)
+      if (prefs.locale && SUPPORTED_LOCALES.includes(prefs.locale)) {
+        return prefs.locale
+      }
+    }
+  } catch {
+    // Fall through to browser locale
+  }
+  return browserLocale()
+}
+
 // Configure I18N
 i18n.init({
   fallbackLng: 'en',
   // Make sure to update `SUPPORTED_LOCALES` in `app/constants.js` when adding a new language
   resources: { fr, en, ar, es, pt_BR, eo, ru },
-  lng: store.getState().UserPreferences.locale,
+  lng: getInitialLocale(),
   defaultNS: 'main',
   joinArrays: '\n',
   debug: JS_ENV === 'dev',
@@ -47,6 +64,6 @@ i18n.init({
   },
 })
 
-i18n.on('languageChanged', (language) => store.dispatch(changeLocale(language)))
+// Note: Locale changes are now handled by UserPreferencesContext, which calls i18n.changeLanguage()
 
 export default i18n

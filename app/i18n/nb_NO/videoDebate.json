@@ -9,7 +9,8 @@
   "flagForm": {
     "title": "Hvorfor ønsker du å flagge denne kommentaren?",
     "xAvailable": "{{count}} tilgjengelig",
-    "xAvailable_other": "{{count}} tilgjengelig"
+    "xAvailable_other": "{{count}} tilgjengelig",
+    "successMessage": "Kommentar flagget"
   },
   "comment": {
     "writeComment": "Skriv en kommentar…",
@@ -42,7 +43,7 @@
     "title": "Tittel",
     "one": "Taler",
     "remove": "Fjern taler",
-    "confirmRemove": "Alle påstander av {{speaker.full_name}} på denne videoen vil bli foreldreløse",
+    "confirmRemove": "Alle påstander av {{speaker.fullName}} på denne videoen vil bli foreldreløse",
     "add": "Legg til taler",
     "create": "Legg til taler \"{{name}}\"",
     "edit": "Rediger \"{{name}}\"-info",

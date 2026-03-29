@@ -4,6 +4,7 @@ import { withTranslation } from 'react-i18next'
 import { Link, withRouter } from 'react-router-dom'
 
 import { getErrorInfo, tError } from '../../lib/errors'
+import { logError } from '../../logger'
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert'
 import { Button } from '../ui/button'
 
@@ -15,6 +16,7 @@ export class ErrorView extends React.PureComponent {
   render() {
     const { t, error = 'unknown', canGoBack = true } = this.props
     const canReload = this.props.canReload || refreshableErrors.includes(error)
+    logError(error)
     return (
       <Alert variant="destructive">
         <AlertCircle className="h-4 w-4" />

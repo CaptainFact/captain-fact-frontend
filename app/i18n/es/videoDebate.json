@@ -9,7 +9,8 @@
   "flagForm": {
     "title": "¿Por qué informar de este comentario?",
     "xAvailable": "{{count}} disponible",
-    "xAvailable_other": "{{count}} disponibles"
+    "xAvailable_other": "{{count}} disponibles",
+    "successMessage": "Comentario denunciado con éxito"
   },
   "comment": {
     "writeComment": "Escribe un comentario...",
@@ -41,7 +42,7 @@
   "speaker": {
     "one": "Locutor·a",
     "remove": "Quitar el·la locutor·a",
-    "confirmRemove": "Todas las declaraciones de {{speaker.full_name}} en este video se van a convertir en huérfanos",
+    "confirmRemove": "Todas las declaraciones de {{speaker.fullName}} en este video se van a convertir en huérfanos",
     "add": "Añadir un·a locutor·a",
     "create": "Crear el locutor \"{{name}}\"",
     "edit": "Modificar la información de \"{{name}}\"",

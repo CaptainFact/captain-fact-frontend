@@ -4,7 +4,7 @@ import * as React from 'react'
 
 import { cn } from '@/lib/css-utils'
 
-import Spinner from './spinner'
+import { Spinner } from './spinner'
 
 const buttonVariants = cva(
   'relative inline-flex items-center justify-center gap-1 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
@@ -77,7 +77,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     }, [loading])
     const realChildren = loading ? (
       <span>
-        <Spinner size={24} />
+        <Spinner className="size-5" />
       </span>
     ) : (
       children

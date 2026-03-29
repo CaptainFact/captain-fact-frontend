@@ -9,7 +9,8 @@
   "flagForm": {
     "title": "Porque é que quer sinalizar este comentário?",
     "xAvailable": "{{count}} disponível",
-    "xAvailable_other": "{{count}} disponíveis"
+    "xAvailable_other": "{{count}} disponíveis",
+    "successMessage": "Comentário sinalizado com sucesso"
   },
   "comment": {
     "writeComment": "Escreva um comentário…",
@@ -41,7 +42,7 @@
   "speaker": {
     "one": "Orador",
     "remove": "Remover orador",
-    "confirmRemove": "Todas as declarações efetuadas por {{speaker.full_name}} neste vídeo irão passar a órfãs",
+    "confirmRemove": "Todas as declarações efetuadas por {{speaker.fullName}} neste vídeo irão passar a órfãs",
     "add": "Adicionar Orador",
     "create": "Criar orador \"{{name}}\"",
     "edit": "Editar informação de \"{{name}}\"",

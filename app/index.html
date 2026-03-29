@@ -98,5 +98,64 @@
         <noscript>Your browser does not support JavaScript!</noscript>
       </div>
     </div>
+
+    <!-- Detect locale and show localized loading text -->
+    <script>
+      (function() {
+        try {
+          // Supported locales
+          const SUPPORTED_LOCALES = ['fr', 'en', 'ar', 'es', 'pt_BR', 'eo', 'ru'];
+          
+          // Loading translations
+          const loadingTexts = {
+            'en': 'Loading…',
+            'fr': 'Chargement…',
+            'ar': 'جارٍ التحميل',
+            'es': 'Cargando…',
+            'pt_BR': 'Carregando…',
+            'eo': 'Ŝarĝo…',
+            'ru': 'Загрузка…'
+          };
+          
+          // Get locale from localStorage or browser
+          let locale = null;
+          
+          // Try localStorage first
+          try {
+            const stored = localStorage.getItem('preferences');
+            if (stored) {
+              const prefs = JSON.parse(stored);
+              if (prefs.locale && SUPPORTED_LOCALES.includes(prefs.locale)) {
+                locale = prefs.locale;
+              }
+            }
+          } catch (e) {
+            // Fall through to browser locale
+          }
+          
+          // If no locale from localStorage, try browser locale
+          if (!locale) {
+            try {
+              const browserLang = (navigator.userLanguage || navigator.language || 'en').split('-')[0].toLowerCase();
+              if (SUPPORTED_LOCALES.includes(browserLang)) {
+                locale = browserLang;
+              } else {
+                locale = 'en'; // default fallback
+              }
+            } catch (e) {
+              locale = 'en'; // default fallback
+            }
+          }
+          
+          // Update loading text
+          const loadingElement = document.querySelector('#preloading-frame p');
+          if (loadingElement && loadingTexts[locale]) {
+            loadingElement.textContent = loadingTexts[locale];
+          }
+        } catch (e) {
+          // Ignore errors, keep default "Loading..."
+        }
+      })();
+    </script>
   </body>
 </html>

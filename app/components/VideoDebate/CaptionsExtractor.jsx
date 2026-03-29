@@ -1,32 +1,19 @@
-import { gql, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import { debounce } from 'lodash'
 import { CirclePlay, CircleX, MessageCircle } from 'lucide-react'
 import React from 'react'
 import { withTranslation } from 'react-i18next'
 import { usePopper } from 'react-popper'
-import { connect } from 'react-redux'
 
+import { useVideoPlayback } from '../../contexts/VideoPlaybackContext'
 import { cn } from '../../lib/css-utils'
-import { forcePosition, setPlaying } from '../../state/video_debate/video/reducer'
 import Statement from '../Statements/Statement'
 import { Button } from '../ui/button'
 import ClickableIcon from '../Utils/ClickableIcon'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import Message from '../Utils/Message'
 import ActionBubbleMenu, { ActionBubble } from './ActionBubbleMenu'
-
-const captionsQuery = gql`
-  query VideoCaptionsQuery($videoId: ID!) {
-    video(hashId: $videoId) {
-      id
-      captions {
-        text
-        start
-        duration
-      }
-    }
-  }
-`
+import { VIDEO_CAPTIONS_QUERY } from './graphql'
 
 // A statement is displayed before each caption whe
 const getStatementsAtPosition = (statements, caption, nextCaption) => {
@@ -123,14 +110,14 @@ const StatementIndicator = withTranslation('main')(({ statement, onPlayClick, t 
 const CaptionsExtractor = ({
   t,
   videoId,
-  playbackPosition,
   statements,
-  setPlaying,
-  forcePosition,
+  onSetStatementForm,
+  onClearStatementForm,
 }) => {
-  const { data, loading, error } = useQuery(captionsQuery, { variables: { videoId } })
+  const { data, loading, error } = useQuery(VIDEO_CAPTIONS_QUERY, { variables: { videoId } })
   const [selection, setSelection] = React.useState({ text: null })
   const textContainerRef = React.useRef()
+  const { position: playbackPosition, setPlaying, forcePosition } = useVideoPlayback()
 
   // Watch for selection changes
   React.useEffect(() => {
@@ -219,24 +206,15 @@ const CaptionsExtractor = ({
             }}
           />
         }
-        getStatementInitialValues={() => {
-          return {
-            text: selection.text,
-            time: Math.floor(selection.start),
-          }
-        }}
+        getStatementInitialValues={() => ({
+          text: selection.text,
+          time: Math.floor(selection.start),
+        })}
+        onSetStatementForm={onSetStatementForm}
+        onClearStatementForm={onClearStatementForm}
       />
     </div>
   )
 }
 
-export default connect(
-  (state) => ({
-    statements: state.VideoDebate.statements.data,
-    playbackPosition: state.VideoDebate.video.playback.position,
-  }),
-  {
-    forcePosition,
-    setPlaying,
-  },
-)(withTranslation('videoDebate')(CaptionsExtractor))
+export default withTranslation('videoDebate')(CaptionsExtractor)

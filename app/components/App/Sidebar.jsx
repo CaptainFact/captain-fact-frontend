@@ -1,4 +1,4 @@
-import { Query } from '@apollo/client/react/components'
+import { useQuery } from '@apollo/client'
 import { capitalize, get } from 'lodash'
 import {
   CircleHelp,
@@ -14,12 +14,12 @@ import {
 } from 'lucide-react'
 import React from 'react'
 import { useTranslation, withTranslation } from 'react-i18next'
-import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { Discord, Facebook, Github, Mastodon, Twitter } from 'styled-icons/fa-brands'
 import { Star } from 'styled-icons/fa-solid'
 import { LinkExternal } from 'styled-icons/octicons'
 
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { cn } from '@/lib/css-utils'
 
 import {
@@ -31,14 +31,68 @@ import {
   MIN_REPUTATION_MODERATION,
   TABLET_WIDTH_THRESHOLD,
 } from '../../constants'
+import { useUserPreferences } from '../../contexts/UserPreferencesContext'
 import { useTheme } from '../../hooks/use-theme'
-import { closeSidebar, toggleSidebar } from '../../state/user_preferences/reducer'
 import UserLanguageSelector from '../LoggedInUser/UserLanguageSelector'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
 import { Badge } from '../ui/badge'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 import ProgressBar from '../Utils/ProgressBar'
 import ReputationGuard from '../Utils/ReputationGuard'
+
+// Daily gain gauge component
+const DailyGainGauge = ({ t }) => {
+  const { data } = useQuery(loggedInUserTodayReputationGain, {
+    fetchPolicy: 'network-only',
+    pollInterval: 30000,
+  })
+
+  const dailyGain = get(data, 'loggedInUser.todayReputationGain', 0)
+
+  return (
+    <div className="flex flex-col items-center">
+      <div className="flex items-center w-[90%]">
+        <Star size={20} className="text-white bg-[#6ba3a7] p-1 rounded-full -mr-px z-[1]" />
+        <ProgressBar
+          height="7px"
+          outerBackgroundColor="#c4c4c4"
+          innerBackgroundColor="#6ba3a7"
+          max={MAX_DAILY_REPUTATION_GAIN}
+          value={dailyGain}
+        />
+      </div>
+      <p className="text-[#858585] dark:text-muted-foreground text-[0.9em]">
+        {`${t('menu.dailyGain')} ${dailyGain}/${MAX_DAILY_REPUTATION_GAIN}`}
+      </p>
+    </div>
+  )
+}
+
+const ModerationMenuItem = () => {
+  const { t } = useTranslation('main')
+  const { data } = useQuery(loggedInUserPendingModerationCount, {
+    fetchPolicy: 'network-only',
+    pollInterval: 120_000,
+  })
+
+  const pendingCount = get(data, 'loggedInUser.actionsPendingModeration', 0)
+  return (
+    <li>
+      <Link
+        to="/moderation"
+        className="flex items-center px-4 py-2 text-gray-700 dark:text-foreground hover:bg-gray-100 dark:hover:bg-accent rounded-md hover:text-gray-900 dark:hover:text-foreground"
+      >
+        <Flag size="1.2em" className="mr-2" />
+        {t('menu.moderation')}
+        {Boolean(pendingCount) && (
+          <Badge className="ml-2" variant="destructive">
+            {pendingCount}
+          </Badge>
+        )}
+      </Link>
+    </li>
+  )
+}
 
 // Theme selector component for sidebar
 const ThemeSelector = () => {
@@ -52,34 +106,37 @@ const ThemeSelector = () => {
   ]
 
   return (
-    <div className="flex gap-1 w-full mb-4">
-      {themes.map(({ value, label, Icon }) => (
-        <button
-          key={value}
-          onClick={() => setTheme(value)}
-          className={cn(
-            'flex-1 flex items-center justify-center gap-1.5 px-2 py-1.5 text-sm rounded-md outline-none transition-colors',
-            theme === value
-              ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-              : 'bg-white dark:bg-background text-gray-700 dark:text-foreground hover:bg-[#f5f7fa] dark:hover:bg-accent active:bg-[#f5f7fa] dark:active:bg-accent focus:bg-[#f5f7fa] dark:focus:bg-accent',
-          )}
-          title={label}
-        >
-          <Icon size={14} />
-          <span className="hidden sm:inline">{label}</span>
-        </button>
-      ))}
-    </div>
+    <TooltipProvider delayDuration={50}>
+      <div className="flex gap-1 w-full mb-4">
+        {themes.map(({ value, label, Icon }) => (
+          <Tooltip key={value}>
+            <TooltipTrigger asChild>
+              <button
+                onClick={() => setTheme(value)}
+                className={cn(
+                  'flex-1 flex items-center justify-center p-2 rounded-md outline-none transition-colors',
+                  theme === value
+                    ? 'bg-primary text-primary-foreground hover:bg-primary/90'
+                    : 'bg-white dark:bg-background text-gray-700 dark:text-foreground hover:bg-[#f5f7fa] dark:hover:bg-accent active:bg-[#f5f7fa] dark:active:bg-accent focus:bg-[#f5f7fa] dark:focus:bg-accent',
+                )}
+                aria-label={label}
+              >
+                <Icon size={18} />
+              </button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{label}</p>
+            </TooltipContent>
+          </Tooltip>
+        ))}
+      </div>
+    </TooltipProvider>
   )
 }
 
-@connect((state) => ({ sidebarExpended: state.UserPreferences.sidebarExpended }), {
-  toggleSidebar,
-  closeSidebar,
-})
 @withTranslation('main')
 @withLoggedInUser
-export default class Sidebar extends React.PureComponent {
+class Sidebar extends React.PureComponent {
   constructor(props) {
     super(props)
     this.MenuListLink = this.MenuListLink.bind(this)
@@ -149,7 +206,7 @@ export default class Sidebar extends React.PureComponent {
           <ThemeSelector />
           {isAuthenticated ? (
             <React.Fragment>
-              <p className="text-gray-600 dark:text-muted-foreground uppercase text-sm font-semibold mb-2">
+              <p className="text-gray-600 dark:text-muted-foreground uppercase text-sm font-semibold mb-2 mt-3">
                 {t('menu.yourProfile')}
               </p>
               {this.renderMenuProfile()}
@@ -244,36 +301,7 @@ export default class Sidebar extends React.PureComponent {
 
   renderDailyGainGauge() {
     const { t } = this.props
-
-    return (
-      <Query
-        fetchPolicy="network-only"
-        pollInterval={30000}
-        query={loggedInUserTodayReputationGain}
-      >
-        {({ data }) => {
-          const dailyGain = get(data, 'loggedInUser.todayReputationGain', 0)
-
-          return (
-            <div className="flex flex-col items-center">
-              <div className="flex items-center w-[90%]">
-                <Star size={20} className="text-white bg-[#6ba3a7] p-1 rounded-full -mr-px z-[1]" />
-                <ProgressBar
-                  height="7px"
-                  outerBackgroundColor="#c4c4c4"
-                  innerBackgroundColor="#6ba3a7"
-                  max={MAX_DAILY_REPUTATION_GAIN}
-                  value={dailyGain}
-                />
-              </div>
-              <p className="text-[#858585] dark:text-muted-foreground text-[0.9em]">
-                {`${t('menu.dailyGain')} ${dailyGain}/${MAX_DAILY_REPUTATION_GAIN}`}
-              </p>
-            </div>
-          )
-        }}
-      </Query>
-    )
+    return <DailyGainGauge t={t} />
   }
 
   renderMenuProfile() {
@@ -293,28 +321,23 @@ export default class Sidebar extends React.PureComponent {
           {capitalize(t('entities.videoFactChecking'))}
         </this.MenuListLink>
         <ReputationGuard requiredRep={MIN_REPUTATION_MODERATION}>
-          <Query
-            fetchPolicy="network-only"
-            pollInterval={25000}
-            query={loggedInUserPendingModerationCount}
-          >
-            {({ data }) => {
-              const pendingCount = get(data, 'loggedInUser.actions_pending_moderation', 0)
-              return (
-                <this.MenuListLink to="/moderation">
-                  <Flag size="1.2em" className="mr-2" />
-                  {t('menu.moderation')}
-                  {Boolean(pendingCount) && (
-                    <Badge className="ml-2" variant="destructive">
-                      {pendingCount}
-                    </Badge>
-                  )}
-                </this.MenuListLink>
-              )
-            }}
-          </Query>
+          <ModerationMenuItem />
         </ReputationGuard>
       </ul>
     )
   }
 }
+
+const SidebarWithPreferences = (props) => {
+  const { sidebarExpended, toggleSidebar, closeSidebar } = useUserPreferences()
+  return (
+    <Sidebar
+      {...props}
+      sidebarExpended={sidebarExpended}
+      toggleSidebar={toggleSidebar}
+      closeSidebar={closeSidebar}
+    />
+  )
+}
+
+export default SidebarWithPreferences

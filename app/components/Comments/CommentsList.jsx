@@ -1,96 +1,123 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import FlipMove from 'react-flip-move'
 
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
-import { CommentDisplay } from './CommentDisplay'
+import { useLoggedInUser } from '../LoggedInUser/UserProvider'
+import CommentDisplay from './CommentDisplay'
 import CommentForm from './CommentForm'
 import CommentsListExpender from './CommentsListExpender'
 import CommentsListHeader from './CommentsListHeader'
 
-@withLoggedInUser
-export class CommentsList extends React.PureComponent {
-  static propTypes = {
-    setReplyToComment: PropTypes.func,
+const getNbDisplayedRange = (nesting) => {
+  if (nesting > 3) {
+    return [3, 5]
   }
+  return [4 - nesting, 6 - nesting]
+}
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      nbComments: this.getNbDisplayedRange(props.nesting || 1),
+const CommentsList = ({
+  comments = [],
+  className,
+  commentType,
+  header,
+  statementID,
+  replyingTo,
+  nesting = 1,
+  repliesByParent,
+  setReplyToComment,
+  votesMap,
+  flagsMap,
+}) => {
+  const { isAuthenticated, loggedInUser } = useLoggedInUser()
+  const [nbComments, setNbComments] = useState(() => getNbDisplayedRange(nesting))
+
+  const commentsLength = comments.length
+
+  // Get displayed comments based on current range
+  const displayedComments = useMemo(() => {
+    const [lowLimit, highLimit] = nbComments
+    const result = []
+    let numComment = 0
+
+    for (const comment of comments) {
+      numComment++
+      if (numComment <= lowLimit || (numComment <= highLimit && (comment.score || 0) > -1)) {
+        result.push(comment)
+      } else {
+        break
+      }
     }
+
+    return result
+  }, [comments, nbComments])
+
+  const handleExpendList = () => {
+    const [lowLimit, highLimit] = nbComments
+    setNbComments([lowLimit + 5, highLimit + 7])
   }
 
-  render() {
-    const {
-      comments,
-      className,
-      commentType,
-      header,
-      statementID,
-      replyingTo,
-      isAuthenticated,
-      loggedInUser,
-      nesting = 1,
-    } = this.props
-    const displayedComments = this.getDisplayedComments()
+  return (
+    <div className={className} data-cy={`comments-list-${commentType || 'comments'}`}>
+      {header && <CommentsListHeader header={header} />}
+      <FlipMove enterAnimation="fade" leaveAnimation={false}>
+        {commentsLength > 0 ? (
+          displayedComments.map((comment) => {
+            // Get replies for this comment if repliesByParent is provided
+            const replies = repliesByParent?.[comment.id]
+            // Get logged in user's vote for this comment
+            const loggedInUserVote = votesMap?.[comment.id] || 0
+            // Get logged in user's flag status for this comment
+            const isFlagged = flagsMap?.[comment.id] || false
 
-    return (
-      <div className={className} data-cy={`comments-list-${commentType || 'comments'}`}>
-        {header && <CommentsListHeader header={header} />}
-        <FlipMove enterAnimation="fade" leaveAnimation={false}>
-          {comments.size > 0 ? (
-            displayedComments.map((comment) => (
+            return (
               <div key={comment.id}>
                 <CommentDisplay
                   comment={comment}
                   nesting={nesting}
                   replyingTo={replyingTo}
-                  setReplyToComment={this.props.setReplyToComment}
+                  setReplyToComment={setReplyToComment}
+                  replies={replies}
+                  repliesByParent={repliesByParent}
+                  loggedInUserVote={loggedInUserVote}
+                  isFlagged={isFlagged}
+                  votesMap={votesMap}
                 />
               </div>
-            ))
-          ) : (
+            )
+          })
+        ) : (
+          <div key="comment-form">
             <CommentForm
               statementID={statementID}
               replyTo={replyingTo}
-              setReplyToComment={this.props.setReplyToComment}
+              setReplyToComment={setReplyToComment}
               user={isAuthenticated ? loggedInUser : null}
               inciteToParticipate={commentType}
             />
-          )}
-        </FlipMove>
-        {displayedComments.size < comments.size && (
-          <CommentsListExpender
-            count={comments.size - displayedComments.size}
-            onClick={() => this.handleExpendList(this.state.nbComments)}
-          />
+          </div>
         )}
-      </div>
-    )
-  }
-
-  getDisplayedComments() {
-    const [lowLimit, highLimit] = this.state.nbComments
-    let numComment = 0
-    return this.props.comments.takeWhile((c) => {
-      return ++numComment <= lowLimit || (numComment <= highLimit && c.score > -1)
-    })
-  }
-
-  handleExpendList([lowLimit, highLimit]) {
-    this.setState({ nbComments: [lowLimit + 5, highLimit + 7] })
-  }
-
-  getNbDisplayedRange(nesting) {
-    if (nesting > 3) {
-      return [3, 5]
-    }
-    return [4 - nesting, 6 - nesting]
-  }
+      </FlipMove>
+      {displayedComments.length < commentsLength && (
+        <CommentsListExpender
+          count={commentsLength - displayedComments.length}
+          onClick={handleExpendList}
+          nesting={nesting}
+        />
+      )}
+    </div>
+  )
 }
 
-CommentsList.defaultProps = {
-  comments: [],
-  displayLimit: 5,
+CommentsList.propTypes = {
+  comments: PropTypes.array,
+  className: PropTypes.string,
+  commentType: PropTypes.string,
+  header: PropTypes.node,
+  statementID: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  replyingTo: PropTypes.object,
+  nesting: PropTypes.number,
+  repliesByParent: PropTypes.object,
+  setReplyToComment: PropTypes.func,
 }
+
+export default CommentsList

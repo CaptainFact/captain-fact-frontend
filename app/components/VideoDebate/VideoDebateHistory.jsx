@@ -1,45 +1,67 @@
+import { useQuery, useSubscription } from '@apollo/client'
+import PropTypes from 'prop-types'
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { connect } from 'react-redux'
 
-import { reset } from '../../state/user_actions/reducer'
-import {
-  joinVideoDebateHistoryChannel,
-  leaveVideoDebateHistoryChannel,
-} from '../../state/video_debate/history/effects'
 import ActionsTable from '../UsersActions/ActionsTable'
+import { ErrorView } from '../Utils/ErrorView'
+import { VIDEO_HISTORY_ACTION_ADDED_SUBSCRIPTION, VIDEO_HISTORY_ACTIONS_QUERY } from './graphql'
 
-@connect(
-  (state) => ({
-    isLoading: state.UsersActions.isLoading,
-    error: state.UsersActions.error,
-    actions: state.UsersActions.actions,
-  }),
-  { joinVideoDebateHistoryChannel, leaveVideoDebateHistoryChannel, reset },
-)
-export default class VideoDebateHistory extends React.PureComponent {
-  componentDidMount() {
-    this.props.joinVideoDebateHistoryChannel(this.props.videoId)
-  }
+const VideoDebateHistory = ({ videoId }) => {
+  // Fetch initial history actions
+  const { loading, data, error, client } = useQuery(VIDEO_HISTORY_ACTIONS_QUERY, {
+    variables: { videoId },
+    skip: !videoId,
+    fetchPolicy: 'cache-and-network',
+  })
 
-  componentWillUnmount() {
-    this.props.leaveVideoDebateHistoryChannel()
-    this.props.reset()
-  }
+  // Subscribe to new actions
+  useSubscription(VIDEO_HISTORY_ACTION_ADDED_SUBSCRIPTION, {
+    variables: { videoId },
+    skip: !videoId,
+    onData: ({ data }) => {
+      if (data?.data?.videoHistoryActionAdded) {
+        const newAction = data.data.videoHistoryActionAdded
 
-  render() {
-    const { isLoading, error, actions } = this.props
+        // Update the cache by adding the new action to the existing query
+        client.cache.updateQuery(
+          {
+            query: VIDEO_HISTORY_ACTIONS_QUERY,
+            variables: { videoId },
+          },
+          (existingData) => {
+            if (!existingData) {
+              return existingData
+            }
 
-    return (
-      <React.Fragment>
-        <Helmet>
-          <meta name="robots" content="noindex" />
-        </Helmet>
-        <div className="videodebate-actions-history">
-          {error && error}
-          <ActionsTable actions={actions} isLoading={isLoading} />
-        </div>
-      </React.Fragment>
-    )
-  }
+            return {
+              ...existingData,
+              videoHistoryActions: [newAction, ...existingData.videoHistoryActions],
+            }
+          },
+        )
+      }
+    },
+  })
+
+  return (
+    <React.Fragment>
+      <Helmet>
+        <meta name="robots" content="noindex" />
+      </Helmet>
+      <div className="videodebate-actions-history">
+        {error ? (
+          <ErrorView error={error} canGoBack={false} />
+        ) : (
+          <ActionsTable actions={data?.videoHistoryActions || []} isLoading={loading} />
+        )}
+      </div>
+    </React.Fragment>
+  )
 }
+
+VideoDebateHistory.propTypes = {
+  videoId: PropTypes.string.isRequired,
+}
+
+export default VideoDebateHistory

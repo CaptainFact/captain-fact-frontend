@@ -1,86 +1,98 @@
+import { useMutation } from '@apollo/client'
 import debounce from 'debounce-promise'
 import { Formik } from 'formik'
 import { capitalize, pick, truncate } from 'lodash'
-import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Trans, withTranslation } from 'react-i18next'
-import { connect } from 'react-redux'
 import { Save } from 'styled-icons/boxicons-regular'
 import { Ban } from 'styled-icons/fa-solid'
 import { LinkExternal } from 'styled-icons/octicons'
 
+import { toast } from '@/hooks/use-toast'
 import { cn } from '@/lib/css-utils'
-import { toastError } from '@/lib/toasts'
 
+import { UPDATE_SPEAKER_MUTATION } from '../../API/graphql_queries'
 import { searchOnWikidata } from '../../API/wikidata'
 import { SPEAKER_NAME_LENGTH, SPEAKER_TITLE_LENGTH } from '../../constants'
+import { useUserPreferences } from '../../contexts/UserPreferencesContext'
 import { cleanStr } from '../../lib/clean_str'
 import { validateLengthI18n } from '../../lib/form_validators'
 import capitalizeName from '../../lib/name_formatter'
 import { ReactiveAsyncSelect, ReactSelectTheme } from '../../lib/react_select_theme'
 import { wikidataURL } from '../../lib/url_utils'
-import { popModal } from '../../state/modals/reducer'
-import { updateSpeaker } from '../../state/video_debate/effects'
-import Modal from '../Modal/Modal'
 import { Button } from '../ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '../ui/dialog'
 import { Input } from '../ui/input'
 import { ScrollArea } from '../ui/scroll-area'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
-class EditSpeakerFormModal extends React.PureComponent {
-  static propTypes = {
-    speaker: PropTypes.object.isRequired,
-    language: PropTypes.string,
-    t: PropTypes.func.isRequired,
-  }
+const EditSpeakerFormModal = ({ speaker, open, onOpenChange, t }) => {
+  const { locale: userLocale } = useUserPreferences()
+  const locale = userLocale
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      hasWikidataSearchBar: !props.speaker.wikidata_item_id,
-      initialSuggestions: null,
-    }
-  }
+  const [hasWikidataSearchBar, setHasWikidataSearchBar] = useState(!speaker.wikidataItemId)
+  const [initialSuggestions, setInitialSuggestions] = useState(null)
+  const [updateSpeaker] = useMutation(UPDATE_SPEAKER_MUTATION)
 
-  async componentDidMount() {
-    const { full_name, wikidata_item_id } = this.props.speaker
+  useEffect(() => {
+    const loadInitialSuggestions = async () => {
+      const { fullName, wikidataItemId } = speaker
 
-    if (full_name && !wikidata_item_id) {
-      const searchResults = await searchOnWikidata(full_name, this.props.locale)
-      if (searchResults.length > 0) {
-        this.setState({ initialSuggestions: searchResults })
+      if (fullName && !wikidataItemId) {
+        const searchResults = await searchOnWikidata(fullName, locale)
+        if (searchResults.length > 0) {
+          setInitialSuggestions(searchResults)
+        }
       }
     }
-  }
 
-  onSubmit = (values, actions) => {
-    return this.props.updateSpeaker(values).then((e) => {
+    loadInitialSuggestions()
+  }, [speaker, locale])
+
+  const onSubmit = async (values, actions) => {
+    try {
+      await updateSpeaker({
+        variables: {
+          id: values.id,
+          fullName: values.fullName,
+          title: values.title,
+          wikidataItemId: values.wikidataItemId,
+        },
+      })
+
+      onOpenChange(false)
+    } catch {
+      toast({
+        variant: 'destructive',
+        title: t('errors:title'),
+        description: t('errors:client.submissionError'),
+      })
+    } finally {
       actions.setSubmitting(false)
-      if (e.errors) {
-        actions.setErrors(e.payload)
-      } else if (e.error) {
-        toastError(e.payload)
-      } else {
-        this.props.popModal()
-      }
-    })
+    }
   }
 
-  validate = ({ full_name, title, wikidata_item_id }) => {
-    const { t } = this.props
+  const validate = ({ fullName, title, wikidataItemId }) => {
     const errors = {}
-    validateLengthI18n(t, errors, 'full_name', full_name, SPEAKER_NAME_LENGTH)
+    validateLengthI18n(t, errors, 'fullName', fullName, SPEAKER_NAME_LENGTH)
     if (title) {
       validateLengthI18n(t, errors, 'title', title, SPEAKER_TITLE_LENGTH)
     }
-    if (wikidata_item_id && wikidata_item_id[0] !== 'Q') {
-      errors.wikidata_item_id = "Must start with 'Q', eg. Q178517"
+    if (wikidataItemId && wikidataItemId[0] !== 'Q') {
+      errors.wikidataItemId = "Must start with 'Q', eg. Q178517"
     }
     return errors
   }
 
-  loadOptions = debounce(async (search) => {
-    const searchResults = await searchOnWikidata(search, this.props.locale)
+  const loadOptions = debounce(async (search) => {
+    const searchResults = await searchOnWikidata(search, locale)
     return searchResults.map((searchEntry) => {
       const description = truncate(capitalize(searchEntry.description), { length: 60 })
       return {
@@ -90,119 +102,96 @@ class EditSpeakerFormModal extends React.PureComponent {
     })
   }, 250)
 
-  getLabel(label, maxLength) {
-    const charactersStr = this.props.t('main:misc.character', { count: maxLength })
+  const getLabel = (label, maxLength) => {
+    const charactersStr = t('main:misc.character', { count: maxLength })
     return `${label} (\u2264 ${maxLength} ${charactersStr})`
   }
 
-  render() {
-    const { t } = this.props
-    const { initialSuggestions, hasWikidataSearchBar } = this.state
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-5xl">
+        <DialogHeader>
+          <DialogTitle>{t('speaker.edit', { name: speaker.fullName })}</DialogTitle>
+          <DialogDescription>{t('speaker.details')}</DialogDescription>
+        </DialogHeader>
 
-    return (
-      <Formik
-        initialValues={pick(this.props.speaker, ['id', 'full_name', 'title', 'wikidata_item_id'])}
-        onSubmit={this.onSubmit}
-        validate={this.validate}
-      >
-        {({
-          handleSubmit,
-          setFieldValue,
-          setValues,
-          values,
-          isSubmitting,
-          isValid,
-          dirty,
-          submitForm,
-          errors,
-        }) => (
-          <Modal
-            title={t('speaker.edit', { name: this.props.speaker.full_name })}
-            className="p-4 max-w-5xl"
-            footer={
-              <div className="flex justify-end gap-2">
-                <Button
-                  onClick={submitForm}
-                  disabled={isSubmitting || !isValid || !dirty}
-                  className={cn('', { 'opacity-50 cursor-not-allowed': isSubmitting })}
-                >
-                  <Save className="w-5 h-5" />
-                  <span className="ml-2">{t('main:actions.save')}</span>
-                </Button>
-                <Button
-                  variant="outline"
-                  disabled={isSubmitting}
-                  onClick={() => this.props.popModal()}
-                >
-                  <Ban className="w-4 h-4" />
-                  <span className="ml-2">{t('main:actions.cancel')}</span>
-                </Button>
-              </div>
-            }
-          >
-            <form className="space-y-4" onSubmit={handleSubmit}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Wikidata search */}
-                <div className="space-y-4">
-                  <h3 className="font-medium text-gray-900 dark:text-foreground mb-3">
-                    {t('wikidata.autofill')}
-                  </h3>
-                  <div className="mb-4">
-                    {values.wikidata_item_id && !hasWikidataSearchBar ? (
-                      <div className="bg-blue-50 dark:bg-blue-950/30 p-3 rounded-md">
-                        <Trans i18nKey="videoDebate:wikidata.using">
-                          Using data from{' '}
-                          <a
-                            href={wikidataURL(values.wikidata_item_id)}
-                            className="font-medium dark:text-blue-400 dark:hover:text-blue-300"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {{ qid: values.wikidata_item_id }}
-                          </a>{' '}
-                          (
-                          <Button
-                            type="button"
-                            variant="link"
-                            size="xs"
-                            onClick={() => this.setState({ hasWikidataSearchBar: true })}
-                          >
-                            edit
-                          </Button>
-                          )
-                        </Trans>
-                      </div>
-                    ) : (
-                      <ReactiveAsyncSelect
-                        inputId="wikidata-search"
-                        placeholder={this.props.t('wikidata.search')}
-                        tabSelectsValue={false}
-                        loadOptions={this.loadOptions}
-                        theme={ReactSelectTheme}
-                        noOptionsMessage={({ inputValue }) =>
-                          inputValue.length < 3 ? t('speaker.search') : t('speaker.noneFound')
-                        }
-                        onChange={({ value }) => {
-                          setValues({
-                            ...values,
-                            wikidata_item_id: value.id,
-                            full_name: value.label,
-                            title: capitalize(value.description),
-                          })
-                          this.setState({
-                            hasWikidataSearchBar: false,
-                          })
-                        }}
-                      />
-                    )}
-                  </div>
+        <Formik
+          initialValues={pick(speaker, ['id', 'fullName', 'title', 'wikidataItemId'])}
+          onSubmit={onSubmit}
+          validate={validate}
+        >
+          {({
+            handleSubmit,
+            setFieldValue,
+            setValues,
+            values,
+            isSubmitting,
+            isValid,
+            dirty,
+            submitForm,
+            errors,
+          }) => (
+            <>
+              <form className="space-y-4" onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Wikidata search */}
+                  <div className="space-y-4">
+                    <h3 className="font-medium text-gray-900 dark:text-foreground mb-3">
+                      {t('wikidata.autofill')}
+                    </h3>
+                    <div className="mb-4">
+                      {values.wikidataItemId && !hasWikidataSearchBar ? (
+                        <div className="bg-blue-50 dark:bg-blue-950/30 p-3 rounded-md">
+                          <Trans i18nKey="videoDebate:wikidata.using">
+                            Using data from{' '}
+                            <a
+                              href={wikidataURL(values.wikidataItemId)}
+                              className="font-medium dark:text-blue-400 dark:hover:text-blue-300"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {{ qid: values.wikidataItemId }}
+                            </a>{' '}
+                            (
+                            <Button
+                              type="button"
+                              variant="link"
+                              size="xs"
+                              onClick={() => setHasWikidataSearchBar(true)}
+                            >
+                              edit
+                            </Button>
+                            )
+                          </Trans>
+                        </div>
+                      ) : (
+                        <ReactiveAsyncSelect
+                          inputId="wikidata-search"
+                          placeholder={t('wikidata.search')}
+                          tabSelectsValue={false}
+                          loadOptions={loadOptions}
+                          theme={ReactSelectTheme}
+                          noOptionsMessage={({ inputValue }) =>
+                            inputValue.length < 3 ? t('speaker.search') : t('speaker.noneFound')
+                          }
+                          onChange={({ value }) => {
+                            setValues({
+                              ...values,
+                              wikidataItemId: value.id,
+                              fullName: value.label,
+                              title: capitalize(value.description),
+                            })
+                            setHasWikidataSearchBar(false)
+                          }}
+                        />
+                      )}
+                    </div>
 
-                  {hasWikidataSearchBar && initialSuggestions && (
-                    <ScrollArea className="bg-gray-50 rounded-lg h-[400px] shadow-inner">
-                      <div className="p-4">
+                    {hasWikidataSearchBar && initialSuggestions && (
+                      <ScrollArea className="bg-gray-50 dark:bg-gray-900 rounded-lg h-[400px] shadow-inner">
                         <ul className="divide-y divide-gray-200">
                           {initialSuggestions.map(({ id, label, description, url }) => (
-                            <li key={id} className="py-3 hover:bg-gray-100">
+                            <li key={id} className="p-3 hover:bg-gray-100">
                               <div className="flex items-center justify-between gap-4">
                                 <div className="flex flex-col gap-1">
                                   <div className="flex items-center gap-2">
@@ -228,11 +217,11 @@ class EditSpeakerFormModal extends React.PureComponent {
                                   onClick={() => {
                                     setValues({
                                       ...values,
-                                      wikidata_item_id: id,
-                                      full_name: label,
+                                      wikidataItemId: id,
+                                      fullName: label,
                                       title: capitalize(description),
                                     })
-                                    this.setState({ hasWikidataSearchBar: false })
+                                    setHasWikidataSearchBar(false)
                                   }}
                                 >
                                   {t('speaker.select')}
@@ -241,99 +230,113 @@ class EditSpeakerFormModal extends React.PureComponent {
                             </li>
                           ))}
                         </ul>
+                      </ScrollArea>
+                    )}
+                  </div>
+
+                  {/* Speaker form */}
+                  <div className="space-y-4 md:border-l md:border-gray-200 dark:md:border-border md:pl-6">
+                    <h3 className="font-medium text-gray-900 dark:text-foreground mb-3">
+                      {t('speaker.details')}
+                    </h3>
+                    <div className="space-y-4">
+                      <div className="space-y-2">
+                        <label
+                          htmlFor="fullName"
+                          className="block text-sm font-medium dark:text-foreground"
+                        >
+                          {getLabel(t('speaker.fullName'), SPEAKER_NAME_LENGTH[1])}
+                        </label>
+                        <Input
+                          id="fullName"
+                          name="fullName"
+                          placeholder="Barack Obama, Dark Vador..."
+                          value={values.fullName}
+                          onChange={(e) =>
+                            setFieldValue('fullName', capitalizeName(cleanStr(e.target.value)))
+                          }
+                        />
+                        {errors.fullName && (
+                          <p className="text-red-500 dark:text-red-400 text-sm">
+                            {errors.fullName}
+                          </p>
+                        )}
                       </div>
-                    </ScrollArea>
-                  )}
-                </div>
 
-                {/* Speaker form */}
-                <div className="space-y-4 md:border-l md:border-gray-200 dark:md:border-border md:pl-6">
-                  <h3 className="font-medium text-gray-900 dark:text-foreground mb-3">
-                    {t('speaker.details')}
-                  </h3>
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="full_name"
-                        className="block text-sm font-medium dark:text-foreground"
-                      >
-                        {this.getLabel(t('speaker.fullName'), SPEAKER_NAME_LENGTH[1])}
-                      </label>
-                      <Input
-                        id="full_name"
-                        name="full_name"
-                        placeholder="Barack Obama, Dark Vador..."
-                        value={values.full_name}
-                        onChange={(e) =>
-                          setFieldValue('full_name', capitalizeName(cleanStr(e.target.value)))
-                        }
-                      />
-                      {errors.full_name && (
-                        <p className="text-red-500 dark:text-red-400 text-sm">{errors.full_name}</p>
-                      )}
-                    </div>
+                      <div className="space-y-2">
+                        <label
+                          htmlFor="title"
+                          className="block text-sm font-medium dark:text-foreground"
+                        >
+                          {getLabel(t('speaker.title'), SPEAKER_TITLE_LENGTH[1])}
+                        </label>
+                        <Input
+                          id="title"
+                          name="title"
+                          placeholder={t('speaker.titlePlaceholder')}
+                          value={values.title || ''}
+                          onChange={(e) => setFieldValue('title', cleanStr(e.target.value))}
+                          autoComplete="off"
+                        />
+                        {errors.title && (
+                          <p className="text-red-500 dark:text-red-400 text-sm">{errors.title}</p>
+                        )}
+                      </div>
 
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="title"
-                        className="block text-sm font-medium dark:text-foreground"
-                      >
-                        {this.getLabel(t('speaker.title'), SPEAKER_TITLE_LENGTH[1])}
-                      </label>
-                      <Input
-                        id="title"
-                        name="title"
-                        placeholder={t('speaker.titlePlaceholder')}
-                        value={values.title || ''}
-                        onChange={(e) => setFieldValue('title', cleanStr(e.target.value))}
-                        autoComplete="off"
-                      />
-                      {errors.title && (
-                        <p className="text-red-500 dark:text-red-400 text-sm">{errors.title}</p>
-                      )}
-                    </div>
-
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="wikidata_item_id"
-                        className="block text-sm font-medium dark:text-foreground"
-                      >
-                        {t('wikidata.id')}
-                      </label>
-                      <Input
-                        id="wikidata_item_id"
-                        name="wikidata_item_id"
-                        placeholder="QXXXXXXXX"
-                        value={values.wikidata_item_id || ''}
-                        onChange={(e) =>
-                          e.target.value.length > 1
-                            ? setFieldValue('wikidata_item_id', cleanStr(e.target.value))
-                            : setFieldValue('wikidata_item_id', null)
-                        }
-                        autoComplete="off"
-                      />
-                      {errors.wikidata_item_id && (
-                        <p className="text-red-500 dark:text-red-400 text-sm">
-                          {errors.wikidata_item_id}
-                        </p>
-                      )}
+                      <div className="space-y-2">
+                        <label
+                          htmlFor="wikidataItemId"
+                          className="block text-sm font-medium dark:text-foreground"
+                        >
+                          {t('wikidata.id')}
+                        </label>
+                        <Input
+                          id="wikidataItemId"
+                          name="wikidataItemId"
+                          placeholder="QXXXXXXXX"
+                          value={values.wikidataItemId || ''}
+                          onChange={(e) =>
+                            e.target.value.length > 1
+                              ? setFieldValue('wikidataItemId', cleanStr(e.target.value))
+                              : setFieldValue('wikidataItemId', null)
+                          }
+                          autoComplete="off"
+                        />
+                        {errors.wikidataItemId && (
+                          <p className="text-red-500 dark:text-red-400 text-sm">
+                            {errors.wikidataItemId}
+                          </p>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </form>
-          </Modal>
-        )}
-      </Formik>
-    )
-  }
+              </form>
+
+              <DialogFooter>
+                <Button
+                  onClick={submitForm}
+                  disabled={isSubmitting || !isValid || !dirty}
+                  className={cn('', { 'opacity-50 cursor-not-allowed': isSubmitting })}
+                >
+                  <Save className="w-5 h-5" />
+                  <span className="ml-2">{t('main:actions.save')}</span>
+                </Button>
+                <Button
+                  variant="outline"
+                  disabled={isSubmitting}
+                  onClick={() => onOpenChange(false)}
+                >
+                  <Ban className="w-4 h-4" />
+                  <span className="ml-2">{t('main:actions.cancel')}</span>
+                </Button>
+              </DialogFooter>
+            </>
+          )}
+        </Formik>
+      </DialogContent>
+    </Dialog>
+  )
 }
 
-export default withTranslation('videoDebate')(
-  connect(
-    (state) => ({
-      locale: state.VideoDebate.video.data.language || state.UserPreferences.locale,
-    }),
-    { updateSpeaker, popModal },
-  )(EditSpeakerFormModal),
-)
+export default withTranslation('videoDebate')(EditSpeakerFormModal)

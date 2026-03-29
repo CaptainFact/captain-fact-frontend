@@ -11,6 +11,10 @@ export const VideoHit = ({ hit }) => {
         thumbnail: `https://img.youtube.com/vi/${hit.youtube_id}/mqdefault.jpg`,
         isPartner: hit.is_partner,
         youtubeId: hit.youtube_id,
+        speakers: hit.speakers.map((s) => ({
+          ...s,
+          fullName: s.full_name,
+        })),
       }}
     />
   )

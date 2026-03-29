@@ -1,217 +1,180 @@
+import { useMutation } from '@apollo/client'
 import { Check, X } from '@styled-icons/feather'
-import React from 'react'
-import { withTranslation } from 'react-i18next'
-import { connect } from 'react-redux'
+import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { cn } from '@/lib/css-utils'
+import { toastError } from '@/lib/toasts'
 
+import { DELETE_STATEMENT_MUTATION } from '../../API/graphql_queries'
 import { MIN_REPUTATION_REMOVE_STATEMENT, MIN_REPUTATION_UPDATE_STATEMENT } from '../../constants'
-import { handleFormEffectResponse } from '../../lib/handle_effect_response'
-import { deleteStatement, updateStatement } from '../../state/video_debate/statements/effects'
-import * as statementSelectors from '../../state/video_debate/statements/selectors'
 import CommentForm from '../Comments/CommentForm'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
-import ModalConfirmDelete from '../Modal/ModalConfirmDelete'
+import DialogConfirmDelete from '../Dialogs/DialogConfirmDelete'
+import { useLoggedInUser } from '../LoggedInUser/UserProvider'
 import { Button } from '../ui/button'
 import { Card } from '../ui/card'
 import ReputationGuardTooltip from '../Utils/ReputationGuardTooltip'
 import Statement from './Statement'
 import StatementComments from './StatementComments'
-import { StatementForm } from './StatementForm'
+import StatementForm, { UPDATE_STATEMENT_MUTATION } from './StatementForm'
 
-@connect(
-  (state, props) => ({
-    offset: state.VideoDebate.video.offset,
-    speaker: statementSelectors.getStatementSpeaker(state, props),
-    isFocused: statementSelectors.isStatementFocused(state, props),
-    scrollTo: state.VideoDebate.statements.scrollTo,
-    autoscrollEnabled: state.UserPreferences.enableAutoscroll,
-    formEnabled: state.VideoDebate.statements.formsCount > 0,
-  }),
-  { updateStatement, deleteStatement },
-)
-@withLoggedInUser
-@withTranslation('videoDebate')
-export default class StatementContainer extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = { isDeleting: false, isEditing: false, replyTo: null, editDraftAction: null }
-    this.containerRef = React.createRef()
-  }
+const StatementContainer = ({
+  statement,
+  speakers,
+  offset,
+  votesMap,
+  flagsMap,
+  onSetScrollTo,
+  isFocused = true,
+}) => {
+  const { loggedInUser, isAuthenticated } = useLoggedInUser()
+  const { t } = useTranslation('videoDebate')
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
+  const [replyTo, setReplyTo] = useState(null)
+  const [editDraftAction, setEditDraftAction] = useState(null)
 
-  componentDidUpdate(prevProps) {
-    if (this.shouldScroll(this.props, prevProps)) {
-      this.smoothScrollTo()
-    }
-  }
+  const [deleteStatement] = useMutation(DELETE_STATEMENT_MUTATION)
+  const [updateStatement] = useMutation(UPDATE_STATEMENT_MUTATION)
 
-  setReplyToComment = (replyTo) => {
-    this.setState({ replyTo })
-  }
+  const speaker = statement.speaker
 
-  render() {
-    const { isDeleting, isEditing, replyTo } = this.state
-    const { statement, isFocused, speaker, isAuthenticated, loggedInUser, t } = this.props
-
-    return (
-      <Card
-        ref={this.containerRef}
-        className={cn('max-w-[980px] mx-auto bg-white dark:bg-background', {
-          'shadow-lg': isFocused,
-        })}
-      >
-        {this.renderStatementOrEditForm(speaker, statement)}
-        {statement.is_draft && !isEditing ? (
-          <footer className="flex border-t border-gray-200 dark:border-border">
-            <ReputationGuardTooltip requiredRep={MIN_REPUTATION_UPDATE_STATEMENT} asChild>
-              {({ hasReputation }) => (
-                <Button
-                  variant="ghost"
-                  className="flex-1 rounded-none border-r border-gray-200 dark:border-border"
-                  disabled={Boolean(!hasReputation || this.state.editDraftAction)}
-                  onClick={async () => {
-                    this.setState({ editDraftAction: 'save' })
-                    try {
-                      await this.props.updateStatement(statement.set('is_draft', false))
-                    } finally {
-                      this.setState({ editDraftAction: null })
-                    }
-                  }}
-                >
-                  <Check size={16} className="mr-1" />
-                  {t('statement.publish')}
-                </Button>
-              )}
-            </ReputationGuardTooltip>
-            <ReputationGuardTooltip requiredRep={MIN_REPUTATION_REMOVE_STATEMENT} asChild>
-              {({ hasReputation }) => (
-                <Button
-                  variant="ghost"
-                  className="flex-1 rounded-none"
-                  disabled={Boolean(!hasReputation || this.state.editDraftAction)}
-                  onClick={async () => {
-                    this.setState({ editDraftAction: 'discard' })
-                    try {
-                      await this.props.deleteStatement({ id: statement.id })
-                    } finally {
-                      this.setState({ editDraftAction: null })
-                    }
-                  }}
-                >
-                  <X size={16} className="mr-1" />
-                  {t('statement.discard')}
-                </Button>
-              )}
-            </ReputationGuardTooltip>
-          </footer>
-        ) : (
-          <React.Fragment>
-            <StatementComments
-              statement={statement}
-              speaker={speaker}
-              setReplyToComment={this.setReplyToComment}
-            />
-            {!statement.is_draft && (
-              <CommentForm
-                statementID={statement.id}
-                replyTo={replyTo}
-                setReplyToComment={this.setReplyToComment}
-                user={isAuthenticated ? loggedInUser : null}
-              />
-            )}
-          </React.Fragment>
-        )}
-        {isDeleting && (
-          <ModalConfirmDelete
-            title={t('statement.remove')}
-            className="text-sm"
-            isAbsolute
-            isRemove
-            message={t('statement.confirmRemove')}
-            handleAbort={() => this.setState({ isDeleting: false })}
-            handleConfirm={() => this.props.deleteStatement({ id: statement.id })}
-          />
-        )}
-      </Card>
-    )
-  }
-
-  renderStatementOrEditForm(speaker, statement) {
-    return this.state.isEditing ? (
-      <StatementForm
-        form={`StatementForm-${statement.id}`}
-        initialValues={statement.toJS()}
-        offset={this.props.offset}
-        isBundled
-        handleAbort={() => this.setState({ isEditing: false })}
-        handleConfirm={(s) =>
-          this.props.updateStatement(s).then(
-            handleFormEffectResponse({
-              onSuccess: (response) => {
-                this.setState({ isEditing: false })
-                return response
-              },
-            }),
-          )
-        }
-      />
-    ) : (
-      <Statement
-        statement={statement}
-        speaker={speaker}
-        handleEdit={() => this.setState({ isEditing: true })}
-        handleDelete={() => this.setState({ isDeleting: true })}
-        offset={this.props.offset}
-      />
-    )
-  }
-
-  // ---- Autoscroll ----
-
-  shouldScroll = (props, prevProps) => {
-    // Return if not ready or if this is not the scroll target and not focused
-    if (!this.isAutoScrollReady(props) || !this.isTarget(props)) {
-      return false
-    }
-
-    // Get previous state
-    const wasEnabled = prevProps.autoscrollEnabled
-    const wasTarget = this.isTarget(prevProps)
-    const wasReady = this.isAutoScrollReady(prevProps)
-    const wasActive = wasTarget && wasReady && wasEnabled
-    const wasForced = this.isAutoScrollForced(props)
-
-    // Scroll if enabled and wasn't target, wasn't enabled or wasn't ready
-    if (props.autoscrollEnabled && !wasActive) {
-      return true
-    }
-
-    // Only override autoscrollEnabled when we're forced by a scrollTo
-    if (!props.autoscrollEnabled && (!wasActive || !wasForced) && this.isAutoScrollForced(props)) {
-      return true
-    }
-
-    return false
-  }
-
-  isAutoScrollReady = (props) => !props.commentsLoading && !props.formEnabled
-
-  isScrollToTarget = (props) => {
-    return props.scrollTo && props.scrollTo.id === props.statement.id
-  }
-
-  isAutoScrollForced = (props) => {
-    return this.isScrollToTarget(props) && props.scrollTo.__forceAutoScroll
-  }
-
-  isTarget = (props) => this.isScrollToTarget(props) || props.isFocused
-
-  smoothScrollTo = () => {
-    if (this.containerRef.current) {
-      return this.containerRef.current?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
+  const handleDeleteStatement = async () => {
+    try {
+      await deleteStatement({
+        variables: {
+          id: statement.id,
+        },
       })
+      setIsDeleting(false)
+    } catch (error) {
+      toastError(error)
     }
   }
+
+  const handlePublishDraft = async () => {
+    setEditDraftAction('save')
+    try {
+      await updateStatement({
+        variables: {
+          id: statement.id,
+          text: statement.text,
+          time: statement.time,
+          speakerId: statement.speakerId || statement.speaker?.id || null,
+          isDraft: false,
+        },
+      })
+    } catch (error) {
+      toastError(error)
+    } finally {
+      setEditDraftAction(null)
+    }
+  }
+
+  const handleDiscardDraft = async () => {
+    setEditDraftAction('discard')
+    try {
+      await deleteStatement({
+        variables: {
+          id: statement.id,
+        },
+      })
+    } catch (error) {
+      toastError(error)
+    } finally {
+      setEditDraftAction(null)
+    }
+  }
+
+  return (
+    <Card
+      id={`statement-${statement.id}`}
+      className={cn(
+        'max-w-[980px] mx-auto bg-white dark:bg-background',
+        isFocused && 'shadow-lg shadow-primary/20',
+      )}
+    >
+      {isEditing ? (
+        <StatementForm
+          offset={offset}
+          initialValues={statement}
+          speakers={speakers}
+          onAbort={() => setIsEditing(false)}
+          onSuccess={() => setIsEditing(false)}
+          onSetScrollTo={onSetScrollTo}
+        />
+      ) : (
+        <Statement
+          statement={statement}
+          speaker={speaker}
+          handleEdit={() => setIsEditing(true)}
+          handleDelete={() => setIsDeleting(true)}
+          offset={offset}
+        />
+      )}
+
+      {statement.isDraft && !isEditing ? (
+        <footer className="flex border-t border-gray-200 dark:border-border">
+          <ReputationGuardTooltip requiredRep={MIN_REPUTATION_UPDATE_STATEMENT} asChild>
+            {({ hasReputation }) => (
+              <Button
+                variant="ghost"
+                className="flex-1 rounded-none border-r border-gray-200 dark:border-border"
+                disabled={!hasReputation || editDraftAction}
+                onClick={handlePublishDraft}
+              >
+                <Check size={16} className="mr-1" />
+                {t('statement.publish')}
+              </Button>
+            )}
+          </ReputationGuardTooltip>
+          <ReputationGuardTooltip requiredRep={MIN_REPUTATION_REMOVE_STATEMENT} asChild>
+            {({ hasReputation }) => (
+              <Button
+                variant="ghost"
+                className="flex-1 rounded-none"
+                disabled={!hasReputation || editDraftAction}
+                onClick={handleDiscardDraft}
+              >
+                <X size={16} className="mr-1" />
+                {t('statement.discard')}
+              </Button>
+            )}
+          </ReputationGuardTooltip>
+        </footer>
+      ) : (
+        <React.Fragment>
+          <StatementComments
+            statement={statement}
+            speaker={speaker}
+            setReplyToComment={setReplyTo}
+            votesMap={votesMap}
+            flagsMap={flagsMap}
+          />
+          {!statement.isDraft && (
+            <CommentForm
+              statementID={statement.id}
+              replyTo={replyTo}
+              setReplyToComment={setReplyTo}
+              user={isAuthenticated ? loggedInUser : null}
+            />
+          )}
+        </React.Fragment>
+      )}
+
+      {isDeleting && (
+        <DialogConfirmDelete
+          title={t('statement.remove')}
+          className="text-sm"
+          isAbsolute
+          isRemove
+          message={t('statement.confirmRemove')}
+          handleAbort={() => setIsDeleting(false)}
+          handleConfirm={handleDeleteStatement}
+        />
+      )}
+    </Card>
+  )
 }
+
+export default StatementContainer

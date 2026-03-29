@@ -1,7 +1,13 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const ProgressBar = ({ outerBackgroundColor, innerBackgroundColor, height, max, value }) => {
+const ProgressBar = ({
+  outerBackgroundColor = 'grey',
+  innerBackgroundColor = 'blue',
+  height = '1rem',
+  max = 100,
+  value,
+}) => {
   const percentage = (value / max) * 100
   return (
     <div className="w-full">
@@ -31,13 +37,6 @@ ProgressBar.propTypes = {
   height: PropTypes.string,
   max: PropTypes.number,
   value: PropTypes.number.isRequired,
-}
-
-ProgressBar.defaultProps = {
-  outerBackgroundColor: 'grey',
-  innerBackgroundColor: 'blue',
-  height: '1rem',
-  max: 100,
 }
 
 export default ProgressBar

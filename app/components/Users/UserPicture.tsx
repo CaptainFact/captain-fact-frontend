@@ -23,10 +23,10 @@ const getInitials = ({ name, username }) => {
 }
 
 const UserPicture = ({
-  user: { username, name, picture_url, mini_picture_url },
+  user: { username, name, picture_url, mini_picture_url, pictureUrl, miniPictureUrl },
   size,
 }: {
-  user: { username: string; name: string; picture_url: string; mini_picture_url: string }
+  user: { username: string; name: string; picture_url: string; mini_picture_url: string; pictureUrl: string; miniPictureUrl: string }
   size: typeof USER_PICTURE_SMALL | typeof USER_PICTURE_LARGE | typeof USER_PICTURE_XLARGE | 36
 }) => (
   <Avatar
@@ -44,7 +44,7 @@ const UserPicture = ({
               : null,
     )}
   >
-    <AvatarImage src={size < 36 ? mini_picture_url : picture_url} />
+    <AvatarImage src={size < 36 ? (mini_picture_url || miniPictureUrl) : (picture_url || pictureUrl)} />
     <AvatarFallback className={cn(size < 36 && 'text-xs')}>
       {getInitials({ username, name })}
     </AvatarFallback>

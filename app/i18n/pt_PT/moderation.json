@@ -1,9 +1,9 @@
 {
     "reason": {
-        "2": "Conteúdo comercial indesejado ou spam",
-        "1": "Ataque pessoal ou linguagem inapropriada",
-        "4": "Não construtivo",
-        "3": "Irrelevante"
+        "SPAM": "Conteúdo comercial indesejado ou spam",
+        "BAD_LANGUAGE": "Ataque pessoal ou linguagem inapropriada",
+        "NOT_CONSTRUCTIVE": "Não construtivo",
+        "IRRELEVANT": "Irrelevante"
     },
     "pending": "Moderação pendente",
     "whyReport": "Porque é que acha que este comentário foi denunciado?",
@@ -18,5 +18,7 @@
     "header": {
         "date": "Data"
     },
-    "flaggedFor": "sinalizou isto por \"$t(reason.{{reason}})\""
+    "flaggedFor": "sinalizou isto por \"$t(reason.{{reason}})\"",
+    "flagSubmitted": "Sinalização enviada",
+    "thankYouFeedback": "Obrigado pelo seu feedback!"
 }

@@ -5,6 +5,7 @@
   "addIssue": "File an issue on GitHub",
   "reload": "Reload the page",
   "errorDetails": "Technical details",
+  "required": "This field is required",
   "server": {
     "unknown": "Something didn't work on our side, we'll check it out!",
     "invalid_email": "Invalid email address",
@@ -20,7 +21,8 @@
     "unauthenticated": "You need an account to do that",
     "unauthorized": "Please (re)connect to continue",
     "noInternet": "Server connection failed, try refreshing the page",
-    "remote_video_404": "Remote video doesn't seems to exist"
+    "remote_video_404": "Remote video doesn't seems to exist",
+    "comment_text_contains_url": "The comment body cannot contain URLs. Use the source field instead."
   },
   "client": {
     "joinCrashed": "Server connection failed",

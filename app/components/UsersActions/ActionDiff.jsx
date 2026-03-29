@@ -1,5 +1,4 @@
 import { diffWordsWithSpace } from 'diff'
-import { List, Map } from 'immutable'
 import { startCase } from 'lodash'
 import React, { PureComponent } from 'react'
 import { Link } from 'react-router-dom'
@@ -18,15 +17,15 @@ import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
 
 class ActionDiff extends PureComponent {
   render() {
-    const allActions = this.props.allActions || new List([this.props.action])
+    const allActions = this.props.allActions || [this.props.action]
     const diff = this.generateDiff(allActions, this.props.action)
-    if (diff.size === 0) {
+    if (Object.keys(diff).length === 0) {
       return null
     }
 
     return (
       <div className="p-3 text-left text-sm bg-slate-800 shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.3)] rounded-sm">
-        {diff.entrySeq().map(([key, changes]) => (
+        {Object.entries(diff).map(([key, changes]) => (
           <div key={key} className="mb-3 last:mb-0">
             <div className="inline-block mr-2 font-medium min-w-[70px] text-amber-400 align-top text-xs uppercase tracking-wide">
               {startCase(this.formatChangeKey(key))}&nbsp;
@@ -42,15 +41,15 @@ class ActionDiff extends PureComponent {
 
   renderKeyDiff(key, changes) {
     // Value completely changed, show it like prev -> new
-    if (changes.size === 2 && changes.first().removed && changes.last().added) {
+    if (changes.length === 2 && changes[0].removed && changes[1].added) {
       return (
         <div>
           <span className="px-1 py-0.5 bg-red-900/50 line-through opacity-60">
-            {this.formatChangeValue(changes.first().value, key)}
+            {this.formatChangeValue(changes[0].value, key)}
           </span>
           <span className="mx-1 text-slate-400">→</span>
           <span className="px-1 py-0.5 bg-emerald-800/50">
-            {this.formatChangeValue(changes.last().value, key)}
+            {this.formatChangeValue(changes[1].value, key)}
           </span>
         </div>
       )
@@ -103,74 +102,99 @@ class ActionDiff extends PureComponent {
 
     // Get previous state
     const actionIdx = entityActions.findIndex((a) => a.id === action.id)
-    let prevState = new Map()
-    if (actionIdx + 1 < entityActions.size) {
+    let prevState = {}
+    if (actionIdx + 1 < entityActions.length) {
       prevState = this.buildReferenceEntity(entityActions.slice(actionIdx + 1))
     }
 
     // Build changes object like key: [diffs]
-    return new Map().withMutations((diff) => {
-      for (const [key, newValue] of this.getActionChanges(action, prevState).entrySeq()) {
-        const valueDiff = this.diffEntry(key, prevState.get(key), newValue)
-        diff.set(key, new List(valueDiff))
-      }
-    })
+    const diff = {}
+    const actionChanges = this.getActionChanges(action, prevState)
+    for (const [key, newValue] of Object.entries(actionChanges)) {
+      const valueDiff = this.diffEntry(key, prevState[key], newValue)
+      diff[key] = valueDiff
+    }
+    return diff
   }
 
   getActionChanges(action, prevState) {
     if ([ACTION_DELETE, ACTION_REMOVE].includes(action.type)) {
-      return prevState.map(() => null)
+      const result = {}
+      for (const key in prevState) {
+        result[key] = null
+      }
+      return result
     }
     if (action.type === ACTION_RESTORE) {
       return prevState
     }
-    return action.changes
+    // Parse JSON string if needed
+    try {
+      if (typeof action.changes === 'string') {
+        return JSON.parse(action.changes) || {}
+      }
+      return action.changes || {}
+    } catch {
+      // If parsing fails, return empty object
+      return {}
+    }
   }
 
   completeReference(reference, actions, keysToStore) {
-    return reference.withMutations((reference) => {
-      // Let's look for the most recent entries
-      for (const action of actions) {
-        if (action.changes.size === 0) {
+    // Let's look for the most recent entries
+    for (const action of actions) {
+      // Parse JSON string if needed
+      let changes
+      try {
+        if (typeof action.changes === 'string') {
+          changes = JSON.parse(action.changes) || {}
+        } else {
+          changes = action.changes || {}
+        }
+      } catch {
+        // If parsing fails, use empty object
+        changes = {}
+      }
+      if (Object.keys(changes).length === 0) {
+        continue
+      }
+      for (let idx = keysToStore.length - 1; idx >= 0; idx--) {
+        const key = keysToStore[idx]
+        if (!(key in changes)) {
           continue
         }
-        for (const [idx, key] of keysToStore.entries()) {
-          if (!action.changes.has(key)) {
-            continue
-          }
-          // Yihaa ! Changes contains a value for key
-          reference.set(key, action.changes.get(key))
-          delete keysToStore[idx]
-          if (keysToStore.length === 0) {
-            return reference
-          }
+        // Yihaa ! Changes contains a value for key
+        reference[key] = changes[key]
+        keysToStore.splice(idx, 1)
+        if (keysToStore.length === 0) {
+          return reference
         }
       }
-      return reference
-    })
+    }
+    return reference
   }
 
   buildReferenceEntity(actions, base = null) {
-    const entity = actions.first().entity
+    const entity = actions[0].entity
     if (entity === ENTITY_STATEMENT) {
       return this.buildReferenceStatement(actions, base)
     }
     if (entity === ENTITY_SPEAKER) {
       return this.buildReferenceSpeaker(actions, base)
     }
-    return new Map()
+    return {}
   }
 
   buildReferenceStatement(actions, base = null) {
     if (!base) {
-      base = new Map({ id: actions.last().statementId })
+      base = { id: actions[actions.length - 1].statementId }
     }
     return this.completeReference(base, actions, ['text', 'time', 'speaker_id'])
   }
 
   buildReferenceSpeaker(actions, base = null) {
     if (!base) {
-      base = new Map({ id: actions.first().speakerId })
+      base = { id: actions[0].speakerId }
     }
     return this.completeReference(base, actions, ['full_name', 'title'])
   }

@@ -21,7 +21,8 @@
     "xAvailable_other": "{{count}} disponeblaj",
     "warningMessage1": "Se unu el viaj raportoj estus juĝista kiel ekscesa… vi perdus reputacion.",
     "warningMessage2": "Ĉu vi nepre volas damaĝi la reputacion de la aŭtoro de tiu komento? Ĉu ĝi vere nocas?",
-    "warningMessage3": "PS: La kontrolo ĉe CaptainFact estas civitana ekzerco de interhelpo, kiu necesitas indulgon kaj toleron."
+    "warningMessage3": "PS: La kontrolo ĉe CaptainFact estas civitana ekzerco de interhelpo, kiu necesitas indulgon kaj toleron.",
+    "successMessage": "Komentaro raportita sukcese"
   },
   "comment": {
     "writeComment": "Skribi komenton...",
@@ -67,7 +68,7 @@
   "speaker": {
     "one": "Parolanto",
     "remove": "Retiri la parolanton",
-    "confirmRemove": "Ĉiuj deklaroj de {{speaker.full_name}} pri ĉi tiu video fariĝos orfaj",
+    "confirmRemove": "Ĉiuj deklaroj de {{speaker.fullName}} pri ĉi tiu video fariĝos orfaj",
     "add": "Aldoni parolanton",
     "create": "Krei la parolanton \"{{name}}\"",
     "edit": "Ŝanĝi la informojn de \"{{name}}\"",

@@ -21,7 +21,8 @@
     "xAvailable_other": "{{count}} available",
     "warningMessage1": "If one of your flags is considered abusive, you will lose reputation.",
     "warningMessage2": "Are you sure the user’s contribution is worth a loss of reputation? Is it truly harmful?",
-    "warningMessage3": "PS: Collaborative fact-checking on CaptainFact requires mutual kindness and indulgence."
+    "warningMessage3": "PS: Collaborative fact-checking on CaptainFact requires mutual kindness and indulgence.",
+    "successMessage": "Comment flagged successfully"
   },
   "comment": {
     "writeComment": "Write a comment…",
@@ -70,7 +71,8 @@
   "speaker": {
     "one": "Speaker",
     "remove": "Remove speaker",
-    "confirmRemove": "All statements made by {{speaker.full_name}} on this video will become orphans",
+    "removed": "Speaker removed",
+    "confirmRemove": "All statements made by {{speaker.fullName}} on this video will become orphans",
     "add": "Add speaker",
     "create": "Create speaker \"{{name}}\"",
     "edit": "Edit \"{{name}}\" information",

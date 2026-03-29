@@ -1,9 +1,7 @@
-import { Mutation, Query } from '@apollo/client/react/components'
-import gql from 'graphql-tag'
+import { gql, useMutation, useQuery } from '@apollo/client'
 import { get } from 'lodash'
 import PropTypes from 'prop-types'
-import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { useMemo } from 'react'
 
 const loggedInUserNotificationsQuery = gql`
   query LoggedInUserNotifications(
@@ -30,10 +28,12 @@ const loggedInUserNotificationsQuery = gql`
             statementId
             commentId
             user {
+              id
               name
               username
             }
             video {
+              id
               hashId
               title
             }
@@ -43,6 +43,7 @@ const loggedInUserNotificationsQuery = gql`
               fullName
             }
             comment {
+              id
               text
             }
             changes
@@ -63,47 +64,51 @@ const markAsSeenMutation = gql`
 `
 
 /**
- * A connector to get a user's notifications
+ * Hook to get a user's notifications
+ */
+const useNotifications = ({ pageSize, pageNumber, pollInterval, filter }) => {
+  const { loading, error, data } = useQuery(loggedInUserNotificationsQuery, {
+    variables: { filter, pageSize, page: pageNumber },
+    pollInterval,
+    fetchPolicy: 'network-only',
+  })
+
+  const [markAsSeenMutationFn] = useMutation(markAsSeenMutation, {
+    refetchQueries: () => ['LoggedInUserUnreadNotificationsCount'],
+  })
+
+  const paginatedNotifications = useMemo(
+    () =>
+      get(data, 'loggedInUser.notifications', {
+        pageNumber: 1,
+        totalPages: 1,
+        entries: [],
+      }),
+    [data],
+  )
+
+  const markAsSeen = (ids, seen) => {
+    return markAsSeenMutationFn({
+      variables: Array.isArray(ids) ? { ids, seen } : { ids: [ids], seen },
+    })
+  }
+
+  return {
+    notifications: paginatedNotifications.entries,
+    loading,
+    error,
+    pageNumber: paginatedNotifications.pageNumber,
+    totalPages: paginatedNotifications.totalPages,
+    markAsSeen,
+  }
+}
+
+/**
+ * A connector to get a user's notifications (deprecated - use useNotifications hook instead)
  */
 const Notifications = ({ children, pageSize, pageNumber, pollInterval, filter }) => {
-  return (
-    <Query
-      query={loggedInUserNotificationsQuery}
-      variables={{ filter, pageSize, page: pageNumber }}
-      pollInterval={pollInterval}
-      fetchPolicy="network-only"
-    >
-      {({ loading, error, data }) => {
-        const paginatedNotifications = get(data, 'loggedInUser.notifications', {
-          pageNumber: 1,
-          totalPages: 1,
-          entries: [],
-        })
-
-        return (
-          <Mutation
-            mutation={markAsSeenMutation}
-            refetchQueries={() => ['LoggedInUserUnreadNotificationsCount']}
-          >
-            {(markAsSeen) =>
-              children({
-                notifications: paginatedNotifications.entries,
-                loading,
-                error,
-                pageNumber: paginatedNotifications.pageNumber,
-                totalPages: paginatedNotifications.totalPages,
-                markAsSeen: (ids, seen) => {
-                  return markAsSeen({
-                    variables: Array.isArray(ids) ? { ids, seen } : { ids: [ids], seen },
-                  })
-                },
-              })
-            }
-          </Mutation>
-        )
-      }}
-    </Query>
-  )
+  const notificationsData = useNotifications({ pageSize, pageNumber, pollInterval, filter })
+  return children(notificationsData)
 }
 
 Notifications.propTypes = {
@@ -120,4 +125,4 @@ Notifications.defaultProps = {
   filter: 'ALL',
 }
 
-export default withRouter(Notifications)
+export default Notifications

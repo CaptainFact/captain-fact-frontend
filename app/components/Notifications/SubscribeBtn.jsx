@@ -1,23 +1,13 @@
 import { Mutation } from '@apollo/client/react/components'
-import gql from 'graphql-tag'
+import { UPDATE_SUBSCRIPTION_MUTATION } from 'app/API/graphql_queries'
 import { Bell, BellOff } from 'lucide-react'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Action from '../VideoDebate/Actions/ActionButton'
-
-const updateSubscriptionQuery = gql`
-  mutation UpdateSubscription($entityId: ID!, $scope: String!, $isSubscribed: Boolean!) {
-    updateSubscription(entityId: $entityId, scope: $scope, isSubscribed: $isSubscribed) {
-      id
-      isSubscribed
-      reason
-    }
-  }
-`
+import Action from '../VideoDebate/ActionButton'
 
 const SubscribeBtn = ({ isSubscribed, entityId, scope, ...props }) => (
-  <Mutation mutation={updateSubscriptionQuery} variables={{ entityId, scope }}>
+  <Mutation mutation={UPDATE_SUBSCRIPTION_MUTATION} variables={{ entityId, scope }}>
     {(updateSubscription) => (
       <Action
         activated={isSubscribed}

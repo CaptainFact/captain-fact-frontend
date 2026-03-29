@@ -5,14 +5,14 @@ import Popup from 'reactjs-popup'
 import { cn } from '../../lib/css-utils'
 
 const FacetButton = ({
-  label,
-  activated,
+  label = undefined,
+  activated = true,
   onClick,
   activatedIcon,
-  deactivatedIcon,
-  size,
-  keepTooltipInside,
-  className,
+  deactivatedIcon = undefined,
+  size = 40,
+  keepTooltipInside = undefined,
+  className = undefined,
   isSecondary,
 }) => {
   const popupContent = (
@@ -93,15 +93,6 @@ FacetButton.propTypes = {
   size: PropTypes.number,
   keepTooltipInside: PropTypes.string,
   className: PropTypes.string,
-}
-
-FacetButton.defaultProps = {
-  label: undefined,
-  activated: true,
-  deactivatedIcon: undefined,
-  size: 40,
-  keepTooltipInside: undefined,
-  className: undefined,
 }
 
 export default FacetButton

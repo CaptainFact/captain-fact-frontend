@@ -33,5 +33,7 @@
   },
   "noActivity": "Hasta ahora no se ha tomado ninguna medida",
   "browsingAnalyzer": "Análisis de la navegación",
-  "reputation": "Reputación"
+  "reputation": "Reputación",
+  "signupSuccessTitle": "¡Bienvenido a bordo!",
+  "signupSuccessDescription": "Tu cuenta ha sido creada exitosamente."
 }

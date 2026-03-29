@@ -2,11 +2,19 @@ import { Mic } from 'lucide-react'
 import React from 'react'
 import { withTranslation } from 'react-i18next'
 
-import { CommentsList } from '../Comments/CommentsList'
-import { SpeakerPreview } from '../Speakers/SpeakerPreview'
+import CommentsList from '../Comments/CommentsList'
+import SpeakerPreview from '../Speakers/SpeakerPreview'
 
-export default withTranslation('videoDebate')(({ t, speaker, comments, setReplyToComment }) => {
-  return comments.size === 0 ? null : (
+export default withTranslation('videoDebate')(({
+  t,
+  speaker,
+  comments,
+  setReplyToComment,
+  repliesByParent,
+  votesMap,
+  flagsMap,
+}) => {
+  return comments.length === 0 ? null : (
     <div className="border-b border-gray-200 dark:border-border">
       <div className="bg-neutral-100 dark:bg-accent text-center flex justify-center items-center gap-2 p-1 border-b border-gray-200 dark:border-border dark:text-foreground">
         <Mic size={14} />
@@ -17,7 +25,13 @@ export default withTranslation('videoDebate')(({ t, speaker, comments, setReplyT
           {speaker && <SpeakerPreview speaker={speaker} withoutActions />}
         </div>
         <div>
-          <CommentsList comments={comments} setReplyToComment={setReplyToComment} />
+          <CommentsList
+            comments={comments}
+            setReplyToComment={setReplyToComment}
+            repliesByParent={repliesByParent}
+            votesMap={votesMap}
+            flagsMap={flagsMap}
+          />
         </div>
       </div>
     </div>

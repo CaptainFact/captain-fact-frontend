@@ -15,7 +15,7 @@ const getDefaultOpen = (localStorageDismissKey) => {
 /**
  * A message that can be dismissed
  */
-const DismissableMessage = ({ children, header, localStorageDismissKey, ...props }) => {
+const DismissableMessage = ({ children, header, localStorageDismissKey, onDismiss, ...props }) => {
   const [isDisplayed, setDisplayed] = React.useState(getDefaultOpen(localStorageDismissKey))
 
   if (!isDisplayed) {
@@ -31,6 +31,7 @@ const DismissableMessage = ({ children, header, localStorageDismissKey, ...props
         if (localStorageDismissKey) {
           setLocalStorage(localStorageDismissKey, true)
         }
+        onDismiss?.()
       }}
     >
       {children}

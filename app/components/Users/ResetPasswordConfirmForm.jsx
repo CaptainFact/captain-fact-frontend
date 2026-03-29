@@ -1,87 +1,83 @@
-import React from 'react'
-import { withTranslation } from 'react-i18next'
-import { reduxForm } from 'redux-form'
+import { useFormik } from 'formik'
+import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useParams } from 'react-router-dom'
 
 import * as userAPI from '../../API/http_api/current_user'
 import { USER_PICTURE_XLARGE } from '../../constants'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import { validateUserForm } from '../../lib/user_validations'
+import { useLoggedInUser } from '../LoggedInUser/UserProvider'
 import { Button } from '../ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { ErrorView } from '../Utils/ErrorView'
 import { LoadingFrame } from '../Utils/LoadingFrame'
 import UserAppellation from './UserAppellation'
-import { UserPasswordField, UserPasswordRepeatField } from './UserFormFields'
+import { FormikUserPasswordField, FormikUserPasswordRepeatField } from './UserFormFields'
 import UserPicture from './UserPicture'
 
-// Fields are auto-validated, only validate password and repeat are the same
-const validate = (params) => {
-  if (params.password) {
-    return params.password === params.passwordRepeat ? {} : { passwordRepeat: "Doesn't match" }
-  }
-  return {}
-}
+const ResetPasswordConfirmForm = () => {
+  const { t } = useTranslation('user')
+  const { token } = useParams()
+  const { updateLoggedInUser } = useLoggedInUser()
+  const [status, setStatus] = useState('waiting_verification')
+  const [user, setUser] = useState(null)
 
-@reduxForm({ form: 'resetPassword', validate })
-@withTranslation('user')
-@withLoggedInUser
-export default class ResetPasswordConfirmForm extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = { status: 'waiting_verification', user: null }
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     userAPI
-      .resetPasswordVerify(this.props.match.params.token)
+      .resetPasswordVerify(token)
       .then((user) => {
-        this.setState({ status: 'confirm', user })
+        setStatus('confirm')
+        setUser(user)
       })
       .catch(() => {
-        this.setState({ status: 'error', user: 'invalid_token' })
+        setStatus('error')
+        setUser('invalid_token')
       })
-  }
+  }, [token])
 
-  submitForm(e) {
-    userAPI
-      .resetPasswordConfirm(this.props.match.params.token, e.password)
-      .then((user) => {
-        userAPI.signIn('identity', { ...user, password: e.password }).then(({ user, token }) => {
-          this.props.updateLoggedInUser(user, token)
+  const validateForm = (values) =>
+    validateUserForm(t, values, {
+      passwordRequired: true,
+      includePasswordRepeat: true,
+      emailRequired: false,
+    })
+
+  const formik = useFormik({
+    initialValues: {
+      password: '',
+      passwordRepeat: '',
+    },
+    validate: validateForm,
+    onSubmit: async (values) => {
+      try {
+        const user = await userAPI.resetPasswordConfirm(token, values.password)
+        const { user: signedInUser, token: authToken } = await userAPI.signIn('identity', {
+          ...user,
+          password: values.password,
         })
-        this.setState({ status: 'confirm_success' })
-      })
-      .catch(() => {
-        this.setState({ status: 'error', user: 'reset_failed' })
-      })
-  }
+        updateLoggedInUser(signedInUser, authToken)
+        setStatus('confirm_success')
+      } catch {
+        setStatus('error')
+        setUser('reset_failed')
+      }
+    },
+  })
 
-  render() {
-    return (
-      <form
-        className="max-w-md mx-auto p-6"
-        onSubmit={this.props.handleSubmit(this.submitForm.bind(this))}
-      >
-        {this.renderContent()}
-      </form>
-    )
-  }
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting, isValid } =
+    formik
 
-  renderContent() {
-    if (this.state.status === 'error') {
-      return <ErrorView error={this.state.user} i18nNS="user:errors.error" canGoBack={false} />
-    }
-
-    if (this.state.status === 'verify') {
+  const renderContent = () => {
+    if (status === 'error') {
+      return <ErrorView error={user} i18nNS="user:errors.error" canGoBack={false} />
+    } else if (status === 'waiting_verification') {
       return <LoadingFrame />
-    }
-
-    if (this.state.status === 'confirm') {
-      const user = this.state.user
+    } else if (status === 'confirm') {
       return (
         <div className="px-2 my-12">
           <Card className="max-w-[500px] mx-auto">
             <CardHeader>
-              <CardTitle>{this.props.t('resetPassword')}</CardTitle>
+              <CardTitle>{t('resetPassword')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex flex-col items-center mb-3">
@@ -89,19 +85,47 @@ export default class ResetPasswordConfirmForm extends React.PureComponent {
                 <UserAppellation user={user} withoutActions />
               </div>
               <div className="flex flex-col gap-3 border-t pt-4 mt-4">
-                <UserPasswordField t={this.props.t} />
-                <UserPasswordRepeatField t={this.props.t} />
-                <Button type="submit" variant="outline">
-                  {this.props.t('resetPassword')}
+                <FormikUserPasswordField
+                  t={t}
+                  values={values}
+                  errors={errors}
+                  touched={touched}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                />
+                <FormikUserPasswordRepeatField
+                  t={t}
+                  values={values}
+                  errors={errors}
+                  touched={touched}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                />
+                <Button
+                  type="submit"
+                  variant="outline"
+                  disabled={!isValid || isSubmitting}
+                  loading={isSubmitting}
+                >
+                  {t('resetPassword')}
                 </Button>
               </div>
             </CardContent>
           </Card>
         </div>
       )
-    }
-    if (this.state.status === 'confirm_success') {
-      return <div className="px-2 my-12">{this.props.t('resetPasswordSuccess')}</div>
+    } else if (status === 'confirm_success') {
+      return <div className="px-2 my-12">{t('resetPasswordSuccess')}</div>
+    } else {
+      return null
     }
   }
+
+  return (
+    <form className="max-w-md mx-auto p-6" onSubmit={handleSubmit}>
+      {renderContent()}
+    </form>
+  )
 }
+
+export default ResetPasswordConfirmForm

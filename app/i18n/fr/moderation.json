@@ -8,10 +8,10 @@
     "confirm": "Confirmer le signalement"
   },
   "reason": {
-    "1": "Attaque personelle ou langage inapproprié",
-    "2": "Spam ou publicité non souhaitée",
-    "3": "Hors-sujet",
-    "4": "Non constructif"
+    "BAD_LANGUAGE": "Attaque personelle ou langage inapproprié",
+    "SPAM": "Spam ou publicité non souhaitée",
+    "IRRELEVANT": "Hors-sujet",
+    "NOT_CONSTRUCTIVE": "Non constructif"
   },
   "seeContext": "Voir dans son contexte",
   "whyReport": "Selon vous, pourquoi ce commentaire a-t-il été signalé ?",
@@ -21,5 +21,7 @@
   "pending": "En attente de moderation",
   "helpText1": "Dès 125 points de réputation, vous pouvez contribuer à la modération de contenus signalés par les membres de CaptainFact.",
   "helpText2": "Vous pouvez confirmer, vous abstenir ou réfuter le signalement, ce qui a des conséquences sur la réputation de l’utilisateur.",
-  "learnMore": "En savoir plus sur la modération"
+  "learnMore": "En savoir plus sur la modération",
+  "flagSubmitted": "Signalement soumis",
+  "thankYouFeedback": "Merci pour votre retour !"
 }

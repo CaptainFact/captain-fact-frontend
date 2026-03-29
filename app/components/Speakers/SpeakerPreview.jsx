@@ -1,115 +1,133 @@
+import { useMutation } from '@apollo/client'
 import { AvatarFallback } from '@radix-ui/react-avatar'
 import { Mic } from 'lucide-react'
-import React from 'react'
-import { withTranslation } from 'react-i18next'
-import { connect } from 'react-redux'
-import { Link, withRouter } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useTranslation, withTranslation } from 'react-i18next'
+import { Link, useHistory } from 'react-router-dom'
 
+import { toast } from '@/hooks/use-toast'
 import { cn } from '@/lib/css-utils'
 
-import { addModal } from '../../state/modals/reducer'
-import { removeSpeaker } from '../../state/video_debate/effects'
-import { changeStatementFormSpeaker } from '../../state/video_debate/statements/reducer'
-import { getFocusedStatementSpeakerId } from '../../state/video_debate/statements/selectors'
-import { withLoggedInUser } from '../LoggedInUser/UserProvider'
+import { REMOVE_SPEAKER_FROM_VIDEO_MUTATION } from '../../API/graphql_queries'
+import DialogConfirmDelete from '../Dialogs/DialogConfirmDelete'
 import { Avatar, AvatarImage } from '../ui/avatar'
+import { removeSpeakerFromVideoCache } from '../VideoDebate/graphql-cache'
 import EditSpeakerFormModal from './EditSpeakerFormModal'
-import ModalRemoveSpeaker from './ModalRemoveSpeaker'
 import { SpeakerDropdownMenu } from './SpeakerDropdownMenu'
 
-@withRouter
-@withTranslation('videoDebate')
-@connect(
-  (state, props) => ({
-    isFocused: getFocusedStatementSpeakerId(state) === props.speaker.id,
-  }),
-  { addModal, changeStatementFormSpeaker, removeSpeaker },
-)
-@withLoggedInUser
-export class SpeakerPreview extends React.PureComponent {
-  render() {
-    const { speaker, isAuthenticated, withoutActions, className, isFocused } = this.props
+const SpeakerPreview = ({
+  speaker,
+  className,
+  videoId,
+  isAnimated = false,
+  isAuthenticated = false,
+  showActions = true,
+  onSetStatementForm = null,
+}) => {
+  const { t } = useTranslation('videoDebate')
+  const history = useHistory()
+  const [removeSpeakerFromVideo] = useMutation(REMOVE_SPEAKER_FROM_VIDEO_MUTATION)
+  const [editModalOpen, setEditModalOpen] = useState(false)
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false)
 
-    return (
-      <div
-        className={cn(
-          'flex items-center animate-fadeInUp justify-between gap-2',
-          { 'speaker-pulse': isFocused },
-          className,
-        )}
-      >
-        <div className="flex items-center">
-          <div className="flex-none w-[50px] flex justify-center items-center mr-3">
-            {this.renderSpeakerThumb(speaker)}
-          </div>
-          <div className="flex-1 flex flex-col min-w-0">
-            {this.renderName(speaker)}
-            <p className="sm:text-sm max-w-full text-xs text-neutral-600 dark:text-muted-foreground">
-              {speaker.title || '...'}
-            </p>
-          </div>
-        </div>
-        <div className="flex">
-          {isAuthenticated && !withoutActions && (
-            <SpeakerDropdownMenu
-              handleRemove={() => this.handleRemove()}
-              handleEdit={() => this.handleEdit()}
-              handleAddStatement={() => this.handleAddStatement()}
-            />
-          )}
-        </div>
-      </div>
-    )
+  if (!speaker) {
+    return null
   }
 
-  renderSpeakerThumb(speaker) {
-    return (
-      <Avatar className="bg-white dark:bg-background rounded-full flex items-center justify-center border border-neutral-200 dark:border-border">
-        <AvatarImage src={speaker.picture} />
-        <AvatarFallback>
-          <Mic className="text-neutral-600 dark:text-muted-foreground" />
-        </AvatarFallback>
-      </Avatar>
-    )
+  const handleRemoveSpeaker = () => {
+    setDeleteModalOpen(true)
   }
 
-  renderName(speaker) {
-    return (
-      <Link
-        to={`/s/${speaker.slug || speaker.id}`}
-        className={
-          'sm:font-medium sm:text-base text-sm hover:underline text-neutral-900 dark:text-foreground'
-        }
-        target="_blank"
-      >
-        {speaker.full_name}
-      </Link>
-    )
-  }
-
-  handleRemove() {
-    this.props.addModal({
-      Modal: ModalRemoveSpeaker,
-      props: {
-        speaker: this.props.speaker,
-        handleConfirm: () => this.props.removeSpeaker(this.props.speaker),
+  const handleConfirmRemoveSpeaker = async () => {
+    await removeSpeakerFromVideo({
+      variables: { videoId, speakerId: speaker.id },
+      update: (cache) => {
+        removeSpeakerFromVideoCache(cache, videoId, speaker.id)
       },
     })
-  }
-
-  handleEdit() {
-    this.props.addModal({
-      Modal: EditSpeakerFormModal,
-      props: { speaker: this.props.speaker.toJS() },
+    toast({
+      title: t('speaker.removed'),
     })
+    setDeleteModalOpen(false)
   }
 
-  handleAddStatement() {
-    const historyRegex = new RegExp('/history/?$')
-    const currentPath = this.props.location.pathname
-    if (currentPath.match(historyRegex)) {
-      this.props.history.push(currentPath.replace(historyRegex, ''))
-    }
-    this.props.changeStatementFormSpeaker({ id: this.props.speaker.id })
+  const handleEditSpeaker = () => {
+    setEditModalOpen(true)
   }
+
+  const handleAddStatement = () => {
+    // Navigate to debate view if we're on history page
+    const currentPath = window.location.pathname
+    const historyRegex = new RegExp('/history/?$')
+    if (currentPath.match(historyRegex)) {
+      history.push(currentPath.replace(historyRegex, ''))
+    }
+
+    // Set the statement form with the speaker
+    if (onSetStatementForm) {
+      onSetStatementForm({ speakerId: speaker.id })
+    }
+  }
+
+  const mainContent = (
+    <div className={`flex items-center justify-between gap-2 animate-fadeInUp ${className || ''}`}>
+      <div className="flex items-center">
+        <div className="flex-none w-[50px] flex justify-center items-center mr-3">
+          <Avatar
+            className={cn(
+              'bg-white dark:bg-background rounded-full flex items-center justify-center border border-neutral-200 dark:border-border',
+              isAnimated && 'animate-borderPulse',
+            )}
+          >
+            <AvatarImage src={speaker.picture} />
+            <AvatarFallback>
+              <Mic className="text-neutral-600 dark:text-muted-foreground" />
+            </AvatarFallback>
+          </Avatar>
+        </div>
+        <div className="flex-1 flex flex-col min-w-0">
+          <Link
+            to={`/s/${speaker.slug || speaker.id}`}
+            className="sm:font-medium sm:text-base text-sm hover:underline text-neutral-900 dark:text-foreground"
+            target="_blank"
+          >
+            {speaker.fullName}
+          </Link>
+          <p className="sm:text-sm max-w-full text-xs text-neutral-600 dark:text-muted-foreground">
+            {speaker.title || '...'}
+          </p>
+        </div>
+      </div>
+      <div className="flex">
+        {isAuthenticated && showActions && (
+          <SpeakerDropdownMenu
+            handleRemove={handleRemoveSpeaker}
+            handleEdit={handleEditSpeaker}
+            handleAddStatement={handleAddStatement}
+          />
+        )}
+      </div>
+    </div>
+  )
+
+  return (
+    <>
+      {mainContent}
+      <EditSpeakerFormModal
+        speaker={speaker}
+        open={editModalOpen}
+        onOpenChange={setEditModalOpen}
+      />
+      <DialogConfirmDelete
+        open={deleteModalOpen}
+        onOpenChange={setDeleteModalOpen}
+        title={t('speaker.remove')}
+        message={t('speaker.confirmRemove', { speaker })}
+        handleConfirm={handleConfirmRemoveSpeaker}
+        isRemove
+      />
+    </>
+  )
 }
+
+export default withTranslation('videoDebate')(SpeakerPreview)

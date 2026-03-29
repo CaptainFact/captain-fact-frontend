@@ -1,9 +1,8 @@
-import Immutable from 'immutable'
+import { useMutation } from '@apollo/client'
 import { Indent, Undo } from 'lucide-react'
 import PropTypes from 'prop-types'
-import React from 'react'
-import { withTranslation } from 'react-i18next'
-import { connect } from 'react-redux'
+import React, { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import {
   Table,
@@ -14,8 +13,9 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
-import { ACTION_DELETE, ACTION_REMOVE } from '../../constants'
-import { revertVideoDebateUserAction } from '../../state/video_debate/history/effects'
+import { RESTORE_SPEAKER_MUTATION, RESTORE_STATEMENT_MUTATION } from '../../API/graphql_queries'
+import { ACTION_DELETE, ACTION_REMOVE, ENTITY_SPEAKER, ENTITY_STATEMENT } from '../../constants'
+import { getEntityIDFromAction } from '../../lib/user_action_entity_id'
 import { Button } from '../ui/button'
 import UserAppellation from '../Users/UserAppellation'
 import { LoadingFrame } from '../Utils/LoadingFrame'
@@ -24,74 +24,61 @@ import ActionDiff from './ActionDiff'
 import ActionEntityLink from './ActionEntityLink'
 import ActionIcon from './ActionIcon'
 
-@withTranslation('history')
-@connect(
-  (state) => ({
-    lastActionsIds: state.UsersActions.lastActionsIds,
-  }),
-  { revertVideoDebateUserAction },
-)
-class ActionsTable extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = { expendedDiffs: new Immutable.List() }
-  }
+const ActionsTable = ({ actions, isLoading, showEntity = true }) => {
+  const { t } = useTranslation('history')
+  const [expandedDiffs, setExpandedDiffs] = useState([])
 
-  render() {
-    return (
-      <Table>
-        <TableHeader>{this.renderHeader()}</TableHeader>
-        <TableBody>{this.renderBody()}</TableBody>
-      </Table>
-    )
-  }
+  const [restoreStatement] = useMutation(RESTORE_STATEMENT_MUTATION)
+  const [restoreSpeaker] = useMutation(RESTORE_SPEAKER_MUTATION)
 
-  // ---- Table header ----
+  // Compute which actions are the last ones for their entities
+  const lastActionIds = useMemo(() => {
+    const lastActionsMap = {}
 
-  renderHeader = () => {
-    const { t, showEntity } = this.props
-    return (
-      <TableRow>
-        <TableHead>{t('when')}</TableHead>
-        <TableHead>{t('who')}</TableHead>
-        <TableHead>Action</TableHead>
-        {showEntity && <TableHead>{t('entity')}</TableHead>}
-        <TableHead>{t('main:actions.all')}</TableHead>
-      </TableRow>
-    )
-  }
+    actions.forEach((action) => {
+      const entityKey = `${action.entity}:${getEntityIDFromAction(action)}`
+      const existingAction = lastActionsMap[entityKey]
 
-  collapseDiffs() {
-    this.setState((prevState) => ({
-      expendedDiffs: prevState.expendedDiffs.clear(),
-    }))
-  }
+      // Keep the action with the most recent time
+      if (!existingAction || action.time > existingAction.time) {
+        lastActionsMap[entityKey] = action
+      }
+    })
 
-  // ---- Table body ----
+    return new Set(Object.values(lastActionsMap).map((action) => action.id))
+  }, [actions])
 
-  renderBody = () => {
-    if (this.props.isLoading) {
-      return (
-        <TableRow style={{ background: 'none' }}>
-          <TableCell colSpan={this.getNbCols()}>
-            <LoadingFrame />
-          </TableCell>
-        </TableRow>
-      )
+  const getNbCols = () => 7 - !showEntity
+
+  const handleRestore = async (action) => {
+    try {
+      if (action.entity === ENTITY_STATEMENT) {
+        await restoreStatement({
+          variables: { id: action.statementId || action.id },
+        })
+      } else if (action.entity === ENTITY_SPEAKER) {
+        await restoreSpeaker({
+          variables: {
+            speakerId: action.speakerId || action.id,
+            videoId: action.videoId,
+          },
+        })
+      }
+    } catch {
+      // Error handling could be added here
     }
-    return this.props.actions.map((a) => this.renderAction(a))
   }
 
-  renderAction = (action) => {
-    if (this.state.expendedDiffs.includes(action.id)) {
-      return [this.renderActionLine(action, true), this.renderDiffLine(action)]
+  const toggleDiff = (action, isDiffing) => {
+    if (isDiffing) {
+      setExpandedDiffs((prev) => prev.filter((id) => id !== action.id))
+    } else {
+      setExpandedDiffs((prev) => [...prev, action.id])
     }
-    return this.renderActionLine(action)
   }
 
-  renderActionLine(action, isDiffing = false) {
-    const { showEntity, t } = this.props
-    const isLastActionForEntity = this.props.lastActionsIds.includes(action.id)
+  const renderActionLine = (action, isDiffing = false) => {
+    const isLastActionForEntity = lastActionIds.has(action.id)
     const isReversibleType = [ACTION_DELETE, ACTION_REMOVE].includes(action.type)
     const reversible = isLastActionForEntity && isReversibleType
 
@@ -100,7 +87,9 @@ class ActionsTable extends React.PureComponent {
         <TableCell>
           <TimeSince time={action.time} />
         </TableCell>
-        <TableCell>{this.renderUser(action.user)}</TableCell>
+        <TableCell>
+          <UserAppellation user={action.user} compact />
+        </TableCell>
         <TableCell>
           <ActionIcon className="inline" type={action.type} />
           <strong> {t(`action.${action.type}`)}</strong>
@@ -111,7 +100,7 @@ class ActionsTable extends React.PureComponent {
           </TableCell>
         )}
         <TableCell>
-          <Button variant="outline" size="xs" onClick={() => this.toggleDiff(action, isDiffing)}>
+          <Button variant="outline" size="xs" onClick={() => toggleDiff(action, isDiffing)}>
             <Indent size="1em" />
             <span>{t(isDiffing ? 'compare_hide' : 'compare_show')} </span>
           </Button>
@@ -119,7 +108,7 @@ class ActionsTable extends React.PureComponent {
             <Button
               variant="outline"
               size="xs"
-              onClick={() => this.props.revertVideoDebateUserAction(action)}
+              onClick={() => handleRestore(action)}
               className="ml-2"
             >
               <Undo size="1em" />
@@ -131,43 +120,54 @@ class ActionsTable extends React.PureComponent {
     )
   }
 
-  renderUser = (user) => <UserAppellation user={user} compact />
-
-  renderDiffLine = (action) => (
+  const renderDiffLine = (action) => (
     <TableRow key={`${action.id}-diff`}>
-      <TableCell colSpan={this.getNbCols()} style={{ padding: 0 }}>
-        <ActionDiff action={action} allActions={this.props.actions} />
+      <TableCell colSpan={getNbCols()} style={{ padding: 0 }}>
+        <ActionDiff action={action} allActions={actions} />
       </TableCell>
     </TableRow>
   )
 
-  toggleDiff = (action, isDiffing) => {
-    if (isDiffing) {
-      const actionIdx = this.state.expendedDiffs.findIndex((id) => id === action.id)
-      this.setState((prevState) => ({
-        expendedDiffs: prevState.expendedDiffs.delete(actionIdx),
-      }))
-    } else {
-      this.setState((prevState) => ({
-        expendedDiffs: prevState.expendedDiffs.push(action.id),
-      }))
-    }
-  }
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>{t('when')}</TableHead>
+          <TableHead>{t('who')}</TableHead>
+          <TableHead>Action</TableHead>
+          {showEntity && <TableHead>{t('entity')}</TableHead>}
+          <TableHead>{t('main:actions.all')}</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {isLoading ? (
+          <TableRow style={{ background: 'none' }}>
+            <TableCell colSpan={getNbCols()}>
+              <LoadingFrame />
+            </TableCell>
+          </TableRow>
+        ) : (
+          actions.map((action) => {
+            if (expandedDiffs.includes(action.id)) {
+              return [renderActionLine(action, true), renderDiffLine(action)]
+            }
+            return renderActionLine(action)
+          })
+        )}
+      </TableBody>
+    </Table>
+  )
+}
 
-  getNbCols = () => 7 - !this.props.showEntity
+ActionsTable.propTypes = {
+  actions: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool,
+  showEntity: PropTypes.bool,
 }
 
 ActionsTable.defaultProps = {
   isLoading: false,
-  showRestore: true,
   showEntity: true,
-}
-
-ActionsTable.propTypes = {
-  actions: PropTypes.instanceOf(Immutable.List).isRequired,
-  isLoading: PropTypes.bool,
-  showRestore: PropTypes.bool,
-  showEntity: PropTypes.bool,
 }
 
 export default ActionsTable

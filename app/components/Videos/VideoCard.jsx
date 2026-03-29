@@ -13,8 +13,8 @@ import { TimeSince } from '../Utils/TimeSince'
 export class VideoCard extends React.PureComponent {
   render() {
     const { t, video } = this.props
-    const { hash_id, title } = video
-    const linkTarget = videoURL(hash_id)
+    const { hashId, title } = video
+    const linkTarget = videoURL(hashId)
 
     return (
       <Card className="overflow-hidden h-full flex flex-col group bg-white dark:bg-[hsl(0,0%,14%)]">
@@ -42,12 +42,14 @@ export class VideoCard extends React.PureComponent {
     )
   }
 
-  renderVideoMetadata({ speakers, insertedAt }, t) {
+  renderVideoMetadata({ speakers, insertedAt, user }, t) {
     return (
       <div className="space-y-2 text-xs">
-        <div>
-          {this.renderAddedByLabel(t)} <TimeSince time={insertedAt} />
-        </div>
+        {user && (
+          <div>
+            {this.renderAddedByLabel(t)} {insertedAt && <TimeSince time={insertedAt} />}
+          </div>
+        )}
         {speakers && speakers.length > 0 && this.renderSpeakersList(speakers, t)}
       </div>
     )
@@ -84,7 +86,7 @@ export class VideoCard extends React.PureComponent {
     if (nbOthers > 0) {
       const title = speakers
         .slice(MAX_VIDEO_CARD_SPEAKERS)
-        .map((s) => s.full_name)
+        .map((s) => s.fullName)
         .join(', ')
       speakerComponentsList.push(
         <span key="others" className="inline align-middle dark:text-muted-foreground">
@@ -110,6 +112,6 @@ export class VideoCard extends React.PureComponent {
   }
 
   renderSpeakerName(speaker) {
-    return <Link to={`/s/${speaker.slug || speaker.id}`}>{speaker.full_name}</Link>
+    return <Link to={`/s/${speaker.slug || speaker.id}`}>{speaker.fullName}</Link>
   }
 }

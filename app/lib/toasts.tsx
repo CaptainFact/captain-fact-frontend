@@ -3,14 +3,15 @@
  * transition to shadcn toasts.
  */
 
-import { Ghost, Link } from 'lucide-react'
+import { Ghost } from 'lucide-react'
 import React from 'react'
 import { Trans } from 'react-i18next'
+import { Link } from 'react-router-dom'
 
 import { ToastAction } from '@/components/ui/toast'
 import { toast } from '@/hooks/use-toast'
 
-import { getErrorInfo } from './errors'
+import { getErrorInfo, normalizeServerErrorMessage } from './errors'
 import { WithRouterForRenderProp } from './router'
 
 export const toastErrorUnauthenticated = () => {
@@ -38,8 +39,21 @@ export const toastErrorUnauthenticated = () => {
 }
 
 export function toastError(error) {
-  if (typeof error === 'object' && error !== null && error.message) {
-    error = error.message
+  if (typeof error === 'object' && error !== null) {
+    // Handle GraphQL errors - extract message from graphQLErrors array
+    if (error.cause?.message) {
+      error = error.cause.message
+    } else if (error.graphQLErrors && error.graphQLErrors.length > 0) {
+      error = error.graphQLErrors[0].message || error.message || 'unexpected'
+    } else if (error.networkError) {
+      error = error.networkError.message || error.message || 'unexpected'
+    } else {
+      error = error.message || 'unexpected'
+    }
+  }
+
+  if (typeof error === 'string') {
+    error = normalizeServerErrorMessage(error)
   }
 
   const errorInfo = getErrorInfo(error)
@@ -50,10 +64,16 @@ export function toastError(error) {
       title: <Trans i18nKey="errors:title" />,
       description: (
         <div>
-          <p className="block mb-1">{error}</p>
-          <Link className="block" to={errorInfo.url}>
-            <Trans i18nKey={errorInfo.i18nKey || 'actions.moreInfo'} />
-          </Link>
+          {errorInfo.i18nKey && (
+            <p className="block mb-1">
+              <Trans i18nKey={errorInfo.i18nKey} />
+            </p>
+          )}
+          {errorInfo.url && (
+            <Link className="block underline" to={errorInfo.url}>
+              <Trans i18nKey={'actions.moreInfo'} />
+            </Link>
+          )}
         </div>
       ),
     })

@@ -1,21 +1,20 @@
+import { useMutation } from '@apollo/client'
 import { Formik } from 'formik'
 import { get } from 'lodash'
 import { Check, CircleX, HelpCircle, MessagesSquare, Plus, ShieldBan } from 'lucide-react'
 import PropTypes from 'prop-types'
-import React from 'react'
-import { withTranslation } from 'react-i18next'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import isURL from 'validator/lib/isURL'
 
 import { cn } from '@/lib/css-utils'
 import { toastError, toastErrorUnauthenticated } from '@/lib/toasts'
 
+import { CREATE_COMMENT_MUTATION } from '../../API/graphql_queries'
 import { COMMENT_LENGTH, USER_PICTURE_LARGE } from '../../constants'
 import { cleanStrMultiline } from '../../lib/clean_str'
 import { validateLengthI18n } from '../../lib/form_validators'
 import { logError } from '../../logger'
-import { postComment } from '../../state/video_debate/comments/effects'
 import TextareaLengthCounter from '../FormUtils/TextareaLengthCounter'
 import { Button } from '../ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
@@ -24,62 +23,44 @@ import { Textarea } from '../ui/textarea'
 import UserAppellation from '../Users/UserAppellation'
 import UserPicture from '../Users/UserPicture'
 import ExternalLinkNewTab from '../Utils/ExternalLinkNewTab'
-import { CommentDisplay } from './CommentDisplay'
+import CommentDisplay from './CommentDisplay'
 
-@connect(null, { postComment })
-@withTranslation('videoDebate')
-@withRouter
-class CommentForm extends React.Component {
-  static propTypes = {
-    /** Statement ID */
-    statementID: PropTypes.number.isRequired,
-    /** Callback to set the reply */
-    setReplyToComment: PropTypes.func.isRequired,
-    /** The comment we want to reply to */
-    replyTo: PropTypes.shape({ id: PropTypes.number }),
-    /** The commenting user, or null if none is logged in */
-    user: PropTypes.object,
-    /** @ignore *from withTranslation* */
-    t: PropTypes.func.isRequired,
-    /** Do we incitate to participate */
-    inciteToParticipate: PropTypes.oneOf(['approve', 'refute']),
-  }
+const CommentForm = ({ statementID, setReplyToComment, replyTo, user, inciteToParticipate }) => {
+  const { t } = useTranslation('videoDebate')
+  const [isCollapsed, setIsCollapsed] = useState(true)
+  const [createComment] = useMutation(CREATE_COMMENT_MUTATION)
 
-  state = { isCollapsed: true }
-
-  expandForm() {
-    if (this.props.user) {
-      this.setState({ isCollapsed: false })
+  const expandForm = () => {
+    if (user) {
+      setIsCollapsed(false)
     } else {
       toastErrorUnauthenticated()
     }
   }
 
-  onSubmit = ({ text, source, approve }, { resetForm, setErrors }) => {
-    return this.props
-      .postComment({
-        statement_id: this.props.statementID,
-        text: text.length ? text : null,
-        source: source ? { url: source } : null,
-        reply_to_id: get(this.props, 'replyTo.id', null),
-        approve,
+  const onSubmit = async ({ text, source, approve }, { resetForm, setErrors }) => {
+    try {
+      await createComment({
+        variables: {
+          statementId: statementID,
+          text: text.length ? text : null,
+          source: source || null,
+          replyToId: get(replyTo, 'id', null),
+          approve: approve !== null ? approve : null,
+        },
       })
-      .then((e) => {
-        if (e.error) {
-          setErrors(e.payload)
-        } else {
-          this.props.setReplyToComment(null)
-          resetForm()
-        }
-      })
-      .catch((e) => {
-        logError(e)
-        toastError(e)
-      })
+
+      // The subscription will handle adding the comment to state
+      setReplyToComment(null)
+      resetForm()
+    } catch (error) {
+      logError(error)
+      toastError(error)
+      setErrors({ submit: t('errors:server.unknown') })
+    }
   }
 
-  validate = ({ source, text }) => {
-    const { t } = this.props
+  const validate = ({ source, text }) => {
     const errors = {}
 
     if (source && !isURL(source, { protocols: ['http', 'https'] })) {
@@ -93,9 +74,7 @@ class CommentForm extends React.Component {
     return errors
   }
 
-  renderHelpMessage() {
-    const { t } = this.props
-
+  const renderHelpMessage = () => {
     return (
       <Card className="my-3">
         <CardHeader>
@@ -136,8 +115,7 @@ class CommentForm extends React.Component {
     )
   }
 
-  renderSubmitButtons(values, setFieldValue, isDisabled) {
-    const { replyTo, t } = this.props
+  const renderSubmitButtons = (values, setFieldValue, isDisabled) => {
     const i18nParams = replyTo ? { context: 'reply' } : null
 
     return !values.source ? (
@@ -151,7 +129,7 @@ class CommentForm extends React.Component {
         {t('comment.post', i18nParams)}
       </Button>
     ) : (
-      <div className="flex flex-1 flex-wrap min-w-[460px] gap-1">
+      <div className="flex flex-1 flex-wrap gap-1">
         <div className="flex flex-1 gap-1">
           <Button
             type="submit"
@@ -187,19 +165,17 @@ class CommentForm extends React.Component {
     )
   }
 
-  renderIncitate(values, setFieldValue, isDisabled) {
-    const { replyTo, inciteToParticipate, t } = this.props
+  const renderIncitate = (values, setFieldValue, isDisabled) => {
     const i18nParams = replyTo ? { context: 'reply' } : null
     const variant = inciteToParticipate === 'approve' ? 'success' : 'destructive'
     const comment = inciteToParticipate === 'approve' ? 'comment.approve' : 'comment.refute'
     const approveField = inciteToParticipate === 'approve'
 
     return (
-      <div className="flex flex-1 flex-wrap min-w-[460px]">
+      <div className="flex flex-1 flex-wrap">
         <div className="flex flex-[3_1_0%]">
           <Button
             variant={variant}
-            className="my-1 mr-1 flex-1"
             disabled={isDisabled || !values.source}
             onClick={() => setFieldValue('approve', approveField)}
           >
@@ -210,14 +186,13 @@ class CommentForm extends React.Component {
     )
   }
 
-  renderForm() {
-    const { t, inciteToParticipate } = this.props
+  const renderForm = () => {
     const initialValues = { text: '', source: '', approve: null }
 
     return (
-      <Formik initialValues={initialValues} validate={this.validate} onSubmit={this.onSubmit}>
+      <Formik initialValues={initialValues} validate={validate} onSubmit={onSubmit}>
         {({ handleBlur, handleSubmit, values, setFieldValue, isValid, dirty, errors }) => (
-          <form onSubmit={handleSubmit} className="flex-1">
+          <form onSubmit={handleSubmit} className="flex-1 min-w-0">
             <div className="flex flex-col">
               <div className="mb-2 relative">
                 <Textarea
@@ -225,7 +200,7 @@ class CommentForm extends React.Component {
                   value={values.text}
                   onChange={(e) => setFieldValue('text', cleanStrMultiline(e.target.value))}
                   onBlur={handleBlur}
-                  // eslint-disable-next-line jsx-a11y/no-autofocus
+                  // eslint-disable-next-line jsx-a11y/no-autofocus -- focus comment field when opening reply/new comment
                   autoFocus
                   placeholder={t('comment.writeComment')}
                   disabled={false}
@@ -236,7 +211,7 @@ class CommentForm extends React.Component {
               </div>
 
               <div className="flex flex-wrap my-1 gap-2">
-                <div className="flex flex-col flex-[3_1_330px] mr-2">
+                <div className="flex flex-col flex-[3_1_0%] min-w-0 mr-2">
                   <Input
                     name="source"
                     value={values.source}
@@ -251,10 +226,10 @@ class CommentForm extends React.Component {
                 </div>
 
                 {inciteToParticipate
-                  ? this.renderIncitate(values, setFieldValue, !isValid || !dirty)
-                  : this.renderSubmitButtons(values, setFieldValue, !isValid || !dirty)}
+                  ? renderIncitate(values, setFieldValue, !isValid || !dirty)
+                  : renderSubmitButtons(values, setFieldValue, !isValid || !dirty)}
               </div>
-              {this.renderHelpMessage()}
+              {renderHelpMessage()}
             </div>
           </form>
         )}
@@ -262,21 +237,20 @@ class CommentForm extends React.Component {
     )
   }
 
-  renderCollapsedForm() {
-    const { inciteToParticipate, t } = this.props
+  const renderCollapsedForm = () => {
     const commentIncitateTo =
       'comment.incitateTo' + (inciteToParticipate === 'approve' ? 'Confirm' : 'Refute')
 
     return inciteToParticipate ? (
       <div className="p-2 mb-3 text-center items-center justify-center flex flex-col text-sm dark:text-foreground">
         <span className="mt-3">{t(commentIncitateTo)}.</span>
-        <Button size="xs" variant="link" onClick={() => this.expandForm()}>
+        <Button size="xs" variant="link" onClick={expandForm}>
           <span>&nbsp;{t('comment.addYourSource')}.</span>
         </Button>
       </div>
     ) : (
       <div className="flex justify-center p-2 border-t border-gray-200 dark:border-border">
-        <Button variant="link" onClick={() => this.expandForm()}>
+        <Button variant="link" onClick={expandForm}>
           <Plus className="w-5 h-5 mr-1" />
           <span>{t('comment.revealForm')}</span>
         </Button>
@@ -284,55 +258,58 @@ class CommentForm extends React.Component {
     )
   }
 
-  render() {
-    const { user, replyTo, t } = this.props
-    const isSelfReply = get(user, 'id') === get(replyTo, 'user.id')
+  const isSelfReply = get(user, 'id') === get(replyTo, 'user.id')
 
-    return !user || (this.state.isCollapsed && !replyTo) ? (
-      this.renderCollapsedForm()
-    ) : (
-      <div
-        data-cy="comment-form-container"
-        className={cn(
-          'flex flex-col px-3 pb-3 pt-5 comment-form shadow-[0_10px_6px_-10px_#dbdbdb_inset] dark:shadow-[0_10px_6px_-10px_rgba(0,0,0,0.3)_inset] dark:bg-background',
-          this.props.inciteToParticipate && 'incitation-comment',
-        )}
-      >
-        {replyTo && (
-          <div className="mb-2">
-            <div className="flex items-center mb-2">
-              <Button
-                size="icon-xs"
-                variant="outline"
-                className="h-7 w-7"
-                onClick={() => this.props.setReplyToComment(null)}
-              >
-                <CircleX size={15} />
-              </Button>
-              <span className="ml-2 text-sm dark:text-foreground">
-                {t(isSelfReply ? 'comment.replyingToSelf' : 'comment.replyingTo')}{' '}
-                <UserAppellation defaultComponent="span" user={replyTo.user} />
-              </span>
-            </div>
-            <CommentDisplay
-              isQuoted
-              richMedias={false}
-              comment={replyTo}
-              withoutActions
-              withoutHeader
-              hideThread
-            />
+  return !user || (isCollapsed && !replyTo) ? (
+    renderCollapsedForm()
+  ) : (
+    <div
+      data-cy="comment-form-container"
+      className={cn(
+        'flex flex-col px-3 pb-3 pt-5 comment-form shadow-[0_10px_6px_-10px_#dbdbdb_inset] dark:shadow-[0_10px_6px_-10px_rgba(0,0,0,0.3)_inset] dark:bg-background',
+        inciteToParticipate && 'incitation-comment',
+      )}
+    >
+      {replyTo && (
+        <div className="mb-2">
+          <div className="flex items-center mb-2">
+            <Button
+              size="icon-xs"
+              variant="outline"
+              className="h-7 w-7"
+              onClick={() => setReplyToComment(null)}
+            >
+              <CircleX size={15} />
+            </Button>
+            <span className="ml-2 text-sm dark:text-foreground">
+              {t(isSelfReply ? 'comment.replyingToSelf' : 'comment.replyingTo')}{' '}
+              <UserAppellation defaultComponent="span" user={replyTo.user} />
+            </span>
           </div>
-        )}
-        <div className="flex">
-          <div className="mr-2">
-            <UserPicture user={user} size={USER_PICTURE_LARGE} />
-          </div>
-          {this.renderForm()}
+          <CommentDisplay
+            isQuoted
+            richMedias={false}
+            comment={replyTo}
+            withoutActions
+            withoutHeader
+            hideThread
+          />
         </div>
+      )}
+      <div className="flex gap-2 min-w-0" id="user-form">
+        <UserPicture user={user} size={USER_PICTURE_LARGE} />
+        {renderForm()}
       </div>
-    )
-  }
+    </div>
+  )
+}
+
+CommentForm.propTypes = {
+  statementID: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  setReplyToComment: PropTypes.func.isRequired,
+  replyTo: PropTypes.shape({ id: PropTypes.number }),
+  user: PropTypes.object,
+  inciteToParticipate: PropTypes.oneOf(['approve', 'refute']),
 }
 
 export default CommentForm

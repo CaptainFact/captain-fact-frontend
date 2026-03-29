@@ -17,7 +17,7 @@ const typeToVariantMap = {
   dark: 'default',
 }
 
-const Message = ({ type, header, className, children, onClose }) => (
+const Message = ({ type = 'info', header, className, children, onClose }) => (
   <Alert variant={typeToVariantMap[type]} className={cn('message', `is-${type}`, className)}>
     {(header || onClose) && (
       <AlertTitle className="message-header flex justify-between items-center">
@@ -37,10 +37,6 @@ Message.propTypes = {
   type: PropTypes.oneOf(['info', 'danger', 'warning', 'primary', 'link', 'dark']),
   onClose: PropTypes.func,
   header: PropTypes.node,
-}
-
-Message.defaultProps = {
-  type: 'info',
 }
 
 export default Message

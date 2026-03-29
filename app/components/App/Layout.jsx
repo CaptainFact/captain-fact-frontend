@@ -1,23 +1,17 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { connect } from 'react-redux'
 
 import { checkExtensionInstall } from '@/lib/browser-extension'
 import { cn } from '@/lib/css-utils'
 
-import { MainModalContainer } from '../Modal/MainModalContainer'
+import { useUserPreferences } from '../../contexts/UserPreferencesContext'
 import { Toaster } from '../ui/toaster'
 import PublicAchievementUnlocker from '../Users/PublicAchievementUnlocker'
-import BackgroundNotifier from './BackgroundNotifier'
 import CrashReportPage from './CrashReportPage'
 import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 
-@connect((state) => ({
-  locale: state.UserPreferences.locale,
-  sidebarExpended: state.UserPreferences.sidebarExpended,
-}))
-export default class Layout extends React.PureComponent {
+class Layout extends React.PureComponent {
   state = { error: null }
 
   /** Called when app crashes */
@@ -56,7 +50,6 @@ export default class Layout extends React.PureComponent {
       <React.Fragment>
         <div lang={locale}>
           {this.renderMetadata()}
-          <MainModalContainer />
           <Navbar />
           <Sidebar />
           <div
@@ -67,7 +60,6 @@ export default class Layout extends React.PureComponent {
           >
             {!this.state.error ? children : <CrashReportPage error={this.state.error} />}
           </div>
-          <BackgroundNotifier />
           <PublicAchievementUnlocker achievementId={4} meetConditionsFunc={checkExtensionInstall} />
         </div>
         <Toaster />
@@ -75,3 +67,10 @@ export default class Layout extends React.PureComponent {
     )
   }
 }
+
+const LayoutWithPreferences = (props) => {
+  const { locale, sidebarExpended } = useUserPreferences()
+  return <Layout {...props} locale={locale} sidebarExpended={sidebarExpended} />
+}
+
+export default LayoutWithPreferences

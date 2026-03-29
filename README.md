@@ -10,7 +10,6 @@
 <a href="https://github.com/CaptainFact/captain-fact-frontend/releases"><img src="https://img.shields.io/github/v/release/CaptainFact/captain-fact-frontend" alt="GitHub release" /></a>
 <a href="https://github.com/CaptainFact/captain-fact-frontend/actions/workflows/release.yml"><img src="https://github.com/CaptainFact/captain-fact-frontend/actions/workflows/release.yml/badge.svg" alt='Release Status' /></a>
 <a href='https://coveralls.io/github/CaptainFact/captain-fact-frontend?branch=staging'><img src='https://coveralls.io/repos/github/CaptainFact/captain-fact-frontend/badge.svg?branch=staging' alt='Coverage Status' /></a>
-<a href="https://hosted.weblate.org/engage/captainfact-frontend-ui/"><img src="https://hosted.weblate.org/widgets/captainfact-frontend-ui/-/svg-badge.svg" alt="Translation status" /></a>
 </p>
 <hr/>
 <p align="center">
@@ -51,13 +50,6 @@ app
 ├── components => All react components
 ├── i18n => Translations
 ├── lib => Misc utilities
-├── state => All redux related
-│   ├── comments
-│   │   ├── effects.js => Async actions creators, always return a promise
-│   │   ├── record.js => The object representing a single comment
-│   │   ├── reducer.js => Reducer + actions creators, always return an action object
-│   │   └── selectors.js => Re-select selectors to select data in state
-│   └── ...
 ├── static => Static assets, directly copied to the public directory
 └── router.jsx => Application router and main entry point
 ```
@@ -73,7 +65,6 @@ Styling is based on [Tailwind](https://tailwindcss.com).
 - [React Router](https://github.com/ReactTraining/react-router): Routing
 - [Phoenix](https://phoenixframework.org/): Interaction with [https://hexdocs.pm/phoenix/Phoenix.Socket.html](Phoenix.Socket)
 - [TailwindCSS](https://tailwindcss.com/): Utility-first CSS framework
-- [Redux](https://redux.js.org/): State management (deprecated)
 
 ## Linked projects
 

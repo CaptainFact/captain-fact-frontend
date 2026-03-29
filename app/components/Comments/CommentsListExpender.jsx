@@ -4,7 +4,7 @@ import { withTranslation } from 'react-i18next'
 import { Button } from '../ui/button'
 
 const CommentsListExpender = ({ t, onClick, nesting, count }) => (
-  <div className="ml-4">
+  <div className="ml-4 mb-4">
     <Button variant="outline" onClick={onClick}>
       {t('comment.loadMore', {
         context: nesting === 1 ? 'comments' : 'replies',

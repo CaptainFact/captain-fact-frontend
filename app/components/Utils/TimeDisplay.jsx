@@ -1,3 +1,4 @@
+import { useVideoPlayback } from 'app/contexts/VideoPlaybackContext'
 import { capitalize as doCapitalize } from 'lodash'
 import React from 'react'
 import { withTranslation } from 'react-i18next'
@@ -9,22 +10,30 @@ import { Button } from '../ui/button'
 
 const i18nAtKey = 'misc.timeAt'
 
+const PositionButton = ({ time, textClassName, formattedTime }) => {
+  const { forcePosition } = useVideoPlayback()
+  return (
+    <Button
+      variant="link"
+      className={cn('px-1', textClassName)}
+      onClick={() => {
+        forcePosition(time)
+      }}
+    >
+      {formattedTime}
+    </Button>
+  )
+}
+
 const TimeDisplay = ({
   time,
   textClassName,
-  handleClick,
   t,
+  withoutPlayback = false,
   textBefore = true,
   capitalize = true,
 }) => {
   const formattedTime = formatSeconds(time)
-  const content = handleClick ? (
-    <Button variant="link" className={cn('px-1', textClassName)} onClick={() => handleClick(time)}>
-      {formattedTime}
-    </Button>
-  ) : (
-    formattedTime
-  )
   return (
     <div className={textClassName}>
       {textBefore && (
@@ -33,7 +42,11 @@ const TimeDisplay = ({
           &nbsp;
         </span>
       )}
-      {content}
+      {withoutPlayback ? (
+        <span>{formattedTime}</span>
+      ) : (
+        <PositionButton time={time} textClassName={textClassName} formattedTime={formattedTime} />
+      )}
     </div>
   )
 }

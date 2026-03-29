@@ -1,69 +1,65 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { withTranslation } from 'react-i18next'
-import { connect } from 'react-redux'
 
 import { ENTITY_STATEMENT } from '../../constants'
-import { addModal } from '../../state/modals/reducer'
-import { setScrollTo } from '../../state/video_debate/statements/reducer'
-import { forcePosition } from '../../state/video_debate/video/reducer'
 import ShareModal from '../Utils/ShareModal'
-import { ModalHistory } from '../VideoDebate/ModalHistory'
+import { StatementHistoryDialog } from '../VideoDebate/StatementHistoryDialog'
 import StatementHeader from './StatementHeader'
 
-@connect(null, { addModal, forcePosition, setScrollTo })
-@withTranslation('videoDebate')
-export default class Statement extends React.PureComponent {
-  render() {
-    const { statement, speaker, handleEdit, handleDelete, withoutActions, offset = 0 } = this.props
+const Statement = ({
+  statement,
+  speaker,
+  handleEdit,
+  handleDelete,
+  withoutActions,
+  offset = 0,
+  customButtons,
+  withoutPlayback,
+}) => {
+  const [shareModalOpen, setShareModalOpen] = useState(false)
+  const [historyModalOpen, setHistoryModalOpen] = useState(false)
 
-    return (
-      <div data-cy="statement">
-        <StatementHeader
-          statementTime={statement.time + offset}
-          isDraft={statement.is_draft}
-          speaker={speaker}
-          handleEdit={handleEdit}
-          handleDelete={handleDelete}
-          handleShowHistory={() => this.showHistory()}
-          handleTimeClick={withoutActions ? null : this.handleTimeClick}
-          handleShare={() => this.shareModal()}
-          withoutActions={withoutActions}
-          customButtons={this.props.customButtons}
-        />
-        <div className="bg-[#31455d] dark:bg-[hsl(210,30%,20%)] text-white dark:text-foreground p-5 shadow-inner flex items-start gap-4">
-          <span className="h-[50px] -mt-2 sm:text-7xl text-5xl font-serif text-neutral-300 dark:text-neutral-400">
-            “
-          </span>
-          <blockquote className="text-lg italic py-1">{statement.text}</blockquote>
-        </div>
+  const shareModal = () => {
+    setShareModalOpen(true)
+  }
+
+  const showHistory = () => {
+    setHistoryModalOpen(true)
+  }
+
+  return (
+    <div data-cy="statement">
+      <StatementHeader
+        statementTime={statement.time + offset}
+        isDraft={statement.isDraft || statement.is_draft}
+        speaker={speaker}
+        handleEdit={handleEdit}
+        handleDelete={handleDelete}
+        handleShowHistory={showHistory}
+        handleShare={shareModal}
+        withoutActions={withoutActions}
+        customButtons={customButtons}
+        withoutPlayback={withoutPlayback}
+      />
+      <div className="bg-[#31455d] dark:bg-[hsl(210,30%,20%)] text-white dark:text-foreground p-5 shadow-inner flex items-start gap-4">
+        <span className="h-[50px] -mt-2 sm:text-7xl text-5xl font-serif text-neutral-300 dark:text-neutral-400">
+          “
+        </span>
+        <blockquote className="text-lg italic py-1">{statement.text}</blockquote>
       </div>
-    )
-  }
-
-  handleTimeClick = (time) => {
-    this.props.forcePosition(time)
-    this.props.setScrollTo({
-      id: this.props.statement.id,
-      __forceAutoScroll: true,
-    })
-  }
-
-  shareModal() {
-    this.props.addModal({
-      Modal: ShareModal,
-      props: {
-        path: `${location.pathname}?statement=${this.props.statement.id}`,
-      },
-    })
-  }
-
-  showHistory() {
-    this.props.addModal({
-      Modal: ModalHistory,
-      props: {
-        entity: ENTITY_STATEMENT,
-        entityId: this.props.statement.id,
-      },
-    })
-  }
+      <ShareModal
+        open={shareModalOpen}
+        onOpenChange={setShareModalOpen}
+        path={`${location.pathname}?statement=${statement.id}`}
+      />
+      <StatementHistoryDialog
+        open={historyModalOpen}
+        onOpenChange={setHistoryModalOpen}
+        entity={ENTITY_STATEMENT}
+        entityId={statement.id}
+      />
+    </div>
+  )
 }
+
+export default withTranslation('videoDebate')(Statement)
