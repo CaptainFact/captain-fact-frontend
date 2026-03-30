@@ -239,7 +239,6 @@ class Sidebar extends React.PureComponent {
               }
             >
               <Users size="1.2em" className="mr-2" />
-              {t('menu.forum')}
               <LinkExternal
                 size="0.9em"
                 className="text-gray-500 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground ml-2"
