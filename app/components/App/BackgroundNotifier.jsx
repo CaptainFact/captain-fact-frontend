@@ -6,11 +6,13 @@ import neutralSoundFileURL from '../../assets/sounds/background_statement_neutra
 import refuteSoundFileURL from '../../assets/sounds/background_statement_refute.mp3'
 import { useFocusedStatement } from '../../contexts/FocusedStatementContext'
 import { useUserPreferences } from '../../contexts/UserPreferencesContext'
+import { useVideoPlayback } from '../../contexts/VideoPlaybackContext'
 import { isStatementConfirmed } from '../../lib/statements_utils'
 
 const confirmAudioFile = new Audio(confirmSoundFileURL)
 const refuteAudioFile = new Audio(refuteSoundFileURL)
 const neutralAudioFile = new Audio(neutralSoundFileURL)
+const notificationAudioFiles = [confirmAudioFile, refuteAudioFile, neutralAudioFile]
 
 const setFavicon = (value) => {
   // Reset favicon URL each time we interact with it to fix ugly background
@@ -27,6 +29,7 @@ const setFavicon = (value) => {
 const BackgroundNotifier = () => {
   const { statement } = useFocusedStatement()
   const { enableSoundOnBackgroundFocus: soundEnabled } = useUserPreferences()
+  const { volume } = useVideoPlayback()
   const prevFocusedStatementIdRef = useRef(-1)
   const prevSoundEnabledRef = useRef(soundEnabled)
 
@@ -44,6 +47,12 @@ const BackgroundNotifier = () => {
       fallback: false,
     })
   }, [])
+
+  useEffect(() => {
+    notificationAudioFiles.forEach((audioFile) => {
+      audioFile.volume = volume
+    })
+  }, [volume])
 
   // Handle focus event listener
   useEffect(() => {

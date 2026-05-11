@@ -8,7 +8,7 @@ import { useVideoPlayback } from '../../contexts/VideoPlaybackContext'
  * Updates position when playing and seeks to position when requested.
  */
 const VideoDebatePlayer = ({ url }) => {
-  const { forcedPosition, isPlaying, setPosition, setPlaying } = useVideoPlayback()
+  const { forcedPosition, isPlaying, setPosition, setPlaying, setVolume } = useVideoPlayback()
   const playerRef = useRef(null)
   const prevForcedPositionRef = useRef(null)
 
@@ -33,6 +33,7 @@ const VideoDebatePlayer = ({ url }) => {
       onPlay={() => setPlaying(true)}
       onPause={() => setPlaying(false)}
       onProgress={({ playedSeconds }) => setPosition(playedSeconds)}
+      onVolumeChange={(event) => setVolume(event.target.volume)}
       width=""
       height=""
       controls
