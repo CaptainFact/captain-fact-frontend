@@ -3,8 +3,8 @@ import React, { createContext, useCallback, useContext, useMemo, useReducer, use
 const initialState = {
   position: 0,
   isPlaying: false,
-  volume: 1,
   forcedPosition: { requestId: null, time: 0 },
+  volume: 1,
 }
 
 const playbackReducer = (state, action) => {
@@ -63,7 +63,11 @@ export const VideoPlaybackProvider = ({ children, onUpdatePosition }) => {
   }, [])
 
   const setVolume = useCallback((volume) => {
-    dispatch({ type: 'SET_VOLUME', payload: volume })
+    if (typeof volume !== 'number' || Number.isNaN(volume)) {
+      return
+    }
+
+    dispatch({ type: 'SET_VOLUME', payload: Math.min(1, Math.max(0, volume)) })
   }, [])
 
   const forcePosition = useCallback((time) => {
@@ -74,22 +78,22 @@ export const VideoPlaybackProvider = ({ children, onUpdatePosition }) => {
     () => ({
       position: state.position,
       isPlaying: state.isPlaying,
-      volume: state.volume,
       forcedPosition: state.forcedPosition,
+      volume: state.volume,
       setPosition,
       setPlaying,
-      setVolume,
       forcePosition,
+      setVolume,
     }),
     [
       state.position,
       state.isPlaying,
-      state.volume,
       state.forcedPosition,
+      state.volume,
       setPosition,
       setPlaying,
-      setVolume,
       forcePosition,
+      setVolume,
     ],
   )
 

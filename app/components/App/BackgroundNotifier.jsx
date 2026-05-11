@@ -12,7 +12,6 @@ import { isStatementConfirmed } from '../../lib/statements_utils'
 const confirmAudioFile = new Audio(confirmSoundFileURL)
 const refuteAudioFile = new Audio(refuteSoundFileURL)
 const neutralAudioFile = new Audio(neutralSoundFileURL)
-const notificationAudioFiles = [confirmAudioFile, refuteAudioFile, neutralAudioFile]
 
 const setFavicon = (value) => {
   // Reset favicon URL each time we interact with it to fix ugly background
@@ -40,6 +39,14 @@ const BackgroundNotifier = () => {
     setFavicon(null)
   }, [])
 
+  const playNotification = useCallback(
+    (audioFile) => {
+      audioFile.volume = volume
+      audioFile.play()
+    },
+    [volume],
+  )
+
   // Initialize Tinycon options
   useEffect(() => {
     Tinycon.setOptions({
@@ -47,12 +54,6 @@ const BackgroundNotifier = () => {
       fallback: false,
     })
   }, [])
-
-  useEffect(() => {
-    notificationAudioFiles.forEach((audioFile) => {
-      audioFile.volume = volume
-    })
-  }, [volume])
 
   // Handle focus event listener
   useEffect(() => {
@@ -68,7 +69,7 @@ const BackgroundNotifier = () => {
   useEffect(() => {
     // Play a sound when enabling setting
     if (!prevSoundEnabledRef.current && soundEnabled) {
-      neutralAudioFile.play()
+      playNotification(neutralAudioFile)
       prevSoundEnabledRef.current = soundEnabled
       return
     }
@@ -89,18 +90,18 @@ const BackgroundNotifier = () => {
       if (soundEnabled) {
         const confirmed = isStatementConfirmed(comments)
         if (confirmed === null) {
-          neutralAudioFile.play()
+          playNotification(neutralAudioFile)
         } else if (confirmed) {
-          confirmAudioFile.play()
+          playNotification(confirmAudioFile)
         } else {
-          refuteAudioFile.play()
+          playNotification(refuteAudioFile)
         }
       }
     }
 
     // Always update the ref at the end
     prevFocusedStatementIdRef.current = focusedStatementId
-  }, [focusedStatementId, soundEnabled, comments, setFavicon])
+  }, [focusedStatementId, soundEnabled, comments, playNotification])
 
   return null
 }
