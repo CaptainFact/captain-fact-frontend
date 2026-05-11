@@ -4,6 +4,7 @@ const initialState = {
   position: 0,
   isPlaying: false,
   forcedPosition: { requestId: null, time: 0 },
+  volume: 1,
 }
 
 const playbackReducer = (state, action) => {
@@ -17,6 +18,11 @@ const playbackReducer = (state, action) => {
       return {
         ...state,
         isPlaying: action.payload,
+      }
+    case 'SET_VOLUME':
+      return {
+        ...state,
+        volume: action.payload,
       }
     case 'FORCE_POSITION':
       return {
@@ -56,6 +62,14 @@ export const VideoPlaybackProvider = ({ children, onUpdatePosition }) => {
     dispatch({ type: 'SET_PLAYING', payload: isPlaying })
   }, [])
 
+  const setVolume = useCallback((volume) => {
+    if (typeof volume !== 'number' || Number.isNaN(volume)) {
+      return
+    }
+
+    dispatch({ type: 'SET_VOLUME', payload: Math.min(1, Math.max(0, volume)) })
+  }, [])
+
   const forcePosition = useCallback((time) => {
     dispatch({ type: 'FORCE_POSITION', payload: time })
   }, [])
@@ -65,11 +79,22 @@ export const VideoPlaybackProvider = ({ children, onUpdatePosition }) => {
       position: state.position,
       isPlaying: state.isPlaying,
       forcedPosition: state.forcedPosition,
+      volume: state.volume,
       setPosition,
       setPlaying,
       forcePosition,
+      setVolume,
     }),
-    [state.position, state.isPlaying, state.forcedPosition, setPosition, setPlaying, forcePosition],
+    [
+      state.position,
+      state.isPlaying,
+      state.forcedPosition,
+      state.volume,
+      setPosition,
+      setPlaying,
+      forcePosition,
+      setVolume,
+    ],
   )
 
   return <VideoPlaybackContext.Provider value={value}>{children}</VideoPlaybackContext.Provider>

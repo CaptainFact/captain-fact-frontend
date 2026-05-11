@@ -6,6 +6,7 @@ import neutralSoundFileURL from '../../assets/sounds/background_statement_neutra
 import refuteSoundFileURL from '../../assets/sounds/background_statement_refute.mp3'
 import { useFocusedStatement } from '../../contexts/FocusedStatementContext'
 import { useUserPreferences } from '../../contexts/UserPreferencesContext'
+import { useVideoPlayback } from '../../contexts/VideoPlaybackContext'
 import { isStatementConfirmed } from '../../lib/statements_utils'
 
 const confirmAudioFile = new Audio(confirmSoundFileURL)
@@ -27,6 +28,7 @@ const setFavicon = (value) => {
 const BackgroundNotifier = () => {
   const { statement } = useFocusedStatement()
   const { enableSoundOnBackgroundFocus: soundEnabled } = useUserPreferences()
+  const { volume } = useVideoPlayback()
   const prevFocusedStatementIdRef = useRef(-1)
   const prevSoundEnabledRef = useRef(soundEnabled)
 
@@ -36,6 +38,14 @@ const BackgroundNotifier = () => {
   const onFocus = useCallback(() => {
     setFavicon(null)
   }, [])
+
+  const playNotification = useCallback(
+    (audioFile) => {
+      audioFile.volume = volume
+      audioFile.play()
+    },
+    [volume],
+  )
 
   // Initialize Tinycon options
   useEffect(() => {
@@ -59,7 +69,7 @@ const BackgroundNotifier = () => {
   useEffect(() => {
     // Play a sound when enabling setting
     if (!prevSoundEnabledRef.current && soundEnabled) {
-      neutralAudioFile.play()
+      playNotification(neutralAudioFile)
       prevSoundEnabledRef.current = soundEnabled
       return
     }
@@ -80,18 +90,18 @@ const BackgroundNotifier = () => {
       if (soundEnabled) {
         const confirmed = isStatementConfirmed(comments)
         if (confirmed === null) {
-          neutralAudioFile.play()
+          playNotification(neutralAudioFile)
         } else if (confirmed) {
-          confirmAudioFile.play()
+          playNotification(confirmAudioFile)
         } else {
-          refuteAudioFile.play()
+          playNotification(refuteAudioFile)
         }
       }
     }
 
     // Always update the ref at the end
     prevFocusedStatementIdRef.current = focusedStatementId
-  }, [focusedStatementId, soundEnabled, comments, setFavicon])
+  }, [focusedStatementId, soundEnabled, comments, playNotification])
 
   return null
 }
