@@ -4,6 +4,7 @@ const initialState = {
   position: 0,
   isPlaying: false,
   forcedPosition: { requestId: null, time: 0 },
+  volume: 1,
 }
 
 const playbackReducer = (state, action) => {
@@ -22,6 +23,11 @@ const playbackReducer = (state, action) => {
       return {
         ...state,
         forcedPosition: { requestId: Date.now(), time: action.payload },
+      }
+    case 'SET_VOLUME':
+      return {
+        ...state,
+        volume: action.payload,
       }
     default:
       return state
@@ -60,16 +66,35 @@ export const VideoPlaybackProvider = ({ children, onUpdatePosition }) => {
     dispatch({ type: 'FORCE_POSITION', payload: time })
   }, [])
 
+  const setVolume = useCallback((volume) => {
+    if (typeof volume !== 'number' || Number.isNaN(volume)) {
+      return
+    }
+
+    dispatch({ type: 'SET_VOLUME', payload: Math.min(1, Math.max(0, volume)) })
+  }, [])
+
   const value = useMemo(
     () => ({
       position: state.position,
       isPlaying: state.isPlaying,
       forcedPosition: state.forcedPosition,
+      volume: state.volume,
       setPosition,
       setPlaying,
       forcePosition,
+      setVolume,
     }),
-    [state.position, state.isPlaying, state.forcedPosition, setPosition, setPlaying, forcePosition],
+    [
+      state.position,
+      state.isPlaying,
+      state.forcedPosition,
+      state.volume,
+      setPosition,
+      setPlaying,
+      forcePosition,
+      setVolume,
+    ],
   )
 
   return <VideoPlaybackContext.Provider value={value}>{children}</VideoPlaybackContext.Provider>
