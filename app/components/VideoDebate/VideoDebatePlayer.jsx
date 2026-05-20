@@ -12,6 +12,7 @@ const VideoDebatePlayer = ({ url }) => {
   const playerRef = useRef(null)
   const prevForcedPositionRef = useRef(null)
   const internalPlayerRef = useRef(null)
+  const volumeListenerRef = useRef(null)
 
   useEffect(() => {
     if (
@@ -44,23 +45,32 @@ const VideoDebatePlayer = ({ url }) => {
     setVolume(Math.max(0, Math.min(1, vol)))
   }, [setVolume])
 
+  // Keep a stable ref to the latest syncVolume so the native DOM listener
+  // always calls the current version without needing to re-register on each
+  // render (avoids the stale-closure / repeated add-remove cycle).
+  const syncVolumeRef = useRef(syncVolume)
+  syncVolumeRef.current = syncVolume
+
   // On player ready: sync initial volume and attach a native volumechange
   // listener so that volume changes while the video is paused are captured
   // immediately (works for HTML5 video; YouTube provides no equivalent event).
   const handleReady = useCallback(() => {
-    syncVolume()
+    syncVolumeRef.current()
     const player = playerRef.current?.getInternalPlayer()
     if (player?.addEventListener) {
-      player.addEventListener('volumechange', syncVolume)
+      volumeListenerRef.current = () => syncVolumeRef.current()
+      player.addEventListener('volumechange', volumeListenerRef.current)
       internalPlayerRef.current = player
     }
-  }, [syncVolume])
+  }, [])
 
   useEffect(() => {
     return () => {
-      internalPlayerRef.current?.removeEventListener?.('volumechange', syncVolume)
+      if (internalPlayerRef.current && volumeListenerRef.current) {
+        internalPlayerRef.current.removeEventListener('volumechange', volumeListenerRef.current)
+      }
     }
-  }, [syncVolume])
+  }, [])
 
   return (
     <ReactPlayer
