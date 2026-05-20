@@ -6,6 +6,7 @@ import neutralSoundFileURL from '../../assets/sounds/background_statement_neutra
 import refuteSoundFileURL from '../../assets/sounds/background_statement_refute.mp3'
 import { useFocusedStatement } from '../../contexts/FocusedStatementContext'
 import { useUserPreferences } from '../../contexts/UserPreferencesContext'
+import { useVideoPlayback } from '../../contexts/VideoPlaybackContext'
 import { isStatementConfirmed } from '../../lib/statements_utils'
 
 const confirmAudioFile = new Audio(confirmSoundFileURL)
@@ -27,6 +28,7 @@ const setFavicon = (value) => {
 const BackgroundNotifier = () => {
   const { statement } = useFocusedStatement()
   const { enableSoundOnBackgroundFocus: soundEnabled } = useUserPreferences()
+  const { volume } = useVideoPlayback()
   const prevFocusedStatementIdRef = useRef(-1)
   const prevSoundEnabledRef = useRef(soundEnabled)
 
@@ -57,6 +59,11 @@ const BackgroundNotifier = () => {
 
   // Handle sound enable/disable and statement focus changes
   useEffect(() => {
+    // Update audio volumes
+    confirmAudioFile.volume = volume
+    refuteAudioFile.volume = volume
+    neutralAudioFile.volume = volume
+
     // Play a sound when enabling setting
     if (!prevSoundEnabledRef.current && soundEnabled) {
       neutralAudioFile.play()
@@ -91,7 +98,7 @@ const BackgroundNotifier = () => {
 
     // Always update the ref at the end
     prevFocusedStatementIdRef.current = focusedStatementId
-  }, [focusedStatementId, soundEnabled, comments, setFavicon])
+  }, [focusedStatementId, soundEnabled, comments, setFavicon, volume])
 
   return null
 }
