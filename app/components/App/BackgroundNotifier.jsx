@@ -6,6 +6,7 @@ import neutralSoundFileURL from '../../assets/sounds/background_statement_neutra
 import refuteSoundFileURL from '../../assets/sounds/background_statement_refute.mp3'
 import { useFocusedStatement } from '../../contexts/FocusedStatementContext'
 import { useUserPreferences } from '../../contexts/UserPreferencesContext'
+import { useVideoPlayback } from '../../contexts/VideoPlaybackContext'
 import { isStatementConfirmed } from '../../lib/statements_utils'
 
 const confirmAudioFile = new Audio(confirmSoundFileURL)
@@ -19,6 +20,11 @@ const setFavicon = (value) => {
   Tinycon.setBubble(value)
 }
 
+const playNotificationSound = (audioFile, volume) => {
+  audioFile.volume = volume
+  audioFile.play()
+}
+
 /**
  * This component watches for various events then triggers sounds or change
  * favicon to notify the user that there's something to look at **only**
@@ -27,6 +33,7 @@ const setFavicon = (value) => {
 const BackgroundNotifier = () => {
   const { statement } = useFocusedStatement()
   const { enableSoundOnBackgroundFocus: soundEnabled } = useUserPreferences()
+  const { volume } = useVideoPlayback()
   const prevFocusedStatementIdRef = useRef(-1)
   const prevSoundEnabledRef = useRef(soundEnabled)
 
@@ -59,7 +66,7 @@ const BackgroundNotifier = () => {
   useEffect(() => {
     // Play a sound when enabling setting
     if (!prevSoundEnabledRef.current && soundEnabled) {
-      neutralAudioFile.play()
+      playNotificationSound(neutralAudioFile, volume)
       prevSoundEnabledRef.current = soundEnabled
       return
     }
@@ -80,18 +87,18 @@ const BackgroundNotifier = () => {
       if (soundEnabled) {
         const confirmed = isStatementConfirmed(comments)
         if (confirmed === null) {
-          neutralAudioFile.play()
+          playNotificationSound(neutralAudioFile, volume)
         } else if (confirmed) {
-          confirmAudioFile.play()
+          playNotificationSound(confirmAudioFile, volume)
         } else {
-          refuteAudioFile.play()
+          playNotificationSound(refuteAudioFile, volume)
         }
       }
     }
 
     // Always update the ref at the end
     prevFocusedStatementIdRef.current = focusedStatementId
-  }, [focusedStatementId, soundEnabled, comments, setFavicon])
+  }, [focusedStatementId, soundEnabled, comments, volume, setFavicon])
 
   return null
 }

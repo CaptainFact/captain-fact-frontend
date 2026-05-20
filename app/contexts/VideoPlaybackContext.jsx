@@ -3,6 +3,7 @@ import React, { createContext, useCallback, useContext, useMemo, useReducer, use
 const initialState = {
   position: 0,
   isPlaying: false,
+  volume: 1,
   forcedPosition: { requestId: null, time: 0 },
 }
 
@@ -17,6 +18,11 @@ const playbackReducer = (state, action) => {
       return {
         ...state,
         isPlaying: action.payload,
+      }
+    case 'SET_VOLUME':
+      return {
+        ...state,
+        volume: action.payload,
       }
     case 'FORCE_POSITION':
       return {
@@ -56,6 +62,11 @@ export const VideoPlaybackProvider = ({ children, onUpdatePosition }) => {
     dispatch({ type: 'SET_PLAYING', payload: isPlaying })
   }, [])
 
+  const setVolume = useCallback((volume) => {
+    const normalizedVolume = Math.min(Math.max(volume, 0), 1)
+    dispatch({ type: 'SET_VOLUME', payload: normalizedVolume })
+  }, [])
+
   const forcePosition = useCallback((time) => {
     dispatch({ type: 'FORCE_POSITION', payload: time })
   }, [])
@@ -64,12 +75,23 @@ export const VideoPlaybackProvider = ({ children, onUpdatePosition }) => {
     () => ({
       position: state.position,
       isPlaying: state.isPlaying,
+      volume: state.volume,
       forcedPosition: state.forcedPosition,
       setPosition,
       setPlaying,
+      setVolume,
       forcePosition,
     }),
-    [state.position, state.isPlaying, state.forcedPosition, setPosition, setPlaying, forcePosition],
+    [
+      state.position,
+      state.isPlaying,
+      state.volume,
+      state.forcedPosition,
+      setPosition,
+      setPlaying,
+      setVolume,
+      forcePosition,
+    ],
   )
 
   return <VideoPlaybackContext.Provider value={value}>{children}</VideoPlaybackContext.Provider>
