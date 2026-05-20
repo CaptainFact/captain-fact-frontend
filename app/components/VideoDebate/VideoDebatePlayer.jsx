@@ -3,6 +3,14 @@ import ReactPlayer from 'react-player'
 
 import { useVideoPlayback } from '../../contexts/VideoPlaybackContext'
 
+const normalizeVolume = (volume) => {
+  if (!Number.isFinite(volume)) {
+    return null
+  }
+
+  return Math.min(Math.max(volume > 1 ? volume / 100 : volume, 0), 1)
+}
+
 const getNormalizedPlayerVolume = (player) => {
   const internalPlayer = player?.getInternalPlayer?.()
   if (!internalPlayer) {
@@ -10,14 +18,11 @@ const getNormalizedPlayerVolume = (player) => {
   }
 
   if (typeof internalPlayer.volume === 'number') {
-    return internalPlayer.volume
+    return normalizeVolume(internalPlayer.volume)
   }
 
   if (typeof internalPlayer.getVolume === 'function') {
-    const volume = internalPlayer.getVolume()
-    if (Number.isFinite(volume)) {
-      return volume > 1 ? volume / 100 : volume
-    }
+    return normalizeVolume(internalPlayer.getVolume())
   }
 
   return null
@@ -32,10 +37,12 @@ const VideoDebatePlayer = ({ url }) => {
   const playerRef = useRef(null)
   const prevForcedPositionRef = useRef(null)
   const cleanupVolumeListenerRef = useRef(null)
+  const lastSyncedVolumeRef = useRef(null)
 
   const updateVolumeFromPlayer = useCallback(() => {
     const volume = getNormalizedPlayerVolume(playerRef.current)
-    if (volume !== null) {
+    if (volume !== null && volume !== lastSyncedVolumeRef.current) {
+      lastSyncedVolumeRef.current = volume
       setVolume(volume)
     }
   }, [setVolume])

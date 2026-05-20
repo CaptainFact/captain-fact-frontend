@@ -21,7 +21,13 @@ const setFavicon = (value) => {
 }
 
 const playNotificationSound = (audioFile, volume) => {
-  audioFile.volume = volume
+  const normalizedVolume = Math.min(Math.max(Number.isFinite(volume) ? volume : 1, 0), 1)
+
+  if (normalizedVolume === 0) {
+    return
+  }
+
+  audioFile.volume = normalizedVolume
   audioFile.play()
 }
 
