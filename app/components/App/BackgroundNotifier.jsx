@@ -6,6 +6,7 @@ import neutralSoundFileURL from '../../assets/sounds/background_statement_neutra
 import refuteSoundFileURL from '../../assets/sounds/background_statement_refute.mp3'
 import { useFocusedStatement } from '../../contexts/FocusedStatementContext'
 import { useUserPreferences } from '../../contexts/UserPreferencesContext'
+import { useVideoPlayback } from '../../contexts/VideoPlaybackContext'
 import { isStatementConfirmed } from '../../lib/statements_utils'
 
 const confirmAudioFile = new Audio(confirmSoundFileURL)
@@ -27,6 +28,7 @@ const setFavicon = (value) => {
 const BackgroundNotifier = () => {
   const { statement } = useFocusedStatement()
   const { enableSoundOnBackgroundFocus: soundEnabled } = useUserPreferences()
+  const { volume } = useVideoPlayback()
   const prevFocusedStatementIdRef = useRef(-1)
   const prevSoundEnabledRef = useRef(soundEnabled)
 
@@ -57,9 +59,17 @@ const BackgroundNotifier = () => {
 
   // Handle sound enable/disable and statement focus changes
   useEffect(() => {
+    const playSound = (audioFile) => {
+      audioFile.volume = volume
+      audioFile.currentTime = 0
+      audioFile.play()?.catch(() => {
+        // Ignore playback failures (e.g. browser autoplay restrictions)
+      })
+    }
+
     // Play a sound when enabling setting
     if (!prevSoundEnabledRef.current && soundEnabled) {
-      neutralAudioFile.play()
+      playSound(neutralAudioFile)
       prevSoundEnabledRef.current = soundEnabled
       return
     }
@@ -80,18 +90,18 @@ const BackgroundNotifier = () => {
       if (soundEnabled) {
         const confirmed = isStatementConfirmed(comments)
         if (confirmed === null) {
-          neutralAudioFile.play()
+          playSound(neutralAudioFile)
         } else if (confirmed) {
-          confirmAudioFile.play()
+          playSound(confirmAudioFile)
         } else {
-          refuteAudioFile.play()
+          playSound(refuteAudioFile)
         }
       }
     }
 
     // Always update the ref at the end
     prevFocusedStatementIdRef.current = focusedStatementId
-  }, [focusedStatementId, soundEnabled, comments, setFavicon])
+  }, [focusedStatementId, soundEnabled, comments, setFavicon, volume])
 
   return null
 }
