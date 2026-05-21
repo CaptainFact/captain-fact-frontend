@@ -61,7 +61,10 @@ const BackgroundNotifier = () => {
   useEffect(() => {
     const playSound = (audioFile) => {
       audioFile.volume = volume
-      audioFile.play()
+      audioFile.currentTime = 0
+      audioFile.play()?.catch(() => {
+        // Ignore playback failures (e.g. browser autoplay restrictions)
+      })
     }
 
     // Play a sound when enabling setting
