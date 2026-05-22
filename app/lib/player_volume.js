@@ -1,13 +1,31 @@
 export const DEFAULT_PLAYER_VOLUME = 1
 
+const clampNormalizedVolume = (volume) => Math.max(0, Math.min(1, volume))
+
 export const normalizePlayerVolume = (volume) => {
   const numericVolume = Number(volume)
   if (!Number.isFinite(numericVolume)) {
     return null
   }
 
-  const normalizedVolume = numericVolume > 1 ? numericVolume / 100 : numericVolume
-  return Math.max(0, Math.min(1, normalizedVolume))
+  return clampNormalizedVolume(numericVolume)
+}
+
+export const normalizePercentagePlayerVolume = (volume) => {
+  const numericVolume = Number(volume)
+  if (!Number.isFinite(numericVolume)) {
+    return null
+  }
+
+  return clampNormalizedVolume(numericVolume / 100)
+}
+
+const isPlayerMuted = (internalPlayer) => {
+  if (typeof internalPlayer.isMuted === 'function') {
+    return internalPlayer.isMuted()
+  }
+
+  return internalPlayer.muted === true
 }
 
 export const getReactPlayerVolume = (player) => {
@@ -17,8 +35,12 @@ export const getReactPlayerVolume = (player) => {
       return null
     }
 
+    if (isPlayerMuted(internalPlayer)) {
+      return 0
+    }
+
     if (typeof internalPlayer.getVolume === 'function') {
-      return normalizePlayerVolume(internalPlayer.getVolume())
+      return normalizePercentagePlayerVolume(internalPlayer.getVolume())
     }
 
     if (typeof internalPlayer.volume !== 'undefined') {
