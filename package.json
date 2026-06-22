@@ -189,7 +189,7 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.103.0",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.2.2",
+    "webpack-dev-server": "^5.2.5",
     "@graphql-codegen/cli": "^5.0.7",
     "@graphql-codegen/typescript": "^5.0.3",
     "@graphql-codegen/typescript-operations": "^5.0.3",
